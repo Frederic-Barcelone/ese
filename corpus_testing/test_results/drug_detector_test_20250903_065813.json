@@ -1,0 +1,31 @@
+{
+  "timestamp": "20250903_065813",
+  "test_suite": "drug_detector",
+  "version": "2.1",
+  "results": [
+    {
+      "test": "basic_detection",
+      "status": "passed",
+      "drugs_found": 6
+    },
+    {
+      "test": "complex_names",
+      "status": "passed",
+      "drugs_found": 8
+    },
+    {
+      "test": "investigational",
+      "status": "passed",
+      "drugs_found": 3
+    },
+    {
+      "test": "performance",
+      "status": "passed",
+      "time": 0.5019872188568115
+    },
+    {
+      "test": "edge_cases",
+      "status": "passed"
+    }
+  ]
+}

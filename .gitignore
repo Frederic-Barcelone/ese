@@ -1,0 +1,31 @@
+# Python cache and virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Cache folder
+cache/
+*.cache
+
+# Logs and temp files
+*.log
+*.tmp
+
+# IDE and OS specific
+.DS_Store
+.vscode/
+.idea/
+
+# other Folders not needed
+ASV/
+corpus_db/
+corpus_dictionaries/
+corpus_logs/
+corpus_orphanet/
+corpus_sas/
+documents*/
+ESE-Admin/
+pubmed/
+Read.K
