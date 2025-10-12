@@ -1180,10 +1180,17 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                             # Call generate_descriptions (PLURAL) and it returns dict with title, short_description, long_description
                             descriptions = extractor.generate_descriptions(limited_text, file_path.name, stage_results.get('document_type'))
                             stage_results.update(descriptions)
+                            
+                            # Ensure we have at least a basic title if generation failed
+                            if not stage_results.get('title'):
+                                logger.warning("No title generated, using filename")
+                                stage_results['title'] = file_path.stem.replace('_', ' ')
                         except Exception as e:
                             logger.error(f"Description generation failed: {e}")
                             final_results['processing_errors'].append(f"Description: {str(e)[:100]}")
-                    
+                            # Fallback title
+                            stage_results['title'] = file_path.stem.replace('_', ' ')
+                                        
                     # Dates
                     if 'dates' in stage_config.get('tasks', []):
                         try:
@@ -1193,14 +1200,6 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                             logger.error(f"Date extraction failed: {e}")
                             final_results['processing_errors'].append(f"Dates: {str(e)[:100]}")
                     
-                    # Title
-                    if 'title' in stage_config.get('tasks', []):
-                        try:
-                            title_result = extractor.generate_title(limited_text, file_path.name)
-                            stage_results['title'] = title_result.get('title')
-                        except Exception as e:
-                            logger.error(f"Title generation failed: {e}")
-                            final_results['processing_errors'].append(f"Title: {str(e)[:100]}")
                     
                     # Filename proposal
                     if 'filename_proposal' in stage_config.get('tasks', []):
