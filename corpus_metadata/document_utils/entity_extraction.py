@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 """
-Enhanced Entity Extraction Pipeline - UPDATED v11.0.0
+Enhanced Entity Extraction Pipeline - UPDATED v11.1.0
 =====================================================
 Location: corpus_metadata/document_utils/entity_extraction.py
-Version: 11.0.0 - OPTIMIZED FOR PERFORMANCE & GENERALIZATION
-Last Updated: 2025-10-08
+Version: 11.1.0 - ADDED CITATION, PERSON, AND REFERENCE EXTRACTION
+Last Updated: 2025-10-13
+
+CHANGES IN v11.1.0:
+==================
+✓ ADDED citation extraction (Step 2)
+✓ ADDED person extraction (Step 3)  
+✓ ADDED reference extraction (Step 4)
+✓ UPDATED extraction summary to include citation/person/reference counts
+✓ Renumbered existing steps (drugs: 2→5, diseases: 3→6, dedup: 3.5→7, etc.)
 
 MAJOR CHANGES IN v11.0.0:
 ========================
@@ -23,10 +31,6 @@ PERFORMANCE IMPROVEMENTS:
 - Overall recall: +20-30% across all entity types
 
 Previous Version: v10.6.0
-- Multi-stage drug validation with hardcoded thresholds
-- Fuzzy matching at 85% (too strict)
-- Complex adaptive filtering with 7 different threshold values
-- Promotion requiring both metadata AND IDs (too restrictive)
 """
 
 import json
@@ -35,13 +39,27 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime
-from collections import defaultdict
-from enum import Enum
 
-# Configure logging
-logger = logging.getLogger(__name__)
+# Import utility functions and classes
+from corpus_metadata.document_utils.entity_extraction_utils import (
+    ConfidenceBand,
+    ThresholdConfig,
+    ExtractionCache,
+    get_confidence_band,
+    fuzzy_match,
+    deduplicate_by_key,
+    deduplicate_diseases_preserve_hierarchy,
+    deduplicate_entities_across_types,
+    apply_adaptive_confidence_filter,
+    enrich_abbreviations_with_entity_ids,
+    validate_extraction_results,
+    SYMPTOM_KEYWORDS,
+    FINDING_KEYWORDS,
+    GENERIC_DISEASE_TERMS,
+    ALWAYS_KEEP_DISEASES
+)
 
-# Import modules
+# Import extraction modules
 from corpus_metadata.document_utils.entity_db_extraction import ExtractionDatabase
 from corpus_metadata.document_utils.entity_report import generate_extraction_report
 from corpus_metadata.document_utils.entity_abbreviation_promotion import (
@@ -50,671 +68,12 @@ from corpus_metadata.document_utils.entity_abbreviation_promotion import (
     normalize_ids
 )
 
-# ============================================================================
-# CONFIDENCE BAND SYSTEM (NEW IN v11.0.0) - Replaces Hardcoded Thresholds
-# ============================================================================
+# Configure logging
+logger = logging.getLogger(__name__)
 
-class ConfidenceBand(Enum):
-    """
-    Confidence bands for entity validation
-    
-    Replaces hardcoded thresholds like 0.65, 0.75, 0.85 with ranges.
-    This allows for more robust classification that adapts to different
-    detection methods without overfitting to specific decimal values.
-    """
-    HIGH = (0.80, 1.0)       # Always keep - high quality detections
-    MEDIUM = (0.60, 0.80)    # Keep with validation or IDs
-    LOW = (0.40, 0.60)       # Flag for review, keep if pattern-detected
-    VERY_LOW = (0.0, 0.40)   # Reject unless special case
+# Pipeline version
+PIPELINE_VERSION = 'v11.1.0'
 
-def get_confidence_band(confidence: float) -> ConfidenceBand:
-    """Determine which confidence band a score falls into"""
-    if confidence >= 0.80:
-        return ConfidenceBand.HIGH
-    elif confidence >= 0.60:
-        return ConfidenceBand.MEDIUM
-    elif confidence >= 0.40:
-        return ConfidenceBand.LOW
-    else:
-        return ConfidenceBand.VERY_LOW
-
-# ============================================================================
-# CONFIGURABLE THRESHOLDS (NEW IN v11.0.0)
-# ============================================================================
-
-class ThresholdConfig:
-    """
-    Centralized threshold configuration with provenance tracking
-    
-    All thresholds are now in one place and can be overridden via config.yaml
-    Each threshold has a default value and explanation for why it was chosen.
-    """
-    
-    # Fuzzy matching - REDUCED from 85 to 75
-    FUZZY_MATCH_THRESHOLD = 75  # Was 85, reduced for better recall
-    FUZZY_MATCH_PROVENANCE = "Set to 75 based on analysis showing 85 rejected valid matches"
-    
-    # Entity-specific minimum confidences (lower bounds only)
-    DRUG_MIN_CONFIDENCE = 0.60   # Was 0.85 for non-Claude, now more permissive
-    DISEASE_MIN_CONFIDENCE = 0.55  # Was 0.75, now more permissive
-    
-    # Detection method quality indicators (informational, not filtering)
-    METHOD_QUALITY = {
-        'pattern': 'high',      # Pattern matching is reliable
-        'kb': 'high',           # Knowledge base matches are reliable
-        'lexicon': 'medium',    # Lexicon matches need some validation
-        'ner': 'medium',        # NER models are fairly reliable
-        'abbreviation': 'medium',  # Depends on expansion quality
-        'claude': 'high'        # Claude validation is high quality
-    }
-    
-    # Promotion requirements - RELAXED
-    PROMOTION_MIN_IDS = 1  # Still requires at least one ID
-    PROMOTION_ALLOW_NO_IDS_IF_HIGH_CONF = True  # NEW: Allow promotion without IDs if confidence >= 0.85
-    PROMOTION_HIGH_CONF_THRESHOLD = 0.85
-    
-    # Abbreviation context support threshold
-    ABBREV_CONTEXT_SUPPORT_MIN = 0.55  # Was 0.60, now more permissive
-
-# ============================================================================
-# VALIDATION CONSTANTS (Kept from v10.6.0)
-# ============================================================================
-
-# Symptoms and clinical findings (NOT diseases)
-SYMPTOM_KEYWORDS = {
-    'pain', 'ache', 'aching',
-    'fever', 'fatigue', 'weakness',
-    'nausea', 'vomiting', 'diarrhea',
-    'cough', 'dyspnea', 'tachycardia',
-    'edema', 'swelling', 'rash'
-}
-
-FINDING_KEYWORDS = {
-    'impairment', 'insufficiency', 'deficiency',
-    'elevation', 'reduction', 'decrease', 'increase',
-    'hemorrhage', 'bleeding', 'hematuria',
-    'proteinuria', 'azotemia', 'uremia',
-    'dysfunction', 'abnormality'
-}
-
-GENERIC_DISEASE_TERMS = {
-    'neuropathy', 'myopathy', 'arthropathy',
-    'infection', 'infections', 'inflammation',
-    'disorder', 'condition'
-}
-
-# Terms that should be kept even if they match filters
-ALWAYS_KEEP_DISEASES = {
-    'pneumocystis jirovecii pneumonia',
-    'end-stage renal disease',
-    'chronic kidney disease',
-    'acute kidney injury',
-    'diffuse alveolar hemorrhage',
-    'peripheral neuropathy',
-    'diabetic neuropathy',
-    'glomerulonephritis'
-}
-
-# ============================================================================
-# EXTRACTION CACHING (Kept from v10.6.0)
-# ============================================================================
-
-class ExtractionCache:
-    """File-based cache for extraction results to avoid re-processing"""
-    
-    def __init__(self, cache_dir: Path = None):
-        """Initialize cache with directory"""
-        if cache_dir is None:
-            cache_dir = Path('./cache/extractions')
-        self.cache_dir = Path(cache_dir)
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
-        logger.debug(f"Extraction cache initialized: {self.cache_dir}")
-    
-    def _get_file_hash(self, file_path: Path) -> str:
-        """Calculate file hash for cache key"""
-        import hashlib
-        with open(file_path, 'rb') as f:
-            return hashlib.sha256(f.read()).hexdigest()
-    
-    def get(self, file_path: Path, version: str) -> Optional[Dict]:
-        """Get cached results if available"""
-        try:
-            file_hash = self._get_file_hash(file_path)
-            cache_key = f"{file_hash}_{version}.json"
-            cache_file = self.cache_dir / cache_key
-            
-            if cache_file.exists():
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    cached = json.load(f)
-                    logger.info(f"Cache hit for {file_path.name}")
-                    return cached
-        except Exception as e:
-            logger.warning(f"Cache read error: {e}")
-        
-        return None
-    
-    def set(self, file_path: Path, version: str, results: Dict):
-        """Store results in cache"""
-        try:
-            file_hash = self._get_file_hash(file_path)
-            cache_key = f"{file_hash}_{version}.json"
-            cache_file = self.cache_dir / cache_key
-            
-            with open(cache_file, 'w', encoding='utf-8') as f:
-                json.dump(results, f, indent=2)
-            
-            logger.debug(f"Cached results for {file_path.name}")
-        except Exception as e:
-            logger.warning(f"Cache write error: {e}")
-
-# ============================================================================
-# HELPER FUNCTIONS
-# ============================================================================
-
-def fuzzy_match(term: str, candidates: List[str], threshold: int = None) -> Optional[str]:
-    """
-    Fuzzy string matching using token sort ratio
-    
-    UPDATED IN v11.0.0: Default threshold reduced from 85 to 75
-    """
-    if threshold is None:
-        threshold = ThresholdConfig.FUZZY_MATCH_THRESHOLD
-    
-    try:
-        from fuzzywuzzy import fuzz
-    except ImportError:
-        logger.warning("fuzzywuzzy not available, fuzzy matching disabled")
-        return None
-    
-    best_match = None
-    best_score = 0
-    
-    for candidate in candidates:
-        score = fuzz.token_sort_ratio(term.lower(), candidate.lower())
-        if score > best_score and score >= threshold:
-            best_score = score
-            best_match = candidate
-    
-    return best_match
-
-def deduplicate_by_key(entities: List[Dict], keys: Tuple[str, ...]) -> List[Dict]:
-    """Remove duplicates based on specified keys"""
-    seen = set()
-    unique = []
-    
-    for entity in entities:
-        # Create key from specified fields
-        key_values = tuple(entity.get(k, '').lower() if entity.get(k) else '' for k in keys)
-        
-        if key_values not in seen:
-            seen.add(key_values)
-            unique.append(entity)
-    
-    logger.debug(f"Deduplicated {len(entities)} → {len(unique)} entities by {keys}")
-    return unique
-
-def deduplicate_diseases_preserve_hierarchy(diseases: List[Dict]) -> List[Dict]:
-    """
-    Deduplicate diseases while preserving parent-child relationships
-    
-    Example: Keep both "vasculitis" and "ANCA-associated vasculitis"
-    """
-    if not diseases:
-        return []
-    
-    # Sort by name length (longer = more specific)
-    sorted_diseases = sorted(diseases, key=lambda d: len(d.get('name', '')), reverse=True)
-    
-    kept = []
-    kept_names_lower = set()
-    
-    for disease in sorted_diseases:
-        name = disease.get('name', '').lower()
-        
-        # Check if this is a substring of any already kept disease
-        is_parent_of_kept = any(name in kept_name for kept_name in kept_names_lower if name != kept_name)
-        
-        if not is_parent_of_kept:
-            kept.append(disease)
-            kept_names_lower.add(name)
-    
-    logger.debug(f"Deduplicated diseases with hierarchy: {len(diseases)} → {len(kept)}")
-    return kept
-
-# ============================================================================
-# CROSS-TYPE DEDUPLICATION (Kept from v10.6.0)
-# ============================================================================
-
-def deduplicate_entities_across_types(
-    abbreviations: List[Dict],
-    drugs: List[Dict],
-    diseases: List[Dict]
-) -> Tuple[List[Dict], List[Dict], List[Dict]]:
-    """
-    Remove abbreviations whose expansions match detected drugs or diseases
-    
-    Prevents issues like:
-    - AAV → "ANCA-associated vasculitis" appearing as both abbrev and disease
-    - PJP → appearing as both abbreviation and disease
-    """
-    if not abbreviations:
-        return abbreviations, drugs, diseases
-    
-    # Build indices for fast lookup
-    drug_names = {d.get('name', '').lower() for d in drugs if d.get('name')}
-    drug_names.update({d.get('normalized_name', '').lower() for d in drugs if d.get('normalized_name')})
-    
-    disease_names = {d.get('name', '').lower() for d in diseases if d.get('name')}
-    disease_names.update({d.get('canonical_name', '').lower() for d in diseases if d.get('canonical_name')})
-    
-    cleaned_abbreviations = []
-    removed_count = 0
-    removal_reasons = defaultdict(int)
-    
-    for abbrev in abbreviations:
-        expansion = abbrev.get('expansion', '').lower()
-        abbrev_text = abbrev.get('abbreviation', '').lower()
-        
-        should_remove = False
-        reason = None
-        
-        # Check if expansion matches a drug
-        if expansion in drug_names:
-            should_remove = True
-            reason = 'expansion_matches_drug'
-            removal_reasons['expansion_matches_drug'] += 1
-        
-        # Check if expansion matches a disease
-        elif expansion in disease_names:
-            should_remove = True
-            reason = 'expansion_matches_disease'
-            removal_reasons['expansion_matches_disease'] += 1
-        
-        # Check if abbreviation itself matches a disease (e.g., "PJP")
-        elif abbrev_text in disease_names:
-            should_remove = True
-            reason = 'abbreviation_matches_disease'
-            removal_reasons['abbreviation_matches_disease'] += 1
-        
-        if should_remove:
-            removed_count += 1
-            logger.debug(
-                f"Removed abbreviation '{abbrev.get('abbreviation')}' "
-                f"(expansion: '{abbrev.get('expansion')}') - {reason}"
-            )
-        else:
-            cleaned_abbreviations.append(abbrev)
-    
-    # Log deduplication summary
-    if removed_count > 0:
-        logger.info(f"Cross-type deduplication: Removed {removed_count} abbreviations")
-        logger.info(f"Removal breakdown:")
-        for reason, count in sorted(removal_reasons.items(), key=lambda x: x[1], reverse=True):
-            logger.info(f"  - {reason}: {count}")
-    else:
-        logger.debug("Cross-type deduplication: No overlaps found")
-    
-    logger.debug(f"Cross-type deduplication output: {len(cleaned_abbreviations)} abbrev, "
-                f"{len(drugs)} drugs, {len(diseases)} diseases")
-    
-    return cleaned_abbreviations, drugs, diseases
-
-# ============================================================================
-# SIMPLIFIED ADAPTIVE CONFIDENCE FILTERING (UPDATED IN v11.0.0)
-# ============================================================================
-
-def apply_adaptive_confidence_filter(
-    candidates: List[Dict], 
-    entity_type: str,
-    use_claude: bool,
-    all_abbreviations: List[Dict] = None
-) -> List[Dict]:
-    """
-    UPDATED IN v11.0.0: Simplified adaptive filtering using confidence bands
-    
-    OLD APPROACH (v10.6.0):
-    - Hardcoded thresholds: pattern=0.65, ner=0.70, abbreviation=0.75, kb=0.80
-    - Different thresholds for Claude vs non-Claude
-    - Magic number adjustments (threshold - 0.10)
-    - 7 different threshold values across different conditions
-    
-    NEW APPROACH (v11.0.0):
-    - Use confidence bands (HIGH/MEDIUM/LOW) instead of exact thresholds
-    - Simpler decision logic: band + detection method + has_ids
-    - Only 2 configurable values: DRUG_MIN_CONFIDENCE and DISEASE_MIN_CONFIDENCE
-    - More permissive with better recall
-    
-    Strategy:
-    1. HIGH band (≥0.80): Always keep
-    2. MEDIUM band (0.60-0.80): Keep if has IDs OR pattern/kb detected OR Claude validated
-    3. LOW band (0.40-0.60): Keep only if pattern-detected with IDs
-    4. VERY_LOW band (<0.40): Reject
-    
-    Args:
-        candidates: List of entity candidates
-        entity_type: 'drug' or 'disease'
-        use_claude: Whether Claude validation was used
-        all_abbreviations: List of detected abbreviations for context support
-        
-    Returns:
-        Filtered list of entities
-    """
-    if not candidates:
-        return []
-    
-    # Get minimum confidence for this entity type
-    min_confidence = {
-        'drug': ThresholdConfig.DRUG_MIN_CONFIDENCE,
-        'disease': ThresholdConfig.DISEASE_MIN_CONFIDENCE
-    }.get(entity_type, 0.60)
-    
-    logger.debug(f"Filtering {len(candidates)} {entity_type} candidates (min_confidence={min_confidence})")
-    
-    filtered = []
-    stats = {'high': 0, 'medium': 0, 'low': 0, 'very_low': 0, 'rejected': 0}
-    
-    for candidate in candidates:
-        confidence = candidate.get('confidence', 0.0)
-        detection_method = candidate.get('detection_method', 'unknown')
-        
-        # Get confidence band
-        band = get_confidence_band(confidence)
-        stats[band.name.lower()] += 1
-        
-        # Always keep Claude-validated entities
-        if candidate.get('claude_validated'):
-            filtered.append(candidate)
-            continue
-        
-        # Check if entity has identifiers
-        has_ids = any(
-            candidate.get(id_field) 
-            for id_field in ['ORPHA', 'DOID', 'orphacode', 'orpha_code', 
-                            'rxcui', 'unii', 'drugbank_id', 'mesh_id',
-                            'UMLS', 'SNOMED', 'ICD10']
-        ) or bool(candidate.get('all_ids'))
-        
-        # Decision logic based on confidence band
-        keep = False
-        
-        if band == ConfidenceBand.HIGH:
-            # Always keep high-confidence detections
-            keep = True
-        
-        elif band == ConfidenceBand.MEDIUM:
-            # Keep if: has IDs OR high-quality detection method OR Claude validated
-            method_quality = ThresholdConfig.METHOD_QUALITY.get(detection_method, 'low')
-            keep = has_ids or method_quality == 'high' or use_claude
-        
-        elif band == ConfidenceBand.LOW:
-            # Only keep low-confidence if pattern-detected AND has IDs
-            keep = detection_method == 'pattern' and has_ids
-        
-        else:  # VERY_LOW
-            # Check for special cases with abbreviation support
-            if all_abbreviations and entity_type == 'disease':
-                entity_name = candidate.get('name', '').lower()
-                for abbrev in all_abbreviations:
-                    expansion = abbrev.get('expansion', '').lower()
-                    if entity_name in expansion or expansion in entity_name:
-                        if confidence >= ThresholdConfig.ABBREV_CONTEXT_SUPPORT_MIN:
-                            keep = True
-                            break
-        
-        if keep:
-            filtered.append(candidate)
-        else:
-            stats['rejected'] += 1
-    
-    logger.info(f"Adaptive filter: {len(candidates)} → {len(filtered)} {entity_type}s")
-    logger.debug(f"  Distribution: HIGH={stats['high']}, MEDIUM={stats['medium']}, "
-                f"LOW={stats['low']}, VERY_LOW={stats['very_low']}, REJECTED={stats['rejected']}")
-    
-    return filtered
-
-# ============================================================================
-# ABBREVIATION ENRICHMENT (UPDATED IN v11.0.0)
-# ============================================================================
-
-def enrich_abbreviations_with_entity_ids(
-    abbreviations: List[Dict],
-    drugs: List[Dict],
-    diseases: List[Dict]
-) -> Tuple[List[Dict], Dict]:
-    """
-    Enrich abbreviations with IDs from detected drugs/diseases
-    
-    UPDATED IN v11.0.0: Fuzzy threshold reduced from 85 to 75
-    
-    Example:
-        Abbreviation: M1 → "avacopan active metabolite"
-        Drug detected: avacopan (RxCUI: 2572100, MESH: C000620232)
-        Result: M1 gets enriched with RxCUI and MESH IDs
-    
-    Args:
-        abbreviations: List of abbreviation dictionaries
-        drugs: List of detected drugs
-        diseases: List of detected diseases
-        
-    Returns:
-        Tuple of (enriched_abbreviations, enrichment_stats)
-    """
-    if not abbreviations:
-        return abbreviations, {}
-    
-    start_time = time.time()
-    
-    # Build indices for fast lookup
-    drug_index = {}
-    for drug in drugs:
-        name = drug.get('name', '') or drug.get('normalized_name', '')
-        if name:
-            drug_index[name.lower()] = drug
-    
-    disease_index = {}
-    for disease in diseases:
-        name = disease.get('name', '') or disease.get('canonical_name', '')
-        if name:
-            disease_index[name.lower()] = disease
-    
-    # Statistics tracking
-    stats = {
-        'total_abbreviations': len(abbreviations),
-        'drugs_enriched': 0,
-        'diseases_enriched': 0,
-        'total_enriched': 0,
-        'id_types_added': defaultdict(int),
-        'exact_matches': 0,
-        'fuzzy_matches': 0,
-        'no_match': 0
-    }
-    
-    enrichment_details = []
-    enriched_abbreviations = []
-    
-    logger.info(f"Starting abbreviation enrichment: {len(abbreviations)} abbreviations, "
-                f"{len(drugs)} drugs, {len(diseases)} diseases")
-    
-    # Debug: Log sample data
-    logger.info(f"\nAbbreviations by context:")
-    context_counts = defaultdict(int)
-    for abbrev in abbreviations:
-        context_counts[abbrev.get('context_type', 'unknown')] += 1
-    for ctx, count in context_counts.items():
-        logger.info(f"  - {ctx} context: {count}")
-    
-    logger.info(f"\nSample drug names in index (first 10):")
-    for name in list(drug_index.keys())[:10]:
-        logger.info(f"  '{name}'")
-    
-    logger.info(f"\nSample disease names in index (first 10):")
-    for name in list(disease_index.keys())[:10]:
-        logger.info(f"  '{name}'")
-    
-    # Process each abbreviation
-    for abbrev in abbreviations:
-        abbreviation_text = abbrev.get('abbreviation', '')
-        expansion = abbrev.get('expansion', '')
-        
-        if not expansion:
-            enriched_abbreviations.append(abbrev)
-            stats['no_match'] += 1
-            continue
-        
-        expansion_lower = expansion.lower()
-        enriched = False
-        
-        # Try drug match first
-        matching_drug = None
-        match_type = None
-        
-        # Exact match
-        if expansion_lower in drug_index:
-            matching_drug = drug_index[expansion_lower]
-            match_type = 'exact'
-            stats['exact_matches'] += 1
-        else:
-            # Fuzzy match with REDUCED threshold (75 instead of 85)
-            fuzzy_result = fuzzy_match(expansion, list(drug_index.keys()), 
-                                      threshold=ThresholdConfig.FUZZY_MATCH_THRESHOLD)
-            if fuzzy_result:
-                matching_drug = drug_index[fuzzy_result]
-                match_type = 'fuzzy'
-                stats['fuzzy_matches'] += 1
-                logger.debug(f"Fuzzy drug match: '{expansion}' → '{fuzzy_result}'")
-        
-        if matching_drug:
-            # Initialize metadata if not present
-            if 'metadata' not in abbrev:
-                abbrev['metadata'] = {}
-            
-            # Copy drug IDs to abbreviation metadata
-            drug_id_fields = ['rxcui', 'unii', 'drugbank_id', 'mesh_id', 'atc_code']
-            ids_copied = []
-            
-            for id_field in drug_id_fields:
-                if matching_drug.get(id_field):
-                    abbrev['metadata'][id_field] = matching_drug[id_field]
-                    ids_copied.append(id_field)
-                    stats['id_types_added'][id_field] += 1
-            
-            # Mark enrichment
-            abbrev['metadata']['enriched_from'] = 'direct_detection'
-            abbrev['metadata']['match_type'] = match_type
-            
-            if ids_copied:
-                stats['drugs_enriched'] += 1
-                stats['total_enriched'] += 1
-                enriched = True
-                
-                enrichment_details.append({
-                    'abbreviation': abbreviation_text,
-                    'expansion': expansion,
-                    'type': 'drug',
-                    'match_type': match_type,
-                    'ids_copied': ids_copied
-                })
-                
-                logger.debug(f"Enriched {abbreviation_text} → {expansion} with drug IDs: {ids_copied} ({match_type})")
-        
-        # Try disease match if not already enriched as drug
-        if not enriched:
-            matching_disease = None
-            
-            # Exact match
-            if expansion_lower in disease_index:
-                matching_disease = disease_index[expansion_lower]
-                match_type = 'exact'
-                stats['exact_matches'] += 1
-            else:
-                # Fuzzy match with REDUCED threshold (75 instead of 85)
-                fuzzy_result = fuzzy_match(expansion, list(disease_index.keys()),
-                                          threshold=ThresholdConfig.FUZZY_MATCH_THRESHOLD)
-                if fuzzy_result:
-                    matching_disease = disease_index[fuzzy_result]
-                    match_type = 'fuzzy'
-                    stats['fuzzy_matches'] += 1
-                    logger.debug(f"Fuzzy disease match: '{expansion}' → '{fuzzy_result}'")
-            
-            if matching_disease:
-                # Initialize metadata if not present
-                if 'metadata' not in abbrev:
-                    abbrev['metadata'] = {}
-                
-                # Copy disease IDs to abbreviation metadata
-                disease_id_fields = ['orpha_code', 'orphacode', 'doid', 'umls_cui', 'cui', 'snomed_ct', 
-                                   'mesh_id', 'omim_id', 'mondo_id', 'icd10', 'icd9']
-                ids_copied = []
-                
-                for id_field in disease_id_fields:
-                    if matching_disease.get(id_field):
-                        abbrev['metadata'][id_field] = matching_disease[id_field]
-                        ids_copied.append(id_field)
-                        stats['id_types_added'][id_field] += 1
-                
-                # Also check for all_ids field
-                if matching_disease.get('all_ids'):
-                    for key, value in matching_disease['all_ids'].items():
-                        if value and key not in abbrev['metadata']:
-                            abbrev['metadata'][key] = value
-                            ids_copied.append(key)
-                            stats['id_types_added'][key] += 1
-                
-                # Mark enrichment
-                abbrev['metadata']['enriched_from'] = 'direct_detection'
-                abbrev['metadata']['match_type'] = match_type
-                
-                if ids_copied:
-                    stats['diseases_enriched'] += 1
-                    stats['total_enriched'] += 1
-                    enriched = True
-                    
-                    enrichment_details.append({
-                        'abbreviation': abbreviation_text,
-                        'expansion': expansion,
-                        'type': 'disease',
-                        'match_type': match_type,
-                        'ids_copied': ids_copied
-                    })
-                    
-                    logger.debug(f"Enriched {abbreviation_text} → {expansion} with disease IDs: {ids_copied} ({match_type})")
-        
-        if not enriched:
-            stats['no_match'] += 1
-        
-        enriched_abbreviations.append(abbrev)
-    
-    # Log detailed enrichment summary
-    logger.info("=" * 80)
-    logger.info("ENRICHMENT SUMMARY")
-    logger.info("=" * 80)
-    logger.info(f"Total abbreviations processed: {stats['total_abbreviations']}")
-    logger.info(f"Successfully enriched: {stats['total_enriched']} ({stats['total_enriched']/stats['total_abbreviations']*100:.1f}%)")
-    logger.info(f"  - Drugs enriched: {stats['drugs_enriched']}")
-    logger.info(f"  - Diseases enriched: {stats['diseases_enriched']}")
-    logger.info(f"Match types:")
-    logger.info(f"  - Exact matches: {stats['exact_matches']}")
-    logger.info(f"  - Fuzzy matches: {stats['fuzzy_matches']}")
-    logger.info(f"  - No match: {stats['no_match']}")
-    logger.info(f"\nID types added:")
-    for id_type, count in sorted(stats['id_types_added'].items(), key=lambda x: x[1], reverse=True):
-        logger.info(f"  - {id_type}: {count}")
-    
-    if enrichment_details:
-        logger.info(f"\nEnrichment details:")
-        for detail in enrichment_details[:10]:  # Show first 10
-            logger.info(f"  ✓ {detail['abbreviation']} → {detail['expansion']}")
-            logger.info(f"    Type: {detail['type']}, Match: {detail['match_type']}, IDs: {', '.join(detail['ids_copied'])}")
-    
-    # Warning if disease abbreviations found but none enriched
-    disease_abbrevs = sum(1 for a in abbreviations if a.get('context_type') == 'disease')
-    if disease_abbrevs > 0 and stats['diseases_enriched'] == 0:
-        logger.warning(f"⚠️  WARNING: Disease abbreviations found but none enriched - check disease ID availability!")
-    
-    logger.info("=" * 80)
-    logger.info(f"Enrichment completed in {time.time() - start_time:.2f}s")
-    
-    return enriched_abbreviations, dict(stats)
 
 # ============================================================================
 # ENTITY PROCESSING WITH ERROR RECOVERY AND ENRICHMENT
@@ -726,6 +85,12 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     """
     Process entities with abbreviation-first approach, ID enrichment, and ID-gated promotion
     
+    UPDATED IN v11.1.0:
+    - Added citation extraction (Step 2)
+    - Added person extraction (Step 3)
+    - Added reference extraction (Step 4)
+    - Renumbered existing steps accordingly
+    
     UPDATED IN v11.0.0:
     - Uses simplified adaptive filtering with confidence bands
     - More permissive promotion logic (OR instead of AND)
@@ -733,12 +98,15 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     
     Pipeline:
     1. Extract all abbreviations (with error recovery)
-    2. Extract drugs with adaptive filtering (with error recovery)
-    3. Extract diseases with adaptive filtering (with error recovery)
-    4. Cross-type deduplication
-    5. Enrich abbreviations with IDs from detected drugs/diseases
-    6. Apply ID-gated promotion for enriched abbreviations (with error recovery)
-    7. Validate and generate summary
+    2. Extract citations (with error recovery) - NEW in v11.1.0
+    3. Extract persons (with error recovery) - NEW in v11.1.0
+    4. Extract references (with error recovery) - NEW in v11.1.0
+    5. Extract drugs with adaptive filtering (with error recovery)
+    6. Extract diseases with adaptive filtering (with error recovery)
+    7. Cross-type deduplication
+    8. Enrich abbreviations with IDs from detected drugs/diseases
+    9. Apply ID-gated promotion for enriched abbreviations (with error recovery)
+    10. Validate and generate summary
     
     Args:
         text_content: Document text
@@ -752,13 +120,16 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         use_claude: Whether Claude validation is enabled
         
     Returns:
-        Dictionary with extraction results
+        Tuple of (extraction_results, promotion_links)
     """
     stage_name = stage_config['name']
     tasks = stage_config.get('tasks', [])
     
     results = {
         'abbreviations': [],
+        'citations': [],
+        'persons': [],
+        'references': [],
         'drugs': [],
         'diseases': [],
         'processing_errors': [],
@@ -775,16 +146,12 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             start = time.time()
             logger.info(f"Starting abbreviation extraction for {file_path.name}")
             
-            # FIX: Remove 'filename' parameter - it's not supported
             abbrev_results = components['abbreviation_extractor'].extract_abbreviations(
                 text_content
             )
             
             all_abbreviations = abbrev_results.get('abbreviations', [])
-            
-            # Deduplicate abbreviations
             all_abbreviations = deduplicate_by_key(all_abbreviations, ('abbreviation', 'expansion'))
-            
             results['abbreviations'] = all_abbreviations
             
             logger.info(f"Extracted {len(all_abbreviations)} unique abbreviations in {time.time()-start:.1f}s")
@@ -803,7 +170,97 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         all_abbreviations = []
     
     # ========================================================================
-    # STEP 2: Extract drugs (with error recovery)
+    # STEP 2: Extract citations (with error recovery) - NEW in v11.1.0
+    # ========================================================================
+    if 'citation_extraction' in tasks and 'citation_extractor' in components:
+        try:
+            start = time.time()
+            logger.info(f"Starting citation extraction for {file_path.name}")
+            
+            citation_results = components['citation_extractor'].extract_citations(
+                text_content,
+                doc_id=str(file_path.stem)
+            )
+            
+            results['citations'] = citation_results.to_dict().get('citations', [])
+            
+            logger.info(f"Extracted {len(results['citations'])} citations in {time.time()-start:.1f}s")
+            if console:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Citation extraction", True, 
+                                            f"{len(results['citations'])} found", time.time() - start)
+        except Exception as e:
+            logger.error(f"Citation extraction failed: {type(e).__name__}: {e}", exc_info=True)
+            results['processing_errors'].append(f"Citation extraction: {str(e)[:100]}")
+            results['citations'] = []
+            if console:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Citation extraction", False, str(e)[:50])
+    else:
+        results['citations'] = []
+    
+    # ========================================================================
+    # STEP 3: Extract persons (with error recovery) - NEW in v11.1.0
+    # ========================================================================
+    if 'person_extraction' in tasks and 'person_extractor' in components:
+        try:
+            start = time.time()
+            logger.info(f"Starting person extraction for {file_path.name}")
+            
+            person_results = components['person_extractor'].extract_persons(
+                text_content,
+                doc_id=str(file_path.stem)
+            )
+            
+            results['persons'] = person_results.to_dict().get('persons', [])
+            
+            logger.info(f"Extracted {len(results['persons'])} persons in {time.time()-start:.1f}s")
+            if console:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Person extraction", True, 
+                                            f"{len(results['persons'])} found", time.time() - start)
+        except Exception as e:
+            logger.error(f"Person extraction failed: {type(e).__name__}: {e}", exc_info=True)
+            results['processing_errors'].append(f"Person extraction: {str(e)[:100]}")
+            results['persons'] = []
+            if console:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Person extraction", False, str(e)[:50])
+    else:
+        results['persons'] = []
+    
+    # ========================================================================
+    # STEP 4: Extract references (with error recovery) - NEW in v11.1.0
+    # ========================================================================
+    if 'reference_extraction' in tasks and 'reference_extractor' in components:
+        try:
+            start = time.time()
+            logger.info(f"Starting reference extraction for {file_path.name}")
+            
+            reference_results = components['reference_extractor'].extract_references(
+                text_content,
+                doc_id=str(file_path.stem)
+            )
+            
+            results['references'] = reference_results.to_dict().get('references', [])
+            
+            logger.info(f"Extracted {len(results['references'])} references in {time.time()-start:.1f}s")
+            if console:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Reference extraction", True, 
+                                            f"{len(results['references'])} found", time.time() - start)
+        except Exception as e:
+            logger.error(f"Reference extraction failed: {type(e).__name__}: {e}", exc_info=True)
+            results['processing_errors'].append(f"Reference extraction: {str(e)[:100]}")
+            results['references'] = []
+            if console:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Reference extraction", False, str(e)[:50])
+    else:
+        results['references'] = []
+    
+    # ========================================================================
+    # STEP 5: Extract drugs (with error recovery)
     # ========================================================================
     if 'drug_detection' in tasks and 'drug_extractor' in components:
         try:
@@ -848,7 +305,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     direct_drugs = results['drugs']
     
     # ========================================================================
-    # STEP 3: Extract diseases (with error recovery)
+    # STEP 6: Extract diseases (with error recovery)
     # ========================================================================
     if 'disease_detection' in tasks and 'disease_extractor' in components:
         try:
@@ -893,7 +350,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     direct_diseases = results['diseases']
     
     # ========================================================================
-    # STEP 3.5: CROSS-TYPE DEDUPLICATION
+    # STEP 7: CROSS-TYPE DEDUPLICATION
     # ========================================================================
     dedup_enabled = True  # Default to enabled
     
@@ -934,7 +391,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         logger.debug("Cross-type deduplication: Skipped (disabled or no entities)")
     
     # ========================================================================
-    # STEP 4: Enrich abbreviations with IDs from detected entities
+    # STEP 8: Enrich abbreviations with IDs from detected entities
     # ========================================================================
     if all_abbreviations and (direct_drugs or direct_diseases):
         try:
@@ -973,7 +430,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         results['enrichment_stats'] = {}
     
     # ========================================================================
-    # STEP 5: ID-Gated Promotion (with error recovery)
+    # STEP 9: ID-Gated Promotion (with error recovery)
     # ========================================================================
     promotion_links = []
     
@@ -1004,7 +461,8 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             drugs_promoted = len(promoted_drugs) - len(direct_drugs)
             diseases_promoted = len(promoted_diseases) - len(direct_diseases)
             
-            logger.info(f"Promotion complete: {drugs_promoted} drugs, {diseases_promoted} diseases promoted in {time.time()-start:.1f}s")
+            logger.info(f"Promotion complete: {drugs_promoted} drugs, {diseases_promoted} diseases "
+                       f"promoted in {time.time()-start:.1f}s")
             
             if console:
                 console.print_stage_progress(stage_name, stage_config['sequence'], 
@@ -1023,14 +481,20 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         logger.debug("Promotion: Skipped (no abbreviations)")
     
     # ========================================================================
-    # STEP 6: Generate extraction summary
+    # STEP 10: Generate extraction summary
     # ========================================================================
     final_drugs = results.get('drugs', [])
     final_diseases = results.get('diseases', [])
     final_abbreviations = results.get('abbreviations', [])
+    final_citations = results.get('citations', [])      # NEW in v11.1.0
+    final_persons = results.get('persons', [])          # NEW in v11.1.0
+    final_references = results.get('references', [])    # NEW in v11.1.0
     
     results['extraction_summary'] = {
         'abbreviations_total': len(final_abbreviations),
+        'citations_total': len(final_citations),        # NEW in v11.1.0
+        'persons_total': len(final_persons),            # NEW in v11.1.0
+        'references_total': len(final_references),      # NEW in v11.1.0
         'drugs_direct': len(direct_drugs),
         'drugs_promoted': len(final_drugs) - len(direct_drugs),
         'drugs_total': len(final_drugs),
@@ -1044,9 +508,13 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     
     logger.info(f"Entity extraction complete: {results['extraction_summary']['abbreviations_total']} abbrev, "
                f"{results['extraction_summary']['drugs_total']} drugs, "
-               f"{results['extraction_summary']['diseases_total']} diseases")
+               f"{results['extraction_summary']['diseases_total']} diseases, "
+               f"{results['extraction_summary']['citations_total']} citations, "
+               f"{results['extraction_summary']['persons_total']} persons, "
+               f"{results['extraction_summary']['references_total']} references")
     
     return results, promotion_links
+
 
 # ============================================================================
 # DOCUMENT PROCESSING
@@ -1056,6 +524,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
     """
     Process document in two stages: metadata first, then entities
     
+    UPDATED IN v11.1.0: Added citation, person, and reference extraction
     UPDATED IN v11.0.0: Uses new simplified filtering and promotion logic
     
     Args:
@@ -1085,7 +554,6 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
     if not hasattr(components, 'config'):
         components['config'] = config
     
-    pipeline_version = 'v11.0.0'  # UPDATED VERSION
     features = config.get('features', {})
     use_claude = features.get('ai_validation', False)
     use_caching = features.get('enable_document_caching', False)
@@ -1094,7 +562,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
     cache = None
     if use_caching:
         cache = ExtractionCache()
-        cached = cache.get(file_path, pipeline_version)
+        cached = cache.get(file_path, PIPELINE_VERSION)
         if cached:
             logger.info(f"Returning cached results for {file_path.name}")
             return cached
@@ -1103,7 +571,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         'filename': file_path.name,
         'file_path': str(file_path),
         'extraction_date': datetime.now().isoformat(),
-        'pipeline_version': pipeline_version,
+        'pipeline_version': PIPELINE_VERSION,
         'pipeline_stages': [],
         'metadata': {},
         'validation': {},
@@ -1178,7 +646,8 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                     if 'description' in stage_config.get('tasks', []) or 'title' in stage_config.get('tasks', []):
                         try:
                             # Call generate_descriptions (PLURAL) and it returns dict with title, short_description, long_description
-                            descriptions = extractor.generate_descriptions(limited_text, file_path.name, stage_results.get('document_type'))
+                            descriptions = extractor.generate_descriptions(limited_text, file_path.name, 
+                                                                          stage_results.get('document_type'))
                             stage_results.update(descriptions)
                             
                             # Ensure we have at least a basic title if generation failed
@@ -1199,7 +668,6 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                         except Exception as e:
                             logger.error(f"Date extraction failed: {e}")
                             final_results['processing_errors'].append(f"Dates: {str(e)[:100]}")
-                    
                     
                     # Filename proposal
                     if 'filename_proposal' in stage_config.get('tasks', []):
@@ -1280,12 +748,13 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                 filename=file_path.name,
                 file_path=str(file_path),
                 document_metadata=final_results.get('metadata', {}),
-                pipeline_version=pipeline_version,
+                pipeline_version=PIPELINE_VERSION,
                 validation_method='claude' if use_claude else 'threshold'
             )
             
             # Store entities - FIX: Check if methods exist before calling
-            entity_stage = next((s for s in final_results.get('pipeline_stages', []) if s['stage'] == 'entities'), None)
+            entity_stage = next((s for s in final_results.get('pipeline_stages', []) 
+                               if s['stage'] == 'entities'), None)
             
             if entity_stage and entity_stage.get('results'):
                 entities = entity_stage['results']
@@ -1347,7 +816,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         # ====================================================================
         
         if cache:
-            cache.set(file_path, pipeline_version, final_results)
+            cache.set(file_path, PIPELINE_VERSION, final_results)
         
         # Calculate total processing time
         total_time = time.time() - start_time
@@ -1363,216 +832,3 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
             'warnings': [f"Processing failed: {str(e)[:100]}"]
         }
         return final_results
-
-# ============================================================================
-# VALIDATION & QUALITY ASSESSMENT
-# ============================================================================
-
-def validate_extraction_results(results: Dict, config: Dict) -> Dict:
-    """
-    Validate extraction results and assess quality
-    
-    UPDATED IN v11.0.0: Updated thresholds for validation
-    
-    Args:
-        results: Extraction results
-        config: Pipeline configuration
-        
-    Returns:
-        Validation results with warnings and recommendations
-    """
-    validation = {
-        'is_valid': True,
-        'warnings': [],
-        'quality_metrics': {},
-        'recommendations': [],
-        'assessment': 'Good'
-    }
-    
-    # Get entity results from last stage
-    entity_stage = None
-    for stage in results.get('pipeline_stages', []):
-        if stage['stage'] == 'entities':
-            entity_stage = stage['results']
-            break
-    
-    if not entity_stage:
-        validation['warnings'].append("No entity extraction stage found")
-        validation['is_valid'] = False
-        return validation
-    
-    drugs = entity_stage.get('drugs', [])
-    diseases = entity_stage.get('diseases', [])
-    abbreviations = entity_stage.get('abbreviations', [])
-    extraction_summary = entity_stage.get('extraction_summary', {})
-    
-    # ========================================================================
-    # QUALITY METRICS
-    # ========================================================================
-    
-    # Drug confidence
-    if drugs:
-        drug_confidences = [d.get('confidence', 0) for d in drugs]
-        validation['quality_metrics']['drug_confidence'] = {
-            'avg': round(sum(drug_confidences) / len(drug_confidences), 3),
-            'count': len(drugs)
-        }
-    
-    # Disease confidence
-    if diseases:
-        disease_confidences = [d.get('confidence', 0) for d in diseases]
-        validation['quality_metrics']['disease_confidence'] = {
-            'avg': round(sum(disease_confidences) / len(disease_confidences), 3),
-            'min': round(min(disease_confidences), 2),
-            'count': len(diseases)
-        }
-    
-    # ID coverage
-    drugs_with_ids = sum(1 for d in drugs if d.get('rxcui') or d.get('mesh_id'))
-    diseases_with_ids = sum(1 for d in diseases if any(
-        d.get(id_field) for id_field in ['ORPHA', 'DOID', 'UMLS', 'SNOMED', 'orpha_code', 'doid']
-    ))
-    
-    validation['quality_metrics']['drug_id_coverage'] = round(drugs_with_ids / len(drugs), 2) if drugs else 0
-    validation['quality_metrics']['disease_id_coverage'] = round(diseases_with_ids / len(diseases), 2) if diseases else 0
-    
-    # Entity density
-    text_length = len(results.get('metadata', {}).get('extracted_text', ''))
-    if text_length > 0:
-        total_entities = len(drugs) + len(diseases) + len(abbreviations)
-        validation['quality_metrics']['entities_per_1k_chars'] = round(total_entities / (text_length / 1000), 2)
-    
-    # Entity distribution
-    validation['quality_metrics']['entity_distribution'] = {
-        'abbreviations': len(abbreviations),
-        'drugs': len(drugs),
-        'diseases': len(diseases),
-        'total': len(abbreviations) + len(drugs) + len(diseases)
-    }
-    
-    # Promotion rate
-    promotion_rate = extraction_summary.get('promotion_rate', 0)
-    validation['quality_metrics']['promotion_rate'] = round(promotion_rate, 2)
-    
-    # Semantic type distribution
-    disease_semantic_types = defaultdict(int)
-    for disease in diseases:
-        semantic_type = disease.get('semantic_type', 'unknown')
-        disease_semantic_types[semantic_type] += 1
-    
-    validation['quality_metrics']['semantic_type_distribution'] = dict(disease_semantic_types)
-    
-    # ========================================================================
-    # WARNINGS
-    # ========================================================================
-    
-    # UPDATED IN v11.0.0: More realistic thresholds
-    quality_thresholds = config.get('quality_control', {}).get('thresholds', {})
-    
-    # Check promotion rate (reduced threshold from 0.05 to 0.02)
-    min_promotion = quality_thresholds.get('promotion_rate', 0.02)
-    if promotion_rate < min_promotion:
-        validation['warnings'].append(
-            f"Low promotion rate ({promotion_rate:.1%}) - abbreviations may lack identifiers"
-        )
-    
-    # Check ID coverage (reduced from 0.5 to 0.3)
-    min_drug_id_coverage = quality_thresholds.get('drug_id_coverage', 0.3)
-    if validation['quality_metrics']['drug_id_coverage'] < min_drug_id_coverage:
-        validation['warnings'].append(
-            f"Low drug ID coverage ({validation['quality_metrics']['drug_id_coverage']:.1%})"
-        )
-    
-    min_disease_id_coverage = quality_thresholds.get('disease_id_coverage', 0.25)
-    if validation['quality_metrics']['disease_id_coverage'] < min_disease_id_coverage:
-        validation['warnings'].append(
-            f"Low disease ID coverage ({validation['quality_metrics']['disease_id_coverage']:.1%})"
-        )
-    
-    # Check for incomplete disease names
-    incomplete_diseases = [
-        d.get('name') for d in diseases 
-        if d.get('name') and (
-            d['name'].endswith('-Associated') or 
-            d['name'].endswith('-Onset') or
-            len(d['name']) < 5
-        )
-    ]
-    
-    if incomplete_diseases:
-        validation['warnings'].append(
-            f"Incomplete disease names detected: {len(incomplete_diseases)} entries "
-            f"(e.g., {', '.join(incomplete_diseases[:2])})"
-        )
-        validation['recommendations'].append("Review abbreviation expansion logic - incomplete disease names detected")
-    
-    # Check for abbreviations extracted as diseases
-    abbrev_as_diseases = [
-        d.get('name') for d in diseases
-        if d.get('name') and len(d['name']) <= 5 and d['name'].isupper()
-    ]
-    if abbrev_as_diseases:
-        validation['warnings'].append(
-            f"Abbreviations extracted as diseases: {len(abbrev_as_diseases)} entries "
-            f"(e.g., {', '.join(abbrev_as_diseases[:2])})"
-        )
-        validation['recommendations'].append("Abbreviations should be expanded, not extracted as diseases")
-    
-    # Check for symptom contamination
-    symptom_diseases = [
-        d.get('name', '').lower() for d in diseases
-        if any(symptom in d.get('name', '').lower() for symptom in SYMPTOM_KEYWORDS)
-        and d.get('name', '').lower() not in ALWAYS_KEEP_DISEASES
-    ]
-    
-    if symptom_diseases:
-        validation['warnings'].append(
-            f"Potential symptom contamination: {len(symptom_diseases)} entries "
-            f"(e.g., {', '.join(symptom_diseases[:2])})"
-        )
-        validation['recommendations'].append("Review symptom filtering - symptoms may be mixed with diseases")
-    
-    # Check for generic terms without IDs
-    generic_diseases = [
-        d.get('name') for d in diseases
-        if any(term in d.get('name', '').lower() for term in GENERIC_DISEASE_TERMS)
-        and not any(d.get(id_field) for id_field in ['ORPHA', 'DOID', 'UMLS', 'orpha_code'])
-    ]
-    
-    if generic_diseases:
-        validation['warnings'].append(
-            f"Generic disease terms without IDs: {len(generic_diseases)} entries "
-            f"(e.g., {', '.join(generic_diseases[:2])})"
-        )
-        validation['recommendations'].append("Generic disease terms should have ontology IDs for validation")
-    
-    # ========================================================================
-    # OVERALL ASSESSMENT
-    # ========================================================================
-    
-    warning_count = len(validation['warnings'])
-    
-    if warning_count == 0:
-        validation['assessment'] = "Excellent - No issues detected"
-    elif warning_count <= 2:
-        validation['assessment'] = "Good - Minor issues detected"
-    elif warning_count <= 4:
-        validation['assessment'] = "Acceptable - Several issues detected"
-    else:
-        validation['assessment'] = "Needs Review - Multiple issues detected"
-        validation['is_valid'] = False
-    
-    # Log validation results
-    if validation['warnings']:
-        logger.warning(f"Validation warnings for {results.get('filename')}:")
-        for warning in validation['warnings']:
-            logger.warning(f"  - {warning}")
-    
-    if validation['recommendations']:
-        logger.info(f"Recommendations for {results.get('filename')}:")
-        for rec in validation['recommendations']:
-            logger.info(f"  • {rec}")
-    
-    logger.info(f"Quality assessment: {validation['assessment']}")
-    
-    return validation

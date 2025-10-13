@@ -9,6 +9,8 @@
 # - Added promotion configuration for ID-gated abbreviation promotion
 # - Enhanced validation settings with fuzzy matching options
 # - Added disease name completion settings
+#  corpus_config/config.yaml
+
 
 system:
   name: "Rare Disease Document Extraction"
@@ -31,6 +33,11 @@ features:
   description: true # lang and short
   dates: true
   title: true # better file name
+
+  # NEW: Citation, Person, and Reference extraction (ADD THESE 3 LINES)
+  citation_extraction: true      
+  person_extraction: true        
+  reference_extraction: true     
   
   # External API features
   pubtator_enrichment: true   # Use PubTator3 API for entity enrichment
@@ -86,6 +93,9 @@ pipeline:
         - drug_detection
         - disease_detection
         - abbreviation_extraction 
+        - citation_extraction      
+        - person_extraction        
+        - reference_extraction     
         
 # API Configuration - Single source for all API settings
 api_configuration:
@@ -383,6 +393,82 @@ quality_control:
     - "generic_terms_without_ids"
     - "low_id_coverage"
     - "low_promotion_rate"
+
+# ==============================================================================
+# CITATION EXTRACTOR CONFIGURATION (NEW IN v12.3)
+# ==============================================================================
+citation:
+  # Minimum confidence threshold for extracted citations
+  min_confidence: 0.5
+  
+  # Extract context around citations
+  extract_context: true
+  context_window: 100  # Characters before/after citation
+  
+  # Detect and classify citation styles (Vancouver, APA, Harvard, etc.)
+  detect_style: true
+  
+  # Link inline citations to reference list
+  link_inline_citations: true
+  
+  # Extract DOIs, PMIDs, PMC IDs, and other identifiers from citations
+  extract_identifiers: true
+  
+  # Deduplicate citations by DOI/PMID
+  deduplicate_by_identifier: true
+
+# ==============================================================================
+# PERSON EXTRACTOR CONFIGURATION (NEW IN v12.3)
+# ==============================================================================
+person:
+  # Minimum confidence threshold for extracted persons
+  min_confidence: 0.5
+  
+  # Extract context around person mentions
+  extract_context: true
+  context_window: 100  # Characters before/after person mention
+  
+  # Extract institutional affiliations
+  extract_affiliations: true
+  
+  # Validate ORCID checksums (if ORCID detected)
+  validate_orcid_checksums: true
+  
+  # Classify person roles (author, PI, investigator, etc.)
+  classify_roles: true
+  
+  # Build co-author network graph
+  build_coauthor_network: true
+  
+  # Deduplicate persons by name normalization
+  deduplicate_persons: true
+
+# ==============================================================================
+# REFERENCE EXTRACTOR CONFIGURATION (NEW IN v12.3)
+# ==============================================================================
+reference:
+  # Minimum confidence threshold for extracted references
+  min_confidence: 0.5
+  
+  # Extract context around reference mentions
+  extract_context: true
+  context_window: 100  # Characters before/after reference
+  
+  # Classify reference roles (cited, supporting, conflicting, etc.)
+  classify_roles: true
+  
+  # Reconstruct full URLs from partial references
+  reconstruct_urls: true
+  
+  # Validate checksums for identifiers (DOI, PMID checksums)
+  validate_checksums: true
+  
+  # Extract all 60+ reference types (DOI, PMID, NCT, EMA, etc.)
+  extract_all_types: true
+  
+  # Group related references (e.g., same trial, same publication)
+  group_related_references: true
+
 
 # ==============================================================================
 # EXPERIMENTAL FEATURES (NEW IN v12.3)

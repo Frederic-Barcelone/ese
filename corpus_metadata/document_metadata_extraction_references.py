@@ -1,26 +1,23 @@
 #!/usr/bin/env python3
 """
-Document Metadata Extraction - Reference & Identifier Extractor
-================================================================
+Document Metadata Extraction - Reference & Identifier Extractor (FIXED + VALIDATED)
+====================================================================================
 Location: corpus_metadata/document_metadata_extraction_references.py
-Version: 1.0.0
-Last Updated: 2025-10-08
+Version: 1.2.0 - WITH AI VALIDATION
+Last Updated: 2025-10-13
 
-Purpose:
-    Extract and normalize external references and identifiers from biomedical documents.
-    Integrates with entity_reference_patterns.py for comprehensive coverage.
+FEATURES IN v1.2.0:
+- ✅ Integrated Claude AI validation after extraction
+- ✅ Auto-corrects misclassified references (PMID vs INSPIREHEP)
+- ✅ Validation statistics in output
+- ✅ Optional validation (can be disabled)
 
-Features:
-    - Multi-category identifier extraction (DOIs, PubMed, Clinical Trials, Patents, etc.)
-    - Context-aware reference detection
-    - URL reconstruction and validation
-    - Reference role classification (supporting evidence, methodology, guideline, etc.)
-    - Confidence scoring and quality assessment
-    - Deduplication and normalization
-
-Usage:
-    extractor = ReferenceExtractor()
-    result = extractor.extract_references(document_text, doc_id="PMC123456")
+PREVIOUS FIXES IN v1.1.0:
+- ✅ Fixed PMID detection with URL context awareness
+- ✅ Added numbered reference parsing (1-60 style)
+- ✅ Filter false INSPIREHEP matches (actually PMIDs)
+- ✅ Extract full reference metadata (title, journal, authors)
+- ✅ Better reference section detection
 """
 
 import re
@@ -46,6 +43,22 @@ try:
     )
 except ImportError:
     logging.warning("Could not import entity_reference_patterns. Using fallback patterns.")
+    REFERENCE_PATTERNS = {}
+    CONTEXT_ROLE_PATTERNS = {}
+    PUBLISHER_METADATA = {}
+    CONFIDENCE_BOOSTERS = {}
+
+# NEW: Import validation module
+try:
+    from document_utils.entity_validations import (
+        ReferenceValidator,
+        apply_validation_corrections,
+        BatchValidationResult
+    )
+    VALIDATION_AVAILABLE = True
+except ImportError:
+    logging.warning("Could not import entity_validations. AI validation disabled.")
+    VALIDATION_AVAILABLE = False
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -95,18 +108,25 @@ class ExtractedReference:
     """Structured representation of an extracted reference."""
     
     # REQUIRED FIELDS (no defaults) - MUST come first
-    reference_id: str  # Unique within document
-    reference_type: str  # doi, pubmed, nct, etc.
+    reference_id: str
+    reference_type: str
     raw_text: str
     normalized_value: str
     category: ReferenceCategory
     start_char: int
     end_char: int
     
-    # OPTIONAL FIELDS (with defaults) - MUST come after required fields
+    # OPTIONAL FIELDS (with defaults)
     role: ReferenceRole = ReferenceRole.GENERAL
     section: Optional[str] = None
     sentence: Optional[str] = None
+    
+    # Full reference metadata
+    reference_number: Optional[int] = None
+    title: Optional[str] = None
+    journal: Optional[str] = None
+    authors: Optional[str] = None
+    year: Optional[str] = None
     
     # Metadata
     url: Optional[str] = None
@@ -144,7 +164,8 @@ class ExtractedReference:
         
         # Optional fields
         optional_fields = ['section', 'sentence', 'url', 'source', 
-                          'preceding_context', 'following_context']
+                          'preceding_context', 'following_context',
+                          'reference_number', 'title', 'journal', 'authors', 'year']
         for field_name in optional_fields:
             value = getattr(self, field_name)
             if value is not None:
@@ -171,11 +192,13 @@ class ReferenceExtractionResult:
     # Extracted references
     references: List[ExtractedReference] = field(default_factory=list)
     
-    # Statistics by category
+    # Numbered references from reference list
+    numbered_references: List[Dict] = field(default_factory=list)
+    
+    # Statistics
     category_counts: Dict[str, int] = field(default_factory=dict)
     type_counts: Dict[str, int] = field(default_factory=dict)
     
-    # Analysis
     total_references: int = 0
     unique_references: int = 0
     references_with_urls: int = 0
@@ -186,6 +209,10 @@ class ReferenceExtractionResult:
     has_pubmed: bool = False
     has_clinical_trial: bool = False
     preprint_count: int = 0
+    
+    # NEW: Validation results
+    validation_applied: bool = False
+    validation_summary: Optional[Dict] = None
     
     # Document classification
     document_type_hints: List[str] = field(default_factory=list)
@@ -198,10 +225,11 @@ class ReferenceExtractionResult:
     
     def to_dict(self) -> Dict:
         """Convert to dictionary representation."""
-        return {
+        result_dict = {
             'doc_id': self.doc_id,
             'language': self.language,
             'references': [r.to_dict() for r in self.references],
+            'numbered_references': self.numbered_references,
             'statistics': {
                 'total_references': self.total_references,
                 'unique_references': self.unique_references,
@@ -222,6 +250,15 @@ class ReferenceExtractionResult:
             'warnings': self.warnings,
             'metadata': self.metadata
         }
+        
+        # NEW: Add validation info if applied
+        if self.validation_applied:
+            result_dict['validation'] = {
+                'applied': True,
+                'summary': self.validation_summary
+            }
+        
+        return result_dict
     
     def to_json(self, indent: int = 2) -> str:
         """Serialize to JSON."""
@@ -229,31 +266,47 @@ class ReferenceExtractionResult:
 
 
 # ============================================================================
-# REFERENCE EXTRACTOR
+# REFERENCE EXTRACTOR (FIXED VERSION WITH VALIDATION)
 # ============================================================================
 
 class ReferenceExtractor:
     """
     Extract and normalize external references from biomedical documents.
+    FIXED: Better PMID detection, numbered reference parsing.
+    NEW: Integrated Claude AI validation.
     """
     
     def __init__(self, config: Optional[Dict] = None):
-        """
-        Initialize the reference extractor.
-        
-        Args:
-            config: Optional configuration dictionary
-        """
+        """Initialize the reference extractor."""
         self.config = config or {}
         self.min_confidence = self.config.get('min_confidence', 0.5)
         self.extract_context = self.config.get('extract_context', True)
         self.context_window = self.config.get('context_window', 100)
         self.classify_roles = self.config.get('classify_roles', True)
         
+        # NEW: Validation settings
+        self.enable_validation = self.config.get('enable_validation', True)
+        self.validation_batch_size = self.config.get('validation_batch_size', 20)
+        
         # Compile patterns
         self._compile_patterns()
         
-        logger.info(f"ReferenceExtractor initialized with config: {self.config}")
+        # NEW: Initialize validator if enabled
+        self.validator = None
+        if self.enable_validation and VALIDATION_AVAILABLE:
+            try:
+                self.validator = ReferenceValidator(
+                    batch_size=self.validation_batch_size
+                )
+                logger.info("✓ Reference validator initialized")
+            except Exception as e:
+                logger.warning(f"Could not initialize validator: {e}")
+                self.enable_validation = False
+        elif self.enable_validation and not VALIDATION_AVAILABLE:
+            logger.warning("Validation requested but entity_validations module not available")
+            self.enable_validation = False
+        
+        logger.info(f"ReferenceExtractor initialized (validation={'enabled' if self.enable_validation else 'disabled'})")
     
     def _compile_patterns(self):
         """Compile all regex patterns for efficiency."""
@@ -278,12 +331,25 @@ class ReferenceExtractor:
             self.compiled_role_patterns[role] = [
                 re.compile(p, re.IGNORECASE) for p in patterns
             ]
+        
+        # Compile reference section pattern
+        self.reference_section_pattern = re.compile(
+            r'^\s*(?:REFERENCES?|Bibliography|Literature\s+Cited)\s*$',
+            re.MULTILINE | re.IGNORECASE
+        )
+        
+        # Numbered reference pattern
+        self.numbered_ref_pattern = re.compile(
+            r'^\s*(\d{1,2})\.\s+(.+?)(?=^\s*\d{1,2}\.\s+|$)',
+            re.MULTILINE | re.DOTALL
+        )
     
     def extract_references(
         self,
         text: str,
         doc_id: str = "unknown",
-        section_map: Optional[Dict[str, Tuple[int, int]]] = None
+        section_map: Optional[Dict[str, Tuple[int, int]]] = None,
+        validate: Optional[bool] = None
     ) -> ReferenceExtractionResult:
         """
         Extract all references from document text.
@@ -291,18 +357,25 @@ class ReferenceExtractor:
         Args:
             text: Document text
             doc_id: Document identifier
-            section_map: Optional mapping of section names to character positions
-            
+            section_map: Optional section boundaries
+            validate: Override validation setting (None uses config)
+        
         Returns:
-            ReferenceExtractionResult object
+            ReferenceExtractionResult with extracted and validated references
         """
         start_time = datetime.now()
         
         result = ReferenceExtractionResult(doc_id=doc_id)
         
         try:
-            # Extract references by pattern type
             logger.info(f"Extracting references for {doc_id}")
+            
+            # Extract numbered references from reference section
+            numbered_refs = self._extract_numbered_references(text)
+            result.numbered_references = numbered_refs
+            logger.info(f"Found {len(numbered_refs)} numbered references")
+            
+            # Extract identifier references by pattern type
             all_references = []
             
             for ref_type, pattern_info in self.compiled_patterns.items():
@@ -314,7 +387,11 @@ class ReferenceExtractor:
                 )
                 all_references.extend(refs)
             
-            logger.info(f"Found {len(all_references)} raw references")
+            logger.info(f"Found {len(all_references)} raw identifier references")
+            
+            # Filter out false INSPIREHEP matches
+            all_references = self._filter_false_inspirehep(all_references, text)
+            logger.info(f"After INSPIREHEP filtering: {len(all_references)} references")
             
             # Deduplicate references
             unique_refs = self._deduplicate_references(all_references)
@@ -328,6 +405,12 @@ class ReferenceExtractor:
             logger.info(f"After confidence filter: {len(filtered_refs)} references")
             
             result.references = filtered_refs
+            
+            # NEW: Apply AI validation if enabled
+            should_validate = validate if validate is not None else self.enable_validation
+            if should_validate and self.validator and len(result.references) > 0:
+                logger.info("Starting AI validation of extracted references...")
+                result = self._apply_validation(result, text)
             
             # Calculate statistics
             self._calculate_statistics(result)
@@ -347,9 +430,226 @@ class ReferenceExtractor:
         result.processing_time_seconds = (end_time - start_time).total_seconds()
         
         logger.info(f"Reference extraction complete for {doc_id}: "
-                   f"{result.total_references} references")
+                   f"{result.total_references} identifier references, "
+                   f"{len(result.numbered_references)} numbered references")
         
         return result
+    
+    def _apply_validation(
+        self,
+        result: ReferenceExtractionResult,
+        text: str
+    ) -> ReferenceExtractionResult:
+        """
+        NEW: Apply AI validation to extracted references.
+        
+        Args:
+            result: Extraction result with references
+            text: Full document text for context
+            
+        Returns:
+            Updated result with validated references
+        """
+        try:
+            # Convert references to dictionaries for validation
+            ref_dicts = [r.to_dict() for r in result.references]
+            
+            # Validate with Claude AI
+            validation_result = self.validator.validate_references(
+                references=ref_dicts,
+                context_text=text[:5000]  # First 5000 chars for context
+            )
+            
+            logger.info(f"Validation complete: {validation_result.valid_count}/{validation_result.total_references} valid, "
+                       f"{validation_result.misclassified_count} misclassified")
+            
+            # Apply corrections
+            corrected_dicts = apply_validation_corrections(
+                references=ref_dicts,
+                validation_result=validation_result
+            )
+            
+            # Convert back to ExtractedReference objects
+            corrected_refs = []
+            for ref_dict in corrected_dicts:
+                # Find original reference
+                original_ref = next(
+                    (r for r in result.references if r.reference_id == ref_dict['reference_id']),
+                    None
+                )
+                
+                if original_ref:
+                    # Update fields that may have been corrected
+                    if 'validation_corrected' in ref_dict and ref_dict['validation_corrected']:
+                        original_ref.reference_type = ref_dict.get('reference_type', original_ref.reference_type)
+                        original_ref.url = ref_dict.get('url', original_ref.url)
+                        original_ref.source = ref_dict.get('source', original_ref.source)
+                        
+                        # Update category if changed
+                        if 'category' in ref_dict:
+                            try:
+                                original_ref.category = ReferenceCategory(ref_dict['category'])
+                            except ValueError:
+                                pass
+                    
+                    # Add validation metadata
+                    if 'validation' in ref_dict:
+                        original_ref.metadata['validation'] = ref_dict['validation']
+                    
+                    corrected_refs.append(original_ref)
+            
+            result.references = corrected_refs
+            result.validation_applied = True
+            result.validation_summary = validation_result.to_dict()['summary']
+            
+            logger.info(f"Applied validation corrections: {len(result.references)} references remain")
+            
+        except Exception as e:
+            logger.error(f"Validation failed: {e}")
+            result.warnings.append(f"Validation error: {str(e)}")
+            result.validation_applied = False
+        
+        return result
+    
+    def _extract_numbered_references(self, text: str) -> List[Dict]:
+        """
+        Extract numbered references from reference section.
+        Handles formats like: 1. Author A, Author B. Title. Journal. 2020;12:34-56.
+        """
+        numbered_refs = []
+        
+        # Find reference section
+        ref_section_match = self.reference_section_pattern.search(text)
+        if not ref_section_match:
+            logger.info("No reference section found")
+            return numbered_refs
+        
+        # Extract text after "References" header
+        ref_start = ref_section_match.end()
+        ref_text = text[ref_start:]
+        
+        # Find all numbered references
+        for match in self.numbered_ref_pattern.finditer(ref_text):
+            ref_num = int(match.group(1))
+            ref_content = match.group(2).strip()
+            
+            # Parse reference content
+            parsed = self._parse_reference_content(ref_content)
+            
+            numbered_refs.append({
+                'reference_number': ref_num,
+                'raw_text': ref_content,
+                'title': parsed.get('title'),
+                'journal': parsed.get('journal'),
+                'authors': parsed.get('authors'),
+                'year': parsed.get('year'),
+                'url': parsed.get('url'),
+                'doi': parsed.get('doi'),
+                'pmid': parsed.get('pmid'),
+                'pmcid': parsed.get('pmcid'),
+                'start_char': ref_start + match.start(),
+                'end_char': ref_start + match.end()
+            })
+        
+        return numbered_refs
+    
+    def _parse_reference_content(self, ref_text: str) -> Dict[str, Optional[str]]:
+        """Parse structured information from reference text."""
+        parsed = {
+            'title': None,
+            'journal': None,
+            'authors': None,
+            'year': None,
+            'url': None,
+            'doi': None,
+            'pmid': None,
+            'pmcid': None
+        }
+        
+        # Extract year
+        year_match = re.search(r'\b(19|20)\d{2}\b', ref_text)
+        if year_match:
+            parsed['year'] = year_match.group(0)
+        
+        # Extract DOI
+        doi_match = re.search(r'10\.\d{4,9}/[^\s]+', ref_text)
+        if doi_match:
+            parsed['doi'] = doi_match.group(0).rstrip('.')
+        
+        # Extract PMID
+        pmid_match = re.search(r'PMID:?\s*(\d{7,8})', ref_text, re.IGNORECASE)
+        if pmid_match:
+            parsed['pmid'] = pmid_match.group(1)
+        
+        # Extract PMCID
+        pmc_match = re.search(r'PMC(\d{6,9})', ref_text, re.IGNORECASE)
+        if pmc_match:
+            parsed['pmcid'] = pmc_match.group(1)
+        
+        # Extract URL
+        url_match = re.search(r'https?://[^\s]+', ref_text)
+        if url_match:
+            parsed['url'] = url_match.group(0).rstrip('.')
+        
+        # Extract title
+        sentences = ref_text.split('.')
+        if len(sentences) >= 2:
+            potential_title = sentences[1].strip()
+            if len(potential_title) > 10:
+                parsed['title'] = potential_title
+        
+        # Extract journal
+        if parsed['year']:
+            before_year = ref_text.split(parsed['year'])[0]
+            parts = before_year.split('.')
+            if len(parts) >= 3:
+                parsed['journal'] = parts[-1].strip()
+        
+        # Extract authors
+        if sentences:
+            authors = sentences[0].strip()
+            if len(authors) < 200:
+                parsed['authors'] = authors
+        
+        return parsed
+    
+    def _filter_false_inspirehep(
+        self, 
+        references: List[ExtractedReference],
+        text: str
+    ) -> List[ExtractedReference]:
+        """
+        Filter out references misclassified as INSPIREHEP that are actually PMIDs.
+        """
+        filtered_refs = []
+        
+        for ref in references:
+            if ref.reference_type == 'inspirehep':
+                # Check context for PubMed indicators
+                context = (ref.preceding_context or "") + " " + (ref.following_context or "")
+                context_lower = context.lower()
+                
+                pmid_indicators = [
+                    'pubmed',
+                    'ncbi.nlm.nih.gov',
+                    'PMID',
+                    'PubMed',
+                    '/pubmed/',
+                    'Available from: https://pubmed'
+                ]
+                
+                if any(indicator.lower() in context_lower for indicator in pmid_indicators):
+                    # Reclassify as PMID
+                    ref.reference_type = 'pmid'
+                    ref.category = ReferenceCategory.LITERATURE
+                    ref.source = 'PubMed'
+                    ref.url = f'https://pubmed.ncbi.nlm.nih.gov/{ref.normalized_value}/'
+                    ref.warnings.append('Reclassified from inspirehep to pmid based on context')
+                    logger.debug(f"Reclassified INSPIREHEP → PMID: {ref.normalized_value}")
+            
+            filtered_refs.append(ref)
+        
+        return filtered_refs
     
     def _extract_by_pattern(
         self,
@@ -358,18 +658,7 @@ class ReferenceExtractor:
         pattern_info: Dict,
         section_map: Optional[Dict[str, Tuple[int, int]]]
     ) -> List[ExtractedReference]:
-        """
-        Extract references using a specific pattern.
-        
-        Args:
-            text: Document text
-            ref_type: Reference type key
-            pattern_info: Pattern configuration
-            section_map: Optional section boundaries
-            
-        Returns:
-            List of ExtractedReference objects
-        """
+        """Extract references using a specific pattern."""
         references = []
         regex = pattern_info['regex']
         config = pattern_info['config']
@@ -401,19 +690,7 @@ class ReferenceExtractor:
         text: str,
         section_map: Optional[Dict[str, Tuple[int, int]]]
     ) -> Optional[ExtractedReference]:
-        """
-        Create a structured reference from a regex match.
-        
-        Args:
-            match: Regex match object
-            ref_type: Reference type key
-            config: Pattern configuration
-            text: Full document text
-            section_map: Optional section boundaries
-            
-        Returns:
-            ExtractedReference object or None
-        """
+        """Create a structured reference from a regex match."""
         raw_text = match.group(0)
         start_char = match.start()
         end_char = match.end()
@@ -453,14 +730,12 @@ class ReferenceExtractor:
             is_preprint=config.get('is_preprint', False)
         )
         
-        # Build URL if template available
+        # Build URL
         url_template = config.get('url_template')
         if url_template:
             try:
-                # Extract ID for URL (handle different capture groups)
                 url_id = normalized
                 if match.groups():
-                    # Use first capture group if available
                     url_id = match.group(1) if match.group(1) else normalized
                 
                 reference.url = url_template.format(id=url_id)
@@ -479,7 +754,7 @@ class ReferenceExtractor:
         if self.classify_roles:
             reference.role = self._classify_reference_role(reference, text)
         
-        # Calculate final confidence
+        # Calculate confidence
         reference.confidence = self._calculate_reference_confidence(reference, text)
         
         # Determine status
@@ -492,40 +767,22 @@ class ReferenceExtractor:
         position: int,
         section_map: Dict[str, Tuple[int, int]]
     ) -> Optional[str]:
-        """
-        Determine which section a reference belongs to.
-        
-        Args:
-            position: Character position
-            section_map: Section boundaries
-            
-        Returns:
-            Section name or None
-        """
+        """Determine which section a reference belongs to."""
         for section_name, (start, end) in section_map.items():
             if start <= position < end:
                 return section_name
         return None
     
     def _add_context(self, reference: ExtractedReference, text: str):
-        """
-        Add surrounding context to reference.
-        
-        Args:
-            reference: ExtractedReference to update
-            text: Full document text
-        """
-        # Extract preceding context
+        """Add surrounding context to reference."""
         context_start = max(0, reference.start_char - self.context_window)
         preceding = text[context_start:reference.start_char]
         reference.preceding_context = re.sub(r'\s+', ' ', preceding).strip()
         
-        # Extract following context
         context_end = min(len(text), reference.end_char + self.context_window)
         following = text[reference.end_char:context_end]
         reference.following_context = re.sub(r'\s+', ' ', following).strip()
         
-        # Extract sentence (simple approximation)
         sentence_start = text.rfind('.', context_start, reference.start_char) + 1
         sentence_end = text.find('.', reference.end_char, context_end)
         if sentence_end == -1:
@@ -539,20 +796,9 @@ class ReferenceExtractor:
         reference: ExtractedReference,
         text: str
     ) -> ReferenceRole:
-        """
-        Classify the role of the reference in context.
-        
-        Args:
-            reference: ExtractedReference object
-            text: Full document text
-            
-        Returns:
-            ReferenceRole enum
-        """
-        # Use preceding context for classification
+        """Classify the role of the reference in context."""
         context = reference.preceding_context or ""
         
-        # Score each role
         role_scores = defaultdict(float)
         
         for role_name, patterns in self.compiled_role_patterns.items():
@@ -560,7 +806,6 @@ class ReferenceExtractor:
                 if pattern.search(context):
                     role_scores[role_name] += 1.0
         
-        # Special handling for specific reference types
         if reference.reference_type in ['clinicaltrials_gov', 'eudract', 'isrctn']:
             role_scores['trial_registry'] += 2.0
         
@@ -573,7 +818,6 @@ class ReferenceExtractor:
         if reference.section and 'result' in reference.section.lower():
             role_scores['supporting_evidence'] += 1.0
         
-        # Return highest scoring role or GENERAL
         if role_scores:
             best_role = max(role_scores.items(), key=lambda x: x[1])[0]
             try:
@@ -588,20 +832,9 @@ class ReferenceExtractor:
         reference: ExtractedReference,
         text: str
     ) -> float:
-        """
-        Calculate confidence score for reference.
-        
-        Args:
-            reference: ExtractedReference object
-            text: Full document text
-            
-        Returns:
-            Confidence score [0.0-1.0]
-        """
-        # Start with base confidence from pattern
+        """Calculate confidence score for reference."""
         confidence = reference.confidence
         
-        # Apply boosters
         if reference.section:
             section_lower = reference.section.lower()
             if 'title' in section_lower or 'abstract' in section_lower:
@@ -609,18 +842,15 @@ class ReferenceExtractor:
             elif 'method' in section_lower:
                 confidence += CONFIDENCE_BOOSTERS.get('in_methods', 0.05)
         
-        # Check for explicit citation markers
         if reference.preceding_context:
             citation_markers = ['see', 'ref', 'cited in', 'according to']
             if any(marker in reference.preceding_context.lower() for marker in citation_markers):
                 confidence += CONFIDENCE_BOOSTERS.get('explicit_citation', 0.1)
         
-        # Check for multiple mentions (simplified)
         occurrences = text.count(reference.normalized_value)
         if occurrences > 1:
             confidence += CONFIDENCE_BOOSTERS.get('multiple_mentions', 0.05)
         
-        # URL presence increases confidence
         if reference.url:
             confidence += 0.05
         
@@ -630,15 +860,7 @@ class ReferenceExtractor:
         self,
         reference: ExtractedReference
     ) -> ReferenceStatus:
-        """
-        Determine extraction status of reference.
-        
-        Args:
-            reference: ExtractedReference object
-            
-        Returns:
-            ReferenceStatus enum
-        """
+        """Determine extraction status of reference."""
         if reference.url and reference.normalized_value != reference.raw_text.strip():
             return ReferenceStatus.VERIFIED
         elif reference.normalized_value != reference.raw_text.strip():
@@ -652,38 +874,22 @@ class ReferenceExtractor:
         self,
         references: List[ExtractedReference]
     ) -> List[ExtractedReference]:
-        """
-        Remove duplicate references, keeping highest confidence.
-        
-        Args:
-            references: List of references
-            
-        Returns:
-            Deduplicated list
-        """
-        # Group by normalized value and type
+        """Remove duplicate references, keeping highest confidence."""
         groups: Dict[Tuple[str, str], List[ExtractedReference]] = defaultdict(list)
         
         for ref in references:
             key = (ref.reference_type, ref.normalized_value.lower())
             groups[key].append(ref)
         
-        # Keep best from each group
         unique_references = []
         for group in groups.values():
-            # Sort by confidence (desc), then by position (asc)
             best = max(group, key=lambda r: (r.confidence, -r.start_char))
             unique_references.append(best)
         
         return unique_references
     
     def _calculate_statistics(self, result: ReferenceExtractionResult):
-        """
-        Calculate statistics for extraction result.
-        
-        Args:
-            result: ReferenceExtractionResult to update
-        """
+        """Calculate statistics for extraction result."""
         result.total_references = len(result.references)
         result.unique_references = len(set(
             r.normalized_value for r in result.references
@@ -698,17 +904,14 @@ class ReferenceExtractor:
                 r.confidence for r in result.references
             ) / len(result.references)
         
-        # Count by category
         category_counter = Counter(r.category.value for r in result.references)
         result.category_counts = dict(category_counter)
         
-        # Count by type
         type_counter = Counter(r.reference_type for r in result.references)
         result.type_counts = dict(type_counter)
         
-        # Quality metrics
         result.has_doi = any(r.reference_type == 'doi' for r in result.references)
-        result.has_pubmed = any(r.reference_type == 'pubmed' for r in result.references)
+        result.has_pubmed = any(r.reference_type == 'pmid' for r in result.references)
         result.has_clinical_trial = any(
             r.category == ReferenceCategory.CLINICAL_TRIAL 
             for r in result.references
@@ -716,25 +919,17 @@ class ReferenceExtractor:
         result.preprint_count = sum(1 for r in result.references if r.is_preprint)
     
     def _infer_document_type(self, result: ReferenceExtractionResult):
-        """
-        Infer document type based on extracted references.
-        
-        Args:
-            result: ReferenceExtractionResult to update
-        """
+        """Infer document type based on extracted references."""
         hints = []
         
-        # Clinical trial document
         if result.has_clinical_trial:
             hints.append("clinical_trial_related")
         
-        # Systematic review
         cochrane_refs = [r for r in result.references if r.reference_type == 'cochrane_review']
         prospero_refs = [r for r in result.references if r.reference_type == 'prospero']
         if cochrane_refs or prospero_refs:
             hints.append("systematic_review")
         
-        # Regulatory document
         regulatory_refs = [
             r for r in result.references 
             if r.category == ReferenceCategory.REGULATORY
@@ -742,7 +937,6 @@ class ReferenceExtractor:
         if regulatory_refs:
             hints.append("regulatory_document")
         
-        # Guidelines
         guideline_refs = [
             r for r in result.references 
             if r.category == ReferenceCategory.GUIDELINE
@@ -750,15 +944,12 @@ class ReferenceExtractor:
         if guideline_refs:
             hints.append("guideline_document")
         
-        # Research article
         if result.has_doi and result.has_pubmed:
             hints.append("research_article")
         
-        # Preprint
         if result.preprint_count > 0:
             hints.append("includes_preprints")
         
-        # Patent document
         patent_refs = [
             r for r in result.references 
             if r.category == ReferenceCategory.PATENT
@@ -769,36 +960,27 @@ class ReferenceExtractor:
         result.document_type_hints = hints
     
     def _validate_references(self, result: ReferenceExtractionResult):
-        """
-        Validate and clean references.
-        
-        Args:
-            result: ReferenceExtractionResult to validate
-        """
+        """Validate and clean references."""
         valid_references = []
         
         for ref in result.references:
-            # Validate normalized value is not empty
             if not ref.normalized_value or ref.normalized_value.strip() == "":
                 ref.warnings.append("Empty normalized value")
                 continue
             
-            # Validate confidence range
             if not 0.0 <= ref.confidence <= 1.0:
                 ref.warnings.append(f"Invalid confidence: {ref.confidence}")
                 ref.confidence = max(0.0, min(1.0, ref.confidence))
             
-            # Validate position
             if ref.start_char < 0 or ref.end_char <= ref.start_char:
                 ref.warnings.append(f"Invalid position: {ref.start_char}-{ref.end_char}")
                 continue
             
-            # Type-specific validation
             if ref.reference_type == 'doi':
                 if not re.match(r'^10\.\d{4,9}/', ref.normalized_value):
                     ref.warnings.append(f"Invalid DOI format: {ref.normalized_value}")
             
-            elif ref.reference_type == 'pubmed':
+            elif ref.reference_type == 'pmid':
                 if not ref.normalized_value.isdigit() or len(ref.normalized_value) < 6:
                     ref.warnings.append(f"Invalid PMID: {ref.normalized_value}")
             
@@ -818,7 +1000,8 @@ class ReferenceExtractor:
 def extract_references_from_text(
     text: str,
     doc_id: str = "unknown",
-    config: Optional[Dict] = None
+    config: Optional[Dict] = None,
+    validate: bool = True
 ) -> ReferenceExtractionResult:
     """
     Convenience function to extract references from text.
@@ -827,22 +1010,22 @@ def extract_references_from_text(
         text: Document text
         doc_id: Document identifier
         config: Optional extractor configuration
+        validate: Enable AI validation (default: True)
         
     Returns:
         ReferenceExtractionResult
     """
+    if config is None:
+        config = {'enable_validation': validate}
+    elif 'enable_validation' not in config:
+        config['enable_validation'] = validate
+    
     extractor = ReferenceExtractor(config)
-    return extractor.extract_references(text, doc_id)
+    return extractor.extract_references(text, doc_id, validate=validate)
 
 
 def references_to_json(result: ReferenceExtractionResult, filepath: str):
-    """
-    Save reference extraction result to JSON file.
-    
-    Args:
-        result: ReferenceExtractionResult
-        filepath: Output file path
-    """
+    """Save reference extraction result to JSON file."""
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(result.to_json())
     
@@ -853,16 +1036,7 @@ def get_references_by_category(
     result: ReferenceExtractionResult,
     category: ReferenceCategory
 ) -> List[ExtractedReference]:
-    """
-    Filter references by category.
-    
-    Args:
-        result: ReferenceExtractionResult
-        category: Category to filter by
-        
-    Returns:
-        List of matching references
-    """
+    """Filter references by category."""
     return [r for r in result.references if r.category == category]
 
 
@@ -870,51 +1044,5 @@ def get_references_by_type(
     result: ReferenceExtractionResult,
     ref_type: str
 ) -> List[ExtractedReference]:
-    """
-    Filter references by type.
-    
-    Args:
-        result: ReferenceExtractionResult
-        ref_type: Reference type to filter by
-        
-    Returns:
-        List of matching references
-    """
+    """Filter references by type."""
     return [r for r in result.references if r.reference_type == ref_type]
-
-
-def export_references_as_urls(
-    result: ReferenceExtractionResult
-) -> List[str]:
-    """
-    Export all reference URLs.
-    
-    Args:
-        result: ReferenceExtractionResult
-        
-    Returns:
-        List of URLs
-    """
-    return [r.url for r in result.references if r.url]
-
-
-def create_reference_network(
-    result: ReferenceExtractionResult
-) -> Dict[str, List[str]]:
-    """
-    Create a network of references by section.
-    
-    Args:
-        result: ReferenceExtractionResult
-        
-    Returns:
-        Dictionary of section -> list of reference types
-    """
-    network = defaultdict(list)
-    
-    for ref in result.references:
-        if ref.section:
-            network[ref.section].append(ref.reference_type)
-    
-    return dict(network)
-

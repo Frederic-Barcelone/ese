@@ -226,7 +226,7 @@ REFERENCE_PATTERNS = {
     },
     
     'inspirehep': {
-        'pattern': r'\b(?:INSPIRE(?:-HEP)?:?\s*)?\d{6,8}\b',
+        'pattern': r'\bINSPIRE(?:-HEP)?:?\s*\d{6,8}\b',
         'url_template': 'https://inspirehep.net/literature/{id}',
         'normalize': lambda x: re.sub(r'\D', '', x),
         'confidence': 0.85,
