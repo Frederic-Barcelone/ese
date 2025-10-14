@@ -50,7 +50,7 @@ except ImportError:
 
 # NEW: Import validation module
 try:
-    from document_utils.entity_validations import (
+    from document_utils.entity_validation import (
         ReferenceValidator,
         apply_validation_corrections,
         BatchValidationResult

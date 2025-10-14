@@ -162,14 +162,36 @@ class ReferenceValidator:
         result = BatchValidationResult()
         result.total_references = len(references)
         
+        logger.info("=" * 80)
+        logger.info("REFERENCE VALIDATION")
+        logger.info("=" * 80)
         logger.info(f"Validating {len(references)} references...")
         
+        # Count reference types
+        type_counts = defaultdict(int)
         for ref in references:
+            type_counts[ref.get('reference_type', 'unknown')] += 1
+        
+        logger.info(f"Reference types breakdown:")
+        for ref_type, count in sorted(type_counts.items(), key=lambda x: x[1], reverse=True):
+            logger.info(f"  - {ref_type}: {count}")
+        
+        for idx, ref in enumerate(references, 1):
+            ref_type = ref.get('reference_type', 'unknown')
+            normalized = ref.get('normalized_value', '')
+            
+            logger.debug(f"[{idx}/{len(references)}] Validating {ref_type}: {normalized}")
+            
             issues = self._validate_single_reference(ref, context_text)
             
             if issues:
                 result.issues_by_reference[ref['reference_id']] = issues
                 result.invalid_count += 1
+                
+                # Log issues found
+                for issue in issues:
+                    severity_symbol = "🔴" if issue.severity == "critical" else "⚠️" if issue.severity == "warning" else "ℹ️"
+                    logger.info(f"  {severity_symbol} {ref_type} '{normalized}': {issue.description}")
                 
                 # Check if misclassification issue exists
                 if any(issue.issue_type == 'misclassification' for issue in issues):
@@ -179,6 +201,7 @@ class ReferenceValidator:
                     correction = self._generate_correction(ref, issues)
                     if correction:
                         result.corrections[ref['reference_id']] = correction
+                        logger.info(f"    ✓ Correction: {correction}")
                 
                 # Count issue types and severities
                 for issue in issues:
@@ -188,13 +211,34 @@ class ReferenceValidator:
                         result.severity_counts.get(issue.severity, 0) + 1
             else:
                 result.valid_count += 1
+                logger.debug(f"  ✓ Valid: {ref_type} '{normalized}'")
         
         # Calculate processing time
         end_time = datetime.now()
         result.processing_time_seconds = (end_time - start_time).total_seconds()
         
-        logger.info(f"Validation complete: {result.valid_count}/{result.total_references} valid, "
-                   f"{result.misclassified_count} misclassified")
+        # Log summary
+        logger.info("=" * 80)
+        logger.info("VALIDATION SUMMARY")
+        logger.info("=" * 80)
+        logger.info(f"Total references: {result.total_references}")
+        logger.info(f"Valid: {result.valid_count} ({result.valid_count/result.total_references*100:.1f}%)")
+        logger.info(f"Invalid: {result.invalid_count} ({result.invalid_count/result.total_references*100:.1f}%)")
+        logger.info(f"Misclassified: {result.misclassified_count}")
+        logger.info(f"Corrections applied: {len(result.corrections)}")
+        
+        if result.issue_type_counts:
+            logger.info(f"\nIssue types:")
+            for issue_type, count in sorted(result.issue_type_counts.items(), key=lambda x: x[1], reverse=True):
+                logger.info(f"  - {issue_type}: {count}")
+        
+        if result.severity_counts:
+            logger.info(f"\nSeverity breakdown:")
+            for severity, count in sorted(result.severity_counts.items()):
+                logger.info(f"  - {severity}: {count}")
+        
+        logger.info(f"\nProcessing time: {result.processing_time_seconds:.2f}s")
+        logger.info("=" * 80)
         
         return result
     
@@ -263,11 +307,19 @@ class ReferenceValidator:
         normalized = ref.get('normalized_value', '')
         is_pmid_format = self.pmid_pattern.match(normalized) is not None
         
+        # Log detailed analysis for INSPIREHEP references
+        if pmid_score > 0 or inspirehep_score > 0:
+            logger.debug(f"  Context analysis for {normalized}:")
+            logger.debug(f"    - PMID indicators: {pmid_score}")
+            logger.debug(f"    - INSPIREHEP indicators: {inspirehep_score}")
+            logger.debug(f"    - PMID format match: {is_pmid_format}")
+        
         # Decision: likely PMID if:
         # 1. Has PMID indicators AND
         # 2. No INSPIREHEP indicators AND
         # 3. Matches PMID format
         if pmid_score > 0 and inspirehep_score == 0 and is_pmid_format:
+            logger.info(f"  🔄 Misclassification detected: {normalized} (INSPIREHEP → PMID)")
             return ValidationIssue(
                 reference_id=ref['reference_id'],
                 issue_type='misclassification',
@@ -293,6 +345,7 @@ class ReferenceValidator:
         # Check DOI format
         if ref_type == 'doi':
             if not self.doi_pattern.match(normalized):
+                logger.debug(f"  ⚠️  Invalid DOI format: {normalized}")
                 return ValidationIssue(
                     reference_id=ref['reference_id'],
                     issue_type='invalid_format',
@@ -300,10 +353,13 @@ class ReferenceValidator:
                     description=f"Invalid DOI format: {normalized}",
                     confidence=0.9
                 )
+            else:
+                logger.debug(f"  ✓ Valid DOI format: {normalized}")
         
         # Check PMID format
         elif ref_type == 'pmid':
             if not self.pmid_pattern.match(normalized):
+                logger.debug(f"  ⚠️  Invalid PMID format: {normalized}")
                 return ValidationIssue(
                     reference_id=ref['reference_id'],
                     issue_type='invalid_format',
@@ -311,10 +367,13 @@ class ReferenceValidator:
                     description=f"Invalid PMID format: {normalized}",
                     confidence=0.9
                 )
+            else:
+                logger.debug(f"  ✓ Valid PMID format: {normalized}")
         
         # Check NCT format
         elif ref_type == 'clinicaltrials_gov':
             if not self.nct_pattern.match(normalized):
+                logger.debug(f"  ⚠️  Invalid NCT format: {normalized}")
                 return ValidationIssue(
                     reference_id=ref['reference_id'],
                     issue_type='invalid_format',
@@ -322,6 +381,8 @@ class ReferenceValidator:
                     description=f"Invalid NCT format: {normalized}",
                     confidence=0.9
                 )
+            else:
+                logger.debug(f"  ✓ Valid NCT format: {normalized}")
         
         return None
     
@@ -411,6 +472,11 @@ def apply_validation_corrections(
         List of corrected references
     """
     corrected_refs = []
+    corrections_applied = 0
+    
+    logger.info("=" * 80)
+    logger.info("APPLYING VALIDATION CORRECTIONS")
+    logger.info("=" * 80)
     
     for ref in references:
         ref_id = ref['reference_id']
@@ -418,12 +484,23 @@ def apply_validation_corrections(
         if ref_id in validation_result.corrections:
             correction = validation_result.corrections[ref_id]
             
+            # Log what's being corrected
+            old_type = ref.get('reference_type', 'unknown')
+            new_type = correction.get('reference_type', old_type)
+            normalized = ref.get('normalized_value', '')
+            
+            logger.info(f"✓ Correcting: {normalized}")
+            logger.info(f"  Type: {old_type} → {new_type}")
+            if 'url' in correction:
+                logger.info(f"  URL: {correction['url']}")
+            
             # Apply corrections
             for key, value in correction.items():
                 ref[key] = value
             
             # Mark as corrected
             ref['validation_corrected'] = True
+            corrections_applied += 1
             
             # Add validation info
             issues = validation_result.issues_by_reference.get(ref_id, [])
@@ -446,7 +523,9 @@ def apply_validation_corrections(
         
         corrected_refs.append(ref)
     
-    logger.info(f"Applied corrections to {len(validation_result.corrections)} references")
+    logger.info("=" * 80)
+    logger.info(f"Applied {corrections_applied} correction(s) to references")
+    logger.info("=" * 80)
     
     return corrected_refs
 
