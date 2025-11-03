@@ -5,8 +5,14 @@ Documents SOTA Extractor - COMPLETE METADATA EXTRACTION PIPELINE
  
 Location: corpus_metadata/document_metadata_extraction.py
 
-VERSION 8.10.0 - INTEGRATED CITATION, PERSON, AND REFERENCE EXTRACTORS
-=======================================================================
+VERSION 8.10.1 - FIXED CONSOLE REPORTING BUG
+=============================================
+Changes in v8.10.1:
+- FIXED: Console summary now correctly shows entity counts
+- FIXED: Results from process_document_two_stage are now captured
+- FIXED: print_extraction_results and print_file_complete are now called
+- FIXED: File processing progress is now displayed correctly
+
 Changes in v8.10.0:
 - Added CitationExtractor for bibliographic citations
 - Added PersonExtractor for authors and investigators
@@ -145,9 +151,9 @@ modules_loaded = {
     'abbreviation_extractor': False,
     'entity_extraction': False,
     'prefix_manager': False,
-    'citation_extractor': False,  # NEW
-    'person_extractor': False,    # NEW
-    'reference_extractor': False  # NEW
+    'citation_extractor': False,  
+    'person_extractor': False,    
+    'reference_extractor': False   
 }
 
 # Step 1: Load core modules
@@ -264,7 +270,7 @@ class EnhancedDocumentProcessor:
     def print_header(self):
         """Print the application header"""
         print(f"\n{Colors.BRIGHT_CYAN}{'═'*80}")
-        print(f"  {Colors.BOLD}{Colors.BRIGHT_WHITE}CORPUS DOCUMENT PROCESSOR - SOTA EXTRACTOR v8.10.0{Colors.ENDC}")
+        print(f"  {Colors.BOLD}{Colors.BRIGHT_WHITE}CORPUS DOCUMENT PROCESSOR - SOTA EXTRACTOR v8.10.1{Colors.ENDC}")
         print(f"  {Colors.BRIGHT_BLACK}{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{Colors.ENDC}")
         print(f"{Colors.BRIGHT_CYAN}{'═'*80}{Colors.ENDC}\n")
     
@@ -330,7 +336,7 @@ class EnhancedDocumentProcessor:
     def print_file_processing_start(self, file_num: int, file_path: Path):
         """Print file processing start"""
         self.current_file = file_path.name
-        self.files_processed = file_num - 1
+        self.files_processed = file_num
         print(f"\n{Colors.BRIGHT_CYAN}[{file_num}/{self.total_files}]{Colors.ENDC} {Colors.BRIGHT_WHITE}Processing:{Colors.ENDC} {file_path.name}")
         print(f"  {Colors.BRIGHT_BLACK}Size: {file_path.stat().st_size / 1024:.1f} KB{Colors.ENDC}")
     
@@ -638,11 +644,11 @@ def initialize_extraction_system():
         return {}
 
 # ============================================================================
-# MAIN FUNCTION
+# MAIN FUNCTION - FIXED IN v8.10.1
 # ============================================================================
 
 def main():
-    """Main processing function"""
+    """Main processing function - FIXED console reporting bug in v8.10.1"""
     
     try:
         console.print_header()
@@ -703,20 +709,33 @@ def main():
         
         print(f"  {Colors.GREEN}✓{Colors.ENDC} Components ready\n")
         
-        # Process documents
-        for pdf_file in pdf_files:
+        # ====================================================================
+        # PROCESS DOCUMENTS - FIXED IN v8.10.1
+        # ====================================================================
+        # Fix: Capture results and call console reporting methods
+        for file_num, pdf_file in enumerate(pdf_files, 1):
             try:
-                process_document_two_stage(
+                # Start processing and update console
+                console.print_file_processing_start(file_num, pdf_file)
+                
+                # Process document and CAPTURE results
+                results = process_document_two_stage(
                     pdf_file, 
                     components, 
                     documents_folder,
                     console=console,
                     config=config
                 )
+                
+                # Display results and update tracking counters
+                console.print_extraction_results(results)
+                console.print_file_complete(success=True)
+                
             except Exception as e:
                 logger.error(f"Failed to process {pdf_file.name}: {e}", exc_info=True)
                 console.print_file_complete(success=False, error_msg=str(e))
         
+        # Print final summary with all tracked results
         console.print_final_summary()
         
     except Exception as e:

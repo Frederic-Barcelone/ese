@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """
-Enhanced Entity Extraction Pipeline - UPDATED v11.1.0
+Enhanced Entity Extraction Pipeline - UPDATED v11.1.1
 =====================================================
 Location: corpus_metadata/document_utils/entity_extraction.py
-Version: 11.1.0 - ADDED CITATION, PERSON, AND REFERENCE EXTRACTION
-Last Updated: 2025-10-13
+Version: 11.1.1 - ADDED INTRO TEXT EXTRACTION
+Last Updated: 2025-10-14
+
+CHANGES IN v11.1.1:
+==================
+✓ ADDED intro text file extraction (saves limited text separately)
+✓ UPDATED file naming: _full.txt and _intro.txt
+✓ IMPROVED logging for text extraction
 
 CHANGES IN v11.1.0:
 ==================
@@ -13,24 +19,6 @@ CHANGES IN v11.1.0:
 ✓ ADDED reference extraction (Step 4)
 ✓ UPDATED extraction summary to include citation/person/reference counts
 ✓ Renumbered existing steps (drugs: 2→5, diseases: 3→6, dedup: 3.5→7, etc.)
-
-MAJOR CHANGES IN v11.0.0:
-========================
-✓ REMOVED hardcoded confidence thresholds - replaced with confidence bands
-✓ REDUCED fuzzy match threshold from 85 to 75 for better recall
-✓ SIMPLIFIED adaptive filtering - removed complex cascading logic
-✓ MADE promotion logic more permissive (OR instead of AND conditions)
-✓ PARAMETERIZED all magic numbers via config
-✓ IMPROVED performance - removed redundant validation stages
-✓ ADDED threshold provenance tracking
-
-PERFORMANCE IMPROVEMENTS:
-- Drug validation: 140s → ~20s (85% reduction)
-- Enrichment success rate: 4.9% → ~25% (5x improvement)
-- Promotion rate: 0% → ~15% (from zero to productive)
-- Overall recall: +20-30% across all entity types
-
-Previous Version: v10.6.0
 """
 
 import json
@@ -71,8 +59,8 @@ from corpus_metadata.document_utils.entity_abbreviation_promotion import (
 # Configure logging
 logger = logging.getLogger(__name__)
 
-# Pipeline version
-PIPELINE_VERSION = 'v11.1.0'
+# Pipeline version 
+PIPELINE_VERSION = 'v11.1.2'
 
 
 # ============================================================================
@@ -443,7 +431,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             promotion_config = components.get('config', {}).get('promotion', {})
             
             # UPDATED IN v11.0.0: More permissive promotion
-            promoted_drugs, promoted_diseases, kept_abbreviations, links = process_abbreviation_candidates(
+            kept_abbreviations, promoted_drugs, promoted_diseases, links = process_abbreviation_candidates(
                 all_abbreviations,
                 direct_drugs,
                 direct_diseases,
@@ -524,6 +512,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
     """
     Process document in two stages: metadata first, then entities
     
+    UPDATED IN v11.1.1: Added intro text file extraction
     UPDATED IN v11.1.0: Added citation, person, and reference extraction
     UPDATED IN v11.0.0: Uses new simplified filtering and promotion logic
     
@@ -600,16 +589,36 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         
         logger.info(f"Extracted {len(text_content):,} characters from {file_path.name}")
         
-        # Save extracted text
+        # ====================================================================
+        # SAVE EXTRACTED TEXT - BOTH FULL AND INTRO VERSIONS (NEW in v11.1.1)
+        # ====================================================================
         text_folder = output_folder / 'extracted_texts'
         text_folder.mkdir(exist_ok=True)
         
-        text_file = text_folder / f"{file_path.stem}.txt"
+        # 1. Save FULL text extraction
+        text_file = text_folder / f"{file_path.stem}_full.txt"
         with open(text_file, 'w', encoding='utf-8') as f:
             f.write(text_content)
         
         final_results['files_saved'].append(text_file.name)
-        logger.debug(f"Saved text to {text_file.name}")
+        logger.info(f"✓ Saved full text to {text_file.name} ({len(text_content):,} chars)")
+        
+        # 2. Save INTRO text extraction (first N characters)
+        # Get limit from first stage config, default to 5000
+        intro_limit = 5000  # Default
+        metadata_stage = next((s for s in config.get('pipeline', {}).get('stages', []) 
+                              if s.get('name') == 'metadata'), None)
+        if metadata_stage:
+            intro_limit = metadata_stage.get('limits', {}).get('text_chars', 5000)
+        
+        intro_text = text_content[:intro_limit]
+        intro_file = text_folder / f"{file_path.stem}_intro.txt"
+        with open(intro_file, 'w', encoding='utf-8') as f:
+            f.write(intro_text)
+        
+        final_results['files_saved'].append(intro_file.name)
+        logger.info(f"✓ Saved intro text to {intro_file.name} ({len(intro_text):,} chars)")
+        # ====================================================================
         
         # Process each configured stage
         for stage_config in config.get('pipeline', {}).get('stages', []):
@@ -735,7 +744,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
             json.dump(final_results, f, indent=2, ensure_ascii=False)
         
         final_results['files_saved'].append(output_json.name)
-        logger.info(f"Results saved to {output_json.name}")
+        logger.info(f"✓ Results saved to {output_json.name}")
         
         # ====================================================================
         # DATABASE STORAGE & REPORTING
@@ -804,6 +813,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                 report_path = generate_extraction_report(run_id, output_folder, prefix_manager)
                 if report_path:
                     final_results['files_saved'].append(Path(report_path).name)
+                    logger.info(f"✓ Generated report: {Path(report_path).name}")
             
             logger.debug(f"Stored extraction in database: document_id={document_id}, run_id={run_id}")
             
@@ -820,7 +830,12 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         
         # Calculate total processing time
         total_time = time.time() - start_time
-        logger.info(f"Completed processing {file_path.name} in {total_time:.1f}s")
+        logger.info(f"✓ Completed processing {file_path.name} in {total_time:.1f}s")
+        
+        # Log summary of saved files
+        logger.info(f"Files saved ({len(final_results['files_saved'])}):")
+        for saved_file in final_results['files_saved']:
+            logger.info(f"  - {saved_file}")
         
         return final_results
         

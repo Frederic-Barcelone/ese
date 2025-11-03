@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 """
-Entity Extraction Utilities - v11.1.0
+Entity Extraction Utilities - v11.1.2
 =====================================
 Location: corpus_metadata/document_utils/entity_extraction_utils.py
-Version: 11.1.0
-Last Updated: 2025-10-13
+Version: 11.1.2
+Last Updated: 2025-10-14
+
+CHANGES IN v11.1.2:
+- FIXED: Empty abbreviations bug - deduplicate_by_key now filters empty entries
+- FIXED: Cross-type deduplication now pre-filters empty abbreviations
+- IMPROVED: Better logging for filtered entries
 
 Helper functions, classes, and utilities for entity extraction pipeline.
 Includes confidence bands, validation, deduplication, and enrichment logic.
@@ -204,18 +209,77 @@ def fuzzy_match(term: str, candidates: List[str], threshold: int = None) -> Opti
 
 
 def deduplicate_by_key(entities: List[Dict], keys: Tuple[str, ...]) -> List[Dict]:
-    """Remove duplicates based on specified keys"""
+    """
+    Remove duplicates based on specified keys
+    
+    FIXED IN v11.1.2:
+    - Now filters out entities with empty/missing key values
+    - Special handling for abbreviations (requires both abbr AND expansion)
+    - Logs filtered entries for debugging
+    
+    Args:
+        entities: List of entity dictionaries
+        keys: Tuple of key fields to check for duplicates
+        
+    Returns:
+        Deduplicated list with empty entries removed
+    """
+    if not entities:
+        return []
+    
     seen = set()
     unique = []
+    empty_count = 0
+    duplicate_count = 0
     
     for entity in entities:
+        # Skip None or empty dicts
+        if not entity:
+            empty_count += 1
+            continue
+        
+        # Get key values
         key_values = tuple(entity.get(k, '').lower() if entity.get(k) else '' for k in keys)
         
-        if key_values not in seen:
-            seen.add(key_values)
-            unique.append(entity)
+        # CRITICAL FIX #1: Skip entities where ALL key values are empty/None
+        if all(not v or (isinstance(v, str) and not v.strip()) for v in key_values):
+            empty_count += 1
+            logger.debug(f"Filtered empty entity with keys {keys}: {entity.get('abbreviation', entity.get('name', 'N/A'))}")
+            continue
+        
+        # CRITICAL FIX #2: For abbreviations, BOTH fields must be present
+        if keys == ('abbreviation', 'expansion'):
+            abbr, exp = key_values
+            if not abbr or not str(abbr).strip():
+                empty_count += 1
+                logger.debug(f"Filtered abbreviation with empty abbreviation field")
+                continue
+            if not exp or not str(exp).strip():
+                empty_count += 1
+                logger.debug(f"Filtered abbreviation '{abbr}' with empty expansion")
+                continue
+        
+        # Check for duplicates
+        if key_values in seen:
+            duplicate_count += 1
+            logger.debug(f"Filtered duplicate: {key_values}")
+            continue
+        
+        seen.add(key_values)
+        unique.append(entity)
     
-    logger.debug(f"Deduplicated {len(entities)} → {len(unique)} entities by {keys}")
+    # Log results
+    original_count = len(entities)
+    final_count = len(unique)
+    
+    if empty_count > 0 or duplicate_count > 0:
+        logger.info(
+            f"Deduplicated {keys}: {original_count} → {final_count} "
+            f"(removed {empty_count} empty + {duplicate_count} duplicates)"
+        )
+    else:
+        logger.debug(f"Deduplicated {keys}: {original_count} → {final_count}")
+    
     return unique
 
 
@@ -258,11 +322,29 @@ def deduplicate_entities_across_types(
     """
     Remove abbreviations whose expansions match detected drugs or diseases
     
+    UPDATED IN v11.1.2: Added empty abbreviation filtering
+    
     Prevents issues like:
     - AAV → "ANCA-associated vasculitis" appearing as both abbrev and disease
     """
     if not abbreviations:
         return abbreviations, drugs, diseases
+    
+    # ADDED IN v11.1.2: Filter out empty abbreviations BEFORE processing
+    original_count = len(abbreviations)
+    abbreviations = [
+        a for a in abbreviations 
+        if a and a.get('abbreviation') and str(a.get('abbreviation')).strip() 
+        and a.get('expansion') and str(a.get('expansion')).strip()
+    ]
+    
+    empty_filtered = original_count - len(abbreviations)
+    if empty_filtered > 0:
+        logger.info(f"Pre-filtered {empty_filtered} empty abbreviations before cross-type deduplication")
+    
+    if not abbreviations:
+        logger.info("No valid abbreviations after filtering empty entries")
+        return [], drugs, diseases
     
     drug_names = {d.get('name', '').lower() for d in drugs if d.get('name')}
     drug_names.update({d.get('normalized_name', '').lower() for d in drugs if d.get('normalized_name')})

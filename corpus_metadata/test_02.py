@@ -1,336 +1,302 @@
 #!/usr/bin/env python3
 """
-Test Script: Investigate ANCA-Associated Vasculitis in Orphanet
-================================================================
-This script checks how AAV is stored and what the best query strategy is.
+Verification Script for Entity Extraction Fix
+==============================================
+Run this after applying the fix to verify:
+1. Variable order is correct in code
+2. JSON output has drugs and diseases in correct arrays
+3. Promotion counts are logical
 """
 
-import sqlite3
+import json
+import sys
 from pathlib import Path
-import yaml
+from typing import Dict, Any
 
-# Colors
-class Colors:
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    BLUE = '\033[94m'
-    CYAN = '\033[96m'
-    BOLD = '\033[1m'
-    ENDC = '\033[0m'
 
-def load_db_path():
-    """Load Orphanet DB path from config"""
-    config_path = Path('corpus_config/config.yaml')
-    with open(config_path) as f:
-        config = yaml.safe_load(f)
-    return config['resources']['disease_orphanet_db']
-
-def test_disease_lookup(db_path: str):
-    """Test how different disease names are stored"""
+class FixVerifier:
+    def __init__(self):
+        self.checks_passed = 0
+        self.checks_failed = 0
+        self.warnings = []
     
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
+    def check_code_fix(self, file_path: Path) -> bool:
+        """Verify the code has correct variable order"""
+        print("\n" + "="*80)
+        print("CHECK 1: CODE VARIABLE ORDER")
+        print("="*80)
+        
+        try:
+            content = file_path.read_text()
+            
+            # Check for correct pattern
+            import re
+            correct_pattern = r'kept_abbreviations,\s*promoted_drugs,\s*promoted_diseases,\s*links\s*=\s*process_abbreviation_candidates'
+            bug_pattern = r'promoted_drugs,\s*promoted_diseases,\s*kept_abbreviations,\s*links\s*=\s*process_abbreviation_candidates'
+            
+            has_correct = bool(re.search(correct_pattern, content))
+            has_bug = bool(re.search(bug_pattern, content))
+            
+            if has_correct and not has_bug:
+                print("✓ PASS: Variable order is correct")
+                print("  Pattern: kept_abbreviations, promoted_drugs, promoted_diseases, links")
+                self.checks_passed += 1
+                return True
+            elif has_bug:
+                print("✗ FAIL: Bug pattern still present!")
+                print("  Pattern: promoted_drugs, promoted_diseases, kept_abbreviations, links")
+                self.checks_failed += 1
+                return False
+            else:
+                print("? WARNING: Could not find expected pattern")
+                self.warnings.append("Variable assignment pattern not found")
+                return False
+                
+        except Exception as e:
+            print(f"✗ FAIL: Error reading code file: {e}")
+            self.checks_failed += 1
+            return False
     
-    # Test diseases
-    test_terms = [
-        'ANCA-associated vasculitis',
-        'anca-associated vasculitis',
-        'ANCA associated vasculitis',
-        'AAV',
-        'granulomatosis with polyangiitis',
-        'Wegener granulomatosis',
-        "Wegener's granulomatosis",
-        'eosinophilic granulomatosis with polyangiitis',
-        'Churg-Strauss syndrome',
-    ]
+    def check_json_structure(self, json_path: Path) -> Dict[str, Any]:
+        """Verify JSON output structure"""
+        print("\n" + "="*80)
+        print("CHECK 2: JSON OUTPUT STRUCTURE")
+        print("="*80)
+        
+        try:
+            with open(json_path, 'r') as f:
+                data = json.load(f)
+            
+            # Find entities stage
+            entities_stage = None
+            for stage in data.get('pipeline_stages', []):
+                if stage.get('stage') == 'entities':
+                    entities_stage = stage
+                    break
+            
+            if not entities_stage:
+                print("✗ FAIL: Could not find entities stage in JSON")
+                self.checks_failed += 1
+                return {}
+            
+            results = entities_stage.get('results', {})
+            drugs = results.get('drugs', [])
+            diseases = results.get('diseases', [])
+            
+            print(f"\nFound {len(drugs)} drugs, {len(diseases)} diseases")
+            
+            # Analyze drugs array
+            print("\n--- Drugs Array ---")
+            valid_drugs = [d for d in drugs if d.get('name') or d.get('drug_name')]
+            empty_drugs = [d for d in drugs if not (d.get('name') or d.get('drug_name'))]
+            abbrev_structure_drugs = [d for d in drugs if d.get('abbreviation') == '']
+            
+            print(f"  Total entries: {len(drugs)}")
+            print(f"  Valid drug entries: {len(valid_drugs)}")
+            print(f"  Empty entries: {len(empty_drugs)}")
+            print(f"  Abbreviation structures: {len(abbrev_structure_drugs)}")
+            
+            # Sample drugs
+            if valid_drugs:
+                sample = valid_drugs[0]
+                print(f"\n  Sample drug entry:")
+                print(f"    Name: {sample.get('name', sample.get('drug_name', 'N/A'))}")
+                print(f"    Keys: {', '.join(list(sample.keys())[:5])}...")
+            
+            # Analyze diseases array
+            print("\n--- Diseases Array ---")
+            valid_diseases = [d for d in diseases if d.get('name') or d.get('disease_name')]
+            
+            print(f"  Total entries: {len(diseases)}")
+            print(f"  Valid disease entries: {len(valid_diseases)}")
+            
+            # Sample diseases
+            if valid_diseases:
+                sample = valid_diseases[0]
+                print(f"\n  Sample disease entry:")
+                print(f"    Name: {sample.get('name', sample.get('disease_name', 'N/A'))}")
+                print(f"    Keys: {', '.join(list(sample.keys())[:5])}...")
+            
+            # Check for drug names in disease array (indicates unfixed bug)
+            drug_keywords = ['prednisone', 'methylprednisolone', 'rituximab', 'cyclophosphamide']
+            drugs_in_disease_array = []
+            
+            for disease in diseases:
+                name = (disease.get('name') or disease.get('disease_name', '')).lower()
+                if any(keyword in name for keyword in drug_keywords):
+                    drugs_in_disease_array.append(disease.get('name', disease.get('disease_name')))
+            
+            # Determine pass/fail
+            checks_passed = True
+            
+            if len(valid_drugs) == 0 and len(abbrev_structure_drugs) > 0:
+                print("\n✗ FAIL: Drugs array contains abbreviation structures (bug not fixed)")
+                checks_passed = False
+            elif drugs_in_disease_array:
+                print(f"\n✗ FAIL: Disease array contains drugs: {drugs_in_disease_array}")
+                checks_passed = False
+            elif len(valid_drugs) > 0 and len(valid_diseases) > 0:
+                print("\n✓ PASS: Both arrays contain appropriate entities")
+            else:
+                print("\n? WARNING: Arrays may be empty or structured unexpectedly")
+                self.warnings.append("Unexpected array structure")
+            
+            if checks_passed:
+                self.checks_passed += 1
+            else:
+                self.checks_failed += 1
+            
+            return results
+            
+        except Exception as e:
+            print(f"✗ FAIL: Error reading JSON: {e}")
+            self.checks_failed += 1
+            return {}
     
-    print(f"\n{Colors.BOLD}{'='*80}{Colors.ENDC}")
-    print(f"{Colors.BOLD}{Colors.CYAN}TESTING DISEASE NAME LOOKUPS IN ORPHANET{Colors.ENDC}")
-    print(f"{Colors.BOLD}{'='*80}{Colors.ENDC}\n")
+    def check_promotion_logic(self, json_path: Path) -> bool:
+        """Verify promotion counts are logical"""
+        print("\n" + "="*80)
+        print("CHECK 3: PROMOTION LOGIC")
+        print("="*80)
+        
+        try:
+            with open(json_path, 'r') as f:
+                data = json.load(f)
+            
+            # Find entities stage
+            for stage in data.get('pipeline_stages', []):
+                if stage.get('stage') == 'entities':
+                    summary = stage.get('results', {}).get('extraction_summary', {})
+                    break
+            else:
+                print("✗ FAIL: Could not find extraction summary")
+                self.checks_failed += 1
+                return False
+            
+            drugs_direct = summary.get('drugs_direct', 0)
+            drugs_promoted = summary.get('drugs_promoted', 0)
+            drugs_total = summary.get('drugs_total', 0)
+            
+            diseases_direct = summary.get('diseases_direct', 0)
+            diseases_promoted = summary.get('diseases_promoted', 0)
+            diseases_total = summary.get('diseases_total', 0)
+            
+            print("\n--- Drugs ---")
+            print(f"  Direct: {drugs_direct}")
+            print(f"  Promoted: {drugs_promoted}")
+            print(f"  Total: {drugs_total}")
+            print(f"  Formula: {drugs_direct} + {drugs_promoted} = {drugs_direct + drugs_promoted}")
+            
+            print("\n--- Diseases ---")
+            print(f"  Direct: {diseases_direct}")
+            print(f"  Promoted: {diseases_promoted}")
+            print(f"  Total: {diseases_total}")
+            print(f"  Formula: {diseases_direct} + {diseases_promoted} = {diseases_direct + diseases_promoted}")
+            
+            # Check logic
+            issues = []
+            
+            if drugs_promoted < 0:
+                issues.append("Negative drug promotion count")
+            
+            if diseases_promoted < 0:
+                issues.append("Negative disease promotion count")
+            
+            if drugs_direct + drugs_promoted != drugs_total:
+                issues.append(f"Drug formula mismatch: {drugs_direct} + {drugs_promoted} ≠ {drugs_total}")
+            
+            if diseases_direct + diseases_promoted != diseases_total:
+                issues.append(f"Disease formula mismatch: {diseases_direct} + {diseases_promoted} ≠ {diseases_total}")
+            
+            if drugs_total == 42 and diseases_total == 13:
+                issues.append("Suspicious counts (42/13) suggest variables may still be swapped")
+            
+            if issues:
+                print("\n✗ FAIL: Promotion logic issues:")
+                for issue in issues:
+                    print(f"  - {issue}")
+                self.checks_failed += 1
+                return False
+            else:
+                print("\n✓ PASS: Promotion counts are logical")
+                self.checks_passed += 1
+                return True
+                
+        except Exception as e:
+            print(f"✗ FAIL: Error checking promotion logic: {e}")
+            self.checks_failed += 1
+            return False
     
-    for term in test_terms:
-        print(f"{Colors.BOLD}Searching for: '{term}'{Colors.ENDC}")
-        print("-" * 80)
+    def print_summary(self):
+        """Print verification summary"""
+        print("\n" + "="*80)
+        print("VERIFICATION SUMMARY")
+        print("="*80)
         
-        # Test 1: Exact match on preferred term
-        cursor.execute("""
-            SELECT ce.orphacode, ce.entity_type, lr.text_value, lr.text_type
-            FROM core_entities ce
-            JOIN linguistic_representations lr ON ce.entity_id = lr.entity_id
-            WHERE lr.text_type = 'preferred_term'
-            AND ce.status = 'active'
-            AND LOWER(lr.text_value) = LOWER(?)
-        """, (term,))
+        total_checks = self.checks_passed + self.checks_failed
         
-        pref_results = cursor.fetchall()
+        print(f"\nTotal checks: {total_checks}")
+        print(f"✓ Passed: {self.checks_passed}")
+        print(f"✗ Failed: {self.checks_failed}")
         
-        if pref_results:
-            print(f"{Colors.GREEN}✓ Found as PREFERRED TERM:{Colors.ENDC}")
-            for row in pref_results:
-                print(f"  → ORPHA:{row['orphacode']}")
-                print(f"     Term: {row['text_value']}")
-                print(f"     Type: {row['entity_type']}")
-        else:
-            print(f"{Colors.YELLOW}✗ NOT found as preferred term{Colors.ENDC}")
-        
-        # Test 2: Check synonyms
-        cursor.execute("""
-            SELECT ce.orphacode, ce.entity_type, 
-                   lr_syn.text_value as synonym,
-                   lr_pref.text_value as preferred_term
-            FROM core_entities ce
-            JOIN linguistic_representations lr_syn ON ce.entity_id = lr_syn.entity_id
-            JOIN linguistic_representations lr_pref ON ce.entity_id = lr_pref.entity_id
-            WHERE lr_syn.text_type = 'synonym'
-            AND lr_pref.text_type = 'preferred_term'
-            AND ce.status = 'active'
-            AND LOWER(lr_syn.text_value) = LOWER(?)
-        """, (term,))
-        
-        syn_results = cursor.fetchall()
-        
-        if syn_results:
-            print(f"{Colors.GREEN}✓ Found as SYNONYM:{Colors.ENDC}")
-            for row in syn_results:
-                print(f"  → ORPHA:{row['orphacode']}")
-                print(f"     Synonym: {row['synonym']}")
-                print(f"     Preferred: {row['preferred_term']}")
-                print(f"     Type: {row['entity_type']}")
-        else:
-            print(f"{Colors.YELLOW}✗ NOT found as synonym{Colors.ENDC}")
-        
-        # Test 3: Fuzzy search (LIKE with wildcards)
-        cursor.execute("""
-            SELECT ce.orphacode, lr.text_value, lr.text_type
-            FROM core_entities ce
-            JOIN linguistic_representations lr ON ce.entity_id = lr.entity_id
-            WHERE ce.status = 'active'
-            AND LOWER(lr.text_value) LIKE LOWER(?)
-            LIMIT 5
-        """, (f'%{term}%',))
-        
-        fuzzy_results = cursor.fetchall()
-        
-        if fuzzy_results:
-            print(f"{Colors.BLUE}➜ Found via FUZZY SEARCH (contains '{term}'):{Colors.ENDC}")
-            for row in fuzzy_results:
-                print(f"  → ORPHA:{row['orphacode']} - {row['text_value']} [{row['text_type']}]")
+        if self.warnings:
+            print(f"\n⚠ Warnings: {len(self.warnings)}")
+            for warning in self.warnings:
+                print(f"  - {warning}")
         
         print()
-    
-    conn.close()
+        
+        if self.checks_failed == 0:
+            print("🎉 ALL CHECKS PASSED! Bug is fixed!")
+            return True
+        else:
+            print("❌ SOME CHECKS FAILED - Bug may not be fully fixed")
+            return False
 
-def analyze_aav_entity(db_path: str):
-    """Deep dive into AAV entity structure"""
-    
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    
-    print(f"\n{Colors.BOLD}{'='*80}{Colors.ENDC}")
-    print(f"{Colors.BOLD}{Colors.CYAN}DEEP DIVE: ANCA-ASSOCIATED VASCULITIS (ORPHA:156152){Colors.ENDC}")
-    print(f"{Colors.BOLD}{'='*80}{Colors.ENDC}\n")
-    
-    # Get the entity
-    cursor.execute("""
-        SELECT * FROM core_entities
-        WHERE orphacode = 156152
-    """)
-    
-    entity = cursor.fetchone()
-    
-    if not entity:
-        print(f"{Colors.RED}✗ Entity ORPHA:156152 not found!{Colors.ENDC}")
-        conn.close()
-        return
-    
-    print(f"{Colors.BOLD}Entity Details:{Colors.ENDC}")
-    print(f"  Orphacode: {entity['orphacode']}")
-    print(f"  Type: {entity['entity_type']}")
-    print(f"  Status: {entity['status']}")
-    print(f"  Disorder Type: {entity['disorder_type']}")
-    print(f"  Classification: {entity['classification_level']}")
-    
-    # Get all linguistic representations
-    print(f"\n{Colors.BOLD}All Linguistic Representations:{Colors.ENDC}")
-    cursor.execute("""
-        SELECT text_value, text_type, language_code, is_abbreviation
-        FROM linguistic_representations
-        WHERE entity_id = ?
-        ORDER BY text_type, text_value
-    """, (entity['entity_id'],))
-    
-    representations = cursor.fetchall()
-    
-    by_type = {}
-    for rep in representations:
-        text_type = rep['text_type']
-        if text_type not in by_type:
-            by_type[text_type] = []
-        by_type[text_type].append(rep)
-    
-    for text_type, reps in by_type.items():
-        print(f"\n  {Colors.CYAN}{text_type.upper()}:{Colors.ENDC} ({len(reps)} entries)")
-        for rep in reps:
-            abbrev_marker = f" {Colors.YELLOW}[ABBREV]{Colors.ENDC}" if rep['is_abbreviation'] else ""
-            print(f"    • {rep['text_value']}{abbrev_marker}")
-    
-    # Get external mappings
-    print(f"\n{Colors.BOLD}External ID Mappings:{Colors.ENDC}")
-    cursor.execute("""
-        SELECT external_system, external_code
-        FROM external_mappings
-        WHERE entity_id = ?
-        ORDER BY external_system
-    """, (entity['entity_id'],))
-    
-    mappings = cursor.fetchall()
-    
-    if mappings:
-        for mapping in mappings:
-            print(f"  • {mapping['external_system']}: {mapping['external_code']}")
-    else:
-        print(f"  {Colors.YELLOW}(No external mappings found){Colors.ENDC}")
-    
-    conn.close()
-
-def test_case_sensitivity(db_path: str):
-    """Test if case matters in queries"""
-    
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    
-    print(f"\n{Colors.BOLD}{'='*80}{Colors.ENDC}")
-    print(f"{Colors.BOLD}{Colors.CYAN}CASE SENSITIVITY TEST{Colors.ENDC}")
-    print(f"{Colors.BOLD}{'='*80}{Colors.ENDC}\n")
-    
-    test_variations = [
-        'ANCA-associated vasculitis',
-        'anca-associated vasculitis',
-        'ANCA-Associated Vasculitis',
-        'Anca-Associated Vasculitis',
-    ]
-    
-    for variation in test_variations:
-        # Test exact match
-        cursor.execute("""
-            SELECT ce.orphacode, lr.text_value
-            FROM core_entities ce
-            JOIN linguistic_representations lr ON ce.entity_id = lr.entity_id
-            WHERE ce.status = 'active'
-            AND lr.text_value = ?
-        """, (variation,))
-        
-        exact_result = cursor.fetchone()
-        
-        # Test case-insensitive match
-        cursor.execute("""
-            SELECT ce.orphacode, lr.text_value
-            FROM core_entities ce
-            JOIN linguistic_representations lr ON ce.entity_id = lr.entity_id
-            WHERE ce.status = 'active'
-            AND LOWER(lr.text_value) = LOWER(?)
-        """, (variation,))
-        
-        insensitive_result = cursor.fetchone()
-        
-        exact_status = f"{Colors.GREEN}✓{Colors.ENDC}" if exact_result else f"{Colors.RED}✗{Colors.ENDC}"
-        insensitive_status = f"{Colors.GREEN}✓{Colors.ENDC}" if insensitive_result else f"{Colors.RED}✗{Colors.ENDC}"
-        
-        print(f"'{variation}':")
-        print(f"  Exact match (case-sensitive):     {exact_status}")
-        print(f"  LOWER() match (case-insensitive): {insensitive_status}")
-        
-        if insensitive_result:
-            print(f"    → Found: ORPHA:{insensitive_result['orphacode']} - {insensitive_result['text_value']}")
-        print()
-    
-    conn.close()
-
-def check_all_vasculitis_diseases(db_path: str):
-    """Find all vasculitis-related diseases"""
-    
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    
-    print(f"\n{Colors.BOLD}{'='*80}{Colors.ENDC}")
-    print(f"{Colors.BOLD}{Colors.CYAN}ALL VASCULITIS-RELATED DISEASES{Colors.ENDC}")
-    print(f"{Colors.BOLD}{'='*80}{Colors.ENDC}\n")
-    
-    cursor.execute("""
-        SELECT DISTINCT ce.orphacode, lr.text_value as preferred_term
-        FROM core_entities ce
-        JOIN linguistic_representations lr ON ce.entity_id = lr.entity_id
-        WHERE lr.text_type = 'preferred_term'
-        AND ce.status = 'active'
-        AND LOWER(lr.text_value) LIKE '%vasculitis%'
-        ORDER BY lr.text_value
-        LIMIT 20
-    """)
-    
-    results = cursor.fetchall()
-    
-    print(f"Found {len(results)} vasculitis-related diseases:\n")
-    
-    for row in results:
-        print(f"  • ORPHA:{row['orphacode']:<7} - {row['preferred_term']}")
-    
-    conn.close()
 
 def main():
-    """Run all tests"""
-    
-    print(f"\n{Colors.BOLD}{Colors.BLUE}")
+    """Main verification"""
+    print("\n" + "="*80)
+    print("ENTITY EXTRACTION FIX VERIFICATION")
     print("="*80)
-    print(" ORPHANET DATABASE INVESTIGATION: ANCA-ASSOCIATED VASCULITIS")
-    print("="*80)
-    print(f"{Colors.ENDC}")
     
-    db_path = load_db_path()
-    print(f"Database: {db_path}\n")
+    # Get file paths
+    if len(sys.argv) > 2:
+        code_file = Path(sys.argv[1])
+        json_file = Path(sys.argv[2])
+    else:
+        # Try default paths
+        code_file = Path("corpus_metadata/document_utils/entity_extraction.py")
+        json_file = Path("documents_sota/00954_Pediatric ANCA-Associated Vasculitis_ Current Evidence and Therapeutic Landscape_extracted.json")
+        
+        print(f"\nUsing default paths:")
+        print(f"  Code: {code_file}")
+        print(f"  JSON: {json_file}")
+        print("\n(Pass paths as arguments to verify different files)")
     
-    # Run tests
-    test_disease_lookup(db_path)
-    test_case_sensitivity(db_path)
-    analyze_aav_entity(db_path)
-    check_all_vasculitis_diseases(db_path)
+    # Check files exist
+    if not code_file.exists():
+        print(f"\n✗ Code file not found: {code_file}")
+        sys.exit(1)
     
-    # Summary and recommendations
-    print(f"\n{Colors.BOLD}{'='*80}{Colors.ENDC}")
-    print(f"{Colors.BOLD}{Colors.BLUE}RECOMMENDATIONS{Colors.ENDC}")
-    print(f"{Colors.BOLD}{'='*80}{Colors.ENDC}\n")
+    if not json_file.exists():
+        print(f"\n✗ JSON file not found: {json_file}")
+        print("\n⚠ Note: You need to re-run the extraction after fixing the code")
+        print("  to generate a new JSON file for verification")
+        sys.exit(1)
     
-    print(f"{Colors.BOLD}Based on the results above:{Colors.ENDC}\n")
+    # Run verification
+    verifier = FixVerifier()
     
-    print(f"1. If 'ANCA-associated vasculitis' is found as PREFERRED TERM:")
-    print(f"   → Your current query should work (use case-insensitive LOWER())")
-    print()
+    verifier.check_code_fix(code_file)
+    verifier.check_json_structure(json_file)
+    verifier.check_promotion_logic(json_file)
     
-    print(f"2. If 'ANCA-associated vasculitis' is found as SYNONYM:")
-    print(f"   → You MUST add synonym lookup to _query_orphanet_exact()")
-    print(f"   → The preferred term might be different (e.g., 'Vasculitis associated with ANCA')")
-    print()
+    # Print summary
+    success = verifier.print_summary()
     
-    print(f"3. If 'ANCA-associated vasculitis' has punctuation variations:")
-    print(f"   → Normalize by removing hyphens/punctuation before querying")
-    print(f"   → Try both 'ANCA-associated' and 'ANCA associated'")
-    print()
-    
-    print(f"4. Check the linguistic representations section to see:")
-    print(f"   → Exact text as stored in database")
-    print(f"   → Whether it's marked as abbreviation")
-    print(f"   → All available synonyms")
-    print()
-    
-    print(f"{Colors.BOLD}Next Steps:{Colors.ENDC}")
-    print(f"  • Review the output above")
-    print(f"  • Update your query based on how AAV is actually stored")
-    print(f"  • Test the updated query with test_02.py")
-    print()
+    sys.exit(0 if success else 1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
