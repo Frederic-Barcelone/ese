@@ -1,0 +1,498 @@
+{
+  "validation_metadata": {
+    "description": "CTIS Database Validation Reference Data - EXAMPLE WITH DUMMY DATA",
+    "instructions": "This is a fully filled example. Replace with real data from CTIS portal.",
+    "date_collected": "2025-01-06",
+    "collected_by": "Database Validator",
+    "notes": "This contains realistic dummy data for demonstration. Replace all values with actual CTIS data for real validation."
+  },
+  "trials": [
+    {
+      "ctNumber": "2023-506843-40-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "AKAPI: Amikacin Liposome Inhalation Suspension for treatment of Mycobacterium xenopi pulmonary infection: A prospective controlled open-label randomized study",
+      "shortTitle": "ADVANCE-301",
+      "sponsor": "Centre Hospitalier Universitaire Amiens Picardie",
+      "trialPhase": "Therapeutic confirmatory (Phase III)",
+      "therapeuticAreas": "Diseases [C] - Bacterial Infections and Mycoses [C01]",
+      "countries": "France;Germany;Spain;Italy;Netherlands;Belgium",
+      "decisionDate": "2024-03-15",
+      "publishDate": "2024-03-20",
+      "lastUpdated": "2024-11-01",
+      "sites": {
+        "total_count": 45,
+        "examples": [
+          {
+            "site_name": "Institut Gustave Roussy",
+            "organisation": "Institut Gustave Roussy",
+            "country": "France",
+            "city": "Villejuif"
+          },
+          {
+            "site_name": "Charité Universitätsmedizin Berlin",
+            "organisation": "Charité - Universitätsmedizin Berlin",
+            "country": "Germany",
+            "city": "Berlin"
+          },
+          {
+            "site_name": "Hospital Universitario 12 de Octubre",
+            "organisation": "Hospital Universitario 12 de Octubre",
+            "country": "Spain",
+            "city": "Madrid"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 67,
+        "examples": [
+          {
+            "name": "Dr. Marie Dubois",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Public Contact (Sponsor)",
+            "country": "Switzerland"
+          },
+          {
+            "name": "Prof. Hans Schmidt",
+            "role": "Site Investigator",
+            "country": "Germany"
+          }
+        ]
+      },
+      "notes": "Large multi-country Phase III oncology trial with extensive site network"
+    },
+    {
+      "ctNumber": "2024-516849-39-01",
+      "ctPublicStatusCode": "Ongoing, recruiting",
+      "title": "An Open-Label, Multicenter Study Evaluating the Long-Term Safety and Tolerability of XYZ-123 in Patients with Chronic Condition",
+      "shortTitle": "EXTEND-LT",
+      "sponsor": "F. Hoffmann-La Roche AG",
+      "trialPhase": "Phase IV",
+      "therapeuticAreas": "Diseases [C] - Immune System Diseases [C20]",
+      "countries": "France;Germany;United Kingdom;Spain;Poland;Italy",
+      "decisionDate": "2024-05-22",
+      "publishDate": "2024-05-28",
+      "lastUpdated": "2024-10-15",
+      "sites": {
+        "total_count": 78,
+        "examples": [
+          {
+            "site_name": "Assistance Publique - Hôpitaux de Paris",
+            "organisation": "AP-HP - Hôpital Saint-Louis",
+            "country": "France",
+            "city": "Paris"
+          },
+          {
+            "site_name": "University College London Hospitals",
+            "organisation": "UCLH NHS Foundation Trust",
+            "country": "United Kingdom",
+            "city": "London"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 156,
+        "examples": [
+          {
+            "name": "",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Scientific Contact (Sponsor)",
+            "country": "Switzerland"
+          }
+        ]
+      },
+      "notes": "Phase IV post-marketing surveillance study with large patient population"
+    },
+    {
+      "ctNumber": "2024-516906-47-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "A Phase I/II, First-in-Human, Dose-Escalation and Dose-Expansion Study of Novel Agent ABC-789 in Participants with Advanced Solid Tumors",
+      "shortTitle": "FIRST-STEP",
+      "sponsor": "AstraZeneca AB",
+      "trialPhase": "Phase I/II",
+      "therapeuticAreas": "Diseases [C] - Neoplasms [C04]",
+      "countries": "France;Spain;United States",
+      "decisionDate": "2024-07-10",
+      "publishDate": "2024-07-15",
+      "lastUpdated": "2024-09-20",
+      "sites": {
+        "total_count": 12,
+        "examples": [
+          {
+            "site_name": "Institut de Cancérologie de l'Ouest",
+            "organisation": "ICO René Gauducheau",
+            "country": "France",
+            "city": "Saint-Herblain"
+          },
+          {
+            "site_name": "Hospital Universitari Vall d'Hebron",
+            "organisation": "Vall d'Hebron University Hospital",
+            "country": "Spain",
+            "city": "Barcelona"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 28,
+        "examples": [
+          {
+            "name": "Dr. Jean Martin",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Public Contact (Sponsor)",
+            "country": "United Kingdom"
+          }
+        ]
+      },
+      "notes": "Early phase dose-finding study with integrated Phase I/II design"
+    },
+    {
+      "ctNumber": "2023-507521-41-01",
+      "ctPublicStatusCode": "Ended",
+      "title": "A Randomized, Double-Blind, Phase III Study Comparing Standard Treatment Plus Investigational Agent Versus Standard Treatment Alone in Patients with Cardiovascular Disease",
+      "shortTitle": "CARDIO-PROTECT",
+      "sponsor": "Boehringer Ingelheim International GmbH",
+      "trialPhase": "Phase III",
+      "therapeuticAreas": "Diseases [C] - Cardiovascular Diseases [C14]",
+      "countries": "France;Germany;Spain;Italy;Belgium;Netherlands;Poland;Czechia",
+      "decisionDate": "2023-08-30",
+      "publishDate": "2023-09-05",
+      "lastUpdated": "2024-08-15",
+      "sites": {
+        "total_count": 123,
+        "examples": [
+          {
+            "site_name": "Centre Hospitalier Universitaire de Toulouse",
+            "organisation": "CHU Toulouse - Hôpital Rangueil",
+            "country": "France",
+            "city": "Toulouse"
+          },
+          {
+            "site_name": "Klinikum der Universität München",
+            "organisation": "Ludwig-Maximilians-Universität München",
+            "country": "Germany",
+            "city": "München"
+          },
+          {
+            "site_name": "Ospedale San Raffaele",
+            "organisation": "IRCCS Ospedale San Raffaele",
+            "country": "Italy",
+            "city": "Milano"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 245,
+        "examples": [
+          {
+            "name": "Prof. Pierre Dubois",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "Dr. Klaus Müller",
+            "role": "Site Investigator",
+            "country": "Germany"
+          },
+          {
+            "name": "",
+            "role": "Scientific Contact (Sponsor)",
+            "country": "Germany"
+          }
+        ]
+      },
+      "notes": "Completed Phase III cardiovascular outcomes trial with extensive follow-up"
+    },
+    {
+      "ctNumber": "2023-506558-20-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "Expanded Access Program for Emergency Use of Investigational Treatment in Patients with Life-Threatening Condition",
+      "shortTitle": "EAP-EMERGENCY",
+      "sponsor": "Pfizer Inc.",
+      "trialPhase": "Expanded Access",
+      "therapeuticAreas": "Diseases [C] - Respiratory Tract Diseases [C08]",
+      "countries": "France;Germany;Italy;Spain",
+      "decisionDate": "2023-11-20",
+      "publishDate": "2023-11-22",
+      "lastUpdated": "2024-10-30",
+      "sites": {
+        "total_count": 34,
+        "examples": [
+          {
+            "site_name": "Hôpital Bichat - Claude Bernard",
+            "organisation": "AP-HP - Hôpital Bichat",
+            "country": "France",
+            "city": "Paris"
+          },
+          {
+            "site_name": "Universitätsklinikum Heidelberg",
+            "organisation": "Universitätsklinikum Heidelberg",
+            "country": "Germany",
+            "city": "Heidelberg"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 52,
+        "examples": [
+          {
+            "name": "",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Public Contact (Sponsor)",
+            "country": "United States"
+          }
+        ]
+      },
+      "notes": "Expanded access program providing treatment to patients with serious condition"
+    },
+    {
+      "ctNumber": "2024-510234-28-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "A Bioequivalence Study Comparing Two Formulations of Generic Drug in Healthy Volunteers Under Fasting and Fed Conditions",
+      "shortTitle": "BE-STUDY-2024",
+      "sponsor": "Merck Sharp & Dohme LLC",
+      "trialPhase": "Phase I",
+      "therapeuticAreas": "Diseases [C] - Nutritional and Metabolic Diseases [C18]",
+      "countries": "France",
+      "decisionDate": "2024-02-14",
+      "publishDate": "2024-02-16",
+      "lastUpdated": "2024-08-22",
+      "sites": {
+        "total_count": 1,
+        "examples": [
+          {
+            "site_name": "Eurofins Optimed Clinical Research",
+            "organisation": "Eurofins Optimed",
+            "country": "France",
+            "city": "Gières"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 8,
+        "examples": [
+          {
+            "name": "Dr. Laurent Bernard",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Public Contact (Sponsor)",
+            "country": "United States"
+          }
+        ]
+      },
+      "notes": "Single-site Phase I bioequivalence study in healthy volunteers"
+    },
+    {
+      "ctNumber": "2024-512890-15-00",
+      "ctPublicStatusCode": "Ongoing, recruiting",
+      "title": "An Observational, Non-Interventional Registry Study to Assess Real-World Outcomes in Patients Receiving Standard of Care Treatment",
+      "shortTitle": "REAL-WORLD-REGISTRY",
+      "sponsor": "Assistance Publique Hopitaux De Paris",
+      "trialPhase": "Non-Interventional",
+      "therapeuticAreas": "Diseases [C] - Nervous System Diseases [C10]",
+      "countries": "France",
+      "decisionDate": "2024-06-05",
+      "publishDate": "2024-06-10",
+      "lastUpdated": "2024-11-05",
+      "sites": {
+        "total_count": 28,
+        "examples": [
+          {
+            "site_name": "Hôpital de la Pitié-Salpêtrière",
+            "organisation": "AP-HP - Groupe Hospitalier Pitié-Salpêtrière",
+            "country": "France",
+            "city": "Paris"
+          },
+          {
+            "site_name": "CHU de Bordeaux",
+            "organisation": "Centre Hospitalier Universitaire de Bordeaux",
+            "country": "France",
+            "city": "Bordeaux"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 42,
+        "examples": [
+          {
+            "name": "Prof. Sophie Laurent",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Scientific Contact (Sponsor)",
+            "country": "France"
+          }
+        ]
+      },
+      "notes": "Academic non-interventional registry study collecting real-world data"
+    },
+    {
+      "ctNumber": "2023-503456-89-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "Compassionate Use Program for Individual Patient Access to Investigational Medicinal Product for Rare Disease",
+      "shortTitle": "CU-RARE-2023",
+      "sponsor": "Novartis Pharma AG",
+      "trialPhase": "Compassionate Use",
+      "therapeuticAreas": "Diseases [C] - Hemic and Lymphatic Diseases [C15]",
+      "countries": "France;Germany;Spain",
+      "decisionDate": "2023-12-10",
+      "publishDate": "2023-12-12",
+      "lastUpdated": "2024-09-18",
+      "sites": {
+        "total_count": 8,
+        "examples": [
+          {
+            "site_name": "Hôpital Necker-Enfants Malades",
+            "organisation": "AP-HP - Hôpital Necker",
+            "country": "France",
+            "city": "Paris"
+          },
+          {
+            "site_name": "Hospital Universitario La Paz",
+            "organisation": "Hospital La Paz",
+            "country": "Spain",
+            "city": "Madrid"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 15,
+        "examples": [
+          {
+            "name": "Dr. Marie Lambert",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Public Contact (Sponsor)",
+            "country": "Switzerland"
+          }
+        ]
+      },
+      "notes": "Compassionate use program for individual patient access to rare disease treatment"
+    },
+    {
+      "ctNumber": "2024-514567-33-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "A Phase II/III, Randomized, Open-Label Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Novel Therapy in Participants with Advanced Disease",
+      "shortTitle": "BREAKTHROUGH-203",
+      "sponsor": "Eli Lilly & Co.",
+      "trialPhase": "Phase II/III",
+      "therapeuticAreas": "Diseases [C] - Neoplasms [C04]",
+      "countries": "France;Germany;United Kingdom;Spain;Italy;Belgium",
+      "decisionDate": "2024-04-18",
+      "publishDate": "2024-04-25",
+      "lastUpdated": "2024-10-28",
+      "sites": {
+        "total_count": 56,
+        "examples": [
+          {
+            "site_name": "Centre Léon Bérard",
+            "organisation": "Centre Léon Bérard",
+            "country": "France",
+            "city": "Lyon"
+          },
+          {
+            "site_name": "Royal Marsden Hospital",
+            "organisation": "The Royal Marsden NHS Foundation Trust",
+            "country": "United Kingdom",
+            "city": "London"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 89,
+        "examples": [
+          {
+            "name": "Dr. Catherine Moreau",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "",
+            "role": "Scientific Contact (Sponsor)",
+            "country": "United States"
+          }
+        ]
+      },
+      "notes": "Integrated Phase II/III seamless design in advanced oncology indication"
+    },
+    {
+      "ctNumber": "2024-518901-42-00",
+      "ctPublicStatusCode": "Authorised",
+      "title": "A Phase III/IV Post-Authorization Safety Study to Monitor Long-Term Safety of Approved Treatment in Extended Patient Population",
+      "shortTitle": "PASS-LONGTERM",
+      "sponsor": "AbbVie Deutschland GmbH & Co. KG",
+      "trialPhase": "Phase III/IV",
+      "therapeuticAreas": "Diseases [C] - Digestive System Diseases [C06]",
+      "countries": "France;Germany;Spain;Italy;Netherlands;Belgium;Poland;Austria",
+      "decisionDate": "2024-08-12",
+      "publishDate": "2024-08-18",
+      "lastUpdated": "2024-11-02",
+      "sites": {
+        "total_count": 95,
+        "examples": [
+          {
+            "site_name": "Hôpital Beaujon",
+            "organisation": "AP-HP - Hôpital Beaujon",
+            "country": "France",
+            "city": "Clichy"
+          },
+          {
+            "site_name": "Universitätsklinikum Frankfurt",
+            "organisation": "Goethe-Universität Frankfurt",
+            "country": "Germany",
+            "city": "Frankfurt am Main"
+          },
+          {
+            "site_name": "Erasmus MC",
+            "organisation": "Erasmus University Medical Center Rotterdam",
+            "country": "Netherlands",
+            "city": "Rotterdam"
+          }
+        ]
+      },
+      "people": {
+        "total_count": 178,
+        "examples": [
+          {
+            "name": "Prof. Jean Dupont",
+            "role": "Site Investigator",
+            "country": "France"
+          },
+          {
+            "name": "Dr. Hans Weber",
+            "role": "Site Investigator",
+            "country": "Germany"
+          },
+          {
+            "name": "",
+            "role": "Public Contact (Sponsor)",
+            "country": "Germany"
+          }
+        ]
+      },
+      "notes": "Large post-authorization safety study bridging Phase III and IV with extensive site network"
+    }
+  ]
+}

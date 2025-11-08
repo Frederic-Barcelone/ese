@@ -19,6 +19,10 @@ cache/
 .idea/
 
 # other Folders not needed
+FDA_DATA/
+FDA_TH/
+FDA_TH_in/
+syncher_keys.py
 ASV/
 corpus_db/
 corpus_dictionaries/

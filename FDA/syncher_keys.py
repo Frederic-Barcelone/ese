@@ -3,9 +3,9 @@ FDA Syncer Configuration - UPDATED VERSION
 ===========================================
 Contains all configuration parameters for the FDA data syncer.
 
-✅ UPDATED: Configured for successful approval package downloads
-✅ TESTED: Approval packages work with SSL workarounds applied
-✅ READY: Set up for full comprehensive sync
+[OK] UPDATED: Configured for successful approval package downloads
+[OK] TESTED: Approval packages work with SSL workarounds applied
+[OK] READY: Set up for full comprehensive sync
 
 IMPORTANT: 
 - Add this file to .gitignore to keep your API key private!
@@ -50,7 +50,7 @@ FORCE_REDOWNLOAD = False
 # ============================================================================
 
 # OUTPUT_DIR: Where to save all downloaded data
-OUTPUT_DIR = "FDA/fda_nephro_hemato_data"
+OUTPUT_DIR = "./FDA_DATA"
 
 # ============================================================================
 # THERAPEUTIC AREAS SELECTION
@@ -62,7 +62,7 @@ OUTPUT_DIR = "FDA/fda_nephro_hemato_data"
 #   ['nephrology']              - Only nephrology
 #   ['hematology']              - Only hematology  
 #   ['nephrology', 'hematology'] - Both (default)
-SYNC_AREAS = ['nephrology', 'hematology']
+SYNC_AREAS = ['hematology','nephrology']
 
 # ============================================================================
 # SYNC PARAMETERS BY MODE
@@ -77,9 +77,6 @@ SYNC_PARAMETERS = {
             'enabled': True,
             'max_diseases': 2,  # Only test first 2 diseases
             'max_results_per_disease': 10
-        },
-        'orphan_drugs': {
-            'enabled': False  # Skip in test mode
         },
         'integrated_reviews': {
             'enabled': False  # Skip in test mode (takes too long)
@@ -101,9 +98,6 @@ SYNC_PARAMETERS = {
             'enabled': True,
             'max_diseases': None,  # All diseases
             'max_results_per_disease': None
-        },
-        'orphan_drugs': {
-            'enabled': False  # Monthly task - download manually or run monthly
         },
         'integrated_reviews': {
             'enabled': False  # Quarterly task - too time consuming for daily
@@ -128,14 +122,8 @@ SYNC_PARAMETERS = {
             'max_diseases': None,
             'max_results_per_disease': None
         },
-        'orphan_drugs': {
-            'enabled': False  # ⚠️ DISABLED - Download manually from FDA website
-            # Reason: Excel URL returns 404 (URL may have changed)
-            # Manual download: https://www.accessdata.fda.gov/scripts/opdlisting/oopd/
-            # Place file in: FDA/fda_nephro_hemato_data/orphan_drugs/
-        },
         'integrated_reviews': {
-            'enabled': True,  # ✅ ENABLED - Working with SSL workarounds!
+            'enabled': True,  # ??? ENABLED - Working with SSL workarounds!
             'max_drugs': None  # All drugs
             # Note: Successfully tested - downloaded 16/16 documents for Keytruda
             # Expected: 20-50 packages with 200-1,000 PDF documents total
@@ -204,7 +192,7 @@ def validate_config():
         errors.append("OUTPUT_DIR must be a valid directory path string")
     
     if errors:
-        print("\n❌ CONFIGURATION ERRORS:")
+        print("\n??? CONFIGURATION ERRORS:")
         for error in errors:
             print(f"  - {error}")
         return False
@@ -219,7 +207,7 @@ def print_config_summary():
     print(f"\nMode: {MODE}")
     print(f"Description: {SYNC_PARAMETERS[MODE]['description']}")
     print(f"Estimated Time: {SYNC_PARAMETERS[MODE]['estimated_time']}")
-    print(f"\nAPI Key: {'✓ Set' if FDA_API_KEY else '✗ Not Set (using rate limits)'}")
+    print(f"\nAPI Key: {'[SET]' if FDA_API_KEY else '[NOT SET] (using rate limits)'}")
     print(f"Force Redownload: {FORCE_REDOWNLOAD}")
     print(f"Output Directory: {OUTPUT_DIR}")
     print(f"Therapeutic Areas: {', '.join(SYNC_AREAS)}")
@@ -231,7 +219,7 @@ def print_config_summary():
         if source in ['description', 'estimated_time']:
             continue
         if isinstance(params, dict) and 'enabled' in params:
-            status = "✓ Enabled" if params['enabled'] else "✗ Disabled"
+            status = "[ENABLED]" if params['enabled'] else "[DISABLED]"
             details = []
             if params['enabled']:
                 if 'days_back' in params and params['days_back']:
@@ -249,15 +237,15 @@ def print_config_summary():
         print("\n" + "="*70)
         print("IMPORTANT NOTES FOR FULL MODE:")
         print("="*70)
-        print("✅ Approval Packages: ENABLED and WORKING!")
+        print("[OK] Approval Packages: ENABLED and WORKING!")
         print("   - Successfully tested: 16/16 documents downloaded")
         print("   - Expected: 20-50 packages, 200-1,000 PDF documents")
         print("   - Total size: ~1.5-2.5 GB of FDA review documentation")
-        print("\n⚠️  Orphan Drugs: DISABLED (manual download required)")
+        print("\n[WARNING] Orphan Drugs: DISABLED (manual download required)")
         print("   - Excel download URL returns 404 error")
         print("   - Manual download from: https://www.accessdata.fda.gov/scripts/opdlisting/oopd/")
         print("   - Save to: FDA/fda_nephro_hemato_data/orphan_drugs/")
-        print("\n✅ All other sources: ENABLED and working")
+        print("\n[OK] All other sources: ENABLED and working")
         print("   - Drug Labels: ~3,000+ drugs")
         print("   - Adverse Events: Thousands of reports")
         print("   - Enforcement: 5-50 reports")
@@ -270,7 +258,7 @@ def print_expected_results():
         print("\n" + "="*70)
         print("EXPECTED DATA COLLECTION (FULL MODE)")
         print("="*70)
-        print("\n📊 After sync completes, you will have:")
+        print("\n[DATA] After sync completes, you will have:")
         print("\n1. Drug Labels")
         print("   - Count: ~3,000+ unique drug labels")
         print("   - Size: ~500 MB")
@@ -281,7 +269,7 @@ def print_expected_results():
         print("   - Size: ~5-10 MB (Excel file)")
         print("   - Content: Rare disease drug designations")
         
-        print("\n3. Approval Packages ⭐ NEW!")
+        print("\n3. Approval Packages [NEW]!")
         print("   - Packages: 20-50 complete packages")
         print("   - Documents: 200-1,000 PDF files")
         print("   - Size: ~1.5-2.5 GB")
@@ -322,22 +310,22 @@ def check_prerequisites():
         with open('syncher.py', 'r', encoding='utf-8') as f:
             content = f.read()
             if 'from urllib.parse import urljoin' not in content:
-                warnings.append("⚠️  You may be using the old syncher.py without fixes")
+                warnings.append("??????  You may be using the old syncher.py without fixes")
                 warnings.append("   Consider using syncher_FIXED.py for approval packages to work")
             if 'verify=False' not in content:
-                warnings.append("⚠️  SSL workarounds may not be applied")
+                warnings.append("??????  SSL workarounds may not be applied")
                 warnings.append("   Approval package downloads might fail")
     
     # Check output directory
     import os
     if not os.path.exists(OUTPUT_DIR):
-        warnings.append(f"⚠️  Output directory doesn't exist yet: {OUTPUT_DIR}")
+        warnings.append(f"??????  Output directory doesn't exist yet: {OUTPUT_DIR}")
         warnings.append("   It will be created automatically on first run")
     
     # Check orphan drugs manual download reminder
     if MODE == 'full' and SYNC_PARAMETERS['full']['integrated_reviews']['enabled']:
         if not SYNC_PARAMETERS['full']['orphan_drugs']['enabled']:
-            warnings.append("📥 REMINDER: Orphan drugs require manual download")
+            warnings.append("???? REMINDER: Orphan drugs require manual download")
             warnings.append("   Download from: https://www.accessdata.fda.gov/scripts/opdlisting/oopd/")
             warnings.append(f"   Save to: {OUTPUT_DIR}/orphan_drugs/")
     
@@ -354,7 +342,7 @@ if __name__ == "__main__":
     
     # Validate configuration
     if validate_config():
-        print("\n✅ Configuration is valid!")
+        print("\n??? Configuration is valid!")
         print_config_summary()
         
         # Print expected results
@@ -365,20 +353,20 @@ if __name__ == "__main__":
         issues, warnings = check_prerequisites()
         
         if issues:
-            print("\n❌ ISSUES FOUND:")
+            print("\n??? ISSUES FOUND:")
             for issue in issues:
                 print(f"  {issue}")
         
         if warnings:
-            print("\n⚠️  WARNINGS:")
+            print("\n??????  WARNINGS:")
             for warning in warnings:
                 print(f"  {warning}")
         
         if not issues and not warnings:
-            print("\n✅ All checks passed! Ready to run syncher.")
+            print("\n??? All checks passed! Ready to run syncher.")
         
     else:
-        print("\n❌ Please fix configuration errors above.")
+        print("\n??? Please fix configuration errors above.")
         exit(1)
     
     print("\n" + "="*70)
