@@ -1,8 +1,11 @@
 """
-Simple HTTP Client with retry - OPTIMIZED VERSION
+Simple HTTP Client with retry - OPTIMIZED VERSION v2.0
 FDA/fda_syncher/utils/http_client.py
 
-FIXED: Smarter retry logic that doesn't waste time on 404s
+FIXED: 
+- Smarter retry logic that doesn't waste time on 404s
+- Connection pool recycling to prevent stale connections
+- Adaptive rate limiting based on error patterns
 """
 
 import requests
@@ -16,21 +19,46 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class SimpleHTTPClient:
-    """Simple HTTP client with intelligent retry"""
+    """Simple HTTP client with intelligent retry and connection management"""
     
     def __init__(self, max_retries=3):
         self.max_retries = max_retries
         self.session = requests.Session()
+        self.request_count = 0  # Track total requests
+        self.consecutive_errors = 0  # Track error patterns
+    
+    def _recycle_session_if_needed(self):
+        """Recycle connection pool every 100 requests to prevent stale connections"""
+        self.request_count += 1
+        if self.request_count % 100 == 0:
+            print(f"    ♻️  Recycled connection pool (after {self.request_count} requests)")
+            self.session.close()
+            self.session = requests.Session()
+    
+    def _adaptive_delay(self):
+        """Apply adaptive delay based on error rate"""
+        base_delay = RATE_LIMIT_DELAY
+        
+        if self.consecutive_errors > 5:
+            # Exponential backoff for repeated errors
+            delay = min(base_delay * (2 ** (self.consecutive_errors - 5)), 30)
+            print(f"    ⏸️  Adaptive cooling: {delay:.1f}s (consecutive errors: {self.consecutive_errors})")
+            time.sleep(delay)
+        else:
+            time.sleep(base_delay)
     
     def get(self, url, **kwargs):
         """GET with intelligent retry
         
         - Network errors: Full retry with backoff
         - 404 Not Found: Single quick retry only
-        - Other errors: Full retry
+        - Other errors: Full retry with adaptive delays
         """
         kwargs.setdefault('timeout', REQUEST_TIMEOUT)
         kwargs.setdefault('verify', False)
+        
+        # Recycle connection pool periodically
+        self._recycle_session_if_needed()
         
         for attempt in range(self.max_retries):
             try:
@@ -44,10 +72,14 @@ class SimpleHTTPClient:
                         continue
                     else:
                         # Give up on 404s after one retry
+                        self.consecutive_errors = 0  # Reset - 404 is expected
                         response.raise_for_status()
                 
                 response.raise_for_status()
-                time.sleep(RATE_LIMIT_DELAY)  # Use config rate limit
+                
+                # Success - reset error counter and apply normal delay
+                self.consecutive_errors = 0
+                self._adaptive_delay()
                 return response
                 
             except requests.exceptions.HTTPError as e:
@@ -57,16 +89,22 @@ class SimpleHTTPClient:
                         raise
                 
                 # For other HTTP errors, use full retry logic
+                self.consecutive_errors += 1
+                
                 if attempt == self.max_retries - 1:
                     raise
+                
                 wait = (2 ** attempt)
                 print(f"      Retry {attempt+1}/{self.max_retries} in {wait}s...")
                 time.sleep(wait)
                 
             except Exception as e:
-                # For network errors, use full retry logic
+                # For network errors, use full retry logic with adaptive delay
+                self.consecutive_errors += 1
+                
                 if attempt == self.max_retries - 1:
                     raise
+                
                 wait = (2 ** attempt)
                 print(f"      Retry {attempt+1}/{self.max_retries} in {wait}s...")
                 time.sleep(wait)

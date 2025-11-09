@@ -57,8 +57,8 @@ class ApprovalPackagesDownloader:
         
         # Limit to 50 drugs max for optimal performance
         max_drugs = self.config['integrated_reviews'].get('max_drugs')
-        if max_drugs is None or max_drugs > 50:
-            max_drugs = 50
+        if max_drugs is None or max_drugs > 200:
+            max_drugs = 200  # Process up to 200 drugs
             print(f"  🎯 Limiting to {max_drugs} drugs for optimal performance")
         
         drug_names = drug_names[:max_drugs]

@@ -1,130 +1,201 @@
+#!/usr/bin/env python3
 """
-Enhanced Diagnostic - Shows API Responses
-==========================================
-This will show us exactly what the FDA API is returning
+Verification Script for FDA Syncer Critical Fixes
+Checks that all 3 files have been updated correctly
 """
 
+import os
 import sys
-sys.path.insert(0, 'FDA')
+from pathlib import Path
 
-import requests
-from syncher_keys import FDA_API_KEY
+# ANSI color codes
+GREEN = '\033[92m'
+RED = '\033[91m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+END = '\033[0m'
 
-print("="*70)
-print("ENHANCED FDA API DIAGNOSTIC")
-print("="*70)
+def find_file(filename):
+    """Find file in current directory tree"""
+    for root, dirs, files in os.walk('.'):
+        if filename in files:
+            return os.path.join(root, filename)
+    return None
 
-# Test drugs
-test_drugs = ['Keytruda', 'Opdivo', 'Dexamethasone', 'pembrolizumab', 'nivolumab']
+def check_file_exists(filepath, description):
+    """Check if file exists"""
+    if os.path.exists(filepath):
+        print(f"{GREEN}✓{END} Found: {description}")
+        print(f"  Path: {filepath}")
+        return True
+    else:
+        print(f"{RED}✗{END} Missing: {description}")
+        print(f"  Expected: {filepath}")
+        return False
 
-endpoint = "https://api.fda.gov/drug/label.json"
-
-for drug in test_drugs:
-    print(f"\n{'='*70}")
-    print(f"Testing: {drug}")
-    print(f"{'='*70}")
-    
-    # Test 1: Brand name search
-    print("\n[TEST 1] Searching by brand name...")
-    search = f'openfda.brand_name:"{drug}"'
-    params = {"search": search, "limit": 1}
-    if FDA_API_KEY:
-        params["api_key"] = FDA_API_KEY
-    
+def check_file_content(filepath, search_strings, description):
+    """Check if file contains expected content"""
     try:
-        response = requests.get(endpoint, params=params, timeout=30, verify=False)
-        print(f"  Status: {response.status_code}")
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
         
-        if response.status_code == 200:
-            data = response.json()
-            if data.get('results'):
-                result = data['results'][0]
-                openfda = result.get('openfda', {})
-                
-                brand_names = openfda.get('brand_name', [])
-                generic_names = openfda.get('generic_name', [])
-                app_numbers = openfda.get('application_number', [])
-                
-                print(f"  ✓ Found result!")
-                print(f"    Brand names: {brand_names[:3]}")
-                print(f"    Generic names: {generic_names[:3]}")
-                print(f"    Application numbers: {app_numbers}")
-                
-                if app_numbers:
-                    app_no = app_numbers[0].replace('NDA', '').replace('BLA', '').strip()
-                    print(f"    → Cleaned app number: {app_no}")
-                    
-                    # Test if we can find the TOC
-                    print(f"\n[TEST 2] Looking for TOC for {app_no}...")
-                    base_url = "https://www.accessdata.fda.gov"
-                    
-                    found_toc = False
-                    for year in range(2025, 2019, -1):
-                        test_urls = [
-                            f"{base_url}/drugsatfda_docs/nda/{year}/{app_no}TOC.cfm",
-                            f"{base_url}/drugsatfda_docs/nda/{year}/{app_no}Orig1s000TOC.cfm",
-                            f"{base_url}/drugsatfda_docs/bla/{year}/{app_no}Orig1s000TOC.cfm",
-                        ]
-                        
-                        for url in test_urls:
-                            try:
-                                toc_response = requests.get(url, timeout=10, verify=False)
-                                if toc_response.status_code == 200:
-                                    print(f"    ✓ Found TOC: {url}")
-                                    print(f"      Content length: {len(toc_response.content)} bytes")
-                                    found_toc = True
-                                    break
-                            except:
-                                pass
-                        
-                        if found_toc:
-                            break
-                    
-                    if not found_toc:
-                        print(f"    ✗ No TOC found for years 2020-2025")
-                else:
-                    print(f"    ✗ No application numbers in result")
-            else:
-                print(f"  ✗ No results found")
+        missing = []
+        for search_str in search_strings:
+            if search_str not in content:
+                missing.append(search_str)
+        
+        if not missing:
+            print(f"{GREEN}✓{END} {description}: All fixes present")
+            return True
         else:
-            print(f"  ✗ Error: {response.status_code}")
-            print(f"    {response.text[:200]}")
-    
+            print(f"{RED}✗{END} {description}: Missing fixes:")
+            for m in missing:
+                print(f"    - {m[:60]}...")
+            return False
     except Exception as e:
-        print(f"  ✗ Exception: {e}")
-    
-    # Test 2: Generic name search (if different)
-    if drug.lower() not in ['pembrolizumab', 'nivolumab']:
-        print(f"\n[TEST 3] Searching by generic name...")
-        generic_map = {
-            'Keytruda': 'pembrolizumab',
-            'Opdivo': 'nivolumab',
-            'Dexamethasone': 'dexamethasone'
-        }
-        
-        if drug in generic_map:
-            generic = generic_map[drug]
-            search = f'openfda.generic_name:"{generic}"'
-            params = {"search": search, "limit": 1}
-            if FDA_API_KEY:
-                params["api_key"] = FDA_API_KEY
-            
-            try:
-                response = requests.get(endpoint, params=params, timeout=30, verify=False)
-                if response.status_code == 200:
-                    data = response.json()
-                    if data.get('results'):
-                        app_numbers = data['results'][0].get('openfda', {}).get('application_number', [])
-                        print(f"  ✓ Found via generic name: {app_numbers}")
-                    else:
-                        print(f"  ✗ No results via generic name")
-            except Exception as e:
-                print(f"  ✗ Exception: {e}")
+        print(f"{RED}✗{END} {description}: Error reading file - {e}")
+        return False
 
-print("\n" + "="*70)
-print("DIAGNOSTIC COMPLETE")
-print("="*70)
-print("\nSUMMARY:")
-print("- If all drugs show 'Exception', you have a network/SSL issue")
-print("- If drugs found but no TOC, the packages don't exist or are too old")
-print("- If drugs not found, the search query needs adjustment")
+def compile_file(filepath, description):
+    """Try to compile Python file"""
+    try:
+        import py_compile
+        py_compile.compile(filepath, doraise=True)
+        print(f"{GREEN}✓{END} {description}: Compiles successfully")
+        return True
+    except Exception as e:
+        print(f"{RED}✗{END} {description}: Compilation error")
+        print(f"    {str(e)}")
+        return False
+
+def main():
+    print("="*70)
+    print(f"{BLUE}FDA SYNCER - VERIFICATION SCRIPT{END}")
+    print("Checking all 3 critical fixes")
+    print("="*70 + "\n")
+    
+    # Define expected file locations (try both possible structures)
+    file_configs = [
+        {
+            'name': 'syncher_keys.py',
+            'possible_paths': ['FDA/syncher_keys.py', 'syncher_keys.py'],
+            'description': 'Configuration (Fix #3: Reduce Scope)',
+            'required_strings': [
+                "'days_back': 90",
+                "'max_drugs': 200",
+                "OPTIMIZED"
+            ]
+        },
+        {
+            'name': 'http_client.py',
+            'possible_paths': [
+                'FDA/fda_syncher/utils/http_client.py',
+                'fda_syncher/utils/http_client.py',
+                'utils/http_client.py'
+            ],
+            'description': 'HTTP Client (Fix #1: Connection Pool)',
+            'required_strings': [
+                "self.request_count = 0",
+                "_recycle_session_if_needed",
+                "_adaptive_delay"
+            ]
+        },
+        {
+            'name': 'adverse_events.py',
+            'possible_paths': [
+                'FDA/fda_syncher/downloaders/adverse_events.py',
+                'fda_syncher/downloaders/adverse_events.py',
+                'downloaders/adverse_events.py'
+            ],
+            'description': 'Adverse Events (Fix #2: Circuit Breaker)',
+            'required_strings': [
+                "self.consecutive_errors = 0",
+                "_check_circuit_breaker",
+                "CIRCUIT BREAKER TRIGGERED"
+            ]
+        }
+    ]
+    
+    results = []
+    file_paths = {}
+    
+    # Step 1: Find all files
+    print(f"{BLUE}STEP 1: Locating files...{END}\n")
+    for config in file_configs:
+        found = False
+        for possible_path in config['possible_paths']:
+            if os.path.exists(possible_path):
+                check_file_exists(possible_path, config['description'])
+                file_paths[config['name']] = possible_path
+                found = True
+                break
+        
+        if not found:
+            # Try to find it anywhere
+            found_path = find_file(config['name'])
+            if found_path:
+                print(f"{YELLOW}!{END} Found in unexpected location: {config['name']}")
+                print(f"  Path: {found_path}")
+                file_paths[config['name']] = found_path
+            else:
+                print(f"{RED}✗{END} Not found: {config['name']}")
+                results.append(False)
+        print()
+    
+    # Step 2: Check file contents
+    print(f"{BLUE}STEP 2: Checking for fixes...{END}\n")
+    for config in file_configs:
+        if config['name'] in file_paths:
+            result = check_file_content(
+                file_paths[config['name']],
+                config['required_strings'],
+                config['description']
+            )
+            results.append(result)
+        else:
+            results.append(False)
+        print()
+    
+    # Step 3: Compile files
+    print(f"{BLUE}STEP 3: Compiling files...{END}\n")
+    for config in file_configs:
+        if config['name'] in file_paths:
+            result = compile_file(
+                file_paths[config['name']],
+                config['description']
+            )
+            results.append(result)
+        else:
+            results.append(False)
+        print()
+    
+    # Summary
+    print("="*70)
+    print(f"{BLUE}VERIFICATION SUMMARY{END}")
+    print("="*70)
+    
+    total_checks = len(results)
+    passed = sum(results)
+    
+    print(f"Total Checks: {total_checks}")
+    print(f"{GREEN}Passed: {passed}{END}")
+    print(f"{RED}Failed: {total_checks - passed}{END}")
+    
+    if all(results):
+        print(f"\n{GREEN}✓ ALL CHECKS PASSED!{END}")
+        print(f"\n{BLUE}Ready to restart sync:{END}")
+        print(f"  cd FDA  # (if not already there)")
+        print(f"  python sync.py")
+        print("\n" + "="*70)
+        return 0
+    else:
+        print(f"\n{RED}✗ SOME CHECKS FAILED{END}")
+        print(f"\nPlease review the failed checks above and:")
+        print(f"1. Ensure files are in the correct location")
+        print(f"2. Verify all code changes were applied")
+        print(f"3. Check for syntax errors")
+        print("\n" + "="*70)
+        return 1
+
+if __name__ == "__main__":
+    sys.exit(main())
