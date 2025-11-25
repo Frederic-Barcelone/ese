@@ -1,0 +1,3472 @@
+{
+  "European Economic Area [EEA] Member States": {
+    "tab_number": "2",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 30,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Austria"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Belgium"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Bulgaria"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Croatia"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Cyprus"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Czech Republic"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Denmark"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Estonia"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Finland"
+      },
+      {
+        "CODE": 10,
+        "NAME": "France"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Germany"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Greece"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Hungary"
+      },
+      {
+        "CODE": 14,
+        "NAME": "Iceland"
+      },
+      {
+        "CODE": 15,
+        "NAME": "Ireland"
+      },
+      {
+        "CODE": 16,
+        "NAME": "Italy"
+      },
+      {
+        "CODE": 17,
+        "NAME": "Latvia"
+      },
+      {
+        "CODE": 18,
+        "NAME": "Liechtenstein"
+      },
+      {
+        "CODE": 19,
+        "NAME": "Lithuania"
+      },
+      {
+        "CODE": 20,
+        "NAME": "Luxembourg"
+      },
+      {
+        "CODE": 21,
+        "NAME": "Malta"
+      },
+      {
+        "CODE": 22,
+        "NAME": "Netherlands"
+      },
+      {
+        "CODE": 23,
+        "NAME": "Norway"
+      },
+      {
+        "CODE": 24,
+        "NAME": "Poland"
+      },
+      {
+        "CODE": 25,
+        "NAME": "Portugal"
+      },
+      {
+        "CODE": 26,
+        "NAME": "Romania"
+      },
+      {
+        "CODE": 27,
+        "NAME": "Slovakia"
+      },
+      {
+        "CODE": 28,
+        "NAME": "Slovenia"
+      },
+      {
+        "CODE": 29,
+        "NAME": "Spain"
+      },
+      {
+        "CODE": 30,
+        "NAME": "Sweden"
+      }
+    ]
+  },
+  "Gene Transfer Product Type": {
+    "tab_number": "5",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 4,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Naked Nucleic Acid"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Complex Nuleic Acid"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Viral Vector"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Area(s) impacted by the serious breach": {
+    "tab_number": "8",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 5,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Subject Rights"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Subject Safety"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Data Reliability or Robustness"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Regulatory"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Breach Category": {
+    "tab_number": "9",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 2,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Regulation"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Protocol"
+      }
+    ]
+  },
+  "ASR reporting period": {
+    "tab_number": "12",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 14,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Novel combination"
+      },
+      {
+        "CODE": 2,
+        "NAME": "New combination"
+      },
+      {
+        "CODE": 3,
+        "NAME": "First in class product/IMP (in EU)"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Advanced therapy medicinal product (ATMP)"
+      },
+      {
+        "CODE": 5,
+        "NAME": "New signals of concerns or risk for the product"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Temporary halt or suspension of any trial due to safety reason"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Premature ended trials"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Unexpected event changing benefit risk of any trial"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Substantial modification of protocol or IB for rosk mitigation any trial"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Refused approval due to safety reason"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Serious breach safery related or impact on safety"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Urgent safety measure"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Other"
+      },
+      {
+        "CODE": 14,
+        "NAME": ""
+      }
+    ]
+  },
+  "Clinical trial scope": {
+    "tab_number": "13",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 34,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Diagnosis"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Prophylaxis"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Therapy"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Safety"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Efficacy"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Pharmacokinetic"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Pharmacodynamic"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Bioequivalence"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Dose response"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Pharmacogenetic"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Pharmacogenomic"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Pharmacoeconomic"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Other"
+      },
+      {
+        "CODE": "a",
+        "NAME": "discover or verify the clinical, pharmacological or other pharmacodynamic effects of one or more medicinal products;"
+      },
+      {
+        "CODE": "b",
+        "NAME": "identify any adverse reactions to one or more medicinal products;"
+      },
+      {
+        "CODE": "c",
+        "NAME": "study the absorption, distribution, metabolism and excretion of one or more medicinal products; with the objective of ascertaining the safety and/or efficacy of those medicinal products;"
+      }
+    ]
+  },
+  "Clinical trial type (Phase) ": {
+    "tab_number": "14",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 11,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Human Pharmacology (Phase I)- First administration to humans"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Human Pharmacology (Phase I)- Bioequivalence Study"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Human Pharmacology (Phase I)-  Other "
+      },
+      {
+        "CODE": 4,
+        "NAME": "Therapeutic exploratory (Phase II)"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Therapeutic confirmatory  (Phase III)"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Therapeutic use (Phase IV)"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Phase I and Phase II (Integrated)- First administration to humans"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Phase I and Phase II (Integrated)- Bioequivalence Study"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Phase I and Phase II (Integrated)- Other "
+      },
+      {
+        "CODE": 10,
+        "NAME": "Phase II and Phase III (Integrated)"
+      },
+      {
+        "CODE": 11,
+        "NAME": "phase III and phase IV (Integrated)"
+      }
+    ]
+  },
+  "Subject Age Range": {
+    "tab_number": "15",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 4,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "In utero"
+      },
+      {
+        "CODE": 2,
+        "NAME": "0-17 years"
+      },
+      {
+        "CODE": 3,
+        "NAME": "18-64 years"
+      },
+      {
+        "CODE": 4,
+        "NAME": "65+ years"
+      }
+    ]
+  },
+  "Subject Age Range secondary identifier": {
+    "tab_number": "16",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 8,
+    "data": [
+      {
+        "CODE": 0,
+        "NAME": "Preterm newborn infants (up to gestational age<37 weeks)"
+      },
+      {
+        "CODE": 1,
+        "NAME": "0-27 days"
+      },
+      {
+        "CODE": 2,
+        "NAME": "28 days-23 months"
+      },
+      {
+        "CODE": 3,
+        "NAME": "2-5 years"
+      },
+      {
+        "CODE": 4,
+        "NAME": "6-11 years"
+      },
+      {
+        "CODE": 5,
+        "NAME": "12-17 years"
+      },
+      {
+        "CODE": 6,
+        "NAME": "65-84 years"
+      },
+      {
+        "CODE": 7,
+        "NAME": "85+ years"
+      }
+    ]
+  },
+  "Clinical trial group": {
+    "tab_number": "17a",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 2,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Healthy volunteers"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Patients"
+      }
+    ]
+  },
+  "Recruitment population group": {
+    "tab_number": "17b",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 7,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Women using contraception"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Women not using contraception"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Pregnant women"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Nursing women "
+      },
+      {
+        "CODE": 5,
+        "NAME": "Subjects incapable of giving consent"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Subjects in emergency situation"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Subjects incapable of giving consent personally": {
+    "tab_number": "17c",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 2,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Minors"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Incapacitated population"
+      }
+    ]
+  },
+  "Early Termination Reason": {
+    "tab_number": "18",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 9,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Sponsor Decision"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Reprioritisation of Trial"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Divestment"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Merger"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Feasibility (recruitment issues, etc)"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Safety Related (Clinical or Pre-Clinical Results)"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Investigator / Site related"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Medicinal Product Related"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Study Related"
+      }
+    ]
+  },
+  "Cell origin / Somatic or Engineered tissue origin ": {
+    "tab_number": "20",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Autologous"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Allogenic"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Xenogeneic"
+      }
+    ]
+  },
+  "Cell type / Somatic or Engineered tissue cell type": {
+    "tab_number": "21",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Stem"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Differentiated"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Substantial Modification Scope": {
+    "tab_number": "43",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 22,
+    "data": [
+      {
+        "CODE": 1.0,
+        "NAME": "CTA application form"
+      },
+      {
+        "CODE": 2.0,
+        "NAME": "Part I information"
+      },
+      {
+        "CODE": 2.1,
+        "NAME": "EU Application Form"
+      },
+      {
+        "CODE": 2.2,
+        "NAME": " Protocol"
+      },
+      {
+        "CODE": 2.3,
+        "NAME": "GMP Documentation"
+      },
+      {
+        "CODE": 2.4,
+        "NAME": "Investigator's brochure (IB) per IMP"
+      },
+      {
+        "CODE": 2.5,
+        "NAME": "Reference Safety Information (RSI)"
+      },
+      {
+        "CODE": 2.6,
+        "NAME": "Investigational Medicinal  Product Dossier (IMPD) per IMP"
+      },
+      {
+        "CODE": 2.7,
+        "NAME": "Summary of product characteristcs (SMPC) per IMP"
+      },
+      {
+        "CODE": 2.8,
+        "NAME": "Auxiliary Medicinal Product Dossier per IMP"
+      },
+      {
+        "CODE": 2.9,
+        "NAME": "Scientific advice and paediatric investigation plan (PIP)"
+      },
+      {
+        "CODE": 2.1,
+        "NAME": "Content of the labelling of the investigational medicinal products"
+      },
+      {
+        "CODE": 3.0,
+        "NAME": "Part II information"
+      },
+      {
+        "CODE": 3.1,
+        "NAME": "Recruitment Arrangements (information per member state concerned)"
+      },
+      {
+        "CODE": 3.2,
+        "NAME": "Subject Information, Informed Consent Form and Informed Consent Procedure"
+      },
+      {
+        "CODE": 3.3,
+        "NAME": "Suitability of the Investigator"
+      },
+      {
+        "CODE": 3.4,
+        "NAME": "Suitability of the Facilities"
+      },
+      {
+        "CODE": 3.5,
+        "NAME": "Proof of Insurance cover or Indemnification"
+      },
+      {
+        "CODE": 3.6,
+        "NAME": "Financial and other arrangements"
+      },
+      {
+        "CODE": 3.7,
+        "NAME": "Proof that data will be processed in compliance with Union Law on Data Protection"
+      },
+      {
+        "CODE": 4.0,
+        "NAME": "Changes to documents"
+      },
+      {
+        "CODE": 5.0,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Substantial Modification Reason": {
+    "tab_number": "44",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 32,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Rights of subjects"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Reliability and robustness of data"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Changes in interpretation of scientific documents/value of the trial "
+      },
+      {
+        "CODE": 4,
+        "NAME": "Changes in safety or integrity of  trial subjects  "
+      },
+      {
+        "CODE": 5,
+        "NAME": "Conduct or management of CT"
+      },
+      {
+        "CODE": 6,
+        "NAME": "GMP issues "
+      },
+      {
+        "CODE": 7,
+        "NAME": "Quality IMPS/AxMP"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Preclinical data"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Clinical data"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Change in the Benefit/Risk"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Conditions by RMS/MSC"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Corrective measures by MS"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Start of trial"
+      },
+      {
+        "CODE": 14,
+        "NAME": "Start of recruitment"
+      },
+      {
+        "CODE": 15,
+        "NAME": "Temporary halt"
+      },
+      {
+        "CODE": 16,
+        "NAME": "Restart trial"
+      },
+      {
+        "CODE": 17,
+        "NAME": "Restart of recruitment"
+      },
+      {
+        "CODE": 18,
+        "NAME": "End of recruitment"
+      },
+      {
+        "CODE": 19,
+        "NAME": "Early termination"
+      },
+      {
+        "CODE": 20,
+        "NAME": "End of trial in MS"
+      },
+      {
+        "CODE": 21,
+        "NAME": "End of trial in EEA"
+      },
+      {
+        "CODE": 22,
+        "NAME": "Global end of trial"
+      },
+      {
+        "CODE": 23,
+        "NAME": "Anticipated date of summary of results"
+      },
+      {
+        "CODE": 24,
+        "NAME": "Unexpected Event Change in B/R"
+      },
+      {
+        "CODE": 25,
+        "NAME": "Serious Breach"
+      },
+      {
+        "CODE": 26,
+        "NAME": "Urgent Safety Measure"
+      },
+      {
+        "CODE": 27,
+        "NAME": "3rd Country Inspectorate Inspection"
+      },
+      {
+        "CODE": 28,
+        "NAME": "EEA Inspections"
+      },
+      {
+        "CODE": 29,
+        "NAME": "Change of sponsor or sponsor’s legal representative"
+      },
+      {
+        "CODE": 30,
+        "NAME": "Extension to start trial recruitment beyond 2 years"
+      },
+      {
+        "CODE": 31,
+        "NAME": "Extension to restart trial beyond 2 years"
+      },
+      {
+        "CODE": 32,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Late Results Justification": {
+    "tab_number": "45",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 4,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Trial still running outside the EEA"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Statistical analysis still ongoing"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Trial follow up ongoing"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Medicinal Product Characteristics": {
+    "tab_number": "47",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 11,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Narcotic"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Psychotropic"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Radiopharmaceutical"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Immunilogical"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Plasma Derived"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Extractive"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Recombinant"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Containing GMO(s)"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Herbal"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Homeopathic"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Advanced Therapy Classification": {
+    "tab_number": "48",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Somatic cell therapy"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Tissue engineered therapy"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Gene therapy"
+      }
+    ]
+  },
+  "Temporary Halt Reason": {
+    "tab_number": "51",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 7,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Sponsor decision"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Reprioritisation of trial"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Feasibility (recruitment issues etc.)"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Safety related (clinical or pre-clinical results)"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Investigator/Site related "
+      },
+      {
+        "CODE": 6,
+        "NAME": "Medicinal Product related"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Study management related"
+      }
+    ]
+  },
+  "Overall Trial Status": {
+    "tab_number": "52c",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 13,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Pending"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Cancelled"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Under evaluation"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Withdrawn"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Lapsed"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Not Valid"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Authorised"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Not authorised"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Expired"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Halted"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Suspended"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Ended"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Revoked"
+      }
+    ]
+  },
+  "Clinical Trial Allocation Method": {
+    "tab_number": "57",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Randomised Controlled"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Non-Randomised Controlled"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Not Applicable"
+      }
+    ]
+  },
+  "Blinding Method": {
+    "tab_number": "58",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Single"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Double"
+      },
+      {
+        "CODE": 3,
+        "NAME": ""
+      }
+    ]
+  },
+  "Clinical Trial Roles blinded": {
+    "tab_number": "59",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 5,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Subject"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Investigator"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Monitor"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Analyst"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Carer"
+      }
+    ]
+  },
+  "Sponsor Trial Duties": {
+    "tab_number": "68",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 15,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "On site Monitoring"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Investigator Recruitment"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Interactive Response Technologies (IRT) "
+      },
+      {
+        "CODE": 4,
+        "NAME": "Laboratory analysis"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Project management"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Data management"
+      },
+      {
+        "CODE": 7,
+        "NAME": "E-Data capture"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Safety reporting"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Q/A auditing"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Statistical Analysis"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Medical Writing"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Regulatory expertise"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Medical expertise"
+      },
+      {
+        "CODE": 14,
+        "NAME": "Medicinal product management"
+      },
+      {
+        "CODE": 15,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Trial Category": {
+    "tab_number": "71",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Category 1"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Category 2"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Category 3"
+      }
+    ]
+  },
+  "Clinical Trial Product Role": {
+    "tab_number": "77",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 4,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Test"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Comparator"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Placebo"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Auxiliary"
+      }
+    ]
+  },
+  "MEdDRA Level": {
+    "tab_number": "81",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 5,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "SOC (System Organ Class)"
+      },
+      {
+        "CODE": 2,
+        "NAME": "High Level Group Term (HLGT)"
+      },
+      {
+        "CODE": 3,
+        "NAME": "High Level Term (HLT)"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Preferred Term (PT)"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Lowest Level Term (LTT)"
+      }
+    ]
+  },
+  "Therapeutic area": {
+    "tab_number": "82",
+    "columns": [
+      "CODE",
+      "Name"
+    ],
+    "row_count": 58,
+    "data": [
+      {
+        "CODE": 1,
+        "Name": "Diseases [C] - Bacterial Infections and Mycoses [C01]"
+      },
+      {
+        "CODE": 2,
+        "Name": "Diseases [C] - Virus Diseases [C02]"
+      },
+      {
+        "CODE": 3,
+        "Name": "Diseases [C] - Parasitic Diseases [C03]"
+      },
+      {
+        "CODE": 4,
+        "Name": "Diseases [C] - Neoplasms  [C04]"
+      },
+      {
+        "CODE": 5,
+        "Name": "Diseases [C] - Musculoskeletal Diseases [C05]"
+      },
+      {
+        "CODE": 6,
+        "Name": "Diseases [C] - Digestive System Diseases [C06]"
+      },
+      {
+        "CODE": 7,
+        "Name": "Diseases [C] - Stomatognathic Diseases [C07]"
+      },
+      {
+        "CODE": 8,
+        "Name": "Diseases [C] - Respiratory Tract Diseases [C08]"
+      },
+      {
+        "CODE": 9,
+        "Name": "Diseases [C] - Otorhinolaryngologic Diseases [C09]"
+      },
+      {
+        "CODE": 10,
+        "Name": "Diseases [C] - Nervous System Diseases [C10]"
+      },
+      {
+        "CODE": 11,
+        "Name": "Diseases [C] - Eye Diseases [C11]"
+      },
+      {
+        "CODE": 12,
+        "Name": "Diseases [C] - Male Urogenital Diseases  [C12]"
+      },
+      {
+        "CODE": 13,
+        "Name": "Diseases [C] - Female Urogenital Diseases and Pregnancy Complications [C13]"
+      },
+      {
+        "CODE": 14,
+        "Name": "Diseases [C] - Cardiovascular Diseases [C14]"
+      },
+      {
+        "CODE": 15,
+        "Name": "Diseases [C] - Hemic and Lymphatic Diseases [C15]"
+      },
+      {
+        "CODE": 16,
+        "Name": "Diseases [C] - Congenital, Hereditary, and Neonatal Diseases and Abnormalities [C16]"
+      },
+      {
+        "CODE": 17,
+        "Name": "Diseases [C] - Skin and Connective Tissue Diseases [C17]"
+      },
+      {
+        "CODE": 18,
+        "Name": "Diseases [C] - Nutritional and Metabolic Diseases [C18]"
+      },
+      {
+        "CODE": 19,
+        "Name": "Diseases [C] - Hormonal diseases [C19]"
+      },
+      {
+        "CODE": 20,
+        "Name": "Diseases [C] - Immune System Diseases [C20]"
+      },
+      {
+        "CODE": 21,
+        "Name": "Diseases [C] -  Disorders of Environmental Origin [C21]"
+      },
+      {
+        "CODE": 22,
+        "Name": "Diseases [C] -  Animal Diseases [C22] "
+      },
+      {
+        "CODE": 23,
+        "Name": "Diseases [C] - Pathological Conditions, Signs and Symptoms  [C23]"
+      },
+      {
+        "CODE": 24,
+        "Name": "Analytical, Diagnostic and Therapeutic Techniques and Equipment [E] - Diagnosis [E01]"
+      },
+      {
+        "CODE": 25,
+        "Name": "Analytical, Diagnostic and Therapeutic Techniques and Equipment [E] - Therapeutics [E02]"
+      },
+      {
+        "CODE": 26,
+        "Name": "Analytical, Diagnostic and Therapeutic Techniques and Equipment [E] - Anesthesia and Analgesia [E03]"
+      },
+      {
+        "CODE": 27,
+        "Name": "Analytical,Diagnostic,Therapeutic Techniques and Equipment [E]-Surgical Procedures, Operative [E04]"
+      },
+      {
+        "CODE": 28,
+        "Name": "Analytical, Diagnostic and Therapeutic Techniques and Equipment [E] - Investigative Techniques [E05]"
+      },
+      {
+        "CODE": 29,
+        "Name": "Analytical, Diagnostic and Therapeutic Techniques and Equipment [E] - Dentistry [E06]"
+      },
+      {
+        "CODE": 30,
+        "Name": "Analytical, Diagnostic and Therapeutic Techniques and Equipment [E] - Equipment and Supplies [E07]"
+      },
+      {
+        "CODE": 31,
+        "Name": "Psychiatry and Psychology [F] - Behavior and Behavior Mechanisms [F01]"
+      },
+      {
+        "CODE": 32,
+        "Name": "Psychiatry and Psychology [F] - Psychological Phenomena  [F02]"
+      },
+      {
+        "CODE": 33,
+        "Name": "Psychiatry and Psychology [F] - Mental Disorders [F03]"
+      },
+      {
+        "CODE": 34,
+        "Name": "Psychiatry and Psychology [F] - Behavioral Disciplines and Activities [F04]"
+      },
+      {
+        "CODE": 35,
+        "Name": "Phenomena and  Processes [G] - Physical Phenomena [G01]"
+      },
+      {
+        "CODE": 36,
+        "Name": "Phenomena and  Processes [G] - Chemical Phenomena [G02]"
+      },
+      {
+        "CODE": 37,
+        "Name": "Phenomena and Processes [G] - Metabolism  [G03]"
+      },
+      {
+        "CODE": 38,
+        "Name": "Phenomena and  Processes [G]  - Cell Physiological Phenomena [G04]"
+      },
+      {
+        "CODE": 39,
+        "Name": "Phenomena and  Processes [G] - Genetic Phenomena [G05]"
+      },
+      {
+        "CODE": 40,
+        "Name": "Phenomena and  Processes  [G] - Microbiological Phenomena [G06]"
+      },
+      {
+        "CODE": 41,
+        "Name": "Phenomena and  Processes [G] - Physiological processes [G07]"
+      },
+      {
+        "CODE": 42,
+        "Name": "Phenomena and  Processes [G] - Reproductive and Urinary Physiological Phenomena  [G08]"
+      },
+      {
+        "CODE": 43,
+        "Name": "Phenomena and  Processes [G] - Circulatory and Respiratory Physiological Phenomena [G09]"
+      },
+      {
+        "CODE": 44,
+        "Name": "Phenomena and Processes  [G] - Digestive System and Oral Physiological Phenomena [G10]"
+      },
+      {
+        "CODE": 45,
+        "Name": "Phenomena and  Processes  [G] - Musculoskeletal and Neural Physiological Phenomena [G11]"
+      },
+      {
+        "CODE": 46,
+        "Name": "Phenomena and  Processes  [G] - Immune system processes [G12]"
+      },
+      {
+        "CODE": 47,
+        "Name": "Phenomena and  Processes [G] - Immune System Phenomena [G13]"
+      },
+      {
+        "CODE": 48,
+        "Name": "Phenomena and  Processes [G] -  Ocular Physiological Phenomena [G14]"
+      },
+      {
+        "CODE": 49,
+        "Name": "Phenomena and  Processes [G]  - Plant Physiological Phenomena [G15]"
+      },
+      {
+        "CODE": 50,
+        "Name": "Phenomena and  Processes [G] - Biological Phenomena [G16]"
+      },
+      {
+        "CODE": 51,
+        "Name": "Phenomena and Processes [G] - Mathematical Concepts [G17]"
+      },
+      {
+        "CODE": 52,
+        "Name": "Health Care [N] - Population Characteristics [N01]"
+      },
+      {
+        "CODE": 53,
+        "Name": "Health Care [N] - Health Care Facilities, Manpower, and Services [N02]"
+      },
+      {
+        "CODE": 54,
+        "Name": "Health Care [N] - Health Care Economics and Organizations [N03]"
+      },
+      {
+        "CODE": 55,
+        "Name": "Health Care [N] - Health Services Administration [N04]"
+      },
+      {
+        "CODE": 56,
+        "Name": "Health Care [N] - Health Care Quality, Access, and Evaluation [N05]"
+      },
+      {
+        "CODE": 57,
+        "Name": "Health Care [N] - Environment and Public Health [N06]"
+      },
+      {
+        "CODE": 58,
+        "Name": "Not possible to specify"
+      }
+    ]
+  },
+  "Type of device": {
+    "tab_number": "85",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Administration device "
+      },
+      {
+        "CODE": 2,
+        "NAME": "Integrated device"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Medical device"
+      }
+    ]
+  },
+  "Product used in combination with a device": {
+    "tab_number": "86",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 2,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Combined integral"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Combined not integral"
+      }
+    ]
+  },
+  "Organisation Type Role": {
+    "tab_number": "94",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 13,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Clinical facility BE/BA"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Phase I BE/BA"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Analytical and Clinical laboratory"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Analytical laboratory"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Clinical investigator"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Clinical laboratory"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Phase I Clinical facility"
+      },
+      {
+        "CODE": 8,
+        "NAME": "CRO"
+      },
+      {
+        "CODE": 9,
+        "NAME": "Sponsor (commercial)"
+      },
+      {
+        "CODE": 10,
+        "NAME": "Sponsor (non commercial)"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Ethics Committee"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Technical facility (ECG, X-ray etc. analysis)"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "All countries (world) ": {
+    "tab_number": "99",
+    "columns": [
+      "CODE",
+      "Country or Area Name",
+      "ISO \"ALPHA-2 Code",
+      "ISO ALPHA-3 Code"
+    ],
+    "row_count": 247,
+    "data": [
+      {
+        "CODE": 1,
+        "Country or Area Name": "Afghanistan",
+        "ISO \"ALPHA-2 Code": "AF",
+        "ISO ALPHA-3 Code": "AFG"
+      },
+      {
+        "CODE": 2,
+        "Country or Area Name": "Aland Islands",
+        "ISO \"ALPHA-2 Code": "AX",
+        "ISO ALPHA-3 Code": "ALA"
+      },
+      {
+        "CODE": 3,
+        "Country or Area Name": "Albania",
+        "ISO \"ALPHA-2 Code": "AL",
+        "ISO ALPHA-3 Code": "ALB"
+      },
+      {
+        "CODE": 4,
+        "Country or Area Name": "Algeria",
+        "ISO \"ALPHA-2 Code": "DZ",
+        "ISO ALPHA-3 Code": "DZA"
+      },
+      {
+        "CODE": 5,
+        "Country or Area Name": "American Samoa",
+        "ISO \"ALPHA-2 Code": "AS",
+        "ISO ALPHA-3 Code": "ASM"
+      },
+      {
+        "CODE": 6,
+        "Country or Area Name": "Andorra",
+        "ISO \"ALPHA-2 Code": "AD",
+        "ISO ALPHA-3 Code": "AND"
+      },
+      {
+        "CODE": 7,
+        "Country or Area Name": "Angola",
+        "ISO \"ALPHA-2 Code": "AO",
+        "ISO ALPHA-3 Code": "AGO"
+      },
+      {
+        "CODE": 8,
+        "Country or Area Name": "Anguilla",
+        "ISO \"ALPHA-2 Code": "AI",
+        "ISO ALPHA-3 Code": "AIA"
+      },
+      {
+        "CODE": 9,
+        "Country or Area Name": "Antarctica",
+        "ISO \"ALPHA-2 Code": "AQ",
+        "ISO ALPHA-3 Code": "ATA"
+      },
+      {
+        "CODE": 10,
+        "Country or Area Name": "Antigua and Barbuda",
+        "ISO \"ALPHA-2 Code": "AG",
+        "ISO ALPHA-3 Code": "ATG"
+      },
+      {
+        "CODE": 11,
+        "Country or Area Name": "Argentina",
+        "ISO \"ALPHA-2 Code": "AR",
+        "ISO ALPHA-3 Code": "ARG"
+      },
+      {
+        "CODE": 12,
+        "Country or Area Name": "Armenia",
+        "ISO \"ALPHA-2 Code": "AM",
+        "ISO ALPHA-3 Code": "ARM"
+      },
+      {
+        "CODE": 13,
+        "Country or Area Name": "Aruba",
+        "ISO \"ALPHA-2 Code": "AW",
+        "ISO ALPHA-3 Code": "ABW"
+      },
+      {
+        "CODE": 14,
+        "Country or Area Name": "Australia",
+        "ISO \"ALPHA-2 Code": "AU",
+        "ISO ALPHA-3 Code": "AUS"
+      },
+      {
+        "CODE": 15,
+        "Country or Area Name": "Austria",
+        "ISO \"ALPHA-2 Code": "AT",
+        "ISO ALPHA-3 Code": "AUT"
+      },
+      {
+        "CODE": 16,
+        "Country or Area Name": "Azerbaijan",
+        "ISO \"ALPHA-2 Code": "AZ",
+        "ISO ALPHA-3 Code": "AZE"
+      },
+      {
+        "CODE": 17,
+        "Country or Area Name": "Bahamas",
+        "ISO \"ALPHA-2 Code": "BS",
+        "ISO ALPHA-3 Code": "BHS"
+      },
+      {
+        "CODE": 18,
+        "Country or Area Name": "Bahrain",
+        "ISO \"ALPHA-2 Code": "BH",
+        "ISO ALPHA-3 Code": "BHR"
+      },
+      {
+        "CODE": 19,
+        "Country or Area Name": "Bangladesh",
+        "ISO \"ALPHA-2 Code": "BD",
+        "ISO ALPHA-3 Code": "BGD"
+      },
+      {
+        "CODE": 20,
+        "Country or Area Name": "Barbados",
+        "ISO \"ALPHA-2 Code": "BB",
+        "ISO ALPHA-3 Code": "BRB"
+      },
+      {
+        "CODE": 21,
+        "Country or Area Name": "Belarus",
+        "ISO \"ALPHA-2 Code": "BY",
+        "ISO ALPHA-3 Code": "BLR"
+      },
+      {
+        "CODE": 22,
+        "Country or Area Name": "Belgium",
+        "ISO \"ALPHA-2 Code": "BE",
+        "ISO ALPHA-3 Code": "BEL"
+      },
+      {
+        "CODE": 23,
+        "Country or Area Name": "Belize",
+        "ISO \"ALPHA-2 Code": "BZ",
+        "ISO ALPHA-3 Code": "BLZ"
+      },
+      {
+        "CODE": 24,
+        "Country or Area Name": "Benin",
+        "ISO \"ALPHA-2 Code": "BJ",
+        "ISO ALPHA-3 Code": "BEN"
+      },
+      {
+        "CODE": 25,
+        "Country or Area Name": "Bermuda",
+        "ISO \"ALPHA-2 Code": "BM",
+        "ISO ALPHA-3 Code": "BMU"
+      },
+      {
+        "CODE": 26,
+        "Country or Area Name": "Bhutan",
+        "ISO \"ALPHA-2 Code": "BT",
+        "ISO ALPHA-3 Code": "BTN"
+      },
+      {
+        "CODE": 27,
+        "Country or Area Name": "Bolivia",
+        "ISO \"ALPHA-2 Code": "BO",
+        "ISO ALPHA-3 Code": "BOL"
+      },
+      {
+        "CODE": 28,
+        "Country or Area Name": "Bosnia and Herzegovina",
+        "ISO \"ALPHA-2 Code": "BA",
+        "ISO ALPHA-3 Code": "BIH"
+      },
+      {
+        "CODE": 29,
+        "Country or Area Name": "Botswana",
+        "ISO \"ALPHA-2 Code": "BW",
+        "ISO ALPHA-3 Code": "BWA"
+      },
+      {
+        "CODE": 30,
+        "Country or Area Name": "Bouvet Island",
+        "ISO \"ALPHA-2 Code": "BV",
+        "ISO ALPHA-3 Code": "BVT"
+      },
+      {
+        "CODE": 31,
+        "Country or Area Name": "Brazil",
+        "ISO \"ALPHA-2 Code": "BR",
+        "ISO ALPHA-3 Code": "BRA"
+      },
+      {
+        "CODE": 32,
+        "Country or Area Name": "British Virgin Islands",
+        "ISO \"ALPHA-2 Code": "VG",
+        "ISO ALPHA-3 Code": "VGB"
+      },
+      {
+        "CODE": 33,
+        "Country or Area Name": "British Indian Ocean Territory",
+        "ISO \"ALPHA-2 Code": "IO",
+        "ISO ALPHA-3 Code": "IOT"
+      },
+      {
+        "CODE": 34,
+        "Country or Area Name": "Brunei Darussalam",
+        "ISO \"ALPHA-2 Code": "BN",
+        "ISO ALPHA-3 Code": "BRN"
+      },
+      {
+        "CODE": 35,
+        "Country or Area Name": "Bulgaria",
+        "ISO \"ALPHA-2 Code": "BG",
+        "ISO ALPHA-3 Code": "BGR"
+      },
+      {
+        "CODE": 36,
+        "Country or Area Name": "Burkina Faso",
+        "ISO \"ALPHA-2 Code": "BF",
+        "ISO ALPHA-3 Code": "BFA"
+      },
+      {
+        "CODE": 37,
+        "Country or Area Name": "Burundi",
+        "ISO \"ALPHA-2 Code": "BI",
+        "ISO ALPHA-3 Code": "BDI"
+      },
+      {
+        "CODE": 38,
+        "Country or Area Name": "Cambodia",
+        "ISO \"ALPHA-2 Code": "KH",
+        "ISO ALPHA-3 Code": "KHM"
+      },
+      {
+        "CODE": 39,
+        "Country or Area Name": "Cameroon",
+        "ISO \"ALPHA-2 Code": "CM",
+        "ISO ALPHA-3 Code": "CMR"
+      },
+      {
+        "CODE": 40,
+        "Country or Area Name": "Canada",
+        "ISO \"ALPHA-2 Code": "CA",
+        "ISO ALPHA-3 Code": "CAN"
+      },
+      {
+        "CODE": 41,
+        "Country or Area Name": "Cape Verde",
+        "ISO \"ALPHA-2 Code": "CV",
+        "ISO ALPHA-3 Code": "CPV"
+      },
+      {
+        "CODE": 42,
+        "Country or Area Name": "Cayman Islands ",
+        "ISO \"ALPHA-2 Code": "KY",
+        "ISO ALPHA-3 Code": "CYM"
+      },
+      {
+        "CODE": 43,
+        "Country or Area Name": "Central African Republic",
+        "ISO \"ALPHA-2 Code": "CF",
+        "ISO ALPHA-3 Code": "CAF"
+      },
+      {
+        "CODE": 44,
+        "Country or Area Name": "Chad",
+        "ISO \"ALPHA-2 Code": "TD",
+        "ISO ALPHA-3 Code": "TCD"
+      },
+      {
+        "CODE": 45,
+        "Country or Area Name": "Chile",
+        "ISO \"ALPHA-2 Code": "CL",
+        "ISO ALPHA-3 Code": "CHL"
+      },
+      {
+        "CODE": 46,
+        "Country or Area Name": "China",
+        "ISO \"ALPHA-2 Code": "CN",
+        "ISO ALPHA-3 Code": "CHN"
+      },
+      {
+        "CODE": 47,
+        "Country or Area Name": "Hong Kong, Special Administrative Region of China",
+        "ISO \"ALPHA-2 Code": "HK",
+        "ISO ALPHA-3 Code": "HKG"
+      },
+      {
+        "CODE": 48,
+        "Country or Area Name": "Macao, Special Administrative Region of China",
+        "ISO \"ALPHA-2 Code": "MO",
+        "ISO ALPHA-3 Code": "MAC"
+      },
+      {
+        "CODE": 49,
+        "Country or Area Name": "Christmas Island",
+        "ISO \"ALPHA-2 Code": "CX",
+        "ISO ALPHA-3 Code": "CXR"
+      },
+      {
+        "CODE": 50,
+        "Country or Area Name": "Cocos (Keeling) Islands",
+        "ISO \"ALPHA-2 Code": "CC",
+        "ISO ALPHA-3 Code": "CCK"
+      },
+      {
+        "CODE": 51,
+        "Country or Area Name": "Colombia",
+        "ISO \"ALPHA-2 Code": "CO",
+        "ISO ALPHA-3 Code": "COL"
+      },
+      {
+        "CODE": 52,
+        "Country or Area Name": "Comoros",
+        "ISO \"ALPHA-2 Code": "KM",
+        "ISO ALPHA-3 Code": "COM"
+      },
+      {
+        "CODE": 53,
+        "Country or Area Name": "Congo (Brazzaville)",
+        "ISO \"ALPHA-2 Code": "CG",
+        "ISO ALPHA-3 Code": "COG"
+      },
+      {
+        "CODE": 54,
+        "Country or Area Name": "Congo, Democratic Republic of the",
+        "ISO \"ALPHA-2 Code": "CD",
+        "ISO ALPHA-3 Code": "COD"
+      },
+      {
+        "CODE": 55,
+        "Country or Area Name": "Cook Islands ",
+        "ISO \"ALPHA-2 Code": "CK",
+        "ISO ALPHA-3 Code": "COK"
+      },
+      {
+        "CODE": 56,
+        "Country or Area Name": "Costa Rica",
+        "ISO \"ALPHA-2 Code": "CR",
+        "ISO ALPHA-3 Code": "CRI"
+      },
+      {
+        "CODE": 57,
+        "Country or Area Name": "Côte d'Ivoire",
+        "ISO \"ALPHA-2 Code": "CI",
+        "ISO ALPHA-3 Code": "CIV"
+      },
+      {
+        "CODE": 58,
+        "Country or Area Name": "Croatia",
+        "ISO \"ALPHA-2 Code": "HR",
+        "ISO ALPHA-3 Code": "HRV"
+      },
+      {
+        "CODE": 59,
+        "Country or Area Name": "Cuba",
+        "ISO \"ALPHA-2 Code": "CU",
+        "ISO ALPHA-3 Code": "CUB"
+      },
+      {
+        "CODE": 60,
+        "Country or Area Name": "Cyprus",
+        "ISO \"ALPHA-2 Code": "CY",
+        "ISO ALPHA-3 Code": "CYP"
+      },
+      {
+        "CODE": 61,
+        "Country or Area Name": "Czech Republic",
+        "ISO \"ALPHA-2 Code": "CZ",
+        "ISO ALPHA-3 Code": "CZE"
+      },
+      {
+        "CODE": 62,
+        "Country or Area Name": "Denmark",
+        "ISO \"ALPHA-2 Code": "DK",
+        "ISO ALPHA-3 Code": "DNK"
+      },
+      {
+        "CODE": 63,
+        "Country or Area Name": "Djibouti",
+        "ISO \"ALPHA-2 Code": "DJ",
+        "ISO ALPHA-3 Code": "DJI"
+      },
+      {
+        "CODE": 64,
+        "Country or Area Name": "Dominica",
+        "ISO \"ALPHA-2 Code": "DM",
+        "ISO ALPHA-3 Code": "DMA"
+      },
+      {
+        "CODE": 65,
+        "Country or Area Name": "Dominican Republic",
+        "ISO \"ALPHA-2 Code": "DO",
+        "ISO ALPHA-3 Code": "DOM"
+      },
+      {
+        "CODE": 66,
+        "Country or Area Name": "Ecuador",
+        "ISO \"ALPHA-2 Code": "EC",
+        "ISO ALPHA-3 Code": "ECU"
+      },
+      {
+        "CODE": 67,
+        "Country or Area Name": "Egypt",
+        "ISO \"ALPHA-2 Code": "EG",
+        "ISO ALPHA-3 Code": "EGY"
+      },
+      {
+        "CODE": 68,
+        "Country or Area Name": "El Salvador",
+        "ISO \"ALPHA-2 Code": "SV",
+        "ISO ALPHA-3 Code": "SLV"
+      },
+      {
+        "CODE": 69,
+        "Country or Area Name": "Equatorial Guinea",
+        "ISO \"ALPHA-2 Code": "GQ",
+        "ISO ALPHA-3 Code": "GNQ"
+      },
+      {
+        "CODE": 70,
+        "Country or Area Name": "Eritrea",
+        "ISO \"ALPHA-2 Code": "ER",
+        "ISO ALPHA-3 Code": "ERI"
+      },
+      {
+        "CODE": 71,
+        "Country or Area Name": "Estonia",
+        "ISO \"ALPHA-2 Code": "EE",
+        "ISO ALPHA-3 Code": "EST"
+      },
+      {
+        "CODE": 72,
+        "Country or Area Name": "Ethiopia",
+        "ISO \"ALPHA-2 Code": "ET",
+        "ISO ALPHA-3 Code": "ETH"
+      },
+      {
+        "CODE": 73,
+        "Country or Area Name": "Falkland Islands (Malvinas) ",
+        "ISO \"ALPHA-2 Code": "FK",
+        "ISO ALPHA-3 Code": "FLK"
+      },
+      {
+        "CODE": 74,
+        "Country or Area Name": "Faroe Islands",
+        "ISO \"ALPHA-2 Code": "FO",
+        "ISO ALPHA-3 Code": "FRO"
+      },
+      {
+        "CODE": 75,
+        "Country or Area Name": "Fiji",
+        "ISO \"ALPHA-2 Code": "FJ",
+        "ISO ALPHA-3 Code": "FJI"
+      },
+      {
+        "CODE": 76,
+        "Country or Area Name": "Finland",
+        "ISO \"ALPHA-2 Code": "FI",
+        "ISO ALPHA-3 Code": "FIN"
+      },
+      {
+        "CODE": 77,
+        "Country or Area Name": "France",
+        "ISO \"ALPHA-2 Code": "FR",
+        "ISO ALPHA-3 Code": "FRA"
+      },
+      {
+        "CODE": 78,
+        "Country or Area Name": "French Guiana",
+        "ISO \"ALPHA-2 Code": "GF",
+        "ISO ALPHA-3 Code": "GUF"
+      },
+      {
+        "CODE": 79,
+        "Country or Area Name": "French Polynesia",
+        "ISO \"ALPHA-2 Code": "PF",
+        "ISO ALPHA-3 Code": "PYF"
+      },
+      {
+        "CODE": 80,
+        "Country or Area Name": "French Southern Territories",
+        "ISO \"ALPHA-2 Code": "TF",
+        "ISO ALPHA-3 Code": "ATF"
+      },
+      {
+        "CODE": 81,
+        "Country or Area Name": "Gabon",
+        "ISO \"ALPHA-2 Code": "GA",
+        "ISO ALPHA-3 Code": "GAB"
+      },
+      {
+        "CODE": 82,
+        "Country or Area Name": "Gambia",
+        "ISO \"ALPHA-2 Code": "GM",
+        "ISO ALPHA-3 Code": "GMB"
+      },
+      {
+        "CODE": 83,
+        "Country or Area Name": "Georgia",
+        "ISO \"ALPHA-2 Code": "GE",
+        "ISO ALPHA-3 Code": "GEO"
+      },
+      {
+        "CODE": 84,
+        "Country or Area Name": "Germany",
+        "ISO \"ALPHA-2 Code": "DE",
+        "ISO ALPHA-3 Code": "DEU"
+      },
+      {
+        "CODE": 85,
+        "Country or Area Name": "Ghana",
+        "ISO \"ALPHA-2 Code": "GH",
+        "ISO ALPHA-3 Code": "GHA"
+      },
+      {
+        "CODE": 86,
+        "Country or Area Name": "Gibraltar ",
+        "ISO \"ALPHA-2 Code": "GI",
+        "ISO ALPHA-3 Code": "GIB"
+      },
+      {
+        "CODE": 87,
+        "Country or Area Name": "Greece",
+        "ISO \"ALPHA-2 Code": "GR",
+        "ISO ALPHA-3 Code": "GRC"
+      },
+      {
+        "CODE": 88,
+        "Country or Area Name": "Greenland",
+        "ISO \"ALPHA-2 Code": "GL",
+        "ISO ALPHA-3 Code": "GRL"
+      },
+      {
+        "CODE": 89,
+        "Country or Area Name": "Grenada",
+        "ISO \"ALPHA-2 Code": "GD",
+        "ISO ALPHA-3 Code": "GRD"
+      },
+      {
+        "CODE": 90,
+        "Country or Area Name": "Guadeloupe",
+        "ISO \"ALPHA-2 Code": "GP",
+        "ISO ALPHA-3 Code": "GLP"
+      },
+      {
+        "CODE": 91,
+        "Country or Area Name": "Guam",
+        "ISO \"ALPHA-2 Code": "GU",
+        "ISO ALPHA-3 Code": "GUM"
+      },
+      {
+        "CODE": 92,
+        "Country or Area Name": "Guatemala",
+        "ISO \"ALPHA-2 Code": "GT",
+        "ISO ALPHA-3 Code": "GTM"
+      },
+      {
+        "CODE": 93,
+        "Country or Area Name": "Guernsey",
+        "ISO \"ALPHA-2 Code": "GG",
+        "ISO ALPHA-3 Code": "GGY"
+      },
+      {
+        "CODE": 94,
+        "Country or Area Name": "Guinea",
+        "ISO \"ALPHA-2 Code": "GN",
+        "ISO ALPHA-3 Code": "GIN"
+      },
+      {
+        "CODE": 95,
+        "Country or Area Name": "Guinea-Bissau",
+        "ISO \"ALPHA-2 Code": "GW",
+        "ISO ALPHA-3 Code": "GNB"
+      },
+      {
+        "CODE": 96,
+        "Country or Area Name": "Guyana",
+        "ISO \"ALPHA-2 Code": "GY",
+        "ISO ALPHA-3 Code": "GUY"
+      },
+      {
+        "CODE": 97,
+        "Country or Area Name": "Haiti",
+        "ISO \"ALPHA-2 Code": "HT",
+        "ISO ALPHA-3 Code": "HTI"
+      },
+      {
+        "CODE": 98,
+        "Country or Area Name": "Heard Island and Mcdonald Islands",
+        "ISO \"ALPHA-2 Code": "HM",
+        "ISO ALPHA-3 Code": "HMD"
+      },
+      {
+        "CODE": 99,
+        "Country or Area Name": "Holy See (Vatican City State)",
+        "ISO \"ALPHA-2 Code": "VA",
+        "ISO ALPHA-3 Code": "VAT"
+      },
+      {
+        "CODE": 100,
+        "Country or Area Name": "Honduras",
+        "ISO \"ALPHA-2 Code": "HN",
+        "ISO ALPHA-3 Code": "HND"
+      },
+      {
+        "CODE": 101,
+        "Country or Area Name": "Hungary",
+        "ISO \"ALPHA-2 Code": "HU",
+        "ISO ALPHA-3 Code": "HUN"
+      },
+      {
+        "CODE": 102,
+        "Country or Area Name": "Iceland",
+        "ISO \"ALPHA-2 Code": "IS",
+        "ISO ALPHA-3 Code": "ISL"
+      },
+      {
+        "CODE": 103,
+        "Country or Area Name": "India",
+        "ISO \"ALPHA-2 Code": "IN",
+        "ISO ALPHA-3 Code": "IND"
+      },
+      {
+        "CODE": 104,
+        "Country or Area Name": "Indonesia",
+        "ISO \"ALPHA-2 Code": "ID",
+        "ISO ALPHA-3 Code": "IDN"
+      },
+      {
+        "CODE": 105,
+        "Country or Area Name": "Iran, Islamic Republic of",
+        "ISO \"ALPHA-2 Code": "IR",
+        "ISO ALPHA-3 Code": "IRN"
+      },
+      {
+        "CODE": 106,
+        "Country or Area Name": "Iraq",
+        "ISO \"ALPHA-2 Code": "IQ",
+        "ISO ALPHA-3 Code": "IRQ"
+      },
+      {
+        "CODE": 107,
+        "Country or Area Name": "Ireland",
+        "ISO \"ALPHA-2 Code": "IE",
+        "ISO ALPHA-3 Code": "IRL"
+      },
+      {
+        "CODE": 108,
+        "Country or Area Name": "Isle of Man ",
+        "ISO \"ALPHA-2 Code": "IM",
+        "ISO ALPHA-3 Code": "IMN"
+      },
+      {
+        "CODE": 109,
+        "Country or Area Name": "Israel",
+        "ISO \"ALPHA-2 Code": "IL",
+        "ISO ALPHA-3 Code": "ISR"
+      },
+      {
+        "CODE": 110,
+        "Country or Area Name": "Italy",
+        "ISO \"ALPHA-2 Code": "IT",
+        "ISO ALPHA-3 Code": "ITA"
+      },
+      {
+        "CODE": 111,
+        "Country or Area Name": "Jamaica",
+        "ISO \"ALPHA-2 Code": "JM",
+        "ISO ALPHA-3 Code": "JAM"
+      },
+      {
+        "CODE": 112,
+        "Country or Area Name": "Japan",
+        "ISO \"ALPHA-2 Code": "JP",
+        "ISO ALPHA-3 Code": "JPN"
+      },
+      {
+        "CODE": 113,
+        "Country or Area Name": "Jersey",
+        "ISO \"ALPHA-2 Code": "JE",
+        "ISO ALPHA-3 Code": "JEY"
+      },
+      {
+        "CODE": 114,
+        "Country or Area Name": "Jordan",
+        "ISO \"ALPHA-2 Code": "JO",
+        "ISO ALPHA-3 Code": "JOR"
+      },
+      {
+        "CODE": 115,
+        "Country or Area Name": "Kazakhstan",
+        "ISO \"ALPHA-2 Code": "KZ",
+        "ISO ALPHA-3 Code": "KAZ"
+      },
+      {
+        "CODE": 116,
+        "Country or Area Name": "Kenya",
+        "ISO \"ALPHA-2 Code": "KE",
+        "ISO ALPHA-3 Code": "KEN"
+      },
+      {
+        "CODE": 117,
+        "Country or Area Name": "Kiribati",
+        "ISO \"ALPHA-2 Code": "KI",
+        "ISO ALPHA-3 Code": "KIR"
+      },
+      {
+        "CODE": 118,
+        "Country or Area Name": "Korea, Democratic People's Republic of",
+        "ISO \"ALPHA-2 Code": "KP",
+        "ISO ALPHA-3 Code": "PRK"
+      },
+      {
+        "CODE": 119,
+        "Country or Area Name": "Korea, Republic of",
+        "ISO \"ALPHA-2 Code": "KR",
+        "ISO ALPHA-3 Code": "KOR"
+      },
+      {
+        "CODE": 120,
+        "Country or Area Name": "Kuwait",
+        "ISO \"ALPHA-2 Code": "KW",
+        "ISO ALPHA-3 Code": "KWT"
+      },
+      {
+        "CODE": 121,
+        "Country or Area Name": "Kyrgyzstan",
+        "ISO \"ALPHA-2 Code": "KG",
+        "ISO ALPHA-3 Code": "KGZ"
+      },
+      {
+        "CODE": 122,
+        "Country or Area Name": "Lao PDR",
+        "ISO \"ALPHA-2 Code": "LA",
+        "ISO ALPHA-3 Code": "LAO"
+      },
+      {
+        "CODE": 123,
+        "Country or Area Name": "Latvia",
+        "ISO \"ALPHA-2 Code": "LV",
+        "ISO ALPHA-3 Code": "LVA"
+      },
+      {
+        "CODE": 124,
+        "Country or Area Name": "Lebanon",
+        "ISO \"ALPHA-2 Code": "LB",
+        "ISO ALPHA-3 Code": "LBN"
+      },
+      {
+        "CODE": 125,
+        "Country or Area Name": "Lesotho",
+        "ISO \"ALPHA-2 Code": "LS",
+        "ISO ALPHA-3 Code": "LSO"
+      },
+      {
+        "CODE": 126,
+        "Country or Area Name": "Liberia",
+        "ISO \"ALPHA-2 Code": "LR",
+        "ISO ALPHA-3 Code": "LBR"
+      },
+      {
+        "CODE": 127,
+        "Country or Area Name": "Libya",
+        "ISO \"ALPHA-2 Code": "LY",
+        "ISO ALPHA-3 Code": "LBY"
+      },
+      {
+        "CODE": 128,
+        "Country or Area Name": "Liechtenstein",
+        "ISO \"ALPHA-2 Code": "LI",
+        "ISO ALPHA-3 Code": "LIE"
+      },
+      {
+        "CODE": 129,
+        "Country or Area Name": "Lithuania",
+        "ISO \"ALPHA-2 Code": "LT",
+        "ISO ALPHA-3 Code": "LTU"
+      },
+      {
+        "CODE": 130,
+        "Country or Area Name": "Luxembourg",
+        "ISO \"ALPHA-2 Code": "LU",
+        "ISO ALPHA-3 Code": "LUX"
+      },
+      {
+        "CODE": 131,
+        "Country or Area Name": "Macedonia, Republic of",
+        "ISO \"ALPHA-2 Code": "MK",
+        "ISO ALPHA-3 Code": "MKD"
+      },
+      {
+        "CODE": 132,
+        "Country or Area Name": "Madagascar",
+        "ISO \"ALPHA-2 Code": "MG",
+        "ISO ALPHA-3 Code": "MDG"
+      },
+      {
+        "CODE": 133,
+        "Country or Area Name": "Malawi",
+        "ISO \"ALPHA-2 Code": "MW",
+        "ISO ALPHA-3 Code": "MWI"
+      },
+      {
+        "CODE": 134,
+        "Country or Area Name": "Malaysia",
+        "ISO \"ALPHA-2 Code": "MY",
+        "ISO ALPHA-3 Code": "MYS"
+      },
+      {
+        "CODE": 135,
+        "Country or Area Name": "Maldives",
+        "ISO \"ALPHA-2 Code": "MV",
+        "ISO ALPHA-3 Code": "MDV"
+      },
+      {
+        "CODE": 136,
+        "Country or Area Name": "Mali",
+        "ISO \"ALPHA-2 Code": "ML",
+        "ISO ALPHA-3 Code": "MLI"
+      },
+      {
+        "CODE": 137,
+        "Country or Area Name": "Malta",
+        "ISO \"ALPHA-2 Code": "MT",
+        "ISO ALPHA-3 Code": "MLT"
+      },
+      {
+        "CODE": 138,
+        "Country or Area Name": "Marshall Islands",
+        "ISO \"ALPHA-2 Code": "MH",
+        "ISO ALPHA-3 Code": "MHL"
+      },
+      {
+        "CODE": 139,
+        "Country or Area Name": "Martinique",
+        "ISO \"ALPHA-2 Code": "MQ",
+        "ISO ALPHA-3 Code": "MTQ"
+      },
+      {
+        "CODE": 140,
+        "Country or Area Name": "Mauritania",
+        "ISO \"ALPHA-2 Code": "MR",
+        "ISO ALPHA-3 Code": "MRT"
+      },
+      {
+        "CODE": 141,
+        "Country or Area Name": "Mauritius",
+        "ISO \"ALPHA-2 Code": "MU",
+        "ISO ALPHA-3 Code": "MUS"
+      },
+      {
+        "CODE": 142,
+        "Country or Area Name": "Mayotte",
+        "ISO \"ALPHA-2 Code": "YT",
+        "ISO ALPHA-3 Code": "MYT"
+      },
+      {
+        "CODE": 143,
+        "Country or Area Name": "Mexico",
+        "ISO \"ALPHA-2 Code": "MX",
+        "ISO ALPHA-3 Code": "MEX"
+      },
+      {
+        "CODE": 144,
+        "Country or Area Name": "Micronesia, Federated States of",
+        "ISO \"ALPHA-2 Code": "FM",
+        "ISO ALPHA-3 Code": "FSM"
+      },
+      {
+        "CODE": 145,
+        "Country or Area Name": "Moldova",
+        "ISO \"ALPHA-2 Code": "MD",
+        "ISO ALPHA-3 Code": "MDA"
+      },
+      {
+        "CODE": 146,
+        "Country or Area Name": "Monaco",
+        "ISO \"ALPHA-2 Code": "MC",
+        "ISO ALPHA-3 Code": "MCO"
+      },
+      {
+        "CODE": 147,
+        "Country or Area Name": "Mongolia",
+        "ISO \"ALPHA-2 Code": "MN",
+        "ISO ALPHA-3 Code": "MNG"
+      },
+      {
+        "CODE": 148,
+        "Country or Area Name": "Montenegro",
+        "ISO \"ALPHA-2 Code": "ME",
+        "ISO ALPHA-3 Code": "MNE"
+      },
+      {
+        "CODE": 149,
+        "Country or Area Name": "Montserrat",
+        "ISO \"ALPHA-2 Code": "MS",
+        "ISO ALPHA-3 Code": "MSR"
+      },
+      {
+        "CODE": 150,
+        "Country or Area Name": "Morocco",
+        "ISO \"ALPHA-2 Code": "MA",
+        "ISO ALPHA-3 Code": "MAR"
+      },
+      {
+        "CODE": 151,
+        "Country or Area Name": "Mozambique",
+        "ISO \"ALPHA-2 Code": "MZ",
+        "ISO ALPHA-3 Code": "MOZ"
+      },
+      {
+        "CODE": 152,
+        "Country or Area Name": "Myanmar",
+        "ISO \"ALPHA-2 Code": "MM",
+        "ISO ALPHA-3 Code": "MMR"
+      },
+      {
+        "CODE": 153,
+        "Country or Area Name": "Namibia",
+        "ISO \"ALPHA-2 Code": "",
+        "ISO ALPHA-3 Code": "NAM"
+      },
+      {
+        "CODE": 154,
+        "Country or Area Name": "Nauru",
+        "ISO \"ALPHA-2 Code": "NR",
+        "ISO ALPHA-3 Code": "NRU"
+      },
+      {
+        "CODE": 155,
+        "Country or Area Name": "Nepal",
+        "ISO \"ALPHA-2 Code": "NP",
+        "ISO ALPHA-3 Code": "NPL"
+      },
+      {
+        "CODE": 156,
+        "Country or Area Name": "Netherlands",
+        "ISO \"ALPHA-2 Code": "NL",
+        "ISO ALPHA-3 Code": "NLD"
+      },
+      {
+        "CODE": 157,
+        "Country or Area Name": "Netherlands Antilles",
+        "ISO \"ALPHA-2 Code": "AN",
+        "ISO ALPHA-3 Code": "ANT"
+      },
+      {
+        "CODE": 158,
+        "Country or Area Name": "New Caledonia",
+        "ISO \"ALPHA-2 Code": "NC",
+        "ISO ALPHA-3 Code": "NCL"
+      },
+      {
+        "CODE": 159,
+        "Country or Area Name": "New Zealand",
+        "ISO \"ALPHA-2 Code": "NZ",
+        "ISO ALPHA-3 Code": "NZL"
+      },
+      {
+        "CODE": 160,
+        "Country or Area Name": "Nicaragua",
+        "ISO \"ALPHA-2 Code": "NI",
+        "ISO ALPHA-3 Code": "NIC"
+      },
+      {
+        "CODE": 161,
+        "Country or Area Name": "Niger",
+        "ISO \"ALPHA-2 Code": "NE",
+        "ISO ALPHA-3 Code": "NER"
+      },
+      {
+        "CODE": 162,
+        "Country or Area Name": "Nigeria",
+        "ISO \"ALPHA-2 Code": "NG",
+        "ISO ALPHA-3 Code": "NGA"
+      },
+      {
+        "CODE": 163,
+        "Country or Area Name": "Niue ",
+        "ISO \"ALPHA-2 Code": "NU",
+        "ISO ALPHA-3 Code": "NIU"
+      },
+      {
+        "CODE": 164,
+        "Country or Area Name": "Norfolk Island",
+        "ISO \"ALPHA-2 Code": "NF",
+        "ISO ALPHA-3 Code": "NFK"
+      },
+      {
+        "CODE": 165,
+        "Country or Area Name": "Northern Mariana Islands",
+        "ISO \"ALPHA-2 Code": "MP",
+        "ISO ALPHA-3 Code": "MNP"
+      },
+      {
+        "CODE": 166,
+        "Country or Area Name": "Norway",
+        "ISO \"ALPHA-2 Code": "NO",
+        "ISO ALPHA-3 Code": "NOR"
+      },
+      {
+        "CODE": 167,
+        "Country or Area Name": "Oman",
+        "ISO \"ALPHA-2 Code": "OM",
+        "ISO ALPHA-3 Code": "OMN"
+      },
+      {
+        "CODE": 168,
+        "Country or Area Name": "Pakistan",
+        "ISO \"ALPHA-2 Code": "PK",
+        "ISO ALPHA-3 Code": "PAK"
+      },
+      {
+        "CODE": 169,
+        "Country or Area Name": "Palau",
+        "ISO \"ALPHA-2 Code": "PW",
+        "ISO ALPHA-3 Code": "PLW"
+      },
+      {
+        "CODE": 170,
+        "Country or Area Name": "Palestinian Territory, Occupied",
+        "ISO \"ALPHA-2 Code": "PS",
+        "ISO ALPHA-3 Code": "PSE"
+      },
+      {
+        "CODE": 171,
+        "Country or Area Name": "Panama",
+        "ISO \"ALPHA-2 Code": "PA",
+        "ISO ALPHA-3 Code": "PAN"
+      },
+      {
+        "CODE": 172,
+        "Country or Area Name": "Papua New Guinea",
+        "ISO \"ALPHA-2 Code": "PG",
+        "ISO ALPHA-3 Code": "PNG"
+      },
+      {
+        "CODE": 173,
+        "Country or Area Name": "Paraguay",
+        "ISO \"ALPHA-2 Code": "PY",
+        "ISO ALPHA-3 Code": "PRY"
+      },
+      {
+        "CODE": 174,
+        "Country or Area Name": "Peru",
+        "ISO \"ALPHA-2 Code": "PE",
+        "ISO ALPHA-3 Code": "PER"
+      },
+      {
+        "CODE": 175,
+        "Country or Area Name": "Philippines",
+        "ISO \"ALPHA-2 Code": "PH",
+        "ISO ALPHA-3 Code": "PHL"
+      },
+      {
+        "CODE": 176,
+        "Country or Area Name": "Pitcairn",
+        "ISO \"ALPHA-2 Code": "PN",
+        "ISO ALPHA-3 Code": "PCN"
+      },
+      {
+        "CODE": 177,
+        "Country or Area Name": "Poland",
+        "ISO \"ALPHA-2 Code": "PL",
+        "ISO ALPHA-3 Code": "POL"
+      },
+      {
+        "CODE": 178,
+        "Country or Area Name": "Portugal",
+        "ISO \"ALPHA-2 Code": "PT",
+        "ISO ALPHA-3 Code": "PRT"
+      },
+      {
+        "CODE": 179,
+        "Country or Area Name": "Puerto Rico",
+        "ISO \"ALPHA-2 Code": "PR",
+        "ISO ALPHA-3 Code": "PRI"
+      },
+      {
+        "CODE": 180,
+        "Country or Area Name": "Qatar",
+        "ISO \"ALPHA-2 Code": "QA",
+        "ISO ALPHA-3 Code": "QAT"
+      },
+      {
+        "CODE": 181,
+        "Country or Area Name": "Réunion",
+        "ISO \"ALPHA-2 Code": "RE",
+        "ISO ALPHA-3 Code": "REU"
+      },
+      {
+        "CODE": 182,
+        "Country or Area Name": "Romania",
+        "ISO \"ALPHA-2 Code": "RO",
+        "ISO ALPHA-3 Code": "ROU"
+      },
+      {
+        "CODE": 183,
+        "Country or Area Name": "Russian Federation",
+        "ISO \"ALPHA-2 Code": "RU",
+        "ISO ALPHA-3 Code": "RUS"
+      },
+      {
+        "CODE": 184,
+        "Country or Area Name": "Rwanda",
+        "ISO \"ALPHA-2 Code": "RW",
+        "ISO ALPHA-3 Code": "RWA"
+      },
+      {
+        "CODE": 185,
+        "Country or Area Name": "Saint-Barthélemy",
+        "ISO \"ALPHA-2 Code": "BL",
+        "ISO ALPHA-3 Code": "BLM"
+      },
+      {
+        "CODE": 186,
+        "Country or Area Name": "Saint Helena",
+        "ISO \"ALPHA-2 Code": "SH",
+        "ISO ALPHA-3 Code": "SHN"
+      },
+      {
+        "CODE": 187,
+        "Country or Area Name": "Saint Kitts and Nevis",
+        "ISO \"ALPHA-2 Code": "KN",
+        "ISO ALPHA-3 Code": "KNA"
+      },
+      {
+        "CODE": 188,
+        "Country or Area Name": "Saint Lucia",
+        "ISO \"ALPHA-2 Code": "LC",
+        "ISO ALPHA-3 Code": "LCA"
+      },
+      {
+        "CODE": 189,
+        "Country or Area Name": "Saint-Martin (French part)",
+        "ISO \"ALPHA-2 Code": "MF",
+        "ISO ALPHA-3 Code": "MAF"
+      },
+      {
+        "CODE": 190,
+        "Country or Area Name": "Saint Pierre and Miquelon ",
+        "ISO \"ALPHA-2 Code": "PM",
+        "ISO ALPHA-3 Code": "SPM"
+      },
+      {
+        "CODE": 191,
+        "Country or Area Name": "Saint Vincent and Grenadines",
+        "ISO \"ALPHA-2 Code": "VC",
+        "ISO ALPHA-3 Code": "VCT"
+      },
+      {
+        "CODE": 192,
+        "Country or Area Name": "Samoa",
+        "ISO \"ALPHA-2 Code": "WS",
+        "ISO ALPHA-3 Code": "WSM"
+      },
+      {
+        "CODE": 193,
+        "Country or Area Name": "San Marino",
+        "ISO \"ALPHA-2 Code": "SM",
+        "ISO ALPHA-3 Code": "SMR"
+      },
+      {
+        "CODE": 194,
+        "Country or Area Name": "Sao Tome and Principe",
+        "ISO \"ALPHA-2 Code": "ST",
+        "ISO ALPHA-3 Code": "STP"
+      },
+      {
+        "CODE": 195,
+        "Country or Area Name": "Saudi Arabia",
+        "ISO \"ALPHA-2 Code": "SA",
+        "ISO ALPHA-3 Code": "SAU"
+      },
+      {
+        "CODE": 196,
+        "Country or Area Name": "Senegal",
+        "ISO \"ALPHA-2 Code": "SN",
+        "ISO ALPHA-3 Code": "SEN"
+      },
+      {
+        "CODE": 197,
+        "Country or Area Name": "Serbia",
+        "ISO \"ALPHA-2 Code": "RS",
+        "ISO ALPHA-3 Code": "SRB"
+      },
+      {
+        "CODE": 198,
+        "Country or Area Name": "Seychelles",
+        "ISO \"ALPHA-2 Code": "SC",
+        "ISO ALPHA-3 Code": "SYC"
+      },
+      {
+        "CODE": 199,
+        "Country or Area Name": "Sierra Leone",
+        "ISO \"ALPHA-2 Code": "SL",
+        "ISO ALPHA-3 Code": "SLE"
+      },
+      {
+        "CODE": 200,
+        "Country or Area Name": "Singapore",
+        "ISO \"ALPHA-2 Code": "SG",
+        "ISO ALPHA-3 Code": "SGP"
+      },
+      {
+        "CODE": 201,
+        "Country or Area Name": "Slovakia",
+        "ISO \"ALPHA-2 Code": "SK",
+        "ISO ALPHA-3 Code": "SVK"
+      },
+      {
+        "CODE": 202,
+        "Country or Area Name": "Slovenia",
+        "ISO \"ALPHA-2 Code": "SI",
+        "ISO ALPHA-3 Code": "SVN"
+      },
+      {
+        "CODE": 203,
+        "Country or Area Name": "Solomon Islands",
+        "ISO \"ALPHA-2 Code": "SB",
+        "ISO ALPHA-3 Code": "SLB"
+      },
+      {
+        "CODE": 204,
+        "Country or Area Name": "Somalia",
+        "ISO \"ALPHA-2 Code": "SO",
+        "ISO ALPHA-3 Code": "SOM"
+      },
+      {
+        "CODE": 205,
+        "Country or Area Name": "South Africa",
+        "ISO \"ALPHA-2 Code": "ZA",
+        "ISO ALPHA-3 Code": "ZAF"
+      },
+      {
+        "CODE": 206,
+        "Country or Area Name": "South Georgia and the South Sandwich Islands",
+        "ISO \"ALPHA-2 Code": "GS",
+        "ISO ALPHA-3 Code": "SGS"
+      },
+      {
+        "CODE": 207,
+        "Country or Area Name": "South Sudan",
+        "ISO \"ALPHA-2 Code": "SS",
+        "ISO ALPHA-3 Code": "SSD"
+      },
+      {
+        "CODE": 208,
+        "Country or Area Name": "Spain",
+        "ISO \"ALPHA-2 Code": "ES",
+        "ISO ALPHA-3 Code": "ESP"
+      },
+      {
+        "CODE": 209,
+        "Country or Area Name": "Sri Lanka",
+        "ISO \"ALPHA-2 Code": "LK",
+        "ISO ALPHA-3 Code": "LKA"
+      },
+      {
+        "CODE": 210,
+        "Country or Area Name": "Sudan",
+        "ISO \"ALPHA-2 Code": "SD",
+        "ISO ALPHA-3 Code": "SDN"
+      },
+      {
+        "CODE": 211,
+        "Country or Area Name": "Suriname *",
+        "ISO \"ALPHA-2 Code": "SR",
+        "ISO ALPHA-3 Code": "SUR"
+      },
+      {
+        "CODE": 212,
+        "Country or Area Name": "Svalbard and Jan Mayen Islands ",
+        "ISO \"ALPHA-2 Code": "SJ",
+        "ISO ALPHA-3 Code": "SJM"
+      },
+      {
+        "CODE": 213,
+        "Country or Area Name": "Swaziland",
+        "ISO \"ALPHA-2 Code": "SZ",
+        "ISO ALPHA-3 Code": "SWZ"
+      },
+      {
+        "CODE": 214,
+        "Country or Area Name": "Sweden",
+        "ISO \"ALPHA-2 Code": "SE",
+        "ISO ALPHA-3 Code": "SWE"
+      },
+      {
+        "CODE": 215,
+        "Country or Area Name": "Switzerland",
+        "ISO \"ALPHA-2 Code": "CH",
+        "ISO ALPHA-3 Code": "CHE"
+      },
+      {
+        "CODE": 216,
+        "Country or Area Name": "Syrian Arab Republic (Syria)",
+        "ISO \"ALPHA-2 Code": "SY",
+        "ISO ALPHA-3 Code": "SYR"
+      },
+      {
+        "CODE": 217,
+        "Country or Area Name": "Taiwan, Republic of China",
+        "ISO \"ALPHA-2 Code": "TW",
+        "ISO ALPHA-3 Code": "TWN"
+      },
+      {
+        "CODE": 218,
+        "Country or Area Name": "Tajikistan",
+        "ISO \"ALPHA-2 Code": "TJ",
+        "ISO ALPHA-3 Code": "TJK"
+      },
+      {
+        "CODE": 219,
+        "Country or Area Name": "Tanzania *, United Republic of",
+        "ISO \"ALPHA-2 Code": "TZ",
+        "ISO ALPHA-3 Code": "TZA"
+      },
+      {
+        "CODE": 220,
+        "Country or Area Name": "Thailand",
+        "ISO \"ALPHA-2 Code": "TH",
+        "ISO ALPHA-3 Code": "THA"
+      },
+      {
+        "CODE": 221,
+        "Country or Area Name": "Timor-Leste",
+        "ISO \"ALPHA-2 Code": "TL",
+        "ISO ALPHA-3 Code": "TLS"
+      },
+      {
+        "CODE": 222,
+        "Country or Area Name": "Togo",
+        "ISO \"ALPHA-2 Code": "TG",
+        "ISO ALPHA-3 Code": "TGO"
+      },
+      {
+        "CODE": 223,
+        "Country or Area Name": "Tokelau ",
+        "ISO \"ALPHA-2 Code": "TK",
+        "ISO ALPHA-3 Code": "TKL"
+      },
+      {
+        "CODE": 224,
+        "Country or Area Name": "Tonga",
+        "ISO \"ALPHA-2 Code": "TO",
+        "ISO ALPHA-3 Code": "TON"
+      },
+      {
+        "CODE": 225,
+        "Country or Area Name": "Trinidad and Tobago",
+        "ISO \"ALPHA-2 Code": "TT",
+        "ISO ALPHA-3 Code": "TTO"
+      },
+      {
+        "CODE": 226,
+        "Country or Area Name": "Tunisia",
+        "ISO \"ALPHA-2 Code": "TN",
+        "ISO ALPHA-3 Code": "TUN"
+      },
+      {
+        "CODE": 227,
+        "Country or Area Name": "Turkey",
+        "ISO \"ALPHA-2 Code": "TR",
+        "ISO ALPHA-3 Code": "TUR"
+      },
+      {
+        "CODE": 228,
+        "Country or Area Name": "Turkmenistan",
+        "ISO \"ALPHA-2 Code": "TM",
+        "ISO ALPHA-3 Code": "TKM"
+      },
+      {
+        "CODE": 229,
+        "Country or Area Name": "Turks and Caicos Islands ",
+        "ISO \"ALPHA-2 Code": "TC",
+        "ISO ALPHA-3 Code": "TCA"
+      },
+      {
+        "CODE": 230,
+        "Country or Area Name": "Tuvalu",
+        "ISO \"ALPHA-2 Code": "TV",
+        "ISO ALPHA-3 Code": "TUV"
+      },
+      {
+        "CODE": 231,
+        "Country or Area Name": "Uganda",
+        "ISO \"ALPHA-2 Code": "UG",
+        "ISO ALPHA-3 Code": "UGA"
+      },
+      {
+        "CODE": 232,
+        "Country or Area Name": "Ukraine",
+        "ISO \"ALPHA-2 Code": "UA",
+        "ISO ALPHA-3 Code": "UKR"
+      },
+      {
+        "CODE": 233,
+        "Country or Area Name": "United Arab Emirates",
+        "ISO \"ALPHA-2 Code": "AE",
+        "ISO ALPHA-3 Code": "ARE"
+      },
+      {
+        "CODE": 234,
+        "Country or Area Name": "United Kingdom",
+        "ISO \"ALPHA-2 Code": "GB",
+        "ISO ALPHA-3 Code": "GBR"
+      },
+      {
+        "CODE": 235,
+        "Country or Area Name": "United States of America",
+        "ISO \"ALPHA-2 Code": "US",
+        "ISO ALPHA-3 Code": "USA"
+      },
+      {
+        "CODE": 236,
+        "Country or Area Name": "United States Minor Outlying Islands",
+        "ISO \"ALPHA-2 Code": "UM",
+        "ISO ALPHA-3 Code": "UMI"
+      },
+      {
+        "CODE": 237,
+        "Country or Area Name": "Uruguay",
+        "ISO \"ALPHA-2 Code": "UY",
+        "ISO ALPHA-3 Code": "URY"
+      },
+      {
+        "CODE": 238,
+        "Country or Area Name": "Uzbekistan",
+        "ISO \"ALPHA-2 Code": "UZ",
+        "ISO ALPHA-3 Code": "UZB"
+      },
+      {
+        "CODE": 239,
+        "Country or Area Name": "Vanuatu",
+        "ISO \"ALPHA-2 Code": "VU",
+        "ISO ALPHA-3 Code": "VUT"
+      },
+      {
+        "CODE": 240,
+        "Country or Area Name": "Venezuela (Bolivarian Republic of)",
+        "ISO \"ALPHA-2 Code": "VE",
+        "ISO ALPHA-3 Code": "VEN"
+      },
+      {
+        "CODE": 241,
+        "Country or Area Name": "Viet Nam",
+        "ISO \"ALPHA-2 Code": "VN",
+        "ISO ALPHA-3 Code": "VNM"
+      },
+      {
+        "CODE": 242,
+        "Country or Area Name": "Virgin Islands, US",
+        "ISO \"ALPHA-2 Code": "VI",
+        "ISO ALPHA-3 Code": "VIR"
+      },
+      {
+        "CODE": 243,
+        "Country or Area Name": "Wallis and Futuna Islands ",
+        "ISO \"ALPHA-2 Code": "WF",
+        "ISO ALPHA-3 Code": "WLF"
+      },
+      {
+        "CODE": 244,
+        "Country or Area Name": "Western Sahara",
+        "ISO \"ALPHA-2 Code": "EH",
+        "ISO ALPHA-3 Code": "ESH"
+      },
+      {
+        "CODE": 245,
+        "Country or Area Name": "Yemen",
+        "ISO \"ALPHA-2 Code": "YE",
+        "ISO ALPHA-3 Code": "YEM"
+      },
+      {
+        "CODE": 246,
+        "Country or Area Name": "Zambia",
+        "ISO \"ALPHA-2 Code": "ZM",
+        "ISO ALPHA-3 Code": "ZMB"
+      },
+      {
+        "CODE": 247,
+        "Country or Area Name": "Zimbabwe",
+        "ISO \"ALPHA-2 Code": "ZW",
+        "ISO ALPHA-3 Code": "ZWE"
+      }
+    ]
+  },
+  "EU Language": {
+    "tab_number": "107",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 24,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Bulgarian"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Croatian"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Czech"
+      },
+      {
+        "CODE": 4,
+        "NAME": "Danish"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Dutch"
+      },
+      {
+        "CODE": 6,
+        "NAME": "English"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Estonian"
+      },
+      {
+        "CODE": 8,
+        "NAME": "Finnish"
+      },
+      {
+        "CODE": 9,
+        "NAME": "French"
+      },
+      {
+        "CODE": 10,
+        "NAME": "German"
+      },
+      {
+        "CODE": 11,
+        "NAME": "Greek"
+      },
+      {
+        "CODE": 12,
+        "NAME": "Hungarian"
+      },
+      {
+        "CODE": 13,
+        "NAME": "Irish"
+      },
+      {
+        "CODE": 14,
+        "NAME": "Italian"
+      },
+      {
+        "CODE": 15,
+        "NAME": "Latvian"
+      },
+      {
+        "CODE": 16,
+        "NAME": "Lithuanian"
+      },
+      {
+        "CODE": 17,
+        "NAME": "Maltese"
+      },
+      {
+        "CODE": 18,
+        "NAME": "Polish"
+      },
+      {
+        "CODE": 19,
+        "NAME": "Portuguese"
+      },
+      {
+        "CODE": 20,
+        "NAME": "Romanian"
+      },
+      {
+        "CODE": 21,
+        "NAME": "Slovak"
+      },
+      {
+        "CODE": 22,
+        "NAME": "Slovenian"
+      },
+      {
+        "CODE": 23,
+        "NAME": "Spanish"
+      },
+      {
+        "CODE": 24,
+        "NAME": "Swedish"
+      }
+    ]
+  },
+  "(Person) Title": {
+    "tab_number": "109",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 5,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Dr."
+      },
+      {
+        "CODE": 2,
+        "NAME": "Prof."
+      },
+      {
+        "CODE": 3,
+        "NAME": "Mr."
+      },
+      {
+        "CODE": 4,
+        "NAME": "Mrs."
+      },
+      {
+        "CODE": 5,
+        "NAME": ""
+      }
+    ]
+  },
+  "Gene Therapy Type": {
+    "tab_number": "110",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 2,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "In vivo"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Ex vivo"
+      }
+    ]
+  },
+  "Type of organisation (for serious breach)": {
+    "tab_number": "119",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 7,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Analytical and Clinical laboratory"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Analytical laboratory"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Clinical investigator"
+      },
+      {
+        "CODE": 4,
+        "NAME": "CRO"
+      },
+      {
+        "CODE": 5,
+        "NAME": "Sponsor (commercial)"
+      },
+      {
+        "CODE": 6,
+        "NAME": "Sponsor (non-commercial)"
+      },
+      {
+        "CODE": 7,
+        "NAME": "Other"
+      }
+    ]
+  },
+  "Result submission": {
+    "tab_number": "120",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "All results"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Partial results"
+      },
+      {
+        "CODE": 3,
+        "NAME": "No results"
+      }
+    ]
+  },
+  "Organisation Type": {
+    "tab_number": "125",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 2,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Commercial"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Non Commercial"
+      }
+    ]
+  },
+  "Modification Scope": {
+    "tab_number": "135",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Part 1"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Part 2"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Part 1 and Part 2"
+      }
+    ]
+  },
+  "Time Unit": {
+    "tab_number": "141",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Day"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Week"
+      },
+      {
+        "CODE": 3,
+        "NAME": "Month"
+      }
+    ]
+  },
+  "Part 1 Medicinal Product Role Type": {
+    "tab_number": "142",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 3,
+    "data": [
+      {
+        "CODE": 1,
+        "NAME": "Product"
+      },
+      {
+        "CODE": 2,
+        "NAME": "Substance"
+      },
+      {
+        "CODE": 3,
+        "NAME": "ATC Code"
+      }
+    ]
+  },
+  "Sheet_153": {
+    "tab_number": "153",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 4,
+    "data": [
+      {
+        "CODE": 1.0,
+        "NAME": "Day"
+      },
+      {
+        "CODE": 2.0,
+        "NAME": "Week"
+      },
+      {
+        "CODE": 3.0,
+        "NAME": "Month"
+      }
+    ]
+  },
+  "Sheet_154": {
+    "tab_number": "154",
+    "columns": [
+      "CODE",
+      "NAME"
+    ],
+    "row_count": 4,
+    "data": [
+      {
+        "CODE": 1.0,
+        "NAME": "SUSAR related"
+      },
+      {
+        "CODE": 2.0,
+        "NAME": "IMP class and mode of action"
+      },
+      {
+        "CODE": 3.0,
+        "NAME": "Other Safety Issue(s)"
+      }
+    ]
+  }
+}
