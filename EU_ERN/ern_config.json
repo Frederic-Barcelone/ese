@@ -1,0 +1,532 @@
+{
+  "_metadata": {
+    "description": "ERN Network Scraper Configuration",
+    "version": "3.1",
+    "last_updated": "2025-11-27",
+    "total_networks": 24,
+    "instructions": "Set 'scrape' to true/false to enable/disable scraping for each network"
+  },
+  "scraper_settings": {
+    "max_crawl_depth": 100,
+    "max_pages_per_network": 10000,
+    "default_request_delay": 1.5,
+    "request_timeout": 45,
+    "max_retries": 3,
+    "backoff_base": 5.0,
+    "skip_existing": true,
+    "verbose": true,
+    "output_directory": "EU_ERN_DATA"
+  },
+  "domain_delays": {
+    "health.ec.europa.eu": 8.0,
+    "ec.europa.eu": 8.0,
+    "ern-net.eu": 2.0,
+    "default": 1.5
+  },
+  "networks": {
+    "ERN-BOND": {
+      "scrape": true,
+      "name": "European Reference Network on Rare Bone Diseases",
+      "short_description": "Rare bone disorders",
+      "full_description": "A network focusing on rare skeletal disorders, bone fragility and metabolic bone diseases.",
+      "website": "https://ernbond.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/adda4271-b02e-49bf-82c0-f88df610515e_en",
+      "disease_area": "Rare bone disorders, skeletal dysplasias, metabolic bone diseases",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/healthcare-providers/",
+        "/patients/",
+        "/resources/",
+        "/publications/",
+        "/education/"
+      ]
+    },
+    "ERN-CRANIO": {
+      "scrape": false,
+      "name": "European Reference Network on Craniofacial Anomalies and ENT Disorders",
+      "short_description": "Craniofacial anomalies and ENT disorders",
+      "full_description": "European Reference Network on craniofacial anomalies and ear, nose and throat (ENT) disorders.",
+      "website": "https://www.ern-cranio.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/77df296d-c99e-47cc-84de-d3e59d56a050_en",
+      "disease_area": "Craniofacial anomalies, ENT disorders",
+      "guidelines_paths": [
+        "/knowledge-hub/",
+        "/healthcare-providers/",
+        "/about-us/",
+        "/patients/",
+        "/resources/"
+      ]
+    },
+    "ERN-EuroBloodNet": {
+      "scrape": true,
+      "name": "European Reference Network on Rare Haematological Diseases",
+      "short_description": "Rare hematological diseases",
+      "full_description": "A network focusing on rare blood disorders, including complex and ultra-rare conditions requiring highly specialized expertise.",
+      "website": "https://eurobloodnet.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/aa7bc950-3738-495a-ae4d-2689a14984b7_en",
+      "disease_area": "Rare haematological diseases, rare blood disorders, complex and ultra-rare blood conditions",
+      "guidelines_paths": [
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/",
+        "/education-training/",
+        "/guidelines/",
+        "/publications/",
+        "/diseases/"
+      ]
+    },
+    "Endo-ERN": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Endocrine Conditions",
+      "short_description": "Rare endocrine conditions",
+      "full_description": "European Reference Network on endocrine conditions including rare hormonal and metabolic endocrine disorders.",
+      "website": "https://endo-ern.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/d48c76a5-e46e-4e5b-8ba7-01e4b46ce7d5_en",
+      "disease_area": "Rare endocrine conditions, hormonal disorders",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/work-packages/cpgs-cdsts/",
+        "/all-publications/publications/",
+        "/resources/",
+        "/patients/"
+      ]
+    },
+    "ERN-EpiCARE": {
+      "scrape": false,
+      "name": "European Reference Network on Rare and Complex Epilepsies",
+      "short_description": "Rare and complex epilepsies",
+      "full_description": "European Reference Network on epilepsies, focusing on rare and complex epileptic conditions.",
+      "website": "https://epi-care.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/bd3bd4e7-69c4-4537-b3af-09ffa47b2532_en",
+      "disease_area": "Rare and complex epilepsies",
+      "guidelines_paths": [
+        "/expertise/",
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERKNet": {
+      "scrape": true,
+      "name": "European Rare Kidney Diseases Reference Network",
+      "short_description": "Rare kidney diseases",
+      "full_description": "A collaborative network dedicated to rare and complex kidney disorders across all ages.",
+      "website": "https://www.erknet.org",
+      "factsheet": "https://health.ec.europa.eu/document/download/62cf8c2a-0bc5-4fcd-a604-7a2c2f81467a_en",
+      "disease_area": "Rare kidney diseases, complex kidney disorders across all ages",
+      "guidelines_paths": [
+        "/guidelines-pathways",
+        "/guidelines-pathways/guidelines/",
+        "/guidelines-pathways/care-pathways/",
+        "/about-erknet/guidelines/",
+        "/for-patients/",
+        "/healthcare-professionals/",
+        "/disease-groups/",
+        "/education/",
+        "/research/"
+      ]
+    },
+    "ERNICA": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Inherited and Congenital Anomalies",
+      "short_description": "Inherited and congenital anomalies",
+      "full_description": "European Reference Network on inherited and congenital anomalies affecting various organ systems.",
+      "website": "https://www.ern-ernica.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/d220362f-fa8f-4b32-9cb5-0978b1984f98_en",
+      "disease_area": "Inherited and congenital anomalies",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-LUNG": {
+      "scrape": false,
+      "name": "European Reference Network on Respiratory Diseases",
+      "short_description": "Rare respiratory diseases",
+      "full_description": "European Reference Network on respiratory diseases including rare lung conditions.",
+      "website": "https://ern-lung.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/39802377-4c88-4dfb-8bc0-4397c96481f1_en",
+      "disease_area": "Rare respiratory diseases, rare lung conditions",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-Skin": {
+      "scrape": false,
+      "name": "European Reference Network on Rare and Undiagnosed Skin Disorders",
+      "short_description": "Rare skin disorders",
+      "full_description": "European Reference Network on skin disorders including rare dermatological conditions.",
+      "website": "https://ern-skin.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/a836e435-4863-4f15-a207-36ca676ff5d6_en",
+      "disease_area": "Rare skin disorders, dermatological conditions",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-EURACAN": {
+      "scrape": false,
+      "name": "European Reference Network on Adult Cancers (Solid Tumours)",
+      "short_description": "Adult solid tumours",
+      "full_description": "European Reference Network on adult cancers focusing on solid tumours.",
+      "website": "https://www.euracan.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/c1e5a04d-b993-49f8-b402-0233a8be6f17_en",
+      "disease_area": "Adult solid tumours, rare adult cancers",
+      "guidelines_paths": [
+        "/expertise/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/",
+        "/resources/"
+      ]
+    },
+    "ERN-eUROGEN": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Urogenital Diseases and Conditions",
+      "short_description": "Rare urogenital diseases",
+      "full_description": "European Reference Network on urogenital diseases and conditions.",
+      "website": "https://eurogen-ern.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/e62b981b-e5e7-4ffb-9d8d-a84bcee9761f_en",
+      "disease_area": "Rare urogenital diseases and conditions",
+      "guidelines_paths": [
+        "/our-work/guidelines/",
+        "/dissemination/publications/",
+        "/our-work/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-EURO-NMD": {
+      "scrape": true,
+      "name": "European Reference Network on Neuromuscular Diseases",
+      "short_description": "Neuromuscular diseases",
+      "full_description": "A network specializing in rare inherited and acquired neuromuscular disorders.",
+      "website": "https://ern-euro-nmd.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/64525d43-e801-4347-9041-f3730568f74d_en",
+      "disease_area": "Neuromuscular diseases, inherited and acquired neuromuscular disorders",
+      "guidelines_paths": [
+        "/about-us/",
+        "/patients/",
+        "/healthcare-professionals/",
+        "/guidelines/",
+        "/resources/",
+        "/education/",
+        "/research/"
+      ]
+    },
+    "ERN-EYE": {
+      "scrape": false,
+      "name": "European Reference Network on Eye Diseases",
+      "short_description": "Rare eye diseases",
+      "full_description": "European Reference Network on eye diseases including rare ophthalmological conditions.",
+      "website": "https://www.ern-eye.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/c33dbf93-24b0-498c-802f-05da5e7e5dfc_en",
+      "disease_area": "Rare eye diseases, ophthalmological conditions",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/",
+        "/resources/"
+      ]
+    },
+    "ERN-GENTURIS": {
+      "scrape": false,
+      "name": "European Reference Network on Genetic Tumour Risk Syndromes",
+      "short_description": "Genetic tumour risk syndromes",
+      "full_description": "European Reference Network on genetic tumour risk syndromes including hereditary cancer predisposition.",
+      "website": "https://www.genturis.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/99faad3a-7d0b-4406-986f-666ba30e29dd_en",
+      "disease_area": "Genetic tumour risk syndromes, hereditary cancer predisposition",
+      "guidelines_paths": [
+        "/",
+        "/l=eng/Home.html",
+        "/guidelines/",
+        "/resources/",
+        "/patients/"
+      ]
+    },
+    "ERN-GUARD-HEART": {
+      "scrape": true,
+      "name": "European Reference Network on Diseases of the Heart",
+      "short_description": "Rare cardiac diseases",
+      "full_description": "A network that addresses rare cardiomyopathies, arrhythmia syndromes and other inherited cardiac conditions.",
+      "website": "https://guardheart.ern-net.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/799c0039-139f-4150-8ee7-741b01e2a503_en",
+      "disease_area": "Rare cardiac diseases, cardiomyopathies, arrhythmia syndromes, inherited cardiac conditions",
+      "guidelines_paths": [
+        "/guidelines",
+        "/patients/laypersons-language/guidelines-consensus-statements/",
+        "/healthcare-professionals/",
+        "/resources/",
+        "/education/",
+        "/diseases/"
+      ]
+    },
+    "ERN-ITHACA": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Congenital Malformations and Rare Intellectual Disability",
+      "short_description": "Congenital malformations, intellectual disability",
+      "full_description": "European Reference Network on congenital malformations and rare intellectual disability.",
+      "website": "https://ern-ithaca.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/4033c394-3163-498a-b325-d54193e32487_en",
+      "disease_area": "Congenital malformations, intellectual disability",
+      "guidelines_paths": [
+        "/ern-ithaca-guidelines/",
+        "/methodology/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "MetabERN": {
+      "scrape": true,
+      "name": "European Reference Network on Hereditary Metabolic Disorders",
+      "short_description": "Hereditary metabolic disorders",
+      "full_description": "A network covering rare inherited metabolic diseases affecting multiple organs and systems.",
+      "website": "https://metab.ern-net.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/05726793-052a-4992-8c2b-ec08cf9af657_en",
+      "disease_area": "Hereditary metabolic disorders, inherited metabolic diseases",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/",
+        "/education/",
+        "/diseases/"
+      ]
+    },
+    "ERN-PaedCan": {
+      "scrape": false,
+      "name": "European Reference Network on Paediatric Cancer",
+      "short_description": "Paediatric haemato-oncology",
+      "full_description": "European Reference Network on paediatric cancer including haemato-oncology.",
+      "website": "https://paedcan.ern-net.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/752ccb29-d366-4e88-b2dd-21ec0cc3e6b4_en",
+      "disease_area": "Paediatric haemato-oncology, childhood cancers",
+      "guidelines_paths": [
+        "/about-ern-paedcan/",
+        "/clinical-patient-management/",
+        "/news/",
+        "/resources/",
+        "/patients/"
+      ]
+    },
+    "ERN-RARE-LIVER": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Hepatological Diseases",
+      "short_description": "Rare liver diseases",
+      "full_description": "European Reference Network on hepatological diseases including rare liver conditions.",
+      "website": "https://rare-liver.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/ab943fbb-ede8-4242-889c-cb3c92590731_en",
+      "disease_area": "Rare liver diseases, hepatological conditions",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/media/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-ReCONNET": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Connective Tissue and Musculoskeletal Diseases",
+      "short_description": "Connective tissue and musculoskeletal diseases",
+      "full_description": "European Reference Network on connective tissue and musculoskeletal diseases.",
+      "website": "https://reconnet.ern-net.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/22d53f92-14d3-43a9-8317-dcbb7ca34f22_en",
+      "disease_area": "Connective tissue and musculoskeletal diseases",
+      "guidelines_paths": [
+        "/clinical-practice-guidelines/",
+        "/disease-info/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-RITA": {
+      "scrape": true,
+      "name": "European Reference Network on Rare Immunodeficiency, Autoinflammatory and Autoimmune Diseases",
+      "short_description": "Immunodeficiency, autoinflammatory, autoimmune diseases",
+      "full_description": "A network for rare primary immunodeficiencies, autoinflammatory and systemic autoimmune diseases.",
+      "website": "https://ern-rita.org",
+      "factsheet": "https://health.ec.europa.eu/document/download/4512e89f-333e-476c-a5c0-c9c2307f079b_en",
+      "disease_area": "Immunodeficiency, autoinflammatory, autoimmune diseases, primary immunodeficiencies",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/about/",
+        "/diseases/",
+        "/patients/",
+        "/healthcare-professionals/",
+        "/resources/",
+        "/education/"
+      ]
+    },
+    "ERN-TRANSPLANT-CHILD": {
+      "scrape": false,
+      "name": "European Reference Network on Transplantation in Children",
+      "short_description": "Paediatric transplantation",
+      "full_description": "European Reference Network on Transplantation in Children covering all aspects of pediatric organ transplantation.",
+      "website": "https://transplantchild.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/1d7398c8-e099-4d33-a6de-98091638a107_en",
+      "disease_area": "Paediatric transplantation",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/publications/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "VASCERN": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Multisystemic Vascular Diseases",
+      "short_description": "Rare vascular diseases",
+      "full_description": "European Reference Network on Rare Multisystemic Vascular Diseases.",
+      "website": "https://vascern.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/0953d94c-de39-43f7-b0ff-bf0123bf565e_en",
+      "disease_area": "Rare multisystemic vascular diseases",
+      "guidelines_paths": [
+        "/guidelines/",
+        "/resources/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    },
+    "ERN-RND": {
+      "scrape": false,
+      "name": "European Reference Network on Rare Neurological Diseases",
+      "short_description": "Rare neurological diseases",
+      "full_description": "European Reference Network on Rare Neurological Diseases covering various rare neurological conditions.",
+      "website": "https://www.ern-rnd.eu",
+      "factsheet": "https://health.ec.europa.eu/document/download/6457a9e8-dd43-4e78-8088-8f16742eddac_en",
+      "disease_area": "Rare neurological diseases",
+      "guidelines_paths": [
+        "/disease-knowledge/",
+        "/education-training/",
+        "/about/",
+        "/patients/",
+        "/healthcare-professionals/"
+      ]
+    }
+  },
+  "ec_methodological_handbooks": {
+    "download_handbooks": true,
+    "handbooks": {
+      "Handbook_00_Introduction": {
+        "title": "Introduction to ERN Guidelines",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-0-Intro-ERN-Guidelines.pdf",
+          "https://rare-liver.eu/media/handbook_0_intro_ern_guidelines.pdf"
+        ],
+        "description": "Overview of the ERN CPG and CDST development framework"
+      },
+      "Handbook_01_Prioritisation": {
+        "title": "Prioritisation of Rare Diseases that Require CPGs or CDSTs",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-1-Prioritisation_ERN-Guidelines.pdf",
+          "https://health.ec.europa.eu/document/download/a15f0b80-dc49-4cba-b9e1-a53f980e47b6_en"
+        ],
+        "description": "Methodology for prioritizing conditions for guideline development"
+      },
+      "Handbook_02_Appraisal": {
+        "title": "Appraisal of Existing CPGs and CDSTs",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-2-Appraisal_Existing_CPGCDST_ERN-Guidelines.pdf"
+        ],
+        "description": "Framework for evaluating quality of existing guidelines using AGREE II"
+      },
+      "Handbook_03_Adaptation": {
+        "title": "Adaptation and Adoption of CPGs and CDSTs",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-3-AdaptationAdoption_CPGCDST_Guidelines.pdf"
+        ],
+        "description": "Process for adapting guidelines for ERN use"
+      },
+      "Handbook_04_CPG_Development": {
+        "title": "Development of Clinical Practice Guidelines for Rare Diseases",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-4-Elaboration_CPG_ERN-Guidelines.pdf"
+        ],
+        "description": "Full methodology for developing new CPGs"
+      },
+      "Handbook_05_Consensus": {
+        "title": "Development of Clinical Consensus Statements",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-5-Elaboration_Clinical_Consensus_Statements_ERN-Guidelines.pdf"
+        ],
+        "description": "Methodology for developing expert consensus statements"
+      },
+      "Handbook_06_Evidence_Reports": {
+        "title": "Elaboration of Evidence Reports",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-6-Elaboration_Evidence_Reports_ERN-Guidelines.pdf"
+        ],
+        "description": "Systematic review methodology for rare diseases"
+      },
+      "Handbook_07_Pathways": {
+        "title": "Development of Diagnostic, Monitoring and Therapeutic Pathways",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-7-Pathways_ERN_Guidelines.pdf"
+        ],
+        "description": "Methodology for care pathway development"
+      },
+      "Handbook_08_Protocols": {
+        "title": "Development of Evidence-Based Protocols",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-8-Evidence-Based-Protocols_ERN-Guidelines.pdf"
+        ],
+        "description": "Protocol development for rare diseases"
+      },
+      "Handbook_09_Dos_Donts": {
+        "title": "Development of Do's and Don'ts Factsheets",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-9-Dos_Donts_Factsheets_ERN-Guidelines.pdf"
+        ],
+        "description": "Quick reference fact sheets for clinicians"
+      },
+      "Handbook_10_Quality_Measures": {
+        "title": "Development of Quality Measures",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-10-Quality-Measures_ERN-Guidelines.pdf"
+        ],
+        "description": "Quality indicator development methodology"
+      },
+      "Handbook_11_Patient_Info": {
+        "title": "Elaboration of Patient Information Booklets",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-11-Patient-Information-Booklets_ERN-Guidelines.pdf"
+        ],
+        "description": "Patient information material development"
+      },
+      "Handbook_12_Implementation": {
+        "title": "Implementation and Evaluation of CPGs and CDSTs",
+        "urls": [
+          "https://endo-ern.eu/wp-content/uploads/2021/03/Handbook-12-Uptake-of-CPGs-and-CDSTs_ERN-Guidelines.pdf"
+        ],
+        "description": "Implementation strategies and evaluation frameworks"
+      },
+      "Handbook_13_Patient_Involvement": {
+        "title": "Patients' Involvement in CPG Development",
+        "urls": [
+          "https://eurogen-ern.eu/wp-content/uploads/2022/07/ePAG-Guide-on-Patient-Involvement-in-Clinical-Practice-Guidelines-and-Other-Clinical-Decision-Support-Tools-June-2022.pdf"
+        ],
+        "description": "Guide for patient engagement in guideline development"
+      }
+    }
+  }
+}

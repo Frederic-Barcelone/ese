@@ -3,8 +3,10 @@
 
 """
 CTIS Extraction Runner
-Simple script to run CTIS data extraction with all parameters configured in code.
-No command-line arguments needed - just edit the configuration section below.
+Runs CTIS data extraction using settings from ctis_config.py
+
+>>> EDIT ctis_config.py TO CHANGE SETTINGS <<<
+
 ctis/ctis_run.py
 """
 
@@ -13,6 +15,21 @@ import time
 import sqlite3
 from pathlib import Path
 
+# Import configuration - ALL settings come from here
+from ctis_config import (
+    # Extraction mode
+    SINGLE_TRIAL, TRIAL_COUNT, EXTRACT_ALL,
+    FILTER_RARE_DISEASE_ONLY,
+    # PDF settings
+    DOWNLOAD_PDFS, DOWNLOAD_ONLY, DOWNLOAD_FILE_TYPES, ONLY_FOR_PUBLICATION,
+    # Output settings
+    OUT_DIR, RESET_DATABASE, CHECK_FOR_UPDATES,
+    # Performance settings
+    MAX_WORKERS, RATE_LIMIT_RPS, PAGE_SIZE, REQUEST_TIMEOUT, MAX_RETRIES,
+    # Paths
+    PORTAL_URL,
+)
+
 # Import from modular structure
 try:
     from ctis_database import init_db
@@ -20,93 +37,48 @@ try:
     from ctis_discovery import iter_ct_numbers_segmented
     from ctis_processor import process_multiple_trials, process_single_trial
     from ctis_http import RateLimiter, create_session, warm_up
-    from ctis_config import PORTAL_URL
-    import ctis_http  # For setting GLOBAL_RATE_LIMITER
+    import ctis_http
 except ImportError as e:
     print(f"ERROR: Could not import extractor modules: {e}")
     print("Make sure all ctis_*.py files are in the same directory.")
     sys.exit(1)
 
+# Try to import PDF downloader (includes process_trial_documents)
+try:
+    from ctis_pdf_downloader import (
+        create_documents_table, 
+        get_document_stats,
+        process_trial_documents
+    )
+    HAS_PDF_DOWNLOADER = True
+except ImportError as e:
+    HAS_PDF_DOWNLOADER = False
+    process_trial_documents = None
 
-# ============================================================================
-# CONFIGURATION - EDIT THESE PARAMETERS
-# ============================================================================
-
-class CTISConfig:
-    """Configuration for CTIS extraction"""
-    
-    # ========== EXTRACTION MODE ============================
-    # Choose ONE mode by setting it to a value, others to None
-    
-    # Mode 1: Extract a single trial by CT number
-    #SINGLE_TRIAL = "2024-514133-38-00"
-    SINGLE_TRIAL = None
-    
-    # Mode 2: Extract a specific number of trials
-    TRIAL_COUNT = 20000  # Extract first N trials (set to None to disable)
-    # TRIAL_COUNT = None  # Extract first N trials (set to None to disable)
-    
-    # Mode 3: Extract ALL trials (can take hours/days!)
-    EXTRACT_ALL = None  # Set to True to extract entire database
-    
-    # ========== RARE DISEASE FILTER ========================================
-    # Set to True to ONLY extract trials marked as rare diseases
-    # Set to False to extract all trials (default behavior)
-    FILTER_RARE_DISEASE_ONLY = True  # Set to True to enable filter
-    
-    # ========== OUTPUT SETTINGS ================================================
-    OUTPUT_DIR = Path("ctis-out")  # Where to save database and files
-    RESET_DATABASE = False  # Set to True to delete existing data and start fresh
-    
-    # ========== PERFORMANCE SETTINGS =================================================
-    MAX_WORKERS = 3  # Number of concurrent download threads (1-5 recommended)
-    RATE_LIMIT_RPS = 2.0  # Max requests per second (2-3 recommended, don't go higher!)
-    PAGE_SIZE = 100  # Results per page (50-100 recommended)
-    REQUEST_TIMEOUT = 60.0  # Seconds to wait for each request
-    
-    # ========== RETRY SETTINGS ===========================================
-    MAX_RETRIES = 6  # How many times to retry failed requests
-    BASE_BACKOFF = 1.0  # Initial wait time for retries (doubles each time)
-    
-    # ========== UPDATE BEHAVIOR =================================================
-    CHECK_FOR_UPDATES = True  # If False, re-downloads all trials even if already in DB
-    
-    # ========== API ENDPOINTS (normally don't change these) ==========
-    BASE_URL = "https://euclinicaltrials.eu"
-    SEARCH_URL = f"{BASE_URL}/ctis-public-api/search"
-    DETAIL_URL = f"{BASE_URL}/ctis-public-api/retrieve/{{ct}}"
-    PORTAL_URL = f"{BASE_URL}/search-for-clinical-trials/?lang=en"
-
-
-# ============================================================================
-# RUN SCRIPT - DON'T EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING
-# ============================================================================
 
 def validate_config():
     """Validate configuration settings"""
     mode_count = sum([
-        CTISConfig.SINGLE_TRIAL is not None,
-        CTISConfig.TRIAL_COUNT is not None,
-        bool(CTISConfig.EXTRACT_ALL)  # Convert to bool to handle None/False
+        SINGLE_TRIAL is not None,
+        TRIAL_COUNT is not None,
+        bool(EXTRACT_ALL)
     ])
     
     if mode_count == 0:
         print("ERROR: No extraction mode selected!")
-        print("Please set one of: SINGLE_TRIAL, TRIAL_COUNT, or EXTRACT_ALL")
+        print("Edit ctis_config.py and set one of: SINGLE_TRIAL, TRIAL_COUNT, or EXTRACT_ALL")
         return False
     
     if mode_count > 1:
         print("ERROR: Multiple extraction modes selected!")
-        print("Please set only ONE of: SINGLE_TRIAL, TRIAL_COUNT, or EXTRACT_ALL")
+        print("Edit ctis_config.py and set only ONE of: SINGLE_TRIAL, TRIAL_COUNT, or EXTRACT_ALL")
         return False
     
-    if CTISConfig.MAX_WORKERS < 1 or CTISConfig.MAX_WORKERS > 10:
-        print("WARNING: MAX_WORKERS should be between 1 and 10")
-        print(f"Current value: {CTISConfig.MAX_WORKERS}")
+    if MAX_WORKERS < 1 or MAX_WORKERS > 10:
+        print(f"WARNING: MAX_WORKERS should be between 1 and 10 (current: {MAX_WORKERS})")
     
-    if CTISConfig.RATE_LIMIT_RPS > 5:
-        print("WARNING: RATE_LIMIT_RPS > 5 may cause rate limiting by CTIS server")
-        print(f"Current value: {CTISConfig.RATE_LIMIT_RPS}")
+    if RATE_LIMIT_RPS > 5:
+        print(f"WARNING: RATE_LIMIT_RPS > 5 may cause rate limiting (current: {RATE_LIMIT_RPS})")
     
     return True
 
@@ -114,30 +86,40 @@ def validate_config():
 def print_config_summary():
     """Print a summary of the configuration"""
     print("=" * 80)
-    print("CTIS EXTRACTION CONFIGURATION")
+    print("CTIS EXTRACTION CONFIGURATION (from ctis_config.py)")
     print("=" * 80)
     
     # Determine mode
-    if CTISConfig.SINGLE_TRIAL:
-        mode = f"Single Trial: {CTISConfig.SINGLE_TRIAL}"
-    elif CTISConfig.TRIAL_COUNT:
-        mode = f"Extract {CTISConfig.TRIAL_COUNT} trials"
-    elif CTISConfig.EXTRACT_ALL:
+    if SINGLE_TRIAL:
+        mode = f"Single Trial: {SINGLE_TRIAL}"
+    elif TRIAL_COUNT:
+        mode = f"Extract {TRIAL_COUNT} trials"
+    elif EXTRACT_ALL:
         mode = "Extract ALL trials (full database)"
     else:
         mode = "NONE (ERROR)"
     
     print(f"Mode:              {mode}")
-    print(f"Rare Disease Only: {CTISConfig.FILTER_RARE_DISEASE_ONLY}")
-    print(f"Output Directory:  {CTISConfig.OUTPUT_DIR}")
-    print(f"Reset Database:    {CTISConfig.RESET_DATABASE}")
-    print(f"Check Updates:     {CTISConfig.CHECK_FOR_UPDATES}")
+    print(f"Rare Disease Only: {FILTER_RARE_DISEASE_ONLY}")
+    print(f"Output Directory:  {OUT_DIR}")
+    print(f"Reset Database:    {RESET_DATABASE}")
+    print(f"Check Updates:     {CHECK_FOR_UPDATES}")
     print()
-    print(f"Max Workers:       {CTISConfig.MAX_WORKERS}")
-    print(f"Rate Limit:        {CTISConfig.RATE_LIMIT_RPS} req/sec")
-    print(f"Page Size:         {CTISConfig.PAGE_SIZE}")
-    print(f"Request Timeout:   {CTISConfig.REQUEST_TIMEOUT}s")
-    print(f"Max Retries:       {CTISConfig.MAX_RETRIES}")
+    
+    # PDF Download settings
+    print("--- PDF Download Settings ---")
+    print(f"Download PDFs:     {DOWNLOAD_PDFS}")
+    if DOWNLOAD_PDFS:
+        print(f"Download Only:     {DOWNLOAD_ONLY}")
+        print(f"File Types:        {DOWNLOAD_FILE_TYPES or 'All'}")
+        print(f"For Publication:   {ONLY_FOR_PUBLICATION}")
+    print()
+    
+    print(f"Max Workers:       {MAX_WORKERS}")
+    print(f"Rate Limit:        {RATE_LIMIT_RPS} req/sec")
+    print(f"Page Size:         {PAGE_SIZE}")
+    print(f"Request Timeout:   {REQUEST_TIMEOUT}s")
+    print(f"Max Retries:       {MAX_RETRIES}")
     print("=" * 80)
     print()
 
@@ -153,17 +135,22 @@ def run_extraction():
     print_config_summary()
     
     # Setup paths
-    out_dir = CTISConfig.OUTPUT_DIR
+    out_dir = OUT_DIR
     db_path = out_dir / "ctis.db"
     ndjson_path = out_dir / "ctis_full.ndjson"
     ct_numbers_path = out_dir / "ct_numbers.txt"
     failed_path = out_dir / "failed_ctnumbers.txt"
+    pdf_dir = out_dir / "pdf"
     
     # Setup output directory
     log("Setting up output directory...")
-    setup_output_dir(out_dir, reset=CTISConfig.RESET_DATABASE)
+    setup_output_dir(out_dir, reset=RESET_DATABASE)
     
-    if CTISConfig.RESET_DATABASE:
+    # Create PDF directory if PDF download enabled
+    if DOWNLOAD_PDFS:
+        pdf_dir.mkdir(parents=True, exist_ok=True)
+    
+    if RESET_DATABASE:
         log("Resetting database and output files...")
         for p in (ndjson_path, ct_numbers_path, failed_path):
             if p.exists():
@@ -171,7 +158,11 @@ def run_extraction():
     
     # Initialize database
     log("Initializing database...")
-    conn = init_db(db_path, reset=CTISConfig.RESET_DATABASE)
+    conn = init_db(db_path, reset=RESET_DATABASE)
+    
+    # Initialize documents table if PDF download enabled
+    if DOWNLOAD_PDFS and HAS_PDF_DOWNLOADER:
+        create_documents_table(conn)
     
     # Setup HTTP session
     log("Setting up HTTP session...")
@@ -184,18 +175,42 @@ def run_extraction():
         pass
     
     # Setup rate limiter
-    rate_limiter = RateLimiter(CTISConfig.RATE_LIMIT_RPS)
-    
-    # Set global rate limiter
+    rate_limiter = RateLimiter(RATE_LIMIT_RPS)
     ctis_http.GLOBAL_RATE_LIMITER = rate_limiter
     
+    # Track trials for document download
+    processed_trials = []
+    
     try:
+        # Handle DOWNLOAD_ONLY mode
+        if DOWNLOAD_ONLY and DOWNLOAD_PDFS:
+            log("Download-only mode: Downloading PDFs for existing trials...")
+            
+            if not HAS_PDF_DOWNLOADER:
+                log("PDF downloader module not available", "WARN")
+                log("Make sure ctis_pdf_downloader.py is in the same directory", "WARN")
+                log("And run: pip install playwright && playwright install chromium", "WARN")
+            else:
+                # Get all trial CT numbers from database
+                cursor = conn.execute("SELECT ctNumber FROM trials")
+                processed_trials = [row[0] for row in cursor.fetchall()]
+                
+                if not processed_trials:
+                    log("No trials in database! Run extraction first.")
+                    sys.exit(1)
+                
+                log(f"Found {len(processed_trials)} trials in database")
+                
+                # Process documents (with update checking)
+                process_trial_documents(processed_trials, conn, session, out_dir,
+                                       check_updates=CHECK_FOR_UPDATES)
+        
         # Execute based on mode
-        if CTISConfig.SINGLE_TRIAL:
+        elif SINGLE_TRIAL:
             # Single trial mode
-            log(f"Extracting single trial: {CTISConfig.SINGLE_TRIAL}")
+            log(f"Extracting single trial: {SINGLE_TRIAL}")
             success = process_single_trial(
-                CTISConfig.SINGLE_TRIAL,
+                SINGLE_TRIAL,
                 conn,
                 session,
                 out_dir,
@@ -204,21 +219,22 @@ def run_extraction():
             
             if success:
                 log("Single trial extraction completed successfully!")
+                processed_trials = [SINGLE_TRIAL]
             else:
                 log("Single trial extraction failed!", "ERROR")
                 sys.exit(1)
         
-        elif CTISConfig.TRIAL_COUNT or CTISConfig.EXTRACT_ALL:
+        elif TRIAL_COUNT or EXTRACT_ALL:
             # Multiple trials mode
-            limit = None if CTISConfig.EXTRACT_ALL else CTISConfig.TRIAL_COUNT
+            limit = None if EXTRACT_ALL else TRIAL_COUNT
             
             if limit:
-                if CTISConfig.FILTER_RARE_DISEASE_ONLY:
+                if FILTER_RARE_DISEASE_ONLY:
                     log(f"Extracting {limit} RARE DISEASE trials...")
                 else:
                     log(f"Extracting {limit} trials...")
             else:
-                if CTISConfig.FILTER_RARE_DISEASE_ONLY:
+                if FILTER_RARE_DISEASE_ONLY:
                     log("Extracting ALL RARE DISEASE trials (full database)...")
                 else:
                     log("Extracting ALL trials (full database)...")
@@ -228,15 +244,18 @@ def run_extraction():
             all_trials, trials_to_update = iter_ct_numbers_segmented(
                 session=session,
                 limit=limit,
-                check_updates=CTISConfig.CHECK_FOR_UPDATES,
+                check_updates=CHECK_FOR_UPDATES,
                 ct_numbers_path=ct_numbers_path,
                 db_path=db_path,
-                page_size=CTISConfig.PAGE_SIZE,
-                filter_rare_disease=CTISConfig.FILTER_RARE_DISEASE_ONLY,
+                page_size=PAGE_SIZE,
+                filter_rare_disease=FILTER_RARE_DISEASE_ONLY,
             )
             
             if not trials_to_update:
                 log("No trials need updating - all current!")
+                # Still get all trials for PDF download
+                cursor = conn.execute("SELECT ctNumber FROM trials")
+                processed_trials = [row[0] for row in cursor.fetchall()]
             else:
                 # Extraction phase
                 log(f"Extracting {len(trials_to_update)} trials...")
@@ -250,10 +269,19 @@ def run_extraction():
                 )
                 
                 log("Extraction completed!")
+                processed_trials = trials_to_update
+            
+            # PDF Download phase (after trial extraction)
+            if DOWNLOAD_PDFS and HAS_PDF_DOWNLOADER and processed_trials:
+                log("\n" + "=" * 60)
+                log("Starting PDF/Document Download Phase")
+                log("=" * 60)
+                process_trial_documents(processed_trials, conn, session, out_dir, 
+                                       check_updates=CHECK_FOR_UPDATES)
     
     except KeyboardInterrupt:
         log("\nInterrupted by user. Progress saved!", "WARN")
-        log("Run again with RESET_DATABASE=False to resume.", "WARN")
+        log("Run again to resume.", "WARN")
         conn.commit()
         sys.exit(0)
     
@@ -279,6 +307,8 @@ def run_extraction():
     print("=" * 80)
     print(f"Database:  {db_path}")
     print(f"NDJSON:    {ndjson_path}")
+    if DOWNLOAD_PDFS:
+        print(f"PDFs:      {pdf_dir}")
     
     # Print statistics
     try:
@@ -288,8 +318,6 @@ def run_extraction():
         trial_count = cursor.execute("SELECT COUNT(*) FROM trials").fetchone()[0]
         site_count = cursor.execute("SELECT COUNT(*) FROM trial_sites").fetchone()[0]
         people_count = cursor.execute("SELECT COUNT(*) FROM trial_people").fetchone()[0]
-        
-        # Count rare disease trials
         rare_disease_count = cursor.execute(
             "SELECT COUNT(*) FROM trials WHERE isRareDisease = 1"
         ).fetchone()[0]
@@ -300,6 +328,21 @@ def run_extraction():
         print(f"  Rare Disease:   {rare_disease_count:,}")
         print(f"  Sites:          {site_count:,}")
         print(f"  People:         {people_count:,}")
+        
+        # Document statistics
+        if DOWNLOAD_PDFS and HAS_PDF_DOWNLOADER:
+            try:
+                doc_stats = get_document_stats(conn_stats)
+                print()
+                print("Document Statistics:")
+                print(f"  Total Trials:    {doc_stats.get('total', 0):,}")
+                print(f"  Downloaded:      {doc_stats.get('downloaded', 0):,}")
+                print(f"  Pending:         {doc_stats.get('pending', 0):,}")
+                print(f"  Failed:          {doc_stats.get('failed', 0):,}")
+                total_mb = doc_stats.get('total_size_bytes', 0) / (1024 * 1024)
+                print(f"  Total Size:      {total_mb:.2f} MB")
+            except Exception:
+                pass
         
         conn_stats.close()
     except Exception:
@@ -314,9 +357,19 @@ def main():
     print("=" * 62)
     print("  CTIS Clinical Trials Data Extractor")
     print("  EU Clinical Trials Information System")
-    print("  RARE DISEASE FILTER ENABLED" if CTISConfig.FILTER_RARE_DISEASE_ONLY else "")
+    if FILTER_RARE_DISEASE_ONLY:
+        print("  RARE DISEASE FILTER ENABLED")
+    if DOWNLOAD_PDFS:
+        print("  PDF DOWNLOAD ENABLED")
     print("=" * 62)
     print()
+    
+    # Check PDF downloader availability
+    if DOWNLOAD_PDFS and not HAS_PDF_DOWNLOADER:
+        print("WARNING: PDF downloading enabled but ctis_pdf_downloader.py not found!")
+        print("Make sure ctis_pdf_downloader.py is in the same directory.")
+        print("Also run: pip install playwright && playwright install chromium")
+        print()
     
     run_extraction()
 

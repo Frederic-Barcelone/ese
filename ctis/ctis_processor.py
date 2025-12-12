@@ -5,20 +5,24 @@
 CTIS Processor Module
 Handles single and batch trial processing
 ctis/ctis_processor.py
+
+ENHANCED (v2.1.0): Added PDF/document downloading support
 """
 
 import time
 import json
 import sqlite3
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 import requests
 
 from ctis_config import (
-    DETAIL_URL, MAX_WORKERS, REPORT_EVERY, FINAL_COOLDOWN, AGE_CATEGORY_MAP
+    DETAIL_URL, MAX_WORKERS, REPORT_EVERY, FINAL_COOLDOWN, AGE_CATEGORY_MAP,
+    DOWNLOAD_PDFS, DOWNLOAD_FILE_TYPES, ONLY_FOR_PUBLICATION,
+    PDF_DIR, DOCUMENT_WORKERS
 )
 from ctis_utils import log, append_jsonl, safe_append_lines
 from ctis_http import req, _ensure_json_response
@@ -34,6 +38,18 @@ from ctis_extractors import (
     extract_country_planning, extract_site_contacts,
     extract_funding_sources, extract_scientific_advice, extract_trial_relationships
 )
+
+# Import PDF downloader module
+try:
+    from ctis_pdf_downloader import (
+        extract_documents, download_trial_documents,
+        create_documents_table, insert_document_metadata,
+        update_document_download_status, get_document_stats
+    )
+    HAS_PDF_DOWNLOADER = True
+except ImportError:
+    HAS_PDF_DOWNLOADER = False
+    log("Warning: ctis_pdf_downloader not found, PDF downloading disabled", "WARN")
 
 # Import comprehensive report generator
 try:
@@ -219,6 +235,53 @@ def process_single_trial(ct_number: str,
             generate_trial_report(report_path, fields, inclusion, exclusion, endpoints, 
                                 products, sites_extracted, people_extracted, ms_statuses)
             log(f"Saved basic report to: {report_path}")
+        
+        # ===== PDF/Document Downloading (v2.1.0) =====
+        if DOWNLOAD_PDFS and HAS_PDF_DOWNLOADER:
+            log("\n=== Downloading Trial Documents ===")
+            
+            # Extract document metadata
+            documents = extract_documents(trial_data)
+            log(f"Found {len(documents)} documents")
+            
+            if documents:
+                # Create documents table if it doesn't exist
+                create_documents_table(conn)
+                
+                # Insert document metadata
+                insert_document_metadata(conn, ct_number, documents)
+                conn.commit()
+                
+                # Download documents with version control
+                # PDFs saved to: ctis-out/pdf/{TRIAL_ID}_{filename}
+                download_results = download_trial_documents(
+                    ct_number=ct_number,
+                    documents=documents,
+                    session=session,
+                    output_dir=out_dir,
+                    conn=conn,  # Pass conn for version checking
+                    only_for_publication=ONLY_FOR_PUBLICATION,
+                    file_types=DOWNLOAD_FILE_TYPES
+                )
+                
+                # Update database with download status
+                for doc, result in zip(documents, download_results):
+                    update_document_download_status(conn, ct_number, doc["doc_id"], result)
+                conn.commit()
+                
+                # Report summary
+                downloaded = sum(1 for r in download_results if r.get("success") and r.get("action") == "downloaded")
+                updated = sum(1 for r in download_results if r.get("success") and r.get("action") == "updated")
+                skipped = sum(1 for r in download_results if r.get("action") == "skipped")
+                total_size = sum(r.get("file_size", 0) for r in download_results if r.get("success"))
+                log(f"\nDocument Download Summary:")
+                log(f"  New downloads: {downloaded}")
+                log(f"  Updated:       {updated}")
+                log(f"  Skipped:       {skipped}")
+                log(f"  Total Size:    {total_size / (1024*1024):.2f} MB")
+            else:
+                log("No documents found for this trial")
+        
         log(f"Single trial extraction complete!")
         return True
 
@@ -378,6 +441,131 @@ def process_multiple_trials(to_fetch: List[str],
             log(f"Still failed: {len(still_failed)} trials (saved to {failed_path})", "WARN")
 
     log(f"Extraction complete! Processed {counter - len(failed)} trials ({updated} updates)")
+
+
+def process_trial_documents(
+    ct_numbers: List[str],
+    conn: sqlite3.Connection,
+    session: requests.Session,
+    out_dir: Path
+) -> Dict[str, Any]:
+    """
+    Process and download documents for multiple trials with version control.
+    
+    All PDFs are saved to ctis-out/pdf folder with naming convention:
+    {TRIAL_ID}_{original_filename}
+    
+    This function:
+    - Checks for new document versions before downloading
+    - Replaces outdated documents automatically
+    - Skips documents that are already current
+    
+    Args:
+        ct_numbers: List of CT numbers to process
+        conn: Database connection (used for version checking)
+        session: HTTP session
+        out_dir: Output directory
+    
+    Returns:
+        Dictionary with download statistics
+    """
+    if not HAS_PDF_DOWNLOADER:
+        log("PDF downloader module not available", "WARN")
+        return {"error": "PDF downloader not available"}
+    
+    if not DOWNLOAD_PDFS:
+        log("PDF downloading is disabled in configuration")
+        return {"status": "disabled"}
+    
+    log(f"\n=== Starting Document Download for {len(ct_numbers)} Trials ===")
+    log(f"Output folder: {out_dir / 'pdf'}")
+    
+    # Ensure documents table exists
+    create_documents_table(conn)
+    
+    # Create PDF directory
+    pdf_dir = out_dir / "pdf"
+    pdf_dir.mkdir(parents=True, exist_ok=True)
+    
+    total_docs = 0
+    new_downloads = 0
+    updated_docs = 0
+    skipped_docs = 0
+    failed_docs = 0
+    total_size = 0
+    
+    for idx, ct_number in enumerate(ct_numbers, 1):
+        log(f"\nProcessing documents for {ct_number} ({idx}/{len(ct_numbers)})")
+        
+        try:
+            # Fetch trial data to get document list
+            trial_data = fetch_trial(ct_number, session)
+            
+            # Extract documents
+            documents = extract_documents(trial_data)
+            
+            if not documents:
+                log(f"  No documents found for {ct_number}")
+                continue
+            
+            log(f"  Found {len(documents)} documents")
+            total_docs += len(documents)
+            
+            # Insert/update metadata
+            insert_document_metadata(conn, ct_number, documents)
+            conn.commit()
+            
+            # Download documents with version control
+            results = download_trial_documents(
+                ct_number=ct_number,
+                documents=documents,
+                session=session,
+                output_dir=out_dir,
+                conn=conn,  # Pass conn for version checking
+                only_for_publication=ONLY_FOR_PUBLICATION,
+                file_types=DOWNLOAD_FILE_TYPES
+            )
+            
+            # Update status in database and collect stats
+            for doc, result in zip(documents, results):
+                update_document_download_status(conn, ct_number, doc["doc_id"], result)
+                
+                if result.get("success"):
+                    total_size += result.get("file_size", 0)
+                    if result.get("action") == "updated":
+                        updated_docs += 1
+                    else:
+                        new_downloads += 1
+                elif result.get("action") == "skipped":
+                    skipped_docs += 1
+                else:
+                    failed_docs += 1
+            
+            conn.commit()
+            
+        except Exception as e:
+            log(f"  Error processing documents for {ct_number}: {e}", "ERROR")
+    
+    # Get final stats
+    stats = get_document_stats(conn)
+    
+    log(f"\n=== Document Download Complete ===")
+    log(f"Total documents processed: {total_docs}")
+    log(f"  New downloads:  {new_downloads}")
+    log(f"  Updated:        {updated_docs}")
+    log(f"  Skipped:        {skipped_docs}")
+    log(f"  Failed:         {failed_docs}")
+    log(f"Total size downloaded: {total_size / (1024*1024):.2f} MB")
+    
+    return {
+        "total_documents": total_docs,
+        "new_downloads": new_downloads,
+        "updated": updated_docs,
+        "skipped": skipped_docs,
+        "failed": failed_docs,
+        "total_size_bytes": total_size,
+        "database_stats": stats
+    }
 
 
 # ===================== Report Generation =====================

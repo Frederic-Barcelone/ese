@@ -1,5 +1,5 @@
 """
-Main Sync Orchestrator - PARALLEL VERSION
+Main Sync Orchestrator - PARALLEL VERSION v2.1
 Coordinates all downloaders using syncher_keys.py config
 
 FEATURES: 
@@ -8,6 +8,12 @@ FEATURES:
 - Orphan drugs skipped (manual download required)
 - Proper error handling
 - Thread-safe operations
+- Better progress reporting
+
+UPDATED v2.1:
+- Improved logging
+- Better error recovery
+- Stats summary at end
 """
 
 import time
@@ -49,9 +55,10 @@ class FDASyncOrchestrator:
         """
         self.max_workers = max_workers
         self.print_lock = Lock()  # Thread-safe printing
+        self.start_time = None
         
         print(f"\n{'='*70}")
-        print(f"FDA DATA SYNCER - PARALLEL MODE")
+        print(f"FDA DATA SYNCER - PARALLEL MODE v2.1")
         print(f"Mode: {MODE}")
         print(f"Workers: {max_workers}")
         print(f"Areas: {', '.join(SYNC_AREAS)}")
@@ -72,7 +79,7 @@ class FDASyncOrchestrator:
     def run(self):
         """Run complete sync with parallel processing"""
         
-        start_time = datetime.now()
+        self.start_time = datetime.now()
         results = {}
         
         for area in SYNC_AREAS:
@@ -80,6 +87,7 @@ class FDASyncOrchestrator:
             self._print_safe(f"THERAPEUTIC AREA: {area.upper()}")
             self._print_safe(f"{'='*70}")
             
+            area_start = time.time()
             results[area] = {}
             
             # Step 1: Drug Labels (sequential - needed for subsequent steps)
@@ -99,17 +107,21 @@ class FDASyncOrchestrator:
             self._print_safe(f"  Save to: {OUTPUT_DIR}/orphan_drugs/")
             results[area]['orphan_drugs'] = 'manual'
             
-            # Extract drug names once
+            # Extract drug names once (now with filtering!)
             drug_names = extract_drug_names_from_labels(labels)
-            self._print_safe(f"\n  Extracted {len(drug_names)} unique drug names from labels")
+            self._print_safe(f"\n  📋 Extracted {len(drug_names)} pharmaceutical drug names from labels")
             
             # Step 3-5: Run remaining downloads in parallel
             self._print_safe(f"\n[STEP 3-5] Running parallel downloads with {self.max_workers} workers...")
             parallel_results = self._run_parallel_downloads(area, drug_names)
             results[area].update(parallel_results)
+            
+            # Print area summary
+            area_duration = time.time() - area_start
+            self._print_safe(f"\n  📊 {area.upper()} completed in {area_duration/60:.1f} minutes")
         
         # Print summary
-        duration = datetime.now() - start_time
+        duration = datetime.now() - self.start_time
         self._print_summary(results, duration)
         
         return results
@@ -210,7 +222,7 @@ class FDASyncOrchestrator:
         """Print final summary"""
         
         print(f"\n{'='*70}")
-        print(f"PARALLEL SYNC COMPLETE!")
+        print(f"✅ PARALLEL SYNC COMPLETE!")
         print(f"{'='*70}")
         print(f"Duration: {duration}")
         print(f"Workers Used: {self.max_workers}")
@@ -226,8 +238,17 @@ class FDASyncOrchestrator:
                 else:
                     print(f"  {source.replace('_', ' ').title()}: {count}")
         
-        print(f"\nTotal Items Downloaded: {total_items:,}")
-        print(f"Estimated Speedup: 2x-{self.max_workers}x faster than sequential")
+        print(f"\n📊 TOTALS:")
+        print(f"  Total Items Downloaded: {total_items:,}")
+        print(f"  Therapeutic Areas: {len(results)}")
+        print(f"  Estimated Speedup: 2x-{self.max_workers}x faster than sequential")
+        
+        # Recommendations
+        print(f"\n💡 RECOMMENDATIONS:")
+        print(f"  - Run fda_data_quality_check.py to verify data integrity")
+        print(f"  - Check FDA_DATA/ folder for all downloaded files")
+        print(f"  - For orphan drugs, manually download from FDA website")
+        
         print(f"\n{'='*70}\n")
 
 
@@ -253,14 +274,14 @@ def main():
     elif MODE == 'daily':
         max_workers = 4  # Balanced for daily updates
     else:  # full
-        max_workers = 6  # Aggressive for comprehensive sync
+        max_workers = 4  # Reduced from 6 to be more conservative
     
     print(f"\n{'='*70}")
     print(f"PARALLEL PROCESSING CONFIGURATION")
     print(f"{'='*70}")
     print(f"Mode: {MODE}")
     print(f"Workers: {max_workers}")
-    print(f"Expected Speedup: 2x-{max_workers//2}x")
+    print(f"Expected Speedup: 2x-{max_workers}x")
     print(f"{'='*70}\n")
     
     # Confirm for full mode

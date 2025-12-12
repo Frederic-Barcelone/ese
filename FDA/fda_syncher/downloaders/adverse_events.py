@@ -1,8 +1,10 @@
 """
-Adverse Events Downloader - OPTIMIZED VERSION v2.0
+Adverse Events Downloader - OPTIMIZED VERSION v2.1
 =====================================================================
 FIXED: Now saves progress incrementally to prevent data loss on interruption
 NEW: Circuit breaker to prevent API abuse and allow recovery
+NEW: Better 404 handling - doesn't count expected "no results" as errors
+NEW: Uses filtered drug names to avoid cosmetics/OTC products
 
 Key improvements:
 1. Saves after each batch of drugs (every 10 drugs)
@@ -11,6 +13,7 @@ Key improvements:
 4. Progress tracking file to know where we left off
 5. Circuit breaker pauses on repeated failures
 6. Better error classification and logging
+7. Smarter 404 handling (expected vs unexpected)
 """
 
 import json
@@ -21,7 +24,7 @@ from pathlib import Path
 
 from syncher_keys import FDA_API_KEY, OUTPUT_DIR, get_sync_config
 from ..utils.http_client import SimpleHTTPClient
-from ..utils.helpers import ensure_dir
+from ..utils.helpers import ensure_dir, filter_pharmaceutical_drugs
 
 
 class AdverseEventsDownloader:
@@ -38,6 +41,11 @@ class AdverseEventsDownloader:
         self.consecutive_errors = 0
         self.total_errors = 0
         self.total_requests = 0
+        self.total_no_results = 0  # Track expected "no data" responses
+        
+        # Stats tracking
+        self.drugs_with_events = 0
+        self.drugs_without_events = 0
         
         ensure_dir(f"{self.output_dir}/adverse_events")
         ensure_dir(f"{self.output_dir}/adverse_events/.progress")  # Progress tracking
@@ -52,6 +60,11 @@ class AdverseEventsDownloader:
         # Check configuration
         days_back = self.config['adverse_events']['days_back']
         max_drugs = self.config['adverse_events'].get('max_drugs')
+        
+        # Filter drug names FIRST to remove cosmetics/OTC
+        original_count = len(drug_names)
+        drug_names = filter_pharmaceutical_drugs(drug_names)
+        print(f"  📋 Drug list: {original_count} → {len(drug_names)} (after filtering non-pharma)")
         
         if max_drugs:
             drug_names = drug_names[:max_drugs]
@@ -89,12 +102,18 @@ class AdverseEventsDownloader:
         
         endpoint = f"{self.base_url}/drug/event.json"
         batch_size = 10  # Save every 10 drugs
+        start_time = time.time()
         
         for i, drug_name in enumerate(drug_names, 1):
             if i % 10 == 0:
-                # Show progress with error rate
-                error_rate = (self.total_errors / self.total_requests * 100) if self.total_requests > 0 else 0
-                print(f"    Progress: {len(processed_drugs) + i}/{len(processed_drugs) + len(drug_names)} drugs... (Error rate: {error_rate:.1f}%)")
+                # Show progress with better stats
+                elapsed_mins = (time.time() - start_time) / 60
+                real_error_rate = (self.total_errors / self.total_requests * 100) if self.total_requests > 0 else 0
+                success_with_data = (self.drugs_with_events / (self.drugs_with_events + self.drugs_without_events) * 100) if (self.drugs_with_events + self.drugs_without_events) > 0 else 0
+                print(f"    Progress: {len(processed_drugs) + i}/{len(processed_drugs) + len(drug_names)} | "
+                      f"Events: {len(all_events):,} | "
+                      f"Drugs with data: {success_with_data:.0f}% | "
+                      f"Errors: {real_error_rate:.1f}%")
             
             # Download events for this drug
             drug_events = self._download_drug_events(
@@ -106,6 +125,9 @@ class AdverseEventsDownloader:
             
             if drug_events:
                 all_events.extend(drug_events)
+                self.drugs_with_events += 1
+            else:
+                self.drugs_without_events += 1
             
             processed_drugs.add(drug_name)
             
@@ -117,15 +139,23 @@ class AdverseEventsDownloader:
                     processed_drugs, 
                     all_events
                 )
-                print(f"    [SAVED] Progress checkpoint: {len(all_events)} events")
+                if i % 50 == 0:  # Only print save message every 50 drugs
+                    print(f"    [SAVED] Progress checkpoint: {len(all_events):,} events")
         
         # Final save and cleanup
         self._finalize(output_file, progress_file, all_events)
         
         # Print final statistics
-        success_rate = ((self.total_requests - self.total_errors) / self.total_requests * 100) if self.total_requests > 0 else 0
-        print(f"  [OK] Downloaded {len(all_events)} adverse events")
-        print(f"  Stats: {self.total_requests} requests, {self.total_errors} errors ({success_rate:.1f}% success rate)")
+        total_drugs_processed = self.drugs_with_events + self.drugs_without_events
+        data_rate = (self.drugs_with_events / total_drugs_processed * 100) if total_drugs_processed > 0 else 0
+        real_error_rate = (self.total_errors / self.total_requests * 100) if self.total_requests > 0 else 0
+        
+        print(f"\n  [OK] Downloaded {len(all_events):,} adverse events")
+        print(f"  📊 Stats:")
+        print(f"     - Drugs with events: {self.drugs_with_events}/{total_drugs_processed} ({data_rate:.0f}%)")
+        print(f"     - API requests: {self.total_requests:,}")
+        print(f"     - Real errors: {self.total_errors} ({real_error_rate:.1f}%)")
+        print(f"     - No data (expected): {self.total_no_results}")
         
         return all_events
     
@@ -134,9 +164,9 @@ class AdverseEventsDownloader:
         if self.consecutive_errors >= 10:
             print(f"\n⚠️  CIRCUIT BREAKER TRIGGERED!")
             print(f"    Consecutive errors: {self.consecutive_errors}")
-            print(f"    Pausing for 5 minutes to allow API recovery...")
+            print(f"    Pausing for 60 seconds to allow API recovery...")
             print(f"    Time: {datetime.now().strftime('%H:%M:%S')}")
-            time.sleep(300)  # 5 minute pause
+            time.sleep(60)  # Reduced from 5 minutes to 60 seconds
             self.consecutive_errors = 0
             print(f"    Resuming at {datetime.now().strftime('%H:%M:%S')}")
     
@@ -145,7 +175,6 @@ class AdverseEventsDownloader:
         drug_events = []
         skip = 0
         limit = 100
-        drug_error_count = 0
         
         while skip < 1000:  # Max 1000 events per drug
             params = {
@@ -167,22 +196,27 @@ class AdverseEventsDownloader:
                     error_msg = data['error'].get('message', 'Unknown error')
                     error_code = data['error'].get('code', 'UNKNOWN')
                     
-                    # Count as error
+                    # "No matches found" is NOT an error - it's expected for many drugs
+                    if 'No matches found' in error_msg or error_code == 'NOT_FOUND':
+                        self.total_no_results += 1
+                        # Don't count as error, don't increment consecutive_errors
+                        self.consecutive_errors = 0  # Reset on expected response
+                        break
+                    
+                    # Real error
                     self.total_errors += 1
                     self.consecutive_errors += 1
-                    drug_error_count += 1
                     
-                    # Log error but only print for first occurrence
+                    # Only log unexpected errors
                     if skip == 0:
-                        print(f"      {drug_name}: FDA API error [{error_code}]: {error_msg[:50]}")
+                        print(f"      ⚠️ {drug_name}: API error [{error_code}]")
                     
-                    # Check circuit breaker
                     self._check_circuit_breaker()
                     break
                 
                 # Check for results
                 if not data.get('results'):
-                    # No more results (reached end) - this is success, not error
+                    # No more results - expected, not an error
                     self.consecutive_errors = 0
                     break
                 
@@ -197,34 +231,36 @@ class AdverseEventsDownloader:
                 drug_events.extend(data['results'])
                 
                 # Show progress for drugs with many events
-                if len(drug_events) >= 600 and len(drug_events) % 100 == 0:
-                    print(f"      {drug_name}: {len(drug_events)} events so far...")
+                if len(drug_events) >= 500 and len(drug_events) % 500 == 0:
+                    print(f"      📈 {drug_name}: {len(drug_events)} events...")
                 
                 skip += limit
                 
             except Exception as e:
-                # Count as error
+                error_str = str(e)
+                
+                # 404 with "No matches found" is expected, not an error
+                if '404' in error_str and skip == 0:
+                    self.total_no_results += 1
+                    self.consecutive_errors = 0  # Reset - this is expected
+                    break
+                
+                # Real error
                 self.total_errors += 1
                 self.consecutive_errors += 1
-                drug_error_count += 1
                 
-                # Log error but continue with other drugs
-                if skip == 0:
-                    error_str = str(e)
-                    # Truncate long error messages
-                    if len(error_str) > 100:
-                        error_str = error_str[:97] + "..."
-                    print(f"      {drug_name}: Request error: {error_str}")
+                # Only log real errors on first attempt
+                if skip == 0 and '404' not in error_str:
+                    if len(error_str) > 80:
+                        error_str = error_str[:77] + "..."
+                    print(f"      ❌ {drug_name}: {error_str}")
                 
-                # Check circuit breaker
                 self._check_circuit_breaker()
                 break
         
-        # Log success for drugs with events (and no errors)
-        if drug_events and drug_error_count == 0:
-            # Only log if we got a reasonable number of events
-            if len(drug_events) < 600:
-                print(f"      ✓ {drug_name}: {len(drug_events)} events")
+        # Log success for drugs with significant events
+        if drug_events and len(drug_events) >= 10:
+            print(f"      ✓ {drug_name}: {len(drug_events)} events")
         
         return drug_events
     

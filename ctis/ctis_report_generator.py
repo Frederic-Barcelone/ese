@@ -635,10 +635,10 @@ if __name__ == "__main__":
     print(f"Output: {output_path}")
     
     if generate_ctis_format_report(conn, ct_number, output_path):
-        print(f"✓ CTIS-format report generated successfully!")
+        print(f"âœ“ CTIS-format report generated successfully!")
         print(f"  {output_path}")
     else:
-        print(f"✗ Failed to generate report")
+        print(f"âœ— Failed to generate report")
         sys.exit(1)
     
     conn.close()

@@ -1,7 +1,9 @@
 """
-Enforcement Reports Downloader
+Enforcement Reports Downloader - VERSION v2.1
 Uses syncher_keys.py and syncher_therapeutic_areas.py
 FDA/fda_syncher/downloaders/enforcement.py
+
+UPDATED: Better logging and error handling
 """
 
 import json
@@ -72,6 +74,12 @@ class EnforcementDownloader:
             response = self.http_client.get(endpoint, params=params)
             data = response.json()
             results = data.get('results', [])
+            
+            # Add metadata
+            for result in results:
+                result['therapeutic_area'] = therapeutic_area
+                result['query_date'] = datetime.now().isoformat()
+            
         except Exception as e:
             print(f"  [X] Error: {e}")
             results = []
@@ -82,4 +90,17 @@ class EnforcementDownloader:
             json.dump(results, f, indent=2)
         
         print(f"  [OK] Downloaded {len(results)} enforcement reports")
+        
+        # Print some stats
+        if results:
+            # Count by classification
+            classifications = {}
+            for r in results:
+                cls = r.get('classification', 'Unknown')
+                classifications[cls] = classifications.get(cls, 0) + 1
+            
+            print(f"  📊 By classification:")
+            for cls, count in sorted(classifications.items()):
+                print(f"     - {cls}: {count}")
+        
         return results

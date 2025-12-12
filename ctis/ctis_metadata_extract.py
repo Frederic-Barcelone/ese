@@ -25,18 +25,18 @@ WHAT IT DOES:
 
 KEY MAPPINGS CREATED:
 ---------------------
-• therapeutic_areas (58 items) - MeSH disease/process categories [C], [E], [F], [G], [N]
-• age_ranges (4 items)         - In utero, 0-17 years, 18-64 years, 65+ years
-• trial_categories (3 items)   - Category 1, 2, 3
-• trial_phases (11 items)      - Phase I, II, III, IV, Integrated phases
-• trial_status (13 items)      - Pending, Authorised, Ended, etc.
-• eea_countries (30 items)     - European Economic Area member states
+â€¢ therapeutic_areas (58 items) - MeSH disease/process categories [C], [E], [F], [G], [N]
+â€¢ age_ranges (4 items)         - In utero, 0-17 years, 18-64 years, 65+ years
+â€¢ trial_categories (3 items)   - Category 1, 2, 3
+â€¢ trial_phases (11 items)      - Phase I, II, III, IV, Integrated phases
+â€¢ trial_status (13 items)      - Pending, Authorised, Ended, etc.
+â€¢ eea_countries (30 items)     - European Economic Area member states
 
 REQUIREMENTS:
 -------------
-• Python 3.7+
-• pandas library: pip install pandas openpyxl
-• CTIS list values Excel file from EMA
+â€¢ Python 3.7+
+â€¢ pandas library: pip install pandas openpyxl
+â€¢ CTIS list values Excel file from EMA
 
 FILE LOCATION:
 --------------
@@ -70,7 +70,7 @@ Two JSON files will be created in the same directory as the Excel file:
 
 2. CTIS_Key_Mappings.json (~6 KB)
    - Quick-access mappings for the 6 most commonly used lists
-   - Simple code → name dictionary format
+   - Simple code â†’ name dictionary format
    - Use this for day-to-day coding/decoding
 
 USING THE OUTPUT IN YOUR CODE:
@@ -162,13 +162,13 @@ THERAPEUTIC AREAS (MeSH Classification):
   Format: "Category [Letter] - Specific Area [Letter+Number]"
   
   Main categories:
-  • [C]  = Diseases (C01-C23)
-  • [E]  = Analytical, Diagnostic & Therapeutic Techniques (E01-E07)
-  • [F]  = Psychiatry & Psychology (F01-F04)
-  • [G]  = Phenomena & Processes (G01-G17)
-  • [N]  = Health Care (N01-N06)
+  â€¢ [C]  = Diseases (C01-C23)
+  â€¢ [E]  = Analytical, Diagnostic & Therapeutic Techniques (E01-E07)
+  â€¢ [F]  = Psychiatry & Psychology (F01-F04)
+  â€¢ [G]  = Phenomena & Processes (G01-G17)
+  â€¢ [N]  = Health Care (N01-N06)
   
-  Example: Code 20 → "Diseases [C] - Immune System Diseases [C20]"
+  Example: Code 20 â†’ "Diseases [C] - Immune System Diseases [C20]"
            The [C] indicates top-level category "Diseases"
            The [C20] is the specific MeSH tree number
 
@@ -209,22 +209,22 @@ IMPORTANT NOTES:
 TROUBLESHOOTING:
 ----------------
 Error: "File not found"
-  → Make sure the Excel file is in the same directory as the script,
+  â†’ Make sure the Excel file is in the same directory as the script,
     or provide the full path as an argument
 
 Error: "No module named 'pandas'"
-  → Install pandas: pip install pandas openpyxl
+  â†’ Install pandas: pip install pandas openpyxl
 
 Error: "No module named 'openpyxl'"
-  → Install openpyxl: pip install openpyxl
+  â†’ Install openpyxl: pip install openpyxl
 
 No output or empty JSON:
-  → Check that the Excel file is the correct CTIS list values file
-  → Verify the file has the "Reference data index" sheet
+  â†’ Check that the Excel file is the correct CTIS list values file
+  â†’ Verify the file has the "Reference data index" sheet
 
 Wrong data extracted:
-  → Make sure you're using the English version (_en.xlsx)
-  → Re-download the Excel file from EMA if it seems corrupted
+  â†’ Make sure you're using the English version (_en.xlsx)
+  â†’ Re-download the Excel file from EMA if it seems corrupted
 
 UPDATING THE MAPPINGS:
 ---------------------
@@ -237,10 +237,10 @@ EMA may update the CTIS list values file periodically. To get the latest:
 
 REFERENCES:
 -----------
-• CTIS Public Portal: https://euclinicaltrials.eu/
-• EMA CTIS Info: https://www.ema.europa.eu/en/human-regulatory/research-development/clinical-trials-information-system
-• MeSH Browser: https://meshb.nlm.nih.gov/
-• MedDRA: https://www.meddra.org/
+â€¢ CTIS Public Portal: https://euclinicaltrials.eu/
+â€¢ EMA CTIS Info: https://www.ema.europa.eu/en/human-regulatory/research-development/clinical-trials-information-system
+â€¢ MeSH Browser: https://meshb.nlm.nih.gov/
+â€¢ MedDRA: https://www.meddra.org/
 
 VERSION:
 --------
@@ -282,7 +282,7 @@ def extract_ctis_list_values(excel_file, output_json='CTIS_List_Values.json'):
     all_data = {}
     
     # Get reference index to map sheet numbers to names
-    print("\n📋 Reading reference index...")
+    print("\nðŸ“‹ Reading reference index...")
     df_ref_index = pd.read_excel(excel_file, sheet_name="Reference data index ")
     
     # Create mapping: TAB number -> Reference Entity name
@@ -293,13 +293,13 @@ def extract_ctis_list_values(excel_file, output_json='CTIS_List_Values.json'):
     print(f"   Found {len(tab_to_name)} reference entities\n")
     
     # Process each sheet
-    print("📊 Extracting data from sheets...")
+    print("ðŸ“Š Extracting data from sheets...")
     print("-"*80)
     
     for sheet_name in xl_file.sheet_names:
         # Skip overview and index sheets
         if sheet_name in ['Overview', 'Reference data index ']:
-            print(f"⏭️  Skipping: {sheet_name}")
+            print(f"â­ï¸  Skipping: {sheet_name}")
             continue
         
         try:
@@ -348,21 +348,21 @@ def extract_ctis_list_values(excel_file, output_json='CTIS_List_Values.json'):
                 'data': data_records
             }
             
-            print(f"✓ {ref_name:50s} | Tab {sheet_name:4s} | {len(data_records):3d} rows (filtered from {len(df)})")
+            print(f"âœ“ {ref_name:50s} | Tab {sheet_name:4s} | {len(data_records):3d} rows (filtered from {len(df)})")
             
         except Exception as e:
-            print(f"✗ Error processing sheet {sheet_name}: {e}")
+            print(f"âœ— Error processing sheet {sheet_name}: {e}")
     
     print("-"*80)
-    print(f"\n✅ Successfully extracted {len(all_data)} lists")
+    print(f"\nâœ… Successfully extracted {len(all_data)} lists")
     
     # Save to JSON
-    print(f"\n💾 Saving to {output_json}...")
+    print(f"\nðŸ’¾ Saving to {output_json}...")
     with open(output_json, 'w', encoding='utf-8') as f:
         json.dump(all_data, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Saved to: {output_json}")
-    print(f"📦 File size: {Path(output_json).stat().st_size / 1024:.1f} KB")
+    print(f"âœ… Saved to: {output_json}")
+    print(f"ðŸ“¦ File size: {Path(output_json).stat().st_size / 1024:.1f} KB")
     
     return all_data
 
@@ -418,17 +418,17 @@ def create_key_mappings(all_data, output_json='CTIS_Key_Mappings.json'):
         'eea_countries': extract_code_name_mapping('European Economic Area [EEA] Member States'),
     }
     
-    print("\n✅ Key mappings extracted:")
+    print("\nâœ… Key mappings extracted:")
     for mapping_key, mapping in key_mappings.items():
         print(f"   {mapping_key:20s} : {len(mapping):3d} items")
     
     # Save key mappings
-    print(f"\n💾 Saving to {output_json}...")
+    print(f"\nðŸ’¾ Saving to {output_json}...")
     with open(output_json, 'w', encoding='utf-8') as f:
         json.dump(key_mappings, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Saved to: {output_json}")
-    print(f"📦 File size: {Path(output_json).stat().st_size / 1024:.1f} KB")
+    print(f"âœ… Saved to: {output_json}")
+    print(f"ðŸ“¦ File size: {Path(output_json).stat().st_size / 1024:.1f} KB")
     
     return key_mappings
 
@@ -455,7 +455,7 @@ def main():
     
     # Check if file exists
     if excel_file is None or not excel_file.exists():
-        print(f"❌ Error: CTIS list values Excel file not found!")
+        print(f"âŒ Error: CTIS list values Excel file not found!")
         print(f"\nSearched in:")
         for path in possible_paths:
             print(f"   - {path}")
@@ -465,7 +465,7 @@ def main():
         print(f"   python {sys.argv[0]} ~/Downloads/clinical-trial-information-system-ctis-list-values_en.xlsx")
         return
     
-    print(f"📂 Using file: {excel_file}\n")
+    print(f"ðŸ“‚ Using file: {excel_file}\n")
     
     # Determine output directory (same as input file or current dir)
     output_dir = excel_file.parent if excel_file.parent != Path('.') else Path.cwd()
@@ -484,20 +484,20 @@ def main():
     
     # Summary
     print("\n" + "="*80)
-    print("✅ EXTRACTION COMPLETE!")
+    print("âœ… EXTRACTION COMPLETE!")
     print("="*80)
-    print(f"\n📁 Files created in: {output_dir}/")
+    print(f"\nðŸ“ Files created in: {output_dir}/")
     print("   1. CTIS_List_Values_All.json      - Complete data (all 45 lists)")
     print("   2. CTIS_Key_Mappings.json         - 6 key mappings for quick access")
     
-    print("\n📊 Summary:")
+    print("\nðŸ“Š Summary:")
     print(f"   Total reference lists: {len(all_data)}")
     print(f"   Key mappings:")
     for key, values in key_mappings.items():
         print(f"      - {key:25s} : {len(values):3d} items")
     
     print("\n" + "="*80)
-    print("🎯 NEXT STEPS:")
+    print("ðŸŽ¯ NEXT STEPS:")
     print("="*80)
     print("""
 1. The JSON files are now in your directory

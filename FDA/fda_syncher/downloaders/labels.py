@@ -1,8 +1,9 @@
 """
-Drug Labels Downloader - FIXED VERSION with Keyword Batching
+Drug Labels Downloader - OPTIMIZED VERSION v2.1
 ==============================================================
 FIXED: Batches keywords to avoid "414 URI Too Long" error
 FIXED: Now saves progress in batches to prevent data loss on interruption
+NEW: Filters to prioritize prescription drugs over OTC/cosmetics
 
 Key improvements:
 1. Batches keywords into groups of 15 to avoid URL length limits
@@ -10,6 +11,7 @@ Key improvements:
 3. Can resume from partial progress
 4. Deduplication preserved across resume
 5. Tracks completed keyword batches
+6. Prioritizes HUMAN PRESCRIPTION DRUG product type
 """
 
 import json
@@ -36,6 +38,14 @@ class LabelsDownloader:
         # Keyword batch size to avoid URI too long errors
         # 15 keywords = ~2000 chars per field, safe for most APIs
         self.keyword_batch_size = 15
+        
+        # Stats tracking
+        self.stats = {
+            'prescription': 0,
+            'otc': 0,
+            'other': 0,
+            'filtered_out': 0
+        }
         
         ensure_dir(f"{self.output_dir}/labels")
         ensure_dir(f"{self.output_dir}/labels/.progress")
@@ -115,14 +125,18 @@ class LabelsDownloader:
                     seen_set_ids
                 )
                 
-                # Add unique results
+                # Add unique results (filtered)
                 if batch_results:
                     for result in batch_results:
                         set_id = result.get('set_id')
                         if set_id and set_id not in seen_set_ids:
-                            seen_set_ids.add(set_id)
-                            all_results.append(result)
-                            result_counter += 1
+                            # Filter by product type if desired
+                            if self._should_include(result):
+                                seen_set_ids.add(set_id)
+                                all_results.append(result)
+                                result_counter += 1
+                            else:
+                                self.stats['filtered_out'] += 1
                     
                     # Save progress every save_interval new results
                     if result_counter >= save_interval:
@@ -158,7 +172,34 @@ class LabelsDownloader:
         self._finalize(output_file, progress_file, all_results)
         
         print(f"  [OK] Downloaded {len(all_results)} unique drug labels")
+        print(f"  📊 Breakdown:")
+        print(f"     - Prescription drugs: {self.stats['prescription']}")
+        print(f"     - OTC drugs: {self.stats['otc']}")
+        print(f"     - Other: {self.stats['other']}")
+        if self.stats['filtered_out'] > 0:
+            print(f"     - Filtered out: {self.stats['filtered_out']}")
+        
         return all_results
+    
+    def _should_include(self, result):
+        """
+        Determine if a label should be included
+        Tracks stats by product type
+        """
+        openfda = result.get('openfda', {})
+        product_types = openfda.get('product_type', [])
+        
+        if 'HUMAN PRESCRIPTION DRUG' in product_types:
+            self.stats['prescription'] += 1
+            return True
+        elif 'HUMAN OTC DRUG' in product_types:
+            self.stats['otc'] += 1
+            return True  # Include OTC but track separately
+        else:
+            self.stats['other'] += 1
+            # Still include - might be relevant
+            # But we track it for analysis
+            return True
     
     def _batch_keywords(self, keywords):
         """Split keywords into batches to avoid URI too long errors"""

@@ -3,8 +3,10 @@
 
 """
 CTIS Configuration Module
-Contains all configuration constants, patterns, and mappings
-ctis/ctis_congif.py
+Contains ALL configuration constants, patterns, and mappings
+ctis/ctis_config.py
+
+>>> EDIT THIS FILE TO CONFIGURE THE EXTRACTION <<<
 """
 
 import os
@@ -13,36 +15,86 @@ import json
 from pathlib import Path
 from typing import Dict, Optional
 
-# ===================== API Configuration =====================
+# =====================================================================
+#                    MAIN CONFIGURATION - EDIT HERE
+# =====================================================================
 
+# ========== EXTRACTION MODE ===========================================
+# Choose ONE mode by setting it to a value, others to None
+
+# Mode 1: Extract a single trial by CT number
+SINGLE_TRIAL = None  # e.g., "2024-514133-38-00"
+
+# Mode 2: Extract a specific number of trials  
+TRIAL_COUNT = None  # e.g., 100
+
+# Mode 3: Extract ALL trials (can take hours!)
+EXTRACT_ALL = True
+
+# ========== RARE DISEASE FILTER =======================================
+# Set to True to ONLY extract rare disease trials
+FILTER_RARE_DISEASE_ONLY = True
+
+# ========== PDF/DOCUMENT DOWNLOAD =====================================
+# Set to True to download PDF documents for each trial
+DOWNLOAD_PDFS = True
+
+# Set to True to ONLY download documents (skip trial extraction)
+# Use this to download PDFs for trials already in database
+DOWNLOAD_ONLY = True
+
+# Types of files to download (extensions). Set to None for all types.
+DOWNLOAD_FILE_TYPES = ['.pdf']
+
+# Only download documents marked "for publication" (public versions)
+ONLY_FOR_PUBLICATION = True
+
+# Maximum file size to download (in MB)
+MAX_DOWNLOAD_SIZE_MB = 500
+
+# ========== OUTPUT SETTINGS ===========================================
+OUT_DIR = Path("ctis-out")
+RESET_DATABASE = False  # Set True to delete existing data and start fresh
+CHECK_FOR_UPDATES = True  # If False, re-downloads all trials
+
+# ========== PERFORMANCE SETTINGS ======================================
+MAX_WORKERS = 3  # Concurrent download threads (1-5 recommended)
+RATE_LIMIT_RPS = 2.0  # Max requests per second (2-3 recommended)
+PAGE_SIZE = 100  # Results per page (50-100 recommended)
+REQUEST_TIMEOUT = 60.0  # Seconds to wait for each request
+MAX_RETRIES = 6  # How many times to retry failed requests
+BASE_BACKOFF = 1.0  # Initial wait time for retries
+
+# =====================================================================
+#                    INTERNAL CONFIGURATION (don't edit)
+# =====================================================================
+
+# API Configuration
 DEFAULT_BASE = os.environ.get("CTIS_BASE", "https://euclinicaltrials.eu")
 BASE = DEFAULT_BASE.rstrip("/")
 SEARCH_URL = f"{BASE}/ctis-public-api/search"
 DETAIL_URL = f"{BASE}/ctis-public-api/retrieve/{{ct}}"
 PORTAL_URL = f"{BASE}/search-for-clinical-trials/?lang=en"
 
-# ===================== Output Paths (defaults) =====================
-
-OUT_DIR = Path("ctis-out")
+# Output Paths (derived from OUT_DIR)
 NDJSON_PATH = OUT_DIR / "ctis_full.ndjson"
 DB_PATH = OUT_DIR / "ctis.db"
 CTNUMBERS_PATH = OUT_DIR / "ct_numbers.txt"
 FAILED_PATH = OUT_DIR / "failed_ctnumbers.txt"
+PDF_DIR = OUT_DIR / "pdf"
+PDF_FOLDER_NAME = "pdf"
 
-# ===================== Request Configuration =====================
+# Document download settings
+DOCUMENT_WORKERS = 2
+DOCUMENT_MAX_RETRIES = 3
+DOCUMENT_TIMEOUT = 120.0
+DOCUMENT_DOWNLOAD_URL = f"{BASE}/ctis-public-api/retrieve/{{ct}}/document/{{doc_id}}"
+DOCUMENT_DOWNLOAD_URL_ALT = f"{BASE}/ctis-public-api/download/{{doc_id}}"
 
-PAGE_SIZE = 100
-MAX_WORKERS = 3
-MAX_RETRIES = 6
-BASE_BACKOFF = 1.0
+# Other internal settings
 JITTER_RANGE = (0.15, 0.45)
 FINAL_COOLDOWN = 1.0
 REPORT_EVERY = 50
-RATE_LIMIT_RPS = 2.0
-REQUEST_TIMEOUT = 60.0
-
-# ===================== Search Parameters =====================
-
 STATUS_SEGMENTS = [1, 2, 3, 4, 5, 6, 7, 8]
 YEAR_START = 2019
 
@@ -434,7 +486,7 @@ def get_country_iso_codes(country_name: str) -> Dict[str, str]:
     # Country name aliases - map CTIS names to JSON names
     COUNTRY_ALIASES = {
         'Czechia': 'Czech Republic',
-        'Türkiye': 'Turkey',
+        'TÃ¼rkiye': 'Turkey',
         'Turkiye': 'Turkey',
         'Korea, Republic of': 'South Korea',
         'Republic of Korea': 'South Korea',

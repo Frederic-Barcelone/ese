@@ -1,11 +1,18 @@
 """
-FDA Data Syncer - Entry Point
+FDA Data Syncer - Entry Point v2.1
 Replaces syncher.py
 
 Uses configuration from:
 - syncher_keys.py
 - syncher_therapeutic_areas.py
-FDA/synch.py
+
+UPDATES v2.1:
+- Improved drug name filtering (removes cosmetics/OTC)
+- Better timeout handling for approval packages
+- Smarter 404 handling (expected vs error)
+- Reduced circuit breaker pause time
+- Better progress reporting
+
 Usage:
     python sync.py
 """
