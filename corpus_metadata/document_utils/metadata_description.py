@@ -60,7 +60,7 @@ class DescriptionExtractor:
         self.client = None
         
         if model is None:
-            model = "claude-3-5-sonnet-20241022"
+            model = "claude-sonnet-4-5-20250929"
             self._log("Using default model: " + model)
         self.model = model
 
@@ -129,7 +129,7 @@ class DescriptionExtractor:
                 cleaned = cleaned[len(p):].strip()
         
         cleaned = cleaned.strip('"\'')
-        cleaned = re.sub(r'^[\.\…\s]+|[\.\…\s]+$', '', cleaned)
+        cleaned = re.sub(r'^[\.\â€¦\s]+|[\.\â€¦\s]+$', '', cleaned)
         cleaned = re.sub(r'\s+', ' ', cleaned).strip()
         
         if cleaned and cleaned.islower():

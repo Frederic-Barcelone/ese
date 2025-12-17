@@ -36,7 +36,7 @@ class IntelligentDocumentRenamer:
         self.logger = get_logger('intelligent_renamer')
         
         # Model configuration
-        self.model = "claude-3-5-sonnet-20241022"
+        self.model = "claude-sonnet-4-5-20250929"
         
         # Initialize Claude client
         self._initialize_claude_client()

@@ -1,0 +1,293 @@
+# ==============================================================================
+# RARE DISEASE EXTRACTION - PIPELINE CONFIGURATION v13.1
+# ==============================================================================
+# corpus_metadata/document_config/config.yaml
+#
+# Environment Variables:
+#   CORPUS_BASE_PATH - Base path for all resources (default: parent of corpus_metadata)
+#   CLAUDE_API_KEY   - API key for Claude AI validation
+
+system:
+  name: "Rare Disease Document Extraction"
+  version: "13.1"
+
+# ==============================================================================
+# PATHS (relative to CORPUS_BASE_PATH or absolute)
+# ==============================================================================
+paths:
+  dictionaries: "corpus_dictionaries/output_datasources"
+  databases: "corpus_db"
+  logs: "corpus_logs"
+  cache: "cache"
+
+# ==============================================================================
+# GLOBAL DEFAULTS
+# ==============================================================================
+defaults:
+  confidence_threshold: 0.75
+  fuzzy_match_threshold: 85
+  context_window: 100
+  min_term_length: 3
+  prefix_start_number: 1000
+
+
+# ==============================================================================
+# FEATURE FLAGS
+# ==============================================================================
+# Each feature can be enabled (true) or disabled (false) independently.
+# Disabling unused features improves performance and reduces dependencies.
+# ==============================================================================
+features:
+  # ---------------------------------------------------------------------------
+  # CORE EXTRACTION - Primary entity detection modules
+  # ---------------------------------------------------------------------------
+  
+  # drug_detection: Identifies drug names (generic, brand, investigational)
+  # Uses RxNorm, FDA approved drugs, and investigational drug databases
+  drug_detection: true
+  
+  # disease_detection: Identifies disease names and rare disease conditions
+  # Uses Orphanet, DOID, SNOMED-CT, and ICD-10 databases
+  disease_detection: true
+  
+  # abbreviation_extraction: Extracts and expands medical abbreviations
+  # Links abbreviations to their full forms (e.g., SMA -> Spinal Muscular Atrophy)
+  # NOTE: Code must use 'abbreviation_extraction' key (not 'abbreviations')
+  abbreviation_extraction: true
+  
+  # ---------------------------------------------------------------------------
+  # DOCUMENT ANALYSIS - Document structure and classification
+  # ---------------------------------------------------------------------------
+  
+  # classification: Automatically classifies document type
+  # Identifies CSRs, protocols, SmPCs, IBs, manuscripts, etc.
+  classification: true
+  
+  # section_detection: Identifies document sections and structure
+  # Detects headers, abstracts, methods, results, references, etc.
+  section_detection: true
+  
+  # table_extraction: Extracts tabular data from documents
+  # Parses tables for structured data like dosing, endpoints, demographics
+  table_extraction: true
+  
+  # ---------------------------------------------------------------------------
+  # METADATA EXTRACTION - Document-level information
+  # ---------------------------------------------------------------------------
+  
+  # title_extraction: Extracts document title from content
+  # Uses multiple heuristics: headers, metadata, first lines
+  title_extraction: true
+  
+  # date_extraction: Extracts dates from document
+  # Identifies publication date, approval date, revision dates
+  date_extraction: true
+  
+  # description_extraction: Generates document description/summary
+  # Creates brief summary based on content analysis
+  description_extraction: true
+  
+  # ---------------------------------------------------------------------------
+  # CITATION/REFERENCE EXTRACTION - Scholarly reference handling
+  # ---------------------------------------------------------------------------
+  
+  # citation_extraction: Extracts inline citations and reference styles
+  # Detects Vancouver, APA, Harvard citation formats
+  citation_extraction: true
+  
+  # person_extraction: Extracts author names, PIs, investigators
+  # Handles Unicode names, ORCIDs, and affiliations
+  person_extraction: true
+  
+  # reference_extraction: Extracts bibliographic references
+  # Identifies DOIs, PMIDs, URLs, and 60+ identifier types
+  reference_extraction: true
+  
+  # ---------------------------------------------------------------------------
+  # EXTERNAL APIS - Third-party service integrations
+  # ---------------------------------------------------------------------------
+  # ⚠️  WARNING: PRIVACY/COMPLIANCE CONSIDERATION
+  # ⚠️  The following features send document content and/or extracted entities
+  # ⚠️  to external third-party services. For sensitive, confidential, or
+  # ⚠️  internal documents, consider setting these to FALSE.
+  # ---------------------------------------------------------------------------
+  
+  # pubtator_enrichment: Enriches entities via NCBI PubTator3 API
+  # Validates and adds identifiers for drugs/diseases
+  # ⚠️  SENDS DATA TO: NCBI (National Center for Biotechnology Information)
+  # ⚠️  For internal/confidential corpora, set to: false
+  pubtator_enrichment: true  # CHANGED: Default false for privacy
+  
+  # ai_validation: Uses Claude AI for entity validation
+  # Requires CLAUDE_API_KEY environment variable to be set
+  # ⚠️  SENDS DATA TO: Anthropic Claude API
+  # ⚠️  For internal/confidential corpora, set to: false
+  ai_validation: true  # CHANGED: Default false for privacy
+  
+  # ---------------------------------------------------------------------------
+  # FILE OPERATIONS - Output and caching
+  # ---------------------------------------------------------------------------
+  
+  # intelligent_rename: Renames files based on extracted metadata
+  # Generates descriptive filenames with auto-incrementing prefixes
+  intelligent_rename: true
+  
+  # caching: Enables extraction result caching
+  # Speeds up reprocessing of previously analyzed documents
+  caching: true
+
+# ==============================================================================
+# RESOURCES (filenames relative to paths.dictionaries)
+# ==============================================================================
+resources:
+  # Abbreviations
+  abbreviation_general: "2025_08_abbreviation_general.json"
+  abbreviation_umls_biological: "2025_08_umls_biological_abbreviations_v5.tsv"
+  abbreviation_umls_clinical: "2025_08_umls_clinical_abbreviations_v5.tsv"
+  
+  # Diseases
+  disease_lexicon: "2025_08_lexicon_disease.json"
+  disease_rare_acronyms: "2025_08_rare_disease_acronyms.json"
+  
+  # Drugs
+  drug_lexicon: "2025_08_lexicon_drug.json"
+  drug_alexion: "2025_08_alexion_drugs.json"
+  drug_fda_approved: "2025_08_fda_approved_drugs.json"
+  drug_investigational: "2025_08_investigational_drugs.json"
+  
+  # Other
+  medical_terms_lexicon: "2025_08_lexicon_medical_terms.json"
+  document_types: "2025_08_document_types.json"
+  clinical_trial_metadata: "00966_clinical_trial_metadata.json"
+
+# ==============================================================================
+# DATABASES (filenames relative to paths.databases)
+# ==============================================================================
+databases:
+  disease_ontology: "disease_ontology.db"
+  disease_orphanet: "orphanet_nlp.db"
+
+# ==============================================================================
+# PIPELINE
+# ==============================================================================
+pipeline:
+  stages:
+    - name: metadata
+      sequence: 1
+      limits:
+        pdf_pages: 10
+        text_chars: 10000
+      tasks:
+        - classification
+        - title_extraction
+        - date_extraction
+        - description_extraction
+    
+    - name: entities
+      sequence: 2
+      limits:
+        pdf_pages: null
+        text_chars: null
+      tasks:
+        - drug_detection
+        - disease_detection
+        - abbreviation_extraction
+        - citation_extraction
+        - person_extraction
+        - reference_extraction
+
+# ==============================================================================
+# API CONFIGURATION
+# ==============================================================================
+api:
+  pubtator:
+    base_url: "https://www.ncbi.nlm.nih.gov/research/pubtator3-api"
+    timeout_seconds: 30
+    rate_limit_per_minute: 30
+  
+  claude:
+    model: "claude-sonnet-4-5-20250929"
+    max_tokens: 1500
+    temperature: 0
+
+# ==============================================================================
+# VALIDATION
+# ==============================================================================
+validation:
+  drug:
+    confidence_threshold: 0.85
+    stages: ["false_positive_filter", "knowledge_base", "claude_ai"]
+  
+  disease:
+    confidence_threshold: 0.75
+    enrichment_mode: "balanced"
+    stages: ["pattern_detection", "lexicon_matching", "claude_ai"]
+
+# ==============================================================================
+# DEDUPLICATION
+# ==============================================================================
+deduplication:
+  enabled: true
+  priority_order: ["drug", "disease", "abbreviation"]
+  remove_expansion_matches: true
+
+# ==============================================================================
+# PROMOTION (Abbreviation -> Entity)
+# ==============================================================================
+promotion:
+  min_ids_required: 1
+  confidence_boost: 0.05
+  
+  preferred_drug_ids: ["RxCUI", "MESH", "ATC", "DrugBank", "UNII"]
+  preferred_disease_ids: ["ORPHA", "DOID", "SNOMED_CT", "ICD10", "UMLS_CUI"]
+
+# ==============================================================================
+# EXTRACTION SETTINGS
+# ==============================================================================
+extraction:
+  citation:
+    detect_style: true
+    link_inline: true
+    extract_identifiers: true
+  
+  person:
+    extract_affiliations: true
+    classify_roles: true
+    validate_orcid: true
+  
+  reference:
+    extract_all_types: true
+    reconstruct_urls: true
+    classify_roles: true
+
+# ==============================================================================
+# OUTPUT
+# ==============================================================================
+output:
+  format: "json"
+  json_indent: 2
+  include:
+    statistics: true
+    confidence: true
+    context: true
+    identifiers: true
+
+# ==============================================================================
+# LOGGING
+# ==============================================================================
+logging:
+  level: "INFO"
+  console: false
+  console_level: "ERROR"
+  file: "corpus.log"
+  max_size_mb: 10
+  backup_count: 5
+
+# ==============================================================================
+# RUNTIME
+# ==============================================================================
+runtime:
+  batch_size: 10
+  timeout_seconds: 300
+  max_file_size_mb: 100
+  on_error: "log_and_continue"

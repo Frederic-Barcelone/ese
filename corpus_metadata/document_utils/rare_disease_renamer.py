@@ -35,7 +35,7 @@ class RareDiseaseDocumentRenamer:
     def __init__(self, 
                  claude_api_key: Optional[str] = None,
                  claude_client: Optional[Any] = None,
-                 model: str = "claude-3-5-sonnet-20241022"):
+                 model: str = "claude-sonnet-4-5-20250929"):
         """
         Initialize the renamer
         
@@ -199,7 +199,7 @@ class RareDiseaseDocumentRenamer:
             # Perform rename
             try:
                 shutil.move(str(file_path), str(new_path))
-                logger.info(f"Renamed: {file_path.name} → {new_filename}")
+                logger.info(f"Renamed: {file_path.name} â†’ {new_filename}")
                 
                 return {
                     'success': True,

@@ -1,28 +1,37 @@
 #!/usr/bin/env python3
 """
-Enhanced Entity Extraction Pipeline - UPDATED v11.1.1
+Enhanced Entity Extraction Pipeline - UPDATED v11.2.0
 =====================================================
 Location: corpus_metadata/document_utils/entity_extraction.py
-Version: 11.1.1 - ADDED INTRO TEXT EXTRACTION
-Last Updated: 2025-10-14
+Version: 11.2.0 - FIXED ABBREVIATION EXTRACTION + CONTEXT FILTERING
+Last Updated: 2025-12-16
+
+CHANGES IN v11.2.0:
+==================
+âœ“ FIXED abbreviation extraction returning empty results
+âœ“ ADDED fallback abbreviation extraction when primary fails
+âœ“ ADDED proper conversion between AbbreviationCandidate class variants
+âœ“ ADDED context-aware drug filtering (lab reagents, signaling molecules)
+âœ“ ADDED disease validation (cell types, incomplete names, artifacts)
 
 CHANGES IN v11.1.1:
 ==================
-✓ ADDED intro text file extraction (saves limited text separately)
-✓ UPDATED file naming: _full.txt and _intro.txt
-✓ IMPROVED logging for text extraction
+âœ“ ADDED intro text file extraction (saves limited text separately)
+âœ“ UPDATED file naming: _full.txt and _intro.txt
+âœ“ IMPROVED logging for text extraction
 
 CHANGES IN v11.1.0:
 ==================
-✓ ADDED citation extraction (Step 2)
-✓ ADDED person extraction (Step 3)  
-✓ ADDED reference extraction (Step 4)
-✓ UPDATED extraction summary to include citation/person/reference counts
-✓ Renumbered existing steps (drugs: 2→5, diseases: 3→6, dedup: 3.5→7, etc.)
+âœ“ ADDED citation extraction (Step 2)
+âœ“ ADDED person extraction (Step 3)  
+âœ“ ADDED reference extraction (Step 4)
+âœ“ UPDATED extraction summary to include citation/person/reference counts
+âœ“ Renumbered existing steps (drugs: 2â†’5, diseases: 3â†’6, dedup: 3.5â†’7, etc.)
 """
 
 import json
 import logging
+import re  # ADDED for fallback extraction
 import time
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
@@ -49,7 +58,6 @@ from corpus_metadata.document_utils.entity_extraction_utils import (
 
 # Import extraction modules
 from corpus_metadata.document_utils.entity_db_extraction import ExtractionDatabase
-from corpus_metadata.document_utils.entity_report import generate_extraction_report
 from corpus_metadata.document_utils.entity_abbreviation_promotion import (
     process_abbreviation_candidates,
     has_required_id,
@@ -60,7 +68,397 @@ from corpus_metadata.document_utils.entity_abbreviation_promotion import (
 logger = logging.getLogger(__name__)
 
 # Pipeline version 
-PIPELINE_VERSION = 'v11.1.2'
+PIPELINE_VERSION = 'v11.2.0'
+
+
+# ============================================================================
+# NEW IN v11.2.0: FALLBACK ABBREVIATION EXTRACTION
+# ============================================================================
+
+def _extract_abbreviations_fallback(text: str) -> List[Dict[str, Any]]:
+    """
+    Fallback abbreviation extraction when primary extractor fails.
+    
+    Uses robust regex patterns to find abbreviations when the main
+    extractor returns empty or invalid results.
+    
+    Args:
+        text: Document text to extract from
+        
+    Returns:
+        List of abbreviation dictionaries
+    """
+    abbreviations = []
+    seen = set()
+    
+    # Pattern 1: "Full Name (ABBR)" - most common biomedical format
+    pattern1 = re.compile(
+        r'([A-Z][a-zA-Z0-9\-\s]{2,60}?)\s*\(\s*([A-Z][A-Z0-9\-/]{1,12})\s*\)',
+        re.MULTILINE
+    )
+    
+    for match in pattern1.finditer(text):
+        expansion = match.group(1).strip()
+        abbr = match.group(2).strip()
+        
+        # Validation
+        if not _is_valid_abbrev(abbr) or not _is_valid_expansion(expansion, abbr):
+            continue
+        
+        key = abbr.upper()
+        if key not in seen:
+            seen.add(key)
+            abbreviations.append({
+                'abbreviation': abbr,
+                'expansion': expansion,
+                'confidence': 0.95,
+                'context_type': _infer_abbrev_context_type(expansion),
+                'source': 'fallback_pattern',
+                'metadata': {'detection': 'full_name_parentheses'}
+            })
+    
+    # Pattern 2: "ABBR (Full Name)" - reverse format
+    pattern2 = re.compile(
+        r'\b([A-Z][A-Z0-9\-/]{1,12})\s*\(\s*([A-Z][a-zA-Z0-9\-\s]{2,60}?)\s*\)',
+        re.MULTILINE
+    )
+    
+    for match in pattern2.finditer(text):
+        abbr = match.group(1).strip()
+        expansion = match.group(2).strip()
+        
+        if not _is_valid_abbrev(abbr) or not _is_valid_expansion(expansion, abbr):
+            continue
+        
+        key = abbr.upper()
+        if key not in seen:
+            seen.add(key)
+            abbreviations.append({
+                'abbreviation': abbr,
+                'expansion': expansion,
+                'confidence': 0.90,
+                'context_type': _infer_abbrev_context_type(expansion),
+                'source': 'fallback_pattern',
+                'metadata': {'detection': 'abbr_parentheses'}
+            })
+    
+    logger.info(f"Fallback abbreviation extraction found {len(abbreviations)} abbreviations")
+    return abbreviations
+
+
+def _is_valid_abbrev(abbr: str) -> bool:
+    """Check if abbreviation has valid structure."""
+    if not abbr or len(abbr) < 2 or len(abbr) > 15:
+        return False
+    
+    # Must have at least 2 uppercase or contain digit
+    upper_count = sum(1 for c in abbr if c.isupper())
+    digit_count = sum(1 for c in abbr if c.isdigit())
+    
+    if upper_count < 2 and digit_count == 0:
+        return False
+    
+    # Filter stopwords
+    stopwords = {
+        'THE', 'THIS', 'THAT', 'WITH', 'FROM', 'INTO', 'OVER', 'AND', 'BUT',
+        'FOR', 'NOR', 'HTTP', 'HTTPS', 'WWW', 'COM', 'ORG', 'NET', 'EDU'
+    }
+    if abbr.upper() in stopwords:
+        return False
+    
+    return True
+
+
+def _is_valid_expansion(expansion: str, abbr: str) -> bool:
+    """Check if expansion is valid for abbreviation."""
+    if not expansion or len(expansion) < 3:
+        return False
+    
+    # Expansion should be longer than abbreviation
+    if len(expansion) <= len(abbr):
+        return False
+    
+    # Should start with capital
+    if not expansion[0].isupper():
+        return False
+    
+    # Filter invalid starts
+    invalid_starts = {'ref', 'reference', 'http', 'https', 'www', 'doi', 'pmid'}
+    first_word = expansion.split()[0].lower()
+    if first_word in invalid_starts:
+        return False
+    
+    return True
+
+
+def _infer_abbrev_context_type(expansion: str) -> str:
+    """Infer context type from expansion text."""
+    exp_lower = expansion.lower()
+    
+    # Disease patterns
+    if any(t in exp_lower for t in 
+           ['disease', 'syndrome', 'disorder', 'deficiency', 'cancer',
+            'carcinoma', 'leukemia', 'lymphoma', 'vasculitis', 'neuropathy',
+            'hypertension', 'fibrosis']):
+        return 'disease'
+    
+    # Drug patterns
+    if any(t in exp_lower for t in 
+           ['therapy', 'treatment', 'drug', 'medication', 'inhibitor',
+            'antagonist', 'agonist', 'blocker', 'approved']):
+        return 'drug'
+    
+    # Biological patterns
+    if any(t in exp_lower for t in 
+           ['protein', 'receptor', 'channel', 'enzyme', 'antibody',
+            'antigen', 'factor', 'kinase', 'transporter']):
+        return 'biological'
+    
+    # Organization patterns
+    if any(t in exp_lower for t in 
+           ['organization', 'association', 'administration', 'institute',
+            'agency', 'college', 'academy']):
+        return 'organization'
+    
+    # Clinical patterns
+    if any(t in exp_lower for t in 
+           ['trial', 'study', 'test', 'assay', 'analysis']):
+        return 'clinical'
+    
+    return 'general'
+
+
+def _convert_abbreviation_candidate(candidate: Any) -> Optional[Dict[str, Any]]:
+    """
+    Convert any AbbreviationCandidate variant to output dictionary.
+    
+    Handles both the AbbreviationCandidate from abbreviation_types.py
+    and the one from abbreviation_patterns.py, plus plain dictionaries.
+    
+    Args:
+        candidate: Any candidate-like object
+        
+    Returns:
+        Dictionary with standardized fields, or None if invalid
+    """
+    if candidate is None:
+        return None
+    
+    # Already a dict
+    if isinstance(candidate, dict):
+        abbr = candidate.get('abbreviation', '')
+        exp = candidate.get('expansion', '')
+        conf = candidate.get('confidence', 0.0)
+        
+        if not abbr:
+            return None
+            
+        return {
+            'abbreviation': abbr,
+            'expansion': exp or '',
+            'confidence': float(conf) if conf else 0.0,
+            'context_type': candidate.get('context_type'),
+            'source': candidate.get('source'),
+            'metadata': candidate.get('metadata', {})
+        }
+    
+    # Has to_dict method
+    if hasattr(candidate, 'to_dict'):
+        try:
+            return _convert_abbreviation_candidate(candidate.to_dict())
+        except Exception as e:
+            logger.warning(f"to_dict() failed: {e}")
+    
+    # Direct attribute access
+    abbr = getattr(candidate, 'abbreviation', None)
+    exp = getattr(candidate, 'expansion', None)
+    conf = getattr(candidate, 'confidence', 0.0)
+    
+    if not abbr:
+        return None
+    
+    return {
+        'abbreviation': str(abbr),
+        'expansion': str(exp) if exp else '',
+        'confidence': float(conf) if conf else 0.0,
+        'context_type': getattr(candidate, 'context_type', None),
+        'source': getattr(candidate, 'source', None),
+        'metadata': getattr(candidate, 'metadata', {}) or {}
+    }
+
+
+# ============================================================================
+# NEW IN v11.2.0: CONTEXT-AWARE DRUG FILTERING
+# ============================================================================
+
+def _filter_drugs_by_context(
+    drugs: List[Dict[str, Any]],
+    full_text: str
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """
+    Filter drug candidates based on context patterns.
+    
+    Identifies and excludes:
+    - Lab reagents (cell culture components)
+    - Signaling molecules (intracellular Ca2+, ROS)
+    - Gene/protein name fragments
+    - Biomarkers used for staining
+    
+    Args:
+        drugs: List of drug candidate dictionaries
+        full_text: Full document text for context
+        
+    Returns:
+        Tuple of (kept_drugs, excluded_drugs)
+    """
+    # Context patterns that indicate NON-drug usage
+    lab_context_patterns = [
+        # Cell culture medium
+        re.compile(r'\b(?:medium|media|DMEM|RPMI|MCDB|culture)\b.{0,50}', re.IGNORECASE),
+        re.compile(r'\b(?:supplemented|containing)\s+\d+\s*(?:mM|Î¼M|%|mg/mL|U/mL)\b', re.IGNORECASE),
+        # Experimental
+        re.compile(r'\b(?:stimulated|treated|incubated)\s+(?:with|using)\b', re.IGNORECASE),
+        # Buffer/solution
+        re.compile(r'\b(?:buffer|solution|PBS|HEPES)\b', re.IGNORECASE),
+    ]
+    
+    signaling_patterns = [
+        # Intracellular signaling
+        re.compile(r'\b(?:intracellular|cytosolic)\s*\[?\s*', re.IGNORECASE),
+        re.compile(r'\[\s*', re.IGNORECASE),  # [Ca2+] style notation
+        re.compile(r'\b(?:signaling|pathway|cascade|transduction)\b', re.IGNORECASE),
+        re.compile(r'\b(?:release|influx|efflux|flux|entry)\b', re.IGNORECASE),
+    ]
+    
+    gene_patterns = [
+        # Part of gene/protein names
+        re.compile(r'\s*(?:gene|receptor|channel|transporter|factor)\b', re.IGNORECASE),
+        re.compile(r'\b(?:Receptor|Channel)\s+(?:Type\s+)?\d*\s*\(\s*', re.IGNORECASE),
+        re.compile(r'\b(?:TRPC|TRPV|TRPM|ORAI|STIM)\d*\b', re.IGNORECASE),
+    ]
+    
+    biomarker_patterns = [
+        # Staining/detection
+        re.compile(r'\b(?:staining|stained|costaining|immunostaining)\b', re.IGNORECASE),
+        re.compile(r'\b(?:marker|markers|indicated)\s+(?:by|for|with)\b', re.IGNORECASE),
+        re.compile(r'\b(?:FACS|flow\s+cytometry)\b', re.IGNORECASE),
+    ]
+    
+    kept = []
+    excluded = []
+    
+    for drug in drugs:
+        name = drug.get('name', '')
+        context = drug.get('context', '')
+        
+        # Get context from text if not provided
+        if not context and full_text:
+            match = re.search(re.escape(name), full_text, re.IGNORECASE)
+            if match:
+                start = max(0, match.start() - 100)
+                end = min(len(full_text), match.end() + 100)
+                context = full_text[start:end]
+        
+        # Check for non-drug context
+        is_lab_reagent = any(p.search(context) for p in lab_context_patterns)
+        is_signaling = any(p.search(context) for p in signaling_patterns)
+        is_gene_fragment = any(p.search(context) for p in gene_patterns)
+        is_biomarker = any(p.search(context) for p in biomarker_patterns)
+        
+        if is_lab_reagent or is_signaling or is_gene_fragment or is_biomarker:
+            drug['filtered_out'] = True
+            drug['filter_reason'] = (
+                'lab_reagent' if is_lab_reagent else
+                'signaling_molecule' if is_signaling else
+                'gene_fragment' if is_gene_fragment else
+                'biomarker'
+            )
+            excluded.append(drug)
+        else:
+            kept.append(drug)
+    
+    logger.info(f"Drug context filter: kept {len(kept)}, excluded {len(excluded)}")
+    return kept, excluded
+
+
+# ============================================================================
+# NEW IN v11.2.0: DISEASE VALIDATION
+# ============================================================================
+
+def _validate_disease_entities(
+    diseases: List[Dict[str, Any]],
+    full_text: str = None
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """
+    Validate disease entities and filter invalid ones.
+    
+    Filters out:
+    - Cell types (hPASMCs, HUVECs)
+    - Incomplete names (peri-, -associated without base)
+    - Parsing artifacts
+    
+    Args:
+        diseases: List of disease candidate dictionaries
+        full_text: Optional full document text
+        
+    Returns:
+        Tuple of (valid_diseases, invalid_diseases)
+    """
+    # Cell type patterns (not diseases)
+    cell_type_patterns = [
+        re.compile(r'^h[A-Z]{2,}[Cc]s?$'),  # hPASMCs, hPAECs
+        re.compile(r'^[A-Z]{2,}[Ee][Cc]s?$'),  # HUVECs
+        re.compile(r'^[A-Z]{2,}[Ss][Mm][Cc]s?$'),  # PASMCs
+        re.compile(r'\b(?:cells?|fibroblasts?|macrophages?|lymphocytes?)\b', re.IGNORECASE),
+    ]
+    
+    # Incomplete name patterns
+    incomplete_patterns = [
+        re.compile(r'^(?:idiopathic|hereditary|familial|congenital|chronic|acute)$', re.IGNORECASE),
+        re.compile(r'^(?:peri|para|hyper|hypo|poly)-?$', re.IGNORECASE),
+        re.compile(r'\s+(?:with|and|or|type|associated)$', re.IGNORECASE),
+        re.compile(r'^(?:disease|syndrome|disorder)s?$', re.IGNORECASE),
+    ]
+    
+    # Artifact patterns
+    artifact_patterns = [
+        re.compile(r'^(?:http|https|www|\.com|\.org)$', re.IGNORECASE),
+        re.compile(r'^\d+$'),
+        re.compile(r'^.{1,2}$'),
+        re.compile(r'[|\\/@#$%^&*]'),
+    ]
+    
+    valid = []
+    invalid = []
+    
+    for disease in diseases:
+        name = disease.get('name', '').strip()
+        
+        if not name or len(name) < 3:
+            disease['validation_reason'] = 'too_short'
+            invalid.append(disease)
+            continue
+        
+        # Check patterns
+        is_cell_type = any(p.search(name) for p in cell_type_patterns)
+        is_incomplete = any(p.search(name) for p in incomplete_patterns)
+        is_artifact = any(p.search(name) for p in artifact_patterns)
+        
+        if is_artifact:
+            disease['validation_reason'] = 'artifact'
+            invalid.append(disease)
+        elif is_cell_type:
+            disease['validation_reason'] = 'cell_type'
+            invalid.append(disease)
+        elif is_incomplete:
+            disease['validation_reason'] = 'incomplete_name'
+            invalid.append(disease)
+        else:
+            disease['validated'] = True
+            valid.append(disease)
+    
+    logger.info(f"Disease validation: {len(valid)} valid, {len(invalid)} filtered")
+    return valid, invalid
 
 
 # ============================================================================
@@ -73,6 +471,11 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     """
     Process entities with abbreviation-first approach, ID enrichment, and ID-gated promotion
     
+    UPDATED IN v11.2.0:
+    - Fixed abbreviation extraction returning empty results
+    - Added context-aware drug filtering
+    - Added disease validation
+    
     UPDATED IN v11.1.0:
     - Added citation extraction (Step 2)
     - Added person extraction (Step 3)
@@ -82,15 +485,17 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     UPDATED IN v11.0.0:
     - Uses simplified adaptive filtering with confidence bands
     - More permissive promotion logic (OR instead of AND)
-    - Reduced fuzzy matching threshold (85 → 75)
+    - Reduced fuzzy matching threshold (85 â†’ 75)
     
     Pipeline:
-    1. Extract all abbreviations (with error recovery)
+    1. Extract all abbreviations (with error recovery + fallback)
     2. Extract citations (with error recovery) - NEW in v11.1.0
     3. Extract persons (with error recovery) - NEW in v11.1.0
     4. Extract references (with error recovery) - NEW in v11.1.0
     5. Extract drugs with adaptive filtering (with error recovery)
+    5.5. Context-aware drug filtering - NEW in v11.2.0
     6. Extract diseases with adaptive filtering (with error recovery)
+    6.5. Disease validation - NEW in v11.2.0
     7. Cross-type deduplication
     8. Enrich abbreviations with IDs from detected drugs/diseases
     9. Apply ID-gated promotion for enriched abbreviations (with error recovery)
@@ -127,7 +532,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
     }
     
     # ========================================================================
-    # STEP 1: Extract abbreviations (with error recovery)
+    # STEP 1: Extract abbreviations (with error recovery + FALLBACK FIX)
     # ========================================================================
     if 'abbreviation_extraction' in tasks and 'abbreviation_extractor' in components:
         try:
@@ -138,8 +543,25 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                 text_content
             )
             
-            all_abbreviations = abbrev_results.get('abbreviations', [])
-            all_abbreviations = deduplicate_by_key(all_abbreviations, ('abbreviation', 'expansion'))
+            raw_abbreviations = abbrev_results.get('abbreviations', [])
+            
+            # FIX v11.2.0: Properly convert and validate abbreviations
+            validated_abbreviations = []
+            for abbrev in raw_abbreviations:
+                converted = _convert_abbreviation_candidate(abbrev)
+                if converted and converted.get('abbreviation'):
+                    # Ensure non-zero confidence if we have an expansion
+                    if converted.get('confidence', 0) == 0 and converted.get('expansion'):
+                        converted['confidence'] = 0.5
+                    if converted.get('confidence', 0) > 0 or converted.get('expansion'):
+                        validated_abbreviations.append(converted)
+            
+            # FIX v11.2.0: Run fallback if no valid results
+            if not validated_abbreviations:
+                logger.warning("Primary abbreviation extraction returned empty, using fallback")
+                validated_abbreviations = _extract_abbreviations_fallback(text_content)
+            
+            all_abbreviations = deduplicate_by_key(validated_abbreviations, ('abbreviation', 'expansion'))
             results['abbreviations'] = all_abbreviations
             
             logger.info(f"Extracted {len(all_abbreviations)} unique abbreviations in {time.time()-start:.1f}s")
@@ -150,10 +572,16 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         except Exception as e:
             logger.error(f"Abbreviation extraction failed: {type(e).__name__}: {e}", exc_info=True)
             results['processing_errors'].append(f"Abbreviation extraction: {str(e)[:100]}")
-            all_abbreviations = []
+            
+            # FIX v11.2.0: Use fallback on exception
+            logger.info("Using fallback abbreviation extraction due to error")
+            all_abbreviations = _extract_abbreviations_fallback(text_content)
+            results['abbreviations'] = all_abbreviations
+            
             if console:
                 console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "Abbreviation extraction", False, str(e)[:50])
+                                            "Abbreviation extraction", False, 
+                                            f"Fallback: {len(all_abbreviations)}")
     else:
         all_abbreviations = []
     
@@ -277,7 +705,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             
             results['drugs'] = direct_drugs
             
-            logger.info(f"Extracted {len(direct_drugs)} drugs after filtering in {time.time()-start:.1f}s")
+            logger.info(f"Extracted {len(direct_drugs)} drugs after confidence filtering in {time.time()-start:.1f}s")
             if console:
                 console.print_stage_progress(stage_name, stage_config['sequence'], 
                                             "Drug detection", True, 
@@ -290,7 +718,30 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                 console.print_stage_progress(stage_name, stage_config['sequence'], 
                                             "Drug detection", False, str(e)[:50])
     
-    direct_drugs = results['drugs']
+    # ========================================================================
+    # STEP 5.5: Context-aware drug filtering - NEW in v11.2.0
+    # ========================================================================
+    direct_drugs = results.get('drugs', [])
+    
+    if direct_drugs:
+        try:
+            start = time.time()
+            kept_drugs, excluded_drugs = _filter_drugs_by_context(direct_drugs, text_content)
+            
+            direct_drugs = kept_drugs
+            results['drugs'] = kept_drugs
+            results['excluded_drugs'] = excluded_drugs
+            
+            logger.info(f"Drug context filter: kept {len(kept_drugs)}, excluded {len(excluded_drugs)} "
+                       f"in {time.time()-start:.1f}s")
+            
+            if console and excluded_drugs:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Drug context filter", True, 
+                                            f"Excluded {len(excluded_drugs)} non-drugs", time.time() - start)
+        except Exception as e:
+            logger.warning(f"Drug context filtering failed: {e}")
+            results['processing_errors'].append(f"Drug context filter: {str(e)[:100]}")
     
     # ========================================================================
     # STEP 6: Extract diseases (with error recovery)
@@ -322,7 +773,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             
             results['diseases'] = direct_diseases
             
-            logger.info(f"Extracted {len(direct_diseases)} diseases after filtering in {time.time()-start:.1f}s")
+            logger.info(f"Extracted {len(direct_diseases)} diseases after confidence filtering in {time.time()-start:.1f}s")
             if console:
                 console.print_stage_progress(stage_name, stage_config['sequence'], 
                                             "Disease detection", True, 
@@ -335,7 +786,30 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                 console.print_stage_progress(stage_name, stage_config['sequence'], 
                                             "Disease detection", False, str(e)[:50])
     
-    direct_diseases = results['diseases']
+    # ========================================================================
+    # STEP 6.5: Disease validation - NEW in v11.2.0
+    # ========================================================================
+    direct_diseases = results.get('diseases', [])
+    
+    if direct_diseases:
+        try:
+            start = time.time()
+            valid_diseases, invalid_diseases = _validate_disease_entities(direct_diseases, text_content)
+            
+            direct_diseases = valid_diseases
+            results['diseases'] = valid_diseases
+            results['invalid_diseases'] = invalid_diseases
+            
+            logger.info(f"Disease validation: {len(valid_diseases)} valid, {len(invalid_diseases)} filtered "
+                       f"in {time.time()-start:.1f}s")
+            
+            if console and invalid_diseases:
+                console.print_stage_progress(stage_name, stage_config['sequence'], 
+                                            "Disease validation", True, 
+                                            f"Filtered {len(invalid_diseases)} invalid", time.time() - start)
+        except Exception as e:
+            logger.warning(f"Disease validation failed: {e}")
+            results['processing_errors'].append(f"Disease validation: {str(e)[:100]}")
     
     # ========================================================================
     # STEP 7: CROSS-TYPE DEDUPLICATION
@@ -491,7 +965,10 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         'diseases_total': len(final_diseases),
         'promotion_rate': len(promotion_links) / len(all_abbreviations) if all_abbreviations else 0,
         'has_errors': bool(results['processing_errors']),
-        'abbreviations_enriched': results.get('enrichment_stats', {}).get('total_enriched', 0)
+        'abbreviations_enriched': results.get('enrichment_stats', {}).get('total_enriched', 0),
+        # NEW in v11.2.0: Track filtered entities
+        'drugs_context_filtered': len(results.get('excluded_drugs', [])),
+        'diseases_validation_filtered': len(results.get('invalid_diseases', []))
     }
     
     logger.info(f"Entity extraction complete: {results['extraction_summary']['abbreviations_total']} abbrev, "
@@ -512,6 +989,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
     """
     Process document in two stages: metadata first, then entities
     
+    UPDATED IN v11.2.0: Uses fixed abbreviation extraction and context filtering
     UPDATED IN v11.1.1: Added intro text file extraction
     UPDATED IN v11.1.0: Added citation, person, and reference extraction
     UPDATED IN v11.0.0: Uses new simplified filtering and promotion logic
@@ -599,45 +1077,34 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         text_file = text_folder / f"{file_path.stem}_full.txt"
         with open(text_file, 'w', encoding='utf-8') as f:
             f.write(text_content)
+        final_results['files_saved'].append(f"{file_path.stem}_full.txt")
+        logger.info(f"âœ“ Saved full text: {text_file.name} ({len(text_content):,} chars)")
         
-        final_results['files_saved'].append(text_file.name)
-        logger.info(f"✓ Saved full text to {text_file.name} ({len(text_content):,} chars)")
-        
-        # 2. Save INTRO text extraction (first N characters)
-        # Get limit from first stage config, default to 5000
-        intro_limit = 5000  # Default
-        metadata_stage = next((s for s in config.get('pipeline', {}).get('stages', []) 
-                              if s.get('name') == 'metadata'), None)
-        if metadata_stage:
-            intro_limit = metadata_stage.get('limits', {}).get('text_chars', 5000)
-        
+        # 2. Save INTRO text (limited for metadata extraction)
+        intro_limit = 10000  # Characters for intro
         intro_text = text_content[:intro_limit]
         intro_file = text_folder / f"{file_path.stem}_intro.txt"
         with open(intro_file, 'w', encoding='utf-8') as f:
             f.write(intro_text)
+        final_results['files_saved'].append(f"{file_path.stem}_intro.txt")
+        logger.info(f"âœ“ Saved intro text: {intro_file.name} ({len(intro_text):,} chars)")
         
-        final_results['files_saved'].append(intro_file.name)
-        logger.info(f"✓ Saved intro text to {intro_file.name} ({len(intro_text):,} chars)")
+        # ====================================================================
+        # PROCESS PIPELINE STAGES
         # ====================================================================
         
-        # Process each configured stage
-        for stage_config in config.get('pipeline', {}).get('stages', []):
-            stage_name = stage_config['name']
-            logger.info(f"Processing stage: {stage_name}")
-            
-            # Apply stage limits
-            limited_text = text_content
-            limits = stage_config.get('limits', {})
-            
-            if limits.get('text_chars'):
-                limited_text = text_content[:limits['text_chars']]
-                logger.debug(f"Limited text to {limits['text_chars']} chars for {stage_name} stage")
-            
-            # Process stage
-            stage_results = {}
+        pipeline_stages = config.get('pipeline', {}).get('stages', [])
+        
+        for stage_config in pipeline_stages:
+            stage_name = stage_config.get('name', '')
             
             if stage_name == 'metadata':
-                # Process metadata tasks (classification, description, dates, etc.)
+                # Process metadata stage with limited text
+                stage_results = {}
+                limits = stage_config.get('limits', {})
+                char_limit = limits.get('text_chars', 10000)
+                limited_text = text_content[:char_limit] if char_limit else text_content
+                
                 if 'basic_extractor' in components:
                     extractor = components['basic_extractor']
                     
@@ -646,26 +1113,22 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                         try:
                             classification = extractor.classify_document(limited_text, file_path.name)
                             stage_results.update(classification)
-                            logger.debug(f"Classification: {classification.get('document_type')}")
                         except Exception as e:
                             logger.error(f"Classification failed: {e}")
                             final_results['processing_errors'].append(f"Classification: {str(e)[:100]}")
                     
-                    # Descriptions AND Title (both come from generate_descriptions)
-                    if 'description' in stage_config.get('tasks', []) or 'title' in stage_config.get('tasks', []):
+                    # Title
+                    if 'title_extraction' in stage_config.get('tasks', []):
                         try:
-                            # Call generate_descriptions (PLURAL) and it returns dict with title, short_description, long_description
-                            descriptions = extractor.generate_descriptions(limited_text, file_path.name, 
-                                                                          stage_results.get('document_type'))
-                            stage_results.update(descriptions)
-                            
-                            # Ensure we have at least a basic title if generation failed
-                            if not stage_results.get('title'):
-                                logger.warning("No title generated, using filename")
+                            title_result = extractor.extract_title(limited_text)
+                            if title_result and title_result.get('title'):
+                                stage_results['title'] = title_result['title']
+                            else:
+                                # Fallback title
                                 stage_results['title'] = file_path.stem.replace('_', ' ')
                         except Exception as e:
-                            logger.error(f"Description generation failed: {e}")
-                            final_results['processing_errors'].append(f"Description: {str(e)[:100]}")
+                            logger.error(f"Title extraction failed: {e}")
+                            final_results['processing_errors'].append(f"Title: {str(e)[:100]}")
                             # Fallback title
                             stage_results['title'] = file_path.stem.replace('_', ' ')
                                         
@@ -744,7 +1207,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
             json.dump(final_results, f, indent=2, ensure_ascii=False)
         
         final_results['files_saved'].append(output_json.name)
-        logger.info(f"✓ Results saved to {output_json.name}")
+        logger.info(f"âœ“ Results saved to {output_json.name}")
         
         # ====================================================================
         # DATABASE STORAGE & REPORTING
@@ -807,13 +1270,6 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                     len(text_content)
                 )
             
-            # Generate report
-            if hasattr(db, 'generate_report'):
-                prefix_manager = components.get('prefix_manager')
-                report_path = generate_extraction_report(run_id, output_folder, prefix_manager)
-                if report_path:
-                    final_results['files_saved'].append(Path(report_path).name)
-                    logger.info(f"✓ Generated report: {Path(report_path).name}")
             
             logger.debug(f"Stored extraction in database: document_id={document_id}, run_id={run_id}")
             
@@ -830,7 +1286,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         
         # Calculate total processing time
         total_time = time.time() - start_time
-        logger.info(f"✓ Completed processing {file_path.name} in {total_time:.1f}s")
+        logger.info(f"âœ“ Completed processing {file_path.name} in {total_time:.1f}s")
         
         # Log summary of saved files
         logger.info(f"Files saved ({len(final_results['files_saved'])}):")

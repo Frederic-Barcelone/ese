@@ -1,27 +1,40 @@
 {
   "_metadata": {
-    "description": "ERN Network Scraper Configuration",
-    "version": "3.1",
-    "last_updated": "2025-11-27",
+    "description": "ERN Network Scraper Configuration - EXPERT + GUIDELINE + SITE + PATIENT Focus",
+    "version": "3.2-focused",
+    "last_updated": "2025-12-16",
     "total_networks": 24,
-    "instructions": "Set 'scrape' to true/false to enable/disable scraping for each network"
+    "priority_content": [
+      "EXPERTS - doctors, researchers, specialists with their expertise areas",
+      "GUIDELINES - clinical practice guidelines, protocols, care pathways",
+      "SITES - hospitals, centers, institutions, member networks",
+      "PATIENTS - patient information, resources, support materials"
+    ],
+    "estimated_time": "2-4 days for all 7 enabled networks"
   },
   "scraper_settings": {
-    "max_crawl_depth": 100,
-    "max_pages_per_network": 10000,
-    "default_request_delay": 1.5,
-    "request_timeout": 45,
-    "max_retries": 3,
-    "backoff_base": 5.0,
+    "max_crawl_depth": 8,
+    "max_pages_per_network": 3000,
+    "default_request_delay": 2.5,
+    "request_timeout": 90,
+    "max_retries": 5,
+    "backoff_base": 15.0,
     "skip_existing": true,
     "verbose": true,
     "output_directory": "EU_ERN_DATA"
   },
   "domain_delays": {
-    "health.ec.europa.eu": 8.0,
-    "ec.europa.eu": 8.0,
-    "ern-net.eu": 2.0,
-    "default": 1.5
+    "health.ec.europa.eu": 10.0,
+    "ec.europa.eu": 10.0,
+    "ern-net.eu": 3.0,
+    "eurobloodnet.eu": 3.5,
+    "erknet.org": 3.0,
+    "ern-rita.org": 3.0,
+    "metab.ern-net.eu": 3.0,
+    "guardheart.ern-net.eu": 3.0,
+    "ern-euro-nmd.eu": 3.0,
+    "ernbond.eu": 3.0,
+    "default": 2.5
   },
   "networks": {
     "ERN-BOND": {
@@ -38,7 +51,11 @@
         "/patients/",
         "/resources/",
         "/publications/",
-        "/education/"
+        "/education/",
+        "/experts/",
+        "/members/",
+        "/centres/",
+        "/network/"
       ]
     },
     "ERN-CRANIO": {
@@ -66,14 +83,19 @@
       "factsheet": "https://health.ec.europa.eu/document/download/aa7bc950-3738-495a-ae4d-2689a14984b7_en",
       "disease_area": "Rare haematological diseases, rare blood disorders, complex and ultra-rare blood conditions",
       "guidelines_paths": [
+        "/guidelines/",
+        "/recommendations/",
         "/resources/",
-        "/about/",
         "/patients/",
         "/healthcare-professionals/",
         "/education-training/",
-        "/guidelines/",
         "/publications/",
-        "/diseases/"
+        "/diseases/",
+        "/disease-groups/",
+        "/members/experts/",
+        "/members/hospital/",
+        "/members/",
+        "/about/"
       ]
     },
     "Endo-ERN": {
@@ -117,15 +139,18 @@
       "factsheet": "https://health.ec.europa.eu/document/download/62cf8c2a-0bc5-4fcd-a604-7a2c2f81467a_en",
       "disease_area": "Rare kidney diseases, complex kidney disorders across all ages",
       "guidelines_paths": [
-        "/guidelines-pathways",
+        "/guidelines-pathways/",
         "/guidelines-pathways/guidelines/",
         "/guidelines-pathways/care-pathways/",
-        "/about-erknet/guidelines/",
         "/for-patients/",
         "/healthcare-professionals/",
         "/disease-groups/",
         "/education/",
-        "/research/"
+        "/research/",
+        "/about-erknet/",
+        "/members/",
+        "/experts/",
+        "/centres/"
       ]
     },
     "ERNICA": {
@@ -223,7 +248,11 @@
         "/guidelines/",
         "/resources/",
         "/education/",
-        "/research/"
+        "/research/",
+        "/experts/",
+        "/members/",
+        "/centres/",
+        "/diseases/"
       ]
     },
     "ERN-EYE": {
@@ -267,12 +296,17 @@
       "factsheet": "https://health.ec.europa.eu/document/download/799c0039-139f-4150-8ee7-741b01e2a503_en",
       "disease_area": "Rare cardiac diseases, cardiomyopathies, arrhythmia syndromes, inherited cardiac conditions",
       "guidelines_paths": [
-        "/guidelines",
+        "/guidelines/",
+        "/patients/",
+        "/patients/laypersons-language/",
         "/patients/laypersons-language/guidelines-consensus-statements/",
         "/healthcare-professionals/",
         "/resources/",
         "/education/",
-        "/diseases/"
+        "/diseases/",
+        "/experts/",
+        "/members/",
+        "/centres/"
       ]
     },
     "ERN-ITHACA": {
@@ -306,7 +340,10 @@
         "/patients/",
         "/healthcare-professionals/",
         "/education/",
-        "/diseases/"
+        "/diseases/",
+        "/experts/",
+        "/members/",
+        "/centres/"
       ]
     },
     "ERN-PaedCan": {
@@ -372,7 +409,10 @@
         "/patients/",
         "/healthcare-professionals/",
         "/resources/",
-        "/education/"
+        "/education/",
+        "/experts/",
+        "/members/",
+        "/centres/"
       ]
     },
     "ERN-TRANSPLANT-CHILD": {

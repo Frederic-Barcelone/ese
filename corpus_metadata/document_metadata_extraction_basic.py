@@ -211,7 +211,7 @@ class ResourceManager:
                     self.initializer.initialize()
                     elapsed = time.time() - start_time
                     if self.verbose:
-                        print(f"\n⏱️  System initialized in {elapsed:.2f}s")
+                        print(f"\n[INFO]  System initialized in {elapsed:.2f}s")
                 except Exception as e:
                     logger.debug(f"System already initialized or error: {e}")
             
@@ -239,17 +239,17 @@ class ResourceManager:
             if status.get('lexicons', {}).get('drugs'):
                 self.lexicons['drug'] = True
                 if self.verbose and hasattr(self.initializer, 'drug_lexicon'):
-                    print(f"  ✓ Drug lexicon loaded: {len(self.initializer.drug_lexicon)} entries")
+                    print(f"  [OK] Drug lexicon loaded: {len(self.initializer.drug_lexicon)} entries")
             
             if status.get('lexicons', {}).get('diseases'):
                 self.lexicons['disease'] = True
                 if self.verbose and hasattr(self.initializer, 'disease_lexicon'):
-                    print(f"  ✓ Disease lexicon loaded: {len(self.initializer.disease_lexicon)} entries")
+                    print(f"  [OK] Disease lexicon loaded: {len(self.initializer.disease_lexicon)} entries")
             
             if status.get('lexicons', {}).get('medical_terms'):
                 self.lexicons['medical_terms'] = True
                 if self.verbose and hasattr(self.initializer, 'medical_terms_lexicon'):
-                    print(f"  ✓ Medical terms loaded: {len(self.initializer.medical_terms_lexicon)} entries")
+                    print(f"  [OK] Medical terms loaded: {len(self.initializer.medical_terms_lexicon)} entries")
             
             # Check models
             if status.get('models', {}):
@@ -257,7 +257,7 @@ class ResourceManager:
                     if model_info:
                         self.models[model_name] = True
                         if self.verbose:
-                            print(f"  ✓ Model loaded: {model_name}")
+                            print(f"  [OK] Model loaded: {model_name}")
         
         self.status['initialized'] = True
         self.status['lexicons_loaded'] = bool(self.lexicons)
@@ -431,7 +431,7 @@ class RareDiseaseMetadataExtractor:
         
         # Report system status
         if verbose and self.resource_manager.is_ready():
-            print("\n✓ System initialized successfully")
+            print("\n[OK] System initialized successfully")
             if self.resource_manager.lexicons:
                 print(f"  - Lexicons loaded: {list(self.resource_manager.lexicons.keys())}")
             if self.resource_manager.models:
@@ -479,7 +479,9 @@ class RareDiseaseMetadataExtractor:
             if self.ai_enabled:
                 # AI is enabled by system, try to initialize with API
                 try:
-                    model = self.config.get('api_configuration', {}).get('claude', {}).get('model', 'claude-3-5-sonnet-20241022')
+                    # Support both config structures: api_configuration.claude (legacy) and api.claude (current)
+                    api_config = self.config.get('api_configuration', self.config.get('api', {}))
+                    model = api_config.get('claude', {}).get('model', 'claude-sonnet-4-5-20250929')
                     self.description_generator = DescriptionExtractor(model=model, silent=True)
                     
                     if verbose:
@@ -796,6 +798,80 @@ class RareDiseaseMetadataExtractor:
                 'method': 'error',
                 'error': str(e)
             }
+    
+    def extract_title(self, text):
+        """
+        Extract document title from text content.
+        
+        Attempts to find the title using:
+        1. First substantial line of text
+        2. Lines with title-like formatting
+        3. Common title patterns
+        
+        Args:
+            text: Document text content
+            
+        Returns:
+            Dictionary with 'title' key or None if not found
+        """
+        if not text or len(text.strip()) < 10:
+            return None
+        
+        try:
+            # Split into lines and clean
+            lines = text.split('\n')
+            candidate_lines = []
+            
+            for line in lines[:30]:  # Check first 30 lines
+                line = line.strip()
+                
+                # Skip empty lines and very short/long lines
+                if not line or len(line) < 5 or len(line) > 200:
+                    continue
+                
+                # Skip lines that look like metadata, headers, or page numbers
+                skip_patterns = [
+                    r'^page\s+\d+',
+                    r'^\d+$',
+                    r'^©|copyright|all rights reserved',
+                    r'^vol\.\s+\d+|volume\s+\d+',
+                    r'^issn|isbn|doi:',
+                    r'^www\.|http',
+                    r'^article\s+info|keywords:|abstract:',
+                    r'^received:|accepted:|published:',
+                ]
+                
+                should_skip = False
+                for pattern in skip_patterns:
+                    if re.search(pattern, line, re.IGNORECASE):
+                        should_skip = True
+                        break
+                
+                if should_skip:
+                    continue
+                
+                candidate_lines.append(line)
+                
+                # Good title candidate if we have at least one
+                if len(candidate_lines) >= 1:
+                    break
+            
+            if candidate_lines:
+                # Return the first good candidate
+                title = candidate_lines[0]
+                
+                # Clean up common artifacts
+                title = re.sub(r'\s+', ' ', title)
+                title = title.strip()
+                
+                if len(title) >= 10:
+                    return {'title': title}
+            
+            return None
+            
+        except Exception as e:
+            logger.warning(f"Title extraction error: {e}")
+            return None
     
     def generate_descriptions(self, text, filename, classification):
         """Generate document descriptions"""

@@ -59,25 +59,7 @@ except ImportError:
         SYSTEM_INIT_AVAILABLE = False
 
 
-@dataclass
-class AbbreviationCandidate:
-    """Data class for abbreviation candidates"""
-    abbreviation: str
-    expansion: str
-    confidence: float
-    source: str = 'document'
-    detection_source: str = 'unknown'
-    context: str = ''
-    position: int = -1
-    page_number: int = -1
-    local_expansion: Optional[str] = None
-    validation_status: str = 'unchecked'
-    semantic_type: Optional[str] = None
-    semantic_tui: Optional[str] = None
-    metadata: Dict = field(default_factory=dict)
-    dictionary_sources: List[str] = field(default_factory=list)
-    alternative_expansions: List[str] = field(default_factory=list)
-    claude_resolved: bool = False
+from corpus_metadata.document_utils.abbreviation_types import AbbreviationCandidate
 
 
 class PatternDetector:
@@ -107,13 +89,13 @@ class PatternDetector:
         if self.use_lexicon:
             try:
                 if system_initializer and SYSTEM_INIT_AVAILABLE:
-                    # Use provided system initializer
-                    self.lexicon_resolver = LexiconResolver(system_initializer)
+                    # Use provided system initializer (pass as keyword arg!)
+                    self.lexicon_resolver = LexiconResolver(system_initializer=system_initializer)
                     logger.info("Lexicon resolver initialized with system resources")
                 elif SYSTEM_INIT_AVAILABLE:
                     # Try to get singleton instance
                     initializer = MetadataSystemInitializer.get_instance()
-                    self.lexicon_resolver = LexiconResolver(initializer)
+                    self.lexicon_resolver = LexiconResolver(system_initializer=initializer)
                     logger.info("Lexicon resolver initialized with singleton instance")
                 else:
                     # Fallback to empty resolver
@@ -125,7 +107,8 @@ class PatternDetector:
         
         # Core abbreviation pattern components
         # Character class for abbreviations (without quantifier)
-        self.ABBR_CHARS_CLASS = r'[A-Z0-9α-ωΑ-Ω/\-]'
+        # Note: Greek letters alpha-omega and capital gamma-omega for scientific abbreviations
+        self.ABBR_CHARS_CLASS = r'[A-Z0-9a-z/\-]'
         
         # Continue with rest of initialization...
         self._compile_patterns()
@@ -147,7 +130,7 @@ class PatternDetector:
         # Pattern for "Long Form (ABBR)" - stricter version
         # Captures only capitalized noun phrases, no sentences
         self.definition_pattern = re.compile(
-            r'([A-Z][A-Za-z0-9α-ωΑ-Ω]+(?:\s+(?:and|or|of|for|with|in)?\s*[A-Za-z0-9α-ωΑ-Ω\-]+){0,8}?)\s*'
+            r'([A-Z][A-Za-z0-9]+(?:\s+(?:and|or|of|for|with|in)?\s*[A-Za-z0-9\-]+){0,8}?)\s*'
             r'\(\s*([A-Z]' + self.ABBR_CHARS_CLASS + r'{1,11})\s*\)',
             flags=re.MULTILINE
         )
@@ -155,18 +138,19 @@ class PatternDetector:
         # Pattern for "ABBR (Long Form)"
         self.reverse_pattern = re.compile(
             r'\b([A-Z]' + self.ABBR_CHARS_CLASS + r'{1,11})\s*\(\s*'
-            r'([A-Z][A-Za-z0-9α-ωΑ-Ω\-\s]{2,100}?)\s*\)',
+            r'([A-Z][A-Za-z0-9\-\s]{2,100}?)\s*\)',
             flags=re.MULTILINE
         )
         
         # Pattern for "ABBR: Long Form" or "ABBR - Long Form"
+        # Note: hyphen must be at end of character class or escaped to avoid invalid range
         self.colon_dash_pattern = re.compile(
-            r'\b([A-Z]' + self.ABBR_CHARS_CLASS + r'{1,11})\s*[:–—-]\s*'
-            r'([A-Z][A-Za-z0-9α-ωΑ-Ω\-\s]{2,100}?)(?=[.;,\n]|$)',
+            r'\b([A-Z]' + self.ABBR_CHARS_CLASS + r'{1,11})\s*[:\-]+\s*'
+            r'([A-Z][A-Za-z0-9\-\s]{2,100}?)(?=[.;,\n]|$)',
             flags=re.MULTILINE
         )
         
-        # Shape guard for abbreviations (needs ≥2 caps or a digit)
+        # Shape guard for abbreviations (needs >=2 caps or a digit)
         self.ABBR_SHAPE_GUARD = re.compile(r'(?:[A-Z].*[A-Z]|\d)')
         
         # Lead-in phrase removal pattern
@@ -526,7 +510,7 @@ class PatternDetector:
             # else default to macrophage phenotype
             return ('M1 macrophage (classically activated) phenotype', 'enzyme/protein', meta)
         
-        # Canonicalize CD88 → C5aR1 expansion
+        # Canonicalize CD88 -> C5aR1 expansion
         if abbr in {'CD88', 'C5aR', 'C5aR1'}:
             return ('C5a receptor 1 (CD88)', 'receptor', meta)
         
@@ -636,7 +620,7 @@ class PatternDetector:
     
     def _count_occurrences(self, text: str, abbr: str) -> int:
         """Count occurrences of abbreviation in text"""
-        # Count singular/plural (NET/NETs) and canonical alias (CD88→C5aR1)
+        # Count singular/plural (NET/NETs) and canonical alias (CD88->C5aR1)
         pattern = r'\b' + re.escape(abbr) + r's?\b'
         return len(re.findall(pattern, text))
     
@@ -753,7 +737,7 @@ class PatternDetector:
     def _normalize_abbrev(self, abbr: str, expansion: str = '') -> str:
         """
         Normalize abbreviation:
-        - Handle plurals (NETs → NET)
+        - Handle plurals (NETs -> NET)
         - Standardize formatting
         """
         a = abbr.strip()

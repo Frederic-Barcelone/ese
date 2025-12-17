@@ -90,8 +90,17 @@ def load_document_types(filename='document_types.json', json_path=None, silent=F
 
 def safe_json_loads(text):
     """Safely parse JSON from text, with fallback strategies"""
+    # First, strip markdown code fences if present (```json ... ``` or ``` ... ```)
+    cleaned = text.strip()
+    if cleaned.startswith('```'):
+        # Remove opening fence (with optional language identifier)
+        cleaned = re.sub(r'^```(?:json)?\s*\n?', '', cleaned)
+        # Remove closing fence
+        cleaned = re.sub(r'\n?```\s*$', '', cleaned)
+        cleaned = cleaned.strip()
+    
     try:
-        return json.loads(text)
+        return json.loads(cleaned)
     except json.JSONDecodeError:
         logger.warning(f"Failed to parse JSON, attempting to extract from text: {text[:100]}...")
         match = re.search(r'({.*?})', text, re.DOTALL)
@@ -121,7 +130,7 @@ def call_claude_with_retry(client, prompt, retries=3, backoff=2, max_tokens=500,
             if not silent:
                 logger.info(f"Calling Claude (attempt {attempt}/{retries})")
             response = client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-sonnet-4-5-20250929",
                 max_tokens=max_tokens,
                 messages=[{"role": "user", "content": prompt}]
             )

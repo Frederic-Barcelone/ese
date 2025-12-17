@@ -50,7 +50,7 @@ class AbbreviationCandidate:
     - abbreviation_extraction.py: Orchestrates the full pipeline
     
     Attributes:
-        abbreviation: The abbreviated form (e.g., "SMA", "TNF-α")
+        abbreviation: The abbreviated form (e.g., "SMA", "TNF-Î±")
         expansion: The full expansion (e.g., "Spinal muscular atrophy")
         confidence: Confidence score between 0.0 and 1.0
         source: Origin of the candidate ('document', 'dictionary', 'claude_inference', etc.)
@@ -93,6 +93,7 @@ class AbbreviationCandidate:
     
     # Domain and context analysis
     context_type: str = 'general'
+    semantic_type: Optional[str] = None  # Inferred semantic category: 'disease', 'drug', 'identifier', etc.
     local_expansion: Optional[str] = None
     context_score: float = 0.0
     domain_context: str = ''
@@ -136,6 +137,7 @@ class AbbreviationCandidate:
             'disambiguation_needed': self.disambiguation_needed,
             'alternative_expansions': self.alternative_expansions,
             'context_type': self.context_type,
+            'semantic_type': self.semantic_type,
             'local_expansion': self.local_expansion,
             'context_score': self.context_score,
             'domain_context': self.domain_context,

@@ -30,7 +30,7 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field
 
 # Character used to protect dots in abbreviations (single byte to maintain length)
-PROTECT_DOT = '§'
+PROTECT_DOT = 'Ã‚Â§'
 
 # ============================================================================
 # CENTRALIZED LOGGING CONFIGURATION
@@ -111,21 +111,21 @@ class ClaudeEnhancer:
         self.claude_client = claude_client
         self.config = config
         
-        # Get model from api_configuration.claude (matching your config.yaml structure)
-        api_config = config.get('api_configuration', {})
+        # Support both config structures: api_configuration.claude (legacy) and api.claude (current)
+        api_config = config.get('api_configuration', config.get('api', {}))
         claude_config = api_config.get('claude', {})
         
-        # Get the model - this matches where it's defined in your config.yaml
+        # Get the model from config
         self.model = claude_config.get('model')
         
         if self.model:
             logger.info(f"Using Claude model: {self.model}")
         else:
             # Use the same default as rare_disease_drug_validator.py
-            self.model = 'claude-3-5-sonnet-20241022'
+            self.model = 'claude-sonnet-4-5-20250929'
             logger.warning(f"No Claude model specified in config. Using fallback model: {self.model}")
         
-        # Get temperature and max_tokens from api_configuration.claude
+        # Get temperature and max_tokens from config
         self.temperature = claude_config.get('temperature', 0)
         self.max_tokens = claude_config.get('max_tokens', 1500)
         
@@ -498,8 +498,8 @@ Rules:
             line = line.strip()
             # Remove numbering (1., 2., etc.)
             line = re.sub(r'^\d+\.\s*', '', line)
-            # Remove bullet points (-, *, •)
-            line = re.sub(r'^[-*•]\s*', '', line)
+            # Remove bullet points (-, *, *)
+            line = re.sub(r'^[-**]\s*', '', line)
             # Remove quotes
             line = line.strip('"\'')
             

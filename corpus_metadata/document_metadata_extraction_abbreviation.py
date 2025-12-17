@@ -503,35 +503,42 @@ class AbbreviationExtractor:
         pattern = re.compile(r'\b' + re.escape(candidate.abbreviation) + r'\b', re.IGNORECASE)
         occurrences = len(pattern.findall(text))
         
-        # Determine if validated
-        validated = candidate.validation_status in {
-            ValidationStatus.VALIDATED,
-            ValidationStatus.LOCAL_DEFINITION,
-            ValidationStatus.DICTIONARY_MATCH,
-            ValidationStatus.CLAUDE_CONTEXT,
-            ValidationStatus.CONTEXT_RESOLVED
-        }
+        # Determine if validated - handle both string and class-based status
+        validation_status = getattr(candidate, 'validation_status', 'unvalidated')
+        if isinstance(validation_status, str):
+            validated = validation_status in {
+                'validated', 'local_definition', 'dictionary_match', 
+                'claude_context', 'context_resolved'
+            }
+        else:
+            validated = validation_status in {
+                ValidationStatus.VALIDATED,
+                ValidationStatus.LOCAL_DEFINITION,
+                ValidationStatus.DICTIONARY_MATCH,
+                ValidationStatus.CLAUDE_CONTEXT,
+                ValidationStatus.CONTEXT_RESOLVED
+            }
         
         return AbbreviationResult(
             abbreviation=candidate.abbreviation,
             expansion=candidate.expansion,
             occurrences=occurrences,
             confidence=candidate.confidence,
-            source=candidate.source,
-            dictionary_sources=candidate.dictionary_sources,
-            first_position=candidate.position,
-            context_type=candidate.context_type,
+            source=getattr(candidate, 'source', 'unknown'),
+            dictionary_sources=getattr(candidate, 'dictionary_sources', []),
+            first_position=getattr(candidate, 'position', -1),
+            context_type=getattr(candidate, 'context_type', 'general'),  # FIX: defensive
             validated=validated,
-            validation_method=candidate.validation_status,
-            alternative_meanings=candidate.alternative_expansions[:5],
-            detection_source=candidate.detection_source,
-            page_number=candidate.page_number,
-            local_expansion=candidate.local_expansion,
-            domain_context=candidate.domain_context,
-            claude_resolved=candidate.claude_resolved,
-            lexicon_resolved=candidate.metadata.get('lexicon_resolved', False),
-            cui=candidate.metadata.get('cui'),
-            semantic_types=candidate.metadata.get('semantic_types', [])
+            validation_method=str(validation_status),
+            alternative_meanings=getattr(candidate, 'alternative_expansions', [])[:5],
+            detection_source=getattr(candidate, 'detection_source', 'unknown'),
+            page_number=getattr(candidate, 'page_number', -1),
+            local_expansion=getattr(candidate, 'local_expansion', None),
+            domain_context=getattr(candidate, 'domain_context', ''),  # FIX: defensive
+            claude_resolved=getattr(candidate, 'claude_resolved', False),
+            lexicon_resolved=candidate.metadata.get('lexicon_resolved', False) if hasattr(candidate, 'metadata') else False,
+            cui=candidate.metadata.get('cui') if hasattr(candidate, 'metadata') else None,
+            semantic_types=candidate.metadata.get('semantic_types', []) if hasattr(candidate, 'metadata') else []
         )
     
     def _calculate_statistics(self, results: List[AbbreviationResult],

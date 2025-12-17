@@ -85,7 +85,7 @@ FALSE_POSITIVE_FRAGMENTS = {
     'early-onset', 'late-onset', 'pediatric', 'juvenile'
 }
 
-# ✅ NEW: Truncation patterns for common disease name fragments
+# [OK] NEW: Truncation patterns for common disease name fragments
 TRUNCATION_INDICATORS = {
     # Disease type suffixes that suggest continuation
     'with', 'and', 'or', 'type', 'associated',
@@ -96,7 +96,7 @@ TRUNCATION_INDICATORS = {
     'hepato', 'reno', 'dermato', 'endo', 'hema'
 }
 
-# ✅ NEW: Minimum confidence threshold for truncation completion
+# [OK] NEW: Minimum confidence threshold for truncation completion
 TRUNCATION_COMPLETION_MIN_CONFIDENCE = 0.75
 
 # SEMANTIC TYPE CODES FOR UMLS DISORDERS GROUP
@@ -147,7 +147,7 @@ SOURCE_CONFIDENCE = {
     'lexicon': 0.85,
     'ner': 0.75,
     'abbreviation_enrichment': 0.70,
-    'truncation_completion': 0.80  # ✅ NEW
+    'truncation_completion': 0.80  # [OK] NEW
 }
 
 # Negation confidence reduction factor
@@ -221,7 +221,7 @@ class DetectedDisease:
     all_ids: Dict[str, str] = field(default_factory=dict)
     canonical_name: Optional[str] = None
     identifiers: Dict[str, str] = field(default_factory=dict)
-    # ✅ NEW: Truncation handling
+    # [OK] NEW: Truncation handling
     is_truncated: bool = False
     original_fragment: Optional[str] = None
     completion_confidence: Optional[float] = None
@@ -435,7 +435,7 @@ class RareDiseaseDetector:
                  use_ner: bool = True,
                  use_lexicon: bool = True,
                  use_validation: bool = False,
-                 use_truncation_completion: bool = True,  # ✅ NEW
+                 use_truncation_completion: bool = True,  # [OK] NEW
                  orphanet_db_path: Optional[str] = None,
                  doid_db_path: Optional[str] = None,
                  config_path: Optional[str] = None,
@@ -463,7 +463,7 @@ class RareDiseaseDetector:
         self.use_ner = use_ner and SPACY_AVAILABLE
         self.use_lexicon = use_lexicon
         self.use_validation = use_validation
-        self.use_truncation_completion = use_truncation_completion  # ✅ NEW
+        self.use_truncation_completion = use_truncation_completion  # [OK] NEW
         
         # Store KB resolver for semantic filtering
         self.kb_resolver = kb_resolver or system_initializer
@@ -506,51 +506,142 @@ class RareDiseaseDetector:
         # Try to get from system initializer
         if not self.orphanet_db_path and system_initializer:
             if hasattr(system_initializer, 'get_resource'):
-                path = system_initializer.get_resource('disease_orphanet_db')
-                if path:
-                    self.orphanet_db_path = path
-            elif hasattr(system_initializer, 'config'):
-                resource = system_initializer.config.get('resources', {}).get('disease_orphanet_db')
-                if isinstance(resource, dict):
-                    self.orphanet_db_path = resource.get('path')
-                elif isinstance(resource, str):
-                    self.orphanet_db_path = resource
+                # Try multiple possible resource names
+                for key in ['disease_orphanet_db', 'disease_orphanet', 'orphanet_db']:
+                    path = system_initializer.get_resource(key)
+                    if path:
+                        self.orphanet_db_path = path
+                        break
+            if not self.orphanet_db_path and hasattr(system_initializer, 'config'):
+                # Check databases section first (current config structure)
+                databases = system_initializer.config.get('databases', {})
+                resource = databases.get('disease_orphanet')
+                if resource:
+                    self.orphanet_db_path = resource if isinstance(resource, str) else resource.get('path')
+                # Fall back to resources section (legacy)
+                if not self.orphanet_db_path:
+                    resources = system_initializer.config.get('resources', {})
+                    resource = resources.get('disease_orphanet_db') or resources.get('disease_orphanet')
+                    if isinstance(resource, dict):
+                        self.orphanet_db_path = resource.get('path')
+                    elif isinstance(resource, str):
+                        self.orphanet_db_path = resource
         
         if not self.doid_db_path and system_initializer:
             if hasattr(system_initializer, 'get_resource'):
-                path = system_initializer.get_resource('disease_ontology_db')
-                if path:
-                    self.doid_db_path = path
-            elif hasattr(system_initializer, 'config'):
-                resource = system_initializer.config.get('resources', {}).get('disease_ontology_db')
-                if isinstance(resource, dict):
-                    self.doid_db_path = resource.get('path')
-                elif isinstance(resource, str):
-                    self.doid_db_path = resource
+                # Try multiple possible resource names
+                for key in ['disease_ontology_db', 'disease_ontology', 'doid_db']:
+                    path = system_initializer.get_resource(key)
+                    if path:
+                        self.doid_db_path = path
+                        break
+            if not self.doid_db_path and hasattr(system_initializer, 'config'):
+                # Check databases section first (current config structure)
+                databases = system_initializer.config.get('databases', {})
+                resource = databases.get('disease_ontology')
+                if resource:
+                    self.doid_db_path = resource if isinstance(resource, str) else resource.get('path')
+                # Fall back to resources section (legacy)
+                if not self.doid_db_path:
+                    resources = system_initializer.config.get('resources', {})
+                    resource = resources.get('disease_ontology_db') or resources.get('disease_ontology')
+                    if isinstance(resource, dict):
+                        self.doid_db_path = resource.get('path')
+                    elif isinstance(resource, str):
+                        self.doid_db_path = resource
         
-        # Try config file
+        # Try config file directly
         if (not self.orphanet_db_path or not self.doid_db_path) and config_path:
             try:
                 import yaml
                 with open(config_path) as f:
                     config = yaml.safe_load(f)
-                resources = config.get('resources', {})
                 
+                # Check databases section first
+                databases = config.get('databases', {})
                 if not self.orphanet_db_path:
-                    resource = resources.get('disease_orphanet_db')
+                    resource = databases.get('disease_orphanet')
                     if isinstance(resource, dict):
                         self.orphanet_db_path = resource.get('path')
                     elif isinstance(resource, str):
                         self.orphanet_db_path = resource
                 
                 if not self.doid_db_path:
-                    resource = resources.get('disease_ontology_db')
+                    resource = databases.get('disease_ontology')
                     if isinstance(resource, dict):
                         self.doid_db_path = resource.get('path')
                     elif isinstance(resource, str):
                         self.doid_db_path = resource
-            except:
-                pass
+                
+                # Fall back to resources section
+                if not self.orphanet_db_path or not self.doid_db_path:
+                    resources = config.get('resources', {})
+                    if not self.orphanet_db_path:
+                        resource = resources.get('disease_orphanet_db') or resources.get('disease_orphanet')
+                        if isinstance(resource, dict):
+                            self.orphanet_db_path = resource.get('path')
+                        elif isinstance(resource, str):
+                            self.orphanet_db_path = resource
+                    
+                    if not self.doid_db_path:
+                        resource = resources.get('disease_ontology_db') or resources.get('disease_ontology')
+                        if isinstance(resource, dict):
+                            self.doid_db_path = resource.get('path')
+                        elif isinstance(resource, str):
+                            self.doid_db_path = resource
+            except Exception as e:
+                logger.debug(f"Could not load config file: {e}")
+        
+        # Resolve relative paths using paths.databases from config
+        if self.orphanet_db_path or self.doid_db_path:
+            db_base_path = None
+            
+            # Try to get database base path from system_initializer
+            if system_initializer and hasattr(system_initializer, 'config'):
+                paths_config = system_initializer.config.get('paths', {})
+                db_base_path = paths_config.get('databases')
+                
+                # Also check for base_path
+                if db_base_path and not Path(db_base_path).is_absolute():
+                    base = system_initializer.config.get('base_path') or paths_config.get('base')
+                    if base:
+                        db_base_path = str(Path(base) / db_base_path)
+            
+            # Try to get from config file if not found
+            if not db_base_path and config_path:
+                try:
+                    import yaml
+                    with open(config_path) as f:
+                        config = yaml.safe_load(f)
+                    db_base_path = config.get('paths', {}).get('databases')
+                except:
+                    pass
+            
+            # Resolve paths if we have a base path and files are not absolute
+            if db_base_path:
+                if self.orphanet_db_path and not Path(self.orphanet_db_path).is_absolute():
+                    resolved = Path(db_base_path) / self.orphanet_db_path
+                    if resolved.exists():
+                        self.orphanet_db_path = str(resolved)
+                    else:
+                        # Try common parent directories
+                        for parent in ['.', '..', '../..']:
+                            test_path = Path(parent) / db_base_path / self.orphanet_db_path
+                            if test_path.exists():
+                                self.orphanet_db_path = str(test_path.resolve())
+                                break
+                
+                if self.doid_db_path and not Path(self.doid_db_path).is_absolute():
+                    resolved = Path(db_base_path) / self.doid_db_path
+                    if resolved.exists():
+                        self.doid_db_path = str(resolved)
+                    else:
+                        # Try common parent directories
+                        for parent in ['.', '..', '../..']:
+                            test_path = Path(parent) / db_base_path / self.doid_db_path
+                            if test_path.exists():
+                                self.doid_db_path = str(test_path.resolve())
+                                break
         
         # Ensure strings not dicts
         if isinstance(self.orphanet_db_path, dict):
@@ -583,10 +674,10 @@ class RareDiseaseDetector:
                 cursor = conn.cursor()
                 cursor.execute("SELECT COUNT(*) FROM core_entities WHERE status='active'")
                 count = cursor.fetchone()[0]
-                logger.info(f"  ✓ Orphanet: {count:,} active entities")
+                logger.info(f"  [OK] Orphanet: {count:,} active entities")
                 conn.close()
             except Exception as e:
-                logger.error(f"  ✗ Orphanet failed: {e}")
+                logger.error(f"  [X] Orphanet failed: {e}")
                 self.orphanet_db_path = None
         
         if self.doid_db_path and Path(self.doid_db_path).exists():
@@ -599,10 +690,10 @@ class RareDiseaseDetector:
                 if 'diseases' in tables:
                     cursor.execute("SELECT COUNT(*) FROM diseases")
                     count = cursor.fetchone()[0]
-                    logger.info(f"  ✓ DOID: {count:,} diseases")
+                    logger.info(f"  [OK] DOID: {count:,} diseases")
                 conn.close()
             except Exception as e:
-                logger.error(f"  ✗ DOID failed: {e}")
+                logger.error(f"  [X] DOID failed: {e}")
                 self.doid_db_path = None
         
         logger.info("="*60)
@@ -704,7 +795,7 @@ class RareDiseaseDetector:
         
         return False
     
-    # ✅ NEW: Truncation detection and completion methods
+    # [OK] NEW: Truncation detection and completion methods
     def _is_likely_truncated(self, name: str, text: str, position: Tuple[int, int]) -> bool:
         """
         Detect if a disease name is likely truncated
@@ -734,7 +825,7 @@ class RareDiseaseDetector:
         continuation_patterns = [
             r'^\s*[a-z]',  # Continues with lowercase
             r'^\s*\(',     # Continues with parenthetical
-            r'^\s*[-–—]',  # Continues with dash
+            r'^\s*-',      # Continues with dash
         ]
         
         for pattern in continuation_patterns:
@@ -763,7 +854,7 @@ class RareDiseaseDetector:
         context_after = text[end:end+200] if end < len(text) else ""
         
         # Extract potential continuation
-        continuation_match = re.match(r'^[\s\-–—]*([a-zA-Z\s\-]+?)(?:\.|,|;|\(|\n|$)', context_after)
+        continuation_match = re.match(r'^[\s\---]*([a-zA-Z\s\-]+?)(?:\.|,|;|\(|\n|$)', context_after)
         if not continuation_match:
             return None
         
@@ -778,7 +869,7 @@ class RareDiseaseDetector:
         completion_result = self._find_completion_in_database(fragment, potential_complete)
         
         if completion_result and completion_result.get('confidence', 0) >= TRUNCATION_COMPLETION_MIN_CONFIDENCE:
-            logger.info(f"✓ Completed truncation: '{fragment}' → '{completion_result['completed_name']}'")
+            logger.info(f"[OK] Completed truncation: '{fragment}' -> '{completion_result['completed_name']}'")
             return completion_result['completed_name']
         
         return None
@@ -989,7 +1080,7 @@ class RareDiseaseDetector:
                 all_ids = self._get_orphanet_external_ids(cursor, orphacode)
                 all_ids['orphanet'] = str(orphacode)
                 
-                logger.debug(f"Found via synonym: '{original_name}' → '{preferred_term}' (ORPHA:{orphacode})")
+                logger.debug(f"Found via synonym: '{original_name}' -> '{preferred_term}' (ORPHA:{orphacode})")
                 
                 conn.close()
                 return {
@@ -1374,7 +1465,7 @@ class RareDiseaseDetector:
                     'time': round(time.time() - stage_start, 3)
                 }
         
-        # ✅ NEW: Handle truncation completion BEFORE other processing
+        # [OK] NEW: Handle truncation completion BEFORE other processing
         if self.use_truncation_completion:
             stage_start = time.time()
             completed_detections = []
@@ -1498,22 +1589,22 @@ class RareDiseaseDetector:
                 
                 if disease.is_truncated:
                     truncations_completed += 1
-                    logger.info(f"✓ Completed truncation with ID: '{disease.original_fragment}' → '{disease.name}' ({db_result.get('primary_id')})")
+                    logger.info(f"[OK] Completed truncation with ID: '{disease.original_fragment}' -> '{disease.name}' ({db_result.get('primary_id')})")
                 else:
-                    logger.info(f"✓ Found IDs for '{disease.name}': {db_result.get('primary_id')}")
+                    logger.info(f"[OK] Found IDs for '{disease.name}': {db_result.get('primary_id')}")
             
             elif db_result is None and self._is_false_positive_disease(disease.name):
                 # Filtered out as false positive
                 diseases_filtered += 1
-                logger.debug(f"✗ Filtered false positive: '{disease.name}'")
+                logger.debug(f"[X] Filtered false positive: '{disease.name}'")
             
             else:
                 # No IDs found but keep it
                 enriched_detections.append(disease)
                 if disease.is_truncated:
-                    logger.debug(f"✗ No IDs found for completed truncation: '{disease.name}'")
+                    logger.debug(f"[X] No IDs found for completed truncation: '{disease.name}'")
                 else:
-                    logger.debug(f"✗ No IDs found for '{disease.name}'")
+                    logger.debug(f"[X] No IDs found for '{disease.name}'")
         
         # Log ID coverage and filtering
         if enriched_detections:
@@ -1776,7 +1867,7 @@ def create_detector(mode='balanced', claude_client=None, verbose=False, **kwargs
     
     supported_params = [
         'use_patterns', 'use_ner', 'use_lexicon', 'use_validation',
-        'use_truncation_completion',  # ✅ NEW
+        'use_truncation_completion',  # [OK] NEW
         'system_initializer', 'kb_resolver', 
         'orphanet_db_path', 'doid_db_path', 'config_path'
     ]

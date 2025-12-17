@@ -41,7 +41,7 @@ DOWNLOAD_PDFS = True
 
 # Set to True to ONLY download documents (skip trial extraction)
 # Use this to download PDFs for trials already in database
-DOWNLOAD_ONLY = True
+DOWNLOAD_ONLY = False
 
 # Types of files to download (extensions). Set to None for all types.
 DOWNLOAD_FILE_TYPES = ['.pdf']

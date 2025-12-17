@@ -23,17 +23,22 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List, Set, Union
 from collections import defaultdict
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
 # Use centralized logging - no fallbacks
 from corpus_metadata.document_utils.metadata_logging_config import (
-    CorpusLogger,
-    singleton_logged,
-    get_logger
+    CorpusConfig,
+    get_logger,
+    timed_section,
+    log_summary,
 )
 
 logger = get_logger('metadata_system_initializer')
 
 
-@singleton_logged('metadata_system_initializer')
+ 
 class MetadataSystemInitializer:
     """
     System initialization for document metadata extraction.
@@ -44,7 +49,7 @@ class MetadataSystemInitializer:
     _instance = None
     _lock = threading.Lock()
     
-    def __new__(cls, config_path: str = "corpus_config/config.yaml"):
+    def __new__(cls, config_path: str = "document_config/config.yaml"):
         """Singleton pattern: Ensure only one instance exists."""
         if cls._instance is None:
             with cls._lock:
@@ -53,7 +58,7 @@ class MetadataSystemInitializer:
                     cls._instance._initialized = False
         return cls._instance
     
-    def __init__(self, config_path: str = "corpus_config/config.yaml"):
+    def __init__(self, config_path: str = "document_config/config.yaml"):
         """Initialize with configuration path."""
         if self._initialized:
             return
@@ -62,7 +67,7 @@ class MetadataSystemInitializer:
             if self._initialized:
                 return
             
-            self.config_path = Path(config_path)
+            self.config_path = Path(__file__).parent.parent / config_path
             if not self.config_path.exists():
                 raise FileNotFoundError(f"Config file not found: {config_path}")
             
@@ -140,9 +145,58 @@ class MetadataSystemInitializer:
             'errors': [],
             'warnings': []
         }
+        
+        # Loading counters for consistent output
+        self._loading_counter = 0
+        self._loading_total = 0
+    
+    # ========================================================================
+    # CONSOLE OUTPUT HELPERS
+    # ========================================================================
+    
+    def _format_size(self, size_bytes: int) -> str:
+        """Format file size in human-readable format (MB)."""
+        size_mb = size_bytes / (1024 * 1024)
+        if size_mb >= 1.0:
+            return f"{size_mb:.2f} MB"
+        elif size_mb >= 0.01:
+            return f"{size_mb:.2f} MB"
+        else:
+            size_kb = size_bytes / 1024
+            return f"{size_kb:.2f} KB"
+    
+    def _get_timestamp(self) -> str:
+        """Get current timestamp in HH:MM:SS format."""
+        from datetime import datetime
+        return datetime.now().strftime("%H:%M:%S")
+    
+    def _print_loading_status(self, resource_name: str, status: str = "OK", 
+                               size_bytes: int = 0, extra_info: str = ""):
+        """
+        Print loading status in consistent format.
+        Format: [HH:MM:SS] [OK] Loading [N/TOTAL] resource_name (size)
+        """
+        from corpus_metadata.document_utils.console_colors import Colors
+        
+        timestamp = self._get_timestamp()
+        counter_str = f"[{self._loading_counter:>2}/{self._loading_total}]"
+        size_str = f"({self._format_size(size_bytes)})" if size_bytes > 0 else ""
+        
+        if status == "OK":
+            status_icon = f"{Colors.GREEN}[OK]{Colors.ENDC}"
+        elif status == "FAIL":
+            status_icon = f"{Colors.RED}[FAIL]{Colors.ENDC}"
+        elif status == "SKIP":
+            status_icon = f"{Colors.YELLOW}[SKIP]{Colors.ENDC}"
+        else:
+            status_icon = f"[{status}]"
+        
+        info_str = f" {extra_info}" if extra_info else ""
+        
+        print(f"[{timestamp}] {status_icon} Loading {counter_str} {resource_name} {size_str}{info_str}")
     
     @classmethod
-    def get_instance(cls, config_path: str = "corpus_config/config.yaml") -> 'MetadataSystemInitializer':
+    def get_instance(cls, config_path: str = "document_config/config.yaml") -> 'MetadataSystemInitializer':
         """Get the singleton instance."""
         return cls(config_path)
     
@@ -154,7 +208,7 @@ class MetadataSystemInitializer:
                 logger.warning("Resetting MetadataSystemInitializer singleton")
                 cls._instance._initialized = False
             cls._instance = None
-            CorpusLogger.reset()
+ 
     
     def initialize(self) -> 'MetadataSystemInitializer':
         """Run complete initialization."""
@@ -162,7 +216,7 @@ class MetadataSystemInitializer:
             logger.debug("Already initialized")
             return self
         
-        with CorpusLogger.timed_section("System initialization", logger, threshold=1.0):
+        with timed_section("System initialization", logger, threshold=1.0):
             init_stats = {
                 'config': None,
                 'resources': 0,
@@ -201,9 +255,6 @@ class MetadataSystemInitializer:
                 init_stats['warnings'] = len(self.status.get('warnings', []))
                 init_stats['errors'] = len(self.status.get('errors', []))
                 
-                # STEP 6: Display resource statistics
-                self.display_resource_statistics()
-                
             except Exception as e:
                 logger.error(f"Initialization failed: {e}")
                 raise
@@ -211,7 +262,7 @@ class MetadataSystemInitializer:
             self._fully_initialized = True
         
         # Log summary
-        CorpusLogger.log_summary(
+        log_summary(
             logger,
             "Metadata system ready",
             {
@@ -240,18 +291,17 @@ class MetadataSystemInitializer:
         """
         features = self.config.get('features', {})
         
-        # Check if either AI feature is enabled
+        # Check if AI validation feature is enabled
         ai_validation_enabled = features.get('ai_validation', False)
-        ai_analysis_enabled = features.get('ai_analysis', False)
         
-        if ai_validation_enabled or ai_analysis_enabled:
+        if ai_validation_enabled:
             # Check for Claude API key in environment
             api_key = os.getenv('CLAUDE_API_KEY')
             
             if not api_key:
                 error_msg = (
-                    f"AI features enabled (ai_validation={ai_validation_enabled}, "
-                    f"ai_analysis={ai_analysis_enabled}) but CLAUDE_API_KEY not set in environment. "
+                    f"AI validation enabled (ai_validation={ai_validation_enabled}) "
+                    "but CLAUDE_API_KEY not set in environment. "
                     "Please set CLAUDE_API_KEY environment variable or disable AI features in config."
                 )
                 logger.error(error_msg)
@@ -268,7 +318,7 @@ class MetadataSystemInitializer:
             logger.info("Claude API key validated successfully")
             self.status['claude_api_validated'] = True
         else:
-            logger.debug("AI features disabled, Claude API key not required")
+            logger.debug("AI validation disabled, Claude API key not required")
             self.status['claude_api_validated'] = False
     
     def _load_all_resources_from_config(self) -> int:
@@ -276,15 +326,40 @@ class MetadataSystemInitializer:
         Load all resources defined in config.yaml dynamically.
         Processes the 'resources' section with the new naming convention.
         """
+        from corpus_metadata.document_utils.console_colors import Colors
+        from datetime import datetime
+        
         total_loaded = 0
+        
+        # Get the dictionaries base path from config
+        paths_config = self.config.get('paths', {})
+        dictionaries_path = paths_config.get('dictionaries', 'corpus_dictionaries/output_datasources')
+        
+        # Resolve dictionaries path relative to project root
+        if not Path(dictionaries_path).is_absolute():
+            dictionaries_base = self.project_root / dictionaries_path
+        else:
+            dictionaries_base = Path(dictionaries_path)
+        
+        logger.debug(f"Dictionaries base path: {dictionaries_base}")
         
         # Process 'resources' section - this is now the main section
         if resources_config := self.config.get('resources'):
-            logger.info("Loading resources from 'resources' section...")
+            # Count total resources first
+            valid_resources = [(name, fname) for name, fname in resources_config.items() if fname]
+            self._loading_total = len(valid_resources)
+            self._loading_counter = 0
             
-            for resource_name, resource_path in resources_config.items():
-                if not resource_path:
-                    continue
+            # Print header
+            timestamp = self._get_timestamp()
+            print(f"\n[{timestamp}] {Colors.HEADER}Loading Resources ({self._loading_total} files){Colors.ENDC}")
+            print(f"[{timestamp}] {'─' * 50}")
+            
+            for resource_name, resource_filename in valid_resources:
+                self._loading_counter += 1
+                
+                # Resolve full path: dictionaries_base / filename
+                full_path = dictionaries_base / resource_filename
                 
                 # Determine resource type based on naming convention
                 special_type = None
@@ -329,9 +404,13 @@ class MetadataSystemInitializer:
                 elif 'document_types' in resource_name:
                     special_type = 'document_types'
                 
-                count = self._load_resource_file(resource_name, resource_path, special_type=special_type)
+                count = self._load_resource_file(resource_name, str(full_path), special_type=special_type)
                 if count > 0:
                     total_loaded += 1
+            
+            # Print footer
+            timestamp = self._get_timestamp()
+            print(f"[{timestamp}] {'─' * 50}")
         
         return total_loaded
     
@@ -344,6 +423,7 @@ class MetadataSystemInitializer:
             resource_path = Path(path)
             
             if not resource_path.exists():
+                self._print_loading_status(name, "FAIL", extra_info="NOT FOUND")
                 logger.warning(f"Resource file not found: {name} at {path}")
                 self.resource_stats[name] = {
                     'path': path,
@@ -352,6 +432,9 @@ class MetadataSystemInitializer:
                     'type': special_type
                 }
                 return 0
+            
+            # Get file size
+            file_size = resource_path.stat().st_size
             
             # Check file extension to determine type
             suffix = resource_path.suffix.lower()
@@ -363,12 +446,21 @@ class MetadataSystemInitializer:
             elif suffix in ['.db', '.sqlite', '.sqlite3']:
                 count = self._load_database_resource(name, resource_path, special_type)
             else:
+                self._print_loading_status(name, "SKIP", file_size, f"Unknown type: {suffix}")
                 logger.warning(f"Unknown resource type for {name}: {resource_path.suffix}")
                 count = 0
+            
+            # Print loading status if successful
+            if count > 0:
+                self._print_loading_status(name, "OK", file_size)
+            else:
+                # Already printed in the loading method if it failed
+                pass
             
             return count
             
         except Exception as e:
+            self._print_loading_status(name, "FAIL", extra_info=str(e)[:50])
             logger.error(f"Failed to load resource {name}: {e}")
             self.resource_stats[name] = {
                 'path': path,
@@ -582,7 +674,7 @@ class MetadataSystemInitializer:
                 'actual_count_source': self._determine_count_source(data, count, special_type)
             }
             
-            logger.info(f"Loaded {name}: {count} entries from {path.name}")
+            logger.debug(f"Loaded {name}: {count} entries from {path.name}")
             return count
             
         except json.JSONDecodeError as e:
@@ -657,7 +749,7 @@ class MetadataSystemInitializer:
                 'resource_type': special_type or 'generic'
             }
             
-            logger.info(f"Loaded {name}: {count} entries from {path.name}")
+            logger.debug(f"Loaded {name}: {count} entries from {path.name}")
             return count
             
         except Exception as e:
@@ -712,7 +804,7 @@ class MetadataSystemInitializer:
                 'resource_type': special_type or 'database'
             }
             
-            logger.info(f"Loaded {name}: SQLite DB with {len(tables)} tables, {total_rows} total rows")
+            logger.debug(f"Loaded {name}: SQLite DB with {len(tables)} tables, {total_rows} total rows")
             return total_rows
             
         except Exception as e:
@@ -886,55 +978,54 @@ class MetadataSystemInitializer:
     
     
     def display_resource_statistics(self):
-        """Display compact resource loading summary"""
-        print("\n" + "="*60)
-        print("RESOURCE LOADING SUMMARY")
-        print("="*60)
-        print(f"{'Category':<20} {'Count':<15} {'Status'}")
-        print("-" * 60)
+        """Display compact resource loading summary with timestamps in consistent format."""
+        from datetime import datetime
+        from corpus_metadata.document_utils.console_colors import Colors
         
-        # Calculate totals by category using resource_stats instead of resources
-        abbrev_count = 0
-        drug_count = 0
-        disease_count = 0
-        other_count = 0
+        timestamp = self._get_timestamp()
         
-        # Count loaded resources from resource_stats
-        abbrev_loaded = 0
-        drug_loaded = 0
-        disease_loaded = 0
-        other_loaded = 0
+        # Calculate totals by category using resource_stats
+        categories = {
+            'abbreviation': {'count': 0, 'loaded': 0, 'total': 3, 'label': 'Abbreviations'},
+            'drug': {'count': 0, 'loaded': 0, 'total': 4, 'label': 'Drug Resources'},
+            'disease': {'count': 0, 'loaded': 0, 'total': 4, 'label': 'Disease Resources'},
+            'other': {'count': 0, 'loaded': 0, 'total': 3, 'label': 'Other Resources'}
+        }
         
         for resource_name, stats in self.resource_stats.items():
             if stats.get('status') == 'LOADED':
                 count = stats.get('count', 0)
                 
-                # Categorize by resource name prefix
                 if resource_name.startswith('abbreviation_'):
-                    abbrev_count += count
-                    abbrev_loaded += 1
+                    categories['abbreviation']['count'] += count
+                    categories['abbreviation']['loaded'] += 1
                 elif resource_name.startswith('drug_'):
-                    drug_count += count
-                    drug_loaded += 1
+                    categories['drug']['count'] += count
+                    categories['drug']['loaded'] += 1
                 elif resource_name.startswith('disease_'):
-                    disease_count += count
-                    disease_loaded += 1
+                    categories['disease']['count'] += count
+                    categories['disease']['loaded'] += 1
                 else:
-                    # Other resources (medical_terms, clinical_trial, document_types)
-                    other_count += count
-                    other_loaded += 1
+                    categories['other']['count'] += count
+                    categories['other']['loaded'] += 1
         
-        # Display statistics
-        print(f"{'Abbreviations':<20} {abbrev_count:>10,}     {abbrev_loaded}/3 ✓")
-        print(f"{'Drug Resources':<20} {drug_count:>10,}     {drug_loaded}/4 ✓")
-        print(f"{'Disease Resources':<20} {disease_count:>10,}     {disease_loaded}/4 ✓")
-        print(f"{'Other Resources':<20} {other_count:>10,}     {other_loaded}/3 ✓")
-        print("-" * 60)
+        total_count = sum(c['count'] for c in categories.values())
+        total_loaded = sum(c['loaded'] for c in categories.values())
+        total_expected = sum(c['total'] for c in categories.values())
         
-        total_count = abbrev_count + drug_count + disease_count + other_count
-        total_loaded = abbrev_loaded + drug_loaded + disease_loaded + other_loaded
-        print(f"{'TOTAL':<20} {total_count:>10,}     {total_loaded}/14 ✓")
-        print("="*60)
+        # Print summary header
+        print(f"\n[{timestamp}] {Colors.HEADER}Resource Loading Summary{Colors.ENDC}")
+        print(f"[{timestamp}] {'─' * 50}")
+        
+        # Print each category
+        for key, cat in categories.items():
+            status = f"{Colors.GREEN}[OK]{Colors.ENDC}" if cat['loaded'] == cat['total'] else f"{Colors.YELLOW}[!]{Colors.ENDC}"
+            print(f"[{timestamp}] {status} {cat['label']:<18} {cat['count']:>8,} entries [{cat['loaded']:>2}/{cat['total']}]")
+        
+        # Print total
+        print(f"[{timestamp}] {'─' * 50}")
+        total_status = f"{Colors.GREEN}[OK]{Colors.ENDC}" if total_loaded == total_expected else f"{Colors.YELLOW}[!]{Colors.ENDC}"
+        print(f"[{timestamp}] {total_status} {'TOTAL':<18} {total_count:>8,} entries [{total_loaded:>2}/{total_expected}]")
     
     def _load_models(self) -> int:
         """Load models specified in config."""

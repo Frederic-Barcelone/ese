@@ -4,8 +4,8 @@ corpus_metadata/document_utils/rare_disease_drug_validator.py
 ==================================
 
 OPTIMIZED VERSION - Performance Improvements:
-- Removed redundant False Positive Filter stage (140s → 30s)
-- Two-stage validation: KB → Claude (when needed)
+- Removed redundant False Positive Filter stage (140s â†’ 30s)
+- Two-stage validation: KB â†’ Claude (when needed)
 - Configurable confidence thresholds (no hardcoded values)
 - Parallel processing support for large batches
 - Smart caching with TTL and invalidation
@@ -74,7 +74,7 @@ class ValidatorConfig:
     
     # Claude settings
     use_claude: bool = True
-    claude_model: str = 'claude-3-5-sonnet-20241022'
+    claude_model: str = 'claude-sonnet-4-5-20250929'
     claude_max_tokens: int = 4096
     claude_temperature: float = 0.0
     claude_only_uncertain: bool = True  # Only send uncertain cases to Claude
@@ -186,7 +186,7 @@ def get_knowledge_base(system_initializer=None):
 
 class DrugValidator:
     """
-    OPTIMIZED Drug Validator - 2-stage pipeline (KB → Claude)
+    OPTIMIZED Drug Validator - 2-stage pipeline (KB â†’ Claude)
     Performance: ~30s (down from 140s)
     """
     
@@ -208,7 +208,7 @@ class DrugValidator:
         # Initialize DrugKnowledgeBase
         self.drug_kb = get_knowledge_base(system_initializer)
         if self.drug_kb:
-            logger.info(f"✓ DrugKnowledgeBase: {self.drug_kb.stats.get('total_drugs', 0)} drugs")
+            logger.info(f"âœ“ DrugKnowledgeBase: {self.drug_kb.stats.get('total_drugs', 0)} drugs")
         else:
             logger.warning("DrugKnowledgeBase not available - validation limited")
         
@@ -240,7 +240,7 @@ class DrugValidator:
         
         try:
             client = anthropic.Anthropic(api_key=api_key)
-            logger.info("✓ Claude client initialized")
+            logger.info("âœ“ Claude client initialized")
             return client
         except Exception as e:
             logger.error(f"Failed to initialize Claude: {e}")
@@ -343,7 +343,7 @@ class DrugValidator:
         self.cache.set(candidates, results, context_text)
         
         logger.info(
-            f"✓ Validation complete: {len(final_drugs)}/{len(candidates)} "
+            f"âœ“ Validation complete: {len(final_drugs)}/{len(candidates)} "
             f"({results['processing_time']:.1f}s)"
         )
         
@@ -595,7 +595,7 @@ Candidates to validate:
         
         print("\nStages:")
         for stage in results['stages']:
-            print(f"  • {stage['name']}:")
+            print(f"  â€¢ {stage['name']}:")
             for k, v in stage.items():
                 if k != 'name':
                     print(f"    - {k}: {v}")
@@ -603,7 +603,7 @@ Candidates to validate:
         if results.get('confidence_distribution'):
             print("\nConfidence Distribution:")
             for conf, count in sorted(results['confidence_distribution'].items()):
-                print(f"  {conf:.1f}: {'█' * count} ({count})")
+                print(f"  {conf:.1f}: {'â–ˆ' * count} ({count})")
         
         print("="*60)
 

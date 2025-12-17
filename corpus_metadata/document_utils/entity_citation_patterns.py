@@ -8,13 +8,13 @@ Last Updated: 2025-10-08
 
 CHANGELOG v1.1.0:
 -----------------
-✓ IMPROVED: More robust citation patterns with better capture groups
-✓ IMPROVED: Enhanced journal abbreviation mappings
-✓ IMPROVED: Better inline citation detection
-✓ ADDED: Pattern compilation validation
-✓ ADDED: Citation style confidence scoring
-✓ FIXED: Regex anchoring for better matching
-✓ ADDED: Support for more citation formats (PLoS, Frontiers, MDPI)
+âœ" IMPROVED: More robust citation patterns with better capture groups
+âœ" IMPROVED: Enhanced journal abbreviation mappings
+âœ" IMPROVED: Better inline citation detection
+âœ" ADDED: Pattern compilation validation
+âœ" ADDED: Citation style confidence scoring
+âœ" FIXED: Regex anchoring for better matching
+âœ" ADDED: Support for more citation formats (PLoS, Frontiers, MDPI)
 """
 
 import re
@@ -34,6 +34,8 @@ REFERENCE_SECTION_MARKERS = {
             r'^\s*(?:REFERENCES?|Bibliography|Works?\s+Cited|Literature\s+Cited)\s*$',
             r'^\s*\d+\.\s*REFERENCES?\s*$',
             r'^\s*References?\s*[:\-]?\s*$',
+            r'(?:^|\n)\s*REFERENCES?\s*(?:\n|$)',  # Less strict - just needs to be on a line
+            r'(?:^|\n)\s*References\s*\n\s*(?:\d+\.|1\.|\[1\])',  # References followed by numbered list
         ],
         'confidence': 0.98,
         'description': 'Standard reference section headers'
@@ -42,6 +44,7 @@ REFERENCE_SECTION_MARKERS = {
     'numbered_list_start': {
         'patterns': [
             r'^\s*(?:1\.|1\)|\[1\])\s+[A-Z][a-z]+\s+[A-Z]{1,3}(?:,|\s)',
+            r'(?:^|\n)\s*1\.\s+[A-Z][a-z]+',  # Simpler numbered reference start
         ],
         'confidence': 0.90,
         'description': 'Start of numbered reference list'
@@ -236,15 +239,23 @@ CITATION_STYLES = {
 
 INLINE_CITATION_PATTERNS = {
     'numbered_square': {
-        'pattern': r'\[(?P<numbers>\d+(?:\s*[-–,]\s*\d+)*)\]',
+        'pattern': r'\[(?P<numbers>\d+(?:\s*[-,]\s*\d+)*)\]',
         'style': 'vancouver',
         'confidence': 0.98,
         'description': 'Square bracket numbered',
         'examples': ['[1]', '[1-3]', '[1,2,5]', '[1-5,8,10-12]']
     },
     
+    'numbered_parenthesis': {
+        'pattern': r'(?<![0-9])\((?P<numbers>\d{1,3}(?:\s*[-,]\s*\d{1,3})*)\)(?![0-9])',
+        'style': 'vancouver',
+        'confidence': 0.80,
+        'description': 'Parenthetical numbered citations',
+        'examples': ['(1)', '(1-3)', '(1,2,5)']
+    },
+    
     'numbered_superscript_marker': {
-        'pattern': r'\^(?P<numbers>\d+(?:[-–,]\s*\d+)*)\^',
+        'pattern': r'\^(?P<numbers>\d+(?:[-,]\s*\d+)*)\^',
         'style': 'nature',
         'confidence': 0.90,
         'description': 'Superscript marker format',
@@ -656,9 +667,9 @@ if __name__ == "__main__":
     validation_errors = validate_citation_patterns()
     
     if not validation_errors:
-        print("✅ All citation patterns validated successfully!")
+        print("âœ… All citation patterns validated successfully!")
     else:
-        print(f"❌ Found {len(validation_errors)} patterns with issues:\n")
+        print(f"âŒ Found {len(validation_errors)} patterns with issues:\n")
         for key, errors in validation_errors.items():
             print(f"  {key}:")
             for error in errors:

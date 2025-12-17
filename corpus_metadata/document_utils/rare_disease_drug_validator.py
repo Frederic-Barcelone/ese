@@ -162,7 +162,7 @@ class DrugValidator:
         
         # Initialize DrugKnowledgeBase (single source of truth)
         self.drug_kb = get_knowledge_base(system_initializer)
-        logger.info(f"✓ DrugKnowledgeBase initialized: {self.drug_kb.stats['total_drugs']} drugs")
+        logger.info(f"[OK] DrugKnowledgeBase initialized: {self.drug_kb.stats['total_drugs']} drugs")
         
         # Get configuration from config.yaml via system initializer
         self.config = self._load_config()
@@ -185,7 +185,7 @@ class DrugValidator:
             # Default configuration
             'min_confidence': 0.5,
             'high_confidence': 0.8,
-            'claude_model': 'claude-3-5-sonnet-20241022',
+            'claude_model': 'claude-sonnet-4-5-20250929',
             'claude_max_tokens': 4096,
             'claude_temperature': 0.0,
             'max_context_length': 1000,
@@ -245,7 +245,7 @@ class DrugValidator:
                     medical_terms.update(lexicon.keys())
                 elif isinstance(lexicon, (list, set)):
                     medical_terms.update(lexicon)
-                logger.info(f"✓ Medical terms loaded: {len(medical_terms)} terms")
+                logger.info(f"[OK] Medical terms loaded: {len(medical_terms)} terms")
         
         return medical_terms
     
@@ -263,7 +263,7 @@ class DrugValidator:
         
         try:
             client = anthropic.Anthropic(api_key=api_key)
-            logger.info("✓ Claude client initialized")
+            logger.info("[OK] Claude client initialized")
             return client
         except Exception as e:
             logger.error(f"Failed to initialize Claude: {e}")
@@ -574,7 +574,7 @@ Drugs to validate:
         
         print("\nValidation Stages:")
         for stage in results['stages']:
-            print(f"  • {stage['name']}: ", end="")
+            print(f"  - {stage['name']}: ", end="")
             for key, value in stage.items():
                 if key != 'name':
                     print(f"{key}={value} ", end="")
@@ -658,44 +658,3 @@ def validate_drug_extraction(extraction_file: str,
         print(f"\nResults saved to: {output_file}")
     
     return results
-
-
-# ============================================================================
-# Main
-# ============================================================================
-
-if __name__ == "__main__":
-    import sys
-    
-    print("Drug Validator v4.0 - DrugKnowledgeBase Integration")
-    print("="*60)
-    
-    if len(sys.argv) > 1:
-        # Process file from command line
-        input_file = sys.argv[1]
-        output_file = sys.argv[2] if len(sys.argv) > 2 else None
-        context_file = sys.argv[3] if len(sys.argv) > 3 else None
-        
-        results = validate_drug_extraction(input_file, output_file, context_file)
-    else:
-        # Test with sample data
-        test_drugs = [
-            {"name": "rituximab", "confidence": 0.95},
-            {"name": "prednisone", "confidence": 0.90},
-            {"name": "creatinine", "confidence": 0.85},  # Should be filtered
-            {"name": "protein", "confidence": 0.80},     # Should be filtered
-            {"name": "eculizumab", "confidence": 0.95},
-            {"name": "methylprednisolone", "confidence": 0.93},
-            {"name": "TMP-SMX", "confidence": 0.85},
-            {"name": "barrier", "confidence": 0.75},     # Should be filtered
-            {"name": "ravulizumab", "confidence": 0.92}
-        ]
-        
-        print("Testing with sample drugs...")
-        validator = DrugValidator()
-        results = validator.validate_drug_list(test_drugs)
-        validator.print_summary(results)
-        
-        print("\nFinal Statistics:")
-        stats = validator.get_statistics()
-        print(json.dumps(stats, indent=2))

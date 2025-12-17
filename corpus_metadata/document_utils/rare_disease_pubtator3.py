@@ -88,7 +88,10 @@ class PubTator3Manager:
     def __init__(self, config_path: Optional[str] = None):
         """Initialize PubTator3 manager with configuration"""
         self.config = self._load_config(config_path)
-        self.api_config = self.config.get('api_configuration', {}).get('pubtator3', {})
+        
+        # Support both config structures: api_configuration.pubtator3 (legacy) and api.pubtator (current)
+        api_section = self.config.get('api_configuration', self.config.get('api', {}))
+        self.api_config = api_section.get('pubtator3', api_section.get('pubtator', {}))
         self.enabled = self.api_config.get('enabled', True)
 
         if not self.enabled:
@@ -119,7 +122,15 @@ class PubTator3Manager:
     def _load_config(self, config_path: Optional[str] = None) -> Dict:
         """Load configuration from YAML file, or defaults"""
         if not config_path:
-            for path in ('./corpus_config/config.yaml', '../corpus_config/config.yaml', './config/config.yaml'):
+            for path in (
+                './corpus_metadata/document_config/config.yaml',
+                '../corpus_metadata/document_config/config.yaml',
+                '../../corpus_metadata/document_config/config.yaml',
+                './corpus_config/config.yaml',
+                '../corpus_config/config.yaml',
+                './config/config.yaml',
+                './config.yaml',
+            ):
                 if os.path.exists(path):
                     config_path = path
                     break
@@ -386,7 +397,7 @@ class PubTator3Manager:
         return None
 
     def normalize_drug(self, drug_text: str, use_cache: bool = True) -> Optional[NormalizedEntity]:
-        """Normalize a drug name using Gazetteer → Autocomplete → Search fallback"""
+        """Normalize a drug name using Gazetteer -> Autocomplete -> Search fallback"""
         if not self.enabled:
             return None
 
@@ -481,7 +492,7 @@ class PubTator3Manager:
         return results
 
     def normalize_disease(self, disease_text: str, use_cache: bool = True) -> Optional[NormalizedEntity]:
-        """Normalize a disease name using Autocomplete → Search fallback"""
+        """Normalize a disease name using Autocomplete -> Search fallback"""
         if not self.enabled:
             return None
 
@@ -629,7 +640,7 @@ def setup_pubtator3(config_path: Optional[str] = None) -> PubTator3Manager:
     """Initialize manager and test connectivity"""
     manager = PubTator3Manager(config_path)
     if manager.enabled and manager.test_connection():
-        logger.debug("✅ PubTator3 API connection OK")
+        logger.debug("[OK] PubTator3 API connection OK")
     elif manager.enabled:
-        logger.warning("⚠️ Could not verify PubTator3 connectivity")
+        logger.warning("[WARN] Could not verify PubTator3 connectivity")
     return manager
