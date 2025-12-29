@@ -4,15 +4,11 @@ Documents SOTA Extractor - COMPLETE METADATA EXTRACTION PIPELINE
 ================================================================
  
 Location: corpus_metadata/document_metadata_extraction.py
+Version: 12.0.0 - REMOVED ABBREVIATION EXTRACTION
 
 Pipeline Overview:
 
-1. ABBREVIATION EXTRACTION (First)
-   |-- Extract all abbreviations with expansions
-   |-- Classify context (biological/disease/drug/clinical)
-   `-- Output: {abbr, expansion, confidence, type, occurrences}
-   
-2. CITATION & REFERENCE EXTRACTION (New Stage)
+1. CITATION & REFERENCE EXTRACTION
    |-- Citation Extractor:
    |   |-- Detect citation styles (Vancouver, APA, Harvard, etc.)
    |   |-- Extract structured citations from references
@@ -27,30 +23,19 @@ Pipeline Overview:
        |-- Reconstruct URLs
        `-- Classify reference roles
 
-3. ENRICHMENT PHASE
-   |-- Drug Extractor receives:
-   |   `-- Abbreviations where type IN (drug, clinical, biological)
-   |       + Their full expansions
-   `-- Disease Extractor receives:
-       `-- Abbreviations where type IN (disease, clinical, biological)
-           + Their full expansions
-
-4. ENTITY EXTRACTION (Enhanced)
+2. ENTITY EXTRACTION
    |-- Drug Detector runs with:
    |   |-- Original text
-   |   |-- Abbreviation candidates
-   |   `-- Expanded forms
+   |   `-- Drug detection patterns
    `-- Disease Detector runs with:
        |-- Original text
-       |-- Abbreviation candidates
-       `-- Expanded forms
+       `-- Disease detection patterns
 
-5. VALIDATION & DEDUPLICATION
+3. VALIDATION & DEDUPLICATION
    |-- Cross-validate findings
-   |-- Resolve conflicts (MPA case)
    `-- Merge duplicates
 
-6. INTELLIGENT RENAMING + PREFIX APPLICATION
+4. INTELLIGENT RENAMING + PREFIX APPLICATION
    |-- Generate intelligent filename based on content
    |-- Apply auto-incrementing prefix (01000_, 01001_, etc.)
    `-- Rename file with new identifier
@@ -79,9 +64,6 @@ from corpus_metadata.document_utils.console_colors import Colors
 # =============================================================================================================================
 # EARLY SYSTEM INITIALIZATION
 # =============================================================================================================================
-# CorpusConfig  : Configuration manager - loads settings from config.yaml
-# get_logger    : Factory function - creates configured logger instances 
-
 from corpus_metadata.document_utils.metadata_logging_config import CorpusConfig, get_logger
 
 config = CorpusConfig(config_dir=Path(__file__).parent / "document_config")
@@ -96,20 +78,19 @@ logger.debug("Centralized logging system initialized")
 #
 # MODULE DESCRIPTIONS:
 # -----------------------------------------------------------------------------------------------------------------------------
-# system_initializer    : Singleton that loads config, resources, lexicons, and validates API keys. Central initialization hub.
-# prefix_manager        : Manages auto-incrementing file prefixes (01000_, 01001_, etc.) for organized file naming.
+# system_initializer    : Singleton that loads config, resources, lexicons, and validates API keys.
+# prefix_manager        : Manages auto-incrementing file prefixes (01000_, 01001_, etc.)
 # document_reader       : Reads PDF/DOCX/TXT files, extracts raw text, handles OCR for scanned documents.
-# document_classifier   : Classifies document type (CSR, protocol, SmPC, IB, manuscript, etc.) using patterns and AI.
-# document_router       : Routes documents to type-specific extractors based on classification results.
-# basic_extractor       : Extracts core metadata: title, date, description, document structure, and section boundaries.
-# drug_extractor        : Detects drug entities using RxNorm, FDA, and investigational drug databases. Validates via PubTator.
-# disease_extractor     : Detects disease entities using Orphanet, DOID, SNOMED-CT. Enriches with rare disease identifiers.
-# abbreviation_extractor: Extracts abbreviations and their expansions. Classifies context (biological/clinical/drug).
-# entity_extraction     : Two-stage extraction orchestrator. Coordinates all entity extractors and handles deduplication.
-# citation_extractor    : Extracts inline citations and detects citation style (Vancouver, APA, Harvard, etc.).
-# person_extractor      : Extracts author names, PIs, investigators. Handles ORCIDs, affiliations, Unicode names.
-# reference_extractor   : Extracts bibliographic references with 60+ ID types (DOI, PMID, NCT, URL, etc.).
-# intelligent_renamer   : Generates descriptive filenames from extracted metadata (disease, drug, document type, date).
+# document_classifier   : Classifies document type (CSR, protocol, SmPC, IB, manuscript, etc.)
+# document_router       : Routes documents to type-specific extractors based on classification.
+# basic_extractor       : Extracts core metadata: title, date, description, document structure.
+# drug_extractor        : Detects drug entities using RxNorm, FDA, and investigational drug databases.
+# disease_extractor     : Detects disease entities using Orphanet, DOID, SNOMED-CT.
+# entity_extraction     : Two-stage extraction orchestrator. Coordinates all entity extractors.
+# citation_extractor    : Extracts inline citations and detects citation style.
+# person_extractor      : Extracts author names, PIs, investigators. Handles ORCIDs, affiliations.
+# reference_extractor   : Extracts bibliographic references with 60+ ID types.
+# intelligent_renamer   : Generates descriptive filenames from extracted metadata.
 # =============================================================================================================================
 
 modules_loaded = {
@@ -121,7 +102,6 @@ modules_loaded = {
     'basic_extractor': False,
     'drug_extractor': False,
     'disease_extractor': False,
-    'abbreviation_extractor': False,
     'entity_extraction': False,
     'citation_extractor': False,  
     'person_extractor': False,    
@@ -146,10 +126,7 @@ def format_size(size_bytes: int) -> str:
         return f"{size_bytes / 1048576:.2f} MB"
 
 def print_status(message: str, status: str = "OK", counter: str = "", size_info: str = ""):
-    """
-    Print status message with timestamp in unified format.
-    Format: [HH:MM:SS] [STATUS] message [counter] (size)
-    """
+    """Print status message with timestamp in unified format."""
     timestamp = get_timestamp()
     status_icons = {
         "OK": f"{Colors.GREEN}[OK]{Colors.ENDC}",
@@ -160,7 +137,6 @@ def print_status(message: str, status: str = "OK", counter: str = "", size_info:
     }
     icon = status_icons.get(status, f"[{status}]")
     
-    # Build output string
     parts = [f"[{timestamp}]", icon, message]
     if counter:
         parts.append(counter)
@@ -181,8 +157,6 @@ def print_section_header(title: str):
 # MODULE DEFINITIONS
 # =============================================================================================================================
 # Format: (key, module_path, class_name, is_critical, is_singleton)
-# - is_critical : If True, exit on failure
-# - is_singleton: If True, call .get_instance() after import
 # =============================================================================================================================
 
 module_definitions = [
@@ -199,7 +173,6 @@ module_definitions = [
     ('basic_extractor', 'corpus_metadata.document_metadata_extraction_basic', 'RareDiseaseMetadataExtractor', False, False),
     ('drug_extractor', 'corpus_metadata.document_metadata_extraction_drug', 'DrugMetadataExtractor', False, False),
     ('disease_extractor', 'corpus_metadata.document_metadata_extraction_disease', 'DiseaseMetadataExtractor', False, False),
-    ('abbreviation_extractor', 'corpus_metadata.document_metadata_extraction_abbreviation', 'AbbreviationExtractor', False, False),
     ('entity_extraction', 'corpus_metadata.document_utils.entity_extraction', 'process_document_two_stage', True, False),
     
     # Citation/Reference modules
@@ -256,7 +229,6 @@ DocumentTypeRouter = loaded_classes.get('DocumentTypeRouter')
 RareDiseaseMetadataExtractor = loaded_classes.get('RareDiseaseMetadataExtractor')
 DrugMetadataExtractor = loaded_classes.get('DrugMetadataExtractor')
 DiseaseMetadataExtractor = loaded_classes.get('DiseaseMetadataExtractor')
-AbbreviationExtractor = loaded_classes.get('AbbreviationExtractor')
 process_document_two_stage = loaded_classes.get('process_document_two_stage')
 CitationExtractor = loaded_classes.get('CitationExtractor')   
 PersonExtractor = loaded_classes.get('PersonExtractor')       
@@ -282,7 +254,6 @@ class EnhancedDocumentProcessor:
         self.failed = 0
         self.total_drugs = 0
         self.total_diseases = 0
-        self.total_abbreviations = 0
         self.total_citations = 0      
         self.total_persons = 0        
         self.total_references = 0     
@@ -297,17 +268,9 @@ class EnhancedDocumentProcessor:
         
     
     def print_loading_data(self):
-        """
-        Print loading status for all data resources defined in config.yaml.
-        
-        Dynamically reads resource names from config - DRY principle.
-        Format: [HH:MM:SS] [OK] Loading [n/total] resource_name (size)
-        """
+        """Print loading status for all data resources defined in config.yaml."""
         self.print_section("DATA SOURCES")
         
-        # ======================================================================
-        # GET RESOURCES DYNAMICALLY FROM CONFIG SCHEMA
-        # ======================================================================
         try:
             resources_config = config.schema.resources
             if not resources_config:
@@ -319,30 +282,21 @@ class EnhancedDocumentProcessor:
             print_status("Unable to read resources from config", "WARN")
             return
         
-        # ======================================================================
-        # COLLECT ALL RESOURCE KEYS
-        # ======================================================================
         resource_keys = []
         
         for resource_key in dir(resources_config):
-            # Skip private/magic attributes
             if resource_key.startswith('_'):
                 continue
             
-            # Skip methods and non-string values
             value = getattr(resources_config, resource_key, None)
             if callable(value) or value is None:
                 continue
             
             resource_keys.append(resource_key)
         
-        # Sort alphabetically for consistent ordering
         resource_keys.sort()
         total_count = len(resource_keys)
         
-        # ======================================================================
-        # DISPLAY RESOURCES WITH CONSISTENT FORMAT
-        # ======================================================================
         loaded_count = 0
         
         for i, resource_key in enumerate(resource_keys, 1):
@@ -364,7 +318,6 @@ class EnhancedDocumentProcessor:
                 print_status(f"Loading {resource_key}", "FAIL", f"[{i:>2}/{total_count}]", "error")
                 logger.debug(f"{resource_key} access error: {e}")
         
-        # Summary line
         if loaded_count == total_count:
             print_status(f"Data sources: {loaded_count}/{total_count} loaded", "OK")
         else:
@@ -384,7 +337,6 @@ class EnhancedDocumentProcessor:
         print_status(f"Modules loaded: {loaded}/{total}", "OK")
         print_status(f"Features enabled: {enabled}/{len(features)}", "OK")
         
-        # Show which features are enabled - ALL of them, no truncation
         enabled_features = [k for k, v in features.items() if v]
         disabled_features = [k for k, v in features.items() if not v]
         
@@ -396,7 +348,6 @@ class EnhancedDocumentProcessor:
             timestamp = get_timestamp()
             print(f"[{timestamp}]     Disabled: {', '.join(disabled_features)}")
         
-        # Also log for file output
         logger.debug(f"System initialized: {loaded}/{total} modules, {enabled}/{len(features)} features")
 
     def print_files_to_process(self, files: List[Path]):
@@ -407,7 +358,6 @@ class EnhancedDocumentProcessor:
         print_status(f"Total files: {len(files)}", "INFO")
         print_status("Order: Alphabetical", "INFO")
         
-        # List ALL files, no truncation
         for i, filepath in enumerate(files, 1):
             timestamp = get_timestamp()
             print(f"[{timestamp}]     {i}. {filepath.name}")
@@ -430,11 +380,10 @@ class EnhancedDocumentProcessor:
         print_status(f"{task}{detail_str} {time_str}", status)
     
     def print_extraction_results(self, results: Dict):
-        """Print extraction results summary - UPDATED WITH NEW EXTRACTORS"""
+        """Print extraction results summary"""
         timestamp = get_timestamp()
         print(f"[{timestamp}] {Colors.CYAN}Extraction Results:{Colors.ENDC}")
         
-        # Extract from pipeline_stages
         entities_stage = next(
             (stage for stage in results.get('pipeline_stages', []) 
             if stage['stage'] == 'entities'), 
@@ -445,21 +394,18 @@ class EnhancedDocumentProcessor:
             entity_results = entities_stage['results']
             drugs = entity_results.get('drugs', [])
             diseases = entity_results.get('diseases', [])
-            abbreviations = entity_results.get('abbreviations', [])
             citations = entity_results.get('citations', [])
             persons = entity_results.get('persons', [])
             references = entity_results.get('references', [])
         else:
             drugs = results.get('drugs', [])
             diseases = results.get('diseases', [])
-            abbreviations = results.get('abbreviations', [])
             citations = results.get('citations', [])
             persons = results.get('persons', [])
             references = results.get('references', [])
         
         self.total_drugs += len(drugs)
         self.total_diseases += len(diseases)
-        self.total_abbreviations += len(abbreviations)
         self.total_citations += len(citations)
         self.total_persons += len(persons)
         self.total_references += len(references)
@@ -480,14 +426,6 @@ class EnhancedDocumentProcessor:
                 conf = disease.get('confidence', 0)
                 timestamp = get_timestamp()
                 print(f"[{timestamp}]       - {name} ({conf:.0%})")
-        
-        print_status(f"Abbreviations found: {len(abbreviations)}", "INFO")
-        if abbreviations and len(abbreviations) <= 3:
-            for abbrev in abbreviations[:3]:
-                abbr = abbrev.get('abbreviation', 'Unknown')
-                exp = abbrev.get('expansion', 'Unknown')
-                timestamp = get_timestamp()
-                print(f"[{timestamp}]       - {abbr} -> {exp}")
         
         print_status(f"Citations found: {len(citations)}", "INFO")
         if citations and len(citations) <= 3:
@@ -546,7 +484,7 @@ class EnhancedDocumentProcessor:
             logger.info(f"File renamed: {old_name} -> {new_name}")
     
     def print_final_summary(self):
-        """Print final processing summary - UPDATED"""
+        """Print final processing summary"""
         elapsed = time.time() - self.start_time
         
         print_section_header("PROCESSING COMPLETE")
@@ -565,7 +503,6 @@ class EnhancedDocumentProcessor:
         print(f"\n[{timestamp}] {Colors.CYAN}Entities Extracted:{Colors.ENDC}")
         print_status(f"Drugs: {self.total_drugs}", "INFO")
         print_status(f"Diseases: {self.total_diseases}", "INFO")
-        print_status(f"Abbreviations: {self.total_abbreviations}", "INFO")
         print_status(f"Citations: {self.total_citations}", "INFO")
         print_status(f"Persons: {self.total_persons}", "INFO")
         print_status(f"References: {self.total_references}", "INFO")
@@ -580,7 +517,7 @@ console = EnhancedDocumentProcessor()
 # ============================================================================
 
 def initialize_extraction_system():
-    """Initialize the extraction system components - UPDATED WITH NEW EXTRACTORS"""
+    """Initialize the extraction system components"""
     try:
         logger.debug("Initializing extraction system components...")
         
@@ -751,17 +688,6 @@ def initialize_extraction_system():
             except Exception as e:
                 logger.warning(f"IntelligentDocumentRenamer initialization failed: {e}")
         
-        if AbbreviationExtractor and features.get('abbreviation_extraction', True):
-            try:
-                components['abbreviation_extractor'] = AbbreviationExtractor(
-                    system_initializer=system_initializer_instance,
-                    use_claude=claude_available
-                )
-                print_status("Abbreviation extraction: ENABLED", "OK")
-                logger.debug(f"Initialized AbbreviationExtractor (Claude: {claude_available})")
-            except Exception as e:
-                logger.warning(f"AbbreviationExtractor initialization failed: {e}")
-        
         print_status("Extraction components ready", "OK")
         logger.debug(f"System initialization complete with {len(components)} components")
         
@@ -781,16 +707,9 @@ def initialize_extraction_system():
 # ============================================================================
 
 def main():
-    """Main processing function - FIXED console reporting bug in v8.10.1"""
+    """Main processing function"""
     
     try:
-        # ====================================================================
-        # DISPLAY SYSTEM STATUS - Show loaded resources and initialization summary
-        # ====================================================================
-        console.print_loading_data()
-        console.print_initialization_summary(modules_loaded)
-        
-        
         # ====================================================================
         # CHECKING FILES - Locate documents folder and setup output paths
         # ====================================================================
@@ -815,8 +734,6 @@ def main():
         print_status(f"Text output: {extracted_texts_folder.absolute()}", "OK")
         print_status(f"Metadata output: {documents_folder.absolute()}", "OK")
 
-
-
         # ====================================================================
         # PREFIX MANAGER - Auto-incrementing file prefixes (01000_, 01001_, etc.)
         # ====================================================================
@@ -828,10 +745,6 @@ def main():
         console.print_section("PREFIX MANAGER")
         print_status(f"Auto-prefix starting at: {prefix_manager.get_next_prefix()}", "OK")
         logger.info(f"DocumentPrefixManager initialized with starting prefix: {prefix_manager.get_next_prefix()}")
-
-
-
-
         
         # Scan for documents
         pdf_files = list(documents_folder.glob("*.pdf"))

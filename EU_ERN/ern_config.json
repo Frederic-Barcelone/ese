@@ -13,8 +13,8 @@
     "estimated_time": "2-4 days for all 7 enabled networks"
   },
   "scraper_settings": {
-    "max_crawl_depth": 8,
-    "max_pages_per_network": 3000,
+    "max_crawl_depth": 10,
+    "max_pages_per_network": 5000,
     "default_request_delay": 2.5,
     "request_timeout": 90,
     "max_retries": 5,

@@ -3,6 +3,10 @@
 corpus_metadata/document_utils/metadata_logging_config.py
 =============================================================
 Central configuration loader and logging utilities.
+
+Provides:
+- Main corpus.log via root logger
+- Dedicated corpus_abbreviation.log via get_abbrev_logger()
 """
 
 import sys
@@ -26,6 +30,58 @@ from corpus_metadata.document_config.config_schema import (
 )
 
 _logger = logging.getLogger(__name__)
+
+
+# ============================================================================
+# ABBREVIATION LOGGER (Dedicated log file: corpus_abbreviation.log)
+# ============================================================================
+
+_abbrev_logger: logging.Logger = None
+_abbrev_logger_initialized = False
+
+
+def get_abbrev_logger() -> logging.Logger:
+    """
+    Get the dedicated abbreviation logger.
+    
+    Writes to logs/corpus_abbreviation.log separately from main corpus.log.
+    
+    Returns:
+        Logger instance for abbreviation processing
+    """
+    global _abbrev_logger, _abbrev_logger_initialized
+    
+    if _abbrev_logger_initialized and _abbrev_logger is not None:
+        return _abbrev_logger
+    
+    # Create dedicated logger
+    _abbrev_logger = logging.getLogger("corpus_abbreviation")
+    _abbrev_logger.setLevel(logging.DEBUG)
+    _abbrev_logger.handlers.clear()
+    _abbrev_logger.propagate = False  # Don't send to root logger
+    
+    # Create log directory
+    log_dir = Path("corpus_logs")
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_path = log_dir / "corpus_abbreviation.log"
+    
+    # File handler with rotation
+    file_handler = logging.handlers.RotatingFileHandler(
+        log_path,
+        maxBytes=10 * 1024 * 1024,  # 10 MB
+        backupCount=3,
+        encoding='utf-8'
+    )
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    ))
+    _abbrev_logger.addHandler(file_handler)
+    
+    _abbrev_logger_initialized = True
+    
+    return _abbrev_logger
 
 
 # ============================================================================
@@ -298,6 +354,7 @@ class CorpusConfig:
 __all__ = [
     'CorpusConfig',
     'get_logger',
+    'get_abbrev_logger',
     'timed_section',
     'log_summary',
 ]

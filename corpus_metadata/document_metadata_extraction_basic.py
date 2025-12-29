@@ -831,14 +831,19 @@ class RareDiseaseMetadataExtractor:
                 
                 # Skip lines that look like metadata, headers, or page numbers
                 skip_patterns = [
-                    r'^page\s+\d+',
-                    r'^\d+$',
-                    r'^©|copyright|all rights reserved',
-                    r'^vol\.\s+\d+|volume\s+\d+',
+                    r'^page\\s+\\d+',
+                    r'^\\d+$',
+                    r'^(C)|copyright|all rights reserved',
+                    r'^vol\\.\\s+\\d+|volume\\s+\\d+',
                     r'^issn|isbn|doi:',
-                    r'^www\.|http',
-                    r'^article\s+info|keywords:|abstract:',
+                    r'^www\\.|http',
+                    r'^article\\s+info|abstract:',
                     r'^received:|accepted:|published:',
+                    # FIX: Better Keywords/metadata detection
+                    r'^keywords?\\s*[:;,]?\\s*[A-Z]',
+                    r'^keywords?\\s+[A-Z]{2,}',
+                    r'^\\*?correspondence',
+                    r'^authors?\\s*[:;]',
                 ]
                 
                 should_skip = False

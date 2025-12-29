@@ -1339,103 +1339,8 @@ class RareDiseaseDetector:
         
         return None
     
-    # Abbreviation processing methods
-    def process_abbreviation_candidates(self, 
-                                       abbreviation_context: Dict[str, Any],
-                                       text: str) -> List[DetectedDisease]:
-        """Process abbreviation candidates with semantic gating"""
-        diseases = []
-        candidates = abbreviation_context.get('disease_candidates', [])
-        
-        for candidate in candidates:
-            abbrev = candidate.get('abbreviation', '')
-            if not self._should_promote_to_disease(candidate):
-                logger.debug(f"Rejected abbreviation {abbrev}")
-                continue
-            
-            expansion = self._get_best_expansion(candidate, text)
-            if not expansion:
-                continue
-            
-            disease = DetectedDisease(
-                name=expansion,
-                confidence=self._calculate_abbreviation_confidence(candidate),
-                detection_method='abbreviation_enrichment',
-                occurrences=candidate.get('occurrences', 1),
-                from_abbreviation=abbrev,
-                semantic_tui=candidate.get('semantic_tui'),
-                matched_terms=[abbrev, expansion],
-                source='abbreviation',
-                positions=[]
-            )
-            
-            diseases.append(disease)
-            logger.info(f"Promoted abbreviation: {abbrev} -> {expansion}")
-        
-        return diseases
-    
-    def _should_promote_to_disease(self, candidate: Dict) -> bool:
-        """Determine if abbreviation should be promoted"""
-        expansion = (candidate.get('local_expansion') or candidate.get('expansion') or '').lower()
-        if not expansion:
-            return False
-        
-        semantic_tui = candidate.get('semantic_tui') or candidate.get('semantic_type')
-        if semantic_tui:
-            return semantic_tui in DISORDERS_STYS
-        
-        has_neg = any(word in expansion for word in DISEASE_NEG_WORDS)
-        if has_neg:
-            return False
-        
-        has_pos_word = any(word in expansion for word in DISEASE_POS_WORDS)
-        has_pos_suffix = any(expansion.endswith(suffix) for suffix in DISEASE_POS_SUFFIXES)
-        
-        return has_pos_word or has_pos_suffix
-    
-    def _get_best_expansion(self, candidate: Dict, text: str) -> Optional[str]:
-        """Get best expansion for abbreviation"""
-        abbrev = candidate.get('abbreviation', '')
-        local_expansion = candidate.get('local_expansion')
-        if local_expansion:
-            return local_expansion
-        
-        patterns = [
-            rf'([^(]+?)\s*\(\s*{re.escape(abbrev)}\s*\)',
-            rf'{re.escape(abbrev)}\s*\(\s*([^)]+?)\s*\)'
-        ]
-        
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
-            if match:
-                expansion = match.group(1).strip()
-                if self._is_valid_expansion(expansion):
-                    return expansion
-        
-        return candidate.get('expansion')
-    
-    def _is_valid_expansion(self, expansion: str) -> bool:
-        """Check if expansion is valid"""
-        if not expansion or len(expansion) < 3:
-            return False
-        if len(expansion) > 100 or len(expansion.split()) > 15:
-            return False
-        if expansion[0].islower():
-            return False
-        return True
-    
-    def _calculate_abbreviation_confidence(self, candidate: Dict) -> float:
-        """Calculate confidence for abbreviation-based disease"""
-        base_confidence = candidate.get('confidence', 0.8)
-        if candidate.get('semantic_tui'):
-            base_confidence *= 1.1
-        if candidate.get('local_expansion'):
-            base_confidence *= 1.05
-        base_confidence *= SOURCE_CONFIDENCE.get('abbreviation_enrichment', 0.70) / 0.85
-        return min(base_confidence, 1.0)
-    
     # Main detection method
-    def detect_diseases(self, text: str, abbreviation_context: Optional[Dict] = None) -> DiseaseDetectionResult:
+    def detect_diseases(self, text: str) -> DiseaseDetectionResult:
         """Main disease detection method with truncation handling integrated"""
         if text is None or not text:
             return DiseaseDetectionResult(
@@ -1508,18 +1413,6 @@ class RareDiseaseDetector:
             
             analytics['stage_metrics']['truncation_completion'] = {
                 'count': truncation_count,
-                'time': round(time.time() - stage_start, 3)
-            }
-        
-        # Process abbreviations
-        if abbreviation_context:
-            stage_start = time.time()
-            abbrev_diseases = self.process_abbreviation_candidates(abbreviation_context, text)
-            all_detections.extend(abbrev_diseases)
-            if abbrev_diseases:
-                methods_used.append('abbreviation_enrichment')
-            analytics['stage_metrics']['abbreviation_enrichment'] = {
-                'count': len(abbrev_diseases),
                 'time': round(time.time() - stage_start, 3)
             }
         

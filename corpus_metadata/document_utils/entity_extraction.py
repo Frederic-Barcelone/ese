@@ -1,37 +1,31 @@
 #!/usr/bin/env python3
 """
-Enhanced Entity Extraction Pipeline - UPDATED v11.2.0
+Enhanced Entity Extraction Pipeline - UPDATED v12.0.0
 =====================================================
 Location: corpus_metadata/document_utils/entity_extraction.py
-Version: 11.2.0 - FIXED ABBREVIATION EXTRACTION + CONTEXT FILTERING
-Last Updated: 2025-12-16
+Version: 12.0.0 - REMOVED ABBREVIATION EXTRACTION
+Last Updated: 2025-12-27
 
-CHANGES IN v11.2.0:
+CHANGES IN v12.0.0:
 ==================
-âœ“ FIXED abbreviation extraction returning empty results
-âœ“ ADDED fallback abbreviation extraction when primary fails
-âœ“ ADDED proper conversion between AbbreviationCandidate class variants
-âœ“ ADDED context-aware drug filtering (lab reagents, signaling molecules)
-âœ“ ADDED disease validation (cell types, incomplete names, artifacts)
+[REMOVED] All abbreviation extraction functionality
+[REMOVED] Fallback abbreviation extraction
+[REMOVED] Abbreviation conversion functions
+[REMOVED] Abbreviation enrichment step
+[REMOVED] ID-gated promotion from abbreviations
+[REMOVED] Cross-type deduplication with abbreviations
+[UPDATED] Pipeline now focuses on DISEASE and DRUG extraction only
+[UPDATED] Simplified extraction summary
 
-CHANGES IN v11.1.1:
+CHANGES IN v11.3.0:
 ==================
-âœ“ ADDED intro text file extraction (saves limited text separately)
-âœ“ UPDATED file naming: _full.txt and _intro.txt
-âœ“ IMPROVED logging for text extraction
-
-CHANGES IN v11.1.0:
-==================
-âœ“ ADDED citation extraction (Step 2)
-âœ“ ADDED person extraction (Step 3)  
-âœ“ ADDED reference extraction (Step 4)
-âœ“ UPDATED extraction summary to include citation/person/reference counts
-âœ“ Renumbered existing steps (drugs: 2â†’5, diseases: 3â†’6, dedup: 3.5â†’7, etc.)
+[+] ADDED provenance_span to all entity types (drugs, diseases, citations, persons, references)
+[+] ADDED _create_provenance_span() helper function
+[+] ADDED _infer_section_from_position() for section detection
 """
-
 import json
 import logging
-import re  # ADDED for fallback extraction
+import re
 import time
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
@@ -46,9 +40,7 @@ from corpus_metadata.document_utils.entity_extraction_utils import (
     fuzzy_match,
     deduplicate_by_key,
     deduplicate_diseases_preserve_hierarchy,
-    deduplicate_entities_across_types,
     apply_adaptive_confidence_filter,
-    enrich_abbreviations_with_entity_ids,
     validate_extraction_results,
     SYMPTOM_KEYWORDS,
     FINDING_KEYWORDS,
@@ -58,237 +50,199 @@ from corpus_metadata.document_utils.entity_extraction_utils import (
 
 # Import extraction modules
 from corpus_metadata.document_utils.entity_db_extraction import ExtractionDatabase
-from corpus_metadata.document_utils.entity_abbreviation_promotion import (
-    process_abbreviation_candidates,
-    has_required_id,
-    normalize_ids
-)
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
 # Pipeline version 
-PIPELINE_VERSION = 'v11.2.0'
+PIPELINE_VERSION = 'v12.0.0'
 
 
 # ============================================================================
-# NEW IN v11.2.0: FALLBACK ABBREVIATION EXTRACTION
+# PROVENANCE SPAN SUPPORT
 # ============================================================================
 
-def _extract_abbreviations_fallback(text: str) -> List[Dict[str, Any]]:
+def _infer_section_from_position(text: str, char_start: int) -> str:
     """
-    Fallback abbreviation extraction when primary extractor fails.
+    Infer document section from character position.
     
-    Uses robust regex patterns to find abbreviations when the main
-    extractor returns empty or invalid results.
+    Looks backwards from the position to find section headers.
     
     Args:
-        text: Document text to extract from
+        text: Full document text
+        char_start: Character position to check
         
     Returns:
-        List of abbreviation dictionaries
+        Inferred section name or 'Unknown'
     """
-    abbreviations = []
-    seen = set()
+    if not text or char_start <= 0:
+        return 'Unknown'
     
-    # Pattern 1: "Full Name (ABBR)" - most common biomedical format
-    pattern1 = re.compile(
-        r'([A-Z][a-zA-Z0-9\-\s]{2,60}?)\s*\(\s*([A-Z][A-Z0-9\-/]{1,12})\s*\)',
-        re.MULTILINE
-    )
+    # Get text before the position (up to 2000 chars back)
+    lookback = min(char_start, 2000)
+    preceding_text = text[char_start - lookback:char_start]
     
-    for match in pattern1.finditer(text):
-        expansion = match.group(1).strip()
-        abbr = match.group(2).strip()
-        
-        # Validation
-        if not _is_valid_abbrev(abbr) or not _is_valid_expansion(expansion, abbr):
-            continue
-        
-        key = abbr.upper()
-        if key not in seen:
-            seen.add(key)
-            abbreviations.append({
-                'abbreviation': abbr,
-                'expansion': expansion,
-                'confidence': 0.95,
-                'context_type': _infer_abbrev_context_type(expansion),
-                'source': 'fallback_pattern',
-                'metadata': {'detection': 'full_name_parentheses'}
-            })
+    # Section patterns (ordered by priority)
+    section_patterns = [
+        (r'\bAbstract\b', 'Abstract'),
+        (r'\bBackground\b', 'Background'),
+        (r'\bIntroduction\b', 'Introduction'),
+        (r'\bMethods?\b', 'Methods'),
+        (r'\bMaterials?\s+and\s+Methods?\b', 'Materials and Methods'),
+        (r'\bResults?\b', 'Results'),
+        (r'\bDiscussion\b', 'Discussion'),
+        (r'\bConclusions?\b', 'Conclusions'),
+        (r'\bReferences?\b', 'References'),
+        (r'\bAcknowledgements?\b', 'Acknowledgements'),
+        (r'\bSupplementary\b', 'Supplementary'),
+        (r'\bAppendix\b', 'Appendix'),
+        (r'\bFigure\s*\d+', 'Figure'),
+        (r'\bTable\s*\d+', 'Table'),
+    ]
     
-    # Pattern 2: "ABBR (Full Name)" - reverse format
-    pattern2 = re.compile(
-        r'\b([A-Z][A-Z0-9\-/]{1,12})\s*\(\s*([A-Z][a-zA-Z0-9\-\s]{2,60}?)\s*\)',
-        re.MULTILINE
-    )
+    # Find the latest section header
+    latest_section = 'Unknown'
+    latest_pos = -1
     
-    for match in pattern2.finditer(text):
-        abbr = match.group(1).strip()
-        expansion = match.group(2).strip()
-        
-        if not _is_valid_abbrev(abbr) or not _is_valid_expansion(expansion, abbr):
-            continue
-        
-        key = abbr.upper()
-        if key not in seen:
-            seen.add(key)
-            abbreviations.append({
-                'abbreviation': abbr,
-                'expansion': expansion,
-                'confidence': 0.90,
-                'context_type': _infer_abbrev_context_type(expansion),
-                'source': 'fallback_pattern',
-                'metadata': {'detection': 'abbr_parentheses'}
-            })
+    for pattern, section_name in section_patterns:
+        for match in re.finditer(pattern, preceding_text, re.IGNORECASE):
+            if match.start() > latest_pos:
+                latest_pos = match.start()
+                latest_section = section_name
     
-    logger.info(f"Fallback abbreviation extraction found {len(abbreviations)} abbreviations")
-    return abbreviations
+    return latest_section
 
 
-def _is_valid_abbrev(abbr: str) -> bool:
-    """Check if abbreviation has valid structure."""
-    if not abbr or len(abbr) < 2 or len(abbr) > 15:
-        return False
-    
-    # Must have at least 2 uppercase or contain digit
-    upper_count = sum(1 for c in abbr if c.isupper())
-    digit_count = sum(1 for c in abbr if c.isdigit())
-    
-    if upper_count < 2 and digit_count == 0:
-        return False
-    
-    # Filter stopwords
-    stopwords = {
-        'THE', 'THIS', 'THAT', 'WITH', 'FROM', 'INTO', 'OVER', 'AND', 'BUT',
-        'FOR', 'NOR', 'HTTP', 'HTTPS', 'WWW', 'COM', 'ORG', 'NET', 'EDU'
-    }
-    if abbr.upper() in stopwords:
-        return False
-    
-    return True
-
-
-def _is_valid_expansion(expansion: str, abbr: str) -> bool:
-    """Check if expansion is valid for abbreviation."""
-    if not expansion or len(expansion) < 3:
-        return False
-    
-    # Expansion should be longer than abbreviation
-    if len(expansion) <= len(abbr):
-        return False
-    
-    # Should start with capital
-    if not expansion[0].isupper():
-        return False
-    
-    # Filter invalid starts
-    invalid_starts = {'ref', 'reference', 'http', 'https', 'www', 'doi', 'pmid'}
-    first_word = expansion.split()[0].lower()
-    if first_word in invalid_starts:
-        return False
-    
-    return True
-
-
-def _infer_abbrev_context_type(expansion: str) -> str:
-    """Infer context type from expansion text."""
-    exp_lower = expansion.lower()
-    
-    # Disease patterns
-    if any(t in exp_lower for t in 
-           ['disease', 'syndrome', 'disorder', 'deficiency', 'cancer',
-            'carcinoma', 'leukemia', 'lymphoma', 'vasculitis', 'neuropathy',
-            'hypertension', 'fibrosis']):
-        return 'disease'
-    
-    # Drug patterns
-    if any(t in exp_lower for t in 
-           ['therapy', 'treatment', 'drug', 'medication', 'inhibitor',
-            'antagonist', 'agonist', 'blocker', 'approved']):
-        return 'drug'
-    
-    # Biological patterns
-    if any(t in exp_lower for t in 
-           ['protein', 'receptor', 'channel', 'enzyme', 'antibody',
-            'antigen', 'factor', 'kinase', 'transporter']):
-        return 'biological'
-    
-    # Organization patterns
-    if any(t in exp_lower for t in 
-           ['organization', 'association', 'administration', 'institute',
-            'agency', 'college', 'academy']):
-        return 'organization'
-    
-    # Clinical patterns
-    if any(t in exp_lower for t in 
-           ['trial', 'study', 'test', 'assay', 'analysis']):
-        return 'clinical'
-    
-    return 'general'
-
-
-def _convert_abbreviation_candidate(candidate: Any) -> Optional[Dict[str, Any]]:
+def _create_provenance_span(
+    entity: Dict[str, Any],
+    full_text: str,
+    context_window: int = 100
+) -> Optional[Dict[str, Any]]:
     """
-    Convert any AbbreviationCandidate variant to output dictionary.
-    
-    Handles both the AbbreviationCandidate from abbreviation_types.py
-    and the one from abbreviation_patterns.py, plus plain dictionaries.
+    Create a provenance_span structure from entity position/context data.
     
     Args:
-        candidate: Any candidate-like object
+        entity: Entity dictionary with position/context fields
+        full_text: Full document text for extracting spans
+        context_window: Number of characters for context window
         
     Returns:
-        Dictionary with standardized fields, or None if invalid
+        Provenance span dictionary or None if no position data
     """
-    if candidate is None:
-        return None
+    # Try to get position information
+    position = entity.get('position')
+    positions = entity.get('positions', [])
+    context = entity.get('context', '')
+    contexts = entity.get('contexts', [])
     
-    # Already a dict
-    if isinstance(candidate, dict):
-        abbr = candidate.get('abbreviation', '')
-        exp = candidate.get('expansion', '')
-        conf = candidate.get('confidence', 0.0)
+    # Determine char_start and char_end
+    char_start = None
+    char_end = None
+    
+    if position and isinstance(position, (tuple, list)) and len(position) >= 2:
+        char_start, char_end = position[0], position[1]
+    elif positions and len(positions) > 0:
+        # Use first position if multiple
+        first_pos = positions[0]
+        if isinstance(first_pos, (tuple, list)) and len(first_pos) >= 2:
+            char_start, char_end = first_pos[0], first_pos[1]
+    
+    # If no position data, try to find entity in text
+    if char_start is None and full_text:
+        entity_name = entity.get('name', '')
         
-        if not abbr:
-            return None
-            
-        return {
-            'abbreviation': abbr,
-            'expansion': exp or '',
-            'confidence': float(conf) if conf else 0.0,
-            'context_type': candidate.get('context_type'),
-            'source': candidate.get('source'),
-            'metadata': candidate.get('metadata', {})
-        }
+        if entity_name:
+            idx = full_text.find(entity_name)
+            if idx >= 0:
+                char_start = idx
+                char_end = idx + len(entity_name)
     
-    # Has to_dict method
-    if hasattr(candidate, 'to_dict'):
-        try:
-            return _convert_abbreviation_candidate(candidate.to_dict())
-        except Exception as e:
-            logger.warning(f"to_dict() failed: {e}")
-    
-    # Direct attribute access
-    abbr = getattr(candidate, 'abbreviation', None)
-    exp = getattr(candidate, 'expansion', None)
-    conf = getattr(candidate, 'confidence', 0.0)
-    
-    if not abbr:
+    # If still no position, return None
+    if char_start is None:
         return None
+    
+    # Extract context text
+    if context:
+        span_text = context
+    elif contexts and len(contexts) > 0:
+        span_text = contexts[0]
+    elif full_text and char_start is not None:
+        # Extract context window around the entity
+        window_start = max(0, char_start - context_window)
+        window_end = min(len(full_text), char_end + context_window)
+        span_text = full_text[window_start:window_end]
+        
+        # Clean up the span text
+        span_text = span_text.strip()
+        span_text = re.sub(r'\s+', ' ', span_text)
+    else:
+        span_text = ''
+    
+    # Infer section
+    section = _infer_section_from_position(full_text, char_start) if full_text else 'Unknown'
     
     return {
-        'abbreviation': str(abbr),
-        'expansion': str(exp) if exp else '',
-        'confidence': float(conf) if conf else 0.0,
-        'context_type': getattr(candidate, 'context_type', None),
-        'source': getattr(candidate, 'source', None),
-        'metadata': getattr(candidate, 'metadata', {}) or {}
+        'text': span_text[:500] if span_text else '',  # Limit to 500 chars
+        'char_start': char_start,
+        'char_end': char_end,
+        'section': section
     }
 
 
+def _add_provenance_to_entity(
+    entity: Dict[str, Any],
+    full_text: str,
+    context_window: int = 100
+) -> Dict[str, Any]:
+    """
+    Add provenance_span to an entity and clean up old position fields.
+    
+    Args:
+        entity: Entity dictionary
+        full_text: Full document text
+        context_window: Context window size
+        
+    Returns:
+        Entity with provenance_span added
+    """
+    # Create provenance span
+    provenance = _create_provenance_span(entity, full_text, context_window)
+    
+    if provenance:
+        entity['provenance_span'] = provenance
+    
+    # Remove old position fields (now stored in provenance_span)
+    entity.pop('position', None)
+    entity.pop('positions', None)
+    entity.pop('contexts', None)
+    
+    return entity
+
+
+def _add_provenance_to_entities(
+    entities: List[Dict[str, Any]],
+    full_text: str,
+    context_window: int = 100
+) -> List[Dict[str, Any]]:
+    """
+    Add provenance_span to a list of entities.
+    
+    Args:
+        entities: List of entity dictionaries
+        full_text: Full document text
+        context_window: Context window size
+        
+    Returns:
+        List of entities with provenance_span added
+    """
+    return [
+        _add_provenance_to_entity(entity, full_text, context_window)
+        for entity in entities
+    ]
+
+
 # ============================================================================
-# NEW IN v11.2.0: CONTEXT-AWARE DRUG FILTERING
+# CONTEXT-AWARE DRUG FILTERING
 # ============================================================================
 
 def _filter_drugs_by_context(
@@ -313,32 +267,26 @@ def _filter_drugs_by_context(
     """
     # Context patterns that indicate NON-drug usage
     lab_context_patterns = [
-        # Cell culture medium
         re.compile(r'\b(?:medium|media|DMEM|RPMI|MCDB|culture)\b.{0,50}', re.IGNORECASE),
-        re.compile(r'\b(?:supplemented|containing)\s+\d+\s*(?:mM|Î¼M|%|mg/mL|U/mL)\b', re.IGNORECASE),
-        # Experimental
+        re.compile(r'\b(?:supplemented|containing)\s+\d+\s*(?:mM|µM|%|mg/mL|U/mL)\b', re.IGNORECASE),
         re.compile(r'\b(?:stimulated|treated|incubated)\s+(?:with|using)\b', re.IGNORECASE),
-        # Buffer/solution
         re.compile(r'\b(?:buffer|solution|PBS|HEPES)\b', re.IGNORECASE),
     ]
     
     signaling_patterns = [
-        # Intracellular signaling
-        re.compile(r'\b(?:intracellular|cytosolic)\s*\[?\s*', re.IGNORECASE),
-        re.compile(r'\[\s*', re.IGNORECASE),  # [Ca2+] style notation
-        re.compile(r'\b(?:signaling|pathway|cascade|transduction)\b', re.IGNORECASE),
-        re.compile(r'\b(?:release|influx|efflux|flux|entry)\b', re.IGNORECASE),
+        re.compile(r'\\b(?:intracellular|cytosolic)\\s*(?:Ca2?\\+|calcium)', re.IGNORECASE),
+        re.compile(r'\\[Ca2?\\+\\]', re.IGNORECASE),
+        re.compile(r'Ca2?\\+\\s*(?:release|influx|efflux|flux|entry)', re.IGNORECASE),
+        re.compile(r'\\b(?:SOCE|TRPC|TRPV|STIM1|ORAI)\\b', re.IGNORECASE),
     ]
     
     gene_patterns = [
-        # Part of gene/protein names
         re.compile(r'\s*(?:gene|receptor|channel|transporter|factor)\b', re.IGNORECASE),
         re.compile(r'\b(?:Receptor|Channel)\s+(?:Type\s+)?\d*\s*\(\s*', re.IGNORECASE),
         re.compile(r'\b(?:TRPC|TRPV|TRPM|ORAI|STIM)\d*\b', re.IGNORECASE),
     ]
     
     biomarker_patterns = [
-        # Staining/detection
         re.compile(r'\b(?:staining|stained|costaining|immunostaining)\b', re.IGNORECASE),
         re.compile(r'\b(?:marker|markers|indicated)\s+(?:by|for|with)\b', re.IGNORECASE),
         re.compile(r'\b(?:FACS|flow\s+cytometry)\b', re.IGNORECASE),
@@ -382,7 +330,7 @@ def _filter_drugs_by_context(
 
 
 # ============================================================================
-# NEW IN v11.2.0: DISEASE VALIDATION
+# DISEASE VALIDATION
 # ============================================================================
 
 def _validate_disease_entities(
@@ -462,44 +410,25 @@ def _validate_disease_entities(
 
 
 # ============================================================================
-# ENTITY PROCESSING WITH ERROR RECOVERY AND ENRICHMENT
+# ENTITY PROCESSING (SIMPLIFIED - NO ABBREVIATIONS)
 # ============================================================================
 
-def process_entities_stage_with_promotion(text_content, file_path, components, stage_config, 
-                                         stage_results, abbreviation_context, console, 
-                                         features, use_claude):
+def process_entities_stage(text_content, file_path, components, stage_config, 
+                          stage_results, console, features, use_claude):
     """
-    Process entities with abbreviation-first approach, ID enrichment, and ID-gated promotion
+    Process entities - DRUG and DISEASE extraction only.
     
-    UPDATED IN v11.2.0:
-    - Fixed abbreviation extraction returning empty results
-    - Added context-aware drug filtering
-    - Added disease validation
-    
-    UPDATED IN v11.1.0:
-    - Added citation extraction (Step 2)
-    - Added person extraction (Step 3)
-    - Added reference extraction (Step 4)
-    - Renumbered existing steps accordingly
-    
-    UPDATED IN v11.0.0:
-    - Uses simplified adaptive filtering with confidence bands
-    - More permissive promotion logic (OR instead of AND)
-    - Reduced fuzzy matching threshold (85 â†’ 75)
+    v12.0.0: Removed all abbreviation-related processing
     
     Pipeline:
-    1. Extract all abbreviations (with error recovery + fallback)
-    2. Extract citations (with error recovery) - NEW in v11.1.0
-    3. Extract persons (with error recovery) - NEW in v11.1.0
-    4. Extract references (with error recovery) - NEW in v11.1.0
-    5. Extract drugs with adaptive filtering (with error recovery)
-    5.5. Context-aware drug filtering - NEW in v11.2.0
-    6. Extract diseases with adaptive filtering (with error recovery)
-    6.5. Disease validation - NEW in v11.2.0
-    7. Cross-type deduplication
-    8. Enrich abbreviations with IDs from detected drugs/diseases
-    9. Apply ID-gated promotion for enriched abbreviations (with error recovery)
-    10. Validate and generate summary
+    1. Extract citations (with error recovery)
+    2. Extract persons (with error recovery)
+    3. Extract references (with error recovery)
+    4. Extract drugs with adaptive filtering (with error recovery)
+    4.5. Context-aware drug filtering
+    5. Extract diseases with adaptive filtering (with error recovery)
+    5.5. Disease validation
+    6. Generate summary
     
     Args:
         text_content: Document text
@@ -507,86 +436,28 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         components: Dictionary of initialized extractors
         stage_config: Stage configuration
         stage_results: Previous stage results
-        abbreviation_context: Context from abbreviation extraction
         console: Console output handler
         features: Feature flags
         use_claude: Whether Claude validation is enabled
         
     Returns:
-        Tuple of (extraction_results, promotion_links)
+        Extraction results dictionary
     """
     stage_name = stage_config['name']
     tasks = stage_config.get('tasks', [])
     
     results = {
-        'abbreviations': [],
         'citations': [],
         'persons': [],
         'references': [],
         'drugs': [],
         'diseases': [],
         'processing_errors': [],
-        'extraction_summary': {},
-        'enrichment_stats': {},
-        'promotion_links': []
+        'extraction_summary': {}
     }
     
     # ========================================================================
-    # STEP 1: Extract abbreviations (with error recovery + FALLBACK FIX)
-    # ========================================================================
-    if 'abbreviation_extraction' in tasks and 'abbreviation_extractor' in components:
-        try:
-            start = time.time()
-            logger.info(f"Starting abbreviation extraction for {file_path.name}")
-            
-            abbrev_results = components['abbreviation_extractor'].extract_abbreviations(
-                text_content
-            )
-            
-            raw_abbreviations = abbrev_results.get('abbreviations', [])
-            
-            # FIX v11.2.0: Properly convert and validate abbreviations
-            validated_abbreviations = []
-            for abbrev in raw_abbreviations:
-                converted = _convert_abbreviation_candidate(abbrev)
-                if converted and converted.get('abbreviation'):
-                    # Ensure non-zero confidence if we have an expansion
-                    if converted.get('confidence', 0) == 0 and converted.get('expansion'):
-                        converted['confidence'] = 0.5
-                    if converted.get('confidence', 0) > 0 or converted.get('expansion'):
-                        validated_abbreviations.append(converted)
-            
-            # FIX v11.2.0: Run fallback if no valid results
-            if not validated_abbreviations:
-                logger.warning("Primary abbreviation extraction returned empty, using fallback")
-                validated_abbreviations = _extract_abbreviations_fallback(text_content)
-            
-            all_abbreviations = deduplicate_by_key(validated_abbreviations, ('abbreviation', 'expansion'))
-            results['abbreviations'] = all_abbreviations
-            
-            logger.info(f"Extracted {len(all_abbreviations)} unique abbreviations in {time.time()-start:.1f}s")
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "Abbreviation extraction", True, 
-                                            f"{len(all_abbreviations)} unique", time.time() - start)
-        except Exception as e:
-            logger.error(f"Abbreviation extraction failed: {type(e).__name__}: {e}", exc_info=True)
-            results['processing_errors'].append(f"Abbreviation extraction: {str(e)[:100]}")
-            
-            # FIX v11.2.0: Use fallback on exception
-            logger.info("Using fallback abbreviation extraction due to error")
-            all_abbreviations = _extract_abbreviations_fallback(text_content)
-            results['abbreviations'] = all_abbreviations
-            
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "Abbreviation extraction", False, 
-                                            f"Fallback: {len(all_abbreviations)}")
-    else:
-        all_abbreviations = []
-    
-    # ========================================================================
-    # STEP 2: Extract citations (with error recovery) - NEW in v11.1.0
+    # STEP 1: Extract citations (with error recovery)
     # ========================================================================
     if 'citation_extraction' in tasks and 'citation_extractor' in components:
         try:
@@ -598,7 +469,12 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                 doc_id=str(file_path.stem)
             )
             
-            results['citations'] = citation_results.to_dict().get('citations', [])
+            citations = citation_results.to_dict().get('citations', [])
+            
+            # Add provenance_span to each citation
+            citations = _add_provenance_to_entities(citations, text_content)
+            
+            results['citations'] = citations
             
             logger.info(f"Extracted {len(results['citations'])} citations in {time.time()-start:.1f}s")
             if console:
@@ -616,7 +492,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         results['citations'] = []
     
     # ========================================================================
-    # STEP 3: Extract persons (with error recovery) - NEW in v11.1.0
+    # STEP 2: Extract persons (with error recovery)
     # ========================================================================
     if 'person_extraction' in tasks and 'person_extractor' in components:
         try:
@@ -628,7 +504,12 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                 doc_id=str(file_path.stem)
             )
             
-            results['persons'] = person_results.to_dict().get('persons', [])
+            persons = person_results.to_dict().get('persons', [])
+            
+            # Add provenance_span to each person
+            persons = _add_provenance_to_entities(persons, text_content)
+            
+            results['persons'] = persons
             
             logger.info(f"Extracted {len(results['persons'])} persons in {time.time()-start:.1f}s")
             if console:
@@ -646,7 +527,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         results['persons'] = []
     
     # ========================================================================
-    # STEP 4: Extract references (with error recovery) - NEW in v11.1.0
+    # STEP 3: Extract references (with error recovery)
     # ========================================================================
     if 'reference_extraction' in tasks and 'reference_extractor' in components:
         try:
@@ -658,7 +539,12 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                 doc_id=str(file_path.stem)
             )
             
-            results['references'] = reference_results.to_dict().get('references', [])
+            references = reference_results.to_dict().get('references', [])
+            
+            # Add provenance_span to each reference
+            references = _add_provenance_to_entities(references, text_content)
+            
+            results['references'] = references
             
             logger.info(f"Extracted {len(results['references'])} references in {time.time()-start:.1f}s")
             if console:
@@ -676,8 +562,9 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
         results['references'] = []
     
     # ========================================================================
-    # STEP 5: Extract drugs (with error recovery)
+    # STEP 4: Extract drugs (with error recovery)
     # ========================================================================
+    direct_drugs = []
     if 'drug_detection' in tasks and 'drug_extractor' in components:
         try:
             start = time.time()
@@ -687,21 +574,18 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             candidates = drug_results.get('drugs', [])
             logger.info(f"Found {len(candidates)} drug candidates before filtering")
             
-            # Apply SIMPLIFIED adaptive confidence filtering
+            # Apply adaptive confidence filtering
             direct_drugs = apply_adaptive_confidence_filter(
                 candidates, 
                 entity_type='drug',
-                use_claude=use_claude,
-                all_abbreviations=all_abbreviations
+                use_claude=use_claude
             )
             
             # Deduplicate
             direct_drugs = deduplicate_by_key(direct_drugs, ('name', 'normalized_name'))
             
-            # Remove position fields
-            for drug in direct_drugs:
-                drug.pop('position', None)
-                drug.pop('positions', None)
+            # Add provenance_span to each drug
+            direct_drugs = _add_provenance_to_entities(direct_drugs, text_content)
             
             results['drugs'] = direct_drugs
             
@@ -719,7 +603,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                                             "Drug detection", False, str(e)[:50])
     
     # ========================================================================
-    # STEP 5.5: Context-aware drug filtering - NEW in v11.2.0
+    # STEP 4.5: Context-aware drug filtering
     # ========================================================================
     direct_drugs = results.get('drugs', [])
     
@@ -744,8 +628,9 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             results['processing_errors'].append(f"Drug context filter: {str(e)[:100]}")
     
     # ========================================================================
-    # STEP 6: Extract diseases (with error recovery)
+    # STEP 5: Extract diseases (with error recovery)
     # ========================================================================
+    direct_diseases = []
     if 'disease_detection' in tasks and 'disease_extractor' in components:
         try:
             start = time.time()
@@ -755,21 +640,18 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             candidates = disease_results.get('diseases', [])
             logger.info(f"Found {len(candidates)} disease candidates before filtering")
             
-            # Apply SIMPLIFIED adaptive confidence filtering
+            # Apply adaptive confidence filtering
             direct_diseases = apply_adaptive_confidence_filter(
                 candidates,
                 entity_type='disease',
-                use_claude=use_claude,
-                all_abbreviations=all_abbreviations
+                use_claude=use_claude
             )
             
             # Deduplicate while preserving disease hierarchies
             direct_diseases = deduplicate_diseases_preserve_hierarchy(direct_diseases)
             
-            # Remove position fields
-            for disease in direct_diseases:
-                disease.pop('position', None)
-                disease.pop('positions', None)
+            # Add provenance_span to each disease
+            direct_diseases = _add_provenance_to_entities(direct_diseases, text_content)
             
             results['diseases'] = direct_diseases
             
@@ -787,7 +669,7 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
                                             "Disease detection", False, str(e)[:50])
     
     # ========================================================================
-    # STEP 6.5: Disease validation - NEW in v11.2.0
+    # STEP 5.5: Disease validation
     # ========================================================================
     direct_diseases = results.get('diseases', [])
     
@@ -812,173 +694,33 @@ def process_entities_stage_with_promotion(text_content, file_path, components, s
             results['processing_errors'].append(f"Disease validation: {str(e)[:100]}")
     
     # ========================================================================
-    # STEP 7: CROSS-TYPE DEDUPLICATION
-    # ========================================================================
-    dedup_enabled = True  # Default to enabled
-    
-    # Check if we have a config object with deduplication settings
-    if hasattr(components, 'config'):
-        dedup_enabled = components.config.get('deduplication', {}).get('across_entity_types', True)
-    
-    if dedup_enabled and all_abbreviations and (direct_drugs or direct_diseases):
-        try:
-            start = time.time()
-            logger.info(f"Starting cross-type deduplication: {len(all_abbreviations)} abbrev, "
-                       f"{len(direct_drugs)} drugs, {len(direct_diseases)} diseases")
-            
-            all_abbreviations, direct_drugs, direct_diseases = deduplicate_entities_across_types(
-                all_abbreviations,
-                direct_drugs,
-                direct_diseases
-            )
-            
-            # Update results with deduplicated entities
-            results['abbreviations'] = all_abbreviations
-            results['drugs'] = direct_drugs
-            results['diseases'] = direct_diseases
-            
-            logger.info(f"After deduplication: {len(all_abbreviations)} abbrev, "
-                       f"{len(direct_drugs)} drugs, {len(direct_diseases)} diseases "
-                       f"({time.time()-start:.1f}s)")
-            
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "Cross-type deduplication", True,
-                                            f"Cleaned entities", time.time() - start)
-                                            
-        except Exception as e:
-            logger.warning(f"Cross-type deduplication failed: {e}", exc_info=True)
-            results['processing_errors'].append(f"Deduplication: {str(e)[:100]}")
-    else:
-        logger.debug("Cross-type deduplication: Skipped (disabled or no entities)")
-    
-    # ========================================================================
-    # STEP 8: Enrich abbreviations with IDs from detected entities
-    # ========================================================================
-    if all_abbreviations and (direct_drugs or direct_diseases):
-        try:
-            start = time.time()
-            logger.info(f"Enriching {len(all_abbreviations)} abbreviations with entity IDs")
-            
-            enriched_abbreviations, enrichment_stats = enrich_abbreviations_with_entity_ids(
-                all_abbreviations,
-                direct_drugs,
-                direct_diseases
-            )
-            
-            # Update abbreviations with enriched versions
-            all_abbreviations = enriched_abbreviations
-            results['abbreviations'] = enriched_abbreviations
-            results['enrichment_stats'] = enrichment_stats
-            
-            logger.info(f"Enrichment complete: {enrichment_stats['total_enriched']} abbreviations "
-                       f"now eligible for promotion ({time.time()-start:.1f}s)")
-            
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "Abbreviation enrichment", True,
-                                            f"{enrichment_stats['total_enriched']} enriched", 
-                                            time.time() - start)
-                                            
-        except Exception as e:
-            logger.warning(f"Enrichment failed: {e}", exc_info=True)
-            results['processing_errors'].append(f"Enrichment: {str(e)[:100]}")
-            results['enrichment_stats'] = {}
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "Abbreviation enrichment", False, str(e)[:50])
-    else:
-        logger.debug("Enrichment: Skipped (no abbreviations or entities)")
-        results['enrichment_stats'] = {}
-    
-    # ========================================================================
-    # STEP 9: ID-Gated Promotion (with error recovery)
-    # ========================================================================
-    promotion_links = []
-    
-    if all_abbreviations:
-        try:
-            start = time.time()
-            logger.info(f"Starting ID-gated promotion for {len(all_abbreviations)} abbreviations")
-            
-            # Get promotion configuration
-            promotion_config = components.get('config', {}).get('promotion', {})
-            
-            # UPDATED IN v11.0.0: More permissive promotion
-            kept_abbreviations, promoted_drugs, promoted_diseases, links = process_abbreviation_candidates(
-                all_abbreviations,
-                direct_drugs,
-                direct_diseases,
-                promotion_config=promotion_config
-            )
-            
-            promotion_links = links
-            
-            # Update results
-            results['drugs'] = promoted_drugs
-            results['diseases'] = promoted_diseases
-            results['abbreviations'] = kept_abbreviations
-            results['promotion_links'] = promotion_links
-            
-            drugs_promoted = len(promoted_drugs) - len(direct_drugs)
-            diseases_promoted = len(promoted_diseases) - len(direct_diseases)
-            
-            logger.info(f"Promotion complete: {drugs_promoted} drugs, {diseases_promoted} diseases "
-                       f"promoted in {time.time()-start:.1f}s")
-            
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "ID-gated promotion", True,
-                                            f"{drugs_promoted + diseases_promoted} promoted", 
-                                            time.time() - start)
-                                            
-        except Exception as e:
-            logger.error(f"Promotion failed: {type(e).__name__}: {e}", exc_info=True)
-            results['processing_errors'].append(f"Promotion: {str(e)[:100]}")
-            promotion_links = []
-            if console:
-                console.print_stage_progress(stage_name, stage_config['sequence'], 
-                                            "ID-gated promotion", False, str(e)[:50])
-    else:
-        logger.debug("Promotion: Skipped (no abbreviations)")
-    
-    # ========================================================================
-    # STEP 10: Generate extraction summary
+    # STEP 6: Generate extraction summary
     # ========================================================================
     final_drugs = results.get('drugs', [])
     final_diseases = results.get('diseases', [])
-    final_abbreviations = results.get('abbreviations', [])
-    final_citations = results.get('citations', [])      # NEW in v11.1.0
-    final_persons = results.get('persons', [])          # NEW in v11.1.0
-    final_references = results.get('references', [])    # NEW in v11.1.0
+    final_citations = results.get('citations', [])
+    final_persons = results.get('persons', [])
+    final_references = results.get('references', [])
     
     results['extraction_summary'] = {
-        'abbreviations_total': len(final_abbreviations),
-        'citations_total': len(final_citations),        # NEW in v11.1.0
-        'persons_total': len(final_persons),            # NEW in v11.1.0
-        'references_total': len(final_references),      # NEW in v11.1.0
-        'drugs_direct': len(direct_drugs),
-        'drugs_promoted': len(final_drugs) - len(direct_drugs),
+        'citations_total': len(final_citations),
+        'persons_total': len(final_persons),
+        'references_total': len(final_references),
         'drugs_total': len(final_drugs),
-        'diseases_direct': len(direct_diseases),
-        'diseases_promoted': len(final_diseases) - len(direct_diseases),
         'diseases_total': len(final_diseases),
-        'promotion_rate': len(promotion_links) / len(all_abbreviations) if all_abbreviations else 0,
         'has_errors': bool(results['processing_errors']),
-        'abbreviations_enriched': results.get('enrichment_stats', {}).get('total_enriched', 0),
-        # NEW in v11.2.0: Track filtered entities
         'drugs_context_filtered': len(results.get('excluded_drugs', [])),
         'diseases_validation_filtered': len(results.get('invalid_diseases', []))
     }
     
-    logger.info(f"Entity extraction complete: {results['extraction_summary']['abbreviations_total']} abbrev, "
+    logger.info(f"Entity extraction complete: "
                f"{results['extraction_summary']['drugs_total']} drugs, "
                f"{results['extraction_summary']['diseases_total']} diseases, "
                f"{results['extraction_summary']['citations_total']} citations, "
                f"{results['extraction_summary']['persons_total']} persons, "
                f"{results['extraction_summary']['references_total']} references")
     
-    return results, promotion_links
+    return results
 
 
 # ============================================================================
@@ -989,10 +731,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
     """
     Process document in two stages: metadata first, then entities
     
-    UPDATED IN v11.2.0: Uses fixed abbreviation extraction and context filtering
-    UPDATED IN v11.1.1: Added intro text file extraction
-    UPDATED IN v11.1.0: Added citation, person, and reference extraction
-    UPDATED IN v11.0.0: Uses new simplified filtering and promotion logic
+    v12.0.0: Removed all abbreviation-related processing
     
     Args:
         file_path: Path to document
@@ -1068,7 +807,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         logger.info(f"Extracted {len(text_content):,} characters from {file_path.name}")
         
         # ====================================================================
-        # SAVE EXTRACTED TEXT - BOTH FULL AND INTRO VERSIONS (NEW in v11.1.1)
+        # SAVE EXTRACTED TEXT - BOTH FULL AND INTRO VERSIONS
         # ====================================================================
         text_folder = output_folder / 'extracted_texts'
         text_folder.mkdir(exist_ok=True)
@@ -1078,7 +817,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         with open(text_file, 'w', encoding='utf-8') as f:
             f.write(text_content)
         final_results['files_saved'].append(f"{file_path.stem}_full.txt")
-        logger.info(f"âœ“ Saved full text: {text_file.name} ({len(text_content):,} chars)")
+        logger.info(f"✓ Saved full text: {text_file.name} ({len(text_content):,} chars)")
         
         # 2. Save INTRO text (limited for metadata extraction)
         intro_limit = 10000  # Characters for intro
@@ -1087,7 +826,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         with open(intro_file, 'w', encoding='utf-8') as f:
             f.write(intro_text)
         final_results['files_saved'].append(f"{file_path.stem}_intro.txt")
-        logger.info(f"âœ“ Saved intro text: {intro_file.name} ({len(intro_text):,} chars)")
+        logger.info(f"✓ Saved intro text: {intro_file.name} ({len(intro_text):,} chars)")
         
         # ====================================================================
         # PROCESS PIPELINE STAGES
@@ -1165,15 +904,12 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
             
             elif stage_name == 'entities':
                 # Process entity extraction stage
-                abbreviation_context = {}
-                
-                entity_results, promotion_links = process_entities_stage_with_promotion(
+                entity_results = process_entities_stage(
                     text_content,  # Use full text for entities
                     file_path,
                     components,
                     stage_config,
                     final_results,
-                    abbreviation_context,
                     console,
                     features,
                     use_claude
@@ -1186,9 +922,6 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                     'tasks': stage_config.get('tasks', []),
                     'results': entity_results
                 })
-                
-                # Add promotion links to results
-                final_results['promotion_links'] = promotion_links
         
         # ====================================================================
         # VALIDATION & QUALITY ASSESSMENT
@@ -1207,7 +940,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
             json.dump(final_results, f, indent=2, ensure_ascii=False)
         
         final_results['files_saved'].append(output_json.name)
-        logger.info(f"âœ“ Results saved to {output_json.name}")
+        logger.info(f"✓ Results saved to {output_json.name}")
         
         # ====================================================================
         # DATABASE STORAGE & REPORTING
@@ -1224,52 +957,54 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
                 validation_method='claude' if use_claude else 'threshold'
             )
             
-            # Store entities - FIX: Check if methods exist before calling
+            # Store entities in database
             entity_stage = next((s for s in final_results.get('pipeline_stages', []) 
                                if s['stage'] == 'entities'), None)
             
             if entity_stage and entity_stage.get('results'):
                 entities = entity_stage['results']
                 
-                # Store abbreviations
-                if hasattr(db, 'add_abbreviation'):
-                    for abbrev in entities.get('abbreviations', []):
-                        try:
-                            db.add_abbreviation(run_id, abbrev, text_content)
-                        except Exception as e:
-                            logger.debug(f"Failed to store abbreviation: {e}")
-                
                 # Store drugs
-                if hasattr(db, 'add_drug'):
-                    for drug in entities.get('drugs', []):
-                        try:
-                            db.add_drug(run_id, drug, text_content)
-                        except Exception as e:
-                            logger.debug(f"Failed to store drug: {e}")
+                drugs = entities.get('drugs', [])
+                if drugs:
+                    try:
+                        db.save_drugs_with_counts(
+                            run_id, 
+                            drugs, 
+                            {},  # No abbreviation map
+                            text_content
+                        )
+                        logger.info(f"Saved {len(drugs)} drugs to database")
+                    except Exception as e:
+                        logger.warning(f"Failed to store drugs: {e}")
                 
-                # Store diseases  
-                if hasattr(db, 'add_disease'):
-                    for disease in entities.get('diseases', []):
-                        try:
-                            db.add_disease(run_id, disease, text_content)
-                        except Exception as e:
-                            logger.debug(f"Failed to store disease: {e}")
+                # Store diseases
+                diseases = entities.get('diseases', [])
+                if diseases:
+                    try:
+                        db.save_diseases_with_counts(
+                            run_id, 
+                            diseases, 
+                            {},  # No abbreviation map
+                            text_content
+                        )
+                        logger.info(f"Saved {len(diseases)} diseases to database")
+                    except Exception as e:
+                        logger.warning(f"Failed to store diseases: {e}")
             
             # Complete extraction
             extraction_summary = entity_stage.get('results', {}).get('extraction_summary', {}) if entity_stage else {}
             
-            if hasattr(db, 'complete_extraction'):
-                db.complete_extraction(
-                    run_id,
-                    extraction_summary.get('abbreviations_total', 0),
-                    extraction_summary.get('drugs_total', 0),
-                    extraction_summary.get('diseases_total', 0),
-                    extraction_summary.get('drugs_promoted', 0),
-                    extraction_summary.get('diseases_promoted', 0),
-                    time.time() - start_time,
-                    len(text_content)
-                )
-            
+            db.complete_extraction(
+                run_id,
+                0,  # No abbreviations
+                extraction_summary.get('drugs_total', len(entities.get('drugs', [])) if entity_stage else 0),
+                extraction_summary.get('diseases_total', len(entities.get('diseases', [])) if entity_stage else 0),
+                0,  # No promoted drugs
+                0,  # No promoted diseases
+                time.time() - start_time,
+                len(text_content) if text_content else 0
+            )
             
             logger.debug(f"Stored extraction in database: document_id={document_id}, run_id={run_id}")
             
@@ -1286,7 +1021,7 @@ def process_document_two_stage(file_path, components, output_folder, console=Non
         
         # Calculate total processing time
         total_time = time.time() - start_time
-        logger.info(f"âœ“ Completed processing {file_path.name} in {total_time:.1f}s")
+        logger.info(f"✓ Completed processing {file_path.name} in {total_time:.1f}s")
         
         # Log summary of saved files
         logger.info(f"Files saved ({len(final_results['files_saved'])}):")

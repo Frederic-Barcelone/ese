@@ -353,7 +353,7 @@ class MetadataSystemInitializer:
             # Print header
             timestamp = self._get_timestamp()
             print(f"\n[{timestamp}] {Colors.HEADER}Loading Resources ({self._loading_total} files){Colors.ENDC}")
-            print(f"[{timestamp}] {'─' * 50}")
+            print(f"[{timestamp}] {'-' * 50}")
             
             for resource_name, resource_filename in valid_resources:
                 self._loading_counter += 1
@@ -371,8 +371,11 @@ class MetadataSystemInitializer:
                     
                 # Disease resources
                 elif resource_name.startswith('disease_'):
-                    if 'lexicon' in resource_name:
+                    if resource_name == 'disease_lexicon':
                         special_type = 'disease_lexicon'
+                    elif 'lexicon' in resource_name:
+                        # Supplemental disease lexicons (e.g., disease_lexicon_pah)
+                        special_type = 'disease_lexicon_supplemental'
                     elif 'acronym' in resource_name:
                         special_type = 'disease_acronyms'
                     else:
@@ -410,7 +413,7 @@ class MetadataSystemInitializer:
             
             # Print footer
             timestamp = self._get_timestamp()
-            print(f"[{timestamp}] {'─' * 50}")
+            print(f"[{timestamp}] {'-' * 50}")
         
         return total_loaded
     
@@ -837,6 +840,11 @@ class MetadataSystemInitializer:
             self._process_disease_lexicon(data)
             self.status['lexicons']['disease'] = True
         
+        # Supplemental disease lexicons (merged with main lexicon)
+        elif special_type == 'disease_lexicon_supplemental':
+            self._merge_supplemental_disease_lexicon(data, name)
+            self.status['resources'][name] = True
+        
         # Medical terms
         elif special_type == 'medical_terms':
             self._process_medical_terms(data)
@@ -900,6 +908,76 @@ class MetadataSystemInitializer:
             normalized = label.lower().strip()
             self.lexicon_indices['disease']['by_label'][label] = info
             self.lexicon_indices['disease']['by_normalized'][normalized] = info
+    
+    def _merge_supplemental_disease_lexicon(self, data: Any, source_name: str):
+        """
+        Merge supplemental disease lexicon data into the main lexicon.
+        
+        This method adds entries from supplemental lexicons (e.g., PAH-specific)
+        without replacing existing entries. If an entry already exists, the
+        supplemental data is merged, with supplemental values taking precedence
+        for any new fields while preserving existing fields.
+        
+        Args:
+            data: The supplemental lexicon data (list or dict)
+            source_name: Name of the supplemental resource for logging
+        """
+        added_count = 0
+        updated_count = 0
+        
+        entries_to_merge = []
+        
+        # Normalize data to list of (label, info) tuples
+        if isinstance(data, list):
+            for item in data:
+                if isinstance(item, dict):
+                    label = item.get('label') or item.get('name') or item.get('disease_name', '')
+                    if label:
+                        entries_to_merge.append((label, item))
+                elif isinstance(item, str):
+                    entries_to_merge.append((item, {'label': item}))
+        elif isinstance(data, dict):
+            # Handle dict with 'diseases', 'entries', etc.
+            if 'diseases' in data and isinstance(data['diseases'], (list, dict)):
+                return self._merge_supplemental_disease_lexicon(data['diseases'], source_name)
+            elif 'entries' in data and isinstance(data['entries'], list):
+                return self._merge_supplemental_disease_lexicon(data['entries'], source_name)
+            elif 'terms' in data and isinstance(data['terms'], list):
+                return self._merge_supplemental_disease_lexicon(data['terms'], source_name)
+            else:
+                # Assume dict is label -> info mapping
+                for label, info in data.items():
+                    if label not in ['metadata', 'version', 'source', 'created', 'updated']:
+                        if isinstance(info, dict):
+                            entries_to_merge.append((label, info))
+                        else:
+                            entries_to_merge.append((label, {'label': label, 'value': info}))
+        
+        # Merge entries
+        for label, info in entries_to_merge:
+            normalized = label.lower().strip()
+            
+            # Mark source for traceability
+            info['_supplemental_source'] = source_name
+            
+            if label in self.disease_lexicon:
+                # Merge with existing entry
+                existing = self.disease_lexicon[label]
+                for key, value in info.items():
+                    if key not in existing or not existing[key]:
+                        existing[key] = value
+                updated_count += 1
+            else:
+                # Add new entry
+                self.disease_lexicon[label] = info
+                added_count += 1
+            
+            # Update indices
+            self.lexicon_indices['disease']['by_label'][label] = self.disease_lexicon[label]
+            self.lexicon_indices['disease']['by_normalized'][normalized] = self.disease_lexicon[label]
+        
+        logger.info(f"Merged supplemental disease lexicon '{source_name}': "
+                   f"{added_count} added, {updated_count} updated")
     
     def _process_medical_terms(self, data: Any):
         """Process medical terms data."""
@@ -1015,7 +1093,7 @@ class MetadataSystemInitializer:
         
         # Print summary header
         print(f"\n[{timestamp}] {Colors.HEADER}Resource Loading Summary{Colors.ENDC}")
-        print(f"[{timestamp}] {'─' * 50}")
+        print(f"[{timestamp}] {'Ã¢â€â‚¬' * 50}")
         
         # Print each category
         for key, cat in categories.items():
@@ -1023,7 +1101,7 @@ class MetadataSystemInitializer:
             print(f"[{timestamp}] {status} {cat['label']:<18} {cat['count']:>8,} entries [{cat['loaded']:>2}/{cat['total']}]")
         
         # Print total
-        print(f"[{timestamp}] {'─' * 50}")
+        print(f"[{timestamp}] {'Ã¢â€â‚¬' * 50}")
         total_status = f"{Colors.GREEN}[OK]{Colors.ENDC}" if total_loaded == total_expected else f"{Colors.YELLOW}[!]{Colors.ENDC}"
         print(f"[{timestamp}] {total_status} {'TOTAL':<18} {total_count:>8,} entries [{total_loaded:>2}/{total_expected}]")
     
@@ -1142,31 +1220,137 @@ class MetadataSystemInitializer:
         
         return lexicon_map.get(lexicon_name)
     
-    def get_claude_client(self):
+    def get_claude_client(self, tier: str = None):
         """
         Get or create a Claude client instance.
+        
+        The client is shared across all tiers - the tier parameter is for
+        logging purposes and to validate the configuration exists.
+        
+        Args:
+            tier: Optional model tier hint ("fast" or "validation")
+                Used for logging; actual model selection happens at call time
         
         Returns:
             Anthropic client instance or None if API key not available
         """
         # Check if we already have a client
-        if hasattr(self, '_claude_client'):
+        if hasattr(self, '_claude_client') and self._claude_client is not None:
             return self._claude_client
         
-        # Check for API key
-        api_key = os.getenv('CLAUDE_API_KEY')
+        # Check for API key (support both env var names)
+        api_key = os.getenv('ANTHROPIC_API_KEY') or os.getenv('CLAUDE_API_KEY')
         if not api_key:
-            logger.warning("CLAUDE_API_KEY not found in environment")  # Changed from self.logger
+            logger.warning("ANTHROPIC_API_KEY/CLAUDE_API_KEY not found in environment")
             return None
         
         try:
             from anthropic import Anthropic
             self._claude_client = Anthropic(api_key=api_key)
-            logger.info("Claude client initialized successfully")  # Changed from self.logger
+            
+            # Log initialization with tier info
+            if tier:
+                model = self.get_claude_model(tier)
+                logger.info(f"Claude client initialized (tier={tier}, model={model})")
+            else:
+                logger.info("Claude client initialized successfully")
+            
             return self._claude_client
-        except Exception as e:
-            logger.error(f"Failed to initialize Claude client: {e}")  # Changed from self.logger
+            
+        except ImportError:
+            logger.error("anthropic package not installed. Run: pip install anthropic")
             return None
+        except Exception as e:
+            logger.error(f"Failed to initialize Claude client: {e}")
+            return None
+
+
+    # ==============================================================================
+    # ADD THESE NEW METHODS AFTER get_claude_client()
+    # ==============================================================================
+
+    def get_claude_config(self, tier: str = "fast") -> dict:
+        """
+        Get Claude configuration for specified tier from config.yaml.
+        
+        TWO-TIER STRATEGY:
+        - "fast": Cheaper/faster model for basic tasks (classification, initial extraction)
+        - "validation": Best model for final validation & enrichment
+        
+        Args:
+            tier: "fast" or "validation"
+            
+        Returns:
+            Dictionary with model, max_tokens, temperature
+            
+        Raises:
+            ValueError: If config not loaded or tier config missing
+        """
+        if not hasattr(self, 'config') or not self.config:
+            raise ValueError("Config not loaded. Call initialize() first.")
+        
+        api_config = self.config.get('api', {})
+        claude_config = api_config.get('claude', {})
+        
+        if not claude_config:
+            raise ValueError("No 'api.claude' section in config.yaml")
+        
+        # Get tier-specific config (required)
+        tier_config = claude_config.get(tier, {})
+        if not tier_config:
+            raise ValueError(f"No 'api.claude.{tier}' section in config.yaml")
+        
+        # Model is required
+        model = tier_config.get('model')
+        if not model:
+            raise ValueError(f"No 'model' specified in api.claude.{tier} config")
+        
+        return {
+            "model": model,
+            "max_tokens": tier_config.get('max_tokens', 4096),
+            "temperature": tier_config.get('temperature', 0.0)
+        }
+
+
+    def get_claude_model(self, tier: str = "fast") -> str:
+        """
+        Get Claude model name for specified tier from config.yaml.
+        
+        Args:
+            tier: "fast" or "validation"
+            
+        Returns:
+            Model name string
+        """
+        config = self.get_claude_config(tier)
+        return config["model"]
+
+
+    def get_validation_config(self, entity_type: str) -> dict:
+        """
+        Get validation configuration for an entity type from config.yaml.
+        
+        Args:
+            entity_type: "abbreviation", "drug", or "disease"
+            
+        Returns:
+            Validation configuration dictionary
+            
+        Raises:
+            ValueError: If config not loaded or validation config missing
+        """
+        if not hasattr(self, 'config') or not self.config:
+            raise ValueError("Config not loaded. Call initialize() first.")
+        
+        validation_config = self.config.get('validation', {})
+        if not validation_config:
+            raise ValueError("No 'validation' section in config.yaml")
+        
+        entity_config = validation_config.get(entity_type, {})
+        if not entity_config:
+            raise ValueError(f"No 'validation.{entity_type}' section in config.yaml")
+        
+        return entity_config
     
     def is_feature_enabled(self, feature: str) -> bool:
         """Check if a feature is enabled in config."""

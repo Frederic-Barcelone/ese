@@ -11,6 +11,20 @@ ULTIMATE EDITION - ENTERPRISE-GRADE WEB SCRAPING
 ███████╗██║  ██║██║ ╚████║    ███████║╚██████╗██║  ██║██║  ██║██║     ███████╗██║  ██║
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝
 ```
+"""
+#!/usr/bin/env python3
+"""
+ERN (European Reference Networks) Resource Scraper v4.2
+========================================================
+ON-THE-FLY PDF EDITION - ENTERPRISE-GRADE WEB SCRAPING
+```
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ•—   â–ˆâ–ˆâ•—    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— 
+â–ˆâ–ˆâ•”â•â•â•â•â•â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ•‘    â–ˆâ–ˆâ•”â•â•â•â•â•â–ˆâ–ˆâ•”â•â•â•â•â•â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â–ˆâ–ˆâ•”â•â•â•â•â•â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ•”â–ˆâ–ˆâ•— â–ˆâ–ˆâ•‘    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘     â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â•
+â–ˆâ–ˆâ•”â•â•â•  â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘â•šâ–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘    â•šâ•â•â•â•â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘     â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•”â•â•â•â• â–ˆâ–ˆâ•”â•â•â•  â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•—
+â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘ â•šâ–ˆâ–ˆâ–ˆâ–ˆâ•‘    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘â•šâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘â–ˆâ–ˆâ•‘     â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘
+â•šâ•â•â•â•â•â•â•â•šâ•â•  â•šâ•â•â•šâ•â•  â•šâ•â•â•â•    â•šâ•â•â•â•â•â•â• â•šâ•â•â•â•â•â•â•šâ•â•  â•šâ•â•â•šâ•â•  â•šâ•â•â•šâ•â•     â•šâ•â•â•â•â•â•â•â•šâ•â•  â•šâ•â•
+```
 
 Major Features:
 
@@ -71,8 +85,8 @@ from contextlib import contextmanager
 # VERSION & CONSTANTS
 # ============================================================================
 
-VERSION = "4.0"
-VERSION_NAME = "Ultimate Edition"
+VERSION = "4.2"
+VERSION_NAME = "On-The-Fly PDF Edition"
 DEFAULT_CONFIG_FILE = "ern_config.json"
 
 # ANSI color codes for terminal output
@@ -206,8 +220,8 @@ DEFAULT_SCRAPER_SETTINGS = {
     "max_pages_per_network": 100,
     "default_request_delay": 1.5,
     "request_timeout": 45,
-    "max_retries": 3,
-    "backoff_base": 5.0,
+    "max_retries": 2,           # v4.2: Reduced from 3 for faster failure
+    "backoff_base": 5.0,        # v4.2: Reduced from default
     "skip_existing": True,
     "verbose": True,
     "output_directory": "EU_ERN_DATA",
@@ -220,6 +234,7 @@ DEFAULT_SCRAPER_SETTINGS = {
     "use_sqlite_state": True,
     "detect_duplicates": True,
     "parse_sitemaps": True,
+    "download_pdfs_on_the_fly": True,  # v4.2: Download PDFs immediately when found
 }
 
 
@@ -295,6 +310,24 @@ class SQLiteStateManager:
                 CREATE INDEX IF NOT EXISTS idx_urls_status ON urls(status);
                 CREATE INDEX IF NOT EXISTS idx_urls_network ON urls(network_id);
                 CREATE INDEX IF NOT EXISTS idx_urls_normalized ON urls(normalized_url);
+                
+                CREATE TABLE IF NOT EXISTS pdf_queue (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    url TEXT UNIQUE,
+                    normalized_url TEXT,
+                    network_id TEXT,
+                    link_text TEXT,
+                    status TEXT DEFAULT 'pending',
+                    file_path TEXT,
+                    file_size INTEGER,
+                    error_message TEXT,
+                    retry_count INTEGER DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE INDEX IF NOT EXISTS idx_pdf_queue_status ON pdf_queue(status);
+                CREATE INDEX IF NOT EXISTS idx_pdf_queue_network ON pdf_queue(network_id);
             ''')
             
             # Set version
@@ -481,6 +514,75 @@ class SQLiteStateManager:
         if hasattr(self._local, 'conn') and self._local.conn:
             self._local.conn.close()
             self._local.conn = None
+    
+    # =========== PDF QUEUE METHODS (v4.2) ===========
+    
+    def add_pdf_to_queue(self, url: str, network_id: str, link_text: str = "") -> bool:
+        """Add PDF to download queue. Returns True if new, False if exists."""
+        normalized = URLUtils.normalize_url(url)
+        try:
+            with self.conn:
+                cursor = self.conn.execute("""
+                    INSERT OR IGNORE INTO pdf_queue 
+                    (url, normalized_url, network_id, link_text, status)
+                    VALUES (?, ?, ?, ?, 'pending')
+                """, (url, normalized, network_id, link_text))
+            return cursor.rowcount > 0
+        except Exception:
+            return False
+    
+    def get_pending_pdfs(self, network_id: str = None, limit: int = 1000) -> List[Dict]:
+        """Get pending PDFs from queue."""
+        if network_id:
+            rows = self.conn.execute("""
+                SELECT * FROM pdf_queue 
+                WHERE status = 'pending' AND network_id = ?
+                ORDER BY created_at LIMIT ?
+            """, (network_id, limit)).fetchall()
+        else:
+            rows = self.conn.execute("""
+                SELECT * FROM pdf_queue 
+                WHERE status = 'pending'
+                ORDER BY created_at LIMIT ?
+            """, (limit,)).fetchall()
+        return [dict(row) for row in rows]
+    
+    def update_pdf_status(self, url: str, status: str, file_path: str = None, 
+                          file_size: int = None, error_message: str = None):
+        """Update PDF download status."""
+        with self.conn:
+            self.conn.execute("""
+                UPDATE pdf_queue 
+                SET status = ?, file_path = ?, file_size = ?, 
+                    error_message = ?, updated_at = CURRENT_TIMESTAMP
+                WHERE url = ?
+            """, (status, file_path, file_size, error_message, url))
+    
+    def is_pdf_in_queue(self, url: str) -> bool:
+        """Check if PDF is already in queue (any status)."""
+        normalized = URLUtils.normalize_url(url)
+        row = self.conn.execute("""
+            SELECT 1 FROM pdf_queue WHERE normalized_url = ?
+        """, (normalized,)).fetchone()
+        return row is not None
+    
+    def is_pdf_downloaded(self, url: str) -> bool:
+        """Check if PDF was already downloaded."""
+        normalized = URLUtils.normalize_url(url)
+        row = self.conn.execute("""
+            SELECT 1 FROM pdf_queue 
+            WHERE normalized_url = ? AND status = 'downloaded'
+        """, (normalized,)).fetchone()
+        return row is not None
+    
+    def get_pdf_queue_stats(self) -> Dict:
+        """Get PDF queue statistics."""
+        stats = {'pending': 0, 'downloaded': 0, 'failed': 0}
+        for row in self.conn.execute("""
+            SELECT status, COUNT(*) as count FROM pdf_queue GROUP BY status
+        """):
+            stats[row['status']] = row['count']
+        return stats
 
 
 # ============================================================================
@@ -1507,6 +1609,7 @@ class ERNScraper:
         self.detect_duplicates = settings.get("detect_duplicates", True)
         self.parse_sitemaps = settings.get("parse_sitemaps", True)
         self.respect_robots = settings.get("respect_robots_txt", False)
+        self.download_pdfs_on_the_fly = settings.get("download_pdfs_on_the_fly", True)  # v4.2
         
         # Domain delays from config or defaults
         self.domain_delays = self.config.get("domain_delays", DEFAULT_DOMAIN_DELAYS)
@@ -1651,11 +1754,20 @@ class ERNScraper:
             except json.JSONDecodeError:
                 pass
         
-        # Get completed networks
-        for row in self.state_db.conn.execute(
-            "SELECT network_id FROM networks WHERE status = 'complete'"
-        ):
-            state["scraped_networks"].append(row['network_id'])
+        # FIXED: Also try to load scraped_networks from metadata
+        scraped_networks_json = self.state_db.get_metadata('scraped_networks')
+        if scraped_networks_json:
+            try:
+                state["scraped_networks"] = json.loads(scraped_networks_json)
+            except json.JSONDecodeError:
+                pass
+        
+        # Get completed networks from table (if metadata doesn't have it)
+        if not state["scraped_networks"]:
+            for row in self.state_db.conn.execute(
+                "SELECT network_id FROM networks WHERE status = 'complete'"
+            ):
+                state["scraped_networks"].append(row['network_id'])
         
         # Get network stats
         for row in self.state_db.conn.execute("SELECT * FROM networks"):
@@ -1666,6 +1778,20 @@ class ERNScraper:
                 'hit_depth_limit': bool(row['hit_depth_limit']),
                 'pdfs_found': row['pdfs_found'],
             }
+        
+        # FIXED: If SQLite has no data, try loading from JSON backup
+        json_state_file = os.path.join(self.output_dir, 'scraper_state.json')
+        if not state["scraped_networks"] and os.path.exists(json_state_file):
+            self.logger.info("[*] SQLite empty, loading from JSON backup...")
+            try:
+                with open(json_state_file, 'r', encoding='utf-8') as f:
+                    json_state = json.load(f)
+                state["scraped_networks"] = json_state.get("scraped_networks", [])
+                state["network_stats"] = json_state.get("network_stats", {})
+                state["settings"] = json_state.get("settings", {})
+                self.logger.info(f"[*] Loaded from JSON: {len(state['scraped_networks'])} networks complete")
+            except Exception as e:
+                self.logger.warning(f"Could not load JSON backup: {e}")
         
         stats = self.state_db.get_statistics()
         self.logger.info(f"[*] Loaded state: {stats.get('urls_downloaded', 0)} URLs processed, "
@@ -1873,20 +1999,41 @@ class ERNScraper:
     def _save_state(self):
         """Save current scraper state for checkpointing."""
         if self.state_db:
-            # Save to SQLite
+            # Save metadata to SQLite
             self.state_db.set_metadata('last_run', datetime.now().isoformat())
             self.state_db.set_metadata('settings', json.dumps({
                 "max_crawl_depth": self.max_crawl_depth,
                 "max_pages_per_network": self.max_pages_per_network
             }))
-        else:
-            # Save to JSON
-            self.state["last_run"] = datetime.now().isoformat()
-            self.state["version"] = VERSION
             
-            with self._lock:
-                with open(self.state_file, 'w', encoding='utf-8') as f:
-                    json.dump(self.state, f, indent=2)
+            # FIXED: Also save network state to SQLite
+            for network_id in self.state.get("scraped_networks", []):
+                stats = self.state.get("network_stats", {}).get(network_id, {})
+                self.state_db.update_network(
+                    network_id,
+                    status='complete',
+                    pages_scraped=stats.get("pages_scraped", 0),
+                    max_depth_reached=stats.get("max_depth_reached", 0),
+                    hit_page_limit=1 if stats.get("hit_page_limit", False) else 0,
+                    hit_depth_limit=1 if stats.get("hit_depth_limit", False) else 0,
+                    pdfs_found=stats.get("pdfs_found", 0),
+                    pdfs_downloaded=stats.get("pdfs_downloaded", 0),
+                    settings=stats.get("settings_used", {})
+                )
+            
+            # Save scraped networks list to metadata for quick lookup
+            self.state_db.set_metadata('scraped_networks', json.dumps(
+                self.state.get("scraped_networks", [])
+            ))
+        
+        # ALWAYS save to JSON as backup (regardless of SQLite)
+        self.state["last_run"] = datetime.now().isoformat()
+        self.state["version"] = VERSION
+        
+        state_file = os.path.join(self.output_dir, 'scraper_state.json')
+        with self._lock:
+            with open(state_file, 'w', encoding='utf-8') as f:
+                json.dump(self.state, f, indent=2)
     
     def _check_settings_changed(self):
         """Check if crawl settings have changed since last run."""
@@ -2306,6 +2453,66 @@ class ERNScraper:
                 return filepath, status, url
         return None, "failed", None
     
+    def _download_pdf_immediate(self, url: str, network_id: str, link_text: str = "") -> Tuple[Optional[str], str]:
+        """
+        v4.2: Download PDF immediately and update queue status.
+        Returns (filepath, status) where status is 'downloaded', 'skipped', or 'failed'.
+        """
+        # Check if already in queue and downloaded
+        if self.state_db and self.state_db.is_pdf_downloaded(url):
+            return None, "skipped"
+        
+        # Add to queue (tracks all PDFs we've seen)
+        if self.state_db:
+            self.state_db.add_pdf_to_queue(url, network_id, link_text)
+        
+        # Generate filename
+        filename = self._url_to_filename(url, prefix=network_id)
+        filepath = os.path.join(self.dirs['guidelines'], filename)
+        
+        # Check if file already exists on disk
+        if self.skip_existing and self._file_exists(filepath):
+            if self.state_db:
+                file_size = os.path.getsize(filepath)
+                self.state_db.update_pdf_status(url, 'downloaded', filepath, file_size)
+            self.logger.debug(f"[PDF] Skipping existing: {filename}")
+            return filepath, "skipped"
+        
+        # Download the PDF
+        self.logger.info(f"[PDF] Downloading: {filename[:50]}...")
+        response = self._safe_request(url)
+        
+        if response:
+            # Verify we got actual PDF content
+            content_length = len(response.content)
+            if content_length < 100:
+                self.logger.warning(f"[PDF] Suspiciously small ({content_length} bytes): {filename}")
+                if self.state_db:
+                    self.state_db.update_pdf_status(url, 'failed', error_message="File too small")
+                return None, "failed"
+            
+            # Save the file
+            with open(filepath, 'wb') as f:
+                f.write(response.content)
+            
+            self.logger.info(f"[PDF] OK: {filename} ({content_length:,} bytes)")
+            
+            # Update state
+            if self.state_db:
+                self.state_db.update_pdf_status(url, 'downloaded', filepath, content_length)
+            
+            with self._lock:
+                self.state["downloaded_urls"].append(url)
+            
+            self.global_stats.pdfs_downloaded += 1
+            return filepath, "downloaded"
+        else:
+            # Download failed
+            if self.state_db:
+                self.state_db.update_pdf_status(url, 'failed', error_message="Download failed")
+            self.logger.warning(f"[PDF] FAILED: {filename}")
+            return None, "failed"
+    
     def _extract_links(self, soup: BeautifulSoup, base_url: str, 
                        patterns: Optional[List[str]] = None) -> List[Dict]:
         """Extract relevant links from a page."""
@@ -2584,7 +2791,7 @@ class ERNScraper:
         if crawl_stats.hit_depth_limit:
             self.logger.info(f"   [*]  Hit depth limit ({self.max_crawl_depth})")
         
-        # Categorize found links
+        # Categorize found links AND download PDFs on-the-fly (v4.2)
         pdf_urls_seen = set()
         for link in all_links:
             url = link["url"]
@@ -2594,14 +2801,28 @@ class ERNScraper:
                     pdf_urls_seen.add(normalized)
                     network_data["pdfs_found"].append(link)
                     crawl_stats.pdfs_found += 1
+                    
+                    # v4.2: Download PDF immediately if enabled
+                    if self.download_pdfs_on_the_fly and not self._shutdown:
+                        filepath, status = self._download_pdf_immediate(
+                            url, network_id, link.get("text", "")
+                        )
+                        if status in ["downloaded", "skipped"]:
+                            network_data["pdfs_downloaded"].append({
+                                "url": url,
+                                "filepath": filepath,
+                                "status": status,
+                                "link_text": link.get("text", "")
+                            })
+                            crawl_stats.pdfs_downloaded += 1
             else:
                 network_data["guidelines_found"].append(link)
         
         self.logger.info(f"[*] Found {crawl_stats.pdfs_found} PDFs, {len(network_data['guidelines_found'])} other links")
         
-        # Download PDFs
-        if network_data["pdfs_found"]:
-            self.logger.info(f"[*] Downloading {len(network_data['pdfs_found'])} PDFs...")
+        # Download PDFs - BATCH MODE (only if on-the-fly is disabled)
+        if not self.download_pdfs_on_the_fly and network_data["pdfs_found"]:
+            self.logger.info(f"[*] Downloading {len(network_data['pdfs_found'])} PDFs (batch mode)...")
             
             if self.parallel_downloads and len(network_data["pdfs_found"]) > 1:
                 # Parallel download
@@ -2642,6 +2863,10 @@ class ERNScraper:
                         })
                         crawl_stats.pdfs_downloaded += 1
         
+        # Show on-the-fly download summary
+        if self.download_pdfs_on_the_fly:
+            self.logger.info(f"[*] PDFs downloaded on-the-fly: {crawl_stats.pdfs_downloaded}/{crawl_stats.pdfs_found}")
+        
         # Download factsheet
         factsheet = network_info.get("factsheet")
         if factsheet and not self._shutdown:
@@ -2668,6 +2893,7 @@ class ERNScraper:
                     "hit_page_limit": crawl_stats.hit_page_limit,
                     "hit_depth_limit": crawl_stats.hit_depth_limit,
                     "pdfs_found": crawl_stats.pdfs_found,
+                    "pdfs_downloaded": crawl_stats.pdfs_downloaded,
                     "last_scraped": end_time.isoformat(),
                     "duration_seconds": crawl_stats.duration_seconds,
                     "settings_used": {
@@ -2994,16 +3220,136 @@ def reset_state(output_dir: str):
         print("Cancelled.")
 
 
+def download_pending_pdfs(output_dir: str, config: Dict = None):
+    """
+    v4.2: Download pending PDFs from the queue.
+    Use this to resume interrupted PDF downloads.
+    """
+    db_path = os.path.join(output_dir, 'scraper_state.db')
+    
+    if not os.path.exists(db_path):
+        print(f"[!] No database found at {db_path}")
+        print("[!] Run scraper first to discover PDFs.")
+        return
+    
+    state_db = SQLiteStateManager(db_path)
+    
+    # Get queue stats
+    stats = state_db.get_pdf_queue_stats()
+    pending = stats.get('pending', 0)
+    downloaded = stats.get('downloaded', 0)
+    failed = stats.get('failed', 0)
+    
+    print("\n" + "=" * 60)
+    print("[*] PDF Queue Status")
+    print("=" * 60)
+    print(f"   Pending:    {pending}")
+    print(f"   Downloaded: {downloaded}")
+    print(f"   Failed:     {failed}")
+    print("=" * 60)
+    
+    if pending == 0:
+        print("\n[*] No pending PDFs to download.")
+        state_db.close()
+        return
+    
+    # Get pending PDFs
+    pending_pdfs = state_db.get_pending_pdfs(limit=1000)
+    
+    print(f"\n[*] Downloading {len(pending_pdfs)} pending PDFs...")
+    
+    # Setup session
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent': f'Mozilla/5.0 (compatible; ERN-Research-Bot/{VERSION}; +https://health.ec.europa.eu)',
+        'Accept': 'application/pdf,*/*',
+    })
+    
+    # Create output directory
+    guidelines_dir = os.path.join(output_dir, 'guidelines')
+    os.makedirs(guidelines_dir, exist_ok=True)
+    
+    success_count = 0
+    fail_count = 0
+    skip_count = 0
+    
+    for i, pdf in enumerate(pending_pdfs, 1):
+        url = pdf['url']
+        network_id = pdf['network_id']
+        
+        # Generate filename
+        parsed = urlparse(url)
+        filename = os.path.basename(parsed.path)
+        if not filename or not filename.endswith('.pdf'):
+            url_hash = hashlib.md5(url.encode()).hexdigest()[:10]
+            filename = f"document_{url_hash}.pdf"
+        filename = re.sub(r'[^\w\-_\.]', '_', filename)
+        if network_id:
+            filename = f"{network_id}_{filename}"
+        
+        filepath = os.path.join(guidelines_dir, filename)
+        
+        # Check if already exists
+        if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+            state_db.update_pdf_status(url, 'downloaded', filepath, os.path.getsize(filepath))
+            skip_count += 1
+            print(f"   [{i}/{len(pending_pdfs)}] SKIP (exists): {filename[:50]}")
+            continue
+        
+        print(f"   [{i}/{len(pending_pdfs)}] Downloading: {filename[:50]}...", end=" ", flush=True)
+        
+        try:
+            response = session.get(url, timeout=60)
+            response.raise_for_status()
+            
+            content_length = len(response.content)
+            if content_length < 100:
+                print(f"FAIL (too small: {content_length} bytes)")
+                state_db.update_pdf_status(url, 'failed', error_message="File too small")
+                fail_count += 1
+                continue
+            
+            with open(filepath, 'wb') as f:
+                f.write(response.content)
+            
+            print(f"OK ({content_length:,} bytes)")
+            state_db.update_pdf_status(url, 'downloaded', filepath, content_length)
+            success_count += 1
+            
+            # Rate limiting
+            time.sleep(2.0)
+            
+        except KeyboardInterrupt:
+            print("\n\n[!] Interrupted. Progress saved.")
+            break
+        except Exception as e:
+            print(f"FAIL ({str(e)[:30]})")
+            state_db.update_pdf_status(url, 'failed', error_message=str(e)[:200])
+            fail_count += 1
+    
+    # Final stats
+    print("\n" + "=" * 60)
+    print("[*] Download Complete")
+    print("=" * 60)
+    print(f"   Downloaded: {success_count}")
+    print(f"   Skipped:    {skip_count}")
+    print(f"   Failed:     {fail_count}")
+    print(f"   Output:     {guidelines_dir}/")
+    print("=" * 60 + "\n")
+    
+    state_db.close()
+
 
 # ============================================================================
 # MAIN CONFIGURATION - EDIT THESE VALUES
 # ============================================================================
 
 # What action to perform:
-#   "scrape"  - Run the scraper (with auto URL discovery)
-#   "reset"   - Reset state and then scrape
-#   "stats"   - Show statistics only
-#   "list"    - List all networks
+#   "scrape"         - Run the scraper (with auto URL discovery)
+#   "reset"          - Reset state and then scrape
+#   "stats"          - Show statistics only
+#   "list"           - List all networks
+#   "download_queue" - Download pending PDFs from queue (v4.2)
 ACTION = "scrape"
 
 # Output directory
@@ -3033,6 +3379,11 @@ MAX_PAGES_PER_NETWORK = None  # e.g., 500
 # When True: discovers URLs from sitemap + navigation before scraping
 # When False: uses only config file paths
 AUTO_DISCOVER_URLS = True
+
+# v4.2: Download PDFs immediately when found (recommended: True)
+# When True: PDFs are downloaded as soon as they're discovered during crawl
+# When False: PDFs are downloaded in batch after crawl completes (legacy mode)
+DOWNLOAD_PDFS_ON_THE_FLY = True
 
 
 # ============================================================================
@@ -3078,6 +3429,7 @@ def main():
             try:
                 state_db = SQLiteStateManager(db_path)
                 stats = state_db.get_statistics()
+                pdf_stats = state_db.get_pdf_queue_stats()
                 
                 print(f"\n{'=' * 60}")
                 print(f"[*] Scraper Statistics")
@@ -3088,6 +3440,10 @@ def main():
                 print(f"   Failed:      {stats.get('urls_failed', 0):,}")
                 print(f"\nNetworks:")
                 print(f"   Complete:    {stats.get('networks_complete', 0)}")
+                print(f"\nPDF Queue (v4.2):")
+                print(f"   Pending:     {pdf_stats.get('pending', 0):,}")
+                print(f"   Downloaded:  {pdf_stats.get('downloaded', 0):,}")
+                print(f"   Failed:      {pdf_stats.get('failed', 0):,}")
                 print(f"\nContent:")
                 print(f"   Total data:  {stats.get('total_bytes', 0) / 1024 / 1024:.2f} MB")
                 print(f"   Duplicates:  {stats.get('duplicate_pages', 0)}")
@@ -3099,6 +3455,11 @@ def main():
                 print(f"Error reading stats: {e}")
         else:
             print(f"No statistics found. Run scraper first.")
+        return
+    
+    # Handle download_queue action (v4.2)
+    if ACTION == "download_queue":
+        download_pending_pdfs(OUTPUT_DIR, config)
         return
     
     # Get enabled networks
@@ -3128,6 +3489,9 @@ def main():
     
     # Set auto discovery
     settings["auto_discover_urls"] = AUTO_DISCOVER_URLS
+    
+    # v4.2: Set on-the-fly PDF downloads
+    settings["download_pdfs_on_the_fly"] = DOWNLOAD_PDFS_ON_THE_FLY
     
     config["scraper_settings"] = settings
     

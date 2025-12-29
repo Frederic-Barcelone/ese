@@ -67,7 +67,12 @@ PERSON_NAME_BLACKLIST = {
     'mild', 'tosevere', 'renal', 'impairment', 'however', 'activity', 'composition',
     'organ', 'function', 'children', 'would', 'likely', 'affect', 'disposition',
     'significantly', 'label', 'explicitly', 'states', 'safety', 'efficacy', 'known',
-    'under', 'trials', 'ongoing'
+    'under', 'trials', 'ongoing',  'keywords', 'keyword', 'abstract', 'introduction', 'methods', 'methodology',
+    'results', 'discussion', 'conclusion', 'conclusions', 'references',
+    'acknowledgments', 'acknowledgements', 'background', 'summary', 'appendix',
+    'supplementary', 'materials', 'figures', 'tables', 'abbreviations',
+    'correspondence', 'author', 'authors', 'affiliation', 'affiliations',
+    'funding', 'ethics', 'consent', 'competing', 'interests', 'availability',
 }
 
 # Titles and prefixes

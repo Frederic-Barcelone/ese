@@ -804,9 +804,9 @@ class CitationExtractor:
             parts = re.split(r'[,\s]+', numbers_str)
             
             for part in parts:
-                if '-' in part or '–' in part:
+                if '-' in part or '-' in part:
                     # Range
-                    start, end = re.split(r'[-–]', part)
+                    start, end = re.split(r'[--]', part)
                     try:
                         for num in range(int(start), int(end) + 1):
                             ref_ids.append(f"ref_{num}")

@@ -185,12 +185,11 @@ class DrugValidator:
             # Default configuration
             'min_confidence': 0.5,
             'high_confidence': 0.8,
-            'claude_model': 'claude-sonnet-4-5-20250929',
-            'claude_max_tokens': 4096,
-            'claude_temperature': 0.0,
             'max_context_length': 1000,
+            'use_claude': True,
+            'model_tier': 'validation',  # NEW: Use validation tier for drug validation
             
-            # Common false positives (can be overridden by config.yaml)
+            # Common false positives
             'common_false_positives': {
                 'adapt', 'barrier', 'control', 'impact', 'information',
                 'active', 'complete', 'central', 'nasal', 'pediatric',
@@ -211,9 +210,25 @@ class DrugValidator:
         if self.system_initializer and hasattr(self.system_initializer, 'config'):
             sys_config = self.system_initializer.config
             
-            # Get validation-specific config if available
-            if validation_config := sys_config.get('validation'):
-                config.update(validation_config)
+            # Get validation.drug config (NEW TWO-TIER SUPPORT)
+            validation_config = sys_config.get('validation', {})
+            drug_validation = validation_config.get('drug', {})
+            
+            if drug_validation:
+                config['model_tier'] = drug_validation.get('model_tier', 'validation')
+                config['confidence_threshold'] = drug_validation.get('confidence_threshold', 0.85)
+                config['enabled'] = drug_validation.get('enabled', True)
+            
+            # Get Claude config for the specified tier
+            api_config = sys_config.get('api', {})
+            claude_config = api_config.get('claude', {})
+            tier = config.get('model_tier', 'validation')
+            tier_config = claude_config.get(tier, {})
+            
+            # Set Claude model settings from tier config
+            config['claude_model'] = tier_config.get('model', claude_config.get('model', 'claude-sonnet-4-5-20250929'))
+            config['claude_max_tokens'] = tier_config.get('max_tokens', claude_config.get('max_tokens', 4096))
+            config['claude_temperature'] = tier_config.get('temperature', claude_config.get('temperature', 0.0))
             
             # Get features config
             if features := sys_config.get('features'):
@@ -249,21 +264,27 @@ class DrugValidator:
         
         return medical_terms
     
-    def _initialize_claude(self, api_key: Optional[str] = None) -> Optional[anthropic.Anthropic]:
-        """Initialize Claude client"""
+    def _initialize_claude(self, api_key: Optional[str] = None) -> Optional['anthropic.Anthropic']:
+        """Initialize Claude client with two-tier model support"""
         if not CLAUDE_AVAILABLE:
             return None
         
+        # Try multiple env var names
         if not api_key:
-            api_key = os.getenv('CLAUDE_API_KEY')
+            api_key = os.getenv('ANTHROPIC_API_KEY') or os.getenv('CLAUDE_API_KEY')
         
         if not api_key:
-            logger.warning("No Claude API key - AI validation disabled")
+            logger.warning("No Claude API key found - AI validation disabled")
             return None
         
         try:
             client = anthropic.Anthropic(api_key=api_key)
-            logger.info("[OK] Claude client initialized")
+            
+            # Log which model tier will be used
+            tier = self.config.get('model_tier', 'validation')
+            model = self.config.get('claude_model', 'claude-sonnet-4-5-20250929')
+            logger.info(f"[OK] Claude client initialized (tier={tier}, model={model})")
+            
             return client
         except Exception as e:
             logger.error(f"Failed to initialize Claude: {e}")
@@ -463,11 +484,11 @@ class DrugValidator:
         try:
             # Call Claude
             response = self.claude_client.messages.create(
-                model=self.config.get('claude_model'),
-                max_tokens=self.config.get('claude_max_tokens'),
-                temperature=self.config.get('claude_temperature'),
-                messages=[{"role": "user", "content": prompt}]
-            )
+                    model=self.config.get('claude_model', 'claude-sonnet-4-5-20250929'),
+                    max_tokens=self.config.get('claude_max_tokens', 4096),
+                    temperature=self.config.get('claude_temperature', 0.0),
+                    messages=[{"role": "user", "content": prompt}]
+                )
             
             # Parse response
             approved, rejected = self._parse_claude_response(
