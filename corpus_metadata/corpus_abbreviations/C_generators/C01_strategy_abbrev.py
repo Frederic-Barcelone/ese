@@ -1,9 +1,21 @@
-#  corpus_metadata/corpus_abbreviations/C_generators/C01_strategy_abbrev.py
+# corpus_metadata/corpus_abbreviations/C_generators/C01_strategy_abbrev.py
+"""
+The Syntax Matcher - Schwartz-Hearst algorithm for abbreviation extraction.
 
+Target: Explicit definitions of short forms in running text.
+
+Patterns:
+  - Explicit A: "Tumor Necrosis Factor (TNF)" -> LF (SF)
+  - Explicit B: "TNF (Tumor Necrosis Factor)" -> SF (LF)
+  - Implicit:   "TNF, defined as Tumor Necrosis Factor" -> SF, phrase LF
+
+Reference: Schwartz & Hearst (2003) "A Simple Algorithm for Identifying
+Abbreviation Definitions in Biomedical Text"
+"""
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, Iterator, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from A_core.A01_domain_models import (
     Candidate,
@@ -20,7 +32,6 @@ from A_core.A03_provenance import (
 from B_parsing.B02_doc_graph import (
     ContentRole,
     DocumentGraph,
-    TableType,
 )
 
 
@@ -80,6 +91,42 @@ def _context_window(text: str, start: int, end: int, window: int = 240) -> str:
     return _clean_ws(text[s:e])
 
 
+def _looks_like_measurement(text: str) -> bool:
+    """
+    Check if text looks like a measurement value rather than a definition.
+    Filters false positives like "11.06 mg/L (UACR-I)".
+    """
+    if not text:
+        return False
+
+    text = text.strip()
+
+    # Define measurement units (including compound units like mg/L, g/dL)
+    units = r'(?:mg|g|L|mL|μg|ng|IU|%|°C|mmol|μmol|pg|kg|mm|cm|m|s|min|h|d|Hz|kDa|Da)'
+    compound_unit = units + r'(?:/' + units + r')?'
+
+    # Reject if ends with a measurement pattern: "NUMBER UNIT"
+    # e.g., "11.06 mg/L", "76.79 mg/L", "100 %", "1.3 × 10^9/L"
+    measurement_end_pattern = re.compile(
+        r'\d+(?:\.\d+)?\s*(?:×\s*10[\^]?\d+)?/?\s*' + compound_unit + r'\s*$',
+        re.IGNORECASE
+    )
+    if measurement_end_pattern.search(text):
+        return True
+
+    # Reject if mostly numeric content (more digits than letters)
+    letters = sum(1 for c in text if c.isalpha())
+    digits = sum(1 for c in text if c.isdigit())
+    if digits > 0 and digits >= letters:
+        return True
+
+    # Reject if looks like a numeric list/sequence
+    if re.match(r'^[\d.,×\s\-–/]+$', text):
+        return True
+
+    return False
+
+
 def _schwartz_hearst_extract(short_form: str, preceding_text: str) -> Optional[str]:
     """
     Schwartz-Hearst-ish backward character alignment.
@@ -125,6 +172,10 @@ def _schwartz_hearst_extract(short_form: str, preceding_text: str) -> Optional[s
 
     # Avoid absurdly long LFs
     if len(lf) > 120:
+        return None
+
+    # Reject measurement values (e.g., "11.06 mg/L" is not a definition)
+    if _looks_like_measurement(lf):
         return None
 
     return lf
@@ -376,87 +427,5 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         )
 
 
-# ----------------------------
-# Generator 2: Glossary tables (high value)
-# ----------------------------
-
-class GlossaryTableCandidateGenerator(BaseCandidateGenerator):
-    """
-    Extract SF/LF pairs from tables classified as GLOSSARY.
-    Uses the Table dual-view (logical_rows + physical cells).
-    """
-
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
-        self.max_rows_per_table = int(self.config.get("max_rows_per_table", 500))
-
-        self.pipeline_version = str(self.config.get("pipeline_version") or get_git_revision_hash())
-        self.run_id = str(self.config.get("run_id") or generate_run_id("ABBR"))
-        self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
-
-    @property
-    def generator_type(self) -> GeneratorType:
-        return GeneratorType.GLOSSARY_TABLE
-
-    def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
-        doc = doc_structure
-        out: List[Candidate] = []
-        seen: Set[Tuple[str, str, str]] = set()
-
-        for table in doc.iter_tables(table_type=TableType.GLOSSARY):
-            count = 0
-            for sf, lf, sf_cell, lf_cell in table.iter_glossary_pairs():
-                if count >= self.max_rows_per_table:
-                    break
-
-                sf = _clean_ws(sf)
-                lf = _clean_ws(lf)
-                if not sf or not lf:
-                    continue
-
-                key = (doc.doc_id, sf.upper(), lf.lower())
-                if key in seen:
-                    continue
-                seen.add(key)
-
-                # Prefer SF cell for pinpointing; fallback to table bbox
-                bbox = (sf_cell.bbox if sf_cell else table.bbox)
-                cell_row = int(sf_cell.row_index) if sf_cell else None
-                cell_col = int(sf_cell.col_index) if sf_cell else None
-
-                loc = Coordinate(
-                    page_num=int(table.page_num),
-                    table_id=str(table.id),
-                    cell_row=cell_row,
-                    cell_col=cell_col,
-                    bbox=bbox,
-                )
-
-                prov = ProvenanceMetadata(
-                    pipeline_version=self.pipeline_version,
-                    run_id=self.run_id,
-                    doc_fingerprint=str(self.config.get("doc_fingerprint") or self.doc_fingerprint_default),
-                    generator_name=self.generator_type,
-                    rule_version="glossary_table::v1",
-                )
-
-                # Context: small markdown table for LLM/debug
-                ctx = table.to_markdown(max_rows=20)
-
-                out.append(
-                    Candidate(
-                        doc_id=doc.doc_id,
-                        field_type=FieldType.GLOSSARY_ENTRY,
-                        generator_type=self.generator_type,
-                        short_form=sf,
-                        long_form=lf,
-                        context_text=ctx,
-                        context_location=loc,
-                        initial_confidence=0.99,
-                        provenance=prov,
-                    )
-                )
-
-                count += 1
-
-        return out
+# Re-export for backward compatibility
+from C_generators.C01b_strategy_glossary import GlossaryTableCandidateGenerator

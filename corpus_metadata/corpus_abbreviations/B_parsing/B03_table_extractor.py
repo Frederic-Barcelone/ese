@@ -37,6 +37,7 @@ class TableExtractor:
         self.config = config or {}
         self.strategy = self.config.get("strategy", "hi_res")
         self.hi_res_model_name = self.config.get("hi_res_model_name", "yolox")
+        self.languages = self.config.get("languages", ["eng"])
 
     def extract_tables(self, file_path: str) -> List[Dict[str, Any]]:
         """
@@ -47,6 +48,7 @@ class TableExtractor:
             strategy=self.strategy,
             hi_res_model_name=self.hi_res_model_name,
             infer_table_structure=True,
+            languages=self.languages,
         )
 
         tables = []

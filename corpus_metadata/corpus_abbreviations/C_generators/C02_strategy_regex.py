@@ -1,11 +1,25 @@
 # corpus_metadata/corpus_abbreviations/C_generators/C02_strategy_regex.py
-# Abbreviation-only orphan finder (SHORT_FORM_ONLY)
+"""
+El Cazador de Patrones - The Pattern Hunter.
 
+Rigid pattern matching for structured data with predictable formats.
+Context-immune: extracts patterns regardless of surrounding text.
+
+Targets:
+  - Trial IDs: NCT01234567, EudraCT 2020-001234-56, ISRCTN12345678
+  - Doses: 10 mg, 500mg, 2.5 mL
+  - Dates: 2024-01-15, 15/01/2024, January 15, 2024
+  - References: DOI, PMID, PMCID, URLs
+
+Analogy: A barcode scanner. If it sees the right pattern, it beeps.
+It doesn't care what product the barcode is on.
+"""
 from __future__ import annotations
 
 import re
-from collections import defaultdict
-from typing import Any, DefaultDict, Dict, List, Optional, Set, Tuple
+from dataclasses import dataclass
+from enum import Enum
+from typing import Any, Dict, List, Optional, Pattern
 
 from A_core.A01_domain_models import (
     Candidate,
@@ -16,259 +30,282 @@ from A_core.A01_domain_models import (
 )
 from A_core.A02_interfaces import BaseCandidateGenerator
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
-from B_parsing.B02_doc_graph import ContentRole, DocumentGraph
+from B_parsing.B02_doc_graph import DocumentGraph
+
+
+class ReferenceType(str, Enum):
+    """Classification of reference sources."""
+    UNIVERSAL = "universal"
+    LITERATURE = "literature"
+    PREPRINT = "preprint"
+    INDEX = "index"
+    REPOSITORY = "repository"
+    CLINICAL_TRIAL = "clinical_trial"
+    REGULATORY = "regulatory"
+    PATENT = "patent"
+    GUIDELINE = "guideline"
+    DATABASE = "database"
+    PUBLISHER = "publisher"
+    UNKNOWN = "unknown"
 
 
 def _clean_ws(s: str) -> str:
     return " ".join((s or "").split()).strip()
 
 
-def _norm_section(s: str) -> str:
-    return _clean_ws(s).lower()
+@dataclass
+class PatternDef:
+    """Definition of a rigid pattern to extract."""
+    name: str
+    pattern: Pattern
+    entity_type: str  # e.g., "TRIAL_ID", "DOSE", "DATE"
+    confidence: float = 0.95
+
+
+# Pre-compiled patterns for pharma/clinical data
+RIGID_PATTERNS: List[PatternDef] = [
+    # Clinical Trial IDs
+    PatternDef(
+        name="nct_id",
+        pattern=re.compile(r'\bNCT\d{8}\b', re.IGNORECASE),
+        entity_type="TRIAL_ID",
+        confidence=0.99,
+    ),
+    PatternDef(
+        name="eudract_id",
+        pattern=re.compile(r'\b\d{4}-\d{6}-\d{2}\b'),  # EudraCT format
+        entity_type="TRIAL_ID",
+        confidence=0.95,
+    ),
+    PatternDef(
+        name="isrctn_id",
+        pattern=re.compile(r'\bISRCTN\d{8}\b', re.IGNORECASE),
+        entity_type="TRIAL_ID",
+        confidence=0.99,
+    ),
+    PatternDef(
+        name="ctis_id",
+        pattern=re.compile(r'\b\d{4}-\d{6}-\d{2}-\d{2}\b'),  # CTIS format
+        entity_type="TRIAL_ID",
+        confidence=0.95,
+    ),
+
+    # Doses with compound units (e.g., mg/L, g/dL, mg/mmol)
+    # Compound units FIRST to avoid partial matches
+    PatternDef(
+        name="dose_compound",
+        pattern=re.compile(
+            r'\b(\d+(?:\.\d+)?)\s*'
+            r'(mg/(?:L|dL|mL|mmol|mol|kg|m²)|'
+            r'g/(?:L|dL|mL|mol|kg)|'
+            r'μg/(?:L|dL|mL|kg)|'
+            r'mmol/(?:L|mol)|'
+            r'μmol/(?:L|mol)|'
+            r'IU/(?:L|mL)|'
+            r'U/(?:L|mL)|'
+            r'×\s*10[\^]?\d+/L)\b',
+            re.IGNORECASE
+        ),
+        entity_type="CONCENTRATION",
+        confidence=0.95,
+    ),
+    # Simple doses (number + single unit)
+    PatternDef(
+        name="dose_mg",
+        pattern=re.compile(r'\b(\d+(?:\.\d+)?)\s*(mg|g|μg|mcg|ug)(?![/])\b', re.IGNORECASE),
+        entity_type="DOSE",
+        confidence=0.90,
+    ),
+    PatternDef(
+        name="dose_ml",
+        pattern=re.compile(r'\b(\d+(?:\.\d+)?)\s*(mL|L|μL|uL)(?![/])\b', re.IGNORECASE),
+        entity_type="DOSE",
+        confidence=0.90,
+    ),
+    PatternDef(
+        name="dose_iu",
+        pattern=re.compile(r'\b(\d+(?:\.\d+)?)\s*(IU|U)(?![/])\b'),
+        entity_type="DOSE",
+        confidence=0.90,
+    ),
+    PatternDef(
+        name="dose_percent",
+        pattern=re.compile(r'\b(\d+(?:\.\d+)?)\s*%\b'),
+        entity_type="PERCENTAGE",
+        confidence=0.85,
+    ),
+
+    # Dates (ISO format)
+    PatternDef(
+        name="date_iso",
+        pattern=re.compile(r'\b(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b'),
+        entity_type="DATE",
+        confidence=0.95,
+    ),
+    PatternDef(
+        name="date_euro",
+        pattern=re.compile(r'\b(0[1-9]|[12]\d|3[01])/(0[1-9]|1[0-2])/(20\d{2})\b'),
+        entity_type="DATE",
+        confidence=0.90,
+    ),
+    PatternDef(
+        name="date_us",
+        pattern=re.compile(r'\b(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/(20\d{2})\b'),
+        entity_type="DATE",
+        confidence=0.85,  # Ambiguous with euro format
+    ),
+
+    # Drug codes / compound IDs
+    PatternDef(
+        name="compound_id",
+        pattern=re.compile(r'\b[A-Z]{2,4}-?\d{3,6}\b'),  # e.g., ABC-12345
+        entity_type="COMPOUND_ID",
+        confidence=0.80,
+    ),
+
+    # Reference identifiers
+    PatternDef(
+        name="doi",
+        pattern=re.compile(r'\b10\.\d{4,}/[^\s\]>]+'),  # DOI: 10.1234/xxxxx
+        entity_type="DOI",
+        confidence=0.98,
+    ),
+    PatternDef(
+        name="pmid",
+        pattern=re.compile(r'\bPMID[:\s]*(\d{7,8})\b', re.IGNORECASE),
+        entity_type="PMID",
+        confidence=0.99,
+    ),
+    PatternDef(
+        name="pmcid",
+        pattern=re.compile(r'\bPMC\d{7,8}\b', re.IGNORECASE),
+        entity_type="PMCID",
+        confidence=0.99,
+    ),
+    PatternDef(
+        name="url_https",
+        pattern=re.compile(r'https?://[^\s\])<>"]+'),
+        entity_type="URL",
+        confidence=0.95,
+    ),
+
+    # Year extraction (for references)
+    PatternDef(
+        name="year_parens",
+        pattern=re.compile(r'\((\d{4})\)'),  # (2024)
+        entity_type="YEAR",
+        confidence=0.80,
+    ),
+]
 
 
 class RegexCandidateGenerator(BaseCandidateGenerator):
     """
-    Abbreviation-Only "Orphan" Finder.
+    Rigid Pattern Matcher - extracts structured data by form, not meaning.
 
-    Goal:
-      - Find acronym-like tokens that appear WITHOUT a local definition in the text.
-      - This complements strategy_abbrev.py (definitions) and glossary extraction.
-
-    Approach:
-      1) Scan for acronym-like tokens (AE, SAE, TNF-alpha, IL-6, eGFR, HbA1c, etc.)
-      2) Global frequency filter (orphans must repeat to be credible)
-      3) Section awareness (skip References/Bibliography/ToC/Appendix)
-      4) Optional suppression: known_short_forms (already defined elsewhere)
+    Context-immune: "Do not administer 10mg" still extracts "10mg".
+    The validation layer decides if it's negated.
     """
 
-    def __init__(self, config: Optional[dict] = None):
-        cfg = config or {}
-
-        # Matches: TNF, IL-6, TNF-alpha, HbA1c, eGFR, SAE, AE
-        # (First char uppercase; rest can include lowercase/digits; optional hyphen suffix)
-        self.token_pattern = re.compile(
-            cfg.get("token_regex", r"\b[A-Z][A-Za-z0-9]{1,11}(?:-[A-Za-z0-9]{1,11})?\b")
-        )
-
-        # Filters
-        self.min_len = int(cfg.get("min_len", 2))
-        self.max_len = int(cfg.get("max_len", 12))
-        self.min_occurrences = int(cfg.get("min_occurrences", 3))  # stricter for orphans
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
+        self.config = config or {}
 
         # Context window around match (chars)
-        self.ctx_window = int(cfg.get("ctx_window", 80))
+        self.ctx_window = int(self.config.get("ctx_window", 60))
 
-        # Section blacklist (substring match)
-        self.blacklisted_sections = {
-            _norm_section(s)
-            for s in cfg.get(
-                "blacklisted_sections",
-                ["references", "bibliography", "table of contents", "appendix", "appendices"],
-            )
-        }
+        # Which pattern types to extract (default: all)
+        self.enabled_types = set(
+            self.config.get("enabled_types", [
+                "TRIAL_ID", "DOSE", "CONCENTRATION", "PERCENTAGE",
+                "DATE", "COMPOUND_ID", "DOI", "PMID", "PMCID", "URL", "YEAR"
+            ])
+        )
 
-        # Token blacklist: compare in UPPER
-        self.blacklist_upper = {
-            str(x).strip().upper()
-            for x in cfg.get(
-                "blacklist",
-                ["THE", "AND", "FOR", "NOT", "BUT", "FIG", "TABLE", "PAGE", "SEE", "SECTION"],
-            )
-        }
+        # Deduplicate by value (emit each unique value once)
+        self.dedupe = bool(self.config.get("dedupe", True))
 
-        # Optional: suppress abbreviations already defined by other generators
-        # Orchestrator should pass: {"known_short_forms": ["TNF", "AE", ...]}
-        self.known_short_forms: Set[str] = {
-            str(x).strip().upper()
-            for x in cfg.get("known_short_forms", [])
-            if str(x).strip()
-        }
-
-        # Emit mode: only first occurrence per token (default)
-        self.emit_first_only = bool(cfg.get("emit_first_only", True))
-
-        # Confidence base for orphans (definition-less)
-        self.base_confidence = float(cfg.get("base_confidence", 0.60))
-        self.max_confidence = float(cfg.get("max_confidence", 0.85))
-
-        # Provenance defaults
-        self.pipeline_version = str(cfg.get("pipeline_version") or get_git_revision_hash())
-        self.run_id = str(cfg.get("run_id") or generate_run_id("ABBR"))
-        self.doc_fingerprint_default = str(cfg.get("doc_fingerprint") or "unknown-doc-fingerprint")
+        # Provenance
+        self.pipeline_version = str(self.config.get("pipeline_version") or get_git_revision_hash())
+        self.run_id = str(self.config.get("run_id") or generate_run_id("REGEX"))
+        self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
 
     @property
     def generator_type(self) -> GeneratorType:
-        return GeneratorType.SYNTAX_PATTERN
+        return GeneratorType.LEXICON_MATCH
 
     def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
         doc = doc_structure
+        candidates: List[Candidate] = []
+        seen: set = set()
 
-        # First pass: count + store occurrences
-        counts: DefaultDict[str, int] = defaultdict(int)
-        occurrences: DefaultDict[str, List[Dict[str, Any]]] = defaultdict(list)
-
-        current_section = "UNKNOWN"
+        # Filter patterns by enabled types
+        active_patterns = [p for p in RIGID_PATTERNS if p.entity_type in self.enabled_types]
 
         for block in doc.iter_linear_blocks(skip_header_footer=True):
-            # Section awareness
-            if block.role == ContentRole.SECTION_HEADER:
-                current_section = _clean_ws(block.text) or "UNKNOWN"
-                continue
-
-            if self._is_blacklisted_section(current_section):
-                continue
-
             text = block.text or ""
             if not text.strip():
                 continue
 
-            for match in self.token_pattern.finditer(text):
-                token_raw = match.group(0)
-                token = token_raw.strip()
-                token_upper = token.upper()
+            for pdef in active_patterns:
+                for match in pdef.pattern.finditer(text):
+                    value = match.group(0).strip()
 
-                if token_upper in self.known_short_forms:
-                    continue
+                    # Dedupe
+                    key = (pdef.entity_type, value.upper())
+                    if self.dedupe and key in seen:
+                        continue
+                    seen.add(key)
 
-                if not self._is_valid_acronym(token):
-                    continue
+                    # Context snippet
+                    start, end = match.start(), match.end()
+                    ctx_start = max(0, start - self.ctx_window)
+                    ctx_end = min(len(text), end + self.ctx_window)
+                    context = _clean_ws(text[ctx_start:ctx_end])
 
-                counts[token_upper] += 1
-                occurrences[token_upper].append(
-                    {
-                        "block": block,
-                        "match_start": match.start(),
-                        "match_end": match.end(),
-                        "section": current_section,
-                        "token_original": token_raw,
-                    }
-                )
-
-        # Second pass: emit candidates
-        candidates: List[Candidate] = []
-
-        for token_upper, count in counts.items():
-            if count < self.min_occurrences:
-                continue
-
-            # Compute confidence as a function of frequency
-            conf = self._confidence_from_count(count)
-
-            if self.emit_first_only:
-                inst = occurrences[token_upper][0]
-                candidates.append(self._make_candidate(doc, token_upper, count, conf, inst))
-            else:
-                for inst in occurrences[token_upper]:
-                    candidates.append(self._make_candidate(doc, token_upper, count, conf, inst))
+                    candidates.append(self._make_candidate(
+                        doc=doc,
+                        block=block,
+                        value=value,
+                        entity_type=pdef.entity_type,
+                        pattern_name=pdef.name,
+                        confidence=pdef.confidence,
+                        context=context,
+                    ))
 
         return candidates
-
-    # -------------------------
-    # Internals
-    # -------------------------
 
     def _make_candidate(
         self,
         doc: DocumentGraph,
-        token_upper: str,
-        count: int,
-        conf: float,
-        inst: Dict[str, Any],
+        block,
+        value: str,
+        entity_type: str,
+        pattern_name: str,
+        confidence: float,
+        context: str,
     ) -> Candidate:
-        block = inst["block"]
-        start = int(inst["match_start"])
-        end = int(inst["match_end"])
-        section = str(inst["section"])
-
-        # Context snippet from the same block
-        text = block.text or ""
-        s = max(0, start - self.ctx_window)
-        e = min(len(text), end + self.ctx_window)
-        context_snippet = _clean_ws(text[s:e])
-
-        # Build Coordinate (matches A01 schema)
         loc = Coordinate(
             page_num=int(block.page_num),
             block_id=str(block.id),
             bbox=block.bbox,
         )
 
-        # Build ProvenanceMetadata (matches A01 schema)
         prov = ProvenanceMetadata(
             pipeline_version=self.pipeline_version,
             run_id=self.run_id,
-            doc_fingerprint=self.doc_fingerprint_default,
+            doc_fingerprint=str(self.config.get("doc_fingerprint") or self.doc_fingerprint_default),
             generator_name=self.generator_type,
-            rule_version=f"regex_orphan::v1::freq={count}",
+            rule_version=f"regex::{pattern_name}",
         )
 
         return Candidate(
             doc_id=doc.doc_id,
-            field_type=FieldType.SHORT_FORM_ONLY,
+            field_type=FieldType.SHORT_FORM_ONLY,  # No definition, just the value
             generator_type=self.generator_type,
-            short_form=token_upper,
-            long_form=None,  # Orphans have no LF
-            context_text=context_snippet,
+            short_form=value,
+            long_form=entity_type,  # Store entity type as "long_form" for downstream use
+            context_text=context,
             context_location=loc,
-            initial_confidence=float(max(0.0, min(1.0, conf))),
+            initial_confidence=confidence,
             provenance=prov,
         )
-
-    def _is_blacklisted_section(self, section_header: str) -> bool:
-        s = _norm_section(section_header)
-        if not s:
-            return False
-        return any(bad in s for bad in self.blacklisted_sections)
-
-    def _is_valid_acronym(self, token: str) -> bool:
-        """
-        Filter obvious noise:
-          - too short/long
-          - purely numeric
-          - common word-like tokens ("The") that slip through because regex allows lowercase
-          - tokens in blacklist
-          - tokens with weak "abbreviation-ness"
-        """
-        t = (token or "").strip()
-        if not t:
-            return False
-
-        if len(t) < self.min_len or len(t) > self.max_len:
-            return False
-
-        if t.isdigit():
-            return False
-
-        tu = t.upper()
-        if tu in self.blacklist_upper:
-            return False
-
-        # Must contain at least one uppercase
-        uppers = sum(1 for ch in t if ch.isupper())
-        letters = sum(1 for ch in t if ch.isalpha())
-
-        if uppers == 0:
-            return False
-
-        # Avoid "The", "This" style: 1 uppercase and mostly lowercase letters
-        # Rule: either >=2 uppercase letters, OR has a digit, OR has hyphen, OR uppercase ratio strong.
-        has_digit = any(ch.isdigit() for ch in t)
-        has_hyphen = "-" in t
-        upper_ratio = (uppers / letters) if letters else 1.0
-
-        if not (uppers >= 2 or has_digit or has_hyphen or upper_ratio >= 0.60):
-            return False
-
-        # Extra: filter header/footer-esque tokens if any slipped through
-        if "PAGE" in tu or "DATE" in tu:
-            return False
-
-        return True
-
-    def _confidence_from_count(self, count: int) -> float:
-        """
-        Confidence grows with frequency, capped.
-        """
-        conf = self.base_confidence + 0.05 * max(0, count - self.min_occurrences)
-        return float(min(self.max_confidence, max(0.0, conf)))

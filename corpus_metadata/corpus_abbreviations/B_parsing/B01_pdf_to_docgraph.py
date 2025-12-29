@@ -319,6 +319,8 @@ class PDFToDocGraphParser(BaseParser):
     - hi_res_model_name: "yolox" (default), "detectron2_onnx"
     - infer_table_structure: True (default) - extract table structure in hi_res
     - extract_images_in_pdf: False (default) - extract images from PDF
+    - languages: ["eng"] (default) - OCR language packs for better accuracy
+    - include_page_breaks: True (default) - track page boundaries
     - force_fast: False (default) - force fast strategy regardless of config
     - force_hf_offline: False (default) - block HuggingFace model downloads
     """
@@ -342,6 +344,10 @@ class PDFToDocGraphParser(BaseParser):
         self.hi_res_model_name = self.config.get("hi_res_model_name", "yolox")
         self.infer_table_structure = bool(self.config.get("infer_table_structure", True))
         self.extract_images_in_pdf = bool(self.config.get("extract_images_in_pdf", False))
+
+        # OCR and structure options
+        self.languages = self.config.get("languages", ["eng"])  # improves OCR accuracy
+        self.include_page_breaks = bool(self.config.get("include_page_breaks", True))  # track page boundaries
 
         # categorías a descartar (case-insensitive)
         self.drop_categories = {c.strip().lower() for c in (self.config.get("drop_categories") or []) if isinstance(c, str)}
@@ -490,6 +496,8 @@ class PDFToDocGraphParser(BaseParser):
         kwargs = {
             "filename": file_path,
             "strategy": self.unstructured_strategy,
+            "languages": self.languages,
+            "include_page_breaks": self.include_page_breaks,
         }
 
         # Add hi_res specific options when using hi_res strategy

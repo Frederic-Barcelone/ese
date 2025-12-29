@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional, Protocol, Tuple
+import json
+import os
+from typing import Any, Dict, List, Optional, Protocol, Tuple
 
 from pydantic import BaseModel, Field, ValidationError
 
@@ -28,6 +30,10 @@ from D_validation.D01_prompt_registry import (
 )
 
 
+# -----------------------------------------------------------------------------
+# LLM Client Protocol + Claude Implementation
+# -----------------------------------------------------------------------------
+
 class LLMClient(Protocol):
     """
     Vendor-agnostic interface.
@@ -49,6 +55,83 @@ class LLMClient(Protocol):
         ...
 
 
+class ClaudeClient:
+    """
+    Claude API client implementing LLMClient protocol.
+    
+    Env vars: ANTHROPIC_API_KEY or CLAUDE_API_KEY
+    
+    Usage:
+        client = ClaudeClient()
+        engine = LLMEngine(client, model="claude-opus-4-5-20251101")
+    """
+
+    def __init__(self, api_key: Optional[str] = None):
+        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CLAUDE_API_KEY")
+        if not self.api_key:
+            raise ValueError("ANTHROPIC_API_KEY or CLAUDE_API_KEY environment variable required")
+        
+        # Lazy import to avoid hard dependency
+        try:
+            import anthropic
+            self._client = anthropic.Anthropic(api_key=self.api_key)
+        except ImportError:
+            raise ImportError("anthropic package required: pip install anthropic")
+
+    def complete_json(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        model: str,
+        temperature: float,
+        max_tokens: int,
+        top_p: float,
+        seed: Optional[int] = None,
+        response_format: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Call Claude API and return parsed JSON."""
+        message = self._client.messages.create(
+            model=model,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=top_p,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+
+        # Extract text
+        text = ""
+        for block in message.content:
+            if block.type == "text":
+                text += block.text
+
+        # Parse JSON (handle markdown code blocks)
+        text = text.strip()
+        if text.startswith("```json"):
+            text = text[7:]
+        if text.startswith("```"):
+            text = text[3:]
+        if text.endswith("```"):
+            text = text[:-3]
+        text = text.strip()
+
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as e:
+            return {
+                "status": "AMBIGUOUS",
+                "confidence": 0.0,
+                "evidence": "",
+                "reason": f"Failed to parse JSON: {e}",
+                "raw_text": text[:500],
+            }
+
+
+# -----------------------------------------------------------------------------
+# Verification Result Schema
+# -----------------------------------------------------------------------------
+
 class VerificationResult(BaseModel):
     status: ValidationStatus
     confidence: float = Field(..., ge=0.0, le=1.0)
@@ -57,19 +140,33 @@ class VerificationResult(BaseModel):
     corrected_long_form: Optional[str] = None
 
 
+# -----------------------------------------------------------------------------
+# LLM Engine (Verifier)
+# -----------------------------------------------------------------------------
+
 class LLMEngine:
     """
     Abbreviation-only verifier.
 
     Input: Candidate (short_form required, long_form optional)
     Output: ExtractedEntity with EvidenceSpan + immutable provenance trail.
+    
+    Usage with Claude:
+        client = ClaudeClient()
+        engine = LLMEngine(
+            client,
+            model="claude-opus-4-5-20251101",  # validation tier
+            temperature=0,
+            max_tokens=4096,
+        )
+        entity = engine.verify_candidate(candidate)
     """
 
     def __init__(
         self,
         llm_client: LLMClient,
         *,
-        model: str = "gpt-4.1-mini",
+        model: str = "claude-sonnet-4-5-20250929",
         prompt_version: str = "latest",
         temperature: float = 0.0,
         max_tokens: int = 450,

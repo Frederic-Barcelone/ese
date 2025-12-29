@@ -4,8 +4,8 @@ import hashlib
 import json
 import subprocess
 import uuid
-from datetime import datetime
-from typing import Any, Dict, Optional, Union
+from datetime import datetime, timezone
+from typing import Any, Dict, Optional
 
 
 def get_git_revision_hash(timeout_sec: float = 1.5) -> str:
@@ -102,6 +102,6 @@ def generate_run_id(prefix: str = "RUN") -> str:
     Unique ID for this pipeline execution batch.
     Includes timestamp + uuid for collision-free runs.
     """
-    ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     u = uuid.uuid4().hex[:12]
     return f"{prefix}_{ts}_{u}"
