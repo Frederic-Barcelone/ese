@@ -74,40 +74,206 @@ KNOWN_FOOTER_PATTERNS = [
     r"\bhttps?://onlinelibrary\.wiley\.com\b",
     r"\bsee the terms and conditions\b",
     r"\beuropean journal of neurology\b",
+    r"\bdovepress\b",
+    r"\btaylor\s*&\s*francis\s*group\b",
+    r"\bpublish your work in this journal\b",
+    r"\bjournal of inflammation research\b",
+    r"\bsubmit your manuscript\b",
+    r"\bopen access full text article\b",
 ]
 KNOWN_FOOTER_RE = re.compile("|".join(KNOWN_FOOTER_PATTERNS), flags=re.IGNORECASE)
+
+# Running header patterns (author names like "Liao et al", "Smith et al.")
+RUNNING_HEADER_RE = re.compile(r"^[A-Z][a-z]+\s+et\s+al\.?$", flags=re.IGNORECASE)
+
+# Numbered reference pattern (e.g., "7. Author A, ..." or "7. DCVAS Study Group, ...")
+NUMBERED_REFERENCE_RE = re.compile(
+    r"^\d{1,3}\.\s+[A-Z]",  # Starts with number, period, then capital letter
+    flags=re.MULTILINE
+)
+
+# OCR garbage patterns to remove
+OCR_GARBAGE_PATTERNS = [
+    r"\b\d+\s*[bBpP»«]+\s*$",      # "18194 bP»" -> page number garbage
+    r'[""]\s*[*>]\s*$',             # ""*", ">" at end
+    r"\bfo\)\s*$",                  # "fo)" misread lock icon
+    r"^\s*[+*~>]{2,}\s*$",          # lines of just symbols
+    r"\s+[»«]+\s*$",                # trailing » or «
+]
+OCR_GARBAGE_RE = re.compile("|".join(OCR_GARBAGE_PATTERNS))
+
+# Pattern to detect garbled flowchart/diagram content
+# Matches text with numbered steps separated by symbols like + * | ~
+FLOWCHART_PATTERN = re.compile(
+    r"^\d+[a-z]?\.\s+.{10,}\s+[+*|~>—]\s+.{10,}\s+[+*|~>—]\s+",
+    re.IGNORECASE
+)
+
+
+def _is_garbled_flowchart(text: str) -> bool:
+    """
+    Detect if text block is a garbled flowchart/diagram.
+    These typically have numbered steps with symbols like + * | ~ separating them.
+    """
+    if not text or len(text) < 100:
+        return False
+
+    # Count flowchart-like symbols (including various dash types)
+    symbol_count = sum(1 for c in text if c in "+*|~>—–-")
+    word_count = len(text.split())
+
+    # Check for numbered step pattern with symbols (e.g., "1. ... + ... | 2. ...")
+    has_numbered_steps = bool(re.search(
+        r"\d+[a-z]?\.\s+[^|+*]+[+*|]\s+.*\d+[a-z]?\.\s+",
+        text
+    ))
+
+    # High symbol-to-word ratio suggests garbled diagram
+    if word_count > 0:
+        ratio = symbol_count / word_count
+        # Lower threshold if we detect numbered step pattern
+        if has_numbered_steps and ratio > 0.08:
+            return True
+        if ratio > 0.12:
+            if FLOWCHART_PATTERN.search(text):
+                return True
+            if has_numbered_steps:
+                return True
+
+    return False
+
+
+def _extract_figure_reference(text: str) -> Optional[str]:
+    """Extract figure number from garbled flowchart text."""
+    # Look for patterns like "Figure 5" or "Fig. 5"
+    match = re.search(r"(?:Figure|Fig\.?)\s*(\d+)", text, re.IGNORECASE)
+    if match:
+        return f"Figure {match.group(1)}"
+    return None
+
+
+def _bbox_overlaps(bbox1: BoundingBox, bbox2: BoundingBox, threshold: float = 0.5) -> bool:
+    """Check if two bounding boxes overlap significantly."""
+    x1_0, y1_0, x1_1, y1_1 = bbox1.coords
+    x2_0, y2_0, x2_1, y2_1 = bbox2.coords
+
+    # Calculate intersection
+    ix0 = max(x1_0, x2_0)
+    iy0 = max(y1_0, y2_0)
+    ix1 = min(x1_1, x2_1)
+    iy1 = min(y1_1, y2_1)
+
+    if ix1 <= ix0 or iy1 <= iy0:
+        return False
+
+    intersection = (ix1 - ix0) * (iy1 - iy0)
+    area1 = (x1_1 - x1_0) * (y1_1 - y1_0)
+
+    if area1 <= 0:
+        return False
+
+    return (intersection / area1) >= threshold
 
 
 def document_to_markdown(
     doc: DocumentGraph,
-    include_table_placeholders: bool = True,
+    include_tables: bool = True,
     skip_header_footer: bool = True,
 ) -> str:
     """
-    Convierte el DocumentGraph a Markdown simple (útil para verificación LLM/debug).
-    (Compat: mantiene include_table_placeholders aunque B01 no genere tablas.)
+    Convert DocumentGraph to Markdown.
+    - Renders tables as proper markdown tables (not flattened text)
+    - Skips text blocks that overlap with table regions
     """
     lines: List[str] = []
 
     for pnum in sorted(doc.pages.keys()):
         page = doc.pages[pnum]
+        tables = getattr(page, "tables", []) or []
 
-        for b in sorted(page.blocks, key=lambda x: x.reading_order_index):
+        # Collect all content items (blocks + tables) for proper ordering
+        content_items = []
+
+        for b in page.blocks:
             if skip_header_footer and b.role in (ContentRole.PAGE_HEADER, ContentRole.PAGE_FOOTER):
                 continue
 
-            if b.role == ContentRole.SECTION_HEADER:
-                lines.append(f"## {b.text}")
-            else:
-                lines.append(b.text)
+            # Skip blocks that overlap with any table region
+            if tables:
+                overlaps_table = any(
+                    _bbox_overlaps(b.bbox, t.bbox, threshold=0.3)
+                    for t in tables
+                )
+                if overlaps_table:
+                    continue
 
-        if include_table_placeholders and getattr(page, "tables", None):
-            for t in sorted(page.tables, key=lambda x: x.reading_order_index):
-                lines.append(f"[Table: {getattr(t, 'caption', None) or 'Untitled'}]")
+            y0 = b.bbox.coords[1] if b.bbox else 0
+            content_items.append((b.reading_order_index, y0, "block", b))
+
+        if include_tables:
+            for t in tables:
+                y0 = t.bbox.coords[1] if t.bbox else 0
+                content_items.append((t.reading_order_index, y0, "table", t))
+
+        # Sort by reading order, then y position
+        content_items.sort(key=lambda x: (x[0], x[1]))
+
+        for _, _, item_type, item in content_items:
+            if item_type == "block":
+                text = item.text
+
+                # Detect and replace garbled flowcharts/diagrams
+                if _is_garbled_flowchart(text):
+                    fig_ref = _extract_figure_reference(text)
+                    if fig_ref:
+                        lines.append(f"[{fig_ref}: Flowchart/Diagram - see PDF for visual]")
+                    else:
+                        lines.append("[Flowchart/Diagram - see PDF for visual]")
+                    continue
+
+                if item.role == ContentRole.SECTION_HEADER:
+                    lines.append(f"## {text}")
+                else:
+                    lines.append(text)
+            elif item_type == "table":
+                # Render as markdown table
+                lines.append("")
+                lines.append(_table_to_markdown(item))
 
         lines.append("")
 
     return "\n".join(lines).strip() + "\n"
+
+
+def _table_to_markdown(table) -> str:
+    """Convert Table object to markdown table format."""
+    if not table.logical_rows:
+        return f"[Table: {table.caption or 'Empty'}]"
+
+    # Get headers
+    headers_map = table.metadata.get("headers", {})
+    if headers_map:
+        headers = [headers_map.get(i, f"Col{i}") for i in sorted(headers_map.keys())]
+    elif table.logical_rows:
+        headers = list(table.logical_rows[0].keys())
+    else:
+        return f"[Table: {table.caption or 'No data'}]"
+
+    out = []
+    if table.caption:
+        out.append(f"**{table.caption}**")
+        out.append("")
+
+    # Header row
+    out.append("| " + " | ".join(headers) + " |")
+    out.append("| " + " | ".join(["---"] * len(headers)) + " |")
+
+    # Data rows
+    for row in table.logical_rows:
+        cells = [str(row.get(h, "")).replace("|", "\\|") for h in headers]
+        out.append("| " + " | ".join(cells) + " |")
+
+    return "\n".join(out)
 
 
 # -----------------------------
@@ -139,7 +305,7 @@ PIPEY_RE = re.compile(r"\s\|\s")
 
 class PDFToDocGraphParser(BaseParser):
     """
-    PDF -> DocumentGraph usando Unstructured (local).
+    PDF -> DocumentGraph usando Unstructured.
 
     Objetivos:
     - Orden de lectura determinista (2 columnas)
@@ -148,25 +314,34 @@ class PDFToDocGraphParser(BaseParser):
     - Reparar guiones de abreviaturas: 'MG- ADL' -> 'MG-ADL'
     - Limpieza de pipes iniciales: '| Andreas ...' -> 'Andreas ...'
 
-    Restricción corporativa:
-    - Por defecto forzamos strategy="fast" (sin modelos HF)
+    Config options:
+    - unstructured_strategy: "hi_res" (default), "fast", "ocr_only", "auto"
+    - hi_res_model_name: "yolox" (default), "detectron2_onnx"
+    - infer_table_structure: True (default) - extract table structure in hi_res
+    - extract_images_in_pdf: False (default) - extract images from PDF
+    - force_fast: False (default) - force fast strategy regardless of config
+    - force_hf_offline: False (default) - block HuggingFace model downloads
     """
 
     def __init__(self, config: Optional[dict] = None):
         self.config = config or {}
 
-        # Offline HF (por si algo intenta bajar modelos)
-        self.force_hf_offline = bool(self.config.get("force_hf_offline", True))
+        # Offline HF - disabled by default to allow model downloads for hi_res
+        self.force_hf_offline = bool(self.config.get("force_hf_offline", False))
         if self.force_hf_offline:
             os.environ.setdefault("HF_HUB_OFFLINE", "1")
             os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
-        # Unstructured knobs
-        # (dejamos configurable, pero por defecto fast)
-        self.unstructured_strategy = str(self.config.get("unstructured_strategy", "fast")).strip() or "fast"
-        self.force_fast = bool(self.config.get("force_fast", True))
+        # Unstructured knobs - default to hi_res for better extraction
+        self.unstructured_strategy = str(self.config.get("unstructured_strategy", "hi_res")).strip() or "hi_res"
+        self.force_fast = bool(self.config.get("force_fast", False))
         if self.force_fast:
             self.unstructured_strategy = "fast"
+
+        # hi_res specific options
+        self.hi_res_model_name = self.config.get("hi_res_model_name", "yolox")
+        self.infer_table_structure = bool(self.config.get("infer_table_structure", True))
+        self.extract_images_in_pdf = bool(self.config.get("extract_images_in_pdf", False))
 
         # categorías a descartar (case-insensitive)
         self.drop_categories = {c.strip().lower() for c in (self.config.get("drop_categories") or []) if isinstance(c, str)}
@@ -270,15 +445,21 @@ class PDFToDocGraphParser(BaseParser):
                 role = ContentRole.BODY_TEXT
                 norm = normalize_repeated_text(txt)
 
-                # Hard override: known footer noise
-                if self._looks_like_known_footer(txt):
+                # Check if this looks like a numbered reference (preserve as body text)
+                is_reference = bool(NUMBERED_REFERENCE_RE.match(txt))
+
+                # Hard override: known footer noise (but not references)
+                if self._looks_like_known_footer(txt) and not is_reference:
                     role = ContentRole.PAGE_FOOTER
+                # Running header pattern: "Author et al" or "Author et al."
+                elif self._is_running_header(txt, rb.get("zone")):
+                    role = ContentRole.PAGE_HEADER
                 elif rb.get("zone") == "HEADER" and norm in repeated_headers:
                     role = ContentRole.PAGE_HEADER
-                elif rb.get("zone") == "FOOTER" and norm in repeated_footers:
+                elif rb.get("zone") == "FOOTER" and norm in repeated_footers and not is_reference:
                     role = ContentRole.PAGE_FOOTER
                 # fallback repetition even if zone couldn't be trusted
-                elif norm in repeated_footers and self._is_short_repeated_noise(txt):
+                elif norm in repeated_footers and self._is_short_repeated_noise(txt) and not is_reference:
                     role = ContentRole.PAGE_FOOTER
                 elif rb.get("is_section_header"):
                     role = ContentRole.SECTION_HEADER
@@ -304,9 +485,20 @@ class PDFToDocGraphParser(BaseParser):
 
     def _call_partition_pdf(self, file_path: str):
         """
-        Local-only. Default fast (no HF models).
+        Partition PDF using unstructured. Supports hi_res with inference.
         """
-        return partition_pdf(filename=file_path, strategy=self.unstructured_strategy)
+        kwargs = {
+            "filename": file_path,
+            "strategy": self.unstructured_strategy,
+        }
+
+        # Add hi_res specific options when using hi_res strategy
+        if self.unstructured_strategy == "hi_res":
+            kwargs["hi_res_model_name"] = self.hi_res_model_name
+            kwargs["infer_table_structure"] = self.infer_table_structure
+            kwargs["extract_images_in_pdf"] = self.extract_images_in_pdf
+
+        return partition_pdf(**kwargs)
 
     # -----------------------
     # Repetition inference
@@ -365,6 +557,22 @@ class PDFToDocGraphParser(BaseParser):
         if len(t) <= 3 and t.isdigit():
             return True
         if self._looks_like_known_footer(t):
+            return True
+        return False
+
+    def _is_running_header(self, text: str, zone: Optional[str]) -> bool:
+        """Detect running headers like 'Liao et al' or 'Smith et al.'"""
+        t = (text or "").strip()
+        if not t:
+            return False
+        # Must be short (author name + et al)
+        if len(t) > 30:
+            return False
+        # Match "Author et al" pattern
+        if RUNNING_HEADER_RE.match(t):
+            return True
+        # Also catch in header zone with page numbers like "Liao et al 18194"
+        if zone == "HEADER" and re.match(r"^[A-Z][a-z]+\s+et\s+al\.?\s*\d*$", t, re.IGNORECASE):
             return True
         return False
 
@@ -609,43 +817,68 @@ class PDFToDocGraphParser(BaseParser):
     _KEEP_HYPHEN_PREFIXES = {
         "anti", "non", "pre", "post", "co", "multi", "bi", "tri",
         "long", "short", "open", "double", "single", "high", "low",
-        "well", "self", "cross",
+        "well", "self", "cross", "small", "medium", "large",
     }
     _COMMON_SUFFIX_FRAGS = {
         "ment", "tion", "tions", "sion", "sions", "tive", "tives",
         "ness", "less", "able", "ible", "ated", "ation", "ations",
-        "ing", "ed", "ive", "ous", "ally",
+        "ing", "ed", "ive", "ous", "ally", "ity", "ies", "es", "ly",
+        "bulin", "blast", "cytes", "rhage", "lines", "tology",  # medical suffixes
+        "alities", "ressive", "pressive", "globulin",
+        "itis", "osis", "emia", "pathy", "plasty",  # more medical suffixes
+    }
+    # Common hyphenated compound words to preserve
+    _KEEP_HYPHENATED = {
+        "anca-associated", "medium-sized", "end-stage",
+    }
+    # Patterns that need space preserved: "small- and" not "small-and"
+    _HYPHEN_SPACE_PRESERVE = {
+        "small", "medium", "large", "short", "long",
     }
 
     def _clean_text(self, text: str) -> str:
         """
-        Limpieza:
-        - quita pipes iniciales artefacto: '| Andreas...' -> 'Andreas...'
-        - arregla hyphenation con salto (o whitespace) en palabras partidas: 'immu- nosuppressive' -> 'immunosuppressive'
-        - colapsa espacios
-        - normaliza guiones con espacio: 'open- label' -> 'open-label'
-        - FIX abreviaturas: 'MG- ADL' -> 'MG-ADL'
+        Text cleaning:
+        - Remove OCR garbage artifacts
+        - Rejoin hyphenated words split across lines
+        - Collapse whitespace
+        - Fix abbreviation hyphens: 'MG- ADL' -> 'MG-ADL'
         """
         t = text or ""
         t = t.replace("\r", "\n")
 
-        # 1) join hyphenated line-break words: (\w+)-\n(\w+) -> \1\2
+        # 0) Remove OCR garbage patterns
+        t = OCR_GARBAGE_RE.sub("", t)
+
+        # 1) Join hyphenated line-break words: word-\n word -> wordword
         t = re.sub(r"(\w+)-\s*\n\s*(\w+)", r"\1\2", t)
 
-        # 2) handle "immu- nosuppressive" style (hyphen + whitespace, no newline left)
-        # remove hyphen ONLY when it looks like a broken word, not a real compound.
+        # 2) Handle "immuno- globulin" style (hyphen + space, broken word)
         def _dehyphen_repl(m: re.Match) -> str:
             a = m.group(1)
             b = m.group(2)
             a_l = a.lower()
             b_l = b.lower()
+            combined = f"{a_l}-{b_l}"
 
-            # keep hyphen for known prefixes (anti-, long-, open-, etc.)
+            # Keep known hyphenated compounds
+            if combined in self._KEEP_HYPHENATED:
+                return f"{a}-{b}"
+
+            # Preserve "small- and", "medium- and" patterns (hyphen + space + and)
+            if a_l in self._HYPHEN_SPACE_PRESERVE and b_l == "and":
+                return f"{a}- {b}"
+
+            # Keep hyphen for known prefixes
             if a_l in self._KEEP_HYPHEN_PREFIXES:
                 return f"{a}-{b}"
 
-            # remove when left is short OR right looks like suffix fragment
-            if len(a) <= 4 or b_l in self._COMMON_SUFFIX_FRAGS:
+            # Remove hyphen when right side looks like a suffix fragment
+            if b_l in self._COMMON_SUFFIX_FRAGS:
+                return f"{a}{b}"
+
+            # Remove hyphen for short left parts (likely broken words)
+            if len(a) <= 5 and len(b) >= 3:
                 return f"{a}{b}"
 
             return f"{a}-{b}"
