@@ -40,11 +40,12 @@ class GeneratorType(str, Enum):
     Tracks which strategy produced the candidate.
     Useful for Recall-by-Strategy analysis.
     """
-    SYNTAX_PATTERN = "gen:syntax_pattern"
-    SECTION_PARSER = "gen:section_parser"
-    GLOSSARY_TABLE = "gen:glossary_table"
-    TABLE_LAYOUT = "gen:table_layout"
-    LEXICON_MATCH = "gen:lexicon_match"
+    SYNTAX_PATTERN = "gen:syntax_pattern"      # C01: Schwartz-Hearst abbreviations
+    SECTION_PARSER = "gen:section_parser"      # (reserved)
+    GLOSSARY_TABLE = "gen:glossary_table"      # C01b: Glossary tables
+    RIGID_PATTERN = "gen:rigid_pattern"        # C02: DOI, trial IDs, doses, etc.
+    TABLE_LAYOUT = "gen:table_layout"          # C03: Spatial extraction
+    LEXICON_MATCH = "gen:lexicon_match"        # C04: Dictionary matching
 
 
 class ValidationStatus(str, Enum):
@@ -151,6 +152,14 @@ class LLMParameters(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
 
+class LexiconIdentifier(BaseModel):
+    """External identifier from a lexicon source (e.g., Orphanet, MONDO, UMLS)."""
+    source: str      # e.g. "Orphanet", "MONDO", "UMLS"
+    id: str          # e.g. "ORPHA:2453", "MONDO_0011055", "C0001234"
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+
 class ProvenanceMetadata(BaseModel):
     """
     Minimal reproducibility + compliance fingerprints.
@@ -161,6 +170,10 @@ class ProvenanceMetadata(BaseModel):
 
     generator_name: GeneratorType
     rule_version: Optional[str] = None
+
+    # Lexicon provenance (which dictionary file the match came from)
+    lexicon_source: Optional[str] = None  # e.g. "2025_08_abbreviation_general.json"
+    lexicon_ids: Optional[List[LexiconIdentifier]] = None  # External IDs (Orphanet, MONDO, etc.)
 
     # Populated during verification
     prompt_bundle_hash: Optional[str] = None
