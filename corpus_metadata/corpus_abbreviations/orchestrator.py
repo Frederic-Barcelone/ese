@@ -25,7 +25,7 @@ from typing import Any, Dict, List, Optional
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus
+from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus, GeneratorType, EvidenceSpan
 from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
@@ -79,7 +79,12 @@ class Orchestrator:
         self.generators = [
             AbbrevSyntaxCandidateGenerator(config={"run_id": self.run_id}),   # C01: Syntax/Schwartz-Hearst
             GlossaryTableCandidateGenerator(config={"run_id": self.run_id}),  # C01b: Glossary tables
-            RegexCandidateGenerator(config={"run_id": self.run_id}),          # C02: Rigid patterns
+            RegexCandidateGenerator(config={                                    # C02: Rigid patterns
+                "run_id": self.run_id,
+                # Only extract entity types relevant for abbreviation validation
+                # Exclude: DOSE, CONCENTRATION, PERCENTAGE, DATE, URL, YEAR (not abbreviations)
+                "enabled_types": ["TRIAL_ID", "COMPOUND_ID", "DOI", "PMID", "PMCID"],
+            }),
             LayoutCandidateGenerator(config={"run_id": self.run_id}),         # C03: Layout heuristics
             RegexLexiconGenerator(config={"run_id": self.run_id}),            # C04: Lexicon/FlashText
         ]
@@ -179,13 +184,53 @@ class Orchestrator:
             self._export_results(pdf_path, [], unique_candidates)
             return []
 
-        print(f"\n[3/4] Validating {len(unique_candidates)} candidates with Claude...")
+        # Pre-filter: Auto-approve high-confidence lexicon matches
+        # These have SF/LF from trusted lexicons and don't need Claude validation
+        auto_approved: List[ExtractedEntity] = []
+        needs_validation: List[Candidate] = []
+
+        for candidate in unique_candidates:
+            # Auto-approve: lexicon matches with high confidence AND both SF and LF present
+            if (candidate.generator_type == GeneratorType.LEXICON_MATCH
+                and candidate.initial_confidence >= 0.90
+                and candidate.long_form
+                and len(candidate.long_form) > len(candidate.short_form)):
+                # Create evidence span from candidate context
+                primary_evidence = EvidenceSpan(
+                    text=candidate.context_text,
+                    location=candidate.context_location,
+                    scope_ref=f"block:{candidate.context_location.block_id or 'unknown'}",
+                    start_char_offset=0,
+                    end_char_offset=len(candidate.context_text),
+                )
+                # Create auto-approved entity without Claude call
+                auto_approved.append(ExtractedEntity(
+                    candidate_id=candidate.id,
+                    doc_id=candidate.doc_id,
+                    field_type=candidate.field_type,
+                    short_form=candidate.short_form,
+                    long_form=candidate.long_form,
+                    primary_evidence=primary_evidence,
+                    supporting_evidence=[],
+                    status=ValidationStatus.VALIDATED,
+                    confidence_score=candidate.initial_confidence,
+                    rejection_reason=None,
+                    validation_flags=["AUTO_APPROVED"],
+                    provenance=candidate.provenance,
+                    raw_llm_response="AUTO_APPROVED:lexicon_match",
+                ))
+            else:
+                needs_validation.append(candidate)
+
+        print(f"\n[3/4] Validating candidates with Claude...")
+        print(f"  Auto-approved (lexicon): {len(auto_approved)}")
+        print(f"  Needs Claude validation: {len(needs_validation)}")
         start = time.time()
 
-        results: List[ExtractedEntity] = []
-        for i, candidate in enumerate(unique_candidates, 1):
-            if i % 10 == 0 or i == len(unique_candidates):
-                print(f"  Progress: {i}/{len(unique_candidates)}")
+        results: List[ExtractedEntity] = list(auto_approved)
+        for i, candidate in enumerate(needs_validation, 1):
+            if i % 10 == 0 or i == len(needs_validation):
+                print(f"  Progress: {i}/{len(needs_validation)}")
 
             try:
                 val_start = time.time()
@@ -206,7 +251,7 @@ class Orchestrator:
                 print(f"  ⚠ Error: {candidate.short_form} - {e}")
 
             # Rate limit
-            if batch_delay_ms > 0 and i < len(unique_candidates):
+            if batch_delay_ms > 0 and i < len(needs_validation):
                 time.sleep(batch_delay_ms / 1000)
 
         print(f"  Time: {time.time() - start:.2f}s")
