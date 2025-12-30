@@ -1,43 +1,58 @@
 # corpus_metadata/corpus_abbreviations/D_validation/D02_llm_engine.py
+"""
+LLM Engine for abbreviation validation.
+
+Contains:
+  - LLMClient: Protocol (interface)
+  - ClaudeClient: Anthropic Claude implementation
+  - LLMEngine: Verifier that uses any LLMClient
+"""
 
 from __future__ import annotations
 
 import json
 import os
-from typing import Any, Dict, List, Optional, Protocol, Tuple
+import re
+from pathlib import Path
+from typing import Any, Dict, Optional, Protocol, Tuple
 
+import yaml
 from pydantic import BaseModel, Field, ValidationError
 
 from A_core.A01_domain_models import (
     Candidate,
     ExtractedEntity,
     EvidenceSpan,
-    Coordinate,
     FieldType,
-    PipelineStage,
-    ProvenanceMetadata,
     LLMParameters,
+    ProvenanceMetadata,
     ValidationStatus,
 )
 from A_core.A03_provenance import (
-    hash_string,
-    get_git_revision_hash,
     generate_run_id,
+    get_git_revision_hash,
+    hash_string,
 )
 from D_validation.D01_prompt_registry import (
     PromptRegistry,
     PromptTask,
 )
 
+# Optional anthropic import
+try:
+    import anthropic
+except ImportError:
+    anthropic = None  # type: ignore
+
 
 # -----------------------------------------------------------------------------
-# LLM Client Protocol + Claude Implementation
+# Protocol
 # -----------------------------------------------------------------------------
 
 class LLMClient(Protocol):
     """
     Vendor-agnostic interface.
-    Your implementation should return a dict already parsed from JSON.
+    Implementations should return a dict already parsed from JSON.
     """
 
     def complete_json(
@@ -55,77 +70,180 @@ class LLMClient(Protocol):
         ...
 
 
+# -----------------------------------------------------------------------------
+# Claude Client
+# -----------------------------------------------------------------------------
+
 class ClaudeClient:
     """
-    Claude API client implementing LLMClient protocol.
+    Anthropic Claude client implementing LLMClient protocol.
     
-    Env vars: ANTHROPIC_API_KEY or CLAUDE_API_KEY
-    
-    Usage:
-        client = ClaudeClient()
-        engine = LLMEngine(client, model="claude-opus-4-5-20251101")
+    Reads config from:
+      1. Explicit parameters
+      2. config.yaml (if config_path provided)
+      3. Environment variables (ANTHROPIC_API_KEY)
     """
 
-    def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CLAUDE_API_KEY")
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
+        max_tokens: Optional[int] = None,
+        temperature: Optional[float] = None,
+        config_path: Optional[str] = None,
+    ):
+        if anthropic is None:
+            raise ImportError(
+                "anthropic package not installed. Run: pip install anthropic"
+            )
+
+        # Load config from YAML if provided
+        cfg = self._load_config(config_path) if config_path else {}
+
+        # Resolve API key: param > config > env
+        self.api_key = (
+            api_key
+            or cfg.get("api_key")
+            or os.environ.get("ANTHROPIC_API_KEY")
+        )
         if not self.api_key:
-            raise ValueError("ANTHROPIC_API_KEY or CLAUDE_API_KEY environment variable required")
-        
-        # Lazy import to avoid hard dependency
+            raise ValueError(
+                "Anthropic API key not found. Set ANTHROPIC_API_KEY env var, "
+                "pass api_key param, or configure in config.yaml"
+            )
+
+        # Resolve model params: param > config > defaults
+        self.default_model = model or cfg.get("model", "claude-sonnet-4-20250514")
+        self.default_max_tokens = max_tokens or cfg.get("max_tokens", 1024)
+        self.default_temperature = temperature if temperature is not None else cfg.get("temperature", 0.0)
+
+        # Initialize client
+        self.client = anthropic.Anthropic(api_key=self.api_key)
+
+    def _load_config(self, config_path: str) -> Dict[str, Any]:
+        """Load Claude config from YAML file."""
+        path = Path(config_path)
+        if not path.exists():
+            return {}
+
         try:
-            import anthropic
-            self._client = anthropic.Anthropic(api_key=self.api_key)
-        except ImportError:
-            raise ImportError("anthropic package required: pip install anthropic")
+            with open(path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+
+            # Extract claude validation config
+            # Expected structure: api.claude.validation.{model, max_tokens, temperature}
+            claude_cfg = data.get("api", {}).get("claude", {})
+            
+            # Try validation config first, then fast config
+            val_cfg = claude_cfg.get("validation", {})
+            if not val_cfg:
+                val_cfg = claude_cfg.get("fast", {})
+
+            return {
+                "api_key": claude_cfg.get("api_key"),
+                "model": val_cfg.get("model"),
+                "max_tokens": val_cfg.get("max_tokens"),
+                "temperature": val_cfg.get("temperature"),
+            }
+        except Exception as e:
+            print(f"Warning: Failed to load config from {config_path}: {e}")
+            return {}
 
     def complete_json(
         self,
         *,
         system_prompt: str,
         user_prompt: str,
-        model: str,
-        temperature: float,
-        max_tokens: int,
-        top_p: float,
-        seed: Optional[int] = None,
-        response_format: Optional[Dict[str, Any]] = None,
+        model: Optional[str] = None,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+        top_p: float = 1.0,
+        seed: Optional[int] = None,  # Claude doesn't support seed
+        response_format: Optional[Dict[str, Any]] = None,  # Ignored, we parse JSON
     ) -> Dict[str, Any]:
-        """Call Claude API and return parsed JSON."""
-        message = self._client.messages.create(
-            model=model,
-            max_tokens=max_tokens,
-            temperature=temperature,
+        """
+        Call Claude and return parsed JSON response.
+        """
+        use_model = model or self.default_model
+        use_max_tokens = max_tokens or self.default_max_tokens
+        use_temperature = temperature if temperature is not None else self.default_temperature
+
+        # Call Claude API
+        message = self.client.messages.create(
+            model=use_model,
+            max_tokens=use_max_tokens,
+            temperature=use_temperature,
             top_p=top_p,
             system=system_prompt,
             messages=[{"role": "user", "content": user_prompt}],
         )
 
-        # Extract text
-        text = ""
+        # Extract text content
+        raw_text = ""
         for block in message.content:
-            if block.type == "text":
-                text += block.text
+            if hasattr(block, "text"):
+                raw_text += block.text
 
-        # Parse JSON (handle markdown code blocks)
-        text = text.strip()
-        if text.startswith("```json"):
-            text = text[7:]
-        if text.startswith("```"):
-            text = text[3:]
-        if text.endswith("```"):
-            text = text[:-3]
-        text = text.strip()
+        # Parse JSON from response
+        return self._extract_json(raw_text)
 
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError as e:
-            return {
-                "status": "AMBIGUOUS",
-                "confidence": 0.0,
-                "evidence": "",
-                "reason": f"Failed to parse JSON: {e}",
-                "raw_text": text[:500],
-            }
+    def _extract_json(self, text: str) -> Dict[str, Any]:
+        """
+        Extract JSON from Claude's response.
+        Handles markdown code blocks and raw JSON.
+        """
+        text = (text or "").strip()
+
+        parsed = None
+
+        # Try markdown code block: ```json {...} ```
+        code_block_match = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text, re.DOTALL)
+        if code_block_match:
+            try:
+                parsed = json.loads(code_block_match.group(1))
+            except json.JSONDecodeError:
+                pass
+
+        # Try to find JSON object (handles nested braces)
+        if parsed is None:
+            # Find first { and match to its closing }
+            start = text.find("{")
+            if start != -1:
+                depth = 0
+                end = start
+                for i, ch in enumerate(text[start:], start):
+                    if ch == "{":
+                        depth += 1
+                    elif ch == "}":
+                        depth -= 1
+                        if depth == 0:
+                            end = i + 1
+                            break
+                if depth == 0:
+                    try:
+                        parsed = json.loads(text[start:end])
+                    except json.JSONDecodeError:
+                        pass
+
+        # Try entire response
+        if parsed is None:
+            try:
+                parsed = json.loads(text)
+            except json.JSONDecodeError:
+                pass
+
+        # Validate that parsed dict has required "status" key
+        if isinstance(parsed, dict) and "status" in parsed:
+            return parsed
+
+        # Fallback: return AMBIGUOUS result
+        return {
+            "status": "AMBIGUOUS",
+            "confidence": 0.0,
+            "evidence": "",
+            "reason": f"Failed to parse JSON from response: {text[:200]}",
+            "corrected_long_form": None,
+        }
 
 
 # -----------------------------------------------------------------------------
@@ -141,32 +259,22 @@ class VerificationResult(BaseModel):
 
 
 # -----------------------------------------------------------------------------
-# LLM Engine (Verifier)
+# LLM Engine
 # -----------------------------------------------------------------------------
 
 class LLMEngine:
     """
-    Abbreviation-only verifier.
+    Abbreviation verifier using LLM.
 
     Input: Candidate (short_form required, long_form optional)
     Output: ExtractedEntity with EvidenceSpan + immutable provenance trail.
-    
-    Usage with Claude:
-        client = ClaudeClient()
-        engine = LLMEngine(
-            client,
-            model="claude-opus-4-5-20251101",  # validation tier
-            temperature=0,
-            max_tokens=4096,
-        )
-        entity = engine.verify_candidate(candidate)
     """
 
     def __init__(
         self,
         llm_client: LLMClient,
         *,
-        model: str = "claude-sonnet-4-5-20250929",
+        model: str = "claude-sonnet-4-20250514",
         prompt_version: str = "latest",
         temperature: float = 0.0,
         max_tokens: int = 450,
@@ -191,6 +299,7 @@ class LLMEngine:
         self.pipeline_version = pipeline_version or get_git_revision_hash()
 
     def verify_candidate(self, candidate: Candidate) -> ExtractedEntity:
+        """Verify a single candidate using the LLM."""
         # 1) Basic guardrails
         context = (candidate.context_text or "").strip()
         if not context:
@@ -212,7 +321,9 @@ class LLMEngine:
             "seed": self.seed,
             "response_format": self.response_format,
         }
-        bundle = PromptRegistry.get_bundle(task, version=self.prompt_version, llm_parameters=llm_params)
+        bundle = PromptRegistry.get_bundle(
+            task, version=self.prompt_version, llm_parameters=llm_params
+        )
         context_hash = hash_string(context)
 
         user_prompt = bundle.user_template.format(
@@ -244,7 +355,7 @@ class LLMEngine:
                 rule_version=f"{task.value}:{bundle.version}",
             )
 
-        # 4) Validate response schema strictly
+        # 4) Validate response schema
         try:
             result = VerificationResult.model_validate(raw)
         except ValidationError as ve:
@@ -258,7 +369,7 @@ class LLMEngine:
                 rule_version=f"{task.value}:{bundle.version}",
             )
 
-        # 5) Decide final LF (only allowed for definition/glossary)
+        # 5) Decide final LF (only for definition/glossary)
         final_lf = candidate.long_form
         if candidate.field_type in (FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY):
             if result.corrected_long_form:
@@ -266,7 +377,7 @@ class LLMEngine:
                 if cl:
                     final_lf = cl
 
-        # 6) Build evidence span (best-effort offsets)
+        # 6) Build evidence span
         ev_text = (result.evidence or context).strip()
         start_off, end_off = self._infer_offsets(
             context=context,
@@ -277,12 +388,12 @@ class LLMEngine:
         primary = EvidenceSpan(
             text=ev_text,
             location=candidate.context_location,
-            scope_ref=context_hash,  # stable scope for audit
+            scope_ref=context_hash,
             start_char_offset=start_off,
             end_char_offset=end_off,
         )
 
-        # 7) Update provenance immutably (frozen model)
+        # 7) Update provenance
         prov = self._updated_provenance(
             candidate.provenance,
             prompt_bundle_hash=bundle.prompt_bundle_hash,
@@ -290,7 +401,7 @@ class LLMEngine:
             rule_version=f"{task.value}:{bundle.version}",
         )
 
-        # 8) Validation rules for SHORT_FORM_ONLY: never create LF
+        # 8) SHORT_FORM_ONLY: never create LF
         out_lf: Optional[str] = final_lf
         if candidate.field_type == FieldType.SHORT_FORM_ONLY:
             out_lf = None
@@ -342,7 +453,6 @@ class LLMEngine:
             response_format=self.response_format,
         )
 
-        # IMPORTANT: ProvenanceMetadata is frozen=True -> use model_copy
         return existing.model_copy(
             update={
                 "pipeline_version": self.pipeline_version or existing.pipeline_version,
@@ -396,7 +506,6 @@ class LLMEngine:
                 }
             )
 
-        # For AMBIGUOUS we keep LF only if it existed on input and field_type requires it.
         lf = candidate.long_form
         if candidate.field_type == FieldType.SHORT_FORM_ONLY:
             lf = None
@@ -417,13 +526,11 @@ class LLMEngine:
             raw_llm_response=raw_llm,
         )
 
-    def _infer_offsets(self, *, context: str, sf: str, lf: Optional[str]) -> Tuple[int, int]:
+    def _infer_offsets(
+        self, *, context: str, sf: str, lf: Optional[str]
+    ) -> Tuple[int, int]:
         """
         Best-effort evidence offsets inside context_text.
-        Priority:
-          1) Span covering "sf" occurrence
-          2) If lf exists and found nearby, extend to cover both
-          3) Fallback: whole context
         """
         ctx = context or ""
         if not ctx:

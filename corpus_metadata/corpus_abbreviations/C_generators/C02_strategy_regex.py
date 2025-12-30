@@ -231,7 +231,7 @@ class RegexCandidateGenerator(BaseCandidateGenerator):
 
     @property
     def generator_type(self) -> GeneratorType:
-        return GeneratorType.LEXICON_MATCH
+        return GeneratorType.RIGID_PATTERN
 
     def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
         doc = doc_structure

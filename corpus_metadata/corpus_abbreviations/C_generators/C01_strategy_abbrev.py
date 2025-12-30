@@ -1,20 +1,28 @@
 # corpus_metadata/corpus_abbreviations/C_generators/C01_strategy_abbrev.py
 """
-The Syntax Matcher - Schwartz-Hearst algorithm for abbreviation extraction.
+The Syntax Matcher - Schwartz-Hearst + Ab3P for abbreviation extraction.
 
 Target: Explicit definitions of short forms in running text.
 
-Patterns:
-  - Explicit A: "Tumor Necrosis Factor (TNF)" -> LF (SF)
-  - Explicit B: "TNF (Tumor Necrosis Factor)" -> SF (LF)
-  - Implicit:   "TNF, defined as Tumor Necrosis Factor" -> SF, phrase LF
+Strategies:
+  1. Schwartz-Hearst: "Tumor Necrosis Factor (TNF)" -> LF (SF)
+  2. Reverse explicit: "TNF (Tumor Necrosis Factor)" -> SF (LF)
+  3. Implicit phrasing: "TNF, defined as Tumor Necrosis Factor"
+  4. Ab3P (NCBI): Machine learning-based abbreviation detection
 
-Reference: Schwartz & Hearst (2003) "A Simple Algorithm for Identifying
-Abbreviation Definitions in Biomedical Text"
+References:
+  - Schwartz & Hearst (2003) "A Simple Algorithm for Identifying
+    Abbreviation Definitions in Biomedical Text"
+  - Ab3P: Abbreviation definition identification (NCBI)
+    https://github.com/ncbi-nlp/Ab3P
 """
 from __future__ import annotations
 
+import os
 import re
+import shutil
+import subprocess
+import tempfile
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from A_core.A01_domain_models import (
@@ -210,7 +218,90 @@ def _validate_sf_in_lf(short_form: str, long_form: str) -> bool:
 
 
 # ----------------------------
-# Generator 1: Explicit + Implicit (syntax)
+# Ab3P Wrapper (NCBI tool)
+# ----------------------------
+
+class Ab3PWrapper:
+    """
+    Wrapper for NCBI Ab3P abbreviation detection tool.
+
+    Ab3P must be installed and available in PATH, or specify ab3p_path.
+    Install: https://github.com/ncbi-nlp/Ab3P
+
+    Returns list of (short_form, long_form, precision) tuples.
+    """
+
+    def __init__(self, ab3p_path: Optional[str] = None, word_data_path: Optional[str] = None):
+        self.ab3p_path = ab3p_path or shutil.which("identify_abbr") or shutil.which("ab3p")
+        self.word_data_path = word_data_path
+        self._available = self.ab3p_path is not None and os.path.exists(self.ab3p_path)
+
+    @property
+    def is_available(self) -> bool:
+        return self._available
+
+    def extract(self, text: str) -> List[Tuple[str, str, float]]:
+        """
+        Run Ab3P on text and return abbreviation pairs.
+
+        Returns: List of (short_form, long_form, precision) tuples
+        """
+        if not self._available or not text.strip():
+            return []
+
+        results = []
+
+        try:
+            # Write text to temp file (Ab3P reads from file)
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
+                f.write(text)
+                temp_path = f.name
+
+            try:
+                # Run Ab3P
+                cmd = [self.ab3p_path, temp_path]
+                if self.word_data_path:
+                    cmd.extend(['-d', self.word_data_path])
+
+                result = subprocess.run(
+                    cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=30,
+                    cwd=os.path.dirname(self.ab3p_path) if self.ab3p_path else None,
+                )
+
+                # Parse Ab3P output format: "SF|LF|precision"
+                for line in result.stdout.strip().split('\n'):
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+
+                    # Ab3P output: "  SF|LF|0.98" (with leading spaces sometimes)
+                    if '|' in line:
+                        parts = line.strip().split('|')
+                        if len(parts) >= 2:
+                            sf = parts[0].strip()
+                            lf = parts[1].strip()
+                            precision = float(parts[2]) if len(parts) > 2 else 0.95
+
+                            if sf and lf and len(sf) >= 2:
+                                results.append((sf, lf, precision))
+
+            finally:
+                # Cleanup temp file
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+
+        except (subprocess.TimeoutExpired, subprocess.SubprocessError, OSError) as e:
+            # Ab3P not available or failed - silently skip
+            pass
+
+        return results
+
+
+# ----------------------------
+# Generator 1: Explicit + Implicit (syntax) + Ab3P
 # ----------------------------
 
 class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
@@ -220,6 +311,7 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
     Strategy A (Explicit):  Long Form (SF)
     Strategy B (Explicit):  SF (Long Form)
     Strategy C (Implicit):  SF, defined as/stands for/... Long Form
+    Strategy D (Ab3P):      NCBI machine learning detection
     """
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
@@ -227,6 +319,14 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
         self.min_sf_length = int(self.config.get("min_sf_length", 2))
         self.max_sf_length = int(self.config.get("max_sf_length", 10))
+
+        # Ab3P wrapper (optional - will skip if not installed)
+        ab3p_path = self.config.get("ab3p_path")
+        self.ab3p = Ab3PWrapper(ab3p_path=ab3p_path)
+        self.use_ab3p = self.config.get("use_ab3p", True) and self.ab3p.is_available
+        if self.use_ab3p:
+            print("Ab3P: enabled")
+        # Silently skip Ab3P if not available (optional dependency)
 
         # Capture any parentheses content; we decide SF vs LF by heuristics
         self.parens_any = re.compile(r"\(([^)]+)\)")
@@ -382,6 +482,43 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
             # update tail for cross-block continuity
             prev_tail = combined[-self.carryover_chars :] if self.carryover_chars > 0 else ""
+
+        # -------------------------
+        # Strategy D: Ab3P (document-level)
+        # -------------------------
+        if self.use_ab3p:
+            # Concatenate all text for Ab3P (it works best on full documents)
+            full_text = "\n".join(
+                _clean_ws(block.text)
+                for block in doc.iter_linear_blocks(skip_header_footer=True)
+                if block.text
+            )
+
+            if full_text:
+                ab3p_results = self.ab3p.extract(full_text)
+                for sf, lf, precision in ab3p_results:
+                    if not _looks_like_short_form(sf, self.min_sf_length, self.max_sf_length):
+                        continue
+
+                    key = (doc.doc_id, sf.upper(), lf.lower())
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
+                    # Find first block containing this SF for context
+                    context_block = None
+                    context_text = full_text[:500]
+                    for block in doc.iter_linear_blocks(skip_header_footer=True):
+                        if sf in (block.text or ""):
+                            context_block = block
+                            context_text = _clean_ws(block.text)
+                            break
+
+                    if context_block:
+                        out.append(self._make_candidate(
+                            doc, context_block, sf, lf, context_text,
+                            0, len(sf), method="ab3p", confidence=precision
+                        ))
 
         return out
 

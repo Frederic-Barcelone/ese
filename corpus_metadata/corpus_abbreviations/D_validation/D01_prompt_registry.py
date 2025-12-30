@@ -60,13 +60,13 @@ class PromptRegistry:
                 "3) If the context contradicts SF->LF -> REJECTED.\n"
                 "4) If LF is slightly wrong, you may provide corrected_long_form.\n\n"
                 "Return JSON with keys:\n"
-                "{"
+                "{{"
                 "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
                 "\"confidence\": number, "
                 "\"evidence\": string, "
                 "\"reason\": string, "
                 "\"corrected_long_form\": string|null"
-                "}"
+                "}}"
             ),
             "schema": None,
         },
@@ -87,12 +87,12 @@ class PromptRegistry:
                 "- Decide if '{sf}' is used as an abbreviation-like token in this context.\n"
                 "- Do NOT invent a long form.\n\n"
                 "Return JSON with keys:\n"
-                "{"
+                "{{"
                 "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
                 "\"confidence\": number, "
                 "\"evidence\": string, "
                 "\"reason\": string"
-                "}"
+                "}}"
             ),
             "schema": None,
         },
