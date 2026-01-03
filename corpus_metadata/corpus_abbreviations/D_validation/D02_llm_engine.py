@@ -326,10 +326,14 @@ class LLMEngine:
         )
         context_hash = hash_string(context)
 
+        # Build provenance context for v1.1+ prompts
+        provenance_text = self._build_provenance_context(candidate)
+
         user_prompt = bundle.user_template.format(
             context=context,
             sf=candidate.short_form,
             lf=candidate.long_form or "",
+            provenance=provenance_text,
         )
 
         # 3) Call LLM
@@ -435,6 +439,35 @@ class LLMEngine:
         if field_type == FieldType.SHORT_FORM_ONLY:
             return PromptTask.VERIFY_SHORT_FORM_ONLY
         return PromptTask.VERIFY_DEFINITION_PAIR
+
+    def _build_provenance_context(self, candidate: Candidate) -> str:
+        """
+        Build provenance context string for Claude validation.
+        Includes lexicon source and external IDs if available.
+        """
+        parts = []
+        prov = candidate.provenance
+
+        # Add lexicon source
+        if prov.lexicon_source:
+            parts.append(f"Lexicon source: {prov.lexicon_source}")
+
+        # Add external IDs (CUI, etc.)
+        if prov.lexicon_ids:
+            ids_str = ", ".join(f"{lid.source}:{lid.id}" for lid in prov.lexicon_ids)
+            parts.append(f"External IDs: {ids_str}")
+
+        # Add generator type
+        if candidate.generator_type:
+            gen_name = candidate.generator_type.value
+            if gen_name == "gen:lexicon_match":
+                parts.append("Source: Medical terminology lexicon")
+            elif gen_name == "gen:syntax_pattern":
+                parts.append("Source: Explicit definition pattern in document")
+
+        if parts:
+            return "Provenance: " + "; ".join(parts) + "\n"
+        return ""
 
     def _updated_provenance(
         self,

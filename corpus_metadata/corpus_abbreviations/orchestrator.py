@@ -8,17 +8,20 @@ Usage:
     python orchestrator.py
 
 Requires:
-    - ANTHROPIC_API_KEY environment variable (or set in config.yaml)
-    - pip install anthropic pyyaml
+    - ANTHROPIC_API_KEY in .env file (or set in config.yaml)
+    - pip install anthropic pyyaml python-dotenv
 """
 
 from __future__ import annotations
+
+from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
 
 import json
 import sys
 import time
 from datetime import datetime
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 # Ensure imports work
@@ -36,6 +39,8 @@ from C_generators.C03_strategy_layout import LayoutCandidateGenerator
 from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
+from E_normalization.E01_term_mapper import TermMapper
+from E_normalization.E02_disambiguator import Disambiguator
 
 
 class Orchestrator:
@@ -111,7 +116,21 @@ class Orchestrator:
             run_id=self.run_id,
         )
 
-        print(f"Orchestrator v0.6 initialized")
+        # Normalization (E01) - canonicalize long forms + attach standard IDs
+        self.term_mapper = TermMapper(config={
+            "mapping_file_path": "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_abbreviation_general.json",
+            "enable_fuzzy_matching": False,
+            "fill_long_form_for_orphans": False,
+        })
+
+        # Disambiguation (E02) - resolve ambiguous abbreviations using context
+        self.disambiguator = Disambiguator(config={
+            "min_context_score": 2,
+            "min_margin": 1,
+            "fill_long_form_for_orphans": True,
+        })
+
+        print(f"Orchestrator v0.7 initialized")
         print(f"  Run ID: {self.run_id}")
         print(f"  Config: {self.config_path}")
         print(f"  Model: {model}")
@@ -184,50 +203,52 @@ class Orchestrator:
             self._export_results(pdf_path, [], unique_candidates)
             return []
 
-        # Pre-filter: Auto-approve high-confidence lexicon matches
-        # These have SF/LF from trusted lexicons and don't need Claude validation
-        auto_approved: List[ExtractedEntity] = []
-        needs_validation: List[Candidate] = []
+        # Collect SFs found by non-lexicon generators (syntax, glossary, layout, regex)
+        # These have evidence of being actual abbreviations in the document
+        corroborated_sfs: set = {
+            c.short_form.upper()
+            for c in unique_candidates
+            if c.generator_type != GeneratorType.LEXICON_MATCH
+        }
 
-        for candidate in unique_candidates:
-            # Auto-approve: lexicon matches with high confidence AND both SF and LF present
-            if (candidate.generator_type == GeneratorType.LEXICON_MATCH
-                and candidate.initial_confidence >= 0.90
-                and candidate.long_form
-                and len(candidate.long_form) > len(candidate.short_form)):
-                # Create evidence span from candidate context
-                primary_evidence = EvidenceSpan(
-                    text=candidate.context_text,
-                    location=candidate.context_location,
-                    scope_ref=f"block:{candidate.context_location.block_id or 'unknown'}",
-                    start_char_offset=0,
-                    end_char_offset=len(candidate.context_text),
-                )
-                # Create auto-approved entity without Claude call
-                auto_approved.append(ExtractedEntity(
-                    candidate_id=candidate.id,
-                    doc_id=candidate.doc_id,
-                    field_type=candidate.field_type,
-                    short_form=candidate.short_form,
-                    long_form=candidate.long_form,
-                    primary_evidence=primary_evidence,
-                    supporting_evidence=[],
-                    status=ValidationStatus.VALIDATED,
-                    confidence_score=candidate.initial_confidence,
-                    rejection_reason=None,
-                    validation_flags=["AUTO_APPROVED"],
-                    provenance=candidate.provenance,
-                    raw_llm_response="AUTO_APPROVED:lexicon_match",
-                ))
-            else:
-                needs_validation.append(candidate)
+        # Count SF occurrences in document text (for frequency-based filtering)
+        full_text = " ".join(
+            block.text for block in doc.iter_linear_blocks() if block.text
+        )
+        from collections import Counter
+        import re
+        # Find all uppercase sequences (potential abbreviations)
+        word_counts = Counter(re.findall(r'\b[A-Z][A-Z0-9]{1,10}\b', full_text))
 
+        # Filter: keep lexicon matches if:
+        # 1. SF is corroborated by another generator, OR
+        # 2. SF appears 1+ times in document (relaxed from 2+ to improve recall)
+        def should_keep(c: Candidate) -> bool:
+            if c.generator_type != GeneratorType.LEXICON_MATCH:
+                return True
+            sf_upper = c.short_form.upper()
+            if sf_upper in corroborated_sfs:
+                return True
+            # Relaxed: keep if SF appears at least once (was 2+)
+            if word_counts.get(sf_upper, 0) >= 1:
+                return True
+            return False
+
+        needs_validation: List[Candidate] = [c for c in unique_candidates if should_keep(c)]
+        frequent_sfs = sum(1 for c in unique_candidates
+                          if c.generator_type == GeneratorType.LEXICON_MATCH
+                          and c.short_form.upper() not in corroborated_sfs
+                          and word_counts.get(c.short_form.upper(), 0) >= 2)
+
+        filtered_count = len(unique_candidates) - len(needs_validation)
         print(f"\n[3/4] Validating candidates with Claude...")
-        print(f"  Auto-approved (lexicon): {len(auto_approved)}")
-        print(f"  Needs Claude validation: {len(needs_validation)}")
+        print(f"  Corroborated SFs: {len(corroborated_sfs)}")
+        print(f"  Frequent SFs (2+ occurrences): {frequent_sfs}")
+        print(f"  Filtered (lexicon-only, rare): {filtered_count}")
+        print(f"  Candidates to validate: {len(needs_validation)}")
         start = time.time()
 
-        results: List[ExtractedEntity] = list(auto_approved)
+        results: List[ExtractedEntity] = []
         for i, candidate in enumerate(needs_validation, 1):
             if i % 10 == 0 or i == len(needs_validation):
                 print(f"  Progress: {i}/{len(needs_validation)}")
@@ -255,6 +276,33 @@ class Orchestrator:
                 time.sleep(batch_delay_ms / 1000)
 
         print(f"  Time: {time.time() - start:.2f}s")
+
+        # -----------------------------
+        # Stage 3.5: Normalize & Disambiguate
+        # -----------------------------
+        print("\n[3.5/4] Normalizing & disambiguating...")
+
+        # Get full document text for disambiguation context
+        full_doc_text = " ".join(
+            block.text for block in doc.iter_linear_blocks() if block.text
+        )
+
+        # Apply normalization (E01) - canonicalize long forms
+        normalized_count = 0
+        for i, entity in enumerate(results):
+            normalized = self.term_mapper.normalize(entity)
+            if "normalized" in (normalized.validation_flags or []):
+                normalized_count += 1
+            results[i] = normalized
+
+        # Apply disambiguation (E02) - resolve ambiguous SFs using context
+        results = self.disambiguator.resolve(results, full_doc_text)
+        disambiguated_count = sum(
+            1 for r in results if "disambiguated" in (r.validation_flags or [])
+        )
+
+        print(f"  Normalized: {normalized_count}")
+        print(f"  Disambiguated: {disambiguated_count}")
 
         # -----------------------------
         # Stage 4: Summary & Export

@@ -36,7 +36,7 @@ class PromptRegistry:
     """
 
     _LATEST: Dict[PromptTask, str] = {
-        PromptTask.VERIFY_DEFINITION_PAIR: "v1.0",
+        PromptTask.VERIFY_DEFINITION_PAIR: "v1.1",
         PromptTask.VERIFY_SHORT_FORM_ONLY: "v1.0",
     }
 
@@ -58,6 +58,36 @@ class PromptRegistry:
                 "1) VALIDATED only if the context explicitly supports SF->LF.\n"
                 "2) If LF is not present or relationship is unclear -> AMBIGUOUS.\n"
                 "3) If the context contradicts SF->LF -> REJECTED.\n"
+                "4) If LF is slightly wrong, you may provide corrected_long_form.\n\n"
+                "Return JSON with keys:\n"
+                "{{"
+                "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
+                "\"confidence\": number, "
+                "\"evidence\": string, "
+                "\"reason\": string, "
+                "\"corrected_long_form\": string|null"
+                "}}"
+            ),
+            "schema": None,
+        },
+
+        # v1.1: Includes provenance context from lexicons
+        (PromptTask.VERIFY_DEFINITION_PAIR, "v1.1"): {
+            "system": (
+                "You are a clinical document QA auditor validating abbreviations. "
+                "Return JSON only."
+            ),
+            "user": (
+                "Context:\n{context}\n\n"
+                "Claim: short form '{sf}' stands for long form '{lf}'.\n"
+                "{provenance}\n"
+                "Decide if this abbreviation mapping is valid.\n"
+                "Rules:\n"
+                "1) VALIDATED if:\n"
+                "   - The context explicitly defines SF->LF, OR\n"
+                "   - The SF appears in context AND the mapping comes from a trusted lexicon (UMLS, medical dictionary)\n"
+                "2) AMBIGUOUS if the SF appears but relationship to LF is unclear and no lexicon source.\n"
+                "3) REJECTED if the context contradicts SF->LF or SF is not an abbreviation.\n"
                 "4) If LF is slightly wrong, you may provide corrected_long_form.\n\n"
                 "Return JSON with keys:\n"
                 "{{"
