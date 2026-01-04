@@ -97,9 +97,10 @@ class ValidationLogger:
 
         self._buffer.append(record)
 
-        # Write to file (append mode)
+        # Write to file (append mode) with pretty formatting
         with open(self.log_file, "a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
+            f.write(json.dumps(record, ensure_ascii=False, default=str, indent=2) + "\n")
+            f.write("---\n")  # Visual separator between records
 
     def log_error(
         self,
@@ -125,7 +126,8 @@ class ValidationLogger:
         }
 
         with open(self.log_file, "a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
+            f.write(json.dumps(record, ensure_ascii=False, default=str, indent=2) + "\n")
+            f.write("---\n")  # Visual separator between records
 
     def write_summary(self) -> Path:
         """

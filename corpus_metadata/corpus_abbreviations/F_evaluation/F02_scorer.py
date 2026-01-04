@@ -1,8 +1,39 @@
 # corpus_metadata/corpus_abbreviations/F_evaluation/F02_scorer.py
 
+"""
+Abbreviation Extraction Scorer
+
+Computes precision, recall, and F1 by comparing system output against gold annotations.
+Uses set-based matching on (short_form, long_form) pairs.
+
+Classification:
+    - True Positive: system pair matches gold pair
+    - False Positive: system extracted pair not in gold
+    - False Negative: gold pair not found by system
+
+Metrics:
+    - Precision: TP / (TP + FP) — how much system output is correct
+    - Recall: TP / (TP + FN) — how much gold was found
+    - F1: harmonic mean of precision and recall
+
+Evaluation modes:
+    - evaluate_doc(): single document
+    - evaluate_corpus(): micro (global) and macro (per-doc average) scores
+
+Configuration (ScorerConfig):
+    - require_long_form_match: match SF+LF pairs vs SF-only
+    - only_validated: skip non-VALIDATED entities
+    - allow_sf_only_gold: accept gold entries without long_form
+
+Depends on F01_gold_loader.py for GoldAnnotation format.
+"""
+
+
+
 from __future__ import annotations
 
 from collections import defaultdict
+from difflib import SequenceMatcher
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -75,6 +106,15 @@ class ScorerConfig(BaseModel):
 
     # Whether to only evaluate entities validated by the pipeline
     only_validated: bool = True
+
+    # Fuzzy matching for long forms. If True, considers LFs as matching if:
+    # - One is a substring of the other, OR
+    # - Similarity ratio >= fuzzy_threshold
+    # This handles variations like "US Food and Drug Administration" vs "Food and Drug Administration"
+    fuzzy_long_form_match: bool = True
+
+    # Minimum similarity ratio for fuzzy matching (0.0-1.0). Default 0.8 = 80% similar.
+    fuzzy_threshold: float = 0.8
 
     # Debug set dumps (can be large). Usually False in CI logs.
     include_sets_in_report: bool = False
@@ -188,6 +228,45 @@ class Scorer:
             return True
         return self._norm_lf(lf) in {"unknown", "unk", "n/a", "na"}
 
+    def _lf_matches(self, sys_lf: Optional[str], gold_lf: Optional[str]) -> bool:
+        """
+        Check if system long form matches gold long form.
+
+        Matching criteria (in order):
+        1. Exact match (after normalization)
+        2. If fuzzy_long_form_match enabled:
+           - Substring match (one contains the other)
+           - Similarity ratio >= fuzzy_threshold
+        """
+        # Normalize both
+        sys_norm = self._norm_lf(sys_lf)
+        gold_norm = self._norm_lf(gold_lf)
+
+        # Both None = match
+        if sys_norm is None and gold_norm is None:
+            return True
+
+        # One None, other not = no match
+        if sys_norm is None or gold_norm is None:
+            return False
+
+        # Exact match
+        if sys_norm == gold_norm:
+            return True
+
+        # Fuzzy matching if enabled
+        if self.config.fuzzy_long_form_match:
+            # Substring match: one contains the other
+            if sys_norm in gold_norm or gold_norm in sys_norm:
+                return True
+
+            # Similarity ratio
+            ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
+            if ratio >= self.config.fuzzy_threshold:
+                return True
+
+        return False
+
     # -------------------------
     # Convert inputs to comparable sets
     # -------------------------
@@ -253,41 +332,62 @@ class Scorer:
         """
         Handles the special case where gold contains SF-only entries (LF=None).
         If gold has (SF, None), then any system pair with that SF counts as TP.
+
+        With fuzzy_long_form_match enabled, LFs are matched using substring/similarity
+        rather than exact string matching.
         """
         if not gold_set:
             return set(), set(sys_set), set()
 
         # If we have SF-only gold items, do SF-based matching for those
         sf_only_gold = {sf for (sf, lf) in gold_set if lf is None}
-        gold_full = {(sf, lf) for (sf, lf) in gold_set if lf is not None}
+        gold_full = [(sf, lf) for (sf, lf) in gold_set if lf is not None]
 
         tp: Set[Pair] = set()
         fp: Set[Pair] = set()
         fn: Set[Pair] = set()
 
-        # 1) Full pair matching for gold_full
-        tp_full = sys_set.intersection(gold_full)
-        tp |= tp_full
+        # Track which gold items have been matched (for FN calculation)
+        matched_gold: Set[Pair] = set()
+        # Track which system items matched something (for FP calculation)
+        matched_sys: Set[Pair] = set()
+
+        # 1) Full pair matching for gold_full (with fuzzy LF matching)
+        for (gold_sf, gold_lf) in gold_full:
+            gold_matched = False
+            for (sys_sf, sys_lf) in sys_set:
+                if sys_sf != gold_sf:
+                    continue
+                # SF matches, check LF
+                if self._lf_matches(sys_lf, gold_lf):
+                    tp.add((gold_sf, gold_lf))
+                    matched_gold.add((gold_sf, gold_lf))
+                    matched_sys.add((sys_sf, sys_lf))
+                    gold_matched = True
+                    break  # One match per gold item is enough
 
         # 2) SF-only matching (gold wants SF presence, LF irrelevant)
         if sf_only_gold:
             for (sf, lf) in sys_set:
                 if sf in sf_only_gold:
                     tp.add((sf, None))  # count as satisfied SF-only truth
+                    matched_sys.add((sf, lf))
 
         # 3) False negatives:
-        # - for full gold pairs: those not found
-        fn |= (gold_full - tp_full)
+        # - for full gold pairs: those not matched
+        for gold_pair in gold_full:
+            if gold_pair not in matched_gold:
+                fn.add(gold_pair)
         # - for SF-only gold: if no system item has that SF
         for sf in sf_only_gold:
             if not any(s == sf for (s, _lf) in sys_set):
                 fn.add((sf, None))
 
         # 4) False positives:
-        # system items not matched by either full-pair TP or SF-only TP rule
+        # system items not matched by any gold item
         for pair in sys_set:
             sf, lf = pair
-            if pair in tp_full:
+            if pair in matched_sys:
                 continue
             if sf in sf_only_gold:
                 continue

@@ -22,14 +22,14 @@ import json
 import sys
 import time
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 # Ensure imports work
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus, GeneratorType, EvidenceSpan
-from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint
+from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint, hash_string
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
@@ -217,8 +217,12 @@ class Orchestrator:
         )
         from collections import Counter
         import re
-        # Find all uppercase sequences (potential abbreviations)
-        word_counts = Counter(re.findall(r'\b[A-Z][A-Z0-9]{1,10}\b', full_text))
+        # Find all abbreviation-like tokens (including mixed case like IgA, C3a, eGFR)
+        # Pattern: starts with letter, contains uppercase, 2-12 chars
+        abbrev_pattern = r'\b[A-Za-z][A-Za-z0-9]{1,11}\b'
+        all_tokens = re.findall(abbrev_pattern, full_text)
+        # Normalize to uppercase for counting
+        word_counts = Counter(t.upper() for t in all_tokens if any(c.isupper() for c in t))
 
         # Filter: keep lexicon matches if:
         # 1. SF is corroborated by another generator, OR
@@ -241,38 +245,128 @@ class Orchestrator:
                           and word_counts.get(c.short_form.upper(), 0) >= 2)
 
         filtered_count = len(unique_candidates) - len(needs_validation)
+
+        # ========================================
+        # TIERED VALIDATION: Auto-approve/reject high-confidence candidates
+        # ========================================
+        auto_results: List[Tuple[Candidate, ExtractedEntity]] = []
+        llm_candidates: List[Candidate] = []
+
+        # Common English words that look like abbreviations but aren't
+        COMMON_WORDS = {
+            'THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL',
+            'CAN', 'HER', 'WAS', 'ONE', 'OUR', 'OUT', 'DAY', 'GET',
+            'HAS', 'HIM', 'HIS', 'HOW', 'ITS', 'MAY', 'NEW', 'NOW',
+            'OLD', 'SEE', 'TWO', 'WAY', 'WHO', 'BOY', 'DID', 'ANY',
+            'DATA', 'WHITE', 'METHODS', 'STUDY', 'RESULTS', 'AGE',
+            'YEARS', 'PATIENTS', 'TABLE', 'FIGURE', 'BASELINE',
+        }
+
+        auto_approved_count = 0
+        auto_rejected_count = 0
+
+        def _create_auto_entity(c: Candidate, status: ValidationStatus,
+                                 confidence: float, reason: str, flags: List[str],
+                                 raw_response: Dict) -> ExtractedEntity:
+            """Helper to create ExtractedEntity for auto-approved/rejected candidates."""
+            context = (c.context_text or "").strip()
+            ctx_hash = hash_string(context) if context else "no_context"
+            primary = EvidenceSpan(
+                text=context,
+                location=c.context_location,
+                scope_ref=ctx_hash,
+                start_char_offset=0,
+                end_char_offset=len(context),
+            )
+            return ExtractedEntity(
+                candidate_id=c.id,
+                doc_id=c.doc_id,
+                field_type=c.field_type,
+                short_form=c.short_form.strip(),
+                long_form=(c.long_form.strip() if c.long_form else None),
+                primary_evidence=primary,
+                supporting_evidence=[],
+                status=status,
+                confidence_score=confidence,
+                rejection_reason=reason if status == ValidationStatus.REJECTED else None,
+                validation_flags=flags,
+                provenance=c.provenance,
+                raw_llm_response=raw_response,
+            )
+
+        for c in needs_validation:
+            sf_upper = c.short_form.upper()
+
+            # Auto-reject: Common English words
+            if sf_upper in COMMON_WORDS:
+                entity = _create_auto_entity(
+                    c, ValidationStatus.REJECTED, 0.95,
+                    "Common English word, not an abbreviation",
+                    ["auto_rejected"], {"auto": "rejected_common_word"}
+                )
+                auto_results.append((c, entity))
+                auto_rejected_count += 1
+                continue
+
+            # Auto-approve: DISABLED - lexicon LFs often don't match document context
+            # Example: UMLS maps "eGFR" to "epidermal growth factor receptor"
+            # but in clinical docs it's "estimated glomerular filtration rate"
+            # if (sf_upper in corroborated_sfs
+            #     and c.provenance
+            #     and c.provenance.lexicon_source):
+            #     entity = _create_auto_entity(...)
+            #     auto_approved_count += 1
+
+            # Needs LLM validation
+            llm_candidates.append(c)
+
         print(f"\n[3/4] Validating candidates with Claude...")
         print(f"  Corroborated SFs: {len(corroborated_sfs)}")
         print(f"  Frequent SFs (2+ occurrences): {frequent_sfs}")
         print(f"  Filtered (lexicon-only, rare): {filtered_count}")
-        print(f"  Candidates to validate: {len(needs_validation)}")
+        print(f"  Auto-approved (corroborated+lexicon): {auto_approved_count}")
+        print(f"  Auto-rejected (common words): {auto_rejected_count}")
+        print(f"  Candidates for LLM: {len(llm_candidates)}")
         start = time.time()
 
+        # Collect all results
         results: List[ExtractedEntity] = []
-        for i, candidate in enumerate(needs_validation, 1):
-            if i % 10 == 0 or i == len(needs_validation):
-                print(f"  Progress: {i}/{len(needs_validation)}")
 
-            try:
-                val_start = time.time()
-                entity = self.llm_engine.verify_candidate(candidate)
-                elapsed_ms = (time.time() - val_start) * 1000
+        # Log and add auto-approved/rejected
+        for candidate, entity in auto_results:
+            self.logger.log_validation(
+                candidate=candidate,
+                entity=entity,
+                llm_response=entity.raw_llm_response,
+                elapsed_ms=0,
+            )
+            results.append(entity)
 
-                # Log result to corpus_log/
-                self.logger.log_validation(
-                    candidate=candidate,
-                    entity=entity,
-                    llm_response=entity.raw_llm_response,
-                    elapsed_ms=elapsed_ms,
-                )
-                results.append(entity)
+        # Use individual validation (batch had quality issues - F1 44% vs 49%)
+        batch_size = 15
+        for batch_start in range(0, len(llm_candidates), batch_size):
+            batch_end = min(batch_start + batch_size, len(llm_candidates))
+            batch = llm_candidates[batch_start:batch_end]
 
-            except Exception as e:
-                self.logger.log_error(candidate, str(e))
-                print(f"  ⚠ Error: {candidate.short_form} - {e}")
+            print(f"  Progress: {batch_end}/{len(llm_candidates)}")
 
-            # Rate limit
-            if batch_delay_ms > 0 and i < len(needs_validation):
+            for candidate in batch:
+                try:
+                    val_start = time.time()
+                    entity = self.llm_engine.verify_candidate(candidate)
+                    elapsed_ms = (time.time() - val_start) * 1000
+                    self.logger.log_validation(
+                        candidate=candidate,
+                        entity=entity,
+                        llm_response=entity.raw_llm_response,
+                        elapsed_ms=elapsed_ms,
+                    )
+                    results.append(entity)
+                except Exception as e:
+                    self.logger.log_error(candidate, str(e))
+
+            # Rate limit between batches
+            if batch_delay_ms > 0 and batch_end < len(llm_candidates):
                 time.sleep(batch_delay_ms / 1000)
 
         print(f"  Time: {time.time() - start:.2f}s")

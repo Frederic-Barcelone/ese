@@ -10,6 +10,15 @@ from typing import Dict, List, Optional, Set, Tuple
 
 from flashtext import KeywordProcessor
 
+# scispacy for biomedical NER (identifies entities like C3G, eGFR, KDIGO)
+try:
+    import spacy
+    from scispacy.abbreviation import AbbreviationDetector
+    from scispacy.linking import EntityLinker
+    SCISPACY_AVAILABLE = True
+except ImportError:
+    SCISPACY_AVAILABLE = False
+
 from A_core.A02_interfaces import BaseCandidateGenerator
 
 # =============================================================================
@@ -24,13 +33,22 @@ OBVIOUS_NOISE: set = {
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
     "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
     # Basic English function words (articles, prepositions, conjunctions)
+    # NOTE: "or" and "us" removed - they can be valid abbreviations (Odds Ratio, United States)
     "an", "as", "at", "be", "by", "do", "go", "he", "if", "in", "is",
-    "it", "me", "my", "no", "of", "on", "or", "so", "to", "up", "us", "we",
+    "it", "me", "my", "no", "of", "on", "so", "to", "up", "we",
     "the", "and", "for", "but", "not", "are", "was", "were", "been",
     "have", "has", "had", "will", "would", "could", "should",
     "this", "that", "these", "those", "with", "from", "into",
     # Citation artifacts
     "et", "al",
+    # Measurement units (not abbreviations, just units)
+    "dl", "ml", "mg", "kg", "mm", "cm", "hz", "khz", "mhz",
+    "mmhg", "kpa", "mol", "mmol", "umol", "nmol",
+    # Full English words mistakenly in lexicons (NOT abbreviations)
+    "investigator", "investigators", "sponsor", "protocol", "study",
+    "patient", "patients", "subject", "subjects", "article", "articles",
+    # Geographic (context-dependent, high FP rate in pharma docs)
+    "nj", "ny", "ca", "tx",  # US states - usually location, not abbreviation
 }
 
 # Minimum length (allow 2-char if uppercase like CT, MR, IV)
@@ -49,7 +67,7 @@ from B_parsing.B02_doc_graph import DocumentGraph
 
 class LexiconEntry:
     """Compiled lexicon entry with regex pattern and source provenance."""
-    __slots__ = ("sf", "lf", "pattern", "source", "lexicon_ids")
+    __slots__ = ("sf", "lf", "pattern", "source", "lexicon_ids", "preserve_case")
 
     def __init__(
         self,
@@ -58,12 +76,14 @@ class LexiconEntry:
         pattern: re.Pattern,
         source: str,
         lexicon_ids: Optional[List[Dict[str, str]]] = None,
+        preserve_case: bool = True,
     ):
         self.sf = sf
         self.lf = lf
         self.pattern = pattern
         self.source = source  # Lexicon file name for provenance
         self.lexicon_ids = lexicon_ids or []  # External IDs [{source, id}, ...]
+        self.preserve_case = preserve_case  # If True, use matched text as SF
 
 
 class RegexLexiconGenerator(BaseCandidateGenerator):
@@ -114,7 +134,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_pah.json"
         ))
         
-        self.context_window = int(self.config.get("context_window", 80))
+        self.context_window = int(self.config.get("context_window", 300))
 
         # Abbreviation entries (regex-based)
         self.abbrev_entries: List[LexiconEntry] = []
@@ -131,15 +151,46 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
 
         # Load lexicons
+        # Note: Disease/Orphanet lexicons contain disease NAMES, not abbreviations
+        # They cause FPs by matching chromosome numbers (45, 46, 10p) as "abbreviations"
         self._load_abbrev_lexicon(self.abbrev_lexicon_path)
-        self._load_disease_lexicon(self.disease_lexicon_path)
-        self._load_orphanet_lexicon(self.orphanet_lexicon_path)
+        # self._load_disease_lexicon(self.disease_lexicon_path)  # Disabled: names, not abbreviations
+        # self._load_orphanet_lexicon(self.orphanet_lexicon_path)  # Disabled: names, not abbreviations
         self._load_rare_disease_acronyms(self.rare_disease_acronyms_path)
         self._load_umls_tsv(self.umls_abbrev_path)
         self._load_umls_tsv(self.umls_clinical_path)
         self._load_anca_lexicon(self.anca_lexicon_path)
         self._load_igan_lexicon(self.igan_lexicon_path)
         self._load_pah_lexicon(self.pah_lexicon_path)
+
+        # Initialize scispacy NER for biomedical entity recognition
+        self.scispacy_nlp = None
+        self.umls_linker = None
+        if SCISPACY_AVAILABLE:
+            try:
+                # Try lg model first (better for linking), fall back to sm
+                try:
+                    self.scispacy_nlp = spacy.load("en_core_sci_lg")
+                    model_name = "en_core_sci_lg"
+                except OSError:
+                    self.scispacy_nlp = spacy.load("en_core_sci_sm")
+                    model_name = "en_core_sci_sm"
+
+                # Add abbreviation detector for Schwartz-Hearst pattern matching
+                self.scispacy_nlp.add_pipe("abbreviation_detector")
+
+                # Add UMLS EntityLinker for abbreviation resolution
+                try:
+                    self.scispacy_nlp.add_pipe(
+                        "scispacy_linker",
+                        config={"resolve_abbreviations": True, "linker_name": "umls"}
+                    )
+                    self.umls_linker = self.scispacy_nlp.get_pipe("scispacy_linker")
+                    print(f"Loaded scispacy {model_name} with abbreviation detector + UMLS linker")
+                except Exception as e:
+                    print(f"Loaded scispacy {model_name} with abbreviation detector (no UMLS linker: {e})")
+            except OSError as e:
+                print(f"Warning: Could not load scispacy model: {e}")
 
     @property
     def generator_type(self) -> GeneratorType:
@@ -163,7 +214,14 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 for match in entry.pattern.finditer(text):
                     start, end = match.start(), match.end()
 
-                    key = (entry.sf.upper(), entry.lf.lower())
+                    # Use matched text to preserve original case (e.g., IgA, MedDRA)
+                    matched_text = text[start:end].strip()
+                    if not matched_text:
+                        continue  # Skip empty matches
+
+                    sf_to_use = matched_text if entry.preserve_case else entry.sf
+
+                    key = (sf_to_use.upper(), entry.lf.lower())
                     if key in seen:
                         continue
                     seen.add(key)
@@ -179,7 +237,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     out.append(self._make_candidate(
                         doc=doc,
                         block=block,
-                        short_form=entry.sf,
+                        short_form=sf_to_use,  # Use matched text with original case
                         long_form=entry.lf,
                         start=start,
                         end=end,
@@ -225,6 +283,110 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     lexicon_source=source,
                     lexicon_ids=entity_lex_ids,
                 ))
+
+            # 3) scispacy NER + abbreviation detection + UMLS linking
+            if self.scispacy_nlp is not None:
+                try:
+                    spacy_doc = self.scispacy_nlp(text)
+
+                    # Extract abbreviations found by Schwartz-Hearst detector
+                    for abrv in spacy_doc._.abbreviations:
+                        sf = abrv.text
+                        lf = str(abrv._.long_form) if abrv._.long_form else None
+
+                        if not sf or not lf:
+                            continue
+                        if not self._is_valid_match(sf):
+                            continue
+
+                        key = (sf.upper(), lf.lower())
+                        if key in seen:
+                            continue
+                        seen.add(key)
+
+                        out.append(self._make_candidate(
+                            doc=doc,
+                            block=block,
+                            short_form=sf,
+                            long_form=lf,
+                            start=abrv.start_char,
+                            end=abrv.end_char,
+                            text=text,
+                            rule_version="scispacy_abbrev::v1",
+                            lexicon_source="scispacy",
+                            lexicon_ids=None,
+                        ))
+
+                    # Extract NER entities with UMLS linking
+                    for ent in spacy_doc.ents:
+                        ent_text = ent.text.strip()
+
+                        # Only consider short, uppercase-containing tokens as abbreviations
+                        if len(ent_text) < 2 or len(ent_text) > 12:
+                            continue
+                        if " " in ent_text:  # Skip multi-word entities
+                            continue
+                        if not any(c.isupper() for c in ent_text):
+                            continue
+                        if not self._is_valid_match(ent_text):
+                            continue
+
+                        # Try UMLS linker first for expansion
+                        lf_from_umls = None
+                        umls_cui = None
+                        if hasattr(ent._, 'kb_ents') and ent._.kb_ents:
+                            # kb_ents is [(CUI, score), ...] - take top match
+                            top_match = ent._.kb_ents[0]
+                            umls_cui = top_match[0]
+                            # Get canonical name from linker's knowledge base
+                            if self.umls_linker and hasattr(self.umls_linker, 'kb'):
+                                try:
+                                    kb_entry = self.umls_linker.kb.cui_to_entity.get(umls_cui)
+                                    if kb_entry:
+                                        lf_from_umls = kb_entry.canonical_name
+                                except Exception:
+                                    pass
+
+                        # Fall back to our lexicons if UMLS didn't provide expansion
+                        lf_from_lexicon = lf_from_umls
+                        if not lf_from_lexicon:
+                            lf_from_lexicon = self.entity_canonical.get(ent_text) or self.entity_canonical.get(ent_text.upper())
+                        if not lf_from_lexicon:
+                            # Try to find in abbrev_entries
+                            for entry in self.abbrev_entries:
+                                if entry.sf.upper() == ent_text.upper():
+                                    lf_from_lexicon = entry.lf
+                                    break
+
+                        if not lf_from_lexicon:
+                            continue  # Only report if we have a known expansion
+
+                        key = (ent_text.upper(), lf_from_lexicon.lower())
+                        if key in seen:
+                            continue
+                        seen.add(key)
+
+                        # Build lexicon IDs from UMLS CUI if available
+                        lex_ids = None
+                        if umls_cui:
+                            lex_ids = [LexiconIdentifier(source="UMLS", id=umls_cui)]
+
+                        source = "scispacy+umls" if lf_from_umls else "scispacy+lexicon"
+                        out.append(self._make_candidate(
+                            doc=doc,
+                            block=block,
+                            short_form=ent_text,
+                            long_form=lf_from_lexicon,
+                            start=ent.start_char,
+                            end=ent.end_char,
+                            text=text,
+                            rule_version="scispacy_ner::v1",
+                            lexicon_source=source,
+                            lexicon_ids=lex_ids,
+                        ))
+                except Exception as e:
+                    # Don't fail entire extraction if scispacy has issues
+                    pass
 
         return out
 
@@ -807,6 +969,14 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
         # Minimum length
         if len(term) < MIN_ABBREV_LENGTH:
+            return False
+
+        # Block pure numbers (not abbreviations)
+        if term.isdigit():
+            return False
+
+        # Block short alphanumeric codes starting with digit (e.g., 1A, 2B, 45)
+        if len(term) <= 3 and term[0].isdigit():
             return False
 
         return True

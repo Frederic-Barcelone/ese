@@ -1,27 +1,29 @@
 #!/usr/bin/env python3
 # corpus_metadata/corpus_abbreviations/F_evaluation/F04_generator_unit_test.py
 """
-
 Generator Unit Test
 
-Tests C_generators on synthetic sentences built from gold abbreviation pairs.
-No PDF, no txt files needed - just the gold JSON.
+Tests abbreviation extraction patterns using synthetic sentences built from gold pairs.
+No PDF parsing required—validates regex logic in isolation.
+
+Process:
+    1. Load gold SF/LF pairs from JSON
+    2. Generate 4 synthetic sentences per pair (different patterns)
+    3. Run simplified extractor matching C01_strategy_abbrev.py logic
+    4. Report recall by pattern type
+
+Patterns tested:
+    - LF (SF): "Tumor Necrosis Factor (TNF)"
+    - SF (LF): "TNF (Tumor Necrosis Factor)"
+    - Implicit: "TNF, defined as Tumor Necrosis Factor"
+    - End position: "diagnosed with Tumor Necrosis Factor (TNF)"
+
+Output: Per-pattern recall and overall recall with pass/fail threshold (≥90%).
 
 Usage:
     python F04_generator_unit_test.py
-    
-    ## What It Does
-```
-281 gold pairs (from nlp4rare_gold.json)
-    ↓
-Deduplicate → ~200 unique SF/LF pairs
-    ↓
-Generate 4 test sentences each = ~800 test cases
-    ↓
-Run simple regex extractor on each
-    ↓
-Report recall by pattern type
-```
+
+Requires: Gold JSON from F03_process_nlp4rare.py
 
 """
 

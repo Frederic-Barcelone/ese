@@ -1,5 +1,24 @@
 # corpus_metadata/corpus_abbreviations/F_evaluation/F01_gold_loader.py
 
+"""
+Gold Standard Loader
+
+Loads human-annotated abbreviation ground truth from JSON or CSV files.
+Returns validated GoldStandard object and doc_id-indexed lookup dictionary.
+
+Normalization applied:
+    - doc_id: filename only (strips paths)
+    - short_form: uppercased
+    - long_form: whitespace-normalized
+    - Duplicates removed by (doc_id, SF, LF) key
+
+Modes:
+    - strict=True: requires doc_id, short_form, long_form
+    - strict=False: allows missing long_form
+
+Used by F02_scorer.py for precision/recall/F1 calculation.
+"""
+
 from __future__ import annotations
 
 import csv

@@ -187,6 +187,44 @@ class ClaudeClient:
         # Parse JSON from response
         return self._extract_json(raw_text)
 
+    def complete_json_any(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        model: Optional[str] = None,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+        top_p: float = 1.0,
+        seed: Optional[int] = None,
+        response_format: Optional[Dict[str, Any]] = None,
+    ):
+        """
+        Call Claude and return parsed JSON response - handles both objects and arrays.
+        """
+        use_model = model or self.default_model
+        use_max_tokens = max_tokens or self.default_max_tokens
+        use_temperature = temperature if temperature is not None else self.default_temperature
+
+        # Call Claude API
+        message = self.client.messages.create(
+            model=use_model,
+            max_tokens=use_max_tokens,
+            temperature=use_temperature,
+            top_p=top_p,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+
+        # Extract text content
+        raw_text = ""
+        for block in message.content:
+            if hasattr(block, "text"):
+                raw_text += block.text
+
+        # Parse JSON from response (handles arrays and objects)
+        return self._extract_json_any(raw_text)
+
     def _extract_json(self, text: str) -> Dict[str, Any]:
         """
         Extract JSON from Claude's response.
@@ -244,6 +282,75 @@ class ClaudeClient:
             "reason": f"Failed to parse JSON from response: {text[:200]}",
             "corrected_long_form": None,
         }
+
+    def _extract_json_any(self, text: str):
+        """
+        Extract JSON from Claude's response - handles both objects and arrays.
+        Returns parsed JSON (dict or list) or None if parsing fails.
+        """
+        text = (text or "").strip()
+
+        # Try markdown code block with array: ```json [...] ```
+        code_block_match = re.search(r"```(?:json)?\s*(\[[\s\S]*?\])\s*```", text, re.DOTALL)
+        if code_block_match:
+            try:
+                return json.loads(code_block_match.group(1))
+            except json.JSONDecodeError:
+                pass
+
+        # Try markdown code block with object: ```json {...} ```
+        code_block_match = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text, re.DOTALL)
+        if code_block_match:
+            try:
+                return json.loads(code_block_match.group(1))
+            except json.JSONDecodeError:
+                pass
+
+        # Try to find JSON array (handles nested brackets)
+        start = text.find("[")
+        if start != -1:
+            depth = 0
+            end = start
+            for i, ch in enumerate(text[start:], start):
+                if ch == "[":
+                    depth += 1
+                elif ch == "]":
+                    depth -= 1
+                    if depth == 0:
+                        end = i + 1
+                        break
+            if depth == 0:
+                try:
+                    return json.loads(text[start:end])
+                except json.JSONDecodeError:
+                    pass
+
+        # Try to find JSON object (handles nested braces)
+        start = text.find("{")
+        if start != -1:
+            depth = 0
+            end = start
+            for i, ch in enumerate(text[start:], start):
+                if ch == "{":
+                    depth += 1
+                elif ch == "}":
+                    depth -= 1
+                    if depth == 0:
+                        end = i + 1
+                        break
+            if depth == 0:
+                try:
+                    return json.loads(text[start:end])
+                except json.JSONDecodeError:
+                    pass
+
+        # Try entire response
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            pass
+
+        return None
 
 
 # -----------------------------------------------------------------------------
@@ -313,6 +420,10 @@ class LLMEngine:
         task = self._select_task(candidate.field_type)
 
         # 2) Prompt bundle + deterministic hashes
+        # Gate v1.2 (permissive) to lexicon-backed candidates only
+        # Use v1.1 (stricter) for syntax/pattern candidates to reduce FP
+        prompt_version = self._select_prompt_version(candidate)
+
         llm_params = {
             "model": self.model,
             "temperature": self.temperature,
@@ -322,7 +433,7 @@ class LLMEngine:
             "response_format": self.response_format,
         }
         bundle = PromptRegistry.get_bundle(
-            task, version=self.prompt_version, llm_parameters=llm_params
+            task, version=prompt_version, llm_parameters=llm_params
         )
         context_hash = hash_string(context)
 
@@ -431,6 +542,220 @@ class LLMEngine:
             raw_llm_response=raw,
         )
 
+    def verify_candidates_batch(
+        self,
+        candidates: list[Candidate],
+        batch_size: int = 15,
+    ) -> list[ExtractedEntity]:
+        """
+        Verify multiple candidates in batches using a single LLM call per batch.
+
+        This is ~10x faster than individual calls while maintaining accuracy.
+        Candidates are grouped into batches of `batch_size` and validated together.
+
+        Args:
+            candidates: List of candidates to validate
+            batch_size: Number of candidates per LLM call (default 15)
+
+        Returns:
+            List of ExtractedEntity results in the same order as input
+        """
+        if not candidates:
+            return []
+
+        results: list[ExtractedEntity] = []
+
+        # Process in batches
+        for batch_start in range(0, len(candidates), batch_size):
+            batch = candidates[batch_start : batch_start + batch_size]
+            batch_results = self._verify_batch(batch)
+            results.extend(batch_results)
+
+        return results
+
+    def _verify_batch(self, batch: list[Candidate]) -> list[ExtractedEntity]:
+        """Verify a single batch of candidates with one LLM call."""
+        if not batch:
+            return []
+
+        # Build batch prompt
+        candidate_lines = []
+        for i, c in enumerate(batch):
+            context = (c.context_text or "")[:180]  # Limit context per candidate
+            prov = self._build_provenance_context(c)
+            candidate_lines.append(
+                f"[{i}] SF: '{c.short_form}' -> LF: '{c.long_form or '(none)'}'\n"
+                f"    Context: \"{context}\"\n"
+                f"    {prov.strip() if prov else 'Source: Unknown'}"
+            )
+
+        candidates_text = "\n\n".join(candidate_lines)
+
+        # Get batch prompt bundle
+        llm_params = {
+            "model": self.model,
+            "temperature": self.temperature,
+            "max_tokens": self.max_tokens * 2,  # More tokens for batch response
+            "top_p": self.top_p,
+            "seed": self.seed,
+            "response_format": self.response_format,
+        }
+        bundle = PromptRegistry.get_bundle(
+            PromptTask.VERIFY_BATCH, version="latest", llm_parameters=llm_params
+        )
+
+        user_prompt = bundle.user_template.format(
+            candidates=candidates_text,
+            count=len(batch),
+        )
+
+        # Call LLM - use complete_json_any to handle array responses
+        try:
+            # Check if client supports complete_json_any (handles arrays)
+            if hasattr(self.client, 'complete_json_any'):
+                raw = self.client.complete_json_any(
+                    system_prompt=bundle.system_prompt,
+                    user_prompt=user_prompt,
+                    model=self.model,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens * 2,
+                    top_p=self.top_p,
+                    seed=self.seed,
+                    response_format=self.response_format,
+                )
+            else:
+                # Fallback for clients without complete_json_any
+                raw = self.client.complete_json(
+                    system_prompt=bundle.system_prompt,
+                    user_prompt=user_prompt,
+                    model=self.model,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens * 2,
+                    top_p=self.top_p,
+                    seed=self.seed,
+                    response_format=self.response_format,
+                )
+        except Exception as e:
+            # On error, fall back to individual validation
+            print(f"  ⚠ Batch LLM error, falling back: {e}")
+            return [self.verify_candidate(c) for c in batch]
+
+        # Parse batch response
+        return self._parse_batch_response(batch, raw)
+
+    def _parse_batch_response(
+        self, batch: list[Candidate], raw
+    ) -> list[ExtractedEntity]:
+        """Parse batch LLM response into individual ExtractedEntity results."""
+        results: list[ExtractedEntity] = []
+
+        # Handle None (parsing failed)
+        if raw is None:
+            print(f"  ⚠ Batch parse failed (raw=None), falling back")
+            return [self.verify_candidate(c) for c in batch]
+
+        # Handle different response formats
+        response_list = []
+        if isinstance(raw, list):
+            response_list = raw
+        elif isinstance(raw, dict):
+            # Try common keys for array response
+            for key in ["results", "validations", "items", "responses"]:
+                if key in raw and isinstance(raw[key], list):
+                    response_list = raw[key]
+                    break
+            # If dict has numeric keys, convert to list
+            if not response_list and any(k.isdigit() for k in raw.keys() if isinstance(k, str)):
+                response_list = [raw.get(str(i)) or raw.get(i) for i in range(len(batch))]
+
+        # If we couldn't parse a list, fall back to individual validation
+        if not response_list or len(response_list) < len(batch):
+            print(f"  ⚠ Batch parse failed (got {len(response_list)}/{len(batch)}), falling back")
+            raw_type = type(raw).__name__
+            raw_keys = list(raw.keys())[:5] if isinstance(raw, dict) else None
+            print(f"    Raw type: {raw_type}, keys: {raw_keys}")
+            return [self.verify_candidate(c) for c in batch]
+
+        # Map responses to candidates
+        for i, candidate in enumerate(batch):
+            if i < len(response_list) and response_list[i]:
+                resp = response_list[i]
+                results.append(self._build_entity_from_batch_response(candidate, resp, raw))
+            else:
+                # Missing response, mark as ambiguous
+                results.append(self._entity_ambiguous(
+                    candidate,
+                    reason="Missing response in batch validation",
+                    flags=["batch_missing"],
+                    raw_llm=raw,
+                ))
+
+        return results
+
+    def _build_entity_from_batch_response(
+        self, candidate: Candidate, resp: dict, raw_batch: dict
+    ) -> ExtractedEntity:
+        """Build ExtractedEntity from a single batch response item."""
+        # Parse status
+        status_str = str(resp.get("status", "AMBIGUOUS")).upper()
+        try:
+            status = ValidationStatus(status_str)
+        except ValueError:
+            status = ValidationStatus.AMBIGUOUS
+
+        confidence = float(resp.get("confidence", 0.5))
+        reason = resp.get("reason", "")
+        corrected_lf = resp.get("corrected_long_form")
+
+        # Use corrected LF if provided
+        final_lf = candidate.long_form
+        if corrected_lf and isinstance(corrected_lf, str) and corrected_lf.strip():
+            final_lf = corrected_lf.strip()
+
+        context = (candidate.context_text or "").strip()
+        context_hash = hash_string(context) if context else "no_context"
+
+        # Build evidence span
+        start_off, end_off = self._infer_offsets(
+            context=context, sf=candidate.short_form, lf=final_lf
+        )
+        primary = EvidenceSpan(
+            text=context or "",
+            location=candidate.context_location,
+            scope_ref=context_hash,
+            start_char_offset=start_off,
+            end_char_offset=end_off,
+        )
+
+        # Build provenance
+        prov = candidate.provenance.model_copy(
+            update={
+                "pipeline_version": self.pipeline_version,
+                "run_id": self.run_id,
+                "rule_version": "batch_validation:v1.0",
+            }
+        )
+
+        rejection_reason = None
+        if status == ValidationStatus.REJECTED:
+            rejection_reason = reason or "Rejected by batch verifier"
+
+        return ExtractedEntity(
+            candidate_id=candidate.id,
+            doc_id=candidate.doc_id,
+            field_type=candidate.field_type,
+            short_form=candidate.short_form.strip(),
+            long_form=(final_lf.strip() if final_lf else None),
+            primary_evidence=primary,
+            supporting_evidence=[],
+            status=status,
+            confidence_score=confidence,
+            rejection_reason=rejection_reason,
+            validation_flags=["batch_validated"],
+            provenance=prov,
+            raw_llm_response={"batch_response": raw_batch, "item_response": resp},
+        )
+
     # -------------------------
     # Helpers
     # -------------------------
@@ -439,6 +764,45 @@ class LLMEngine:
         if field_type == FieldType.SHORT_FORM_ONLY:
             return PromptTask.VERIFY_SHORT_FORM_ONLY
         return PromptTask.VERIFY_DEFINITION_PAIR
+
+    def _select_prompt_version(self, candidate: Candidate) -> str:
+        """
+        Select prompt version based on candidate source.
+
+        For DEFINITION_PAIR/GLOSSARY_ENTRY:
+        - v1.2 (permissive): For lexicon-backed candidates (trusted sources)
+        - v1.1 (stricter): For syntax/pattern candidates (need explicit evidence)
+
+        For SHORT_FORM_ONLY: Always use v1.0 (only version available)
+
+        This gating reduces false positives from over-trusting pattern matches.
+        """
+        # SHORT_FORM_ONLY only has v1.0
+        if candidate.field_type == FieldType.SHORT_FORM_ONLY:
+            return "v1.0"
+
+        # Check if candidate has lexicon provenance
+        has_lexicon = False
+
+        # Check generator type
+        if candidate.generator_type:
+            gen_name = candidate.generator_type.value
+            if gen_name == "gen:lexicon_match":
+                has_lexicon = True
+
+        # Check provenance for lexicon source
+        if candidate.provenance and candidate.provenance.lexicon_source:
+            has_lexicon = True
+
+        # Check for external IDs (CUI, etc.) which indicate lexicon origin
+        if candidate.provenance and candidate.provenance.lexicon_ids:
+            has_lexicon = True
+
+        # Use permissive v1.2 only for lexicon-backed candidates
+        if has_lexicon:
+            return "v1.2"
+        else:
+            return "v1.1"
 
     def _build_provenance_context(self, candidate: Candidate) -> str:
         """

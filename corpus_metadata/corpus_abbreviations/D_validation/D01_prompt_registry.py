@@ -13,6 +13,7 @@ from A_core.A03_provenance import compute_prompt_bundle_hash
 class PromptTask(str, Enum):
     VERIFY_DEFINITION_PAIR = "verify_definition_pair"   # DEFINITION_PAIR + GLOSSARY_ENTRY
     VERIFY_SHORT_FORM_ONLY = "verify_short_form_only"   # SHORT_FORM_ONLY (do NOT guess LF)
+    VERIFY_BATCH = "verify_batch"                       # Batch validation (multiple candidates)
 
 
 class PromptBundle(BaseModel):
@@ -36,8 +37,9 @@ class PromptRegistry:
     """
 
     _LATEST: Dict[PromptTask, str] = {
-        PromptTask.VERIFY_DEFINITION_PAIR: "v1.1",
+        PromptTask.VERIFY_DEFINITION_PAIR: "v1.2",
         PromptTask.VERIFY_SHORT_FORM_ONLY: "v1.0",
+        PromptTask.VERIFY_BATCH: "v1.0",
     }
 
     _TEMPLATES: Dict[Tuple[PromptTask, str], Dict[str, Any]] = {
@@ -101,6 +103,48 @@ class PromptRegistry:
             "schema": None,
         },
 
+        # v1.2: More permissive - trust high-quality lexicons, reduce false rejections
+        (PromptTask.VERIFY_DEFINITION_PAIR, "v1.2"): {
+            "system": (
+                "You are a clinical document QA auditor validating medical abbreviations. "
+                "Your goal is to confirm valid abbreviations while rejecting clear errors. "
+                "When in doubt, lean toward VALIDATED for established medical terms. "
+                "Return JSON only."
+            ),
+            "user": (
+                "Context:\n{context}\n\n"
+                "Claim: short form '{sf}' stands for long form '{lf}'.\n"
+                "{provenance}\n"
+                "Decide if this abbreviation mapping is valid for this medical/scientific document.\n\n"
+                "Validation Rules (in priority order):\n"
+                "1) VALIDATED (high confidence) if:\n"
+                "   - Context explicitly defines SF->LF (e.g., 'long form (SF)' pattern), OR\n"
+                "   - SF appears in context AND comes from UMLS/medical lexicon (trust the lexicon)\n"
+                "2) VALIDATED (medium confidence) if:\n"
+                "   - SF appears in context AND LF is a plausible medical/scientific expansion\n"
+                "   - The LF makes semantic sense for this document's domain\n"
+                "3) REJECTED only if:\n"
+                "   - Context explicitly contradicts the SF->LF mapping, OR\n"
+                "   - SF is clearly NOT an abbreviation (e.g., a regular word, number, identifier), OR\n"
+                "   - LF is obviously wrong for this SF (e.g., 'FDA' -> 'Food Distribution Agency')\n"
+                "4) AMBIGUOUS only if:\n"
+                "   - SF does not appear in the context at all, OR\n"
+                "   - Multiple conflicting expansions are possible and context doesn't clarify\n\n"
+                "Important: Standard medical abbreviations (FDA, EMA, eGFR, UPCR, etc.) from trusted "
+                "lexicons should be VALIDATED when SF appears in context, even without explicit definition.\n\n"
+                "If LF has minor errors (typos, formatting), provide corrected_long_form.\n\n"
+                "Return JSON with keys:\n"
+                "{{"
+                "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
+                "\"confidence\": number (0.0-1.0), "
+                "\"evidence\": string (quote from context), "
+                "\"reason\": string (brief explanation), "
+                "\"corrected_long_form\": string|null"
+                "}}"
+            ),
+            "schema": None,
+        },
+
         # -------------------------
         # Short-form-only (orphan) verification
         # -------------------------
@@ -123,6 +167,46 @@ class PromptRegistry:
                 "\"evidence\": string, "
                 "\"reason\": string"
                 "}}"
+            ),
+            "schema": None,
+        },
+
+        # -------------------------
+        # Batch validation (multiple candidates at once)
+        # -------------------------
+        (PromptTask.VERIFY_BATCH, "v1.0"): {
+            "system": (
+                "You are a strict clinical document QA auditor validating medical abbreviations. "
+                "Apply rigorous standards: only true abbreviations with correct expansions pass. "
+                "You will receive multiple candidates to validate. "
+                "Return a JSON array with one result per candidate, in the same order. "
+                "Return ONLY the JSON array, no other text."
+            ),
+            "user": (
+                "Validate each abbreviation candidate below. Apply STRICT standards.\n\n"
+                "Validation Rules (BE STRICT):\n"
+                "VALIDATED only if:\n"
+                "- SF is a TRUE abbreviation (typically 2-6 uppercase letters/numbers)\n"
+                "- Context explicitly defines SF->LF OR SF appears AND comes from UMLS/medical lexicon\n"
+                "- LF is the correct, standard expansion for this abbreviation\n\n"
+                "REJECTED if:\n"
+                "- SF is a common English word (e.g., Data, Methods, White, Age, Study)\n"
+                "- SF is a proper noun/company name (e.g., Novartis, Lancet)\n"
+                "- LF is wrong or doesn't match standard medical terminology\n"
+                "- SF->LF mapping contradicts context\n"
+                "- LF just repeats SF or is circular\n\n"
+                "AMBIGUOUS if:\n"
+                "- SF not found in context\n"
+                "- Multiple conflicting expansions possible\n"
+                "- Unclear if SF is abbreviation vs regular word\n\n"
+                "Candidates:\n{candidates}\n\n"
+                "Return a JSON array with exactly {count} objects, one per candidate in order:\n"
+                "[\n"
+                "  {{\"index\": 0, \"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", \"confidence\": 0.0-1.0, "
+                "\"reason\": \"brief explanation\", \"corrected_long_form\": null}},\n"
+                "  ...\n"
+                "]\n"
+                "IMPORTANT: Return exactly {count} results. BE STRICT - when in doubt, REJECT."
             ),
             "schema": None,
         },
