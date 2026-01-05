@@ -225,50 +225,57 @@ class ClaudeClient:
         # Parse JSON from response (handles arrays and objects)
         return self._extract_json_any(raw_text)
 
-    def _extract_json(self, text: str) -> Dict[str, Any]:
+    def _find_balanced(self, text: str, open_ch: str, close_ch: str) -> Optional[str]:
+        """Find balanced brackets/braces and return the matched substring."""
+        start = text.find(open_ch)
+        if start == -1:
+            return None
+        depth = 0
+        for i, ch in enumerate(text[start:], start):
+            if ch == open_ch:
+                depth += 1
+            elif ch == close_ch:
+                depth -= 1
+                if depth == 0:
+                    return text[start : i + 1]
+        return None
+
+    def _extract_json_any(self, text: str):
         """
-        Extract JSON from Claude's response.
-        Handles markdown code blocks and raw JSON.
+        Extract JSON from Claude's response - handles both objects and arrays.
+        Returns parsed JSON (dict or list) or None if parsing fails.
         """
         text = (text or "").strip()
 
-        parsed = None
-
-        # Try markdown code block: ```json {...} ```
-        code_block_match = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text, re.DOTALL)
+        # Try markdown code block: ```json [...] ``` or ```json {...} ```
+        code_block_match = re.search(r"```(?:json)?\s*([\[\{][\s\S]*?[\]\}])\s*```", text, re.DOTALL)
         if code_block_match:
             try:
-                parsed = json.loads(code_block_match.group(1))
+                return json.loads(code_block_match.group(1))
             except json.JSONDecodeError:
                 pass
 
-        # Try to find JSON object (handles nested braces)
-        if parsed is None:
-            # Find first { and match to its closing }
-            start = text.find("{")
-            if start != -1:
-                depth = 0
-                end = start
-                for i, ch in enumerate(text[start:], start):
-                    if ch == "{":
-                        depth += 1
-                    elif ch == "}":
-                        depth -= 1
-                        if depth == 0:
-                            end = i + 1
-                            break
-                if depth == 0:
-                    try:
-                        parsed = json.loads(text[start:end])
-                    except json.JSONDecodeError:
-                        pass
+        # Try balanced array first, then object
+        for open_ch, close_ch in [("[", "]"), ("{", "}")]:
+            matched = self._find_balanced(text, open_ch, close_ch)
+            if matched:
+                try:
+                    return json.loads(matched)
+                except json.JSONDecodeError:
+                    pass
 
         # Try entire response
-        if parsed is None:
-            try:
-                parsed = json.loads(text)
-            except json.JSONDecodeError:
-                pass
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            return None
+
+    def _extract_json(self, text: str) -> Dict[str, Any]:
+        """
+        Extract JSON object from Claude's response.
+        Returns dict with "status" key or fallback AMBIGUOUS result.
+        """
+        parsed = self._extract_json_any(text)
 
         # Validate that parsed dict has required "status" key
         if isinstance(parsed, dict) and "status" in parsed:
@@ -279,78 +286,9 @@ class ClaudeClient:
             "status": "AMBIGUOUS",
             "confidence": 0.0,
             "evidence": "",
-            "reason": f"Failed to parse JSON from response: {text[:200]}",
+            "reason": f"Failed to parse JSON from response: {(text or '')[:200]}",
             "corrected_long_form": None,
         }
-
-    def _extract_json_any(self, text: str):
-        """
-        Extract JSON from Claude's response - handles both objects and arrays.
-        Returns parsed JSON (dict or list) or None if parsing fails.
-        """
-        text = (text or "").strip()
-
-        # Try markdown code block with array: ```json [...] ```
-        code_block_match = re.search(r"```(?:json)?\s*(\[[\s\S]*?\])\s*```", text, re.DOTALL)
-        if code_block_match:
-            try:
-                return json.loads(code_block_match.group(1))
-            except json.JSONDecodeError:
-                pass
-
-        # Try markdown code block with object: ```json {...} ```
-        code_block_match = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text, re.DOTALL)
-        if code_block_match:
-            try:
-                return json.loads(code_block_match.group(1))
-            except json.JSONDecodeError:
-                pass
-
-        # Try to find JSON array (handles nested brackets)
-        start = text.find("[")
-        if start != -1:
-            depth = 0
-            end = start
-            for i, ch in enumerate(text[start:], start):
-                if ch == "[":
-                    depth += 1
-                elif ch == "]":
-                    depth -= 1
-                    if depth == 0:
-                        end = i + 1
-                        break
-            if depth == 0:
-                try:
-                    return json.loads(text[start:end])
-                except json.JSONDecodeError:
-                    pass
-
-        # Try to find JSON object (handles nested braces)
-        start = text.find("{")
-        if start != -1:
-            depth = 0
-            end = start
-            for i, ch in enumerate(text[start:], start):
-                if ch == "{":
-                    depth += 1
-                elif ch == "}":
-                    depth -= 1
-                    if depth == 0:
-                        end = i + 1
-                        break
-            if depth == 0:
-                try:
-                    return json.loads(text[start:end])
-                except json.JSONDecodeError:
-                    pass
-
-        # Try entire response
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            pass
-
-        return None
 
 
 # -----------------------------------------------------------------------------
