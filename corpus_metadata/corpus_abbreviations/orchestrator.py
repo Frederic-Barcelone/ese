@@ -257,6 +257,42 @@ class Orchestrator:
             print(f"[WARN] Failed to load config from {config_path}: {e}")
             return {}
 
+    def _export_extracted_text(self, pdf_path: Path, doc) -> None:
+        """
+        Export extracted text from parsed PDF to a text file.
+
+        The text file is saved in the same folder as the PDF with the same
+        name but with a .txt extension.
+        """
+        # Build output path: same folder as PDF, same name but .txt extension
+        txt_path = pdf_path.with_suffix(".txt")
+
+        # Extract text from all blocks
+        text_lines = []
+        current_page = None
+
+        for block in doc.iter_linear_blocks(skip_header_footer=False):
+            # Add page separator when page changes
+            if block.page_num != current_page:
+                if current_page is not None:
+                    text_lines.append("")  # Empty line between pages
+                text_lines.append(f"--- Page {block.page_num} ---")
+                text_lines.append("")
+                current_page = block.page_num
+
+            # Add block text
+            text = (block.text or "").strip()
+            if text:
+                text_lines.append(text)
+
+        # Write to file
+        try:
+            with open(txt_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(text_lines))
+            print(f"  Extracted text: {txt_path.name}")
+        except Exception as e:
+            print(f"  [WARN] Failed to export text: {e}")
+
     def process_pdf(
         self,
         pdf_path: str,
@@ -293,6 +329,9 @@ class Orchestrator:
         print(f"  Blocks: {total_blocks}")
         print(f"  Tables: {total_tables}")
         print(f"  Time: {time.time() - start:.2f}s")
+
+        # Export extracted text to file
+        self._export_extracted_text(pdf_path, doc)
 
         # -----------------------------
         # Stage 2: Generate candidates
