@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT))
 
 from A_core.A01_domain_models import ExtractedEntity, ValidationStatus
 from A_core.A03_provenance import generate_run_id
+from A_core.A04_heuristics_config import HeuristicsConfig, DEFAULT_HEURISTICS_CONFIG
 from F_evaluation.F01_gold_loader import GoldLoader, GoldAnnotation
 from F_evaluation.F02_scorer import Scorer, ScorerConfig, ScoreReport
 from orchestrator import Orchestrator
@@ -113,6 +114,24 @@ class PipelineEvaluator:
         if not pdfs:
             print("❌ No annotated PDFs found")
             return
+
+        # Count unique gold SFs across all docs to evaluate
+        gold_sfs_in_scope = set()
+        for pdf in pdfs:
+            doc_id = pdf.name
+            for anno in self.gold_index.get(doc_id, []):
+                gold_sfs_in_scope.add(anno.short_form.upper())
+
+        # Determine scoring mode from scorer config
+        scoring_mode = "sf+lf_match" if self.scorer.config.require_long_form_match else "sf_only_unique"
+
+        # Print evaluation header for quick comparison
+        eval_header = self.orchestrator.heuristics.eval_header(
+            gold_file=self.gold_path.name,
+            gold_count=len(gold_sfs_in_scope),
+            scoring_mode=scoring_mode,
+        )
+        print("\n" + eval_header)
 
         print("=" * 70)
         print("PIPELINE EVALUATION TEST")

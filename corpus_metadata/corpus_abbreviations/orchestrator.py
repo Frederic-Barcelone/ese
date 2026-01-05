@@ -30,6 +30,10 @@ sys.path.insert(0, str(ROOT))
 
 from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus, GeneratorType, EvidenceSpan, FieldType, Coordinate, ProvenanceMetadata
 from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint, hash_string
+from A_core.A04_heuristics_config import (
+    HeuristicsConfig, HeuristicsCounters, DEFAULT_HEURISTICS_CONFIG,
+    check_context_match, check_trial_id, get_canonical_case
+)
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
@@ -69,6 +73,7 @@ class Orchestrator:
         run_id: Optional[str] = None,
         skip_validation: bool = False,
         enable_haiku_screening: bool = False,  # Haiku fast-reject (disabled by default)
+        heuristics_config: Optional[HeuristicsConfig] = None,  # Centralized heuristics
     ):
         self.config_path = config_path or self.DEFAULT_CONFIG
         self.log_dir = Path(log_dir or self.DEFAULT_LOG_DIR)
@@ -77,6 +82,9 @@ class Orchestrator:
         self.run_id = run_id or generate_run_id("RUN")
         self.skip_validation = skip_validation
         self.enable_haiku_screening = enable_haiku_screening
+
+        # Centralized heuristics config
+        self.heuristics = heuristics_config or DEFAULT_HEURISTICS_CONFIG
 
         # Parser
         self.parser = PDFToDocGraphParser()
@@ -247,9 +255,9 @@ class Orchestrator:
         # UPSTREAM REDUCTION: Reduce LEXICON_MATCH before LLM (1A, 1B)
         # ========================================
 
-        # Quick Win #2: Allowlists for valid short SFs
-        ALLOWED_2LETTER_SFS = {'UK', 'US', 'EU', 'IV', 'IM', 'PO', 'SC', 'ID'}  # Countries + routes
-        ALLOWED_MIXED_CASE = {'MEDDRA', 'RADAR', 'SAS', 'SPSS', 'STATA'}  # Software/registries
+        # Use centralized config for allowlists
+        ALLOWED_2LETTER_SFS = self.heuristics.allowed_2letter_sfs
+        ALLOWED_MIXED_CASE = self.heuristics.allowed_mixed_case
 
         def is_valid_sf_form(sf: str, context: str = "") -> bool:
             """1B: Filter SF by form - reject non-abbreviation patterns."""
@@ -367,87 +375,35 @@ class Orchestrator:
         auto_results: List[Tuple[Candidate, ExtractedEntity]] = []
         llm_candidates: List[Candidate] = []
 
-        # Common English words that look like abbreviations but aren't
-        COMMON_WORDS = {
-            'THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL',
-            'CAN', 'HER', 'WAS', 'ONE', 'OUR', 'OUT', 'DAY', 'GET',
-            'HAS', 'HIM', 'HIS', 'HOW', 'ITS', 'MAY', 'NEW', 'NOW',
-            'OLD', 'SEE', 'TWO', 'WAY', 'WHO', 'BOY', 'DID', 'ANY',
-            'DATA', 'WHITE', 'METHODS', 'STUDY', 'RESULTS', 'AGE',
-            'YEARS', 'PATIENTS', 'TABLE', 'FIGURE', 'BASELINE',
-        }
+        # Use centralized config for common words
+        COMMON_WORDS = self.heuristics.common_words
 
         # ========================================
         # PASO A: Stats whitelist - deterministic (no LLM)
         # These are auto-approved if numeric evidence is present
         # ========================================
-        STATS_WHITELIST = {'CI', 'SD', 'SE', 'OR', 'RR', 'HR', 'IQR', 'AUC', 'ROC'}
-
-        # Mini-lexicon for stats - fixed LFs for reporting
-        STATS_CANONICAL_LF = {
-            'CI': 'confidence interval',
-            'SD': 'standard deviation',
-            'SE': 'standard error',
-            'OR': 'odds ratio',
-            'RR': 'risk ratio',
-            'HR': 'hazard ratio',
-            'IQR': 'interquartile range',
-            'AUC': 'area under the curve',
-            'ROC': 'receiver operating characteristic',
-        }
+        STATS_WHITELIST = self.heuristics.stats_whitelist
+        STATS_CANONICAL_LF = self.heuristics.stats_canonical_lf
 
         # ========================================
         # PASO B: Country codes - deterministic (no LLM)
         # ========================================
-        COUNTRY_CODES = {'US', 'UK', 'USA', 'EU'}
-        COUNTRY_CANONICAL_LF = {
-            'US': 'United States',
-            'UK': 'United Kingdom',
-            'USA': 'United States of America',
-            'EU': 'European Union',
-        }
+        COUNTRY_CODES = self.heuristics.country_codes
+        COUNTRY_CANONICAL_LF = self.heuristics.country_canonical_lf
 
         # Blacklist: words that look like abbreviations but aren't
         # These will be auto-rejected even if in lexicon
-        SF_BLACKLIST = {
-            'AUG', 'INDIAN', 'ROCHE', 'INT', 'WHITE', 'FACIT',  # Not abbreviations in medical context
-            # Author credentials and titles
-            'MD', 'PHD', 'MBBS', 'FRCP', 'MPH', 'MS', 'BSC', 'MA', 'BA',
-            # US state abbreviations (not relevant medical abbreviations)
-            'NY', 'NJ', 'CA', 'TX', 'FL', 'PA', 'OH', 'IL', 'MA', 'NC',
-            # Other non-abbreviations
-            'DM', 'IRCCS',  # Diabetes mellitus context-dependent, Italian research institute
-        }
+        SF_BLACKLIST = self.heuristics.sf_blacklist
 
         # ========================================
         # PASO C: Hyphenated abbreviations - search in full text
         # These are often missed by standard generators
         # ========================================
-        HYPHENATED_ABBREVS = {
-            'APPEAR-C3G': 'trial name',
-            'CKD-EPI': 'Chronic Kidney Disease Epidemiology Collaboration',
-            'FACIT-FATIGUE': 'Functional Assessment of Chronic Illness Therapy-Fatigue',
-            'IL-6': 'interleukin-6',
-            'IL-1': 'interleukin-1',
-            'TNF-α': 'tumor necrosis factor alpha',
-            'sC5b-9': 'soluble terminal complement complex',
-            'C5b-9': 'terminal complement complex',
-        }
+        HYPHENATED_ABBREVS = self.heuristics.hyphenated_abbrevs
 
         # Direct text search for abbreviations often missed by lexicon
         # These are searched in full_text if not already found
-        DIRECT_SEARCH_ABBREVS = {
-            # Country codes (often not in medical lexicons)
-            'UK': 'United Kingdom',
-            # Stats that might be missed
-            'RR': 'risk ratio',
-            'HR': 'hazard ratio',
-            # Multi-word
-            'CC BY': 'Creative Commons Attribution',
-            # Complement fragments (often have wrong LF in lexicon)
-            'C3a': 'complement C3a anaphylatoxin',
-            'C5a': 'complement C5a anaphylatoxin',
-        }
+        DIRECT_SEARCH_ABBREVS = self.heuristics.direct_search_abbrevs
 
         def has_numeric_evidence(context: str, sf: str) -> bool:
             """Check if SF appears with numeric evidence (digits, %, =, :)."""
@@ -512,9 +468,9 @@ class Orchestrator:
                 raw_llm_response=raw_response,
             )
 
-        stats_auto_approved = 0
-        country_auto_approved = 0
-        blacklist_rejected = 0
+        # Initialize heuristics counters for logging
+        counters = HeuristicsCounters()
+
         for c in needs_validation:
             sf_upper = c.short_form.upper()
             ctx = c.context_text or ""
@@ -529,7 +485,35 @@ class Orchestrator:
                     ["auto_rejected_blacklist"], {"auto": "blacklist"}
                 )
                 auto_results.append((c, entity))
-                blacklist_rejected += 1
+                counters.blacklisted_fp_count += 1
+                auto_rejected_count += 1
+                continue
+
+            # ========================================
+            # Contextual rejection for ambiguous SFs (Option B)
+            # ========================================
+            if not check_context_match(c.short_form, ctx, self.heuristics):
+                entity = _create_auto_entity(
+                    c, ValidationStatus.REJECTED, 0.90,
+                    "Rejected: ambiguous SF without required medical context",
+                    ["auto_rejected_context"], {"auto": "context_mismatch"}
+                )
+                auto_results.append((c, entity))
+                counters.context_rejected += 1
+                auto_rejected_count += 1
+                continue
+
+            # ========================================
+            # Exclude trial IDs if configured (NCT\d+)
+            # ========================================
+            if check_trial_id(c.short_form, self.heuristics):
+                entity = _create_auto_entity(
+                    c, ValidationStatus.REJECTED, 0.90,
+                    "Excluded: trial identifier (NCT number)",
+                    ["auto_rejected_trial_id"], {"auto": "trial_id_excluded"}
+                )
+                auto_results.append((c, entity))
+                counters.trial_id_excluded += 1
                 auto_rejected_count += 1
                 continue
 
@@ -562,7 +546,7 @@ class Orchestrator:
                         raw_llm_response=entity.raw_llm_response,
                     )
                 auto_results.append((c, entity))
-                stats_auto_approved += 1
+                counters.recovered_by_stats_whitelist += 1
                 auto_approved_count += 1
                 continue
 
@@ -594,7 +578,7 @@ class Orchestrator:
                         raw_llm_response=entity.raw_llm_response,
                     )
                 auto_results.append((c, entity))
-                country_auto_approved += 1
+                counters.recovered_by_country_code += 1
                 auto_approved_count += 1
                 continue
 
@@ -606,6 +590,7 @@ class Orchestrator:
                     ["auto_rejected"], {"auto": "rejected_common_word"}
                 )
                 auto_results.append((c, entity))
+                counters.common_word_rejected += 1
                 auto_rejected_count += 1
                 continue
 
@@ -616,10 +601,12 @@ class Orchestrator:
         print(f"  Corroborated SFs: {len(corroborated_sfs)}")
         print(f"  Frequent SFs (2+ occurrences): {frequent_sfs}")
         print(f"  Filtered (lexicon-only, rare): {filtered_count}")
-        print(f"  Auto-approved stats (PASO A): {stats_auto_approved}")
-        print(f"  Auto-approved country (PASO B): {country_auto_approved}")
-        print(f"  Auto-rejected blacklist: {blacklist_rejected}")
-        print(f"  Auto-rejected common words: {auto_rejected_count - blacklist_rejected}")
+        print(f"  Auto-approved stats (PASO A): {counters.recovered_by_stats_whitelist}")
+        print(f"  Auto-approved country (PASO B): {counters.recovered_by_country_code}")
+        print(f"  Auto-rejected blacklist: {counters.blacklisted_fp_count}")
+        print(f"  Auto-rejected context: {counters.context_rejected}")
+        print(f"  Auto-rejected trial IDs: {counters.trial_id_excluded}")
+        print(f"  Auto-rejected common words: {counters.common_word_rejected}")
         print(f"  Candidates for LLM: {len(llm_candidates)}")
         start = time.time()
 
@@ -754,7 +741,6 @@ class Orchestrator:
         # PASO C: Detect hyphenated abbreviations in full text
         # These are often missed by standard generators
         # ========================================
-        hyphenated_found = 0
         # Get all SFs already found
         found_sfs = {r.short_form.upper() for r in results if r.status == ValidationStatus.VALIDATED}
 
@@ -808,15 +794,14 @@ class Orchestrator:
                     raw_llm_response={"auto": "hyphenated_detector"},
                 )
                 results.append(entity)
-                hyphenated_found += 1
+                counters.recovered_by_hyphen += 1
 
-        if hyphenated_found > 0:
-            print(f"  Hyphenated detected (PASO C): {hyphenated_found}")
+        if counters.recovered_by_hyphen > 0:
+            print(f"  Hyphenated detected (PASO C): {counters.recovered_by_hyphen}")
 
         # ========================================
         # Direct text search for missed abbreviations (UK, RR, CC BY, etc.)
         # ========================================
-        direct_found = 0
         for direct_sf, direct_lf in DIRECT_SEARCH_ABBREVS.items():
             if direct_sf.upper() in found_sfs:
                 continue  # Already found
@@ -872,10 +857,10 @@ class Orchestrator:
                 )
                 results.append(entity)
                 found_sfs.add(direct_sf.upper())
-                direct_found += 1
+                counters.recovered_by_direct_search += 1
 
-        if direct_found > 0:
-            print(f"  Direct search detected (UK, RR, CC BY): {direct_found}")
+        if counters.recovered_by_direct_search > 0:
+            print(f"  Direct search detected (UK, RR, CC BY): {counters.recovered_by_direct_search}")
 
         # ========================================
         # PASO D: LLM Extractor SF-only
@@ -958,7 +943,6 @@ Return ONLY the JSON array, nothing else."""
             print(f"    Candidates: {sorted(llm_sf_candidates)[:20]}")
 
         # Validate and add LLM-found SFs
-        llm_added = 0
         llm_filtered_already = 0
         llm_filtered_blacklist = 0
         llm_filtered_not_in_text = 0
@@ -1039,9 +1023,9 @@ Return ONLY the JSON array, nothing else."""
             )
             results.append(entity)
             all_processed_sfs.add(sf_upper)
-            llm_added += 1
+            counters.recovered_by_llm_sf_only += 1
 
-        print(f"  LLM SF-only extracted (PASO D): {llm_added}")
+        print(f"  LLM SF-only extracted (PASO D): {counters.recovered_by_llm_sf_only}")
         if llm_sf_candidates:
             print(f"    Filtered: already={llm_filtered_already}, blacklist={llm_filtered_blacklist}, not_in_text={llm_filtered_not_in_text}, form={llm_filtered_form}")
 
@@ -1081,8 +1065,11 @@ Return ONLY the JSON array, nothing else."""
         self.logger.write_summary()
         self.logger.print_summary()
 
+        # Log heuristics counters for debugging
+        counters.log_summary()
+
         # Export results
-        self._export_results(pdf_path, results, unique_candidates)
+        self._export_results(pdf_path, results, unique_candidates, counters)
 
         # Print validated abbreviations
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -1101,6 +1088,7 @@ Return ONLY the JSON array, nothing else."""
         pdf_path: Path,
         results: List[ExtractedEntity],
         candidates: List[Candidate],
+        counters: Optional[HeuristicsCounters] = None,
     ) -> None:
         """
         Export results to JSON in the PDF directory.
@@ -1119,6 +1107,7 @@ Return ONLY the JSON array, nothing else."""
             "total_validated": len([r for r in results if r.status == ValidationStatus.VALIDATED]),
             "total_rejected": len([r for r in results if r.status == ValidationStatus.REJECTED]),
             "total_ambiguous": len([r for r in results if r.status == ValidationStatus.AMBIGUOUS]),
+            "heuristics_counters": counters.to_dict() if counters else None,
             "abbreviations": [],
         }
 
