@@ -179,7 +179,7 @@ class TermMapper(BaseNormalizer):
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
         except Exception as e:
-            print(f"âŒ TermMapper: error loading mapping file {path}: {e}")
+            print(f"[WARN]  TermMapper: error loading mapping file {path}: {e}")
             return {}
 
         out: Dict[str, Dict[str, Any]] = {}

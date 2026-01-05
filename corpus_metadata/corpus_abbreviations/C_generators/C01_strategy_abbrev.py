@@ -113,7 +113,7 @@ def _truncate_at_breaks(text: str) -> str:
     t = re.sub(r"\b(and|or|as|by|the|a|an|of|in|for|to)\s*$", "", t, flags=re.IGNORECASE).strip()
 
     # Drop trailing punctuation that might have been left
-    t = re.sub(r"[,\-–—]\s*$", "", t).strip()
+    t = re.sub(r"[,\-]\s*$", "", t).strip()
 
     return _clean_ws(t)
 
@@ -159,7 +159,7 @@ def _looks_like_measurement(text: str) -> bool:
         return True
 
     # Reject if looks like a numeric list/sequence
-    if re.match(r'^[\d.,×\s\-–/]+$', text):
+    if re.match(r'^[\d.,×\s\-/]+$', text):
         return True
 
     return False

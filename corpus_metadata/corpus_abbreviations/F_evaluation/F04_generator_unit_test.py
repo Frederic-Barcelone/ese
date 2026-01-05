@@ -4,7 +4,7 @@
 Generator Unit Test
 
 Tests abbreviation extraction patterns using synthetic sentences built from gold pairs.
-No PDF parsing required—validates regex logic in isolation.
+No PDF parsing required- validates regex logic in isolation.
 
 Process:
     1. Load gold SF/LF pairs from JSON
@@ -18,7 +18,7 @@ Patterns tested:
     - Implicit: "TNF, defined as Tumor Necrosis Factor"
     - End position: "diagnosed with Tumor Necrosis Factor (TNF)"
 
-Output: Per-pattern recall and overall recall with pass/fail threshold (≥90%).
+Output: Per-pattern recall and overall recall with pass/fail threshold (>=90%).
 
 Usage:
     python F04_generator_unit_test.py
@@ -208,9 +208,9 @@ def print_results(results: Dict):
     print(f"{'OVERALL':<15} {total_tp:>6} {total_fn:>6} {overall_recall:>9.1%}")
     
     if results['failures']:
-        print(f"\n⚠️  Sample failures (first {len(results['failures'])}):")
+        print(f"\n[WARN]ï¸  Sample failures (first {len(results['failures'])}):")
         for f in results['failures'][:5]:
-            print(f"  {f['expected_sf']} → {f['expected_lf'][:30]}...")
+            print(f"  {f['expected_sf']} -> {f['expected_lf'][:30]}...")
             print(f"    Pattern: {f['pattern']}")
             print(f"    Found: {f['found']}")
     
@@ -218,11 +218,11 @@ def print_results(results: Dict):
     
     # Interpretation
     if overall_recall >= 0.90:
-        print("✅ PASS - Generators working correctly (≥90% recall)")
+        print("[OK] PASS - Generators working correctly (>=90% recall)")
     elif overall_recall >= 0.70:
-        print("⚠️  WARNING - Some patterns not captured (70-90%)")
+        print("[WARN]ï¸  WARNING - Some patterns not captured (70-90%)")
     else:
-        print("❌ FAIL - Generator logic needs review (<70%)")
+        print("[X] FAIL - Generator logic needs review (<70%)")
 
 
 # =============================================================================
@@ -231,7 +231,7 @@ def print_results(results: Dict):
 
 def main():
     if not Path(GOLD_JSON).exists():
-        print(f"❌ Gold file not found: {GOLD_JSON}")
+        print(f"[X] Gold file not found: {GOLD_JSON}")
         print("Run F03_process_nlp4rare.py first")
         return
     

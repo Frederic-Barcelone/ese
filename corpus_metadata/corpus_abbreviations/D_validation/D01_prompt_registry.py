@@ -14,6 +14,7 @@ class PromptTask(str, Enum):
     VERIFY_DEFINITION_PAIR = "verify_definition_pair"   # DEFINITION_PAIR + GLOSSARY_ENTRY
     VERIFY_SHORT_FORM_ONLY = "verify_short_form_only"   # SHORT_FORM_ONLY (do NOT guess LF)
     VERIFY_BATCH = "verify_batch"                       # Batch validation (multiple candidates)
+    FAST_REJECT = "fast_reject"                         # Haiku screening: REJECT obvious non-abbreviations
 
 
 class PromptBundle(BaseModel):
@@ -39,7 +40,8 @@ class PromptRegistry:
     _LATEST: Dict[PromptTask, str] = {
         PromptTask.VERIFY_DEFINITION_PAIR: "v1.2",
         PromptTask.VERIFY_SHORT_FORM_ONLY: "v1.0",
-        PromptTask.VERIFY_BATCH: "v1.0",
+        PromptTask.VERIFY_BATCH: "v2.0",
+        PromptTask.FAST_REJECT: "v1.0",
     }
 
     _TEMPLATES: Dict[Tuple[PromptTask, str], Dict[str, Any]] = {
@@ -207,6 +209,94 @@ class PromptRegistry:
                 "  ...\n"
                 "]\n"
                 "IMPORTANT: Return exactly {count} results. BE STRICT - when in doubt, REJECT."
+            ),
+            "schema": None,
+        },
+
+        # v2.0: Robust output contract + anti-AMBIGUOUS rules
+        (PromptTask.VERIFY_BATCH, "v2.0"): {
+            "system": (
+                "You validate medical abbreviations. Return ONLY valid JSON. No markdown. No extra text."
+            ),
+            "user": (
+                "Task: Validate abbreviation mappings independently.\n"
+                "Evaluate each candidate independently. Do not compare candidates to each other.\n\n"
+                "=== INPUT FIELDS ===\n"
+                "- has_explicit_pair: SF and LF found together in document as definition pattern\n"
+                "- ctx_pair: Both SF and LF strings appear in context snippet\n"
+                "- source: Where candidate came from (SYNTAX_PATTERN, LEXICON_MATCH, etc.)\n"
+                "- lexicon: Source lexicon name (UMLS, disease_lexicon_*, etc.)\n\n"
+                "=== DECISION RULES ===\n\n"
+                "VALIDATED if ANY of these:\n"
+                "- has_explicit_pair=true (explicit definition in document - high trust)\n"
+                "- source=GLOSSARY_TABLE (from document's own glossary - high trust)\n"
+                "- lexicon contains 'UMLS' AND SF is medical/scientific term in context\n"
+                "- ctx_pair=true AND source=LEXICON_MATCH (SF and LF both found in context)\n\n"
+                "REJECTED if ANY of these:\n"
+                "- SF is common English word (DATA, METHODS, WHITE, BLACK, TABLE, FIGURE, RESULTS, "
+                "STUDY, AGE, YEARS, PATIENTS, BASELINE) AND has_explicit_pair=false\n"
+                "- LF equals or nearly equals SF (circular)\n"
+                "- Context clearly contradicts the SF->LF meaning\n"
+                "- SF is a proper noun/company name without medical abbreviation usage\n"
+                "- SF appears as regular word in context, not as abbreviation\n\n"
+                "AMBIGUOUS only if ALL of these:\n"
+                "- Context is insufficient AND\n"
+                "- No explicit pair pattern AND\n"
+                "- Does not match any REJECTED rule\n\n"
+                ">>> IMPORTANT: If uncertain between AMBIGUOUS and REJECTED, choose REJECTED with low confidence. <<<\n\n"
+                "=== CANDIDATES ===\n{candidates}\n\n"
+                "=== OUTPUT CONTRACT ===\n"
+                "Return a single JSON object (not an array at root level):\n"
+                "{{\n"
+                '  "expected_count": {count},\n'
+                '  "results": [\n'
+                '    {{"id": "<id from input>", "status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": 0.0-1.0, "reason": "<=12 words"}},\n'
+                "    ...\n"
+                "  ]\n"
+                "}}\n\n"
+                "HARD CONSTRAINTS:\n"
+                "- Output must be valid JSON\n"
+                "- results array must have exactly {count} items\n"
+                "- Each result must include the id from input\n"
+                "- Never return a bare array; always use the wrapper object"
+            ),
+            "schema": None,
+        },
+
+        # -------------------------
+        # Fast Reject (Haiku screening)
+        # -------------------------
+        (PromptTask.FAST_REJECT, "v1.0"): {
+            "system": (
+                "You are a fast screening filter for medical abbreviations. "
+                "Your job is to REJECT obvious non-abbreviations. "
+                "When in doubt, return REVIEW (let the main validator decide). "
+                "Return ONLY valid JSON. No markdown."
+            ),
+            "user": (
+                "Screen these candidates. Only REJECT if you are VERY confident (>=0.9).\n\n"
+                "=== REJECT ONLY IF ===\n"
+                "- SF is a common English word used normally (not as abbreviation)\n"
+                "- SF is a proper noun/company name (Novartis, Roche, Lancet)\n"
+                "- LF is circular (equals or contains only SF)\n"
+                "- LF is clearly not a definition (random phrase, incomplete)\n"
+                "- SF appears in context as regular word, not abbreviation\n\n"
+                "=== REVIEW (default) ===\n"
+                "- Any doubt -> REVIEW\n"
+                "- SF looks like abbreviation but unsure about LF -> REVIEW\n"
+                "- Medical/scientific terms -> REVIEW\n\n"
+                "=== CANDIDATES ===\n{candidates}\n\n"
+                "=== OUTPUT ===\n"
+                "Return JSON object:\n"
+                "{{\n"
+                '  "results": [\n'
+                '    {{"id": "<id>", "decision": "REJECT|REVIEW", "confidence": 0.0-1.0, '
+                '"reason": "<=8 words"}},\n'
+                "    ...\n"
+                "  ]\n"
+                "}}\n\n"
+                "IMPORTANT: Prefer REVIEW when uncertain. Only REJECT obvious cases."
             ),
             "schema": None,
         },

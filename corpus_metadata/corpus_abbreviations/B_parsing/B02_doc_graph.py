@@ -7,7 +7,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 from pydantic import BaseModel, ConfigDict, Field, PrivateAttr
 
-# ✅ IMPORTANT: use local package-style imports (no "corpus_metadata....")
+# [OK] IMPORTANT: use local package-style imports (no "corpus_metadata....")
 from A_core.A01_domain_models import BoundingBox
 
 

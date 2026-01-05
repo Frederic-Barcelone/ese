@@ -616,7 +616,7 @@ class LLMEngine:
                 )
         except Exception as e:
             # On error, fall back to individual validation
-            print(f"  ⚠ Batch LLM error, falling back: {e}")
+            print(f"  [WARN] Batch LLM error, falling back: {e}")
             return [self.verify_candidate(c) for c in batch]
 
         # Parse batch response
@@ -646,7 +646,7 @@ class LLMEngine:
 
         # Handle None (parsing failed)
         if raw is None:
-            print(f"  ⚠ Batch parse failed (raw=None), falling back")
+            print(f"  [WARN] Batch parse failed (raw=None), falling back")
             return [self.verify_candidate(c) for c in batch]
 
         # Extract results list from response
@@ -660,7 +660,7 @@ class LLMEngine:
                 # Hard validation: check expected_count matches
                 resp_expected = raw.get("expected_count", len(response_list))
                 if resp_expected != expected_count:
-                    print(f"  ⚠ Batch count mismatch (expected {expected_count}, got {resp_expected})")
+                    print(f"  [WARN] Batch count mismatch (expected {expected_count}, got {resp_expected})")
             else:
                 # Legacy fallback: try other common keys
                 for key in ["validations", "items", "responses"]:
@@ -673,7 +673,7 @@ class LLMEngine:
 
         # Hard validation: must have exactly expected_count results
         if len(response_list) != expected_count:
-            print(f"  ⚠ Batch parse failed (got {len(response_list)}/{expected_count}), falling back")
+            print(f"  [WARN] Batch parse failed (got {len(response_list)}/{expected_count}), falling back")
             raw_type = type(raw).__name__
             raw_keys = list(raw.keys())[:5] if isinstance(raw, dict) else None
             print(f"    Raw type: {raw_type}, keys: {raw_keys}")
@@ -714,7 +714,7 @@ class LLMEngine:
                     ))
 
         if missing_ids:
-            print(f"  ⚠ {len(missing_ids)} ids not found in response, used index fallback")
+            print(f"  [WARN] {len(missing_ids)} ids not found in response, used index fallback")
 
         return results
 
@@ -869,7 +869,7 @@ class LLMEngine:
                     top_p=1.0,
                 )
         except Exception as e:
-            print(f"  ⚠ Haiku error, sending all to Sonnet: {e}")
+            print(f"  [WARN] Haiku error, sending all to Sonnet: {e}")
             return batch, []
 
         # Parse response

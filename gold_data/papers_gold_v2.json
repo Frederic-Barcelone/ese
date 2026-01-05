@@ -1,0 +1,3031 @@
+{
+  "metadata": {
+    "source": "/Users/frederictetard/Projects/ese/gold_data/papers_gold.json",
+    "audit_report": "/Users/frederictetard/Projects/ese/gold_data/audit_report.json",
+    "reclassification_version": "1.0"
+  },
+  "summary": {
+    "total_original": 156,
+    "defined": 62,
+    "mentioned": 83,
+    "excluded": 11
+  },
+  "defined_annotations": [
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C3G",
+      "long_form": "C3 glomerulopathy",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "EMA",
+      "long_form": "European Medicines Agency",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FDA",
+      "long_form": "Food and Drug Administration",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 7,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "IC-MPGN",
+      "long_form": "immune complex membranoproliferative glomerulonephritis",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "KDIGO",
+      "long_form": "Kidney Disease: Improving Global Outcomes",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "LNP023",
+      "long_form": "iptacopan",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "MPGN",
+      "long_form": "membranoproliferative glomerulonephritis",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "OR",
+      "long_form": "odds ratio",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RAAS",
+      "long_form": "renin-angiotensin-aldosterone system",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 7,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RR",
+      "long_form": "relative reduction",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SGLT2",
+      "long_form": "sodium-glucose cotransporter-2",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "UPCR",
+      "long_form": "urine protein-creatinine ratio",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 42,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "eGFR",
+      "long_form": "estimated glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 81,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AAV",
+      "long_form": "ANCA-associated vasculitis",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 59,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ACR",
+      "long_form": "American College of Rheumatology",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ANCA",
+      "long_form": "antineutrophil cytoplasmic antibody",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 136,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ARCH",
+      "long_form": "Arthritis Research and Collaboration Hub",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AZA",
+      "long_form": "azathioprine",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 23,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "BVAS",
+      "long_form": "Birmingham Vasculitis Activity Score",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "C5aR",
+      "long_form": "C5a receptor",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CT",
+      "long_form": "computed tomography",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CYC",
+      "long_form": "cyclophosphamide",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 53,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "DAH",
+      "long_form": "diffuse alveolar haemorrhage",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 12,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EGPA",
+      "long_form": "eosinophilic GPA",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 10,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EGPA",
+      "long_form": "eosinophilic granulomatosis with polyangiitis",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 70,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ENT",
+      "long_form": "ear, nose and throat",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ESKD",
+      "long_form": "end-stage kidney disease",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 15,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EULAR",
+      "long_form": "European Alliance of Associations for Rheumatology",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 34,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EUVAS",
+      "long_form": "European Vasculitis Study Group",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 5,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FFS",
+      "long_form": "Five Factor Score",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 8,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FV",
+      "long_form": "Final Vote",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FV",
+      "long_form": "final vote (% of expert panel members who agreed with the recommendation)",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FVSG",
+      "long_form": "French Vasculitis Study Group",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GC",
+      "long_form": "glucocorticoid",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 59,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GCs",
+      "long_form": "glucocorticoids",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 25,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GPA",
+      "long_form": "granulomatosis with polyangiitis",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 63,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "HIV",
+      "long_form": "human immunodeficiency virus",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IIF",
+      "long_form": "indirect immunofluorescence",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IL-5",
+      "long_form": "interleukin 5",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoA",
+      "long_form": "Level of Agreement",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoA",
+      "long_form": "level of agreement on a scale of 0–10",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoE",
+      "long_form": "Level of Evidence",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoE",
+      "long_form": "level of evidence",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MEPO",
+      "long_form": "mepolizumab",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MMF",
+      "long_form": "mycophenolate mofetil",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 15,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MP",
+      "long_form": "methylprednisolone",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MPA",
+      "long_form": "microscopic polyangiitis",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 55,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MPO",
+      "long_form": "myeloperoxidase",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 5,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MTX",
+      "long_form": "methotrexate",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 21,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PET",
+      "long_form": "positron emission tomography",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PJP",
+      "long_form": "Pneumocystis jirovecii pneumonia",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 4,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PLEX",
+      "long_form": "plasma exchange",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 30,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PR3",
+      "long_form": "proteinase 3",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RCTs",
+      "long_form": "randomised controlled clinical trials",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RPGN",
+      "long_form": "rapid progressive glomerulonephritis",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RTX",
+      "long_form": "rituximab",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 81,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SLR",
+      "long_form": "systematic literature review",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 8,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SoR",
+      "long_form": "Strength of Recommendation",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SoR",
+      "long_form": "strength of recommendation",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "T/S",
+      "long_form": "trimethoprim-sulfamethoxazole",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 12,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "anti-GBM",
+      "long_form": "anti-glomerular basement membrane",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "eGFR",
+      "long_form": "estimated glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    }
+  ],
+  "mentioned_annotations": [
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "APPEAR-C3G",
+      "long_form": "(trial name)",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 8,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "APPEAR-C3G",
+      "long_form": "study name",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "AT1",
+      "long_form": "angiotensin II type 1",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C3",
+      "long_form": "Complement component 3",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 93,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C3a",
+      "long_form": "Complement component 3a",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C5",
+      "long_form": "Complement component 5",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C5a",
+      "long_form": "Complement component 5a",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CC BY",
+      "long_form": "Creative Commons Attribution",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CI",
+      "long_form": "confidence interval",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 28,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CKD",
+      "long_form": "Chronic Kidney Disease",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CKD-EPI",
+      "long_form": "Chronic Kidney Disease Epidemiology Collaboration",
+      "category": "ABBREV",
+      "page": 8,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "DOI",
+      "long_form": "Digital Object Identifier",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FABHALTA",
+      "long_form": "iptacopan (brand name)",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FACIT-Fatigue",
+      "long_form": "Functional Assessment of Chronic Illness Therapy-Fatigue",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 6,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "GFR",
+      "long_form": "glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 3,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "GLOSEN",
+      "long_form": "Spanish Glomerulonephritis Study Group",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "Ig",
+      "long_form": "Immunoglobulin",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "IgA",
+      "long_form": "Immunoglobulin A",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 6,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "MedDRA",
+      "long_form": "Medical Dictionary for Regulatory Activities",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RaDaR",
+      "long_form": "Rare Diseases Registry",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 6,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SAS",
+      "long_form": "Statistical Analysis System",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SD",
+      "long_form": "standard deviation",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 14,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SE",
+      "long_form": "standard error",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "UK",
+      "long_form": "United Kingdom",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "US",
+      "long_form": "United States",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "USA",
+      "long_form": "United States of America",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "sC5b-9",
+      "long_form": "soluble C5b-9 (membrane attack complex)",
+      "category": "ABBREV",
+      "page": 8,
+      "occurrences": 8,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "sC5b-9",
+      "long_form": "soluble C5b-9 membrane attack complex",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AAV",
+      "long_form": "ANCA-associated vasculitides",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 34,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ADVOCATE",
+      "long_form": "Avacopan for the Treatment of ANCA-Associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AGREE II",
+      "long_form": "Appraisal of Guidelines for Research and Evaluation II",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AIDS",
+      "long_form": "acquired immunodeficiency syndrome",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AJR",
+      "long_form": "American Journal of Roentgenology",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "Ann Rheum Dis",
+      "long_form": "Annals of the Rheumatic Diseases",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "BMJ",
+      "long_form": "British Medical Journal",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "C5a",
+      "long_form": "complement 5a",
+      "category": "ABBREV",
+      "page": 13,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "C5aR",
+      "long_form": "complement 5a receptor",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CD19+",
+      "long_form": "cluster of differentiation 19 positive",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CI",
+      "long_form": "confidence interval",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CIs",
+      "long_form": "confidence intervals",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "COVID-19",
+      "long_form": "coronavirus disease 2019",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CanVasc",
+      "long_form": "Canadian Vasculitis research network",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "DOI",
+      "long_form": "Digital Object Identifier",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EFORT",
+      "long_form": "European Federation of National Associations of Orthopaedics and Traumatology",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EMBASE",
+      "long_form": "Excerpta Medica Database",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EMEUNET",
+      "long_form": "Emerging EULAR Network",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GFR",
+      "long_form": "glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "HR",
+      "long_form": "hazard ratio",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IL-5",
+      "long_form": "interleukin-5",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IgE",
+      "long_form": "immunoglobulin E",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IgG",
+      "long_form": "immunoglobulin G",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "JAK",
+      "long_form": "Janus kinase",
+      "category": "ABBREV",
+      "page": 13,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "JAMA",
+      "long_form": "Journal of the American Medical Association",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "KDIGO",
+      "long_form": "Kidney Disease: Improving Global Outcomes",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LUMC",
+      "long_form": "Leiden University Medical Centre",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 2,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MAINRITSAN",
+      "long_form": "Maintenance of Remission using Rituximab in Systemic ANCA-associated Vasculitis",
+      "category": "ABBREV",
+      "page": 8,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MAINRITSAN-3",
+      "long_form": "Maintenance of Remission using Rituximab in Systemic ANCA-associated Vasculitis 3",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MAINRITSAN2",
+      "long_form": "Maintenance of Remission using Rituximab in Systemic ANCA-associated Vasculitis 2",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MEPEX",
+      "long_form": "Methylprednisolone versus Plasma Exchange trial",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MIRRA",
+      "long_form": "Mepolizumab in Relapsing or Refractory EGPA trial",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 4,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MYCYC",
+      "long_form": "Mycophenolate mofetil versus Cyclophosphamide trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NCT03942887",
+      "long_form": "ClinicalTrials.gov identifier",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NIAID",
+      "long_form": "National Institute of Allergy and Infectious Diseases",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NIHR",
+      "long_form": "National Institute for Health Research",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NORAM",
+      "long_form": "Nonrenal Wegener's Granulomatosis trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PAN",
+      "long_form": "polyarteritis nodosa",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PEXIVAS",
+      "long_form": "Plasma Exchange and Glucocorticoids for Treatment of ANCA-Associated Vasculitis",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 9,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PEXIVAS",
+      "long_form": "Plasma Exchange and Glucocorticoids for Treatment of ANCA-associated Vasculitis",
+      "category": "ABBREV",
+      "page": 16,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PR3-ANCA",
+      "long_form": "proteinase 3 ANCA",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PR3-ANCA",
+      "long_form": "proteinase 3-ANCA",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 17,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PubMed",
+      "long_form": "Public MEDLINE",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RAVE",
+      "long_form": "Rituximab versus Cyclophosphamide for ANCA-Associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RAVE",
+      "long_form": "Rituximab versus cyclophosphamide for ANCA-Associated Vasculitis",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RCT",
+      "long_form": "randomised controlled trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 9,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RCTs",
+      "long_form": "randomised controlled trials",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 11,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "REMAIN",
+      "long_form": "Remission Maintenance in ANCA-associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "REOVAS",
+      "long_form": "Rituximab versus Conventional Therapy in EGPA trial",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "REVAS",
+      "long_form": "Spanish Registry of Systemic Vasculitides",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RITAZAREM",
+      "long_form": "Rituximab Vasculitis Maintenance Study",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RITUXVAS",
+      "long_form": "Rituximab versus Cyclophosphamide in ANCA-Associated Vasculitis",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RMDs",
+      "long_form": "rheumatic and musculoskeletal diseases",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "USA",
+      "long_form": "United States of America",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    }
+  ],
+  "excluded_annotations": [
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "NCT",
+      "long_form": "National Clinical Trial",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 2,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "18F-FDG",
+      "long_form": "fluorine-18 fluorodeoxyglucose",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 3,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ASAS",
+      "long_form": "Assessment of SpondyloArthritis international Society",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AZA-ANCA",
+      "long_form": "Azathioprine for ANCA-associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 1,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ERA-EDTA",
+      "long_form": "European Renal Association-European Dialysis and Transplant Association",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ERA-IWG",
+      "long_form": "European Renal Association Immunonephrology Working Group",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 1,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MPO-ANCA",
+      "long_form": "myeloperoxidase ANCA",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MPO-ANCA",
+      "long_form": "myeloperoxidase-ANCA",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 19,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SARS-CoV-2",
+      "long_form": "severe acute respiratory syndrome coronavirus 2",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 3,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "TMP-SMZ",
+      "long_form": "trimethoprim-sulfamethoxazole",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 2,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "VDI",
+      "long_form": "Vasculitis Damage Index",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 1,
+      "audit_bucket": "PARSE_ISSUE",
+      "gold_type": "EXCLUDED"
+    }
+  ],
+  "all_sf_annotations": [
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C3G",
+      "long_form": "C3 glomerulopathy",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "EMA",
+      "long_form": "European Medicines Agency",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FDA",
+      "long_form": "Food and Drug Administration",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 7,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "IC-MPGN",
+      "long_form": "immune complex membranoproliferative glomerulonephritis",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "KDIGO",
+      "long_form": "Kidney Disease: Improving Global Outcomes",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "LNP023",
+      "long_form": "iptacopan",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "MPGN",
+      "long_form": "membranoproliferative glomerulonephritis",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "OR",
+      "long_form": "odds ratio",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RAAS",
+      "long_form": "renin-angiotensin-aldosterone system",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 7,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RR",
+      "long_form": "relative reduction",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SGLT2",
+      "long_form": "sodium-glucose cotransporter-2",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "UPCR",
+      "long_form": "urine protein-creatinine ratio",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 42,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "eGFR",
+      "long_form": "estimated glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 81,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AAV",
+      "long_form": "ANCA-associated vasculitis",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 59,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ACR",
+      "long_form": "American College of Rheumatology",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ANCA",
+      "long_form": "antineutrophil cytoplasmic antibody",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 136,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ARCH",
+      "long_form": "Arthritis Research and Collaboration Hub",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AZA",
+      "long_form": "azathioprine",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 23,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "BVAS",
+      "long_form": "Birmingham Vasculitis Activity Score",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "C5aR",
+      "long_form": "C5a receptor",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CT",
+      "long_form": "computed tomography",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CYC",
+      "long_form": "cyclophosphamide",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 53,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "DAH",
+      "long_form": "diffuse alveolar haemorrhage",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 12,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EGPA",
+      "long_form": "eosinophilic GPA",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 10,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EGPA",
+      "long_form": "eosinophilic granulomatosis with polyangiitis",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 70,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ENT",
+      "long_form": "ear, nose and throat",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ESKD",
+      "long_form": "end-stage kidney disease",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 15,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EULAR",
+      "long_form": "European Alliance of Associations for Rheumatology",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 34,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EUVAS",
+      "long_form": "European Vasculitis Study Group",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 5,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FFS",
+      "long_form": "Five Factor Score",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 8,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FV",
+      "long_form": "Final Vote",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FV",
+      "long_form": "final vote (% of expert panel members who agreed with the recommendation)",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "FVSG",
+      "long_form": "French Vasculitis Study Group",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GC",
+      "long_form": "glucocorticoid",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 59,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GCs",
+      "long_form": "glucocorticoids",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 25,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GPA",
+      "long_form": "granulomatosis with polyangiitis",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 63,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "HIV",
+      "long_form": "human immunodeficiency virus",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IIF",
+      "long_form": "indirect immunofluorescence",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IL-5",
+      "long_form": "interleukin 5",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoA",
+      "long_form": "Level of Agreement",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoA",
+      "long_form": "level of agreement on a scale of 0–10",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoE",
+      "long_form": "Level of Evidence",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LoE",
+      "long_form": "level of evidence",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MEPO",
+      "long_form": "mepolizumab",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MMF",
+      "long_form": "mycophenolate mofetil",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 15,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MP",
+      "long_form": "methylprednisolone",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MPA",
+      "long_form": "microscopic polyangiitis",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 55,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MPO",
+      "long_form": "myeloperoxidase",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 5,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MTX",
+      "long_form": "methotrexate",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 21,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PET",
+      "long_form": "positron emission tomography",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 3,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PJP",
+      "long_form": "Pneumocystis jirovecii pneumonia",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 4,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PLEX",
+      "long_form": "plasma exchange",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 30,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PR3",
+      "long_form": "proteinase 3",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RCTs",
+      "long_form": "randomised controlled clinical trials",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RPGN",
+      "long_form": "rapid progressive glomerulonephritis",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RTX",
+      "long_form": "rituximab",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 81,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SLR",
+      "long_form": "systematic literature review",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 8,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SoR",
+      "long_form": "Strength of Recommendation",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "SoR",
+      "long_form": "strength of recommendation",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "T/S",
+      "long_form": "trimethoprim-sulfamethoxazole",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 12,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "anti-GBM",
+      "long_form": "anti-glomerular basement membrane",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 6,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "eGFR",
+      "long_form": "estimated glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "EXTRACTABLE_PAIR",
+      "gold_type": "DEFINED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "APPEAR-C3G",
+      "long_form": "(trial name)",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 8,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "APPEAR-C3G",
+      "long_form": "study name",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "AT1",
+      "long_form": "angiotensin II type 1",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C3",
+      "long_form": "Complement component 3",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 93,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C3a",
+      "long_form": "Complement component 3a",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C5",
+      "long_form": "Complement component 5",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "C5a",
+      "long_form": "Complement component 5a",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CC BY",
+      "long_form": "Creative Commons Attribution",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CI",
+      "long_form": "confidence interval",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 28,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CKD",
+      "long_form": "Chronic Kidney Disease",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CKD-EPI",
+      "long_form": "Chronic Kidney Disease Epidemiology Collaboration",
+      "category": "ABBREV",
+      "page": 8,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "DOI",
+      "long_form": "Digital Object Identifier",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FABHALTA",
+      "long_form": "iptacopan (brand name)",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FACIT-Fatigue",
+      "long_form": "Functional Assessment of Chronic Illness Therapy-Fatigue",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 6,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "GFR",
+      "long_form": "glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 3,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "GLOSEN",
+      "long_form": "Spanish Glomerulonephritis Study Group",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "Ig",
+      "long_form": "Immunoglobulin",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "IgA",
+      "long_form": "Immunoglobulin A",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 6,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "MedDRA",
+      "long_form": "Medical Dictionary for Regulatory Activities",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RaDaR",
+      "long_form": "Rare Diseases Registry",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 6,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SAS",
+      "long_form": "Statistical Analysis System",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SD",
+      "long_form": "standard deviation",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 14,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SE",
+      "long_form": "standard error",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "UK",
+      "long_form": "United Kingdom",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "US",
+      "long_form": "United States",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "USA",
+      "long_form": "United States of America",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "sC5b-9",
+      "long_form": "soluble C5b-9 (membrane attack complex)",
+      "category": "ABBREV",
+      "page": 8,
+      "occurrences": 8,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "sC5b-9",
+      "long_form": "soluble C5b-9 membrane attack complex",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AAV",
+      "long_form": "ANCA-associated vasculitides",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 34,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "ADVOCATE",
+      "long_form": "Avacopan for the Treatment of ANCA-Associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AGREE II",
+      "long_form": "Appraisal of Guidelines for Research and Evaluation II",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AIDS",
+      "long_form": "acquired immunodeficiency syndrome",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "AJR",
+      "long_form": "American Journal of Roentgenology",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "Ann Rheum Dis",
+      "long_form": "Annals of the Rheumatic Diseases",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "BMJ",
+      "long_form": "British Medical Journal",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "C5a",
+      "long_form": "complement 5a",
+      "category": "ABBREV",
+      "page": 13,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "C5aR",
+      "long_form": "complement 5a receptor",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CD19+",
+      "long_form": "cluster of differentiation 19 positive",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CI",
+      "long_form": "confidence interval",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CIs",
+      "long_form": "confidence intervals",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "COVID-19",
+      "long_form": "coronavirus disease 2019",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "CanVasc",
+      "long_form": "Canadian Vasculitis research network",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "DOI",
+      "long_form": "Digital Object Identifier",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EFORT",
+      "long_form": "European Federation of National Associations of Orthopaedics and Traumatology",
+      "category": "ABBREV",
+      "page": 15,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EMBASE",
+      "long_form": "Excerpta Medica Database",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "EMEUNET",
+      "long_form": "Emerging EULAR Network",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "GFR",
+      "long_form": "glomerular filtration rate",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "HR",
+      "long_form": "hazard ratio",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IL-5",
+      "long_form": "interleukin-5",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 4,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IgE",
+      "long_form": "immunoglobulin E",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "IgG",
+      "long_form": "immunoglobulin G",
+      "category": "ABBREV",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "JAK",
+      "long_form": "Janus kinase",
+      "category": "ABBREV",
+      "page": 13,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "JAMA",
+      "long_form": "Journal of the American Medical Association",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "KDIGO",
+      "long_form": "Kidney Disease: Improving Global Outcomes",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "LUMC",
+      "long_form": "Leiden University Medical Centre",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 2,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MAINRITSAN",
+      "long_form": "Maintenance of Remission using Rituximab in Systemic ANCA-associated Vasculitis",
+      "category": "ABBREV",
+      "page": 8,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MAINRITSAN-3",
+      "long_form": "Maintenance of Remission using Rituximab in Systemic ANCA-associated Vasculitis 3",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MAINRITSAN2",
+      "long_form": "Maintenance of Remission using Rituximab in Systemic ANCA-associated Vasculitis 2",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MEPEX",
+      "long_form": "Methylprednisolone versus Plasma Exchange trial",
+      "category": "ABBREV",
+      "page": 7,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MIRRA",
+      "long_form": "Mepolizumab in Relapsing or Refractory EGPA trial",
+      "category": "ABBREV",
+      "page": 11,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 4,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "MYCYC",
+      "long_form": "Mycophenolate mofetil versus Cyclophosphamide trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NCT03942887",
+      "long_form": "ClinicalTrials.gov identifier",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NIAID",
+      "long_form": "National Institute of Allergy and Infectious Diseases",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NIHR",
+      "long_form": "National Institute for Health Research",
+      "category": "ABBREV",
+      "page": 14,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "NORAM",
+      "long_form": "Nonrenal Wegener's Granulomatosis trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PAN",
+      "long_form": "polyarteritis nodosa",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PEXIVAS",
+      "long_form": "Plasma Exchange and Glucocorticoids for Treatment of ANCA-Associated Vasculitis",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 9,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PEXIVAS",
+      "long_form": "Plasma Exchange and Glucocorticoids for Treatment of ANCA-associated Vasculitis",
+      "category": "ABBREV",
+      "page": 16,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PR3-ANCA",
+      "long_form": "proteinase 3 ANCA",
+      "category": "ABBREV",
+      "page": 3,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PR3-ANCA",
+      "long_form": "proteinase 3-ANCA",
+      "category": "ABBREV",
+      "page": 4,
+      "occurrences": 17,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "PubMed",
+      "long_form": "Public MEDLINE",
+      "category": "ABBREV",
+      "page": 2,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RAVE",
+      "long_form": "Rituximab versus Cyclophosphamide for ANCA-Associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RAVE",
+      "long_form": "Rituximab versus cyclophosphamide for ANCA-Associated Vasculitis",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RCT",
+      "long_form": "randomised controlled trial",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 9,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RCTs",
+      "long_form": "randomised controlled trials",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 11,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "REMAIN",
+      "long_form": "Remission Maintenance in ANCA-associated Vasculitis trial",
+      "category": "ABBREV",
+      "page": 9,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "REOVAS",
+      "long_form": "Rituximab versus Conventional Therapy in EGPA trial",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 3,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "REVAS",
+      "long_form": "Spanish Registry of Systemic Vasculitides",
+      "category": "ABBREV",
+      "page": 17,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RITAZAREM",
+      "long_form": "Rituximab Vasculitis Maintenance Study",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 5,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RITUXVAS",
+      "long_form": "Rituximab versus Cyclophosphamide in ANCA-Associated Vasculitis",
+      "category": "ABBREV",
+      "page": 6,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "RMDs",
+      "long_form": "rheumatic and musculoskeletal diseases",
+      "category": "ABBREV",
+      "page": 18,
+      "occurrences": 1,
+      "audit_bucket": "UNSUPPORTED_PAIR",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "short_form": "USA",
+      "long_form": "United States of America",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    }
+  ]
+}

@@ -105,7 +105,7 @@ OCR_GARBAGE_RE = re.compile("|".join(OCR_GARBAGE_PATTERNS))
 # Pattern to detect garbled flowchart/diagram content
 # Matches text with numbered steps separated by symbols like + * | ~
 FLOWCHART_PATTERN = re.compile(
-    r"^\d+[a-z]?\.\s+.{10,}\s+[+*|~>—]\s+.{10,}\s+[+*|~>—]\s+",
+    r"^\d+[a-z]?\.\s+.{10,}\s+[+*|~>-]\s+.{10,}\s+[+*|~>-]\s+",
     re.IGNORECASE
 )
 
@@ -119,7 +119,7 @@ def _is_garbled_flowchart(text: str) -> bool:
         return False
 
     # Count flowchart-like symbols (including various dash types)
-    symbol_count = sum(1 for c in text if c in "+*|~>—–-")
+    symbol_count = sum(1 for c in text if c in "+*|~>-")
     word_count = len(text.split())
 
     # Check for numbered step pattern with symbols (e.g., "1. ... + ... | 2. ...")

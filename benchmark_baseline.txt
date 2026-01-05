@@ -1,0 +1,187 @@
+Loading abbreviation lexicon: /Users/frederictetard/Projects/ese/ouput_datasources/2025_08_abbreviation_general.json
+Loaded 5392 abbreviation patterns from 2025_08_abbreviation_general.json
+Loading rare disease acronyms: /Users/frederictetard/Projects/ese/ouput_datasources/2025_08_rare_disease_acronyms.json
+Loaded 1630 rare disease acronyms from 2025_08_rare_disease_acronyms.json
+Loading UMLS: /Users/frederictetard/Projects/ese/ouput_datasources/2025_08_umls_biological_abbreviations_v5.tsv
+Loaded 97336 terms from 2025_08_umls_biological_abbreviations_v5.tsv
+Loading UMLS: /Users/frederictetard/Projects/ese/ouput_datasources/2025_08_umls_clinical_abbreviations_v5.tsv
+Loaded 20000 terms from 2025_08_umls_clinical_abbreviations_v5.tsv
+Loading ANCA lexicon: /Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_anca.json
+Loaded 44 ANCA terms from disease_lexicon_anca.json
+Loading IgAN lexicon: /Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_igan.json
+Loaded 55 IgAN terms from disease_lexicon_igan.json
+Loading PAH lexicon: /Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_pah.json
+Loaded 68 PAH terms from disease_lexicon_pah.json
+Loaded scispacy en_core_sci_lg with abbreviation detector + UMLS linker
+Orchestrator v0.7 initialized
+  Run ID: EVAL_20260105_210430_80be198d2074
+  Config: /Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml
+  Model: claude-sonnet-4-20250514
+  Log dir: /Users/frederictetard/Projects/ese/corpus_log
+  Validation: ENABLED
+  Haiku screening: OFF
+
+[EVAL] gold=papers_gold.json | mode=sf+lf_match | trial_ids=keep | blacklist=11 | gold_sfs=40
+======================================================================
+PIPELINE EVALUATION TEST
+======================================================================
+Run ID: EVAL_20260105_210430_80be198d2074
+PDFs to evaluate: 1
+======================================================================
+
+======================================================================
+[DOC] 01_Article_Iptacopan C3G Trial.pdf
+======================================================================
+
+============================================================
+Processing: 01_Article_Iptacopan C3G Trial.pdf
+============================================================
+
+[1/4] Parsing PDF...
+The `max_size` parameter is deprecated and will be removed in v4.26. Please specify in `size['longest_edge'] instead`.
+  Pages: 12
+  Blocks: 283
+  Tables: 3
+  Time: 92.61s
+
+[2/4] Generating candidates...
+  gen:syntax_pattern: 11 candidates
+  gen:glossary_table: 0 candidates
+  gen:rigid_pattern: 2 candidates
+  gen:table_layout: 3 candidates
+/Users/frederictetard/Projects/ese/venv/lib/python3.12/site-packages/scispacy/abbreviation.py:248: UserWarning: [W036] The component 'matcher' does not have any patterns defined.
+  global_matches = self.global_matcher(doc)
+  gen:lexicon_match: 473 candidates
+  Total unique: 479
+  Time: 12.53s
+  LEXICON_MATCH reduction: 144 -> 109 (dedup: 9, form filter: 26)
+
+[3/4] Validating candidates with Claude...
+  Corroborated SFs: 15
+  Frequent SFs (2+ occurrences): 123
+  Filtered (lexicon-only, rare): 354
+  Auto-approved stats (PASO A): 8
+  Auto-approved country (PASO B): 3
+  Auto-rejected blacklist: 8
+  Auto-rejected context: 0
+  Auto-rejected trial IDs: 0
+  Auto-rejected common words: 7
+  Candidates for LLM: 99
+  Batch (explicit pairs): 10
+  Individual (lexicon): 89
+  Lexicon progress: 15/89
+  Lexicon progress: 30/89
+  Lexicon progress: 45/89
+  Lexicon progress: 60/89
+  Lexicon progress: 75/89
+  Lexicon progress: 89/89
+  Time: 509.02s
+  Hyphenated detected (PASO C): 5
+  Direct search detected (UK, RR, CC BY): 5
+
+  Running LLM SF-only extractor (PASO D)...
+    LLM chunks processed: 5, errors: 0
+    LLM candidates found: 12
+    Candidates: ['AT1', 'DM', 'FRCP', 'IA', 'IRCCS', 'MBBS', 'MD', 'MPH', 'NCT04817618', 'NJ', 'NY', 'PhD']
+  LLM SF-only extracted (PASO D): 3
+    Filtered: already=0, blacklist=9, not_in_text=0, form=0
+
+[3.5/4] Normalizing & disambiguating...
+  Normalized: 1
+  Disambiguated: 0
+
+[4/4] Writing summary...
+
+==================================================
+VALIDATION SUMMARY - EVAL_20260105_210430_80be198d2074
+==================================================
+Total candidates:  125
+  [OK] Validated:     45 (36.0%)
+  [X] Rejected:      74 (59.2%)
+  ? Ambiguous:     6 (4.8%)
+  [WARN] Errors:        0
+
+Log file: /Users/frederictetard/Projects/ese/corpus_log/EVAL_20260105_210430_80be198d2074.jsonl
+==================================================
+
+
+========================================
+HEURISTICS COUNTERS SUMMARY
+========================================
+Auto-approved:
+  - Stats whitelist:     8
+  - Country codes:       3
+  - Hyphenated:          5
+  - Direct search:       5
+  - LLM SF-only:         3
+
+Auto-rejected:
+  - Blacklist:           8
+  - Common words:        7
+  - Context rejected:    0
+  - Form filter:         0
+  - Trial IDs excluded:  0
+========================================
+
+
+  Exported: /Users/frederictetard/Projects/ese/gold_data/PAPERS/abbreviations_01_Article_Iptacopan C3G Trial_20260105_221551.json
+
+Validated abbreviations (58):
+  * SD -> standard deviation
+  * OR -> odds ratio
+  * USA -> United States of America
+  * CI -> confidence interval
+  * CI -> confidence interval
+  * US -> United States
+  * US -> United States
+  * SD -> standard deviation
+  * SD -> standard deviation
+  * SE -> standard error
+  * Se -> standard error
+  * UPCR -> urine protein– creatinine ratio
+  * eGFR -> estimated glomerular filtration rate
+  * FDA -> Food and Drug Administration
+  * EMA -> European Medicines Agency
+  * RAAS -> renin– angiotensin–aldosterone system
+  * SGLT2 -> sodium-glucose cotransporter-2
+  * UPCR -> urine protein–creatinine ratio
+  * KDIGO -> Kidney Disease: Improving Global Outcomes
+  * C3G -> C3 glomerulopathy
+  ... and 38 more
+
+  SCORE:
+  Extracted: 58 | Gold: 42
+  P: 71.8% | R: 66.7% | F1: 69.1%
+  TP: 28 | FP: 11 | FN: 14
+  Time: 634.8s
+
+======================================================================
+CORPUS SUMMARY
+======================================================================
+
+MICRO (global):
+  Precision: 71.8%
+  Recall:    66.7%
+  F1:        69.1%
+  TP: 28 | FP: 11 | FN: 14
+
+MACRO (per-doc average):
+  Precision: 71.8%
+  Recall:    66.7%
+  F1:        69.1%
+
+[X] False Positives (sample):
+   C3A::complement c3a anaphylatoxin
+   FACIT::functional assessment of chronic illness therapy
+   FDA::us food and drug administration
+   INDIAN::asian indian
+   RAAS::renin– angiotensin–aldosterone system
+
+[WARN]ï¸  False Negatives (sample):
+   APPEAR-C3G::study name
+   AT1::angiotensin ii type 1
+   C3A::complement component 3a
+   DOI::digital object identifier
+   GLOSEN::spanish glomerulonephritis study group
+
+======================================================================

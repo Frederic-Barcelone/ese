@@ -12,8 +12,8 @@ Classification:
     - False Negative: gold pair not found by system
 
 Metrics:
-    - Precision: TP / (TP + FP) — how much system output is correct
-    - Recall: TP / (TP + FN) — how much gold was found
+    - Precision: TP / (TP + FP) -  how much system output is correct
+    - Recall: TP / (TP + FN) -  how much gold was found
     - F1: harmonic mean of precision and recall
 
 Evaluation modes:
@@ -100,7 +100,7 @@ class ScorerConfig(BaseModel):
     # If gold long_form is missing/None/"UNKNOWN", treat it as SF-only truth (only SF must match).
     allow_sf_only_gold: bool = True
 
-    # If system long_form is missing for a DEFINITION_PAIR/GLOSSARY_ENTRY, normally thatâ€™s invalid;
+    # If system long_form is missing for a DEFINITION_PAIR/GLOSSARY_ENTRY, normally that's invalid;
     # but in evaluation you can decide whether to keep it (e.g., to score orphan discovery).
     allow_missing_system_lf: bool = False
 
@@ -482,24 +482,24 @@ class Scorer:
     # -------------------------
 
     def print_summary(self, report: ScoreReport, title: str = "EVALUATION REPORT") -> None:
-        print(f"\nðŸ“Š --- {title} ---")
-        print(f"âœ… Precision: {report.precision:.2%}")
-        print(f"ðŸ”Ž Recall:    {report.recall:.2%}")
-        print(f"âš–ï¸  F1 Score:  {report.f1:.2%}")
+        print(f"\n[CHART] --- {title} ---")
+        print(f"[OK] Precision: {report.precision:.2%}")
+        print(f"[TARGET] Recall:    {report.recall:.2%}")
+        print(f"[SCALE]  F1 Score:  {report.f1:.2%}")
         print("-" * 40)
         print(f"TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}")
 
         if report.fp_examples:
-            print("\nâŒ False Positives (examples):")
+            print("\n[WARN]  False Positives (examples):")
             for ex in report.fp_examples:
                 print(f"  - {ex}")
 
         if report.fn_examples:
-            print("\nâš ï¸  False Negatives (examples):")
+            print("\n[WARN]  False Negatives (examples):")
             for ex in report.fn_examples:
                 print(f"  - {ex}")
 
     def print_corpus_summary(self, corpus_report: CorpusScoreReport) -> None:
         self.print_summary(corpus_report.micro, title="CORPUS (MICRO)")
         self.print_summary(corpus_report.macro, title="CORPUS (MACRO)")
-        print(f"\nðŸ“ Docs evaluated: {len(corpus_report.per_doc)}")
+        print(f"\n[DOC] Docs evaluated: {len(corpus_report.per_doc)}")

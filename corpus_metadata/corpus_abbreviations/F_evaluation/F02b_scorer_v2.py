@@ -158,9 +158,9 @@ def score_v2(
         if sf:
             excluded_sfs.add(sf)
 
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     # METRIC 1: SF-only (primary KPI)
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     sf_tp = sys_sf_set & gold_sf_set
     sf_fp = sys_sf_set - gold_sf_set
     sf_fn = gold_sf_set - sys_sf_set
@@ -176,9 +176,9 @@ def score_v2(
     )
     sf_report.compute()
 
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     # METRIC 2: Defined Pairs (honest pair metric)
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     pair_tp = sys_pair_set & gold_pair_set
     pair_fp = sys_pair_set - gold_pair_set
     pair_fn = gold_pair_set - sys_pair_set
@@ -194,16 +194,16 @@ def score_v2(
     )
     pair_report.compute()
 
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     # METRIC 3: Parser Coverage
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     parser_found = all_gold_sfs - excluded_sfs
     parser_coverage = len(parser_found) / len(all_gold_sfs) if all_gold_sfs else 1.0
     parser_missed = sorted(excluded_sfs)
 
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     # BUILD REPORT
-    # ═══════════════════════════════════════════════════════════════════════════
+    # ===========================================================================
     report = ScorerV2Report(
         sf_only=sf_report,
         defined_pairs=pair_report,
@@ -238,12 +238,12 @@ def print_report(report: ScorerV2Report) -> None:
 
     # SF-only (primary)
     sf = report.sf_only
-    print("─" * 70)
-    print("📊 SF-ONLY (Primary KPI) — Target: 90-93%")
-    print("─" * 70)
+    print("-" * 70)
+    print("[STATS] SF-ONLY (Primary KPI) - Target: 90-93%")
+    print("-" * 70)
     print(f"  Precision: {sf.precision * 100:5.1f}%")
     print(f"  Recall:    {sf.recall * 100:5.1f}%")
-    print(f"  F1:        {sf.f1 * 100:5.1f}%  {'✓' if sf.f1 >= 0.90 else '↑'}")
+    print(f"  F1:        {sf.f1 * 100:5.1f}%  {'[OK]' if sf.f1 >= 0.90 else '->'}")
     print(f"  TP: {sf.tp}, FP: {sf.fp}, FN: {sf.fn}")
     print()
 
@@ -255,9 +255,9 @@ def print_report(report: ScorerV2Report) -> None:
 
     # Defined Pairs
     pair = report.defined_pairs
-    print("─" * 70)
-    print("📊 DEFINED PAIRS (Honest Pair Metric)")
-    print("─" * 70)
+    print("-" * 70)
+    print("[STATS] DEFINED PAIRS (Honest Pair Metric)")
+    print("-" * 70)
     print(f"  Precision: {pair.precision * 100:5.1f}%")
     print(f"  Recall:    {pair.recall * 100:5.1f}%")
     print(f"  F1:        {pair.f1 * 100:5.1f}%")
@@ -265,9 +265,9 @@ def print_report(report: ScorerV2Report) -> None:
     print()
 
     # Parser Coverage
-    print("─" * 70)
-    print("📊 PARSER COVERAGE")
-    print("─" * 70)
+    print("-" * 70)
+    print("[STATS] PARSER COVERAGE")
+    print("-" * 70)
     print(f"  Coverage: {report.parser_coverage * 100:5.1f}%")
     if report.parser_missed:
         print(f"  Missed SFs: {report.parser_missed}")
