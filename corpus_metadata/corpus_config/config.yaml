@@ -1,0 +1,564 @@
+# ==============================================================================
+# RARE DISEASE EXTRACTION - PIPELINE CONFIGURATION v15.0
+# ==============================================================================
+# corpus_metadata/corpus_config/config.yaml
+#
+# VERSION 15.0 CHANGES:
+# - Centralized ALL abbreviation extraction parameters
+# - Added paths, heuristics, generators, validation, normalization sections
+# - No hardcoded parameters in any script - all read from this config
+#
+# Environment Variables:
+#   CORPUS_BASE_PATH - Base path for all resources (default: parent of corpus_metadata)
+#   ANTHROPIC_API_KEY - API key for Claude AI validation (or CLAUDE_API_KEY)
+
+system:
+  name: "Rare Disease Document Extraction"
+  version: "15.0"
+  pipeline_version: "0.7"
+
+# ==============================================================================
+# PATHS (relative to CORPUS_BASE_PATH or absolute)
+# ==============================================================================
+paths:
+  # Base paths
+  base: "/Users/frederictetard/Projects/ese"
+  dictionaries: "ouput_datasources"
+  databases: "corpus_db"
+  logs: "corpus_log"
+  cache: "cache"
+
+  # Abbreviation extraction paths
+  pdf_input: "Pdfs"
+  gold_data: "gold_data"
+  papers_folder: "gold_data/PAPERS"
+  gold_json: "gold_data/papers_gold.json"
+
+# ==============================================================================
+# LEXICONS - All lexicon file paths (relative to paths.base/paths.dictionaries)
+# ==============================================================================
+lexicons:
+  # Main abbreviation lexicon
+  abbreviation_general: "2025_08_abbreviation_general.json"
+
+  # Disease lexicons
+  disease_lexicon: "2025_08_lexicon_disease.json"
+  orphanet_diseases: "2025_08_orphanet_diseases.json"
+  rare_disease_acronyms: "2025_08_rare_disease_acronyms.json"
+
+  # UMLS lexicons
+  umls_biological: "2025_08_umls_biological_abbreviations_v5.tsv"
+  umls_clinical: "2025_08_umls_clinical_abbreviations_v5.tsv"
+
+  # Disease-specific supplemental lexicons
+  disease_lexicon_pah: "disease_lexicon_pah.json"
+  disease_lexicon_anca: "disease_lexicon_anca.json"
+  disease_lexicon_igan: "disease_lexicon_igan.json"
+
+  # Other lexicons
+  drug_lexicon: "2025_08_lexicon_drug.json"
+  drug_alexion: "2025_08_alexion_drugs.json"
+  drug_fda_approved: "2025_08_fda_approved_drugs.json"
+  drug_investigational: "2025_08_investigational_drugs.json"
+  medical_terms_lexicon: "2025_08_lexicon_medical_terms.json"
+  document_types: "2025_08_document_types.json"
+  clinical_trial_metadata: "00966_clinical_trial_metadata.json"
+
+# ==============================================================================
+# DATABASES (filenames relative to paths.databases)
+# ==============================================================================
+databases:
+  disease_ontology: "disease_ontology.db"
+  disease_orphanet: "orphanet_nlp.db"
+
+# ==============================================================================
+# GLOBAL DEFAULTS
+# ==============================================================================
+defaults:
+  confidence_threshold: 0.75
+  fuzzy_match_threshold: 85
+  context_window: 300
+  min_term_length: 2
+  prefix_start_number: 1000
+
+# ==============================================================================
+# FEATURE FLAGS
+# ==============================================================================
+features:
+  # Core extraction
+  drug_detection: true
+  disease_detection: true
+  abbreviation_extraction: true
+
+  # Document analysis
+  classification: true
+  section_detection: true
+  table_extraction: true
+
+  # Metadata extraction
+  title_extraction: true
+  date_extraction: true
+  description_extraction: true
+
+  # Citation/Reference extraction
+  citation_extraction: true
+  person_extraction: true
+  reference_extraction: true
+
+  # External APIs (WARNING - PRIVACY: sends data to third-party services)
+  pubtator_enrichment: true
+  ai_validation: true
+
+  # File operations
+  intelligent_rename: true
+  caching: true
+
+# ==============================================================================
+# ABBREVIATION EXTRACTION - GENERATORS
+# ==============================================================================
+generators:
+  # Syntax pattern generator (C01)
+  syntax_pattern:
+    enabled: true
+
+  # Glossary table generator (C01b)
+  glossary_table:
+    enabled: true
+
+  # Regex pattern generator (C02)
+  regex_pattern:
+    enabled: true
+    enabled_types:
+      - "TRIAL_ID"
+      - "COMPOUND_ID"
+      - "DOI"
+      - "PMID"
+      - "PMCID"
+
+  # Layout heuristics generator (C03)
+  layout:
+    enabled: true
+
+  # Lexicon/FlashText generator (C04)
+  lexicon:
+    enabled: true
+    context_window: 300
+    min_abbrev_length: 2
+    # Obvious noise - single letters, function words, units
+    obvious_noise:
+      - "a"
+      - "b"
+      - "c"
+      - "d"
+      - "e"
+      - "f"
+      - "g"
+      - "h"
+      - "i"
+      - "j"
+      - "k"
+      - "l"
+      - "m"
+      - "n"
+      - "o"
+      - "p"
+      - "q"
+      - "r"
+      - "s"
+      - "t"
+      - "u"
+      - "v"
+      - "w"
+      - "x"
+      - "y"
+      - "z"
+      - "an"
+      - "as"
+      - "at"
+      - "be"
+      - "by"
+      - "do"
+      - "go"
+      - "he"
+      - "if"
+      - "in"
+      - "is"
+      - "it"
+      - "me"
+      - "my"
+      - "no"
+      - "of"
+      - "on"
+      - "so"
+      - "to"
+      - "up"
+      - "we"
+      - "the"
+      - "and"
+      - "for"
+      - "but"
+      - "not"
+      - "are"
+      - "was"
+      - "were"
+      - "been"
+      - "have"
+      - "has"
+      - "had"
+      - "will"
+      - "would"
+      - "could"
+      - "should"
+      - "this"
+      - "that"
+      - "these"
+      - "those"
+      - "with"
+      - "from"
+      - "into"
+      - "et"
+      - "al"
+      - "dl"
+      - "ml"
+      - "mg"
+      - "kg"
+      - "mm"
+      - "cm"
+      - "hz"
+      - "khz"
+      - "mhz"
+      - "mmhg"
+      - "kpa"
+      - "mol"
+      - "mmol"
+      - "umol"
+      - "nmol"
+      - "investigator"
+      - "investigators"
+      - "sponsor"
+      - "protocol"
+      - "study"
+      - "patient"
+      - "patients"
+      - "subject"
+      - "subjects"
+      - "article"
+      - "articles"
+      - "nj"
+      - "ny"
+      - "ca"
+      - "tx"
+
+# ==============================================================================
+# ABBREVIATION EXTRACTION - HEURISTICS
+# ==============================================================================
+heuristics:
+  # ========================================
+  # STATS WHITELIST (PASO A) - Auto-approve with numeric evidence
+  # ========================================
+  stats_abbrevs:
+    CI: "confidence interval"
+    SD: "standard deviation"
+    SE: "standard error"
+    OR: "odds ratio"
+    RR: "risk ratio"
+    HR: "hazard ratio"
+    IQR: "interquartile range"
+    AUC: "area under the curve"
+    ROC: "receiver operating characteristic"
+
+  # ========================================
+  # COUNTRY CODES (PASO B) - Auto-approve
+  # ========================================
+  country_abbrevs:
+    US: "United States"
+    UK: "United Kingdom"
+    USA: "United States of America"
+    EU: "European Union"
+
+  # ========================================
+  # BLACKLIST - Auto-reject (SURGICAL: keep small and targeted)
+  # ========================================
+  sf_blacklist:
+    - "MD"
+    - "PHD"
+    - "MBBS"
+    - "FRCP"
+    - "MPH"
+    - "NY"
+    - "NJ"
+    - "IA"
+    - "AUG"
+    - "INT"
+    - "IRCCS"
+
+  # ========================================
+  # COMMON ENGLISH WORDS - Auto-reject
+  # ========================================
+  common_words:
+    - "THE"
+    - "AND"
+    - "FOR"
+    - "ARE"
+    - "BUT"
+    - "NOT"
+    - "YOU"
+    - "ALL"
+    - "CAN"
+    - "HER"
+    - "WAS"
+    - "ONE"
+    - "OUR"
+    - "OUT"
+    - "DAY"
+    - "GET"
+    - "HAS"
+    - "HIM"
+    - "HIS"
+    - "HOW"
+    - "ITS"
+    - "MAY"
+    - "NEW"
+    - "NOW"
+    - "OLD"
+    - "SEE"
+    - "TWO"
+    - "WAY"
+    - "WHO"
+    - "BOY"
+    - "DID"
+    - "ANY"
+    - "DATA"
+    - "WHITE"
+    - "METHODS"
+    - "STUDY"
+    - "RESULTS"
+    - "AGE"
+    - "YEARS"
+    - "PATIENTS"
+    - "TABLE"
+    - "FIGURE"
+    - "BASELINE"
+
+  # ========================================
+  # ALLOWED SHORT SFs (2-letter exceptions)
+  # ========================================
+  allowed_2letter_sfs:
+    - "UK"
+    - "US"
+    - "EU"
+    - "IV"
+    - "IM"
+    - "PO"
+    - "SC"
+    - "ID"
+
+  allowed_mixed_case:
+    - "MEDDRA"
+    - "RADAR"
+    - "SAS"
+    - "SPSS"
+    - "STATA"
+
+  # ========================================
+  # HYPHENATED ABBREVIATIONS (PASO C)
+  # ========================================
+  hyphenated_abbrevs:
+    APPEAR-C3G: "trial name"
+    CKD-EPI: "Chronic Kidney Disease Epidemiology Collaboration"
+    FACIT-FATIGUE: "Functional Assessment of Chronic Illness Therapy-Fatigue"
+    FACIT-Fatigue: "Functional Assessment of Chronic Illness Therapy-Fatigue"
+    IL-6: "interleukin-6"
+    IL-1: "interleukin-1"
+    IL-5: "interleukin-5"
+    sC5b-9: "soluble terminal complement complex"
+    C5b-9: "terminal complement complex"
+    IC-MPGN: "immune complex membranoproliferative glomerulonephritis"
+
+  # ========================================
+  # DIRECT SEARCH ABBREVIATIONS
+  # ========================================
+  direct_search_abbrevs:
+    UK: "United Kingdom"
+    RR: "risk ratio"
+    HR: "hazard ratio"
+    CC BY: "Creative Commons Attribution"
+    C3a: "complement C3a anaphylatoxin"
+    C5a: "complement C5a anaphylatoxin"
+    DOI: "digital object identifier"
+    FABHALTA: "iptacopan (brand name)"
+
+  # ========================================
+  # CONTEXTUAL RULES for ambiguous SFs
+  # ========================================
+  context_required_sfs:
+    IA:
+      - "intramural"
+      - "intra-arterial"
+      - "ia nephropathy"
+      - "igan"
+    IG:
+      - "igg"
+      - "iga"
+      - "igm"
+      - "ige"
+      - "immunoglobulin"
+
+  # SFs with case-sensitive matching requirements
+  case_sensitive_sfs:
+    SC5B9: "sC5b-9"
+    SC5B-9: "sC5b-9"
+    EGFR: "eGFR"
+
+  # Trial IDs handling
+  exclude_trial_ids: false
+
+  # ========================================
+  # LLM SF-ONLY EXTRACTOR (PASO D)
+  # ========================================
+  enable_llm_sf_extractor: true
+  llm_sf_max_chunks: 5
+  llm_sf_chunk_size: 3000
+  llm_sf_confidence: 0.75
+
+  # ========================================
+  # TIERED VALIDATION SETTINGS
+  # ========================================
+  enable_haiku_screening: false
+  batch_validation_size: 10
+  lexicon_validation_batch_size: 15
+  min_sf_occurrences: 2
+
+# ==============================================================================
+# API CONFIGURATION
+# ==============================================================================
+api:
+  pubtator:
+    base_url: "https://www.ncbi.nlm.nih.gov/research/pubtator3-api"
+    timeout_seconds: 30
+    rate_limit_per_minute: 30
+
+  claude:
+    # Fast model - For basic tasks (cheaper, faster)
+    fast:
+      model: "claude-sonnet-4-5-20250929"
+      max_tokens: 1500
+      temperature: 0
+
+    # Validation model - For final validation & enrichment (best quality)
+    validation:
+      model: "claude-sonnet-4-20250514"
+      max_tokens: 450
+      temperature: 0
+      top_p: 1.0
+
+    # Batch delay between API calls (ms)
+    batch_delay_ms: 100
+
+    # Legacy (backward compatibility)
+    model: "claude-sonnet-4-20250514"
+    max_tokens: 1500
+    temperature: 0
+
+# ==============================================================================
+# VALIDATION CONFIGURATION
+# ==============================================================================
+validation:
+  # Abbreviation validation
+  abbreviation:
+    enabled: true
+    model_tier: "validation"
+    skip_validation: false
+    prompt_version: "latest"
+
+  # Drug validation
+  drug:
+    enabled: true
+    model_tier: "validation"
+    confidence_threshold: 0.85
+    stages: ["false_positive_filter", "knowledge_base", "claude_ai"]
+
+  # Disease validation
+  disease:
+    enabled: true
+    model_tier: "validation"
+    confidence_threshold: 0.75
+    enrichment_mode: "balanced"
+    stages: ["pattern_detection", "lexicon_matching", "claude_ai"]
+
+# ==============================================================================
+# NORMALIZATION CONFIGURATION
+# ==============================================================================
+normalization:
+  # Term mapper (E01)
+  term_mapper:
+    enabled: true
+    enable_fuzzy_matching: false
+    fuzzy_cutoff: 0.90
+    fill_long_form_for_orphans: false
+
+  # Disambiguator (E02)
+  disambiguator:
+    enabled: true
+    min_context_score: 2
+    min_margin: 1
+    fill_long_form_for_orphans: true
+
+# ==============================================================================
+# DEDUPLICATION
+# ==============================================================================
+deduplication:
+  enabled: true
+  priority_order: ["drug", "disease"]
+  remove_expansion_matches: true
+
+# ==============================================================================
+# EXTRACTION SETTINGS
+# ==============================================================================
+extraction:
+  citation:
+    detect_style: true
+    link_inline: true
+    extract_identifiers: true
+
+  person:
+    extract_affiliations: true
+    classify_roles: true
+    validate_orcid: true
+
+  reference:
+    extract_all_types: true
+    reconstruct_urls: true
+    classify_roles: true
+
+# ==============================================================================
+# OUTPUT
+# ==============================================================================
+output:
+  format: "json"
+  json_indent: 2
+  include:
+    statistics: true
+    confidence: true
+    context: true
+    identifiers: true
+
+# ==============================================================================
+# LOGGING
+# ==============================================================================
+logging:
+  level: "INFO"
+  console: false
+  console_level: "ERROR"
+  file: "corpus.log"
+  max_size_mb: 10
+  backup_count: 5
+
+# ==============================================================================
+# RUNTIME
+# ==============================================================================
+runtime:
+  batch_size: 10
+  timeout_seconds: 300
+  max_file_size_mb: 100
+  on_error: "log_and_continue"

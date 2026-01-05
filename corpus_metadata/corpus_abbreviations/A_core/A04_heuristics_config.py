@@ -5,6 +5,9 @@ Centralized Heuristics Configuration
 All whitelists, blacklists, and configurable rules in one place.
 Enables easy tuning without modifying pipeline logic.
 
+IMPORTANT: All values are now loaded from config.yaml.
+The hardcoded defaults are only used as fallback.
+
 Categories tracked for logging:
 - recovered_by_stats_whitelist
 - recovered_by_hyphen
@@ -13,8 +16,10 @@ Categories tracked for logging:
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Set, Optional
+from pathlib import Path
+from typing import Any, Dict, Set, Optional, List
 import logging
+import yaml
 
 
 @dataclass
@@ -112,7 +117,7 @@ class HeuristicsConfig:
         'IL-6': 'interleukin-6',
         'IL-1': 'interleukin-1',
         'IL-5': 'interleukin-5',
-        'TNF-α': 'tumor necrosis factor alpha',
+        'TNF-Î±': 'tumor necrosis factor alpha',
         'sC5b-9': 'soluble terminal complement complex',
         'C5b-9': 'terminal complement complex',
         'IC-MPGN': 'immune complex membranoproliferative glomerulonephritis',
@@ -205,6 +210,114 @@ class HeuristicsConfig:
         self.stats_abbrevs = {k.upper(): v for k, v in self.stats_abbrevs.items()}
         self.country_abbrevs = {k.upper(): v for k, v in self.country_abbrevs.items()}
 
+    @classmethod
+    def from_yaml(cls, config_path: str) -> "HeuristicsConfig":
+        """
+        Load HeuristicsConfig from a YAML config file.
+
+        Args:
+            config_path: Path to the config.yaml file
+
+        Returns:
+            HeuristicsConfig instance with values from YAML
+        """
+        path = Path(config_path)
+        if not path.exists():
+            print(f"[WARN] Config file not found: {config_path}, using defaults")
+            return cls()
+
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+        except Exception as e:
+            print(f"[WARN] Failed to load config from {config_path}: {e}, using defaults")
+            return cls()
+
+        heur = data.get("heuristics", {})
+        if not heur:
+            return cls()
+
+        # Helper to convert list to set
+        def to_set(val: Any) -> Set[str]:
+            if isinstance(val, list):
+                return set(val)
+            if isinstance(val, set):
+                return val
+            return set()
+
+        # Helper to convert dict with list values to dict with set values
+        def to_dict_of_sets(val: Any) -> Dict[str, Set[str]]:
+            if isinstance(val, dict):
+                return {k: set(v) if isinstance(v, list) else v for k, v in val.items()}
+            return {}
+
+        # Build kwargs from YAML
+        kwargs: Dict[str, Any] = {}
+
+        # Stats abbrevs (dict)
+        if "stats_abbrevs" in heur:
+            kwargs["stats_abbrevs"] = heur["stats_abbrevs"]
+
+        # Country abbrevs (dict)
+        if "country_abbrevs" in heur:
+            kwargs["country_abbrevs"] = heur["country_abbrevs"]
+
+        # Blacklist (set)
+        if "sf_blacklist" in heur:
+            kwargs["sf_blacklist"] = to_set(heur["sf_blacklist"])
+
+        # Common words (set)
+        if "common_words" in heur:
+            kwargs["common_words"] = to_set(heur["common_words"])
+
+        # Allowed 2-letter SFs (set)
+        if "allowed_2letter_sfs" in heur:
+            kwargs["allowed_2letter_sfs"] = to_set(heur["allowed_2letter_sfs"])
+
+        # Allowed mixed case (set)
+        if "allowed_mixed_case" in heur:
+            kwargs["allowed_mixed_case"] = to_set(heur["allowed_mixed_case"])
+
+        # Hyphenated abbrevs (dict)
+        if "hyphenated_abbrevs" in heur:
+            kwargs["hyphenated_abbrevs"] = heur["hyphenated_abbrevs"]
+
+        # Direct search abbrevs (dict)
+        if "direct_search_abbrevs" in heur:
+            kwargs["direct_search_abbrevs"] = heur["direct_search_abbrevs"]
+
+        # Context required SFs (dict of sets)
+        if "context_required_sfs" in heur:
+            kwargs["context_required_sfs"] = to_dict_of_sets(heur["context_required_sfs"])
+
+        # Case sensitive SFs (dict)
+        if "case_sensitive_sfs" in heur:
+            kwargs["case_sensitive_sfs"] = heur["case_sensitive_sfs"]
+
+        # Boolean flags
+        if "exclude_trial_ids" in heur:
+            kwargs["exclude_trial_ids"] = bool(heur["exclude_trial_ids"])
+        if "enable_llm_sf_extractor" in heur:
+            kwargs["enable_llm_sf_extractor"] = bool(heur["enable_llm_sf_extractor"])
+        if "enable_haiku_screening" in heur:
+            kwargs["enable_haiku_screening"] = bool(heur["enable_haiku_screening"])
+
+        # Numeric values
+        if "llm_sf_max_chunks" in heur:
+            kwargs["llm_sf_max_chunks"] = int(heur["llm_sf_max_chunks"])
+        if "llm_sf_chunk_size" in heur:
+            kwargs["llm_sf_chunk_size"] = int(heur["llm_sf_chunk_size"])
+        if "llm_sf_confidence" in heur:
+            kwargs["llm_sf_confidence"] = float(heur["llm_sf_confidence"])
+        if "batch_validation_size" in heur:
+            kwargs["batch_validation_size"] = int(heur["batch_validation_size"])
+        if "lexicon_validation_batch_size" in heur:
+            kwargs["lexicon_validation_batch_size"] = int(heur["lexicon_validation_batch_size"])
+        if "min_sf_occurrences" in heur:
+            kwargs["min_sf_occurrences"] = int(heur["min_sf_occurrences"])
+
+        return cls(**kwargs)
+
 
 @dataclass
 class HeuristicsCounters:
@@ -265,8 +378,17 @@ Auto-rejected:
         }
 
 
-# Default config instance (can be overridden)
-DEFAULT_HEURISTICS_CONFIG = HeuristicsConfig()
+# Default config path
+DEFAULT_CONFIG_PATH = "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
+
+
+def load_default_heuristics_config() -> HeuristicsConfig:
+    """Load heuristics config from default YAML path, fallback to hardcoded defaults."""
+    return HeuristicsConfig.from_yaml(DEFAULT_CONFIG_PATH)
+
+
+# Default config instance (loaded from config.yaml)
+DEFAULT_HEURISTICS_CONFIG = load_default_heuristics_config()
 
 
 def check_context_match(sf: str, context: str, config: HeuristicsConfig) -> bool:

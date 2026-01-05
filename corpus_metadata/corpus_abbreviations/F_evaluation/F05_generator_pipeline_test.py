@@ -4,15 +4,19 @@
 Pipeline Evaluation Test
 
 Runs full extraction pipeline (Orchestrator) on annotated PDFs and scores against gold.
-Process: PDF parsing → Generation → Claude validation → Normalization → Scoring
+Process: PDF parsing -> Generation -> Claude validation -> Normalization -> Scoring
 
 Output: Per-document and corpus-level precision/recall/F1.
+
+All paths are loaded from config.yaml - no hardcoded parameters.
 """
 
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
+
+import yaml
 
 # Ensure imports work
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,11 +30,41 @@ from F_evaluation.F02_scorer import Scorer, ScorerConfig, ScoreReport
 from orchestrator import Orchestrator
 
 # =============================================================================
-# CONFIGURATION
+# CONFIGURATION - All loaded from config.yaml
 # =============================================================================
 
-PAPERS_FOLDER = "/Users/frederictetard/Projects/ese/gold_data/PAPERS"
-GOLD_JSON = "/Users/frederictetard/Projects/ese/gold_data/papers_gold.json"
+DEFAULT_CONFIG_PATH = "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
+
+
+def load_config(config_path: str = DEFAULT_CONFIG_PATH) -> Dict[str, Any]:
+    """Load configuration from YAML file."""
+    path = Path(config_path)
+    if not path.exists():
+        print(f"[WARN] Config file not found: {config_path}, using defaults")
+        return {}
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
+    except Exception as e:
+        print(f"[WARN] Failed to load config: {e}")
+        return {}
+
+
+def get_paths_from_config(config: Dict[str, Any]) -> Tuple[str, str]:
+    """Extract papers folder and gold JSON paths from config."""
+    paths = config.get("paths", {})
+    base_path = paths.get("base", "/Users/frederictetard/Projects/ese")
+
+    papers_folder = str(Path(base_path) / paths.get("papers_folder", "gold_data/PAPERS"))
+    gold_json = str(Path(base_path) / paths.get("gold_json", "gold_data/papers_gold.json"))
+
+    return papers_folder, gold_json
+
+
+# Load config and extract paths
+_CONFIG = load_config()
+PAPERS_FOLDER, GOLD_JSON = get_paths_from_config(_CONFIG)
 
 
 # =============================================================================
@@ -90,7 +124,7 @@ class PipelineEvaluator:
         gold_annos = self.gold_index.get(doc_id, [])
 
         if not gold_annos:
-            print(f"  ⚠ No gold annotations for {doc_id}")
+            print(f"  [WARN] No gold annotations for {doc_id}")
             return [], ScoreReport(
                 precision=0.0, recall=0.0, f1=0.0,
                 true_positives=0, false_positives=0, false_negatives=0,
@@ -112,7 +146,7 @@ class PipelineEvaluator:
         pdfs = self.get_annotated_pdfs()
 
         if not pdfs:
-            print("❌ No annotated PDFs found")
+            print("[X] No annotated PDFs found")
             return
 
         # Count unique gold SFs across all docs to evaluate
@@ -146,7 +180,7 @@ class PipelineEvaluator:
         for pdf_path in pdfs:
             doc_id = pdf_path.name
             print(f"\n{'='*70}")
-            print(f"📄 {doc_id}")
+            print(f"[DOC] {doc_id}")
             print(f"{'='*70}")
 
             start = time.time()
@@ -185,12 +219,12 @@ class PipelineEvaluator:
 
         # Error analysis
         if corpus_report.micro.fp_examples:
-            print(f"\n❌ False Positives (sample):")
+            print(f"\n[X] False Positives (sample):")
             for ex in corpus_report.micro.fp_examples[:5]:
                 print(f"   {ex}")
 
         if corpus_report.micro.fn_examples:
-            print(f"\n⚠️  False Negatives (sample):")
+            print(f"\n[WARN]ï¸  False Negatives (sample):")
             for ex in corpus_report.micro.fn_examples[:5]:
                 print(f"   {ex}")
 

@@ -2,7 +2,7 @@
 """
 Orchestrator v0.7: PDF -> Parse -> Generate -> Validate -> Log
 
-Processes all PDFs in /Users/frederictetard/Projects/ese/Pdfs
+All configuration is loaded from config.yaml - no hardcoded parameters.
 
 Usage:
     python orchestrator.py
@@ -16,7 +16,45 @@ from __future__ import annotations
 
 from pathlib import Path
 from dotenv import load_dotenv
+import yaml
 load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
+
+# =============================================================================
+# SILENCE KNOWN DEPENDENCY WARNINGS (must be before imports that trigger them)
+# =============================================================================
+import warnings
+
+# 1) scispaCy AbbreviationDetector: global_matcher has no patterns (benign)
+warnings.filterwarnings(
+    "ignore",
+    message=r".*\[W036\].*component 'matcher' does not have any patterns defined.*",
+)
+
+# 2) sklearn version mismatch: UMLS linker loads TfidfVectorizer pickled with 1.1.2
+#    TODO: Consider regenerating scispacy artifacts with current sklearn version
+warnings.filterwarnings(
+    "ignore",
+    category=UserWarning,
+    message=r".*InconsistentVersionWarning.*",
+)
+warnings.filterwarnings(
+    "ignore",
+    module=r"sklearn\.base",
+)
+
+# 3) transformers/unstructured: max_size deprecated (low risk, cosmetic)
+warnings.filterwarnings(
+    "ignore",
+    message=r".*max_size.*parameter is deprecated.*",
+)
+
+# 4) spaCy tokenizer: FutureWarning about set union (internal regex issue)
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    module=r"spacy\.language",
+)
+# =============================================================================
 
 import json
 import sys
@@ -53,7 +91,9 @@ PIPELINE_VERSION = "0.7"
 class Orchestrator:
     """
     Main pipeline orchestrator.
-    
+
+    All configuration is loaded from config.yaml.
+
     Stages:
         1. Parse PDF -> DocumentGraph
         2. Generate candidates (syntax + lexicon)
@@ -61,37 +101,82 @@ class Orchestrator:
         4. Log results to corpus_log/
     """
 
-    # Default paths
-    DEFAULT_CONFIG = "/Users/frederictetard/Projects/ese/corpus_metadata/document_config/config.yaml"
-    DEFAULT_LOG_DIR = "/Users/frederictetard/Projects/ese/corpus_log"
-    DEFAULT_PDF_DIR = "/Users/frederictetard/Projects/ese/Pdfs"
+    # Default config path (all other paths loaded from config)
+    DEFAULT_CONFIG = "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
 
     def __init__(
         self,
         log_dir: Optional[str] = None,
         output_dir: Optional[str] = None,
-        model: str = "claude-sonnet-4-20250514",
+        model: Optional[str] = None,
         api_key: Optional[str] = None,
         config_path: Optional[str] = None,
         run_id: Optional[str] = None,
-        skip_validation: bool = False,
-        enable_haiku_screening: bool = False,  # Haiku fast-reject (disabled by default)
-        heuristics_config: Optional[HeuristicsConfig] = None,  # Centralized heuristics
+        skip_validation: Optional[bool] = None,
+        enable_haiku_screening: Optional[bool] = None,
+        heuristics_config: Optional[HeuristicsConfig] = None,
     ):
+        # Load configuration from YAML
         self.config_path = config_path or self.DEFAULT_CONFIG
-        self.log_dir = Path(log_dir or self.DEFAULT_LOG_DIR)
-        self.output_dir = Path(output_dir) if output_dir else None
-        self.model = model
-        self.run_id = run_id or generate_run_id("RUN")
-        self.skip_validation = skip_validation
-        self.enable_haiku_screening = enable_haiku_screening
+        self.config = self._load_config(self.config_path)
 
-        # Centralized heuristics config
-        self.heuristics = heuristics_config or DEFAULT_HEURISTICS_CONFIG
+        # Extract paths from config
+        paths = self.config.get("paths", {})
+        base_path = paths.get("base", "/Users/frederictetard/Projects/ese")
+
+        # Set paths from config (with parameter override)
+        self.log_dir = Path(log_dir or Path(base_path) / paths.get("logs", "corpus_log"))
+        self.output_dir = Path(output_dir) if output_dir else None
+        self.pdf_dir = Path(base_path) / paths.get("pdf_input", "Pdfs")
+
+        # Extract API settings from config
+        api_cfg = self.config.get("api", {}).get("claude", {})
+        val_cfg = api_cfg.get("validation", {})
+
+        # Set model from config (with parameter override)
+        self.model = model or val_cfg.get("model", "claude-sonnet-4-20250514")
+        self.batch_delay_ms = api_cfg.get("batch_delay_ms", 100)
+
+        # Set validation settings from config (with parameter override)
+        validation_cfg = self.config.get("validation", {}).get("abbreviation", {})
+        self.skip_validation = skip_validation if skip_validation is not None else not validation_cfg.get("enabled", True)
+
+        # Set heuristics settings from config (with parameter override)
+        heur_cfg = self.config.get("heuristics", {})
+        self.enable_haiku_screening = enable_haiku_screening if enable_haiku_screening is not None else heur_cfg.get("enable_haiku_screening", False)
+
+        self.run_id = run_id or generate_run_id("RUN")
+
+        # Load heuristics config from YAML
+        self.heuristics = heuristics_config or HeuristicsConfig.from_yaml(self.config_path)
+
+        # Extract lexicon paths from config
+        lexicons = self.config.get("lexicons", {})
+        dict_path = Path(base_path) / paths.get("dictionaries", "ouput_datasources")
 
         # Parser
         self.parser = PDFToDocGraphParser()
         self.table_extractor = TableExtractor()
+
+        # Extract generator settings from config
+        gen_cfg = self.config.get("generators", {})
+        regex_cfg = gen_cfg.get("regex_pattern", {})
+        lexicon_cfg = gen_cfg.get("lexicon", {})
+
+        # Build lexicon generator config from YAML
+        lexicon_gen_config = {
+            "run_id": self.run_id,
+            "abbrev_lexicon_path": str(dict_path / lexicons.get("abbreviation_general", "2025_08_abbreviation_general.json")),
+            "disease_lexicon_path": str(dict_path / lexicons.get("disease_lexicon", "2025_08_lexicon_disease.json")),
+            "orphanet_lexicon_path": str(dict_path / lexicons.get("orphanet_diseases", "2025_08_orphanet_diseases.json")),
+            "rare_disease_acronyms_path": str(dict_path / lexicons.get("rare_disease_acronyms", "2025_08_rare_disease_acronyms.json")),
+            "umls_abbrev_path": str(dict_path / lexicons.get("umls_biological", "2025_08_umls_biological_abbreviations_v5.tsv")),
+            "umls_clinical_path": str(dict_path / lexicons.get("umls_clinical", "2025_08_umls_clinical_abbreviations_v5.tsv")),
+            "anca_lexicon_path": str(dict_path / lexicons.get("disease_lexicon_anca", "disease_lexicon_anca.json")),
+            "igan_lexicon_path": str(dict_path / lexicons.get("disease_lexicon_igan", "disease_lexicon_igan.json")),
+            "pah_lexicon_path": str(dict_path / lexicons.get("disease_lexicon_pah", "disease_lexicon_pah.json")),
+            "context_window": lexicon_cfg.get("context_window", 300),
+        }
 
         # Generators (all 5 strategies)
         self.generators = [
@@ -99,25 +184,26 @@ class Orchestrator:
             GlossaryTableCandidateGenerator(config={"run_id": self.run_id}),  # C01b: Glossary tables
             RegexCandidateGenerator(config={                                    # C02: Rigid patterns
                 "run_id": self.run_id,
-                # Only extract entity types relevant for abbreviation validation
-                # Exclude: DOSE, CONCENTRATION, PERCENTAGE, DATE, URL, YEAR (not abbreviations)
-                "enabled_types": ["TRIAL_ID", "COMPOUND_ID", "DOI", "PMID", "PMCID"],
+                "enabled_types": regex_cfg.get("enabled_types", ["TRIAL_ID", "COMPOUND_ID", "DOI", "PMID", "PMCID"]),
             }),
             LayoutCandidateGenerator(config={"run_id": self.run_id}),         # C03: Layout heuristics
-            RegexLexiconGenerator(config={"run_id": self.run_id}),            # C04: Lexicon/FlashText
+            RegexLexiconGenerator(config=lexicon_gen_config),                 # C04: Lexicon/FlashText
         ]
 
         # Validation (Claude) - reads config from YAML
-        if not skip_validation:
+        if not self.skip_validation:
             self.claude_client = ClaudeClient(
                 api_key=api_key,
-                model=model,
+                model=self.model,
                 config_path=self.config_path,
             )
             self.llm_engine = LLMEngine(
                 llm_client=self.claude_client,
-                model=model,
+                model=self.model,
                 run_id=self.run_id,
+                max_tokens=val_cfg.get("max_tokens", 450),
+                temperature=val_cfg.get("temperature", 0.0),
+                top_p=val_cfg.get("top_p", 1.0),
             )
         else:
             self.claude_client = None
@@ -129,36 +215,60 @@ class Orchestrator:
             run_id=self.run_id,
         )
 
+        # Extract normalization settings from config
+        norm_cfg = self.config.get("normalization", {})
+        term_mapper_cfg = norm_cfg.get("term_mapper", {})
+        disambig_cfg = norm_cfg.get("disambiguator", {})
+
         # Normalization (E01) - canonicalize long forms + attach standard IDs
         self.term_mapper = TermMapper(config={
-            "mapping_file_path": "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_abbreviation_general.json",
-            "enable_fuzzy_matching": False,
-            "fill_long_form_for_orphans": False,
+            "mapping_file_path": str(dict_path / lexicons.get("abbreviation_general", "2025_08_abbreviation_general.json")),
+            "enable_fuzzy_matching": term_mapper_cfg.get("enable_fuzzy_matching", False),
+            "fuzzy_cutoff": term_mapper_cfg.get("fuzzy_cutoff", 0.90),
+            "fill_long_form_for_orphans": term_mapper_cfg.get("fill_long_form_for_orphans", False),
         })
 
         # Disambiguation (E02) - resolve ambiguous abbreviations using context
         self.disambiguator = Disambiguator(config={
-            "min_context_score": 2,
-            "min_margin": 1,
-            "fill_long_form_for_orphans": True,
+            "min_context_score": disambig_cfg.get("min_context_score", 2),
+            "min_margin": disambig_cfg.get("min_margin", 1),
+            "fill_long_form_for_orphans": disambig_cfg.get("fill_long_form_for_orphans", True),
         })
 
-        print(f"Orchestrator v0.7 initialized")
+        print(f"Orchestrator v{PIPELINE_VERSION} initialized")
         print(f"  Run ID: {self.run_id}")
         print(f"  Config: {self.config_path}")
-        print(f"  Model: {model}")
+        print(f"  Model: {self.model}")
         print(f"  Log dir: {self.log_dir}")
-        print(f"  Validation: {'ENABLED' if not skip_validation else 'DISABLED'}")
-        print(f"  Haiku screening: {'ENABLED' if enable_haiku_screening else 'OFF'}")
+        print(f"  Validation: {'ENABLED' if not self.skip_validation else 'DISABLED'}")
+        print(f"  Haiku screening: {'ENABLED' if self.enable_haiku_screening else 'OFF'}")
+
+    def _load_config(self, config_path: str) -> Dict[str, Any]:
+        """Load configuration from YAML file."""
+        path = Path(config_path)
+        if not path.exists():
+            print(f"[WARN] Config file not found: {config_path}, using defaults")
+            return {}
+
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return yaml.safe_load(f) or {}
+        except Exception as e:
+            print(f"[WARN] Failed to load config from {config_path}: {e}")
+            return {}
 
     def process_pdf(
         self,
         pdf_path: str,
-        batch_delay_ms: float = 100,
+        batch_delay_ms: Optional[float] = None,
     ) -> List[ExtractedEntity]:
         """
         Process a single PDF through the full pipeline.
         """
+        # Use config value if not specified
+        if batch_delay_ms is None:
+            batch_delay_ms = self.batch_delay_ms
+
         pdf_path = Path(pdf_path)
         if not pdf_path.exists():
             raise FileNotFoundError(f"PDF not found: {pdf_path}")
@@ -360,7 +470,7 @@ class Orchestrator:
 
         lexicon_before = sum(len(v) for v in lexicon_by_sf.values()) + sf_form_rejected
         lexicon_after = len(deduped_lexicon)
-        print(f"  LEXICON_MATCH reduction: {lexicon_before} → {lexicon_after} "
+        print(f"  LEXICON_MATCH reduction: {lexicon_before} -> {lexicon_after} "
               f"(dedup: {lexicon_before - sf_form_rejected - lexicon_after}, "
               f"form filter: {sf_form_rejected})")
 
@@ -413,7 +523,7 @@ class Orchestrator:
             ctx = context.lower()
             sf_lower = sf.lower()
 
-            # Find SF position and check ±30 chars window
+            # Find SF position and check Â±30 chars window
             idx = ctx.find(sf_lower)
             if idx == -1:
                 return False
@@ -432,7 +542,7 @@ class Orchestrator:
             # Patterns like "95% CI" or "OR 1.2"
             if re.search(rf'{sf_lower}\s*[:=]?\s*[\d\.\-]', window):
                 return True
-            if re.search(rf'[\d\.]+\s*[-–]\s*[\d\.]+', window):  # Range like 1.2-3.4
+            if re.search(rf'[\d\.]+\s*-\s*[\d\.]+', window):  # Range like 1.2-3.4
                 return True
 
             return False
@@ -668,7 +778,7 @@ class Orchestrator:
                     )
                     results.append(entity)
             except Exception as e:
-                print(f"  ⚠ Batch error, falling back to individual: {e}")
+                print(f"  [WARN] Batch error, falling back to individual: {e}")
                 for candidate in explicit_candidates:
                     try:
                         entity = self.llm_engine.verify_candidate(candidate)
@@ -1049,7 +1159,7 @@ Return ONLY the JSON array, nothing else."""
             print(f"\nValidated abbreviations ({len(validated)}):")
             for v in validated[:20]:
                 lf = v.long_form or "(no expansion)"
-                print(f"  • {v.short_form} → {lf}")
+                print(f"  * {v.short_form} -> {lf}")
             if len(validated) > 20:
                 print(f"  ... and {len(validated) - 20} more")
 
@@ -1122,7 +1232,7 @@ Return ONLY the JSON array, nothing else."""
         
         Returns dict of {pdf_name: [entities]}
         """
-        folder = Path(folder_path or self.DEFAULT_PDF_DIR)
+        folder = Path(folder_path or self.pdf_dir)
         if not folder.exists():
             raise FileNotFoundError(f"Folder not found: {folder}")
 
@@ -1144,7 +1254,7 @@ Return ONLY the JSON array, nothing else."""
                 results = self.process_pdf(str(pdf_path), batch_delay_ms=batch_delay_ms)
                 all_results[pdf_path.name] = results
             except Exception as e:
-                print(f"  ⚠ ERROR processing {pdf_path.name}: {e}")
+                print(f"  [WARN] ERROR processing {pdf_path.name}: {e}")
                 all_results[pdf_path.name] = []
 
         # Final summary
