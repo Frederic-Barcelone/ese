@@ -486,11 +486,15 @@ class LLMEngine:
 
         # 5) Decide final LF (only for definition/glossary)
         final_lf = candidate.long_form
+        final_status = result.status  # May be upgraded if corrected_long_form provided
         if candidate.field_type in (FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY):
             if result.corrected_long_form:
                 cl = result.corrected_long_form.strip()
                 if cl:
                     final_lf = cl
+                    # KEY FIX: If LLM provides corrected_long_form, upgrade REJECTED to VALIDATED
+                    if result.status == ValidationStatus.REJECTED:
+                        final_status = ValidationStatus.VALIDATED
 
         # 6) Build evidence span
         ev_text = (result.evidence or context).strip()
@@ -523,7 +527,7 @@ class LLMEngine:
 
         # 9) Build entity
         rejection_reason = None
-        if result.status == ValidationStatus.REJECTED:
+        if final_status == ValidationStatus.REJECTED:
             rejection_reason = result.reason or "Rejected by verifier"
 
         return ExtractedEntity(
@@ -534,7 +538,7 @@ class LLMEngine:
             long_form=(out_lf.strip() if isinstance(out_lf, str) else None),
             primary_evidence=primary,
             supporting_evidence=[],
-            status=result.status,
+            status=final_status,
             confidence_score=float(result.confidence),
             rejection_reason=rejection_reason,
             validation_flags=[],
@@ -578,15 +582,52 @@ class LLMEngine:
         if not batch:
             return []
 
-        # Build batch prompt
+        # Build batch prompt with v2.0 format: id, has_explicit_pair, source
         candidate_lines = []
-        for i, c in enumerate(batch):
-            context = (c.context_text or "")[:180]  # Limit context per candidate
-            prov = self._build_provenance_context(c)
+        id_to_candidate: dict[str, Candidate] = {}
+
+        for c in batch:
+            cid = str(c.id)
+            id_to_candidate[cid] = c
+
+            context = (c.context_text or "")[:400]  # More context for better accuracy
+
+            # Determine source from generator_type
+            source = "UNKNOWN"
+            if c.generator_type:
+                gen_name = c.generator_type.value
+                if "syntax" in gen_name.lower():
+                    source = "SYNTAX_PATTERN"
+                elif "lexicon" in gen_name.lower():
+                    source = "LEXICON_MATCH"
+                elif "glossary" in gen_name.lower():
+                    source = "GLOSSARY_TABLE"
+                elif "layout" in gen_name.lower() or "table" in gen_name.lower():
+                    source = "TABLE_LAYOUT"
+
+            # has_explicit_pair: True if SYNTAX_PATTERN (detected LF(SF) pattern)
+            has_explicit_pair = (source == "SYNTAX_PATTERN")
+
+            # ctx_pair: True if both SF and LF appear in context (case-insensitive)
+            ctx_lower = context.lower()
+            sf_in_ctx = c.short_form.lower() in ctx_lower
+            lf_in_ctx = (c.long_form or "").lower() in ctx_lower if c.long_form else False
+            ctx_pair = sf_in_ctx and lf_in_ctx
+
+            # Get lexicon source if available (for trusted source validation)
+            lexicon_src = ""
+            if c.provenance and c.provenance.lexicon_source:
+                lexicon_src = c.provenance.lexicon_source
+
             candidate_lines.append(
-                f"[{i}] SF: '{c.short_form}' -> LF: '{c.long_form or '(none)'}'\n"
-                f"    Context: \"{context}\"\n"
-                f"    {prov.strip() if prov else 'Source: Unknown'}"
+                f"- id: {cid}\n"
+                f"  sf: \"{c.short_form}\"\n"
+                f"  lf: \"{c.long_form or '(none)'}\"\n"
+                f"  source: {source}\n"
+                f"  has_explicit_pair: {str(has_explicit_pair).lower()}\n"
+                f"  ctx_pair: {str(ctx_pair).lower()}\n"
+                f"  lexicon: \"{lexicon_src}\"\n"
+                f"  context: \"{context}\""
             )
 
         candidates_text = "\n\n".join(candidate_lines)
@@ -646,49 +687,96 @@ class LLMEngine:
     def _parse_batch_response(
         self, batch: list[Candidate], raw
     ) -> list[ExtractedEntity]:
-        """Parse batch LLM response into individual ExtractedEntity results."""
-        results: list[ExtractedEntity] = []
+        """
+        Parse batch LLM response into individual ExtractedEntity results.
+
+        v2.0 format expects:
+        {
+            "expected_count": N,
+            "results": [
+                {"id": "<candidate_id>", "status": "...", "confidence": 0.X, "reason": "..."},
+                ...
+            ]
+        }
+
+        Uses id-based matching for robustness.
+        Falls back to individual validation if parsing fails.
+        """
+        # Build id -> candidate lookup
+        id_to_candidate: dict[str, Candidate] = {str(c.id): c for c in batch}
+        expected_count = len(batch)
 
         # Handle None (parsing failed)
         if raw is None:
             print(f"  ⚠ Batch parse failed (raw=None), falling back")
             return [self.verify_candidate(c) for c in batch]
 
-        # Handle different response formats
-        response_list = []
-        if isinstance(raw, list):
-            response_list = raw
-        elif isinstance(raw, dict):
-            # Try common keys for array response
-            for key in ["results", "validations", "items", "responses"]:
-                if key in raw and isinstance(raw[key], list):
-                    response_list = raw[key]
-                    break
-            # If dict has numeric keys, convert to list
-            if not response_list and any(k.isdigit() for k in raw.keys() if isinstance(k, str)):
-                response_list = [raw.get(str(i)) or raw.get(i) for i in range(len(batch))]
+        # Extract results list from response
+        response_list: list[dict] = []
 
-        # If we couldn't parse a list, fall back to individual validation
-        if not response_list or len(response_list) < len(batch):
-            print(f"  ⚠ Batch parse failed (got {len(response_list)}/{len(batch)}), falling back")
+        if isinstance(raw, dict):
+            # v2.0 format: {expected_count, results: [...]}
+            if "results" in raw and isinstance(raw["results"], list):
+                response_list = raw["results"]
+
+                # Hard validation: check expected_count matches
+                resp_expected = raw.get("expected_count", len(response_list))
+                if resp_expected != expected_count:
+                    print(f"  ⚠ Batch count mismatch (expected {expected_count}, got {resp_expected})")
+            else:
+                # Legacy fallback: try other common keys
+                for key in ["validations", "items", "responses"]:
+                    if key in raw and isinstance(raw[key], list):
+                        response_list = raw[key]
+                        break
+        elif isinstance(raw, list):
+            # Direct array (legacy v1.0 format)
+            response_list = raw
+
+        # Hard validation: must have exactly expected_count results
+        if len(response_list) != expected_count:
+            print(f"  ⚠ Batch parse failed (got {len(response_list)}/{expected_count}), falling back")
             raw_type = type(raw).__name__
             raw_keys = list(raw.keys())[:5] if isinstance(raw, dict) else None
             print(f"    Raw type: {raw_type}, keys: {raw_keys}")
             return [self.verify_candidate(c) for c in batch]
 
-        # Map responses to candidates
-        for i, candidate in enumerate(batch):
-            if i < len(response_list) and response_list[i]:
-                resp = response_list[i]
+        # Map responses to candidates by id
+        id_to_response: dict[str, dict] = {}
+        for resp in response_list:
+            if isinstance(resp, dict):
+                resp_id = str(resp.get("id", ""))
+                if resp_id:
+                    id_to_response[resp_id] = resp
+
+        # Build results in original batch order
+        results: list[ExtractedEntity] = []
+        missing_ids: list[str] = []
+
+        for candidate in batch:
+            cid = str(candidate.id)
+            resp = id_to_response.get(cid)
+
+            if resp:
                 results.append(self._build_entity_from_batch_response(candidate, resp, raw))
             else:
-                # Missing response, mark as ambiguous
-                results.append(self._entity_ambiguous(
-                    candidate,
-                    reason="Missing response in batch validation",
-                    flags=["batch_missing"],
-                    raw_llm=raw,
-                ))
+                missing_ids.append(cid)
+                # Try index-based fallback (for compatibility)
+                idx = batch.index(candidate)
+                if idx < len(response_list) and isinstance(response_list[idx], dict):
+                    results.append(self._build_entity_from_batch_response(
+                        candidate, response_list[idx], raw
+                    ))
+                else:
+                    results.append(self._entity_ambiguous(
+                        candidate,
+                        reason="Missing response in batch validation",
+                        flags=["batch_missing"],
+                        raw_llm=raw,
+                    ))
+
+        if missing_ids:
+            print(f"  ⚠ {len(missing_ids)} ids not found in response, used index fallback")
 
         return results
 
@@ -711,6 +799,10 @@ class LLMEngine:
         final_lf = candidate.long_form
         if corrected_lf and isinstance(corrected_lf, str) and corrected_lf.strip():
             final_lf = corrected_lf.strip()
+            # KEY FIX: If LLM provides corrected_long_form, upgrade REJECTED to VALIDATED
+            # This handles cases where lexicon has wrong LF but LLM found correct expansion
+            if status == ValidationStatus.REJECTED:
+                status = ValidationStatus.VALIDATED
 
         context = (candidate.context_text or "").strip()
         context_hash = hash_string(context) if context else "no_context"
@@ -732,7 +824,7 @@ class LLMEngine:
             update={
                 "pipeline_version": self.pipeline_version,
                 "run_id": self.run_id,
-                "rule_version": "batch_validation:v1.0",
+                "rule_version": "batch_validation:v2.0",
             }
         )
 
@@ -754,6 +846,168 @@ class LLMEngine:
             validation_flags=["batch_validated"],
             provenance=prov,
             raw_llm_response={"batch_response": raw_batch, "item_response": resp},
+        )
+
+    def fast_reject_batch(
+        self,
+        candidates: list[Candidate],
+        haiku_model: str = "claude-3-5-haiku-20241022",
+        batch_size: int = 20,
+    ) -> tuple[list[Candidate], list[ExtractedEntity]]:
+        """
+        Use Haiku to fast-reject obvious non-abbreviations.
+
+        Returns:
+            (needs_review, rejected): Candidates that need Sonnet validation,
+                                      and entities for rejected candidates.
+        """
+        if not candidates:
+            return [], []
+
+        needs_review: list[Candidate] = []
+        rejected: list[ExtractedEntity] = []
+
+        # Process in batches
+        for batch_start in range(0, len(candidates), batch_size):
+            batch = candidates[batch_start : batch_start + batch_size]
+            batch_needs_review, batch_rejected = self._fast_reject_single_batch(
+                batch, haiku_model
+            )
+            needs_review.extend(batch_needs_review)
+            rejected.extend(batch_rejected)
+
+        return needs_review, rejected
+
+    def _fast_reject_single_batch(
+        self,
+        batch: list[Candidate],
+        haiku_model: str,
+    ) -> tuple[list[Candidate], list[ExtractedEntity]]:
+        """Process a single batch with Haiku fast-reject."""
+        if not batch:
+            return [], []
+
+        # Build candidate lines for prompt
+        id_to_candidate: dict[str, Candidate] = {}
+        candidate_lines = []
+
+        for c in batch:
+            cid = str(c.id)
+            id_to_candidate[cid] = c
+            context = (c.context_text or "")[:200]
+
+            candidate_lines.append(
+                f"- id: {cid}\n"
+                f"  sf: \"{c.short_form}\"\n"
+                f"  lf: \"{c.long_form or '(none)'}\"\n"
+                f"  context: \"{context}\""
+            )
+
+        candidates_text = "\n\n".join(candidate_lines)
+
+        # Get fast-reject prompt bundle
+        bundle = PromptRegistry.get_bundle(PromptTask.FAST_REJECT, version="latest")
+
+        user_prompt = bundle.user_template.format(candidates=candidates_text)
+
+        # Call Haiku
+        try:
+            if hasattr(self.client, 'complete_json_any'):
+                raw = self.client.complete_json_any(
+                    system_prompt=bundle.system_prompt,
+                    user_prompt=user_prompt,
+                    model=haiku_model,
+                    temperature=0.0,
+                    max_tokens=self.max_tokens,
+                    top_p=1.0,
+                )
+            else:
+                raw = self.client.complete_json(
+                    system_prompt=bundle.system_prompt,
+                    user_prompt=user_prompt,
+                    model=haiku_model,
+                    temperature=0.0,
+                    max_tokens=self.max_tokens,
+                    top_p=1.0,
+                )
+        except Exception as e:
+            print(f"  ⚠ Haiku error, sending all to Sonnet: {e}")
+            return batch, []
+
+        # Parse response
+        needs_review: list[Candidate] = []
+        rejected: list[ExtractedEntity] = []
+
+        results_list = []
+        if isinstance(raw, dict) and "results" in raw:
+            results_list = raw["results"]
+        elif isinstance(raw, list):
+            results_list = raw
+
+        # Build id -> result mapping
+        id_to_result: dict[str, dict] = {}
+        for r in results_list:
+            if isinstance(r, dict) and "id" in r:
+                id_to_result[str(r["id"])] = r
+
+        # Process each candidate
+        for c in batch:
+            cid = str(c.id)
+            result = id_to_result.get(cid, {})
+
+            decision = str(result.get("decision", "REVIEW")).upper()
+            confidence = float(result.get("confidence", 0.5))
+            reason = result.get("reason", "")
+
+            # Only reject if high confidence
+            if decision == "REJECT" and confidence >= 0.85:
+                entity = self._entity_fast_rejected(c, confidence, reason)
+                rejected.append(entity)
+            else:
+                needs_review.append(c)
+
+        return needs_review, rejected
+
+    def _entity_fast_rejected(
+        self,
+        candidate: Candidate,
+        confidence: float,
+        reason: str,
+    ) -> ExtractedEntity:
+        """Create a rejected entity from Haiku fast-reject."""
+        context = (candidate.context_text or "").strip()
+        ctx_hash = hash_string(context) if context else "no_context"
+
+        primary = EvidenceSpan(
+            text=context,
+            location=candidate.context_location,
+            scope_ref=ctx_hash,
+            start_char_offset=0,
+            end_char_offset=len(context),
+        )
+
+        prov = candidate.provenance.model_copy(
+            update={
+                "pipeline_version": self.pipeline_version,
+                "run_id": self.run_id,
+                "rule_version": "fast_reject:v1.0",
+            }
+        )
+
+        return ExtractedEntity(
+            candidate_id=candidate.id,
+            doc_id=candidate.doc_id,
+            field_type=candidate.field_type,
+            short_form=candidate.short_form.strip(),
+            long_form=(candidate.long_form.strip() if candidate.long_form else None),
+            primary_evidence=primary,
+            supporting_evidence=[],
+            status=ValidationStatus.REJECTED,
+            confidence_score=confidence,
+            rejection_reason=f"Fast-reject: {reason}",
+            validation_flags=["haiku_rejected"],
+            provenance=prov,
+            raw_llm_response={"haiku_decision": "REJECT", "reason": reason},
         )
 
     # -------------------------

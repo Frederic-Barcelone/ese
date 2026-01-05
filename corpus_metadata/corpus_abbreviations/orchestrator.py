@@ -28,7 +28,7 @@ from typing import Any, Dict, List, Optional, Tuple
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus, GeneratorType, EvidenceSpan
+from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus, GeneratorType, EvidenceSpan, FieldType, Coordinate, ProvenanceMetadata
 from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint, hash_string
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
@@ -68,6 +68,7 @@ class Orchestrator:
         config_path: Optional[str] = None,
         run_id: Optional[str] = None,
         skip_validation: bool = False,
+        enable_haiku_screening: bool = False,  # Haiku fast-reject (disabled by default)
     ):
         self.config_path = config_path or self.DEFAULT_CONFIG
         self.log_dir = Path(log_dir or self.DEFAULT_LOG_DIR)
@@ -75,6 +76,7 @@ class Orchestrator:
         self.model = model
         self.run_id = run_id or generate_run_id("RUN")
         self.skip_validation = skip_validation
+        self.enable_haiku_screening = enable_haiku_screening
 
         # Parser
         self.parser = PDFToDocGraphParser()
@@ -136,6 +138,7 @@ class Orchestrator:
         print(f"  Model: {model}")
         print(f"  Log dir: {self.log_dir}")
         print(f"  Validation: {'ENABLED' if not skip_validation else 'DISABLED'}")
+        print(f"  Haiku screening: {'ENABLED' if enable_haiku_screening else 'OFF'}")
 
     def process_pdf(
         self,
@@ -226,19 +229,131 @@ class Orchestrator:
 
         # Filter: keep lexicon matches if:
         # 1. SF is corroborated by another generator, OR
-        # 2. SF appears 1+ times in document (relaxed from 2+ to improve recall)
+        # 2. SF appears 2+ times in document (strict for precision)
         def should_keep(c: Candidate) -> bool:
             if c.generator_type != GeneratorType.LEXICON_MATCH:
                 return True
             sf_upper = c.short_form.upper()
             if sf_upper in corroborated_sfs:
                 return True
-            # Relaxed: keep if SF appears at least once (was 2+)
-            if word_counts.get(sf_upper, 0) >= 1:
+            # Strict: require SF appears at least twice (1C)
+            if word_counts.get(sf_upper, 0) >= 2:
                 return True
             return False
 
         needs_validation: List[Candidate] = [c for c in unique_candidates if should_keep(c)]
+
+        # ========================================
+        # UPSTREAM REDUCTION: Reduce LEXICON_MATCH before LLM (1A, 1B)
+        # ========================================
+
+        # Quick Win #2: Allowlists for valid short SFs
+        ALLOWED_2LETTER_SFS = {'UK', 'US', 'EU', 'IV', 'IM', 'PO', 'SC', 'ID'}  # Countries + routes
+        ALLOWED_MIXED_CASE = {'MEDDRA', 'RADAR', 'SAS', 'SPSS', 'STATA'}  # Software/registries
+
+        def is_valid_sf_form(sf: str, context: str = "") -> bool:
+            """1B: Filter SF by form - reject non-abbreviation patterns."""
+            sf_upper = sf.upper()
+
+            # Allow 2-letter uppercase if in allowlist
+            if len(sf) == 2 and sf_upper in ALLOWED_2LETTER_SFS:
+                return True
+
+            # Allow known mixed-case/software abbreviations
+            if sf_upper in ALLOWED_MIXED_CASE:
+                return True
+
+            # Special case: Ig/IG only if near immunoglobulin context
+            if sf_upper == 'IG':
+                ctx_lower = context.lower()
+                if any(x in ctx_lower for x in ['igg', 'iga', 'igm', 'ige', 'immunoglobulin']):
+                    return True
+                return False  # Reject ambiguous IG without context
+
+            # Reject if mostly lowercase and longer than 6 chars (likely a word)
+            if len(sf) > 6 and sf.islower():
+                return False
+            # Reject if all lowercase and > 4 chars (e.g., "protein", "study")
+            if sf.islower() and len(sf) > 4:
+                return False
+            # Reject if looks like a regular capitalized word (e.g., "Medications")
+            if len(sf) > 6 and sf[0].isupper() and sf[1:].islower():
+                return False
+            return True
+
+        def score_lf_quality(c: Candidate, full_text: str) -> int:
+            """1A: Score LF quality for dedup ranking."""
+            score = 0
+            lf = (c.long_form or "").lower()
+            sf = c.short_form
+
+            # LF appears near SF in document (highest priority)
+            if lf and sf in full_text:
+                # Check if LF appears within 200 chars of SF
+                sf_positions = [m.start() for m in re.finditer(re.escape(sf), full_text)]
+                for pos in sf_positions[:5]:  # Check first 5 occurrences
+                    window = full_text[max(0, pos-200):pos+200].lower()
+                    if lf in window:
+                        score += 100
+                        break
+
+            # LF appears anywhere in document
+            if lf and lf in full_text.lower():
+                score += 50
+
+            # Prefer shorter, more "definitional" LFs
+            if lf:
+                # Penalize very long LFs (likely not definitions)
+                if len(lf) > 60:
+                    score -= 20
+                # Penalize LFs with verbs/articles
+                if any(w in lf.split() for w in ['the', 'a', 'an', 'is', 'are', 'was']):
+                    score -= 10
+
+            # Prefer candidates from trusted lexicons
+            if c.provenance and c.provenance.lexicon_source:
+                if 'umls' in c.provenance.lexicon_source.lower():
+                    score += 30
+
+            return score
+
+        # 1A: Dedup LEXICON_MATCH by SF - keep top 2 per SF
+        lexicon_by_sf: Dict[str, List[Candidate]] = {}
+        non_lexicon: List[Candidate] = []
+        sf_form_rejected = 0
+
+        for c in needs_validation:
+            if c.generator_type == GeneratorType.LEXICON_MATCH:
+                sf_upper = c.short_form.upper()
+                ctx = c.context_text or ""
+                # 1B: Apply SF form filter (with context for IG special case)
+                if not is_valid_sf_form(c.short_form, ctx):
+                    sf_form_rejected += 1
+                    continue
+                if sf_upper not in lexicon_by_sf:
+                    lexicon_by_sf[sf_upper] = []
+                lexicon_by_sf[sf_upper].append(c)
+            else:
+                non_lexicon.append(c)
+
+        # Keep top 2 LFs per SF based on quality score
+        deduped_lexicon: List[Candidate] = []
+        for sf, candidates in lexicon_by_sf.items():
+            if len(candidates) <= 2:
+                deduped_lexicon.extend(candidates)
+            else:
+                # Score and rank by LF quality
+                scored = [(c, score_lf_quality(c, full_text)) for c in candidates]
+                scored.sort(key=lambda x: -x[1])  # Highest score first
+                deduped_lexicon.extend([c for c, _ in scored[:2]])
+
+        lexicon_before = sum(len(v) for v in lexicon_by_sf.values()) + sf_form_rejected
+        lexicon_after = len(deduped_lexicon)
+        print(f"  LEXICON_MATCH reduction: {lexicon_before} → {lexicon_after} "
+              f"(dedup: {lexicon_before - sf_form_rejected - lexicon_after}, "
+              f"form filter: {sf_form_rejected})")
+
+        needs_validation = non_lexicon + deduped_lexicon
         frequent_sfs = sum(1 for c in unique_candidates
                           if c.generator_type == GeneratorType.LEXICON_MATCH
                           and c.short_form.upper() not in corroborated_sfs
@@ -261,6 +376,109 @@ class Orchestrator:
             'DATA', 'WHITE', 'METHODS', 'STUDY', 'RESULTS', 'AGE',
             'YEARS', 'PATIENTS', 'TABLE', 'FIGURE', 'BASELINE',
         }
+
+        # ========================================
+        # PASO A: Stats whitelist - deterministic (no LLM)
+        # These are auto-approved if numeric evidence is present
+        # ========================================
+        STATS_WHITELIST = {'CI', 'SD', 'SE', 'OR', 'RR', 'HR', 'IQR', 'AUC', 'ROC'}
+
+        # Mini-lexicon for stats - fixed LFs for reporting
+        STATS_CANONICAL_LF = {
+            'CI': 'confidence interval',
+            'SD': 'standard deviation',
+            'SE': 'standard error',
+            'OR': 'odds ratio',
+            'RR': 'risk ratio',
+            'HR': 'hazard ratio',
+            'IQR': 'interquartile range',
+            'AUC': 'area under the curve',
+            'ROC': 'receiver operating characteristic',
+        }
+
+        # ========================================
+        # PASO B: Country codes - deterministic (no LLM)
+        # ========================================
+        COUNTRY_CODES = {'US', 'UK', 'USA', 'EU'}
+        COUNTRY_CANONICAL_LF = {
+            'US': 'United States',
+            'UK': 'United Kingdom',
+            'USA': 'United States of America',
+            'EU': 'European Union',
+        }
+
+        # Blacklist: words that look like abbreviations but aren't
+        # These will be auto-rejected even if in lexicon
+        SF_BLACKLIST = {
+            'AUG', 'INDIAN', 'ROCHE', 'INT', 'WHITE', 'FACIT',  # Not abbreviations in medical context
+            # Author credentials and titles
+            'MD', 'PHD', 'MBBS', 'FRCP', 'MPH', 'MS', 'BSC', 'MA', 'BA',
+            # US state abbreviations (not relevant medical abbreviations)
+            'NY', 'NJ', 'CA', 'TX', 'FL', 'PA', 'OH', 'IL', 'MA', 'NC',
+            # Other non-abbreviations
+            'DM', 'IRCCS',  # Diabetes mellitus context-dependent, Italian research institute
+        }
+
+        # ========================================
+        # PASO C: Hyphenated abbreviations - search in full text
+        # These are often missed by standard generators
+        # ========================================
+        HYPHENATED_ABBREVS = {
+            'APPEAR-C3G': 'trial name',
+            'CKD-EPI': 'Chronic Kidney Disease Epidemiology Collaboration',
+            'FACIT-FATIGUE': 'Functional Assessment of Chronic Illness Therapy-Fatigue',
+            'IL-6': 'interleukin-6',
+            'IL-1': 'interleukin-1',
+            'TNF-α': 'tumor necrosis factor alpha',
+            'sC5b-9': 'soluble terminal complement complex',
+            'C5b-9': 'terminal complement complex',
+        }
+
+        # Direct text search for abbreviations often missed by lexicon
+        # These are searched in full_text if not already found
+        DIRECT_SEARCH_ABBREVS = {
+            # Country codes (often not in medical lexicons)
+            'UK': 'United Kingdom',
+            # Stats that might be missed
+            'RR': 'risk ratio',
+            'HR': 'hazard ratio',
+            # Multi-word
+            'CC BY': 'Creative Commons Attribution',
+            # Complement fragments (often have wrong LF in lexicon)
+            'C3a': 'complement C3a anaphylatoxin',
+            'C5a': 'complement C5a anaphylatoxin',
+        }
+
+        def has_numeric_evidence(context: str, sf: str) -> bool:
+            """Check if SF appears with numeric evidence (digits, %, =, :)."""
+            if not context:
+                return False
+            ctx = context.lower()
+            sf_lower = sf.lower()
+
+            # Find SF position and check ±30 chars window
+            idx = ctx.find(sf_lower)
+            if idx == -1:
+                return False
+
+            window_start = max(0, idx - 30)
+            window_end = min(len(ctx), idx + len(sf) + 30)
+            window = ctx[window_start:window_end]
+
+            # Check for numeric patterns
+            import re
+            # Digits, %, =, :, or typical stat patterns
+            if re.search(r'\d', window):
+                return True
+            if '%' in window or '=' in window:
+                return True
+            # Patterns like "95% CI" or "OR 1.2"
+            if re.search(rf'{sf_lower}\s*[:=]?\s*[\d\.\-]', window):
+                return True
+            if re.search(rf'[\d\.]+\s*[-–]\s*[\d\.]+', window):  # Range like 1.2-3.4
+                return True
+
+            return False
 
         auto_approved_count = 0
         auto_rejected_count = 0
@@ -294,8 +512,91 @@ class Orchestrator:
                 raw_llm_response=raw_response,
             )
 
+        stats_auto_approved = 0
+        country_auto_approved = 0
+        blacklist_rejected = 0
         for c in needs_validation:
             sf_upper = c.short_form.upper()
+            ctx = c.context_text or ""
+
+            # ========================================
+            # PASO B: Auto-reject blacklisted SFs (before other checks)
+            # ========================================
+            if sf_upper in SF_BLACKLIST:
+                entity = _create_auto_entity(
+                    c, ValidationStatus.REJECTED, 0.95,
+                    "Blacklisted: not a valid abbreviation in this context",
+                    ["auto_rejected_blacklist"], {"auto": "blacklist"}
+                )
+                auto_results.append((c, entity))
+                blacklist_rejected += 1
+                auto_rejected_count += 1
+                continue
+
+            # ========================================
+            # PASO A: Auto-approve stats with numeric evidence (NO LLM)
+            # ========================================
+            if sf_upper in STATS_WHITELIST and has_numeric_evidence(ctx, c.short_form):
+                canonical_lf = STATS_CANONICAL_LF.get(sf_upper, None)
+                entity = _create_auto_entity(
+                    c, ValidationStatus.VALIDATED, 0.90,
+                    f"Stats abbreviation with numeric evidence",
+                    ["auto_approved_stats"],
+                    {"auto": "stats_whitelist", "canonical_lf": canonical_lf}
+                )
+                # Override LF with canonical if available
+                if canonical_lf:
+                    entity = ExtractedEntity(
+                        candidate_id=entity.candidate_id,
+                        doc_id=entity.doc_id,
+                        field_type=entity.field_type,
+                        short_form=entity.short_form,
+                        long_form=canonical_lf,  # Use canonical LF
+                        primary_evidence=entity.primary_evidence,
+                        supporting_evidence=entity.supporting_evidence,
+                        status=entity.status,
+                        confidence_score=entity.confidence_score,
+                        rejection_reason=entity.rejection_reason,
+                        validation_flags=entity.validation_flags,
+                        provenance=entity.provenance,
+                        raw_llm_response=entity.raw_llm_response,
+                    )
+                auto_results.append((c, entity))
+                stats_auto_approved += 1
+                auto_approved_count += 1
+                continue
+
+            # ========================================
+            # PASO B: Auto-approve country codes (NO LLM)
+            # ========================================
+            if sf_upper in COUNTRY_CODES:
+                canonical_lf = COUNTRY_CANONICAL_LF.get(sf_upper, None)
+                entity = _create_auto_entity(
+                    c, ValidationStatus.VALIDATED, 0.90,
+                    f"Country code abbreviation",
+                    ["auto_approved_country"],
+                    {"auto": "country_code", "canonical_lf": canonical_lf}
+                )
+                if canonical_lf:
+                    entity = ExtractedEntity(
+                        candidate_id=entity.candidate_id,
+                        doc_id=entity.doc_id,
+                        field_type=entity.field_type,
+                        short_form=entity.short_form,
+                        long_form=canonical_lf,
+                        primary_evidence=entity.primary_evidence,
+                        supporting_evidence=entity.supporting_evidence,
+                        status=entity.status,
+                        confidence_score=entity.confidence_score,
+                        rejection_reason=entity.rejection_reason,
+                        validation_flags=entity.validation_flags,
+                        provenance=entity.provenance,
+                        raw_llm_response=entity.raw_llm_response,
+                    )
+                auto_results.append((c, entity))
+                country_auto_approved += 1
+                auto_approved_count += 1
+                continue
 
             # Auto-reject: Common English words
             if sf_upper in COMMON_WORDS:
@@ -308,15 +609,6 @@ class Orchestrator:
                 auto_rejected_count += 1
                 continue
 
-            # Auto-approve: DISABLED - lexicon LFs often don't match document context
-            # Example: UMLS maps "eGFR" to "epidermal growth factor receptor"
-            # but in clinical docs it's "estimated glomerular filtration rate"
-            # if (sf_upper in corroborated_sfs
-            #     and c.provenance
-            #     and c.provenance.lexicon_source):
-            #     entity = _create_auto_entity(...)
-            #     auto_approved_count += 1
-
             # Needs LLM validation
             llm_candidates.append(c)
 
@@ -324,8 +616,10 @@ class Orchestrator:
         print(f"  Corroborated SFs: {len(corroborated_sfs)}")
         print(f"  Frequent SFs (2+ occurrences): {frequent_sfs}")
         print(f"  Filtered (lexicon-only, rare): {filtered_count}")
-        print(f"  Auto-approved (corroborated+lexicon): {auto_approved_count}")
-        print(f"  Auto-rejected (common words): {auto_rejected_count}")
+        print(f"  Auto-approved stats (PASO A): {stats_auto_approved}")
+        print(f"  Auto-approved country (PASO B): {country_auto_approved}")
+        print(f"  Auto-rejected blacklist: {blacklist_rejected}")
+        print(f"  Auto-rejected common words: {auto_rejected_count - blacklist_rejected}")
         print(f"  Candidates for LLM: {len(llm_candidates)}")
         start = time.time()
 
@@ -342,13 +636,98 @@ class Orchestrator:
             )
             results.append(entity)
 
-        # Use individual validation (batch had quality issues - F1 44% vs 49%)
-        batch_size = 15
-        for batch_start in range(0, len(llm_candidates), batch_size):
-            batch_end = min(batch_start + batch_size, len(llm_candidates))
-            batch = llm_candidates[batch_start:batch_end]
+        # Hybrid validation: batch for high-precision sources, individual for rest
+        # SYNTAX_PATTERN + GLOSSARY_TABLE = explicit pairs (high precision, batch OK)
+        # LEXICON_MATCH = FP-prone, needs individual validation
+        explicit_candidates = []
+        lexicon_candidates = []
 
-            print(f"  Progress: {batch_end}/{len(llm_candidates)}")
+        for c in llm_candidates:
+            gen = c.generator_type.value if c.generator_type else ""
+            if "syntax" in gen.lower() or "glossary" in gen.lower():
+                explicit_candidates.append(c)
+            else:
+                lexicon_candidates.append(c)
+
+        print(f"  Batch (explicit pairs): {len(explicit_candidates)}")
+        print(f"  Individual (lexicon): {len(lexicon_candidates)}")
+
+        # ========================================
+        # HAIKU FAST-REJECT: Screen lexicon candidates before Sonnet
+        # (disabled by default - enable with enable_haiku_screening=True)
+        # ========================================
+        haiku_rejected: List[ExtractedEntity] = []
+        if self.enable_haiku_screening and lexicon_candidates:
+            print(f"\n  Haiku screening {len(lexicon_candidates)} lexicon candidates...")
+            haiku_start = time.time()
+
+            needs_review, haiku_rejected = self.llm_engine.fast_reject_batch(
+                lexicon_candidates,
+                haiku_model="claude-3-5-haiku-20241022",
+                batch_size=20,
+            )
+
+            haiku_time = time.time() - haiku_start
+            print(f"    Haiku rejected: {len(haiku_rejected)}")
+            print(f"    Needs Sonnet review: {len(needs_review)}")
+            print(f"    Haiku time: {haiku_time:.2f}s")
+
+            # Log Haiku rejections
+            for entity in haiku_rejected:
+                # Find matching candidate for logging
+                candidate = next(
+                    (c for c in lexicon_candidates if str(c.id) == str(entity.candidate_id)),
+                    None
+                )
+                if candidate:
+                    self.logger.log_validation(
+                        candidate=candidate,
+                        entity=entity,
+                        llm_response=entity.raw_llm_response,
+                        elapsed_ms=haiku_time * 1000 / len(lexicon_candidates),
+                    )
+                results.append(entity)
+
+            # Update lexicon_candidates to only those needing Sonnet
+            lexicon_candidates = needs_review
+
+        # Batch validate explicit pairs (high precision, ~10x speedup)
+        if explicit_candidates:
+            try:
+                val_start = time.time()
+                batch_results = self.llm_engine.verify_candidates_batch(
+                    explicit_candidates, batch_size=10
+                )
+                elapsed_ms = (time.time() - val_start) * 1000
+
+                for candidate, entity in zip(explicit_candidates, batch_results):
+                    self.logger.log_validation(
+                        candidate=candidate,
+                        entity=entity,
+                        llm_response=entity.raw_llm_response,
+                        elapsed_ms=elapsed_ms / len(explicit_candidates),
+                    )
+                    results.append(entity)
+            except Exception as e:
+                print(f"  ⚠ Batch error, falling back to individual: {e}")
+                for candidate in explicit_candidates:
+                    try:
+                        entity = self.llm_engine.verify_candidate(candidate)
+                        self.logger.log_validation(
+                            candidate=candidate, entity=entity,
+                            llm_response=entity.raw_llm_response, elapsed_ms=0,
+                        )
+                        results.append(entity)
+                    except Exception as e2:
+                        self.logger.log_error(candidate, str(e2))
+
+        # Individual validation for lexicon matches (FP-prone, needs full context)
+        batch_size = 15
+        for batch_start in range(0, len(lexicon_candidates), batch_size):
+            batch_end = min(batch_start + batch_size, len(lexicon_candidates))
+            batch = lexicon_candidates[batch_start:batch_end]
+
+            print(f"  Lexicon progress: {batch_end}/{len(lexicon_candidates)}")
 
             for candidate in batch:
                 try:
@@ -366,10 +745,305 @@ class Orchestrator:
                     self.logger.log_error(candidate, str(e))
 
             # Rate limit between batches
-            if batch_delay_ms > 0 and batch_end < len(llm_candidates):
+            if batch_delay_ms > 0 and batch_end < len(lexicon_candidates):
                 time.sleep(batch_delay_ms / 1000)
 
         print(f"  Time: {time.time() - start:.2f}s")
+
+        # ========================================
+        # PASO C: Detect hyphenated abbreviations in full text
+        # These are often missed by standard generators
+        # ========================================
+        hyphenated_found = 0
+        # Get all SFs already found
+        found_sfs = {r.short_form.upper() for r in results if r.status == ValidationStatus.VALIDATED}
+
+        for hyph_sf, hyph_lf in HYPHENATED_ABBREVS.items():
+            if hyph_sf.upper() in found_sfs:
+                continue  # Already found
+
+            # Search for hyphenated SF in full text (case-insensitive)
+            import re
+            # Match the hyphenated pattern with word boundaries
+            pattern = rf'\b{re.escape(hyph_sf)}\b'
+            match = re.search(pattern, full_text, re.IGNORECASE)
+            if match:
+                # Found! Create a synthetic entity
+                context_start = max(0, match.start() - 100)
+                context_end = min(len(full_text), match.end() + 100)
+                context_snippet = full_text[context_start:context_end]
+
+                ctx_hash = hash_string(context_snippet)
+                primary = EvidenceSpan(
+                    text=context_snippet,
+                    location=Coordinate(page_num=1),  # Default to page 1
+                    scope_ref=ctx_hash,
+                    start_char_offset=match.start() - context_start,
+                    end_char_offset=match.end() - context_start,
+                )
+
+                prov = ProvenanceMetadata(
+                    pipeline_version="0.7",
+                    run_id=self.run_id,
+                    doc_fingerprint="hyphenated_detection",
+                    generator_name=GeneratorType.LEXICON_MATCH,
+                    rule_version="hyphenated_detector:v1.0",
+                    lexicon_source="orchestrator:hyphenated",
+                )
+
+                import uuid
+                entity = ExtractedEntity(
+                    candidate_id=uuid.uuid4(),
+                    doc_id=str(pdf_path.stem) if hasattr(pdf_path, 'stem') else str(pdf_path),
+                    field_type=FieldType.DEFINITION_PAIR,
+                    short_form=match.group(),  # Preserve original case
+                    long_form=hyph_lf,
+                    primary_evidence=primary,
+                    supporting_evidence=[],
+                    status=ValidationStatus.VALIDATED,
+                    confidence_score=0.85,
+                    rejection_reason=None,
+                    validation_flags=["auto_approved_hyphenated"],
+                    provenance=prov,
+                    raw_llm_response={"auto": "hyphenated_detector"},
+                )
+                results.append(entity)
+                hyphenated_found += 1
+
+        if hyphenated_found > 0:
+            print(f"  Hyphenated detected (PASO C): {hyphenated_found}")
+
+        # ========================================
+        # Direct text search for missed abbreviations (UK, RR, CC BY, etc.)
+        # ========================================
+        direct_found = 0
+        for direct_sf, direct_lf in DIRECT_SEARCH_ABBREVS.items():
+            if direct_sf.upper() in found_sfs:
+                continue  # Already found
+
+            # Search for SF in full text
+            # Use word boundary for single words, exact match for multi-word
+            if ' ' in direct_sf:
+                # Multi-word: exact match
+                pattern = re.escape(direct_sf)
+            else:
+                # Single word: word boundary
+                pattern = rf'\b{re.escape(direct_sf)}\b'
+
+            match = re.search(pattern, full_text)
+            if match:
+                # Found! Create entity
+                context_start = max(0, match.start() - 100)
+                context_end = min(len(full_text), match.end() + 100)
+                context_snippet = full_text[context_start:context_end]
+
+                ctx_hash = hash_string(context_snippet)
+                primary = EvidenceSpan(
+                    text=context_snippet,
+                    location=Coordinate(page_num=1),
+                    scope_ref=ctx_hash,
+                    start_char_offset=match.start() - context_start,
+                    end_char_offset=match.end() - context_start,
+                )
+
+                prov = ProvenanceMetadata(
+                    pipeline_version="0.7",
+                    run_id=self.run_id,
+                    doc_fingerprint="direct_search",
+                    generator_name=GeneratorType.LEXICON_MATCH,
+                    rule_version="direct_search:v1.0",
+                    lexicon_source="orchestrator:direct_search",
+                )
+
+                entity = ExtractedEntity(
+                    candidate_id=uuid.uuid4(),
+                    doc_id=str(pdf_path.stem) if hasattr(pdf_path, 'stem') else str(pdf_path),
+                    field_type=FieldType.DEFINITION_PAIR,
+                    short_form=match.group(),
+                    long_form=direct_lf,
+                    primary_evidence=primary,
+                    supporting_evidence=[],
+                    status=ValidationStatus.VALIDATED,
+                    confidence_score=0.85,
+                    rejection_reason=None,
+                    validation_flags=["auto_approved_direct_search"],
+                    provenance=prov,
+                    raw_llm_response={"auto": "direct_search"},
+                )
+                results.append(entity)
+                found_sfs.add(direct_sf.upper())
+                direct_found += 1
+
+        if direct_found > 0:
+            print(f"  Direct search detected (UK, RR, CC BY): {direct_found}")
+
+        # ========================================
+        # PASO D: LLM Extractor SF-only
+        # Find abbreviations NOT in lexicon using LLM
+        # Guardrails: SF must be exact substring in text
+        # ========================================
+        print(f"\n  Running LLM SF-only extractor (PASO D)...")
+
+        # Get all SFs already VALIDATED (don't skip REJECTED - they might be valid SF-only)
+        already_found_sfs = {r.short_form.upper() for r in results if r.status == ValidationStatus.VALIDATED}
+
+        # For LLM extraction, only skip VALIDATED (not REJECTED - they might be valid SFs with wrong LF)
+        # This allows us to rescue SF-only even if the pair was rejected
+        all_processed_sfs = already_found_sfs.copy()
+
+        # Sample chunks of text for LLM analysis (to stay within context limits)
+        chunk_size = 3000
+        text_chunks = []
+        for i in range(0, min(len(full_text), 15000), chunk_size):
+            text_chunks.append(full_text[i:i+chunk_size])
+
+        # Prompt for SF-only extraction
+        sf_extraction_prompt = """You are an expert at identifying medical/scientific abbreviations in text.
+
+Given the following text, identify ALL abbreviations that appear. An abbreviation is typically:
+- 2-10 characters long
+- Contains uppercase letters (e.g., "FDA", "eGFR", "IL-6", "C3a")
+- May contain numbers or hyphens
+- Represents a longer term/concept
+
+IMPORTANT RULES:
+1. Only return abbreviations that EXACTLY appear in the text (case-sensitive)
+2. Do NOT include common words (the, and, for, etc.)
+3. Do NOT include author names, months, or country names
+4. Include multi-word abbreviations like "CC BY" if present
+5. Include mixed-case abbreviations like "eGFR", "IgA", "C3a"
+
+Already found (DO NOT include these): {already_found}
+
+Text to analyze:
+{text}
+
+Return a JSON array of abbreviation strings found. Example: ["DOI", "CC BY", "IgA", "C3a"]
+Return ONLY the JSON array, nothing else."""
+
+        llm_sf_candidates = set()
+        llm_errors = 0
+
+        for i, chunk in enumerate(text_chunks):
+            try:
+                prompt = sf_extraction_prompt.format(
+                    already_found=", ".join(sorted(already_found_sfs)[:50]),
+                    text=chunk
+                )
+
+                response = self.claude_client.complete_json_any(
+                    system_prompt="You are an abbreviation extraction assistant. Return only valid JSON arrays.",
+                    user_prompt=prompt,
+                    model=self.model,
+                    temperature=0.0,
+                    max_tokens=500,
+                    top_p=1.0,
+                )
+
+                # Response is already parsed (list or dict)
+                if isinstance(response, list):
+                    for sf in response:
+                        if isinstance(sf, str) and sf.strip():
+                            llm_sf_candidates.add(sf.strip())
+                elif isinstance(response, dict) and "abbreviations" in response:
+                    for sf in response.get("abbreviations", []):
+                        if isinstance(sf, str) and sf.strip():
+                            llm_sf_candidates.add(sf.strip())
+            except Exception as e:
+                llm_errors += 1
+
+        print(f"    LLM chunks processed: {len(text_chunks)}, errors: {llm_errors}")
+        print(f"    LLM candidates found: {len(llm_sf_candidates)}")
+        if llm_sf_candidates:
+            print(f"    Candidates: {sorted(llm_sf_candidates)[:20]}")
+
+        # Validate and add LLM-found SFs
+        llm_added = 0
+        llm_filtered_already = 0
+        llm_filtered_blacklist = 0
+        llm_filtered_not_in_text = 0
+        llm_filtered_form = 0
+        for sf_candidate in llm_sf_candidates:
+            sf_upper = sf_candidate.upper()
+
+            # Skip if already processed
+            if sf_upper in all_processed_sfs:
+                llm_filtered_already += 1
+                continue
+
+            # Skip common words and blacklist
+            if sf_upper in COMMON_WORDS or sf_upper in SF_BLACKLIST:
+                llm_filtered_blacklist += 1
+                continue
+
+            # Guardrail: SF must appear exactly in text
+            if sf_candidate not in full_text:
+                # Try case-insensitive match
+                pattern = rf'\b{re.escape(sf_candidate)}\b'
+                match = re.search(pattern, full_text, re.IGNORECASE)
+                if not match:
+                    llm_filtered_not_in_text += 1
+                    continue
+                sf_candidate = match.group()  # Use actual case from text
+
+            # Validate SF form (basic sanity check)
+            if len(sf_candidate) < 2 or len(sf_candidate) > 15:
+                llm_filtered_form += 1
+                continue
+            if not any(c.isupper() for c in sf_candidate):
+                llm_filtered_form += 1
+                continue
+
+            # Create entity (SF-only, no LF)
+            # Find context around the SF
+            idx = full_text.find(sf_candidate)
+            if idx == -1:
+                idx = full_text.lower().find(sf_candidate.lower())
+
+            context_start = max(0, idx - 100)
+            context_end = min(len(full_text), idx + len(sf_candidate) + 100)
+            context_snippet = full_text[context_start:context_end]
+
+            ctx_hash = hash_string(context_snippet)
+            primary = EvidenceSpan(
+                text=context_snippet,
+                location=Coordinate(page_num=1),
+                scope_ref=ctx_hash,
+                start_char_offset=idx - context_start if idx >= context_start else 0,
+                end_char_offset=idx - context_start + len(sf_candidate) if idx >= context_start else len(sf_candidate),
+            )
+
+            prov = ProvenanceMetadata(
+                pipeline_version="0.7",
+                run_id=self.run_id,
+                doc_fingerprint="llm_sf_extraction",
+                generator_name=GeneratorType.LEXICON_MATCH,
+                rule_version="llm_sf_extractor:v1.0",
+                lexicon_source="orchestrator:llm_sf_only",
+            )
+
+            entity = ExtractedEntity(
+                candidate_id=uuid.uuid4(),
+                doc_id=str(pdf_path.stem) if hasattr(pdf_path, 'stem') else str(pdf_path),
+                field_type=FieldType.SHORT_FORM_ONLY,  # SF-only, no LF
+                short_form=sf_candidate,
+                long_form=None,  # No LF - avoid hallucination
+                primary_evidence=primary,
+                supporting_evidence=[],
+                status=ValidationStatus.VALIDATED,
+                confidence_score=0.75,  # Lower confidence for LLM-extracted
+                rejection_reason=None,
+                validation_flags=["llm_sf_extracted"],
+                provenance=prov,
+                raw_llm_response={"auto": "llm_sf_extractor"},
+            )
+            results.append(entity)
+            all_processed_sfs.add(sf_upper)
+            llm_added += 1
+
+        print(f"  LLM SF-only extracted (PASO D): {llm_added}")
+        if llm_sf_candidates:
+            print(f"    Filtered: already={llm_filtered_already}, blacklist={llm_filtered_blacklist}, not_in_text={llm_filtered_not_in_text}, form={llm_filtered_form}")
 
         # -----------------------------
         # Stage 3.5: Normalize & Disambiguate
