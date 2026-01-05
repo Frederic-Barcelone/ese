@@ -46,6 +46,9 @@ from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
 
+# Module constants
+PIPELINE_VERSION = "0.7"
+
 
 class Orchestrator:
     """
@@ -382,14 +385,12 @@ class Orchestrator:
         # PASO A: Stats whitelist - deterministic (no LLM)
         # These are auto-approved if numeric evidence is present
         # ========================================
-        STATS_WHITELIST = self.heuristics.stats_whitelist
-        STATS_CANONICAL_LF = self.heuristics.stats_canonical_lf
+        STATS_ABBREVS = self.heuristics.stats_abbrevs  # {SF: canonical_LF}
 
         # ========================================
         # PASO B: Country codes - deterministic (no LLM)
         # ========================================
-        COUNTRY_CODES = self.heuristics.country_codes
-        COUNTRY_CANONICAL_LF = self.heuristics.country_canonical_lf
+        COUNTRY_ABBREVS = self.heuristics.country_abbrevs  # {SF: canonical_LF}
 
         # Blacklist: words that look like abbreviations but aren't
         # These will be auto-rejected even if in lexicon
@@ -520,31 +521,16 @@ class Orchestrator:
             # ========================================
             # PASO A: Auto-approve stats with numeric evidence (NO LLM)
             # ========================================
-            if sf_upper in STATS_WHITELIST and has_numeric_evidence(ctx, c.short_form):
-                canonical_lf = STATS_CANONICAL_LF.get(sf_upper, None)
+            if sf_upper in STATS_ABBREVS and has_numeric_evidence(ctx, c.short_form):
+                canonical_lf = STATS_ABBREVS.get(sf_upper)
                 entity = _create_auto_entity(
                     c, ValidationStatus.VALIDATED, 0.90,
                     f"Stats abbreviation with numeric evidence",
                     ["auto_approved_stats"],
                     {"auto": "stats_whitelist", "canonical_lf": canonical_lf}
                 )
-                # Override LF with canonical if available
                 if canonical_lf:
-                    entity = ExtractedEntity(
-                        candidate_id=entity.candidate_id,
-                        doc_id=entity.doc_id,
-                        field_type=entity.field_type,
-                        short_form=entity.short_form,
-                        long_form=canonical_lf,  # Use canonical LF
-                        primary_evidence=entity.primary_evidence,
-                        supporting_evidence=entity.supporting_evidence,
-                        status=entity.status,
-                        confidence_score=entity.confidence_score,
-                        rejection_reason=entity.rejection_reason,
-                        validation_flags=entity.validation_flags,
-                        provenance=entity.provenance,
-                        raw_llm_response=entity.raw_llm_response,
-                    )
+                    entity = entity.model_copy(update={"long_form": canonical_lf})
                 auto_results.append((c, entity))
                 counters.recovered_by_stats_whitelist += 1
                 auto_approved_count += 1
@@ -553,8 +539,8 @@ class Orchestrator:
             # ========================================
             # PASO B: Auto-approve country codes (NO LLM)
             # ========================================
-            if sf_upper in COUNTRY_CODES:
-                canonical_lf = COUNTRY_CANONICAL_LF.get(sf_upper, None)
+            if sf_upper in COUNTRY_ABBREVS:
+                canonical_lf = COUNTRY_ABBREVS.get(sf_upper)
                 entity = _create_auto_entity(
                     c, ValidationStatus.VALIDATED, 0.90,
                     f"Country code abbreviation",
@@ -562,21 +548,7 @@ class Orchestrator:
                     {"auto": "country_code", "canonical_lf": canonical_lf}
                 )
                 if canonical_lf:
-                    entity = ExtractedEntity(
-                        candidate_id=entity.candidate_id,
-                        doc_id=entity.doc_id,
-                        field_type=entity.field_type,
-                        short_form=entity.short_form,
-                        long_form=canonical_lf,
-                        primary_evidence=entity.primary_evidence,
-                        supporting_evidence=entity.supporting_evidence,
-                        status=entity.status,
-                        confidence_score=entity.confidence_score,
-                        rejection_reason=entity.rejection_reason,
-                        validation_flags=entity.validation_flags,
-                        provenance=entity.provenance,
-                        raw_llm_response=entity.raw_llm_response,
-                    )
+                    entity = entity.model_copy(update={"long_form": canonical_lf})
                 auto_results.append((c, entity))
                 counters.recovered_by_country_code += 1
                 auto_approved_count += 1
@@ -769,7 +741,7 @@ class Orchestrator:
                 )
 
                 prov = ProvenanceMetadata(
-                    pipeline_version="0.7",
+                    pipeline_version=PIPELINE_VERSION,
                     run_id=self.run_id,
                     doc_fingerprint="hyphenated_detection",
                     generator_name=GeneratorType.LEXICON_MATCH,
@@ -832,7 +804,7 @@ class Orchestrator:
                 )
 
                 prov = ProvenanceMetadata(
-                    pipeline_version="0.7",
+                    pipeline_version=PIPELINE_VERSION,
                     run_id=self.run_id,
                     doc_fingerprint="direct_search",
                     generator_name=GeneratorType.LEXICON_MATCH,
@@ -998,7 +970,7 @@ Return ONLY the JSON array, nothing else."""
             )
 
             prov = ProvenanceMetadata(
-                pipeline_version="0.7",
+                pipeline_version=PIPELINE_VERSION,
                 run_id=self.run_id,
                 doc_fingerprint="llm_sf_extraction",
                 generator_name=GeneratorType.LEXICON_MATCH,

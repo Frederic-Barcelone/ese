@@ -27,12 +27,9 @@ class HeuristicsConfig:
 
     # ========================================
     # STATS WHITELIST (PASO A) - Auto-approve with numeric evidence
+    # Dict format: {SF: canonical_LF} - use .keys() for membership check
     # ========================================
-    stats_whitelist: Set[str] = field(default_factory=lambda: {
-        'CI', 'SD', 'SE', 'OR', 'RR', 'HR', 'IQR', 'AUC', 'ROC'
-    })
-
-    stats_canonical_lf: Dict[str, str] = field(default_factory=lambda: {
+    stats_abbrevs: Dict[str, str] = field(default_factory=lambda: {
         'CI': 'confidence interval',
         'SD': 'standard deviation',
         'SE': 'standard error',
@@ -46,12 +43,9 @@ class HeuristicsConfig:
 
     # ========================================
     # COUNTRY CODES (PASO B) - Auto-approve
+    # Dict format: {SF: canonical_LF} - use .keys() for membership check
     # ========================================
-    country_codes: Set[str] = field(default_factory=lambda: {
-        'US', 'UK', 'USA', 'EU'
-    })
-
-    country_canonical_lf: Dict[str, str] = field(default_factory=lambda: {
+    country_abbrevs: Dict[str, str] = field(default_factory=lambda: {
         'US': 'United States',
         'UK': 'United Kingdom',
         'USA': 'United States of America',
@@ -202,12 +196,14 @@ class HeuristicsConfig:
     def __post_init__(self):
         """Validate config after initialization."""
         # Ensure all sets use uppercase for consistent matching
-        self.stats_whitelist = {s.upper() for s in self.stats_whitelist}
-        self.country_codes = {s.upper() for s in self.country_codes}
         self.sf_blacklist = {s.upper() for s in self.sf_blacklist}
         self.common_words = {s.upper() for s in self.common_words}
         self.allowed_2letter_sfs = {s.upper() for s in self.allowed_2letter_sfs}
         self.allowed_mixed_case = {s.upper() for s in self.allowed_mixed_case}
+
+        # Ensure Dict keys are uppercase for consistent matching
+        self.stats_abbrevs = {k.upper(): v for k, v in self.stats_abbrevs.items()}
+        self.country_abbrevs = {k.upper(): v for k, v in self.country_abbrevs.items()}
 
 
 @dataclass
