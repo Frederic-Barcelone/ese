@@ -14,12 +14,41 @@ Requires:
 
 from __future__ import annotations
 
+# =============================================================================
+# SILENCE WARNINGS FIRST (must be before library imports)
+# =============================================================================
+import os
+import warnings
+
+# Suppress at environment level for subprocesses
+os.environ["PYTHONWARNINGS"] = (
+    "ignore::UserWarning,ignore::FutureWarning,ignore::DeprecationWarning"
+)
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+_WARNING_FILTERS = [
+    (UserWarning, r".*W036.*"),
+    (UserWarning, r".*matcher.*does not have any patterns.*"),
+    (UserWarning, r".*InconsistentVersionWarning.*"),
+    (UserWarning, r".*max_size.*deprecated.*"),
+    (FutureWarning, r".*max_size.*deprecated.*"),
+    (DeprecationWarning, r".*max_size.*"),
+]
+
+for _cat, _pat in _WARNING_FILTERS:
+    warnings.filterwarnings("ignore", category=_cat, message=_pat)
+
+warnings.filterwarnings("ignore", module=r"sklearn\.base")
+warnings.filterwarnings("ignore", category=FutureWarning, module=r"spacy\.language")
+warnings.filterwarnings("ignore", category=UserWarning, module=r"transformers")
+# =============================================================================
+
 import json
 import re
 import sys
 import time
 import uuid
-import warnings
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -29,27 +58,6 @@ import yaml
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
-
-# =============================================================================
-# SILENCE KNOWN DEPENDENCY WARNINGS (must be before imports that trigger them)
-# =============================================================================
-_WARNING_FILTERS = [
-    # scispaCy: [W036] matcher has no patterns
-    (UserWarning, r".*W036.*"),
-    (UserWarning, r".*matcher.*does not have any patterns.*"),
-    # sklearn version mismatch
-    (UserWarning, r".*InconsistentVersionWarning.*"),
-    # transformers/unstructured: max_size deprecated
-    (UserWarning, r".*max_size.*deprecated.*"),
-    (FutureWarning, r".*max_size.*deprecated.*"),
-    (DeprecationWarning, r".*max_size.*"),
-]
-
-for category, pattern in _WARNING_FILTERS:
-    warnings.filterwarnings("ignore", category=category, message=pattern)
-
-warnings.filterwarnings("ignore", module=r"sklearn\.base")
-warnings.filterwarnings("ignore", category=FutureWarning, module=r"spacy\.language")
 # =============================================================================
 
 # Ensure imports work
