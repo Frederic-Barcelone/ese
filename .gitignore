@@ -47,3 +47,8 @@ ouput_datasources/
 corpus_log/
 gold_data/NLP4RARE
 backup_2026_01_05
+
+# Test artifacts (timestamped extraction outputs)
+gold_data/PAPERS/*_20??????_??????.txt
+gold_data/PAPERS/abbreviations_*_20??????_??????.json
+input_datasources/
