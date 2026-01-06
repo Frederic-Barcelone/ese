@@ -511,6 +511,40 @@ normalization:
     fill_long_form_for_orphans: true
 
 # ==============================================================================
+# DISEASE DETECTION CONFIGURATION
+# ==============================================================================
+disease_detection:
+  # Master switch for disease detection
+  enabled: true
+
+  # Lexicons to use
+  enable_general_lexicon: true    # 2025_08_lexicon_disease.json (29K+ diseases)
+  enable_orphanet: true           # 2025_08_orphanet_diseases.json (9.6K diseases)
+  enable_scispacy: true           # scispacy NER with UMLS linking
+
+  # Context window for snippets
+  context_window: 300
+
+  # False positive filtering
+  fp_filter:
+    enabled: true
+    filter_chromosomes: true      # Block 10p, 22q11, 46,XX patterns
+    filter_genes: true            # Block gene names used as genes (not diseases)
+    short_match_threshold: 4      # Matches <= this need disease context
+
+  # Validation settings
+  validation:
+    enabled: false                # Set to true to enable LLM validation
+    batch_size: 10
+    confidence_threshold: 0.75
+
+  # Output
+  output:
+    separate_file: true           # diseases_{doc}_{timestamp}.json
+    include_codes: true           # Include ICD-10, SNOMED, ORPHA codes
+    include_all_identifiers: true
+
+# ==============================================================================
 # DEDUPLICATION
 # ==============================================================================
 deduplication:

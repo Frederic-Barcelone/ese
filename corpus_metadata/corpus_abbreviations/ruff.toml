@@ -1,8 +1,0 @@
-# Ruff configuration for corpus_abbreviations
-# https://docs.astral.sh/ruff/configuration/
-
-[lint]
-# Ignore E402: Module level import not at top of file
-# These imports are intentionally placed after warning filters
-# to suppress known dependency warnings before they're triggered
-ignore = ["E402"]
