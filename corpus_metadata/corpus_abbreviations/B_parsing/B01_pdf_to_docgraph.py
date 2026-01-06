@@ -1,4 +1,15 @@
 # corpus_metadata/corpus_abbreviations/B_parsing/B01_pdf_to_docgraph.py
+"""
+PDF to DocumentGraph Parser with SOTA Column Ordering
+
+CHANGELOG v2.0:
+    - Integrated B04_column_ordering for SOTA multi-column layout detection
+    - Added document_type config for layout presets
+    - Added use_sota_layout toggle (default: True)
+    - Preserves legacy ordering as fallback
+
+Compatible with Unstructured.io hi_res, fast, auto strategies.
+"""
 from __future__ import annotations
 
 import os
@@ -12,6 +23,14 @@ from unstructured.partition.pdf import partition_pdf
 from A_core.A02_interfaces import BaseParser
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole
+
+# SOTA Column Ordering (B04)
+from B_parsing.B04_column_ordering import (
+    order_page_blocks,
+    LayoutConfig,
+    create_config as create_layout_config,
+    get_layout_info,
+)
 
 
 # -----------------------------
@@ -308,7 +327,7 @@ class PDFToDocGraphParser(BaseParser):
     PDF -> DocumentGraph usando Unstructured.
 
     Objetivos:
-    - Orden de lectura determinista (2 columnas)
+    - Orden de lectura determinista (SOTA multi-columna via B04)
     - Detectar headers/footers repetidos (robusto)
     - Detectar SECTION_HEADER evitando falsos positivos (autores/afiliaciones)
     - Reparar guiones de abreviaturas: 'MG- ADL' -> 'MG-ADL'
@@ -323,6 +342,11 @@ class PDFToDocGraphParser(BaseParser):
     - include_page_breaks: True (default) - track page boundaries
     - force_fast: False (default) - force fast strategy regardless of config
     - force_hf_offline: False (default) - block HuggingFace model downloads
+    
+    NEW Config options (SOTA Layout - B04):
+    - use_sota_layout: True (default) - use B04 SOTA column ordering
+    - document_type: "academic" (default) - preset: "academic", "clinical", "regulatory", "newsletter"
+    - layout_config: None (default) - custom LayoutConfig instance
     """
 
     def __init__(self, config: Optional[dict] = None):
@@ -364,8 +388,31 @@ class PDFToDocGraphParser(BaseParser):
         self.min_repeat_pages = int(self.config.get("min_repeat_pages", 3))
         self.repeat_zone_majority = float(self.config.get("repeat_zone_majority", 0.60))
 
-        # 2 columnas
+        # Legacy 2 columnas (used as fallback)
         self.two_col_min_side_blocks = int(self.config.get("two_col_min_side_blocks", 6))
+
+        # =============================================
+        # SOTA Column Ordering (B04) - NEW
+        # =============================================
+        self.use_sota_layout = bool(self.config.get("use_sota_layout", True))
+        
+        # Layout configuration - can be:
+        # - None (use document_type preset)
+        # - A LayoutConfig instance
+        # - A string: "academic", "clinical", "regulatory", "newsletter"
+        layout_cfg = self.config.get("layout_config")
+        if layout_cfg is None:
+            document_type = self.config.get("document_type", "academic")
+            self.layout_config = create_layout_config(document_type)
+        elif isinstance(layout_cfg, str):
+            self.layout_config = create_layout_config(layout_cfg)
+        elif isinstance(layout_cfg, LayoutConfig):
+            self.layout_config = layout_cfg
+        else:
+            self.layout_config = LayoutConfig()
+        
+        # Store layout info per page (for debugging/export)
+        self._page_layouts: Dict[int, Dict[str, Any]] = {}
 
     # -----------------------
     # Public
@@ -408,6 +455,7 @@ class PDFToDocGraphParser(BaseParser):
 
             is_section_header = self._is_section_header(el, zone, text)
 
+            # Include category for B04 spanning detection hints
             rb = {
                 "text": text,
                 "bbox": bbox,
@@ -415,6 +463,7 @@ class PDFToDocGraphParser(BaseParser):
                 "y0": float(bbox.coords[1]),
                 "zone": zone,
                 "is_section_header": is_section_header,
+                "category": cat_norm,  # For B04 hints
             }
             raw_pages[page_num].append(rb)
 
@@ -435,12 +484,35 @@ class PDFToDocGraphParser(BaseParser):
 
         # Pass 2: build DocumentGraph
         graph = DocumentGraph(doc_id=file_path)
+        self._page_layouts = {}  # Reset layout info
 
         for page_num in sorted(raw_pages.keys()):
             page_w, page_h = page_dims.get(page_num, (0.0, 0.0))
             page_obj = Page(number=page_num, width=page_w, height=page_h)
 
-            ordered = self._order_blocks_deterministically(raw_pages[page_num], page_w=page_w)
+            # =============================================
+            # SOTA Column Ordering (B04) - INTEGRATION
+            # =============================================
+            if self.use_sota_layout:
+                # Get layout info for debugging/export
+                self._page_layouts[page_num] = get_layout_info(
+                    raw_pages[page_num],
+                    page_w,
+                    page_h,
+                    self.layout_config
+                )
+                
+                # Apply SOTA ordering
+                ordered = order_page_blocks(
+                    raw_pages[page_num],
+                    page_w,
+                    page_h,
+                    self.layout_config,
+                    page_num
+                )
+            else:
+                # Fallback to legacy ordering
+                ordered = self._order_blocks_deterministically(raw_pages[page_num], page_w=page_w)
 
             blocks: List[TextBlock] = []
             for idx, rb in enumerate(ordered):
@@ -484,6 +556,14 @@ class PDFToDocGraphParser(BaseParser):
             graph.pages[page_num] = page_obj
 
         return graph
+
+    def get_page_layout_info(self, page_num: int) -> Optional[Dict[str, Any]]:
+        """Get detected layout info for a specific page (after parsing)."""
+        return self._page_layouts.get(page_num)
+
+    def get_all_layout_info(self) -> Dict[int, Dict[str, Any]]:
+        """Get detected layout info for all pages (after parsing)."""
+        return self._page_layouts.copy()
 
     # -----------------------
     # Unstructured call
@@ -601,6 +681,12 @@ class PDFToDocGraphParser(BaseParser):
             return None
 
     def _bbox_from_element(self, el, page_w: float, page_h: float) -> BoundingBox:
+        """
+        Extract bounding box from Unstructured element.
+
+        IMPORTANT: Unstructured hi_res uses PixelSpace coordinates (image pixels),
+        not PDF coordinates. We must normalize to PDF space for B04 column detection.
+        """
         md = getattr(el, "metadata", None)
         coords_meta = getattr(md, "coordinates", None) if md else None
 
@@ -620,8 +706,27 @@ class PDFToDocGraphParser(BaseParser):
             if xs and ys:
                 x0, x1 = min(xs), max(xs)
                 y0, y1 = min(ys), max(ys)
+
+                # Normalize from PixelSpace to PDF space
+                # Unstructured hi_res renders at ~200-300 DPI, PDF is 72 DPI
+                scale_x, scale_y = 1.0, 1.0
+                if coords_meta is not None and hasattr(coords_meta, "system"):
+                    system = coords_meta.system
+                    if hasattr(system, "width") and hasattr(system, "height"):
+                        pixel_w = system.width
+                        pixel_h = system.height
+                        if pixel_w > 0 and pixel_h > 0:
+                            scale_x = page_w / pixel_w
+                            scale_y = page_h / pixel_h
+
+                # Apply normalization
+                x0 = max(0.0, x0 * scale_x)
+                y0 = max(0.0, y0 * scale_y)
+                x1 = max(0.0, x1 * scale_x)
+                y1 = max(0.0, y1 * scale_y)
+
                 return BoundingBox(
-                    coords=(max(0.0, x0), max(0.0, y0), max(0.0, x1), max(0.0, y1)),
+                    coords=(x0, y0, x1, y1),
                     page_width=page_w or None,
                     page_height=page_h or None,
                     is_normalized=False,
@@ -739,10 +844,11 @@ class PDFToDocGraphParser(BaseParser):
         return False
 
     # -----------------------
-    # Ordering (2 columns)
+    # Legacy Ordering (fallback)
     # -----------------------
 
     def _is_two_column_page(self, raw_blocks: List[Dict[str, Any]], page_w: float) -> bool:
+        """Legacy two-column detection. Used when use_sota_layout=False."""
         if not raw_blocks or page_w <= 0:
             return False
 
@@ -760,6 +866,7 @@ class PDFToDocGraphParser(BaseParser):
         return (left >= min_side and right >= min_side and mid <= max(2, int(0.08 * len(xs))))
 
     def _order_single_column(self, items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Legacy single-column ordering. Used when use_sota_layout=False."""
         items = sorted(items, key=lambda r: (r["y0"], r["x0"]))
 
         ordered: List[Dict[str, Any]] = []
@@ -787,6 +894,14 @@ class PDFToDocGraphParser(BaseParser):
         return ordered
 
     def _order_blocks_deterministically(self, raw_blocks: List[Dict[str, Any]], page_w: float) -> List[Dict[str, Any]]:
+        """
+        Legacy block ordering. Used when use_sota_layout=False.
+        
+        NOTE: This method has a known issue with two-column layouts:
+        it reads ALL left column blocks, then ALL right column blocks,
+        instead of interleaving by Y-bands. Use SOTA layout (B04) for
+        correct multi-column reading order.
+        """
         if not raw_blocks:
             return []
 

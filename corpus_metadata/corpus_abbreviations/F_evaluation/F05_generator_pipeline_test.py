@@ -114,7 +114,7 @@ class PipelineEvaluator:
         annotated_docs = set(self.gold_index.keys())
         pdfs = []
         for pdf in self.papers_folder.glob("*.pdf"):
-            if pdf.name in annotated_docs and pdf.name.startswith("01_"):
+            if pdf.name in annotated_docs:
                 pdfs.append(pdf)
         return sorted(pdfs)
 
