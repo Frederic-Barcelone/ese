@@ -133,7 +133,11 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             "pah_lexicon_path",
             "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_pah.json"
         ))
-        
+        self.trial_acronyms_path = Path(self.config.get(
+            "trial_acronyms_path",
+            "/Users/frederictetard/Projects/ese/ouput_datasources/trial_acronyms_lexicon.json"
+        ))
+
         self.context_window = int(self.config.get("context_window", 300))
 
         # Abbreviation entries (regex-based)
@@ -165,6 +169,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_anca_lexicon(self.anca_lexicon_path)
         self._load_igan_lexicon(self.igan_lexicon_path)
         self._load_pah_lexicon(self.pah_lexicon_path)
+        self._load_trial_acronyms(self.trial_acronyms_path)
 
         # Print compact summary
         self._print_lexicon_summary()
@@ -942,6 +947,55 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             loaded += 1
 
         self._lexicon_stats.append(("PAH disease", loaded))
+
+    def _load_trial_acronyms(self, path: Path) -> None:
+        """Load clinical trial acronyms lexicon (RADAR, APPEAR-C3G, MAINRITSAN, etc.)."""
+        if not path.exists():
+            return
+
+        data = json.loads(path.read_text(encoding="utf-8"))
+        loaded = 0
+
+        for acronym, entry in data.items():
+            if not acronym or not isinstance(entry, dict):
+                continue
+
+            # Get expansion and regex pattern
+            lf = entry.get("canonical_expansion")
+            regex_str = entry.get("regex")
+
+            if not lf or not regex_str:
+                continue
+
+            # Skip very long expansions (full trial titles)
+            # We want abbreviations, not full protocol titles
+            if len(lf) > 150:
+                lf = f"{acronym} (clinical trial)"
+
+            try:
+                case_insensitive = bool(entry.get("case_insensitive", False))
+                flags = re.IGNORECASE if case_insensitive else 0
+                pattern = re.compile(regex_str, flags)
+
+                # Build lexicon IDs from NCT ID
+                lexicon_ids = []
+                nct_id = entry.get("nct_id")
+                if nct_id:
+                    lexicon_ids.append({"source": "ClinicalTrials.gov", "id": nct_id})
+
+                self.abbrev_entries.append(LexiconEntry(
+                    sf=acronym,
+                    lf=lf,
+                    pattern=pattern,
+                    source=path.name,
+                    lexicon_ids=lexicon_ids,
+                    preserve_case=True,  # Preserve case for trial names
+                ))
+                loaded += 1
+            except re.error:
+                pass
+
+        self._lexicon_stats.append(("Trial acronyms", loaded))
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)
