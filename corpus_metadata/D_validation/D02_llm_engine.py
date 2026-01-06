@@ -288,6 +288,9 @@ class ClaudeClient:
         try:
             return json.loads(text)
         except json.JSONDecodeError:
+            # Log failed parse for debugging
+            preview = text[:200] + "..." if len(text) > 200 else text
+            print(f"  [DEBUG] JSON parse failed. Raw response preview: {preview!r}")
             return None
 
     def _extract_json(self, text: str) -> Dict[str, Any]:
@@ -597,11 +600,14 @@ class LLMEngine:
 
         candidates_text = "\n\n".join(candidate_lines)
 
+        # Calculate max_tokens based on batch size (~100 tokens per candidate + overhead)
+        batch_max_tokens = max(self.max_tokens * 2, len(batch) * 100 + 200)
+
         # Get batch prompt bundle
         llm_params = {
             "model": self.model,
             "temperature": self.temperature,
-            "max_tokens": self.max_tokens * 2,  # More tokens for batch response
+            "max_tokens": batch_max_tokens,
             "top_p": self.top_p,
             "seed": self.seed,
             "response_format": self.response_format,
@@ -624,7 +630,7 @@ class LLMEngine:
                     user_prompt=user_prompt,
                     model=self.model,
                     temperature=self.temperature,
-                    max_tokens=self.max_tokens * 2,
+                    max_tokens=batch_max_tokens,
                     top_p=self.top_p,
                     seed=self.seed,
                     response_format=self.response_format,
@@ -636,7 +642,7 @@ class LLMEngine:
                     user_prompt=user_prompt,
                     model=self.model,
                     temperature=self.temperature,
-                    max_tokens=self.max_tokens * 2,
+                    max_tokens=batch_max_tokens,
                     top_p=self.top_p,
                     seed=self.seed,
                     response_format=self.response_format,
