@@ -150,6 +150,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self.run_id = str(self.config.get("run_id") or generate_run_id("ABBR"))
         self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
 
+        # Lexicon loading stats (for summary output)
+        self._lexicon_stats: List[tuple] = []
+
         # Load lexicons
         # Note: Disease/Orphanet lexicons contain disease NAMES, not abbreviations
         # They cause FPs by matching chromosome numbers (45, 46, 10p) as "abbreviations"
@@ -162,6 +165,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_anca_lexicon(self.anca_lexicon_path)
         self._load_igan_lexicon(self.igan_lexicon_path)
         self._load_pah_lexicon(self.pah_lexicon_path)
+
+        # Print compact summary
+        self._print_lexicon_summary()
 
         # Initialize scispacy NER for biomedical entity recognition
         self.scispacy_nlp = None
@@ -433,16 +439,22 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             provenance=prov,
         )
 
-    def _load_abbrev_lexicon(self, path: Path) -> None:
-        if not path.exists():
-            print(f"Abbreviation lexicon not found: {path}")
+    def _print_lexicon_summary(self) -> None:
+        """Print compact summary of loaded lexicons."""
+        if not self._lexicon_stats:
             return
 
-        print(f"Loading abbreviation lexicon: {path}")
-        data = json.loads(path.read_text(encoding="utf-8"))
+        total = sum(count for _, count in self._lexicon_stats)
+        print(f"Lexicons loaded: {len(self._lexicon_stats)} files, {total:,} terms")
+        for name, count in self._lexicon_stats:
+            print(f"  {name:<30} {count:>7,}")
 
+    def _load_abbrev_lexicon(self, path: Path) -> None:
+        if not path.exists():
+            return
+
+        data = json.loads(path.read_text(encoding="utf-8"))
         loaded = 0
-        failed = 0
 
         for sf, entry in data.items():
             if not sf or not isinstance(entry, dict):
@@ -463,14 +475,10 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     sf=sf, lf=lf, pattern=pattern, source=path.name
                 ))
                 loaded += 1
-            except re.error as e:
-                failed += 1
-                if failed <= 5:
-                    print(f"  Bad regex for '{sf}': {e}")
+            except re.error:
+                pass
 
-        print(f"Loaded {loaded} abbreviation patterns from {path.name}")
-        if failed:
-            print(f"  {failed} patterns failed to compile")
+        self._lexicon_stats.append(("Abbreviations", loaded))
 
     def _load_disease_lexicon(self, path: Path) -> None:
         if not path.exists():
@@ -555,13 +563,10 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
     def _load_rare_disease_acronyms(self, path: Path) -> None:
         if not path.exists():
-            print(f"Rare disease acronyms not found: {path}")
             return
 
-        print(f"Loading rare disease acronyms: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
-
         loaded = 0
 
         for acronym, entry in data.items():
@@ -586,16 +591,13 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[acronym] = lexicon_ids
             loaded += 1
 
-        print(f"Loaded {loaded} rare disease acronyms from {path.name}")
+        self._lexicon_stats.append(("Rare disease acronyms", loaded))
 
     def _load_umls_tsv(self, path: Path) -> None:
         if not path.exists():
-            print(f"UMLS file not found: {path}")
             return
 
-        print(f"Loading UMLS: {path}")
         source = path.name
-
         loaded = 0
 
         with open(path, "r", encoding="utf-8") as f:
@@ -619,7 +621,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 self.entity_ids[abbrev] = lexicon_ids
                 loaded += 1
 
-        print(f"Loaded {loaded} terms from {path.name}")
+        # Extract a short name from filename for display
+        name = "UMLS biological" if "biological" in source else "UMLS clinical"
+        self._lexicon_stats.append((name, loaded))
 
     def _extract_identifiers(self, identifiers: Dict) -> List[Dict[str, str]]:
         """Extract lexicon IDs from an identifiers dict."""
@@ -653,13 +657,10 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
     def _load_anca_lexicon(self, path: Path) -> None:
         if not path.exists():
-            print(f"ANCA lexicon not found: {path}")
             return
 
-        print(f"Loading ANCA lexicon: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
-
         loaded = 0
 
         # 1) Diseases section
@@ -737,18 +738,15 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[term] = []  # No IDs for composite terms
             loaded += 1
 
-        print(f"Loaded {loaded} ANCA terms from {path.name}")
+        self._lexicon_stats.append(("ANCA disease", loaded))
 
 
     def _load_igan_lexicon(self, path: Path) -> None:
         if not path.exists():
-            print(f"Warning: IgAN lexicon not found: {path}")
             return
 
-        print(f"Loading IgAN lexicon: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
-
         loaded = 0
 
         # 1) Diseases section
@@ -842,17 +840,14 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[term] = []
             loaded += 1
 
-        print(f"Loaded {loaded} IgAN terms from {path.name}")
+        self._lexicon_stats.append(("IgAN disease", loaded))
 
     def _load_pah_lexicon(self, path: Path) -> None:
         if not path.exists():
-            print(f"Warning: PAH lexicon not found: {path}")
             return
 
-        print(f"Loading PAH lexicon: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
-
         loaded = 0
 
         # 1) Diseases section
@@ -946,7 +941,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[term] = []
             loaded += 1
 
-        print(f"Loaded {loaded} PAH terms from {path.name}")
+        self._lexicon_stats.append(("PAH disease", loaded))
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)
