@@ -16,6 +16,7 @@ the address on the envelope to know where to deliver.
 
 from __future__ import annotations
 
+import bisect
 import re
 from dataclasses import dataclass
 from enum import Enum
@@ -557,20 +558,29 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         left.sort(key=lambda b: _bbox_coords(b.bbox)[1])
         right.sort(key=lambda b: _bbox_coords(b.bbox)[1])
 
-        # Greedy match by Y alignment
+        # Pre-compute center Y values for right blocks (for binary search)
+        right_centers = [_center_y(rb.bbox) for rb in right]
+
+        # Greedy match by Y alignment using binary search (O(n log n) vs O(n²))
         pairs = []
-        used = set()
+        used: Set[int] = set()
 
         for lb in left:
             lcy = _center_y(lb.bbox)
+
+            # Binary search to find range of candidates within tolerance
+            lo = bisect.bisect_left(right_centers, lcy - self.row_tolerance)
+            hi = bisect.bisect_right(right_centers, lcy + self.row_tolerance)
+
+            # Find best unused match in the narrow range
             best_idx = -1
             best_dist = float("inf")
 
-            for i, rb in enumerate(right):
+            for i in range(lo, hi):
                 if i in used:
                     continue
-                dist = abs(lcy - _center_y(rb.bbox))
-                if dist <= self.row_tolerance and dist < best_dist:
+                dist = abs(lcy - right_centers[i])
+                if dist < best_dist:
                     best_dist = dist
                     best_idx = i
 
