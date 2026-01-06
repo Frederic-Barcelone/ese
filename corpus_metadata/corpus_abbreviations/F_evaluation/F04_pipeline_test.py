@@ -103,7 +103,7 @@ class PipelineEvaluator:
             skip_validation=False,
         )
 
-    def _load_gold(self) -> Tuple[any, Dict[str, List[GoldAnnotation]]]:
+    def _load_gold(self) -> Tuple[Any, Dict[str, List[GoldAnnotation]]]:
         """Load gold annotations."""
         if not self.gold_path.exists():
             raise FileNotFoundError(f"Gold file not found: {self.gold_path}")

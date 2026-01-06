@@ -711,10 +711,10 @@ class PDFToDocGraphParser(BaseParser):
                 # Unstructured hi_res renders at ~200-300 DPI, PDF is 72 DPI
                 scale_x, scale_y = 1.0, 1.0
                 if coords_meta is not None and hasattr(coords_meta, "system"):
-                    system = coords_meta.system
-                    if hasattr(system, "width") and hasattr(system, "height"):
-                        pixel_w = system.width
-                        pixel_h = system.height
+                    system = getattr(coords_meta, "system", None)
+                    if system is not None and hasattr(system, "width") and hasattr(system, "height"):
+                        pixel_w = getattr(system, "width", 0)
+                        pixel_h = getattr(system, "height", 0)
                         if pixel_w > 0 and pixel_h > 0:
                             scale_x = page_w / pixel_w
                             scale_y = page_h / pixel_h

@@ -66,7 +66,7 @@ def main() -> None:
         print(f"  - {r.value}: {c}")
 
     # Export markdown para inspección humana/LLM/debug
-    md = document_to_markdown(doc, include_table_placeholders=True, skip_header_footer=True)
+    md = document_to_markdown(doc, include_tables=True, skip_header_footer=True)
     out_path = Path(__file__).with_suffix(".out.md")
     out_path.write_text(md, encoding="utf-8")
     print(f"\n📝 Markdown: {out_path}")

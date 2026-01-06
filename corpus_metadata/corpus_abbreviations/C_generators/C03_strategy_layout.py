@@ -46,7 +46,8 @@ def _bbox_coords(bbox) -> Tuple[float, float, float, float]:
     """Extract (x0, y0, x1, y1) from BoundingBox."""
     if bbox is None:
         return (0.0, 0.0, 0.0, 0.0)
-    return tuple(float(c) for c in bbox.coords)
+    coords = bbox.coords
+    return (float(coords[0]), float(coords[1]), float(coords[2]), float(coords[3]))
 
 
 def _center_y(bbox) -> float:

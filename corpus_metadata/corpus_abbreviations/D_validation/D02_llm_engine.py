@@ -69,6 +69,20 @@ class LLMClient(Protocol):
     ) -> Dict[str, Any]:
         ...
 
+    def complete_json_any(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        model: Optional[str] = None,
+        temperature: Optional[float] = None,
+        max_tokens: Optional[int] = None,
+        top_p: float = 1.0,
+        seed: Optional[int] = None,
+        response_format: Optional[Dict[str, Any]] = None,
+    ) -> Any:
+        ...
+
 
 # -----------------------------------------------------------------------------
 # Claude Client
@@ -719,7 +733,7 @@ class LLMEngine:
         return results
 
     def _build_entity_from_batch_response(
-        self, candidate: Candidate, resp: dict, raw_batch: dict
+        self, candidate: Candidate, resp: dict, raw_batch: Any
     ) -> ExtractedEntity:
         """Build ExtractedEntity from a single batch response item."""
         # Parse status
@@ -1059,7 +1073,7 @@ class LLMEngine:
         *,
         reason: str,
         flags: list[str],
-        raw_llm: Optional[Dict[str, Any]],
+        raw_llm: Any = None,
         context_hash: Optional[str] = None,
         prompt_bundle_hash: Optional[str] = None,
         rule_version: Optional[str] = None,

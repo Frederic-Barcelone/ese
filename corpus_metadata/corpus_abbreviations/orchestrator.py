@@ -1,6 +1,6 @@
 # corpus_metadata/corpus_abbreviations/orchestrator.py
 """
-Orchestrator v0.7: PDF -> Parse -> Generate -> Validate -> Log
+Orchestrator v0.8: PDF -> Parse -> Generate -> Validate -> Log
 
 All configuration is loaded from config.yaml - no hardcoded parameters.
 
@@ -14,86 +14,170 @@ Requires:
 
 from __future__ import annotations
 
+import json
+import re
+import sys
+import time
+import uuid
+import warnings
+from collections import Counter
+from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
-from dotenv import load_dotenv
+from typing import Any, Dict, List, Optional, Tuple
+
 import yaml
+from dotenv import load_dotenv
+
 load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
 
 # =============================================================================
 # SILENCE KNOWN DEPENDENCY WARNINGS (must be before imports that trigger them)
 # =============================================================================
-import warnings
+_WARNING_FILTERS = [
+    # scispaCy: [W036] matcher has no patterns
+    (UserWarning, r".*W036.*"),
+    (UserWarning, r".*matcher.*does not have any patterns.*"),
+    # sklearn version mismatch
+    (UserWarning, r".*InconsistentVersionWarning.*"),
+    # transformers/unstructured: max_size deprecated
+    (UserWarning, r".*max_size.*deprecated.*"),
+    (FutureWarning, r".*max_size.*deprecated.*"),
+    (DeprecationWarning, r".*max_size.*"),
+]
 
-# 1) scispaCy AbbreviationDetector: global_matcher has no patterns (benign)
-warnings.filterwarnings(
-    "ignore",
-    message=r".*\[W036\].*component 'matcher' does not have any patterns defined.*",
-)
+for category, pattern in _WARNING_FILTERS:
+    warnings.filterwarnings("ignore", category=category, message=pattern)
 
-# 2) sklearn version mismatch: UMLS linker loads TfidfVectorizer pickled with 1.1.2
-#    TODO: Consider regenerating scispacy artifacts with current sklearn version
-warnings.filterwarnings(
-    "ignore",
-    category=UserWarning,
-    message=r".*InconsistentVersionWarning.*",
-)
-warnings.filterwarnings(
-    "ignore",
-    module=r"sklearn\.base",
-)
-
-# 3) transformers/unstructured: max_size deprecated (low risk, cosmetic)
-warnings.filterwarnings(
-    "ignore",
-    message=r".*max_size.*parameter is deprecated.*",
-)
-
-# 4) spaCy tokenizer: FutureWarning about set union (internal regex issue)
-warnings.filterwarnings(
-    "ignore",
-    category=FutureWarning,
-    module=r"spacy\.language",
-)
+warnings.filterwarnings("ignore", module=r"sklearn\.base")
+warnings.filterwarnings("ignore", category=FutureWarning, module=r"spacy\.language")
 # =============================================================================
-
-import json
-import sys
-import time
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
 
 # Ensure imports work
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from A_core.A01_domain_models import Candidate, ExtractedEntity, ValidationStatus, GeneratorType, EvidenceSpan, FieldType, Coordinate, ProvenanceMetadata
-from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint, hash_string
+from A_core.A01_domain_models import (
+    Candidate, Coordinate, EvidenceSpan, ExtractedEntity,
+    FieldType, GeneratorType, ProvenanceMetadata, ValidationStatus,
+)
+from A_core.A03_provenance import generate_run_id, hash_string
 from A_core.A04_heuristics_config import (
-    HeuristicsConfig, HeuristicsCounters, DEFAULT_HEURISTICS_CONFIG,
-    check_context_match, check_trial_id, get_canonical_case
+    HeuristicsConfig, HeuristicsCounters,
+    check_context_match, check_trial_id,
 )
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
-from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C02_strategy_regex import RegexCandidateGenerator
 from C_generators.C03_strategy_layout import LayoutCandidateGenerator
 from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
+from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
 from F_evaluation.F05_extraction_analysis import run_analysis
 
-# Module constants
-PIPELINE_VERSION = "0.7"
+PIPELINE_VERSION = "0.8"
 
+
+# =============================================================================
+# HELPER FUNCTIONS (module-level for reuse)
+# =============================================================================
+
+def extract_context_snippet(full_text: str, match_start: int, match_end: int, window: int = 100) -> str:
+    """Extract context snippet around a match position."""
+    start = max(0, match_start - window)
+    end = min(len(full_text), match_end + window)
+    return full_text[start:end]
+
+
+def has_numeric_evidence(context: str, sf: str) -> bool:
+    """Check if SF appears with numeric evidence (digits, %, =, :)."""
+    if not context:
+        return False
+    ctx = context.lower()
+    sf_lower = sf.lower()
+
+    idx = ctx.find(sf_lower)
+    if idx == -1:
+        return False
+
+    window = ctx[max(0, idx - 30):min(len(ctx), idx + len(sf) + 30)]
+
+    # Check for numeric patterns
+    if re.search(r'\d', window) or '%' in window or '=' in window:
+        return True
+    if re.search(rf'{re.escape(sf_lower)}\s*[:=]?\s*[\d.\-]', window):
+        return True
+    if re.search(r'[\d.]+\s*-\s*[\d.]+', window):
+        return True
+    return False
+
+
+def is_valid_sf_form(sf: str, context: str, allowed_2letter: set, allowed_mixed: set) -> bool:
+    """Filter SF by form - reject non-abbreviation patterns."""
+    sf_upper = sf.upper()
+
+    if len(sf) == 2 and sf_upper in allowed_2letter:
+        return True
+    if sf_upper in allowed_mixed:
+        return True
+
+    # Special case: IG only if near immunoglobulin context
+    if sf_upper == 'IG':
+        ctx_lower = context.lower()
+        return any(x in ctx_lower for x in ['igg', 'iga', 'igm', 'ige', 'immunoglobulin'])
+
+    # Reject lowercase words
+    if sf.islower() and len(sf) > 4:
+        return False
+    if len(sf) > 6 and sf.islower():
+        return False
+    # Reject capitalized words (e.g., "Medications")
+    if len(sf) > 6 and sf[0].isupper() and sf[1:].islower():
+        return False
+    return True
+
+
+def score_lf_quality(candidate: Candidate, full_text: str) -> int:
+    """Score LF quality for dedup ranking."""
+    score = 0
+    lf = (candidate.long_form or "").lower()
+    sf = candidate.short_form
+
+    if lf and sf in full_text:
+        # Check if LF appears within 200 chars of SF
+        for m in list(re.finditer(re.escape(sf), full_text))[:5]:
+            window = full_text[max(0, m.start() - 200):m.start() + 200].lower()
+            if lf in window:
+                score += 100
+                break
+
+    if lf and lf in full_text.lower():
+        score += 50
+
+    if lf:
+        if len(lf) > 60:
+            score -= 20
+        if any(w in lf.split() for w in ['the', 'a', 'an', 'is', 'are', 'was']):
+            score -= 10
+
+    if candidate.provenance and candidate.provenance.lexicon_source:
+        if 'umls' in candidate.provenance.lexicon_source.lower():
+            score += 30
+
+    return score
+
+
+# =============================================================================
+# ORCHESTRATOR CLASS
+# =============================================================================
 
 class Orchestrator:
     """
     Main pipeline orchestrator.
-
-    All configuration is loaded from config.yaml.
 
     Stages:
         1. Parse PDF -> DocumentGraph
@@ -102,7 +186,6 @@ class Orchestrator:
         4. Log results to corpus_log/
     """
 
-    # Default config path (all other paths loaded from config)
     DEFAULT_CONFIG = "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
 
     def __init__(
@@ -117,7 +200,6 @@ class Orchestrator:
         enable_haiku_screening: Optional[bool] = None,
         heuristics_config: Optional[HeuristicsConfig] = None,
     ):
-        # Load configuration from YAML
         self.config_path = config_path or self.DEFAULT_CONFIG
         self.config = self._load_config(self.config_path)
 
@@ -125,34 +207,42 @@ class Orchestrator:
         paths = self.config.get("paths", {})
         base_path = paths.get("base", "/Users/frederictetard/Projects/ese")
 
-        # Set paths from config (with parameter override)
         self.log_dir = Path(log_dir or Path(base_path) / paths.get("logs", "corpus_log"))
         self.output_dir = Path(output_dir) if output_dir else None
         self.pdf_dir = Path(base_path) / paths.get("pdf_input", "Pdfs")
         self.gold_json = str(Path(base_path) / paths.get("gold_json", "gold_data/papers_gold.json"))
 
-        # Extract API settings from config
+        # API settings
         api_cfg = self.config.get("api", {}).get("claude", {})
         val_cfg = api_cfg.get("validation", {})
 
-        # Set model from config (with parameter override)
         self.model = model or val_cfg.get("model", "claude-sonnet-4-20250514")
         self.batch_delay_ms = api_cfg.get("batch_delay_ms", 100)
 
-        # Set validation settings from config (with parameter override)
+        # Validation settings
         validation_cfg = self.config.get("validation", {}).get("abbreviation", {})
         self.skip_validation = skip_validation if skip_validation is not None else not validation_cfg.get("enabled", True)
 
-        # Set heuristics settings from config (with parameter override)
+        # Heuristics settings
         heur_cfg = self.config.get("heuristics", {})
         self.enable_haiku_screening = enable_haiku_screening if enable_haiku_screening is not None else heur_cfg.get("enable_haiku_screening", False)
 
         self.run_id = run_id or generate_run_id("RUN")
-
-        # Load heuristics config from YAML
         self.heuristics = heuristics_config or HeuristicsConfig.from_yaml(self.config_path)
 
-        # Extract lexicon paths from config
+        # Initialize components
+        self._init_components(paths, base_path, api_key, val_cfg)
+
+        print(f"Orchestrator v{PIPELINE_VERSION} initialized")
+        print(f"  Run ID: {self.run_id}")
+        print(f"  Config: {self.config_path}")
+        print(f"  Model: {self.model}")
+        print(f"  Log dir: {self.log_dir}")
+        print(f"  Validation: {'ENABLED' if not self.skip_validation else 'DISABLED'}")
+        print(f"  Haiku screening: {'ENABLED' if self.enable_haiku_screening else 'OFF'}")
+
+    def _init_components(self, paths: dict, base_path: str, api_key: Optional[str], val_cfg: dict) -> None:
+        """Initialize parser, generators, validation, and normalization components."""
         lexicons = self.config.get("lexicons", {})
         dict_path = Path(base_path) / paths.get("dictionaries", "ouput_datasources")
 
@@ -160,12 +250,11 @@ class Orchestrator:
         self.parser = PDFToDocGraphParser()
         self.table_extractor = TableExtractor()
 
-        # Extract generator settings from config
+        # Generators
         gen_cfg = self.config.get("generators", {})
         regex_cfg = gen_cfg.get("regex_pattern", {})
         lexicon_cfg = gen_cfg.get("lexicon", {})
 
-        # Build lexicon generator config from YAML
         lexicon_gen_config = {
             "run_id": self.run_id,
             "abbrev_lexicon_path": str(dict_path / lexicons.get("abbreviation_general", "2025_08_abbreviation_general.json")),
@@ -180,25 +269,20 @@ class Orchestrator:
             "context_window": lexicon_cfg.get("context_window", 300),
         }
 
-        # Generators (all 5 strategies)
         self.generators = [
-            AbbrevSyntaxCandidateGenerator(config={"run_id": self.run_id}),   # C01: Syntax/Schwartz-Hearst
-            GlossaryTableCandidateGenerator(config={"run_id": self.run_id}),  # C01b: Glossary tables
-            RegexCandidateGenerator(config={                                    # C02: Rigid patterns
+            AbbrevSyntaxCandidateGenerator(config={"run_id": self.run_id}),
+            GlossaryTableCandidateGenerator(config={"run_id": self.run_id}),
+            RegexCandidateGenerator(config={
                 "run_id": self.run_id,
                 "enabled_types": regex_cfg.get("enabled_types", ["TRIAL_ID", "COMPOUND_ID", "DOI", "PMID", "PMCID"]),
             }),
-            LayoutCandidateGenerator(config={"run_id": self.run_id}),         # C03: Layout heuristics
-            RegexLexiconGenerator(config=lexicon_gen_config),                 # C04: Lexicon/FlashText
+            LayoutCandidateGenerator(config={"run_id": self.run_id}),
+            RegexLexiconGenerator(config=lexicon_gen_config),
         ]
 
-        # Validation (Claude) - reads config from YAML
+        # Validation
         if not self.skip_validation:
-            self.claude_client = ClaudeClient(
-                api_key=api_key,
-                model=self.model,
-                config_path=self.config_path,
-            )
+            self.claude_client = ClaudeClient(api_key=api_key, model=self.model, config_path=self.config_path)
             self.llm_engine = LLMEngine(
                 llm_client=self.claude_client,
                 model=self.model,
@@ -211,18 +295,14 @@ class Orchestrator:
             self.claude_client = None
             self.llm_engine = None
 
-        # Logger - writes to corpus_log/
-        self.logger = ValidationLogger(
-            log_dir=str(self.log_dir),
-            run_id=self.run_id,
-        )
+        # Logger
+        self.logger = ValidationLogger(log_dir=str(self.log_dir), run_id=self.run_id)
 
-        # Extract normalization settings from config
+        # Normalization
         norm_cfg = self.config.get("normalization", {})
         term_mapper_cfg = norm_cfg.get("term_mapper", {})
         disambig_cfg = norm_cfg.get("disambiguator", {})
 
-        # Normalization (E01) - canonicalize long forms + attach standard IDs
         self.term_mapper = TermMapper(config={
             "mapping_file_path": str(dict_path / lexicons.get("abbreviation_general", "2025_08_abbreviation_general.json")),
             "enable_fuzzy_matching": term_mapper_cfg.get("enable_fuzzy_matching", False),
@@ -230,20 +310,11 @@ class Orchestrator:
             "fill_long_form_for_orphans": term_mapper_cfg.get("fill_long_form_for_orphans", False),
         })
 
-        # Disambiguation (E02) - resolve ambiguous abbreviations using context
         self.disambiguator = Disambiguator(config={
             "min_context_score": disambig_cfg.get("min_context_score", 2),
             "min_margin": disambig_cfg.get("min_margin", 1),
             "fill_long_form_for_orphans": disambig_cfg.get("fill_long_form_for_orphans", True),
         })
-
-        print(f"Orchestrator v{PIPELINE_VERSION} initialized")
-        print(f"  Run ID: {self.run_id}")
-        print(f"  Config: {self.config_path}")
-        print(f"  Model: {self.model}")
-        print(f"  Log dir: {self.log_dir}")
-        print(f"  Validation: {'ENABLED' if not self.skip_validation else 'DISABLED'}")
-        print(f"  Haiku screening: {'ENABLED' if self.enable_haiku_screening else 'OFF'}")
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load configuration from YAML file."""
@@ -259,66 +330,101 @@ class Orchestrator:
             print(f"[WARN] Failed to load config from {config_path}: {e}")
             return {}
 
-    def _export_extracted_text(self, pdf_path: Path, doc) -> None:
-        """
-        Export extracted text from parsed PDF to a text file.
+    # =========================================================================
+    # ENTITY CREATION HELPERS
+    # =========================================================================
 
-        The text file is saved in the same folder as the PDF with format:
-        <pdf_stem>_<timestamp>.txt
-        """
-        # Build output path: same folder as PDF, name with timestamp
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        txt_path = pdf_path.parent / f"{pdf_path.stem}_{timestamp}.txt"
-
-        # Extract text from all blocks
-        text_lines = []
-        current_page = None
-
-        for block in doc.iter_linear_blocks(skip_header_footer=False):
-            # Add page separator when page changes
-            if block.page_num != current_page:
-                if current_page is not None:
-                    text_lines.append("")  # Empty line between pages
-                text_lines.append(f"--- Page {block.page_num} ---")
-                text_lines.append("")
-                current_page = block.page_num
-
-            # Add block text
-            text = (block.text or "").strip()
-            if text:
-                text_lines.append(text)
-
-        # Write to file
-        try:
-            with open(txt_path, "w", encoding="utf-8") as f:
-                f.write("\n".join(text_lines))
-            print(f"  Extracted text: {txt_path.name}")
-        except Exception as e:
-            print(f"  [WARN] Failed to export text: {e}")
-
-    def process_pdf(
+    def _create_entity_from_candidate(
         self,
-        pdf_path: str,
-        batch_delay_ms: Optional[float] = None,
-    ) -> List[ExtractedEntity]:
-        """
-        Process a single PDF through the full pipeline.
-        """
-        # Use config value if not specified
-        if batch_delay_ms is None:
-            batch_delay_ms = self.batch_delay_ms
+        candidate: Candidate,
+        status: ValidationStatus,
+        confidence: float,
+        reason: str,
+        flags: List[str],
+        raw_response: Dict,
+        long_form_override: Optional[str] = None,
+    ) -> ExtractedEntity:
+        """Create ExtractedEntity from a Candidate (for auto-approve/reject)."""
+        context = (candidate.context_text or "").strip()
+        ctx_hash = hash_string(context) if context else "no_context"
+        primary = EvidenceSpan(
+            text=context,
+            location=candidate.context_location,
+            scope_ref=ctx_hash,
+            start_char_offset=0,
+            end_char_offset=len(context),
+        )
+        return ExtractedEntity(
+            candidate_id=candidate.id,
+            doc_id=candidate.doc_id,
+            field_type=candidate.field_type,
+            short_form=candidate.short_form.strip(),
+            long_form=long_form_override or (candidate.long_form.strip() if candidate.long_form else None),
+            primary_evidence=primary,
+            supporting_evidence=[],
+            status=status,
+            confidence_score=confidence,
+            rejection_reason=reason if status == ValidationStatus.REJECTED else None,
+            validation_flags=flags,
+            provenance=candidate.provenance,
+            raw_llm_response=raw_response,
+        )
 
-        pdf_path = Path(pdf_path)
-        if not pdf_path.exists():
-            raise FileNotFoundError(f"PDF not found: {pdf_path}")
+    def _create_entity_from_search(
+        self,
+        doc_id: str,
+        full_text: str,
+        match: re.Match,
+        long_form: Optional[str],
+        field_type: FieldType,
+        confidence: float,
+        flags: List[str],
+        rule_version: str,
+        lexicon_source: str,
+    ) -> ExtractedEntity:
+        """Create ExtractedEntity from a text search match."""
+        context_snippet = extract_context_snippet(full_text, match.start(), match.end())
+        ctx_hash = hash_string(context_snippet)
 
-        print(f"\n{'='*60}")
-        print(f"Processing: {pdf_path.name}")
-        print(f"{'='*60}")
+        primary = EvidenceSpan(
+            text=context_snippet,
+            location=Coordinate(page_num=1),
+            scope_ref=ctx_hash,
+            start_char_offset=match.start() - max(0, match.start() - 100),
+            end_char_offset=match.end() - max(0, match.start() - 100),
+        )
 
-        # -----------------------------
-        # Stage 1: Parse PDF
-        # -----------------------------
+        prov = ProvenanceMetadata(
+            pipeline_version=PIPELINE_VERSION,
+            run_id=self.run_id,
+            doc_fingerprint=lexicon_source,
+            generator_name=GeneratorType.LEXICON_MATCH,
+            rule_version=rule_version,
+            lexicon_source=f"orchestrator:{lexicon_source}",
+        )
+
+        return ExtractedEntity(
+            candidate_id=uuid.uuid4(),
+            doc_id=doc_id,
+            field_type=field_type,
+            short_form=match.group(),
+            long_form=long_form,
+            primary_evidence=primary,
+            supporting_evidence=[],
+            status=ValidationStatus.VALIDATED,
+            confidence_score=confidence,
+            rejection_reason=None,
+            validation_flags=flags,
+            provenance=prov,
+            raw_llm_response={"auto": lexicon_source},
+        )
+
+    # =========================================================================
+    # PIPELINE STAGES
+    # =========================================================================
+
+    def _parse_pdf(self, pdf_path: Path):
+        """Stage 1: Parse PDF into DocumentGraph."""
         print("\n[1/4] Parsing PDF...")
         start = time.time()
 
@@ -333,22 +439,21 @@ class Orchestrator:
         print(f"  Tables: {total_tables}")
         print(f"  Time: {time.time() - start:.2f}s")
 
-        # Export extracted text to file
         self._export_extracted_text(pdf_path, doc)
+        return doc
 
-        # -----------------------------
-        # Stage 2: Generate candidates
-        # -----------------------------
+    def _generate_candidates(self, doc) -> Tuple[List[Candidate], str]:
+        """Stage 2: Generate and deduplicate candidates."""
         print("\n[2/4] Generating candidates...")
         start = time.time()
 
-        all_candidates: List[Candidate] = []
+        all_candidates = []
         for gen in self.generators:
             candidates = gen.extract(doc)
             print(f"  {gen.generator_type.value}: {len(candidates)} candidates")
             all_candidates.extend(candidates)
 
-        # Deduplicate by (SF, LF)
+        # Deduplicate
         seen = set()
         unique_candidates = []
         for c in all_candidates:
@@ -357,399 +462,173 @@ class Orchestrator:
                 seen.add(key)
                 unique_candidates.append(c)
 
+        # Build full text
+        full_text = " ".join(block.text for block in doc.iter_linear_blocks() if block.text)
+
         print(f"  Total unique: {len(unique_candidates)}")
         print(f"  Time: {time.time() - start:.2f}s")
 
-        # -----------------------------
-        # Stage 3: Validate with Claude
-        # -----------------------------
-        if self.skip_validation:
-            print("\n[3/4] Validation SKIPPED")
-            # Still export candidates without validation
-            self._export_results(pdf_path, [], unique_candidates)
-            return []
+        return unique_candidates, full_text
 
-        # Collect SFs found by non-lexicon generators (syntax, glossary, layout, regex)
-        # These have evidence of being actual abbreviations in the document
-        corroborated_sfs: set = {
+    def _filter_candidates(
+        self,
+        candidates: List[Candidate],
+        full_text: str,
+    ) -> Tuple[List[Candidate], set, Counter, int]:
+        """Filter and reduce candidates before validation."""
+        # Corroborated SFs (found by non-lexicon generators)
+        corroborated_sfs = {
             c.short_form.upper()
-            for c in unique_candidates
+            for c in candidates
             if c.generator_type != GeneratorType.LEXICON_MATCH
         }
 
-        # Count SF occurrences in document text (for frequency-based filtering)
-        full_text = " ".join(
-            block.text for block in doc.iter_linear_blocks() if block.text
-        )
-        from collections import Counter
-        import re
-        # Find all abbreviation-like tokens (including mixed case like IgA, C3a, eGFR)
-        # Pattern: starts with letter, contains uppercase, 2-12 chars
+        # Count SF occurrences
         abbrev_pattern = r'\b[A-Za-z][A-Za-z0-9]{1,11}\b'
         all_tokens = re.findall(abbrev_pattern, full_text)
-        # Normalize to uppercase for counting
         word_counts = Counter(t.upper() for t in all_tokens if any(c.isupper() for c in t))
 
-        # Filter: keep lexicon matches if:
-        # 1. SF is corroborated by another generator, OR
-        # 2. SF appears 2+ times in document (strict for precision)
+        # Keep lexicon matches if corroborated or frequent
         def should_keep(c: Candidate) -> bool:
             if c.generator_type != GeneratorType.LEXICON_MATCH:
                 return True
             sf_upper = c.short_form.upper()
-            if sf_upper in corroborated_sfs:
-                return True
-            # Strict: require SF appears at least twice (1C)
-            if word_counts.get(sf_upper, 0) >= 2:
-                return True
-            return False
+            return sf_upper in corroborated_sfs or word_counts.get(sf_upper, 0) >= 2
 
-        needs_validation: List[Candidate] = [c for c in unique_candidates if should_keep(c)]
+        needs_validation = [c for c in candidates if should_keep(c)]
 
-        # ========================================
-        # UPSTREAM REDUCTION: Reduce LEXICON_MATCH before LLM (1A, 1B)
-        # ========================================
+        # Reduce lexicon matches (dedup by SF, filter by form)
+        allowed_2letter = self.heuristics.allowed_2letter_sfs
+        allowed_mixed = self.heuristics.allowed_mixed_case
 
-        # Use centralized config for allowlists
-        ALLOWED_2LETTER_SFS = self.heuristics.allowed_2letter_sfs
-        ALLOWED_MIXED_CASE = self.heuristics.allowed_mixed_case
-
-        def is_valid_sf_form(sf: str, context: str = "") -> bool:
-            """1B: Filter SF by form - reject non-abbreviation patterns."""
-            sf_upper = sf.upper()
-
-            # Allow 2-letter uppercase if in allowlist
-            if len(sf) == 2 and sf_upper in ALLOWED_2LETTER_SFS:
-                return True
-
-            # Allow known mixed-case/software abbreviations
-            if sf_upper in ALLOWED_MIXED_CASE:
-                return True
-
-            # Special case: Ig/IG only if near immunoglobulin context
-            if sf_upper == 'IG':
-                ctx_lower = context.lower()
-                if any(x in ctx_lower for x in ['igg', 'iga', 'igm', 'ige', 'immunoglobulin']):
-                    return True
-                return False  # Reject ambiguous IG without context
-
-            # Reject if mostly lowercase and longer than 6 chars (likely a word)
-            if len(sf) > 6 and sf.islower():
-                return False
-            # Reject if all lowercase and > 4 chars (e.g., "protein", "study")
-            if sf.islower() and len(sf) > 4:
-                return False
-            # Reject if looks like a regular capitalized word (e.g., "Medications")
-            if len(sf) > 6 and sf[0].isupper() and sf[1:].islower():
-                return False
-            return True
-
-        def score_lf_quality(c: Candidate, full_text: str) -> int:
-            """1A: Score LF quality for dedup ranking."""
-            score = 0
-            lf = (c.long_form or "").lower()
-            sf = c.short_form
-
-            # LF appears near SF in document (highest priority)
-            if lf and sf in full_text:
-                # Check if LF appears within 200 chars of SF
-                sf_positions = [m.start() for m in re.finditer(re.escape(sf), full_text)]
-                for pos in sf_positions[:5]:  # Check first 5 occurrences
-                    window = full_text[max(0, pos-200):pos+200].lower()
-                    if lf in window:
-                        score += 100
-                        break
-
-            # LF appears anywhere in document
-            if lf and lf in full_text.lower():
-                score += 50
-
-            # Prefer shorter, more "definitional" LFs
-            if lf:
-                # Penalize very long LFs (likely not definitions)
-                if len(lf) > 60:
-                    score -= 20
-                # Penalize LFs with verbs/articles
-                if any(w in lf.split() for w in ['the', 'a', 'an', 'is', 'are', 'was']):
-                    score -= 10
-
-            # Prefer candidates from trusted lexicons
-            if c.provenance and c.provenance.lexicon_source:
-                if 'umls' in c.provenance.lexicon_source.lower():
-                    score += 30
-
-            return score
-
-        # 1A: Dedup LEXICON_MATCH by SF - keep top 2 per SF
         lexicon_by_sf: Dict[str, List[Candidate]] = {}
-        non_lexicon: List[Candidate] = []
+        non_lexicon = []
         sf_form_rejected = 0
 
         for c in needs_validation:
             if c.generator_type == GeneratorType.LEXICON_MATCH:
-                sf_upper = c.short_form.upper()
                 ctx = c.context_text or ""
-                # 1B: Apply SF form filter (with context for IG special case)
-                if not is_valid_sf_form(c.short_form, ctx):
+                if not is_valid_sf_form(c.short_form, ctx, allowed_2letter, allowed_mixed):
                     sf_form_rejected += 1
                     continue
-                if sf_upper not in lexicon_by_sf:
-                    lexicon_by_sf[sf_upper] = []
-                lexicon_by_sf[sf_upper].append(c)
+                sf_upper = c.short_form.upper()
+                lexicon_by_sf.setdefault(sf_upper, []).append(c)
             else:
                 non_lexicon.append(c)
 
-        # Keep top 2 LFs per SF based on quality score
-        deduped_lexicon: List[Candidate] = []
-        for sf, candidates in lexicon_by_sf.items():
-            if len(candidates) <= 2:
-                deduped_lexicon.extend(candidates)
+        # Keep top 2 LFs per SF
+        deduped_lexicon = []
+        for sf, cands in lexicon_by_sf.items():
+            if len(cands) <= 2:
+                deduped_lexicon.extend(cands)
             else:
-                # Score and rank by LF quality
-                scored = [(c, score_lf_quality(c, full_text)) for c in candidates]
-                scored.sort(key=lambda x: -x[1])  # Highest score first
+                scored = [(c, score_lf_quality(c, full_text)) for c in cands]
+                scored.sort(key=lambda x: -x[1])
                 deduped_lexicon.extend([c for c, _ in scored[:2]])
 
         lexicon_before = sum(len(v) for v in lexicon_by_sf.values()) + sf_form_rejected
-        lexicon_after = len(deduped_lexicon)
-        print(f"  LEXICON_MATCH reduction: {lexicon_before} -> {lexicon_after} "
-              f"(dedup: {lexicon_before - sf_form_rejected - lexicon_after}, "
-              f"form filter: {sf_form_rejected})")
+        print(f"  LEXICON_MATCH reduction: {lexicon_before} -> {len(deduped_lexicon)} "
+              f"(dedup: {lexicon_before - sf_form_rejected - len(deduped_lexicon)}, form filter: {sf_form_rejected})")
 
-        needs_validation = non_lexicon + deduped_lexicon
-        frequent_sfs = sum(1 for c in unique_candidates
-                          if c.generator_type == GeneratorType.LEXICON_MATCH
-                          and c.short_form.upper() not in corroborated_sfs
-                          and word_counts.get(c.short_form.upper(), 0) >= 2)
+        return non_lexicon + deduped_lexicon, corroborated_sfs, word_counts, len(candidates) - len(non_lexicon + deduped_lexicon)
 
-        filtered_count = len(unique_candidates) - len(needs_validation)
+    def _apply_heuristics(
+        self,
+        candidates: List[Candidate],
+        counters: HeuristicsCounters,
+    ) -> Tuple[List[Tuple[Candidate, ExtractedEntity]], List[Candidate]]:
+        """Apply auto-approve/reject heuristics. Returns (auto_results, llm_candidates)."""
+        auto_results = []
+        llm_candidates = []
 
-        # ========================================
-        # TIERED VALIDATION: Auto-approve/reject high-confidence candidates
-        # ========================================
-        auto_results: List[Tuple[Candidate, ExtractedEntity]] = []
-        llm_candidates: List[Candidate] = []
-
-        # Use centralized config for common words
-        COMMON_WORDS = self.heuristics.common_words
-
-        # ========================================
-        # PASO A: Stats whitelist - deterministic (no LLM)
-        # These are auto-approved if numeric evidence is present
-        # ========================================
-        STATS_ABBREVS = self.heuristics.stats_abbrevs  # {SF: canonical_LF}
-
-        # ========================================
-        # PASO B: Country codes - deterministic (no LLM)
-        # ========================================
-        COUNTRY_ABBREVS = self.heuristics.country_abbrevs  # {SF: canonical_LF}
-
-        # Blacklist: words that look like abbreviations but aren't
-        # These will be auto-rejected even if in lexicon
-        SF_BLACKLIST = self.heuristics.sf_blacklist
-
-        # ========================================
-        # PASO C: Hyphenated abbreviations - search in full text
-        # These are often missed by standard generators
-        # ========================================
-        HYPHENATED_ABBREVS = self.heuristics.hyphenated_abbrevs
-
-        # Direct text search for abbreviations often missed by lexicon
-        # These are searched in full_text if not already found
-        DIRECT_SEARCH_ABBREVS = self.heuristics.direct_search_abbrevs
-
-        def has_numeric_evidence(context: str, sf: str) -> bool:
-            """Check if SF appears with numeric evidence (digits, %, =, :)."""
-            if not context:
-                return False
-            ctx = context.lower()
-            sf_lower = sf.lower()
-
-            # Find SF position and check Â±30 chars window
-            idx = ctx.find(sf_lower)
-            if idx == -1:
-                return False
-
-            window_start = max(0, idx - 30)
-            window_end = min(len(ctx), idx + len(sf) + 30)
-            window = ctx[window_start:window_end]
-
-            # Check for numeric patterns
-            import re
-            # Digits, %, =, :, or typical stat patterns
-            if re.search(r'\d', window):
-                return True
-            if '%' in window or '=' in window:
-                return True
-            # Patterns like "95% CI" or "OR 1.2"
-            if re.search(rf'{sf_lower}\s*[:=]?\s*[\d\.\-]', window):
-                return True
-            if re.search(rf'[\d\.]+\s*-\s*[\d\.]+', window):  # Range like 1.2-3.4
-                return True
-
-            return False
-
-        auto_approved_count = 0
-        auto_rejected_count = 0
-
-        def _create_auto_entity(c: Candidate, status: ValidationStatus,
-                                 confidence: float, reason: str, flags: List[str],
-                                 raw_response: Dict) -> ExtractedEntity:
-            """Helper to create ExtractedEntity for auto-approved/rejected candidates."""
-            context = (c.context_text or "").strip()
-            ctx_hash = hash_string(context) if context else "no_context"
-            primary = EvidenceSpan(
-                text=context,
-                location=c.context_location,
-                scope_ref=ctx_hash,
-                start_char_offset=0,
-                end_char_offset=len(context),
-            )
-            return ExtractedEntity(
-                candidate_id=c.id,
-                doc_id=c.doc_id,
-                field_type=c.field_type,
-                short_form=c.short_form.strip(),
-                long_form=(c.long_form.strip() if c.long_form else None),
-                primary_evidence=primary,
-                supporting_evidence=[],
-                status=status,
-                confidence_score=confidence,
-                rejection_reason=reason if status == ValidationStatus.REJECTED else None,
-                validation_flags=flags,
-                provenance=c.provenance,
-                raw_llm_response=raw_response,
-            )
-
-        # Initialize heuristics counters for logging
-        counters = HeuristicsCounters()
-
-        for c in needs_validation:
+        for c in candidates:
             sf_upper = c.short_form.upper()
             ctx = c.context_text or ""
 
-            # ========================================
-            # PASO B: Auto-reject blacklisted SFs (before other checks)
-            # ========================================
-            if sf_upper in SF_BLACKLIST:
-                entity = _create_auto_entity(
+            # Auto-reject blacklisted
+            if sf_upper in self.heuristics.sf_blacklist:
+                entity = self._create_entity_from_candidate(
                     c, ValidationStatus.REJECTED, 0.95,
-                    "Blacklisted: not a valid abbreviation in this context",
+                    "Blacklisted: not a valid abbreviation",
                     ["auto_rejected_blacklist"], {"auto": "blacklist"}
                 )
                 auto_results.append((c, entity))
                 counters.blacklisted_fp_count += 1
-                auto_rejected_count += 1
                 continue
 
-            # ========================================
-            # Contextual rejection for ambiguous SFs (Option B)
-            # ========================================
+            # Auto-reject context mismatch
             if not check_context_match(c.short_form, ctx, self.heuristics):
-                entity = _create_auto_entity(
+                entity = self._create_entity_from_candidate(
                     c, ValidationStatus.REJECTED, 0.90,
-                    "Rejected: ambiguous SF without required medical context",
+                    "Rejected: ambiguous SF without required context",
                     ["auto_rejected_context"], {"auto": "context_mismatch"}
                 )
                 auto_results.append((c, entity))
                 counters.context_rejected += 1
-                auto_rejected_count += 1
                 continue
 
-            # ========================================
-            # Exclude trial IDs if configured (NCT\d+)
-            # ========================================
+            # Auto-reject trial IDs
             if check_trial_id(c.short_form, self.heuristics):
-                entity = _create_auto_entity(
+                entity = self._create_entity_from_candidate(
                     c, ValidationStatus.REJECTED, 0.90,
                     "Excluded: trial identifier (NCT number)",
                     ["auto_rejected_trial_id"], {"auto": "trial_id_excluded"}
                 )
                 auto_results.append((c, entity))
                 counters.trial_id_excluded += 1
-                auto_rejected_count += 1
                 continue
 
-            # ========================================
-            # PASO A: Auto-approve stats with numeric evidence (NO LLM)
-            # ========================================
-            if sf_upper in STATS_ABBREVS and has_numeric_evidence(ctx, c.short_form):
-                canonical_lf = STATS_ABBREVS.get(sf_upper)
-                entity = _create_auto_entity(
+            # Auto-approve stats with numeric evidence
+            if sf_upper in self.heuristics.stats_abbrevs and has_numeric_evidence(ctx, c.short_form):
+                canonical_lf = self.heuristics.stats_abbrevs.get(sf_upper)
+                entity = self._create_entity_from_candidate(
                     c, ValidationStatus.VALIDATED, 0.90,
-                    f"Stats abbreviation with numeric evidence",
-                    ["auto_approved_stats"],
-                    {"auto": "stats_whitelist", "canonical_lf": canonical_lf}
+                    "Stats abbreviation with numeric evidence",
+                    ["auto_approved_stats"], {"auto": "stats_whitelist"},
+                    long_form_override=canonical_lf,
                 )
-                if canonical_lf:
-                    entity = entity.model_copy(update={"long_form": canonical_lf})
                 auto_results.append((c, entity))
                 counters.recovered_by_stats_whitelist += 1
-                auto_approved_count += 1
                 continue
 
-            # ========================================
-            # PASO B: Auto-approve country codes (NO LLM)
-            # ========================================
-            if sf_upper in COUNTRY_ABBREVS:
-                canonical_lf = COUNTRY_ABBREVS.get(sf_upper)
-                entity = _create_auto_entity(
+            # Auto-approve country codes
+            if sf_upper in self.heuristics.country_abbrevs:
+                canonical_lf = self.heuristics.country_abbrevs.get(sf_upper)
+                entity = self._create_entity_from_candidate(
                     c, ValidationStatus.VALIDATED, 0.90,
-                    f"Country code abbreviation",
-                    ["auto_approved_country"],
-                    {"auto": "country_code", "canonical_lf": canonical_lf}
+                    "Country code abbreviation",
+                    ["auto_approved_country"], {"auto": "country_code"},
+                    long_form_override=canonical_lf,
                 )
-                if canonical_lf:
-                    entity = entity.model_copy(update={"long_form": canonical_lf})
                 auto_results.append((c, entity))
                 counters.recovered_by_country_code += 1
-                auto_approved_count += 1
                 continue
 
-            # Auto-reject: Common English words
-            if sf_upper in COMMON_WORDS:
-                entity = _create_auto_entity(
+            # Auto-reject common words
+            if sf_upper in self.heuristics.common_words:
+                entity = self._create_entity_from_candidate(
                     c, ValidationStatus.REJECTED, 0.95,
                     "Common English word, not an abbreviation",
                     ["auto_rejected"], {"auto": "rejected_common_word"}
                 )
                 auto_results.append((c, entity))
                 counters.common_word_rejected += 1
-                auto_rejected_count += 1
                 continue
 
-            # Needs LLM validation
             llm_candidates.append(c)
 
-        print(f"\n[3/4] Validating candidates with Claude...")
-        print(f"  Corroborated SFs: {len(corroborated_sfs)}")
-        print(f"  Frequent SFs (2+ occurrences): {frequent_sfs}")
-        print(f"  Filtered (lexicon-only, rare): {filtered_count}")
-        print(f"  Auto-approved stats (PASO A): {counters.recovered_by_stats_whitelist}")
-        print(f"  Auto-approved country (PASO B): {counters.recovered_by_country_code}")
-        print(f"  Auto-rejected blacklist: {counters.blacklisted_fp_count}")
-        print(f"  Auto-rejected context: {counters.context_rejected}")
-        print(f"  Auto-rejected trial IDs: {counters.trial_id_excluded}")
-        print(f"  Auto-rejected common words: {counters.common_word_rejected}")
-        print(f"  Candidates for LLM: {len(llm_candidates)}")
-        start = time.time()
+        return auto_results, llm_candidates
 
-        # Collect all results
-        results: List[ExtractedEntity] = []
+    def _validate_with_llm(
+        self,
+        llm_candidates: List[Candidate],
+        batch_delay_ms: float,
+    ) -> List[ExtractedEntity]:
+        """Validate candidates using LLM."""
+        assert self.llm_engine is not None, "LLM engine must be initialized for validation"
+        results = []
 
-        # Log and add auto-approved/rejected
-        for candidate, entity in auto_results:
-            self.logger.log_validation(
-                candidate=candidate,
-                entity=entity,
-                llm_response=entity.raw_llm_response,
-                elapsed_ms=0,
-            )
-            results.append(entity)
-
-        # Hybrid validation: batch for high-precision sources, individual for rest
-        # SYNTAX_PATTERN + GLOSSARY_TABLE = explicit pairs (high precision, batch OK)
-        # LEXICON_MATCH = FP-prone, needs individual validation
+        # Split by generator type
         explicit_candidates = []
         lexicon_candidates = []
 
@@ -763,250 +642,132 @@ class Orchestrator:
         print(f"  Batch (explicit pairs): {len(explicit_candidates)}")
         print(f"  Individual (lexicon): {len(lexicon_candidates)}")
 
-        # ========================================
-        # HAIKU FAST-REJECT: Screen lexicon candidates before Sonnet
-        # (disabled by default - enable with enable_haiku_screening=True)
-        # ========================================
-        haiku_rejected: List[ExtractedEntity] = []
+        # Haiku screening (optional)
         if self.enable_haiku_screening and lexicon_candidates:
             print(f"\n  Haiku screening {len(lexicon_candidates)} lexicon candidates...")
             haiku_start = time.time()
-
             needs_review, haiku_rejected = self.llm_engine.fast_reject_batch(
-                lexicon_candidates,
-                haiku_model="claude-3-5-haiku-20241022",
-                batch_size=20,
+                lexicon_candidates, haiku_model="claude-3-5-haiku-20241022", batch_size=20
             )
-
             haiku_time = time.time() - haiku_start
-            print(f"    Haiku rejected: {len(haiku_rejected)}")
-            print(f"    Needs Sonnet review: {len(needs_review)}")
-            print(f"    Haiku time: {haiku_time:.2f}s")
+            print(f"    Haiku rejected: {len(haiku_rejected)}, Needs review: {len(needs_review)}, Time: {haiku_time:.2f}s")
 
-            # Log Haiku rejections
             for entity in haiku_rejected:
-                # Find matching candidate for logging
-                candidate = next(
-                    (c for c in lexicon_candidates if str(c.id) == str(entity.candidate_id)),
-                    None
-                )
+                candidate = next((c for c in lexicon_candidates if str(c.id) == str(entity.candidate_id)), None)
                 if candidate:
-                    self.logger.log_validation(
-                        candidate=candidate,
-                        entity=entity,
-                        llm_response=entity.raw_llm_response,
-                        elapsed_ms=haiku_time * 1000 / len(lexicon_candidates),
-                    )
+                    self.logger.log_validation(candidate, entity, entity.raw_llm_response, haiku_time * 1000 / len(lexicon_candidates))
                 results.append(entity)
 
-            # Update lexicon_candidates to only those needing Sonnet
             lexicon_candidates = needs_review
 
-        # Batch validate explicit pairs (high precision, ~10x speedup)
+        # Batch validate explicit pairs
         if explicit_candidates:
             try:
                 val_start = time.time()
-                batch_results = self.llm_engine.verify_candidates_batch(
-                    explicit_candidates, batch_size=10
-                )
+                batch_results = self.llm_engine.verify_candidates_batch(explicit_candidates, batch_size=10)
                 elapsed_ms = (time.time() - val_start) * 1000
 
                 for candidate, entity in zip(explicit_candidates, batch_results):
-                    self.logger.log_validation(
-                        candidate=candidate,
-                        entity=entity,
-                        llm_response=entity.raw_llm_response,
-                        elapsed_ms=elapsed_ms / len(explicit_candidates),
-                    )
+                    self.logger.log_validation(candidate, entity, entity.raw_llm_response, elapsed_ms / len(explicit_candidates))
                     results.append(entity)
             except Exception as e:
                 print(f"  [WARN] Batch error, falling back to individual: {e}")
                 for candidate in explicit_candidates:
                     try:
                         entity = self.llm_engine.verify_candidate(candidate)
-                        self.logger.log_validation(
-                            candidate=candidate, entity=entity,
-                            llm_response=entity.raw_llm_response, elapsed_ms=0,
-                        )
+                        self.logger.log_validation(candidate, entity, entity.raw_llm_response, 0)
                         results.append(entity)
                     except Exception as e2:
                         self.logger.log_error(candidate, str(e2))
 
-        # Individual validation for lexicon matches (FP-prone, needs full context)
+        # Individual validation for lexicon matches
         batch_size = 15
         for batch_start in range(0, len(lexicon_candidates), batch_size):
             batch_end = min(batch_start + batch_size, len(lexicon_candidates))
             batch = lexicon_candidates[batch_start:batch_end]
-
             print(f"  Lexicon progress: {batch_end}/{len(lexicon_candidates)}")
 
             for candidate in batch:
                 try:
                     val_start = time.time()
                     entity = self.llm_engine.verify_candidate(candidate)
-                    elapsed_ms = (time.time() - val_start) * 1000
-                    self.logger.log_validation(
-                        candidate=candidate,
-                        entity=entity,
-                        llm_response=entity.raw_llm_response,
-                        elapsed_ms=elapsed_ms,
-                    )
+                    self.logger.log_validation(candidate, entity, entity.raw_llm_response, (time.time() - val_start) * 1000)
                     results.append(entity)
                 except Exception as e:
                     self.logger.log_error(candidate, str(e))
 
-            # Rate limit between batches
             if batch_delay_ms > 0 and batch_end < len(lexicon_candidates):
                 time.sleep(batch_delay_ms / 1000)
 
-        print(f"  Time: {time.time() - start:.2f}s")
+        return results
 
-        # ========================================
-        # PASO C: Detect hyphenated abbreviations in full text
-        # These are often missed by standard generators
-        # ========================================
-        # Get all SFs already found
-        found_sfs = {r.short_form.upper() for r in results if r.status == ValidationStatus.VALIDATED}
+    def _search_missing_abbreviations(
+        self,
+        doc_id: str,
+        full_text: str,
+        found_sfs: set,
+        counters: HeuristicsCounters,
+    ) -> List[ExtractedEntity]:
+        """Search for abbreviations missed by generators (PASO C/D)."""
+        results = []
 
-        for hyph_sf, hyph_lf in HYPHENATED_ABBREVS.items():
+        # PASO C: Hyphenated abbreviations
+        for hyph_sf, hyph_lf in self.heuristics.hyphenated_abbrevs.items():
             if hyph_sf.upper() in found_sfs:
-                continue  # Already found
-
-            # Search for hyphenated SF in full text (case-insensitive)
-            import re
-            # Match the hyphenated pattern with word boundaries
+                continue
             pattern = rf'\b{re.escape(hyph_sf)}\b'
             match = re.search(pattern, full_text, re.IGNORECASE)
             if match:
-                # Found! Create a synthetic entity
-                context_start = max(0, match.start() - 100)
-                context_end = min(len(full_text), match.end() + 100)
-                context_snippet = full_text[context_start:context_end]
-
-                ctx_hash = hash_string(context_snippet)
-                primary = EvidenceSpan(
-                    text=context_snippet,
-                    location=Coordinate(page_num=1),  # Default to page 1
-                    scope_ref=ctx_hash,
-                    start_char_offset=match.start() - context_start,
-                    end_char_offset=match.end() - context_start,
-                )
-
-                prov = ProvenanceMetadata(
-                    pipeline_version=PIPELINE_VERSION,
-                    run_id=self.run_id,
-                    doc_fingerprint="hyphenated_detection",
-                    generator_name=GeneratorType.LEXICON_MATCH,
-                    rule_version="hyphenated_detector:v1.0",
-                    lexicon_source="orchestrator:hyphenated",
-                )
-
-                import uuid
-                entity = ExtractedEntity(
-                    candidate_id=uuid.uuid4(),
-                    doc_id=str(pdf_path.stem) if hasattr(pdf_path, 'stem') else str(pdf_path),
-                    field_type=FieldType.DEFINITION_PAIR,
-                    short_form=match.group(),  # Preserve original case
-                    long_form=hyph_lf,
-                    primary_evidence=primary,
-                    supporting_evidence=[],
-                    status=ValidationStatus.VALIDATED,
-                    confidence_score=0.85,
-                    rejection_reason=None,
-                    validation_flags=["auto_approved_hyphenated"],
-                    provenance=prov,
-                    raw_llm_response={"auto": "hyphenated_detector"},
+                entity = self._create_entity_from_search(
+                    doc_id, full_text, match, hyph_lf,
+                    FieldType.DEFINITION_PAIR, 0.85,
+                    ["auto_approved_hyphenated"], "hyphenated_detector:v1.0", "hyphenated"
                 )
                 results.append(entity)
+                found_sfs.add(hyph_sf.upper())
                 counters.recovered_by_hyphen += 1
 
         if counters.recovered_by_hyphen > 0:
             print(f"  Hyphenated detected (PASO C): {counters.recovered_by_hyphen}")
 
-        # ========================================
-        # Direct text search for missed abbreviations (UK, RR, CC BY, etc.)
-        # ========================================
-        for direct_sf, direct_lf in DIRECT_SEARCH_ABBREVS.items():
+        # Direct search abbreviations
+        for direct_sf, direct_lf in self.heuristics.direct_search_abbrevs.items():
             if direct_sf.upper() in found_sfs:
-                continue  # Already found
-
-            # Search for SF in full text
-            # Use word boundary for single words, exact match for multi-word
-            if ' ' in direct_sf:
-                # Multi-word: exact match
-                pattern = re.escape(direct_sf)
-            else:
-                # Single word: word boundary
-                pattern = rf'\b{re.escape(direct_sf)}\b'
-
+                continue
+            pattern = re.escape(direct_sf) if ' ' in direct_sf else rf'\b{re.escape(direct_sf)}\b'
             match = re.search(pattern, full_text)
             if match:
-                # Found! Create entity
-                context_start = max(0, match.start() - 100)
-                context_end = min(len(full_text), match.end() + 100)
-                context_snippet = full_text[context_start:context_end]
-
-                ctx_hash = hash_string(context_snippet)
-                primary = EvidenceSpan(
-                    text=context_snippet,
-                    location=Coordinate(page_num=1),
-                    scope_ref=ctx_hash,
-                    start_char_offset=match.start() - context_start,
-                    end_char_offset=match.end() - context_start,
-                )
-
-                prov = ProvenanceMetadata(
-                    pipeline_version=PIPELINE_VERSION,
-                    run_id=self.run_id,
-                    doc_fingerprint="direct_search",
-                    generator_name=GeneratorType.LEXICON_MATCH,
-                    rule_version="direct_search:v1.0",
-                    lexicon_source="orchestrator:direct_search",
-                )
-
-                entity = ExtractedEntity(
-                    candidate_id=uuid.uuid4(),
-                    doc_id=str(pdf_path.stem) if hasattr(pdf_path, 'stem') else str(pdf_path),
-                    field_type=FieldType.DEFINITION_PAIR,
-                    short_form=match.group(),
-                    long_form=direct_lf,
-                    primary_evidence=primary,
-                    supporting_evidence=[],
-                    status=ValidationStatus.VALIDATED,
-                    confidence_score=0.85,
-                    rejection_reason=None,
-                    validation_flags=["auto_approved_direct_search"],
-                    provenance=prov,
-                    raw_llm_response={"auto": "direct_search"},
+                entity = self._create_entity_from_search(
+                    doc_id, full_text, match, direct_lf,
+                    FieldType.DEFINITION_PAIR, 0.85,
+                    ["auto_approved_direct_search"], "direct_search:v1.0", "direct_search"
                 )
                 results.append(entity)
                 found_sfs.add(direct_sf.upper())
                 counters.recovered_by_direct_search += 1
 
         if counters.recovered_by_direct_search > 0:
-            print(f"  Direct search detected (UK, RR, CC BY): {counters.recovered_by_direct_search}")
+            print(f"  Direct search detected: {counters.recovered_by_direct_search}")
 
-        # ========================================
-        # PASO D: LLM Extractor SF-only
-        # Find abbreviations NOT in lexicon using LLM
-        # Guardrails: SF must be exact substring in text
-        # ========================================
-        print(f"\n  Running LLM SF-only extractor (PASO D)...")
+        return results
 
-        # Get all SFs already VALIDATED (don't skip REJECTED - they might be valid SF-only)
-        already_found_sfs = {r.short_form.upper() for r in results if r.status == ValidationStatus.VALIDATED}
+    def _extract_sf_only_with_llm(
+        self,
+        doc_id: str,
+        full_text: str,
+        found_sfs: set,
+        counters: HeuristicsCounters,
+    ) -> List[ExtractedEntity]:
+        """PASO D: Extract SF-only using LLM."""
+        print("\n  Running LLM SF-only extractor (PASO D)...")
+        if self.claude_client is None:
+            return []
+        results = []
 
-        # For LLM extraction, only skip VALIDATED (not REJECTED - they might be valid SFs with wrong LF)
-        # This allows us to rescue SF-only even if the pair was rejected
-        all_processed_sfs = already_found_sfs.copy()
-
-        # Sample chunks of text for LLM analysis (to stay within context limits)
+        # Sample chunks
         chunk_size = 3000
-        text_chunks = []
-        for i in range(0, min(len(full_text), 15000), chunk_size):
-            text_chunks.append(full_text[i:i+chunk_size])
+        text_chunks = [full_text[i:i + chunk_size] for i in range(0, min(len(full_text), 15000), chunk_size)]
 
-        # Prompt for SF-only extraction
         sf_extraction_prompt = """You are an expert at identifying medical/scientific abbreviations in text.
 
 Given the following text, identify ALL abbreviations that appear. An abbreviation is typically:
@@ -1033,13 +794,12 @@ Return ONLY the JSON array, nothing else."""
         llm_sf_candidates = set()
         llm_errors = 0
 
-        for i, chunk in enumerate(text_chunks):
+        for chunk in text_chunks:
             try:
                 prompt = sf_extraction_prompt.format(
-                    already_found=", ".join(sorted(already_found_sfs)[:50]),
+                    already_found=", ".join(sorted(found_sfs)[:50]),
                     text=chunk
                 )
-
                 response = self.claude_client.complete_json_any(
                     system_prompt="You are an abbreviation extraction assistant. Return only valid JSON arrays.",
                     user_prompt=prompt,
@@ -1048,8 +808,6 @@ Return ONLY the JSON array, nothing else."""
                     max_tokens=500,
                     top_p=1.0,
                 )
-
-                # Response is already parsed (list or dict)
                 if isinstance(response, list):
                     for sf in response:
                         if isinstance(sf, str) and sf.strip():
@@ -1058,67 +816,45 @@ Return ONLY the JSON array, nothing else."""
                     for sf in response.get("abbreviations", []):
                         if isinstance(sf, str) and sf.strip():
                             llm_sf_candidates.add(sf.strip())
-            except Exception as e:
+            except Exception:
                 llm_errors += 1
 
-        print(f"    LLM chunks processed: {len(text_chunks)}, errors: {llm_errors}")
-        print(f"    LLM candidates found: {len(llm_sf_candidates)}")
-        if llm_sf_candidates:
-            print(f"    Candidates: {sorted(llm_sf_candidates)[:20]}")
+        print(f"    LLM chunks: {len(text_chunks)}, errors: {llm_errors}, candidates: {len(llm_sf_candidates)}")
 
         # Validate and add LLM-found SFs
-        llm_filtered_already = 0
-        llm_filtered_blacklist = 0
-        llm_filtered_not_in_text = 0
-        llm_filtered_form = 0
+        blacklist = self.heuristics.common_words | self.heuristics.sf_blacklist
+
         for sf_candidate in llm_sf_candidates:
             sf_upper = sf_candidate.upper()
 
-            # Skip if already processed
-            if sf_upper in all_processed_sfs:
-                llm_filtered_already += 1
+            if sf_upper in found_sfs or sf_upper in blacklist:
                 continue
 
-            # Skip common words and blacklist
-            if sf_upper in COMMON_WORDS or sf_upper in SF_BLACKLIST:
-                llm_filtered_blacklist += 1
-                continue
-
-            # Guardrail: SF must appear exactly in text
+            # Verify SF exists in text
             if sf_candidate not in full_text:
-                # Try case-insensitive match
-                pattern = rf'\b{re.escape(sf_candidate)}\b'
-                match = re.search(pattern, full_text, re.IGNORECASE)
+                match = re.search(rf'\b{re.escape(sf_candidate)}\b', full_text, re.IGNORECASE)
                 if not match:
-                    llm_filtered_not_in_text += 1
                     continue
-                sf_candidate = match.group()  # Use actual case from text
+                sf_candidate = match.group()
 
-            # Validate SF form (basic sanity check)
-            if len(sf_candidate) < 2 or len(sf_candidate) > 15:
-                llm_filtered_form += 1
-                continue
-            if not any(c.isupper() for c in sf_candidate):
-                llm_filtered_form += 1
+            # Basic form validation
+            if len(sf_candidate) < 2 or len(sf_candidate) > 15 or not any(c.isupper() for c in sf_candidate):
                 continue
 
-            # Create entity (SF-only, no LF)
-            # Find context around the SF
+            # Find context
             idx = full_text.find(sf_candidate)
             if idx == -1:
                 idx = full_text.lower().find(sf_candidate.lower())
 
-            context_start = max(0, idx - 100)
-            context_end = min(len(full_text), idx + len(sf_candidate) + 100)
-            context_snippet = full_text[context_start:context_end]
-
+            context_snippet = extract_context_snippet(full_text, idx, idx + len(sf_candidate))
             ctx_hash = hash_string(context_snippet)
+
             primary = EvidenceSpan(
                 text=context_snippet,
                 location=Coordinate(page_num=1),
                 scope_ref=ctx_hash,
-                start_char_offset=idx - context_start if idx >= context_start else 0,
-                end_char_offset=idx - context_start + len(sf_candidate) if idx >= context_start else len(sf_candidate),
+                start_char_offset=max(0, idx - (idx - 100 if idx > 100 else 0)),
+                end_char_offset=max(0, idx - (idx - 100 if idx > 100 else 0)) + len(sf_candidate),
             )
 
             prov = ProvenanceMetadata(
@@ -1132,38 +868,33 @@ Return ONLY the JSON array, nothing else."""
 
             entity = ExtractedEntity(
                 candidate_id=uuid.uuid4(),
-                doc_id=str(pdf_path.stem) if hasattr(pdf_path, 'stem') else str(pdf_path),
-                field_type=FieldType.SHORT_FORM_ONLY,  # SF-only, no LF
+                doc_id=doc_id,
+                field_type=FieldType.SHORT_FORM_ONLY,
                 short_form=sf_candidate,
-                long_form=None,  # No LF - avoid hallucination
+                long_form=None,
                 primary_evidence=primary,
                 supporting_evidence=[],
                 status=ValidationStatus.VALIDATED,
-                confidence_score=0.75,  # Lower confidence for LLM-extracted
+                confidence_score=0.75,
                 rejection_reason=None,
                 validation_flags=["llm_sf_extracted"],
                 provenance=prov,
                 raw_llm_response={"auto": "llm_sf_extractor"},
             )
             results.append(entity)
-            all_processed_sfs.add(sf_upper)
+            found_sfs.add(sf_upper)
             counters.recovered_by_llm_sf_only += 1
 
         print(f"  LLM SF-only extracted (PASO D): {counters.recovered_by_llm_sf_only}")
-        if llm_sf_candidates:
-            print(f"    Filtered: already={llm_filtered_already}, blacklist={llm_filtered_blacklist}, not_in_text={llm_filtered_not_in_text}, form={llm_filtered_form}")
+        return results
 
-        # -----------------------------
-        # Stage 3.5: Normalize & Disambiguate
-        # -----------------------------
+    def _normalize_results(self, results: List[ExtractedEntity], doc) -> List[ExtractedEntity]:
+        """Stage 3.5: Normalize and disambiguate results."""
         print("\n[3.5/4] Normalizing & disambiguating...")
 
-        # Get full document text for disambiguation context
-        full_doc_text = " ".join(
-            block.text for block in doc.iter_linear_blocks() if block.text
-        )
+        full_doc_text = " ".join(block.text for block in doc.iter_linear_blocks() if block.text)
 
-        # Apply normalization (E01) - canonicalize long forms
+        # Normalize
         normalized_count = 0
         for i, entity in enumerate(results):
             normalized = self.term_mapper.normalize(entity)
@@ -1171,39 +902,147 @@ Return ONLY the JSON array, nothing else."""
                 normalized_count += 1
             results[i] = normalized
 
-        # Apply disambiguation (E02) - resolve ambiguous SFs using context
+        # Disambiguate
         results = self.disambiguator.resolve(results, full_doc_text)
-        disambiguated_count = sum(
-            1 for r in results if "disambiguated" in (r.validation_flags or [])
-        )
+        disambiguated_count = sum(1 for r in results if "disambiguated" in (r.validation_flags or []))
 
         print(f"  Normalized: {normalized_count}")
         print(f"  Disambiguated: {disambiguated_count}")
 
-        # -----------------------------
+        return results
+
+    # =========================================================================
+    # MAIN PROCESS METHOD
+    # =========================================================================
+
+    def process_pdf(self, pdf_path: str | Path, batch_delay_ms: Optional[float] = None) -> List[ExtractedEntity]:
+        """Process a single PDF through the full pipeline."""
+        delay: float = batch_delay_ms if batch_delay_ms is not None else (self.batch_delay_ms or 100.0)
+
+        pdf_path_obj = Path(pdf_path)
+        if not pdf_path_obj.exists():
+            raise FileNotFoundError(f"PDF not found: {pdf_path}")
+
+        print(f"\n{'=' * 60}")
+        print(f"Processing: {pdf_path_obj.name}")
+        print(f"{'=' * 60}")
+
+        # Stage 1: Parse
+        doc = self._parse_pdf(pdf_path_obj)
+
+        # Stage 2: Generate candidates
+        unique_candidates, full_text = self._generate_candidates(doc)
+
+        # Early exit if validation disabled
+        if self.skip_validation:
+            print("\n[3/4] Validation SKIPPED")
+            self._export_results(pdf_path_obj, [], unique_candidates)
+            return []
+
+        # Filter candidates
+        needs_validation, corroborated_sfs, word_counts, filtered_count = self._filter_candidates(unique_candidates, full_text)
+
+        # Apply heuristics
+        counters = HeuristicsCounters()
+        auto_results, llm_candidates = self._apply_heuristics(needs_validation, counters)
+
+        # Print stats
+        frequent_sfs = sum(
+            1 for c in unique_candidates
+            if c.generator_type == GeneratorType.LEXICON_MATCH
+            and c.short_form.upper() not in corroborated_sfs
+            and word_counts.get(c.short_form.upper(), 0) >= 2
+        )
+
+        print(f"\n[3/4] Validating candidates with Claude...")
+        print(f"  Corroborated SFs: {len(corroborated_sfs)}")
+        print(f"  Frequent SFs (2+): {frequent_sfs}")
+        print(f"  Filtered (lexicon-only, rare): {filtered_count}")
+        print(f"  Auto-approved stats: {counters.recovered_by_stats_whitelist}")
+        print(f"  Auto-approved country: {counters.recovered_by_country_code}")
+        print(f"  Auto-rejected blacklist: {counters.blacklisted_fp_count}")
+        print(f"  Auto-rejected context: {counters.context_rejected}")
+        print(f"  Auto-rejected trial IDs: {counters.trial_id_excluded}")
+        print(f"  Auto-rejected common words: {counters.common_word_rejected}")
+        print(f"  Candidates for LLM: {len(llm_candidates)}")
+
+        start = time.time()
+
+        # Collect results
+        results: List[ExtractedEntity] = []
+
+        # Log auto results
+        for candidate, entity in auto_results:
+            self.logger.log_validation(candidate, entity, entity.raw_llm_response, 0)
+            results.append(entity)
+
+        # LLM validation
+        llm_results = self._validate_with_llm(llm_candidates, delay)
+        results.extend(llm_results)
+
+        print(f"  Time: {time.time() - start:.2f}s")
+
+        # Search for missing abbreviations
+        doc_id = str(pdf_path_obj.stem)
+        found_sfs = {r.short_form.upper() for r in results if r.status == ValidationStatus.VALIDATED}
+
+        search_results = self._search_missing_abbreviations(doc_id, full_text, found_sfs, counters)
+        results.extend(search_results)
+
+        # LLM SF-only extraction
+        sf_only_results = self._extract_sf_only_with_llm(doc_id, full_text, found_sfs, counters)
+        results.extend(sf_only_results)
+
+        # Normalize
+        results = self._normalize_results(results, doc)
+
         # Stage 4: Summary & Export
-        # -----------------------------
         print("\n[4/4] Writing summary...")
-        
-        # Write validation log summary
         self.logger.write_summary()
         self.logger.print_summary()
-
-        # Log heuristics counters for debugging
         counters.log_summary()
 
-        # Export results
-        self._export_results(pdf_path, results, unique_candidates, counters)
+        self._export_results(pdf_path_obj, results, unique_candidates, counters)
 
-        # Print validated abbreviations
+        # Print validated
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
         if validated:
             print(f"\nValidated abbreviations ({len(validated)}):")
             for v in validated:
-                lf = v.long_form or "(no expansion)"
-                print(f"  * {v.short_form} -> {lf}")
+                print(f"  * {v.short_form} -> {v.long_form or '(no expansion)'}")
 
         return results
+
+    # =========================================================================
+    # EXPORT METHODS
+    # =========================================================================
+
+    def _export_extracted_text(self, pdf_path: Path, doc) -> None:
+        """Export extracted text to file."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        txt_path = pdf_path.parent / f"{pdf_path.stem}_{timestamp}.txt"
+
+        text_lines = []
+        current_page = None
+
+        for block in doc.iter_linear_blocks(skip_header_footer=False):
+            if block.page_num != current_page:
+                if current_page is not None:
+                    text_lines.append("")
+                text_lines.append(f"--- Page {block.page_num} ---")
+                text_lines.append("")
+                current_page = block.page_num
+
+            text = (block.text or "").strip()
+            if text:
+                text_lines.append(text)
+
+        try:
+            with open(txt_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(text_lines))
+            print(f"  Extracted text: {txt_path.name}")
+        except Exception as e:
+            print(f"  [WARN] Failed to export text: {e}")
 
     def _export_results(
         self,
@@ -1212,37 +1051,28 @@ Return ONLY the JSON array, nothing else."""
         candidates: List[Candidate],
         counters: Optional[HeuristicsCounters] = None,
     ) -> None:
-        """
-        Export results to JSON in the PDF directory.
-        """
-        # Determine output directory
+        """Export results to JSON."""
         out_dir = self.output_dir or pdf_path.parent
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        # Build export data
+
         export_data = {
             "run_id": self.run_id,
             "timestamp": datetime.now().isoformat(),
             "document": pdf_path.name,
             "document_path": str(pdf_path),
             "total_candidates": len(candidates),
-            "total_validated": len([r for r in results if r.status == ValidationStatus.VALIDATED]),
-            "total_rejected": len([r for r in results if r.status == ValidationStatus.REJECTED]),
-            "total_ambiguous": len([r for r in results if r.status == ValidationStatus.AMBIGUOUS]),
+            "total_validated": sum(1 for r in results if r.status == ValidationStatus.VALIDATED),
+            "total_rejected": sum(1 for r in results if r.status == ValidationStatus.REJECTED),
+            "total_ambiguous": sum(1 for r in results if r.status == ValidationStatus.AMBIGUOUS),
             "heuristics_counters": counters.to_dict() if counters else None,
             "abbreviations": [],
         }
 
-        # Add validated abbreviations
         for entity in results:
             if entity.status == ValidationStatus.VALIDATED:
-                # Extract lexicon_ids as list of dicts
                 lexicon_ids = None
                 if entity.provenance.lexicon_ids:
-                    lexicon_ids = [
-                        {"source": lid.source, "id": lid.id}
-                        for lid in entity.provenance.lexicon_ids
-                    ]
+                    lexicon_ids = [{"source": lid.source, "id": lid.id} for lid in entity.provenance.lexicon_ids]
 
                 export_data["abbreviations"].append({
                     "short_form": entity.short_form,
@@ -1255,26 +1085,15 @@ Return ONLY the JSON array, nothing else."""
                     "lexicon_ids": lexicon_ids,
                 })
 
-        # Write JSON
         out_file = out_dir / f"abbreviations_{pdf_path.stem}_{timestamp}.json"
         with open(out_file, "w", encoding="utf-8") as f:
             json.dump(export_data, f, indent=2, ensure_ascii=False)
 
         print(f"\n  Exported: {out_file}")
-
-        # Run F06 extraction analysis (screen output only)
         run_analysis(export_data, self.gold_json)
 
-    def process_folder(
-        self,
-        folder_path: Optional[str] = None,
-        batch_delay_ms: float = 100,
-    ) -> Dict[str, List[ExtractedEntity]]:
-        """
-        Process all PDFs in a folder.
-        
-        Returns dict of {pdf_name: [entities]}
-        """
+    def process_folder(self, folder_path: Optional[str] = None, batch_delay_ms: float = 100) -> Dict[str, List[ExtractedEntity]]:
+        """Process all PDFs in a folder."""
         folder = Path(folder_path or self.pdf_dir)
         if not folder.exists():
             raise FileNotFoundError(f"Folder not found: {folder}")
@@ -1284,30 +1103,28 @@ Return ONLY the JSON array, nothing else."""
             print(f"No PDF files found in {folder}")
             return {}
 
-        print(f"\n{'#'*60}")
+        print(f"\n{'#' * 60}")
         print(f"BATCH PROCESSING: {len(pdf_files)} PDFs")
         print(f"Folder: {folder}")
-        print(f"{'#'*60}")
+        print(f"{'#' * 60}")
 
-        all_results: Dict[str, List[ExtractedEntity]] = {}
-        
+        all_results = {}
+
         for i, pdf_path in enumerate(pdf_files, 1):
             print(f"\n[{i}/{len(pdf_files)}] {pdf_path.name}")
             try:
-                results = self.process_pdf(str(pdf_path), batch_delay_ms=batch_delay_ms)
-                all_results[pdf_path.name] = results
+                all_results[pdf_path.name] = self.process_pdf(str(pdf_path), batch_delay_ms=batch_delay_ms)
             except Exception as e:
-                print(f"  [WARN] ERROR processing {pdf_path.name}: {e}")
+                print(f"  [WARN] ERROR: {e}")
                 all_results[pdf_path.name] = []
 
-        # Final summary
-        print(f"\n{'#'*60}")
+        print(f"\n{'#' * 60}")
         print(f"BATCH COMPLETE")
-        print(f"{'#'*60}")
+        print(f"{'#' * 60}")
         print(f"PDFs processed: {len(all_results)}")
-        
+
         total_validated = sum(
-            len([r for r in results if r.status == ValidationStatus.VALIDATED])
+            sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
             for results in all_results.values()
         )
         print(f"Total validated abbreviations: {total_validated}")
@@ -1318,8 +1135,7 @@ Return ONLY the JSON array, nothing else."""
 
 def main():
     """Process all PDFs in the default folder."""
-    orchestrator = Orchestrator()
-    orchestrator.process_folder()
+    Orchestrator().process_folder()
 
 
 if __name__ == "__main__":

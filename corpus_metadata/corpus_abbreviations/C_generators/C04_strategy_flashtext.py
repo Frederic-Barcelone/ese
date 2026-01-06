@@ -17,6 +17,7 @@ try:
     from scispacy.linking import EntityLinker
     SCISPACY_AVAILABLE = True
 except ImportError:
+    spacy = None  # type: ignore
     SCISPACY_AVAILABLE = False
 
 from A_core.A02_interfaces import BaseCandidateGenerator
@@ -182,7 +183,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         # Initialize scispacy NER for biomedical entity recognition
         self.scispacy_nlp = None
         self.umls_linker = None
-        if SCISPACY_AVAILABLE:
+        if SCISPACY_AVAILABLE and spacy is not None:
             try:
                 # Try lg model first (better for linking), fall back to sm
                 try:
@@ -212,7 +213,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
     def generator_type(self) -> GeneratorType:
         return GeneratorType.LEXICON_MATCH
 
-    def extract(self, doc: DocumentGraph) -> List[Candidate]:
+    def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
+        doc = doc_structure  # Alias for readability
         out: List[Candidate] = []
         seen: Set[Tuple[str, str]] = set()  # (SF_upper, LF_lower) dedup
 
@@ -270,7 +272,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 if not self._is_valid_match(matched_term):
                     continue
 
-                canonical = self.entity_canonical.get(matched_term, matched_term)
+                canonical = self.entity_canonical.get(matched_term) or matched_term
                 source = self.entity_source.get(matched_term, "unknown")
 
                 key = (matched_term.upper(), canonical.lower())
@@ -376,6 +378,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
                         if not lf_from_lexicon:
                             continue  # Only report if we have a known expansion
+                        assert lf_from_lexicon is not None  # Type narrowing for pyright
 
                         key = (ent_text.upper(), lf_from_lexicon.lower())
                         if key in seen:

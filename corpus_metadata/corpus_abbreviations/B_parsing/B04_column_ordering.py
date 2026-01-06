@@ -862,6 +862,7 @@ def _xy_cut_recursive(
                 cut_pos, axis = y_cut, 'y'
 
     # Partition and recurse
+    assert cut_pos is not None  # Guaranteed by logic above
     if axis == 'x':
         left = [g for g in geoms if g.x_center < cut_pos]
         right = [g for g in geoms if g.x_center >= cut_pos]
@@ -1119,6 +1120,8 @@ def order_by_layout(
 
     # Single column: XY-Cut ordering
     if layout.layout_type == LayoutType.SINGLE_COLUMN:
+        if layout.stats is None:
+            return blocks
         ordered = xy_cut_order(geoms, layout.stats, cfg)
         return [g.block_ref for g in ordered]
 
@@ -1219,6 +1222,8 @@ def _order_body_bands(
         return []
 
     stats = layout.stats
+    if stats is None:
+        return sorted(geoms, key=lambda g: (g.y0, g.x0))
     band_height = max(
         stats.median_height * config.band_height_factor,
         config.y_tolerance * 3

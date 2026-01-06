@@ -10,7 +10,7 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from A_core.A01_domain_models import (
     Candidate,
@@ -56,7 +56,7 @@ class ValidationLogger:
         self,
         candidate: Candidate,
         entity: ExtractedEntity,
-        llm_response: Optional[Dict[str, Any]] = None,
+        llm_response: Optional[Union[Dict[str, Any], str]] = None,
         elapsed_ms: Optional[float] = None,
     ) -> None:
         """
