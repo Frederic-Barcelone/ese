@@ -234,7 +234,7 @@ class Orchestrator:
     """
 
     DEFAULT_CONFIG = (
-        "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
+        "/Users/frederictetard/Projects/ese/corpus_metadata/G_config/config.yaml"
     )
 
     def __init__(

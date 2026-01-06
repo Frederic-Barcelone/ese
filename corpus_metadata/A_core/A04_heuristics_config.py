@@ -473,7 +473,7 @@ Auto-rejected:
 
 # Default config path
 DEFAULT_CONFIG_PATH = (
-    "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
+    "/Users/frederictetard/Projects/ese/corpus_metadata/G_config/config.yaml"
 )
 
 

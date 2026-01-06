@@ -1,7 +1,7 @@
 # ==============================================================================
 # RARE DISEASE EXTRACTION - PIPELINE CONFIGURATION v15.0
 # ==============================================================================
-# corpus_metadata/corpus_config/config.yaml
+# corpus_metadata/G_config/config.yaml
 #
 # VERSION 15.0 CHANGES:
 # - Centralized ALL abbreviation extraction parameters

@@ -33,7 +33,7 @@ from orchestrator import Orchestrator
 # =============================================================================
 
 DEFAULT_CONFIG_PATH = (
-    "/Users/frederictetard/Projects/ese/corpus_metadata/corpus_config/config.yaml"
+    "/Users/frederictetard/Projects/ese/corpus_metadata/G_config/config.yaml"
 )
 
 
