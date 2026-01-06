@@ -602,10 +602,10 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         if not self._lexicon_stats:
             return
 
-        total = sum(count for _, count in self._lexicon_stats)
+        total = sum(count for _, count, _ in self._lexicon_stats)
         print(f"Lexicons loaded: {len(self._lexicon_stats)} files, {total:,} terms")
-        for name, count in self._lexicon_stats:
-            print(f"  {name:<30} {count:>7,}")
+        for name, count, filename in self._lexicon_stats:
+            print(f"  {name:<30} {count:>7,}  ({filename})")
 
     def _load_abbrev_lexicon(self, path: Path) -> None:
         if not path.exists():
@@ -636,7 +636,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             except re.error:
                 pass
 
-        self._lexicon_stats.append(("Abbreviations", loaded))
+        self._lexicon_stats.append(("Abbreviations", loaded, path.name))
 
     def _load_disease_lexicon(self, path: Path) -> None:
         if not path.exists():
@@ -750,7 +750,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[acronym] = lexicon_ids
             loaded += 1
 
-        self._lexicon_stats.append(("Rare disease acronyms", loaded))
+        self._lexicon_stats.append(("Rare disease acronyms", loaded, path.name))
 
     def _load_umls_tsv(self, path: Path) -> None:
         if not path.exists():
@@ -782,7 +782,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
         # Extract a short name from filename for display
         name = "UMLS biological" if "biological" in source else "UMLS clinical"
-        self._lexicon_stats.append((name, loaded))
+        self._lexicon_stats.append((name, loaded, path.name))
 
     def _extract_identifiers(self, identifiers: Dict) -> List[Dict[str, str]]:
         """Extract lexicon IDs from an identifiers dict."""
@@ -897,7 +897,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[term] = []  # No IDs for composite terms
             loaded += 1
 
-        self._lexicon_stats.append(("ANCA disease", loaded))
+        self._lexicon_stats.append(("ANCA disease", loaded, path.name))
 
     def _load_igan_lexicon(self, path: Path) -> None:
         if not path.exists():
@@ -998,7 +998,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[term] = []
             loaded += 1
 
-        self._lexicon_stats.append(("IgAN disease", loaded))
+        self._lexicon_stats.append(("IgAN disease", loaded, path.name))
 
     def _load_pah_lexicon(self, path: Path) -> None:
         if not path.exists():
@@ -1099,7 +1099,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             self.entity_ids[term] = []
             loaded += 1
 
-        self._lexicon_stats.append(("PAH disease", loaded))
+        self._lexicon_stats.append(("PAH disease", loaded, path.name))
 
     def _load_trial_acronyms(self, path: Path) -> None:
         """Load clinical trial acronyms lexicon (RADAR, APPEAR-C3G, MAINRITSAN, etc.)."""
@@ -1150,7 +1150,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             except re.error:
                 pass
 
-        self._lexicon_stats.append(("Trial acronyms", loaded))
+        self._lexicon_stats.append(("Trial acronyms", loaded, path.name))
 
     def _load_pro_scales(self, path: Path) -> None:
         """Load PRO scales lexicon (SF-36, PHQ-9, EORTC-QLQ-C30, etc.)."""
@@ -1198,7 +1198,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             except re.error:
                 pass
 
-        self._lexicon_stats.append(("PRO scales", loaded))
+        self._lexicon_stats.append(("PRO scales", loaded, path.name))
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)

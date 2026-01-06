@@ -20,6 +20,9 @@ from __future__ import annotations
 import os
 import warnings
 
+from dotenv import load_dotenv
+load_dotenv()  # Load .env file from current directory or parent
+
 # Suppress at environment level for subprocesses
 os.environ["PYTHONWARNINGS"] = (
     "ignore::UserWarning,ignore::FutureWarning,ignore::DeprecationWarning"
