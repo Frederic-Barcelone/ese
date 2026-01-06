@@ -5,6 +5,7 @@ Table extraction from PDF -> JSON/Table model.
 Uses unstructured's table extraction (hi_res with infer_table_structure=True)
 to populate Table objects in the DocumentGraph.
 """
+
 from __future__ import annotations
 
 import re
@@ -136,7 +137,9 @@ class TableExtractor:
 
         return TableType.DATA_GRID.value
 
-    def populate_document_graph(self, doc: DocumentGraph, file_path: str) -> DocumentGraph:
+    def populate_document_graph(
+        self, doc: DocumentGraph, file_path: str
+    ) -> DocumentGraph:
         """
         Extract tables from PDF and add them to DocumentGraph.
         """
@@ -165,13 +168,15 @@ class TableExtractor:
             all_rows = [headers] + t["rows"]
             for row_idx, row in enumerate(all_rows):
                 for col_idx, cell_text in enumerate(row):
-                    cells.append(TableCell(
-                        text=cell_text,
-                        row_index=row_idx,
-                        col_index=col_idx,
-                        is_header=(row_idx == 0),
-                        bbox=BoundingBox(coords=bbox_coords),
-                    ))
+                    cells.append(
+                        TableCell(
+                            text=cell_text,
+                            row_index=row_idx,
+                            col_index=col_idx,
+                            is_header=(row_idx == 0),
+                            bbox=BoundingBox(coords=bbox_coords),
+                        )
+                    )
 
             # Build metadata
             headers_map = {i: h for i, h in enumerate(headers)}
@@ -202,12 +207,16 @@ class TableExtractor:
             h_lower = h.lower()
             if any(p in h_lower for p in ["abbr", "acronym", "symbol"]):
                 result["sf_col_idx"] = i
-            elif any(p in h_lower for p in ["definition", "meaning", "term", "description"]):
+            elif any(
+                p in h_lower for p in ["definition", "meaning", "term", "description"]
+            ):
                 result["lf_col_idx"] = i
         return result
 
 
-def extract_tables_to_json(file_path: str, config: Optional[dict] = None) -> List[Dict[str, Any]]:
+def extract_tables_to_json(
+    file_path: str, config: Optional[dict] = None
+) -> List[Dict[str, Any]]:
     """
     Convenience function: PDF -> JSON tables.
     """

@@ -10,6 +10,7 @@ CHANGELOG v2.0:
 
 Compatible with Unstructured.io hi_res, fast, auto strategies.
 """
+
 from __future__ import annotations
 
 import os
@@ -36,6 +37,7 @@ from B_parsing.B04_column_ordering import (
 # -----------------------------
 # Text normalization helpers
 # -----------------------------
+
 
 def normalize_repeated_text(text: str) -> str:
     """
@@ -70,6 +72,7 @@ def normalize_abbrev_hyphens(text: str) -> str:
     Convierte 'MG- ADL' -> 'MG-ADL' si ambos lados parecen abreviaturas.
     Evita tocar palabras normales tipo 'long-term' (minúsculas).
     """
+
     def repl(m: re.Match) -> str:
         a = m.group("a")
         b = m.group("b")
@@ -108,24 +111,23 @@ RUNNING_HEADER_RE = re.compile(r"^[A-Z][a-z]+\s+et\s+al\.?$", flags=re.IGNORECAS
 # Numbered reference pattern (e.g., "7. Author A, ..." or "7. DCVAS Study Group, ...")
 NUMBERED_REFERENCE_RE = re.compile(
     r"^\d{1,3}\.\s+[A-Z]",  # Starts with number, period, then capital letter
-    flags=re.MULTILINE
+    flags=re.MULTILINE,
 )
 
 # OCR garbage patterns to remove
 OCR_GARBAGE_PATTERNS = [
-    r"\b\d+\s*[bBpP»«]+\s*$",      # "18194 bP»" -> page number garbage
-    r'[""]\s*[*>]\s*$',             # ""*", ">" at end
-    r"\bfo\)\s*$",                  # "fo)" misread lock icon
-    r"^\s*[+*~>]{2,}\s*$",          # lines of just symbols
-    r"\s+[»«]+\s*$",                # trailing » or «
+    r"\b\d+\s*[bBpP»«]+\s*$",  # "18194 bP»" -> page number garbage
+    r'[""]\s*[*>]\s*$',  # ""*", ">" at end
+    r"\bfo\)\s*$",  # "fo)" misread lock icon
+    r"^\s*[+*~>]{2,}\s*$",  # lines of just symbols
+    r"\s+[»«]+\s*$",  # trailing » or «
 ]
 OCR_GARBAGE_RE = re.compile("|".join(OCR_GARBAGE_PATTERNS))
 
 # Pattern to detect garbled flowchart/diagram content
 # Matches text with numbered steps separated by symbols like + * | ~
 FLOWCHART_PATTERN = re.compile(
-    r"^\d+[a-z]?\.\s+.{10,}\s+[+*|~>-]\s+.{10,}\s+[+*|~>-]\s+",
-    re.IGNORECASE
+    r"^\d+[a-z]?\.\s+.{10,}\s+[+*|~>-]\s+.{10,}\s+[+*|~>-]\s+", re.IGNORECASE
 )
 
 
@@ -142,10 +144,9 @@ def _is_garbled_flowchart(text: str) -> bool:
     word_count = len(text.split())
 
     # Check for numbered step pattern with symbols (e.g., "1. ... + ... | 2. ...")
-    has_numbered_steps = bool(re.search(
-        r"\d+[a-z]?\.\s+[^|+*]+[+*|]\s+.*\d+[a-z]?\.\s+",
-        text
-    ))
+    has_numbered_steps = bool(
+        re.search(r"\d+[a-z]?\.\s+[^|+*]+[+*|]\s+.*\d+[a-z]?\.\s+", text)
+    )
 
     # High symbol-to-word ratio suggests garbled diagram
     if word_count > 0:
@@ -171,7 +172,9 @@ def _extract_figure_reference(text: str) -> Optional[str]:
     return None
 
 
-def _bbox_overlaps(bbox1: BoundingBox, bbox2: BoundingBox, threshold: float = 0.5) -> bool:
+def _bbox_overlaps(
+    bbox1: BoundingBox, bbox2: BoundingBox, threshold: float = 0.5
+) -> bool:
     """Check if two bounding boxes overlap significantly."""
     x1_0, y1_0, x1_1, y1_1 = bbox1.coords
     x2_0, y2_0, x2_1, y2_1 = bbox2.coords
@@ -214,14 +217,16 @@ def document_to_markdown(
         content_items = []
 
         for b in page.blocks:
-            if skip_header_footer and b.role in (ContentRole.PAGE_HEADER, ContentRole.PAGE_FOOTER):
+            if skip_header_footer and b.role in (
+                ContentRole.PAGE_HEADER,
+                ContentRole.PAGE_FOOTER,
+            ):
                 continue
 
             # Skip blocks that overlap with any table region
             if tables:
                 overlaps_table = any(
-                    _bbox_overlaps(b.bbox, t.bbox, threshold=0.3)
-                    for t in tables
+                    _bbox_overlaps(b.bbox, t.bbox, threshold=0.3) for t in tables
                 )
                 if overlaps_table:
                     continue
@@ -245,7 +250,9 @@ def document_to_markdown(
                 if _is_garbled_flowchart(text):
                     fig_ref = _extract_figure_reference(text)
                     if fig_ref:
-                        lines.append(f"[{fig_ref}: Flowchart/Diagram - see PDF for visual]")
+                        lines.append(
+                            f"[{fig_ref}: Flowchart/Diagram - see PDF for visual]"
+                        )
                     else:
                         lines.append("[Flowchart/Diagram - see PDF for visual]")
                     continue
@@ -342,7 +349,7 @@ class PDFToDocGraphParser(BaseParser):
     - include_page_breaks: True (default) - track page boundaries
     - force_fast: False (default) - force fast strategy regardless of config
     - force_hf_offline: False (default) - block HuggingFace model downloads
-    
+
     NEW Config options (SOTA Layout - B04):
     - use_sota_layout: True (default) - use B04 SOTA column ordering
     - document_type: "academic" (default) - preset: "academic", "clinical", "regulatory", "newsletter"
@@ -359,29 +366,43 @@ class PDFToDocGraphParser(BaseParser):
             os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
         # Unstructured knobs - default to hi_res for better extraction
-        self.unstructured_strategy = str(self.config.get("unstructured_strategy", "hi_res")).strip() or "hi_res"
+        self.unstructured_strategy = (
+            str(self.config.get("unstructured_strategy", "hi_res")).strip() or "hi_res"
+        )
         self.force_fast = bool(self.config.get("force_fast", False))
         if self.force_fast:
             self.unstructured_strategy = "fast"
 
         # hi_res specific options
         self.hi_res_model_name = self.config.get("hi_res_model_name", "yolox")
-        self.infer_table_structure = bool(self.config.get("infer_table_structure", True))
-        self.extract_images_in_pdf = bool(self.config.get("extract_images_in_pdf", False))
+        self.infer_table_structure = bool(
+            self.config.get("infer_table_structure", True)
+        )
+        self.extract_images_in_pdf = bool(
+            self.config.get("extract_images_in_pdf", False)
+        )
 
         # OCR and structure options
         self.languages = self.config.get("languages", ["eng"])  # improves OCR accuracy
-        self.include_page_breaks = bool(self.config.get("include_page_breaks", True))  # track page boundaries
+        self.include_page_breaks = bool(
+            self.config.get("include_page_breaks", True)
+        )  # track page boundaries
 
         # categorías a descartar (case-insensitive)
-        self.drop_categories = {c.strip().lower() for c in (self.config.get("drop_categories") or []) if isinstance(c, str)}
+        self.drop_categories = {
+            c.strip().lower()
+            for c in (self.config.get("drop_categories") or [])
+            if isinstance(c, str)
+        }
 
         # Orden / líneas
         self.y_tolerance = float(self.config.get("y_tolerance", 3.0))
 
         # Header/Footer por posición
-        self.header_top_pct = float(self.config.get("header_top_pct", 0.07))        # top 7%
-        self.footer_bottom_pct = float(self.config.get("footer_bottom_pct", 0.90)) # bottom 10%
+        self.header_top_pct = float(self.config.get("header_top_pct", 0.07))  # top 7%
+        self.footer_bottom_pct = float(
+            self.config.get("footer_bottom_pct", 0.90)
+        )  # bottom 10%
 
         # Header/Footer por repetición
         self.min_repeat_count = int(self.config.get("min_repeat_count", 3))
@@ -389,13 +410,15 @@ class PDFToDocGraphParser(BaseParser):
         self.repeat_zone_majority = float(self.config.get("repeat_zone_majority", 0.60))
 
         # Legacy 2 columnas (used as fallback)
-        self.two_col_min_side_blocks = int(self.config.get("two_col_min_side_blocks", 6))
+        self.two_col_min_side_blocks = int(
+            self.config.get("two_col_min_side_blocks", 6)
+        )
 
         # =============================================
         # SOTA Column Ordering (B04) - NEW
         # =============================================
         self.use_sota_layout = bool(self.config.get("use_sota_layout", True))
-        
+
         # Layout configuration - can be:
         # - None (use document_type preset)
         # - A LayoutConfig instance
@@ -410,7 +433,7 @@ class PDFToDocGraphParser(BaseParser):
             self.layout_config = layout_cfg
         else:
             self.layout_config = LayoutConfig()
-        
+
         # Store layout info per page (for debugging/export)
         self._page_layouts: Dict[int, Dict[str, Any]] = {}
 
@@ -436,7 +459,9 @@ class PDFToDocGraphParser(BaseParser):
             cat_norm = (cat or "").strip().lower() if isinstance(cat, str) else ""
             cls_norm = el.__class__.__name__.strip().lower()
 
-            if self.drop_categories and (cat_norm in self.drop_categories or cls_norm in self.drop_categories):
+            if self.drop_categories and (
+                cat_norm in self.drop_categories or cls_norm in self.drop_categories
+            ):
                 continue
 
             page_num = self._get_element_page_num(el)
@@ -496,23 +521,18 @@ class PDFToDocGraphParser(BaseParser):
             if self.use_sota_layout:
                 # Get layout info for debugging/export
                 self._page_layouts[page_num] = get_layout_info(
-                    raw_pages[page_num],
-                    page_w,
-                    page_h,
-                    self.layout_config
+                    raw_pages[page_num], page_w, page_h, self.layout_config
                 )
-                
+
                 # Apply SOTA ordering
                 ordered = order_page_blocks(
-                    raw_pages[page_num],
-                    page_w,
-                    page_h,
-                    self.layout_config,
-                    page_num
+                    raw_pages[page_num], page_w, page_h, self.layout_config, page_num
                 )
             else:
                 # Fallback to legacy ordering
-                ordered = self._order_blocks_deterministically(raw_pages[page_num], page_w=page_w)
+                ordered = self._order_blocks_deterministically(
+                    raw_pages[page_num], page_w=page_w
+                )
 
             blocks: List[TextBlock] = []
             for idx, rb in enumerate(ordered):
@@ -534,10 +554,18 @@ class PDFToDocGraphParser(BaseParser):
                     role = ContentRole.PAGE_HEADER
                 elif rb.get("zone") == "HEADER" and norm in repeated_headers:
                     role = ContentRole.PAGE_HEADER
-                elif rb.get("zone") == "FOOTER" and norm in repeated_footers and not is_reference:
+                elif (
+                    rb.get("zone") == "FOOTER"
+                    and norm in repeated_footers
+                    and not is_reference
+                ):
                     role = ContentRole.PAGE_FOOTER
                 # fallback repetition even if zone couldn't be trusted
-                elif norm in repeated_footers and self._is_short_repeated_noise(txt) and not is_reference:
+                elif (
+                    norm in repeated_footers
+                    and self._is_short_repeated_noise(txt)
+                    and not is_reference
+                ):
                     role = ContentRole.PAGE_FOOTER
                 elif rb.get("is_section_header"):
                     role = ContentRole.SECTION_HEADER
@@ -660,7 +688,9 @@ class PDFToDocGraphParser(BaseParser):
         if RUNNING_HEADER_RE.match(t):
             return True
         # Also catch in header zone with page numbers like "Liao et al 18194"
-        if zone == "HEADER" and re.match(r"^[A-Z][a-z]+\s+et\s+al\.?\s*\d*$", t, re.IGNORECASE):
+        if zone == "HEADER" and re.match(
+            r"^[A-Z][a-z]+\s+et\s+al\.?\s*\d*$", t, re.IGNORECASE
+        ):
             return True
         return False
 
@@ -712,7 +742,11 @@ class PDFToDocGraphParser(BaseParser):
                 scale_x, scale_y = 1.0, 1.0
                 if coords_meta is not None and hasattr(coords_meta, "system"):
                     system = getattr(coords_meta, "system", None)
-                    if system is not None and hasattr(system, "width") and hasattr(system, "height"):
+                    if (
+                        system is not None
+                        and hasattr(system, "width")
+                        and hasattr(system, "height")
+                    ):
                         pixel_w = getattr(system, "width", 0)
                         pixel_h = getattr(system, "height", 0)
                         if pixel_w > 0 and pixel_h > 0:
@@ -846,7 +880,9 @@ class PDFToDocGraphParser(BaseParser):
     # Legacy Ordering (fallback)
     # -----------------------
 
-    def _is_two_column_page(self, raw_blocks: List[Dict[str, Any]], page_w: float) -> bool:
+    def _is_two_column_page(
+        self, raw_blocks: List[Dict[str, Any]], page_w: float
+    ) -> bool:
         """Legacy two-column detection. Used when use_sota_layout=False."""
         if not raw_blocks or page_w <= 0:
             return False
@@ -862,7 +898,11 @@ class PDFToDocGraphParser(BaseParser):
         mid = sum(1 for x in xs if page_w * 0.45 <= x <= page_w * 0.55)
 
         min_side = self.two_col_min_side_blocks
-        return (left >= min_side and right >= min_side and mid <= max(2, int(0.08 * len(xs))))
+        return (
+            left >= min_side
+            and right >= min_side
+            and mid <= max(2, int(0.08 * len(xs)))
+        )
 
     def _order_single_column(self, items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Legacy single-column ordering. Used when use_sota_layout=False."""
@@ -892,10 +932,12 @@ class PDFToDocGraphParser(BaseParser):
 
         return ordered
 
-    def _order_blocks_deterministically(self, raw_blocks: List[Dict[str, Any]], page_w: float) -> List[Dict[str, Any]]:
+    def _order_blocks_deterministically(
+        self, raw_blocks: List[Dict[str, Any]], page_w: float
+    ) -> List[Dict[str, Any]]:
         """
         Legacy block ordering. Used when use_sota_layout=False.
-        
+
         NOTE: This method has a known issue with two-column layouts:
         it reads ALL left column blocks, then ALL right column blocks,
         instead of interleaving by Y-bands. Use SOTA layout (B04) for
@@ -914,7 +956,7 @@ class PDFToDocGraphParser(BaseParser):
 
         for rb in raw_blocks:
             x0, _, x1, _ = rb["bbox"].coords
-            width = (x1 - x0)
+            width = x1 - x0
 
             if page_w > 0 and width >= page_w * 0.75:
                 full_width.append(rb)
@@ -937,25 +979,81 @@ class PDFToDocGraphParser(BaseParser):
     # -----------------------
 
     _KEEP_HYPHEN_PREFIXES = {
-        "anti", "non", "pre", "post", "co", "multi", "bi", "tri",
-        "long", "short", "open", "double", "single", "high", "low",
-        "well", "self", "cross", "small", "medium", "large",
+        "anti",
+        "non",
+        "pre",
+        "post",
+        "co",
+        "multi",
+        "bi",
+        "tri",
+        "long",
+        "short",
+        "open",
+        "double",
+        "single",
+        "high",
+        "low",
+        "well",
+        "self",
+        "cross",
+        "small",
+        "medium",
+        "large",
     }
     _COMMON_SUFFIX_FRAGS = {
-        "ment", "tion", "tions", "sion", "sions", "tive", "tives",
-        "ness", "less", "able", "ible", "ated", "ation", "ations",
-        "ing", "ed", "ive", "ous", "ally", "ity", "ies", "es", "ly",
-        "bulin", "blast", "cytes", "rhage", "lines", "tology",  # medical suffixes
-        "alities", "ressive", "pressive", "globulin",
-        "itis", "osis", "emia", "pathy", "plasty",  # more medical suffixes
+        "ment",
+        "tion",
+        "tions",
+        "sion",
+        "sions",
+        "tive",
+        "tives",
+        "ness",
+        "less",
+        "able",
+        "ible",
+        "ated",
+        "ation",
+        "ations",
+        "ing",
+        "ed",
+        "ive",
+        "ous",
+        "ally",
+        "ity",
+        "ies",
+        "es",
+        "ly",
+        "bulin",
+        "blast",
+        "cytes",
+        "rhage",
+        "lines",
+        "tology",  # medical suffixes
+        "alities",
+        "ressive",
+        "pressive",
+        "globulin",
+        "itis",
+        "osis",
+        "emia",
+        "pathy",
+        "plasty",  # more medical suffixes
     }
     # Common hyphenated compound words to preserve
     _KEEP_HYPHENATED = {
-        "anca-associated", "medium-sized", "end-stage",
+        "anca-associated",
+        "medium-sized",
+        "end-stage",
     }
     # Patterns that need space preserved: "small- and" not "small-and"
     _HYPHEN_SPACE_PRESERVE = {
-        "small", "medium", "large", "short", "long",
+        "small",
+        "medium",
+        "large",
+        "short",
+        "long",
     }
 
     def _clean_text(self, text: str) -> str:

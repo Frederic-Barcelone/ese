@@ -21,7 +21,7 @@ from A_core.A01_domain_models import (
 class ValidationLogger:
     """
     Logs validation results to corpus_log directory.
-    
+
     Creates one log file per run with all validation results.
     """
 
@@ -85,11 +85,15 @@ class ValidationLogger:
                 "status": entity.status.value,
                 "confidence_score": entity.confidence_score,
                 "rejection_reason": entity.rejection_reason,
-                "corrected_long_form": entity.long_form if entity.long_form != candidate.long_form else None,
+                "corrected_long_form": entity.long_form
+                if entity.long_form != candidate.long_form
+                else None,
                 "validation_flags": entity.validation_flags,
             },
             "context_snippet": (candidate.context_text or "")[:300],
-            "page_num": candidate.context_location.page_num if candidate.context_location else None,
+            "page_num": candidate.context_location.page_num
+            if candidate.context_location
+            else None,
             "llm_response": llm_response,
             "elapsed_ms": elapsed_ms,
         }
@@ -98,7 +102,9 @@ class ValidationLogger:
 
         # Write to file (append mode) with pretty formatting
         with open(self.log_file, "a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False, default=str, indent=2) + "\n")
+            f.write(
+                json.dumps(record, ensure_ascii=False, default=str, indent=2) + "\n"
+            )
             f.write("---\n")  # Visual separator between records
 
     def log_error(
@@ -125,7 +131,9 @@ class ValidationLogger:
         }
 
         with open(self.log_file, "a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False, default=str, indent=2) + "\n")
+            f.write(
+                json.dumps(record, ensure_ascii=False, default=str, indent=2) + "\n"
+            )
             f.write("---\n")  # Visual separator between records
 
     def write_summary(self) -> Path:
@@ -162,13 +170,25 @@ class ValidationLogger:
         Print summary to console.
         """
         total = self.stats["total"]
-        print(f"\n{'='*50}")
+        print(f"\n{'=' * 50}")
         print(f"VALIDATION SUMMARY - {self.run_id}")
-        print(f"{'='*50}")
+        print(f"{'=' * 50}")
         print(f"Total candidates:  {total}")
-        print(f"  [OK] Validated:     {self.stats['validated']} ({self.stats['validated']/total*100:.1f}%)" if total else "  [OK] Validated:     0")
-        print(f"  [X] Rejected:      {self.stats['rejected']} ({self.stats['rejected']/total*100:.1f}%)" if total else "  [X] Rejected:      0")
-        print(f"  ? Ambiguous:     {self.stats['ambiguous']} ({self.stats['ambiguous']/total*100:.1f}%)" if total else "  ? Ambiguous:     0")
+        print(
+            f"  [OK] Validated:     {self.stats['validated']} ({self.stats['validated'] / total * 100:.1f}%)"
+            if total
+            else "  [OK] Validated:     0"
+        )
+        print(
+            f"  [X] Rejected:      {self.stats['rejected']} ({self.stats['rejected'] / total * 100:.1f}%)"
+            if total
+            else "  [X] Rejected:      0"
+        )
+        print(
+            f"  ? Ambiguous:     {self.stats['ambiguous']} ({self.stats['ambiguous'] / total * 100:.1f}%)"
+            if total
+            else "  ? Ambiguous:     0"
+        )
         print(f"  [WARN] Errors:        {self.stats['errors']}")
         print(f"\nLog file: {self.log_file}")
-        print(f"{'='*50}\n")
+        print(f"{'=' * 50}\n")

@@ -13,6 +13,7 @@ Strategies:
 Analogy: A mail carrier. Doesn't read the letters, just looks at
 the address on the envelope to know where to deliver.
 """
+
 from __future__ import annotations
 
 import re
@@ -56,6 +57,7 @@ def _center_y(bbox) -> float:
 
 class PageZone(str, Enum):
     """Predefined page zones for spatial extraction."""
+
     TOP_LEFT = "top_left"
     TOP_CENTER = "top_center"
     TOP_RIGHT = "top_right"
@@ -69,6 +71,7 @@ class PageZone(str, Enum):
 @dataclass
 class LabelPattern:
     """Definition of a label-value extraction pattern."""
+
     name: str
     label_regex: re.Pattern
     entity_type: str
@@ -79,55 +82,55 @@ class LabelPattern:
 LABEL_PATTERNS: List[LabelPattern] = [
     LabelPattern(
         name="protocol_id",
-        label_regex=re.compile(r'Protocol\s*(?:ID|No\.?|Number)?[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"Protocol\s*(?:ID|No\.?|Number)?[:\s]*", re.IGNORECASE),
         entity_type="PROTOCOL_ID",
         confidence=0.95,
     ),
     LabelPattern(
         name="study_id",
-        label_regex=re.compile(r'Study\s*(?:ID|No\.?|Number)?[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"Study\s*(?:ID|No\.?|Number)?[:\s]*", re.IGNORECASE),
         entity_type="STUDY_ID",
         confidence=0.95,
     ),
     LabelPattern(
         name="sponsor",
-        label_regex=re.compile(r'Sponsor[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"Sponsor[:\s]*", re.IGNORECASE),
         entity_type="SPONSOR",
         confidence=0.90,
     ),
     LabelPattern(
         name="investigator",
-        label_regex=re.compile(r'(?:Principal\s+)?Investigator[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"(?:Principal\s+)?Investigator[:\s]*", re.IGNORECASE),
         entity_type="INVESTIGATOR",
         confidence=0.90,
     ),
     LabelPattern(
         name="version",
-        label_regex=re.compile(r'(?:Document\s+)?Version[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"(?:Document\s+)?Version[:\s]*", re.IGNORECASE),
         entity_type="VERSION",
         confidence=0.85,
     ),
     LabelPattern(
         name="date",
-        label_regex=re.compile(r'(?:Effective\s+)?Date[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"(?:Effective\s+)?Date[:\s]*", re.IGNORECASE),
         entity_type="DATE",
         confidence=0.85,
     ),
     LabelPattern(
         name="indication",
-        label_regex=re.compile(r'Indication[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"Indication[:\s]*", re.IGNORECASE),
         entity_type="INDICATION",
         confidence=0.90,
     ),
     LabelPattern(
         name="drug_name",
-        label_regex=re.compile(r'(?:Study\s+)?Drug[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"(?:Study\s+)?Drug[:\s]*", re.IGNORECASE),
         entity_type="DRUG_NAME",
         confidence=0.90,
     ),
     LabelPattern(
         name="phase",
-        label_regex=re.compile(r'Phase[:\s]*', re.IGNORECASE),
+        label_regex=re.compile(r"Phase[:\s]*", re.IGNORECASE),
         entity_type="PHASE",
         confidence=0.90,
     ),
@@ -151,16 +154,24 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         self.zone_margin = float(self.config.get("zone_margin", 0.15))  # 15% from edges
 
         # Label-value extraction
-        self.max_value_distance = float(self.config.get("max_value_distance", 200))  # pixels
+        self.max_value_distance = float(
+            self.config.get("max_value_distance", 200)
+        )  # pixels
         self.max_value_length = int(self.config.get("max_value_length", 100))
 
         # Glossary section keywords
         self.glossary_headers = {
             s.strip().lower()
-            for s in self.config.get("glossary_headers", [
-                "list of abbreviations", "abbreviations", "glossary",
-                "definition of terms", "acronyms"
-            ])
+            for s in self.config.get(
+                "glossary_headers",
+                [
+                    "list of abbreviations",
+                    "abbreviations",
+                    "glossary",
+                    "definition of terms",
+                    "acronyms",
+                ],
+            )
         }
 
         # Column alignment tolerance
@@ -171,9 +182,13 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         self.dedupe = bool(self.config.get("dedupe", True))
 
         # Provenance
-        self.pipeline_version = str(self.config.get("pipeline_version") or get_git_revision_hash())
+        self.pipeline_version = str(
+            self.config.get("pipeline_version") or get_git_revision_hash()
+        )
         self.run_id = str(self.config.get("run_id") or generate_run_id("LAYOUT"))
-        self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
+        self.doc_fingerprint_default = str(
+            self.config.get("doc_fingerprint") or "unknown-doc-fingerprint"
+        )
 
     @property
     def generator_type(self) -> GeneratorType:
@@ -203,7 +218,9 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
     # Strategy 1: Label-Value Extraction
     # -------------------------------------------------------------------------
 
-    def _extract_label_values(self, doc: DocumentGraph, seen: Set[str]) -> List[Candidate]:
+    def _extract_label_values(
+        self, doc: DocumentGraph, seen: Set[str]
+    ) -> List[Candidate]:
         """Extract values that follow known label patterns."""
         candidates = []
 
@@ -222,7 +239,7 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
                 remaining = text[value_start:].strip()
 
                 # Take first line or up to max length
-                value = remaining.split('\n')[0][:self.max_value_length].strip()
+                value = remaining.split("\n")[0][: self.max_value_length].strip()
 
                 # STRICT VALIDATION to prevent hallucinations
                 if not self._is_valid_extracted_value(value, pattern.entity_type):
@@ -234,15 +251,17 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
                     continue
                 seen.add(key)
 
-                candidates.append(self._make_candidate(
-                    doc=doc,
-                    block=block,
-                    value=value,
-                    entity_type=pattern.entity_type,
-                    rule_name=f"label_value::{pattern.name}",
-                    confidence=pattern.confidence,
-                    context=text[:200],
-                ))
+                candidates.append(
+                    self._make_candidate(
+                        doc=doc,
+                        block=block,
+                        value=value,
+                        entity_type=pattern.entity_type,
+                        rule_name=f"label_value::{pattern.name}",
+                        confidence=pattern.confidence,
+                        context=text[:200],
+                    )
+                )
 
         return candidates
 
@@ -269,18 +288,46 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
 
         # Reject common sentence starters
         sentence_starters = [
-            "the ", "a ", "an ", "this ", "that ", "these ", "those ",
-            "it ", "we ", "they ", "he ", "she ", "was ", "were ", "is ",
-            "are ", "has ", "have ", "had ", "will ", "would ", "could ",
-            "should ", "may ", "might ", "must ", "can ", "documented ",
-            "reported ", "showed ", "demonstrated ", "indicated ", "found ",
+            "the ",
+            "a ",
+            "an ",
+            "this ",
+            "that ",
+            "these ",
+            "those ",
+            "it ",
+            "we ",
+            "they ",
+            "he ",
+            "she ",
+            "was ",
+            "were ",
+            "is ",
+            "are ",
+            "has ",
+            "have ",
+            "had ",
+            "will ",
+            "would ",
+            "could ",
+            "should ",
+            "may ",
+            "might ",
+            "must ",
+            "can ",
+            "documented ",
+            "reported ",
+            "showed ",
+            "demonstrated ",
+            "indicated ",
+            "found ",
         ]
         value_lower = value.lower()
         if any(value_lower.startswith(s) for s in sentence_starters):
             return False
 
         # Reject if contains too much punctuation (likely prose)
-        punct_count = sum(1 for c in value if c in '.,;:!?')
+        punct_count = sum(1 for c in value if c in ".,;:!?")
         if punct_count > 2:
             return False
 
@@ -288,7 +335,8 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         if entity_type in ["PROTOCOL_ID", "STUDY_ID"]:
             # Should contain alphanumeric pattern
             import re
-            if not re.search(r'[A-Z]{2,}[-_]?\d+|^\d{4,}', value):
+
+            if not re.search(r"[A-Z]{2,}[-_]?\d+|^\d{4,}", value):
                 # Doesn't look like an ID pattern
                 if word_count > 3:
                     return False
@@ -299,7 +347,9 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
     # Strategy 2: Zone Extraction
     # -------------------------------------------------------------------------
 
-    def _extract_from_zones(self, doc: DocumentGraph, seen: Set[str]) -> List[Candidate]:
+    def _extract_from_zones(
+        self, doc: DocumentGraph, seen: Set[str]
+    ) -> List[Candidate]:
         """Extract data from specific page zones (first page only for now)."""
         candidates = []
 
@@ -334,15 +384,17 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
                     key = f"ZONE_TOP_RIGHT:{text}"
                     if key not in seen:
                         seen.add(key)
-                        candidates.append(self._make_candidate(
-                            doc=doc,
-                            block=block,
-                            value=text,
-                            entity_type="HEADER_INFO",
-                            rule_name="zone::top_right",
-                            confidence=0.75,
-                            context=text,
-                        ))
+                        candidates.append(
+                            self._make_candidate(
+                                doc=doc,
+                                block=block,
+                                value=text,
+                                entity_type="HEADER_INFO",
+                                rule_name="zone::top_right",
+                                confidence=0.75,
+                                context=text,
+                            )
+                        )
 
         return candidates
 
@@ -350,7 +402,9 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
     # Strategy 3: Glossary Tables
     # -------------------------------------------------------------------------
 
-    def _extract_glossary_tables(self, doc: DocumentGraph, seen: Set[str]) -> List[Candidate]:
+    def _extract_glossary_tables(
+        self, doc: DocumentGraph, seen: Set[str]
+    ) -> List[Candidate]:
         """Extract from structured glossary tables."""
         candidates = []
 
@@ -385,17 +439,19 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
                     rule_version="layout::glossary_table",
                 )
 
-                candidates.append(Candidate(
-                    doc_id=doc.doc_id,
-                    field_type=FieldType.GLOSSARY_ENTRY,
-                    generator_type=GeneratorType.GLOSSARY_TABLE,
-                    short_form=sf_clean,
-                    long_form=lf_clean,
-                    context_text=table.to_markdown(max_rows=20),
-                    context_location=loc,
-                    initial_confidence=0.97,
-                    provenance=prov,
-                ))
+                candidates.append(
+                    Candidate(
+                        doc_id=doc.doc_id,
+                        field_type=FieldType.GLOSSARY_ENTRY,
+                        generator_type=GeneratorType.GLOSSARY_TABLE,
+                        short_form=sf_clean,
+                        long_form=lf_clean,
+                        context_text=table.to_markdown(max_rows=20),
+                        context_location=loc,
+                        initial_confidence=0.97,
+                        provenance=prov,
+                    )
+                )
 
         return candidates
 
@@ -403,7 +459,9 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
     # Strategy 4: Two-Column Alignment
     # -------------------------------------------------------------------------
 
-    def _extract_column_pairs(self, doc: DocumentGraph, seen: Set[str]) -> List[Candidate]:
+    def _extract_column_pairs(
+        self, doc: DocumentGraph, seen: Set[str]
+    ) -> List[Candidate]:
         """Extract SF-LF pairs from two-column layouts in glossary sections."""
         candidates = []
 
@@ -414,7 +472,9 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
             if not self._is_glossary_section(page.blocks):
                 continue
 
-            body_blocks = [b for b in page.blocks if b.role == ContentRole.BODY_TEXT and b.bbox]
+            body_blocks = [
+                b for b in page.blocks if b.role == ContentRole.BODY_TEXT and b.bbox
+            ]
             if len(body_blocks) < 4:
                 continue
 
@@ -450,17 +510,19 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
                     rule_version="layout::column_alignment",
                 )
 
-                candidates.append(Candidate(
-                    doc_id=doc.doc_id,
-                    field_type=FieldType.GLOSSARY_ENTRY,
-                    generator_type=GeneratorType.TABLE_LAYOUT,
-                    short_form=sf_clean,
-                    long_form=lf_clean,
-                    context_text=f"{sf_clean}: {lf_clean}",
-                    context_location=loc,
-                    initial_confidence=0.88,
-                    provenance=prov,
-                ))
+                candidates.append(
+                    Candidate(
+                        doc_id=doc.doc_id,
+                        field_type=FieldType.GLOSSARY_ENTRY,
+                        generator_type=GeneratorType.TABLE_LAYOUT,
+                        short_form=sf_clean,
+                        long_form=lf_clean,
+                        context_text=f"{sf_clean}: {lf_clean}",
+                        context_location=loc,
+                        initial_confidence=0.88,
+                        provenance=prov,
+                    )
+                )
 
         return candidates
 
@@ -474,7 +536,9 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
                 return True
         return False
 
-    def _find_column_pairs(self, blocks: List[TextBlock]) -> List[Tuple[TextBlock, TextBlock]]:
+    def _find_column_pairs(
+        self, blocks: List[TextBlock]
+    ) -> List[Tuple[TextBlock, TextBlock]]:
         """Find left-right pairs based on column alignment."""
         if not blocks:
             return []
@@ -500,7 +564,7 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         for lb in left:
             lcy = _center_y(lb.bbox)
             best_idx = -1
-            best_dist = float('inf')
+            best_dist = float("inf")
 
             for i, rb in enumerate(right):
                 if i in used:

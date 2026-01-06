@@ -15,6 +15,7 @@ try:
     import spacy
     from scispacy.abbreviation import AbbreviationDetector  # noqa: F401
     from scispacy.linking import EntityLinker  # noqa: F401
+
     SCISPACY_AVAILABLE = True
 except ImportError:
     spacy = None  # type: ignore
@@ -31,25 +32,114 @@ from A_core.A02_interfaces import BaseCandidateGenerator
 # Obvious non-abbreviations: single letters, basic English function words
 OBVIOUS_NOISE: set = {
     # Single letters (never valid abbreviations alone)
-    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-    "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
     # Basic English function words (articles, prepositions, conjunctions)
     # NOTE: "or" and "us" removed - they can be valid abbreviations (Odds Ratio, United States)
-    "an", "as", "at", "be", "by", "do", "go", "he", "if", "in", "is",
-    "it", "me", "my", "no", "of", "on", "so", "to", "up", "we",
-    "the", "and", "for", "but", "not", "are", "was", "were", "been",
-    "have", "has", "had", "will", "would", "could", "should",
-    "this", "that", "these", "those", "with", "from", "into",
+    "an",
+    "as",
+    "at",
+    "be",
+    "by",
+    "do",
+    "go",
+    "he",
+    "if",
+    "in",
+    "is",
+    "it",
+    "me",
+    "my",
+    "no",
+    "of",
+    "on",
+    "so",
+    "to",
+    "up",
+    "we",
+    "the",
+    "and",
+    "for",
+    "but",
+    "not",
+    "are",
+    "was",
+    "were",
+    "been",
+    "have",
+    "has",
+    "had",
+    "will",
+    "would",
+    "could",
+    "should",
+    "this",
+    "that",
+    "these",
+    "those",
+    "with",
+    "from",
+    "into",
     # Citation artifacts
-    "et", "al",
+    "et",
+    "al",
     # Measurement units (not abbreviations, just units)
-    "dl", "ml", "mg", "kg", "mm", "cm", "hz", "khz", "mhz",
-    "mmhg", "kpa", "mol", "mmol", "umol", "nmol",
+    "dl",
+    "ml",
+    "mg",
+    "kg",
+    "mm",
+    "cm",
+    "hz",
+    "khz",
+    "mhz",
+    "mmhg",
+    "kpa",
+    "mol",
+    "mmol",
+    "umol",
+    "nmol",
     # Full English words mistakenly in lexicons (NOT abbreviations)
-    "investigator", "investigators", "sponsor", "protocol", "study",
-    "patient", "patients", "subject", "subjects", "article", "articles",
+    "investigator",
+    "investigators",
+    "sponsor",
+    "protocol",
+    "study",
+    "patient",
+    "patients",
+    "subject",
+    "subjects",
+    "article",
+    "articles",
     # Geographic (context-dependent, high FP rate in pharma docs)
-    "nj", "ny", "ca", "tx",  # US states - usually location, not abbreviation
+    "nj",
+    "ny",
+    "ca",
+    "tx",  # US states - usually location, not abbreviation
 }
 
 # Minimum length (allow 2-char if uppercase like CT, MR, IV)
@@ -68,6 +158,7 @@ from B_parsing.B02_doc_graph import DocumentGraph
 
 class LexiconEntry:
     """Compiled lexicon entry with regex pattern and source provenance."""
+
     __slots__ = ("sf", "lf", "pattern", "source", "lexicon_ids", "preserve_case")
 
     def __init__(
@@ -98,50 +189,72 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self.config = config or {}
 
         # Lexicon paths
-        self.abbrev_lexicon_path = Path(self.config.get(
-            "abbrev_lexicon_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_abbreviation_general.json"
-        ))
-        self.disease_lexicon_path = Path(self.config.get(
-            "disease_lexicon_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_lexicon_disease.json"
-        ))
-        self.orphanet_lexicon_path = Path(self.config.get(
-            "orphanet_lexicon_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_orphanet_diseases.json"
-        ))
-        self.rare_disease_acronyms_path = Path(self.config.get(
-            "rare_disease_acronyms_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_rare_disease_acronyms.json"
-        ))
-        self.umls_abbrev_path = Path(self.config.get(
-            "umls_abbrev_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_umls_biological_abbreviations_v5.tsv"
-        ))
-        self.umls_clinical_path = Path(self.config.get(
-            "umls_clinical_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_umls_clinical_abbreviations_v5.tsv"
-        ))
-        self.anca_lexicon_path = Path(self.config.get(
-            "anca_lexicon_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_anca.json"
-        ))
-        self.igan_lexicon_path = Path(self.config.get(
-            "igan_lexicon_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_igan.json"
-        ))
-        self.pah_lexicon_path = Path(self.config.get(
-            "pah_lexicon_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_pah.json"
-        ))
-        self.trial_acronyms_path = Path(self.config.get(
-            "trial_acronyms_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/trial_acronyms_lexicon.json"
-        ))
-        self.pro_scales_path = Path(self.config.get(
-            "pro_scales_path",
-            "/Users/frederictetard/Projects/ese/ouput_datasources/pro_scales_lexicon.json"
-        ))
+        self.abbrev_lexicon_path = Path(
+            self.config.get(
+                "abbrev_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_abbreviation_general.json",
+            )
+        )
+        self.disease_lexicon_path = Path(
+            self.config.get(
+                "disease_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_lexicon_disease.json",
+            )
+        )
+        self.orphanet_lexicon_path = Path(
+            self.config.get(
+                "orphanet_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_orphanet_diseases.json",
+            )
+        )
+        self.rare_disease_acronyms_path = Path(
+            self.config.get(
+                "rare_disease_acronyms_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_rare_disease_acronyms.json",
+            )
+        )
+        self.umls_abbrev_path = Path(
+            self.config.get(
+                "umls_abbrev_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_umls_biological_abbreviations_v5.tsv",
+            )
+        )
+        self.umls_clinical_path = Path(
+            self.config.get(
+                "umls_clinical_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_umls_clinical_abbreviations_v5.tsv",
+            )
+        )
+        self.anca_lexicon_path = Path(
+            self.config.get(
+                "anca_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_anca.json",
+            )
+        )
+        self.igan_lexicon_path = Path(
+            self.config.get(
+                "igan_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_igan.json",
+            )
+        )
+        self.pah_lexicon_path = Path(
+            self.config.get(
+                "pah_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/disease_lexicon_pah.json",
+            )
+        )
+        self.trial_acronyms_path = Path(
+            self.config.get(
+                "trial_acronyms_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/trial_acronyms_lexicon.json",
+            )
+        )
+        self.pro_scales_path = Path(
+            self.config.get(
+                "pro_scales_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/pro_scales_lexicon.json",
+            )
+        )
 
         self.context_window = int(self.config.get("context_window", 300))
 
@@ -151,13 +264,19 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         # Disease/entity entries (FlashText-based)
         self.entity_kp = KeywordProcessor(case_sensitive=False)
         self.entity_canonical: Dict[str, str] = {}  # matched_term -> canonical_name
-        self.entity_source: Dict[str, str] = {}     # matched_term -> source file
-        self.entity_ids: Dict[str, List[Dict[str, str]]] = {}  # matched_term -> [{source, id}, ...]
+        self.entity_source: Dict[str, str] = {}  # matched_term -> source file
+        self.entity_ids: Dict[
+            str, List[Dict[str, str]]
+        ] = {}  # matched_term -> [{source, id}, ...]
 
         # Provenance
-        self.pipeline_version = str(self.config.get("pipeline_version") or get_git_revision_hash())
+        self.pipeline_version = str(
+            self.config.get("pipeline_version") or get_git_revision_hash()
+        )
         self.run_id = str(self.config.get("run_id") or generate_run_id("ABBR"))
-        self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
+        self.doc_fingerprint_default = str(
+            self.config.get("doc_fingerprint") or "unknown-doc-fingerprint"
+        )
 
         # Lexicon loading stats (for summary output)
         self._lexicon_stats: List[tuple] = []
@@ -200,12 +319,16 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 try:
                     self.scispacy_nlp.add_pipe(
                         "scispacy_linker",
-                        config={"resolve_abbreviations": True, "linker_name": "umls"}
+                        config={"resolve_abbreviations": True, "linker_name": "umls"},
                     )
                     self.umls_linker = self.scispacy_nlp.get_pipe("scispacy_linker")
-                    print(f"Loaded scispacy {model_name} with abbreviation detector + UMLS linker")
+                    print(
+                        f"Loaded scispacy {model_name} with abbreviation detector + UMLS linker"
+                    )
                 except Exception as e:
-                    print(f"Loaded scispacy {model_name} with abbreviation detector (no UMLS linker: {e})")
+                    print(
+                        f"Loaded scispacy {model_name} with abbreviation detector (no UMLS linker: {e})"
+                    )
             except OSError as e:
                 print(f"Warning: Could not load scispacy model: {e}")
 
@@ -252,18 +375,20 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                             for d in entry.lexicon_ids
                         ]
 
-                    out.append(self._make_candidate(
-                        doc=doc,
-                        block=block,
-                        short_form=sf_to_use,  # Use matched text with original case
-                        long_form=entry.lf,
-                        start=start,
-                        end=end,
-                        text=text,
-                        rule_version="abbrev_regex::v1",
-                        lexicon_source=entry.source,
-                        lexicon_ids=lex_ids,
-                    ))
+                    out.append(
+                        self._make_candidate(
+                            doc=doc,
+                            block=block,
+                            short_form=sf_to_use,  # Use matched text with original case
+                            long_form=entry.lf,
+                            start=start,
+                            end=end,
+                            text=text,
+                            rule_version="abbrev_regex::v1",
+                            lexicon_source=entry.source,
+                            lexicon_ids=lex_ids,
+                        )
+                    )
 
             # 2) Entity matches (FlashText - diseases, orphanet terms)
             entity_hits = self.entity_kp.extract_keywords(text, span_info=True)
@@ -289,18 +414,20 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                         for d in raw_ids
                     ]
 
-                out.append(self._make_candidate(
-                    doc=doc,
-                    block=block,
-                    short_form=matched_term,
-                    long_form=canonical,
-                    start=start,
-                    end=end,
-                    text=text,
-                    rule_version="entity_exact::v1",
-                    lexicon_source=source,
-                    lexicon_ids=entity_lex_ids,
-                ))
+                out.append(
+                    self._make_candidate(
+                        doc=doc,
+                        block=block,
+                        short_form=matched_term,
+                        long_form=canonical,
+                        start=start,
+                        end=end,
+                        text=text,
+                        rule_version="entity_exact::v1",
+                        lexicon_source=source,
+                        lexicon_ids=entity_lex_ids,
+                    )
+                )
 
             # 3) scispacy NER + abbreviation detection + UMLS linking
             if self.scispacy_nlp is not None:
@@ -322,18 +449,20 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                             continue
                         seen.add(key)
 
-                        out.append(self._make_candidate(
-                            doc=doc,
-                            block=block,
-                            short_form=sf,
-                            long_form=lf,
-                            start=abrv.start_char,
-                            end=abrv.end_char,
-                            text=text,
-                            rule_version="scispacy_abbrev::v1",
-                            lexicon_source="scispacy",
-                            lexicon_ids=None,
-                        ))
+                        out.append(
+                            self._make_candidate(
+                                doc=doc,
+                                block=block,
+                                short_form=sf,
+                                long_form=lf,
+                                start=abrv.start_char,
+                                end=abrv.end_char,
+                                text=text,
+                                rule_version="scispacy_abbrev::v1",
+                                lexicon_source="scispacy",
+                                lexicon_ids=None,
+                            )
+                        )
 
                     # Extract NER entities with UMLS linking
                     for ent in spacy_doc.ents:
@@ -352,14 +481,16 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                         # Try UMLS linker first for expansion
                         lf_from_umls = None
                         umls_cui = None
-                        if hasattr(ent._, 'kb_ents') and ent._.kb_ents:
+                        if hasattr(ent._, "kb_ents") and ent._.kb_ents:
                             # kb_ents is [(CUI, score), ...] - take top match
                             top_match = ent._.kb_ents[0]
                             umls_cui = top_match[0]
                             # Get canonical name from linker's knowledge base
-                            if self.umls_linker and hasattr(self.umls_linker, 'kb'):
+                            if self.umls_linker and hasattr(self.umls_linker, "kb"):
                                 try:
-                                    kb_entry = self.umls_linker.kb.cui_to_entity.get(umls_cui)
+                                    kb_entry = self.umls_linker.kb.cui_to_entity.get(
+                                        umls_cui
+                                    )
                                     if kb_entry:
                                         lf_from_umls = kb_entry.canonical_name
                                 except Exception:
@@ -368,7 +499,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                         # Fall back to our lexicons if UMLS didn't provide expansion
                         lf_from_lexicon = lf_from_umls
                         if not lf_from_lexicon:
-                            lf_from_lexicon = self.entity_canonical.get(ent_text) or self.entity_canonical.get(ent_text.upper())
+                            lf_from_lexicon = self.entity_canonical.get(
+                                ent_text
+                            ) or self.entity_canonical.get(ent_text.upper())
                         if not lf_from_lexicon:
                             # Try to find in abbrev_entries
                             for entry in self.abbrev_entries:
@@ -391,18 +524,20 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                             lex_ids = [LexiconIdentifier(source="UMLS", id=umls_cui)]
 
                         source = "scispacy+umls" if lf_from_umls else "scispacy+lexicon"
-                        out.append(self._make_candidate(
-                            doc=doc,
-                            block=block,
-                            short_form=ent_text,
-                            long_form=lf_from_lexicon,
-                            start=ent.start_char,
-                            end=ent.end_char,
-                            text=text,
-                            rule_version="scispacy_ner::v1",
-                            lexicon_source=source,
-                            lexicon_ids=lex_ids,
-                        ))
+                        out.append(
+                            self._make_candidate(
+                                doc=doc,
+                                block=block,
+                                short_form=ent_text,
+                                long_form=lf_from_lexicon,
+                                start=ent.start_char,
+                                end=ent.end_char,
+                                text=text,
+                                rule_version="scispacy_ner::v1",
+                                lexicon_source=source,
+                                lexicon_ids=lex_ids,
+                            )
+                        )
                 except Exception:
                     # Don't fail entire extraction if scispacy has issues
                     pass
@@ -484,9 +619,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 flags = re.IGNORECASE if case_insensitive else 0
                 pattern = re.compile(regex_str, flags)
 
-                self.abbrev_entries.append(LexiconEntry(
-                    sf=sf, lf=lf, pattern=pattern, source=path.name
-                ))
+                self.abbrev_entries.append(
+                    LexiconEntry(sf=sf, lf=lf, pattern=pattern, source=path.name)
+                )
                 loaded += 1
             except re.error:
                 pass
@@ -516,7 +651,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             sources_list = entry.get("sources", [])
             lexicon_ids = [
                 {"source": s.get("source", ""), "id": s.get("id", "")}
-                for s in sources_list if isinstance(s, dict) and s.get("id")
+                for s in sources_list
+                if isinstance(s, dict) and s.get("id")
             ]
 
             self.entity_kp.add_keyword(label, label)
@@ -752,7 +888,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             loaded += 1
 
         self._lexicon_stats.append(("ANCA disease", loaded))
-
 
     def _load_igan_lexicon(self, path: Path) -> None:
         if not path.exists():
@@ -991,14 +1126,16 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 if nct_id:
                     lexicon_ids.append({"source": "ClinicalTrials.gov", "id": nct_id})
 
-                self.abbrev_entries.append(LexiconEntry(
-                    sf=acronym,
-                    lf=lf,
-                    pattern=pattern,
-                    source=path.name,
-                    lexicon_ids=lexicon_ids,
-                    preserve_case=True,  # Preserve case for trial names
-                ))
+                self.abbrev_entries.append(
+                    LexiconEntry(
+                        sf=acronym,
+                        lf=lf,
+                        pattern=pattern,
+                        source=path.name,
+                        lexicon_ids=lexicon_ids,
+                        preserve_case=True,  # Preserve case for trial names
+                    )
+                )
                 loaded += 1
             except re.error:
                 pass
@@ -1033,16 +1170,20 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 lexicon_ids = []
                 example_ncts = entry.get("example_nct_ids", [])
                 if example_ncts and len(example_ncts) > 0:
-                    lexicon_ids.append({"source": "ClinicalTrials.gov", "id": example_ncts[0]})
+                    lexicon_ids.append(
+                        {"source": "ClinicalTrials.gov", "id": example_ncts[0]}
+                    )
 
-                self.abbrev_entries.append(LexiconEntry(
-                    sf=scale_name,
-                    lf=lf,
-                    pattern=pattern,
-                    source=path.name,
-                    lexicon_ids=lexicon_ids,
-                    preserve_case=True,  # Preserve case for PRO scale names
-                ))
+                self.abbrev_entries.append(
+                    LexiconEntry(
+                        sf=scale_name,
+                        lf=lf,
+                        pattern=pattern,
+                        source=path.name,
+                        lexicon_ids=lexicon_ids,
+                        preserve_case=True,  # Preserve case for PRO scale names
+                    )
+                )
                 loaded += 1
             except re.error:
                 pass

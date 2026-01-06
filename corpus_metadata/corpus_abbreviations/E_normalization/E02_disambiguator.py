@@ -43,22 +43,52 @@ class Disambiguator:
         self.only_validated: bool = bool(self.config.get("only_validated", True))
 
         # Whether we are allowed to fill long_form for SHORT_FORM_ONLY entities
-        self.fill_long_form: bool = bool(self.config.get("fill_long_form_for_orphans", True))
+        self.fill_long_form: bool = bool(
+            self.config.get("fill_long_form_for_orphans", True)
+        )
 
         # Basic tokenization config
         self.lowercase: bool = bool(self.config.get("lowercase", True))
 
         # In production: load from JSON. Here: inline defaults (same as your sample)
-        self.ambiguity_map: Dict[str, Dict[str, List[str]]] = self.config.get("ambiguity_map") or {
+        self.ambiguity_map: Dict[str, Dict[str, List[str]]] = self.config.get(
+            "ambiguity_map"
+        ) or {
             "MS": {
-                "Multiple Sclerosis": ["relapse", "remission", "neurology", "brain", "lesion", "edss"],
-                "Mass Spectrometry": ["chromatography", "ion", "mass", "charge", "spectrum", "lc-ms"],
+                "Multiple Sclerosis": [
+                    "relapse",
+                    "remission",
+                    "neurology",
+                    "brain",
+                    "lesion",
+                    "edss",
+                ],
+                "Mass Spectrometry": [
+                    "chromatography",
+                    "ion",
+                    "mass",
+                    "charge",
+                    "spectrum",
+                    "lc-ms",
+                ],
                 "Medical Services": ["admin", "hospital", "provider", "insurance"],
             },
             "PD": {
-                "Pharmacodynamics": ["pk", "pharmacokinetics", "drug", "concentration", "auc"],
+                "Pharmacodynamics": [
+                    "pk",
+                    "pharmacokinetics",
+                    "drug",
+                    "concentration",
+                    "auc",
+                ],
                 "Parkinson's Disease": ["tremor", "motor", "dopamine", "neurology"],
-                "Progressive Disease": ["recist", "tumor", "oncology", "cancer", "response"],
+                "Progressive Disease": [
+                    "recist",
+                    "tumor",
+                    "oncology",
+                    "cancer",
+                    "response",
+                ],
             },
             "AE": {
                 "Adverse Event": ["safety", "toxicity", "grade", "serious"],
@@ -70,7 +100,9 @@ class Disambiguator:
     # Public API
     # -------------------------
 
-    def resolve(self, entities: List[ExtractedEntity], full_doc_text: str) -> List[ExtractedEntity]:
+    def resolve(
+        self, entities: List[ExtractedEntity], full_doc_text: str
+    ) -> List[ExtractedEntity]:
         """
         Resolve ambiguous orphans based on global document context.
 
@@ -180,7 +212,9 @@ class Disambiguator:
 
         return Counter(tokens)
 
-    def _decide_meaning(self, sf_key: str, profile: Counter) -> Optional[Tuple[str, int, int]]:
+    def _decide_meaning(
+        self, sf_key: str, profile: Counter
+    ) -> Optional[Tuple[str, int, int]]:
         """
         Returns (best_meaning, best_score, second_best_score) if confident, else None.
         """

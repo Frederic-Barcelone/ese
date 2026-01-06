@@ -13,6 +13,7 @@ References:
   - Schwartz & Hearst (2003) "A Simple Algorithm for Identifying
     Abbreviation Definitions in Biomedical Text"
 """
+
 from __future__ import annotations
 
 import re
@@ -95,22 +96,36 @@ def _truncate_at_breaks(text: str) -> str:
     t = re.split(r"[.;:\n\r\)\]]", t, maxsplit=1)[0].strip()
 
     # Stop at relative clause starters
-    t = re.split(r"\b(which|that|who|where|when|while|whose)\b", t, maxsplit=1, flags=re.IGNORECASE)[0].strip()
+    t = re.split(
+        r"\b(which|that|who|where|when|while|whose)\b",
+        t,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0].strip()
 
     # Stop at verb phrases that indicate narrative/commentary rather than definition
     # e.g., "enzyme was evaluated" -> "enzyme"
     # e.g., "receptor is a subtype" -> "receptor"
     t = re.split(
         r"\b(was|were|is|are|has|have|had|being|been|can|could|would|should|may|might)\s+",
-        t, maxsplit=1, flags=re.IGNORECASE
+        t,
+        maxsplit=1,
+        flags=re.IGNORECASE,
     )[0].strip()
 
     # Stop at common non-definition patterns
     # e.g., "protein also known as" -> handled by implicit patterns, not here
-    t = re.split(r"\b(also|previously|formerly|sometimes|commonly|often)\b", t, maxsplit=1, flags=re.IGNORECASE)[0].strip()
+    t = re.split(
+        r"\b(also|previously|formerly|sometimes|commonly|often)\b",
+        t,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0].strip()
 
     # Drop trailing connector words and articles
-    t = re.sub(r"\b(and|or|as|by|the|a|an|of|in|for|to)\s*$", "", t, flags=re.IGNORECASE).strip()
+    t = re.sub(
+        r"\b(and|or|as|by|the|a|an|of|in|for|to)\s*$", "", t, flags=re.IGNORECASE
+    ).strip()
 
     # Drop trailing punctuation that might have been left
     t = re.sub(r"[,\-]\s*$", "", t).strip()
@@ -140,14 +155,14 @@ def _looks_like_measurement(text: str) -> bool:
     text = text.strip()
 
     # Define measurement units (including compound units like mg/L, g/dL)
-    units = r'(?:mg|g|L|mL|μg|ng|IU|%|°C|mmol|μmol|pg|kg|mm|cm|m|s|min|h|d|Hz|kDa|Da)'
-    compound_unit = units + r'(?:/' + units + r')?'
+    units = r"(?:mg|g|L|mL|μg|ng|IU|%|°C|mmol|μmol|pg|kg|mm|cm|m|s|min|h|d|Hz|kDa|Da)"
+    compound_unit = units + r"(?:/" + units + r")?"
 
     # Reject if ends with a measurement pattern: "NUMBER UNIT"
     # e.g., "11.06 mg/L", "76.79 mg/L", "100 %", "1.3 × 10^9/L"
     measurement_end_pattern = re.compile(
-        r'\d+(?:\.\d+)?\s*(?:×\s*10[\^]?\d+)?/?\s*' + compound_unit + r'\s*$',
-        re.IGNORECASE
+        r"\d+(?:\.\d+)?\s*(?:×\s*10[\^]?\d+)?/?\s*" + compound_unit + r"\s*$",
+        re.IGNORECASE,
     )
     if measurement_end_pattern.search(text):
         return True
@@ -159,7 +174,7 @@ def _looks_like_measurement(text: str) -> bool:
         return True
 
     # Reject if looks like a numeric list/sequence
-    if re.match(r'^[\d.,×\s\-/]+$', text):
+    if re.match(r"^[\d.,×\s\-/]+$", text):
         return True
 
     return False
@@ -317,6 +332,7 @@ def _validate_sf_in_lf(short_form: str, long_form: str) -> bool:
 # Generator 1: Explicit + Implicit (syntax)
 # ----------------------------
 
+
 class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
     """
     Abbreviation extraction from running text.
@@ -362,13 +378,21 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         ]
 
         self.context_window_chars = int(self.config.get("context_window_chars", 400))
-        self.carryover_chars = int(self.config.get("carryover_chars", 140))  # helps cross-block edge cases
-        self.max_candidates_per_block = int(self.config.get("max_candidates_per_block", 200))
+        self.carryover_chars = int(
+            self.config.get("carryover_chars", 140)
+        )  # helps cross-block edge cases
+        self.max_candidates_per_block = int(
+            self.config.get("max_candidates_per_block", 200)
+        )
 
         # Provenance defaults (prefer orchestrator to pass these in)
-        self.pipeline_version = str(self.config.get("pipeline_version") or get_git_revision_hash())
+        self.pipeline_version = str(
+            self.config.get("pipeline_version") or get_git_revision_hash()
+        )
         self.run_id = str(self.config.get("run_id") or generate_run_id("ABBR"))
-        self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
+        self.doc_fingerprint_default = str(
+            self.config.get("doc_fingerprint") or "unknown-doc-fingerprint"
+        )
 
     @property
     def generator_type(self) -> GeneratorType:
@@ -392,7 +416,9 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                 prev_tail = ""
                 continue
 
-            combined = (prev_tail + " " + text_block).strip() if prev_tail else text_block
+            combined = (
+                (prev_tail + " " + text_block).strip() if prev_tail else text_block
+            )
 
             added_this_block = 0
 
@@ -408,7 +434,9 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     continue
 
                 # Prefer the content inside parens as SF if it looks like SF
-                if _looks_like_short_form(inside, self.min_sf_length, self.max_sf_length):
+                if _looks_like_short_form(
+                    inside, self.min_sf_length, self.max_sf_length
+                ):
                     sf = inside
                     preceding = combined[: m.start()]
 
@@ -428,7 +456,19 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     seen.add(key)
 
                     method = "explicit_lf_sf" if " " not in sf else "explicit_space_sf"
-                    out.append(self._make_candidate(doc, block, sf, lf, combined, m.start(), m.end(), method=method, confidence=0.95 if " " in sf else 0.98))
+                    out.append(
+                        self._make_candidate(
+                            doc,
+                            block,
+                            sf,
+                            lf,
+                            combined,
+                            m.start(),
+                            m.end(),
+                            method=method,
+                            confidence=0.95 if " " in sf else 0.98,
+                        )
+                    )
                     added_this_block += 1
                     continue
 
@@ -437,12 +477,16 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                 preceding = combined[: m.start()].rstrip()
 
                 # Grab last token before "(" as SF
-                prev_token_match = re.search(r"([A-Za-z0-9\-\+/().]{2,15})\s*$", preceding)
+                prev_token_match = re.search(
+                    r"([A-Za-z0-9\-\+/().]{2,15})\s*$", preceding
+                )
                 if not prev_token_match:
                     continue
                 sf_candidate = prev_token_match.group(1)
 
-                if not _looks_like_short_form(sf_candidate, self.min_sf_length, self.max_sf_length):
+                if not _looks_like_short_form(
+                    sf_candidate, self.min_sf_length, self.max_sf_length
+                ):
                     continue
 
                 lf_clean = _truncate_at_breaks(lf_candidate)
@@ -457,7 +501,19 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     continue
                 seen.add(key)
 
-                out.append(self._make_candidate(doc, block, sf_candidate, lf_clean, combined, m.start(), m.end(), method="explicit_sf_lf", confidence=0.96))
+                out.append(
+                    self._make_candidate(
+                        doc,
+                        block,
+                        sf_candidate,
+                        lf_clean,
+                        combined,
+                        m.start(),
+                        m.end(),
+                        method="explicit_sf_lf",
+                        confidence=0.96,
+                    )
+                )
                 added_this_block += 1
 
             # -------------------------
@@ -467,14 +523,18 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                 if added_this_block >= self.max_candidates_per_block:
                     break
 
-                for m in pat.finditer(text_block):  # use block text for implicit; avoids cross-block weirdness
+                for m in pat.finditer(
+                    text_block
+                ):  # use block text for implicit; avoids cross-block weirdness
                     if added_this_block >= self.max_candidates_per_block:
                         break
 
                     sf = _clean_ws(m.group(1))
                     raw_lf = _clean_ws(m.group(2))
 
-                    if not _looks_like_short_form(sf, self.min_sf_length, self.max_sf_length):
+                    if not _looks_like_short_form(
+                        sf, self.min_sf_length, self.max_sf_length
+                    ):
                         continue
 
                     lf = _truncate_at_breaks(raw_lf)
@@ -490,11 +550,25 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                         continue
                     seen.add(key)
 
-                    out.append(self._make_candidate(doc, block, sf, lf, text_block, m.start(), m.end(), method="implicit_phrasing", confidence=0.90))
+                    out.append(
+                        self._make_candidate(
+                            doc,
+                            block,
+                            sf,
+                            lf,
+                            text_block,
+                            m.start(),
+                            m.end(),
+                            method="implicit_phrasing",
+                            confidence=0.90,
+                        )
+                    )
                     added_this_block += 1
 
             # update tail for cross-block continuity
-            prev_tail = combined[-self.carryover_chars :] if self.carryover_chars > 0 else ""
+            prev_tail = (
+                combined[-self.carryover_chars :] if self.carryover_chars > 0 else ""
+            )
 
         return out
 
@@ -510,7 +584,12 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         method: str,
         confidence: float,
     ) -> Candidate:
-        ctx = _context_window(context_source_text, match_start, match_end, window=self.context_window_chars)
+        ctx = _context_window(
+            context_source_text,
+            match_start,
+            match_end,
+            window=self.context_window_chars,
+        )
 
         loc = Coordinate(
             page_num=int(block.page_num),
@@ -521,7 +600,9 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         prov = ProvenanceMetadata(
             pipeline_version=self.pipeline_version,
             run_id=self.run_id,
-            doc_fingerprint=str(self.config.get("doc_fingerprint") or self.doc_fingerprint_default),
+            doc_fingerprint=str(
+                self.config.get("doc_fingerprint") or self.doc_fingerprint_default
+            ),
             generator_name=self.generator_type,
             # keep method here (cheap + no schema changes)
             rule_version=f"abbrev_syntax::{method}",

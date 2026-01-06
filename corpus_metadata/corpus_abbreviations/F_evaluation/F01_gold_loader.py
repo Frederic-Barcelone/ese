@@ -35,6 +35,7 @@ class GoldAnnotation(BaseModel):
     A single gold truth.
     Example: doc_id='protocol_101.pdf', short_form='TNF', long_form='Tumor Necrosis Factor'
     """
+
     doc_id: str
     short_form: str
     long_form: Optional[str] = None
@@ -70,7 +71,9 @@ class GoldLoader:
     # Public API
     # -------------------------
 
-    def load_json(self, file_path: str) -> Tuple[GoldStandard, Dict[str, List[GoldAnnotation]]]:
+    def load_json(
+        self, file_path: str
+    ) -> Tuple[GoldStandard, Dict[str, List[GoldAnnotation]]]:
         raw = self._read_json(file_path)
         annos = self._parse_records(raw, source=str(file_path))
         gold = GoldStandard(annotations=annos)
@@ -98,7 +101,9 @@ class GoldLoader:
         with open(file_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
-    def _read_csv(self, file_path: str, *, delimiter: str, encoding: str) -> List[Dict[str, Any]]:
+    def _read_csv(
+        self, file_path: str, *, delimiter: str, encoding: str
+    ) -> List[Dict[str, Any]]:
         out: List[Dict[str, Any]] = []
         with open(file_path, "r", encoding=encoding, newline="") as f:
             reader = csv.DictReader(f, delimiter=delimiter)
@@ -119,15 +124,25 @@ class GoldLoader:
         """
         records: List[Dict[str, Any]]
 
-        if isinstance(raw, dict) and "annotations" in raw and isinstance(raw["annotations"], list):
+        if (
+            isinstance(raw, dict)
+            and "annotations" in raw
+            and isinstance(raw["annotations"], list)
+        ):
             records = raw["annotations"]
-        elif isinstance(raw, dict) and "defined_annotations" in raw and isinstance(raw["defined_annotations"], list):
+        elif (
+            isinstance(raw, dict)
+            and "defined_annotations" in raw
+            and isinstance(raw["defined_annotations"], list)
+        ):
             # v2 format: use defined_annotations (extractable pairs with definitions)
             records = raw["defined_annotations"]
         elif isinstance(raw, list):
             records = raw
         else:
-            raise ValueError(f"Gold file {source} must be a list or an object with 'annotations'/'defined_annotations' list")
+            raise ValueError(
+                f"Gold file {source} must be a list or an object with 'annotations'/'defined_annotations' list"
+            )
 
         annos: List[GoldAnnotation] = []
         seen: set[Tuple[str, str, Optional[str]]] = set()
@@ -136,20 +151,41 @@ class GoldLoader:
             if not isinstance(item, dict):
                 continue
 
-            doc_raw = item.get("doc_id") or item.get("filename") or item.get("doc") or item.get("file")
-            sf_raw = item.get("short_form") or item.get("short") or item.get("sf") or item.get("abbr")
-            lf_raw = item.get("long_form") or item.get("long") or item.get("lf") or item.get("expansion")
+            doc_raw = (
+                item.get("doc_id")
+                or item.get("filename")
+                or item.get("doc")
+                or item.get("file")
+            )
+            sf_raw = (
+                item.get("short_form")
+                or item.get("short")
+                or item.get("sf")
+                or item.get("abbr")
+            )
+            lf_raw = (
+                item.get("long_form")
+                or item.get("long")
+                or item.get("lf")
+                or item.get("expansion")
+            )
             cat_raw = item.get("category") or item.get("type") or item.get("label")
 
             doc_id = self._norm_doc_id(doc_raw)
             sf = self._norm_short_form(sf_raw)
             lf = self._norm_long_form(lf_raw)
-            category = (str(cat_raw).strip() if cat_raw is not None and str(cat_raw).strip() else None)
+            category = (
+                str(cat_raw).strip()
+                if cat_raw is not None and str(cat_raw).strip()
+                else None
+            )
 
             # Required fields
             if not doc_id or not sf:
                 if self.strict:
-                    raise ValueError(f"Missing doc_id or short_form in {source}: {item}")
+                    raise ValueError(
+                        f"Missing doc_id or short_form in {source}: {item}"
+                    )
                 else:
                     continue
 
@@ -199,7 +235,9 @@ class GoldLoader:
     # Indexing
     # -------------------------
 
-    def _index_by_doc(self, annos: List[GoldAnnotation]) -> Dict[str, List[GoldAnnotation]]:
+    def _index_by_doc(
+        self, annos: List[GoldAnnotation]
+    ) -> Dict[str, List[GoldAnnotation]]:
         ds: Dict[str, List[GoldAnnotation]] = defaultdict(list)
         for a in annos:
             ds[a.doc_id].append(a)

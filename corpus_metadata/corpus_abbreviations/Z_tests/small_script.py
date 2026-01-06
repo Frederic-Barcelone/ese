@@ -45,7 +45,9 @@ def main():
     if total_tables:
         print("\nTables:")
         for t in doc.iter_tables():
-            print(f"  Page {t.page_num}: {t.table_type.value}, {len(t.logical_rows)} rows")
+            print(
+                f"  Page {t.page_num}: {t.table_type.value}, {len(t.logical_rows)} rows"
+            )
             if t.metadata.get("headers"):
                 headers = list(t.metadata["headers"].values())[:3]
                 print(f"    Headers: {headers}")
@@ -59,12 +61,14 @@ def main():
     # Write tables JSON
     tables_json = []
     for t in doc.iter_tables():
-        tables_json.append({
-            "page": t.page_num,
-            "type": t.table_type.value,
-            "headers": list(t.metadata.get("headers", {}).values()),
-            "rows": t.logical_rows,
-        })
+        tables_json.append(
+            {
+                "page": t.page_num,
+                "type": t.table_type.value,
+                "headers": list(t.metadata.get("headers", {}).values()),
+                "rows": t.logical_rows,
+            }
+        )
     if tables_json:
         json_path = pdf_path.with_suffix(".tables.json")
         json_path.write_text(json.dumps(tables_json, indent=2), encoding="utf-8")

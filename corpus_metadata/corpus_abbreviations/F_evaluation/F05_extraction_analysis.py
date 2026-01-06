@@ -29,29 +29,31 @@ class ExtractionAnalyzer:
     def analyze(self, results_data: Dict[str, Any], gold_path: str) -> Dict[str, Any]:
         """
         Run analysis and print report.
-        
+
         Returns metrics dict for programmatic use.
         """
         # Load data
         gold_data = self._load_gold(gold_path)
         doc_name = results_data.get("document", "Unknown")
-        
+
         # Filter gold to this document
         gold_defined = [
-            g for g in gold_data.get("defined", [])
+            g
+            for g in gold_data.get("defined", [])
             if self._match_doc_id(g.get("doc_id", ""), doc_name)
         ]
         gold_mentioned = [
-            g for g in gold_data.get("mentioned", [])
+            g
+            for g in gold_data.get("mentioned", [])
             if self._match_doc_id(g.get("doc_id", ""), doc_name)
         ]
-        
+
         # Get system extractions
         validated = results_data.get("abbreviations", [])
-        
+
         # Build comparison data
         comparison = self._build_comparison(validated, gold_defined)
-        
+
         # Print report
         self._print_report(
             doc_name=doc_name,
@@ -61,7 +63,7 @@ class ExtractionAnalyzer:
             validated=validated,
             results_data=results_data,
         )
-        
+
         return comparison["metrics"]
 
     # -------------------------------------------------------------------------
@@ -83,7 +85,11 @@ class ExtractionAnalyzer:
                 "excluded": data.get("excluded_annotations", []),
             }
         elif "annotations" in data:
-            return {"defined": data.get("annotations", []), "mentioned": [], "excluded": []}
+            return {
+                "defined": data.get("annotations", []),
+                "mentioned": [],
+                "excluded": [],
+            }
         elif isinstance(data, list):
             return {"defined": data, "mentioned": [], "excluded": []}
         return {"defined": [], "mentioned": [], "excluded": []}
@@ -92,7 +98,11 @@ class ExtractionAnalyzer:
         """Check if document IDs match."""
         gold_stem = Path(gold_doc_id).stem.lower()
         target_stem = Path(target_doc).stem.lower()
-        return gold_stem == target_stem or gold_stem in target_stem or target_stem in gold_stem
+        return (
+            gold_stem == target_stem
+            or gold_stem in target_stem
+            or target_stem in gold_stem
+        )
 
     # -------------------------------------------------------------------------
     # NORMALIZATION
@@ -119,7 +129,7 @@ class ExtractionAnalyzer:
             return True
         if sys_norm in gold_norm or gold_norm in sys_norm:
             return True
-        
+
         ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
         return ratio >= self.fuzzy_threshold
 
@@ -127,13 +137,11 @@ class ExtractionAnalyzer:
     # COMPARISON LOGIC
     # -------------------------------------------------------------------------
     def _build_comparison(
-        self, 
-        validated: List[Dict], 
-        gold_defined: List[Dict]
+        self, validated: List[Dict], gold_defined: List[Dict]
     ) -> Dict[str, Any]:
         """
         Build comparison between system output and gold standard.
-        
+
         Returns structured data for both sections of the report.
         """
         # Deduplicate validated by (SF, LF)
@@ -145,12 +153,14 @@ class ExtractionAnalyzer:
             key = (sf, lf)
             if key not in seen and sf:
                 seen.add(key)
-                unique_validated.append({
-                    "short_form": sf,
-                    "long_form": item.get("long_form"),
-                    "long_form_norm": lf,
-                })
-        
+                unique_validated.append(
+                    {
+                        "short_form": sf,
+                        "long_form": item.get("long_form"),
+                        "long_form_norm": lf,
+                    }
+                )
+
         # Deduplicate gold by (SF, LF)
         seen_gold = set()
         unique_gold = []
@@ -160,21 +170,23 @@ class ExtractionAnalyzer:
             key = (sf, lf)
             if key not in seen_gold and sf:
                 seen_gold.add(key)
-                unique_gold.append({
-                    "short_form": sf,
-                    "long_form": item.get("long_form"),
-                    "long_form_norm": lf,
-                    "page": item.get("page", "?"),
-                })
-        
+                unique_gold.append(
+                    {
+                        "short_form": sf,
+                        "long_form": item.get("long_form"),
+                        "long_form_norm": lf,
+                        "page": item.get("page", "?"),
+                    }
+                )
+
         # SECTION 1: Check each gold item - was it found?
         gold_results = []
         matched_gold_keys = set()
-        
+
         for gold_item in unique_gold:
             gold_sf = gold_item["short_form"]
             gold_lf_norm = gold_item["long_form_norm"]
-            
+
             found = False
             matched_lf = None
             for sys_item in unique_validated:
@@ -184,22 +196,24 @@ class ExtractionAnalyzer:
                         matched_lf = sys_item["long_form"]
                         matched_gold_keys.add((gold_sf, gold_lf_norm))
                         break
-            
-            gold_results.append({
-                "short_form": gold_sf,
-                "long_form": gold_item["long_form"],
-                "page": gold_item["page"],
-                "found": found,
-                "matched_lf": matched_lf,
-            })
-        
+
+            gold_results.append(
+                {
+                    "short_form": gold_sf,
+                    "long_form": gold_item["long_form"],
+                    "page": gold_item["page"],
+                    "found": found,
+                    "matched_lf": matched_lf,
+                }
+            )
+
         # SECTION 2: Check each extracted item - does it match gold?
         extracted_results = []
-        
+
         for sys_item in unique_validated:
             sys_sf = sys_item["short_form"]
             sys_lf_norm = sys_item["long_form_norm"]
-            
+
             matches_gold = False
             matched_gold_lf = None
             for gold_item in unique_gold:
@@ -208,26 +222,32 @@ class ExtractionAnalyzer:
                         matches_gold = True
                         matched_gold_lf = gold_item["long_form"]
                         break
-            
-            extracted_results.append({
-                "short_form": sys_sf,
-                "long_form": sys_item["long_form"],
-                "matches_gold": matches_gold,
-                "gold_long_form": matched_gold_lf,
-            })
-        
+
+            extracted_results.append(
+                {
+                    "short_form": sys_sf,
+                    "long_form": sys_item["long_form"],
+                    "matches_gold": matches_gold,
+                    "gold_long_form": matched_gold_lf,
+                }
+            )
+
         # Sort extracted alphabetically
         extracted_results.sort(key=lambda x: x["short_form"])
-        
+
         # Calculate metrics
         tp = sum(1 for g in gold_results if g["found"])
         fn = sum(1 for g in gold_results if not g["found"])
         fp = sum(1 for e in extracted_results if not e["matches_gold"])
-        
+
         precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
         recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-        f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
-        
+        f1 = (
+            (2 * precision * recall) / (precision + recall)
+            if (precision + recall) > 0
+            else 0.0
+        )
+
         return {
             "gold_results": gold_results,
             "extracted_results": extracted_results,
@@ -238,7 +258,7 @@ class ExtractionAnalyzer:
                 "precision": precision,
                 "recall": recall,
                 "f1": f1,
-            }
+            },
         }
 
     # -------------------------------------------------------------------------
@@ -254,11 +274,11 @@ class ExtractionAnalyzer:
         results_data: Dict[str, Any],
     ) -> None:
         """Print the full report."""
-        
+
         gold_results = comparison["gold_results"]
         extracted_results = comparison["extracted_results"]
         metrics = comparison["metrics"]
-        
+
         # =====================================================================
         # HEADER
         # =====================================================================
@@ -268,7 +288,7 @@ class ExtractionAnalyzer:
         print("╠" + "═" * 78 + "╣")
         print("║" + f" Document: {doc_name[:66]}".ljust(78) + "║")
         print("╚" + "═" * 78 + "╝")
-        
+
         # =====================================================================
         # QUICK SUMMARY BOX
         # =====================================================================
@@ -278,18 +298,28 @@ class ExtractionAnalyzer:
         precision = metrics["precision"]
         recall = metrics["recall"]
         f1 = metrics["f1"]
-        
+
         print("\n┌─────────────────────────────────────────────────────────────────┐")
         print("│                        QUICK SUMMARY                            │")
         print("├─────────────────────────────────────────────────────────────────┤")
-        print(f"│  Gold Standard:  {len(gold_results):3} abbreviations to find                      │")
-        print(f"│  Extracted:      {len(extracted_results):3} abbreviations found                        │")
+        print(
+            f"│  Gold Standard:  {len(gold_results):3} abbreviations to find                      │"
+        )
+        print(
+            f"│  Extracted:      {len(extracted_results):3} abbreviations found                        │"
+        )
         print("├─────────────────────────────────────────────────────────────────┤")
-        print(f"│  ✓ Correct (TP):     {tp:3}    │  Precision: {precision:6.1%}                │")
-        print(f"│  ✗ Extra (FP):       {fp:3}    │  Recall:    {recall:6.1%}                │")
-        print(f"│  ○ Missed (FN):      {fn:3}    │  F1 Score:  {f1:6.1%}                │")
+        print(
+            f"│  ✓ Correct (TP):     {tp:3}    │  Precision: {precision:6.1%}                │"
+        )
+        print(
+            f"│  ✗ Extra (FP):       {fp:3}    │  Recall:    {recall:6.1%}                │"
+        )
+        print(
+            f"│  ○ Missed (FN):      {fn:3}    │  F1 Score:  {f1:6.1%}                │"
+        )
         print("└─────────────────────────────────────────────────────────────────┘")
-        
+
         # =====================================================================
         # SECTION 1: GOLD STANDARD CHECKLIST
         # =====================================================================
@@ -298,36 +328,42 @@ class ExtractionAnalyzer:
         print(" SECTION 1: GOLD STANDARD CHECKLIST ")
         print(" (What we SHOULD find - from human-annotated ground truth)")
         print("━" * 80)
-        
+
         if not gold_results:
             print("\n  (No gold standard entries for this document)")
         else:
             # Header
             print(f"\n  {'Status':<8} {'Short Form':<15} {'Long Form':<45} {'Page':<5}")
             print("  " + "─" * 75)
-            
+
             # Sort: found first, then not found
-            gold_sorted = sorted(gold_results, key=lambda x: (not x["found"], x["short_form"]))
-            
+            gold_sorted = sorted(
+                gold_results, key=lambda x: (not x["found"], x["short_form"])
+            )
+
             for item in gold_sorted:
                 sf = item["short_form"]
                 lf = item["long_form"] or "(no definition)"
                 lf_display = (lf[:42] + "...") if len(lf) > 45 else lf
                 page = str(item["page"])
-                
+
                 if item["found"]:
                     status = "  ✓ FOUND"
                     print(f"  {status:<8} {sf:<15} {lf_display:<45} {page:<5}")
                 else:
                     status = "  ✗ MISS "
-                    print(f"  \033[91m{status:<8} {sf:<15} {lf_display:<45} {page:<5}\033[0m")
-            
+                    print(
+                        f"  \033[91m{status:<8} {sf:<15} {lf_display:<45} {page:<5}\033[0m"
+                    )
+
             # Summary
             found_count = sum(1 for g in gold_results if g["found"])
             total_count = len(gold_results)
             print("  " + "─" * 75)
-            print(f"  TOTAL: {found_count}/{total_count} found ({found_count/total_count*100:.0f}% recall)")
-        
+            print(
+                f"  TOTAL: {found_count}/{total_count} found ({found_count / total_count * 100:.0f}% recall)"
+            )
+
         # =====================================================================
         # SECTION 2: EXTRACTED ABBREVIATIONS
         # =====================================================================
@@ -336,32 +372,34 @@ class ExtractionAnalyzer:
         print(" SECTION 2: EXTRACTED ABBREVIATIONS ")
         print(" (What we DID find - sorted alphabetically)")
         print("━" * 80)
-        
+
         if not extracted_results:
             print("\n  (No abbreviations extracted)")
         else:
             # Header
             print(f"\n  {'Status':<10} {'Short Form':<15} {'Extracted Long Form':<40}")
             print("  " + "─" * 75)
-            
+
             for item in extracted_results:
                 sf = item["short_form"]
                 lf = item["long_form"] or "(no expansion)"
                 lf_display = (lf[:37] + "...") if len(lf) > 40 else lf
-                
+
                 if item["matches_gold"]:
                     status = "  ✓ MATCH "
                     print(f"  {status:<10} {sf:<15} {lf_display:<40}")
                 else:
                     status = "  ○ EXTRA "
                     print(f"  \033[93m{status:<10} {sf:<15} {lf_display:<40}\033[0m")
-            
+
             # Summary
             match_count = sum(1 for e in extracted_results if e["matches_gold"])
             total_count = len(extracted_results)
             print("  " + "─" * 75)
-            print(f"  TOTAL: {match_count}/{total_count} match gold ({match_count/total_count*100:.0f}% precision)")
-        
+            print(
+                f"  TOTAL: {match_count}/{total_count} match gold ({match_count / total_count * 100:.0f}% precision)"
+            )
+
         # =====================================================================
         # SECTION 3: MENTIONED (BONUS - not scored)
         # =====================================================================
@@ -371,10 +409,10 @@ class ExtractionAnalyzer:
             print(" SECTION 3: MENTIONED ABBREVIATIONS (not scored) ")
             print(" (Used in document but not explicitly defined - bonus if found)")
             print("━" * 80)
-            
+
             # Build set of extracted SFs
             extracted_sfs = {e["short_form"] for e in extracted_results}
-            
+
             # Deduplicate mentioned
             seen_mentioned = set()
             unique_mentioned = []
@@ -383,25 +421,27 @@ class ExtractionAnalyzer:
                 if sf not in seen_mentioned:
                     seen_mentioned.add(sf)
                     unique_mentioned.append(m)
-            
+
             print(f"\n  {'Status':<10} {'Short Form':<15} {'Expected Long Form':<40}")
             print("  " + "─" * 75)
-            
+
             found_count = 0
             for m in sorted(unique_mentioned, key=lambda x: x.get("short_form", "")):
                 sf = self._norm_sf(m.get("short_form", ""))
                 lf = m.get("long_form", "(unknown)")
                 lf_display = (lf[:37] + "...") if len(lf) > 40 else lf
-                
+
                 if sf in extracted_sfs:
                     print(f"  {'  ✓ FOUND':<10} {sf:<15} {lf_display:<40}")
                     found_count += 1
                 else:
-                    print(f"  \033[90m{'  - MISS':<10} {sf:<15} {lf_display:<40}\033[0m")
-            
+                    print(
+                        f"  \033[90m{'  - MISS':<10} {sf:<15} {lf_display:<40}\033[0m"
+                    )
+
             print("  " + "─" * 75)
             print(f"  BONUS: {found_count}/{len(unique_mentioned)} found")
-        
+
         # =====================================================================
         # PIPELINE STATS (optional)
         # =====================================================================
@@ -409,7 +449,7 @@ class ExtractionAnalyzer:
         total_validated = results_data.get("total_validated", 0)
         total_rejected = results_data.get("total_rejected", 0)
         heuristics = results_data.get("heuristics_counters", {})
-        
+
         if total_candidates > 0 or heuristics:
             print("\n")
             print("━" * 80)
@@ -418,13 +458,13 @@ class ExtractionAnalyzer:
             print(f"\n  Candidates generated:  {total_candidates}")
             print(f"  Validated:             {total_validated}")
             print(f"  Rejected:              {total_rejected}")
-            
+
             if heuristics:
                 print("\n  Heuristics applied:")
                 for key, value in sorted(heuristics.items()):
                     if value > 0:
                         print(f"    • {key}: {value}")
-        
+
         print("\n" + "═" * 80)
         print(" END OF REPORT ")
         print("═" * 80 + "\n")
@@ -436,11 +476,11 @@ class ExtractionAnalyzer:
 def run_analysis(results_data: Dict[str, Any], gold_path: str) -> Dict[str, Any]:
     """
     Run extraction analysis.
-    
+
     Args:
         results_data: Export data dict from orchestrator
         gold_path: Path to gold standard JSON
-        
+
     Returns:
         Metrics dict with precision, recall, f1, etc.
     """
@@ -468,9 +508,9 @@ if __name__ == "__main__":
         "heuristics_counters": {
             "recovered_by_stats_whitelist": 8,
             "blacklisted_fp_count": 9,
-        }
+        },
     }
-    
+
     # You would pass real gold path here
     # run_analysis(mock_results, "/path/to/papers_gold_v2.json")
     print("Module loaded successfully. Call run_analysis() to use.")

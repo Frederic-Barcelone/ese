@@ -49,6 +49,7 @@ except ImportError:
 # Protocol
 # -----------------------------------------------------------------------------
 
+
 class LLMClient(Protocol):
     """
     Vendor-agnostic interface.
@@ -66,8 +67,7 @@ class LLMClient(Protocol):
         top_p: float,
         seed: Optional[int] = None,
         response_format: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
-        ...
+    ) -> Dict[str, Any]: ...
 
     def complete_json_any(
         self,
@@ -80,18 +80,18 @@ class LLMClient(Protocol):
         top_p: float = 1.0,
         seed: Optional[int] = None,
         response_format: Optional[Dict[str, Any]] = None,
-    ) -> Any:
-        ...
+    ) -> Any: ...
 
 
 # -----------------------------------------------------------------------------
 # Claude Client
 # -----------------------------------------------------------------------------
 
+
 class ClaudeClient:
     """
     Anthropic Claude client implementing LLMClient protocol.
-    
+
     Reads config from:
       1. Explicit parameters
       2. config.yaml (if config_path provided)
@@ -116,9 +116,7 @@ class ClaudeClient:
 
         # Resolve API key: param > config > env
         self.api_key = (
-            api_key
-            or cfg.get("api_key")
-            or os.environ.get("ANTHROPIC_API_KEY")
+            api_key or cfg.get("api_key") or os.environ.get("ANTHROPIC_API_KEY")
         )
         if not self.api_key:
             raise ValueError(
@@ -129,7 +127,9 @@ class ClaudeClient:
         # Resolve model params: param > config > defaults
         self.default_model = model or cfg.get("model", "claude-sonnet-4-20250514")
         self.default_max_tokens = max_tokens or cfg.get("max_tokens", 1024)
-        self.default_temperature = temperature if temperature is not None else cfg.get("temperature", 0.0)
+        self.default_temperature = (
+            temperature if temperature is not None else cfg.get("temperature", 0.0)
+        )
 
         # Initialize client
         self.client = anthropic.Anthropic(api_key=self.api_key)
@@ -147,7 +147,7 @@ class ClaudeClient:
             # Extract claude validation config
             # Expected structure: api.claude.validation.{model, max_tokens, temperature}
             claude_cfg = data.get("api", {}).get("claude", {})
-            
+
             # Try validation config first, then fast config
             val_cfg = claude_cfg.get("validation", {})
             if not val_cfg:
@@ -180,7 +180,9 @@ class ClaudeClient:
         """
         use_model = model or self.default_model
         use_max_tokens = max_tokens or self.default_max_tokens
-        use_temperature = temperature if temperature is not None else self.default_temperature
+        use_temperature = (
+            temperature if temperature is not None else self.default_temperature
+        )
 
         # Call Claude API
         message = self.client.messages.create(
@@ -218,7 +220,9 @@ class ClaudeClient:
         """
         use_model = model or self.default_model
         use_max_tokens = max_tokens or self.default_max_tokens
-        use_temperature = temperature if temperature is not None else self.default_temperature
+        use_temperature = (
+            temperature if temperature is not None else self.default_temperature
+        )
 
         # Call Claude API
         message = self.client.messages.create(
@@ -262,7 +266,9 @@ class ClaudeClient:
         text = (text or "").strip()
 
         # Try markdown code block: ```json [...] ``` or ```json {...} ```
-        code_block_match = re.search(r"```(?:json)?\s*([\[\{][\s\S]*?[\]\}])\s*```", text, re.DOTALL)
+        code_block_match = re.search(
+            r"```(?:json)?\s*([\[\{][\s\S]*?[\]\}])\s*```", text, re.DOTALL
+        )
         if code_block_match:
             try:
                 return json.loads(code_block_match.group(1))
@@ -309,6 +315,7 @@ class ClaudeClient:
 # Verification Result Schema
 # -----------------------------------------------------------------------------
 
+
 class VerificationResult(BaseModel):
     status: ValidationStatus
     confidence: float = Field(..., ge=0.0, le=1.0)
@@ -320,6 +327,7 @@ class VerificationResult(BaseModel):
 # -----------------------------------------------------------------------------
 # LLM Engine
 # -----------------------------------------------------------------------------
+
 
 class LLMEngine:
     """
@@ -439,7 +447,10 @@ class LLMEngine:
         # 5) Decide final LF (only for definition/glossary)
         final_lf = candidate.long_form
         final_status = result.status  # May be upgraded if corrected_long_form provided
-        if candidate.field_type in (FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY):
+        if candidate.field_type in (
+            FieldType.DEFINITION_PAIR,
+            FieldType.GLOSSARY_ENTRY,
+        ):
             if result.corrected_long_form:
                 cl = result.corrected_long_form.strip()
                 if cl:
@@ -558,12 +569,14 @@ class LLMEngine:
                     source = "TABLE_LAYOUT"
 
             # has_explicit_pair: True if SYNTAX_PATTERN (detected LF(SF) pattern)
-            has_explicit_pair = (source == "SYNTAX_PATTERN")
+            has_explicit_pair = source == "SYNTAX_PATTERN"
 
             # ctx_pair: True if both SF and LF appear in context (case-insensitive)
             ctx_lower = context.lower()
             sf_in_ctx = c.short_form.lower() in ctx_lower
-            lf_in_ctx = (c.long_form or "").lower() in ctx_lower if c.long_form else False
+            lf_in_ctx = (
+                (c.long_form or "").lower() in ctx_lower if c.long_form else False
+            )
             ctx_pair = sf_in_ctx and lf_in_ctx
 
             # Get lexicon source if available (for trusted source validation)
@@ -573,13 +586,13 @@ class LLMEngine:
 
             candidate_lines.append(
                 f"- id: {cid}\n"
-                f"  sf: \"{c.short_form}\"\n"
-                f"  lf: \"{c.long_form or '(none)'}\"\n"
+                f'  sf: "{c.short_form}"\n'
+                f'  lf: "{c.long_form or "(none)"}"\n'
                 f"  source: {source}\n"
                 f"  has_explicit_pair: {str(has_explicit_pair).lower()}\n"
                 f"  ctx_pair: {str(ctx_pair).lower()}\n"
-                f"  lexicon: \"{lexicon_src}\"\n"
-                f"  context: \"{context}\""
+                f'  lexicon: "{lexicon_src}"\n'
+                f'  context: "{context}"'
             )
 
         candidates_text = "\n\n".join(candidate_lines)
@@ -605,7 +618,7 @@ class LLMEngine:
         # Call LLM - use complete_json_any to handle array responses
         try:
             # Check if client supports complete_json_any (handles arrays)
-            if hasattr(self.client, 'complete_json_any'):
+            if hasattr(self.client, "complete_json_any"):
                 raw = self.client.complete_json_any(
                     system_prompt=bundle.system_prompt,
                     user_prompt=user_prompt,
@@ -672,7 +685,9 @@ class LLMEngine:
                 # Hard validation: check expected_count matches
                 resp_expected = raw.get("expected_count", len(response_list))
                 if resp_expected != expected_count:
-                    print(f"  [WARN] Batch count mismatch (expected {expected_count}, got {resp_expected})")
+                    print(
+                        f"  [WARN] Batch count mismatch (expected {expected_count}, got {resp_expected})"
+                    )
             else:
                 # Legacy fallback: try other common keys
                 for key in ["validations", "items", "responses"]:
@@ -685,7 +700,9 @@ class LLMEngine:
 
         # Hard validation: must have exactly expected_count results
         if len(response_list) != expected_count:
-            print(f"  [WARN] Batch parse failed (got {len(response_list)}/{expected_count}), falling back")
+            print(
+                f"  [WARN] Batch parse failed (got {len(response_list)}/{expected_count}), falling back"
+            )
             raw_type = type(raw).__name__
             raw_keys = list(raw.keys())[:5] if isinstance(raw, dict) else None
             print(f"    Raw type: {raw_type}, keys: {raw_keys}")
@@ -708,25 +725,33 @@ class LLMEngine:
             resp = id_to_response.get(cid)
 
             if resp:
-                results.append(self._build_entity_from_batch_response(candidate, resp, raw))
+                results.append(
+                    self._build_entity_from_batch_response(candidate, resp, raw)
+                )
             else:
                 missing_ids.append(cid)
                 # Try index-based fallback (for compatibility)
                 idx = batch.index(candidate)
                 if idx < len(response_list) and isinstance(response_list[idx], dict):
-                    results.append(self._build_entity_from_batch_response(
-                        candidate, response_list[idx], raw
-                    ))
+                    results.append(
+                        self._build_entity_from_batch_response(
+                            candidate, response_list[idx], raw
+                        )
+                    )
                 else:
-                    results.append(self._entity_ambiguous(
-                        candidate,
-                        reason="Missing response in batch validation",
-                        flags=["batch_missing"],
-                        raw_llm=raw,
-                    ))
+                    results.append(
+                        self._entity_ambiguous(
+                            candidate,
+                            reason="Missing response in batch validation",
+                            flags=["batch_missing"],
+                            raw_llm=raw,
+                        )
+                    )
 
         if missing_ids:
-            print(f"  [WARN] {len(missing_ids)} ids not found in response, used index fallback")
+            print(
+                f"  [WARN] {len(missing_ids)} ids not found in response, used index fallback"
+            )
 
         return results
 
@@ -848,9 +873,9 @@ class LLMEngine:
 
             candidate_lines.append(
                 f"- id: {cid}\n"
-                f"  sf: \"{c.short_form}\"\n"
-                f"  lf: \"{c.long_form or '(none)'}\"\n"
-                f"  context: \"{context}\""
+                f'  sf: "{c.short_form}"\n'
+                f'  lf: "{c.long_form or "(none)"}"\n'
+                f'  context: "{context}"'
             )
 
         candidates_text = "\n\n".join(candidate_lines)
@@ -862,7 +887,7 @@ class LLMEngine:
 
         # Call Haiku
         try:
-            if hasattr(self.client, 'complete_json_any'):
+            if hasattr(self.client, "complete_json_any"):
                 raw = self.client.complete_json_any(
                     system_prompt=bundle.system_prompt,
                     user_prompt=user_prompt,

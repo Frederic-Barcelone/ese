@@ -56,7 +56,9 @@ def _stable_json_dumps(obj: Any) -> str:
     )
 
 
-def compute_prompt_hash(system_prompt: str, user_template: str, parameters: Dict[str, Any]) -> str:
+def compute_prompt_hash(
+    system_prompt: str, user_template: str, parameters: Dict[str, Any]
+) -> str:
     """
     Fingerprint of prompt + parameters.
     """

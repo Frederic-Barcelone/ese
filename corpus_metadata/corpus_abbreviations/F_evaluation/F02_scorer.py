@@ -28,8 +28,6 @@ Configuration (ScorerConfig):
 Depends on F01_gold_loader.py for GoldAnnotation format.
 """
 
-
-
 from __future__ import annotations
 
 from collections import defaultdict
@@ -53,6 +51,7 @@ class ScoreReport(BaseModel):
     """
     Aggregate metrics for a single evaluation run.
     """
+
     precision: float
     recall: float
     f1: float
@@ -79,6 +78,7 @@ class CorpusScoreReport(BaseModel):
       - micro: global set logic across all docs
       - macro: average over per-doc scores (equal weight per doc)
     """
+
     micro: ScoreReport
     macro: ScoreReport
     per_doc: Dict[str, ScoreReport] = Field(default_factory=dict)
@@ -90,8 +90,11 @@ class ScorerConfig(BaseModel):
     """
     Configuration knobs to control strictness.
     """
+
     # Only evaluate these entity field types. Default: definitions (explicit) + glossary entries.
-    include_field_types: Set[FieldType] = Field(default_factory=lambda: {FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY})
+    include_field_types: Set[FieldType] = Field(
+        default_factory=lambda: {FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY}
+    )
 
     # If True, system long_form must match gold long_form (after normalization).
     # If False, match by short_form only (useful if your gold has LF missing or you evaluate SF detection).
@@ -195,7 +198,9 @@ class Scorer:
 
         per_doc: Dict[str, ScoreReport] = {}
         for did in all_doc_ids:
-            per_doc[did] = self.evaluate_doc(sys_by_doc.get(did, []), gold_by_doc.get(did, []), doc_id=None)
+            per_doc[did] = self.evaluate_doc(
+                sys_by_doc.get(did, []), gold_by_doc.get(did, []), doc_id=None
+            )
 
         # Micro (global)
         sys_set_all = self._system_to_set(system_output)
@@ -288,9 +293,14 @@ class Scorer:
                 continue
 
             # If LF is missing and we don't allow missing LF for definition-like outputs, skip
-            if lf is None and not self.config.allow_missing_system_lf and ent.field_type in (
-                FieldType.DEFINITION_PAIR,
-                FieldType.GLOSSARY_ENTRY,
+            if (
+                lf is None
+                and not self.config.allow_missing_system_lf
+                and ent.field_type
+                in (
+                    FieldType.DEFINITION_PAIR,
+                    FieldType.GLOSSARY_ENTRY,
+                )
             ):
                 continue
 
@@ -328,7 +338,9 @@ class Scorer:
     # Set comparison
     # -------------------------
 
-    def _compare_sets(self, sys_set: Set[Pair], gold_set: Set[Pair]) -> Tuple[Set[Pair], Set[Pair], Set[Pair]]:
+    def _compare_sets(
+        self, sys_set: Set[Pair], gold_set: Set[Pair]
+    ) -> Tuple[Set[Pair], Set[Pair], Set[Pair]]:
         """
         Handles the special case where gold contains SF-only entries (LF=None).
         If gold has (SF, None), then any system pair with that SF counts as TP.
@@ -353,8 +365,8 @@ class Scorer:
         matched_sys: Set[Pair] = set()
 
         # 1) Full pair matching for gold_full (with fuzzy LF matching)
-        for (gold_sf, gold_lf) in gold_full:
-            for (sys_sf, sys_lf) in sys_set:
+        for gold_sf, gold_lf in gold_full:
+            for sys_sf, sys_lf in sys_set:
                 if sys_sf != gold_sf:
                     continue
                 # SF matches, check LF
@@ -366,7 +378,7 @@ class Scorer:
 
         # 2) SF-only matching (gold wants SF presence, LF irrelevant)
         if sf_only_gold:
-            for (sf, lf) in sys_set:
+            for sf, lf in sys_set:
                 if sf in sf_only_gold:
                     tp.add((sf, None))  # count as satisfied SF-only truth
                     matched_sys.add((sf, lf))
@@ -397,14 +409,20 @@ class Scorer:
     # Report building
     # -------------------------
 
-    def _build_report(self, tp_set: Set[Pair], fp_set: Set[Pair], fn_set: Set[Pair]) -> ScoreReport:
+    def _build_report(
+        self, tp_set: Set[Pair], fp_set: Set[Pair], fn_set: Set[Pair]
+    ) -> ScoreReport:
         tp = len(tp_set)
         fp = len(fp_set)
         fn = len(fn_set)
 
         precision = tp / (tp + fp) if (tp + fp) else 0.0
         recall = tp / (tp + fn) if (tp + fn) else 0.0
-        f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) else 0.0
+        f1 = (
+            (2 * precision * recall) / (precision + recall)
+            if (precision + recall)
+            else 0.0
+        )
 
         # Pretty examples
         fp_examples = [self._pair_to_str(p) for p in sorted(fp_set)[:10]]
@@ -479,13 +497,17 @@ class Scorer:
     # Pretty printing
     # -------------------------
 
-    def print_summary(self, report: ScoreReport, title: str = "EVALUATION REPORT") -> None:
+    def print_summary(
+        self, report: ScoreReport, title: str = "EVALUATION REPORT"
+    ) -> None:
         print(f"\n[CHART] --- {title} ---")
         print(f"[OK] Precision: {report.precision:.2%}")
         print(f"[TARGET] Recall:    {report.recall:.2%}")
         print(f"[SCALE]  F1 Score:  {report.f1:.2%}")
         print("-" * 40)
-        print(f"TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}")
+        print(
+            f"TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}"
+        )
 
         if report.fp_examples:
             print("\n[WARN]  False Positives (examples):")

@@ -19,6 +19,7 @@ from A_core.A01_domain_models import (
 # TermMapper (Normalization)
 # -------------------------
 
+
 class TermMapper(BaseNormalizer):
     """
     Abbreviation-only normalizer.
@@ -39,17 +40,23 @@ class TermMapper(BaseNormalizer):
 
         # Processed lexicon output (you said you'll manage lexicon processing later)
         # Expected to be a SINGLE file: abbreviation_lexicon.json
-        self.mapping_file = self.config.get("mapping_file_path", "abbreviation_lexicon.json")
+        self.mapping_file = self.config.get(
+            "mapping_file_path", "abbreviation_lexicon.json"
+        )
 
         # Optional fuzzy matching
         self.enable_fuzzy = bool(self.config.get("enable_fuzzy_matching", False))
         self.fuzzy_cutoff = float(self.config.get("fuzzy_cutoff", 0.90))
 
         # Controls for SHORT_FORM_ONLY behavior
-        self.fill_long_form_for_orphans = bool(self.config.get("fill_long_form_for_orphans", False))
+        self.fill_long_form_for_orphans = bool(
+            self.config.get("fill_long_form_for_orphans", False)
+        )
 
         # Load lookup table (normalized_key -> {canonical_long_form, standard_id, ...})
-        self.lookup_table: Dict[str, Dict[str, Any]] = self._load_mappings(self.mapping_file)
+        self.lookup_table: Dict[str, Dict[str, Any]] = self._load_mappings(
+            self.mapping_file
+        )
         self.valid_keys: List[str] = list(self.lookup_table.keys())
 
     # -------------------------
@@ -86,8 +93,11 @@ class TermMapper(BaseNormalizer):
             "mapped_from": map_kind,  # "long_form" | "short_form"
             "original_term": to_map,
             "normalized_key": norm_key,
-            "canonical_long_form": match.get("canonical_long_form") or match.get("name"),
-            "standard_id": match.get("standard_id") or match.get("code") or match.get("id"),
+            "canonical_long_form": match.get("canonical_long_form")
+            or match.get("name"),
+            "standard_id": match.get("standard_id")
+            or match.get("code")
+            or match.get("id"),
         }
 
         updates: Dict[str, Any] = {}
@@ -105,7 +115,10 @@ class TermMapper(BaseNormalizer):
                 updates["long_form"] = canonical_lf
             else:
                 # Orphan case: only if you explicitly allow filling
-                if entity.field_type == FieldType.SHORT_FORM_ONLY and self.fill_long_form_for_orphans:
+                if (
+                    entity.field_type == FieldType.SHORT_FORM_ONLY
+                    and self.fill_long_form_for_orphans
+                ):
                     updates["long_form"] = canonical_lf
 
         # Add a small flag (keep the original flags too)
@@ -127,7 +140,10 @@ class TermMapper(BaseNormalizer):
           - prefer long_form when present (definition/glossary)
           - fallback to short_form for orphans
         """
-        if entity.long_form and entity.field_type in (FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY):
+        if entity.long_form and entity.field_type in (
+            FieldType.DEFINITION_PAIR,
+            FieldType.GLOSSARY_ENTRY,
+        ):
             return entity.long_form, "long_form"
 
         # Orphan / fallback
@@ -149,7 +165,9 @@ class TermMapper(BaseNormalizer):
     def _fuzzy_lookup(self, norm_key: str) -> Optional[Dict[str, Any]]:
         if not self.valid_keys:
             return None
-        matches = get_close_matches(norm_key, self.valid_keys, n=1, cutoff=self.fuzzy_cutoff)
+        matches = get_close_matches(
+            norm_key, self.valid_keys, n=1, cutoff=self.fuzzy_cutoff
+        )
         if matches:
             return self.lookup_table.get(matches[0])
         return None
@@ -200,7 +218,12 @@ class TermMapper(BaseNormalizer):
             for item in data:
                 if not isinstance(item, dict):
                     continue
-                raw_key = item.get("key") or item.get("normalized_key") or item.get("sf") or item.get("term")
+                raw_key = (
+                    item.get("key")
+                    or item.get("normalized_key")
+                    or item.get("sf")
+                    or item.get("term")
+                )
                 key = self._preprocess(str(raw_key)) if raw_key else ""
                 if not key:
                     continue

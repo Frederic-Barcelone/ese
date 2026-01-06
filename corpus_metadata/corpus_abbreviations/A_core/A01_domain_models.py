@@ -14,6 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 # Pipeline enums
 # -------------------------
 
+
 class PipelineStage(str, Enum):
     GENERATION = "GENERATION"
     VERIFICATION = "VERIFICATION"
@@ -25,6 +26,7 @@ class FieldType(str, Enum):
     Distinguishes *how* the abbreviation was presented.
     This drives which verifier rules apply.
     """
+
     # "Tumor Necrosis Factor (TNF)" or "TNF (Tumor Necrosis Factor)"
     DEFINITION_PAIR = "DEFINITION_PAIR"
 
@@ -40,12 +42,13 @@ class GeneratorType(str, Enum):
     Tracks which strategy produced the candidate.
     Useful for Recall-by-Strategy analysis.
     """
-    SYNTAX_PATTERN = "gen:syntax_pattern"      # C01: Schwartz-Hearst abbreviations
-    SECTION_PARSER = "gen:section_parser"      # (reserved)
-    GLOSSARY_TABLE = "gen:glossary_table"      # C01b: Glossary tables
-    RIGID_PATTERN = "gen:rigid_pattern"        # C02: DOI, trial IDs, doses, etc.
-    TABLE_LAYOUT = "gen:table_layout"          # C03: Spatial extraction
-    LEXICON_MATCH = "gen:lexicon_match"        # C04: Dictionary matching
+
+    SYNTAX_PATTERN = "gen:syntax_pattern"  # C01: Schwartz-Hearst abbreviations
+    SECTION_PARSER = "gen:section_parser"  # (reserved)
+    GLOSSARY_TABLE = "gen:glossary_table"  # C01b: Glossary tables
+    RIGID_PATTERN = "gen:rigid_pattern"  # C02: DOI, trial IDs, doses, etc.
+    TABLE_LAYOUT = "gen:table_layout"  # C03: Spatial extraction
+    LEXICON_MATCH = "gen:lexicon_match"  # C04: Dictionary matching
 
 
 class ValidationStatus(str, Enum):
@@ -58,6 +61,7 @@ class ValidationStatus(str, Enum):
 # Geometry (shared)
 # -------------------------
 
+
 class BoundingBox(BaseModel):
     """
     Strict BBox used across the pipeline.
@@ -66,6 +70,7 @@ class BoundingBox(BaseModel):
     If is_normalized=True: coords are in [0,1]
     If is_normalized=False: coords are absolute units (pixels/points), >= 0
     """
+
     coords: Tuple[float, float, float, float]
 
     page_width: Optional[float] = None
@@ -85,7 +90,9 @@ class BoundingBox(BaseModel):
 
         if self.is_normalized:
             if not all(0.0 <= v <= 1.0 for v in (x0, y0, x1, y1)):
-                raise ValueError("Normalized BoundingBox must have coords in [0.0, 1.0].")
+                raise ValueError(
+                    "Normalized BoundingBox must have coords in [0.0, 1.0]."
+                )
 
         # Optional soft bounds check (kept permissive)
         if (not self.is_normalized) and self.page_width and self.page_height:
@@ -102,6 +109,7 @@ class Coordinate(BaseModel):
     - bbox is optional (but recommended for highlighting).
     - block_id/table_id/cell indices allow linking back to doc_graph objects.
     """
+
     page_num: int = Field(..., ge=1, description="1-based page index (human readable)")
 
     block_id: Optional[str] = None
@@ -119,6 +127,7 @@ class EvidenceSpan(BaseModel):
     Proof snippet with offsets scoped to a known text context (scope_ref).
     Offsets are optional-ish in practice, but we keep them required for strictness.
     """
+
     text: str
     location: Coordinate
 
@@ -141,6 +150,7 @@ class EvidenceSpan(BaseModel):
 # Provenance (audit trail)
 # -------------------------
 
+
 class LLMParameters(BaseModel):
     model_name: str
     temperature: float
@@ -154,8 +164,9 @@ class LLMParameters(BaseModel):
 
 class LexiconIdentifier(BaseModel):
     """External identifier from a lexicon source (e.g., Orphanet, MONDO, UMLS)."""
-    source: str      # e.g. "Orphanet", "MONDO", "UMLS"
-    id: str          # e.g. "ORPHA:2453", "MONDO_0011055", "C0001234"
+
+    source: str  # e.g. "Orphanet", "MONDO", "UMLS"
+    id: str  # e.g. "ORPHA:2453", "MONDO_0011055", "C0001234"
 
     model_config = ConfigDict(frozen=True, extra="forbid")
 
@@ -164,16 +175,19 @@ class ProvenanceMetadata(BaseModel):
     """
     Minimal reproducibility + compliance fingerprints.
     """
-    pipeline_version: str        # e.g. git commit hash
-    run_id: str                  # e.g. RUN_20250101_120000_ab12cd34ef56
-    doc_fingerprint: str         # SHA256 of source PDF bytes
+
+    pipeline_version: str  # e.g. git commit hash
+    run_id: str  # e.g. RUN_20250101_120000_ab12cd34ef56
+    doc_fingerprint: str  # SHA256 of source PDF bytes
 
     generator_name: GeneratorType
     rule_version: Optional[str] = None
 
     # Lexicon provenance (which dictionary file the match came from)
     lexicon_source: Optional[str] = None  # e.g. "2025_08_abbreviation_general.json"
-    lexicon_ids: Optional[List[LexiconIdentifier]] = None  # External IDs (Orphanet, MONDO, etc.)
+    lexicon_ids: Optional[List[LexiconIdentifier]] = (
+        None  # External IDs (Orphanet, MONDO, etc.)
+    )
 
     # Populated during verification
     prompt_bundle_hash: Optional[str] = None
@@ -189,11 +203,13 @@ class ProvenanceMetadata(BaseModel):
 # Candidate (pre-verification)
 # -------------------------
 
+
 class Candidate(BaseModel):
     """
     Noisy pre-LLM object.
     Keep it abbreviation-specific: SF always required; LF optional depending on FieldType.
     """
+
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
 
     doc_id: str
@@ -223,7 +239,9 @@ class Candidate(BaseModel):
 
         if self.field_type in (FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY):
             if not lf:
-                raise ValueError(f"Candidate.long_form is required for field_type={self.field_type}.")
+                raise ValueError(
+                    f"Candidate.long_form is required for field_type={self.field_type}."
+                )
         return self
 
 
@@ -231,10 +249,12 @@ class Candidate(BaseModel):
 # ExtractedEntity (post-verification)
 # -------------------------
 
+
 class ExtractedEntity(BaseModel):
     """
     Verified output object. Suitable for export + audit.
     """
+
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
     candidate_id: uuid.UUID
 
@@ -276,5 +296,7 @@ class ExtractedEntity(BaseModel):
 
         if self.field_type in (FieldType.DEFINITION_PAIR, FieldType.GLOSSARY_ENTRY):
             if self.status == ValidationStatus.VALIDATED and not lf:
-                raise ValueError(f"Validated entity requires long_form for field_type={self.field_type}.")
+                raise ValueError(
+                    f"Validated entity requires long_form for field_type={self.field_type}."
+                )
         return self

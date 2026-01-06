@@ -6,6 +6,7 @@ Target: Tables with columns like "Abbreviation | Definition" or "Term | Meaning"
 
 High confidence extractions since glossary tables are authoritative sources.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -42,9 +43,13 @@ class GlossaryTableCandidateGenerator(BaseCandidateGenerator):
         self.config = config or {}
         self.max_rows_per_table = int(self.config.get("max_rows_per_table", 500))
 
-        self.pipeline_version = str(self.config.get("pipeline_version") or get_git_revision_hash())
+        self.pipeline_version = str(
+            self.config.get("pipeline_version") or get_git_revision_hash()
+        )
         self.run_id = str(self.config.get("run_id") or generate_run_id("ABBR"))
-        self.doc_fingerprint_default = str(self.config.get("doc_fingerprint") or "unknown-doc-fingerprint")
+        self.doc_fingerprint_default = str(
+            self.config.get("doc_fingerprint") or "unknown-doc-fingerprint"
+        )
 
     @property
     def generator_type(self) -> GeneratorType:
@@ -72,7 +77,7 @@ class GlossaryTableCandidateGenerator(BaseCandidateGenerator):
                 seen.add(key)
 
                 # Prefer SF cell for pinpointing; fallback to table bbox
-                bbox = (sf_cell.bbox if sf_cell else table.bbox)
+                bbox = sf_cell.bbox if sf_cell else table.bbox
                 cell_row = int(sf_cell.row_index) if sf_cell else None
                 cell_col = int(sf_cell.col_index) if sf_cell else None
 
@@ -87,7 +92,10 @@ class GlossaryTableCandidateGenerator(BaseCandidateGenerator):
                 prov = ProvenanceMetadata(
                     pipeline_version=self.pipeline_version,
                     run_id=self.run_id,
-                    doc_fingerprint=str(self.config.get("doc_fingerprint") or self.doc_fingerprint_default),
+                    doc_fingerprint=str(
+                        self.config.get("doc_fingerprint")
+                        or self.doc_fingerprint_default
+                    ),
                     generator_name=self.generator_type,
                     rule_version="glossary_table::v1",
                 )

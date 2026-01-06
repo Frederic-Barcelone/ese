@@ -11,10 +11,14 @@ from A_core.A03_provenance import compute_prompt_bundle_hash
 
 
 class PromptTask(str, Enum):
-    VERIFY_DEFINITION_PAIR = "verify_definition_pair"   # DEFINITION_PAIR + GLOSSARY_ENTRY
-    VERIFY_SHORT_FORM_ONLY = "verify_short_form_only"   # SHORT_FORM_ONLY (do NOT guess LF)
-    VERIFY_BATCH = "verify_batch"                       # Batch validation (multiple candidates)
-    FAST_REJECT = "fast_reject"                         # Haiku screening: REJECT obvious non-abbreviations
+    VERIFY_DEFINITION_PAIR = (
+        "verify_definition_pair"  # DEFINITION_PAIR + GLOSSARY_ENTRY
+    )
+    VERIFY_SHORT_FORM_ONLY = (
+        "verify_short_form_only"  # SHORT_FORM_ONLY (do NOT guess LF)
+    )
+    VERIFY_BATCH = "verify_batch"  # Batch validation (multiple candidates)
+    FAST_REJECT = "fast_reject"  # Haiku screening: REJECT obvious non-abbreviations
 
 
 class PromptBundle(BaseModel):
@@ -65,16 +69,15 @@ class PromptRegistry:
                 "4) If LF is slightly wrong, you may provide corrected_long_form.\n\n"
                 "Return JSON with keys:\n"
                 "{{"
-                "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
-                "\"confidence\": number, "
-                "\"evidence\": string, "
-                "\"reason\": string, "
-                "\"corrected_long_form\": string|null"
+                '"status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": number, '
+                '"evidence": string, '
+                '"reason": string, '
+                '"corrected_long_form": string|null'
                 "}}"
             ),
             "schema": None,
         },
-
         # v1.1: Includes provenance context from lexicons
         (PromptTask.VERIFY_DEFINITION_PAIR, "v1.1"): {
             "system": (
@@ -95,16 +98,15 @@ class PromptRegistry:
                 "4) If LF is slightly wrong, you may provide corrected_long_form.\n\n"
                 "Return JSON with keys:\n"
                 "{{"
-                "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
-                "\"confidence\": number, "
-                "\"evidence\": string, "
-                "\"reason\": string, "
-                "\"corrected_long_form\": string|null"
+                '"status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": number, '
+                '"evidence": string, '
+                '"reason": string, '
+                '"corrected_long_form": string|null'
                 "}}"
             ),
             "schema": None,
         },
-
         # v1.2: More permissive - trust high-quality lexicons, reduce false rejections
         (PromptTask.VERIFY_DEFINITION_PAIR, "v1.2"): {
             "system": (
@@ -137,16 +139,15 @@ class PromptRegistry:
                 "If LF has minor errors (typos, formatting), provide corrected_long_form.\n\n"
                 "Return JSON with keys:\n"
                 "{{"
-                "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
-                "\"confidence\": number (0.0-1.0), "
-                "\"evidence\": string (quote from context), "
-                "\"reason\": string (brief explanation), "
-                "\"corrected_long_form\": string|null"
+                '"status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": number (0.0-1.0), '
+                '"evidence": string (quote from context), '
+                '"reason": string (brief explanation), '
+                '"corrected_long_form": string|null'
                 "}}"
             ),
             "schema": None,
         },
-
         # -------------------------
         # Short-form-only (orphan) verification
         # -------------------------
@@ -164,15 +165,14 @@ class PromptRegistry:
                 "- Do NOT invent a long form.\n\n"
                 "Return JSON with keys:\n"
                 "{{"
-                "\"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", "
-                "\"confidence\": number, "
-                "\"evidence\": string, "
-                "\"reason\": string"
+                '"status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": number, '
+                '"evidence": string, '
+                '"reason": string'
                 "}}"
             ),
             "schema": None,
         },
-
         # -------------------------
         # Batch validation (multiple candidates at once)
         # -------------------------
@@ -204,15 +204,14 @@ class PromptRegistry:
                 "Candidates:\n{candidates}\n\n"
                 "Return a JSON array with exactly {count} objects, one per candidate in order:\n"
                 "[\n"
-                "  {{\"index\": 0, \"status\": \"VALIDATED|REJECTED|AMBIGUOUS\", \"confidence\": 0.0-1.0, "
-                "\"reason\": \"brief explanation\", \"corrected_long_form\": null}},\n"
+                '  {{"index": 0, "status": "VALIDATED|REJECTED|AMBIGUOUS", "confidence": 0.0-1.0, '
+                '"reason": "brief explanation", "corrected_long_form": null}},\n'
                 "  ...\n"
                 "]\n"
                 "IMPORTANT: Return exactly {count} results. BE STRICT - when in doubt, REJECT."
             ),
             "schema": None,
         },
-
         # v2.0: Robust output contract + anti-AMBIGUOUS rules
         (PromptTask.VERIFY_BATCH, "v2.0"): {
             "system": (
@@ -263,7 +262,6 @@ class PromptRegistry:
             ),
             "schema": None,
         },
-
         # -------------------------
         # Fast Reject (Haiku screening)
         # -------------------------
@@ -322,7 +320,9 @@ class PromptRegistry:
         schema = entry.get("schema")
 
         params = llm_parameters or {}
-        bundle_hash = compute_prompt_bundle_hash(system_prompt, user_template, schema, params)
+        bundle_hash = compute_prompt_bundle_hash(
+            system_prompt, user_template, schema, params
+        )
 
         return PromptBundle(
             task=task,

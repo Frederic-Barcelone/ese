@@ -23,7 +23,7 @@ class ContentRole(str, Enum):
 class TableType(str, Enum):
     UNKNOWN = "UNKNOWN"
     DATA_GRID = "DATA_GRID"
-    GLOSSARY = "GLOSSARY"      # critical for abbreviation pipeline
+    GLOSSARY = "GLOSSARY"  # critical for abbreviation pipeline
     LAYOUT_GRID = "LAYOUT_GRID"
 
 
@@ -32,11 +32,12 @@ class TextBlock(BaseModel):
     Atomic unit of text.
     'role' lets generators skip headers/footers.
     """
+
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     text: str
 
-    page_num: int = Field(..., ge=1)                 # 1-based
-    reading_order_index: int = Field(..., ge=0)      # 0-based per page
+    page_num: int = Field(..., ge=1)  # 1-based
+    reading_order_index: int = Field(..., ge=0)  # 0-based per page
     role: ContentRole = ContentRole.BODY_TEXT
 
     bbox: BoundingBox
@@ -48,6 +49,7 @@ class TableCell(BaseModel):
     """
     Physical cell. Used for highlighting evidence.
     """
+
     text: str
     row_index: int = Field(..., ge=0)
     col_index: int = Field(..., ge=0)
@@ -67,6 +69,7 @@ class Table(BaseModel):
       - logical_rows: semantic view (generator-friendly)
       - logical_cell_refs: bridge logical -> physical (row/col coords)
     """
+
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     page_num: int = Field(..., ge=1)
     reading_order_index: int = Field(..., ge=0)
@@ -83,7 +86,9 @@ class Table(BaseModel):
 
     # View 3: audit bridge (parallel to logical_rows)
     # e.g. [{"Abbrev": {"rc": (0,0)}, "Term": {"rc": (0,1)}}]
-    logical_cell_refs: List[Dict[str, Dict[str, Tuple[int, int]]]] = Field(default_factory=list)
+    logical_cell_refs: List[Dict[str, Dict[str, Tuple[int, int]]]] = Field(
+        default_factory=list
+    )
 
     bbox: BoundingBox
     metadata: Dict[str, Any] = Field(default_factory=dict)
@@ -108,7 +113,9 @@ class Table(BaseModel):
         r, c = ref["rc"]
         return self.get_cell(r, c)
 
-    def get_bbox_for_logical(self, logical_row_idx: int, key: str) -> Optional[BoundingBox]:
+    def get_bbox_for_logical(
+        self, logical_row_idx: int, key: str
+    ) -> Optional[BoundingBox]:
         """Given logical row index + column key, return the exact cell bbox (if available)."""
         if logical_row_idx < 0 or logical_row_idx >= len(self.logical_cell_refs):
             return None
@@ -122,9 +129,13 @@ class Table(BaseModel):
         if not rows:
             return f"**Table**: {self.caption or 'Untitled'} (empty)\n"
 
-        headers_map = self.metadata.get("headers")      # {col_idx: header_name}
+        headers_map = self.metadata.get("headers")  # {col_idx: header_name}
         ordered_cols = self.metadata.get("ordered_cols")  # [col_idx,...]
-        if isinstance(headers_map, dict) and isinstance(ordered_cols, list) and ordered_cols:
+        if (
+            isinstance(headers_map, dict)
+            and isinstance(ordered_cols, list)
+            and ordered_cols
+        ):
             cols = [headers_map[c] for c in ordered_cols if c in headers_map]
         else:
             cols = list(rows[0].keys())
@@ -139,7 +150,9 @@ class Table(BaseModel):
 
         return "\n".join(out) + "\n"
 
-    def iter_glossary_pairs(self) -> Iterator[Tuple[str, str, Optional[TableCell], Optional[TableCell]]]:
+    def iter_glossary_pairs(
+        self,
+    ) -> Iterator[Tuple[str, str, Optional[TableCell], Optional[TableCell]]]:
         """
         If table_type is GLOSSARY and metadata contains glossary_cols + headers mapping,
         yields (sf, lf, sf_cell, lf_cell) for each logical row.
@@ -166,8 +179,16 @@ class Table(BaseModel):
                 lf = row.get(lf_key, "").strip()
                 if not sf or not lf:
                     continue
-                sf_cell = self.get_cell_from_ref(self.logical_cell_refs[i].get(sf_key, {})) if i < len(self.logical_cell_refs) else None
-                lf_cell = self.get_cell_from_ref(self.logical_cell_refs[i].get(lf_key, {})) if i < len(self.logical_cell_refs) else None
+                sf_cell = (
+                    self.get_cell_from_ref(self.logical_cell_refs[i].get(sf_key, {}))
+                    if i < len(self.logical_cell_refs)
+                    else None
+                )
+                lf_cell = (
+                    self.get_cell_from_ref(self.logical_cell_refs[i].get(lf_key, {}))
+                    if i < len(self.logical_cell_refs)
+                    else None
+                )
                 yield (sf, lf, sf_cell, lf_cell)
 
         return _gen()
@@ -217,19 +238,26 @@ class DocumentGraph(BaseModel):
             raise KeyError(f"Page {page_num} not found")
         return self.pages[page_num]
 
-    def iter_linear_blocks(self, skip_header_footer: bool = True) -> Iterator[TextBlock]:
+    def iter_linear_blocks(
+        self, skip_header_footer: bool = True
+    ) -> Iterator[TextBlock]:
         """
         Primary feeder for generators that read linearly.
         """
         for pnum in sorted(self.pages.keys()):
             page = self.pages[pnum]
             for block in sorted(page.blocks, key=lambda b: b.reading_order_index):
-                if skip_header_footer and block.role in (ContentRole.PAGE_HEADER, ContentRole.PAGE_FOOTER):
+                if skip_header_footer and block.role in (
+                    ContentRole.PAGE_HEADER,
+                    ContentRole.PAGE_FOOTER,
+                ):
                     continue
                 yield block
 
     def iter_tables(self, table_type: Optional[TableType] = None) -> Iterator[Table]:
         for pnum in sorted(self.pages.keys()):
-            for t in sorted(self.pages[pnum].tables, key=lambda x: x.reading_order_index):
+            for t in sorted(
+                self.pages[pnum].tables, key=lambda x: x.reading_order_index
+            ):
                 if table_type is None or t.table_type == table_type:
                     yield t

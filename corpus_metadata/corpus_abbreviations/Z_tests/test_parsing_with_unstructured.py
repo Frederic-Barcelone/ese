@@ -38,8 +38,8 @@ def main() -> None:
 
     parser = PDFToDocGraphParser(
         config={
-            "strategy": "hi_res",      # prueba: "fast" si quieres algo más ligero
-            "languages": ["eng"],      # OCR packs si hace falta
+            "strategy": "hi_res",  # prueba: "fast" si quieres algo más ligero
+            "languages": ["eng"],  # OCR packs si hace falta
             "min_repeat_count": 3,
             "header_top_pct": 0.07,
             "footer_bottom_pct": 0.93,

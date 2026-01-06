@@ -77,8 +77,10 @@ logger = logging.getLogger(__name__)
 # ENUMS
 # =============================================================================
 
+
 class LayoutType(str, Enum):
     """Page layout classification."""
+
     SINGLE_COLUMN = "single_column"
     TWO_COLUMN = "two_column"
     THREE_COLUMN = "three_column"
@@ -89,6 +91,7 @@ class LayoutType(str, Enum):
 
 class BlockClass(str, Enum):
     """Block classification for ordering."""
+
     SPANNING = "spanning"
     LEFT = "left"
     CENTER = "center"
@@ -100,16 +103,18 @@ class SemanticPriority(int, Enum):
     Semantic priority for reading order (XY-Cut++ CMM).
     Lower value = higher priority (read first).
     """
-    CROSS_LAYOUT = 0   # Spanning elements (headers, full-width)
-    TITLE = 1          # Titles, section headers
-    VISION = 2         # Tables, figures, images
-    NARRATIVE = 3      # Body text, paragraphs
-    OTHER = 4          # Footers, captions, misc
+
+    CROSS_LAYOUT = 0  # Spanning elements (headers, full-width)
+    TITLE = 1  # Titles, section headers
+    VISION = 2  # Tables, figures, images
+    NARRATIVE = 3  # Body text, paragraphs
+    OTHER = 4  # Footers, captions, misc
 
 
 # =============================================================================
 # CONFIGURATION
 # =============================================================================
+
 
 @dataclass
 class LayoutConfig:
@@ -118,6 +123,7 @@ class LayoutConfig:
     Defaults tuned for Unstructured.io hi_res output on academic/clinical docs.
     Incorporates XY-Cut++ (arxiv:2504.10258) SOTA parameters.
     """
+
     # -------------------------------------------------------------------------
     # XY-Cut++ SOTA Parameters
     # -------------------------------------------------------------------------
@@ -140,45 +146,45 @@ class LayoutConfig:
     # -------------------------------------------------------------------------
     # Gutter Detection (Breuel method)
     # -------------------------------------------------------------------------
-    gutter_min_width_factor: float = 1.5      # Multiplier of median horizontal gap
-    min_gutter_width_abs: float = 8.0         # Absolute minimum gutter width (points)
-                                              # Academic journals often have 8-12pt gutters
+    gutter_min_width_factor: float = 1.5  # Multiplier of median horizontal gap
+    min_gutter_width_abs: float = 8.0  # Absolute minimum gutter width (points)
+    # Academic journals often have 8-12pt gutters
 
     # -------------------------------------------------------------------------
     # Column Validation
     # -------------------------------------------------------------------------
     min_blocks_per_column: int = 3
-    min_column_width_pct: float = 0.18        # Min column as fraction of page
-    max_column_width_pct: float = 0.58        # Max single column width
+    min_column_width_pct: float = 0.18  # Min column as fraction of page
+    max_column_width_pct: float = 0.58  # Max single column width
 
     # -------------------------------------------------------------------------
     # Spanning Element Detection (fallback if adaptive disabled)
     # -------------------------------------------------------------------------
-    spanning_width_pct: float = 0.55          # Width > this% = spanning
-    spanning_overlap_ratio: float = 0.25      # Overlap ratio to consider spanning
+    spanning_width_pct: float = 0.55  # Width > this% = spanning
+    spanning_overlap_ratio: float = 0.25  # Overlap ratio to consider spanning
 
     # -------------------------------------------------------------------------
     # Zone Detection (% of page height)
     # -------------------------------------------------------------------------
-    header_zone_pct: float = 0.12             # Top 12% is header zone
-    footer_zone_pct: float = 0.10             # Bottom 10% is footer zone
+    header_zone_pct: float = 0.12  # Top 12% is header zone
+    footer_zone_pct: float = 0.10  # Bottom 10% is footer zone
 
     # -------------------------------------------------------------------------
     # Y-band Parameters
     # -------------------------------------------------------------------------
-    y_tolerance: float = 5.0                  # Blocks within this Y are "same line"
-    band_height_factor: float = 1.8           # Multiplier of median block height
+    y_tolerance: float = 5.0  # Blocks within this Y are "same line"
+    band_height_factor: float = 1.8  # Multiplier of median block height
 
     # -------------------------------------------------------------------------
     # XY-Cut Parameters
     # -------------------------------------------------------------------------
     xy_cut_min_elements: int = 2
-    min_gap_factor: float = 0.3               # Min gap as fraction of median gap
+    min_gap_factor: float = 0.3  # Min gap as fraction of median gap
 
     # -------------------------------------------------------------------------
     # Column Search
     # -------------------------------------------------------------------------
-    column_search_margin: float = 0.25        # Search for gutters in middle 50%
+    column_search_margin: float = 0.25  # Search for gutters in middle 50%
 
     # -------------------------------------------------------------------------
     # Three-column Support
@@ -190,26 +196,40 @@ class LayoutConfig:
     # PPTX-to-PDF Mode
     # -------------------------------------------------------------------------
     pptx_mode: bool = False
-    pptx_invert_z_order: bool = True          # PowerPoint reading order is inverted
-    pptx_footer_patterns: Set[str] = field(default_factory=lambda: {
-        "slide", "page", "©", "copyright", "confidential", "footer",
-        "all rights reserved", "proprietary"
-    })
+    pptx_invert_z_order: bool = True  # PowerPoint reading order is inverted
+    pptx_footer_patterns: Set[str] = field(
+        default_factory=lambda: {
+            "slide",
+            "page",
+            "©",
+            "copyright",
+            "confidential",
+            "footer",
+            "all rights reserved",
+            "proprietary",
+        }
+    )
     pptx_aspect_ratio_range: Tuple[float, float] = (1.2, 1.9)  # 4:3 to 16:9
 
     # -------------------------------------------------------------------------
     # Unstructured.io Categories
     # -------------------------------------------------------------------------
     use_unstructured_categories: bool = True
-    title_categories: Set[str] = field(default_factory=lambda: {
-        "title", "header", "headline", "sectionheader"
-    })
-    table_categories: Set[str] = field(default_factory=lambda: {
-        "table", "tablecell", "figure", "image", "figurecaption"
-    })
-    narrative_categories: Set[str] = field(default_factory=lambda: {
-        "narrativetext", "text", "listitem", "paragraph"
-    })
+    title_categories: Set[str] = field(
+        default_factory=lambda: {"title", "header", "headline", "sectionheader"}
+    )
+    table_categories: Set[str] = field(
+        default_factory=lambda: {
+            "table",
+            "tablecell",
+            "figure",
+            "image",
+            "figurecaption",
+        }
+    )
+    narrative_categories: Set[str] = field(
+        default_factory=lambda: {"narrativetext", "text", "listitem", "paragraph"}
+    )
 
     # -------------------------------------------------------------------------
     # Debug
@@ -221,9 +241,11 @@ class LayoutConfig:
 # GEOMETRY EXTRACTION
 # =============================================================================
 
+
 @dataclass
 class BlockGeom:
     """Extracted geometry from a raw block dict."""
+
     block_ref: Dict[str, Any]
     x0: float
     y0: float
@@ -247,8 +269,7 @@ class BlockGeom:
 
 
 def extract_block_geometry(
-    block: Dict[str, Any],
-    config: Optional[LayoutConfig] = None
+    block: Dict[str, Any], config: Optional[LayoutConfig] = None
 ) -> Optional[BlockGeom]:
     """
     Extract geometry from B01 raw_block dict.
@@ -261,7 +282,7 @@ def extract_block_geometry(
         return None
 
     # Extract coordinates from BoundingBox or tuple
-    if hasattr(bbox, 'coords'):
+    if hasattr(bbox, "coords"):
         x0, y0, x1, y1 = bbox.coords
     elif isinstance(bbox, (list, tuple)) and len(bbox) >= 4:
         x0, y0, x1, y1 = bbox[:4]
@@ -302,7 +323,7 @@ def extract_block_geometry(
 def _get_semantic_priority(
     category: Optional[str],
     block: Dict[str, Any],
-    config: Optional[LayoutConfig] = None
+    config: Optional[LayoutConfig] = None,
 ) -> SemanticPriority:
     """
     Determine semantic priority for reading order (XY-Cut++ CMM).
@@ -342,9 +363,11 @@ def _get_semantic_priority(
 # STATISTICS
 # =============================================================================
 
+
 @dataclass
 class PageStats:
     """Computed statistics for adaptive thresholds (XY-Cut++ enhanced)."""
+
     page_width: float
     page_height: float
 
@@ -355,8 +378,8 @@ class PageStats:
     median_y_gap: float
 
     # XY-Cut++ adaptive thresholds
-    median_bbox_length: float      # For β×median spanning threshold
-    density_ratio: float           # τ_d for axis selection
+    median_bbox_length: float  # For β×median spanning threshold
+    density_ratio: float  # τ_d for axis selection
 
     # Content bounds
     content_left: float
@@ -386,7 +409,9 @@ class PageStats:
         return self.density_ratio > threshold
 
     @classmethod
-    def compute(cls, geoms: List[BlockGeom], page_w: float, page_h: float) -> 'PageStats':
+    def compute(
+        cls, geoms: List[BlockGeom], page_w: float, page_h: float
+    ) -> "PageStats":
         """Compute statistics from block geometries."""
         defaults = cls(
             page_width=page_w,
@@ -438,10 +463,14 @@ class PageStats:
             page_width=page_w,
             page_height=page_h,
             median_width=statistics.median(widths) if widths else defaults.median_width,
-            median_height=statistics.median(heights) if heights else defaults.median_height,
+            median_height=statistics.median(heights)
+            if heights
+            else defaults.median_height,
             median_x_gap=statistics.median(x_gaps) if x_gaps else defaults.median_x_gap,
             median_y_gap=statistics.median(y_gaps) if y_gaps else defaults.median_y_gap,
-            median_bbox_length=statistics.median(bbox_lengths) if bbox_lengths else defaults.median_bbox_length,
+            median_bbox_length=statistics.median(bbox_lengths)
+            if bbox_lengths
+            else defaults.median_bbox_length,
             density_ratio=density_ratio,
             content_left=min(g.x0 for g in geoms),
             content_right=max(g.x1 for g in geoms),
@@ -455,60 +484,59 @@ class PageStats:
 # GUTTER DETECTION
 # =============================================================================
 
+
 @dataclass
 class Gutter:
     """Detected column separator."""
-    x_left: float       # Right edge of left content
-    x_right: float      # Left edge of right content
+
+    x_left: float  # Right edge of left content
+    x_right: float  # Left edge of right content
     confidence: float
-    
+
     @property
     def center(self) -> float:
         return (self.x_left + self.x_right) / 2
-    
+
     @property
     def width(self) -> float:
         return self.x_right - self.x_left
 
 
 def find_gutters(
-    geoms: List[BlockGeom],
-    stats: PageStats,
-    config: LayoutConfig
+    geoms: List[BlockGeom], stats: PageStats, config: LayoutConfig
 ) -> List[Gutter]:
     """
     Find column gutters using whitespace analysis.
-    
+
     Based on Breuel's sweep-line algorithm for maximal whitespace.
     """
     if len(geoms) < config.min_blocks_per_column * 2:
         return []
-    
+
     # Adaptive minimum gutter width
     min_gutter = max(
-        stats.median_x_gap * config.gutter_min_width_factor,
-        config.min_gutter_width_abs
+        stats.median_x_gap * config.gutter_min_width_factor, config.min_gutter_width_abs
     )
-    
+
     # Search region (middle portion of page)
     margin = config.column_search_margin
     search_left = stats.page_width * margin
     search_right = stats.page_width * (1 - margin)
-    
+
     # Find gaps using sweep line
     events = []
     for g in geoms:
-        events.append((g.x0, 'start', g))
-        events.append((g.x1, 'end', g))
-    
-    events.sort(key=lambda e: (e[0], 0 if e[1] == 'start' else 1))
-    
+        events.append((g.x0, "start", g))
+        events.append((g.x1, "end", g))
+
+    events.sort(key=lambda e: (e[0], 0 if e[1] == "start" else 1))
+
     active: Set[int] = set()
     gaps = []
     last_x = stats.content_left
-    
+
     for x, event_type, geom in events:
-        if event_type == 'start':
+        if event_type == "start":
             if not active and x - last_x >= min_gutter:
                 gap_center = (last_x + x) / 2
                 if search_left <= gap_center <= search_right:
@@ -518,54 +546,53 @@ def find_gutters(
             active.discard(id(geom))
             if not active:
                 last_x = x
-    
+
     # Convert to Gutter objects and validate
     gutters = []
     for gap_left, gap_right in gaps:
         gutter = Gutter(
             x_left=gap_left,
             x_right=gap_right,
-            confidence=min(1.0, (gap_right - gap_left) / (min_gutter * 2))
+            confidence=min(1.0, (gap_right - gap_left) / (min_gutter * 2)),
         )
-        
+
         # Validate: sufficient blocks on each side
         if _validate_gutter(gutter, geoms, stats, config):
             gutters.append(gutter)
-    
+
     # Sort by position
     gutters.sort(key=lambda g: g.center)
-    
+
     # Limit to 2 gutters max (for 3-column)
     if not config.enable_three_column:
         gutters = gutters[:1]
     else:
         gutters = gutters[:2]
-    
+
     return gutters
 
 
 def _validate_gutter(
-    gutter: Gutter,
-    geoms: List[BlockGeom],
-    stats: PageStats,
-    config: LayoutConfig
+    gutter: Gutter, geoms: List[BlockGeom], stats: PageStats, config: LayoutConfig
 ) -> bool:
     """Validate gutter has sufficient content on both sides."""
     left_blocks = [g for g in geoms if g.x_center < gutter.center]
     right_blocks = [g for g in geoms if g.x_center > gutter.center]
-    
-    if (len(left_blocks) < config.min_blocks_per_column or
-        len(right_blocks) < config.min_blocks_per_column):
+
+    if (
+        len(left_blocks) < config.min_blocks_per_column
+        or len(right_blocks) < config.min_blocks_per_column
+    ):
         return False
-    
+
     # Check column widths
     min_col = stats.page_width * config.min_column_width_pct
     left_width = gutter.x_left - stats.content_left
     right_width = stats.content_right - gutter.x_right
-    
+
     if left_width < min_col or right_width < min_col:
         return False
-    
+
     return True
 
 
@@ -573,10 +600,9 @@ def _validate_gutter(
 # X-COORDINATE CLUSTERING (Fallback Column Detection)
 # =============================================================================
 
+
 def find_columns_by_clustering(
-    geoms: List[BlockGeom],
-    stats: PageStats,
-    config: LayoutConfig
+    geoms: List[BlockGeom], stats: PageStats, config: LayoutConfig
 ) -> List[Gutter]:
     """
     Detect column boundaries by clustering block x-coordinates.
@@ -620,12 +646,14 @@ def find_columns_by_clustering(
             gap_center = (x_centers[i] + x_centers[i + 1]) / 2
             # Only consider gaps in middle portion of page
             if 0.2 * stats.page_width < gap_center < 0.8 * stats.page_width:
-                gaps.append({
-                    'x_left': x_centers[i],
-                    'x_right': x_centers[i + 1],
-                    'center': gap_center,
-                    'width': gap,
-                })
+                gaps.append(
+                    {
+                        "x_left": x_centers[i],
+                        "x_right": x_centers[i + 1],
+                        "center": gap_center,
+                        "width": gap,
+                    }
+                )
 
     if not gaps:
         return []
@@ -634,17 +662,19 @@ def find_columns_by_clustering(
     gutters = []
     for gap in gaps[:2]:  # Max 2 gutters for 3-column
         gutter = Gutter(
-            x_left=gap['x_left'],
-            x_right=gap['x_right'],
-            confidence=min(1.0, gap['width'] / (min_gap * 2))
+            x_left=gap["x_left"],
+            x_right=gap["x_right"],
+            confidence=min(1.0, gap["width"] / (min_gap * 2)),
         )
 
         # Validate: count blocks on each side
-        left_count = sum(1 for g in narrow_geoms if g.x_center < gap['center'])
-        right_count = sum(1 for g in narrow_geoms if g.x_center > gap['center'])
+        left_count = sum(1 for g in narrow_geoms if g.x_center < gap["center"])
+        right_count = sum(1 for g in narrow_geoms if g.x_center > gap["center"])
 
-        if (left_count >= config.min_blocks_per_column and
-                right_count >= config.min_blocks_per_column):
+        if (
+            left_count >= config.min_blocks_per_column
+            and right_count >= config.min_blocks_per_column
+        ):
             gutters.append(gutter)
 
     return gutters
@@ -654,9 +684,9 @@ def find_columns_by_clustering(
 # L-SHAPED DETECTION (XY-Cut++ Pre-Mask)
 # =============================================================================
 
+
 def detect_l_shaped_regions(
-    geoms: List[BlockGeom],
-    config: LayoutConfig
+    geoms: List[BlockGeom], config: LayoutConfig
 ) -> List[BlockGeom]:
     """
     Detect L-shaped regions that would break standard XY-cut (XY-Cut++ pre-mask).
@@ -704,11 +734,12 @@ def detect_l_shaped_regions(
 # SPANNING DETECTION (XY-Cut++ Enhanced)
 # =============================================================================
 
+
 def detect_spanning(
     geoms: List[BlockGeom],
     gutters: List[Gutter],
     stats: PageStats,
-    config: LayoutConfig
+    config: LayoutConfig,
 ) -> Tuple[List[BlockGeom], List[BlockGeom]]:
     """
     Separate spanning elements from column-bound elements (XY-Cut++ enhanced).
@@ -780,10 +811,9 @@ def detect_spanning(
 # XY-CUT ORDERING (XY-Cut++ Enhanced)
 # =============================================================================
 
+
 def xy_cut_order(
-    geoms: List[BlockGeom],
-    stats: PageStats,
-    config: LayoutConfig
+    geoms: List[BlockGeom], stats: PageStats, config: LayoutConfig
 ) -> List[BlockGeom]:
     """
     Order blocks using recursive XY-Cut with density-driven axis selection (XY-Cut++).
@@ -810,7 +840,7 @@ def _xy_cut_recursive(
     geoms: List[BlockGeom],
     stats: PageStats,
     config: LayoutConfig,
-    prefer_y_first: bool = True
+    prefer_y_first: bool = True,
 ) -> List[BlockGeom]:
     """
     Recursive XY-Cut implementation (XY-Cut++ enhanced).
@@ -836,46 +866,46 @@ def _xy_cut_recursive(
 
     # Choose axis based on XY-Cut++ density-driven selection
     if x_cut is None:
-        cut_pos, axis = y_cut, 'y'
+        cut_pos, axis = y_cut, "y"
     elif y_cut is None:
-        cut_pos, axis = x_cut, 'x'
+        cut_pos, axis = x_cut, "x"
     else:
-        x_score = _cut_quality(geoms, x_cut, 'x')
-        y_score = _cut_quality(geoms, y_cut, 'y')
+        x_score = _cut_quality(geoms, x_cut, "x")
+        y_score = _cut_quality(geoms, y_cut, "y")
 
         # XY-Cut++: Use density ratio to determine preference
         # τ_d > 0.9 → prefer Y-cuts (horizontal reading bands)
         if prefer_y_first:
             # Prefer Y-cuts when density suggests columnar content
             if y_score >= x_score * 0.7:  # More aggressive Y preference
-                cut_pos, axis = y_cut, 'y'
+                cut_pos, axis = y_cut, "y"
             else:
-                cut_pos, axis = x_cut, 'x'
+                cut_pos, axis = x_cut, "x"
         else:
             # Prefer X-cuts when density suggests row-based content
             if x_score >= y_score * 0.7:
-                cut_pos, axis = x_cut, 'x'
+                cut_pos, axis = x_cut, "x"
             else:
-                cut_pos, axis = y_cut, 'y'
+                cut_pos, axis = y_cut, "y"
 
     # Partition and recurse
     assert cut_pos is not None  # Guaranteed by logic above
-    if axis == 'x':
+    if axis == "x":
         left = [g for g in geoms if g.x_center < cut_pos]
         right = [g for g in geoms if g.x_center >= cut_pos]
-        return (_xy_cut_recursive(left, stats, config, prefer_y_first) +
-                _xy_cut_recursive(right, stats, config, prefer_y_first))
+        return _xy_cut_recursive(
+            left, stats, config, prefer_y_first
+        ) + _xy_cut_recursive(right, stats, config, prefer_y_first)
     else:
         top = [g for g in geoms if g.y_center < cut_pos]
         bottom = [g for g in geoms if g.y_center >= cut_pos]
-        return (_xy_cut_recursive(top, stats, config, prefer_y_first) +
-                _xy_cut_recursive(bottom, stats, config, prefer_y_first))
+        return _xy_cut_recursive(
+            top, stats, config, prefer_y_first
+        ) + _xy_cut_recursive(bottom, stats, config, prefer_y_first)
 
 
 def _find_x_cut(
-    geoms: List[BlockGeom],
-    stats: PageStats,
-    config: Optional[LayoutConfig] = None
+    geoms: List[BlockGeom], stats: PageStats, config: Optional[LayoutConfig] = None
 ) -> Optional[float]:
     """Find best vertical cut."""
     if len(geoms) < 2:
@@ -896,9 +926,7 @@ def _find_x_cut(
 
 
 def _find_y_cut(
-    geoms: List[BlockGeom],
-    stats: PageStats,
-    config: Optional[LayoutConfig] = None
+    geoms: List[BlockGeom], stats: PageStats, config: Optional[LayoutConfig] = None
 ) -> Optional[float]:
     """Find best horizontal cut."""
     if len(geoms) < 2:
@@ -926,7 +954,7 @@ def _cut_quality(geoms: List[BlockGeom], cut_pos: float, axis: str) -> float:
     - Balance: How evenly the cut divides elements (40%)
     - Separation: How few elements straddle the cut (60%)
     """
-    if axis == 'x':
+    if axis == "x":
         left = [g for g in geoms if g.x_center < cut_pos]
         right = [g for g in geoms if g.x_center >= cut_pos]
         straddling = sum(1 for g in geoms if g.x0 < cut_pos < g.x1)
@@ -949,9 +977,11 @@ def _cut_quality(geoms: List[BlockGeom], cut_pos: float, axis: str) -> float:
 # LAYOUT DETECTION
 # =============================================================================
 
+
 @dataclass
 class PageLayout:
     """Detected page layout."""
+
     page_width: float
     page_height: float
     layout_type: LayoutType
@@ -959,10 +989,10 @@ class PageLayout:
     spanning_blocks: List[BlockGeom] = field(default_factory=list)
     column_blocks: List[BlockGeom] = field(default_factory=list)
     header_end_y: float = 0.0
-    footer_start_y: float = float('inf')
+    footer_start_y: float = float("inf")
     stats: Optional[PageStats] = None
     confidence: float = 0.0
-    
+
     @property
     def num_columns(self) -> int:
         return len(self.gutters) + 1 if self.gutters else 1
@@ -972,7 +1002,7 @@ def detect_layout(
     blocks: List[Dict[str, Any]],
     page_width: float,
     page_height: float,
-    config: Optional[LayoutConfig] = None
+    config: Optional[LayoutConfig] = None,
 ) -> PageLayout:
     """
     Detect page layout from B01 raw_blocks (XY-Cut++ enhanced).
@@ -987,9 +1017,13 @@ def detect_layout(
     # Auto-detect PPTX mode from aspect ratio
     if not cfg.pptx_mode:
         aspect_ratio = page_width / page_height if page_height > 0 else 1.0
-        if cfg.pptx_aspect_ratio_range[0] <= aspect_ratio <= cfg.pptx_aspect_ratio_range[1]:
+        if (
+            cfg.pptx_aspect_ratio_range[0]
+            <= aspect_ratio
+            <= cfg.pptx_aspect_ratio_range[1]
+        ):
             # Landscape aspect ratio suggests PPTX
-            cfg = LayoutConfig(**{**cfg.__dict__, 'pptx_mode': True})
+            cfg = LayoutConfig(**{**cfg.__dict__, "pptx_mode": True})
             logger.debug(f"Auto-detected PPTX mode (aspect ratio: {aspect_ratio:.2f})")
 
     # Extract geometries with semantic priority
@@ -1022,7 +1056,8 @@ def detect_layout(
 
     # Filter to body zone for column detection
     body_geoms = [
-        g for g in geoms
+        g
+        for g in geoms
         if g.y_center > layout.header_end_y and g.y_center < layout.footer_start_y
     ]
 
@@ -1041,7 +1076,7 @@ def detect_layout(
 
     # Detect spanning elements (with adaptive threshold)
     spanning, column_bound = detect_spanning(body_geoms, gutters, stats, cfg)
-    
+
     # Validate column layout
     if len(gutters) >= 2 and cfg.enable_three_column:
         # Check three-column validity
@@ -1049,7 +1084,7 @@ def detect_layout(
         left = sum(1 for g in column_bound if g.x_center < g1.center)
         center = sum(1 for g in column_bound if g1.center <= g.x_center < g2.center)
         right = sum(1 for g in column_bound if g.x_center >= g2.center)
-        
+
         if all(c >= cfg.three_col_min_blocks for c in [left, center, right]):
             layout.layout_type = LayoutType.THREE_COLUMN
             layout.gutters = gutters[:2]
@@ -1061,20 +1096,23 @@ def detect_layout(
     elif gutters:
         layout.layout_type = LayoutType.TWO_COLUMN
         layout.gutters = [gutters[0]]
-    
+
     layout.spanning_blocks = spanning
     layout.column_blocks = column_bound
-    layout.confidence = min(g.confidence for g in layout.gutters) if layout.gutters else 1.0
-    
+    layout.confidence = (
+        min(g.confidence for g in layout.gutters) if layout.gutters else 1.0
+    )
+
     # Check for mixed header (spanning elements in header area)
     if spanning and layout.num_columns > 1:
         header_spans = [
-            g for g in spanning 
+            g
+            for g in spanning
             if g.y_center < layout.header_end_y + stats.median_height * 2
         ]
         if header_spans:
             layout.layout_type = LayoutType.MIXED_HEADER
-    
+
     return layout
 
 
@@ -1082,10 +1120,11 @@ def detect_layout(
 # READING ORDER ENGINE
 # =============================================================================
 
+
 def order_by_layout(
     blocks: List[Dict[str, Any]],
     layout: PageLayout,
-    config: Optional[LayoutConfig] = None
+    config: Optional[LayoutConfig] = None,
 ) -> List[Dict[str, Any]]:
     """
     Order blocks according to detected layout (XY-Cut++ enhanced).
@@ -1127,9 +1166,7 @@ def order_by_layout(
 
 
 def _handle_pptx_ordering(
-    geoms: List[BlockGeom],
-    layout: PageLayout,
-    config: LayoutConfig
+    geoms: List[BlockGeom], layout: PageLayout, config: LayoutConfig
 ) -> List[BlockGeom]:
     """
     Handle PPTX-specific ordering quirks.
@@ -1171,9 +1208,7 @@ def _handle_pptx_ordering(
 
 
 def _order_multicolumn(
-    geoms: List[BlockGeom],
-    layout: PageLayout,
-    config: LayoutConfig
+    geoms: List[BlockGeom], layout: PageLayout, config: LayoutConfig
 ) -> List[Dict[str, Any]]:
     """
     Order blocks for multi-column layout with Y-band interleaving.
@@ -1181,29 +1216,30 @@ def _order_multicolumn(
     # Separate by zone
     header = [g for g in geoms if g.y_center <= layout.header_end_y]
     footer = [g for g in geoms if g.y_center >= layout.footer_start_y]
-    body = [g for g in geoms 
-            if g.y_center > layout.header_end_y and g.y_center < layout.footer_start_y]
-    
+    body = [
+        g
+        for g in geoms
+        if g.y_center > layout.header_end_y and g.y_center < layout.footer_start_y
+    ]
+
     ordered = []
-    
+
     # Header: top-to-bottom, left-to-right
     header.sort(key=lambda g: (g.y0, g.x0))
     ordered.extend(header)
-    
+
     # Body: Y-band interleaved
     ordered.extend(_order_body_bands(body, layout, config))
-    
+
     # Footer: top-to-bottom, left-to-right
     footer.sort(key=lambda g: (g.y0, g.x0))
     ordered.extend(footer)
-    
+
     return [g.block_ref for g in ordered]
 
 
 def _order_body_bands(
-    geoms: List[BlockGeom],
-    layout: PageLayout,
-    config: LayoutConfig
+    geoms: List[BlockGeom], layout: PageLayout, config: LayoutConfig
 ) -> List[BlockGeom]:
     """
     Order body blocks using Y-band interleaving (XY-Cut++ enhanced).
@@ -1220,8 +1256,7 @@ def _order_body_bands(
     if stats is None:
         return sorted(geoms, key=lambda g: (g.y0, g.x0))
     band_height = max(
-        stats.median_height * config.band_height_factor,
-        config.y_tolerance * 3
+        stats.median_height * config.band_height_factor, config.y_tolerance * 3
     )
 
     # Build spanning set using content_key for stable identity
@@ -1238,25 +1273,25 @@ def _order_body_bands(
 
         if len(layout.gutters) == 1:
             return 1 if g.x_center < layout.gutters[0].center else 3
-        
+
         g1 = layout.gutters[0].center
         g2 = layout.gutters[1].center
-        
+
         if g.x_center < g1:
             return 1
         elif g.x_center >= g2:
             return 3
         else:
             return 2
-    
+
     def get_band(g: BlockGeom) -> int:
         return int(g.y0 / band_height) if band_height > 0 else 0
-    
+
     # Group by band
     bands: Dict[int, List[Tuple[int, BlockGeom]]] = defaultdict(list)
     for g in geoms:
         bands[get_band(g)].append((get_column(g), g))
-    
+
     # Order within each band
     ordered = []
     for band_idx in sorted(bands.keys()):
@@ -1264,7 +1299,7 @@ def _order_body_bands(
         # Sort by: column, then Y, then X
         band_items.sort(key=lambda item: (item[0], item[1].y0, item[1].x0))
         ordered.extend(g for _, g in band_items)
-    
+
     return ordered
 
 
@@ -1272,47 +1307,48 @@ def _order_body_bands(
 # PUBLIC API (Drop-in replacement)
 # =============================================================================
 
+
 def order_page_blocks(
     blocks: List[Dict[str, Any]],
     page_width: float,
     page_height: float,
     config: Optional[LayoutConfig] = None,
-    page_num: int = 1
+    page_num: int = 1,
 ) -> List[Dict[str, Any]]:
     """
     Main entry point: detect layout and order blocks.
-    
+
     DROP-IN REPLACEMENT for PDFToDocGraphParser._order_blocks_deterministically()
-    
+
     Args:
         blocks: List of raw_block dicts from B01 (with "bbox", "text", etc.)
         page_width: Page width in points (from PyMuPDF)
         page_height: Page height in points (from PyMuPDF)
         config: Optional LayoutConfig for tuning
         page_num: Page number (for logging only)
-    
+
     Returns:
         Same blocks list, reordered for correct reading sequence.
-    
+
     Usage in B01_pdf_to_docgraph.py:
         # Replace:
         ordered = self._order_blocks_deterministically(raw_pages[page_num], page_w=page_w)
-        
+
         # With:
         from B_parsing.B04_column_ordering import order_page_blocks
         ordered = order_page_blocks(raw_pages[page_num], page_w, page_h)
     """
     cfg = config or LayoutConfig()
-    
+
     # Detect layout
     layout = detect_layout(blocks, page_width, page_height, cfg)
-    
+
     if cfg.debug_mode:
         logger.debug(
             f"Page {page_num}: {layout.layout_type.value}, "
             f"{layout.num_columns} cols, confidence={layout.confidence:.2f}"
         )
-    
+
     # Order blocks
     return order_by_layout(blocks, layout, cfg)
 
@@ -1321,11 +1357,12 @@ def order_page_blocks(
 # CONVENIENCE FUNCTIONS
 # =============================================================================
 
+
 def get_layout_info(
     blocks: List[Dict[str, Any]],
     page_width: float,
     page_height: float,
-    config: Optional[LayoutConfig] = None
+    config: Optional[LayoutConfig] = None,
 ) -> Dict[str, Any]:
     """
     Get layout info without reordering (for debugging).
@@ -1356,7 +1393,9 @@ def get_layout_info(
         info["xy_cut_metrics"] = {
             "density_ratio": round(stats.density_ratio, 3),
             "use_xy_cut": stats.should_use_xy_cut(cfg.density_ratio_threshold),
-            "adaptive_spanning_threshold": round(stats.adaptive_spanning_threshold(cfg.spanning_beta), 1),
+            "adaptive_spanning_threshold": round(
+                stats.adaptive_spanning_threshold(cfg.spanning_beta), 1
+            ),
             "median_bbox_length": round(stats.median_bbox_length, 1),
             "median_width": round(stats.median_width, 1),
             "median_height": round(stats.median_height, 1),
@@ -1371,9 +1410,7 @@ def get_layout_info(
 
 
 def analyze_pdf_layout(
-    pdf_path: str,
-    config: Optional[LayoutConfig] = None,
-    verbose: bool = True
+    pdf_path: str, config: Optional[LayoutConfig] = None, verbose: bool = True
 ) -> List[Dict[str, Any]]:
     """
     Analyze layout of each page in a PDF (diagnostic tool).
@@ -1390,6 +1427,7 @@ def analyze_pdf_layout(
 
     # Parse PDF to get raw pages
     import fitz
+
     doc = fitz.open(pdf_path)
 
     results = []
@@ -1403,29 +1441,36 @@ def analyze_pdf_layout(
         # Use Unstructured if available, else basic extraction
         try:
             from unstructured.partition.pdf import partition_pdf
+
             elements = partition_pdf(
                 pdf_path,
                 strategy="hi_res",
                 include_page_breaks=True,
             )
             # Filter to current page
-            page_elements = [e for e in elements if getattr(e.metadata, 'page_number', 0) == page_num + 1]
+            page_elements = [
+                e
+                for e in elements
+                if getattr(e.metadata, "page_number", 0) == page_num + 1
+            ]
 
             blocks = []
             for elem in page_elements:
-                coords = getattr(elem.metadata, 'coordinates', None)
-                if coords and hasattr(coords, 'points'):
+                coords = getattr(elem.metadata, "coordinates", None)
+                if coords and hasattr(coords, "points"):
                     pts = coords.points
                     x0 = min(p[0] for p in pts)
                     y0 = min(p[1] for p in pts)
                     x1 = max(p[0] for p in pts)
                     y1 = max(p[1] for p in pts)
-                    blocks.append({
-                        "text": str(elem),
-                        "bbox": (x0, y0, x1, y1),
-                        "category": elem.category,
-                        "zone": "BODY",
-                    })
+                    blocks.append(
+                        {
+                            "text": str(elem),
+                            "bbox": (x0, y0, x1, y1),
+                            "category": elem.category,
+                            "zone": "BODY",
+                        }
+                    )
         except Exception:
             # Fallback to PyMuPDF blocks
             blocks = []
@@ -1436,12 +1481,14 @@ def analyze_pdf_layout(
                     for line in block.get("lines", []):
                         for span in line.get("spans", []):
                             text += span.get("text", "") + " "
-                    blocks.append({
-                        "text": text.strip(),
-                        "bbox": bbox,
-                        "category": None,
-                        "zone": "BODY",
-                    })
+                    blocks.append(
+                        {
+                            "text": text.strip(),
+                            "bbox": bbox,
+                            "category": None,
+                            "zone": "BODY",
+                        }
+                    )
 
         # Get layout info
         info = get_layout_info(blocks, page_w, page_h, cfg)
@@ -1450,29 +1497,35 @@ def analyze_pdf_layout(
         results.append(info)
 
         if verbose:
-            print(f"\n{'='*60}")
+            print(f"\n{'=' * 60}")
             print(f"PAGE {page_num + 1} ({page_w:.0f}x{page_h:.0f})")
-            print(f"{'='*60}")
+            print(f"{'=' * 60}")
             print(f"  Layout: {info['layout_type']} ({info['num_columns']} columns)")
-            print(f"  Blocks: {info['total_blocks']} total, {info['num_spanning']} spanning, {info['num_column_bound']} column-bound")
-            if info['num_gutters'] > 0:
+            print(
+                f"  Blocks: {info['total_blocks']} total, {info['num_spanning']} spanning, {info['num_column_bound']} column-bound"
+            )
+            if info["num_gutters"] > 0:
                 print(f"  Gutters: {info['gutter_positions']}")
-            if 'xy_cut_metrics' in info:
-                m = info['xy_cut_metrics']
-                print(f"  XY-Cut++: density_ratio={m['density_ratio']}, use_xy={m['use_xy_cut']}")
-                print(f"            adaptive_threshold={m['adaptive_spanning_threshold']}")
-            if 'l_shaped_blocks' in info:
+            if "xy_cut_metrics" in info:
+                m = info["xy_cut_metrics"]
+                print(
+                    f"  XY-Cut++: density_ratio={m['density_ratio']}, use_xy={m['use_xy_cut']}"
+                )
+                print(
+                    f"            adaptive_threshold={m['adaptive_spanning_threshold']}"
+                )
+            if "l_shaped_blocks" in info:
                 print(f"  L-shaped blocks: {info['l_shaped_blocks']}")
 
     doc.close()
 
     if verbose:
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print("SUMMARY")
-        print(f"{'='*60}")
+        print(f"{'=' * 60}")
         layout_counts = {}
         for r in results:
-            lt = r['layout_type']
+            lt = r["layout_type"]
             layout_counts[lt] = layout_counts.get(lt, 0) + 1
         for lt, count in sorted(layout_counts.items()):
             print(f"  {lt}: {count} pages")
@@ -1480,10 +1533,7 @@ def analyze_pdf_layout(
     return results
 
 
-def create_config(
-    document_type: str = "default",
-    **overrides
-) -> LayoutConfig:
+def create_config(document_type: str = "default", **overrides) -> LayoutConfig:
     """
     Create configuration for specific document types.
 
@@ -1534,6 +1584,7 @@ def create_config(
 # INTEGRATION HELPER: Direct replacement in B01
 # =============================================================================
 
+
 class ColumnOrderingMixin:
     """
     Mixin class for PDFToDocGraphParser (XY-Cut++ enhanced).
@@ -1553,7 +1604,7 @@ class ColumnOrderingMixin:
         blocks: List[Dict[str, Any]],
         page_width: float,
         page_height: float,
-        page_num: int = 1
+        page_num: int = 1,
     ) -> List[Dict[str, Any]]:
         """
         SOTA replacement for _order_blocks_deterministically.
@@ -1566,7 +1617,7 @@ class ColumnOrderingMixin:
         - PPTX mode support
         """
         # Use instance attribute to avoid shared state across instances
-        config = getattr(self, '_layout_config', None) or LayoutConfig()
+        config = getattr(self, "_layout_config", None) or LayoutConfig()
         return order_page_blocks(blocks, page_width, page_height, config, page_num)
 
     def set_layout_config(self, config: LayoutConfig) -> None:
