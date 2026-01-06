@@ -137,6 +137,10 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             "trial_acronyms_path",
             "/Users/frederictetard/Projects/ese/ouput_datasources/trial_acronyms_lexicon.json"
         ))
+        self.pro_scales_path = Path(self.config.get(
+            "pro_scales_path",
+            "/Users/frederictetard/Projects/ese/ouput_datasources/pro_scales_lexicon.json"
+        ))
 
         self.context_window = int(self.config.get("context_window", 300))
 
@@ -170,6 +174,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_igan_lexicon(self.igan_lexicon_path)
         self._load_pah_lexicon(self.pah_lexicon_path)
         self._load_trial_acronyms(self.trial_acronyms_path)
+        self._load_pro_scales(self.pro_scales_path)
 
         # Print compact summary
         self._print_lexicon_summary()
@@ -996,6 +1001,50 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 pass
 
         self._lexicon_stats.append(("Trial acronyms", loaded))
+
+    def _load_pro_scales(self, path: Path) -> None:
+        """Load PRO scales lexicon (SF-36, PHQ-9, EORTC-QLQ-C30, etc.)."""
+        if not path.exists():
+            return
+
+        data = json.loads(path.read_text(encoding="utf-8"))
+        loaded = 0
+
+        for scale_name, entry in data.items():
+            if not scale_name or not isinstance(entry, dict):
+                continue
+
+            # Get expansion and regex pattern
+            lf = entry.get("canonical_expansion")
+            regex_str = entry.get("regex")
+
+            if not lf or not regex_str:
+                continue
+
+            try:
+                case_insensitive = bool(entry.get("case_insensitive", False))
+                flags = re.IGNORECASE if case_insensitive else 0
+                pattern = re.compile(regex_str, flags)
+
+                # Build lexicon IDs from example NCT IDs (use first one)
+                lexicon_ids = []
+                example_ncts = entry.get("example_nct_ids", [])
+                if example_ncts and len(example_ncts) > 0:
+                    lexicon_ids.append({"source": "ClinicalTrials.gov", "id": example_ncts[0]})
+
+                self.abbrev_entries.append(LexiconEntry(
+                    sf=scale_name,
+                    lf=lf,
+                    pattern=pattern,
+                    source=path.name,
+                    lexicon_ids=lexicon_ids,
+                    preserve_case=True,  # Preserve case for PRO scale names
+                ))
+                loaded += 1
+            except re.error:
+                pass
+
+        self._lexicon_stats.append(("PRO scales", loaded))
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)

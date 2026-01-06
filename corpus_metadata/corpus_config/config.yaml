@@ -58,6 +58,9 @@ lexicons:
   # Clinical trial acronyms lexicon
   trial_acronyms: "trial_acronyms_lexicon.json"
 
+  # PRO scales lexicon (Patient-Reported Outcome instruments)
+  pro_scales: "pro_scales_lexicon.json"
+
   # Other lexicons
   drug_lexicon: "2025_08_lexicon_drug.json"
   drug_alexion: "2025_08_alexion_drugs.json"
