@@ -116,15 +116,19 @@ class GoldLoader:
         Accepts:
           - list[dict]
           - dict with key 'annotations' pointing to list[dict]
+          - dict with key 'defined_annotations' pointing to list[dict] (v2 format)
         """
         records: List[Dict[str, Any]]
 
         if isinstance(raw, dict) and "annotations" in raw and isinstance(raw["annotations"], list):
             records = raw["annotations"]
+        elif isinstance(raw, dict) and "defined_annotations" in raw and isinstance(raw["defined_annotations"], list):
+            # v2 format: use defined_annotations (extractable pairs with definitions)
+            records = raw["defined_annotations"]
         elif isinstance(raw, list):
             records = raw
         else:
-            raise ValueError(f"Gold file {source} must be a list or an object with 'annotations' list")
+            raise ValueError(f"Gold file {source} must be a list or an object with 'annotations'/'defined_annotations' list")
 
         annos: List[GoldAnnotation] = []
         seen: set[Tuple[str, str, Optional[str]]] = set()
