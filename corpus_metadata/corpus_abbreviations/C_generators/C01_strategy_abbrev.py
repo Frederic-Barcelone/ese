@@ -541,4 +541,4 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
 
 # Re-export for backward compatibility
-from C_generators.C01b_strategy_glossary import GlossaryTableCandidateGenerator
+from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator

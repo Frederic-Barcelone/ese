@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_abbreviations/C_generators/C01b_strategy_glossary.py
+# corpus_metadata/corpus_abbreviations/C_generators/C05_strategy_glossary.py
 """
 Glossary Table Extractor - Extract SF/LF pairs from glossary tables.
 

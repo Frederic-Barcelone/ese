@@ -75,7 +75,7 @@ from A_core.A04_heuristics_config import (
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
-from C_generators.C01b_strategy_glossary import GlossaryTableCandidateGenerator
+from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C02_strategy_regex import RegexCandidateGenerator
 from C_generators.C03_strategy_layout import LayoutCandidateGenerator
 from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
