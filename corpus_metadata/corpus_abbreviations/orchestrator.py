@@ -1199,11 +1199,9 @@ Return ONLY the JSON array, nothing else."""
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
         if validated:
             print(f"\nValidated abbreviations ({len(validated)}):")
-            for v in validated[:20]:
+            for v in validated:
                 lf = v.long_form or "(no expansion)"
                 print(f"  * {v.short_form} -> {lf}")
-            if len(validated) > 20:
-                print(f"  ... and {len(validated) - 20} more")
 
         return results
 
