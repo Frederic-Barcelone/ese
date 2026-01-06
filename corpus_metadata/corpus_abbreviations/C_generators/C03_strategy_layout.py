@@ -21,7 +21,6 @@ from enum import Enum
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from A_core.A01_domain_models import (
-    BoundingBox,
     Candidate,
     Coordinate,
     FieldType,

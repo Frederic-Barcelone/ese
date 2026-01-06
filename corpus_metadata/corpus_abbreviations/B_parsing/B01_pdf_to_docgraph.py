@@ -760,7 +760,6 @@ class PDFToDocGraphParser(BaseParser):
     def _looks_like_author_or_affiliation(self, t: str) -> bool:
         if not t:
             return False
-        tl = t.strip().lower()
 
         # easy metadata exclusions
         if META_PREFIX_RE.search(t):

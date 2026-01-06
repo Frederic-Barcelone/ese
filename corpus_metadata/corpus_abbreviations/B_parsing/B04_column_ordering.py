@@ -60,7 +60,7 @@ import statistics
 from collections import defaultdict
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Tuple, Set
+from typing import Any, Dict, List, Optional, Tuple, Set
 import logging
 
 # Import from your core modules
@@ -731,9 +731,6 @@ def detect_spanning(
     # Fallback: fixed percentage threshold
     fixed_threshold = stats.page_width * config.spanning_width_pct
 
-    # Use the more permissive threshold
-    span_threshold = min(adaptive_threshold, fixed_threshold)
-
     for geom in geoms:
         is_spanning = False
 
@@ -1181,8 +1178,6 @@ def _order_multicolumn(
     """
     Order blocks for multi-column layout with Y-band interleaving.
     """
-    stats = layout.stats
-    
     # Separate by zone
     header = [g for g in geoms if g.y_center <= layout.header_end_y]
     footer = [g for g in geoms if g.y_center >= layout.footer_start_y]
@@ -1391,10 +1386,7 @@ def analyze_pdf_layout(
     Returns:
         List of layout info dicts, one per page
     """
-    from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
-
     cfg = config or LayoutConfig(debug_mode=True)
-    parser = PDFToDocGraphParser(config={"use_sota_layout": True})
 
     # Parse PDF to get raw pages
     import fitz

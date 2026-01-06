@@ -13,8 +13,8 @@ from flashtext import KeywordProcessor
 # scispacy for biomedical NER (identifies entities like C3G, eGFR, KDIGO)
 try:
     import spacy
-    from scispacy.abbreviation import AbbreviationDetector
-    from scispacy.linking import EntityLinker
+    from scispacy.abbreviation import AbbreviationDetector  # noqa: F401
+    from scispacy.linking import EntityLinker  # noqa: F401
     SCISPACY_AVAILABLE = True
 except ImportError:
     spacy = None  # type: ignore
@@ -403,7 +403,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                             lexicon_source=source,
                             lexicon_ids=lex_ids,
                         ))
-                except Exception as e:
+                except Exception:
                     # Don't fail entire extraction if scispacy has issues
                     pass
 

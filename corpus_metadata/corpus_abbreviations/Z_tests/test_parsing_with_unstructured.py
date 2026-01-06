@@ -24,7 +24,7 @@ def _bootstrap_import_path() -> Path:
 
 
 def main() -> None:
-    pkg_root = _bootstrap_import_path()
+    _bootstrap_import_path()  # Sets up sys.path
 
     # ✅ Pon aquí tu PDF (sin CLI)
     PDF_FILE = Path(
@@ -35,7 +35,6 @@ def main() -> None:
         raise FileNotFoundError(f"PDF no encontrado: {PDF_FILE}")
 
     from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser, document_to_markdown
-    from B_parsing.B02_doc_graph import ContentRole
 
     parser = PDFToDocGraphParser(
         config={

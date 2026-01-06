@@ -17,7 +17,7 @@ Categories tracked for logging:
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Set, Optional, List
+from typing import Any, Dict, Set, Optional
 import logging
 import yaml
 

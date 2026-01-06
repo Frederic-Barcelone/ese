@@ -34,7 +34,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from difflib import SequenceMatcher
-from typing import Dict, Iterable, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -354,7 +354,6 @@ class Scorer:
 
         # 1) Full pair matching for gold_full (with fuzzy LF matching)
         for (gold_sf, gold_lf) in gold_full:
-            gold_matched = False
             for (sys_sf, sys_lf) in sys_set:
                 if sys_sf != gold_sf:
                     continue
@@ -363,7 +362,6 @@ class Scorer:
                     tp.add((gold_sf, gold_lf))
                     matched_gold.add((gold_sf, gold_lf))
                     matched_sys.add((sys_sf, sys_lf))
-                    gold_matched = True
                     break  # One match per gold item is enough
 
         # 2) SF-only matching (gold wants SF presence, LF irrelevant)

@@ -1,21 +1,12 @@
-# corpus_metadata/corpus_abbreviations/F_evaluation/F05_extraction_analysis.py
-
+# F05_extraction_analysis.py
 """
-Extraction Analysis Report
+Extraction Analysis Report - Version 2 (Simplified)
 
-Compares system extraction results against gold standard and displays a
-detailed analysis report on screen.
+Clear 2-section structure:
+    SECTION 1: GOLD STANDARD - What we SHOULD find (checklist)
+    SECTION 2: EXTRACTED     - What we DID find (results)
 
-Report sections:
-    - True Positives (TP): correctly extracted abbreviations
-    - False Positives (FP): extracted but not in gold
-    - False Negatives (FN): in gold but not extracted
-    - Rejected: candidates that were extracted but rejected by validation
-    - Ambiguous: candidates marked as ambiguous
-
-Output: Screen only (no JSON, no file output)
-
-This module is called automatically after extraction in the orchestrator.
+Plus: Summary metrics at the top for quick overview.
 """
 
 from __future__ import annotations
@@ -23,82 +14,61 @@ from __future__ import annotations
 import json
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
-
-
-# Type aliases
-Pair = Tuple[str, Optional[str]]  # (SF, LF)
+from typing import Any, Dict, List, Optional
 
 
 class ExtractionAnalyzer:
-    """
-    Analyzes extraction results against gold standard.
-    Displays report to screen only.
-    """
+    """Analyzes extraction results against gold standard."""
 
-    def __init__(
-        self,
-        fuzzy_threshold: float = 0.8,
-    ):
+    def __init__(self, fuzzy_threshold: float = 0.8):
         self.fuzzy_threshold = fuzzy_threshold
 
-    def analyze(
-        self,
-        results_data: Dict[str, Any],
-        gold_path: str,
-    ) -> None:
+    # -------------------------------------------------------------------------
+    # MAIN ENTRY POINT
+    # -------------------------------------------------------------------------
+    def analyze(self, results_data: Dict[str, Any], gold_path: str) -> Dict[str, Any]:
         """
-        Run full analysis and print report to screen.
-
-        Args:
-            results_data: Extraction results dict (from _export_results)
-            gold_path: Path to gold standard JSON file
+        Run analysis and print report.
+        
+        Returns metrics dict for programmatic use.
         """
-        # Load gold data
+        # Load data
         gold_data = self._load_gold(gold_path)
-
-        # Extract document info
         doc_name = results_data.get("document", "Unknown")
-
+        
         # Filter gold to this document
-        gold_defined = [g for g in gold_data.get("defined", []) if self._match_doc_id(g.get("doc_id", ""), doc_name)]
-        gold_mentioned = [g for g in gold_data.get("mentioned", []) if self._match_doc_id(g.get("doc_id", ""), doc_name)]
-
-        # Get extracted abbreviations (validated)
+        gold_defined = [
+            g for g in gold_data.get("defined", [])
+            if self._match_doc_id(g.get("doc_id", ""), doc_name)
+        ]
+        gold_mentioned = [
+            g for g in gold_data.get("mentioned", [])
+            if self._match_doc_id(g.get("doc_id", ""), doc_name)
+        ]
+        
+        # Get system extractions
         validated = results_data.get("abbreviations", [])
-
-        # Get counts
-        total_candidates = results_data.get("total_candidates", 0)
-        total_validated = results_data.get("total_validated", 0)
-        total_rejected = results_data.get("total_rejected", 0)
-        total_ambiguous = results_data.get("total_ambiguous", 0)
-
-        # Build comparison sets
-        sys_set = self._build_system_set(validated)
-        gold_set = self._build_gold_set(gold_defined)
-
-        # Compute TP, FP, FN
-        tp, fp, fn = self._compare_sets(sys_set, gold_set)
-
+        
+        # Build comparison data
+        comparison = self._build_comparison(validated, gold_defined)
+        
         # Print report
-        self._print_header(doc_name)
-        self._print_summary(
-            total_candidates=total_candidates,
-            total_validated=total_validated,
-            total_rejected=total_rejected,
-            total_ambiguous=total_ambiguous,
-            gold_defined_count=len(gold_defined),
-            gold_mentioned_count=len(gold_mentioned),
+        self._print_report(
+            doc_name=doc_name,
+            comparison=comparison,
+            gold_defined=gold_defined,
+            gold_mentioned=gold_mentioned,
+            validated=validated,
+            results_data=results_data,
         )
-        self._print_metrics(tp, fp, fn)
-        self._print_heuristics(results_data.get("heuristics_counters", {}))
-        self._print_true_positives(tp)
-        self._print_false_positives(fp)
-        self._print_false_negatives(fn, gold_defined)
-        self._print_mentioned_not_defined(gold_mentioned, validated)
+        
+        return comparison["metrics"]
 
+    # -------------------------------------------------------------------------
+    # DATA LOADING
+    # -------------------------------------------------------------------------
     def _load_gold(self, path: str) -> Dict[str, List[Dict]]:
-        """Load gold standard file."""
+        """Load gold standard file (supports multiple formats)."""
         gold_path = Path(path)
         if not gold_path.exists():
             return {"defined": [], "mentioned": [], "excluded": []}
@@ -106,39 +76,38 @@ class ExtractionAnalyzer:
         with open(gold_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        # Handle different gold file formats
         if "defined_annotations" in data:
-            # papers_gold_v2.json format
             return {
                 "defined": data.get("defined_annotations", []),
                 "mentioned": data.get("mentioned_annotations", []),
                 "excluded": data.get("excluded_annotations", []),
             }
         elif "annotations" in data:
-            # Standard format
             return {"defined": data.get("annotations", []), "mentioned": [], "excluded": []}
         elif isinstance(data, list):
             return {"defined": data, "mentioned": [], "excluded": []}
-        else:
-            return {"defined": [], "mentioned": [], "excluded": []}
+        return {"defined": [], "mentioned": [], "excluded": []}
 
     def _match_doc_id(self, gold_doc_id: str, target_doc: str) -> bool:
-        """Check if gold doc_id matches target document."""
+        """Check if document IDs match."""
         gold_stem = Path(gold_doc_id).stem.lower()
         target_stem = Path(target_doc).stem.lower()
         return gold_stem == target_stem or gold_stem in target_stem or target_stem in gold_stem
 
+    # -------------------------------------------------------------------------
+    # NORMALIZATION
+    # -------------------------------------------------------------------------
     def _norm_sf(self, sf: str) -> str:
         return (sf or "").strip().upper()
 
     def _norm_lf(self, lf: Optional[str]) -> Optional[str]:
         if lf is None:
             return None
-        s = " ".join(str(lf).strip().split())
-        return s.lower() if s else None
+        s = " ".join(str(lf).strip().split()).lower()
+        return s if s else None
 
     def _lf_matches(self, sys_lf: Optional[str], gold_lf: Optional[str]) -> bool:
-        """Check if long forms match (exact or fuzzy)."""
+        """Check if long forms match (exact, substring, or fuzzy)."""
         sys_norm = self._norm_lf(sys_lf)
         gold_norm = self._norm_lf(gold_lf)
 
@@ -148,203 +117,360 @@ class ExtractionAnalyzer:
             return False
         if sys_norm == gold_norm:
             return True
-
-        # Substring match
         if sys_norm in gold_norm or gold_norm in sys_norm:
             return True
-
-        # Fuzzy match
+        
         ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
         return ratio >= self.fuzzy_threshold
 
-    def _build_system_set(self, validated: List[Dict]) -> Set[Pair]:
-        """Build set of (SF, LF) pairs from system output."""
-        out: Set[Pair] = set()
+    # -------------------------------------------------------------------------
+    # COMPARISON LOGIC
+    # -------------------------------------------------------------------------
+    def _build_comparison(
+        self, 
+        validated: List[Dict], 
+        gold_defined: List[Dict]
+    ) -> Dict[str, Any]:
+        """
+        Build comparison between system output and gold standard.
+        
+        Returns structured data for both sections of the report.
+        """
+        # Deduplicate validated by (SF, LF)
+        seen = set()
+        unique_validated = []
         for item in validated:
             sf = self._norm_sf(item.get("short_form", ""))
             lf = self._norm_lf(item.get("long_form"))
-            if sf:
-                out.add((sf, lf))
-        return out
-
-    def _build_gold_set(self, gold_items: List[Dict]) -> Set[Pair]:
-        """Build set of (SF, LF) pairs from gold standard."""
-        out: Set[Pair] = set()
-        for item in gold_items:
+            key = (sf, lf)
+            if key not in seen and sf:
+                seen.add(key)
+                unique_validated.append({
+                    "short_form": sf,
+                    "long_form": item.get("long_form"),
+                    "long_form_norm": lf,
+                })
+        
+        # Deduplicate gold by (SF, LF)
+        seen_gold = set()
+        unique_gold = []
+        for item in gold_defined:
             sf = self._norm_sf(item.get("short_form", ""))
             lf = self._norm_lf(item.get("long_form"))
-            if sf:
-                out.add((sf, lf))
-        return out
+            key = (sf, lf)
+            if key not in seen_gold and sf:
+                seen_gold.add(key)
+                unique_gold.append({
+                    "short_form": sf,
+                    "long_form": item.get("long_form"),
+                    "long_form_norm": lf,
+                    "page": item.get("page", "?"),
+                })
+        
+        # SECTION 1: Check each gold item - was it found?
+        gold_results = []
+        matched_gold_keys = set()
+        
+        for gold_item in unique_gold:
+            gold_sf = gold_item["short_form"]
+            gold_lf_norm = gold_item["long_form_norm"]
+            
+            found = False
+            matched_lf = None
+            for sys_item in unique_validated:
+                if sys_item["short_form"] == gold_sf:
+                    if self._lf_matches(sys_item["long_form_norm"], gold_lf_norm):
+                        found = True
+                        matched_lf = sys_item["long_form"]
+                        matched_gold_keys.add((gold_sf, gold_lf_norm))
+                        break
+            
+            gold_results.append({
+                "short_form": gold_sf,
+                "long_form": gold_item["long_form"],
+                "page": gold_item["page"],
+                "found": found,
+                "matched_lf": matched_lf,
+            })
+        
+        # SECTION 2: Check each extracted item - does it match gold?
+        extracted_results = []
+        
+        for sys_item in unique_validated:
+            sys_sf = sys_item["short_form"]
+            sys_lf_norm = sys_item["long_form_norm"]
+            
+            matches_gold = False
+            matched_gold_lf = None
+            for gold_item in unique_gold:
+                if gold_item["short_form"] == sys_sf:
+                    if self._lf_matches(sys_lf_norm, gold_item["long_form_norm"]):
+                        matches_gold = True
+                        matched_gold_lf = gold_item["long_form"]
+                        break
+            
+            extracted_results.append({
+                "short_form": sys_sf,
+                "long_form": sys_item["long_form"],
+                "matches_gold": matches_gold,
+                "gold_long_form": matched_gold_lf,
+            })
+        
+        # Sort extracted alphabetically
+        extracted_results.sort(key=lambda x: x["short_form"])
+        
+        # Calculate metrics
+        tp = sum(1 for g in gold_results if g["found"])
+        fn = sum(1 for g in gold_results if not g["found"])
+        fp = sum(1 for e in extracted_results if not e["matches_gold"])
+        
+        precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+        recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+        f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+        
+        return {
+            "gold_results": gold_results,
+            "extracted_results": extracted_results,
+            "metrics": {
+                "true_positives": tp,
+                "false_positives": fp,
+                "false_negatives": fn,
+                "precision": precision,
+                "recall": recall,
+                "f1": f1,
+            }
+        }
 
-    def _compare_sets(
-        self, sys_set: Set[Pair], gold_set: Set[Pair]
-    ) -> Tuple[Set[Pair], Set[Pair], Set[Pair]]:
-        """Compare system and gold sets, returning TP, FP, FN."""
-        tp: Set[Pair] = set()
-        fp: Set[Pair] = set()
-        fn: Set[Pair] = set()
-
-        matched_gold: Set[Pair] = set()
-
-        # Match system items against gold
-        for (sys_sf, sys_lf) in sys_set:
-            matched = False
-            for (gold_sf, gold_lf) in gold_set:
-                if sys_sf != gold_sf:
-                    continue
-                if self._lf_matches(sys_lf, gold_lf):
-                    tp.add((sys_sf, sys_lf))
-                    matched_gold.add((gold_sf, gold_lf))
-                    matched = True
-                    break
-            if not matched:
-                fp.add((sys_sf, sys_lf))
-
-        # Find unmatched gold items (FN)
-        for gold_pair in gold_set:
-            if gold_pair not in matched_gold:
-                fn.add(gold_pair)
-
-        return tp, fp, fn
-
-    def _print_header(self, doc_name: str) -> None:
-        """Print report header."""
-        print("\n" + "=" * 70)
-        print("EXTRACTION ANALYSIS REPORT (F06)")
-        print("=" * 70)
-        print(f"Document: {doc_name}")
-        print("=" * 70)
-
-    def _print_summary(
+    # -------------------------------------------------------------------------
+    # REPORT PRINTING
+    # -------------------------------------------------------------------------
+    def _print_report(
         self,
-        total_candidates: int,
-        total_validated: int,
-        total_rejected: int,
-        total_ambiguous: int,
-        gold_defined_count: int,
-        gold_mentioned_count: int,
+        doc_name: str,
+        comparison: Dict[str, Any],
+        gold_defined: List[Dict],
+        gold_mentioned: List[Dict],
+        validated: List[Dict],
+        results_data: Dict[str, Any],
     ) -> None:
-        """Print extraction summary."""
-        print("\n--- EXTRACTION SUMMARY ---")
-        print(f"  Total candidates generated:  {total_candidates}")
-        print(f"  Validated (accepted):        {total_validated}")
-        print(f"  Rejected:                    {total_rejected}")
-        print(f"  Ambiguous:                   {total_ambiguous}")
-        print()
-        print(f"  Gold defined abbreviations:  {gold_defined_count}")
-        print(f"  Gold mentioned (no def):     {gold_mentioned_count}")
+        """Print the full report."""
+        
+        gold_results = comparison["gold_results"]
+        extracted_results = comparison["extracted_results"]
+        metrics = comparison["metrics"]
+        
+        # =====================================================================
+        # HEADER
+        # =====================================================================
+        print("\n")
+        print("╔" + "═" * 78 + "╗")
+        print("║" + " EXTRACTION ANALYSIS REPORT ".center(78) + "║")
+        print("╠" + "═" * 78 + "╣")
+        print("║" + f" Document: {doc_name[:66]}".ljust(78) + "║")
+        print("╚" + "═" * 78 + "╝")
+        
+        # =====================================================================
+        # QUICK SUMMARY BOX
+        # =====================================================================
+        tp = metrics["true_positives"]
+        fp = metrics["false_positives"]
+        fn = metrics["false_negatives"]
+        precision = metrics["precision"]
+        recall = metrics["recall"]
+        f1 = metrics["f1"]
+        
+        print("\n┌─────────────────────────────────────────────────────────────────┐")
+        print("│                        QUICK SUMMARY                            │")
+        print("├─────────────────────────────────────────────────────────────────┤")
+        print(f"│  Gold Standard:  {len(gold_results):3} abbreviations to find                      │")
+        print(f"│  Extracted:      {len(extracted_results):3} abbreviations found                        │")
+        print("├─────────────────────────────────────────────────────────────────┤")
+        print(f"│  ✓ Correct (TP):     {tp:3}    │  Precision: {precision:6.1%}                │")
+        print(f"│  ✗ Extra (FP):       {fp:3}    │  Recall:    {recall:6.1%}                │")
+        print(f"│  ○ Missed (FN):      {fn:3}    │  F1 Score:  {f1:6.1%}                │")
+        print("└─────────────────────────────────────────────────────────────────┘")
+        
+        # =====================================================================
+        # SECTION 1: GOLD STANDARD CHECKLIST
+        # =====================================================================
+        print("\n")
+        print("━" * 80)
+        print(" SECTION 1: GOLD STANDARD CHECKLIST ")
+        print(" (What we SHOULD find - from human-annotated ground truth)")
+        print("━" * 80)
+        
+        if not gold_results:
+            print("\n  (No gold standard entries for this document)")
+        else:
+            # Header
+            print(f"\n  {'Status':<8} {'Short Form':<15} {'Long Form':<45} {'Page':<5}")
+            print("  " + "─" * 75)
+            
+            # Sort: found first, then not found
+            gold_sorted = sorted(gold_results, key=lambda x: (not x["found"], x["short_form"]))
+            
+            for item in gold_sorted:
+                sf = item["short_form"]
+                lf = item["long_form"] or "(no definition)"
+                lf_display = (lf[:42] + "...") if len(lf) > 45 else lf
+                page = str(item["page"])
+                
+                if item["found"]:
+                    status = "  ✓ FOUND"
+                    print(f"  {status:<8} {sf:<15} {lf_display:<45} {page:<5}")
+                else:
+                    status = "  ✗ MISS "
+                    print(f"  \033[91m{status:<8} {sf:<15} {lf_display:<45} {page:<5}\033[0m")
+            
+            # Summary
+            found_count = sum(1 for g in gold_results if g["found"])
+            total_count = len(gold_results)
+            print("  " + "─" * 75)
+            print(f"  TOTAL: {found_count}/{total_count} found ({found_count/total_count*100:.0f}% recall)")
+        
+        # =====================================================================
+        # SECTION 2: EXTRACTED ABBREVIATIONS
+        # =====================================================================
+        print("\n")
+        print("━" * 80)
+        print(" SECTION 2: EXTRACTED ABBREVIATIONS ")
+        print(" (What we DID find - sorted alphabetically)")
+        print("━" * 80)
+        
+        if not extracted_results:
+            print("\n  (No abbreviations extracted)")
+        else:
+            # Header
+            print(f"\n  {'Status':<10} {'Short Form':<15} {'Extracted Long Form':<40}")
+            print("  " + "─" * 75)
+            
+            for item in extracted_results:
+                sf = item["short_form"]
+                lf = item["long_form"] or "(no expansion)"
+                lf_display = (lf[:37] + "...") if len(lf) > 40 else lf
+                
+                if item["matches_gold"]:
+                    status = "  ✓ MATCH "
+                    print(f"  {status:<10} {sf:<15} {lf_display:<40}")
+                else:
+                    status = "  ○ EXTRA "
+                    print(f"  \033[93m{status:<10} {sf:<15} {lf_display:<40}\033[0m")
+            
+            # Summary
+            match_count = sum(1 for e in extracted_results if e["matches_gold"])
+            total_count = len(extracted_results)
+            print("  " + "─" * 75)
+            print(f"  TOTAL: {match_count}/{total_count} match gold ({match_count/total_count*100:.0f}% precision)")
+        
+        # =====================================================================
+        # SECTION 3: MENTIONED (BONUS - not scored)
+        # =====================================================================
+        if gold_mentioned:
+            print("\n")
+            print("━" * 80)
+            print(" SECTION 3: MENTIONED ABBREVIATIONS (not scored) ")
+            print(" (Used in document but not explicitly defined - bonus if found)")
+            print("━" * 80)
+            
+            # Build set of extracted SFs
+            extracted_sfs = {e["short_form"] for e in extracted_results}
+            
+            # Deduplicate mentioned
+            seen_mentioned = set()
+            unique_mentioned = []
+            for m in gold_mentioned:
+                sf = self._norm_sf(m.get("short_form", ""))
+                if sf not in seen_mentioned:
+                    seen_mentioned.add(sf)
+                    unique_mentioned.append(m)
+            
+            print(f"\n  {'Status':<10} {'Short Form':<15} {'Expected Long Form':<40}")
+            print("  " + "─" * 75)
+            
+            found_count = 0
+            for m in sorted(unique_mentioned, key=lambda x: x.get("short_form", "")):
+                sf = self._norm_sf(m.get("short_form", ""))
+                lf = m.get("long_form", "(unknown)")
+                lf_display = (lf[:37] + "...") if len(lf) > 40 else lf
+                
+                if sf in extracted_sfs:
+                    print(f"  {'  ✓ FOUND':<10} {sf:<15} {lf_display:<40}")
+                    found_count += 1
+                else:
+                    print(f"  \033[90m{'  - MISS':<10} {sf:<15} {lf_display:<40}\033[0m")
+            
+            print("  " + "─" * 75)
+            print(f"  BONUS: {found_count}/{len(unique_mentioned)} found")
+        
+        # =====================================================================
+        # PIPELINE STATS (optional)
+        # =====================================================================
+        total_candidates = results_data.get("total_candidates", 0)
+        total_validated = results_data.get("total_validated", 0)
+        total_rejected = results_data.get("total_rejected", 0)
+        heuristics = results_data.get("heuristics_counters", {})
+        
+        if total_candidates > 0 or heuristics:
+            print("\n")
+            print("━" * 80)
+            print(" PIPELINE STATISTICS ")
+            print("━" * 80)
+            print(f"\n  Candidates generated:  {total_candidates}")
+            print(f"  Validated:             {total_validated}")
+            print(f"  Rejected:              {total_rejected}")
+            
+            if heuristics:
+                print("\n  Heuristics applied:")
+                for key, value in sorted(heuristics.items()):
+                    if value > 0:
+                        print(f"    • {key}: {value}")
+        
+        print("\n" + "═" * 80)
+        print(" END OF REPORT ")
+        print("═" * 80 + "\n")
 
-    def _print_metrics(self, tp: Set[Pair], fp: Set[Pair], fn: Set[Pair]) -> None:
-        """Print precision/recall/F1 metrics."""
-        tp_count = len(tp)
-        fp_count = len(fp)
-        fn_count = len(fn)
 
-        precision = tp_count / (tp_count + fp_count) if (tp_count + fp_count) else 0.0
-        recall = tp_count / (tp_count + fn_count) if (tp_count + fn_count) else 0.0
-        f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) else 0.0
-
-        print("\n--- METRICS ---")
-        print(f"  Precision: {precision:.2%} ({tp_count} / {tp_count + fp_count})")
-        print(f"  Recall:    {recall:.2%} ({tp_count} / {tp_count + fn_count})")
-        print(f"  F1 Score:  {f1:.2%}")
-        print()
-        print(f"  True Positives (TP):   {tp_count}")
-        print(f"  False Positives (FP):  {fp_count}")
-        print(f"  False Negatives (FN):  {fn_count}")
-
-    def _print_heuristics(self, counters: Dict[str, int]) -> None:
-        """Print heuristics counters."""
-        if not counters:
-            return
-
-        print("\n--- HEURISTICS COUNTERS ---")
-        for key, value in sorted(counters.items()):
-            print(f"  {key}: {value}")
-
-    def _print_true_positives(self, tp: Set[Pair]) -> None:
-        """Print true positives list."""
-        print("\n--- TRUE POSITIVES (TP) ---")
-        if not tp:
-            print("  (none)")
-            return
-
-        for sf, lf in sorted(tp):
-            lf_display = lf or "(no long form)"
-            print(f"  [OK] {sf} -> {lf_display}")
-
-    def _print_false_positives(self, fp: Set[Pair]) -> None:
-        """Print false positives list."""
-        print("\n--- FALSE POSITIVES (FP) ---")
-        print("  (Extracted but not in gold standard)")
-        if not fp:
-            print("  (none)")
-            return
-
-        for sf, lf in sorted(fp):
-            lf_display = lf or "(no long form)"
-            print(f"  [FP] {sf} -> {lf_display}")
-
-    def _print_false_negatives(self, fn: Set[Pair], gold_defined: List[Dict]) -> None:
-        """Print false negatives list with context from gold."""
-        print("\n--- FALSE NEGATIVES (FN) ---")
-        print("  (In gold standard but not extracted)")
-        if not fn:
-            print("  (none)")
-            return
-
-        # Build lookup for gold details
-        gold_lookup = {}
-        for g in gold_defined:
-            sf = self._norm_sf(g.get("short_form", ""))
-            lf = self._norm_lf(g.get("long_form"))
-            gold_lookup[(sf, lf)] = g
-
-        for sf, lf in sorted(fn):
-            lf_display = lf or "(no long form)"
-            gold_info = gold_lookup.get((sf, lf), {})
-            page = gold_info.get("page", "?")
-            print(f"  [MISS] {sf} -> {lf_display} (page {page})")
-
-    def _print_mentioned_not_defined(
-        self, gold_mentioned: List[Dict], validated: List[Dict]
-    ) -> None:
-        """Print mentioned abbreviations and their extraction status."""
-        if not gold_mentioned:
-            return
-
-        print("\n--- MENTIONED (not defined in gold) ---")
-        print("  (Abbreviations used in document without explicit definition)")
-
-        # Build set of extracted SFs
-        extracted_sfs = {self._norm_sf(v.get("short_form", "")) for v in validated}
-
-        found_count = 0
-        not_found_count = 0
-
-        for g in sorted(gold_mentioned, key=lambda x: x.get("short_form", "")):
-            sf = self._norm_sf(g.get("short_form", ""))
-            page = g.get("page", "?")
-
-            if sf in extracted_sfs:
-                print(f"  [FOUND]  {sf} (page {page}) - extracted with definition")
-                found_count += 1
-            else:
-                print(f"  [MISS]   {sf} (page {page}) - not extracted")
-                not_found_count += 1
-
-        print(f"\n  Mentioned found: {found_count}, Mentioned missing: {not_found_count}")
-
-
-def run_analysis(results_data: Dict[str, Any], gold_path: str) -> None:
+# =============================================================================
+# PUBLIC API
+# =============================================================================
+def run_analysis(results_data: Dict[str, Any], gold_path: str) -> Dict[str, Any]:
     """
-    Convenience function to run extraction analysis.
-    Called from orchestrator after _export_results.
-
+    Run extraction analysis.
+    
     Args:
-        results_data: The export data dict built in _export_results
-        gold_path: Path to gold standard JSON file
+        results_data: Export data dict from orchestrator
+        gold_path: Path to gold standard JSON
+        
+    Returns:
+        Metrics dict with precision, recall, f1, etc.
     """
     analyzer = ExtractionAnalyzer()
-    analyzer.analyze(results_data, gold_path)
+    return analyzer.analyze(results_data, gold_path)
+
+
+# =============================================================================
+# STANDALONE TEST
+# =============================================================================
+if __name__ == "__main__":
+    # Test with mock data
+    mock_results = {
+        "document": "01_Article_Iptacopan C3G Trial.pdf",
+        "abbreviations": [
+            {"short_form": "C3G", "long_form": "C3 glomerulopathy"},
+            {"short_form": "eGFR", "long_form": "estimated glomerular filtration rate"},
+            {"short_form": "FDA", "long_form": "Food and Drug Administration"},
+            {"short_form": "CI", "long_form": "confidence interval"},
+            {"short_form": "SD", "long_form": "standard deviation"},
+        ],
+        "total_candidates": 608,
+        "total_validated": 62,
+        "total_rejected": 84,
+        "heuristics_counters": {
+            "recovered_by_stats_whitelist": 8,
+            "blacklisted_fp_count": 9,
+        }
+    }
+    
+    # You would pass real gold path here
+    # run_analysis(mock_results, "/path/to/papers_gold_v2.json")
+    print("Module loaded successfully. Call run_analysis() to use.")

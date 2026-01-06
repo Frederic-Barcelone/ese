@@ -21,7 +21,6 @@ import time
 import uuid
 import warnings
 from collections import Counter
-from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -954,7 +953,7 @@ Return ONLY the JSON array, nothing else."""
             and word_counts.get(c.short_form.upper(), 0) >= 2
         )
 
-        print(f"\n[3/4] Validating candidates with Claude...")
+        print("\n[3/4] Validating candidates with Claude...")
         print(f"  Corroborated SFs: {len(corroborated_sfs)}")
         print(f"  Frequent SFs (2+): {frequent_sfs}")
         print(f"  Filtered (lexicon-only, rare): {filtered_count}")
@@ -1119,7 +1118,7 @@ Return ONLY the JSON array, nothing else."""
                 all_results[pdf_path.name] = []
 
         print(f"\n{'#' * 60}")
-        print(f"BATCH COMPLETE")
+        print("BATCH COMPLETE")
         print(f"{'#' * 60}")
         print(f"PDFs processed: {len(all_results)}")
 

@@ -24,9 +24,8 @@ from __future__ import annotations
 import csv
 import json
 from collections import defaultdict
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, ConfigDict, Field
 

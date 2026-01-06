@@ -24,7 +24,6 @@ sys.path.insert(0, str(ROOT))
 
 from A_core.A01_domain_models import ExtractedEntity, ValidationStatus
 from A_core.A03_provenance import generate_run_id
-from A_core.A04_heuristics_config import HeuristicsConfig, DEFAULT_HEURISTICS_CONFIG
 from F_evaluation.F01_gold_loader import GoldLoader, GoldAnnotation
 from F_evaluation.F02_scorer import Scorer, ScorerConfig, ScoreReport
 from orchestrator import Orchestrator
@@ -190,7 +189,7 @@ class PipelineEvaluator:
             gold_count = len(self.gold_index.get(doc_id, []))
             validated = [e for e in entities if e.status == ValidationStatus.VALIDATED]
 
-            print(f"\n  SCORE:")
+            print("\n  SCORE:")
             print(f"  Extracted: {len(validated)} | Gold: {gold_count}")
             print(f"  P: {report.precision:.1%} | R: {report.recall:.1%} | F1: {report.f1:.1%}")
             print(f"  TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}")
@@ -206,25 +205,25 @@ class PipelineEvaluator:
 
         corpus_report = self.scorer.evaluate_corpus(all_entities, all_gold)
 
-        print(f"\nMICRO (global):")
+        print("\nMICRO (global):")
         print(f"  Precision: {corpus_report.micro.precision:.1%}")
         print(f"  Recall:    {corpus_report.micro.recall:.1%}")
         print(f"  F1:        {corpus_report.micro.f1:.1%}")
         print(f"  TP: {corpus_report.micro.true_positives} | FP: {corpus_report.micro.false_positives} | FN: {corpus_report.micro.false_negatives}")
 
-        print(f"\nMACRO (per-doc average):")
+        print("\nMACRO (per-doc average):")
         print(f"  Precision: {corpus_report.macro.precision:.1%}")
         print(f"  Recall:    {corpus_report.macro.recall:.1%}")
         print(f"  F1:        {corpus_report.macro.f1:.1%}")
 
         # Error analysis
         if corpus_report.micro.fp_examples:
-            print(f"\n[X] False Positives (sample):")
+            print("\n[X] False Positives (sample):")
             for ex in corpus_report.micro.fp_examples[:5]:
                 print(f"   {ex}")
 
         if corpus_report.micro.fn_examples:
-            print(f"\n[WARN]ï¸  False Negatives (sample):")
+            print("\n[WARN]ï¸  False Negatives (sample):")
             for ex in corpus_report.micro.fn_examples[:5]:
                 print(f"   {ex}")
 

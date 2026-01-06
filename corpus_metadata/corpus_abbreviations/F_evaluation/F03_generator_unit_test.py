@@ -28,7 +28,6 @@ Requires: Gold JSON from F03_process_nlp4rare.py
 """
 
 import json
-import sys
 from pathlib import Path
 from typing import List, Dict, Tuple, Set
 

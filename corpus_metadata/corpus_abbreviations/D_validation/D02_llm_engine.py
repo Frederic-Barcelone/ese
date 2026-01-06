@@ -654,13 +654,11 @@ class LLMEngine:
         Uses id-based matching for robustness.
         Falls back to individual validation if parsing fails.
         """
-        # Build id -> candidate lookup
-        id_to_candidate: dict[str, Candidate] = {str(c.id): c for c in batch}
         expected_count = len(batch)
 
         # Handle None (parsing failed)
         if raw is None:
-            print(f"  [WARN] Batch parse failed (raw=None), falling back")
+            print("  [WARN] Batch parse failed (raw=None), falling back")
             return [self.verify_candidate(c) for c in batch]
 
         # Extract results list from response
