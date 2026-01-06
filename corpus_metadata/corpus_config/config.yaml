@@ -32,7 +32,7 @@ paths:
   pdf_input: "Pdfs"
   gold_data: "gold_data"
   papers_folder: "gold_data/PAPERS"
-  gold_json: "gold_data/papers_gold.json"
+  gold_json: "gold_data/papers_gold_v2.json"
 
 # ==============================================================================
 # LEXICONS - All lexicon file paths (relative to paths.base/paths.dictionaries)

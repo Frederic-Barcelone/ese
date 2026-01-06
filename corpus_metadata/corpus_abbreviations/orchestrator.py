@@ -83,6 +83,7 @@ from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
+from F_evaluation.F06_extraction_analysis import run_analysis
 
 # Module constants
 PIPELINE_VERSION = "0.7"
@@ -128,6 +129,7 @@ class Orchestrator:
         self.log_dir = Path(log_dir or Path(base_path) / paths.get("logs", "corpus_log"))
         self.output_dir = Path(output_dir) if output_dir else None
         self.pdf_dir = Path(base_path) / paths.get("pdf_input", "Pdfs")
+        self.gold_json = str(Path(base_path) / paths.get("gold_json", "gold_data/papers_gold.json"))
 
         # Extract API settings from config
         api_cfg = self.config.get("api", {}).get("claude", {})
@@ -261,11 +263,12 @@ class Orchestrator:
         """
         Export extracted text from parsed PDF to a text file.
 
-        The text file is saved in the same folder as the PDF with the same
-        name but with a .txt extension.
+        The text file is saved in the same folder as the PDF with format:
+        <pdf_stem>_<timestamp>.txt
         """
-        # Build output path: same folder as PDF, same name but .txt extension
-        txt_path = pdf_path.with_suffix(".txt")
+        # Build output path: same folder as PDF, name with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        txt_path = pdf_path.parent / f"{pdf_path.stem}_{timestamp}.txt"
 
         # Extract text from all blocks
         text_lines = []
@@ -1258,8 +1261,11 @@ Return ONLY the JSON array, nothing else."""
         out_file = out_dir / f"abbreviations_{pdf_path.stem}_{timestamp}.json"
         with open(out_file, "w", encoding="utf-8") as f:
             json.dump(export_data, f, indent=2, ensure_ascii=False)
-        
+
         print(f"\n  Exported: {out_file}")
+
+        # Run F06 extraction analysis (screen output only)
+        run_analysis(export_data, self.gold_json)
 
     def process_folder(
         self,
