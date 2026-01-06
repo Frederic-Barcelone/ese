@@ -83,7 +83,7 @@ from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
-from F_evaluation.F06_extraction_analysis import run_analysis
+from F_evaluation.F05_extraction_analysis import run_analysis
 
 # Module constants
 PIPELINE_VERSION = "0.7"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# corpus_metadata/corpus_abbreviations/F_evaluation/F05_generator_pipeline_test.py
+# corpus_metadata/corpus_abbreviations/F_evaluation/F04_pipeline_test.py
 """
 Pipeline Evaluation Test
 
