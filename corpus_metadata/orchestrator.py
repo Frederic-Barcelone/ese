@@ -21,6 +21,7 @@ import os
 import warnings
 
 from dotenv import load_dotenv
+
 load_dotenv()  # Load .env file from current directory or parent
 
 # Suppress at environment level for subprocesses
@@ -387,8 +388,7 @@ class Orchestrator:
                 / lexicons.get("trial_acronyms", "trial_acronyms_lexicon.json")
             ),
             "pro_scales_path": str(
-                dict_path
-                / lexicons.get("pro_scales", "pro_scales_lexicon.json")
+                dict_path / lexicons.get("pro_scales", "pro_scales_lexicon.json")
             ),
             "context_window": lexicon_cfg.get("context_window", 300),
         }
@@ -502,10 +502,16 @@ class Orchestrator:
                 config={
                     "run_id": self.run_id,
                     "lexicon_base_path": str(dict_path),
-                    "enable_alexion_lexicon": drug_cfg.get("enable_alexion_lexicon", True),
-                    "enable_investigational_lexicon": drug_cfg.get("enable_investigational_lexicon", True),
+                    "enable_alexion_lexicon": drug_cfg.get(
+                        "enable_alexion_lexicon", True
+                    ),
+                    "enable_investigational_lexicon": drug_cfg.get(
+                        "enable_investigational_lexicon", True
+                    ),
                     "enable_fda_lexicon": drug_cfg.get("enable_fda_lexicon", True),
-                    "enable_rxnorm_lexicon": drug_cfg.get("enable_rxnorm_lexicon", True),
+                    "enable_rxnorm_lexicon": drug_cfg.get(
+                        "enable_rxnorm_lexicon", True
+                    ),
                     "enable_scispacy": drug_cfg.get("enable_scispacy", True),
                     "enable_patterns": drug_cfg.get("enable_patterns", True),
                     "context_window": drug_cfg.get("context_window", 300),
@@ -531,7 +537,9 @@ class Orchestrator:
                 data = json.loads(rare_disease_path.read_text(encoding="utf-8"))
                 for acronym, entry in data.items():
                     if isinstance(entry, dict) and entry.get("name"):
-                        self.rare_disease_lookup[acronym.strip().upper()] = entry["name"].strip()
+                        self.rare_disease_lookup[acronym.strip().upper()] = entry[
+                            "name"
+                        ].strip()
             except Exception as e:
                 print(f"  [WARN] Failed to load rare disease lexicon: {e}")
 
@@ -555,7 +563,9 @@ class Orchestrator:
     def _print_unified_lexicon_summary(self) -> None:
         """Print unified summary of all loaded lexicons across all detectors."""
         # Collect stats from all sources, track seen filenames to avoid duplicates
-        all_stats: List[Tuple[str, int, str, str]] = []  # (name, count, filename, category)
+        all_stats: List[
+            Tuple[str, int, str, str]
+        ] = []  # (name, count, filename, category)
         seen_files: set = set()
 
         # From C04 (abbreviation generator) - skip disease lexicons (handled by C06)
@@ -563,10 +573,20 @@ class Orchestrator:
             if hasattr(gen, "_lexicon_stats"):
                 for name, count, filename in gen._lexicon_stats:
                     # Skip disease lexicons from C04 - they're handled by C06
-                    if name in ("ANCA disease", "IgAN disease", "PAH disease", "Rare disease acronyms"):
+                    if name in (
+                        "ANCA disease",
+                        "IgAN disease",
+                        "PAH disease",
+                        "Rare disease acronyms",
+                    ):
                         continue
                     # Categorize based on name
-                    if name in ("Abbreviations", "Clinical research", "UMLS biological", "UMLS clinical"):
+                    if name in (
+                        "Abbreviations",
+                        "Clinical research",
+                        "UMLS biological",
+                        "UMLS clinical",
+                    ):
                         cat = "Abbreviation"
                     elif name in ("Trial acronyms", "PRO scales"):
                         cat = "Other"
@@ -1210,8 +1230,14 @@ Return ONLY the JSON array, nothing else."""
                             if isinstance(sf, str) and sf.strip():
                                 sf_clean = sf.strip()
                                 # Keep the LF if we found one, or update if new one is better
-                                if sf_clean not in llm_sf_candidates or (lf and not llm_sf_candidates.get(sf_clean)):
-                                    llm_sf_candidates[sf_clean] = lf.strip() if isinstance(lf, str) and lf else None
+                                if sf_clean not in llm_sf_candidates or (
+                                    lf and not llm_sf_candidates.get(sf_clean)
+                                ):
+                                    llm_sf_candidates[sf_clean] = (
+                                        lf.strip()
+                                        if isinstance(lf, str) and lf
+                                        else None
+                                    )
                         elif isinstance(item, str) and item.strip():
                             # Backward compatibility: handle plain strings
                             sf_clean = item.strip()
@@ -1283,12 +1309,15 @@ Return ONLY the JSON array, nothing else."""
                 doc_fingerprint="llm_sf_extraction",
                 generator_name=GeneratorType.LEXICON_MATCH,
                 rule_version="llm_sf_lf_extractor:v2.0",
-                lexicon_source="orchestrator:llm_extraction" + (":lexicon_fallback" if lexicon_fallback_used else ""),
+                lexicon_source="orchestrator:llm_extraction"
+                + (":lexicon_fallback" if lexicon_fallback_used else ""),
             )
 
             # Determine field type based on whether we have LF
             has_lf = bool(lf_candidate)
-            field_type = FieldType.DEFINITION_PAIR if has_lf else FieldType.SHORT_FORM_ONLY
+            field_type = (
+                FieldType.DEFINITION_PAIR if has_lf else FieldType.SHORT_FORM_ONLY
+            )
             confidence = 0.85 if has_lf else 0.75
 
             entity = ExtractedEntity(
@@ -1516,9 +1545,7 @@ Return ONLY the JSON array, nothing else."""
     # DISEASE DETECTION METHODS
     # =========================================================================
 
-    def _process_diseases(
-        self, doc, pdf_path: Path
-    ) -> List[ExtractedDisease]:
+    def _process_diseases(self, doc, pdf_path: Path) -> List[ExtractedDisease]:
         """
         Process document for disease mentions.
 
@@ -1548,7 +1575,9 @@ Return ONLY the JSON array, nothing else."""
                 candidate=candidate,
                 status=ValidationStatus.VALIDATED,
                 confidence=candidate.initial_confidence + candidate.confidence_boost,
-                flags=["auto_validated_lexicon"] if is_specialized else ["lexicon_match"],
+                flags=["auto_validated_lexicon"]
+                if is_specialized
+                else ["lexicon_match"],
             )
             results.append(entity)
 
@@ -1675,7 +1704,9 @@ Return ONLY the JSON array, nothing else."""
                 category=entity.disease_category,
                 codes=codes,
                 all_identifiers=all_identifiers,
-                context=entity.primary_evidence.text if entity.primary_evidence else None,
+                context=entity.primary_evidence.text
+                if entity.primary_evidence
+                else None,
                 page=entity.primary_evidence.location.page_num
                 if entity.primary_evidence
                 else None,
@@ -1714,9 +1745,7 @@ Return ONLY the JSON array, nothing else."""
     # DRUG DETECTION METHODS
     # =========================================================================
 
-    def _process_drugs(
-        self, doc, pdf_path: Path
-    ) -> List[ExtractedDrug]:
+    def _process_drugs(self, doc, pdf_path: Path) -> List[ExtractedDrug]:
         """
         Process document for drug mentions.
 
@@ -1743,7 +1772,9 @@ Return ONLY the JSON array, nothing else."""
                 candidate,
                 status=ValidationStatus.VALIDATED,
                 confidence=candidate.initial_confidence if is_specialized else 0.7,
-                flags=["auto_validated_lexicon"] if is_specialized else ["lexicon_match"],
+                flags=["auto_validated_lexicon"]
+                if is_specialized
+                else ["lexicon_match"],
             )
             results.append(entity)
 
@@ -1844,7 +1875,9 @@ Return ONLY the JSON array, nothing else."""
                 marketing_status=entity.marketing_status,
                 codes=codes,
                 all_identifiers=all_identifiers,
-                context=entity.primary_evidence.text if entity.primary_evidence else None,
+                context=entity.primary_evidence.text
+                if entity.primary_evidence
+                else None,
                 page=entity.primary_evidence.location.page_num
                 if entity.primary_evidence
                 else None,

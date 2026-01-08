@@ -16,13 +16,12 @@ from __future__ import annotations
 
 import json
 import re
-import uuid
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from flashtext import KeywordProcessor
 
-from A_core.A01_domain_models import Coordinate, ValidationStatus
+from A_core.A01_domain_models import Coordinate
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A06_drug_models import (
     DrugCandidate,
@@ -30,14 +29,13 @@ from A_core.A06_drug_models import (
     DrugGeneratorType,
     DrugIdentifier,
     DrugProvenanceMetadata,
-    ExtractedDrug,
 )
 from B_parsing.B01_pdf_to_docgraph import DocumentGraph
 
 # Optional scispacy import
 try:
     import spacy
-    from scispacy.linking import EntityLinker
+    from scispacy.linking import EntityLinker  # noqa: F401
 
     SCISPACY_AVAILABLE = True
 except ImportError:
@@ -428,7 +426,9 @@ class DrugDetector:
         Returns list of DrugCandidate objects.
         """
         candidates: List[DrugCandidate] = []
-        doc_fingerprint = getattr(doc_graph, "fingerprint", self.doc_fingerprint_default)
+        doc_fingerprint = getattr(
+            doc_graph, "fingerprint", self.doc_fingerprint_default
+        )
 
         # Get full text for detection
         full_text = doc_graph.get_plain_text()
@@ -738,9 +738,7 @@ class DrugDetector:
                 DrugIdentifier(system="RxCUI", code=str(drug_info["rxcui"]))
             )
         if drug_info.get("nct_id"):
-            identifiers.append(
-                DrugIdentifier(system="NCT", code=drug_info["nct_id"])
-            )
+            identifiers.append(DrugIdentifier(system="NCT", code=drug_info["nct_id"]))
         if drug_info.get("application_number"):
             identifiers.append(
                 DrugIdentifier(system="FDA_NDA", code=drug_info["application_number"])

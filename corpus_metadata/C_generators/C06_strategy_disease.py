@@ -385,7 +385,9 @@ class DiseaseDetector:
 
                 loaded += 1
 
-            self._lexicon_stats.append((f"Specialized ({name.upper()})", loaded, path.name))
+            self._lexicon_stats.append(
+                (f"Specialized ({name.upper()})", loaded, path.name)
+            )
 
     def _load_general_lexicon(self) -> None:
         """Load general disease lexicon with FP awareness."""
@@ -431,7 +433,9 @@ class DiseaseDetector:
             self.general_kp.add_keyword(label, key)
             loaded += 1
 
-        self._lexicon_stats.append(("General diseases", loaded, self.general_disease_path.name))
+        self._lexicon_stats.append(
+            ("General diseases", loaded, self.general_disease_path.name)
+        )
 
     def _load_orphanet_lexicon(self) -> None:
         """Load Orphanet rare disease lexicon."""
@@ -479,7 +483,9 @@ class DiseaseDetector:
 
             loaded += 1
 
-        self._lexicon_stats.append(("Orphanet diseases", loaded, self.orphanet_path.name))
+        self._lexicon_stats.append(
+            ("Orphanet diseases", loaded, self.orphanet_path.name)
+        )
 
     def _looks_like_chromosome(self, text: str) -> bool:
         """Quick check if text looks like a chromosome/karyotype pattern."""
@@ -542,7 +548,9 @@ class DiseaseDetector:
                 self.umls_linker = self.scispacy_nlp.get_pipe("scispacy_linker")
                 print(f"  Disease detector: loaded scispacy {model_name} + UMLS linker")
             except Exception as e:
-                print(f"  Disease detector: loaded scispacy {model_name} (no UMLS: {e})")
+                print(
+                    f"  Disease detector: loaded scispacy {model_name} (no UMLS: {e})"
+                )
         except OSError as e:
             print(f"  Disease detector: scispacy not available: {e}")
 
@@ -552,7 +560,9 @@ class DiseaseDetector:
             return
 
         total = sum(count for _, count, _ in self._lexicon_stats)
-        print(f"\nDisease lexicons: {len(self._lexicon_stats)} sources, {total:,} entries")
+        print(
+            f"\nDisease lexicons: {len(self._lexicon_stats)} sources, {total:,} entries"
+        )
         print("─" * 70)
         print(f"  Disease ({total:,} entries)")
 
@@ -574,7 +584,9 @@ class DiseaseDetector:
         """
         doc = doc_structure
         candidates: List[DiseaseCandidate] = []
-        seen: Set[Tuple[str, str]] = set()  # (matched_text_lower, preferred_label_lower)
+        seen: Set[Tuple[str, str]] = (
+            set()
+        )  # (matched_text_lower, preferred_label_lower)
 
         for block in doc.iter_linear_blocks(skip_header_footer=True):
             text = (block.text or "").strip()
@@ -582,25 +594,17 @@ class DiseaseDetector:
                 continue
 
             # 1. Specialized lexicon matches (highest priority)
-            candidates.extend(
-                self._extract_specialized(text, block, doc, seen)
-            )
+            candidates.extend(self._extract_specialized(text, block, doc, seen))
 
             # 2. General lexicon matches (with FP filtering)
-            candidates.extend(
-                self._extract_general(text, block, doc, seen)
-            )
+            candidates.extend(self._extract_general(text, block, doc, seen))
 
             # 3. Regex pattern matches from specialized lexicons
-            candidates.extend(
-                self._extract_patterns(text, block, doc, seen)
-            )
+            candidates.extend(self._extract_patterns(text, block, doc, seen))
 
             # 4. scispacy NER (for unknown diseases)
             if self.scispacy_nlp is not None:
-                candidates.extend(
-                    self._extract_scispacy(text, block, doc, seen)
-                )
+                candidates.extend(self._extract_scispacy(text, block, doc, seen))
 
         return candidates
 
