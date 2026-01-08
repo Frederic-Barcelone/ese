@@ -62,7 +62,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import yaml
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 # =============================================================================
 
 # Ensure imports work
@@ -105,6 +105,7 @@ from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
+from E_normalization.E04_pubtator_enricher import DiseaseEnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -248,6 +249,7 @@ class Orchestrator:
         api_key: Optional[str] = None,
         config_path: Optional[str] = None,
         run_id: Optional[str] = None,
+        gold_json: Optional[str] = None,
         skip_validation: Optional[bool] = None,
         enable_haiku_screening: Optional[bool] = None,
         heuristics_config: Optional[HeuristicsConfig] = None,
@@ -264,7 +266,7 @@ class Orchestrator:
         )
         self.output_dir = Path(output_dir) if output_dir else None
         self.pdf_dir = Path(base_path) / paths.get("pdf_input", "Pdfs")
-        self.gold_json = str(
+        self.gold_json = gold_json or str(
             Path(base_path) / paths.get("gold_json", "gold_data/papers_gold.json")
         )
 
@@ -461,9 +463,33 @@ class Orchestrator:
                 }
             )
             self.disease_normalizer = DiseaseNormalizer()
+
+            # PubTator enrichment
+            pubtator_cfg = self.config.get("api", {}).get("pubtator", {})
+            self.enable_pubtator = pubtator_cfg.get("enabled", False)
+            if self.enable_pubtator:
+                self.disease_enricher = DiseaseEnricher(pubtator_cfg)
+            else:
+                self.disease_enricher = None
         else:
             self.disease_detector = None
             self.disease_normalizer = None
+            self.disease_enricher = None
+
+        # Load rare disease acronyms for fallback lookup (SF→LF when LLM has no expansion)
+        self.rare_disease_lookup: Dict[str, str] = {}
+        rare_disease_path = dict_path / lexicons.get(
+            "rare_disease_acronyms", "2025_08_rare_disease_acronyms.json"
+        )
+        if rare_disease_path.exists():
+            try:
+                data = json.loads(rare_disease_path.read_text(encoding="utf-8"))
+                for acronym, entry in data.items():
+                    if isinstance(entry, dict) and entry.get("name"):
+                        self.rare_disease_lookup[acronym.strip().upper()] = entry["name"].strip()
+                print(f"  Lexicon fallback: {len(self.rare_disease_lookup)} rare disease acronyms loaded")
+            except Exception as e:
+                print(f"  [WARN] Failed to load rare disease lexicon: {e}")
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load configuration from YAML file."""
@@ -1014,30 +1040,32 @@ class Orchestrator:
             for i in range(0, min(len(full_text), 15000), chunk_size)
         ]
 
-        sf_extraction_prompt = """You are an expert at identifying medical/scientific abbreviations in text.
+        sf_extraction_prompt = """You are an expert at identifying medical/scientific abbreviations and their definitions in text.
 
-Given the following text, identify ALL abbreviations that appear. An abbreviation is typically:
+Given the following text, identify ALL abbreviations and their long form definitions. An abbreviation is typically:
 - 2-10 characters long
-- Contains uppercase letters (e.g., "FDA", "eGFR", "IL-6", "C3a")
+- Contains uppercase letters (e.g., "FDA", "eGFR", "IL-6", "C3a", "AN")
 - May contain numbers or hyphens
 - Represents a longer term/concept
 
 IMPORTANT RULES:
 1. Only return abbreviations that EXACTLY appear in the text (case-sensitive)
-2. Do NOT include common words (the, and, for, etc.)
-3. Do NOT include author names, months, or country names
-4. Include multi-word abbreviations like "CC BY" if present
+2. Extract the full long form/definition if it appears in the text (e.g., "Acanthosis nigricans (AN)" → sf: "AN", lf: "Acanthosis nigricans")
+3. Do NOT include common words (the, and, for, etc.)
+4. Do NOT include author names, months, or country names
 5. Include mixed-case abbreviations like "eGFR", "IgA", "C3a"
+6. If the long form is not explicitly defined in the text, set lf to null
 
 Already found (DO NOT include these): {already_found}
 
 Text to analyze:
 {text}
 
-Return a JSON array of abbreviation strings found. Example: ["DOI", "CC BY", "IgA", "C3a"]
+Return a JSON array of objects with "sf" (short form) and "lf" (long form, or null if not defined).
+Example: [{{"sf": "AN", "lf": "Acanthosis nigricans"}}, {{"sf": "FDA", "lf": null}}]
 Return ONLY the JSON array, nothing else."""
 
-        llm_sf_candidates = set()
+        llm_sf_candidates: Dict[str, Optional[str]] = {}  # sf -> lf mapping
         llm_errors = 0
 
         for chunk in text_chunks:
@@ -1046,21 +1074,28 @@ Return ONLY the JSON array, nothing else."""
                     already_found=", ".join(sorted(found_sfs)[:50]), text=chunk
                 )
                 response = self.claude_client.complete_json_any(
-                    system_prompt="You are an abbreviation extraction assistant. Return only valid JSON arrays.",
+                    system_prompt="You are an abbreviation extraction assistant. Return only valid JSON arrays of objects.",
                     user_prompt=prompt,
                     model=self.model,
                     temperature=0.0,
-                    max_tokens=500,
+                    max_tokens=1000,
                     top_p=1.0,
                 )
                 if isinstance(response, list):
-                    for sf in response:
-                        if isinstance(sf, str) and sf.strip():
-                            llm_sf_candidates.add(sf.strip())
-                elif isinstance(response, dict) and "abbreviations" in response:
-                    for sf in response.get("abbreviations", []):
-                        if isinstance(sf, str) and sf.strip():
-                            llm_sf_candidates.add(sf.strip())
+                    for item in response:
+                        if isinstance(item, dict):
+                            sf = item.get("sf", "")
+                            lf = item.get("lf")
+                            if isinstance(sf, str) and sf.strip():
+                                sf_clean = sf.strip()
+                                # Keep the LF if we found one, or update if new one is better
+                                if sf_clean not in llm_sf_candidates or (lf and not llm_sf_candidates.get(sf_clean)):
+                                    llm_sf_candidates[sf_clean] = lf.strip() if isinstance(lf, str) and lf else None
+                        elif isinstance(item, str) and item.strip():
+                            # Backward compatibility: handle plain strings
+                            sf_clean = item.strip()
+                            if sf_clean not in llm_sf_candidates:
+                                llm_sf_candidates[sf_clean] = None
             except Exception:
                 llm_errors += 1
 
@@ -1068,10 +1103,10 @@ Return ONLY the JSON array, nothing else."""
             f"    LLM chunks: {len(text_chunks)}, errors: {llm_errors}, candidates: {len(llm_sf_candidates)}"
         )
 
-        # Validate and add LLM-found SFs
+        # Validate and add LLM-found SFs (now with LFs when available)
         blacklist = self.heuristics.common_words | self.heuristics.sf_blacklist
 
-        for sf_candidate in llm_sf_candidates:
+        for sf_candidate, lf_candidate in llm_sf_candidates.items():
             sf_upper = sf_candidate.upper()
 
             if sf_upper in found_sfs or sf_upper in blacklist:
@@ -1113,35 +1148,48 @@ Return ONLY the JSON array, nothing else."""
                 + len(sf_candidate),
             )
 
+            # Lexicon fallback: if LLM found SF but no LF, check rare disease lexicon
+            lexicon_fallback_used = False
+            if not lf_candidate:
+                sf_upper = sf_candidate.upper()
+                if sf_upper in self.rare_disease_lookup:
+                    lf_candidate = self.rare_disease_lookup[sf_upper]
+                    lexicon_fallback_used = True
+
             prov = ProvenanceMetadata(
                 pipeline_version=PIPELINE_VERSION,
                 run_id=self.run_id,
                 doc_fingerprint="llm_sf_extraction",
                 generator_name=GeneratorType.LEXICON_MATCH,
-                rule_version="llm_sf_extractor:v1.0",
-                lexicon_source="orchestrator:llm_sf_only",
+                rule_version="llm_sf_lf_extractor:v2.0",
+                lexicon_source="orchestrator:llm_extraction" + (":lexicon_fallback" if lexicon_fallback_used else ""),
             )
+
+            # Determine field type based on whether we have LF
+            has_lf = bool(lf_candidate)
+            field_type = FieldType.DEFINITION_PAIR if has_lf else FieldType.SHORT_FORM_ONLY
+            confidence = 0.85 if has_lf else 0.75
 
             entity = ExtractedEntity(
                 candidate_id=uuid.uuid4(),
                 doc_id=doc_id,
-                field_type=FieldType.SHORT_FORM_ONLY,
+                field_type=field_type,
                 short_form=sf_candidate,
-                long_form=None,
+                long_form=lf_candidate,
                 primary_evidence=primary,
                 supporting_evidence=[],
                 status=ValidationStatus.VALIDATED,
-                confidence_score=0.75,
+                confidence_score=confidence,
                 rejection_reason=None,
-                validation_flags=["llm_sf_extracted"],
+                validation_flags=["llm_extracted"] if has_lf else ["llm_sf_extracted"],
                 provenance=prov,
-                raw_llm_response={"auto": "llm_sf_extractor"},
+                raw_llm_response={"auto": "llm_sf_lf_extractor"},
             )
             results.append(entity)
             found_sfs.add(sf_upper)
             counters.recovered_by_llm_sf_only += 1
 
-        print(f"  LLM SF-only extracted (PASO D): {counters.recovered_by_llm_sf_only}")
+        print(f"  LLM extracted (PASO D): {counters.recovered_by_llm_sf_only}")
         return results
 
     def _normalize_results(
@@ -1365,6 +1413,11 @@ Return ONLY the JSON array, nothing else."""
         if self.disease_normalizer is not None:
             results = self.disease_normalizer.normalize_batch(results)
 
+        # PubTator enrichment
+        if self.disease_enricher is not None:
+            print("  Enriching with PubTator3...")
+            results = self.disease_enricher.enrich_batch(results, verbose=True)
+
         validated_count = len(
             [r for r in results if r.status == ValidationStatus.VALIDATED]
         )
@@ -1487,6 +1540,9 @@ Return ONLY the JSON array, nothing else."""
                 if entity.provenance
                 else None,
                 validation_flags=entity.validation_flags,
+                mesh_aliases=entity.mesh_aliases,
+                pubtator_normalized_name=entity.pubtator_normalized_name,
+                enrichment_source=entity.enrichment_source,
             )
             disease_entries.append(entry)
 

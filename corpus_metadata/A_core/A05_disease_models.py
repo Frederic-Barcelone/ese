@@ -206,6 +206,11 @@ class ExtractedDisease(BaseModel):
     is_rare_disease: bool = False
     disease_category: Optional[str] = None  # e.g., "nephrology", "pulmonology"
 
+    # PubTator enrichment fields
+    mesh_aliases: List[str] = Field(default_factory=list)
+    pubtator_normalized_name: Optional[str] = None
+    enrichment_source: Optional[str] = None
+
     # Audit trail
     provenance: DiseaseProvenanceMetadata
     raw_llm_response: Optional[Union[Dict[str, Any], str]] = None
@@ -256,6 +261,11 @@ class DiseaseExportEntry(BaseModel):
     # Provenance
     lexicon_source: Optional[str] = None
     validation_flags: List[str] = Field(default_factory=list)
+
+    # PubTator enrichment
+    mesh_aliases: List[str] = Field(default_factory=list)
+    pubtator_normalized_name: Optional[str] = None
+    enrichment_source: Optional[str] = None
 
     model_config = ConfigDict(extra="forbid")
 

@@ -38,8 +38,9 @@ paths:
 # LEXICONS - All lexicon file paths (relative to paths.base/paths.dictionaries)
 # ==============================================================================
 lexicons:
-  # Main abbreviation lexicon
+  # Main abbreviation lexicons
   abbreviation_general: "2025_08_abbreviation_general.json"
+  clinical_research_abbreviations: "clinical_research_abbreviations.json"
 
   # Disease lexicons
   disease_lexicon: "2025_08_lexicon_disease.json"
@@ -440,9 +441,17 @@ heuristics:
 # ==============================================================================
 api:
   pubtator:
+    enabled: true
     base_url: "https://www.ncbi.nlm.nih.gov/research/pubtator3-api"
     timeout_seconds: 30
-    rate_limit_per_minute: 30
+    rate_limit_per_second: 3
+    cache:
+      enabled: true
+      directory: "cache/pubtator"
+      ttl_hours: 168  # 7 days
+    enrichment:
+      enrich_missing_mesh: true
+      add_aliases: true
 
   claude:
     # Fast model - For basic tasks (cheaper, faster)
