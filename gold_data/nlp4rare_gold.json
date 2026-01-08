@@ -1,1692 +1,1873 @@
 {
   "corpus": "NLP4RARE-CM-UC3M",
-  "total": 281,
+  "total": 311,
+  "parenthetical_added": 67,
   "annotations": [
     {
-      "doc_id": "Ablepharon.ann",
-      "short_form": "AMS",
-      "long_form": "Ablepharon-Macrostomia Syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Ablepharon.ann",
-      "short_form": "AMS",
-      "long_form": "Ablepharon-Macrostomia Syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Acanthosis-Nigricans.ann",
       "short_form": "AN",
       "long_form": "Acanthosis nigricans",
-      "category": "DISEASE"
+      "category": "DISEASE",
+      "doc_id": "Acanthosis-Nigricans.pdf"
     },
     {
-      "doc_id": "Acquired-Lipodystrophy.ann",
-      "short_form": "AGL",
-      "long_form": "acquired generalized lipodystrophy",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Acquired-Lipodystrophy.ann",
-      "short_form": "APL",
-      "long_form": "acquired partial lipodystrophy",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Acquired-Lipodystrophy.ann",
-      "short_form": "LD-HIV",
-      "long_form": "high active antiretroviral induced lipodystrophy",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Acute-Cholecystitis.ann",
-      "short_form": "ACC",
-      "long_form": "acute calculous cholecystitis",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Adams-Oliver-Syndrome.ann",
-      "short_form": "AOS",
-      "long_form": "Adams-Oliver syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Adenoid-Cystic-Carcinoma.ann",
-      "short_form": "ACC",
-      "long_form": "Adenoid cystic carcinoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Adenylosuccinate-Lyase-Deficiency.ann",
-      "short_form": "ASLD",
-      "long_form": "Adenylosuccinate lyase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Agenesis-of-Corpus-Callosum.ann",
       "short_form": "ACC",
       "long_form": "Agenesis of corpus callosum",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Agenesis-of-Corpus-Callosum.pdf"
     },
     {
-      "doc_id": "Alagille-Syndrome.ann",
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Agenesis-of-Corpus-Callosum.pdf"
+    },
+    {
       "short_form": "ALGS",
       "long_form": "Alagille syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Alagille-Syndrome.pdf"
     },
     {
-      "doc_id": "Alveolar-Soft-Part-Sarcoma.ann",
       "short_form": "ASPS",
       "long_form": "Alveolar soft part sarcoma",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Alveolar-Soft-Part-Sarcoma.pdf"
     },
     {
-      "doc_id": "Amelogenesis-Imperfecta.ann",
-      "short_form": "AI",
-      "long_form": "Amelogenesis imperfecta",
-      "category": "RAREDISEASE"
+      "short_form": "APS",
+      "long_form": "Antiphospholipid syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Antiphospholipid-Syndrome.pdf"
     },
     {
-      "doc_id": "Amniotic-Fluid-Embolism.ann",
-      "short_form": "AFE",
-      "long_form": "Amniotic fluid embolism",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Amyotrophic-Lateral-Sclerosis.ann",
-      "short_form": "ALS",
-      "long_form": "Amyotrophic lateral sclerosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Anemia-Hemolytic-Cold-Antibody.ann",
-      "short_form": "CAHA",
-      "long_form": "Cold antibody hemolytic anemia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Angioimmunoblastic-T.ann",
-      "short_form": "AITL",
-      "long_form": "Angioimmunoblastic T-cell lymphoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Antiphospholipid-Syndrome.ann",
-      "short_form": "ANTIPHOSPHOLIPID SYNDROME",
-      "long_form": "secondary antiphospholipid syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Arteriovenous-Malformation.ann",
       "short_form": "AVM",
       "long_form": "Arteriovenous malformation",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Arteriovenous-Malformation.pdf"
     },
     {
-      "doc_id": "Arthrogryposis-Multiplex-Congenita.ann",
-      "short_form": "AMC",
-      "long_form": "arthrogryposis multiplex congenita",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Ataxia-Telangiectasia.ann",
-      "short_form": "AT",
-      "long_form": "Ataxia telangiectasia",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Ataxia-with-Vitamin-E-Deficiency.ann",
-      "short_form": "AVED",
-      "long_form": "Ataxia with vitamin E deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Atrioventricular-Septal-Defect.ann",
-      "short_form": "ASVD",
-      "long_form": "Atrioventricular septal defect",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Autoimmune-Polyglandular-Syndrome-Type-1.ann",
-      "short_form": "APS-1",
-      "long_form": "Autoimmune polyglandular syndrome type 1",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Autosomal-Dominant-Hyper-IgE-Syndrome.ann",
-      "short_form": "AD-HIES",
-      "long_form": "Autosomal dominant hyper IgE syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Autosomal-Dominant-Tubulo.ann",
-      "short_form": "ADTKD",
-      "long_form": "Autosomal dominant tubulointerstitial kidney disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Baller.ann",
       "short_form": "BGS",
       "long_form": "Baller-Gerold syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Baller.pdf"
     },
     {
-      "doc_id": "Bernard.ann",
-      "short_form": "BSS",
-      "long_form": "Bernard-Soulier syndrome",
-      "category": "RAREDISEASE"
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Banti_s-Syndrome.pdf"
     },
     {
-      "doc_id": "Binswanger-Disease.ann",
-      "short_form": "CADASIL",
-      "long_form": "cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Biotinidase-Deficiency.ann",
-      "short_form": "BTD",
-      "long_form": "Biotinidase deficiency",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.ann",
-      "short_form": "POI",
-      "long_form": "premature ovarian insufficiency",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Blue-Rubber-Bleb-Nevus-syndrome.ann",
-      "short_form": "BRBNS",
-      "long_form": "Blue rubber bleb nevus syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Branchio-Oculo-Facial-Syndrome.ann",
-      "short_form": "BOFS",
-      "long_form": "Branchio-oculo-facial syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Bronchiolitis-Obliterans-Organizing-Pneumonia.ann",
-      "short_form": "BOOP",
-      "long_form": "Bronchiolitis obliterans organizing pneumonia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.ann",
       "short_form": "DDD",
       "long_form": "dense deposit disease",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf"
     },
     {
-      "doc_id": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.ann",
       "short_form": "C3G",
       "long_form": "C3 Glomerulopathy",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf"
     },
     {
-      "doc_id": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.ann",
       "short_form": "C3GN",
       "long_form": "C3 glomerulonephritis",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf"
     },
     {
-      "doc_id": "Carbamoyl-Phosphate-Synthetase-I-Deficiency.ann",
-      "short_form": "CPSID",
-      "long_form": "Carbamoyl phosphate synthetase I deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Carnitine-Palmitoyltransferase-1A-Deficiency.ann",
-      "short_form": "CPT1A",
-      "long_form": "Carnitine palmitoyltransferase 1A deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Carpenter-Syndrome.ann",
-      "short_form": "SYNDACTYLY",
-      "long_form": "genetic disorder",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Cat-Eye-Syndrome.ann",
       "short_form": "CES",
       "long_form": "Cat eye syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Cat-Eye-Syndrome.pdf"
     },
     {
-      "doc_id": "Central-Core-Disease.ann",
-      "short_form": "CCD",
-      "long_form": "Central core disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Cerebellar-Degeneration-Subacute.ann",
-      "short_form": "THESE TWO TYPES",
-      "long_form": "nutritional cerebellar degeneration",
-      "category": "ANAPHOR"
-    },
-    {
-      "doc_id": "Cerebral-Creatine-Deficiency-Syndromes.ann",
-      "short_form": "CCDS",
-      "long_form": "Cerebral creatine deficiency syndromes",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Cerebro-Oculo-Facio-Skeletal-Syndrome.ann",
-      "short_form": "COFS",
-      "long_form": "Cerebro-oculo-facio-skeletal syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Chandler_s-Syndrome.ann",
-      "short_form": "CS",
-      "long_form": "Chandler's syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Chandler_s-Syndrome.ann",
-      "short_form": "ICE SYNDROME",
-      "long_form": "iridocorneal endothelial syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Chromosome-10-Monosomy-10p.ann",
-      "short_form": "DGS",
-      "long_form": "DiGeorge syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Chronic-Granulomatous-Disease.ann",
-      "short_form": "CGD",
-      "long_form": "chronic granulomatous disease",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Citrullinemia-Type-1.ann",
-      "short_form": "CTLN1",
-      "long_form": "Citrullinemia type I",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Cockayne-Syndrome.ann",
-      "short_form": "CS",
-      "long_form": "Cockayne Syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Cockayne-Syndrome.ann",
-      "short_form": "CS TYPE I",
-      "long_form": "classical form of Cockayne Syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Cockayne-Syndrome.ann",
-      "short_form": "CS TYPE III",
-      "long_form": "Cockayne Syndrome Type III",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Cockayne-Syndrome.ann",
-      "short_form": "XP-CS",
-      "long_form": "Xeroderma pigmentosa-Cockayne syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Common-Variable-Immune-Deficiency.ann",
-      "short_form": "CVID",
-      "long_form": "Common Variable Immune Deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Adrenal-Hyperplasia.ann",
-      "short_form": "CAH",
-      "long_form": "Congenital adrenal hyperplasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Erythropoietic-Porphyria.ann",
-      "short_form": "CEP",
-      "long_form": "Congenital erythropoietic porphyria",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Fiber-Type-Disproportion.ann",
-      "short_form": "CFTD",
-      "long_form": "Congenital fiber type disproportion",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Hepatic-Fibrosis.ann",
-      "short_form": "CHF",
-      "long_form": "Congenital hepatic fibrosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Hepatic-Fibrosis.ann",
-      "short_form": "FCD",
-      "long_form": "hepatorenal fibrocystic diseases",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Congenital-Hepatic-Fibrosis.ann",
-      "short_form": "PKD",
-      "long_form": "polycystic kidney disease",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Congenital-Hepatic-Fibrosis.ann",
-      "short_form": "NPHP",
-      "long_form": "nephronophthisis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Hyperinsulinism.ann",
-      "short_form": "HI",
-      "long_form": "Congenital hyperinsulinism",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Pulmonary-Lymphangiectasia.ann",
-      "short_form": "CPL",
-      "long_form": "Congenital pulmonary lymphangiectasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Sucrase.ann",
-      "short_form": "CSID",
-      "long_form": "Congenital sucrase-isomaltase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Congenital-Syphilis.ann",
-      "short_form": "CS",
-      "long_form": "congenital syphilis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Cornelia-de-Lange-Syndrome.ann",
-      "short_form": "CDLS)",
+      "short_form": "CdLS)",
       "long_form": "Cornelia de Lange syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Cornelia-de-Lange-Syndrome.pdf"
     },
     {
-      "doc_id": "Creutzfeldt-Jakob-Disease.ann",
+      "short_form": "CdLS",
+      "long_form": "Cornelia de Lange syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Cornelia-de-Lange-Syndrome.pdf"
+    },
+    {
       "short_form": "CJD",
       "long_form": "Creutzfeldt-Jakob disease",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Creutzfeldt-Jakob-Disease.pdf"
     },
     {
-      "doc_id": "Cronkhite.ann",
-      "short_form": "CCS",
-      "long_form": "Cronkhite-Canada syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Cystic-Fibrosis.ann",
       "short_form": "CF",
       "long_form": "cystic fibrosis",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Cystic-Fibrosis.pdf"
     },
     {
-      "doc_id": "Cytomegalovirus-Infection.ann",
-      "short_form": "CMV",
-      "long_form": "Cytomegalovirus infection",
-      "category": "RAREDISEASE"
+      "short_form": "FDA",
+      "long_form": "Food and Drug Administration",
+      "category": "RAREDISEASE",
+      "doc_id": "Cystic-Fibrosis.pdf"
     },
     {
-      "doc_id": "Dandy-Walker-Malformation.ann",
-      "short_form": "DWM",
-      "long_form": "Dandy-Walker malformation",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "De-Santis-Cacchione-Syndrome.ann",
-      "short_form": "XP",
-      "long_form": "xeroderma pigmentosum",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Dejerine.ann",
       "short_form": "DSS",
       "long_form": "Dejerine-Sottas syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Dejerine.pdf"
     },
     {
-      "doc_id": "Dentinogenesis-Imperfecta-Type-III.ann",
-      "short_form": "DGI-III",
-      "long_form": "Dentinogenesis imperfecta type III",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Dilatation-of-the-Pulmonary-Artery-Idiopathic.ann",
-      "short_form": "IDPA",
-      "long_form": "Idiopathic dilatation of the pulmonary artery",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Dysplasia-Epiphysealis-Hemimelica.ann",
       "short_form": "DEH",
       "long_form": "Dysplasia epiphysealis hemimelica",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Dysplasia-Epiphysealis-Hemimelica.pdf"
     },
     {
-      "doc_id": "Ear-Patella-Short-Stature-Syndrome.ann",
-      "short_form": "EPS",
-      "long_form": "Ear-patella-short stature syndrome",
-      "category": "RAREDISEASE"
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Empty-Sella-Syndrome.pdf"
     },
     {
-      "doc_id": "Encephalitis-Herpes-Simplex.ann",
-      "short_form": "HSE",
-      "long_form": "Herpes simplex encephalitis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Encephalitis-Herpes-Simplex.ann",
-      "short_form": "HSV",
-      "long_form": "herpes simplex virus",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Endocardial-Fibroelastosis.ann",
-      "short_form": "EFE",
-      "long_form": "Endocardial fibroelastosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Eosinophilic-Esophagitis.ann",
-      "short_form": "EOE",
-      "long_form": "Eosinophilic esophagitis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Eosinophilic-Esophagitis.ann",
-      "short_form": "GERD",
-      "long_form": "gastroesophageal reflux disease",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Epidermal-Nevus-Syndromes.ann",
-      "short_form": "ENSS",
-      "long_form": "Epidermal nevus syndromes",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Epitheliopathy-Acute-Posterior-Multifocal-Placoid-Pigment.ann",
-      "short_form": "APMPPE",
-      "long_form": "Acute posterior multifocal placoid pigment epitheliopathy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Erythema-Multiforme.ann",
-      "short_form": "EM",
-      "long_form": "Erythema multiforme",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Erythrokeratodermia-with-Ataxia.ann",
-      "short_form": "EKDA",
-      "long_form": "Erythrokeratodermia with ataxia",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Essential-Tremor.ann",
-      "short_form": "ET",
-      "long_form": "Essential tremor",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Ewing-Sarcoma.ann",
       "short_form": "PNET",
       "long_form": "primitive neuroectodermal tumor",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Ewing-Sarcoma.pdf"
     },
     {
-      "doc_id": "Ewing-Sarcoma.ann",
       "short_form": "EFT",
       "long_form": "Ewing family of tumors",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Ewing-Sarcoma.pdf"
     },
     {
-      "doc_id": "Facioscapulohumeral-Muscular-Dystrophy.ann",
-      "short_form": "IBM2",
-      "long_form": "inclusion body myopathy 2",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Familial-Adenomatous-Polyposis.ann",
-      "short_form": "FAP",
-      "long_form": "Familial adenomatous polyposis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Familial-Encephalopathy-with-Neuroserpin-Inclusion-Bodies.ann",
-      "short_form": "FENIB",
-      "long_form": "Familial encephalopathy with neuroserpin inclusion bodies",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Fatal-Familial-Insomnia.ann",
-      "short_form": "SFI",
-      "long_form": "sporadic fatal insomnia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Felty-Syndrome.ann",
-      "short_form": "RA",
-      "long_form": "rheumatoid arthritis",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Fetal-Alcohol-Syndrome.ann",
       "short_form": "FAS",
       "long_form": "Fetal alcohol syndrome",
-      "category": "DISEASE"
+      "category": "DISEASE",
+      "doc_id": "Fetal-Alcohol-Syndrome.pdf"
     },
     {
-      "doc_id": "Fetal-Alcohol-Syndrome.ann",
-      "short_form": "FAS",
-      "long_form": "fetal alcohol syndrome",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Fibrodysplasia-Ossificans-Progressiva.ann",
-      "short_form": "FOP",
-      "long_form": "Fibrodysplasia ossificans progressiva",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Fibromuscular-Dysplasia.ann",
-      "short_form": "FMD",
-      "long_form": "Fibromuscular dysplasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Fitz-Hugh-Curtis-Syndrome.ann",
-      "short_form": "PID",
-      "long_form": "pelvic inflammatory disease",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Focal-Segmental-Glomerulosclerosis.ann",
-      "short_form": "FSGS",
-      "long_form": "Focal segmental glomerulosclerosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Follicular-Lymphoma.ann",
-      "short_form": "NHL",
-      "long_form": "non-Hodgkin lymphoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Freeman-Sheldon-Syndrome.ann",
-      "short_form": "MCCS",
-      "long_form": "multiple congenital contractures",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Fructose-Intolerance-Hereditary.ann",
-      "short_form": "HFI",
-      "long_form": "Hereditary fructose intolerance",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Fructose-Intolerance-Hereditary.ann",
-      "short_form": "HFBP",
-      "long_form": "Hereditary fructose-1,6-biphosphatase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Functional-Neurological-Disorder.ann",
-      "short_form": "FND",
-      "long_form": "Functional neurological disorder",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Gastritis-Giant-Hypertrophic.ann",
-      "short_form": "GHG",
-      "long_form": "Giant hypertrophic gastritis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Gastrointestinal-Stromal-Tumors.ann",
-      "short_form": "GISTS",
-      "long_form": "Gastrointestinal stromal tumors",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Gastroparesis.ann",
-      "short_form": "GASTROPARESIS",
-      "long_form": "pyloric stenosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Giant-Cell-Arteritis.ann",
-      "short_form": "GCA",
-      "long_form": "Giant cell arteritis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Glanzmann-Thrombasthenia.ann",
-      "short_form": "GT",
-      "long_form": "Glanzmann thrombasthenia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Glutaric-Aciduria-Type-I.ann",
-      "short_form": "ORGANIC ACIDURIA",
-      "long_form": "hereditary metabolic disorder",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Glycogen-Storage-Disease-Type-VII.ann",
-      "short_form": "GSD VII",
-      "long_form": "Glycogen storage disease type VII",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Gottron-Syndrome.ann",
-      "short_form": "GS",
-      "long_form": "Gottron syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Graft-versus-Host-Disease.ann",
-      "short_form": "GVHD",
-      "long_form": "Graft versus Host Disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "HTLV-Type-I-and-Type-II.ann",
-      "short_form": "HTLV-I",
-      "long_form": "HTLV-I associated myelopathy/tropical spastic paraparesis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "HTLV-Type-I-and-Type-II.ann",
-      "short_form": "HAM/TSP",
-      "long_form": "HTLV-I associated myelopathy/tropical spastic paraparesis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Hemimegalencephaly.ann",
-      "short_form": "HME",
-      "long_form": "Hemimegalencephaly",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Hemophagocytic-Lymphohistiocytosis.ann",
-      "short_form": "HLH",
-      "long_form": "Hemophagocytic lymphohistiocytosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Hereditary-Multiple-Osteochondromas.ann",
-      "short_form": "HMO",
-      "long_form": "Hereditary multiple osteochondromas",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Herpes-Neonatal.ann",
-      "short_form": "HSV",
-      "long_form": "herpes simplex virus",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Holoprosencephaly.ann",
-      "short_form": "HPE",
-      "long_form": "Holoprosencephaly",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Human-Granulocytic-Ehrlichiosis-(HGE).ann",
-      "short_form": "HGE",
-      "long_form": "Human Granulocytic Ehrlichiosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Human-Granulocytic-Ehrlichiosis-(HGE).ann",
-      "short_form": "HGE",
-      "long_form": "Human Granulocytic Ehrlichiosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Human-Granulocytic-Ehrlichiosis-(HGE).ann",
-      "short_form": "HGE",
-      "long_form": "Sennetsu Fever",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Human-Monocytic-Ehrlichiosis-(HME).ann",
       "short_form": "HME",
       "long_form": "Human Monocytic Ehrlichiosis",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Human-Monocytic-Ehrlichiosis-(HME).pdf"
     },
     {
-      "doc_id": "Hutchinson.ann",
-      "short_form": "HGPS",
-      "long_form": "Hutchinson-Gilford progeria syndrome",
-      "category": "RAREDISEASE"
+      "short_form": "MRI",
+      "long_form": "on magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Melorheostosis.pdf"
     },
     {
-      "doc_id": "Hypohidrotic-Ectodermal-Dysplasia.ann",
-      "short_form": "HED",
-      "long_form": "Hypohidrotic ectodermal dysplasia",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Hypothalamic-Hamartoma.ann",
-      "short_form": "HH",
-      "long_form": "Hypothalamic hamartomas",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Ichthyosis-CHILD-Syndrome.ann",
-      "short_form": "CHILD SYNDROME",
-      "long_form": "congenital hemidysplasia with ichthyosiform erythroderma and limb defects",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Idiopathic-Intracranial-Hypertension.ann",
-      "short_form": "IH",
-      "long_form": "Intracranial Hypertension",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Idiopathic-Intracranial-Hypertension.ann",
-      "short_form": "IH",
-      "long_form": "benign intracranial hypertension",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Immune-Thrombocytopenia.ann",
-      "short_form": "ITP",
-      "long_form": "Immune thrombocytopenia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Juvenile-Pilocytic-Astrocytoma.ann",
-      "short_form": "JPA",
-      "long_form": "Juvenile pilocytic astrocytoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Kasabach.ann",
-      "short_form": "KMP",
-      "long_form": "Kasabach-Merritt phenomenon",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Kasabach.ann",
-      "short_form": "KASABACH-MERRITT PHENOMENON",
-      "long_form": "Kaposiform hemangioendothelioma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Kearns-Sayre-Syndrome.ann",
-      "short_form": "KSS",
-      "long_form": "Kearns-Sayre syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Kearns-Sayre-Syndrome.ann",
-      "short_form": "CPEO",
-      "long_form": "chronic progressive external ophthalmoplegia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Kenny.ann",
-      "short_form": "KCS2",
-      "long_form": "Kenny-Caffey syndrome type 2",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Keratitis-Ichthyosis-Deafness-Syndrome.ann",
-      "short_form": "KID",
-      "long_form": "Keratitis ichthyosis deafness",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Keratosis-Follicularis-Spinulosa-Decalvans.ann",
-      "short_form": "KFSD",
-      "long_form": "Keratosis follicularis spinulosa decalvans",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Klinefelter-Syndrome.ann",
-      "short_form": "KS",
-      "long_form": "Kallmann syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Klippel.ann",
-      "short_form": "KTS",
-      "long_form": "Klippel-Trenaunay Syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Kufor-Rakeb-Syndrome.ann",
-      "short_form": "KRS",
-      "long_form": "Kufor Rakeb syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Kugelberg-Welander-Syndrome.ann",
-      "short_form": "SMA3",
-      "long_form": "Kugelberg-Welander syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Leber-Hereditary-Optic-Neuropathy.ann",
-      "short_form": "LHON",
-      "long_form": "Leber hereditary optic neuropathy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Lennox.ann",
-      "short_form": "LGS",
-      "long_form": "Lennox-Gastaut syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Levy.ann",
-      "short_form": "LYS",
-      "long_form": "Levy-Yeboa syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Lichen-Planus.ann",
-      "short_form": "LP",
-      "long_form": "Lichen planus",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Long-QT-Syndrome.ann",
-      "short_form": "LQTS",
-      "long_form": "Long QT syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Long-QT-Syndrome.ann",
-      "short_form": "TDP",
-      "long_form": "torsade de pointes",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Long-QT-Syndrome.ann",
-      "short_form": "VF",
-      "long_form": "ventricular fibrillation",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "MCT8.ann",
-      "short_form": "THCT DEFICIENCY",
-      "long_form": "MCT8-specific thyroid hormone cell transporter deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "MELAS-Syndrome.ann",
-      "short_form": "MELAS SYNDROME",
-      "long_form": "Mitochondrial Encephalopathy, Lactic Acidosis, and Stroke-like episodes",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "MERRF-Syndrome.ann",
-      "short_form": "MERRF SYNDROME",
-      "long_form": "syndrome Myoclonus Epilepsy with Ragged-Red Fibers",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Machado.ann",
-      "short_form": "MJD-III",
-      "long_form": "Machado-Joseph Disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Machado.ann",
-      "short_form": "MJD",
-      "long_form": "Machado-Joseph Disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Malignant-Hyperthermia.ann",
-      "short_form": "MH",
-      "long_form": "Malignant hyperthermia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Mantle-Cell-Lymphoma.ann",
-      "short_form": "MCL",
-      "long_form": "Mantle cell lymphoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Mantle-Cell-Lymphoma.ann",
-      "short_form": "MCL",
-      "long_form": "Mantle cell lymphoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Mantle-Cell-Lymphoma.ann",
-      "short_form": "NHL",
-      "long_form": "non-Hodgkin’s lymphoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Mayer.ann",
-      "short_form": "MRKH",
-      "long_form": "Mayer-Rokitansky-Küster-Hauser",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "McCune-Albright-Syndrome.ann",
-      "short_form": "MAS",
-      "long_form": "McCune-Albright syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Median-Arcuate-Ligament-Syndrome.ann",
-      "short_form": "MALS",
-      "long_form": "median arcuate ligament syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Megalencephaly.ann",
-      "short_form": "MCAP",
-      "long_form": "macrocephaly-capillary malformation",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Meningitis-Tuberculous.ann",
       "short_form": "TBM",
       "long_form": "Tuberculous Meningitis",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Meningitis-Tuberculous.pdf"
     },
     {
-      "doc_id": "Meningitis-Tuberculous.ann",
       "short_form": "TB",
       "long_form": "tuberculosis",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Meningitis-Tuberculous.pdf"
     },
     {
-      "doc_id": "Mevalonate-Kinase-Deficiency.ann",
-      "short_form": "MKD",
-      "long_form": "Mevalonate kinase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Mitochondrial-Neurogastrointestinal-Encephalopathy.ann",
-      "short_form": "MNGIE",
-      "long_form": "Mitochondrial neurogastrointestinal encephalomyopathy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Mitral-Valve-Prolapse-Syndrome.ann",
-      "short_form": "MVP",
-      "long_form": "Mitral valve prolapse syndrome",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Mitral-Valve-Prolapse-Syndrome.ann",
-      "short_form": "MVP",
-      "long_form": "mitral valve prolapse syndrome",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Mitral-Valve-Prolapse-Syndrome.ann",
-      "short_form": "MVP",
-      "long_form": "Mitral valve prolapse syndrome",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Mixed-Cryoglobulinemia.ann",
       "short_form": "HC",
       "long_form": "hepatitis C",
-      "category": "DISEASE"
+      "category": "DISEASE",
+      "doc_id": "Mixed-Cryoglobulinemia.pdf"
     },
     {
-      "doc_id": "Mucous-Membrane-Pemphigoid.ann",
-      "short_form": "MMP",
-      "long_form": "Mucous membrane pemphigoid",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Multiple-Endocrine-Neoplasia-Type-1.ann",
-      "short_form": "MEN TYPE 1",
-      "long_form": "Multiple endocrine neoplasia type 1",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Multiple-Endocrine-Neoplasia-Type-2.ann",
-      "short_form": "MEN2",
-      "long_form": "Multiple endocrine neoplasia type 2",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Necrotizing-Enterocolitis.ann",
-      "short_form": "SIP",
-      "long_form": "spontaneous intestinal perforation",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Necrotizing-Fasciitis.ann",
-      "short_form": "NF",
-      "long_form": "Necrotizing fasciitis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Nephrogenic-Systemic-Fibrosis.ann",
-      "short_form": "NSF",
-      "long_form": "Nephrogenic systemic fibrosis",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Neu-Laxova-Syndrome.ann",
-      "short_form": "NLS",
-      "long_form": "Neu-Laxova syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Neuropathy-Congenital-Hypomyelination.ann",
-      "short_form": "CHN",
-      "long_form": "Congenital hypomyelination neuropathy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Nevoid-Basal-Cell-Carcinoma-Syndrome.ann",
-      "short_form": "NBCCS",
-      "long_form": "Basal cell carcinoma of the skin",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Non.ann",
-      "short_form": "N24",
-      "long_form": "Non-24-hour sleep-wake disorder",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "OSMED-Heterozygous.ann",
-      "short_form": "HETEROZYGOUS OSMED",
-      "long_form": "oto-spondyl-megaepiphyseal dysplasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "OSMED-Homozygous.ann",
-      "short_form": "HOMOZYGOUS OSMED",
-      "long_form": "oto-spondylo-megaepiphyseal dysplasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Oculo.ann",
-      "short_form": "OAVS",
-      "long_form": "Oculo-auriculo-vertebral spectrum",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Oculocerebrocutaneous-Syndrome.ann",
-      "short_form": "OCC SYNDROME",
-      "long_form": "microphthalmos",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Olivopontocerebellar-Atrophy.ann",
-      "short_form": "OPCA",
-      "long_form": "olivopontocerebellar atrophy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Oral.ann",
-      "short_form": "OFDS",
-      "long_form": "Oral-facial-digital syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Osteogenesis-Imperfecta.ann",
-      "short_form": "OI",
-      "long_form": "Osteogenesis Imperfecta",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Osteonecrosis.ann",
-      "short_form": "AVN",
-      "long_form": "avascular necrosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Ovotesticular-Disorder-of-Sex-Development.ann",
-      "short_form": "OVOTESTICULAR DSD",
-      "long_form": "Ovotesticular disorder of sex development",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Paracoccidioidomycosis.ann",
-      "short_form": "PCM",
-      "long_form": "Paracoccidioidomycosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Pelizaeus-Merzbacher-disease.ann",
-      "short_form": "PMD",
-      "long_form": "Pelizaeus-Merzbacher disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Peutz-Jeghers-Syndrome.ann",
-      "short_form": "PJS",
-      "long_form": "Peutz Jeghers syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Phosphoglycerate-Kinase-Deficiency.ann",
-      "short_form": "PGK",
-      "long_form": "Phosphoglycerate kinase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Pneumocystis-Pneumonia.ann",
-      "short_form": "PJP",
-      "long_form": "Pneumocystis pneumonia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Polymorphous-Low.ann",
-      "short_form": "PLGA",
-      "long_form": "weakening of the muscles on one side of the face",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Pontocerebellar-Hypoplasia.ann",
-      "short_form": "PCH",
-      "long_form": "Pontocerebellar hypoplasias",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Post-Polio-Syndrome.ann",
-      "short_form": "PPS",
-      "long_form": "Post-polio syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Post.ann",
-      "short_form": "PTLD",
-      "long_form": "Post-transplant lymphoproliferative disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Primary-Biliary-Cholangitis.ann",
-      "short_form": "PBC",
-      "long_form": "Primary biliary cholangitis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Primary-Central-Nervous-System-Lymphoma.ann",
       "short_form": "PCNSL",
       "long_form": "Primary central nervous system lymphoma",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Primary-Central-Nervous-System-Lymphoma.pdf"
     },
     {
-      "doc_id": "Primary-Gastric-Lymphoma.ann",
-      "short_form": "DLBCL OF THE STOMACH",
-      "long_form": "diffuse large B-cell lymphoma of the stomach",
-      "category": "RAREDISEASE"
+      "short_form": "PLS",
+      "long_form": "Primary lateral sclerosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Primary-Lateral-Sclerosis.pdf"
     },
     {
-      "doc_id": "Primary-Intestinal-Lymphangiectasia.ann",
-      "short_form": "PIL",
-      "long_form": "Primary intestinal lymphangiectasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Progressive-Myoclonus-Epilepsy.ann",
-      "short_form": "PME",
-      "long_form": "Progressive myoclonus epilepsy",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Progressive-Osseous-Heteroplasia.ann",
-      "short_form": "POH",
-      "long_form": "progressive osseous heteroplasia",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Progressive-Symmetric-Erythrokeratodermia.ann",
-      "short_form": "PSEK",
-      "long_form": "Progressive symmetric erythrokeratoderma",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Prune-Belly-Syndrome.ann",
-      "short_form": "PRUNE-BELLY SYNDROME",
-      "long_form": "Eagle-Barrett syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Pure-Autonomic-Failure.ann",
-      "short_form": "PAF",
-      "long_form": "pure autonomic failure",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Pyoderma-Gangrenosum.ann",
-      "short_form": "PG",
-      "long_form": "Pyoderma gangrenosum",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Ramsay-Hunt-Syndrome.ann",
-      "short_form": "RHS",
-      "long_form": "Ramsay Hunt syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Rapid.ann",
-      "short_form": "ROHHAD",
-      "long_form": "Rapid-onset obesity with hypothalamic dysfunction, hypoventilation, and autonomic dysregulation",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Rapid.ann",
-      "short_form": "CCHS",
-      "long_form": "Congenital central hypoventilation syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Rapid.ann",
-      "short_form": "RADICA",
-      "long_form": "rubric of respiratory and autonomic disorders of infancy, childhood, and adulthood",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Recessive-Multiple-Epiphyseal-Dysplasia.ann",
-      "short_form": "RMED",
-      "long_form": "SLC26A2 Recessive multiple epiphyseal dysplasia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Refractory-Celiac-Disease.ann",
-      "short_form": "RCD",
-      "long_form": "Refractory celiac disease",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Respiratory-Distress-Syndrome-Infant.ann",
-      "short_form": "IRDS",
-      "long_form": "Infant respiratory distress syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Restless-Legs-Syndrome.ann",
-      "short_form": "ACHING",
-      "long_form": "Restless legs syndrome",
-      "category": "SYMPTOM"
-    },
-    {
-      "doc_id": "Restless-Legs-Syndrome.ann",
-      "short_form": "RLS",
-      "long_form": "restless legs syndrome",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Retinitis-Pigmentosa.ann",
-      "short_form": "RP",
-      "long_form": "Retinitis pigmentosa",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Retinopathy-of-Prematurity.ann",
-      "short_form": "ROP",
-      "long_form": "Retinopathy of prematurity",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Rocky-Mountain-Spotted-Fever.ann",
-      "short_form": "RMSF",
-      "long_form": "Rocky Mountain spotted fever",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Sakati-Syndrome.ann",
-      "short_form": "ACPS",
-      "long_form": "Acrocephalopolysyndactyly",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Schwartz-Jampel-Syndrome.ann",
-      "short_form": "SJS",
-      "long_form": "Schwartz-Jampel syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Senior-Lken-Syndrome.ann",
-      "short_form": "IT",
-      "long_form": "Senior Løken syndrome",
-      "category": "ANAPHOR"
-    },
-    {
-      "doc_id": "Sennetsu-Fever.ann",
-      "short_form": "SENNETSU FEVER",
-      "long_form": "Human Ehrlichioses",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Sennetsu-Fever.ann",
-      "short_form": "HGE",
-      "long_form": "Human Granulocytic Ehrlichiosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Sheehan-Syndrome.ann",
-      "short_form": "SS",
-      "long_form": "Sheehan syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Short-Chain-Acyl-CoA-Dehydrogenase-Deficiency.ann",
-      "short_form": "SCADD",
-      "long_form": "Short chain acyl-CoA dehydrogenase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Short-Chain-Acyl-CoA-Dehydrogenase-Deficiency.ann",
-      "short_form": "FOD",
-      "long_form": "fatty acid oxidation disorders",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Sinonasal-Undifferentiated-Carcinoma.ann",
-      "short_form": "SNUC",
-      "long_form": "Sinonasal undifferentiated carcinoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Smith-Lemli-Opitz-Syndrome.ann",
-      "short_form": "SLOS",
-      "long_form": "Smith-Lemli-Opitz syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Snyder.ann",
-      "short_form": "SRS",
-      "long_form": "Snyder-Robinson syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Snyder.ann",
-      "short_form": "XLID",
-      "long_form": "X-linked intellectual disability",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Spastic-Paraplegia-47.ann",
-      "short_form": "HSP",
-      "long_form": "AP-4-associated hereditary spastic paraplegia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Spastic-Paraplegia-50.ann",
-      "short_form": "SPG50",
-      "long_form": "Spastic paraplegia 50",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Spastic-Paraplegia-50.ann",
-      "short_form": "HSP",
-      "long_form": "AP-4-associated hereditary spastic paraplegia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Spastic-Paraplegia-51.ann",
-      "short_form": "HSP",
-      "long_form": "AP-4-associated hereditary spastic paraplegia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Spastic-Paraplegia-52.ann",
-      "short_form": "HSP",
-      "long_form": "AP-4-associated hereditary spastic paraplegia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Split-Hand-Split-Foot-Malformation.ann",
-      "short_form": "SHFM",
-      "long_form": "Split hand/split foot malformation",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Spondyloepiphyseal-Dysplasia-Tarda.ann",
-      "short_form": "SEDT",
-      "long_form": "Spondyloepiphyseal dysplasia tarda",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Spondyloepiphyseal-Dysplasia-Tarda.ann",
-      "short_form": "SEDL",
-      "long_form": "Spondyloepiphyseal dysplasia tarda",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Sporadic-Inclusion-Body-Myositis.ann",
-      "short_form": "SIBM",
-      "long_form": "Sporadic inclusion body myositis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Status-Epilepticus.ann",
-      "short_form": "SE",
-      "long_form": "Status epilepticus",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Stiff-Person-Syndrome.ann",
-      "short_form": "SPS",
-      "long_form": "Stiff-person syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Subacute-Sclerosing-Panencephalitis.ann",
       "short_form": "SSPE",
       "long_form": "Subacute sclerosing panencephalitis",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Subacute-Sclerosing-Panencephalitis.pdf"
     },
     {
-      "doc_id": "Succinic-Semialdehyde-Dehydrogenase-Deficiency.ann",
-      "short_form": "SSADH DEFICIENCY",
-      "long_form": "Succinic semialdehyde dehydrogenase deficiency",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Sudden-Infant-Death-Syndrome.ann",
-      "short_form": "SIDS",
-      "long_form": "Sudden infant death syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Superior-Semicircular-Canal-Dehiscence.ann",
-      "short_form": "SSCD",
-      "long_form": "Superior semicircular canal dehiscence",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Superior-Semicircular-Canal-Dehiscence.ann",
-      "short_form": "EVAS",
-      "long_form": "SSCD",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Systemic-Capillary-Leak-Syndrome.ann",
-      "short_form": "SCLS",
-      "long_form": "Systemic capillary leak syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Tardive-Dyskinesia.ann",
-      "short_form": "TD",
-      "long_form": "Tardive dyskinesia",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Thyroid-Cancer.ann",
-      "short_form": "FMTC",
-      "long_form": "Familial medullary thyroid carcinoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Thyroid-Cancer.ann",
-      "short_form": "MTC",
-      "long_form": "medullary thyroid carcinoma",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Townes-Brocks-Syndrome.ann",
       "short_form": "TBS",
       "long_form": "Townes-Brocks syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Townes-Brocks-Syndrome.pdf"
     },
     {
-      "doc_id": "Toxic-Shock-Syndrome.ann",
-      "short_form": "TSS",
-      "long_form": "Toxic Shock Syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Transverse-Myelitis.ann",
-      "short_form": "SLE",
-      "long_form": "systemic lupus erythematosus",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Tricho-Dento-Osseous-Syndrome.ann",
-      "short_form": "TDO SYNDROME",
-      "long_form": "Tricho-dento-osseous syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Trichorhinophalangeal-Syndrome-Type-I.ann",
-      "short_form": "TRPS1",
-      "long_form": "Trichorhinophalangeal syndrome type I",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Trichorhinophalangeal-Syndrome-Type-II.ann",
-      "short_form": "TRPS2",
-      "long_form": "Trichorhinophalangeal syndrome type II",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Trichorhinophalangeal-Syndrome-Type-III.ann",
-      "short_form": "TRPS3",
-      "long_form": "Trichorhinophalangeal syndrome type III",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Tuberculosis.ann",
-      "short_form": "TB",
-      "long_form": "Tuberculosis",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Twin.ann",
-      "short_form": "TTTS",
-      "long_form": "Twin-twin transfusion syndrome",
-      "category": "RAREDISEASE"
-    },
-    {
-      "doc_id": "Very-Long-Chain-Acyl-CoA-Dehydrogenase-Deficiency-(LCAD).ann",
       "short_form": "VLCADD",
       "long_form": "Very long-chain acyl-CoA dehydrogenase deficiency",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Very-Long-Chain-Acyl-CoA-Dehydrogenase-Deficiency-(LCAD).pdf"
     },
     {
-      "doc_id": "Very-Long-Chain-Acyl-CoA-Dehydrogenase-Deficiency-(LCAD).ann",
       "short_form": "LCADD",
       "long_form": "long-chain acyl-CoA dehydrogenase deficiency",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Very-Long-Chain-Acyl-CoA-Dehydrogenase-Deficiency-(LCAD).pdf"
     },
     {
-      "doc_id": "WAS-Related-Disorders.ann",
-      "short_form": "PCP",
-      "long_form": "Pneumocystis carinii pneumonia",
-      "category": "DISEASE"
-    },
-    {
-      "doc_id": "Waardenburg-Syndrome.ann",
-      "short_form": "WS",
-      "long_form": "Waardenburg syndrome",
-      "category": "SKINRAREDISEASE"
-    },
-    {
-      "doc_id": "Waldenstrom_s-Macroglobulinemia.ann",
       "short_form": "WMG",
       "long_form": "Waldenström's macroglobulinemia",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Waldenstrom_s-Macroglobulinemia.pdf"
     },
     {
-      "doc_id": "Werdnig.ann",
-      "short_form": "SMAS",
-      "long_form": "spinal muscular atrophies",
-      "category": "RAREDISEASE"
+      "short_form": "AGL",
+      "long_form": "acquired generalized lipodystrophy",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Acquired-Lipodystrophy.pdf"
     },
     {
-      "doc_id": "West-Nile-Encephalitis.ann",
-      "short_form": "WNE",
-      "long_form": "West Nile Encephalitis",
-      "category": "RAREDISEASE"
+      "short_form": "APL",
+      "long_form": "acquired partial lipodystrophy",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Acquired-Lipodystrophy.pdf"
     },
     {
-      "doc_id": "Wildervanck-Syndrome.ann",
-      "short_form": "KFS",
-      "long_form": "Klippel-Feil syndrome",
-      "category": "RAREDISEASE"
+      "short_form": "LD-HIV",
+      "long_form": "high active antiretroviral induced lipodystrophy",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Acquired-Lipodystrophy.pdf"
     },
     {
-      "doc_id": "Wolf.ann",
-      "short_form": "WHS",
-      "long_form": "Wolf-Hirschhorn syndrome",
-      "category": "RAREDISEASE"
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Acute-Disseminated-Encephalomyelitis.pdf"
     },
     {
-      "doc_id": "Wolff-Parkinson-White-Syndrome.ann",
-      "short_form": "WPW",
-      "long_form": "Wolff-Parkinson-White",
-      "category": "RAREDISEASE"
+      "short_form": "AOS",
+      "long_form": "Adams-Oliver syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Adams-Oliver-Syndrome.pdf"
     },
     {
-      "doc_id": "X-linked-Lymphoproliferative-Syndrome.ann",
+      "short_form": "ASLD",
+      "long_form": "Adenylosuccinate lyase deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Adenylosuccinate-Lyase-Deficiency.pdf"
+    },
+    {
+      "short_form": "AI",
+      "long_form": "Amelogenesis imperfecta",
+      "category": "RAREDISEASE",
+      "doc_id": "Amelogenesis-Imperfecta.pdf"
+    },
+    {
+      "short_form": "AITL",
+      "long_form": "Angioimmunoblastic T-cell lymphoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Angioimmunoblastic-T.pdf"
+    },
+    {
+      "short_form": "AMC",
+      "long_form": "arthrogryposis multiplex congenita",
+      "category": "RAREDISEASE",
+      "doc_id": "Arthrogryposis-Multiplex-Congenita.pdf"
+    },
+    {
+      "short_form": "CGH",
+      "long_form": "and comparative genomic hybridization",
+      "category": "RAREDISEASE",
+      "doc_id": "Arthrogryposis-Multiplex-Congenita.pdf"
+    },
+    {
+      "short_form": "AD-HIES",
+      "long_form": "Autosomal dominant hyper IgE syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Autosomal-Dominant-Hyper-IgE-Syndrome.pdf"
+    },
+    {
+      "short_form": "BSS",
+      "long_form": "Bernard-Soulier syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Bernard.pdf"
+    },
+    {
+      "short_form": "POI",
+      "long_form": "premature ovarian insufficiency",
+      "category": "DISEASE",
+      "doc_id": "Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf"
+    },
+    {
+      "short_form": "CCD",
+      "long_form": "Central core disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Central-Core-Disease.pdf"
+    },
+    {
+      "short_form": "CTLN1",
+      "long_form": "Citrullinemia type I",
+      "category": "RAREDISEASE",
+      "doc_id": "Citrullinemia-Type-1.pdf"
+    },
+    {
+      "short_form": "CFTD",
+      "long_form": "Congenital fiber type disproportion",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Fiber-Type-Disproportion.pdf"
+    },
+    {
+      "short_form": "CPL",
+      "long_form": "Congenital pulmonary lymphangiectasia",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Pulmonary-Lymphangiectasia.pdf"
+    },
+    {
+      "short_form": "CS",
+      "long_form": "congenital syphilis",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Syphilis.pdf"
+    },
+    {
+      "short_form": "DWM",
+      "long_form": "Dandy-Walker malformation",
+      "category": "RAREDISEASE",
+      "doc_id": "Dandy-Walker-Malformation.pdf"
+    },
+    {
+      "short_form": "EM",
+      "long_form": "Erythema multiforme",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Erythema-Multiforme.pdf"
+    },
+    {
+      "short_form": "HFI",
+      "long_form": "Hereditary fructose intolerance",
+      "category": "RAREDISEASE",
+      "doc_id": "Fructose-Intolerance-Hereditary.pdf"
+    },
+    {
+      "short_form": "HFBP",
+      "long_form": "Hereditary fructose-1,6-biphosphatase deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Fructose-Intolerance-Hereditary.pdf"
+    },
+    {
+      "short_form": "FND",
+      "long_form": "Functional neurological disorder",
+      "category": "RAREDISEASE",
+      "doc_id": "Functional-Neurological-Disorder.pdf"
+    },
+    {
+      "short_form": "GT",
+      "long_form": "Glanzmann thrombasthenia",
+      "category": "RAREDISEASE",
+      "doc_id": "Glanzmann-Thrombasthenia.pdf"
+    },
+    {
+      "short_form": "GSD VII",
+      "long_form": "Glycogen storage disease type VII",
+      "category": "RAREDISEASE",
+      "doc_id": "Glycogen-Storage-Disease-Type-VII.pdf"
+    },
+    {
+      "short_form": "HTLV-I",
+      "long_form": "HTLV-I associated myelopathy/tropical spastic paraparesis",
+      "category": "RAREDISEASE",
+      "doc_id": "HTLV-Type-I-and-Type-II.pdf"
+    },
+    {
+      "short_form": "HAM/TSP",
+      "long_form": "HTLV-I associated myelopathy/tropical spastic paraparesis",
+      "category": "RAREDISEASE",
+      "doc_id": "HTLV-Type-I-and-Type-II.pdf"
+    },
+    {
+      "short_form": "HME",
+      "long_form": "Hemimegalencephaly",
+      "category": "RAREDISEASE",
+      "doc_id": "Hemimegalencephaly.pdf"
+    },
+    {
+      "short_form": "HLH",
+      "long_form": "Hemophagocytic lymphohistiocytosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Hemophagocytic-Lymphohistiocytosis.pdf"
+    },
+    {
+      "short_form": "HPE",
+      "long_form": "Holoprosencephaly",
+      "category": "RAREDISEASE",
+      "doc_id": "Holoprosencephaly.pdf"
+    },
+    {
+      "short_form": "HGE",
+      "long_form": "Human Granulocytic Ehrlichiosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Human-Granulocytic-Ehrlichiosis-(HGE).pdf"
+    },
+    {
+      "short_form": "HGE",
+      "long_form": "Sennetsu Fever",
+      "category": "RAREDISEASE",
+      "doc_id": "Human-Granulocytic-Ehrlichiosis-(HGE).pdf"
+    },
+    {
+      "short_form": "HED",
+      "long_form": "Hypohidrotic ectodermal dysplasia",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Hypohidrotic-Ectodermal-Dysplasia.pdf"
+    },
+    {
+      "short_form": "GI",
+      "long_form": "gastrointestinal",
+      "category": "RAREDISEASE",
+      "doc_id": "Hypohidrotic-Ectodermal-Dysplasia.pdf"
+    },
+    {
+      "short_form": "HH",
+      "long_form": "Hypothalamic hamartomas",
+      "category": "RAREDISEASE",
+      "doc_id": "Hypothalamic-Hamartoma.pdf"
+    },
+    {
+      "short_form": "ITP",
+      "long_form": "Immune thrombocytopenia",
+      "category": "RAREDISEASE",
+      "doc_id": "Immune-Thrombocytopenia.pdf"
+    },
+    {
+      "short_form": "KMP",
+      "long_form": "Kasabach-Merritt phenomenon",
+      "category": "RAREDISEASE",
+      "doc_id": "Kasabach.pdf"
+    },
+    {
+      "short_form": "KSS",
+      "long_form": "Kearns-Sayre syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Kearns-Sayre-Syndrome.pdf"
+    },
+    {
+      "short_form": "CPEO",
+      "long_form": "chronic progressive external ophthalmoplegia",
+      "category": "RAREDISEASE",
+      "doc_id": "Kearns-Sayre-Syndrome.pdf"
+    },
+    {
+      "short_form": "LHON",
+      "long_form": "Leber hereditary optic neuropathy",
+      "category": "RAREDISEASE",
+      "doc_id": "Leber-Hereditary-Optic-Neuropathy.pdf"
+    },
+    {
+      "short_form": "LGS",
+      "long_form": "Lennox-Gastaut syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Lennox.pdf"
+    },
+    {
+      "short_form": "MRKH",
+      "long_form": "Mayer-Rokitansky-Küster-Hauser",
+      "category": "RAREDISEASE",
+      "doc_id": "Mayer.pdf"
+    },
+    {
+      "short_form": "MNGIE",
+      "long_form": "Mitochondrial neurogastrointestinal encephalomyopathy",
+      "category": "RAREDISEASE",
+      "doc_id": "Mitochondrial-Neurogastrointestinal-Encephalopathy.pdf"
+    },
+    {
+      "short_form": "PJS",
+      "long_form": "Peutz Jeghers syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Peutz-Jeghers-Syndrome.pdf"
+    },
+    {
+      "short_form": "PGK",
+      "long_form": "Phosphoglycerate kinase deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Phosphoglycerate-Kinase-Deficiency.pdf"
+    },
+    {
+      "short_form": "PJP",
+      "long_form": "Pneumocystis pneumonia",
+      "category": "RAREDISEASE",
+      "doc_id": "Pneumocystis-Pneumonia.pdf"
+    },
+    {
+      "short_form": "PLGA",
+      "long_form": "weakening of the muscles on one side of the face",
+      "category": "SIGN",
+      "doc_id": "Polymorphous-Low.pdf"
+    },
+    {
+      "short_form": "PBC",
+      "long_form": "Primary biliary cholangitis",
+      "category": "RAREDISEASE",
+      "doc_id": "Primary-Biliary-Cholangitis.pdf"
+    },
+    {
+      "short_form": "POH",
+      "long_form": "progressive osseous heteroplasia",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Progressive-Osseous-Heteroplasia.pdf"
+    },
+    {
+      "short_form": "PSEK",
+      "long_form": "Progressive symmetric erythrokeratoderma",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Progressive-Symmetric-Erythrokeratodermia.pdf"
+    },
+    {
+      "short_form": "IVP",
+      "long_form": "intravenous pyelogram",
+      "category": "RAREDISEASE",
+      "doc_id": "Prune-Belly-Syndrome.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Pyruvate-Dehydrogenase-Complex-Deficiency.pdf"
+    },
+    {
+      "short_form": "MRS",
+      "long_form": "and magnetic resonance spectroscopy",
+      "category": "RAREDISEASE",
+      "doc_id": "Pyruvate-Dehydrogenase-Complex-Deficiency.pdf"
+    },
+    {
+      "short_form": "ROHHAD",
+      "long_form": "Rapid-onset obesity with hypothalamic dysfunction, hypoventilation, and autonomic dysregulation",
+      "category": "RAREDISEASE",
+      "doc_id": "Rapid.pdf"
+    },
+    {
+      "short_form": "CCHS",
+      "long_form": "Congenital central hypoventilation syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Rapid.pdf"
+    },
+    {
+      "short_form": "RADICA",
+      "long_form": "rubric of respiratory and autonomic disorders of infancy, childhood, and adulthood",
+      "category": "DISEASE",
+      "doc_id": "Rapid.pdf"
+    },
+    {
+      "short_form": "RCD",
+      "long_form": "Refractory celiac disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Refractory-Celiac-Disease.pdf"
+    },
+    {
+      "short_form": "TPN",
+      "long_form": "and total parental nutrition",
+      "category": "RAREDISEASE",
+      "doc_id": "Refractory-Celiac-Disease.pdf"
+    },
+    {
+      "short_form": "RLS",
+      "long_form": "restless legs syndrome",
+      "category": "DISEASE",
+      "doc_id": "Restless-Legs-Syndrome.pdf"
+    },
+    {
+      "short_form": "SS",
+      "long_form": "Sheehan syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Sheehan-Syndrome.pdf"
+    },
+    {
+      "short_form": "HSP",
+      "long_form": "AP-4-associated hereditary spastic paraplegia",
+      "category": "RAREDISEASE",
+      "doc_id": "Spastic-Paraplegia-47.pdf"
+    },
+    {
+      "short_form": "SPS",
+      "long_form": "Stiff-person syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Stiff-Person-Syndrome.pdf"
+    },
+    {
+      "short_form": "TD",
+      "long_form": "Tardive dyskinesia",
+      "category": "RAREDISEASE",
+      "doc_id": "Tardive-Dyskinesia.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "a computed tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Wyburn.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Wyburn.pdf"
+    },
+    {
       "short_form": "XLP",
       "long_form": "X-linked lymphoproliferative syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "X-linked-Lymphoproliferative-Syndrome.pdf"
     },
     {
-      "doc_id": "X-linked-Lymphoproliferative-Syndrome.ann",
       "short_form": "IM",
       "long_form": "infectious mononucleosis",
-      "category": "DISEASE"
+      "category": "DISEASE",
+      "doc_id": "X-linked-Lymphoproliferative-Syndrome.pdf"
     },
     {
-      "doc_id": "X.ann",
       "short_form": "XMEA",
       "long_form": "X-linked myopathy with excessive autophagy",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "X.pdf"
     },
     {
-      "doc_id": "Zellweger-Spectrum-Disorders.ann",
-      "short_form": "PBDS",
+      "short_form": "AMS",
+      "long_form": "Ablepharon-Macrostomia Syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Ablepharon.pdf"
+    },
+    {
+      "short_form": "ACC",
+      "long_form": "acute calculous cholecystitis",
+      "category": "DISEASE",
+      "doc_id": "Acute-Cholecystitis.pdf"
+    },
+    {
+      "short_form": "ACC",
+      "long_form": "Adenoid cystic carcinoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Adenoid-Cystic-Carcinoma.pdf"
+    },
+    {
+      "short_form": "AFE",
+      "long_form": "Amniotic fluid embolism",
+      "category": "RAREDISEASE",
+      "doc_id": "Amniotic-Fluid-Embolism.pdf"
+    },
+    {
+      "short_form": "ALS",
+      "long_form": "Amyotrophic lateral sclerosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Amyotrophic-Lateral-Sclerosis.pdf"
+    },
+    {
+      "short_form": "CAHA",
+      "long_form": "Cold antibody hemolytic anemia",
+      "category": "RAREDISEASE",
+      "doc_id": "Anemia-Hemolytic-Cold-Antibody.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Astrocytoma.pdf"
+    },
+    {
+      "short_form": "AT",
+      "long_form": "Ataxia telangiectasia",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Ataxia-Telangiectasia.pdf"
+    },
+    {
+      "short_form": "AVED",
+      "long_form": "Ataxia with vitamin E deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Ataxia-with-Vitamin-E-Deficiency.pdf"
+    },
+    {
+      "short_form": "ASVD",
+      "long_form": "Atrioventricular septal defect",
+      "category": "RAREDISEASE",
+      "doc_id": "Atrioventricular-Septal-Defect.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Atrioventricular-Septal-Defect.pdf"
+    },
+    {
+      "short_form": "APS-1",
+      "long_form": "Autoimmune polyglandular syndrome type 1",
+      "category": "RAREDISEASE",
+      "doc_id": "Autoimmune-Polyglandular-Syndrome-Type-1.pdf"
+    },
+    {
+      "short_form": "ADTKD",
+      "long_form": "Autosomal dominant tubulointerstitial kidney disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Autosomal-Dominant-Tubulo.pdf"
+    },
+    {
+      "short_form": "CADASIL",
+      "long_form": "cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy",
+      "category": "RAREDISEASE",
+      "doc_id": "Binswanger-Disease.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Binswanger-Disease.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "or computerized tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Binswanger-Disease.pdf"
+    },
+    {
+      "short_form": "BTD",
+      "long_form": "Biotinidase deficiency",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Biotinidase-Deficiency.pdf"
+    },
+    {
+      "short_form": "BRBNS",
+      "long_form": "Blue rubber bleb nevus syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Blue-Rubber-Bleb-Nevus-syndrome.pdf"
+    },
+    {
+      "short_form": "BOFS",
+      "long_form": "Branchio-oculo-facial syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Branchio-Oculo-Facial-Syndrome.pdf"
+    },
+    {
+      "short_form": "BOOP",
+      "long_form": "Bronchiolitis obliterans organizing pneumonia",
+      "category": "RAREDISEASE",
+      "doc_id": "Bronchiolitis-Obliterans-Organizing-Pneumonia.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic resonance imagining",
+      "category": "RAREDISEASE",
+      "doc_id": "Budd-Chiari-Syndrome.pdf"
+    },
+    {
+      "short_form": "CPSID",
+      "long_form": "Carbamoyl phosphate synthetase I deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Carbamoyl-Phosphate-Synthetase-I-Deficiency.pdf"
+    },
+    {
+      "short_form": "CPT1A",
+      "long_form": "Carnitine palmitoyltransferase 1A deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Carnitine-Palmitoyltransferase-1A-Deficiency.pdf"
+    },
+    {
+      "short_form": "CCDS",
+      "long_form": "Cerebral creatine deficiency syndromes",
+      "category": "RAREDISEASE",
+      "doc_id": "Cerebral-Creatine-Deficiency-Syndromes.pdf"
+    },
+    {
+      "short_form": "COFS",
+      "long_form": "Cerebro-oculo-facio-skeletal syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Cerebro-Oculo-Facio-Skeletal-Syndrome.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Cervical-Dystonia.pdf"
+    },
+    {
+      "short_form": "CS",
+      "long_form": "Chandler's syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Chandler_s-Syndrome.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "computerized tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Chilaiditi_s-Syndrome.pdf"
+    },
+    {
+      "short_form": "DGS",
+      "long_form": "DiGeorge syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Chromosome-10-Monosomy-10p.pdf"
+    },
+    {
+      "short_form": "CGD",
+      "long_form": "chronic granulomatous disease",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Chronic-Granulomatous-Disease.pdf"
+    },
+    {
+      "short_form": "CS",
+      "long_form": "Cockayne Syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Cockayne-Syndrome.pdf"
+    },
+    {
+      "short_form": "XP-CS",
+      "long_form": "Xeroderma pigmentosa-Cockayne syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Cockayne-Syndrome.pdf"
+    },
+    {
+      "short_form": "CVID",
+      "long_form": "Common Variable Immune Deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Common-Variable-Immune-Deficiency.pdf"
+    },
+    {
+      "short_form": "WHO",
+      "long_form": "The World Health Organization",
+      "category": "RAREDISEASE",
+      "doc_id": "Common-Variable-Immune-Deficiency.pdf"
+    },
+    {
+      "short_form": "CAH",
+      "long_form": "Congenital adrenal hyperplasia",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Adrenal-Hyperplasia.pdf"
+    },
+    {
+      "short_form": "CEP",
+      "long_form": "Congenital erythropoietic porphyria",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Congenital-Erythropoietic-Porphyria.pdf"
+    },
+    {
+      "short_form": "CFEOM",
+      "long_form": "Congenital fibrosis of the extraocular muscles",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Fibrosis-of-the-Extraocular-Muscles.pdf"
+    },
+    {
+      "short_form": "CHF",
+      "long_form": "Congenital hepatic fibrosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Hepatic-Fibrosis.pdf"
+    },
+    {
+      "short_form": "FCD",
+      "long_form": "hepatorenal fibrocystic diseases",
+      "category": "DISEASE",
+      "doc_id": "Congenital-Hepatic-Fibrosis.pdf"
+    },
+    {
+      "short_form": "PKD",
+      "long_form": "polycystic kidney disease",
+      "category": "DISEASE",
+      "doc_id": "Congenital-Hepatic-Fibrosis.pdf"
+    },
+    {
+      "short_form": "NPHP",
+      "long_form": "nephronophthisis",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Hepatic-Fibrosis.pdf"
+    },
+    {
+      "short_form": "HI",
+      "long_form": "Congenital hyperinsulinism",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Hyperinsulinism.pdf"
+    },
+    {
+      "short_form": "CSID",
+      "long_form": "Congenital sucrase-isomaltase deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Congenital-Sucrase.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Cor-Triatriatum.pdf"
+    },
+    {
+      "short_form": "CCS",
+      "long_form": "Cronkhite-Canada syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Cronkhite.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Cysticercosis.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "and computed tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Cysticercosis.pdf"
+    },
+    {
+      "short_form": "CMV",
+      "long_form": "Cytomegalovirus infection",
+      "category": "RAREDISEASE",
+      "doc_id": "Cytomegalovirus-Infection.pdf"
+    },
+    {
+      "short_form": "XP",
+      "long_form": "xeroderma pigmentosum",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "De-Santis-Cacchione-Syndrome.pdf"
+    },
+    {
+      "short_form": "DGI-III",
+      "long_form": "Dentinogenesis imperfecta type III",
+      "category": "RAREDISEASE",
+      "doc_id": "Dentinogenesis-Imperfecta-Type-III.pdf"
+    },
+    {
+      "short_form": "IDPA",
+      "long_form": "Idiopathic dilatation of the pulmonary artery",
+      "category": "RAREDISEASE",
+      "doc_id": "Dilatation-of-the-Pulmonary-Artery-Idiopathic.pdf"
+    },
+    {
+      "short_form": "EPS",
+      "long_form": "Ear-patella-short stature syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Ear-Patella-Short-Stature-Syndrome.pdf"
+    },
+    {
+      "short_form": "CBC",
+      "long_form": "complete blood count",
+      "category": "RAREDISEASE",
+      "doc_id": "Eisenmenger-Syndrome.pdf"
+    },
+    {
+      "short_form": "HSE",
+      "long_form": "Herpes simplex encephalitis",
+      "category": "RAREDISEASE",
+      "doc_id": "Encephalitis-Herpes-Simplex.pdf"
+    },
+    {
+      "short_form": "HSV",
+      "long_form": "herpes simplex virus",
+      "category": "RAREDISEASE",
+      "doc_id": "Encephalitis-Herpes-Simplex.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Encephalitis-Herpes-Simplex.pdf"
+    },
+    {
+      "short_form": "CDC",
+      "long_form": "The Centers for Disease Control",
+      "category": "RAREDISEASE",
+      "doc_id": "Encephalocele.pdf"
+    },
+    {
+      "short_form": "EFE",
+      "long_form": "Endocardial fibroelastosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Endocardial-Fibroelastosis.pdf"
+    },
+    {
+      "short_form": "EoE",
+      "long_form": "Eosinophilic esophagitis",
+      "category": "RAREDISEASE",
+      "doc_id": "Eosinophilic-Esophagitis.pdf"
+    },
+    {
+      "short_form": "GERD",
+      "long_form": "gastroesophageal reflux disease",
+      "category": "DISEASE",
+      "doc_id": "Eosinophilic-Esophagitis.pdf"
+    },
+    {
+      "short_form": "ENSs",
+      "long_form": "Epidermal nevus syndromes",
+      "category": "RAREDISEASE",
+      "doc_id": "Epidermal-Nevus-Syndromes.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Epidermal-Nevus-Syndromes.pdf"
+    },
+    {
+      "short_form": "APMPPE",
+      "long_form": "Acute posterior multifocal placoid pigment epitheliopathy",
+      "category": "RAREDISEASE",
+      "doc_id": "Epitheliopathy-Acute-Posterior-Multifocal-Placoid-Pigment.pdf"
+    },
+    {
+      "short_form": "EKDA",
+      "long_form": "Erythrokeratodermia with ataxia",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Erythrokeratodermia-with-Ataxia.pdf"
+    },
+    {
+      "short_form": "ET",
+      "long_form": "Essential tremor",
+      "category": "RAREDISEASE",
+      "doc_id": "Essential-Tremor.pdf"
+    },
+    {
+      "short_form": "IBM2",
+      "long_form": "inclusion body myopathy 2",
+      "category": "RAREDISEASE",
+      "doc_id": "Facioscapulohumeral-Muscular-Dystrophy.pdf"
+    },
+    {
+      "short_form": "FAP",
+      "long_form": "Familial adenomatous polyposis",
+      "category": "RAREDISEASE",
+      "doc_id": "Familial-Adenomatous-Polyposis.pdf"
+    },
+    {
+      "short_form": "FENIB",
+      "long_form": "Familial encephalopathy with neuroserpin inclusion bodies",
+      "category": "RAREDISEASE",
+      "doc_id": "Familial-Encephalopathy-with-Neuroserpin-Inclusion-Bodies.pdf"
+    },
+    {
+      "short_form": "SFI",
+      "long_form": "sporadic fatal insomnia",
+      "category": "RAREDISEASE",
+      "doc_id": "Fatal-Familial-Insomnia.pdf"
+    },
+    {
+      "short_form": "RA",
+      "long_form": "rheumatoid arthritis",
+      "category": "DISEASE",
+      "doc_id": "Felty-Syndrome.pdf"
+    },
+    {
+      "short_form": "FOP",
+      "long_form": "Fibrodysplasia ossificans progressiva",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Fibrodysplasia-Ossificans-Progressiva.pdf"
+    },
+    {
+      "short_form": "FMD",
+      "long_form": "Fibromuscular dysplasia",
+      "category": "RAREDISEASE",
+      "doc_id": "Fibromuscular-Dysplasia.pdf"
+    },
+    {
+      "short_form": "PID",
+      "long_form": "pelvic inflammatory disease",
+      "category": "DISEASE",
+      "doc_id": "Fitz-Hugh-Curtis-Syndrome.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "computed tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Fitz-Hugh-Curtis-Syndrome.pdf"
+    },
+    {
+      "short_form": "FSGS",
+      "long_form": "Focal segmental glomerulosclerosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Focal-Segmental-Glomerulosclerosis.pdf"
+    },
+    {
+      "short_form": "NHL",
+      "long_form": "non-Hodgkin lymphoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Follicular-Lymphoma.pdf"
+    },
+    {
+      "short_form": "MCCs",
+      "long_form": "multiple congenital contractures",
+      "category": "RAREDISEASE",
+      "doc_id": "Freeman-Sheldon-Syndrome.pdf"
+    },
+    {
+      "short_form": "GHG",
+      "long_form": "Giant hypertrophic gastritis",
+      "category": "RAREDISEASE",
+      "doc_id": "Gastritis-Giant-Hypertrophic.pdf"
+    },
+    {
+      "short_form": "GISTs",
+      "long_form": "Gastrointestinal stromal tumors",
+      "category": "RAREDISEASE",
+      "doc_id": "Gastrointestinal-Stromal-Tumors.pdf"
+    },
+    {
+      "short_form": "CDC",
+      "long_form": "The Centers for Disease Control",
+      "category": "RAREDISEASE",
+      "doc_id": "Gastroschisis.pdf"
+    },
+    {
+      "short_form": "GCA",
+      "long_form": "Giant cell arteritis",
+      "category": "RAREDISEASE",
+      "doc_id": "Giant-Cell-Arteritis.pdf"
+    },
+    {
+      "short_form": "CNS",
+      "long_form": "central nervous system",
+      "category": "RAREDISEASE",
+      "doc_id": "Glioblastoma.pdf"
+    },
+    {
+      "short_form": "GA",
+      "long_form": "glutaric acid",
+      "category": "RAREDISEASE",
+      "doc_id": "Glutaric-Aciduria-Type-I.pdf"
+    },
+    {
+      "short_form": "LE",
+      "long_form": "and low excretors",
+      "category": "RAREDISEASE",
+      "doc_id": "Glutaric-Aciduria-Type-I.pdf"
+    },
+    {
+      "short_form": "GS",
+      "long_form": "Gottron syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Gottron-Syndrome.pdf"
+    },
+    {
+      "short_form": "GVHD",
+      "long_form": "Graft versus Host Disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Graft-versus-Host-Disease.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Hepatic-Encephalopathy.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "and computed tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Hepatic-Encephalopathy.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Hereditary-Lymphedema.pdf"
+    },
+    {
+      "short_form": "HMO",
+      "long_form": "Hereditary multiple osteochondromas",
+      "category": "RAREDISEASE",
+      "doc_id": "Hereditary-Multiple-Osteochondromas.pdf"
+    },
+    {
+      "short_form": "HSV",
+      "long_form": "herpes simplex virus",
+      "category": "DISEASE",
+      "doc_id": "Herpes-Neonatal.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "computerized tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Huntington_s-Disease.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Huntington_s-Disease.pdf"
+    },
+    {
+      "short_form": "HGPS",
+      "long_form": "Hutchinson-Gilford progeria syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Hutchinson.pdf"
+    },
+    {
+      "short_form": "IH",
+      "long_form": "Intracranial Hypertension",
+      "category": "RAREDISEASE",
+      "doc_id": "Idiopathic-Intracranial-Hypertension.pdf"
+    },
+    {
+      "short_form": "IH",
+      "long_form": "benign intracranial hypertension",
+      "category": "RAREDISEASE",
+      "doc_id": "Idiopathic-Intracranial-Hypertension.pdf"
+    },
+    {
+      "short_form": "JPA",
+      "long_form": "Juvenile pilocytic astrocytoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Juvenile-Pilocytic-Astrocytoma.pdf"
+    },
+    {
+      "short_form": "KCS2",
+      "long_form": "Kenny-Caffey syndrome type 2",
+      "category": "RAREDISEASE",
+      "doc_id": "Kenny.pdf"
+    },
+    {
+      "short_form": "KID",
+      "long_form": "Keratitis ichthyosis deafness",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Keratitis-Ichthyosis-Deafness-Syndrome.pdf"
+    },
+    {
+      "short_form": "KFSD",
+      "long_form": "Keratosis follicularis spinulosa decalvans",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Keratosis-Follicularis-Spinulosa-Decalvans.pdf"
+    },
+    {
+      "short_form": "KS",
+      "long_form": "Kallmann syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Klinefelter-Syndrome.pdf"
+    },
+    {
+      "short_form": "KTS",
+      "long_form": "Klippel-Trenaunay Syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Klippel.pdf"
+    },
+    {
+      "short_form": "CAT",
+      "long_form": "Computed axial tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Klippel.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "and magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Klippel.pdf"
+    },
+    {
+      "short_form": "KRS",
+      "long_form": "Kufor Rakeb syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Kufor-Rakeb-Syndrome.pdf"
+    },
+    {
+      "short_form": "SMA3",
+      "long_form": "Kugelberg-Welander syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Kugelberg-Welander-Syndrome.pdf"
+    },
+    {
+      "short_form": "LYS",
+      "long_form": "Levy-Yeboa syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Levy.pdf"
+    },
+    {
+      "short_form": "LP",
+      "long_form": "Lichen planus",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Lichen-Planus.pdf"
+    },
+    {
+      "short_form": "LQTS",
+      "long_form": "Long QT syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Long-QT-Syndrome.pdf"
+    },
+    {
+      "short_form": "TdP",
+      "long_form": "torsade de pointes",
+      "category": "DISEASE",
+      "doc_id": "Long-QT-Syndrome.pdf"
+    },
+    {
+      "short_form": "VF",
+      "long_form": "ventricular fibrillation",
+      "category": "DISEASE",
+      "doc_id": "Long-QT-Syndrome.pdf"
+    },
+    {
+      "short_form": "MJD-III",
+      "long_form": "Machado-Joseph Disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Machado.pdf"
+    },
+    {
+      "short_form": "MJD",
+      "long_form": "Machado-Joseph Disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Machado.pdf"
+    },
+    {
+      "short_form": "MH",
+      "long_form": "Malignant hyperthermia",
+      "category": "RAREDISEASE",
+      "doc_id": "Malignant-Hyperthermia.pdf"
+    },
+    {
+      "short_form": "MCL",
+      "long_form": "Mantle cell lymphoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Mantle-Cell-Lymphoma.pdf"
+    },
+    {
+      "short_form": "NHL",
+      "long_form": "non-Hodgkin’s lymphoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Mantle-Cell-Lymphoma.pdf"
+    },
+    {
+      "short_form": "MAS",
+      "long_form": "McCune-Albright syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "McCune-Albright-Syndrome.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Meckel-Syndrome.pdf"
+    },
+    {
+      "short_form": "MALS",
+      "long_form": "median arcuate ligament syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Median-Arcuate-Ligament-Syndrome.pdf"
+    },
+    {
+      "short_form": "MCAP",
+      "long_form": "macrocephaly-capillary malformation",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Megalencephaly.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Meningioma.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Meningococcal-Meningitis.pdf"
+    },
+    {
+      "short_form": "MKD",
+      "long_form": "Mevalonate kinase deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Mevalonate-Kinase-Deficiency.pdf"
+    },
+    {
+      "short_form": "MVP",
+      "long_form": "Mitral valve prolapse syndrome",
+      "category": "DISEASE",
+      "doc_id": "Mitral-Valve-Prolapse-Syndrome.pdf"
+    },
+    {
+      "short_form": "MMP",
+      "long_form": "Mucous membrane pemphigoid",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Mucous-Membrane-Pemphigoid.pdf"
+    },
+    {
+      "short_form": "MEN2",
+      "long_form": "Multiple endocrine neoplasia type 2",
+      "category": "RAREDISEASE",
+      "doc_id": "Multiple-Endocrine-Neoplasia-Type-2.pdf"
+    },
+    {
+      "short_form": "CDC",
+      "long_form": "The Centers for Disease Control",
+      "category": "RAREDISEASE",
+      "doc_id": "Mumps.pdf"
+    },
+    {
+      "short_form": "SIP",
+      "long_form": "spontaneous intestinal perforation",
+      "category": "DISEASE",
+      "doc_id": "Necrotizing-Enterocolitis.pdf"
+    },
+    {
+      "short_form": "NF",
+      "long_form": "Necrotizing fasciitis",
+      "category": "RAREDISEASE",
+      "doc_id": "Necrotizing-Fasciitis.pdf"
+    },
+    {
+      "short_form": "NSF",
+      "long_form": "Nephrogenic systemic fibrosis",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Nephrogenic-Systemic-Fibrosis.pdf"
+    },
+    {
+      "short_form": "NLS",
+      "long_form": "Neu-Laxova syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Neu-Laxova-Syndrome.pdf"
+    },
+    {
+      "short_form": "CHN",
+      "long_form": "Congenital hypomyelination neuropathy",
+      "category": "RAREDISEASE",
+      "doc_id": "Neuropathy-Congenital-Hypomyelination.pdf"
+    },
+    {
+      "short_form": "NBCCS",
+      "long_form": "Basal cell carcinoma of the skin",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Nevoid-Basal-Cell-Carcinoma-Syndrome.pdf"
+    },
+    {
+      "short_form": "N24",
+      "long_form": "Non-24-hour sleep-wake disorder",
+      "category": "RAREDISEASE",
+      "doc_id": "Non.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic Resonance Imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Ocular-Motor-Apraxia-Cogan-Type.pdf"
+    },
+    {
+      "short_form": "PET",
+      "long_form": "Positron Emission Tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Ocular-Motor-Apraxia-Cogan-Type.pdf"
+    },
+    {
+      "short_form": "OAVS",
+      "long_form": "Oculo-auriculo-vertebral spectrum",
+      "category": "RAREDISEASE",
+      "doc_id": "Oculo.pdf"
+    },
+    {
+      "short_form": "OPCA",
+      "long_form": "olivopontocerebellar atrophy",
+      "category": "RAREDISEASE",
+      "doc_id": "Olivopontocerebellar-Atrophy.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Ollier-Disease.pdf"
+    },
+    {
+      "short_form": "OFDS",
+      "long_form": "Oral-facial-digital syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Oral.pdf"
+    },
+    {
+      "short_form": "OI",
+      "long_form": "Osteogenesis Imperfecta",
+      "category": "RAREDISEASE",
+      "doc_id": "Osteogenesis-Imperfecta.pdf"
+    },
+    {
+      "short_form": "AVN",
+      "long_form": "avascular necrosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Osteonecrosis.pdf"
+    },
+    {
+      "short_form": "PCM",
+      "long_form": "Paracoccidioidomycosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Paracoccidioidomycosis.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Parry-Romberg-Syndrome.pdf"
+    },
+    {
+      "short_form": "PMD",
+      "long_form": "Pelizaeus-Merzbacher disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Pelizaeus-Merzbacher-disease.pdf"
+    },
+    {
+      "short_form": "CVS",
+      "long_form": "chorionic villus sampling",
+      "category": "RAREDISEASE",
+      "doc_id": "Penta-X-Syndrome.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Polymyositis-and-Necrotizing-Myopathy.pdf"
+    },
+    {
+      "short_form": "PCH",
+      "long_form": "Pontocerebellar hypoplasias",
+      "category": "RAREDISEASE",
+      "doc_id": "Pontocerebellar-Hypoplasia.pdf"
+    },
+    {
+      "short_form": "PPS",
+      "long_form": "Post-polio syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Post-Polio-Syndrome.pdf"
+    },
+    {
+      "short_form": "PTLD",
+      "long_form": "Post-transplant lymphoproliferative disease",
+      "category": "RAREDISEASE",
+      "doc_id": "Post.pdf"
+    },
+    {
+      "short_form": "PIL",
+      "long_form": "Primary intestinal lymphangiectasia",
+      "category": "RAREDISEASE",
+      "doc_id": "Primary-Intestinal-Lymphangiectasia.pdf"
+    },
+    {
+      "short_form": "CBC",
+      "long_form": "A complete blood count",
+      "category": "RAREDISEASE",
+      "doc_id": "Primary-Myelofibrosis.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "and magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Primary-Visual-Agnosia.pdf"
+    },
+    {
+      "short_form": "PME",
+      "long_form": "Progressive myoclonus epilepsy",
+      "category": "RAREDISEASE",
+      "doc_id": "Progressive-Myoclonus-Epilepsy.pdf"
+    },
+    {
+      "short_form": "PAF",
+      "long_form": "pure autonomic failure",
+      "category": "RAREDISEASE",
+      "doc_id": "Pure-Autonomic-Failure.pdf"
+    },
+    {
+      "short_form": "PG",
+      "long_form": "Pyoderma gangrenosum",
+      "category": "RAREDISEASE",
+      "doc_id": "Pyoderma-Gangrenosum.pdf"
+    },
+    {
+      "short_form": "RHS",
+      "long_form": "Ramsay Hunt syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Ramsay-Hunt-Syndrome.pdf"
+    },
+    {
+      "short_form": "IRDS",
+      "long_form": "Infant respiratory distress syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Respiratory-Distress-Syndrome-Infant.pdf"
+    },
+    {
+      "short_form": "RP",
+      "long_form": "Retinitis pigmentosa",
+      "category": "RAREDISEASE",
+      "doc_id": "Retinitis-Pigmentosa.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "Computed tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Retinoblastoma.pdf"
+    },
+    {
+      "short_form": "ROP",
+      "long_form": "Retinopathy of prematurity",
+      "category": "RAREDISEASE",
+      "doc_id": "Retinopathy-of-Prematurity.pdf"
+    },
+    {
+      "short_form": "RMSF",
+      "long_form": "Rocky Mountain spotted fever",
+      "category": "RAREDISEASE",
+      "doc_id": "Rocky-Mountain-Spotted-Fever.pdf"
+    },
+    {
+      "short_form": "ACPS",
+      "long_form": "Acrocephalopolysyndactyly",
+      "category": "RAREDISEASE",
+      "doc_id": "Sakati-Syndrome.pdf"
+    },
+    {
+      "short_form": "SJS",
+      "long_form": "Schwartz-Jampel syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Schwartz-Jampel-Syndrome.pdf"
+    },
+    {
+      "short_form": "HGE",
+      "long_form": "Human Granulocytic Ehrlichiosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Sennetsu-Fever.pdf"
+    },
+    {
+      "short_form": "CBC",
+      "long_form": "A complete blood count",
+      "category": "RAREDISEASE",
+      "doc_id": "Severe-Combined-Immunodeficiency.pdf"
+    },
+    {
+      "short_form": "SCADD",
+      "long_form": "Short chain acyl-CoA dehydrogenase deficiency",
+      "category": "RAREDISEASE",
+      "doc_id": "Short-Chain-Acyl-CoA-Dehydrogenase-Deficiency.pdf"
+    },
+    {
+      "short_form": "FOD",
+      "long_form": "fatty acid oxidation disorders",
+      "category": "DISEASE",
+      "doc_id": "Short-Chain-Acyl-CoA-Dehydrogenase-Deficiency.pdf"
+    },
+    {
+      "short_form": "SNUC",
+      "long_form": "Sinonasal undifferentiated carcinoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Sinonasal-Undifferentiated-Carcinoma.pdf"
+    },
+    {
+      "short_form": "SLOS",
+      "long_form": "Smith-Lemli-Opitz syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Smith-Lemli-Opitz-Syndrome.pdf"
+    },
+    {
+      "short_form": "SRS",
+      "long_form": "Snyder-Robinson syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Snyder.pdf"
+    },
+    {
+      "short_form": "XLID",
+      "long_form": "X-linked intellectual disability",
+      "category": "DISEASE",
+      "doc_id": "Snyder.pdf"
+    },
+    {
+      "short_form": "SPG50",
+      "long_form": "Spastic paraplegia 50",
+      "category": "RAREDISEASE",
+      "doc_id": "Spastic-Paraplegia-50.pdf"
+    },
+    {
+      "short_form": "HSP",
+      "long_form": "AP-4-associated hereditary spastic paraplegia",
+      "category": "RAREDISEASE",
+      "doc_id": "Spastic-Paraplegia-50.pdf"
+    },
+    {
+      "short_form": "HSP",
+      "long_form": "AP-4-associated hereditary spastic paraplegia",
+      "category": "RAREDISEASE",
+      "doc_id": "Spastic-Paraplegia-51.pdf"
+    },
+    {
+      "short_form": "HSP",
+      "long_form": "AP-4-associated hereditary spastic paraplegia",
+      "category": "RAREDISEASE",
+      "doc_id": "Spastic-Paraplegia-52.pdf"
+    },
+    {
+      "short_form": "SHFM",
+      "long_form": "Split hand/split foot malformation",
+      "category": "RAREDISEASE",
+      "doc_id": "Split-Hand-Split-Foot-Malformation.pdf"
+    },
+    {
+      "short_form": "SEDT",
+      "long_form": "Spondyloepiphyseal dysplasia tarda",
+      "category": "RAREDISEASE",
+      "doc_id": "Spondyloepiphyseal-Dysplasia-Tarda.pdf"
+    },
+    {
+      "short_form": "SEDL",
+      "long_form": "Spondyloepiphyseal dysplasia tarda",
+      "category": "RAREDISEASE",
+      "doc_id": "Spondyloepiphyseal-Dysplasia-Tarda.pdf"
+    },
+    {
+      "short_form": "CT",
+      "long_form": "computed tomography",
+      "category": "RAREDISEASE",
+      "doc_id": "Sporadic-Porencephaly.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Sporadic-Porencephaly.pdf"
+    },
+    {
+      "short_form": "SE",
+      "long_form": "Status epilepticus",
+      "category": "RAREDISEASE",
+      "doc_id": "Status-Epilepticus.pdf"
+    },
+    {
+      "short_form": "SIDS",
+      "long_form": "Sudden infant death syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Sudden-Infant-Death-Syndrome.pdf"
+    },
+    {
+      "short_form": "SSCD",
+      "long_form": "Superior semicircular canal dehiscence",
+      "category": "RAREDISEASE",
+      "doc_id": "Superior-Semicircular-Canal-Dehiscence.pdf"
+    },
+    {
+      "short_form": "SCLS",
+      "long_form": "Systemic capillary leak syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Systemic-Capillary-Leak-Syndrome.pdf"
+    },
+    {
+      "short_form": "FMTC",
+      "long_form": "Familial medullary thyroid carcinoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Thyroid-Cancer.pdf"
+    },
+    {
+      "short_form": "MTC",
+      "long_form": "medullary thyroid carcinoma",
+      "category": "RAREDISEASE",
+      "doc_id": "Thyroid-Cancer.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Tietze-Syndrome.pdf"
+    },
+    {
+      "short_form": "TSS",
+      "long_form": "Toxic Shock Syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Toxic-Shock-Syndrome.pdf"
+    },
+    {
+      "short_form": "SLE",
+      "long_form": "systemic lupus erythematosus",
+      "category": "RAREDISEASE",
+      "doc_id": "Transverse-Myelitis.pdf"
+    },
+    {
+      "short_form": "TRPS1",
+      "long_form": "Trichorhinophalangeal syndrome type I",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Trichorhinophalangeal-Syndrome-Type-I.pdf"
+    },
+    {
+      "short_form": "TRPS2",
+      "long_form": "Trichorhinophalangeal syndrome type II",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Trichorhinophalangeal-Syndrome-Type-II.pdf"
+    },
+    {
+      "short_form": "TRPS3",
+      "long_form": "Trichorhinophalangeal syndrome type III",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Trichorhinophalangeal-Syndrome-Type-III.pdf"
+    },
+    {
+      "short_form": "CVS",
+      "long_form": "chorionic villus sampling",
+      "category": "RAREDISEASE",
+      "doc_id": "Triploidy.pdf"
+    },
+    {
+      "short_form": "TB",
+      "long_form": "Tuberculosis",
+      "category": "RAREDISEASE",
+      "doc_id": "Tuberculosis.pdf"
+    },
+    {
+      "short_form": "TTTS",
+      "long_form": "Twin-twin transfusion syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Twin.pdf"
+    },
+    {
+      "short_form": "PCP",
+      "long_form": "Pneumocystis carinii pneumonia",
+      "category": "DISEASE",
+      "doc_id": "WAS-Related-Disorders.pdf"
+    },
+    {
+      "short_form": "WS",
+      "long_form": "Waardenburg syndrome",
+      "category": "SKINRAREDISEASE",
+      "doc_id": "Waardenburg-Syndrome.pdf"
+    },
+    {
+      "short_form": "SMAs",
+      "long_form": "spinal muscular atrophies",
+      "category": "RAREDISEASE",
+      "doc_id": "Werdnig.pdf"
+    },
+    {
+      "short_form": "WNE",
+      "long_form": "West Nile Encephalitis",
+      "category": "RAREDISEASE",
+      "doc_id": "West-Nile-Encephalitis.pdf"
+    },
+    {
+      "short_form": "KFS",
+      "long_form": "Klippel-Feil syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Wildervanck-Syndrome.pdf"
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "category": "RAREDISEASE",
+      "doc_id": "Wildervanck-Syndrome.pdf"
+    },
+    {
+      "short_form": "WHS",
+      "long_form": "Wolf-Hirschhorn syndrome",
+      "category": "RAREDISEASE",
+      "doc_id": "Wolf.pdf"
+    },
+    {
+      "short_form": "WPW",
+      "long_form": "Wolff-Parkinson-White",
+      "category": "RAREDISEASE",
+      "doc_id": "Wolff-Parkinson-White-Syndrome.pdf"
+    },
+    {
+      "short_form": "PBDs",
       "long_form": "Zellweger spectrum disorders",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Zellweger-Spectrum-Disorders.pdf"
     },
     {
-      "doc_id": "Zollinger.ann",
       "short_form": "ZES",
       "long_form": "Zollinger-Ellison syndrome",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Zollinger.pdf"
     },
     {
-      "doc_id": "Zollinger.ann",
       "short_form": "MEN-1",
       "long_form": "multiple endocrine neoplasia type 1",
-      "category": "RAREDISEASE"
+      "category": "RAREDISEASE",
+      "doc_id": "Zollinger.pdf"
     }
   ]
 }
