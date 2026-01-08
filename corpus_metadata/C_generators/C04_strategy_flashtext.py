@@ -313,9 +313,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_trial_acronyms(self.trial_acronyms_path)
         self._load_pro_scales(self.pro_scales_path)
 
-        # Print compact summary
-        self._print_lexicon_summary()
-
         # Initialize scispacy NER for biomedical entity recognition
         self.scispacy_nlp = None
         self.umls_linker = None

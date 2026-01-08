@@ -532,9 +532,11 @@ class Orchestrator:
                 for acronym, entry in data.items():
                     if isinstance(entry, dict) and entry.get("name"):
                         self.rare_disease_lookup[acronym.strip().upper()] = entry["name"].strip()
-                print(f"  Lexicon fallback: {len(self.rare_disease_lookup)} rare disease acronyms loaded")
             except Exception as e:
                 print(f"  [WARN] Failed to load rare disease lexicon: {e}")
+
+        # Print unified lexicon summary
+        self._print_unified_lexicon_summary()
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load configuration from YAML file."""
@@ -549,6 +551,80 @@ class Orchestrator:
         except Exception as e:
             print(f"[WARN] Failed to load config from {config_path}: {e}")
             return {}
+
+    def _print_unified_lexicon_summary(self) -> None:
+        """Print unified summary of all loaded lexicons across all detectors."""
+        # Collect stats from all sources, track seen filenames to avoid duplicates
+        all_stats: List[Tuple[str, int, str, str]] = []  # (name, count, filename, category)
+        seen_files: set = set()
+
+        # From C04 (abbreviation generator) - skip disease lexicons (handled by C06)
+        for gen in self.generators:
+            if hasattr(gen, "_lexicon_stats"):
+                for name, count, filename in gen._lexicon_stats:
+                    # Skip disease lexicons from C04 - they're handled by C06
+                    if name in ("ANCA disease", "IgAN disease", "PAH disease", "Rare disease acronyms"):
+                        continue
+                    # Categorize based on name
+                    if name in ("Abbreviations", "Clinical research", "UMLS biological", "UMLS clinical"):
+                        cat = "Abbreviation"
+                    elif name in ("Trial acronyms", "PRO scales"):
+                        cat = "Other"
+                    else:
+                        cat = "Other"
+                    if filename not in seen_files:
+                        all_stats.append((name, count, filename, cat))
+                        seen_files.add(filename)
+
+        # From C07 (drug detector) - add Drug category first for display order
+        if self.drug_detector and hasattr(self.drug_detector, "_lexicon_stats"):
+            for name, count, filename in self.drug_detector._lexicon_stats:
+                if filename not in seen_files:
+                    all_stats.append((name, count, filename, "Drug"))
+                    seen_files.add(filename)
+
+        # From C06 (disease detector)
+        if self.disease_detector and hasattr(self.disease_detector, "_lexicon_stats"):
+            for name, count, filename in self.disease_detector._lexicon_stats:
+                display_name = name.replace("Specialized ", "")
+                if filename not in seen_files:
+                    all_stats.append((display_name, count, filename, "Disease"))
+                    seen_files.add(filename)
+
+        if not all_stats:
+            return
+
+        # Group by category with explicit order
+        categories = [
+            ("Abbreviation", []),
+            ("Drug", []),
+            ("Disease", []),
+            ("Other", []),
+        ]
+        cat_dict = {name: items for name, items in categories}
+
+        for name, count, filename, cat in all_stats:
+            if cat in cat_dict:
+                cat_dict[cat].append((name, count, filename))
+
+        # Calculate totals
+        total = sum(count for _, count, _, _ in all_stats if count > 1)
+        file_count = len([s for s in all_stats if s[1] > 0])
+
+        print(f"\nLexicons loaded: {file_count} sources, {total:,} entries")
+        print("─" * 70)
+
+        for cat_name, items in categories:
+            if not items:
+                continue
+            cat_total = sum(count for _, count, _ in items if count > 1)
+            print(f"  {cat_name} ({cat_total:,} entries)")
+            for name, count, filename in items:
+                if count > 1:
+                    print(f"    • {name:<26} {count:>8,}  {filename}")
+                else:
+                    print(f"    • {name:<26} {'enabled':>8}  {filename}")
+        print()
 
     # =========================================================================
     # ENTITY CREATION HELPERS

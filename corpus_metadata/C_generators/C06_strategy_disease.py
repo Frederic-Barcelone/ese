@@ -349,9 +349,6 @@ class DiseaseDetector:
         if self.enable_scispacy:
             self._init_scispacy()
 
-        # Print summary
-        self._print_summary()
-
     def _load_specialized_lexicons(self) -> None:
         """Load specialized disease lexicons (PAH, ANCA, IgAN)."""
         for name, path in self.specialized_lexicons.items():

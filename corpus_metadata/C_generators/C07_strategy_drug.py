@@ -194,9 +194,6 @@ class DrugDetector:
         if self.enable_scispacy and SCISPACY_AVAILABLE:
             self._init_scispacy()
 
-        # Print summary (after all lexicons and scispacy loaded)
-        self._print_lexicon_summary()
-
     def _load_lexicons(self) -> None:
         """Load all drug lexicons."""
         if self.enable_alexion:
