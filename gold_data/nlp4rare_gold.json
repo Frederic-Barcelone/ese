@@ -1,6 +1,6 @@
 {
   "corpus": "NLP4RARE-CM-UC3M",
-  "total": 311,
+  "total": 310,
   "parenthetical_added": 67,
   "annotations": [
     {
@@ -80,12 +80,6 @@
       "long_form": "Cat eye syndrome",
       "category": "RAREDISEASE",
       "doc_id": "Cat-Eye-Syndrome.pdf"
-    },
-    {
-      "short_form": "CdLS)",
-      "long_form": "Cornelia de Lange syndrome",
-      "category": "RAREDISEASE",
-      "doc_id": "Cornelia-de-Lange-Syndrome.pdf"
     },
     {
       "short_form": "CdLS",
