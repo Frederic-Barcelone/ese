@@ -554,6 +554,32 @@ disease_detection:
     include_all_identifiers: true
 
 # ==============================================================================
+# DRUG DETECTION
+# ==============================================================================
+drug_detection:
+  # Master switch for drug detection
+  enabled: true
+
+  # Lexicons to use (in priority order)
+  enable_alexion_lexicon: true           # Alexion pipeline drugs (specialized)
+  enable_investigational_lexicon: true   # ClinicalTrials.gov drugs (32K)
+  enable_fda_lexicon: true               # FDA approved drugs (50K)
+  enable_rxnorm_lexicon: true            # RxNorm general terms (133K)
+  enable_scispacy: true                  # scispacy NER with UMLS (CHEMICAL types)
+
+  # Compound ID pattern matching (LNP023, ALXN1720, BMS-986278)
+  enable_patterns: true
+
+  # Context window for snippets
+  context_window: 300
+
+  # Output
+  output:
+    separate_file: true           # drugs_{doc}_{timestamp}.json
+    include_codes: true           # Include RxCUI, MeSH, NDC codes
+    include_all_identifiers: true
+
+# ==============================================================================
 # DEDUPLICATION
 # ==============================================================================
 deduplication:

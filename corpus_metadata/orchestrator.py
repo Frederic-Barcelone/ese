@@ -92,6 +92,13 @@ from A_core.A05_disease_models import (
     DiseaseExportEntry,
     ExtractedDisease,
 )
+from A_core.A06_drug_models import (
+    DrugCandidate,
+    DrugExportDocument,
+    DrugExportEntry,
+    DrugGeneratorType,
+    ExtractedDrug,
+)
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
@@ -100,12 +107,14 @@ from C_generators.C03_strategy_layout import LayoutCandidateGenerator
 from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
 from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
+from C_generators.C07_strategy_drug import DrugDetector
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E04_pubtator_enricher import DiseaseEnricher
+from E_normalization.E05_drug_enricher import DrugEnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -475,6 +484,34 @@ class Orchestrator:
             self.disease_detector = None
             self.disease_normalizer = None
             self.disease_enricher = None
+
+        # Drug detection components
+        drug_cfg = self.config.get("drug_detection", {})
+        self.enable_drug_detection = drug_cfg.get("enabled", True)
+
+        if self.enable_drug_detection:
+            self.drug_detector = DrugDetector(
+                config={
+                    "run_id": self.run_id,
+                    "lexicon_base_path": str(dict_path),
+                    "enable_alexion_lexicon": drug_cfg.get("enable_alexion_lexicon", True),
+                    "enable_investigational_lexicon": drug_cfg.get("enable_investigational_lexicon", True),
+                    "enable_fda_lexicon": drug_cfg.get("enable_fda_lexicon", True),
+                    "enable_rxnorm_lexicon": drug_cfg.get("enable_rxnorm_lexicon", True),
+                    "enable_scispacy": drug_cfg.get("enable_scispacy", True),
+                    "enable_patterns": drug_cfg.get("enable_patterns", True),
+                    "context_window": drug_cfg.get("context_window", 300),
+                }
+            )
+
+            # Drug PubTator enrichment (reuses same pubtator config)
+            if self.enable_pubtator:
+                self.drug_enricher = DrugEnricher(pubtator_cfg)
+            else:
+                self.drug_enricher = None
+        else:
+            self.drug_detector = None
+            self.drug_enricher = None
 
         # Load rare disease acronyms for fallback lookup (SF→LF when LLM has no expansion)
         self.rare_disease_lookup: Dict[str, str] = {}
@@ -1331,6 +1368,11 @@ Return ONLY the JSON array, nothing else."""
         if self.enable_disease_detection and self.disease_detector is not None:
             disease_results = self._process_diseases(doc, pdf_path_obj)
 
+        # Drug detection (parallel pipeline)
+        drug_results: List[ExtractedDrug] = []
+        if self.enable_drug_detection and self.drug_detector is not None:
+            drug_results = self._process_drugs(doc, pdf_path_obj)
+
         # Stage 4: Summary & Export
         print("\n[4/4] Writing summary...")
         self.logger.write_summary()
@@ -1342,6 +1384,10 @@ Return ONLY the JSON array, nothing else."""
         # Export disease results
         if disease_results:
             self._export_disease_results(pdf_path_obj, disease_results)
+
+        # Export drug results
+        if drug_results:
+            self._export_drug_results(pdf_path_obj, drug_results)
 
         # Print validated
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -1366,6 +1412,19 @@ Return ONLY the JSON array, nothing else."""
                 print(f"  * {d.preferred_label}{code_str}")
             if len(validated_diseases) > 10:
                 print(f"  ... and {len(validated_diseases) - 10} more")
+
+        # Print validated drugs
+        validated_drugs = [
+            d for d in drug_results if d.status == ValidationStatus.VALIDATED
+        ]
+        if validated_drugs:
+            print(f"\nValidated drugs ({len(validated_drugs)}):")
+            for d in validated_drugs[:10]:  # Show first 10
+                phase = f" ({d.development_phase})" if d.development_phase else ""
+                compound = f" [{d.compound_id}]" if d.compound_id else ""
+                print(f"  * {d.preferred_name}{compound}{phase}")
+            if len(validated_drugs) > 10:
+                print(f"  ... and {len(validated_drugs) - 10} more")
 
         return results
 
@@ -1566,6 +1625,175 @@ Return ONLY the JSON array, nothing else."""
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Disease export: {out_file.name}")
+
+    # =========================================================================
+    # DRUG DETECTION METHODS
+    # =========================================================================
+
+    def _process_drugs(
+        self, doc, pdf_path: Path
+    ) -> List[ExtractedDrug]:
+        """
+        Process document for drug mentions.
+
+        Returns validated drug entities.
+        """
+        print("\n[3c/4] Detecting drug mentions...")
+        start = time.time()
+
+        # Run drug detection
+        candidates = self.drug_detector.detect(doc)
+        print(f"  Drug candidates: {len(candidates)}")
+
+        # Convert candidates to ExtractedDrug (auto-validated for lexicon matches)
+        results: List[ExtractedDrug] = []
+        for candidate in candidates:
+            # Determine if auto-validated (Alexion, investigational, FDA)
+            is_specialized = candidate.generator_type in {
+                DrugGeneratorType.LEXICON_ALEXION,
+                DrugGeneratorType.LEXICON_INVESTIGATIONAL,
+                DrugGeneratorType.PATTERN_COMPOUND_ID,
+            }
+
+            entity = self._candidate_to_extracted_drug(
+                candidate,
+                status=ValidationStatus.VALIDATED,
+                confidence=candidate.initial_confidence if is_specialized else 0.7,
+                flags=["auto_validated_lexicon"] if is_specialized else ["lexicon_match"],
+            )
+            results.append(entity)
+
+        # PubTator enrichment
+        if self.drug_enricher is not None:
+            print("  Enriching with PubTator3...")
+            results = self.drug_enricher.enrich_batch(results, verbose=True)
+
+        validated_count = len(
+            [r for r in results if r.status == ValidationStatus.VALIDATED]
+        )
+        print(f"  Validated drugs: {validated_count}")
+        print(f"  Time: {time.time() - start:.2f}s")
+
+        return results
+
+    def _candidate_to_extracted_drug(
+        self,
+        candidate: DrugCandidate,
+        status: ValidationStatus,
+        confidence: float,
+        flags: List[str],
+    ) -> ExtractedDrug:
+        """Convert DrugCandidate to ExtractedDrug."""
+        return ExtractedDrug(
+            candidate_id=candidate.id,
+            doc_id=candidate.doc_id,
+            matched_text=candidate.matched_text,
+            preferred_name=candidate.preferred_name,
+            brand_name=candidate.brand_name,
+            compound_id=candidate.compound_id,
+            identifiers=candidate.identifiers,
+            primary_evidence=EvidenceSpan(
+                text=candidate.context_text,
+                location=candidate.context_location,
+                scope_ref="drug_detection",
+                start_char_offset=0,
+                end_char_offset=len(candidate.context_text),
+            ),
+            status=status,
+            confidence_score=confidence,
+            validation_flags=flags,
+            drug_class=candidate.drug_class,
+            mechanism=candidate.mechanism,
+            development_phase=candidate.development_phase,
+            is_investigational=candidate.is_investigational,
+            sponsor=candidate.sponsor,
+            conditions=candidate.conditions,
+            nct_id=candidate.nct_id,
+            dosage_form=candidate.dosage_form,
+            route=candidate.route,
+            marketing_status=candidate.marketing_status,
+            provenance=candidate.provenance,
+        )
+
+    def _export_drug_results(
+        self, pdf_path: Path, results: List[ExtractedDrug]
+    ) -> None:
+        """Export drug detection results to separate JSON file."""
+        out_dir = self.output_dir or pdf_path.parent
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
+        rejected = [r for r in results if r.status == ValidationStatus.REJECTED]
+        investigational = [r for r in validated if r.is_investigational]
+
+        # Build export entries
+        drug_entries: List[DrugExportEntry] = []
+        for entity in validated:
+            codes = {
+                "rxcui": entity.rxcui,
+                "mesh": entity.mesh_id,
+                "ndc": entity.ndc_code,
+                "drugbank": entity.drugbank_id,
+                "unii": entity.unii,
+            }
+
+            all_identifiers = [
+                {"system": i.system, "code": i.code, "display": i.display}
+                for i in entity.identifiers
+            ]
+
+            entry = DrugExportEntry(
+                matched_text=entity.matched_text,
+                preferred_name=entity.preferred_name,
+                brand_name=entity.brand_name,
+                compound_id=entity.compound_id,
+                confidence=entity.confidence_score,
+                is_investigational=entity.is_investigational,
+                drug_class=entity.drug_class,
+                mechanism=entity.mechanism,
+                development_phase=entity.development_phase,
+                sponsor=entity.sponsor,
+                conditions=entity.conditions,
+                nct_id=entity.nct_id,
+                dosage_form=entity.dosage_form,
+                route=entity.route,
+                marketing_status=entity.marketing_status,
+                codes=codes,
+                all_identifiers=all_identifiers,
+                context=entity.primary_evidence.text if entity.primary_evidence else None,
+                page=entity.primary_evidence.location.page_num
+                if entity.primary_evidence
+                else None,
+                lexicon_source=entity.provenance.lexicon_source
+                if entity.provenance
+                else None,
+                validation_flags=entity.validation_flags,
+                mesh_aliases=entity.mesh_aliases,
+                pubtator_normalized_name=entity.pubtator_normalized_name,
+                enrichment_source=entity.enrichment_source,
+            )
+            drug_entries.append(entry)
+
+        # Build export document
+        export_doc = DrugExportDocument(
+            run_id=self.run_id,
+            timestamp=datetime.now().isoformat(),
+            document=pdf_path.name,
+            document_path=str(pdf_path.absolute()),
+            pipeline_version=PIPELINE_VERSION,
+            total_candidates=len(results),
+            total_validated=len(validated),
+            total_rejected=len(rejected),
+            total_investigational=len(investigational),
+            drugs=drug_entries,
+        )
+
+        # Write to file
+        out_file = out_dir / f"drugs_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export_doc.model_dump_json(indent=2))
+
+        print(f"  Drug export: {out_file.name}")
 
     # =========================================================================
     # EXPORT METHODS
