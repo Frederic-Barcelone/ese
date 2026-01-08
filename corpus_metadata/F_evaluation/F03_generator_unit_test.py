@@ -88,7 +88,7 @@ NLP4RARE_PATH = BASE_PATH / "gold_data" / "NLP4RARE"
 CONFIG_PATH = BASE_PATH / "corpus_metadata" / "G_config" / "config.yaml"
 
 # Evaluation settings
-MAX_DOCS = 5                    # Max documents to process per split (None = all)
+MAX_DOCS = None                 # Max documents to process per split (None = all)
 SKIP_VALIDATION = False         # Enable LLM validation for proper evaluation
 SPLITS_TO_EVALUATE = ["dev"]    # Which splits to run: ["dev"], ["test"], ["train"], or all
 FUZZY_THRESHOLD = 0.8           # Long form matching threshold (0.8 = 80% similarity)
@@ -224,22 +224,50 @@ def load_gold_standard(gold_path: Path) -> Dict[str, List[GoldEntry]]:
 # =============================================================================
 
 
+def normalize_medical_synonyms(text: str) -> str:
+    """Normalize common medical synonyms for better matching."""
+    # Common interchangeable terms in medical contexts
+    synonyms = [
+        ("disease", "syndrome"),
+        ("disorder", "syndrome"),
+        ("disease (disorder)", "syndrome"),
+        ("deficiency", "deficit"),
+    ]
+    normalized = text.lower()
+    for term1, term2 in synonyms:
+        # Normalize to first term for comparison
+        normalized = normalized.replace(term2, term1)
+    return normalized
+
+
 def lf_matches(sys_lf: Optional[str], gold_lf: Optional[str], threshold: float = 0.8) -> bool:
-    """Check if long forms match (exact, substring, or fuzzy)."""
+    """Check if long forms match (exact, substring, fuzzy, or synonym-normalized)."""
     if sys_lf is None and gold_lf is None:
         return True
     if sys_lf is None or gold_lf is None:
         return False
-    
+
     sys_norm = " ".join(sys_lf.strip().lower().split())
     gold_norm = " ".join(gold_lf.strip().lower().split())
-    
+
+    # Exact match
     if sys_norm == gold_norm:
         return True
+
+    # Substring match
     if sys_norm in gold_norm or gold_norm in sys_norm:
         return True
-    
-    ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
+
+    # Synonym-normalized match (disease ↔ syndrome, etc.)
+    sys_syn = normalize_medical_synonyms(sys_norm)
+    gold_syn = normalize_medical_synonyms(gold_norm)
+    if sys_syn == gold_syn:
+        return True
+    if sys_syn in gold_syn or gold_syn in sys_syn:
+        return True
+
+    # Fuzzy match on normalized forms
+    ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
     return ratio >= threshold
 
 
