@@ -1,6 +1,6 @@
 {
   "corpus": "NLP4RARE-CM-UC3M",
-  "total": 310,
+  "total": 309,
   "parenthetical_added": 67,
   "annotations": [
     {
@@ -164,12 +164,6 @@
       "long_form": "tuberculosis",
       "category": "RAREDISEASE",
       "doc_id": "Meningitis-Tuberculous.pdf"
-    },
-    {
-      "short_form": "HC",
-      "long_form": "hepatitis C",
-      "category": "DISEASE",
-      "doc_id": "Mixed-Cryoglobulinemia.pdf"
     },
     {
       "short_form": "PCNSL",
