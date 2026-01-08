@@ -205,6 +205,12 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 "/Users/frederictetard/Projects/ese/ouput_datasources/2025_08_abbreviation_general.json",
             )
         )
+        self.clinical_research_abbrev_path = Path(
+            self.config.get(
+                "clinical_research_abbrev_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/clinical_research_abbreviations.json",
+            )
+        )
         self.disease_lexicon_path = Path(
             self.config.get(
                 "disease_lexicon_path",
@@ -295,6 +301,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         # Note: Disease/Orphanet lexicons contain disease NAMES, not abbreviations
         # They cause FPs by matching chromosome numbers (45, 46, 10p) as "abbreviations"
         self._load_abbrev_lexicon(self.abbrev_lexicon_path)
+        self._load_abbrev_lexicon(self.clinical_research_abbrev_path, "Clinical research")
         # self._load_disease_lexicon(self.disease_lexicon_path)  # Disabled: names, not abbreviations
         # self._load_orphanet_lexicon(self.orphanet_lexicon_path)  # Disabled: names, not abbreviations
         self._load_rare_disease_acronyms(self.rare_disease_acronyms_path)
@@ -598,20 +605,67 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         )
 
     def _print_lexicon_summary(self) -> None:
-        """Print compact summary of loaded lexicons."""
+        """Print compact summary of loaded lexicons grouped by category."""
         if not self._lexicon_stats:
             return
 
-        total = sum(count for _, count, _ in self._lexicon_stats)
-        print(f"Lexicons loaded: {len(self._lexicon_stats)} files, {total:,} terms")
-        for name, count, filename in self._lexicon_stats:
-            print(f"  {name:<30} {count:>7,}  ({filename})")
+        # Categorize lexicons with explicit ordering: Abbreviation, Drug, Disease, Other
+        categories = [
+            ("Abbreviation", []),
+            ("Drug", []),
+            ("Disease", []),
+            ("Other", []),
+        ]
+        cat_dict = {name: items for name, items in categories}
 
-    def _load_abbrev_lexicon(self, path: Path) -> None:
+        # Map lexicon names to categories
+        category_map = {
+            # Abbreviation
+            "Abbreviations": "Abbreviation",
+            "Clinical research": "Abbreviation",
+            "UMLS biological": "Abbreviation",
+            "UMLS clinical": "Abbreviation",
+            # Disease
+            "Rare disease acronyms": "Disease",
+            "ANCA disease": "Disease",
+            "IgAN disease": "Disease",
+            "PAH disease": "Disease",
+            # Other
+            "Trial acronyms": "Other",
+            "PRO scales": "Other",
+        }
+
+        for name, count, filename in self._lexicon_stats:
+            cat = category_map.get(name, "Abbreviation")
+            if cat in cat_dict:
+                cat_dict[cat].append((name, count, filename))
+
+        total = sum(count for _, count, _ in self._lexicon_stats)
+        file_count = len([s for s in self._lexicon_stats if s[1] > 0])
+        print(f"\nLexicons loaded: {file_count} files, {total:,} terms")
+        print("─" * 70)
+
+        for cat_name, items in categories:
+            if not items:
+                continue
+            cat_total = sum(count for _, count, _ in items)
+            print(f"  {cat_name} ({cat_total:,} terms)")
+            for name, count, filename in items:
+                print(f"    • {name:<26} {count:>8,}  {filename}")
+        print()
+
+    def _load_abbrev_lexicon(self, path: Path, label: str = "Abbreviations") -> None:
         if not path.exists():
             return
 
-        data = json.loads(path.read_text(encoding="utf-8"))
+        content = path.read_text(encoding="utf-8").strip()
+        if not content:
+            return
+
+        data = json.loads(content)
+        if not data:  # Skip empty files
+            return
+
         loaded = 0
 
         for sf, entry in data.items():
@@ -636,7 +690,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             except re.error:
                 pass
 
-        self._lexicon_stats.append(("Abbreviations", loaded, path.name))
+        self._lexicon_stats.append((label, loaded, path.name))
 
     def _load_disease_lexicon(self, path: Path) -> None:
         if not path.exists():

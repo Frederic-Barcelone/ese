@@ -333,8 +333,8 @@ class DiseaseDetector:
             self.config.get("doc_fingerprint") or "unknown-doc-fingerprint"
         )
 
-        # Stats
-        self._lexicon_stats: List[Tuple[str, int]] = []
+        # Stats: (name, count, filename)
+        self._lexicon_stats: List[Tuple[str, int, str]] = []
 
         # Load lexicons
         self._load_specialized_lexicons()
@@ -388,7 +388,7 @@ class DiseaseDetector:
 
                 loaded += 1
 
-            self._lexicon_stats.append((f"Specialized ({name.upper()})", loaded))
+            self._lexicon_stats.append((f"Specialized ({name.upper()})", loaded, path.name))
 
     def _load_general_lexicon(self) -> None:
         """Load general disease lexicon with FP awareness."""
@@ -434,7 +434,7 @@ class DiseaseDetector:
             self.general_kp.add_keyword(label, key)
             loaded += 1
 
-        self._lexicon_stats.append(("General diseases", loaded))
+        self._lexicon_stats.append(("General diseases", loaded, self.general_disease_path.name))
 
     def _load_orphanet_lexicon(self) -> None:
         """Load Orphanet rare disease lexicon."""
@@ -482,7 +482,7 @@ class DiseaseDetector:
 
             loaded += 1
 
-        self._lexicon_stats.append(("Orphanet diseases", loaded))
+        self._lexicon_stats.append(("Orphanet diseases", loaded, self.orphanet_path.name))
 
     def _looks_like_chromosome(self, text: str) -> bool:
         """Quick check if text looks like a chromosome/karyotype pattern."""
@@ -550,14 +550,20 @@ class DiseaseDetector:
             print(f"  Disease detector: scispacy not available: {e}")
 
     def _print_summary(self) -> None:
-        """Print loading summary."""
+        """Print loading summary grouped by category."""
         if not self._lexicon_stats:
             return
 
-        total = sum(count for _, count in self._lexicon_stats)
-        print(f"Disease lexicons loaded: {len(self._lexicon_stats)} sources, {total:,} entries")
-        for name, count in self._lexicon_stats:
-            print(f"  {name:<25} {count:>7,}")
+        total = sum(count for _, count, _ in self._lexicon_stats)
+        print(f"\nDisease lexicons: {len(self._lexicon_stats)} sources, {total:,} entries")
+        print("─" * 70)
+        print(f"  Disease ({total:,} entries)")
+
+        for name, count, filename in self._lexicon_stats:
+            # Clean up display name
+            display_name = name.replace("Specialized ", "")
+            print(f"    • {display_name:<26} {count:>8,}  {filename}")
+        print()
 
     def extract(self, doc_structure: DocumentGraph) -> List[DiseaseCandidate]:
         """

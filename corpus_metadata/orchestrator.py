@@ -382,6 +382,14 @@ class Orchestrator:
                 dict_path
                 / lexicons.get("disease_lexicon_pah", "disease_lexicon_pah.json")
             ),
+            "trial_acronyms_path": str(
+                dict_path
+                / lexicons.get("trial_acronyms", "trial_acronyms_lexicon.json")
+            ),
+            "pro_scales_path": str(
+                dict_path
+                / lexicons.get("pro_scales", "pro_scales_lexicon.json")
+            ),
             "context_window": lexicon_cfg.get("context_window", 300),
         }
 

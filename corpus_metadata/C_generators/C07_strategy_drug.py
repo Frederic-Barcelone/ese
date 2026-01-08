@@ -173,6 +173,9 @@ class DrugDetector:
         self.fda_drugs: Dict[str, Dict] = {}
         self.rxnorm_drugs: Dict[str, Dict] = {}
 
+        # Lexicon loading stats (for summary output)
+        self._lexicon_stats: List[Tuple[str, int, str]] = []
+
         # Load lexicons
         self._load_lexicons()
 
@@ -190,6 +193,9 @@ class DrugDetector:
         self.nlp = None
         if self.enable_scispacy and SCISPACY_AVAILABLE:
             self._init_scispacy()
+
+        # Print summary (after all lexicons and scispacy loaded)
+        self._print_lexicon_summary()
 
     def _load_lexicons(self) -> None:
         """Load all drug lexicons."""
@@ -233,7 +239,9 @@ class DrugDetector:
                     for alias in drug_info.get("aliases", []):
                         self.alexion_processor.add_keyword(alias, drug_name.lower())
 
-            print(f"  Loaded Alexion lexicon: {len(known_drugs)} drugs")
+            self._lexicon_stats.append(
+                ("Alexion drugs", len(known_drugs), "2025_08_alexion_drugs.json")
+            )
 
         except Exception as e:
             print(f"[WARN] Failed to load Alexion lexicon: {e}")
@@ -274,7 +282,9 @@ class DrugDetector:
                     self.investigational_processor.add_keyword(drug_name, drug_key)
                     count += 1
 
-            print(f"  Loaded investigational lexicon: {count} drugs")
+            self._lexicon_stats.append(
+                ("Investigational drugs", count, "2025_08_investigational_drugs.json")
+            )
 
         except Exception as e:
             print(f"[WARN] Failed to load investigational lexicon: {e}")
@@ -322,7 +332,9 @@ class DrugDetector:
                         if brand_key not in self.fda_drugs:
                             self.fda_processor.add_keyword(brand, drug_key)
 
-            print(f"  Loaded FDA lexicon: {count} drugs")
+            self._lexicon_stats.append(
+                ("FDA approved drugs", count, "2025_08_fda_approved_drugs.json")
+            )
 
         except Exception as e:
             print(f"[WARN] Failed to load FDA lexicon: {e}")
@@ -358,7 +370,9 @@ class DrugDetector:
                     self.rxnorm_processor.add_keyword(term, term_key)
                     count += 1
 
-            print(f"  Loaded RxNorm lexicon: {count} terms")
+            self._lexicon_stats.append(
+                ("RxNorm terms", count, "2025_08_lexicon_drug.json")
+            )
 
         except Exception as e:
             print(f"[WARN] Failed to load RxNorm lexicon: {e}")
@@ -385,11 +399,30 @@ class DrugDetector:
                         "threshold": 0.7,
                     },
                 )
-            print("  Drug detector: scispacy NER initialized")
+            self._lexicon_stats.append(("scispacy NER", 1, "en_core_sci_lg"))
 
         except Exception as e:
             print(f"[WARN] Failed to initialize scispacy for drugs: {e}")
             self.nlp = None
+
+    def _print_lexicon_summary(self) -> None:
+        """Print compact summary of loaded drug lexicons."""
+        if not self._lexicon_stats:
+            return
+
+        # All drug lexicons go under "Drug" category
+        total = sum(count for _, count, _ in self._lexicon_stats if count > 1)
+        file_count = len([s for s in self._lexicon_stats if s[1] > 0])
+        print(f"\nDrug lexicons: {file_count} sources, {total:,} entries")
+        print("─" * 70)
+        print(f"  Drug ({total:,} entries)")
+
+        for name, count, filename in self._lexicon_stats:
+            if count > 1:
+                print(f"    • {name:<26} {count:>8,}  {filename}")
+            else:
+                print(f"    • {name:<26} {'enabled':>8}  {filename}")
+        print()
 
     def detect(self, doc_graph: DocumentGraph) -> List[DrugCandidate]:
         """
