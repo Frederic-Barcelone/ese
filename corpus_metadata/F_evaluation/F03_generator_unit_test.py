@@ -76,7 +76,18 @@ import time
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple, TYPE_CHECKING
+
+# Add corpus_metadata to path once at module load
+_BASE_PATH = Path("/Users/frederictetard/Projects/ese")
+if str(_BASE_PATH / "corpus_metadata") not in sys.path:
+    sys.path.insert(0, str(_BASE_PATH / "corpus_metadata"))
+
+from orchestrator import Orchestrator
+from A_core.A01_domain_models import ValidationStatus
+
+if TYPE_CHECKING:
+    pass  # For any type-only imports
 
 # =============================================================================
 # CONFIGURATION (ALL HARDCODED - MODIFY HERE)
@@ -88,10 +99,149 @@ NLP4RARE_PATH = BASE_PATH / "gold_data" / "NLP4RARE"
 CONFIG_PATH = BASE_PATH / "corpus_metadata" / "G_config" / "config.yaml"
 
 # Evaluation settings
-MAX_DOCS = None                 # Max documents to process per split (None = all)
+MAX_DOCS = 5                    # Max documents to process per split (None = all)
 SKIP_VALIDATION = False         # Enable LLM validation for proper evaluation
 SPLITS_TO_EVALUATE = ["dev"]    # Which splits to run: ["dev"], ["test"], ["train"], or all
 FUZZY_THRESHOLD = 0.8           # Long form matching threshold (0.8 = 80% similarity)
+GOLD_CATEGORIES = ["DISEASE", "RAREDISEASE", "SKINRAREDISEASE"]  # Categories to evaluate (None = all)
+EVAL_ABBREV_CLASSES = ["disease"]  # Only evaluate these abbreviation classes (disease, gene, identifier, general_medical, other)
+
+
+# =============================================================================
+# ABBREVIATION CLASSIFICATION
+# =============================================================================
+
+from enum import Enum
+import re
+
+
+class AbbreviationClass(Enum):
+    """Classification of extracted abbreviations."""
+    DISEASE = "disease"              # Disease abbreviations (target for evaluation)
+    GENE = "gene"                    # Gene symbols (JAG1, NOTCH2, BRCA1, etc.)
+    IDENTIFIER = "identifier"        # Database IDs (OMIM, PMID, DOI, NCT, etc.)
+    GENERAL_MEDICAL = "general_medical"  # General medical terms (MRI, CT, ECG, etc.)
+    OTHER = "other"                  # Unclassified
+
+
+# Gene symbol patterns (typically 2-6 uppercase letters followed by optional numbers)
+GENE_PATTERNS = [
+    r'^[A-Z]{2,6}\d{0,2}$',          # JAG1, NOTCH2, BRCA1, TP53, etc.
+    r'^[A-Z]{2,4}-[A-Z]{1,3}\d?$',   # HLA-B, HLA-DR, etc.
+]
+
+# Known gene symbols (common ones that might be ambiguous)
+KNOWN_GENES = {
+    "JAG1", "JAG2", "NOTCH1", "NOTCH2", "NOTCH3", "NOTCH4",
+    "BRCA1", "BRCA2", "TP53", "EGFR", "KRAS", "BRAF", "ALK",
+    "HER2", "ERBB2", "MYC", "RAS", "RAF", "MEK", "ERK",
+    "CFTR", "DMD", "SMN1", "SMN2", "HTT", "FMR1", "PKD1", "PKD2",
+    "COL1A1", "COL1A2", "FBN1", "FGFR1", "FGFR2", "FGFR3",
+    "NF1", "NF2", "TSC1", "TSC2", "VHL", "RB1", "APC", "MLH1",
+}
+
+# Identifier patterns
+IDENTIFIER_PATTERNS = {
+    "OMIM": r'^OMIM$',
+    "ORPHA": r'^ORPHA(NET)?$',
+    "PMID": r'^PMID$',
+    "DOI": r'^DOI$',
+    "NCT": r'^NCT\d*$',
+    "ISRCTN": r'^ISRCTN$',
+    "EUDRACT": r'^EUDRACT$',
+    "ICD": r'^ICD-?\d{0,2}$',
+    "SNOMED": r'^SNOMED$',
+    "MESH": r'^MESH$',
+    "MONDO": r'^MONDO$',
+    "UMLS": r'^UMLS$',
+    "CUI": r'^C\d{7}$',               # UMLS CUI format
+}
+
+# General medical abbreviations (non-disease)
+GENERAL_MEDICAL = {
+    # Imaging
+    "MRI", "CT", "PET", "SPECT", "MRA", "CTA", "DSA", "EEG", "EMG", "ECG", "EKG",
+    "US", "USG", "ECHO", "TEE", "TTE",
+    # Lab/procedures
+    "CBC", "BMP", "CMP", "LFT", "RFT", "ABG", "VBG", "CSF", "BAL",
+    "ELISA", "PCR", "WB", "IHC", "FISH", "NGS", "WES", "WGS",
+    # Clinical
+    "IV", "IM", "SC", "PO", "PR", "SL", "INH", "TOP",
+    "BID", "TID", "QID", "PRN", "QD", "QOD", "QHS",
+    "BMI", "BP", "HR", "RR", "SPO2", "GCS", "APACHE",
+    # Statistical
+    "CI", "SD", "SE", "SEM", "OR", "RR", "HR", "IQR", "AUC", "ROC",
+    "NS", "NA", "NR", "ND",
+    # Organizations/standards
+    "FDA", "EMA", "WHO", "CDC", "NIH", "NHS",
+    "IRB", "DSMB", "GCP", "ICH",
+}
+
+# Disease-related keywords in long forms
+DISEASE_KEYWORDS = [
+    "disease", "syndrome", "disorder", "deficiency", "dystrophy",
+    "neuropathy", "myopathy", "cardiomyopathy", "encephalopathy",
+    "anemia", "leukemia", "lymphoma", "sarcoma", "carcinoma",
+    "sclerosis", "fibrosis", "cirrhosis", "necrosis",
+    "itis",  # suffix for inflammation
+    "osis",  # suffix for condition
+    "pathy", # suffix for disease
+]
+
+
+def classify_abbreviation(short_form: str, long_form: Optional[str], lexicon_source: Optional[str] = None) -> AbbreviationClass:
+    """Classify an abbreviation into Disease, Gene, Identifier, General Medical, or Other.
+
+    Args:
+        short_form: The abbreviation
+        long_form: The expansion (if available)
+        lexicon_source: Source lexicon file name (if available)
+
+    Returns:
+        AbbreviationClass enum value
+    """
+    sf_upper = short_form.strip().upper()
+
+    # 1. Check identifiers first (highest priority)
+    for id_type, pattern in IDENTIFIER_PATTERNS.items():
+        if re.match(pattern, sf_upper, re.IGNORECASE):
+            return AbbreviationClass.IDENTIFIER
+
+    # 2. Check known genes
+    if sf_upper in KNOWN_GENES:
+        return AbbreviationClass.GENE
+
+    # 3. Check gene patterns (if no long form - genes typically don't have expansions in text)
+    if not long_form or long_form.strip() == "":
+        for pattern in GENE_PATTERNS:
+            if re.match(pattern, sf_upper):
+                # Additional check: genes are typically 2-6 chars, mostly consonants
+                if len(sf_upper) <= 6 and sum(1 for c in sf_upper if c in 'AEIOU') <= 2:
+                    return AbbreviationClass.GENE
+
+    # 4. Check general medical abbreviations
+    if sf_upper in GENERAL_MEDICAL:
+        return AbbreviationClass.GENERAL_MEDICAL
+
+    # 5. Check if long form contains disease keywords
+    if long_form:
+        lf_lower = long_form.lower()
+        for keyword in DISEASE_KEYWORDS:
+            if keyword in lf_lower:
+                return AbbreviationClass.DISEASE
+
+    # 6. Check lexicon source for disease lexicons
+    if lexicon_source:
+        ls_lower = lexicon_source.lower()
+        if any(term in ls_lower for term in ["disease", "orphan", "rare"]):
+            return AbbreviationClass.DISEASE
+
+    # 7. If has a long form but didn't match anything, likely disease or other medical
+    if long_form and long_form.strip():
+        # Default to disease for abbreviations with expansions that weren't classified otherwise
+        return AbbreviationClass.DISEASE
+
+    return AbbreviationClass.OTHER
 
 
 # =============================================================================
@@ -118,10 +268,12 @@ class GoldEntry:
 
 @dataclass
 class ExtractedEntry:
-    """Single extracted abbreviation."""
+    """Single extracted abbreviation with classification."""
     short_form: str
     long_form: Optional[str]
     confidence: float = 0.0
+    abbrev_class: AbbreviationClass = AbbreviationClass.OTHER
+    lexicon_source: Optional[str] = None
 
     @property
     def sf_normalized(self) -> str:
@@ -132,6 +284,10 @@ class ExtractedEntry:
         if not self.long_form:
             return None
         return " ".join(self.long_form.strip().lower().split())
+
+    @property
+    def is_disease(self) -> bool:
+        return self.abbrev_class == AbbreviationClass.DISEASE
 
 
 @dataclass
@@ -196,8 +352,13 @@ class AggregateMetrics:
 # =============================================================================
 
 
-def load_gold_standard(gold_path: Path) -> Dict[str, List[GoldEntry]]:
-    """Load gold standard and group by document ID."""
+def load_gold_standard(gold_path: Path, categories: Optional[List[str]] = None) -> Dict[str, List[GoldEntry]]:
+    """Load gold standard and group by document ID.
+
+    Args:
+        gold_path: Path to gold standard JSON file
+        categories: If provided, only include entries with these categories
+    """
     if not gold_path.exists():
         raise FileNotFoundError(f"Gold standard not found: {gold_path}")
 
@@ -205,16 +366,27 @@ def load_gold_standard(gold_path: Path) -> Dict[str, List[GoldEntry]]:
         data = json.load(f)
 
     annotations = data.get("annotations", [])
-    
+
     by_doc: Dict[str, List[GoldEntry]] = {}
+    filtered_count = 0
     for ann in annotations:
+        category = ann.get("category", "UNKNOWN")
+
+        # Filter by category if specified
+        if categories and category not in categories:
+            filtered_count += 1
+            continue
+
         entry = GoldEntry(
             short_form=ann["short_form"],
             long_form=ann["long_form"],
-            category=ann.get("category", "UNKNOWN"),
+            category=category,
             doc_id=ann["doc_id"],
         )
         by_doc.setdefault(entry.doc_id, []).append(entry)
+
+    if filtered_count > 0:
+        print(f" Filtered out {filtered_count} entries (categories not in {categories})")
 
     return by_doc
 
@@ -274,12 +446,45 @@ def lf_matches(sys_lf: Optional[str], gold_lf: Optional[str], threshold: float =
 def compare_extractions(
     extracted: List[ExtractedEntry],
     gold: List[GoldEntry],
-) -> DocumentMetrics:
-    """Compare extracted abbreviations against gold standard."""
+    eval_classes: Optional[List[str]] = None,
+) -> Tuple[DocumentMetrics, Dict[str, int]]:
+    """Compare extracted abbreviations against gold standard.
+
+    Args:
+        extracted: List of extracted abbreviations
+        gold: List of gold standard entries
+        eval_classes: List of abbreviation classes to evaluate (e.g., ["disease"])
+                     If None, evaluate all classes
+
+    Returns:
+        Tuple of (DocumentMetrics, class_counts dict)
+    """
     doc_id = gold[0].doc_id if gold else "unknown"
     metrics = DocumentMetrics(doc_id=doc_id)
     metrics.gold_count = len(gold)
-    metrics.extracted_count = len(extracted)
+
+    # Count extractions by class
+    class_counts: Dict[str, int] = {}
+    for ext in extracted:
+        class_name = ext.abbrev_class.value
+        class_counts[class_name] = class_counts.get(class_name, 0) + 1
+
+    # Filter extracted to only include specified classes
+    if eval_classes:
+        filtered_extracted = [
+            ext for ext in extracted
+            if ext.abbrev_class.value in eval_classes
+        ]
+        filtered_count = len(extracted) - len(filtered_extracted)
+        if filtered_count > 0:
+            print(f"      Classification filter: {len(extracted)} total -> {len(filtered_extracted)} disease-class (filtered {filtered_count})")
+            for class_name, count in sorted(class_counts.items()):
+                marker = "✓" if class_name in eval_classes else "✗"
+                print(f"        {marker} {class_name}: {count}")
+    else:
+        filtered_extracted = extracted
+
+    metrics.extracted_count = len(filtered_extracted)
 
     gold_by_sf: Dict[str, List[GoldEntry]] = {}
     for g in gold:
@@ -287,10 +492,10 @@ def compare_extractions(
 
     matched_gold: Set[Tuple[str, str]] = set()
 
-    for ext in extracted:
+    for ext in filtered_extracted:
         sf_norm = ext.sf_normalized
         matched = False
-        
+
         if sf_norm in gold_by_sf:
             for g in gold_by_sf[sf_norm]:
                 gold_key = (g.sf_normalized, g.lf_normalized)
@@ -312,7 +517,7 @@ def compare_extractions(
             metrics.fn += 1
             metrics.fn_pairs.append((g.short_form, g.long_form))
 
-    return metrics
+    return metrics, class_counts
 
 
 # =============================================================================
@@ -320,29 +525,41 @@ def compare_extractions(
 # =============================================================================
 
 
-def run_orchestrator(pdf_path: Path) -> List[ExtractedEntry]:
-    """Run the extraction pipeline on a single PDF."""
-    sys.path.insert(0, str(BASE_PATH / "corpus_metadata"))
-    
-    from orchestrator import Orchestrator
-    from A_core.A01_domain_models import ValidationStatus
-
-    orch = Orchestrator(
+def create_orchestrator() -> Orchestrator:
+    """Create and initialize orchestrator once (expensive operation)."""
+    return Orchestrator(
         config_path=str(CONFIG_PATH),
         gold_json=str(GOLD_JSON),
         skip_validation=SKIP_VALIDATION,
     )
 
+
+def run_orchestrator(orch: Orchestrator, pdf_path: Path) -> List[ExtractedEntry]:
+    """Run the extraction pipeline on a single PDF using existing orchestrator."""
     results = orch.process_pdf(str(pdf_path))
 
     extracted = []
     for entity in results:
         if entity.status == ValidationStatus.VALIDATED:
+            # Get lexicon source if available
+            lexicon_source = None
+            if hasattr(entity, 'provenance') and entity.provenance:
+                lexicon_source = getattr(entity.provenance, 'lexicon_source', None)
+
+            # Classify the abbreviation
+            abbrev_class = classify_abbreviation(
+                short_form=entity.short_form,
+                long_form=entity.long_form,
+                lexicon_source=lexicon_source,
+            )
+
             extracted.append(
                 ExtractedEntry(
                     short_form=entity.short_form,
                     long_form=entity.long_form,
                     confidence=entity.confidence_score,
+                    abbrev_class=abbrev_class,
+                    lexicon_source=lexicon_source,
                 )
             )
 
@@ -358,8 +575,9 @@ def evaluate_split(
     split_name: str,
     split_path: Path,
     gold_by_doc: Dict[str, List[GoldEntry]],
+    orch: Orchestrator,
 ) -> Tuple[AggregateMetrics, List[DocumentMetrics]]:
-    """Evaluate all PDFs in a split."""
+    """Evaluate all PDFs in a split using shared orchestrator instance."""
     print(f"\n{'='*70}")
     print(f" EVALUATING SPLIT: {split_name.upper()}")
     print(f"{'='*70}")
@@ -370,12 +588,13 @@ def evaluate_split(
 
     pdf_files = sorted(split_path.glob("*.pdf"))
     pdf_with_gold = [pdf for pdf in pdf_files if pdf.name in gold_by_doc]
+    total_with_gold = len(pdf_with_gold)  # Count before truncation
 
     if MAX_DOCS:
         pdf_with_gold = pdf_with_gold[:MAX_DOCS]
 
     print(f"  PDFs in folder:    {len(pdf_files)}")
-    print(f"  PDFs with gold:    {len([p for p in pdf_files if p.name in gold_by_doc])}")
+    print(f"  PDFs with gold:    {total_with_gold}")
     print(f"  PDFs to process:   {len(pdf_with_gold)}")
 
     aggregate = AggregateMetrics(split_name=split_name)
@@ -391,13 +610,13 @@ def evaluate_split(
         start_time = time.time()
         
         try:
-            extracted = run_orchestrator(pdf_path)
+            extracted = run_orchestrator(orch, pdf_path)
             elapsed = time.time() - start_time
 
             print(f"      Extracted:        {len(extracted)}")
             print(f"      Time:             {elapsed:.1f}s")
 
-            metrics = compare_extractions(extracted, gold_entries)
+            metrics, class_counts = compare_extractions(extracted, gold_entries, eval_classes=EVAL_ABBREV_CLASSES)
             metrics.processing_time = elapsed
             doc_metrics_list.append(metrics)
 
@@ -503,18 +722,27 @@ def main():
     print(f" Skip validation:  {SKIP_VALIDATION}")
     print(f" Max docs/split:   {MAX_DOCS}")
     print(f" Splits:           {SPLITS_TO_EVALUATE}")
+    print(f" Gold categories:  {GOLD_CATEGORIES}")
+    print(f" Eval classes:     {EVAL_ABBREV_CLASSES}")
     print("="*70)
 
-    # Load gold standard
+    # Load gold standard (filtered by category)
     print("\n Loading gold standard...")
-    gold_by_doc = load_gold_standard(GOLD_JSON)
+    gold_by_doc = load_gold_standard(GOLD_JSON, categories=GOLD_CATEGORIES)
     print(f" Loaded {sum(len(v) for v in gold_by_doc.values())} annotations across {len(gold_by_doc)} documents")
+
+    # Initialize orchestrator ONCE (expensive: loads scispacy, UMLS, lexicons)
+    print("\n Initializing orchestrator (one-time cost)...")
+    init_start = time.time()
+    orch = create_orchestrator()
+    init_time = time.time() - init_start
+    print(f" Orchestrator initialized in {init_time:.1f}s")
 
     # Run evaluation
     all_results = []
     for split_name in SPLITS_TO_EVALUATE:
         split_path = NLP4RARE_PATH / split_name
-        aggregate, doc_list = evaluate_split(split_name, split_path, gold_by_doc)
+        aggregate, doc_list = evaluate_split(split_name, split_path, gold_by_doc, orch)
         all_results.append((aggregate, doc_list))
         print_split_report(aggregate)
 
@@ -542,6 +770,18 @@ def main():
     # Error analysis
     all_docs = [doc for _, doc_list in all_results for doc in doc_list]
     print_error_analysis(all_docs)
+
+    # Timing summary
+    total_processing = sum(a.total_time for a, _ in all_results)
+    total_docs = sum(a.processed_docs for a, _ in all_results)
+    print(f"\n{'='*70}")
+    print(" TIMING SUMMARY")
+    print(f"{'='*70}")
+    print(f"  Orchestrator init:   {init_time:.1f}s (one-time)")
+    print(f"  Document processing: {total_processing:.1f}s ({total_docs} docs)")
+    if total_docs > 0:
+        print(f"  Avg per document:    {total_processing / total_docs:.1f}s")
+    print(f"  Total elapsed:       {init_time + total_processing:.1f}s")
 
     print(f"\n{'='*70}")
     print(" EVALUATION COMPLETE")
