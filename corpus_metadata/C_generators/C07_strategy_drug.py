@@ -430,8 +430,11 @@ class DrugDetector:
             doc_graph, "fingerprint", self.doc_fingerprint_default
         )
 
-        # Get full text for detection
-        full_text = doc_graph.get_plain_text()
+        # Get full text for detection by concatenating all blocks
+        full_text = "\n\n".join(
+            block.text for block in doc_graph.iter_linear_blocks(skip_header_footer=True)
+            if block.text
+        )
 
         # Layer 1: Alexion drugs (specialized, highest priority)
         if self.alexion_processor:
@@ -671,13 +674,12 @@ class DrugDetector:
                 if best_score < 0.7:
                     continue
 
-                # Check semantic type
+                # Check semantic type - use cui_to_entity API
                 linker = self.nlp.get_pipe("scispacy_linker")
-                kb = linker.kb
-                if best_cui not in kb:
+                entity_info = linker.kb.cui_to_entity.get(best_cui)
+                if entity_info is None:
                     continue
 
-                entity_info = kb[best_cui]
                 types = set(entity_info.types)
 
                 # Only keep chemical entities
