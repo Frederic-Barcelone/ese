@@ -19,7 +19,74 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Set, Optional
 import logging
+import os
+import re
+import unicodedata
 import yaml
+
+
+# ========================================
+# UNICODE NORMALIZATION UTILITIES
+# Handle PDF mojibake, ligatures, variant hyphens, etc.
+# ========================================
+
+# Various Unicode hyphen/dash characters to normalize
+HYPHENS_PATTERN = re.compile(r"[\u2010\u2011\u2012\u2013\u2014\u2212\u00ad]")
+
+# Common mojibake substitutions (e.g., from PDF extraction)
+MOJIBAKE_MAP = {
+    "Î±": "α",  # Greek alpha (common PDF encoding issue)
+    "Î²": "β",  # Greek beta
+    "Î³": "γ",  # Greek gamma
+    "Î´": "δ",  # Greek delta
+    "ﬁ": "fi",  # fi ligature
+    "ﬂ": "fl",  # fl ligature
+    "ﬀ": "ff",  # ff ligature
+    "ﬃ": "ffi",  # ffi ligature
+    "ﬄ": "ffl",  # ffl ligature
+}
+
+
+def normalize_sf(sf: str) -> str:
+    """
+    Normalize a short form for display/storage.
+
+    - Applies NFKC Unicode normalization
+    - Fixes common mojibake issues
+    - Normalizes hyphens to standard ASCII hyphen
+    - Collapses whitespace
+    """
+    s = unicodedata.normalize("NFKC", sf).strip()
+    # Fix mojibake
+    for bad, good in MOJIBAKE_MAP.items():
+        s = s.replace(bad, good)
+    # Normalize hyphens
+    s = HYPHENS_PATTERN.sub("-", s)
+    # Collapse whitespace
+    s = re.sub(r"\s+", " ", s)
+    return s
+
+
+def normalize_sf_key(sf: str) -> str:
+    """
+    Normalize a short form for use as dictionary/set key (comparison).
+
+    Returns uppercase normalized form for consistent matching.
+    """
+    return normalize_sf(sf).upper()
+
+
+def normalize_context(ctx: str) -> str:
+    """
+    Normalize context text for matching.
+
+    - Applies NFKC Unicode normalization
+    - Normalizes hyphens
+    - Returns lowercase for case-insensitive matching
+    """
+    c = unicodedata.normalize("NFKC", ctx)
+    c = HYPHENS_PATTERN.sub("-", c)
+    return c.lower()
 
 
 @dataclass
@@ -79,10 +146,22 @@ class HeuristicsConfig:
             # Ambiguous 2-letter that are rarely medical
             "IA",  # Iowa, intramural - ambiguous without strong context
             # Common words/months that get lexicon matches
-            "AUG",
-            "INT",  # August, International - not abbreviations
+            "AUG",  # August (month)
+            "INT",  # International - not a medical abbreviation
             # Research/tool names that aren't medical abbreviations
             "IRCCS",  # Italian research institute
+            # Database identifiers - these are references, not abbreviations
+            "OMIM",  # Online Mendelian Inheritance in Man
+            "MIM",  # Alternative OMIM prefix
+            "ORPHA",  # Orphanet database
+            "ORPHANET",  # Orphanet database
+            "PMID",  # PubMed ID
+            "PMC",  # PubMed Central
+            "MESH",  # Medical Subject Headings
+            "SNOMED",  # SNOMED CT
+            "MONDO",  # Mondo Disease Ontology
+            "ORCID",  # Researcher ID
+            "ISRCTN",  # Trial registry
         }
     )
 
@@ -92,52 +171,23 @@ class HeuristicsConfig:
 
     # ========================================
     # COMMON ENGLISH WORDS - Auto-reject
+    # Organized by category for maintainability
     # ========================================
     common_words: Set[str] = field(
         default_factory=lambda: {
-            "THE",
-            "AND",
-            "FOR",
-            "ARE",
-            "BUT",
-            "NOT",
-            "YOU",
-            "ALL",
-            "CAN",
-            "HER",
-            "WAS",
-            "ONE",
-            "OUR",
-            "OUT",
-            "DAY",
-            "GET",
-            "HAS",
-            "HIM",
-            "HIS",
-            "HOW",
-            "ITS",
-            "MAY",
-            "NEW",
-            "NOW",
-            "OLD",
-            "SEE",
-            "TWO",
-            "WAY",
-            "WHO",
-            "BOY",
-            "DID",
-            "ANY",
-            "DATA",
-            "WHITE",
-            "METHODS",
-            "STUDY",
-            "RESULTS",
-            "AGE",
-            "YEARS",
-            "PATIENTS",
-            "TABLE",
-            "FIGURE",
-            "BASELINE",
+            # Short common words (3 letters)
+            "THE", "AND", "FOR", "ARE", "BUT", "NOT", "YOU", "ALL", "CAN",
+            "HER", "WAS", "ONE", "OUR", "OUT", "DAY", "GET", "HAS", "HIM",
+            "HIS", "HOW", "ITS", "MAY", "NEW", "NOW", "OLD", "SEE", "TWO",
+            "WAY", "WHO", "BOY", "DID", "ANY", "AGE",
+            # Paper section headers (common FPs in academic text)
+            "ABSTRACT", "INTRODUCTION", "METHODS", "RESULTS", "DISCUSSION",
+            "CONCLUSION", "CONCLUSIONS", "REFERENCES", "ACKNOWLEDGMENTS",
+            "SUPPLEMENTARY", "APPENDIX", "BACKGROUND",
+            # Table/figure labels
+            "TABLE", "FIGURE", "FIG",
+            # Common research terms (not abbreviations)
+            "DATA", "STUDY", "YEARS", "PATIENTS", "BASELINE", "WHITE",
         }
     )
 
@@ -157,32 +207,44 @@ class HeuristicsConfig:
         }
     )
 
+    # Allowed non-medical tokens: don't reject these based on form/case
+    # but also don't auto-approve as medical abbreviations
+    # Categories: registries (MEDDRA), software (SAS, SPSS, STATA), acronyms (RADAR)
     allowed_mixed_case: Set[str] = field(
         default_factory=lambda: {
+            # Medical registries (not abbreviations but valid identifiers)
             "MEDDRA",
-            "RADAR",
+            # Statistical software (common in methods sections)
             "SAS",
             "SPSS",
-            "STATA",  # Software/registries
+            "STATA",
+            # Other acronyms
+            "RADAR",
         }
     )
 
     # ========================================
     # HYPHENATED ABBREVIATIONS (PASO C)
     # Often missed by standard generators
+    # Keys are CANONICAL forms; matching uses normalized comparison
     # ========================================
     hyphenated_abbrevs: Dict[str, str] = field(
         default_factory=lambda: {
+            # Trial names
             "APPEAR-C3G": "trial name",
+            # Clinical scores/tools
             "CKD-EPI": "Chronic Kidney Disease Epidemiology Collaboration",
-            "FACIT-FATIGUE": "Functional Assessment of Chronic Illness Therapy-Fatigue",
             "FACIT-Fatigue": "Functional Assessment of Chronic Illness Therapy-Fatigue",
-            "IL-6": "interleukin-6",
+            # Interleukins
             "IL-1": "interleukin-1",
             "IL-5": "interleukin-5",
-            "TNF-Î±": "tumor necrosis factor alpha",
-            "sC5b-9": "soluble terminal complement complex",
+            "IL-6": "interleukin-6",
+            # Cytokines (canonical form with Greek alpha)
+            "TNF-α": "tumor necrosis factor alpha",
+            # Complement system
             "C5b-9": "terminal complement complex",
+            "sC5b-9": "soluble terminal complement complex",
+            # Disease classifications
             "IC-MPGN": "immune complex membranoproliferative glomerulonephritis",
         }
     )
@@ -285,16 +347,21 @@ class HeuristicsConfig:
         )
 
     def __post_init__(self):
-        """Validate config after initialization."""
-        # Ensure all sets use uppercase for consistent matching
-        self.sf_blacklist = {s.upper() for s in self.sf_blacklist}
-        self.common_words = {s.upper() for s in self.common_words}
-        self.allowed_2letter_sfs = {s.upper() for s in self.allowed_2letter_sfs}
-        self.allowed_mixed_case = {s.upper() for s in self.allowed_mixed_case}
+        """Validate config after initialization and normalize all keys."""
+        # Normalize all sets using normalize_sf_key for consistent matching
+        # This handles Unicode, hyphens, whitespace, and case
+        self.sf_blacklist = {normalize_sf_key(s) for s in self.sf_blacklist}
+        self.common_words = {normalize_sf_key(s) for s in self.common_words}
+        self.allowed_2letter_sfs = {normalize_sf_key(s) for s in self.allowed_2letter_sfs}
+        self.allowed_mixed_case = {normalize_sf_key(s) for s in self.allowed_mixed_case}
 
-        # Ensure Dict keys are uppercase for consistent matching
-        self.stats_abbrevs = {k.upper(): v for k, v in self.stats_abbrevs.items()}
-        self.country_abbrevs = {k.upper(): v for k, v in self.country_abbrevs.items()}
+        # Normalize Dict keys for consistent matching
+        self.stats_abbrevs = {normalize_sf_key(k): v for k, v in self.stats_abbrevs.items()}
+        self.country_abbrevs = {normalize_sf_key(k): v for k, v in self.country_abbrevs.items()}
+        self.hyphenated_abbrevs = {normalize_sf_key(k): v for k, v in self.hyphenated_abbrevs.items()}
+        self.direct_search_abbrevs = {normalize_sf_key(k): v for k, v in self.direct_search_abbrevs.items()}
+        self.case_sensitive_sfs = {normalize_sf_key(k): v for k, v in self.case_sensitive_sfs.items()}
+        self.context_required_sfs = {normalize_sf_key(k): v for k, v in self.context_required_sfs.items()}
 
     @classmethod
     def from_yaml(cls, config_path: str) -> "HeuristicsConfig":
@@ -325,18 +392,24 @@ class HeuristicsConfig:
         if not heur:
             return cls()
 
-        # Helper to convert list to set
-        def to_set(val: Any) -> Set[str]:
+        # Helper to convert list to set with type validation
+        def to_set(val: Any, key: str) -> Set[str]:
+            if val is None:
+                return set()
             if isinstance(val, list):
                 return set(val)
             if isinstance(val, set):
                 return val
+            print(f"[WARN] heuristics.{key}: expected list/set, got {type(val).__name__}, using empty set")
             return set()
 
         # Helper to convert dict with list values to dict with set values
-        def to_dict_of_sets(val: Any) -> Dict[str, Set[str]]:
+        def to_dict_of_sets(val: Any, key: str) -> Dict[str, Set[str]]:
+            if val is None:
+                return {}
             if isinstance(val, dict):
                 return {k: set(v) if isinstance(v, list) else v for k, v in val.items()}
+            print(f"[WARN] heuristics.{key}: expected dict, got {type(val).__name__}, using empty dict")
             return {}
 
         # Build kwargs from YAML
@@ -352,19 +425,19 @@ class HeuristicsConfig:
 
         # Blacklist (set)
         if "sf_blacklist" in heur:
-            kwargs["sf_blacklist"] = to_set(heur["sf_blacklist"])
+            kwargs["sf_blacklist"] = to_set(heur["sf_blacklist"], "sf_blacklist")
 
         # Common words (set)
         if "common_words" in heur:
-            kwargs["common_words"] = to_set(heur["common_words"])
+            kwargs["common_words"] = to_set(heur["common_words"], "common_words")
 
         # Allowed 2-letter SFs (set)
         if "allowed_2letter_sfs" in heur:
-            kwargs["allowed_2letter_sfs"] = to_set(heur["allowed_2letter_sfs"])
+            kwargs["allowed_2letter_sfs"] = to_set(heur["allowed_2letter_sfs"], "allowed_2letter_sfs")
 
         # Allowed mixed case (set)
         if "allowed_mixed_case" in heur:
-            kwargs["allowed_mixed_case"] = to_set(heur["allowed_mixed_case"])
+            kwargs["allowed_mixed_case"] = to_set(heur["allowed_mixed_case"], "allowed_mixed_case")
 
         # Hyphenated abbrevs (dict)
         if "hyphenated_abbrevs" in heur:
@@ -377,7 +450,7 @@ class HeuristicsConfig:
         # Context required SFs (dict of sets)
         if "context_required_sfs" in heur:
             kwargs["context_required_sfs"] = to_dict_of_sets(
-                heur["context_required_sfs"]
+                heur["context_required_sfs"], "context_required_sfs"
             )
 
         # Case sensitive SFs (dict)
@@ -471,9 +544,11 @@ Auto-rejected:
         }
 
 
-# Default config path
-DEFAULT_CONFIG_PATH = (
-    "/Users/frederictetard/Projects/ese/corpus_metadata/G_config/config.yaml"
+# Default config path: prefer env var, fallback to relative path from this file
+# Set ESE_CONFIG_PATH env var for custom config location
+DEFAULT_CONFIG_PATH = os.getenv(
+    "ESE_CONFIG_PATH",
+    str(Path(__file__).resolve().parents[1] / "G_config" / "config.yaml")
 )
 
 
@@ -493,16 +568,19 @@ def check_context_match(sf: str, context: str, config: HeuristicsConfig) -> bool
     Returns True if:
     - SF is not in context_required_sfs, OR
     - SF is in context_required_sfs AND context contains required terms
-    """
-    sf_upper = sf.upper()
 
-    if sf_upper not in config.context_required_sfs:
+    Uses normalized comparison for both SF and context to handle
+    Unicode variants, hyphens, etc.
+    """
+    sf_key = normalize_sf_key(sf)
+
+    if sf_key not in config.context_required_sfs:
         return True  # No special context requirement
 
-    required_terms = config.context_required_sfs[sf_upper]
-    ctx_lower = context.lower()
+    required_terms = config.context_required_sfs[sf_key]
+    ctx_normalized = normalize_context(context)
 
-    return any(term in ctx_lower for term in required_terms)
+    return any(term in ctx_normalized for term in required_terms)
 
 
 def check_trial_id(sf: str, config: HeuristicsConfig) -> bool:
@@ -511,13 +589,12 @@ def check_trial_id(sf: str, config: HeuristicsConfig) -> bool:
 
     Returns True if SF should be EXCLUDED (is a trial ID and exclude_trial_ids=True).
     """
-    import re
-
     if not config.exclude_trial_ids:
         return False  # Don't exclude trial IDs
 
     # Match NCT followed by digits (ClinicalTrials.gov identifiers)
-    return bool(re.match(r"^NCT\d+$", sf.upper()))
+    sf_normalized = normalize_sf_key(sf)
+    return bool(re.match(r"^NCT\d+$", sf_normalized))
 
 
 def get_canonical_case(sf: str, config: HeuristicsConfig) -> str:
@@ -526,5 +603,5 @@ def get_canonical_case(sf: str, config: HeuristicsConfig) -> str:
 
     E.g., SC5B9 -> sC5b-9
     """
-    sf_upper = sf.upper()
-    return config.case_sensitive_sfs.get(sf_upper, sf)
+    sf_key = normalize_sf_key(sf)
+    return config.case_sensitive_sfs.get(sf_key, sf)
