@@ -30,6 +30,7 @@ Depends on F01_gold_loader.py for GoldAnnotation format.
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from difflib import SequenceMatcher
 from typing import Dict, List, Optional, Set, Tuple
@@ -218,7 +219,17 @@ class Scorer:
     # -------------------------
 
     def _norm_sf(self, sf: str) -> str:
-        return (sf or "").strip().upper()
+        """
+        Normalize short form for comparison.
+
+        - Strips whitespace
+        - Uppercases
+        - Removes hyphens/dashes for matching (SC5B-9 == SC5B9)
+        """
+        s = (sf or "").strip().upper()
+        # Remove hyphens/dashes to normalize (SC5B-9 -> SC5B9)
+        s = re.sub(r"[-–—]", "", s)
+        return s
 
     def _norm_lf(self, lf: Optional[str]) -> Optional[str]:
         if lf is None:

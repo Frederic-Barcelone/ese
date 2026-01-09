@@ -271,6 +271,12 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 "/Users/frederictetard/Projects/ese/ouput_datasources/pro_scales_lexicon.json",
             )
         )
+        self.pharma_companies_path = Path(
+            self.config.get(
+                "pharma_companies_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/pharma_companies_lexicon.json",
+            )
+        )
 
         self.context_window = int(self.config.get("context_window", 300))
 
@@ -314,6 +320,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_pah_lexicon(self.pah_lexicon_path)
         self._load_trial_acronyms(self.trial_acronyms_path)
         self._load_pro_scales(self.pro_scales_path)
+        self._load_pharma_companies(self.pharma_companies_path)
 
         # Initialize scispacy NER for biomedical entity recognition
         self.scispacy_nlp = None
@@ -680,6 +687,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             # Other
             "Trial acronyms": "Other",
             "PRO scales": "Other",
+            "Pharma companies": "Other",
         }
 
         for name, count, filename in self._lexicon_stats:
@@ -1300,6 +1308,48 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 pass
 
         self._lexicon_stats.append(("PRO scales", loaded, path.name))
+
+    def _load_pharma_companies(self, path: Path) -> None:
+        """Load pharma companies lexicon (Roche, Novartis, Pfizer, etc.)."""
+        if not path.exists():
+            return
+
+        data = json.loads(path.read_text(encoding="utf-8"))
+        source = path.name
+        loaded = 0
+
+        for company_key, entry in data.items():
+            if not company_key or not isinstance(entry, dict):
+                continue
+
+            canonical = (entry.get("canonical_name") or "").strip()
+            full_name = (entry.get("full_name") or "").strip()
+            variants = entry.get("variants") or []
+
+            if not canonical:
+                continue
+
+            # Use full_name as the long form if available, otherwise canonical
+            lf = full_name if full_name else canonical
+
+            # Register all variants (including canonical name)
+            all_terms = set(variants)
+            all_terms.add(canonical)
+            if full_name:
+                all_terms.add(full_name)
+
+            for term in all_terms:
+                term = (term or "").strip()
+                if not term or len(term) < 2:
+                    continue
+
+                self.entity_kp.add_keyword(term, term)
+                self.entity_canonical[term] = lf
+                self.entity_source[term] = source
+                self.entity_ids[term] = []  # No external IDs for pharma companies
+                loaded += 1
+
+        self._lexicon_stats.append(("Pharma companies", loaded, path.name))
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)
