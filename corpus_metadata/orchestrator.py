@@ -135,6 +135,36 @@ def extract_context_snippet(
     return full_text[start:end]
 
 
+# Pattern for normalizing various dash/hyphen characters
+_DASH_PATTERN = re.compile(r"[\u2010\u2011\u2012\u2013\u2014\u2212\u00ad\-–—]")
+
+
+def normalize_lf_for_dedup(lf: str) -> str:
+    """
+    Normalize a long form for deduplication comparison.
+
+    Normalizes:
+    - All dash/hyphen variants to standard hyphen
+    - Multiple spaces to single space
+    - Case to lowercase
+    - Leading/trailing whitespace
+
+    This prevents duplicates like:
+    - "renin-angiotensin" vs "renin–angiotensin" (hyphen vs en-dash)
+    - "urine protein-creatinine" vs "urine protein– creatinine"
+    """
+    if not lf:
+        return ""
+    # Normalize dashes/hyphens to standard hyphen
+    normalized = _DASH_PATTERN.sub("-", lf)
+    # Normalize whitespace around hyphens
+    normalized = re.sub(r"\s*-\s*", "-", normalized)
+    # Collapse multiple spaces
+    normalized = re.sub(r"\s+", " ", normalized)
+    # Lowercase and strip
+    return normalized.lower().strip()
+
+
 def has_numeric_evidence(context: str, sf: str) -> bool:
     """Check if SF appears with numeric evidence (digits, %, =, :)."""
     if not context:
@@ -770,11 +800,12 @@ class Orchestrator:
             print(f"  {gen.generator_type.value}: {len(candidates)} candidates")
             all_candidates.extend(candidates)
 
-        # Deduplicate
+        # Deduplicate using normalized LF to handle punctuation variants
         seen = set()
         unique_candidates = []
         for c in all_candidates:
-            key = (c.short_form.upper(), (c.long_form or "").lower())
+            # Use normalize_lf_for_dedup to handle hyphen/dash variants
+            key = (c.short_form.upper(), normalize_lf_for_dedup(c.long_form or ""))
             if key not in seen:
                 seen.add(key)
                 unique_candidates.append(c)

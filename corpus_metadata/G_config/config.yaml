@@ -268,7 +268,8 @@ heuristics:
     SD: "standard deviation"
     SE: "standard error"
     OR: "odds ratio"
-    RR: "risk ratio"
+    # RR removed - ambiguous (can be "risk ratio" OR "relative reduction")
+    # Let syntax generator determine from context
     HR: "hazard ratio"
     IQR: "interquartile range"
     AUC: "area under the curve"
@@ -298,6 +299,17 @@ heuristics:
     - "AUG"
     - "INT"
     - "IRCCS"
+    # UK postal code prefixes (often extracted as abbreviations)
+    - "NE1"
+    - "NE2"
+    - "NE3"
+    - "SW1"
+    - "SW2"
+    - "EC1"
+    - "WC1"
+    - "W1"
+    # Credentials that appear after names
+    - "DM"      # Doctor of Medicine (credential)
 
   # ========================================
   # COMMON ENGLISH WORDS - Auto-reject
@@ -387,7 +399,7 @@ heuristics:
   # ========================================
   direct_search_abbrevs:
     UK: "United Kingdom"
-    RR: "risk ratio"
+    # RR removed - ambiguous, let syntax generator determine from context
     HR: "hazard ratio"
     CC BY: "Creative Commons Attribution"
     C3a: "complement C3a anaphylatoxin"
@@ -418,7 +430,7 @@ heuristics:
     EGFR: "eGFR"
 
   # Trial IDs handling
-  exclude_trial_ids: false
+  exclude_trial_ids: true  # Filter out NCT trial IDs from abbreviation extraction
 
   # ========================================
   # LLM SF-ONLY EXTRACTOR (PASO D)

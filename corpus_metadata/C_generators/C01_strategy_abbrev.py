@@ -246,13 +246,72 @@ def _space_sf_extract(short_form: str, preceding_text: str) -> Optional[str]:
     return None
 
 
+def _word_initial_extract(short_form: str, preceding_text: str) -> Optional[str]:
+    """
+    Word-initial letter matching for acronyms.
+    Matches SF letters to the first letter of each word in preceding text.
+
+    Works well for: "Acanthosis nigricans (AN)" where A=Acanthosis, N=nigricans
+    """
+    sf = re.sub(r"[^A-Za-z0-9]", "", short_form or "")
+    if len(sf) < 2:
+        return None
+
+    txt = (preceding_text or "").rstrip()
+    if not txt:
+        return None
+
+    # Extract words (alphanumeric sequences)
+    words = re.findall(r"[A-Za-z][A-Za-z0-9]*", txt)
+    if len(words) < len(sf):
+        return None
+
+    # Try to match SF letters to word-initial letters (backwards from end of words)
+    # Look for consecutive words whose initials spell the SF
+    sf_lower = sf.lower()
+
+    # Sliding window: try to find len(sf) consecutive words matching SF
+    for start_idx in range(len(words) - len(sf), -1, -1):
+        candidate_words = words[start_idx : start_idx + len(sf)]
+        initials = "".join(w[0].lower() for w in candidate_words)
+
+        if initials == sf_lower:
+            # Found a match! Build the long form
+            lf = " ".join(candidate_words)
+
+            # Validate: first letter must match
+            if lf[0].lower() != sf[0].lower():
+                continue
+
+            # Avoid absurdly long LFs
+            if len(lf) > 120:
+                continue
+
+            # Reject measurements
+            if _looks_like_measurement(lf):
+                continue
+
+            return lf
+
+    return None
+
+
 def _schwartz_hearst_extract(short_form: str, preceding_text: str) -> Optional[str]:
     """
     Schwartz-Hearst-ish backward character alignment.
     Returns a best-effort long form (LF) extracted from preceding_text, or None.
 
     Works well for: "... Tumor Necrosis Factor (TNF)"
+
+    Now tries word-initial matching first (better for disease acronyms),
+    then falls back to classic character alignment.
     """
+    # Try word-initial matching first (works better for disease acronyms)
+    lf = _word_initial_extract(short_form, preceding_text)
+    if lf:
+        return lf
+
+    # Fall back to classic Schwartz-Hearst character alignment
     sf = re.sub(r"[^A-Za-z0-9]", "", short_form or "")
     if len(sf) < 2:
         return None
@@ -298,6 +357,57 @@ def _schwartz_hearst_extract(short_form: str, preceding_text: str) -> Optional[s
         return None
 
     return lf
+
+
+def _extract_preceding_name(short_form: str, preceding_text: str) -> Optional[str]:
+    """
+    Extract a drug/compound name immediately before parentheses.
+
+    Handles patterns like "iptacopan (LNP023)" where:
+    - The SF is an alphanumeric code (LNP023, NCT04817618)
+    - The LF is a proper name/word directly before the parentheses
+
+    This is different from Schwartz-Hearst because the code letters
+    don't need to appear in the name.
+    """
+    sf = (short_form or "").strip()
+    txt = (preceding_text or "").rstrip()
+
+    if not sf or not txt:
+        return None
+
+    # SF should look like an alphanumeric code (contains letters AND digits)
+    has_letter = any(c.isalpha() for c in sf)
+    has_digit = any(c.isdigit() for c in sf)
+    is_compound_id = has_letter and has_digit and len(sf) >= 4
+
+    if not is_compound_id:
+        return None
+
+    # Extract the last word before parentheses
+    # Match a word that's either:
+    # - A proper noun (capitalized) like "Iptacopan"
+    # - A lowercase word like "iptacopan"
+    # But NOT all-caps (that would be another abbreviation)
+    word_match = re.search(r"([A-Za-z][a-z]{2,20})\s*$", txt)
+    if not word_match:
+        return None
+
+    candidate_lf = word_match.group(1)
+
+    # Skip if the candidate is too short or too long
+    if len(candidate_lf) < 3 or len(candidate_lf) > 25:
+        return None
+
+    # Skip if it looks like a common word (articles, prepositions)
+    skip_words = {
+        "the", "and", "for", "with", "from", "that", "this",
+        "which", "where", "when", "while", "being", "both"
+    }
+    if candidate_lf.lower() in skip_words:
+        return None
+
+    return candidate_lf
 
 
 def _validate_sf_in_lf(short_form: str, long_form: str) -> bool:
@@ -377,6 +487,16 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
             ),
         ]
 
+        # Explicit inline definition patterns: "SF=long form" or "SF: long form"
+        # Captures patterns like "RR=relative reduction" or "UPCR: urine protein-creatinine ratio"
+        self.inline_definition_patterns = [
+            # SF=long form (e.g., "RR=relative reduction")
+            # Uses greedy match for LF, stopping at period, comma, or uppercase letter
+            re.compile(
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([a-z][a-z\s\-/]{3,60})(?=[.,;)\]A-Z]|$)",
+            ),
+        ]
+
         self.context_window_chars = int(self.config.get("context_window_chars", 400))
         self.carryover_chars = int(
             self.config.get("carryover_chars", 140)
@@ -446,6 +566,11 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     # Fallback for space-separated SFs like "CC BY"
                     if not lf and " " in sf:
                         lf = _space_sf_extract(sf, preceding)
+
+                    # HIGH PRIORITY FIX: Handle compound IDs like "iptacopan (LNP023)"
+                    # where the code doesn't spell out the drug name
+                    if not lf:
+                        lf = _extract_preceding_name(sf, preceding)
 
                     if not lf:
                         continue
@@ -561,6 +686,67 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                             m.end(),
                             method="implicit_phrasing",
                             confidence=0.90,
+                        )
+                    )
+                    added_this_block += 1
+
+            # -------------------------
+            # Strategy D: Inline definitions (SF=LF or SF: LF)
+            # HIGH PRIORITY: Catches "RR=relative reduction" patterns
+            # -------------------------
+            for pat in self.inline_definition_patterns:
+                if added_this_block >= self.max_candidates_per_block:
+                    break
+
+                for m in pat.finditer(text_block):
+                    if added_this_block >= self.max_candidates_per_block:
+                        break
+
+                    sf = _clean_ws(m.group(1))
+                    lf = _clean_ws(m.group(2))
+
+                    if not _looks_like_short_form(
+                        sf, self.min_sf_length, self.max_sf_length
+                    ):
+                        continue
+
+                    # LF should be lowercase phrase (not another abbreviation)
+                    if not lf or len(lf) < 4:
+                        continue
+
+                    # Skip if LF is all uppercase (likely another abbreviation)
+                    if lf.isupper():
+                        continue
+
+                    # Skip if LF contains common noise patterns
+                    noise_patterns = [
+                        "sponsored by", "workshop", "scientific", "facts",
+                        "uncertainties", "study", "trial", "published",
+                    ]
+                    lf_lower = lf.lower()
+                    if any(noise in lf_lower for noise in noise_patterns):
+                        continue
+
+                    # Skip if LF is too long (likely noise)
+                    if len(lf) > 40:
+                        continue
+
+                    key = (doc.doc_id, sf.upper(), lf.lower())
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
+                    out.append(
+                        self._make_candidate(
+                            doc,
+                            block,
+                            sf,
+                            lf,
+                            text_block,
+                            m.start(),
+                            m.end(),
+                            method="inline_definition",
+                            confidence=0.97,  # High confidence - explicit definition
                         )
                     )
                     added_this_block += 1
