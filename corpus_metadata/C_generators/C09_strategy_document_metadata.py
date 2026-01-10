@@ -688,15 +688,30 @@ Classify this document. Return JSON only."""
             if not response:
                 return None
 
-            # Parse response
-            primary_code = response.get("primary_code", "")
-            primary_conf = float(response.get("primary_confidence", 0.5))
+            # Handle case where LLM returns a list instead of dict
+            if isinstance(response, list):
+                if len(response) > 0 and isinstance(response[0], dict):
+                    response = response[0]
+                else:
+                    print(f"[WARN] Unexpected LLM response format: {type(response)}")
+                    return None
+
+            if not isinstance(response, dict):
+                print(f"[WARN] Expected dict response, got: {type(response)}")
+                return None
+
+            # Parse response - handle both "primary_code" and "code" formats
+            primary_code = response.get("primary_code") or response.get("code", "")
+            primary_conf = float(response.get("primary_confidence") or response.get("confidence", 0.5))
             reasoning = response.get("reasoning", "")
 
             # Get type info
             type_info = self.type_registry.get_type_by_code(primary_code)
             if not type_info:
+                print(f"  [WARN] Unknown document type code: '{primary_code}'")
                 return None
+
+            print(f"  Classification: {primary_code} - {type_info['name']} (conf: {primary_conf:.2f})")
 
             primary_type = DocumentType(
                 code=type_info["code"],
@@ -782,6 +797,16 @@ Generate title and descriptions. Return JSON only."""
                 )
 
             if not response:
+                return None
+
+            # Handle case where LLM returns a list instead of dict
+            if isinstance(response, list):
+                if len(response) > 0 and isinstance(response[0], dict):
+                    response = response[0]
+                else:
+                    return None
+
+            if not isinstance(response, dict):
                 return None
 
             # Determine title source
