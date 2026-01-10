@@ -3,23 +3,23 @@
 Clinical trial feasibility information extraction strategy.
 
 Extracts key information needed for clinical trial feasibility assessment:
-1. Eligibility criteria (inclusion/exclusion)
-2. Epidemiology data (prevalence, incidence, demographics)
-3. Patient journey phases (screening → treatment → follow-up)
-4. Study endpoints (primary, secondary)
-5. Site/country information
+1. Eligibility criteria (inclusion/exclusion) with negation handling
+2. Epidemiology data (prevalence, incidence, demographics) with context
+3. Patient journey phases (screening → treatment → follow-up) with burden metrics
+4. Study endpoints (primary, secondary) with proper boundaries
+5. Site/country information with disambiguation
 
 Uses a combination of:
-- Section detection (Methods, Eligibility, Study Design)
-- Pattern matching for structured criteria
-- Regex for epidemiology statistics
-- Keyword detection for patient journey phases
+- Layout-aware section detection
+- Pattern matching with negation handling
+- Context-gated country extraction
+- Feature-based confidence scoring
 """
 
 from __future__ import annotations
 
 import re
-import uuid
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
@@ -39,54 +39,19 @@ from A_core.A07_feasibility_models import (
     StudySite,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
+from B_parsing.B05_section_detector import SectionDetector, SECTION_PATTERNS
+from B_parsing.B06_confidence import ConfidenceFeatures, ConfidenceCalculator
+from B_parsing.B07_negation import NegationDetector, NEGATION_CUES, EXCEPTION_CUES
 
 
 # =============================================================================
-# SECTION PATTERNS
+# NOTE: Section patterns, negation cues, and exception cues are imported from
+# B_parsing.B05_section_detector, B_parsing.B07_negation
 # =============================================================================
-
-# Patterns to identify relevant sections in clinical trial documents
-SECTION_PATTERNS = {
-    "eligibility": [
-        r"eligibility\s*criteria",
-        r"inclusion\s*(?:and\s*)?exclusion\s*criteria",
-        r"patient\s*selection",
-        r"study\s*population",
-        r"participants",
-    ],
-    "methods": [
-        r"methods",
-        r"study\s*design",
-        r"trial\s*design",
-        r"materials?\s*and\s*methods",
-    ],
-    "epidemiology": [
-        r"epidemiology",
-        r"prevalence",
-        r"incidence",
-        r"demographics",
-        r"background",
-        r"introduction",
-    ],
-    "endpoints": [
-        r"endpoints?",
-        r"outcomes?",
-        r"efficacy",
-        r"primary\s*(?:end)?points?",
-        r"secondary\s*(?:end)?points?",
-    ],
-    "patient_journey": [
-        r"study\s*procedures?",
-        r"treatment\s*period",
-        r"follow[\-\s]?up",
-        r"screening",
-        r"study\s*visits?",
-    ],
-}
 
 
 # =============================================================================
-# ELIGIBILITY CRITERIA PATTERNS
+# ELIGIBILITY CRITERIA PATTERNS (Expanded for rare disease)
 # =============================================================================
 
 INCLUSION_MARKERS = [
@@ -95,6 +60,7 @@ INCLUSION_MARKERS = [
     r"eligible\s*(?:patients?|subjects?|participants?)",
     r"key\s*inclusion",
     r"to\s*be\s*eligible",
+    r"must\s*(?:have|be|meet)",
 ]
 
 EXCLUSION_MARKERS = [
@@ -103,112 +69,182 @@ EXCLUSION_MARKERS = [
     r"ineligible\s*if",
     r"key\s*exclusion",
     r"not\s*eligible\s*if",
+    r"will\s*be\s*excluded",
 ]
 
-# Common criterion categories
+# Expanded criterion categories for rare disease (P1)
 CRITERION_CATEGORIES = {
+    # Age
     "age": r"(?:age|year[s]?\s*old|\d+\s*(?:to|–|-)\s*\d+\s*years?)",
-    "diagnosis": r"(?:diagnosis|diagnosed|confirmed|documented)\s+(?:of|with)",
-    "disease_severity": r"(?:mild|moderate|severe|advanced|early[- ]stage|late[- ]stage)",
-    "prior_treatment": r"(?:prior|previous|history\s*of)\s+(?:treatment|therapy|medication)",
-    "lab_value": r"(?:egfr|gfr|creatinine|hemoglobin|platelet|wbc|alt|ast|bilirubin)",
-    "comorbidity": r"(?:comorbid|concurrent|concomitant|coexisting)\s+(?:disease|condition)",
-    "pregnancy": r"(?:pregnan|breast[\-\s]?feed|lactat|contracept)",
-    "consent": r"(?:informed\s*consent|willing\s*to\s*participate)",
+
+    # Disease definition (rare disease critical)
+    "disease_definition": (
+        r"(?:genetically\s*confirmed|pathogenic\s*variant|"
+        r"confirmed\s*by\s*(?:biopsy|genetic|molecular)|"
+        r"meets\s*diagnostic\s*criteria|"
+        r"documented\s*(?:diagnosis|mutation))"
+    ),
+
+    # Disease severity
+    "disease_severity": (
+        r"(?:mild|moderate|severe|advanced|"
+        r"(?:early|late)[- ]stage|"
+        r"NYHA\s*class|mRS\s*\d|"
+        r"FEV1|baseline.*(?:score|grade))"
+    ),
+
+    # Disease duration
+    "disease_duration": (
+        r"(?:disease\s*duration|onset\s*(?:before|after)|"
+        r"diagnosed\s*(?:within|for\s*at\s*least))"
+    ),
+
+    # Prior treatment (expanded)
+    "prior_treatment": (
+        r"(?:prior|previous|history\s*of)\s+(?:treatment|therapy|medication)|"
+        r"treatment[\s-]?na[ïi]ve|"
+        r"(?:failure|intolerance)\s*(?:to|of)|"
+        r"≥?\s*\d+\s*(?:prior\s*)?lines?\s*(?:of\s*therapy)?"
+    ),
+
+    # Biomarker/genetic
+    "biomarker": (
+        r"(?:mutation|variant|genotype|biomarker|"
+        r"positive\s*for|negative\s*for|"
+        r"expression\s*(?:of|level))"
+    ),
+
+    # Lab values (expanded)
+    "lab_value": (
+        r"(?:egfr|gfr|creatinine|hemoglobin|platelet|wbc|"
+        r"alt|ast|bilirubin|albumin|inr|"
+        r"≥?\s*\d+(?:\.\d+)?\s*(?:mg|g|u|mmol|µmol)/)"
+    ),
+
+    # Organ function
+    "organ_function": (
+        r"(?:hepatic|renal|cardiac|pulmonary)\s*(?:function|impairment)|"
+        r"child[\s-]?pugh|"
+        r"(?:liver|kidney|heart)\s*(?:disease|failure)"
+    ),
+
+    # Comorbidity
+    "comorbidity": (
+        r"(?:comorbid|concurrent|concomitant|coexisting)\s+(?:disease|condition)|"
+        r"history\s*of\s*(?:cancer|malignancy|stroke|MI)"
+    ),
+
+    # Concomitant medications
+    "concomitant_medications": (
+        r"(?:concomitant|concurrent)\s*(?:use|medication)|"
+        r"stable\s*dose|"
+        r"chronic\s*(?:corticosteroid|immunosuppressant)"
+    ),
+
+    # Pregnancy
+    "pregnancy": (
+        r"(?:pregnan|breast[\s-]?feed|lactat|contracept|"
+        r"women?\s*of\s*childbearing)"
+    ),
+
+    # Consent
+    "consent": (
+        r"(?:informed\s*consent|willing\s*to\s*participate|"
+        r"able\s*to\s*comply)"
+    ),
 }
 
 
 # =============================================================================
-# EPIDEMIOLOGY PATTERNS
+# EPIDEMIOLOGY PATTERNS (with context extraction)
 # =============================================================================
 
 PREVALENCE_PATTERNS = [
-    # "prevalence of 1 in 10,000" or "prevalence: 1/10000"
     r"prevalence\s*(?:of|:|\s)\s*([\d.,]+\s*(?:in|per|/)\s*[\d.,]+(?:\s*(?:million|thousand|100,?000|10,?000|1,?000))?)",
-    # "affects 1-2 per million"
     r"affects?\s*([\d.,]+(?:\s*[-–to]+\s*[\d.,]+)?\s*(?:per|in)\s*(?:million|[\d,]+))",
-    # "rare disease with <1/1000000"
     r"(<?\s*[\d.,]+\s*/\s*[\d.,]+)",
-    # "3.5% of patients"
     r"([\d.,]+\s*%)\s*(?:of\s*)?(?:patients?|population|adults?|children)",
 ]
 
 INCIDENCE_PATTERNS = [
-    # "incidence of 2.5 per 100,000 person-years"
     r"incidence\s*(?:of|:|\s)\s*([\d.,]+(?:\s*[-–to]+\s*[\d.,]+)?\s*(?:per|/)\s*[\d.,]+(?:\s*person[\-\s]?years?)?)",
-    # "2-3 new cases per million per year"
     r"([\d.,]+(?:\s*[-–to]+\s*[\d.,]+)?\s*(?:new\s*)?cases?\s*(?:per|/)\s*(?:million|[\d,]+)(?:\s*per\s*year)?)",
 ]
 
 DEMOGRAPHICS_PATTERNS = [
-    # "median age 45 years" or "mean age of 52"
     r"((?:median|mean)\s*age\s*(?:of\s*)?[\d.,]+(?:\s*years?)?)",
-    # "age range 18-75"
     r"(age\s*(?:range|:)\s*[\d]+\s*[-–to]+\s*[\d]+)",
-    # "65% female" or "male:female ratio 1:2"
     r"([\d.,]+\s*%\s*(?:male|female|women|men))",
     r"((?:male|female)[:\s]+(?:male|female)\s*ratio\s*[\d.,]+\s*:\s*[\d.,]+)",
 ]
 
+# Context extraction patterns for epidemiology (P1)
+GEOGRAPHY_PATTERNS = [
+    r"(?:in|across)\s+((?:the\s+)?(?:United States|Europe|Asia|North America|[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?))",
+    r"(US|European|Asian|global)\s+population",
+]
+
+TIME_PATTERNS = [
+    r"(?:as\s+of|in)\s+(\d{4})",
+    r"(?:between|from)\s+(\d{4})\s*(?:to|and|-)\s*(\d{4})",
+    r"(\d{4})\s*(?:data|estimates?|statistics)",
+]
+
+SETTING_PATTERNS = [
+    r"(population[\s-]?based|registry[\s-]?based|single[\s-]?center|referral\s*center|community)",
+]
+
 
 # =============================================================================
-# PATIENT JOURNEY PATTERNS
+# PATIENT JOURNEY PATTERNS (with burden metrics)
 # =============================================================================
 
 JOURNEY_PHASE_KEYWORDS = {
     PatientJourneyPhaseType.SCREENING: [
-        "screening period",
-        "screening phase",
-        "screening visit",
-        "pre-treatment",
-        "baseline assessment",
-        "wash-out",
-        "washout period",
+        "screening period", "screening phase", "screening visit",
+        "pre-treatment", "baseline assessment", "wash-out", "washout period",
     ],
     PatientJourneyPhaseType.RUN_IN: [
-        "run-in period",
-        "run in phase",
-        "lead-in period",
-        "stabilization period",
+        "run-in period", "run in phase", "lead-in period", "stabilization period",
     ],
     PatientJourneyPhaseType.RANDOMIZATION: [
-        "randomization",
-        "randomised",
-        "randomized",
-        "random assignment",
-        "treatment allocation",
+        "randomization", "randomised", "randomized",
+        "random assignment", "treatment allocation",
     ],
     PatientJourneyPhaseType.TREATMENT: [
-        "treatment period",
-        "treatment phase",
-        "active treatment",
-        "intervention period",
-        "dosing period",
-        "induction phase",
-        "maintenance phase",
+        "treatment period", "treatment phase", "active treatment",
+        "intervention period", "dosing period", "induction phase", "maintenance phase",
     ],
     PatientJourneyPhaseType.FOLLOW_UP: [
-        "follow-up period",
-        "follow up phase",
-        "post-treatment",
-        "safety follow-up",
-        "observation period",
-        "long-term follow-up",
+        "follow-up period", "follow up phase", "post-treatment",
+        "safety follow-up", "observation period", "long-term follow-up",
     ],
     PatientJourneyPhaseType.EXTENSION: [
-        "extension study",
-        "open-label extension",
-        "OLE period",
-        "continued access",
+        "extension study", "open-label extension", "OLE period", "continued access",
     ],
 }
 
-# Duration patterns
 DURATION_PATTERN = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:[-–to]+\s*\d+(?:\.\d+)?\s*)?"
-    r"(weeks?|months?|days?|years?)",
+    r"(\d+(?:\.\d+)?)\s*(?:[-–to]+\s*\d+(?:\.\d+)?\s*)?(weeks?|months?|days?|years?)",
     re.IGNORECASE,
 )
+
+# Burden metrics patterns
+VISIT_PATTERNS = [
+    r"(\d+)\s*(?:study\s*)?visits?",
+    r"every\s*(\d+)\s*weeks?",
+    r"(?:weekly|bi[\s-]?weekly|monthly)\s*visits?",
+]
+
+PROCEDURE_PATTERNS = [
+    r"(?:lumbar\s*puncture|bone\s*marrow|biopsy|infusion|"
+    r"MRI|CT\s*scan|PET|echocardiogram|endoscopy)",
+]
+
+INPATIENT_PATTERNS = [
+    r"(\d+)\s*(?:day|night)s?\s*(?:hospitalization|inpatient)",
+    r"(?:overnight|24[\s-]?hour)\s*(?:stay|observation)",
+]
 
 
 # =============================================================================
@@ -238,23 +274,58 @@ ENDPOINT_PATTERNS = {
 
 
 # =============================================================================
-# SITE/COUNTRY PATTERNS
+# SITE/COUNTRY PATTERNS (with disambiguation)
 # =============================================================================
 
-COUNTRY_PATTERNS = [
-    # "conducted in 15 countries"
-    r"conducted\s*(?:in|across)\s*(\d+)\s*(?:countries|sites|centers)",
-    # "United States, Germany, France"
-    r"(?:countries?|sites?|centers?)\s*(?:included?|:)\s*([A-Z][a-z]+(?:,?\s*(?:and\s*)?[A-Z][a-z]+)*)",
-]
+# Countries that need context validation (P0)
+AMBIGUOUS_COUNTRIES = {"georgia", "jordan", "turkey", "chad", "china", "guinea", "mali"}
 
-# Known country names for extraction
+# Context cues that indicate site/country discussion
+COUNTRY_CONTEXT_CUES = {
+    "sites", "centers", "countries", "enrolled", "conducted",
+    "multicenter", "international", "patients from", "study in",
+    "recruitment", "participating", "locations",
+}
+
 COUNTRIES = {
     "united states", "usa", "us", "germany", "france", "uk", "united kingdom",
     "italy", "spain", "canada", "australia", "japan", "china", "brazil",
     "netherlands", "belgium", "switzerland", "austria", "sweden", "norway",
     "denmark", "finland", "poland", "czech republic", "hungary", "israel",
     "south korea", "korea", "taiwan", "india", "russia", "mexico", "argentina",
+    "turkey", "greece", "portugal", "ireland", "new zealand", "singapore",
+    "hong kong", "thailand", "malaysia", "south africa", "egypt", "chile",
+    "colombia", "peru", "ukraine", "romania", "bulgaria",
+}
+
+# ISO country codes for validation
+COUNTRY_CODES = {
+    "united states": "US", "usa": "US", "us": "US",
+    "germany": "DE", "france": "FR", "uk": "GB", "united kingdom": "GB",
+    "italy": "IT", "spain": "ES", "canada": "CA", "australia": "AU",
+    "japan": "JP", "china": "CN", "brazil": "BR", "netherlands": "NL",
+    "belgium": "BE", "switzerland": "CH", "austria": "AT", "sweden": "SE",
+    "norway": "NO", "denmark": "DK", "finland": "FI", "poland": "PL",
+    "czech republic": "CZ", "hungary": "HU", "israel": "IL",
+    "south korea": "KR", "korea": "KR", "taiwan": "TW", "india": "IN",
+    "russia": "RU", "mexico": "MX", "argentina": "AR", "turkey": "TR",
+}
+
+
+# =============================================================================
+# CONFIDENCE SCORING - Uses shared B_parsing.B06_confidence
+# Expected sections mapping for feasibility fields
+# =============================================================================
+
+EXPECTED_SECTIONS = {
+    FeasibilityFieldType.ELIGIBILITY_INCLUSION: ["eligibility", "methods"],
+    FeasibilityFieldType.ELIGIBILITY_EXCLUSION: ["eligibility", "methods"],
+    FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE: ["epidemiology", "abstract"],
+    FeasibilityFieldType.EPIDEMIOLOGY_INCIDENCE: ["epidemiology", "abstract"],
+    FeasibilityFieldType.EPIDEMIOLOGY_DEMOGRAPHICS: ["epidemiology", "methods", "results"],
+    FeasibilityFieldType.STUDY_ENDPOINT: ["endpoints", "methods"],
+    FeasibilityFieldType.PATIENT_JOURNEY_PHASE: ["patient_journey", "methods"],
+    FeasibilityFieldType.STUDY_SITE: ["methods"],
 }
 
 
@@ -267,12 +338,13 @@ class FeasibilityDetector:
     """
     Extracts clinical trial feasibility information from documents.
 
-    Covers:
-    - Eligibility criteria (inclusion/exclusion)
-    - Epidemiology (prevalence, incidence, demographics)
-    - Patient journey phases
-    - Study endpoints
-    - Site/country information
+    Improvements over v1:
+    - Negation handling for eligibility criteria
+    - Country disambiguation with context validation
+    - Expanded eligibility categories for rare disease
+    - Epidemiology context extraction (geography, time, setting)
+    - Feature-based confidence scoring
+    - Patient journey burden metrics
     """
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
@@ -295,6 +367,11 @@ class FeasibilityDetector:
         self.enable_endpoints = self.config.get("enable_endpoints", True)
         self.enable_sites = self.config.get("enable_sites", True)
 
+        # Shared parsing utilities from B_parsing
+        self.section_detector = SectionDetector()
+        self.negation_detector = NegationDetector()
+        self.confidence_calculator = ConfidenceCalculator()
+
         # Compile patterns
         self._compile_patterns()
 
@@ -308,9 +385,11 @@ class FeasibilityDetector:
 
         self.prevalence_re = [re.compile(p, re.IGNORECASE) for p in PREVALENCE_PATTERNS]
         self.incidence_re = [re.compile(p, re.IGNORECASE) for p in INCIDENCE_PATTERNS]
-        self.demographics_re = [
-            re.compile(p, re.IGNORECASE) for p in DEMOGRAPHICS_PATTERNS
-        ]
+        self.demographics_re = [re.compile(p, re.IGNORECASE) for p in DEMOGRAPHICS_PATTERNS]
+
+        self.geography_re = [re.compile(p, re.IGNORECASE) for p in GEOGRAPHY_PATTERNS]
+        self.time_re = [re.compile(p, re.IGNORECASE) for p in TIME_PATTERNS]
+        self.setting_re = [re.compile(p, re.IGNORECASE) for p in SETTING_PATTERNS]
 
         self.endpoint_re = {
             etype: [re.compile(p, re.IGNORECASE) for p in patterns]
@@ -322,25 +401,19 @@ class FeasibilityDetector:
             for cat, pattern in CRITERION_CATEGORIES.items()
         }
 
+        self.visit_re = [re.compile(p, re.IGNORECASE) for p in VISIT_PATTERNS]
+        self.procedure_re = re.compile(PROCEDURE_PATTERNS[0], re.IGNORECASE)
+        self.inpatient_re = [re.compile(p, re.IGNORECASE) for p in INPATIENT_PATTERNS]
+
     def extract(self, doc_structure: DocumentGraph) -> List[FeasibilityCandidate]:
-        """
-        Extract feasibility information from document.
-
-        Args:
-            doc_structure: Parsed document graph
-
-        Returns:
-            List of FeasibilityCandidate objects
-        """
+        """Extract feasibility information from document."""
         doc = doc_structure
         candidates: List[FeasibilityCandidate] = []
         seen: Set[str] = set()
 
-        # Get document fingerprint
         doc_fingerprint = getattr(doc, "fingerprint", self.doc_fingerprint_default)
         doc_id = getattr(doc, "doc_id", "unknown")
 
-        # Track current section for context
         current_section = "unknown"
 
         for block in doc.iter_linear_blocks(skip_header_footer=True):
@@ -350,12 +423,11 @@ class FeasibilityDetector:
 
             page_num = getattr(block, "page_number", None)
 
-            # Update section tracking
-            section = self._detect_section(text)
+            # Layout-aware section detection
+            section = self._detect_section(text, block)
             if section:
                 current_section = section
 
-            # Extract different types of feasibility info
             if self.enable_eligibility:
                 candidates.extend(
                     self._extract_eligibility(
@@ -394,20 +466,28 @@ class FeasibilityDetector:
         self._update_stats(candidates)
         return candidates
 
-    def _detect_section(self, text: str) -> Optional[str]:
-        """Detect if text is a section header."""
-        text_lower = text.lower().strip()
+    def _detect_section(self, text: str, block: Any = None) -> Optional[str]:
+        """Layout-aware section detection using shared SectionDetector."""
+        result = self.section_detector.detect(text, block)
+        return result.name if result else None
 
-        # Short text more likely to be a header
-        if len(text) > 100:
-            return None
+    # =========================================================================
+    # NEGATION DETECTION - Uses shared B_parsing.B07_negation
+    # =========================================================================
 
-        for section_name, patterns in SECTION_PATTERNS.items():
-            for pattern in patterns:
-                if re.search(pattern, text_lower):
-                    return section_name
+    def _detect_negation(self, text: str, match_start: int) -> bool:
+        """Check if match is negated using shared NegationDetector."""
+        result = self.negation_detector.detect(text, match_start)
+        return result.is_negated and not result.is_double_negation
 
-        return None
+    def _has_exception(self, text: str) -> bool:
+        """Check if text contains exception cues."""
+        text_lower = text.lower()
+        return any(cue in text_lower for cue in EXCEPTION_CUES)
+
+    # =========================================================================
+    # ELIGIBILITY EXTRACTION (with negation handling)
+    # =========================================================================
 
     def _extract_eligibility(
         self,
@@ -418,38 +498,48 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract eligibility criteria from text."""
+        """Extract eligibility criteria with negation handling."""
         candidates = []
 
-        # Check for inclusion criteria markers
         is_inclusion = any(p.search(text) for p in self.inclusion_re)
         is_exclusion = any(p.search(text) for p in self.exclusion_re)
 
-        # If we're in eligibility section, look for bullet points
         if section == "eligibility" or is_inclusion or is_exclusion:
-            # Extract bullet point items
             criteria = self._extract_bullet_items(text)
 
             for criterion_text in criteria:
                 if len(criterion_text) < 10:
                     continue
 
-                # Determine type based on context
+                # Determine base type
                 criterion_type = CriterionType.EXCLUSION if is_exclusion else CriterionType.INCLUSION
 
-                # Deduplicate
+                # Check for negation
+                is_negated = self._detect_negation(text, text.find(criterion_text[:20]))
+
+                # Flip type if negated in exclusion context
+                # "Excluded if NOT pregnant" → pregnancy allowed (inclusion-like)
+                if is_exclusion and is_negated:
+                    # Keep as exclusion but flag
+                    pass
+
                 dedup_key = f"elig:{criterion_text[:50].lower()}"
                 if dedup_key in seen:
                     continue
                 seen.add(dedup_key)
 
-                # Detect category
                 category = self._detect_criterion_category(criterion_text)
+                derived = self._derive_eligibility_variables(criterion_text, category)
 
                 field_type = (
                     FeasibilityFieldType.ELIGIBILITY_EXCLUSION
                     if criterion_type == CriterionType.EXCLUSION
                     else FeasibilityFieldType.ELIGIBILITY_INCLUSION
+                )
+
+                # Calculate confidence
+                features = self._calculate_confidence_features(
+                    field_type, section, text, criterion_text
                 )
 
                 candidate = self._make_candidate(
@@ -460,12 +550,15 @@ class FeasibilityDetector:
                     field_type=field_type,
                     page_num=page_num,
                     section=section,
-                    confidence=0.7 if section == "eligibility" else 0.5,
+                    confidence=features.total(),
+                    confidence_features=features.to_dict(),
                 )
                 candidate.eligibility_criterion = EligibilityCriterion(
                     criterion_type=criterion_type,
                     text=criterion_text,
                     category=category,
+                    is_negated=is_negated,
+                    derived_variables=derived if derived else None,
                 )
                 candidates.append(candidate)
 
@@ -475,30 +568,23 @@ class FeasibilityDetector:
         """Extract bullet point or numbered list items."""
         items = []
 
-        # Split by common bullet patterns
         patterns = [
-            r"(?:^|\n)\s*[•●○▪▸]\s*(.+?)(?=\n\s*[•●○▪▸]|\n\n|$)",  # Bullet points
-            r"(?:^|\n)\s*[-–—]\s*(.+?)(?=\n\s*[-–—]|\n\n|$)",  # Dashes
-            r"(?:^|\n)\s*\d+[.)]\s*(.+?)(?=\n\s*\d+[.)]|\n\n|$)",  # Numbered
-            r"(?:^|\n)\s*[a-z][.)]\s*(.+?)(?=\n\s*[a-z][.)]|\n\n|$)",  # Lettered
+            r"(?:^|\n)\s*[•●○▪▸]\s*(.+?)(?=\n\s*[•●○▪▸]|\n\n|$)",
+            r"(?:^|\n)\s*[-–—]\s*(.+?)(?=\n\s*[-–—]|\n\n|$)",
+            r"(?:^|\n)\s*\d+[.)]\s*(.+?)(?=\n\s*\d+[.)]|\n\n|$)",
+            r"(?:^|\n)\s*[a-z][.)]\s*(.+?)(?=\n\s*[a-z][.)]|\n\n|$)",
         ]
 
         for pattern in patterns:
             matches = re.findall(pattern, text, re.MULTILINE | re.DOTALL)
             items.extend([m.strip() for m in matches if m.strip()])
 
-        # If no bullet items found, check if this is a single criterion sentence
         if not items and len(text) < 500:
-            # Look for criterion-like sentences
             sentences = re.split(r'[.;](?=\s|$)', text)
             for sent in sentences:
                 sent = sent.strip()
                 if 20 < len(sent) < 300:
-                    # Check if it looks like a criterion
-                    if any(
-                        p.search(sent)
-                        for p in self.criterion_category_re.values()
-                    ):
+                    if any(p.search(sent) for p in self.criterion_category_re.values()):
                         items.append(sent)
 
         return items
@@ -511,6 +597,36 @@ class FeasibilityDetector:
                 return category
         return None
 
+    def _derive_eligibility_variables(
+        self, text: str, category: Optional[str]
+    ) -> Optional[Dict[str, Any]]:
+        """Extract ML-ready variables from criterion."""
+        text_lower = text.lower()
+        derived: Dict[str, Any] = {}
+
+        # Age extraction
+        age_match = re.search(r'(\d+)\s*(?:to|–|-)\s*(\d+)\s*years?', text_lower)
+        if age_match:
+            derived['age_min'] = int(age_match.group(1))
+            derived['age_max'] = int(age_match.group(2))
+            derived['pediatric_allowed'] = derived['age_min'] < 18
+            derived['elderly_allowed'] = derived['age_max'] >= 65
+
+        # Prior lines
+        lines_match = re.search(r'(\d+)\s*(?:or\s*more\s*)?(?:prior\s*)?lines?', text_lower)
+        if lines_match:
+            derived['prior_lines_required'] = int(lines_match.group(1))
+
+        if 'treatment-naive' in text_lower or 'treatment naive' in text_lower:
+            derived['prior_lines_required'] = 0
+            derived['treatment_naive_required'] = True
+
+        return derived if derived else None
+
+    # =========================================================================
+    # EPIDEMIOLOGY EXTRACTION (with context)
+    # =========================================================================
+
     def _extract_epidemiology(
         self,
         text: str,
@@ -520,10 +636,10 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract epidemiology statistics from text."""
+        """Extract epidemiology statistics with context."""
         candidates = []
 
-        # Prevalence patterns
+        # Prevalence
         for pattern in self.prevalence_re:
             for match in pattern.finditer(text):
                 value = match.group(1) if match.lastindex else match.group(0)
@@ -531,6 +647,23 @@ class FeasibilityDetector:
                 if dedup_key in seen:
                     continue
                 seen.add(dedup_key)
+
+                # Extract context dimensions
+                geography = self._extract_geography(text, match.start(), match.end())
+                time_period = self._extract_time_period(text, match.start(), match.end())
+                setting = self._extract_setting(text)
+                normalized = self._normalize_epi_value(value, match.group(0))
+
+                # Calculate confidence with context bonus
+                features = self._calculate_confidence_features(
+                    FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE, section, text, value
+                )
+                if geography:
+                    features.context_completeness += 0.1
+                if time_period:
+                    features.context_completeness += 0.1
+                if setting:
+                    features.context_completeness += 0.05
 
                 candidate = self._make_candidate(
                     doc_id=doc_id,
@@ -540,15 +673,20 @@ class FeasibilityDetector:
                     field_type=FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE,
                     page_num=page_num,
                     section=section,
-                    confidence=0.8,
+                    confidence=features.total(),
+                    confidence_features=features.to_dict(),
                 )
                 candidate.epidemiology_data = EpidemiologyData(
                     data_type="prevalence",
                     value=value.strip(),
+                    normalized_value=normalized,
+                    geography=geography,
+                    time_period=time_period,
+                    setting=setting,
                 )
                 candidates.append(candidate)
 
-        # Incidence patterns
+        # Incidence
         for pattern in self.incidence_re:
             for match in pattern.finditer(text):
                 value = match.group(1) if match.lastindex else match.group(0)
@@ -556,6 +694,14 @@ class FeasibilityDetector:
                 if dedup_key in seen:
                     continue
                 seen.add(dedup_key)
+
+                geography = self._extract_geography(text, match.start(), match.end())
+                time_period = self._extract_time_period(text, match.start(), match.end())
+                normalized = self._normalize_epi_value(value, match.group(0))
+
+                features = self._calculate_confidence_features(
+                    FeasibilityFieldType.EPIDEMIOLOGY_INCIDENCE, section, text, value
+                )
 
                 candidate = self._make_candidate(
                     doc_id=doc_id,
@@ -565,15 +711,19 @@ class FeasibilityDetector:
                     field_type=FeasibilityFieldType.EPIDEMIOLOGY_INCIDENCE,
                     page_num=page_num,
                     section=section,
-                    confidence=0.8,
+                    confidence=features.total(),
+                    confidence_features=features.to_dict(),
                 )
                 candidate.epidemiology_data = EpidemiologyData(
                     data_type="incidence",
                     value=value.strip(),
+                    normalized_value=normalized,
+                    geography=geography,
+                    time_period=time_period,
                 )
                 candidates.append(candidate)
 
-        # Demographics patterns
+        # Demographics
         for pattern in self.demographics_re:
             for match in pattern.finditer(text):
                 value = match.group(1) if match.lastindex else match.group(0)
@@ -581,6 +731,10 @@ class FeasibilityDetector:
                 if dedup_key in seen:
                     continue
                 seen.add(dedup_key)
+
+                features = self._calculate_confidence_features(
+                    FeasibilityFieldType.EPIDEMIOLOGY_DEMOGRAPHICS, section, text, value
+                )
 
                 candidate = self._make_candidate(
                     doc_id=doc_id,
@@ -590,7 +744,8 @@ class FeasibilityDetector:
                     field_type=FeasibilityFieldType.EPIDEMIOLOGY_DEMOGRAPHICS,
                     page_num=page_num,
                     section=section,
-                    confidence=0.7,
+                    confidence=features.total(),
+                    confidence_features=features.to_dict(),
                 )
                 candidate.epidemiology_data = EpidemiologyData(
                     data_type="demographics",
@@ -599,6 +754,60 @@ class FeasibilityDetector:
                 candidates.append(candidate)
 
         return candidates
+
+    def _extract_geography(self, text: str, start: int, end: int) -> Optional[str]:
+        """Extract geography context around a match."""
+        window = text[max(0, start - 100):min(len(text), end + 100)]
+        for pattern in self.geography_re:
+            m = pattern.search(window)
+            if m:
+                return m.group(1).strip()
+        return None
+
+    def _extract_time_period(self, text: str, start: int, end: int) -> Optional[str]:
+        """Extract time period context around a match."""
+        window = text[max(0, start - 100):min(len(text), end + 100)]
+        for pattern in self.time_re:
+            m = pattern.search(window)
+            if m:
+                if m.lastindex and m.lastindex >= 2:
+                    return f"{m.group(1)}-{m.group(2)}"
+                return m.group(1)
+        return None
+
+    def _extract_setting(self, text: str) -> Optional[str]:
+        """Extract study setting from text."""
+        for pattern in self.setting_re:
+            m = pattern.search(text)
+            if m:
+                return m.group(1).strip()
+        return None
+
+    def _normalize_epi_value(self, value: str, full_match: str) -> Optional[float]:
+        """Normalize epidemiology value to per-million."""
+        try:
+            # "1 in 10,000" -> 100 per million
+            match = re.search(r'([\d.,]+)\s*(?:in|per|/)\s*([\d,]+)', value)
+            if match:
+                num = float(match.group(1).replace(',', ''))
+                denom = float(match.group(2).replace(',', ''))
+                if denom > 0:
+                    return (num / denom) * 1_000_000
+
+            # "3.5%" -> 35,000 per million
+            if '%' in value:
+                pct_match = re.search(r'([\d.,]+)', value)
+                if pct_match:
+                    pct = float(pct_match.group(1).replace(',', ''))
+                    return pct * 10_000
+
+        except (ValueError, ZeroDivisionError):
+            pass
+        return None
+
+    # =========================================================================
+    # PATIENT JOURNEY EXTRACTION (with burden metrics)
+    # =========================================================================
 
     def _extract_patient_journey(
         self,
@@ -609,7 +818,7 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract patient journey phase information."""
+        """Extract patient journey phase information with burden metrics."""
         candidates = []
         text_lower = text.lower()
 
@@ -621,11 +830,21 @@ class FeasibilityDetector:
                         continue
                     seen.add(dedup_key)
 
-                    # Try to extract duration
+                    # Extract duration
                     duration_match = DURATION_PATTERN.search(text)
                     duration = None
                     if duration_match:
                         duration = f"{duration_match.group(1)} {duration_match.group(2)}"
+
+                    # Extract burden metrics
+                    visits = self._extract_visit_count(text)
+                    visit_frequency = self._extract_visit_frequency(text)
+                    procedures = self._extract_procedures(text)
+                    inpatient_days = self._extract_inpatient_days(text)
+
+                    features = self._calculate_confidence_features(
+                        FeasibilityFieldType.PATIENT_JOURNEY_PHASE, section, text, keyword
+                    )
 
                     candidate = self._make_candidate(
                         doc_id=doc_id,
@@ -635,17 +854,69 @@ class FeasibilityDetector:
                         field_type=FeasibilityFieldType.PATIENT_JOURNEY_PHASE,
                         page_num=page_num,
                         section=section,
-                        confidence=0.6,
+                        confidence=features.total(),
+                        confidence_features=features.to_dict(),
                     )
                     candidate.patient_journey_phase = PatientJourneyPhase(
                         phase_type=phase_type,
                         description=text[:200],
                         duration=duration,
+                        visits=visits,
+                        visit_frequency=visit_frequency,
+                        procedures=procedures,
+                        inpatient_days=inpatient_days,
                     )
                     candidates.append(candidate)
-                    break  # Only one match per phase type per block
+                    break
 
         return candidates
+
+    def _extract_visit_count(self, text: str) -> Optional[int]:
+        """Extract number of visits from text."""
+        for pattern in self.visit_re:
+            m = pattern.search(text)  # Pattern already compiled with IGNORECASE
+            if m and m.group(1):
+                try:
+                    return int(m.group(1))
+                except ValueError:
+                    pass
+        return None
+
+    def _extract_visit_frequency(self, text: str) -> Optional[str]:
+        """Extract visit frequency (e.g., 'every 4 weeks')."""
+        m = re.search(r'every\s*(\d+)\s*(weeks?|months?|days?)', text, re.IGNORECASE)
+        if m:
+            return f"every {m.group(1)} {m.group(2)}"
+
+        for freq in ["weekly", "bi-weekly", "biweekly", "monthly", "quarterly"]:
+            if freq in text.lower():
+                return freq
+        return None
+
+    def _extract_procedures(self, text: str) -> List[str]:
+        """Extract procedure/assessment names."""
+        procedures = []
+        matches = self.procedure_re.findall(text)
+        procedures.extend(matches)
+        return list(set(procedures))
+
+    def _extract_inpatient_days(self, text: str) -> Optional[int]:
+        """Extract inpatient/hospitalization requirement."""
+        for pattern in self.inpatient_re:
+            m = pattern.search(text)  # Pattern already compiled with IGNORECASE
+            if m and m.lastindex:
+                try:
+                    return int(m.group(1))
+                except ValueError:
+                    pass
+        # Check for overnight stay
+        if re.search(r'overnight|24[\s-]?hour', text, re.IGNORECASE):
+            return 1
+        return None
+
+    # =========================================================================
+    # ENDPOINT EXTRACTION (with better boundaries)
+    # =========================================================================
 
     def _extract_endpoints(
         self,
@@ -656,25 +927,26 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract study endpoint information."""
+        """Extract study endpoint information with proper boundaries."""
         candidates = []
 
         for endpoint_type, patterns in self.endpoint_re.items():
             for pattern in patterns:
                 match = pattern.search(text)
                 if match:
-                    # Try to extract the actual endpoint text after the marker
-                    endpoint_text = text[match.end():].strip()
-                    # Take first sentence or up to 200 chars
-                    endpoint_text = re.split(r'[.;]', endpoint_text)[0][:200].strip()
+                    endpoint_text = self._extract_endpoint_bounded(text, match)
 
                     if len(endpoint_text) < 10:
-                        endpoint_text = text[match.start():match.start() + 200]
+                        continue
 
                     dedup_key = f"endpoint:{endpoint_type.value}:{endpoint_text[:30].lower()}"
                     if dedup_key in seen:
                         continue
                     seen.add(dedup_key)
+
+                    features = self._calculate_confidence_features(
+                        FeasibilityFieldType.STUDY_ENDPOINT, section, text, endpoint_text
+                    )
 
                     candidate = self._make_candidate(
                         doc_id=doc_id,
@@ -684,7 +956,8 @@ class FeasibilityDetector:
                         field_type=FeasibilityFieldType.STUDY_ENDPOINT,
                         page_num=page_num,
                         section=section,
-                        confidence=0.7,
+                        confidence=features.total(),
+                        confidence_features=features.to_dict(),
                     )
                     candidate.study_endpoint = StudyEndpoint(
                         endpoint_type=endpoint_type,
@@ -693,6 +966,36 @@ class FeasibilityDetector:
                     candidates.append(candidate)
 
         return candidates
+
+    def _extract_endpoint_bounded(self, text: str, match: re.Match) -> str:
+        """Extract endpoint with proper boundary detection."""
+        start = match.end()
+        remaining = text[start:].strip()
+
+        # Strategy 1: If followed by colon, take content until section break
+        if remaining.startswith(':'):
+            end_patterns = [r'\n\s*\n', r'\n[A-Z][a-z]+\s*(?:endpoint|outcome)']
+            for pat in end_patterns:
+                m = re.search(pat, remaining)
+                if m:
+                    return remaining[1:m.start()].strip()[:500]
+
+        # Strategy 2: Take first complete sentence
+        sentence_end = re.search(r'(?<=[.!?])\s+(?=[A-Z])', remaining)
+        if sentence_end and sentence_end.start() < 300:
+            return remaining[:sentence_end.start()].strip()
+
+        # Strategy 3: Stop at list boundary
+        list_boundary = re.search(r'\n\s*(?:[•\-\d]\.?\s)', remaining)
+        if list_boundary and list_boundary.start() > 20:
+            return remaining[:list_boundary.start()].strip()
+
+        # Fallback: first 200 chars to period
+        return re.split(r'[.;]', remaining)[0][:200].strip()
+
+    # =========================================================================
+    # SITE EXTRACTION (with disambiguation)
+    # =========================================================================
 
     def _extract_sites(
         self,
@@ -703,28 +1006,44 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract site/country information."""
+        """Extract site/country information with disambiguation."""
         candidates = []
         text_lower = text.lower()
 
-        # Check for country mentions
+        # Check if ANY site context cue exists
+        has_site_context = any(cue in text_lower for cue in COUNTRY_CONTEXT_CUES)
+        if not has_site_context:
+            return []
+
         found_countries = []
         for country in COUNTRIES:
-            if country in text_lower:
-                found_countries.append(country)
+            if country not in text_lower:
+                continue
+
+            # Extra validation for ambiguous countries
+            if country in AMBIGUOUS_COUNTRIES:
+                if not self._validate_country_context(text_lower, country):
+                    continue
+
+            found_countries.append(country)
 
         if found_countries:
             dedup_key = f"sites:{','.join(sorted(found_countries)[:3])}"
             if dedup_key not in seen:
                 seen.add(dedup_key)
 
-                # Try to extract site count
                 site_count_match = re.search(
                     r"(\d+)\s*(?:sites?|centers?|countries)", text_lower
                 )
                 site_count = int(site_count_match.group(1)) if site_count_match else None
 
-                for country in found_countries[:5]:  # Limit to top 5
+                for country in found_countries[:5]:
+                    features = self._calculate_confidence_features(
+                        FeasibilityFieldType.STUDY_SITE, section, text, country
+                    )
+                    # Boost confidence for validated countries
+                    features.pattern_strength = 0.2
+
                     candidate = self._make_candidate(
                         doc_id=doc_id,
                         doc_fingerprint=doc_fingerprint,
@@ -733,15 +1052,67 @@ class FeasibilityDetector:
                         field_type=FeasibilityFieldType.STUDY_SITE,
                         page_num=page_num,
                         section=section,
-                        confidence=0.6,
+                        confidence=features.total(),
+                        confidence_features=features.to_dict(),
                     )
                     candidate.study_site = StudySite(
                         country=country.title(),
+                        country_code=COUNTRY_CODES.get(country),
                         site_count=site_count,
+                        validation_context="site_context_cue_present",
                     )
                     candidates.append(candidate)
 
         return candidates
+
+    def _validate_country_context(self, text: str, country: str) -> bool:
+        """Validate ambiguous country with surrounding context."""
+        idx = text.find(country)
+        if idx == -1:
+            return False
+
+        window_start = max(0, idx - 50)
+        window_end = min(len(text), idx + len(country) + 50)
+        window = text[window_start:window_end]
+
+        # Negative signals (likely a name or US state)
+        if re.search(rf"(?:dr\.?|mr\.?|ms\.?|prof\.?)\s*{country}", window):
+            return False
+        if re.search(rf"{country}\s*(?:,\s*)?(?:usa?|america|u\.s\.)", window):
+            return False  # US state like "Georgia, USA"
+
+        # Positive signals
+        return any(cue in window for cue in COUNTRY_CONTEXT_CUES)
+
+    # =========================================================================
+    # CONFIDENCE CALCULATION (P2)
+    # =========================================================================
+
+    def _calculate_confidence_features(
+        self,
+        field_type: FeasibilityFieldType,
+        section: str,
+        text: str,
+        match_text: str,
+    ) -> ConfidenceFeatures:
+        """Calculate feature-based confidence score using shared ConfidenceCalculator."""
+        features = ConfidenceFeatures()
+
+        # Section match bonus using expected sections for this field type
+        expected = EXPECTED_SECTIONS.get(field_type, [])
+        features.apply_section_bonus(section, expected)
+
+        # Speculation check using shared utility
+        features.apply_speculation_check(text)
+
+        # Pattern strength (default moderate)
+        features.pattern_strength = 0.1
+
+        return features
+
+    # =========================================================================
+    # HELPERS
+    # =========================================================================
 
     def _make_candidate(
         self,
@@ -753,6 +1124,7 @@ class FeasibilityDetector:
         page_num: Optional[int],
         section: str,
         confidence: float,
+        confidence_features: Optional[Dict[str, float]] = None,
     ) -> FeasibilityCandidate:
         """Create a FeasibilityCandidate with provenance."""
         provenance = FeasibilityProvenanceMetadata(
@@ -771,6 +1143,7 @@ class FeasibilityDetector:
             page_number=page_num,
             section_name=section,
             confidence=confidence,
+            confidence_features=confidence_features,
             provenance=provenance,
         )
 

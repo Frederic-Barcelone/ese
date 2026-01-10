@@ -31,6 +31,9 @@ from A_core.A06_drug_models import (
     DrugProvenanceMetadata,
 )
 from B_parsing.B01_pdf_to_docgraph import DocumentGraph
+from B_parsing.B05_section_detector import SectionDetector
+from B_parsing.B06_confidence import ConfidenceFeatures, ConfidenceCalculator
+from B_parsing.B07_negation import NegationDetector, classify_assertion, AssertionType
 
 # Optional scispacy import
 try:
@@ -412,6 +415,11 @@ class DrugDetector:
 
         # Context window for evidence extraction
         self.context_window = int(self.config.get("context_window", 300))
+
+        # Shared parsing utilities from B_parsing
+        self.section_detector = SectionDetector()
+        self.negation_detector = NegationDetector()
+        self.confidence_calculator = ConfidenceCalculator()
 
         # Lexicon base path
         self.lexicon_base_path = Path(

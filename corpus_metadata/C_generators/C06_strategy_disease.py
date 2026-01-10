@@ -34,6 +34,9 @@ from A_core.A05_disease_models import (
     DiseaseProvenanceMetadata,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
+from B_parsing.B05_section_detector import SectionDetector
+from B_parsing.B06_confidence import ConfidenceFeatures, ConfidenceCalculator
+from B_parsing.B07_negation import NegationDetector, classify_assertion, AssertionType
 
 # scispacy for biomedical NER
 try:
@@ -402,6 +405,11 @@ class DiseaseDetector:
 
         # Context window for snippets
         self.context_window = int(self.config.get("context_window", 300))
+
+        # Shared parsing utilities from B_parsing
+        self.section_detector = SectionDetector()
+        self.negation_detector = NegationDetector()
+        self.confidence_calculator = ConfidenceCalculator()
 
         # FP filter
         self.fp_filter = DiseaseFalsePositiveFilter()
