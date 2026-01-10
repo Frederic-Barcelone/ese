@@ -113,7 +113,9 @@ from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
 from C_generators.C08_strategy_feasibility import FeasibilityDetector
+from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument
+from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
@@ -580,6 +582,25 @@ class Orchestrator:
             )
         else:
             self.feasibility_detector = None
+
+        # Document metadata extraction
+        doc_metadata_cfg = self.config.get("document_metadata", {})
+        self.enable_doc_metadata = doc_metadata_cfg.get("enabled", True)
+
+        if self.enable_doc_metadata:
+            doc_types_path = doc_metadata_cfg.get(
+                "document_types_path",
+                str(dict_path / "2025_08_document_types.json")
+            )
+            self.doc_metadata_strategy = DocumentMetadataStrategy(
+                document_types_path=doc_types_path if Path(doc_types_path).exists() else None,
+                llm_client=self.claude_client,
+                llm_model=self.model,
+                run_id=self.run_id,
+                pipeline_version=PIPELINE_VERSION,
+            )
+        else:
+            self.doc_metadata_strategy = None
 
         # Load rare disease acronyms for fallback lookup (SF→LF when LLM has no expansion)
         self.rare_disease_lookup: Dict[str, str] = {}
@@ -1551,6 +1572,13 @@ Return ONLY the JSON array, nothing else."""
         if self.enable_feasibility and self.feasibility_detector is not None:
             feasibility_results = self._process_feasibility(doc, pdf_path_obj)
 
+        # Document metadata extraction (runs early, uses LLM for classification)
+        doc_metadata: Optional[DocumentMetadata] = None
+        if self.enable_doc_metadata and self.doc_metadata_strategy is not None:
+            doc_metadata = self._process_document_metadata(
+                doc, pdf_path_obj, full_text[:5000]
+            )
+
         # Stage 4: Summary & Export
         print("\n[4/4] Writing summary...")
         self.logger.write_summary()
@@ -1574,6 +1602,10 @@ Return ONLY the JSON array, nothing else."""
         # Export feasibility results
         if feasibility_results:
             self._export_feasibility_results(pdf_path_obj, feasibility_results)
+
+        # Export document metadata
+        if doc_metadata:
+            self._export_document_metadata(pdf_path_obj, doc_metadata)
 
         # Print validated
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -1618,6 +1650,18 @@ Return ONLY the JSON array, nothing else."""
                 by_type.setdefault(key, []).append(f)
             for ftype, items in sorted(by_type.items()):
                 print(f"  {ftype}: {len(items)} items")
+
+        # Print document metadata summary
+        if doc_metadata:
+            print("\nDocument metadata:")
+            if doc_metadata.classification:
+                cls = doc_metadata.classification.primary_type
+                print(f"  Type: {cls.code} - {cls.name} (conf: {cls.confidence:.2f})")
+            if doc_metadata.description:
+                print(f"  Title: {doc_metadata.description.title}")
+            if doc_metadata.date_extraction and doc_metadata.date_extraction.primary_date:
+                pd = doc_metadata.date_extraction.primary_date
+                print(f"  Date: {pd.date.strftime('%Y-%m-%d')} (source: {pd.source.value})")
 
         return results
 
@@ -2107,6 +2151,108 @@ Return ONLY the JSON array, nothing else."""
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Feasibility export: {out_file.name}")
+
+    # =========================================================================
+    # DOCUMENT METADATA METHODS
+    # =========================================================================
+
+    def _process_document_metadata(
+        self, doc, pdf_path: Path, content_sample: str
+    ) -> Optional[DocumentMetadata]:
+        """
+        Extract document metadata including classification and descriptions.
+
+        Returns DocumentMetadata with file info, PDF metadata, classification, etc.
+        """
+        if self.doc_metadata_strategy is None:
+            return None
+
+        print("\n[3e/4] Extracting document metadata...")
+        start = time.time()
+
+        try:
+            metadata = self.doc_metadata_strategy.extract(
+                file_path=str(pdf_path),
+                doc_graph=doc,
+                doc_id=pdf_path.stem,
+                content_sample=content_sample,
+            )
+
+            elapsed = time.time() - start
+            print(f"  Time: {elapsed:.2f}s")
+
+            return metadata
+        except Exception as e:
+            print(f"  [WARN] Document metadata extraction failed: {e}")
+            return None
+
+    def _export_document_metadata(
+        self, pdf_path: Path, metadata: DocumentMetadata
+    ) -> None:
+        """Export document metadata to JSON file."""
+        out_dir = self.output_dir or pdf_path.parent
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Build simplified export
+        export = DocumentMetadataExport(
+            doc_id=metadata.doc_id,
+            doc_filename=metadata.doc_filename,
+            file_size_bytes=metadata.file_metadata.size_bytes if metadata.file_metadata else None,
+            file_size_human=metadata.file_metadata.size_human if metadata.file_metadata else None,
+            file_extension=metadata.file_metadata.extension if metadata.file_metadata else None,
+            pdf_title=metadata.pdf_metadata.title if metadata.pdf_metadata else None,
+            pdf_author=metadata.pdf_metadata.author if metadata.pdf_metadata else None,
+            pdf_page_count=metadata.pdf_metadata.page_count if metadata.pdf_metadata else None,
+            pdf_creation_date=(
+                metadata.pdf_metadata.creation_date.isoformat()
+                if metadata.pdf_metadata and metadata.pdf_metadata.creation_date
+                else None
+            ),
+            document_type_code=(
+                metadata.classification.primary_type.code
+                if metadata.classification
+                else None
+            ),
+            document_type_name=(
+                metadata.classification.primary_type.name
+                if metadata.classification
+                else None
+            ),
+            document_type_group=(
+                metadata.classification.primary_type.group
+                if metadata.classification
+                else None
+            ),
+            classification_confidence=(
+                metadata.classification.primary_type.confidence
+                if metadata.classification
+                else None
+            ),
+            title=metadata.description.title if metadata.description else None,
+            short_description=(
+                metadata.description.short_description if metadata.description else None
+            ),
+            long_description=(
+                metadata.description.long_description if metadata.description else None
+            ),
+            document_date=(
+                metadata.date_extraction.primary_date.date.isoformat()
+                if metadata.date_extraction and metadata.date_extraction.primary_date
+                else None
+            ),
+            document_date_source=(
+                metadata.date_extraction.primary_date.source.value
+                if metadata.date_extraction and metadata.date_extraction.primary_date
+                else None
+            ),
+        )
+
+        # Write to file
+        out_file = out_dir / f"metadata_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export.model_dump_json(indent=2))
+
+        print(f"  Document metadata export: {out_file.name}")
 
     # =========================================================================
     # EXPORT METHODS
