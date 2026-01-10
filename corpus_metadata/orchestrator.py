@@ -70,6 +70,9 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
+# Print startup message before slow imports (scispacy takes ~30s to load)
+print("Starting pipeline... (loading NLP models, this may take a moment)")
+
 from A_core.A01_domain_models import (
     Candidate,
     Coordinate,
@@ -109,6 +112,8 @@ from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
 from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
+from C_generators.C08_strategy_feasibility import FeasibilityDetector
+from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
 from E_normalization.E01_term_mapper import TermMapper
@@ -557,6 +562,25 @@ class Orchestrator:
             self.drug_detector = None
             self.drug_enricher = None
 
+        # Feasibility detection components
+        feasibility_cfg = self.config.get("feasibility_extraction", {})
+        self.enable_feasibility = feasibility_cfg.get("enabled", True)
+
+        if self.enable_feasibility:
+            self.feasibility_detector = FeasibilityDetector(
+                config={
+                    "run_id": self.run_id,
+                    "enable_eligibility": feasibility_cfg.get("enable_eligibility", True),
+                    "enable_epidemiology": feasibility_cfg.get("enable_epidemiology", True),
+                    "enable_patient_journey": feasibility_cfg.get("enable_patient_journey", True),
+                    "enable_endpoints": feasibility_cfg.get("enable_endpoints", True),
+                    "enable_sites": feasibility_cfg.get("enable_sites", True),
+                    "context_window": feasibility_cfg.get("context_window", 300),
+                }
+            )
+        else:
+            self.feasibility_detector = None
+
         # Load rare disease acronyms for fallback lookup (SF→LF when LLM has no expansion)
         self.rare_disease_lookup: Dict[str, str] = {}
         rare_disease_path = dict_path / lexicons.get(
@@ -598,16 +622,15 @@ class Orchestrator:
         ] = []  # (name, count, filename, category)
         seen_files: set = set()
 
-        # From C04 (abbreviation generator) - skip disease lexicons (handled by C06)
+        # From C04 (abbreviation generator) - skip specialized disease lexicons (handled by C06)
         for gen in self.generators:
             if hasattr(gen, "_lexicon_stats"):
                 for name, count, filename in gen._lexicon_stats:
-                    # Skip disease lexicons from C04 - they're handled by C06
+                    # Skip specialized disease lexicons from C04 - they're handled by C06
                     if name in (
                         "ANCA disease",
                         "IgAN disease",
                         "PAH disease",
-                        "Rare disease acronyms",
                     ):
                         continue
                     # Categorize based on name
@@ -618,7 +641,9 @@ class Orchestrator:
                         "UMLS clinical",
                     ):
                         cat = "Abbreviation"
-                    elif name in ("Trial acronyms", "PRO scales"):
+                    elif name == "Rare disease acronyms":
+                        cat = "Disease"
+                    elif name in ("Trial acronyms", "PRO scales", "Pharma companies"):
                         cat = "Other"
                     else:
                         cat = "Other"
@@ -629,17 +654,21 @@ class Orchestrator:
         # From C07 (drug detector) - add Drug category first for display order
         if self.drug_detector and hasattr(self.drug_detector, "_lexicon_stats"):
             for name, count, filename in self.drug_detector._lexicon_stats:
-                if filename not in seen_files:
+                # Use category-prefixed key to allow scispacy in multiple categories
+                key = f"Drug:{filename}"
+                if key not in seen_files:
                     all_stats.append((name, count, filename, "Drug"))
-                    seen_files.add(filename)
+                    seen_files.add(key)
 
         # From C06 (disease detector)
         if self.disease_detector and hasattr(self.disease_detector, "_lexicon_stats"):
             for name, count, filename in self.disease_detector._lexicon_stats:
                 display_name = name.replace("Specialized ", "")
-                if filename not in seen_files:
+                # Use category-prefixed key to allow scispacy in multiple categories
+                key = f"Disease:{filename}"
+                if key not in seen_files:
                     all_stats.append((display_name, count, filename, "Disease"))
-                    seen_files.add(filename)
+                    seen_files.add(key)
 
         if not all_stats:
             return
@@ -1517,13 +1546,22 @@ Return ONLY the JSON array, nothing else."""
         if self.enable_drug_detection and self.drug_detector is not None:
             drug_results = self._process_drugs(doc, pdf_path_obj)
 
+        # Feasibility extraction (parallel pipeline)
+        feasibility_results: List[FeasibilityCandidate] = []
+        if self.enable_feasibility and self.feasibility_detector is not None:
+            feasibility_results = self._process_feasibility(doc, pdf_path_obj)
+
         # Stage 4: Summary & Export
         print("\n[4/4] Writing summary...")
         self.logger.write_summary()
         self.logger.print_summary()
         counters.log_summary()
 
-        self._export_results(pdf_path_obj, results, unique_candidates, counters)
+        self._export_results(
+            pdf_path_obj, results, unique_candidates, counters,
+            disease_results=disease_results if disease_results else None,
+            drug_results=drug_results if drug_results else None,
+        )
 
         # Export disease results
         if disease_results:
@@ -1532,6 +1570,10 @@ Return ONLY the JSON array, nothing else."""
         # Export drug results
         if drug_results:
             self._export_drug_results(pdf_path_obj, drug_results)
+
+        # Export feasibility results
+        if feasibility_results:
+            self._export_feasibility_results(pdf_path_obj, feasibility_results)
 
         # Print validated
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -1546,7 +1588,7 @@ Return ONLY the JSON array, nothing else."""
         ]
         if validated_diseases:
             print(f"\nValidated diseases ({len(validated_diseases)}):")
-            for d in validated_diseases[:10]:  # Show first 10
+            for d in validated_diseases:
                 codes = []
                 if d.icd10_code:
                     codes.append(f"ICD-10:{d.icd10_code}")
@@ -1554,8 +1596,6 @@ Return ONLY the JSON array, nothing else."""
                     codes.append(f"ORPHA:{d.orpha_code}")
                 code_str = f" [{', '.join(codes)}]" if codes else ""
                 print(f"  * {d.preferred_label}{code_str}")
-            if len(validated_diseases) > 10:
-                print(f"  ... and {len(validated_diseases) - 10} more")
 
         # Print validated drugs
         validated_drugs = [
@@ -1563,12 +1603,21 @@ Return ONLY the JSON array, nothing else."""
         ]
         if validated_drugs:
             print(f"\nValidated drugs ({len(validated_drugs)}):")
-            for d in validated_drugs[:10]:  # Show first 10
+            for d in validated_drugs:
                 phase = f" ({d.development_phase})" if d.development_phase else ""
                 compound = f" [{d.compound_id}]" if d.compound_id else ""
                 print(f"  * {d.preferred_name}{compound}{phase}")
-            if len(validated_drugs) > 10:
-                print(f"  ... and {len(validated_drugs) - 10} more")
+
+        # Print feasibility summary
+        if feasibility_results:
+            print(f"\nFeasibility information ({len(feasibility_results)} items):")
+            # Group by type
+            by_type: Dict[str, List[FeasibilityCandidate]] = {}
+            for f in feasibility_results:
+                key = f.field_type.value.split("_")[0]  # Get main category
+                by_type.setdefault(key, []).append(f)
+            for ftype, items in sorted(by_type.items()):
+                print(f"  {ftype}: {len(items)} items")
 
         return results
 
@@ -1944,6 +1993,122 @@ Return ONLY the JSON array, nothing else."""
         print(f"  Drug export: {out_file.name}")
 
     # =========================================================================
+    # FEASIBILITY EXTRACTION METHODS
+    # =========================================================================
+
+    def _process_feasibility(
+        self, doc, pdf_path: Path
+    ) -> List[FeasibilityCandidate]:
+        """
+        Process document for clinical trial feasibility information.
+
+        Returns feasibility candidates (eligibility, epidemiology, patient journey, etc.)
+        """
+        if self.feasibility_detector is None:
+            return []
+
+        print("\n[3d/4] Extracting feasibility information...")
+        start = time.time()
+
+        # Extract feasibility candidates
+        candidates = self.feasibility_detector.extract(doc)
+        print(f"  Feasibility items: {len(candidates)}")
+
+        # Print summary by type
+        self.feasibility_detector.print_summary()
+
+        print(f"  Time: {time.time() - start:.2f}s")
+
+        return candidates
+
+    def _export_feasibility_results(
+        self, pdf_path: Path, results: List[FeasibilityCandidate]
+    ) -> None:
+        """Export feasibility extraction results to JSON file."""
+        out_dir = self.output_dir or pdf_path.parent
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Group by field type
+        from A_core.A07_feasibility_models import FeasibilityExportEntry, FeasibilityExportDocument
+
+        eligibility_inclusion = []
+        eligibility_exclusion = []
+        epidemiology = []
+        patient_journey = []
+        endpoints = []
+        sites = []
+
+        for r in results:
+            entry = FeasibilityExportEntry(
+                field_type=r.field_type.value,
+                text=r.matched_text,
+                section=r.section_name,
+                structured_data=None,
+                confidence=r.confidence,
+            )
+
+            # Add structured data based on type
+            if r.eligibility_criterion:
+                entry.structured_data = {
+                    "type": r.eligibility_criterion.criterion_type.value,
+                    "category": r.eligibility_criterion.category,
+                }
+            elif r.epidemiology_data:
+                entry.structured_data = {
+                    "data_type": r.epidemiology_data.data_type,
+                    "value": r.epidemiology_data.value,
+                    "population": r.epidemiology_data.population,
+                }
+            elif r.patient_journey_phase:
+                entry.structured_data = {
+                    "phase": r.patient_journey_phase.phase_type.value,
+                    "duration": r.patient_journey_phase.duration,
+                }
+            elif r.study_endpoint:
+                entry.structured_data = {
+                    "type": r.study_endpoint.endpoint_type.value,
+                    "name": r.study_endpoint.name,
+                }
+            elif r.study_site:
+                entry.structured_data = {
+                    "country": r.study_site.country,
+                    "site_count": r.study_site.site_count,
+                }
+
+            # Categorize
+            if "ELIGIBILITY_INCLUSION" in r.field_type.value:
+                eligibility_inclusion.append(entry)
+            elif "ELIGIBILITY_EXCLUSION" in r.field_type.value:
+                eligibility_exclusion.append(entry)
+            elif "EPIDEMIOLOGY" in r.field_type.value:
+                epidemiology.append(entry)
+            elif "PATIENT_JOURNEY" in r.field_type.value:
+                patient_journey.append(entry)
+            elif "ENDPOINT" in r.field_type.value:
+                endpoints.append(entry)
+            elif "SITE" in r.field_type.value:
+                sites.append(entry)
+
+        # Build export document
+        export_doc = FeasibilityExportDocument(
+            doc_id=pdf_path.stem,
+            doc_filename=pdf_path.name,
+            eligibility_inclusion=eligibility_inclusion,
+            eligibility_exclusion=eligibility_exclusion,
+            epidemiology=epidemiology,
+            patient_journey=patient_journey,
+            endpoints=endpoints,
+            sites=sites,
+        )
+
+        # Write to file
+        out_file = out_dir / f"feasibility_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export_doc.model_dump_json(indent=2))
+
+        print(f"  Feasibility export: {out_file.name}")
+
+    # =========================================================================
     # EXPORT METHODS
     # =========================================================================
 
@@ -1980,6 +2145,8 @@ Return ONLY the JSON array, nothing else."""
         results: List[ExtractedEntity],
         candidates: List[Candidate],
         counters: Optional[HeuristicsCounters] = None,
+        disease_results: Optional[List[ExtractedDisease]] = None,
+        drug_results: Optional[List[ExtractedDrug]] = None,
     ) -> None:
         """Export results to JSON."""
         out_dir = self.output_dir or pdf_path.parent
@@ -2002,6 +2169,8 @@ Return ONLY the JSON array, nothing else."""
             ),
             "heuristics_counters": counters.to_dict() if counters else None,
             "abbreviations": [],
+            "diseases": [],
+            "drugs": [],
         }
 
         for entity in results:
@@ -2029,6 +2198,37 @@ Return ONLY the JSON array, nothing else."""
                         "lexicon_ids": lexicon_ids,
                     }
                 )
+
+        # Add diseases to export
+        if disease_results:
+            for disease in disease_results:
+                if disease.status == ValidationStatus.VALIDATED:
+                    export_data["diseases"].append(
+                        {
+                            "name": disease.preferred_label,
+                            "matched_text": disease.matched_text,
+                            "abbreviation": disease.abbreviation,
+                            "confidence": disease.confidence_score,
+                            "is_rare": disease.is_rare_disease,
+                            "icd10": disease.icd10_code,
+                            "orpha": disease.orpha_code,
+                        }
+                    )
+
+        # Add drugs to export
+        if drug_results:
+            for drug in drug_results:
+                if drug.status == ValidationStatus.VALIDATED:
+                    export_data["drugs"].append(
+                        {
+                            "name": drug.preferred_name,
+                            "matched_text": drug.matched_text,
+                            "compound_id": drug.compound_id,
+                            "confidence": drug.confidence_score,
+                            "is_investigational": drug.is_investigational,
+                            "phase": drug.development_phase,
+                        }
+                    )
 
         out_file = out_dir / f"abbreviations_{pdf_path.stem}_{timestamp}.json"
         with open(out_file, "w", encoding="utf-8") as f:
@@ -2085,6 +2285,7 @@ Return ONLY the JSON array, nothing else."""
 def main():
     """Process all PDFs in the default folder."""
     Orchestrator().process_folder()
+    print("\nPipeline finished.")
 
 
 if __name__ == "__main__":

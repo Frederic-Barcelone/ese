@@ -8,7 +8,9 @@
     "total_original": 156,
     "defined": 62,
     "mentioned": 83,
-    "excluded": 11
+    "excluded": 11,
+    "defined_diseases": 12,
+    "defined_drugs": 10
   },
   "defined_annotations": [
     {
@@ -3026,6 +3028,176 @@
       "occurrences": 1,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
+    }
+  ],
+  "defined_diseases": [
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "C3 glomerulopathy",
+      "abbreviation": "C3G",
+      "is_rare": true,
+      "orpha": "329918",
+      "icd10": null
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "dense deposit disease",
+      "abbreviation": "DDD",
+      "is_rare": true,
+      "orpha": "329918",
+      "icd10": null
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "C3 glomerulonephritis",
+      "abbreviation": "C3GN",
+      "is_rare": true,
+      "orpha": "329918",
+      "icd10": null
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "membranoproliferative glomerulonephritis",
+      "abbreviation": "MPGN",
+      "is_rare": false,
+      "orpha": null,
+      "icd10": "N05"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "immune complex membranoproliferative glomerulonephritis",
+      "abbreviation": "IC-MPGN",
+      "is_rare": false,
+      "orpha": null,
+      "icd10": "N05"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "chronic kidney disease",
+      "abbreviation": "CKD",
+      "is_rare": false,
+      "orpha": null,
+      "icd10": "N18"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "IgA nephropathy",
+      "abbreviation": "IgAN",
+      "is_rare": true,
+      "orpha": "34145",
+      "icd10": "N02"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "paroxysmal nocturnal hemoglobinuria",
+      "abbreviation": "PNH",
+      "is_rare": true,
+      "orpha": "447",
+      "icd10": "D59.5"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "ANCA-associated vasculitis",
+      "abbreviation": "AAV",
+      "is_rare": true,
+      "orpha": "156152",
+      "icd10": "M31"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "granulomatosis with polyangiitis",
+      "abbreviation": "GPA",
+      "is_rare": true,
+      "orpha": "900",
+      "icd10": "M31.3"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "microscopic polyangiitis",
+      "abbreviation": "MPA",
+      "is_rare": true,
+      "orpha": "727",
+      "icd10": "M31.7"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "eosinophilic granulomatosis with polyangiitis",
+      "abbreviation": "EGPA",
+      "is_rare": true,
+      "orpha": "183",
+      "icd10": "M30.1"
+    }
+  ],
+  "defined_drugs": [
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "iptacopan",
+      "compound_id": "LNP023",
+      "is_investigational": true,
+      "mechanism": "factor B inhibitor"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "eculizumab",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "C5 inhibitor"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "pegcetacoplan",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "C3 inhibitor"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "mycophenolate",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "immunosuppressant"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "name": "corticosteroids",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "anti-inflammatory"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "rituximab",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "anti-CD20 monoclonal antibody"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "cyclophosphamide",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "alkylating agent"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "azathioprine",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "immunosuppressant"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "methotrexate",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "antimetabolite"
+    },
+    {
+      "doc_id": "02_Article_AAV Management Guidelines.pdf",
+      "name": "avacopan",
+      "compound_id": null,
+      "is_investigational": false,
+      "mechanism": "C5a receptor antagonist"
     }
   ]
 }

@@ -47,6 +47,16 @@ class ExtractionAnalyzer:
             for g in gold_data.get("mentioned", [])
             if self._match_doc_id(g.get("doc_id", ""), doc_name)
         ]
+        gold_diseases = [
+            g
+            for g in gold_data.get("diseases", [])
+            if self._match_doc_id(g.get("doc_id", ""), doc_name)
+        ]
+        gold_drugs = [
+            g
+            for g in gold_data.get("drugs", [])
+            if self._match_doc_id(g.get("doc_id", ""), doc_name)
+        ]
 
         # Get system extractions
         validated = results_data.get("abbreviations", [])
@@ -60,6 +70,8 @@ class ExtractionAnalyzer:
             comparison=comparison,
             gold_defined=gold_defined,
             gold_mentioned=gold_mentioned,
+            gold_diseases=gold_diseases,
+            gold_drugs=gold_drugs,
             validated=validated,
             results_data=results_data,
         )
@@ -73,7 +85,7 @@ class ExtractionAnalyzer:
         """Load gold standard file (supports multiple formats)."""
         gold_path = Path(path)
         if not gold_path.exists():
-            return {"defined": [], "mentioned": [], "excluded": []}
+            return {"defined": [], "mentioned": [], "excluded": [], "diseases": [], "drugs": []}
 
         with open(gold_path, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -83,16 +95,20 @@ class ExtractionAnalyzer:
                 "defined": data.get("defined_annotations", []),
                 "mentioned": data.get("mentioned_annotations", []),
                 "excluded": data.get("excluded_annotations", []),
+                "diseases": data.get("defined_diseases", []),
+                "drugs": data.get("defined_drugs", []),
             }
         elif "annotations" in data:
             return {
                 "defined": data.get("annotations", []),
                 "mentioned": [],
                 "excluded": [],
+                "diseases": [],
+                "drugs": [],
             }
         elif isinstance(data, list):
-            return {"defined": data, "mentioned": [], "excluded": []}
-        return {"defined": [], "mentioned": [], "excluded": []}
+            return {"defined": data, "mentioned": [], "excluded": [], "diseases": [], "drugs": []}
+        return {"defined": [], "mentioned": [], "excluded": [], "diseases": [], "drugs": []}
 
     def _match_doc_id(self, gold_doc_id: str, target_doc: str) -> bool:
         """Check if document IDs match."""
@@ -270,6 +286,8 @@ class ExtractionAnalyzer:
         comparison: Dict[str, Any],
         gold_defined: List[Dict],
         gold_mentioned: List[Dict],
+        gold_diseases: List[Dict],
+        gold_drugs: List[Dict],
         validated: List[Dict],
         results_data: Dict[str, Any],
     ) -> None:
@@ -299,6 +317,10 @@ class ExtractionAnalyzer:
         recall = metrics["recall"]
         f1 = metrics["f1"]
 
+        # Get disease and drug counts
+        disease_count = len(results_data.get("diseases", []))
+        drug_count = len(results_data.get("drugs", []))
+
         print("\n┌─────────────────────────────────────────────────────────────────┐")
         print("│                        QUICK SUMMARY                            │")
         print("├─────────────────────────────────────────────────────────────────┤")
@@ -308,6 +330,10 @@ class ExtractionAnalyzer:
         print(
             f"│  Extracted:      {len(extracted_results):3} abbreviations found                        │"
         )
+        if disease_count > 0 or drug_count > 0:
+            print(
+                f"│  Diseases:       {disease_count:3}  |  Drugs: {drug_count:3}                            │"
+            )
         print("├─────────────────────────────────────────────────────────────────┤")
         print(
             f"│  ✓ Correct (TP):     {tp:3}    │  Precision: {precision:6.1%}                │"
@@ -333,8 +359,8 @@ class ExtractionAnalyzer:
             print("\n  (No gold standard entries for this document)")
         else:
             # Header
-            print(f"\n  {'Status':<8} {'Short Form':<15} {'Long Form':<45} {'Page':<5}")
-            print("  " + "─" * 75)
+            print(f"\n  {'Status':<8} {'Short Form':<15} {'Long Form':<55} {'Page':<5}")
+            print("  " + "─" * 85)
 
             # Sort: found first, then not found
             gold_sorted = sorted(
@@ -344,22 +370,21 @@ class ExtractionAnalyzer:
             for item in gold_sorted:
                 sf = item["short_form"]
                 lf = item["long_form"] or "(no definition)"
-                lf_display = (lf[:42] + "...") if len(lf) > 45 else lf
                 page = str(item["page"])
 
                 if item["found"]:
                     status = "  ✓ FOUND"
-                    print(f"  {status:<8} {sf:<15} {lf_display:<45} {page:<5}")
+                    print(f"  {status:<8} {sf:<15} {lf:<55} {page:<5}")
                 else:
                     status = "  ✗ MISS "
                     print(
-                        f"  \033[91m{status:<8} {sf:<15} {lf_display:<45} {page:<5}\033[0m"
+                        f"  \033[91m{status:<8} {sf:<15} {lf:<55} {page:<5}\033[0m"
                     )
 
             # Summary
             found_count = sum(1 for g in gold_results if g["found"])
             total_count = len(gold_results)
-            print("  " + "─" * 75)
+            print("  " + "─" * 85)
             print(
                 f"  TOTAL: {found_count}/{total_count} found ({found_count / total_count * 100:.0f}% recall)"
             )
@@ -377,25 +402,24 @@ class ExtractionAnalyzer:
             print("\n  (No abbreviations extracted)")
         else:
             # Header
-            print(f"\n  {'Status':<10} {'Short Form':<15} {'Extracted Long Form':<40}")
-            print("  " + "─" * 75)
+            print(f"\n  {'Status':<10} {'Short Form':<15} {'Extracted Long Form':<55}")
+            print("  " + "─" * 85)
 
             for item in extracted_results:
                 sf = item["short_form"]
                 lf = item["long_form"] or "(no expansion)"
-                lf_display = (lf[:37] + "...") if len(lf) > 40 else lf
 
                 if item["matches_gold"]:
                     status = "  ✓ MATCH "
-                    print(f"  {status:<10} {sf:<15} {lf_display:<40}")
+                    print(f"  {status:<10} {sf:<15} {lf:<55}")
                 else:
                     status = "  ○ EXTRA "
-                    print(f"  \033[93m{status:<10} {sf:<15} {lf_display:<40}\033[0m")
+                    print(f"  \033[93m{status:<10} {sf:<15} {lf:<55}\033[0m")
 
             # Summary
             match_count = sum(1 for e in extracted_results if e["matches_gold"])
             total_count = len(extracted_results)
-            print("  " + "─" * 75)
+            print("  " + "─" * 85)
             print(
                 f"  TOTAL: {match_count}/{total_count} match gold ({match_count / total_count * 100:.0f}% precision)"
             )
@@ -422,25 +446,141 @@ class ExtractionAnalyzer:
                     seen_mentioned.add(sf)
                     unique_mentioned.append(m)
 
-            print(f"\n  {'Status':<10} {'Short Form':<15} {'Expected Long Form':<40}")
-            print("  " + "─" * 75)
+            print(f"\n  {'Status':<10} {'Short Form':<15} {'Expected Long Form':<55}")
+            print("  " + "─" * 85)
 
             found_count = 0
             for m in sorted(unique_mentioned, key=lambda x: x.get("short_form", "")):
                 sf = self._norm_sf(m.get("short_form", ""))
                 lf = m.get("long_form", "(unknown)")
-                lf_display = (lf[:37] + "...") if len(lf) > 40 else lf
 
                 if sf in extracted_sfs:
-                    print(f"  {'  ✓ FOUND':<10} {sf:<15} {lf_display:<40}")
+                    print(f"  {'  ✓ FOUND':<10} {sf:<15} {lf:<55}")
                     found_count += 1
                 else:
                     print(
-                        f"  \033[90m{'  - MISS':<10} {sf:<15} {lf_display:<40}\033[0m"
+                        f"  \033[90m{'  - MISS':<10} {sf:<15} {lf:<55}\033[0m"
                     )
 
-            print("  " + "─" * 75)
+            print("  " + "─" * 85)
             print(f"  BONUS: {found_count}/{len(unique_mentioned)} found")
+
+        # =====================================================================
+        # SECTION 4: DISEASE & DRUG EXTRACTIONS (with gold standard eval)
+        # =====================================================================
+        diseases = results_data.get("diseases", [])
+        drugs = results_data.get("drugs", [])
+
+        if diseases or drugs or gold_diseases or gold_drugs:
+            print("\n")
+            print("━" * 80)
+            print(" SECTION 4: ENTITY EXTRACTIONS BY TYPE ")
+            print(" (Diseases and Drugs detected vs gold standard)")
+            print("━" * 80)
+
+            # Build extracted name sets for matching
+            extracted_disease_names = {d.get("name", "").lower() for d in diseases}
+            extracted_drug_names = {d.get("name", "").lower() for d in drugs}
+
+            # === DISEASES ===
+            if gold_diseases:
+                # Evaluate against gold standard
+                disease_tp = 0
+                disease_fn = 0
+                print(f"\n  DISEASES - Gold Standard ({len(gold_diseases)} expected)")
+                print("  " + "─" * 85)
+                print(f"  {'Status':<10} {'Name':<45} {'Rare?':<6} {'ORPHA':<12}")
+                print("  " + "─" * 85)
+
+                for g in gold_diseases:
+                    gold_name = g.get("name", "").lower()
+                    gold_abbrev = (g.get("abbreviation") or "").lower()
+                    # Check if found (by name or abbreviation)
+                    found = any(
+                        gold_name in ext or ext in gold_name or gold_abbrev in ext
+                        for ext in extracted_disease_names
+                    )
+                    if found:
+                        disease_tp += 1
+                        status = "✓ FOUND"
+                    else:
+                        disease_fn += 1
+                        status = "✗ MISS"
+
+                    is_rare = "Yes" if g.get("is_rare") else "No"
+                    orpha = g.get("orpha") or "-"
+                    print(f"  {status:<10} {g.get('name', ''):<45} {is_rare:<6} {orpha:<12}")
+
+                disease_recall = disease_tp / len(gold_diseases) * 100 if gold_diseases else 0
+                print("  " + "─" * 85)
+                print(f"  Disease Recall: {disease_tp}/{len(gold_diseases)} ({disease_recall:.0f}%)")
+
+            elif diseases:
+                print(f"\n  DISEASES ({len(diseases)} found, no gold standard)")
+                print("  " + "─" * 85)
+                print(f"  {'Name':<50} {'Rare?':<6} {'ICD-10':<12} {'ORPHA':<12}")
+                print("  " + "─" * 85)
+
+                seen_diseases = set()
+                for d in diseases:
+                    name = d.get("name", "")
+                    if name.lower() in seen_diseases:
+                        continue
+                    seen_diseases.add(name.lower())
+                    is_rare = "Yes" if d.get("is_rare") else "No"
+                    icd10 = d.get("icd10") or "-"
+                    orpha = d.get("orpha") or "-"
+                    print(f"  {name:<50} {is_rare:<6} {icd10:<12} {orpha:<12}")
+
+            # === DRUGS ===
+            if gold_drugs:
+                # Evaluate against gold standard
+                drug_tp = 0
+                drug_fn = 0
+                print(f"\n  DRUGS - Gold Standard ({len(gold_drugs)} expected)")
+                print("  " + "─" * 85)
+                print(f"  {'Status':<10} {'Name':<35} {'Compound':<15} {'Mechanism':<25}")
+                print("  " + "─" * 85)
+
+                for g in gold_drugs:
+                    gold_name = g.get("name", "").lower()
+                    gold_compound = (g.get("compound_id") or "").lower()
+                    # Check if found (by name or compound ID)
+                    found = any(
+                        gold_name in ext or ext in gold_name or (gold_compound and gold_compound in ext)
+                        for ext in extracted_drug_names
+                    )
+                    if found:
+                        drug_tp += 1
+                        status = "✓ FOUND"
+                    else:
+                        drug_fn += 1
+                        status = "✗ MISS"
+
+                    compound = g.get("compound_id") or "-"
+                    mechanism = g.get("mechanism") or "-"
+                    print(f"  {status:<10} {g.get('name', ''):<35} {compound:<15} {mechanism:<25}")
+
+                drug_recall = drug_tp / len(gold_drugs) * 100 if gold_drugs else 0
+                print("  " + "─" * 85)
+                print(f"  Drug Recall: {drug_tp}/{len(gold_drugs)} ({drug_recall:.0f}%)")
+
+            elif drugs:
+                print(f"\n  DRUGS ({len(drugs)} found, no gold standard)")
+                print("  " + "─" * 85)
+                print(f"  {'Name':<40} {'Compound ID':<15} {'Phase':<20} {'Invest?':<8}")
+                print("  " + "─" * 85)
+
+                seen_drugs = set()
+                for d in drugs:
+                    name = d.get("name", "")
+                    if name.lower() in seen_drugs:
+                        continue
+                    seen_drugs.add(name.lower())
+                    compound = d.get("compound_id") or "-"
+                    phase = d.get("phase") or "-"
+                    is_inv = "Yes" if d.get("is_investigational") else "No"
+                    print(f"  {name:<40} {compound:<15} {phase:<20} {is_inv:<8}")
 
         # =====================================================================
         # PIPELINE STATS (optional)
@@ -458,6 +598,12 @@ class ExtractionAnalyzer:
             print(f"\n  Candidates generated:  {total_candidates}")
             print(f"  Validated:             {total_validated}")
             print(f"  Rejected:              {total_rejected}")
+
+            # Entity counts
+            if diseases or drugs:
+                print(f"\n  Entity extraction:")
+                print(f"    • Diseases: {len(diseases)}")
+                print(f"    • Drugs: {len(drugs)}")
 
             if heuristics:
                 print("\n  Heuristics applied:")

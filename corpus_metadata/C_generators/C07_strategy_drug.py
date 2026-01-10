@@ -52,6 +52,7 @@ class DrugFalsePositiveFilter:
 
     # Common words that might match drug names
     COMMON_WORDS: Set[str] = {
+        # Dosage forms
         "oral",
         "tablet",
         "capsule",
@@ -62,17 +63,21 @@ class DrugFalsePositiveFilter:
         "patch",
         "spray",
         "drops",
+        # Generic substances
         "water",
         "salt",
         "acid",
         "base",
         "oil",
         "sugar",
+        "fat",
+        # Metals (often false positives)
         "iron",
         "gold",
         "silver",
         "lead",
         "zinc",
+        # Drug-related terms
         "dose",
         "drug",
         "agent",
@@ -81,6 +86,231 @@ class DrugFalsePositiveFilter:
         "formula",
         "active",
         "inactive",
+        "medications",
+        "medication",
+        "medicine",
+        "medicines",
+        "treatment",
+        "therapy",
+        # Generic/vague terms
+        "various",
+        "other",
+        "others",
+        "complete",
+        "unknown",
+        "none",
+        "same",
+        "different",
+        "several",
+        "many",
+        "some",
+        "all",
+        "any",
+        # Journal/publication names
+        "lancet",
+        "nature",
+        "science",
+        "cell",
+        # Generic process/action words
+        "via",
+        "met",
+        "food",
+        "duration",
+        "support",
+        "root",
+        "process",
+        "his",
+        "central",
+        "ensure",
+        "blockade",
+        "therapeutic",
+        "monotherapy",
+        "targeted therapy",
+        "soc",
+        # Biomolecules (not drugs per se)
+        "protein",
+        "creatinine",
+        "glucose",
+        "angiotensin",
+        "aldosterone",
+        "renin",
+        "complement",
+        "factor b",
+        "serum",
+        # Too generic drug terms
+        "inhibitor",
+        "inhibitors",
+        "antagonist",
+        "antagonists",
+        "agonist",
+        "agonists",
+        "receptor",
+        "receptors",
+        "pharmaceutical preparations",
+        "activation product",
+        # Anatomical/biological structures
+        "nephron",
+        "membrane attack complex",
+        "com",
+        "importal",
+    }
+
+    # Body parts and organs (not drugs)
+    BODY_PARTS: Set[str] = {
+        "liver",
+        "kidney",
+        "heart",
+        "lung",
+        "brain",
+        "blood",
+        "bone",
+        "skin",
+        "muscle",
+        "nerve",
+        "eye",
+        "ear",
+        "stomach",
+        "intestine",
+        "colon",
+        "bladder",
+        "spleen",
+        "pancreas",
+        "thyroid",
+        "adrenal",
+        "ovary",
+        "uterus",
+        "prostate",
+        "breast",
+        "tongue",
+        "teeth",
+        "gum",
+        "nail",
+        "hair",
+    }
+
+    # Clinical trial status terms (leaked from trial data)
+    TRIAL_STATUS_TERMS: Set[str] = {
+        "not_yet_recruiting",
+        "recruiting",
+        "active",
+        "completed",
+        "suspended",
+        "terminated",
+        "withdrawn",
+        "enrolling",
+        "available",
+        "approved",
+        "no_longer_available",
+        "withheld",
+        "unknown",
+        "not yet recruiting",
+        "active, not recruiting",
+        "enrolling by invitation",
+    }
+
+    # Medical equipment/procedures (not drugs)
+    EQUIPMENT_PROCEDURES: Set[str] = {
+        "ultrasound",
+        "mri",
+        "ct",
+        "xray",
+        "x-ray",
+        "scan",
+        "surgery",
+        "biopsy",
+        "endoscopy",
+        "catheter",
+        "stent",
+        "implant",
+        "pacemaker",
+        "ventilator",
+        "dialysis",
+        "ecg",
+        "ekg",
+        "eeg",
+        "emg",
+    }
+
+    # Terms that should ALWAYS be filtered, even from specialized lexicons
+    # These are generic placeholders that sometimes appear in trial data
+    ALWAYS_FILTER: Set[str] = {
+        "medications",
+        "medication",
+        "other",
+        "others",
+        "placebo",
+        "control",
+        "standard of care",
+        "standard care",
+        "best supportive care",
+        "usual care",
+        "no intervention",
+        "observation",
+        "watchful waiting",
+        "dietary supplement",
+        "behavioral",
+        "device",
+        "procedure",
+        "radiation",
+        "biological",
+        "combination product",
+        "diagnostic test",
+        "genetic",
+        "various",
+        "multiple",
+        "unspecified",
+        "investigational",
+        "experimental",
+        "study drug",
+        "study treatment",
+        "test drug",
+        "test product",
+        "active comparator",
+        "sham comparator",
+    }
+
+    # Generic all-caps words that are not drugs
+    NON_DRUG_ALLCAPS: Set[str] = {
+        "information",
+        "complete",
+        "ring",
+        "same",
+        "other",
+        "none",
+        "all",
+        "any",
+        "new",
+        "old",
+        "high",
+        "low",
+        "full",
+        "empty",
+        "open",
+        "closed",
+        "start",
+        "end",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "current",
+        "total",
+        "average",
+        "mean",
+        "median",
+        "normal",
+        "abnormal",
+        "positive",
+        "negative",
+        "present",
+        "absent",
+        "available",
+        "unavailable",
+        "required",
+        "optional",
+        "primary",
+        "secondary",
+        "additional",
     }
 
     # Minimum drug name length
@@ -88,6 +318,11 @@ class DrugFalsePositiveFilter:
 
     def __init__(self):
         self.common_words_lower = {w.lower() for w in self.COMMON_WORDS}
+        self.body_parts_lower = {w.lower() for w in self.BODY_PARTS}
+        self.trial_status_lower = {w.lower() for w in self.TRIAL_STATUS_TERMS}
+        self.equipment_lower = {w.lower() for w in self.EQUIPMENT_PROCEDURES}
+        self.non_drug_allcaps_lower = {w.lower() for w in self.NON_DRUG_ALLCAPS}
+        self.always_filter_lower = {w.lower() for w in self.ALWAYS_FILTER}
 
     def is_false_positive(
         self, matched_text: str, context: str, generator_type: DrugGeneratorType
@@ -98,9 +333,39 @@ class DrugFalsePositiveFilter:
         Returns True if the match should be filtered out.
         """
         text_lower = matched_text.lower().strip()
+        text_stripped = matched_text.strip()
 
         # Skip very short matches
         if len(text_lower) < self.MIN_LENGTH:
+            return True
+
+        # Always filter generic placeholder terms (even from specialized lexicons)
+        if text_lower in self.always_filter_lower:
+            return True
+
+        # Always filter trial status terms (even from specialized lexicons)
+        if text_lower in self.trial_status_lower:
+            return True
+
+        # Check if text contains any trial status term (handles various formats)
+        text_normalized = text_lower.replace("_", " ")
+        for status in self.trial_status_lower:
+            if status in text_normalized:
+                return True
+
+        # Filter text containing trial status in parentheses like "Medications (NOT_YET_RECRUITING)"
+        if "(" in text_stripped and ")" in text_stripped:
+            # Also check the base word before parentheses
+            base_word = text_stripped[:text_stripped.find("(")].strip().lower()
+            if base_word in self.common_words_lower:
+                return True
+
+        # Always filter body parts
+        if text_lower in self.body_parts_lower:
+            return True
+
+        # Always filter equipment/procedures
+        if text_lower in self.equipment_lower:
             return True
 
         # Skip common words (unless from specialized lexicon)
@@ -109,6 +374,10 @@ class DrugFalsePositiveFilter:
             DrugGeneratorType.LEXICON_INVESTIGATIONAL,
         }:
             if text_lower in self.common_words_lower:
+                return True
+
+            # Filter generic all-caps words that aren't drugs
+            if text_lower in self.non_drug_allcaps_lower:
                 return True
 
         return False
@@ -611,6 +880,12 @@ class DrugDetector:
                         "preferred_name": matched_text,
                         "compound_id": matched_text,
                     }
+
+                # Apply false positive filter for compound patterns too
+                if self.fp_filter.is_false_positive(
+                    matched_text, context, DrugGeneratorType.PATTERN_COMPOUND_ID
+                ):
+                    continue
 
                 candidate = DrugCandidate(
                     doc_id=doc_graph.doc_id,

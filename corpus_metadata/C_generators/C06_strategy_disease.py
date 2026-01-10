@@ -70,6 +70,94 @@ class DiseaseFalsePositiveFilter:
     - "Chromosome 22q11.2 deletion" -> matches "22q11.2"
     """
 
+    # Layer 0: Generic/overly broad terms that are not specific diseases
+    GENERIC_TERMS: Set[str] = {
+        # Too generic - categories, not specific diseases
+        "disease",
+        "diseases",
+        "syndrome",
+        "syndromes",
+        "disorder",
+        "disorders",
+        "condition",
+        "conditions",
+        "rare diseases",
+        "rare disease",
+        "orphan disease",
+        "orphan diseases",
+        "genetic disease",
+        "genetic diseases",
+        "hereditary disease",
+        "hereditary diseases",
+        "communicable diseases",
+        "infectious disease",
+        "infectious diseases",
+        "chronic disease",
+        "chronic diseases",
+        "autoimmune disease",
+        "autoimmune diseases",
+        "metabolic disease",
+        "metabolic diseases",
+        "neurological disease",
+        "neurological diseases",
+        # Generic anatomical terms
+        "neoplasm",
+        "neoplasms",
+        "malignant neoplasms",
+        "benign neoplasms",
+        "tumor",
+        "tumors",
+        "cancer",
+        "cancers",
+        "carcinoma",
+        "sarcoma",
+        "lymphoma",
+        "leukemia",
+        # Generic process terms
+        "agenesis",
+        "aplasia",
+        "hypoplasia",
+        "hyperplasia",
+        "atrophy",
+        "hypertrophy",
+        "inflammation",
+        "infection",
+        "deficiency",
+        "insufficiency",
+        # Other overly generic
+        "abnormality",
+        "abnormalities",
+        "anomaly",
+        "anomalies",
+        "malformation",
+        "malformations",
+        "deformity",
+        "deformities",
+        # Veterinary/animal diseases (FP in human context)
+        "newcastle disease",
+        # Mental/behavioral (too generic)
+        "mental blocking",
+        "learning disabilities",
+        # Clinical status terms (not diseases)
+        "progressive disease",
+        "kidney diseases",
+        "kidney failure",
+        "renal glomerular disease",
+        # Generic infection terms
+        "infections",
+        "pneumonia",
+        "meningitis",
+        "nephritis",
+        # Symptoms/signs, not diseases
+        "ascites",
+        "hypertensive disease",
+        "neoplasm metastasis",
+        # Too broad categories
+        "complement deficiencies",
+        "infections of musculoskeletal system",
+        "infection due to encapsulated bacteria",
+    }
+
     # Layer 1: Chromosome/karyotype patterns to block
     CHROMOSOME_PATTERNS = [
         r"^\d{1,2}[pq]$",  # 10p, 22q, etc.
@@ -154,6 +242,7 @@ class DiseaseFalsePositiveFilter:
             re.compile(p, re.IGNORECASE) for p in self.CHROMOSOME_PATTERNS
         ]
         self._gene_pattern = re.compile(self.GENE_PATTERN)
+        self._generic_terms_lower = {t.lower() for t in self.GENERIC_TERMS}
 
     def should_filter(
         self, matched_text: str, context: str, is_abbreviation: bool = False
@@ -165,7 +254,12 @@ class DiseaseFalsePositiveFilter:
             (should_filter, reason)
         """
         matched_clean = matched_text.strip()
+        matched_lower = matched_clean.lower()
         ctx_lower = context.lower()
+
+        # Layer 0: Filter generic/overly broad terms
+        if matched_lower in self._generic_terms_lower:
+            return True, "generic_term"
 
         # Layer 1: Check chromosome patterns
         for pattern in self._compiled_chr_patterns:
@@ -547,10 +641,12 @@ class DiseaseDetector:
                 )
                 self.umls_linker = self.scispacy_nlp.get_pipe("scispacy_linker")
                 print(f"  Disease detector: loaded scispacy {model_name} + UMLS linker")
+                self._lexicon_stats.append(("scispacy NER", 1, model_name))
             except Exception as e:
                 print(
                     f"  Disease detector: loaded scispacy {model_name} (no UMLS: {e})"
                 )
+                self._lexicon_stats.append(("scispacy NER", 1, model_name))
         except OSError as e:
             print(f"  Disease detector: scispacy not available: {e}")
 
@@ -606,7 +702,8 @@ class DiseaseDetector:
             if self.scispacy_nlp is not None:
                 candidates.extend(self._extract_scispacy(text, block, doc, seen))
 
-        return candidates
+        # Final deduplication by preferred_name to avoid duplicates like "Sarcoma" x3
+        return self._deduplicate_by_name(candidates)
 
     def _extract_specialized(
         self,
@@ -670,11 +767,18 @@ class DiseaseDetector:
             entry = self.general_entries[key]
             context = self._make_context(text, start, end)
 
-            # Apply FP filter
+            # Apply FP filter to matched text
             should_filter, reason = self.fp_filter.should_filter(
                 matched_text, context, is_abbreviation=False
             )
             if should_filter:
+                continue
+
+            # Also filter by preferred_label (lexicon entry might have generic name)
+            should_filter_label, _ = self.fp_filter.should_filter(
+                entry.preferred_label, context, is_abbreviation=False
+            )
+            if should_filter_label:
                 continue
 
             # Dedup
@@ -803,11 +907,18 @@ class DiseaseDetector:
                 preferred_label = kb_entry.canonical_name or ent_text
                 context = self._make_context(text, ent.start_char, ent.end_char)
 
-                # Apply FP filter
+                # Apply FP filter to matched text
                 should_filter, _ = self.fp_filter.should_filter(
                     ent_text, context, is_abbreviation=False
                 )
                 if should_filter:
+                    continue
+
+                # Also filter by preferred_label (UMLS canonical name might be generic)
+                should_filter_label, _ = self.fp_filter.should_filter(
+                    preferred_label, context, is_abbreviation=False
+                )
+                if should_filter_label:
                     continue
 
                 # Dedup
@@ -942,3 +1053,36 @@ class DiseaseDetector:
             return False
         ctx_lower = context.lower()
         return any(exc.lower() in ctx_lower for exc in exclude_contexts)
+
+    def _deduplicate_by_name(
+        self, candidates: List[DiseaseCandidate]
+    ) -> List[DiseaseCandidate]:
+        """
+        Final deduplication by preferred_label to avoid duplicates.
+
+        Keeps the highest confidence candidate for each unique preferred_label.
+        """
+        if not candidates:
+            return candidates
+
+        # Group by preferred_label (case-insensitive)
+        by_name: Dict[str, List[DiseaseCandidate]] = {}
+        for c in candidates:
+            key = c.preferred_label.lower()
+            if key not in by_name:
+                by_name[key] = []
+            by_name[key].append(c)
+
+        # Keep highest confidence for each name
+        deduped = []
+        for name_key, group in by_name.items():
+            # Sort by confidence descending, then by generator type priority
+            group.sort(
+                key=lambda x: (
+                    -x.initial_confidence,
+                    0 if x.generator_type == DiseaseGeneratorType.LEXICON_SPECIALIZED else 1,
+                )
+            )
+            deduped.append(group[0])
+
+        return deduped
