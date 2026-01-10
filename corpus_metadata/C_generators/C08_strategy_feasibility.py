@@ -51,6 +51,137 @@ from B_parsing.B07_negation import NegationDetector, NEGATION_CUES, EXCEPTION_CU
 
 
 # =============================================================================
+# FALSE POSITIVE FILTER
+# =============================================================================
+
+
+class FeasibilityFalsePositiveFilter:
+    """
+    Multi-layer false positive filter for feasibility extraction.
+
+    Filters out:
+    - Figure/Table/Appendix captions
+    - Definitions (X=...)
+    - Statistics/results (95% CI, p<, SE, SD)
+    - OCR garbage
+    """
+
+    # Layer 1: Caption patterns - never eligibility/epidemiology
+    CAPTION_PATTERNS = [
+        r"^(?:Figure|Fig\.?|Table|Appendix|Panel|Supplementary)\s*\d",
+        r"^(?:Figure|Fig\.?|Table)\s+[A-Z]\d?",
+    ]
+
+    # Layer 2: Definition patterns (X=...) -> glossary, not eligibility
+    DEFINITION_PATTERNS = [
+        r"^[A-Z]{2,10}\s*=",  # e.g., "eGFR=..."
+        r"^\w+\s*=\s*\w+",     # Variable definitions
+    ]
+
+    # Layer 3: Statistics/results patterns
+    STATISTICS_PATTERNS = [
+        r"95%?\s*CI",
+        r"p\s*[<>=]\s*0?\.\d+",
+        r"(?:^|\s)(?:SE|SD)\s*[=:]?\s*\d",
+        r"model[\s-]?estimated",
+        r"hazard\s*ratio",
+        r"odds\s*ratio",
+        r"relative\s*risk",
+        r"confidence\s*interval",
+        r"standard\s*(?:error|deviation)",
+        r"interquartile\s*range",
+        r"IQR",
+    ]
+
+    # Layer 4: OCR garbage patterns
+    OCR_GARBAGE_PATTERNS = [
+        r"[^\w\s]{3,}",  # 3+ consecutive special chars
+        r"^\d+\s*[-—–]\s*\w+\s+\d+\s+\d+",  # Table row patterns like "8 — Baseline 14 30"
+        r"^[\d\s,.-]+$",  # Only numbers and punctuation
+    ]
+
+    # Layer 5: Bare fractions without context (not epidemiology)
+    BARE_FRACTION_PATTERN = r"^\d+/\d+$"
+
+    def __init__(self):
+        self.caption_re = [re.compile(p, re.IGNORECASE) for p in self.CAPTION_PATTERNS]
+        self.definition_re = [re.compile(p) for p in self.DEFINITION_PATTERNS]
+        self.statistics_re = [re.compile(p, re.IGNORECASE) for p in self.STATISTICS_PATTERNS]
+        self.ocr_re = [re.compile(p) for p in self.OCR_GARBAGE_PATTERNS]
+        self.bare_fraction_re = re.compile(self.BARE_FRACTION_PATTERN)
+
+    def is_caption(self, text: str) -> bool:
+        """Check if text is a figure/table caption."""
+        text = text.strip()
+        return any(p.search(text) for p in self.caption_re)
+
+    def is_definition(self, text: str) -> bool:
+        """Check if text is a definition (X=...)."""
+        text = text.strip()
+        return any(p.match(text) for p in self.definition_re)
+
+    def is_statistics(self, text: str) -> bool:
+        """Check if text contains statistical results."""
+        return any(p.search(text) for p in self.statistics_re)
+
+    def is_ocr_garbage(self, text: str) -> bool:
+        """Check if text looks like OCR noise."""
+        text = text.strip()
+        if len(text) < 5:
+            return True
+        return any(p.search(text) for p in self.ocr_re)
+
+    def is_bare_fraction(self, text: str) -> bool:
+        """Check if text is just a bare fraction like '11/37'."""
+        return bool(self.bare_fraction_re.match(text.strip()))
+
+    def filter_eligibility(self, text: str) -> Tuple[bool, str]:
+        """
+        Filter eligibility candidates.
+        Returns (should_keep, rejection_reason).
+        """
+        if self.is_caption(text):
+            return False, "caption"
+        if self.is_definition(text):
+            return False, "definition"
+        if self.is_statistics(text):
+            return False, "statistics"
+        if self.is_ocr_garbage(text):
+            return False, "ocr_garbage"
+        return True, ""
+
+    def filter_epidemiology(self, text: str, has_anchor: bool) -> Tuple[bool, str]:
+        """
+        Filter epidemiology candidates.
+        Returns (should_keep, rejection_reason).
+        """
+        if self.is_caption(text):
+            return False, "caption"
+        if self.is_ocr_garbage(text):
+            return False, "ocr_garbage"
+        if self.is_bare_fraction(text) and not has_anchor:
+            return False, "bare_fraction_no_anchor"
+        if self.is_statistics(text) and not has_anchor:
+            return False, "statistics_no_anchor"
+        return True, ""
+
+
+# =============================================================================
+# EPIDEMIOLOGY ANCHOR PHRASES (required for bare numbers)
+# =============================================================================
+
+EPIDEMIOLOGY_ANCHORS = [
+    r"prevalen",
+    r"inciden",
+    r"per\s*(?:million|100,?000|10,?000)",
+    r"population[\s-]?based",
+    r"registry",
+    r"affects?\s*(?:approximately|about|~)?\s*\d",
+    r"estimated\s*(?:at|to\s*be)",
+]
+
+
+# =============================================================================
 # ELIGIBILITY CRITERIA PATTERNS (Expanded for rare disease)
 # =============================================================================
 
@@ -372,11 +503,18 @@ class FeasibilityDetector:
         self.negation_detector = NegationDetector()
         self.confidence_calculator = ConfidenceCalculator()
 
+        # False positive filter
+        self.fp_filter = FeasibilityFalsePositiveFilter()
+
+        # Epidemiology anchor patterns
+        self.epi_anchor_re = [re.compile(p, re.IGNORECASE) for p in EPIDEMIOLOGY_ANCHORS]
+
         # Compile patterns
         self._compile_patterns()
 
         # Stats for summary
         self._extraction_stats: Dict[str, int] = {}
+        self._rejection_stats: Dict[str, int] = {}
 
     def _compile_patterns(self) -> None:
         """Pre-compile regex patterns for efficiency."""
@@ -498,8 +636,14 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract eligibility criteria with negation handling."""
+        """Extract eligibility criteria with negation handling and FP filtering."""
         candidates = []
+
+        # Early rejection: block-level FP check
+        keep, reason = self.fp_filter.filter_eligibility(text)
+        if not keep:
+            self._rejection_stats[f"elig_{reason}"] = self._rejection_stats.get(f"elig_{reason}", 0) + 1
+            return []
 
         is_inclusion = any(p.search(text) for p in self.inclusion_re)
         is_exclusion = any(p.search(text) for p in self.exclusion_re)
@@ -509,6 +653,12 @@ class FeasibilityDetector:
 
             for criterion_text in criteria:
                 if len(criterion_text) < 10:
+                    continue
+
+                # Item-level FP check
+                keep, reason = self.fp_filter.filter_eligibility(criterion_text)
+                if not keep:
+                    self._rejection_stats[f"elig_{reason}"] = self._rejection_stats.get(f"elig_{reason}", 0) + 1
                     continue
 
                 # Determine base type
@@ -627,6 +777,14 @@ class FeasibilityDetector:
     # EPIDEMIOLOGY EXTRACTION (with context)
     # =========================================================================
 
+    def _has_epi_anchor(self, text: str, start: int, end: int) -> bool:
+        """Check if there's an epidemiology anchor phrase near the match."""
+        # Check in a window around the match
+        window_start = max(0, start - 100)
+        window_end = min(len(text), end + 50)
+        window = text[window_start:window_end]
+        return any(p.search(window) for p in self.epi_anchor_re)
+
     def _extract_epidemiology(
         self,
         text: str,
@@ -636,13 +794,29 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract epidemiology statistics with context."""
+        """Extract epidemiology statistics with context and anchor validation."""
         candidates = []
+
+        # Block-level check for section appropriateness
+        valid_sections = {"epidemiology", "abstract", "results", "unknown"}
+        if section not in valid_sections:
+            # Allow but with lower confidence if in wrong section
+            pass
 
         # Prevalence
         for pattern in self.prevalence_re:
             for match in pattern.finditer(text):
                 value = match.group(1) if match.lastindex else match.group(0)
+
+                # Check for anchor phrase
+                has_anchor = self._has_epi_anchor(text, match.start(), match.end())
+
+                # FP filter
+                keep, reason = self.fp_filter.filter_epidemiology(value, has_anchor)
+                if not keep:
+                    self._rejection_stats[f"epi_{reason}"] = self._rejection_stats.get(f"epi_{reason}", 0) + 1
+                    continue
+
                 dedup_key = f"prev:{value.lower()}"
                 if dedup_key in seen:
                     continue
@@ -658,6 +832,8 @@ class FeasibilityDetector:
                 features = self._calculate_confidence_features(
                     FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE, section, text, value
                 )
+                if has_anchor:
+                    features.anchor_proximity = 0.2
                 if geography:
                     features.context_completeness += 0.1
                 if time_period:
@@ -690,6 +866,16 @@ class FeasibilityDetector:
         for pattern in self.incidence_re:
             for match in pattern.finditer(text):
                 value = match.group(1) if match.lastindex else match.group(0)
+
+                # Check for anchor phrase
+                has_anchor = self._has_epi_anchor(text, match.start(), match.end())
+
+                # FP filter
+                keep, reason = self.fp_filter.filter_epidemiology(value, has_anchor)
+                if not keep:
+                    self._rejection_stats[f"epi_{reason}"] = self._rejection_stats.get(f"epi_{reason}", 0) + 1
+                    continue
+
                 dedup_key = f"inc:{value.lower()}"
                 if dedup_key in seen:
                     continue
@@ -702,6 +888,8 @@ class FeasibilityDetector:
                 features = self._calculate_confidence_features(
                     FeasibilityFieldType.EPIDEMIOLOGY_INCIDENCE, section, text, value
                 )
+                if has_anchor:
+                    features.anchor_proximity = 0.2
 
                 candidate = self._make_candidate(
                     doc_id=doc_id,
@@ -723,7 +911,7 @@ class FeasibilityDetector:
                 )
                 candidates.append(candidate)
 
-        # Demographics
+        # Demographics - more lenient (baseline characteristics are OK)
         for pattern in self.demographics_re:
             for match in pattern.finditer(text):
                 value = match.group(1) if match.lastindex else match.group(0)
@@ -818,20 +1006,57 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract patient journey phase information with burden metrics."""
+        """Extract patient journey phase information with explicit phase+duration patterns."""
         candidates = []
         text_lower = text.lower()
 
-        for phase_type, keywords in JOURNEY_PHASE_KEYWORDS.items():
-            for keyword in keywords:
-                if keyword in text_lower:
-                    dedup_key = f"journey:{phase_type.value}"
+        # Skip if clearly wrong section
+        if self.fp_filter.is_caption(text):
+            return []
+
+        # Phase patterns that require multi-word context (not single tokens)
+        STRONG_PHASE_PATTERNS = {
+            PatientJourneyPhaseType.SCREENING: [
+                r"screening\s+(?:period|phase|visit)",
+                r"(?:pre-?treatment|baseline)\s+(?:assessment|period|phase)",
+                r"wash[\s-]?out\s+period",
+            ],
+            PatientJourneyPhaseType.RUN_IN: [
+                r"run[\s-]?in\s+(?:period|phase)",
+                r"lead[\s-]?in\s+(?:period|phase)",
+                r"stabilization\s+period",
+            ],
+            PatientJourneyPhaseType.TREATMENT: [
+                r"(?:treatment|intervention|dosing|active)\s+(?:period|phase)",
+                r"(?:double[\s-]?blind|open[\s-]?label)\s+(?:period|phase|treatment)",
+                r"(?:induction|maintenance)\s+(?:period|phase)",
+            ],
+            PatientJourneyPhaseType.FOLLOW_UP: [
+                r"follow[\s-]?up\s+(?:period|phase|visit)",
+                r"(?:post[\s-]?treatment|observation)\s+(?:period|phase)",
+                r"safety\s+follow[\s-]?up",
+            ],
+            PatientJourneyPhaseType.EXTENSION: [
+                r"(?:open[\s-]?label\s+)?extension\s+(?:study|period|phase)",
+                r"(?:long[\s-]?term|continued)\s+(?:access|treatment)",
+            ],
+        }
+
+        for phase_type, patterns in STRONG_PHASE_PATTERNS.items():
+            for pattern in patterns:
+                match = re.search(pattern, text_lower)
+                if match:
+                    keyword = match.group(0)
+                    dedup_key = f"journey:{phase_type.value}:{keyword[:20]}"
                     if dedup_key in seen:
                         continue
                     seen.add(dedup_key)
 
-                    # Extract duration
-                    duration_match = DURATION_PATTERN.search(text)
+                    # Extract duration NEAR the match (not anywhere in text)
+                    match_start = match.start()
+                    match_end = match.end()
+                    duration_window = text[max(0, match_start - 30):min(len(text), match_end + 80)]
+                    duration_match = DURATION_PATTERN.search(duration_window)
                     duration = None
                     if duration_match:
                         duration = f"{duration_match.group(1)} {duration_match.group(2)}"
@@ -845,6 +1070,10 @@ class FeasibilityDetector:
                     features = self._calculate_confidence_features(
                         FeasibilityFieldType.PATIENT_JOURNEY_PHASE, section, text, keyword
                     )
+                    # Boost confidence for explicit patterns
+                    features.pattern_strength = 0.2
+                    if duration:
+                        features.context_completeness = 0.1
 
                     candidate = self._make_candidate(
                         doc_id=doc_id,
@@ -867,7 +1096,7 @@ class FeasibilityDetector:
                         inpatient_days=inpatient_days,
                     )
                     candidates.append(candidate)
-                    break
+                    break  # One match per phase type per block
 
         return candidates
 
@@ -918,6 +1147,13 @@ class FeasibilityDetector:
     # ENDPOINT EXTRACTION (with better boundaries)
     # =========================================================================
 
+    def _normalize_endpoint_fingerprint(self, text: str) -> str:
+        """Create normalized fingerprint for endpoint deduplication."""
+        # Lowercase, remove stopwords and punctuation
+        stopwords = {"was", "is", "the", "a", "an", "were", "are", "to", "at", "of", "in"}
+        words = re.sub(r'[^\w\s]', '', text.lower()).split()
+        return " ".join(w for w in words if w not in stopwords)[:50]
+
     def _extract_endpoints(
         self,
         text: str,
@@ -927,19 +1163,60 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract study endpoint information with proper boundaries."""
+        """Extract study endpoint information with explicit type signals."""
         candidates = []
 
-        for endpoint_type, patterns in self.endpoint_re.items():
-            for pattern in patterns:
+        # Skip captions
+        if self.fp_filter.is_caption(text):
+            return []
+
+        # Explicit endpoint type markers (required)
+        TYPE_MARKERS = {
+            EndpointType.PRIMARY: [
+                r"primary\s+(?:efficacy\s+)?(?:end)?point",
+                r"primary\s+(?:outcome|measure)",
+            ],
+            EndpointType.SECONDARY: [
+                r"(?:key\s+)?secondary\s+(?:end)?point",
+                r"secondary\s+(?:outcome|measure)",
+            ],
+            EndpointType.SAFETY: [
+                r"safety\s+(?:end)?point",
+                r"(?:serious\s+)?adverse\s+event",
+                r"treatment[\s-]?emergent",
+            ],
+            EndpointType.EXPLORATORY: [
+                r"exploratory\s+(?:end)?point",
+            ],
+        }
+
+        for endpoint_type, patterns in TYPE_MARKERS.items():
+            for pattern_str in patterns:
+                pattern = re.compile(pattern_str, re.IGNORECASE)
                 match = pattern.search(text)
                 if match:
                     endpoint_text = self._extract_endpoint_bounded(text, match)
 
-                    if len(endpoint_text) < 10:
+                    # Reject very short or useless extractions
+                    if len(endpoint_text) < 15:
                         continue
 
-                    dedup_key = f"endpoint:{endpoint_type.value}:{endpoint_text[:30].lower()}"
+                    # Reject if it's just the marker itself
+                    if endpoint_text.lower() == match.group(0).lower():
+                        continue
+
+                    # Reject fragments like "was rejected", "primary endpoint was"
+                    useless_patterns = [
+                        r"^(?:was|were|is|are)\s+\w+$",
+                        r"^primary\s+endpoint\s+was$",
+                        r"rejected",
+                    ]
+                    if any(re.search(p, endpoint_text, re.IGNORECASE) for p in useless_patterns):
+                        continue
+
+                    # Normalized fingerprint for dedup
+                    fingerprint = self._normalize_endpoint_fingerprint(endpoint_text)
+                    dedup_key = f"endpoint:{endpoint_type.value}:{fingerprint}"
                     if dedup_key in seen:
                         continue
                     seen.add(dedup_key)
@@ -947,6 +1224,8 @@ class FeasibilityDetector:
                     features = self._calculate_confidence_features(
                         FeasibilityFieldType.STUDY_ENDPOINT, section, text, endpoint_text
                     )
+                    # Boost for explicit type marker
+                    features.pattern_strength = 0.2
 
                     candidate = self._make_candidate(
                         doc_id=doc_id,
@@ -997,6 +1276,16 @@ class FeasibilityDetector:
     # SITE EXTRACTION (with disambiguation)
     # =========================================================================
 
+    def _normalize_country(self, country: str) -> str:
+        """Normalize country name to canonical form."""
+        CANONICAL = {
+            "us": "United States", "usa": "United States", "u.s.": "United States",
+            "united states": "United States",
+            "uk": "United Kingdom", "u.k.": "United Kingdom",
+            "united kingdom": "United Kingdom",
+        }
+        return CANONICAL.get(country.lower(), country.title())
+
     def _extract_sites(
         self,
         text: str,
@@ -1006,7 +1295,7 @@ class FeasibilityDetector:
         section: str,
         seen: Set[str],
     ) -> List[FeasibilityCandidate]:
-        """Extract site/country information with disambiguation."""
+        """Extract site/country information with better USA/UK handling."""
         candidates = []
         text_lower = text.lower()
 
@@ -1015,20 +1304,44 @@ class FeasibilityDetector:
         if not has_site_context:
             return []
 
-        found_countries = []
-        for country in COUNTRIES:
-            if country not in text_lower:
-                continue
+        found_countries = set()  # Use set for dedup
 
-            # Extra validation for ambiguous countries
-            if country in AMBIGUOUS_COUNTRIES:
-                if not self._validate_country_context(text_lower, country):
-                    continue
+        # Special handling for USA/UK (case-sensitive patterns)
+        usa_patterns = [
+            r"\bU\.?S\.?A\.?\b",  # USA, U.S.A.
+            r"\bU\.S\.\b",  # U.S.
+            r"\bUnited\s+States\b",
+        ]
+        uk_patterns = [
+            r"\bU\.?K\.?\b",  # UK, U.K.
+            r"\bUnited\s+Kingdom\b",
+        ]
 
-            found_countries.append(country)
+        for pattern in usa_patterns:
+            if re.search(pattern, text):
+                found_countries.add("united states")
+                break
+
+        for pattern in uk_patterns:
+            if re.search(pattern, text):
+                found_countries.add("united kingdom")
+                break
+
+        # Check other countries (but NOT 'us' or 'uk' in lowercase - likely pronouns)
+        SAFE_COUNTRIES = COUNTRIES - {"us", "uk"}  # Remove ambiguous short forms
+        for country in SAFE_COUNTRIES:
+            if country in text_lower:
+                # Extra validation for ambiguous countries
+                if country in AMBIGUOUS_COUNTRIES:
+                    if not self._validate_country_context(text_lower, country):
+                        continue
+                found_countries.add(country)
 
         if found_countries:
-            dedup_key = f"sites:{','.join(sorted(found_countries)[:3])}"
+            # Normalize and deduplicate
+            normalized_countries = list(set(self._normalize_country(c) for c in found_countries))
+
+            dedup_key = f"sites:{','.join(sorted(normalized_countries)[:3])}"
             if dedup_key not in seen:
                 seen.add(dedup_key)
 
@@ -1037,7 +1350,7 @@ class FeasibilityDetector:
                 )
                 site_count = int(site_count_match.group(1)) if site_count_match else None
 
-                for country in found_countries[:5]:
+                for country in normalized_countries[:5]:
                     features = self._calculate_confidence_features(
                         FeasibilityFieldType.STUDY_SITE, section, text, country
                     )
@@ -1056,8 +1369,8 @@ class FeasibilityDetector:
                         confidence_features=features.to_dict(),
                     )
                     candidate.study_site = StudySite(
-                        country=country.title(),
-                        country_code=COUNTRY_CODES.get(country),
+                        country=country,  # Already normalized
+                        country_code=COUNTRY_CODES.get(country.lower()),
                         site_count=site_count,
                         validation_context="site_context_cue_present",
                     )
@@ -1095,7 +1408,7 @@ class FeasibilityDetector:
         text: str,
         match_text: str,
     ) -> ConfidenceFeatures:
-        """Calculate feature-based confidence score using shared ConfidenceCalculator."""
+        """Calculate feature-based confidence score with penalties and bonuses."""
         features = ConfidenceFeatures()
 
         # Section match bonus using expected sections for this field type
@@ -1107,6 +1420,19 @@ class FeasibilityDetector:
 
         # Pattern strength (default moderate)
         features.pattern_strength = 0.1
+
+        # PENALTY: Figure/Table captions (-0.3)
+        if self.fp_filter.is_caption(text):
+            features.negation_penalty = -0.3
+
+        # PENALTY: OCR garbage / many special chars (-0.2)
+        special_char_ratio = len(re.findall(r'[^\w\s]', match_text)) / max(len(match_text), 1)
+        if special_char_ratio > 0.2:
+            features.negation_penalty = min(features.negation_penalty, -0.2)
+
+        # PENALTY: Wrong section for this field type
+        if section not in expected and section != "unknown":
+            features.section_match = -0.1
 
         return features
 
