@@ -85,8 +85,10 @@ class EligibilityCriterion(BaseModel):
 
     criterion_type: CriterionType
     text: str  # Full criterion text
-    category: Optional[str] = None  # e.g., "age", "disease", "treatment", "lab value"
+    category: Optional[str] = None  # e.g., "age", "disease_definition", "biomarker"
+    is_negated: bool = False  # True if criterion contains negation
     parsed_value: Optional[Dict[str, Any]] = None  # Structured extraction
+    derived_variables: Optional[Dict[str, Any]] = None  # ML-ready: age_min, pediatric_allowed
 
     model_config = ConfigDict(extra="forbid")
 
@@ -101,6 +103,11 @@ class EpidemiologyData(BaseModel):
 
     data_type: str  # "prevalence", "incidence", "mortality", "demographics"
     value: str  # e.g., "1-2 per million", "3.5%", "median age 45"
+    normalized_value: Optional[float] = None  # Per-million standardized
+    unit: Optional[str] = None  # "per 100,000", "percent"
+    geography: Optional[str] = None  # Country/region
+    time_period: Optional[str] = None  # Year or range
+    setting: Optional[str] = None  # "population-based", "registry"
     population: Optional[str] = None  # e.g., "adults", "children", "US population"
     source: Optional[str] = None  # e.g., "Orphanet", "CDC", study citation
     year: Optional[str] = None  # Year of data
@@ -120,7 +127,9 @@ class PatientJourneyPhase(BaseModel):
     description: str  # What happens in this phase
     duration: Optional[str] = None  # e.g., "4 weeks", "up to 12 weeks"
     visits: Optional[int] = None  # Number of visits
+    visit_frequency: Optional[str] = None  # "every 4 weeks"
     procedures: List[str] = Field(default_factory=list)  # Procedures/assessments
+    inpatient_days: Optional[int] = None  # Days of hospitalization required
 
     model_config = ConfigDict(extra="forbid")
 
@@ -150,9 +159,12 @@ class StudySite(BaseModel):
     """Clinical trial site information."""
 
     country: str
+    country_code: Optional[str] = None  # ISO code
     region: Optional[str] = None  # e.g., "Europe", "North America"
     site_count: Optional[int] = None
+    site_type: Optional[str] = None  # "academic", "community"
     enrollment_target: Optional[int] = None
+    validation_context: Optional[str] = None  # Why we trust this extraction
 
     model_config = ConfigDict(extra="forbid")
 
@@ -215,6 +227,7 @@ class FeasibilityCandidate(BaseModel):
 
     # Confidence
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
+    confidence_features: Optional[Dict[str, float]] = None  # For debugging/calibration
 
     provenance: FeasibilityProvenanceMetadata
 

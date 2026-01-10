@@ -99,7 +99,7 @@ NLP4RARE_PATH = BASE_PATH / "gold_data" / "NLP4RARE"
 CONFIG_PATH = BASE_PATH / "corpus_metadata" / "G_config" / "config.yaml"
 
 # Evaluation settings
-MAX_DOCS = 1  # Max documents to process per split (None = all)
+MAX_DOCS = 5  # Max documents to process per split (None = all)
 SKIP_VALIDATION = False  # Enable LLM validation for proper evaluation
 SPLITS_TO_EVALUATE = [
     "dev"
