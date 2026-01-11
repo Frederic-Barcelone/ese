@@ -391,6 +391,7 @@ class DiseaseDetector:
             "pah": lexicon_base / "disease_lexicon_pah.json",
             "anca": lexicon_base / "disease_lexicon_anca.json",
             "igan": lexicon_base / "disease_lexicon_igan.json",
+            "c3g": lexicon_base / "disease_lexicon_c3g.json",
         }
 
         self.general_disease_path = lexicon_base / "2025_08_lexicon_disease.json"
