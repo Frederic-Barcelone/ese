@@ -22,6 +22,7 @@ VERSION: 4.0.0
 import sys
 import time
 import sqlite3
+import zipfile
 from pathlib import Path
 from typing import List, Dict, Optional
 from datetime import datetime, timezone
@@ -44,6 +45,8 @@ HEADLESS = True
 DOWNLOAD_TIMEOUT_MS = 120000  # 2 minutes
 PAGE_LOAD_TIMEOUT_MS = 60000  # 1 minute
 DELAY_BETWEEN_DOWNLOADS = 2.0  # seconds
+EXTRACT_PDFS = True  # Auto-extract PDFs from downloaded ZIPs
+DELETE_ZIP_AFTER_EXTRACT = False  # Keep ZIP files after extraction
 
 
 # ===================== Browser Management =====================
@@ -127,6 +130,63 @@ def _close_browser():
 # Register cleanup on exit
 import atexit
 atexit.register(_close_browser)
+
+
+# ===================== ZIP Extraction =====================
+
+def extract_pdfs_from_zip(zip_path: Path, output_dir: Path, ct_number: str) -> List[str]:
+    """
+    Extract PDF files from a downloaded ZIP archive.
+
+    Args:
+        zip_path: Path to the ZIP file
+        output_dir: Directory to extract PDFs to
+        ct_number: Trial CT number (used for prefixing files)
+
+    Returns:
+        List of extracted PDF file paths
+    """
+    extracted = []
+
+    if not zip_path.exists():
+        log(f"  ZIP file not found: {zip_path}", "WARN")
+        return extracted
+
+    try:
+        with zipfile.ZipFile(zip_path, 'r') as zf:
+            for name in zf.namelist():
+                # Only extract PDF files
+                if name.lower().endswith('.pdf'):
+                    # Get just the filename (ignore folder structure in ZIP)
+                    base_name = Path(name).name
+                    # Prefix with CT number if not already prefixed
+                    if not base_name.startswith(ct_number):
+                        out_name = f"{ct_number}_{base_name}"
+                    else:
+                        out_name = base_name
+
+                    out_path = output_dir / out_name
+
+                    # Extract the file
+                    with zf.open(name) as src:
+                        content = src.read()
+                        with open(out_path, 'wb') as dst:
+                            dst.write(content)
+
+                    extracted.append(str(out_path))
+                    log(f"    Extracted: {out_name}")
+
+        if extracted:
+            log(f"  Extracted {len(extracted)} PDF(s) from ZIP")
+        else:
+            log(f"  No PDFs found in ZIP archive")
+
+    except zipfile.BadZipFile:
+        log(f"  Invalid ZIP file: {zip_path}", "WARN")
+    except Exception as e:
+        log(f"  Error extracting ZIP: {e}", "WARN")
+
+    return extracted
 
 
 # ===================== Database Functions =====================
@@ -435,8 +495,21 @@ def download_trial(
         result["file_name"] = file_name
         result["file_size"] = output_path.stat().st_size
         result["downloaded_at"] = datetime.now(timezone.utc).isoformat()
-        
+
         log(f"  ✓ {ct_number}: {file_name} ({result['file_size']:,} bytes)")
+
+        # Auto-extract PDFs from ZIP
+        if EXTRACT_PDFS and file_name.lower().endswith('.zip'):
+            extracted = extract_pdfs_from_zip(output_path, pdf_dir, ct_number)
+            result["extracted_pdfs"] = extracted
+
+            # Optionally delete ZIP after extraction
+            if DELETE_ZIP_AFTER_EXTRACT and extracted:
+                try:
+                    output_path.unlink()
+                    log(f"  Deleted ZIP after extraction")
+                except Exception as e:
+                    log(f"  Could not delete ZIP: {e}", "WARN")
         
     except PlaywrightTimeout:
         result["error"] = "Timeout waiting for download"
@@ -578,78 +651,93 @@ def process_trial_documents(
     return results
 
 
-# ===================== CLI =====================
+# ===================== Extract Existing ZIPs =====================
+
+def extract_all_zips(zip_dir: Path, output_dir: Optional[Path] = None) -> Dict:
+    """
+    Extract PDFs from all ZIP files in a directory.
+
+    Args:
+        zip_dir: Directory containing ZIP files
+        output_dir: Directory for extracted PDFs (defaults to same as zip_dir)
+
+    Returns:
+        Dict with extraction statistics
+    """
+    if output_dir is None:
+        output_dir = zip_dir
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    stats = {
+        "total_zips": 0,
+        "successful": 0,
+        "failed": 0,
+        "total_pdfs": 0,
+        "extracted_files": []
+    }
+
+    # Find all ZIP files
+    zip_files = list(zip_dir.glob("*.zip"))
+    stats["total_zips"] = len(zip_files)
+
+    if not zip_files:
+        log(f"No ZIP files found in {zip_dir}")
+        return stats
+
+    log(f"\n=== Extracting PDFs from {len(zip_files)} ZIP files ===")
+
+    for zip_path in zip_files:
+        # Try to extract CT number from filename (e.g., "2024-512203-40-00_trial.zip")
+        ct_number = zip_path.stem.split("_")[0] if "_" in zip_path.stem else zip_path.stem
+
+        log(f"\nProcessing: {zip_path.name}")
+        extracted = extract_pdfs_from_zip(zip_path, output_dir, ct_number)
+
+        if extracted:
+            stats["successful"] += 1
+            stats["total_pdfs"] += len(extracted)
+            stats["extracted_files"].extend(extracted)
+        else:
+            stats["failed"] += 1
+
+    log(f"\n{'='*60}")
+    log(f"Extraction Complete:")
+    log(f"  ZIP files processed: {stats['total_zips']}")
+    log(f"  Successful:          {stats['successful']}")
+    log(f"  Failed:              {stats['failed']}")
+    log(f"  Total PDFs extracted: {stats['total_pdfs']}")
+    log(f"{'='*60}")
+
+    return stats
+
+
+# ===================== Standalone Execution =====================
 
 if __name__ == "__main__":
-    import argparse
-    
-    parser = argparse.ArgumentParser(
-        description="Download CTIS trial document packages",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # Download single trial
-  python ctis_pdf_downloader.py 2024-512203-40-00
-  
-  # Download multiple trials from file
-  python ctis_pdf_downloader.py --file ct_numbers.txt
-  
-  # Specify output directory
-  python ctis_pdf_downloader.py --output my-downloads 2024-512203-40-00
-  
-  # Show browser (for debugging)
-  python ctis_pdf_downloader.py --visible 2024-512203-40-00
-        """
-    )
-    
-    parser.add_argument("ct_numbers", nargs="*", help="Trial CT numbers to download")
-    parser.add_argument("--file", "-f", help="File with CT numbers (one per line)")
-    parser.add_argument("--output", "-o", default="ctis-out", help="Output directory")
-    parser.add_argument("--visible", action="store_true", help="Show browser window")
-    parser.add_argument("--db", help="SQLite database for tracking")
-    
-    args = parser.parse_args()
-    
-    # Collect CT numbers
-    ct_numbers = list(args.ct_numbers) if args.ct_numbers else []
-    
-    if args.file:
-        file_path = Path(args.file)
-        if file_path.exists():
-            with open(file_path) as f:
-                for line in f:
-                    ct = line.strip()
-                    if ct and not ct.startswith("#"):
-                        ct_numbers.append(ct)
-        else:
-            print(f"ERROR: File not found: {args.file}")
+    # ========== CONFIGURATION (edit these) ==========
+
+    # Directory containing downloaded ZIP files
+    ZIP_DIR = Path("ctis-out/pdf")
+
+    # Directory to extract PDFs to (same as ZIP_DIR if None)
+    OUTPUT_DIR = None
+
+    # Set to True to only extract existing ZIPs (no new downloads)
+    EXTRACT_ONLY = True
+
+    # ================================================
+
+    if EXTRACT_ONLY:
+        # Extract PDFs from existing ZIP files
+        if not ZIP_DIR.exists():
+            print(f"ERROR: Directory not found: {ZIP_DIR}")
             sys.exit(1)
-    
-    if not ct_numbers:
-        parser.print_help()
-        print("\nERROR: No CT numbers provided")
+
+        output = OUTPUT_DIR if OUTPUT_DIR else ZIP_DIR
+        stats = extract_all_zips(ZIP_DIR, output)
+        print(f"\nDone! Extracted {stats['total_pdfs']} PDFs from {stats['successful']} ZIP files.")
+    else:
+        # Download mode - requires CT numbers from database or file
+        print("Download mode not configured. Set EXTRACT_ONLY = False and provide CT numbers.")
         sys.exit(1)
-    
-    # Remove duplicates
-    ct_numbers = list(dict.fromkeys(ct_numbers))
-    
-    # Settings
-    if args.visible:
-        HEADLESS = False
-    
-    output_dir = Path(args.output)
-    
-    # Database
-    conn = None
-    if args.db:
-        conn = sqlite3.connect(args.db)
-        create_documents_table(conn)
-    
-    # Download
-    try:
-        results = download_trials_batch(ct_numbers, output_dir, conn)
-        failed = [r for r in results if not r["success"]]
-        sys.exit(0 if not failed else 1)
-    finally:
-        if conn:
-            conn.close()
