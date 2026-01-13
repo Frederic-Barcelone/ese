@@ -123,7 +123,8 @@ from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E04_pubtator_enricher import DiseaseEnricher
 from E_normalization.E05_drug_enricher import DrugEnricher
-from E_normalization.E06_deduplicator import Deduplicator
+from E_normalization.E06_nct_enricher import NCTEnricher
+from E_normalization.E07_deduplicator import Deduplicator
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -627,6 +628,13 @@ class Orchestrator:
                         ].strip()
             except Exception as e:
                 print(f"  [WARN] Failed to load rare disease lexicon: {e}")
+
+        # NCT enricher for clinical trial identifier expansion
+        nct_cfg = self.config.get("nct_enricher", {})
+        if nct_cfg.get("enabled", True):
+            self.nct_enricher = NCTEnricher(nct_cfg)
+        else:
+            self.nct_enricher = None
 
         # Print unified lexicon summary
         self._print_unified_lexicon_summary()
@@ -1457,6 +1465,11 @@ Return ONLY the JSON array, nothing else."""
                 normalized_count += 1
             results[i] = normalized
 
+        # Step 1.5: NCT enrichment (fetch trial titles from ClinicalTrials.gov)
+        nct_enriched_count = 0
+        if self.nct_enricher is not None:
+            nct_enriched_count = self._enrich_nct_entities(results)
+
         # Step 2: Disambiguate
         results = self.disambiguator.resolve(results, full_text)
         disambiguated_count = sum(
@@ -1470,10 +1483,52 @@ Return ONLY the JSON array, nothing else."""
         dedup_removed = count_before - count_after
 
         print(f"  Normalized: {normalized_count}")
+        if nct_enriched_count > 0:
+            print(f"  NCT enriched: {nct_enriched_count}")
         print(f"  Disambiguated: {disambiguated_count}")
         print(f"  Deduplicated: {dedup_removed} duplicates merged")
 
         return results
+
+    def _enrich_nct_entities(self, results: List[ExtractedEntity]) -> int:
+        """Enrich NCT identifiers with trial titles from ClinicalTrials.gov.
+
+        Args:
+            results: List of entities to check for NCT IDs
+
+        Returns:
+            Number of entities enriched
+        """
+        import re
+
+        nct_pattern = re.compile(r"^NCT\d{8}$", re.IGNORECASE)
+        enriched_count = 0
+
+        for i, entity in enumerate(results):
+            # Skip if already has long_form
+            if entity.long_form:
+                continue
+
+            # Check if short_form is an NCT ID
+            sf = (entity.short_form or "").strip().upper()
+            if not nct_pattern.match(sf):
+                continue
+
+            # Fetch trial info from ClinicalTrials.gov
+            info = self.nct_enricher.enrich(sf)
+            if info and info.long_form:
+                # Update entity with trial title
+                new_flags = list(entity.validation_flags or [])
+                if "nct_enriched" not in new_flags:
+                    new_flags.append("nct_enriched")
+
+                results[i] = entity.model_copy(update={
+                    "long_form": info.long_form,
+                    "validation_flags": new_flags,
+                })
+                enriched_count += 1
+
+        return enriched_count
 
     # =========================================================================
     # MAIN PROCESS METHOD

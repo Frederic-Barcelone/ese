@@ -1,4 +1,4 @@
-# corpus_metadata/E_normalization/E06_deduplicator.py
+# corpus_metadata/E_normalization/E07_deduplicator.py
 
 """
 Deduplicator for abbreviation entities.
