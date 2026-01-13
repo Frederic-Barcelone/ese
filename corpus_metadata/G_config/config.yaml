@@ -483,6 +483,8 @@ heuristics:
     C5a: "complement C5a anaphylatoxin"
     DOI: "Digital Object Identifier"
     FABHALTA: "iptacopan (brand name)"
+    GLOSEN: "Spanish Glomerulonephritis Study Group"
+    IG: "Immunoglobulin"
 
   # ========================================
   # CONTEXTUAL RULES for ambiguous SFs
