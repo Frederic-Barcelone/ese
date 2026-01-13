@@ -397,6 +397,10 @@ class ExtractionAnalyzer:
         print(" SECTION 2: EXTRACTED ABBREVIATIONS ")
         print(" (What we DID find - sorted alphabetically)")
         print("━" * 80)
+        print()
+        print("  ✓ MATCH = Extracted AND in gold standard (True Positive)")
+        print("  ○ EXTRA = Extracted but NOT in gold standard (False Positive)")
+        print()
 
         if not extracted_results:
             print("\n  (No abbreviations extracted)")
