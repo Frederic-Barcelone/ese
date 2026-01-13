@@ -25,7 +25,7 @@ SOURCE: https://hendrik.codes/post/scraping-the-clinical-trials-information-syst
 
 import json
 from typing import Dict, Any, List, Tuple
-from ctis_config import AGE_CATEGORY_MAP, PHASE_MAP, PRODUCT_ROLE_MAP, BLINDING_MAP, MSC_PUBLIC_STATUS_CODE_MAP
+from ctis_config import PHASE_MAP, PRODUCT_ROLE_MAP, BLINDING_MAP
 from ctis_utils import get, coerce_int, log
 
 # ===================== Medical Conditions (ENHANCED - Bug #3) =====================
@@ -684,7 +684,7 @@ def extract_population(js: Dict[str, Any]) -> Tuple[str, str]:
                 log(f"[AGE] Extracted from inclusion text: {final_codes}", "INFO")
             elif 'pediatric' in inclusion_text or 'paediatric' in inclusion_text or 'children' in inclusion_text:
                 final_codes.update({3, 4, 5})
-                log(f"[AGE] Extracted pediatric from inclusion text", "INFO")
+                log("[AGE] Extracted pediatric from inclusion text", "INFO")
         except Exception as e:
             log(f"[AGE] Could not extract from inclusion text: {e}", "WARN")
     
@@ -932,12 +932,6 @@ def extract_ms_status(js: Dict[str, Any]) -> List[Dict[str, Any]]:
         if not member_state:
             continue
         
-        public_status_code = ms.get("mscPublicStatusCode")
-        status_text = MSC_PUBLIC_STATUS_CODE_MAP.get(
-            public_status_code, 
-            f"Unknown status code {public_status_code}"
-        )
-
         # Basic info from memberStatesConcerned
         ms_record = {
             "member_state": member_state,

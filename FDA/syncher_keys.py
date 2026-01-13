@@ -31,7 +31,9 @@ MODE = 'full'
 # FDA API Key
 # Get your free key from: https://open.fda.gov/apis/authentication/
 # Leave as None to use without key (lower rate limits)
-FDA_API_KEY = "M3s5Z3re4WYjOl4IjqROjDFFWpL6VoeSokQUdmze"
+# Set via environment variable FDA_API_KEY or in .env file
+import os
+FDA_API_KEY = os.getenv("FDA_API_KEY")
 
 # API Rate Limits (for reference):
 # Without key: 240 requests/minute, 120,000/day

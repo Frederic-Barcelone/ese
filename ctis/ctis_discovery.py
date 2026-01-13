@@ -7,7 +7,6 @@ Handles trial discovery, enumeration, and checkpoint management
 ctis/ctis_discovery.py
 """
 
-import time
 from pathlib import Path
 from typing import List, Set, Tuple, Optional, Dict, Any
 from datetime import datetime

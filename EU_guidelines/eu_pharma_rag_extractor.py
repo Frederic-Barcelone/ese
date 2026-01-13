@@ -27,19 +27,17 @@ Usage:
 Version: 4.0
 """
 
-import os
 import re
 import json
 import time
 import hashlib
 import logging
 import signal
-import asyncio
 from datetime import datetime
 from pathlib import Path
-from dataclasses import dataclass, field, asdict
-from typing import Optional, List, Dict, Set, Tuple, Any
-from urllib.parse import urljoin, urlparse, unquote, parse_qs
+from dataclasses import dataclass, field
+from typing import Optional, List, Dict, Set, Tuple
+from urllib.parse import urljoin, urlparse, unquote
 from collections import deque
 
 import warnings
@@ -351,13 +349,13 @@ class EUPharmaRAGExtractor:
         if self._browser:
             try:
                 self._browser.close()
-            except:
+            except Exception:
                 pass
             self._browser = None
         if self._playwright:
             try:
                 self._playwright.stop()
-            except:
+            except Exception:
                 pass
             self._playwright = None
     
@@ -382,7 +380,7 @@ class EUPharmaRAGExtractor:
             try:
                 # Wait for main content area to appear
                 page.wait_for_selector("article, main, [role='main'], .content", timeout=10000)
-            except:
+            except Exception:
                 pass
             
             # Extra wait for JavaScript rendering
@@ -437,7 +435,7 @@ class EUPharmaRAGExtractor:
         
         url_lower = url.lower()
         for lang in EU_LANGUAGE_CODES:
-            if f"/{lang}/" in url_lower and f"/en/" not in url_lower:
+            if f"/{lang}/" in url_lower and "/en/" not in url_lower:
                 return True
             if url_lower.endswith(f"_{lang}"):
                 return True

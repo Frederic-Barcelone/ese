@@ -601,7 +601,7 @@ class ExtractionAnalyzer:
 
             # Entity counts
             if diseases or drugs:
-                print(f"\n  Entity extraction:")
+                print("\n  Entity extraction:")
                 print(f"    • Diseases: {len(diseases)}")
                 print(f"    • Drugs: {len(drugs)}")
 

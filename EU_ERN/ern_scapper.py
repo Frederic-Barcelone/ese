@@ -68,18 +68,16 @@ import sys
 import sqlite3
 import csv
 import gzip
-from io import BytesIO
 from urllib.parse import urljoin, urlparse, urlunparse, parse_qs, urlencode
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import logging
-from collections import defaultdict, deque, Counter
-from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Optional, Set, Tuple, Any, Iterator
+from collections import defaultdict, deque
+from dataclasses import dataclass, asdict
+from typing import Dict, List, Optional, Set, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import random
 import threading
-from contextlib import contextmanager
 
 # ============================================================================
 # VERSION & CONSTANTS
@@ -833,18 +831,18 @@ class URLDiscovery:
         self.logger.info(f"   Navigation: {len(results['nav_urls']):3d} URLs")
         self.logger.info(f"   Page links: {len(results['page_urls']):3d} URLs")
         self.logger.info(f"   Depth-2:    {len(results['depth2_urls']):3d} URLs")
-        self.logger.info(f"   -------------------------")
+        self.logger.info("   -------------------------")
         self.logger.info(f"   TOTAL:      {total_discovered:3d} URLs")
         self.logger.info(f"   Threshold:  {self.MIN_DISCOVERED_URLS} URLs")
         
         # CONFIG FALLBACK (only if discovery failed)
         if results['discovery_success']:
             self.logger.info("")
-            self.logger.info(f"   [OK] Discovery SUCCESS! Config paths will be IGNORED.")
+            self.logger.info("   [OK] Discovery SUCCESS! Config paths will be IGNORED.")
         else:
             self.logger.info("")
             self.logger.info(f"   [!!] Discovery FAILED (< {self.MIN_DISCOVERED_URLS} URLs)")
-            self.logger.info(f"   [!!] Using config paths as FALLBACK...")
+            self.logger.info("   [!!] Using config paths as FALLBACK...")
             if config_paths:
                 for path in config_paths:
                     url = urljoin(website, path)
@@ -915,7 +913,7 @@ class URLDiscovery:
                         path = path + '/'
                     seen.add(path)
                     paths.append(path)
-            except:
+            except (ValueError, AttributeError):
                 pass
         
         return sorted(paths)
@@ -2417,8 +2415,6 @@ class ERNScraper:
         # Download file
         response = self._safe_request(url)
         if response:
-            content_type = response.headers.get('Content-Type', '')
-            
             # Verify we got actual PDF content
             if 'pdf' in filename.lower() and len(response.content) < 100:
                 self.logger.warning(f"[*]  Suspiciously small PDF ({len(response.content)} bytes)")
@@ -2689,9 +2685,9 @@ class ERNScraper:
                 crawl_stats.hit_depth_limit = True
                 continue
             
-            # Normalize URL
-            normalized_url = URLUtils.normalize_url(current_url)
-            
+            # Normalize URL (for logging purposes)
+            URLUtils.normalize_url(current_url)
+
             # Check if URL has fragment (log but continue with normalized)
             if URLUtils.has_fragment(current_url):
                 crawl_stats.fragments_normalized += 1
@@ -3013,8 +3009,8 @@ class ERNScraper:
             # Global stats
             gs = self.global_stats
             f.write("## Global Statistics\n\n")
-            f.write(f"| Metric | Value |\n")
-            f.write(f"|--------|-------|\n")
+            f.write("| Metric | Value |\n")
+            f.write("|--------|-------|\n")
             f.write(f"| Total Requests | {gs.total_requests:,} |\n")
             f.write(f"| Successful | {gs.successful_requests:,} |\n")
             f.write(f"| Failed | {gs.failed_requests:,} |\n")
@@ -3134,7 +3130,7 @@ def export_to_csv(results: Dict, output_dir: str):
                 stats.get('duration_seconds', 0)
             ])
     
-    print(f"[*] Exported to CSV:")
+    print("[*] Exported to CSV:")
     print(f"   [*] {pages_file}")
     print(f"   [*] {pdfs_file}")
     print(f"   [*] {stats_file}")
@@ -3395,7 +3391,7 @@ def main():
     
     # Handle reset action
     if ACTION == "reset":
-        print(f"\n[*] Resetting scraper state...")
+        print("\n[*] Resetting scraper state...")
         db_path = os.path.join(OUTPUT_DIR, 'scraper_state.db')
         json_path = os.path.join(OUTPUT_DIR, 'scraper_state.json')
         
@@ -3406,7 +3402,7 @@ def main():
             os.remove(json_path)
             print(f"   Removed: {json_path}")
         
-        print(f"   [*] State reset complete\n")
+        print("   [*] State reset complete\n")
         # Continue to scrape after reset
     
     # Load configuration
@@ -3432,19 +3428,19 @@ def main():
                 pdf_stats = state_db.get_pdf_queue_stats()
                 
                 print(f"\n{'=' * 60}")
-                print(f"[*] Scraper Statistics")
+                print("[*] Scraper Statistics")
                 print(f"{'=' * 60}")
-                print(f"\nURLs:")
+                print("\nURLs:")
                 print(f"   Downloaded:  {stats.get('urls_downloaded', 0):,}")
                 print(f"   Skipped:     {stats.get('urls_skipped', 0):,}")
                 print(f"   Failed:      {stats.get('urls_failed', 0):,}")
-                print(f"\nNetworks:")
+                print("\nNetworks:")
                 print(f"   Complete:    {stats.get('networks_complete', 0)}")
-                print(f"\nPDF Queue (v4.2):")
+                print("\nPDF Queue (v4.2):")
                 print(f"   Pending:     {pdf_stats.get('pending', 0):,}")
                 print(f"   Downloaded:  {pdf_stats.get('downloaded', 0):,}")
                 print(f"   Failed:      {pdf_stats.get('failed', 0):,}")
-                print(f"\nContent:")
+                print("\nContent:")
                 print(f"   Total data:  {stats.get('total_bytes', 0) / 1024 / 1024:.2f} MB")
                 print(f"   Duplicates:  {stats.get('duplicate_pages', 0)}")
                 print(f"\nLast run: {state_db.get_metadata('last_run', 'Never')}")
@@ -3454,7 +3450,7 @@ def main():
             except Exception as e:
                 print(f"Error reading stats: {e}")
         else:
-            print(f"No statistics found. Run scraper first.")
+            print("No statistics found. Run scraper first.")
         return
     
     # Handle download_queue action (v4.2)
@@ -3474,7 +3470,7 @@ def main():
             return
     
     if not enabled:
-        print(f"\n[*]  No networks are enabled for scraping!")
+        print("\n[*]  No networks are enabled for scraping!")
         print("Edit ern_config.json and set 'scrape': true for desired networks.")
         return
     
@@ -3508,17 +3504,17 @@ def main():
         scraper.networks_to_scrape = enabled
     
     try:
-        results = scraper.run()
-        
+        scraper.run()
+
         if scraper._shutdown:
-            print(f"\n[*]  Scraping interrupted. Progress saved.")
-            print(f"   Re-run to continue.")
+            print("\n[*]  Scraping interrupted. Progress saved.")
+            print("   Re-run to continue.")
         else:
-            print(f"\n[*] Scraping complete!")
+            print("\n[*] Scraping complete!")
             print(f"   Output: {scraper.output_dir}/")
     
     except KeyboardInterrupt:
-        print(f"\n[*]  Interrupted. Progress saved.")
+        print("\n[*]  Interrupted. Progress saved.")
     except Exception as e:
         print(f"\n[*] Error: {e}")
         if VERBOSE:

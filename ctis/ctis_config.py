@@ -13,7 +13,7 @@ import os
 import re
 import json
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict
 
 # =====================================================================
 #                    MAIN CONFIGURATION - EDIT HERE

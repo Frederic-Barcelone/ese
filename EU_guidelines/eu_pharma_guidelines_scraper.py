@@ -33,7 +33,6 @@ Usage:
 Version: 7.0
 """
 
-import os
 import re
 import json
 import time
@@ -41,11 +40,10 @@ import random
 import logging
 import hashlib
 import signal
-import sys
 from datetime import datetime
 from pathlib import Path
 from dataclasses import dataclass, asdict, field
-from typing import Optional, Dict, Set, List, Tuple, Any
+from typing import Optional, Dict, Set, List, Tuple
 from urllib.parse import urljoin, urlparse, unquote, parse_qs
 from collections import deque
 from enum import Enum

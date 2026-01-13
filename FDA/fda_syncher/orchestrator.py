@@ -18,7 +18,7 @@ UPDATED v2.1:
 
 import time
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 
 # Import from YOUR config files
@@ -58,7 +58,7 @@ class FDASyncOrchestrator:
         self.start_time = None
         
         print(f"\n{'='*70}")
-        print(f"FDA DATA SYNCER - PARALLEL MODE v2.1")
+        print("FDA DATA SYNCER - PARALLEL MODE v2.1")
         print(f"Mode: {MODE}")
         print(f"Workers: {max_workers}")
         print(f"Areas: {', '.join(SYNC_AREAS)}")
@@ -91,7 +91,7 @@ class FDASyncOrchestrator:
             results[area] = {}
             
             # Step 1: Drug Labels (sequential - needed for subsequent steps)
-            self._print_safe(f"\n[STEP 1/5] Drug Labels...")
+            self._print_safe("\n[STEP 1/5] Drug Labels...")
             try:
                 labels = self.labels_dl.download(area)
                 results[area]['labels'] = len(labels) if isinstance(labels, list) else 0
@@ -102,8 +102,8 @@ class FDASyncOrchestrator:
                 labels = []
             
             # Step 2: Orphan Drugs - SKIPPED (manual download required)
-            self._print_safe(f"\n[STEP 2/5] Orphan Drugs - SKIPPED (manual download)")
-            self._print_safe(f"  Download from: https://www.accessdata.fda.gov/scripts/opdlisting/oopd/")
+            self._print_safe("\n[STEP 2/5] Orphan Drugs - SKIPPED (manual download)")
+            self._print_safe("  Download from: https://www.accessdata.fda.gov/scripts/opdlisting/oopd/")
             self._print_safe(f"  Save to: {OUTPUT_DIR}/orphan_drugs/")
             results[area]['orphan_drugs'] = 'manual'
             
@@ -188,7 +188,7 @@ class FDASyncOrchestrator:
     def _download_approval_packages(self, area, drug_names):
         """Download approval packages (thread worker)"""
         try:
-            self._print_safe(f"  [Worker] Starting approval packages download...")
+            self._print_safe("  [Worker] Starting approval packages download...")
             packages = self.packages_dl.download(area, drug_names)
             count = len(packages) if isinstance(packages, list) else 0
             return count
@@ -199,7 +199,7 @@ class FDASyncOrchestrator:
     def _download_adverse_events(self, area, drug_names):
         """Download adverse events (thread worker)"""
         try:
-            self._print_safe(f"  [Worker] Starting adverse events download...")
+            self._print_safe("  [Worker] Starting adverse events download...")
             adverse = self.adverse_dl.download(area, drug_names)
             count = len(adverse) if isinstance(adverse, list) else 0
             return count
@@ -210,7 +210,7 @@ class FDASyncOrchestrator:
     def _download_enforcement(self, area):
         """Download enforcement reports (thread worker)"""
         try:
-            self._print_safe(f"  [Worker] Starting enforcement download...")
+            self._print_safe("  [Worker] Starting enforcement download...")
             enforcement = self.enforcement_dl.download(area)
             count = len(enforcement) if isinstance(enforcement, list) else 0
             return count
@@ -222,11 +222,11 @@ class FDASyncOrchestrator:
         """Print final summary"""
         
         print(f"\n{'='*70}")
-        print(f"✅ PARALLEL SYNC COMPLETE!")
+        print("✅ PARALLEL SYNC COMPLETE!")
         print(f"{'='*70}")
         print(f"Duration: {duration}")
         print(f"Workers Used: {self.max_workers}")
-        print(f"\nResults by therapeutic area:")
+        print("\nResults by therapeutic area:")
         
         total_items = 0
         for area, data in results.items():
@@ -238,16 +238,16 @@ class FDASyncOrchestrator:
                 else:
                     print(f"  {source.replace('_', ' ').title()}: {count}")
         
-        print(f"\n📊 TOTALS:")
+        print("\n📊 TOTALS:")
         print(f"  Total Items Downloaded: {total_items:,}")
         print(f"  Therapeutic Areas: {len(results)}")
         print(f"  Estimated Speedup: 2x-{self.max_workers}x faster than sequential")
         
         # Recommendations
-        print(f"\n💡 RECOMMENDATIONS:")
-        print(f"  - Run fda_data_quality_check.py to verify data integrity")
-        print(f"  - Check FDA_DATA/ folder for all downloaded files")
-        print(f"  - For orphan drugs, manually download from FDA website")
+        print("\n💡 RECOMMENDATIONS:")
+        print("  - Run fda_data_quality_check.py to verify data integrity")
+        print("  - Check FDA_DATA/ folder for all downloaded files")
+        print("  - For orphan drugs, manually download from FDA website")
         
         print(f"\n{'='*70}\n")
 
@@ -277,7 +277,7 @@ def main():
         max_workers = 4  # Reduced from 6 to be more conservative
     
     print(f"\n{'='*70}")
-    print(f"PARALLEL PROCESSING CONFIGURATION")
+    print("PARALLEL PROCESSING CONFIGURATION")
     print(f"{'='*70}")
     print(f"Mode: {MODE}")
     print(f"Workers: {max_workers}")
@@ -291,7 +291,7 @@ def main():
             if response.lower() not in ['yes', 'y']:
                 print("Sync cancelled.")
                 return
-        except:
+        except (EOFError, KeyboardInterrupt):
             print("Running in non-interactive mode...")
     
     # Run sync with parallel processing

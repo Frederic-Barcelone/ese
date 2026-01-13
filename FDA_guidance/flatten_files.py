@@ -228,7 +228,7 @@ def main():
         print(f"\n🔍 DRY RUN - Target directory would be: {TARGET_DIR}")
     
     # Show source structure
-    print(f"\n📂 Source structure:")
+    print("\n📂 Source structure:")
     subfolders = [d for d in source_path.iterdir() if d.is_dir()]
     for subfolder in sorted(subfolders):
         file_count = len(list(subfolder.rglob('*')))
@@ -251,7 +251,7 @@ def main():
     print(f"Total size: {stats['total_size_mb']:.2f} MB")
     
     if not DRY_RUN and stats['copied'] > 0:
-        print(f"\n✅ Copy complete!")
+        print("\n✅ Copy complete!")
         print(f"Files available in: {TARGET_DIR}")
         
         # Create a manifest file in target
@@ -284,7 +284,7 @@ def main():
         print(f"📄 Manifest created: {manifest_path}")
     
     elif DRY_RUN:
-        print(f"\n🔍 DRY RUN complete - no files were copied")
+        print("\n🔍 DRY RUN complete - no files were copied")
         print("Set DRY_RUN = False to actually copy files")
     
     print("=" * 70 + "\n")

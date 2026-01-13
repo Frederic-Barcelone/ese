@@ -280,7 +280,7 @@ def run_all_qa_checks(db_path):
                 info_count += 1
     
     log("")
-    log(f"QA Check Summary:")
+    log("QA Check Summary:")
     log(f"  Errors:   {error_count}")
     log(f"  Warnings: {warning_count}")
     log(f"  Info:     {info_count}")
@@ -330,7 +330,7 @@ def print_qa_report(db_path, output_path):
     results["site_contact_completeness"] = check_site_contact_completeness(db_path)
     
     with output_path.open('w', encoding='utf-8') as f:
-        f.write(f"CTIS QA Report\n")
+        f.write("CTIS QA Report\n")
         f.write(f"Generated: {datetime.utcnow().isoformat()}Z\n")
         f.write("=" * 80 + "\n\n")
         

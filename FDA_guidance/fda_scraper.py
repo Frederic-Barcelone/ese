@@ -36,8 +36,8 @@ import re
 import json
 import logging
 from datetime import datetime
-from urllib.parse import urljoin, urlparse, parse_qs, urlencode, quote
-from typing import Optional, Set, Dict, List, Tuple
+from urllib.parse import urljoin, urlparse, parse_qs, quote
+from typing import Optional, Set, Dict, Tuple
 
 import requests
 from bs4 import BeautifulSoup
@@ -645,7 +645,7 @@ def download_pdf_with_retry(
             if os.path.exists(path):
                 try:
                     os.remove(path)
-                except:
+                except OSError:
                     pass
     
     logger.error(f"All {max_retries + 1} download attempts failed for: {pdf_url}")
@@ -802,7 +802,7 @@ def load_progress(progress_file: str) -> Dict:
                     if key not in data:
                         data[key] = [] if key != "last_category" else None
                 return data
-        except:
+        except (OSError, json.JSONDecodeError):
             pass
     return {
         "downloaded": [],
@@ -955,7 +955,6 @@ def main():
             # Get PDF URL - check if it's already a direct PDF/media link
             if url.lower().endswith(".pdf") or "/media/" in url:
                 pdf_url = url
-                pdf_title = title
             else:
                 pdf_info = get_pdf_url_from_guidance_page(session, url)
                 if not pdf_info:
@@ -969,8 +968,7 @@ def main():
                     save_progress(progress_file, progress)
                     continue
                 pdf_url = pdf_info["pdf_url"]
-                pdf_title = pdf_info.get("title", title)
-            
+
             # Download
             if download_pdf_with_retry(session, pdf_url, save_path):
                 stats["downloaded"] += 1

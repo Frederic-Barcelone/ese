@@ -11,9 +11,7 @@ ctis/ctis_run.py
 """
 
 import sys
-import time
 import sqlite3
-from pathlib import Path
 
 # Import configuration - ALL settings come from here
 from ctis_config import (
@@ -26,8 +24,6 @@ from ctis_config import (
     OUT_DIR, RESET_DATABASE, CHECK_FOR_UPDATES,
     # Performance settings
     MAX_WORKERS, RATE_LIMIT_RPS, PAGE_SIZE, REQUEST_TIMEOUT, MAX_RETRIES,
-    # Paths
-    PORTAL_URL,
 )
 
 # Import from modular structure
@@ -51,7 +47,7 @@ try:
         process_trial_documents
     )
     HAS_PDF_DOWNLOADER = True
-except ImportError as e:
+except ImportError:
     HAS_PDF_DOWNLOADER = False
     process_trial_documents = None
 

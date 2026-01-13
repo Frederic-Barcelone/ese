@@ -22,12 +22,9 @@ SETUP INSTRUCTIONS:
 import unittest
 import os
 import sys
-import json
 import tempfile
 import shutil
-from unittest.mock import Mock, patch, MagicMock, mock_open
-from datetime import datetime, timedelta
-from pathlib import Path
+from unittest.mock import Mock, patch
 
 # Add parent directory to path to find the FDA syncer modules
 # Adjust this path based on where your FDA syncer code is located

@@ -36,7 +36,7 @@ class EnforcementDownloader:
         
         # Check if disabled in config
         if not self.config['enforcement']['enabled']:
-            print(f"\n[ENFORCEMENT] DISABLED in config")
+            print("\n[ENFORCEMENT] DISABLED in config")
             return []
         
         # Check if today's file exists
@@ -99,7 +99,7 @@ class EnforcementDownloader:
                 cls = r.get('classification', 'Unknown')
                 classifications[cls] = classifications.get(cls, 0) + 1
             
-            print(f"  📊 By classification:")
+            print("  📊 By classification:")
             for cls, count in sorted(classifications.items()):
                 print(f"     - {cls}: {count}")
         

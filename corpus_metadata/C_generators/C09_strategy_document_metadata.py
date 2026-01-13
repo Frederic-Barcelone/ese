@@ -15,12 +15,11 @@ Uses pattern matching for dates and LLM for classification/description.
 from __future__ import annotations
 
 import json
-import os
 import re
 import stat
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A08_document_metadata_models import (
@@ -29,7 +28,6 @@ from A_core.A08_document_metadata_models import (
     DocumentClassification,
     DocumentDescription,
     DocumentMetadata,
-    DocumentMetadataFieldType,
     DocumentMetadataGeneratorType,
     DocumentMetadataProvenance,
     DocumentType,
@@ -448,7 +446,7 @@ class DocumentMetadataStrategy:
                 accessed_at=datetime.fromtimestamp(stat_info.st_atime),
                 permissions=permissions,
             )
-        except Exception as e:
+        except Exception:
             # Return minimal metadata on error
             return FileMetadata(
                 file_path=str(path),

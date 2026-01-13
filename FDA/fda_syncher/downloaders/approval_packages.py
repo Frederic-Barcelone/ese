@@ -16,8 +16,8 @@ Key improvements:
 import os
 import re
 import glob
+import json
 import time
-import requests
 from datetime import datetime
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
@@ -71,7 +71,7 @@ class ApprovalPackagesDownloader:
         
         # Check if disabled in config
         if not self.config['integrated_reviews']['enabled']:
-            print(f"\n[APPROVAL PACKAGES] DISABLED in config")
+            print("\n[APPROVAL PACKAGES] DISABLED in config")
             return []
         
         print(f"\n[APPROVAL PACKAGES] Downloading for {therapeutic_area}...")
@@ -95,7 +95,7 @@ class ApprovalPackagesDownloader:
         successful = []
         start_time = time.time()
         
-        print(f"\n  Starting downloads...")
+        print("\n  Starting downloads...")
         
         for i, drug_name in enumerate(drug_names, 1):
             # Progress every 5 drugs
@@ -126,7 +126,7 @@ class ApprovalPackagesDownloader:
         
         total_mins = (time.time() - start_time) / 60
         
-        print(f"\n  ✅ COMPLETE!")
+        print("\n  ✅ COMPLETE!")
         print(f"     Found & Downloaded: {self.stats['found']} packages")
         print(f"     Skipped (cached): {self.stats['skipped_cached']}")
         print(f"     Skipped (ANDA/generic): {self.stats['skipped_anda']}")
@@ -201,7 +201,7 @@ class ApprovalPackagesDownloader:
                 'downloaded': len(downloaded),
                 'skipped': False
             }
-        except Exception as e:
+        except Exception:
             self.stats['error'] += 1
             return None
     
@@ -239,7 +239,7 @@ class ApprovalPackagesDownloader:
                     # Clean up the application number
                     app_no = app_no.replace('NDA', '').replace('BLA', '').strip()
                     return app_no
-        except:
+        except (OSError, json.JSONDecodeError, KeyError):
             pass
         
         return None
@@ -284,7 +284,7 @@ class ApprovalPackagesDownloader:
                         # Verify it's actually a TOC page (has PDF links)
                         if b'.pdf' in response.content.lower():
                             return url, response.content
-                except:
+                except Exception:
                     # Silent failure on 404s - expected
                     continue
         
@@ -311,7 +311,7 @@ class ApprovalPackagesDownloader:
                 })
             
             return documents
-        except:
+        except Exception:
             return []
     
     def _categorize(self, doc_name):
@@ -368,7 +368,7 @@ class ApprovalPackagesDownloader:
                 })
                 
                 time.sleep(0.2)
-            except:
+            except Exception:
                 continue
         
         return downloaded
@@ -396,5 +396,5 @@ class ApprovalPackagesDownloader:
             
             with open(os.path.join(drug_dir, 'INDEX.md'), 'w') as f:
                 f.write(content)
-        except:
+        except (OSError, KeyError):
             pass

@@ -12,7 +12,6 @@ from datetime import datetime
 
 # Import from YOUR config file
 from syncher_keys import FORCE_REDOWNLOAD
-from syncher_therapeutic_areas import normalize_term
 
 
 def check_existing_file(filepath):
@@ -235,9 +234,6 @@ def extract_drug_names_from_labels(labels):
         openfda = label.get('openfda', {})
         if not isinstance(openfda, dict):
             continue
-        
-        # Check product type - prefer prescription drugs
-        product_type = openfda.get('product_type', [])
         
         brand_names = openfda.get('brand_name', [])
         generic_names = openfda.get('generic_name', [])

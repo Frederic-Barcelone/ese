@@ -20,7 +20,6 @@ import json
 import os
 import time
 from datetime import datetime, timedelta
-from pathlib import Path
 
 from syncher_keys import FDA_API_KEY, OUTPUT_DIR, get_sync_config
 from ..utils.http_client import SimpleHTTPClient
@@ -54,7 +53,7 @@ class AdverseEventsDownloader:
         """Download adverse events for therapeutic area with incremental saves"""
         
         if not self.config['adverse_events']['enabled']:
-            print(f"\n[ADVERSE EVENTS] DISABLED in config")
+            print("\n[ADVERSE EVENTS] DISABLED in config")
             return []
         
         # Check configuration
@@ -102,12 +101,10 @@ class AdverseEventsDownloader:
         
         endpoint = f"{self.base_url}/drug/event.json"
         batch_size = 10  # Save every 10 drugs
-        start_time = time.time()
-        
+
         for i, drug_name in enumerate(drug_names, 1):
             if i % 10 == 0:
                 # Show progress with better stats
-                elapsed_mins = (time.time() - start_time) / 60
                 real_error_rate = (self.total_errors / self.total_requests * 100) if self.total_requests > 0 else 0
                 success_with_data = (self.drugs_with_events / (self.drugs_with_events + self.drugs_without_events) * 100) if (self.drugs_with_events + self.drugs_without_events) > 0 else 0
                 print(f"    Progress: {len(processed_drugs) + i}/{len(processed_drugs) + len(drug_names)} | "
@@ -151,7 +148,7 @@ class AdverseEventsDownloader:
         real_error_rate = (self.total_errors / self.total_requests * 100) if self.total_requests > 0 else 0
         
         print(f"\n  [OK] Downloaded {len(all_events):,} adverse events")
-        print(f"  📊 Stats:")
+        print("  📊 Stats:")
         print(f"     - Drugs with events: {self.drugs_with_events}/{total_drugs_processed} ({data_rate:.0f}%)")
         print(f"     - API requests: {self.total_requests:,}")
         print(f"     - Real errors: {self.total_errors} ({real_error_rate:.1f}%)")
@@ -162,9 +159,9 @@ class AdverseEventsDownloader:
     def _check_circuit_breaker(self):
         """Check if circuit breaker should trigger"""
         if self.consecutive_errors >= 10:
-            print(f"\n⚠️  CIRCUIT BREAKER TRIGGERED!")
+            print("\n⚠️  CIRCUIT BREAKER TRIGGERED!")
             print(f"    Consecutive errors: {self.consecutive_errors}")
-            print(f"    Pausing for 60 seconds to allow API recovery...")
+            print("    Pausing for 60 seconds to allow API recovery...")
             print(f"    Time: {datetime.now().strftime('%H:%M:%S')}")
             time.sleep(60)  # Reduced from 5 minutes to 60 seconds
             self.consecutive_errors = 0
@@ -274,7 +271,7 @@ class AdverseEventsDownloader:
             try:
                 with open(output_file, 'r') as f:
                     all_events = json.load(f)
-            except:
+            except (OSError, json.JSONDecodeError):
                 all_events = []
         
         # Load progress tracking file
@@ -282,7 +279,7 @@ class AdverseEventsDownloader:
             try:
                 with open(progress_file, 'r') as f:
                     processed_drugs = set(line.strip() for line in f if line.strip())
-            except:
+            except OSError:
                 processed_drugs = set()
         
         return processed_drugs, all_events

@@ -23,8 +23,7 @@ import sqlite3
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, Any, List, Optional
-from collections import defaultdict
+from typing import Any, List, Optional
 
 # Import utilities from project
 sys.path.insert(0, '/mnt/project')
@@ -61,7 +60,7 @@ except ImportError:
             return None
         try:
             return datetime.fromisoformat(str(ts_str).replace('Z', '+00:00'))
-        except:
+        except (ValueError, TypeError):
             return None
     
     def log(msg):
@@ -108,7 +107,7 @@ def decode_age_categories(age_json: str) -> str:
             return ""
         names = [AGE_CATEGORY_MAP.get(str(code), f"Code {code}") for code in codes]
         return ", ".join(names)
-    except:
+    except (json.JSONDecodeError, TypeError):
         return str(age_json)
 
 
@@ -120,7 +119,7 @@ def decode_status_code(status_code: Any) -> str:
     try:
         code = int(status_code) if isinstance(status_code, str) else status_code
         return MSC_PUBLIC_STATUS_CODE_MAP.get(code, f"Unknown status code: {code}")
-    except:
+    except (ValueError, TypeError):
         return str(status_code)
 
 
@@ -153,7 +152,7 @@ def format_date(date_str: Any) -> str:
             return date_str_clean.split('T')[0]
         
         return date_str_clean
-    except Exception as e:
+    except Exception:
         # Last resort: if there's a T in the string, take everything before it
         date_str_clean = str(date_str)
         if 'T' in date_str_clean:
@@ -694,9 +693,9 @@ if __name__ == "__main__":
     
     # Exit
     if success:
-        print(f"\n✓ Excel file generated successfully!")
+        print("\n✓ Excel file generated successfully!")
         print(f"  Location: {output_path}")
         sys.exit(0)
     else:
-        print(f"\n✗ Failed to generate Excel file")
+        print("\n✗ Failed to generate Excel file")
         sys.exit(1)

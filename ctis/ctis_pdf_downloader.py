@@ -115,14 +115,14 @@ def _close_browser():
     if _browser_context:
         try:
             _browser_context.close()
-        except:
+        except Exception:
             pass
         _browser_context = None
-    
+
     if _playwright:
         try:
             _playwright.stop()
-        except:
+        except Exception:
             pass
         _playwright = None
 
@@ -179,7 +179,7 @@ def extract_pdfs_from_zip(zip_path: Path, output_dir: Path, ct_number: str) -> L
         if extracted:
             log(f"  Extracted {len(extracted)} PDF(s) from ZIP")
         else:
-            log(f"  No PDFs found in ZIP archive")
+            log("  No PDFs found in ZIP archive")
 
     except zipfile.BadZipFile:
         log(f"  Invalid ZIP file: {zip_path}", "WARN")
@@ -437,7 +437,7 @@ def download_trial(
             if cookie_btn.count() > 0 and cookie_btn.first.is_visible():
                 cookie_btn.first.click()
                 page.wait_for_timeout(1000)
-        except:
+        except Exception:
             pass
         
         # Find download button
@@ -455,7 +455,7 @@ def download_trial(
                 if elements.count() > 0 and elements.first.is_visible():
                     download_btn = elements.first
                     break
-            except:
+            except Exception:
                 continue
         
         if not download_btn:
@@ -507,7 +507,7 @@ def download_trial(
             if DELETE_ZIP_AFTER_EXTRACT and extracted:
                 try:
                     output_path.unlink()
-                    log(f"  Deleted ZIP after extraction")
+                    log("  Deleted ZIP after extraction")
                 except Exception as e:
                     log(f"  Could not delete ZIP: {e}", "WARN")
         
@@ -598,7 +598,7 @@ def download_trials_batch(
     
     # Summary
     log(f"\n{'='*60}")
-    log(f"Download Complete:")
+    log("Download Complete:")
     log(f"  New downloads: {success_count}")
     log(f"  Updated:       {update_count}")
     log(f"  Skipped:       {skip_count}")
@@ -702,7 +702,7 @@ def extract_all_zips(zip_dir: Path, output_dir: Optional[Path] = None) -> Dict:
             stats["failed"] += 1
 
     log(f"\n{'='*60}")
-    log(f"Extraction Complete:")
+    log("Extraction Complete:")
     log(f"  ZIP files processed: {stats['total_zips']}")
     log(f"  Successful:          {stats['successful']}")
     log(f"  Failed:              {stats['failed']}")

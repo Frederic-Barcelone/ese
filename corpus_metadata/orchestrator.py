@@ -2073,7 +2073,7 @@ Return ONLY the JSON array, nothing else."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Group by field type
-        from A_core.A07_feasibility_models import FeasibilityExportEntry, FeasibilityExportDocument
+        from A_core.A07_feasibility_models import FeasibilityExportEntry
 
         eligibility_inclusion = []
         eligibility_exclusion = []

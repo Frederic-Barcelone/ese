@@ -384,7 +384,7 @@ def print_configuration_summary():
     total_classes = sum(get_drug_class_count(a) for a in get_all_therapeutic_areas())
     total_aliases = len(ALIASES)
     
-    print(f"\nTOTAL:")
+    print("\nTOTAL:")
     print(f"  Therapeutic Areas: {len(get_all_therapeutic_areas())}")
     print(f"  Canonical Diseases: {total_diseases}")
     print(f"  Canonical Drug Classes: {total_classes}")

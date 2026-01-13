@@ -6,7 +6,6 @@ Checks that all 3 files have been updated correctly
 
 import os
 import sys
-from pathlib import Path
 
 # ANSI color codes
 GREEN = '\033[92m'
@@ -184,16 +183,16 @@ def main():
     if all(results):
         print(f"\n{GREEN}✓ ALL CHECKS PASSED!{END}")
         print(f"\n{BLUE}Ready to restart sync:{END}")
-        print(f"  cd FDA  # (if not already there)")
-        print(f"  python sync.py")
+        print("  cd FDA  # (if not already there)")
+        print("  python sync.py")
         print("\n" + "="*70)
         return 0
     else:
         print(f"\n{RED}✗ SOME CHECKS FAILED{END}")
-        print(f"\nPlease review the failed checks above and:")
-        print(f"1. Ensure files are in the correct location")
-        print(f"2. Verify all code changes were applied")
-        print(f"3. Check for syntax errors")
+        print("\nPlease review the failed checks above and:")
+        print("1. Ensure files are in the correct location")
+        print("2. Verify all code changes were applied")
+        print("3. Check for syntax errors")
         print("\n" + "="*70)
         return 1
 

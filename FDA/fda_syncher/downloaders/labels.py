@@ -17,7 +17,6 @@ Key improvements:
 import json
 import os
 from datetime import datetime
-from pathlib import Path
 
 from syncher_keys import FDA_API_KEY, OUTPUT_DIR, get_sync_config
 from syncher_therapeutic_areas import THERAPEUTIC_AREAS, get_expanded_keywords
@@ -54,7 +53,7 @@ class LabelsDownloader:
         """Download drug labels for therapeutic area with incremental saves"""
         
         if not self.config['labels']['enabled']:
-            print(f"\n[LABELS] DISABLED in config")
+            print("\n[LABELS] DISABLED in config")
             return []
         
         # Setup file paths
@@ -172,7 +171,7 @@ class LabelsDownloader:
         self._finalize(output_file, progress_file, all_results)
         
         print(f"  [OK] Downloaded {len(all_results)} unique drug labels")
-        print(f"  📊 Breakdown:")
+        print("  📊 Breakdown:")
         print(f"     - Prescription drugs: {self.stats['prescription']}")
         print(f"     - OTC drugs: {self.stats['otc']}")
         print(f"     - Other: {self.stats['other']}")
@@ -271,7 +270,7 @@ class LabelsDownloader:
                     all_results = json.load(f)
                     # Rebuild seen set IDs
                     seen_set_ids = {r.get('set_id') for r in all_results if r.get('set_id')}
-            except:
+            except (OSError, json.JSONDecodeError):
                 pass
         
         # Load progress state
@@ -279,7 +278,7 @@ class LabelsDownloader:
             try:
                 with open(progress_file, 'r') as f:
                     search_state = json.load(f)
-            except:
+            except (OSError, json.JSONDecodeError):
                 pass
         
         return all_results, seen_set_ids, search_state

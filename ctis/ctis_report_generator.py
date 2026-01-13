@@ -161,7 +161,7 @@ def format_date(date_str: Any) -> str:
         if dt:
             return dt.strftime('%Y-%m-%d')
         return str(date_str)
-    except:
+    except (ValueError, TypeError):
         return str(date_str)
 
 
@@ -173,11 +173,11 @@ def decode_age_categories(age_json: str) -> str:
         codes = json.loads(age_json)
         if not codes:
             return ""
-        # CTIS format: "18-64 years,65+ years"  
+        # CTIS format: "18-64 years,65+ years"
         # Convert codes to strings for lookup (handles both int and str codes)
         names = [AGE_CATEGORY_MAP.get(str(code), f"Code {code}") for code in codes]
         return ",".join(names)
-    except:
+    except (json.JSONDecodeError, TypeError):
         return str(age_json)
 
 
@@ -367,17 +367,15 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
     endpoints = get_endpoints(conn, ct_number)
     products = get_trial_products(conn, ct_number)
     ms_statuses = get_ms_status(conn, ct_number)
-    country_plans = get_country_planning(conn, ct_number)
-    site_contacts = get_site_contacts(conn, ct_number)
-    
+
     # Generate report
     with output_path.open('w', encoding='utf-8') as f:
         # Header - matching CTIS HTML format
         f.write(format_section_header("CTIS Clinical Trial Information", 1))
         f.write(f"Report Generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC\n")
-        f.write(f"Data extracted from CTIS database\n")
-        f.write(f"Labels match official CTIS HTML download format\n")
-        f.write(f"Database field names shown in parentheses\n")
+        f.write("Data extracted from CTIS database\n")
+        f.write("Labels match official CTIS HTML download format\n")
+        f.write("Database field names shown in parentheses\n")
         
         # ============================================================
         # 1. SUMMARY - TRIAL INFORMATION
@@ -461,7 +459,7 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
         f.write(format_section_header("2.1 Trial Details", 2))
         
         # Population
-        f.write(f"\nPopulation:\n")
+        f.write("\nPopulation:\n")
         f.write(format_field_ctis(get_ctis_label('gender'), trial.get('gender', ''), 'gender', indent=1))
         f.write(format_field_ctis(get_ctis_label('ageCategories'), age_display, 'ageCategories', indent=1))
         f.write(format_field_ctis(get_ctis_label('isPediatric'), format_yes_no(trial.get('isPediatric')), 'isPediatric', indent=1))
@@ -469,12 +467,12 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
         f.write(format_field_ctis(get_ctis_label('isConditionRareDisease'), format_yes_no(trial.get('isConditionRareDisease')), 'isConditionRareDisease', indent=1))
         
         # Trial Design
-        f.write(f"\nTrial Design:\n")
+        f.write("\nTrial Design:\n")
         f.write(format_field_ctis(get_ctis_label('isRandomised'), format_yes_no(trial.get('isRandomised')), 'isRandomised', indent=1))
         f.write(format_field_ctis(get_ctis_label('blindingType'), trial.get('blindingType', ''), 'blindingType', indent=1))
         
         # Inclusion Criteria
-        f.write(f"\nInclusion Criteria:\n")
+        f.write("\nInclusion Criteria:\n")
         if inclusion:
             for criterion in inclusion:
                 f.write(f"  {criterion['criterionNumber']}. {criterion['criterionText']}\n")
@@ -482,7 +480,7 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
             f.write("  (None specified)\n")
         
         # Exclusion Criteria
-        f.write(f"\nExclusion Criteria:\n")
+        f.write("\nExclusion Criteria:\n")
         if exclusion:
             for criterion in exclusion:
                 f.write(f"  {criterion['criterionNumber']}. {criterion['criterionText']}\n")
@@ -490,7 +488,7 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
             f.write("  (None specified)\n")
         
         # Endpoints
-        f.write(f"\nEndpoints:\n")
+        f.write("\nEndpoints:\n")
         f.write(format_field_ctis(get_ctis_label('primaryEndpointsCount'), trial.get('primaryEndpointsCount', 0), 'primaryEndpointsCount', indent=1))
         f.write(format_field_ctis(get_ctis_label('secondaryEndpointsCount'), trial.get('secondaryEndpointsCount', 0), 'secondaryEndpointsCount', indent=1))
         
@@ -498,14 +496,14 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
         secondary_eps = [ep for ep in endpoints if ep['endpointType'] == 'secondary']
         
         if primary_eps:
-            f.write(f"\n  Primary Endpoints:\n")
+            f.write("\n  Primary Endpoints:\n")
             for ep in primary_eps:
                 f.write(f"    {ep['endpointNumber']}. {ep['endpointText']}\n")
                 if ep['timeFrame']:
                     f.write(f"       Timeframe: {ep['timeFrame']}\n")
         
         if secondary_eps:
-            f.write(f"\n  Secondary Endpoints:\n")
+            f.write("\n  Secondary Endpoints:\n")
             for ep in secondary_eps:
                 f.write(f"    {ep['endpointNumber']}. {ep['endpointText']}\n")
                 if ep['timeFrame']:
@@ -580,7 +578,7 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
                 f.write(f"{'-' * 80}\n")
                 
                 for person in people_by_role[role]:
-                    f.write(f"\n")
+                    f.write("\n")
                     f.write(format_field_ctis(get_ctis_label('name'), person['name'], 'name', indent=1))
                     f.write(format_field_ctis(get_ctis_label('email'), person['email'], 'email', indent=1))
                     f.write(format_field_ctis(get_ctis_label('phone'), person['phone'], 'phone', indent=1))
@@ -599,8 +597,8 @@ def generate_ctis_format_report(conn: sqlite3.Connection, ct_number: str, output
         f.write(format_section_header("End of Report", 1))
         f.write(f"Report generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC\n")
         f.write(f"CT Number: {ct_number}\n")
-        f.write(f"Labels match official CTIS HTML download format\n")
-        f.write(f"Database field names shown in parentheses\n")
+        f.write("Labels match official CTIS HTML download format\n")
+        f.write("Database field names shown in parentheses\n")
         f.write("=" * 80 + "\n")
     
     return True
@@ -635,10 +633,10 @@ if __name__ == "__main__":
     print(f"Output: {output_path}")
     
     if generate_ctis_format_report(conn, ct_number, output_path):
-        print(f"âœ“ CTIS-format report generated successfully!")
+        print("âœ“ CTIS-format report generated successfully!")
         print(f"  {output_path}")
     else:
-        print(f"âœ— Failed to generate report")
+        print("âœ— Failed to generate report")
         sys.exit(1)
     
     conn.close()

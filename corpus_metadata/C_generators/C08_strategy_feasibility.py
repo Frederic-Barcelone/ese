@@ -19,8 +19,6 @@ Uses a combination of:
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
@@ -39,9 +37,9 @@ from A_core.A07_feasibility_models import (
     StudySite,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
-from B_parsing.B05_section_detector import SectionDetector, SECTION_PATTERNS
+from B_parsing.B05_section_detector import SectionDetector
 from B_parsing.B06_confidence import ConfidenceFeatures, ConfidenceCalculator
-from B_parsing.B07_negation import NegationDetector, NEGATION_CUES, EXCEPTION_CUES
+from B_parsing.B07_negation import NegationDetector, EXCEPTION_CUES
 
 
 # =============================================================================

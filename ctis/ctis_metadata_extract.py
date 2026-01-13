@@ -455,13 +455,13 @@ def main():
     
     # Check if file exists
     if excel_file is None or not excel_file.exists():
-        print(f"âŒ Error: CTIS list values Excel file not found!")
-        print(f"\nSearched in:")
+        print("âŒ Error: CTIS list values Excel file not found!")
+        print("\nSearched in:")
         for path in possible_paths:
             print(f"   - {path}")
-        print(f"\nUsage:")
+        print("\nUsage:")
         print(f"   python {sys.argv[0]} <path-to-excel-file>")
-        print(f"\nExample:")
+        print("\nExample:")
         print(f"   python {sys.argv[0]} ~/Downloads/clinical-trial-information-system-ctis-list-values_en.xlsx")
         return
     
@@ -492,7 +492,7 @@ def main():
     
     print("\nðŸ“Š Summary:")
     print(f"   Total reference lists: {len(all_data)}")
-    print(f"   Key mappings:")
+    print("   Key mappings:")
     for key, values in key_mappings.items():
         print(f"      - {key:25s} : {len(values):3d} items")
     

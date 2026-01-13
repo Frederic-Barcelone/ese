@@ -155,7 +155,7 @@ class SimpleHTTPClient:
                 print(f"      Connection error. Retry {attempt+1}/{self.max_retries} in {wait}s...")
                 time.sleep(wait)
                 
-            except Exception as e:
+            except Exception:
                 # For other errors, use full retry logic with adaptive delay
                 self.consecutive_errors += 1
                 
@@ -169,15 +169,11 @@ class SimpleHTTPClient:
     def download_file(self, url, filepath, chunk_size=8192):
         """Download file with streaming and progress"""
         response = self.get(url, stream=True)
-        
-        total_size = int(response.headers.get('content-length', 0))
-        downloaded = 0
-        
+
         with open(filepath, 'wb') as f:
             for chunk in response.iter_content(chunk_size=chunk_size):
                 if chunk:
                     f.write(chunk)
-                    downloaded += len(chunk)
         
         return filepath
     

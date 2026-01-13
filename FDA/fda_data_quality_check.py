@@ -14,11 +14,9 @@ Usage:
 """
 
 import json
-import os
 from pathlib import Path
-from collections import defaultdict, Counter
+from collections import defaultdict
 from datetime import datetime
-import hashlib
 
 class FDADataQualityChecker:
     """Comprehensive quality checker for FDA data"""
@@ -418,7 +416,7 @@ class FDADataQualityChecker:
                             labels_drugs.update(openfda['brand_name'])
                         if 'generic_name' in openfda:
                             labels_drugs.update(openfda['generic_name'])
-                except:
+                except (OSError, json.JSONDecodeError, KeyError):
                     pass
         
         # Get drug names from adverse events
@@ -434,7 +432,7 @@ class FDADataQualityChecker:
                     for event in events[:1000]:
                         if 'query_drug' in event:
                             ae_drugs.add(event['query_drug'])
-                except:
+                except (OSError, json.JSONDecodeError, KeyError):
                     pass
         
         # Get package names
@@ -479,12 +477,12 @@ class FDADataQualityChecker:
         total_issues = sum(len(v) for v in self.issues.values())
         total_duplicates = sum(len(v) for v in self.duplicates.values())
         
-        print(f"\n📊 Overall Health:")
+        print("\n📊 Overall Health:")
         print(f"  Issues Found: {total_issues}")
         print(f"  Duplicates Found: {total_duplicates}")
         
         # Data completeness
-        print(f"\n📈 Data Completeness:")
+        print("\n📈 Data Completeness:")
         for data_type, stats in self.stats.items():
             if data_type == 'directories':
                 continue
@@ -498,7 +496,7 @@ class FDADataQualityChecker:
         
         # Issues breakdown
         if total_issues > 0:
-            print(f"\n⚠️  Issues by Category:")
+            print("\n⚠️  Issues by Category:")
             for category, issue_list in self.issues.items():
                 if issue_list:
                     print(f"  {category}: {len(issue_list)} issues")
@@ -509,14 +507,14 @@ class FDADataQualityChecker:
         
         # Duplicates
         if total_duplicates > 0:
-            print(f"\n🔄 Duplicates Found:")
+            print("\n🔄 Duplicates Found:")
             for category, dup_list in self.duplicates.items():
                 if dup_list:
                     print(f"  {category}: {len(dup_list)} duplicates")
                     print(f"    Examples: {', '.join(str(d) for d in dup_list[:3])}")
         
         # Health assessment
-        print(f"\n🏥 Health Assessment:")
+        print("\n🏥 Health Assessment:")
         if total_issues == 0 and total_duplicates == 0:
             print("  ✅ EXCELLENT - No issues found!")
         elif total_issues < 10 and total_duplicates < 100:

@@ -277,14 +277,14 @@ class FDAValidator:
         print(f"✗ Failed: {failed}")
         
         if failed > 0:
-            print(f"\n⚠️  FAILING TESTS:")
+            print("\n⚠️  FAILING TESTS:")
             for failure in self.failures:
                 print(f"  ✗ {failure}")
             
-            print(f"\n⚠️  WARNING: Some FDA APIs have issues!")
+            print("\n⚠️  WARNING: Some FDA APIs have issues!")
             print("Check the failures above before running your sync.")
         else:
-            print(f"\n✓ All tests passed! FDA APIs are working correctly.")
+            print("\n✓ All tests passed! FDA APIs are working correctly.")
         
         print("="*80)
         

@@ -185,7 +185,7 @@ class TestRunner:
             'summary': {
                 'total_suites': len(self.results),
                 'passed': sum(1 for r in self.results.values() if r.get('passed')),
-                'failed': sum(1 for r in self.results.values() if r.get('passed') == False),
+                'failed': sum(1 for r in self.results.values() if not r.get('passed')),
                 'skipped': sum(1 for r in self.results.values() if r.get('skipped'))
             }
         }

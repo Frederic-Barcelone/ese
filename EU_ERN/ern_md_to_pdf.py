@@ -21,7 +21,6 @@ Author: ERN RAG Pipeline
 Date: 2025-11
 """
 
-import os
 import json
 import re
 from pathlib import Path
@@ -73,7 +72,7 @@ def load_json(filepath: Path) -> Optional[Dict]:
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except:
+        except (OSError, json.JSONDecodeError):
             pass
     return None
 

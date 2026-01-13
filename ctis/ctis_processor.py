@@ -13,7 +13,7 @@ import time
 import json
 import sqlite3
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
@@ -21,8 +21,7 @@ import requests
 
 from ctis_config import (
     DETAIL_URL, MAX_WORKERS, REPORT_EVERY, FINAL_COOLDOWN, AGE_CATEGORY_MAP,
-    DOWNLOAD_PDFS, DOWNLOAD_FILE_TYPES, ONLY_FOR_PUBLICATION,
-    PDF_DIR, DOCUMENT_WORKERS
+    DOWNLOAD_PDFS, DOWNLOAD_FILE_TYPES, ONLY_FOR_PUBLICATION
 )
 from ctis_utils import log, append_jsonl, safe_append_lines
 from ctis_http import req, _ensure_json_response
@@ -177,7 +176,7 @@ def process_single_trial(ct_number: str,
         append_jsonl(ndjson_path, [trial_data])
 
         # Print summary
-        log(f"\n=== Trial Summary ===")
+        log("\n=== Trial Summary ===")
         log(f"CT Number: {fields['ctNumber']}")
         log(f"Title: {fields['title']}")
         log(f"Sponsor: {fields['sponsor']}")
@@ -185,7 +184,7 @@ def process_single_trial(ct_number: str,
         log(f"Status: {fields['ctPublicStatusCode']} ({fields['ctStatus']})")
         log(f"Medical Condition: {fields['medicalCondition']}")
         
-        log(f"\n=== Feasibility Info ===")
+        log("\n=== Feasibility Info ===")
         
         # Decode age categories
         age_cats = json.loads(fields['ageCategories'])
@@ -210,18 +209,18 @@ def process_single_trial(ct_number: str,
         
         # Show MS status summary
         if ms_statuses:
-            log(f"\n=== Member State Status ===")
+            log("\n=== Member State Status ===")
             for ms in ms_statuses:
                 status = ms.get("status", "Unknown")
                 log(f"{ms.get('member_state')}: {status}")
         
         # Show country planning
         if country_plans:
-            log(f"\n=== Planned Participants ===")
+            log("\n=== Planned Participants ===")
             for plan in country_plans:
                 log(f"{plan.get('country')}: {plan.get('planned_participants')} participants")
         
-        log(f"===================\n")
+        log("===================\n")
 
         # Generate detailed report using comprehensive generator if available
         report_path = out_dir / f"{ct_number}_report.txt"
@@ -274,7 +273,7 @@ def process_single_trial(ct_number: str,
                 updated = sum(1 for r in download_results if r.get("success") and r.get("action") == "updated")
                 skipped = sum(1 for r in download_results if r.get("action") == "skipped")
                 total_size = sum(r.get("file_size", 0) for r in download_results if r.get("success"))
-                log(f"\nDocument Download Summary:")
+                log("\nDocument Download Summary:")
                 log(f"  New downloads: {downloaded}")
                 log(f"  Updated:       {updated}")
                 log(f"  Skipped:       {skipped}")
@@ -282,7 +281,7 @@ def process_single_trial(ct_number: str,
             else:
                 log("No documents found for this trial")
         
-        log(f"Single trial extraction complete!")
+        log("Single trial extraction complete!")
         return True
 
     except Exception as e:
@@ -549,7 +548,7 @@ def process_trial_documents(
     # Get final stats
     stats = get_document_stats(conn)
     
-    log(f"\n=== Document Download Complete ===")
+    log("\n=== Document Download Complete ===")
     log(f"Total documents processed: {total_docs}")
     log(f"  New downloads:  {new_downloads}")
     log(f"  Updated:        {updated_docs}")
@@ -592,7 +591,7 @@ def generate_trial_report(report_path: Path, fields: Dict[str, Any],
                         dt = parse_ts(value)
                         if dt:
                             value = dt.strftime('%Y-%m-%d')
-                    except:
+                    except (ValueError, TypeError):
                         pass
                 f.write(f"{key:30s}: {value}\n")
         
@@ -642,7 +641,7 @@ def generate_trial_report(report_path: Path, fields: Dict[str, Any],
             f.write(f"{exc['criterionNumber']}. {exc['criterionText']}\n\n")
         
         f.write("=" * 80 + "\n\n")
-        f.write(f"ENDPOINTS\n")
+        f.write("ENDPOINTS\n")
         f.write("-" * 80 + "\n")
         primary_eps = [e for e in endpoints if e['endpointType'] == 'primary']
         secondary_eps = [e for e in endpoints if e['endpointType'] == 'secondary']

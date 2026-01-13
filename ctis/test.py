@@ -17,9 +17,7 @@ USAGE:
     python test_pdf_download_v3.py
 """
 
-import json
 import sys
-import time
 from pathlib import Path
 
 # ===================== Configuration =====================
@@ -87,7 +85,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                     print("  Accepting cookies...")
                     cookie_btn.first.click()
                     page.wait_for_timeout(1000)
-            except:
+            except Exception:
                 pass
             
             # Take screenshot
@@ -119,7 +117,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                             search_input = first
                             print(f"  Found search input: {selector}")
                             break
-                except:
+                except Exception:
                     continue
             
             if not search_input:
@@ -132,7 +130,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                         placeholder = inp.get_attribute("placeholder") or ""
                         input_type = inp.get_attribute("type") or ""
                         print(f"    {i+1}. type={input_type}, placeholder={placeholder[:30]}")
-                    except:
+                    except Exception:
                         pass
                 page.screenshot(path=str(output_dir / "error_no_search.png"))
                 browser.close()
@@ -172,7 +170,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                         elements.first.click()
                         trial_clicked = True
                         break
-                except Exception as e:
+                except Exception:
                     continue
             
             if not trial_clicked:
@@ -186,7 +184,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                         rows.first.click()
                         trial_clicked = True
                         print("  Clicked first table row")
-                except:
+                except Exception:
                     pass
             
             page.wait_for_timeout(3000)
@@ -216,7 +214,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                             download_btn = first
                             print(f"  Found download button: {selector}")
                             break
-                except:
+                except Exception:
                     continue
             
             if not download_btn:
@@ -228,7 +226,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                         text = btn.text_content().strip()[:50]
                         if text:
                             print(f"    {i+1}. {text}")
-                    except:
+                    except Exception:
                         pass
                 
                 print("\n  All visible links:")
@@ -238,7 +236,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                         text = link.text_content().strip()[:50]
                         if text:
                             print(f"    {i+1}. {text}")
-                    except:
+                    except Exception:
                         pass
                 
                 page.screenshot(path=str(output_dir / "error_no_download_btn.png"))
@@ -264,7 +262,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
                     shutil.move(str(temp_path), str(output_path))
                     
                     size = output_path.stat().st_size
-                    print(f"\n✓ SUCCESS!")
+                    print("\n✓ SUCCESS!")
                     print(f"  File: {output_path.name}")
                     print(f"  Size: {size:,} bytes")
                     
@@ -285,7 +283,7 @@ def download_trial_via_ui(ct_number: str, output_dir: Path) -> bool:
             print(f"\nERROR: {e}")
             try:
                 page.screenshot(path=str(output_dir / "error_exception.png"))
-            except:
+            except Exception:
                 pass
             browser.close()
             return False
@@ -312,7 +310,7 @@ def download_trial_direct(ct_number: str, output_dir: Path) -> bool:
         f"{CTIS_BASE}/ctis-public/view/{ct_number}",
     ]
     
-    print(f"\nTrying alternative URL patterns...")
+    print("\nTrying alternative URL patterns...")
     
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=HEADLESS)
@@ -328,7 +326,7 @@ def download_trial_direct(ct_number: str, output_dir: Path) -> bool:
                 # Check if we landed on a detail page (has download button)
                 download_btn = page.locator('button:has-text("Download"), a:has-text("Download")')
                 if download_btn.count() > 0:
-                    print(f"  Found download button!")
+                    print("  Found download button!")
                     page.screenshot(path=str(output_dir / "alt_found_download.png"))
                     
                     # Try to download
@@ -345,10 +343,10 @@ def download_trial_direct(ct_number: str, output_dir: Path) -> bool:
                             print(f"  Downloaded: {output_path.name}")
                             browser.close()
                             return True
-                    except:
+                    except Exception:
                         pass
                         
-            except Exception as e:
+            except Exception:
                 continue
         
         browser.close()

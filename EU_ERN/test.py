@@ -10,7 +10,6 @@ import requests
 import os
 import re
 import time
-from pathlib import Path
 
 # Configuration
 RESULTS_FILE = "EU_ERN_DATA/ern_scrape_results.json"

@@ -15,7 +15,6 @@ From each package, copies files from:
 Output naming: FDA_{package_name}_{original_filename}
 """
 
-import os
 import shutil
 from pathlib import Path
 
@@ -233,7 +232,7 @@ def main():
         )
         print(f"Total Size Copied: {total_size:.2f} MB")
     
-    print(f"\n✅ Copy complete!")
+    print("\n✅ Copy complete!")
     print(f"Files available in: {TARGET_DIR}")
     print("="*70 + "\n")
     

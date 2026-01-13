@@ -35,7 +35,7 @@ import re
 from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional
 from difflib import SequenceMatcher
 
 # ============================================================================
@@ -376,25 +376,25 @@ class SmartDeduplicator:
     def merge_entity_info(existing: Dict, new: Dict, key_field: str = "name") -> Dict:
         """Generic merge for entities, keeping the most complete information."""
         merged = existing.copy()
-        
-        for field, value in new.items():
-            if field == "_source_file":
+
+        for key, value in new.items():
+            if key == "_source_file":
                 continue
-            if field == "_source_files":
+            if key == "_source_files":
                 continue
-            
-            existing_val = merged.get(field, "")
+
+            existing_val = merged.get(key, "")
             
             # For lists, merge them
             if isinstance(value, list) and isinstance(existing_val, list):
-                merged[field] = list(set(existing_val) | set(value))
+                merged[key] = list(set(existing_val) | set(value))
             # For strings, prefer longer/more complete
             elif isinstance(value, str) and isinstance(existing_val, str):
                 if len(value) > len(existing_val):
-                    merged[field] = value
+                    merged[key] = value
             # For empty values, fill in
             elif not existing_val and value:
-                merged[field] = value
+                merged[key] = value
         
         # Track source files
         existing_sources = merged.get("_source_files", [merged.get("_source_file", "")])
