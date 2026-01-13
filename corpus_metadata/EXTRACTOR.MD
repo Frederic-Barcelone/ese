@@ -55,7 +55,8 @@ corpus_metadata/
 │   ├── E02_disambiguator.py             # Context-based disambiguation (MS problem)
 │   ├── E03_disease_normalizer.py        # Disease ontology normalization
 │   ├── E04_pubtator_enricher.py         # PubTator API disease enrichment
-│   └── E05_drug_enricher.py             # Drug identifier enrichment
+│   ├── E05_drug_enricher.py             # Drug identifier enrichment
+│   └── E06_deduplicator.py              # Merge same-SF entries, pick best LF
 │
 ├── F_evaluation/                        # LAYER 5: METRICS & TESTING
 │   ├── F01_gold_loader.py               # Load gold standard annotations
@@ -436,6 +437,27 @@ Maps drugs to standard identifiers.
 - DrugBank IDs
 - NDC codes
 - MeSH terms
+
+### E06_deduplicator.py - Duplicate Merging
+Merges entities with the same short_form but different long_forms.
+
+**Problem Solved:**
+Multiple generators may find the same abbreviation with different expansions:
+- C3 → "C3 level" (from syntax patterns in text)
+- C3 → "Complement Component 3" (from lexicon lookup)
+
+**Key Principle:**
+Long forms found **in the document text** (Schwartz-Hearst, glossary tables) have priority over lexicon lookups. Author-provided definitions are the ground truth.
+
+**Quality Ranking (highest to lowest):**
+1. GLOSSARY_TABLE - Author-provided glossary
+2. SYNTAX_PATTERN - Schwartz-Hearst from text
+3. TABLE_LAYOUT - Extracted from document tables
+4. LEXICON_MATCH - Dictionary lookup (lowest priority)
+
+**Output:**
+- Single entity per short_form with best long_form
+- Alternative long_forms stored in `normalized_value.deduplication.alternatives`
 
 ---
 

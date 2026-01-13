@@ -123,6 +123,7 @@ from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E04_pubtator_enricher import DiseaseEnricher
 from E_normalization.E05_drug_enricher import DrugEnricher
+from E_normalization.E06_deduplicator import Deduplicator
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -496,6 +497,15 @@ class Orchestrator:
                 "fill_long_form_for_orphans": disambig_cfg.get(
                     "fill_long_form_for_orphans", True
                 ),
+            }
+        )
+
+        dedup_cfg = norm_cfg.get("deduplicator", {})
+        self.deduplicator = Deduplicator(
+            config={
+                "only_validated": dedup_cfg.get("only_validated", True),
+                "store_alternatives": dedup_cfg.get("store_alternatives", True),
+                "max_alternatives": dedup_cfg.get("max_alternatives", 5),
             }
         )
 
@@ -1426,15 +1436,20 @@ Return ONLY the JSON array, nothing else."""
     def _normalize_results(
         self, results: List[ExtractedEntity], full_text: str
     ) -> List[ExtractedEntity]:
-        """Stage 3.5: Normalize and disambiguate results.
+        """Stage 3.5: Normalize, disambiguate, and deduplicate results.
 
         Args:
             results: List of entities to normalize
             full_text: Pre-built full document text (avoids rebuilding)
-        """
-        print("\n[3.5/4] Normalizing & disambiguating...")
 
-        # Normalize
+        Pipeline:
+            1. Normalize: Map to canonical forms (term_mapper)
+            2. Disambiguate: Resolve ambiguous SF meanings (disambiguator)
+            3. Deduplicate: Merge same-SF entries, pick best LF (deduplicator)
+        """
+        print("\n[3.5/4] Normalizing, disambiguating & deduplicating...")
+
+        # Step 1: Normalize
         normalized_count = 0
         for i, entity in enumerate(results):
             normalized = self.term_mapper.normalize(entity)
@@ -1442,14 +1457,21 @@ Return ONLY the JSON array, nothing else."""
                 normalized_count += 1
             results[i] = normalized
 
-        # Disambiguate
+        # Step 2: Disambiguate
         results = self.disambiguator.resolve(results, full_text)
         disambiguated_count = sum(
             1 for r in results if "disambiguated" in (r.validation_flags or [])
         )
 
+        # Step 3: Deduplicate (merge same SF with different LFs)
+        count_before = len(results)
+        results = self.deduplicator.deduplicate(results)
+        count_after = len(results)
+        dedup_removed = count_before - count_after
+
         print(f"  Normalized: {normalized_count}")
         print(f"  Disambiguated: {disambiguated_count}")
+        print(f"  Deduplicated: {dedup_removed} duplicates merged")
 
         return results
 
