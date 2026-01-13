@@ -867,36 +867,6 @@
     },
     {
       "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "UK",
-      "long_form": "United Kingdom",
-      "category": "ABBREV",
-      "page": 11,
-      "occurrences": 2,
-      "audit_bucket": "UNSUPPORTED_PAIR",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "US",
-      "long_form": "United States",
-      "category": "ABBREV",
-      "page": 2,
-      "occurrences": 3,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "USA",
-      "long_form": "United States of America",
-      "category": "ABBREV",
-      "page": 11,
-      "occurrences": 1,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
       "short_form": "sC5b-9",
       "long_form": "soluble C5b-9 (membrane attack complex)",
       "category": "ABBREV",
@@ -2425,36 +2395,6 @@
       "long_form": "standard error",
       "category": "ABBREV",
       "page": 7,
-      "occurrences": 1,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "UK",
-      "long_form": "United Kingdom",
-      "category": "ABBREV",
-      "page": 11,
-      "occurrences": 2,
-      "audit_bucket": "UNSUPPORTED_PAIR",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "US",
-      "long_form": "United States",
-      "category": "ABBREV",
-      "page": 2,
-      "occurrences": 3,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "USA",
-      "long_form": "United States of America",
-      "category": "ABBREV",
-      "page": 11,
       "occurrences": 1,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"

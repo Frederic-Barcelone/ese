@@ -485,6 +485,8 @@ heuristics:
     FABHALTA: "iptacopan (brand name)"
     GLOSEN: "Spanish Glomerulonephritis Study Group"
     IG: "Immunoglobulin"
+    MEDDRA: "Medical Dictionary for Regulatory Activities"
+    SAS: "Statistical Analysis System"
 
   # ========================================
   # CONTEXTUAL RULES for ambiguous SFs
