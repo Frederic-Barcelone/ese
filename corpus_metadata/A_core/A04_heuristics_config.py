@@ -116,16 +116,12 @@ class HeuristicsConfig:
     )
 
     # ========================================
-    # COUNTRY CODES (PASO B) - Auto-approve
-    # Dict format: {SF: canonical_LF} - use .keys() for membership check
+    # COUNTRY CODES (PASO B) - DISABLED (moved to blacklist)
+    # These are valid abbreviations but not domain-specific for clinical NLP.
+    # Keeping empty dict for backward compatibility with code that references it.
     # ========================================
     country_abbrevs: Dict[str, str] = field(
-        default_factory=lambda: {
-            "US": "United States",
-            "UK": "United Kingdom",
-            "USA": "United States of America",
-            "EU": "European Union",
-        }
+        default_factory=lambda: {}
     )
 
     # ========================================
@@ -134,6 +130,11 @@ class HeuristicsConfig:
     # ========================================
     sf_blacklist: Set[str] = field(
         default_factory=lambda: {
+            # Country codes (valid abbreviations but not domain-specific)
+            "US",
+            "UK",
+            "USA",
+            "EU",
             # Author credentials (never medical abbreviations in context)
             "MD",
             "PHD",
