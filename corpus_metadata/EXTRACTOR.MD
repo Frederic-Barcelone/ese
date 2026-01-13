@@ -1,91 +1,123 @@
-# Abbreviation Extraction Pipeline
+# Metadata Extraction Pipeline
 
-This structure separates concerns into strict layers: Ingestion (Parsing) → Logic (Generators) → Judgment (Validation) → Standardization (Normalization) → Persistence (Export).
+A 6-layer pipeline for extracting structured metadata from PDFs: abbreviations, diseases, drugs, clinical trial feasibility data, and document metadata.
 
 **Design Philosophy:**
 - Generators (C) → High Recall (exhaustive, some noise OK)
 - Validation (D) → High Precision (Claude filters noise)
+- Layers: Parsing → Generation → Validation → Normalization → Evaluation
 
 ---
 
 ## Directory Structure
 
 ```
-corpus_metadata/corpus_extraction/
+corpus_metadata/
 │
-├── A_core/                            # LAYER 0: FOUNDATION
-│   ├── A01_domain_models.py           # Pydantic schemas (Candidate, ExtractedEntity)
-│   ├── A02_interfaces.py              # Abstract Base Classes for generators
-│   ├── A03_provenance.py              # Run ID generation, git hash, traceability
-│   └── A04_heuristics_config.py       # Centralized heuristics (whitelists/blacklists)
+├── A_core/                              # LAYER 0: FOUNDATION
+│   ├── A01_domain_models.py             # Core Pydantic schemas (Candidate, ExtractedEntity)
+│   ├── A02_interfaces.py                # Abstract Base Classes for all components
+│   ├── A03_provenance.py                # Run ID generation, git hash, traceability
+│   ├── A04_heuristics_config.py         # Centralized heuristics (whitelists/blacklists)
+│   ├── A05_disease_models.py            # Disease-specific domain models
+│   ├── A06_drug_models.py               # Drug/chemical entity models
+│   ├── A07_feasibility_models.py        # Clinical trial feasibility models
+│   └── A08_document_metadata_models.py  # Document-level metadata models
 │
-├── B_parsing/                         # LAYER 1: DOCUMENT STRUCTURE
-│   ├── B01_pdf_to_docgraph.py         # PDF parsing with Docling/Unstructured
-│   ├── B02_doc_graph.py               # Internal model (Page → Block → Token)
-│   ├── B03_table_extractor.py         # Table detection and JSON serialization
-│   └── B04_column_ordering.py         # Multi-column layout detection and ordering
+├── B_parsing/                           # LAYER 1: DOCUMENT STRUCTURE
+│   ├── B01_pdf_to_docgraph.py           # PDF parsing with Docling/Unstructured
+│   ├── B02_doc_graph.py                 # Internal model (Page → Block → Token)
+│   ├── B03_table_extractor.py           # Table detection and JSON serialization
+│   ├── B04_column_ordering.py           # Multi-column layout detection and ordering
+│   ├── B05_section_detector.py          # Section/heading detection
+│   ├── B06_confidence.py                # Confidence scoring features
+│   └── B07_negation.py                  # Negation/assertion detection
 │
-├── C_generators/                      # LAYER 2: CANDIDATE GENERATION
-│   ├── C01_strategy_abbrev.py         # Schwartz-Hearst syntax patterns
-│   ├── C02_strategy_regex.py          # Rigid patterns (Trial IDs, DOIs, doses)
-│   ├── C03_strategy_layout.py         # Spatial extraction from table cells
-│   ├── C04_strategy_flashtext.py      # Lexicon matching (UMLS, MeSH, trial acronyms)
-│   └── C05_strategy_glossary.py       # Glossary table extractor
+├── C_generators/                        # LAYER 2: CANDIDATE GENERATION
+│   ├── C00_strategy_identifiers.py      # Standardized database IDs (OMIM, DOI, NCT, etc.)
+│   ├── C01_strategy_abbrev.py           # Schwartz-Hearst syntax patterns
+│   ├── C02_strategy_regex.py            # Rigid patterns (Trial IDs, DOIs, doses)
+│   ├── C03_strategy_layout.py           # Spatial extraction from table cells
+│   ├── C04_strategy_flashtext.py        # Lexicon matching (UMLS, MeSH, trial acronyms)
+│   ├── C05_strategy_glossary.py         # Glossary table extractor
+│   ├── C06_strategy_disease.py          # Disease mention detection
+│   ├── C07_strategy_drug.py             # Drug/chemical detection
+│   ├── C08_strategy_feasibility.py      # Clinical trial feasibility extraction
+│   └── C09_strategy_document_metadata.py # Document metadata extraction
 │
-├── D_validation/                      # LAYER 3: LLM VERIFICATION
-│   ├── D01_prompt_registry.py         # Version control for prompts
-│   ├── D02_llm_engine.py              # Claude API wrapper with JSON extraction
-│   └── D03_validation_logger.py       # JSONL audit trail for validation events
+├── D_validation/                        # LAYER 3: LLM VERIFICATION
+│   ├── D01_prompt_registry.py           # Version control for prompts
+│   ├── D02_llm_engine.py                # Claude API wrapper with JSON extraction
+│   └── D03_validation_logger.py         # JSONL audit trail for validation events
 │
-├── E_normalization/                   # LAYER 4: STANDARDIZATION
-│   ├── E01_term_mapper.py             # Synonym resolution (pembro → pembrolizumab)
-│   └── E02_disambiguator.py           # Context-based disambiguation (MS problem)
+├── E_normalization/                     # LAYER 4: STANDARDIZATION
+│   ├── E01_term_mapper.py               # Synonym resolution (pembro → pembrolizumab)
+│   ├── E02_disambiguator.py             # Context-based disambiguation (MS problem)
+│   ├── E03_disease_normalizer.py        # Disease ontology normalization
+│   ├── E04_pubtator_enricher.py         # PubTator API disease enrichment
+│   └── E05_drug_enricher.py             # Drug identifier enrichment
 │
-├── F_evaluation/                      # LAYER 5: METRICS & TESTING
-│   ├── F01_gold_loader.py             # Load gold standard annotations
-│   ├── F02_scorer.py                  # Precision/Recall/F1 calculation
-│   ├── F03_generator_unit_test.py     # Unit tests for generators (no LLM)
-│   ├── F04_pipeline_test.py           # Full pipeline evaluation with scoring
-│   └── F05_extraction_analysis.py     # Detailed extraction report (TP/FP/FN)
+├── F_evaluation/                        # LAYER 5: METRICS & TESTING
+│   ├── F01_gold_loader.py               # Load gold standard annotations
+│   ├── F02_scorer.py                    # Precision/Recall/F1 calculation
+│   ├── F03_generator_unit_test.py       # Unit tests for generators (no LLM)
+│   ├── F04_pipeline_test.py             # Full pipeline evaluation with scoring
+│   └── F05_extraction_analysis.py       # Detailed extraction report (TP/FP/FN)
 │
-├── Z_tests/                           # DEVELOPMENT TESTS
-│   ├── small_script.py                # Quick debugging scripts
-│   └── test_parsing_with_unstructured.py  # Parser testing
+├── G_config/                            # CONFIGURATION
+│   └── config.yaml                      # Central configuration file
 │
-├── orchestrator.py                    # The Conductor - main pipeline entry point
+├── Z_tests/                             # DEVELOPMENT TESTS
+│   ├── small_script.py                  # Quick debugging scripts
+│   └── test_parsing_with_unstructured.py # Parser testing
 │
-└── config/
-    └── corpus_config/config.yaml      # Central configuration file
+├── cache/                               # Runtime cache (PubTator data)
+├── orchestrator.py                      # Main pipeline entry point
+└── EXTRACTOR.MD                         # This documentation
 ```
 
 ---
 
 ## A_core (Foundation Layer)
 
-### A01_domain_models.py - The Source of Truth
-Defines all data structures using Pydantic for strict validation.
+### A01_domain_models.py - Core Data Structures
+Defines all core data structures using Pydantic for strict validation.
 
 **Key Models:**
 - `Candidate`: Raw extraction with confidence score, awaiting validation
-- `ExtractedEntity`: Validated and normalized abbreviation
+- `ExtractedEntity`: Validated and normalized entity
 - `ValidationStatus`: Enum (VALIDATED, REJECTED, AMBIGUOUS, ERROR)
 - `GeneratorType`: Enum (SYNTAX_PATTERN, LEXICON_MATCH, TABLE_LAYOUT, etc.)
+- `BoundingBox`: Geometric model for spatial coordinates
 - `ProvenanceMetadata`: Tracks pipeline version, run ID, lexicon source
 
-**Purpose:** If a script tries to pass invalid data, Pydantic stops it immediately. This prevents silent errors from corrupting the final output.
+**Purpose:** If a script tries to pass invalid data, Pydantic stops it immediately.
 
-### A02_interfaces.py - The Contracts
-Abstract Base Classes that all generators must implement.
+### A02_interfaces.py - Abstract Contracts
+Abstract Base Classes that all components must implement.
 
-**Key Interface:**
+**Key Interfaces:**
 ```python
 class BaseCandidateGenerator(ABC):
     @abstractmethod
     def extract(self, doc: DocumentGraph) -> List[Candidate]:
         """Extract candidates from document."""
-```
 
-**Purpose:** Enables plug-and-play architecture. The orchestrator doesn't need to know how each generator works, only that it returns candidates.
+class BaseVerifier(ABC):
+    @abstractmethod
+    def verify(self, candidates: List[Candidate]) -> List[ExtractedEntity]:
+        """Validate candidates using LLM."""
+
+class BaseNormalizer(ABC):
+    @abstractmethod
+    def normalize(self, entities: List[ExtractedEntity]) -> List[ExtractedEntity]:
+        """Standardize and enrich entities."""
+
+class BaseEvaluationMetric(ABC):
+    @abstractmethod
+    def compute(self, predictions, gold) -> Dict:
+        """Calculate evaluation metrics."""
+```
 
 ### A03_provenance.py - Traceability
 Handles audit trail and reproducibility.
@@ -105,10 +137,40 @@ Centralizes all configurable rules in one place.
 - `hyphenated_abbrevs`: Handle hyphenated forms (CKD-EPI, sC5b-9)
 - `HeuristicsCounters`: Track how many candidates hit each rule
 
-**Eval Header:** Generates summary for quick comparison:
-```
-[EVAL] gold=papers_gold_v2.json | mode=sf+lf_match | blacklist=11 | gold_sfs=56
-```
+### A05_disease_models.py - Disease Domain Models
+Specialized models for disease entity extraction.
+
+**Key Models:**
+- `DiseaseCandidate`: Raw disease mention with context
+- `ExtractedDisease`: Validated disease entity
+- `DiseaseIdentifier`: Supports ICD-10, SNOMED-CT, MONDO, ORPHA codes
+- `DiseaseGeneratorType`: Enum for disease lexicon sources
+
+### A06_drug_models.py - Drug Domain Models
+Models for drug and chemical entity extraction.
+
+**Key Models:**
+- `DrugCandidate`: Raw drug mention
+- `ExtractedDrug`: Validated drug entity
+- `DevelopmentPhase`: Enum (Preclinical, Phase I/II/III, Approved)
+- Supports RxCUI, NDC, MeSH, DrugBank identifiers
+
+### A07_feasibility_models.py - Clinical Trial Feasibility Models
+Models for extracting clinical trial feasibility information.
+
+**Key Models:**
+- `FeasibilityFieldType`: Eligibility, epidemiology, patient journey, endpoints
+- `CriterionType`: Inclusion/exclusion criteria types
+- `PatientJourneyPhaseType`: Diagnosis, treatment, follow-up phases
+- `EndpointType`: Primary, secondary, exploratory endpoints
+
+### A08_document_metadata_models.py - Document Metadata Models
+Models for document-level metadata extraction.
+
+**Key Models:**
+- `FileMetadata`: File system info (size, dates, permissions)
+- `PDFMetadata`: PDF-specific fields (author, creator, creation date)
+- `DocumentMetadata`: Classification, descriptions, date extraction
 
 ---
 
@@ -144,11 +206,45 @@ Handles multi-column document layouts.
 
 **Purpose:** Academic papers often have 2-column layouts. This module ensures text is read in correct order (left column top-to-bottom, then right column).
 
+### B05_section_detector.py - Section Detection
+Identifies document sections and headings.
+
+**Detects:**
+- Standard sections (Abstract, Methods, Results, Discussion)
+- Custom section headers
+- Hierarchical section structure
+
+### B06_confidence.py - Confidence Scoring
+Calculates extraction confidence based on document context.
+
+**Features:**
+- Positional reliability scoring
+- Source quality weighting
+- Context-based confidence adjustment
+
+### B07_negation.py - Negation/Assertion Detection
+Classifies assertions as positive, negative, or uncertain.
+
+**Purpose:** Avoids false positives from negated mentions:
+- "No evidence of disease" → negative assertion
+- "Patient has disease" → positive assertion
+- "Possible disease" → uncertain assertion
+
 ---
 
 ## C_generators (Candidate Generation Layer)
 
-Philosophy: **High Recall**. Better to propose something incorrect (filtered later) than miss a valid abbreviation.
+Philosophy: **High Recall**. Better to propose something incorrect (filtered later) than miss a valid entity.
+
+### C00_strategy_identifiers.py - Database Identifiers
+Extracts standardized database identifiers.
+
+**Extracts:**
+- Disease IDs: OMIM, Orphanet
+- Publication IDs: DOI, PMID, PMC
+- Trial IDs: NCT, ISRCTN, EudraCT
+- Author IDs: ORCID
+- Ontology codes: UMLS CUI, MeSH, ICD-10, SNOMED CT
 
 ### C01_strategy_abbrev.py - Syntax Patterns
 Schwartz-Hearst algorithm for explicit definitions.
@@ -198,6 +294,56 @@ Extracts abbreviations from explicit glossary sections.
 - Tables with columns "Abbreviation" / "Definition"
 - High confidence (author-provided definitions)
 
+### C06_strategy_disease.py - Disease Extraction
+Specialized disease mention detection.
+
+**Lexicons:**
+- Disease-specific lexicons (PAH, ANCA, IgAN, C3G)
+- General disease lexicon (29K+ diseases)
+- Orphanet rare diseases (9.6K)
+- scispacy NER with UMLS disease types
+
+**False Positive Filtering:**
+- Chromosome patterns (Chr1, 1p36)
+- Gene symbols
+- Chemical compounds
+
+### C07_strategy_drug.py - Drug Extraction
+Drug and chemical entity detection.
+
+**Lexicons:**
+- Investigational drug lexicons
+- FDA-approved drugs
+- RxNorm general terms
+- Compound ID patterns (ABC-123)
+
+**Methods:**
+- FlashText lexicon matching
+- scispacy CHEMICAL NER
+- Regex compound patterns
+
+### C08_strategy_feasibility.py - Feasibility Extraction
+Clinical trial feasibility information extraction.
+
+**Extracts:**
+- Eligibility criteria (inclusion/exclusion)
+- Epidemiology data (prevalence, incidence)
+- Patient journey phases
+- Study endpoints (primary, secondary, exploratory)
+
+**Methods:**
+- Rule-based extraction for structured fields
+- LLM-based extraction for complex information
+
+### C09_strategy_document_metadata.py - Document Metadata Extraction
+Document-level metadata extraction.
+
+**Extracts:**
+- File metadata (size, dates)
+- PDF metadata (author, creator, creation date)
+- Document classification (protocol vs. article)
+- Date extraction with fallback chain
+
 ---
 
 ## D_validation (LLM Verification Layer)
@@ -206,6 +352,13 @@ Philosophy: **High Precision**. Filter noise using Claude's reasoning.
 
 ### D01_prompt_registry.py - Prompt Version Control
 Manages all LLM prompts with versioning.
+
+**Prompt Tasks:**
+- `VERIFY_DEFINITION_PAIR`: Validate abbreviation-expansion pairs
+- `VERIFY_SHORT_FORM_ONLY`: Validate standalone abbreviations
+- `VERIFY_BATCH`: Batch validation of multiple candidates
+- `FAST_REJECT`: Quick rejection of obvious false positives
+- Disease and drug validation tasks
 
 **Features:**
 - Unique prompt IDs: `verify_abbreviation:v2.1`
@@ -258,6 +411,32 @@ Resolves polysemy using document context.
 
 **Method:** Contextual voting based on surrounding terms.
 
+### E03_disease_normalizer.py - Disease Normalization
+Maps disease mentions to standard ontologies.
+
+**Links to:**
+- ICD-10 codes
+- SNOMED-CT codes
+- MONDO ontology
+- Orphanet rare disease IDs
+
+### E04_pubtator_enricher.py - PubTator Enrichment
+Uses PubTator API for disease entity linking.
+
+**Features:**
+- Adds MeSH IDs
+- Adds standard disease codes
+- Cache-based to avoid redundant API calls
+
+### E05_drug_enricher.py - Drug Enrichment
+Maps drugs to standard identifiers.
+
+**Links to:**
+- RxNorm codes
+- DrugBank IDs
+- NDC codes
+- MeSH terms
+
 ---
 
 ## F_evaluation (Metrics & Testing Layer)
@@ -282,6 +461,7 @@ Calculates Precision/Recall/F1.
 - Precision: TP / (TP + FP) - "How trustworthy?"
 - Recall: TP / (TP + FN) - "How complete?"
 - F1: Harmonic mean of P and R
+- Micro (global) and macro (per-document) scoring
 
 ### F03_generator_unit_test.py - Generator Unit Tests
 Tests generators without LLM (fast iteration).
@@ -333,11 +513,11 @@ Main entry point that coordinates all layers.
 1. **Parse** (B): PDF → DocumentGraph
 2. **Generate** (C): DocumentGraph → Candidates
 3. **Validate** (D): Candidates → Validated/Rejected
-4. **Normalize** (E): Standardize expansions
+4. **Normalize** (E): Standardize and enrich entities
 5. **Export**: JSON + Analysis report
 
 **Key Features:**
-- Configurable via `config.yaml`
+- Configurable via `G_config/config.yaml`
 - Heuristic shortcuts (PASO A-D) for efficiency
 - Detailed logging to JSONL
 - Automatic F05 analysis after extraction
@@ -350,17 +530,19 @@ Main entry point that coordinates all layers.
 
 ---
 
-## Configuration
+## G_config (Configuration)
 
-All parameters centralized in `corpus_config/config.yaml`:
+All parameters centralized in `G_config/config.yaml`:
 
 **Sections:**
+- `system`: Pipeline name and version
 - `paths`: Input/output directories, gold data location
-- `lexicons`: All lexicon file paths
-- `heuristics`: Whitelists, blacklists, context rules
-- `generators`: Enable/disable specific strategies
-- `validation`: LLM settings, batch sizes
-- `api.claude`: Model selection, temperature, max_tokens
+- `lexicons`: 25+ lexicon file paths with version dating
+- `databases`: Disease ontology databases
+- `defaults`: Global parameters (confidence threshold, fuzzy match threshold)
+- `features`: Feature flags for drug/disease/abbreviation detection
+- `heuristics`: Tuning parameters (PASO A-D)
+- `validation`: LLM settings, model selection, temperature
 
 ---
 
@@ -368,7 +550,7 @@ All parameters centralized in `corpus_config/config.yaml`:
 
 ### Single PDF Extraction
 ```python
-from orchestrator import Orchestrator
+from corpus_metadata.orchestrator import Orchestrator
 
 orch = Orchestrator()
 entities = orch.process_pdf("/path/to/document.pdf")
@@ -376,7 +558,7 @@ entities = orch.process_pdf("/path/to/document.pdf")
 
 ### Pipeline Evaluation
 ```bash
-python F_evaluation/F04_pipeline_test.py
+python -m corpus_metadata.F_evaluation.F04_pipeline_test
 ```
 
 ### Environment
