@@ -25,26 +25,6 @@
     },
     {
       "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "EMA",
-      "long_form": "European Medicines Agency",
-      "category": "ABBREV",
-      "page": 2,
-      "occurrences": 3,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "FDA",
-      "long_form": "Food and Drug Administration",
-      "category": "ABBREV",
-      "page": 2,
-      "occurrences": 7,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
       "short_form": "IC-MPGN",
       "long_form": "immune complex membranoproliferative glomerulonephritis",
       "category": "ABBREV",
@@ -1546,26 +1526,6 @@
       "category": "ABBREV",
       "page": 12,
       "occurrences": 2,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "EMA",
-      "long_form": "European Medicines Agency",
-      "category": "ABBREV",
-      "page": 2,
-      "occurrences": 3,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "FDA",
-      "long_form": "Food and Drug Administration",
-      "category": "ABBREV",
-      "page": 2,
-      "occurrences": 7,
       "audit_bucket": "EXTRACTABLE_PAIR",
       "gold_type": "DEFINED"
     },

@@ -356,6 +356,11 @@ heuristics:
     - "KOR"     # South Korea
     - "RUS"     # Russia
     # ----------------------------------------
+    # Regulatory agencies (not domain-specific)
+    # ----------------------------------------
+    - "FDA"     # Food and Drug Administration
+    - "EMA"     # European Medicines Agency
+    # ----------------------------------------
     # Author credentials
     # ----------------------------------------
     - "MD"
