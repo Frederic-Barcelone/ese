@@ -310,6 +310,110 @@ class DateExtractor:
 
 
 # =============================================================================
+# DOI EXTRACTION
+# =============================================================================
+
+
+class DOIExtractor:
+    """
+    Extracts DOI (Digital Object Identifier) from document content and PDF annotations.
+
+    Supports formats:
+    - Bare DOI: 10.1016/S0140-6736(25)01148-1
+    - URL format: https://doi.org/10.1016/S0140-6736(25)01148-1
+    - With prefix: doi:10.1016/S0140-6736(25)01148-1
+    """
+
+    # DOI patterns - order matters (most specific first)
+    # DOIs can contain parentheses, hyphens, dots, etc. so we use a permissive pattern
+    # and clean up trailing punctuation afterwards
+    DOI_PATTERNS = [
+        # Full URL format: https://doi.org/10.xxxx/...
+        re.compile(r"https?://(?:dx\.)?doi\.org/(10\.\d{4,9}/\S+)", re.IGNORECASE),
+        # With doi: prefix
+        re.compile(r"doi[:\s]+(10\.\d{4,9}/\S+)", re.IGNORECASE),
+        # Bare DOI format (10.xxxx/...)
+        re.compile(r"\b(10\.\d{4,9}/\S+)", re.IGNORECASE),
+    ]
+
+    @classmethod
+    def extract_from_text(cls, text: str) -> tuple[Optional[str], Optional[str]]:
+        """
+        Extract DOI from text content.
+
+        Returns:
+            Tuple of (doi, doi_url) where doi is the bare identifier
+            and doi_url is the full https://doi.org/... URL
+        """
+        if not text:
+            return None, None
+
+        # Normalize whitespace (DOIs sometimes have line breaks)
+        text = re.sub(r"\s+", " ", text)
+
+        for pattern in cls.DOI_PATTERNS:
+            match = pattern.search(text)
+            if match:
+                doi = match.group(1)
+                # Clean up trailing punctuation and common delimiters
+                doi = doi.rstrip(".,;:\"'<>]}")
+                # Remove trailing HTML/XML if present
+                doi = re.sub(r"<[^>]+>.*$", "", doi)
+                # Validate DOI format
+                if cls._is_valid_doi(doi):
+                    doi_url = f"https://doi.org/{doi}"
+                    return doi, doi_url
+
+        return None, None
+
+    @classmethod
+    def extract_from_pdf_annotations(cls, doc) -> tuple[Optional[str], Optional[str]]:
+        """
+        Extract DOI from PDF link annotations.
+
+        Args:
+            doc: PyMuPDF document object
+
+        Returns:
+            Tuple of (doi, doi_url)
+        """
+        if doc is None:
+            return None, None
+
+        try:
+            for page in doc:
+                for link in page.get_links():
+                    uri = link.get("uri", "")
+                    if uri and "doi.org" in uri:
+                        # Extract DOI from URL
+                        match = re.search(r"doi\.org/(10\.\d{4,9}/[^\s\]\)>\",]+)", uri)
+                        if match:
+                            doi = match.group(1).rstrip(".,;:")
+                            if cls._is_valid_doi(doi):
+                                return doi, uri
+        except Exception:
+            pass
+
+        return None, None
+
+    @staticmethod
+    def _is_valid_doi(doi: str) -> bool:
+        """Validate DOI format."""
+        if not doi:
+            return False
+        # DOI must start with 10. and have a suffix after /
+        if not doi.startswith("10."):
+            return False
+        if "/" not in doi:
+            return False
+        # Suffix must be at least 1 character
+        parts = doi.split("/", 1)
+        if len(parts) != 2 or not parts[1]:
+            return False
+        return True
+
+
+# =============================================================================
 # MAIN STRATEGY
 # =============================================================================
 
@@ -375,6 +479,20 @@ class DocumentMetadataStrategy:
         # 3. Get content sample for classification/description
         if content_sample is None and doc_graph:
             content_sample = self._get_content_sample(doc_graph)
+
+        # 3b. Extract DOI from content if not found in PDF annotations
+        if pdf_meta and not pdf_meta.doi and content_sample:
+            doi, doi_url = DOIExtractor.extract_from_text(content_sample)
+            if doi:
+                # Update pdf_meta with DOI found in content
+                pdf_meta = PDFMetadata(
+                    **{**pdf_meta.model_dump(), "doi": doi, "doi_url": doi_url}
+                )
+        elif not pdf_meta and content_sample:
+            # No PDF metadata but we have content - check for DOI
+            doi, doi_url = DOIExtractor.extract_from_text(content_sample)
+            if doi:
+                pdf_meta = PDFMetadata(doi=doi, doi_url=doi_url)
 
         # 4. Extract dates with fallback chain
         date_result = self._extract_dates(
@@ -485,6 +603,9 @@ class DocumentMetadataStrategy:
                 if has_forms and has_annotations:
                     break
 
+            # Extract DOI from PDF link annotations
+            doi, doi_url = DOIExtractor.extract_from_pdf_annotations(doc)
+
             pdf_meta = PDFMetadata(
                 title=meta.get("title") or None,
                 author=meta.get("author") or None,
@@ -500,6 +621,8 @@ class DocumentMetadataStrategy:
                 is_tagged=doc.is_pdf,  # Simplified check
                 has_form_fields=has_forms,
                 has_annotations=has_annotations,
+                doi=doi,
+                doi_url=doi_url,
             )
 
             doc.close()

@@ -96,6 +96,8 @@ class PDFMetadata(BaseModel):
     is_tagged: bool = False  # Accessibility tagging
     has_form_fields: bool = False
     has_annotations: bool = False
+    doi: Optional[str] = None  # DOI identifier (e.g., "10.1016/S0140-6736(25)01148-1")
+    doi_url: Optional[str] = None  # Full DOI URL (e.g., "https://doi.org/10.1016/...")
 
     model_config = ConfigDict(extra="forbid")
 
@@ -263,6 +265,10 @@ class DocumentMetadataExport(BaseModel):
     pdf_author: Optional[str] = None
     pdf_page_count: Optional[int] = None
     pdf_creation_date: Optional[str] = None
+
+    # Identifiers
+    doi: Optional[str] = None  # DOI identifier
+    doi_url: Optional[str] = None  # Full DOI URL
 
     # Classification
     document_type_code: Optional[str] = None
