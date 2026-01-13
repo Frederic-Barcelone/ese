@@ -475,13 +475,13 @@ heuristics:
   # DIRECT SEARCH ABBREVIATIONS
   # ========================================
   direct_search_abbrevs:
-    UK: "United Kingdom"
+    # UK removed - now in blacklist (not domain-specific)
     # RR removed - ambiguous, let syntax generator determine from context
     HR: "hazard ratio"
     CC BY: "Creative Commons Attribution"
     C3a: "complement C3a anaphylatoxin"
     C5a: "complement C5a anaphylatoxin"
-    DOI: "digital object identifier"
+    DOI: "Digital Object Identifier"
     FABHALTA: "iptacopan (brand name)"
 
   # ========================================
