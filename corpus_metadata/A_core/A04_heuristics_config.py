@@ -130,11 +130,73 @@ class HeuristicsConfig:
     # ========================================
     sf_blacklist: Set[str] = field(
         default_factory=lambda: {
-            # Country codes (valid abbreviations but not domain-specific)
-            "US",
-            "UK",
-            "USA",
-            "EU",
+            # ----------------------------------------
+            # Country codes - SAFE (no medical conflict)
+            # NOT included: AT, CA, HR, IL, IN, IT, MG, MS, NO, PE, PT, SA, SC, SE, TR
+            # (these conflict with medical abbreviations)
+            # ----------------------------------------
+            # Major regions
+            "US", "UK", "USA", "EU",
+            # Europe (safe codes only)
+            "FR",   # France
+            "DE",   # Germany
+            "ES",   # Spain
+            "NL",   # Netherlands
+            "BE",   # Belgium
+            "PL",   # Poland
+            "CZ",   # Czech Republic
+            "DK",   # Denmark
+            "FI",   # Finland
+            "IE",   # Ireland
+            "GR",   # Greece
+            "HU",   # Hungary
+            "RO",   # Romania
+            "BG",   # Bulgaria
+            "SK",   # Slovakia
+            "SI",   # Slovenia
+            "LT",   # Lithuania
+            "LV",   # Latvia
+            "EE",   # Estonia
+            "CY",   # Cyprus
+            "MT",   # Malta
+            "LU",   # Luxembourg
+            "RU",   # Russia
+            "UA",   # Ukraine
+            # Asia-Pacific (safe codes only)
+            "JP",   # Japan
+            "CN",   # China
+            "KR",   # South Korea
+            "TW",   # Taiwan
+            "SG",   # Singapore
+            "HK",   # Hong Kong
+            "TH",   # Thailand
+            "MY",   # Malaysia
+            "VN",   # Vietnam
+            "PK",   # Pakistan
+            "AU",   # Australia
+            "NZ",   # New Zealand
+            # Americas (safe codes only)
+            "BR",   # Brazil
+            "MX",   # Mexico
+            "AR",   # Argentina
+            "CL",   # Chile
+            "CO",   # Colombia
+            # Africa/Middle East (safe codes only)
+            "ZA",   # South Africa
+            "EG",   # Egypt
+            # 3-letter ISO codes (commonly seen)
+            "GBR",  # Great Britain
+            "FRA",  # France
+            "DEU",  # Germany
+            "JPN",  # Japan
+            "CHN",  # China
+            "AUS",  # Australia
+            "ESP",  # Spain
+            "NLD",  # Netherlands
+            "BRA",  # Brazil
+            "MEX",  # Mexico
+            "KOR",  # South Korea
+            "RUS",  # Russia
             # Author credentials (never medical abbreviations in context)
             "MD",
             "PHD",
