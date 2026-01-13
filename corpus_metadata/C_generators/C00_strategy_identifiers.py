@@ -73,15 +73,19 @@ class ExtractedIdentifier:
     start_pos: int
     end_pos: int
     confidence: float = 0.95
+    long_form: Optional[str] = None  # Expanded name (e.g., trial title for NCT IDs)
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
+        result = {
             "type": self.id_type.value,
             "value": self.value,
             "normalized": self.normalized,
             "context": self.context[:200] if self.context else "",
             "confidence": self.confidence,
         }
+        if self.long_form:
+            result["long_form"] = self.long_form
+        return result
 
 
 # Identifier patterns with named groups
@@ -404,13 +408,51 @@ def extract_identifiers_from_text(
     return results
 
 
+def enrich_nct_identifiers(
+    identifiers: List[ExtractedIdentifier],
+    config: Optional[Dict] = None,
+) -> List[ExtractedIdentifier]:
+    """
+    Enrich NCT identifiers with trial information from ClinicalTrials.gov.
+
+    Args:
+        identifiers: List of extracted identifiers
+        config: Optional configuration for the enricher
+
+    Returns:
+        Same list with NCT identifiers enriched with long_form (trial title)
+    """
+    from E_normalization.E06_nct_enricher import get_nct_enricher
+
+    # Find NCT identifiers that need enrichment
+    nct_identifiers = [
+        ident for ident in identifiers
+        if ident.id_type == IdentifierType.NCT and not ident.long_form
+    ]
+
+    if not nct_identifiers:
+        return identifiers
+
+    # Get enricher instance (reuses cached client)
+    enricher = get_nct_enricher(config)
+
+    # Enrich each NCT identifier
+    for ident in nct_identifiers:
+        nct_id = f"NCT{ident.normalized}"
+        info = enricher.enrich(nct_id)
+        if info and info.long_form:
+            ident.long_form = info.long_form
+
+    return identifiers
+
+
 if __name__ == "__main__":
     # Quick test
     test_text = """
     Alagille syndrome (OMIM #118450) is a rare genetic disorder.
     Most people have mutations in the JAG1 gene. A small percentage
     have mutations in NOTCH2. See DOI: 10.1038/nature12345 and
-    PMID: 12345678 for more information. Clinical trial NCT01234567
+    PMID: 12345678 for more information. Clinical trial NCT04817618
     is currently recruiting. The disease is also known as ORPHA:52
     in the Orphanet database.
     """
@@ -423,3 +465,13 @@ if __name__ == "__main__":
         print(
             f"  {ident.id_type.value:12} | {ident.value:30} | norm: {ident.normalized}"
         )
+
+    # Test NCT enrichment
+    print("\n" + "=" * 60)
+    print("Testing NCT Enrichment:")
+    print("-" * 60)
+    identifiers = enrich_nct_identifiers(identifiers)
+    for ident in identifiers:
+        if ident.id_type == IdentifierType.NCT:
+            print(f"  NCT ID: {ident.value}")
+            print(f"  Long Form: {ident.long_form}")
