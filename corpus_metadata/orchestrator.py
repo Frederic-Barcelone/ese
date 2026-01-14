@@ -113,6 +113,7 @@ from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
 from C_generators.C08_strategy_feasibility import FeasibilityDetector
+from C_generators.C08b_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
@@ -591,8 +592,19 @@ class Orchestrator:
                     "context_window": feasibility_cfg.get("context_window", 300),
                 }
             )
+            # LLM-based structured extraction (more precise, replaces pattern-based)
+            self.use_llm_feasibility = feasibility_cfg.get("use_llm", True)
+            if self.use_llm_feasibility and self.claude_client:
+                self.llm_feasibility_extractor = LLMFeasibilityExtractor(
+                    llm_client=self.claude_client,
+                    llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
+                    config={"run_id": self.run_id},
+                )
+            else:
+                self.llm_feasibility_extractor = None
         else:
             self.feasibility_detector = None
+            self.llm_feasibility_extractor = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -1647,7 +1659,7 @@ Return ONLY the JSON array, nothing else."""
         # Feasibility extraction (parallel pipeline)
         feasibility_results: List[FeasibilityCandidate] = []
         if self.enable_feasibility and self.feasibility_detector is not None:
-            feasibility_results = self._process_feasibility(doc, pdf_path_obj)
+            feasibility_results = self._process_feasibility(doc, pdf_path_obj, full_text)
 
         # Document metadata extraction (runs early, uses LLM for classification)
         doc_metadata: Optional[DocumentMetadata] = None
@@ -2118,10 +2130,13 @@ Return ONLY the JSON array, nothing else."""
     # =========================================================================
 
     def _process_feasibility(
-        self, doc, pdf_path: Path
+        self, doc, pdf_path: Path, full_text: str
     ) -> List[FeasibilityCandidate]:
         """
         Process document for clinical trial feasibility information.
+
+        Uses LLM-based extraction when available (higher precision),
+        falls back to pattern-based extraction otherwise.
 
         Returns feasibility candidates (eligibility, epidemiology, patient journey, etc.)
         """
@@ -2131,13 +2146,23 @@ Return ONLY the JSON array, nothing else."""
         print("\n[3d/4] Extracting feasibility information...")
         start = time.time()
 
-        # Extract feasibility candidates
-        candidates = self.feasibility_detector.extract(doc)
+        # Use LLM extraction if available (preferred - more precise structured output)
+        if self.llm_feasibility_extractor is not None:
+            print("  Using LLM-based extraction...")
+            candidates = self.llm_feasibility_extractor.extract(
+                doc_graph=doc,
+                doc_id=pdf_path.stem,
+                doc_fingerprint=pdf_path.stem,
+                full_text=full_text,
+            )
+            self.llm_feasibility_extractor.print_summary()
+        else:
+            # Fallback to pattern-based extraction
+            print("  Using pattern-based extraction...")
+            candidates = self.feasibility_detector.extract(doc)
+            self.feasibility_detector.print_summary()
+
         print(f"  Feasibility items: {len(candidates)}")
-
-        # Print summary by type
-        self.feasibility_detector.print_summary()
-
         print(f"  Time: {time.time() - start:.2f}s")
 
         return candidates
@@ -2152,6 +2177,7 @@ Return ONLY the JSON array, nothing else."""
         # Group by field type
         from A_core.A07_feasibility_models import FeasibilityExportEntry
 
+        study_design_data = None
         eligibility_inclusion = []
         eligibility_exclusion = []
         epidemiology = []
@@ -2160,6 +2186,11 @@ Return ONLY the JSON array, nothing else."""
         sites = []
 
         for r in results:
+            # Handle study design separately (single object, not list)
+            if r.field_type.value == "STUDY_DESIGN" and r.study_design:
+                study_design_data = r.study_design.model_dump()
+                continue
+
             entry = FeasibilityExportEntry(
                 field_type=r.field_type.value,
                 text=r.matched_text,
@@ -2173,6 +2204,7 @@ Return ONLY the JSON array, nothing else."""
                 entry.structured_data = {
                     "type": r.eligibility_criterion.criterion_type.value,
                     "category": r.eligibility_criterion.category,
+                    "derived": r.eligibility_criterion.derived_variables,
                 }
             elif r.epidemiology_data:
                 entry.structured_data = {
@@ -2189,6 +2221,9 @@ Return ONLY the JSON array, nothing else."""
                 entry.structured_data = {
                     "type": r.study_endpoint.endpoint_type.value,
                     "name": r.study_endpoint.name,
+                    "measure": r.study_endpoint.measure,
+                    "timepoint": r.study_endpoint.timepoint,
+                    "analysis_method": r.study_endpoint.analysis_method,
                 }
             elif r.study_site:
                 entry.structured_data = {
@@ -2214,6 +2249,7 @@ Return ONLY the JSON array, nothing else."""
         export_doc = FeasibilityExportDocument(
             doc_id=pdf_path.stem,
             doc_filename=pdf_path.name,
+            study_design=study_design_data,
             eligibility_inclusion=eligibility_inclusion,
             eligibility_exclusion=eligibility_exclusion,
             epidemiology=epidemiology,

@@ -35,6 +35,7 @@ class FeasibilityFieldType(str, Enum):
     PATIENT_JOURNEY_PHASE = "PATIENT_JOURNEY_PHASE"
     STUDY_ENDPOINT = "STUDY_ENDPOINT"
     STUDY_SITE = "STUDY_SITE"
+    STUDY_DESIGN = "STUDY_DESIGN"
     STUDY_DURATION = "STUDY_DURATION"
     TREATMENT_PATHWAY = "TREATMENT_PATHWAY"
 
@@ -143,9 +144,42 @@ class StudyEndpoint(BaseModel):
     """Clinical trial endpoint."""
 
     endpoint_type: EndpointType
-    name: str  # e.g., "Complete remission at Week 52"
-    measure: Optional[str] = None  # How it's measured
-    timepoint: Optional[str] = None  # e.g., "Week 52", "Day 1 to Week 26"
+    name: str  # e.g., "Proteinuria reduction"
+    measure: Optional[str] = None  # What is measured (e.g., "24-hour UPCR")
+    timepoint: Optional[str] = None  # e.g., "6 months", "Week 52"
+    analysis_method: Optional[str] = None  # e.g., "log-transformed ratio to baseline"
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Study Design (NEW)
+# -------------------------
+
+
+class TreatmentArm(BaseModel):
+    """Treatment arm in a clinical trial."""
+
+    name: str  # e.g., "Iptacopan", "Placebo"
+    dose: Optional[str] = None  # e.g., "200mg"
+    frequency: Optional[str] = None  # e.g., "twice daily"
+    route: Optional[str] = None  # e.g., "oral"
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class StudyDesign(BaseModel):
+    """Clinical trial study design parameters."""
+
+    phase: Optional[str] = None  # e.g., "2", "3", "2/3"
+    design_type: Optional[str] = None  # e.g., "parallel", "crossover", "single-arm"
+    blinding: Optional[str] = None  # e.g., "double-blind", "open-label"
+    randomization_ratio: Optional[str] = None  # e.g., "1:1", "2:1"
+    sample_size: Optional[int] = None  # Planned enrollment
+    actual_enrollment: Optional[int] = None  # Actual enrollment
+    duration_months: Optional[int] = None  # Total study duration
+    treatment_arms: List[TreatmentArm] = Field(default_factory=list)
+    control_type: Optional[str] = None  # e.g., "placebo", "active", "standard of care"
 
     model_config = ConfigDict(extra="forbid")
 
@@ -224,6 +258,7 @@ class FeasibilityCandidate(BaseModel):
     patient_journey_phase: Optional[PatientJourneyPhase] = None
     study_endpoint: Optional[StudyEndpoint] = None
     study_site: Optional[StudySite] = None
+    study_design: Optional[StudyDesign] = None
 
     # Confidence
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
@@ -254,6 +289,9 @@ class FeasibilityExportDocument(BaseModel):
 
     doc_id: str
     doc_filename: str
+
+    # Study design (single structured object)
+    study_design: Optional[Dict[str, Any]] = None
 
     # Grouped by type
     eligibility_inclusion: List[FeasibilityExportEntry] = Field(default_factory=list)
