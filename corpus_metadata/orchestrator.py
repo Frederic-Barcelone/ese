@@ -104,6 +104,7 @@ from A_core.A06_drug_models import (
     ExtractedDrug,
 )
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
+from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
 from C_generators.C02_strategy_regex import RegexCandidateGenerator
@@ -1692,6 +1693,10 @@ Return ONLY the JSON array, nothing else."""
         if feasibility_results:
             self._export_feasibility_results(pdf_path_obj, feasibility_results)
 
+        # Export images
+        if doc is not None:
+            self._export_images(pdf_path_obj, doc)
+
         # Export document metadata
         if doc_metadata:
             self._export_document_metadata(pdf_path_obj, doc_metadata)
@@ -2264,6 +2269,45 @@ Return ONLY the JSON array, nothing else."""
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Feasibility export: {out_file.name}")
+
+    def _export_images(
+        self, pdf_path: Path, doc: "DocumentGraph"
+    ) -> None:
+        """Export extracted images to JSON file."""
+        # Collect all images
+        images = list(doc.iter_images())
+        if not images:
+            return
+
+        out_dir = self.output_dir or pdf_path.parent
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Build export data
+        export_data = {
+            "doc_id": pdf_path.stem,
+            "doc_filename": pdf_path.name,
+            "total_images": len(images),
+            "images": []
+        }
+
+        for img in images:
+            img_data = {
+                "page": img.page_num,
+                "type": img.image_type.value,
+                "caption": img.caption,
+                "ocr_text": img.ocr_text,
+                "bbox": list(img.bbox.coords) if img.bbox else None,
+                "image_base64": img.image_base64,  # Can be large!
+            }
+            export_data["images"].append(img_data)
+
+        # Write to file
+        out_file = out_dir / f"images_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            import json
+            json.dump(export_data, f, indent=2)
+
+        print(f"  Images export: {out_file.name} ({len(images)} images)")
 
     # =========================================================================
     # DOCUMENT METADATA METHODS
