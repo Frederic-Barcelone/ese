@@ -243,6 +243,74 @@ class ClaudeClient:
         # Parse JSON from response (handles arrays and objects)
         return self._extract_json_any(raw_text)
 
+    def complete_vision_json(
+        self,
+        *,
+        image_base64: str,
+        prompt: str,
+        model: Optional[str] = None,
+        max_tokens: int = 2000,
+        temperature: float = 0.0,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Call Claude Vision API with an image and return parsed JSON response.
+
+        Args:
+            image_base64: Base64-encoded image (PNG, JPEG, GIF, or WebP)
+            prompt: Text prompt describing what to extract
+            model: Model to use (default: claude-sonnet-4-20250514)
+            max_tokens: Max response tokens
+            temperature: Sampling temperature
+
+        Returns:
+            Parsed JSON dict or None if failed
+        """
+        use_model = model or self.default_model
+
+        # Detect media type from base64 header or default to PNG
+        media_type = "image/png"
+        if image_base64.startswith("/9j/"):
+            media_type = "image/jpeg"
+        elif image_base64.startswith("R0lGOD"):
+            media_type = "image/gif"
+        elif image_base64.startswith("UklGR"):
+            media_type = "image/webp"
+
+        # Build message with image block
+        message = self.client.messages.create(
+            model=use_model,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": media_type,
+                                "data": image_base64,
+                            },
+                        },
+                        {
+                            "type": "text",
+                            "text": prompt,
+                        },
+                    ],
+                }
+            ],
+        )
+
+        # Extract text content
+        raw_text = ""
+        for block in message.content:
+            if hasattr(block, "text"):
+                raw_text += block.text
+
+        # Parse JSON from response
+        return self._extract_json_any(raw_text)
+
     def _find_balanced(self, text: str, open_ch: str, close_ch: str) -> Optional[str]:
         """Find balanced brackets/braces and return the matched substring."""
         start = text.find(open_ch)
