@@ -121,6 +121,15 @@ OCR_GARBAGE_PATTERNS = [
     r"\bfo\)\s*$",  # "fo)" misread lock icon
     r"^\s*[+*~>]{2,}\s*$",  # lines of just symbols
     r"\s+[»«]+\s*$",  # trailing » or «
+    # Additional garbage patterns
+    r"^\s*[◆●○■□▪▫►◄▸◂]+\s*$",  # bullet-only lines
+    r"\b[Il1|]{4,}\b",  # misread vertical bars (||| often OCR'd as Ill1)
+    r"^\s*[-_=]{5,}\s*$",  # horizontal rules
+    r"^\s*\.{5,}\s*$",  # dotted lines (table of contents)
+    r"\b\d{1,2}\s*[oO0]\s*[fF]\s*\d{1,3}\b",  # "1 of 10" page numbers
+    r"^\s*[#*]{3,}\s*$",  # decorative symbol lines
+    r"\[\s*[A-Z]?\s*\]",  # empty checkbox placeholders like "[ ]" or "[X]"
+    r"^\s*\d+\s*$",  # lone page numbers
 ]
 OCR_GARBAGE_RE = re.compile("|".join(OCR_GARBAGE_PATTERNS))
 
@@ -306,9 +315,34 @@ def _table_to_markdown(table) -> str:
 # Header detection helpers
 # -----------------------------
 
-SECTION_NUM_RE = re.compile(r"^\s*\d+(\.\d+)*\s*\|\s*\S+")
+SECTION_NUM_RE = re.compile(r"^\s*\d+(\.\d+)*\s*[|\.]?\s*\S+")
+
+# Expanded section patterns including clinical/medical sections
+SECTION_PATTERNS = [
+    # Standard academic sections
+    "abstract", "introduction", "methods", "materials and methods",
+    "results", "discussion", "conclusion", "conclusions", "references",
+    "background", "summary", "acknowledgements", "acknowledgments",
+    # Clinical trial sections
+    "study design", "study population", "patient characteristics",
+    "baseline characteristics", "demographics", "eligibility",
+    "inclusion criteria", "exclusion criteria", "eligibility criteria",
+    "primary outcomes", "secondary outcomes", "primary endpoint",
+    "secondary endpoints", "endpoints", "assessments",
+    "efficacy", "efficacy results", "efficacy analysis",
+    "safety", "safety analysis", "safety results", "adverse events",
+    "tolerability", "pharmacokinetics", "pharmacodynamics",
+    "statistical analysis", "statistical methods", "sample size",
+    # Regulatory sections
+    "indications", "contraindications", "warnings", "precautions",
+    "dosage", "dosage and administration", "overdosage",
+    "clinical pharmacology", "nonclinical toxicology",
+    # Review/meta-analysis sections
+    "search strategy", "data extraction", "quality assessment",
+    "risk of bias", "sensitivity analysis", "subgroup analysis",
+]
 SECTION_PLAIN_RE = re.compile(
-    r"^(abstract|introduction|methods|materials and methods|results|discussion|conclusion|conclusions|references)$",
+    r"^(" + "|".join(re.escape(p) for p in SECTION_PATTERNS) + r")$",
     flags=re.IGNORECASE,
 )
 
@@ -415,6 +449,14 @@ class PDFToDocGraphParser(BaseParser):
         )
 
         # =============================================
+        # Extraction Method Selection - NEW
+        # =============================================
+        # "unstructured" (default): Use Unstructured.io with ML models
+        # "pymupdf": Use PyMuPDF direct text extraction (faster, better for native PDFs)
+        # "auto": Use pymupdf for native PDFs, unstructured for scanned
+        self.extraction_method = self.config.get("extraction_method", "unstructured")
+
+        # =============================================
         # SOTA Column Ordering (B04) - NEW
         # =============================================
         self.use_sota_layout = bool(self.config.get("use_sota_layout", True))
@@ -443,7 +485,20 @@ class PDFToDocGraphParser(BaseParser):
 
     def parse(self, file_path: str) -> DocumentGraph:
         page_dims = self._get_page_dimensions(file_path)
-        elements = self._call_partition_pdf(file_path)
+
+        # Select extraction method
+        use_pymupdf = False
+        if self.extraction_method == "pymupdf":
+            use_pymupdf = True
+        elif self.extraction_method == "auto":
+            # Auto-detect: use PyMuPDF for native PDFs, Unstructured for scanned
+            use_pymupdf = not self._is_scanned_pdf(file_path)
+
+        # Extract elements using selected method
+        if use_pymupdf:
+            elements = self._extract_with_pymupdf(file_path)
+        else:
+            elements = self._call_partition_pdf(file_path)
 
         # Pass 1: raw blocks + repetition stats
         raw_pages: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
@@ -454,31 +509,50 @@ class PDFToDocGraphParser(BaseParser):
         norm_sample_text: Dict[str, str] = {}
 
         for el in elements:
-            # drop categories if requested
-            cat = getattr(el, "category", None)
-            cat_norm = (cat or "").strip().lower() if isinstance(cat, str) else ""
-            cls_norm = el.__class__.__name__.strip().lower()
+            # Handle both Unstructured elements and PyMuPDF dicts
+            if use_pymupdf:
+                # PyMuPDF returns dicts
+                cat_norm = (el.get("category") or "").strip().lower()
+                page_num = el.get("page_num")
+                text_raw = el.get("text", "")
+                bbox_tuple = el.get("bbox", (0, 0, 0, 0))
+                page_w, page_h = page_dims.get(page_num, (0.0, 0.0))
+                bbox = BoundingBox(coords=bbox_tuple, page_width=page_w, page_height=page_h)
+            else:
+                # Unstructured returns element objects
+                cat = getattr(el, "category", None)
+                cat_norm = (cat or "").strip().lower() if isinstance(cat, str) else ""
+                cls_norm = el.__class__.__name__.strip().lower()
 
-            if self.drop_categories and (
-                cat_norm in self.drop_categories or cls_norm in self.drop_categories
-            ):
-                continue
+                if self.drop_categories and (
+                    cat_norm in self.drop_categories or cls_norm in self.drop_categories
+                ):
+                    continue
 
-            page_num = self._get_element_page_num(el)
+                page_num = self._get_element_page_num(el)
+                if page_num is None:
+                    continue
+
+                page_w, page_h = page_dims.get(page_num, (0.0, 0.0))
+                text_raw = getattr(el, "text", "") or ""
+                bbox = self._bbox_from_element(el, page_w=page_w, page_h=page_h)
+
             if page_num is None:
                 continue
 
-            page_w, page_h = page_dims.get(page_num, (0.0, 0.0))
-
-            text_raw = getattr(el, "text", "") or ""
             text = self._clean_text(text_raw)
             if not text:
                 continue
 
-            bbox = self._bbox_from_element(el, page_w=page_w, page_h=page_h)
             zone = self._zone_from_bbox(bbox, page_h=page_h)
 
-            is_section_header = self._is_section_header(el, zone, text)
+            # For PyMuPDF, pass category directly; for Unstructured, pass element
+            is_section_header = self._is_section_header(
+                el if not use_pymupdf else None,
+                zone,
+                text,
+                category=cat_norm if use_pymupdf else None
+            )
 
             # Include category for B04 spanning detection hints
             rb = {
@@ -615,6 +689,90 @@ class PDFToDocGraphParser(BaseParser):
             kwargs["extract_images_in_pdf"] = self.extract_images_in_pdf
 
         return partition_pdf(**kwargs)
+
+    def _extract_with_pymupdf(self, file_path: str) -> List[Dict[str, Any]]:
+        """
+        Extract text blocks directly using PyMuPDF (fitz).
+
+        Advantages over Unstructured:
+        - Faster (no ML model overhead)
+        - More reliable for native PDFs with embedded text
+        - Better character preservation
+        - Accurate bounding boxes in PDF coordinates
+
+        Returns list of dicts with keys: text, bbox, page_num, category
+        """
+        doc = fitz.open(file_path)
+        blocks = []
+
+        try:
+            for page_idx in range(doc.page_count):
+                page = doc[page_idx]
+                page_num = page_idx + 1
+
+                # Extract text blocks with positions
+                # flags: preserve whitespace and ligatures
+                text_dict = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
+
+                for block in text_dict.get("blocks", []):
+                    # Only process text blocks (type 0), skip images (type 1)
+                    if block.get("type") != 0:
+                        continue
+
+                    # Extract text from lines and spans
+                    block_text = self._extract_block_text(block)
+                    if not block_text or not block_text.strip():
+                        continue
+
+                    # Get bounding box (already in PDF coordinates)
+                    bbox = block.get("bbox", (0, 0, 0, 0))
+
+                    blocks.append({
+                        "text": block_text,
+                        "bbox": bbox,
+                        "page_num": page_num,
+                        "category": "NarrativeText",  # Default category
+                    })
+        finally:
+            doc.close()
+
+        return blocks
+
+    def _extract_block_text(self, block: Dict[str, Any]) -> str:
+        """Extract text from a PyMuPDF text block."""
+        lines = []
+        for line in block.get("lines", []):
+            spans_text = []
+            for span in line.get("spans", []):
+                text = span.get("text", "")
+                if text:
+                    spans_text.append(text)
+            if spans_text:
+                lines.append("".join(spans_text))
+        return "\n".join(lines)
+
+    def _is_scanned_pdf(self, file_path: str) -> bool:
+        """
+        Detect if PDF is scanned (image-based) vs native (text-based).
+
+        Returns True if PDF appears to be scanned/OCR'd.
+        """
+        doc = fitz.open(file_path)
+        try:
+            # Check first few pages for text content
+            text_chars = 0
+            pages_checked = min(3, doc.page_count)
+
+            for i in range(pages_checked):
+                page = doc[i]
+                text = page.get_text("text")
+                text_chars += len(text.strip())
+
+            # If very little text found, likely scanned
+            avg_chars = text_chars / pages_checked if pages_checked > 0 else 0
+            return avg_chars < 100  # Less than 100 chars per page = likely scanned
+        finally:
+            doc.close()
 
     # -----------------------
     # Repetition inference
@@ -817,9 +975,17 @@ class PDFToDocGraphParser(BaseParser):
 
         return False
 
-    def _is_section_header(self, el, zone: str, cleaned_text: str) -> bool:
+    def _is_section_header(
+        self, el, zone: str, cleaned_text: str, category: Optional[str] = None
+    ) -> bool:
         """
         Goal: mark true paper section headings, not author/affiliation/title fragments.
+
+        Args:
+            el: Unstructured element (or None if using PyMuPDF)
+            zone: Position zone (HEADER, BODY, FOOTER)
+            cleaned_text: Cleaned text content
+            category: Optional category string (used when el is None)
         """
         if zone != "BODY":
             return False
@@ -859,20 +1025,26 @@ class PDFToDocGraphParser(BaseParser):
             return False
 
         # category hints: only accept Title/Header if it *still* looks like a header
-        cat = getattr(el, "category", None)
-        if isinstance(cat, str):
-            cat_norm = cat.strip().lower()
-            if cat_norm in {"title", "header"}:
-                # must be short and "header-like"
-                if t[0].isupper() or t[0].isdigit():
-                    return True
-                return False
+        # Support both Unstructured elements and direct category string
+        cat_norm = category
+        if cat_norm is None and el is not None:
+            cat = getattr(el, "category", None)
+            if isinstance(cat, str):
+                cat_norm = cat.strip().lower()
 
-        cls = el.__class__.__name__.lower()
-        if cls in {"title", "header"}:
+        if cat_norm in {"title", "header"}:
+            # must be short and "header-like"
             if t[0].isupper() or t[0].isdigit():
                 return True
             return False
+
+        # Check class name for Unstructured elements
+        if el is not None:
+            cls = el.__class__.__name__.lower()
+            if cls in {"title", "header"}:
+                if t[0].isupper() or t[0].isdigit():
+                    return True
+                return False
 
         return False
 

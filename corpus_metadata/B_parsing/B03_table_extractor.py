@@ -111,20 +111,78 @@ class TableExtractor:
             return (0.0, 0.0, 0.0, 0.0)
 
     def _parse_html_table(self, html: str) -> List[List[str]]:
-        """Parse HTML table to list of rows."""
+        """Parse HTML table to list of rows with colspan/rowspan support."""
         from bs4 import BeautifulSoup
 
         soup = BeautifulSoup(html, "html.parser")
-        rows = []
 
-        for tr in soup.find_all("tr"):
-            cells = []
+        # First pass: determine grid size and track spans
+        all_trs = soup.find_all("tr")
+        if not all_trs:
+            return []
+
+        # Calculate max columns considering colspans
+        max_cols = 0
+        for tr in all_trs:
+            col_count = sum(
+                int(td.get("colspan", 1)) for td in tr.find_all(["th", "td"])
+            )
+            max_cols = max(max_cols, col_count)
+
+        # Build grid with span tracking
+        grid: List[List[Optional[str]]] = []
+        rowspan_tracker: Dict[int, Tuple[str, int]] = {}  # col_idx -> (text, remaining_rows)
+
+        for tr in all_trs:
+            row: List[Optional[str]] = [None] * max_cols
+            col_idx = 0
+
             for td in tr.find_all(["th", "td"]):
-                cells.append(td.get_text(strip=True))
-            if cells:
-                rows.append(cells)
+                # Skip columns occupied by rowspan from previous rows
+                while col_idx < max_cols and col_idx in rowspan_tracker:
+                    text, remaining = rowspan_tracker[col_idx]
+                    row[col_idx] = text
+                    if remaining <= 1:
+                        del rowspan_tracker[col_idx]
+                    else:
+                        rowspan_tracker[col_idx] = (text, remaining - 1)
+                    col_idx += 1
 
-        return rows
+                if col_idx >= max_cols:
+                    break
+
+                cell_text = td.get_text(strip=True)
+                colspan = int(td.get("colspan", 1))
+                rowspan = int(td.get("rowspan", 1))
+
+                # Fill cells for colspan
+                for i in range(colspan):
+                    if col_idx + i < max_cols:
+                        row[col_idx + i] = cell_text
+
+                # Track rowspan for future rows
+                if rowspan > 1:
+                    for i in range(colspan):
+                        if col_idx + i < max_cols:
+                            rowspan_tracker[col_idx + i] = (cell_text, rowspan - 1)
+
+                col_idx += colspan
+
+            # Fill any remaining rowspan cells
+            while col_idx < max_cols:
+                if col_idx in rowspan_tracker:
+                    text, remaining = rowspan_tracker[col_idx]
+                    row[col_idx] = text
+                    if remaining <= 1:
+                        del rowspan_tracker[col_idx]
+                    else:
+                        rowspan_tracker[col_idx] = (text, remaining - 1)
+                col_idx += 1
+
+            # Convert None to empty string and add row
+            grid.append([cell or "" for cell in row])
+
+        return grid
 
     def _classify_table(self, headers: List[str]) -> str:
         """Classify table type based on headers."""
