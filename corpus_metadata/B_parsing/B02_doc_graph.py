@@ -27,6 +27,17 @@ class TableType(str, Enum):
     LAYOUT_GRID = "LAYOUT_GRID"
 
 
+class ImageType(str, Enum):
+    """Type of image/figure in document."""
+    UNKNOWN = "UNKNOWN"
+    FIGURE = "FIGURE"  # General figure
+    FLOWCHART = "FLOWCHART"  # Patient flow, CONSORT diagrams
+    CHART = "CHART"  # Bar/line/pie charts
+    DIAGRAM = "DIAGRAM"  # Schematic diagrams
+    PHOTO = "PHOTO"  # Photographs
+    LOGO = "LOGO"  # Company/journal logos
+
+
 class TextBlock(BaseModel):
     """
     Atomic unit of text.
@@ -43,6 +54,42 @@ class TextBlock(BaseModel):
     bbox: BoundingBox
 
     model_config = ConfigDict(frozen=True, extra="forbid")
+
+
+class ImageBlock(BaseModel):
+    """
+    Extracted image/figure from document.
+
+    Contains:
+    - base64 encoded image data
+    - OCR'd text from the image (if available)
+    - Caption from nearby FigureCaption elements
+    - Bounding box for highlighting
+    """
+
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+
+    page_num: int = Field(..., ge=1)
+    reading_order_index: int = Field(..., ge=0)
+
+    # Image data
+    image_base64: Optional[str] = None  # Base64-encoded image
+    image_format: str = "png"  # Format hint (png, jpg)
+
+    # Content extracted from image
+    ocr_text: Optional[str] = None  # Text OCR'd from within the image
+    caption: Optional[str] = None  # Figure caption (from FigureCaption element)
+
+    # Classification
+    image_type: ImageType = ImageType.UNKNOWN
+
+    # Bounding box
+    bbox: BoundingBox
+
+    # Additional metadata
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+    model_config = ConfigDict(extra="forbid")
 
 
 class TableCell(BaseModel):
@@ -201,6 +248,7 @@ class Page(BaseModel):
 
     blocks: List[TextBlock] = Field(default_factory=list)
     tables: List[Table] = Field(default_factory=list)
+    images: List[ImageBlock] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
 
@@ -218,6 +266,11 @@ class Page(BaseModel):
             x0, y0, *_ = t.bbox.coords
             label = f"[Table: {t.caption or 'Untitled'}]"
             items.append((t.reading_order_index, 1, y0, x0, "TABLE", label))
+
+        for img in self.images:
+            x0, y0, *_ = img.bbox.coords
+            label = f"[Image: {img.caption or 'Figure'}]"
+            items.append((img.reading_order_index, 2, y0, x0, "IMAGE", label))
 
         items.sort(key=lambda x: (x[0], x[1], x[2], x[3]))
         for *_sort, typ, txt in items:
@@ -237,6 +290,15 @@ class DocumentGraph(BaseModel):
         if page_num not in self.pages:
             raise KeyError(f"Page {page_num} not found")
         return self.pages[page_num]
+
+    def iter_images(self) -> Iterator[ImageBlock]:
+        """
+        Iterate all images across all pages.
+        """
+        for pnum in sorted(self.pages.keys()):
+            page = self.pages[pnum]
+            for img in sorted(page.images, key=lambda i: i.reading_order_index):
+                yield img
 
     def iter_linear_blocks(
         self, skip_header_footer: bool = True

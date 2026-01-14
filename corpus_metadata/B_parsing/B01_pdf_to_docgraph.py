@@ -23,7 +23,7 @@ from unstructured.partition.pdf import partition_pdf
 
 from A_core.A02_interfaces import BaseParser
 from A_core.A01_domain_models import BoundingBox
-from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole
+from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole, ImageBlock, ImageType
 
 # SOTA Column Ordering (B04)
 from B_parsing.B04_column_ordering import (
@@ -412,8 +412,17 @@ class PDFToDocGraphParser(BaseParser):
         self.infer_table_structure = bool(
             self.config.get("infer_table_structure", True)
         )
+        # Image extraction - enabled by default for hi_res
         self.extract_images_in_pdf = bool(
-            self.config.get("extract_images_in_pdf", False)
+            self.config.get("extract_images_in_pdf", True)
+        )
+        # Extract base64 images into element payload
+        self.extract_image_block_to_payload = bool(
+            self.config.get("extract_image_block_to_payload", True)
+        )
+        # Which element types to extract as images
+        self.extract_image_block_types = self.config.get(
+            "extract_image_block_types", ["Image", "Table", "Figure"]
         )
 
         # OCR and structure options
@@ -500,8 +509,10 @@ class PDFToDocGraphParser(BaseParser):
         else:
             elements = self._call_partition_pdf(file_path)
 
-        # Pass 1: raw blocks + repetition stats
+        # Pass 1: raw blocks + repetition stats + images
         raw_pages: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
+        raw_images: Dict[int, List[Dict[str, Any]]] = defaultdict(list)  # Images per page
+        raw_captions: Dict[int, List[Dict[str, Any]]] = defaultdict(list)  # Figure captions
 
         norm_count: Counter[str] = Counter()
         norm_pages: Dict[str, set] = defaultdict(set)
@@ -539,6 +550,29 @@ class PDFToDocGraphParser(BaseParser):
 
             if page_num is None:
                 continue
+
+            # Handle Image and FigureCaption elements (Unstructured only)
+            if not use_pymupdf:
+                cls_name = el.__class__.__name__
+                if cls_name == "Image":
+                    # Extract image with base64 data
+                    image_base64 = None
+                    if hasattr(el, "metadata") and hasattr(el.metadata, "image_base64"):
+                        image_base64 = el.metadata.image_base64
+                    raw_images[page_num].append({
+                        "bbox": bbox,
+                        "image_base64": image_base64,
+                        "ocr_text": text_raw.strip() if text_raw else None,
+                        "y0": float(bbox.coords[1]),
+                    })
+                    continue  # Don't add to text blocks
+                elif cls_name == "FigureCaption":
+                    raw_captions[page_num].append({
+                        "text": text_raw.strip(),
+                        "bbox": bbox,
+                        "y0": float(bbox.coords[1]),
+                    })
+                    # Also add to text blocks for context
 
             text = self._clean_text(text_raw)
             if not text:
@@ -655,6 +689,73 @@ class PDFToDocGraphParser(BaseParser):
                 )
 
             page_obj.blocks = blocks
+
+            # Add images to page (match captions by proximity)
+            page_images: List[ImageBlock] = []
+            page_caps = raw_captions.get(page_num, [])
+
+            for img_idx, img_data in enumerate(raw_images.get(page_num, [])):
+                # Find closest caption below the image (captions usually below figures)
+                img_y = img_data["y0"]
+                caption = None
+                best_dist = float("inf")
+
+                for cap in page_caps:
+                    cap_y = cap["y0"]
+                    # Caption should be below the image (larger Y in PDF coords)
+                    # Allow large tolerance since captions can be far below in multi-column
+                    if cap_y >= img_y:
+                        dist = cap_y - img_y
+                        if dist < best_dist and dist < 1500:  # Within 1500 units (generous)
+                            best_dist = dist
+                            caption = cap["text"]
+
+                # If no caption found on same page, check if OCR text mentions "Figure X"
+                if not caption and img_data.get("ocr_text"):
+                    # Try to extract figure number from OCR text
+                    import re
+                    fig_match = re.search(r"Figure\s*(\d+)", img_data["ocr_text"], re.IGNORECASE)
+                    if fig_match:
+                        caption = f"Figure {fig_match.group(1)}"
+
+                # Determine image type from caption or OCR text
+                img_type = ImageType.UNKNOWN
+                check_text = (caption or "") + " " + (img_data.get("ocr_text") or "")
+                check_lower = check_text.lower()
+
+                # Flowchart: CONSORT diagrams, patient flow, screening
+                if any(kw in check_lower for kw in [
+                    "screened", "randomized", "enrolled", "consort", "flow",
+                    "excluded", "discontinued", "completed", "allocation"
+                ]):
+                    img_type = ImageType.FLOWCHART
+                # Chart: various clinical trial result charts
+                elif any(kw in check_lower for kw in [
+                    "kaplan", "survival", "curve", "plot", "bar", "proportion",
+                    "percentage", "reduction", "change", "effect", "endpoint",
+                    "month", "week", "baseline", "placebo", "treatment"
+                ]):
+                    img_type = ImageType.CHART
+                # Diagram: mechanism, pathway diagrams
+                elif any(kw in check_lower for kw in [
+                    "diagram", "schematic", "mechanism", "pathway", "cascade"
+                ]):
+                    img_type = ImageType.DIAGRAM
+                # Logo: small images on first page
+                elif page_num == 1 and len(img_data.get("image_base64") or "") < 10000:
+                    img_type = ImageType.LOGO
+
+                page_images.append(ImageBlock(
+                    page_num=page_num,
+                    reading_order_index=len(blocks) + img_idx,  # After text blocks
+                    image_base64=img_data.get("image_base64"),
+                    ocr_text=img_data.get("ocr_text"),
+                    caption=caption,
+                    image_type=img_type,
+                    bbox=img_data["bbox"],
+                ))
+
+            page_obj.images = page_images
             graph.pages[page_num] = page_obj
 
         return graph
@@ -687,6 +788,10 @@ class PDFToDocGraphParser(BaseParser):
             kwargs["hi_res_model_name"] = self.hi_res_model_name
             kwargs["infer_table_structure"] = self.infer_table_structure
             kwargs["extract_images_in_pdf"] = self.extract_images_in_pdf
+            # Image extraction to payload (base64)
+            if self.extract_image_block_to_payload:
+                kwargs["extract_image_block_types"] = self.extract_image_block_types
+                kwargs["extract_image_block_to_payload"] = True
 
         return partition_pdf(**kwargs)
 
