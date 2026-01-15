@@ -7,7 +7,7 @@
   "summary": {
     "total_original": 156,
     "defined": 62,
-    "mentioned": 81,
+    "mentioned": 82,
     "excluded": 16,
     "defined_diseases": 12,
     "defined_drugs": 10
@@ -872,6 +872,16 @@
       "category": "ABBREV",
       "page": 10,
       "occurrences": 2,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "ROCHE",
+      "long_form": "F. Hoffmann-La Roche AG",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 1,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
