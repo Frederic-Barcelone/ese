@@ -1719,14 +1719,21 @@ Return ONLY the JSON array, nothing else."""
         if doc_metadata:
             self._export_document_metadata(pdf_path_obj, doc_metadata)
 
-        # Print validated
+        # Print validated abbreviations with provenance
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
         if validated:
             print(f"\nValidated abbreviations ({len(validated)}):")
             for v in validated:
-                print(f"  * {v.short_form} -> {v.long_form or '(no expansion)'}")
+                src = ""
+                if v.provenance and v.provenance.lexicon_source:
+                    # Shorten long lexicon names for display
+                    lex = v.provenance.lexicon_source
+                    if lex.startswith("2025_08_"):
+                        lex = lex.replace("2025_08_", "").replace(".json", "").replace(".tsv", "")
+                    src = f" [{lex}]"
+                print(f"  * {v.short_form} -> {v.long_form or '(no expansion)'}{src}")
 
-        # Print validated diseases
+        # Print validated diseases with provenance
         validated_diseases = [
             d for d in disease_results if d.status == ValidationStatus.VALIDATED
         ]
@@ -1739,9 +1746,15 @@ Return ONLY the JSON array, nothing else."""
                 if d.orpha_code:
                     codes.append(f"ORPHA:{d.orpha_code}")
                 code_str = f" [{', '.join(codes)}]" if codes else ""
-                print(f"  * {d.preferred_label}{code_str}")
+                src = ""
+                if d.provenance and d.provenance.lexicon_source:
+                    lex = d.provenance.lexicon_source
+                    if lex.startswith("disease_lexicon_"):
+                        lex = lex.replace("disease_lexicon_", "").replace(".json", "")
+                    src = f" ({lex})"
+                print(f"  * {d.preferred_label}{code_str}{src}")
 
-        # Print validated drugs
+        # Print validated drugs with provenance
         validated_drugs = [
             d for d in drug_results if d.status == ValidationStatus.VALIDATED
         ]
@@ -1750,7 +1763,13 @@ Return ONLY the JSON array, nothing else."""
             for d in validated_drugs:
                 phase = f" ({d.development_phase})" if d.development_phase else ""
                 compound = f" [{d.compound_id}]" if d.compound_id else ""
-                print(f"  * {d.preferred_name}{compound}{phase}")
+                src = ""
+                if d.provenance and d.provenance.lexicon_source:
+                    lex = d.provenance.lexicon_source
+                    if lex.startswith("2025_08_"):
+                        lex = lex.replace("2025_08_", "").replace(".json", "")
+                    src = f" <{lex}>"
+                print(f"  * {d.preferred_name}{compound}{phase}{src}")
 
         # Print feasibility summary
         if feasibility_results:
