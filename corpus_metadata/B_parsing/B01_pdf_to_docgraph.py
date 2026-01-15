@@ -616,7 +616,7 @@ class PDFToDocGraphParser(BaseParser):
         )
 
         # Pass 2: build DocumentGraph
-        graph = DocumentGraph(doc_id=file_path)
+        graph = DocumentGraph(doc_id=str(file_path))
         self._page_layouts = {}  # Reset layout info
 
         for page_num in sorted(raw_pages.keys()):
