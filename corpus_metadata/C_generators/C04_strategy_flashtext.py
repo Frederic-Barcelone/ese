@@ -707,11 +707,15 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             "Clinical research": "Abbreviation",
             "UMLS biological": "Abbreviation",
             "UMLS clinical": "Abbreviation",
+            "Meta-Inventory": "Abbreviation",
+            # Drug
+            "ChEMBL drugs": "Drug",
             # Disease
             "Rare disease acronyms": "Disease",
             "ANCA disease": "Disease",
             "IgAN disease": "Disease",
             "PAH disease": "Disease",
+            "MONDO diseases": "Disease",
             # Other
             "Trial acronyms": "Other",
             "PRO scales": "Other",
@@ -1393,10 +1397,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         Format: {SF: {canonical_expansion, regex, expansions: [...]}}
         """
         if not path.exists():
-            print(f"Meta-Inventory not found: {path}")
             return
 
-        print(f"Loading Meta-Inventory: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         loaded = 0
 
@@ -1432,7 +1434,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 pass
 
         self._lexicon_stats.append(("Meta-Inventory", loaded, path.name))
-        print(f"Loaded {loaded} abbreviations from Meta-Inventory")
 
     def _load_mondo_lexicon(self, path: Path) -> None:
         """
@@ -1444,10 +1445,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         Format: [{label, sources: [{source, id}], synonyms: [...]}]
         """
         if not path.exists():
-            print(f"MONDO lexicon not found: {path}")
             return
 
-        print(f"Loading MONDO diseases: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
         loaded = 0
@@ -1478,7 +1477,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             loaded += 1
 
         self._lexicon_stats.append(("MONDO diseases", loaded, path.name))
-        print(f"Loaded {loaded} disease terms from MONDO")
 
     def _load_chembl_lexicon(self, path: Path) -> None:
         """
@@ -1490,10 +1488,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         Format: [{label, chembl_id, max_phase, synonyms: [...]}]
         """
         if not path.exists():
-            print(f"ChEMBL lexicon not found: {path}")
             return
 
-        print(f"Loading ChEMBL drugs: {path}")
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
         loaded = 0
@@ -1504,7 +1500,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         elif isinstance(data, list):
             drugs = data
         else:
-            print(f"Unknown ChEMBL format in {path}")
             return
 
         for entry in drugs:
@@ -1541,7 +1536,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     loaded += 1
 
         self._lexicon_stats.append(("ChEMBL drugs", loaded, path.name))
-        print(f"Loaded {loaded} drug terms from ChEMBL")
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)
