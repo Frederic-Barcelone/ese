@@ -52,6 +52,7 @@ import heapq
 import json
 import re
 import sys
+import base64
 import time
 import uuid
 from collections import Counter
@@ -2396,16 +2397,30 @@ Return ONLY the JSON array, nothing else."""
                     except Exception as e:
                         print(f"    [WARN] Chart analysis failed: {e}")
 
+            # Save image as file
+            if img.image_base64:
+                img_type = img.image_type.value.lower() if img.image_type else "image"
+                img_filename = f"{img_type}_page{img.page_num}_{len([i for i in export_data['images'] if i.get('page') == img.page_num]) + 1}.jpg"
+                img_path = out_dir / img_filename
+                try:
+                    img_bytes = base64.b64decode(img.image_base64)
+                    with open(img_path, "wb") as img_file:
+                        img_file.write(img_bytes)
+                    img_data["saved_file"] = img_filename
+                except Exception as e:
+                    print(f"    [WARN] Failed to save image {img_filename}: {e}")
+
             export_data["images"].append(img_data)
 
-        # Write to file
+        # Write JSON metadata
         out_file = out_dir / f"images_{pdf_path.stem}_{timestamp}.json"
         with open(out_file, "w", encoding="utf-8") as f:
             import json
             json.dump(export_data, f, indent=2)
 
+        saved_count = sum(1 for img in export_data["images"] if "saved_file" in img)
         analyzed_count = sum(1 for img in export_data["images"] if "vision_analysis" in img)
-        print(f"  Images export: {out_file.name} ({len(images)} images, {analyzed_count} analyzed)")
+        print(f"  Images export: {out_file.name} ({len(images)} images, {saved_count} saved, {analyzed_count} analyzed)")
 
     # =========================================================================
     # DOCUMENT METADATA METHODS
@@ -2515,8 +2530,9 @@ Return ONLY the JSON array, nothing else."""
 
     def _export_extracted_text(self, pdf_path: Path, doc) -> None:
         """Export extracted text to file."""
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        txt_path = pdf_path.parent / f"{pdf_path.stem}_{timestamp}.txt"
+        txt_path = out_dir / f"{pdf_path.stem}_{timestamp}.txt"
 
         text_lines = []
         current_page = None

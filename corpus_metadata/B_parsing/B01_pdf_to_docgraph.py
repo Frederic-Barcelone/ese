@@ -799,7 +799,7 @@ class PDFToDocGraphParser(BaseParser):
                 kwargs["extract_image_block_to_payload"] = True
             # Save extracted images to output directory
             if self._image_output_dir:
-                kwargs["image_output_dir_path"] = self._image_output_dir
+                kwargs["extract_image_block_output_dir"] = self._image_output_dir
 
         return partition_pdf(**kwargs)
 
