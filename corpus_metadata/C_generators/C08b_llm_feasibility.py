@@ -13,8 +13,6 @@ This replaces the noisy regex-based extraction with high-quality structured outp
 
 from __future__ import annotations
 
-import json
-import re
 from typing import Any, Dict, List, Optional
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash

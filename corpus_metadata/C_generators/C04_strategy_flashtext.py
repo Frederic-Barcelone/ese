@@ -7,7 +7,7 @@ import json
 import re
 import warnings
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from flashtext import KeywordProcessor
 
@@ -366,7 +366,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
         # Collect blocks for batch scispacy processing
         blocks_data: List[
-            Tuple[any, str, int, int]
+            Tuple[Any, str, int, int]
         ] = []  # (block, text, start_offset, end_offset)
         full_text_parts: List[str] = []
         current_offset = 0
@@ -502,7 +502,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     block, block_text, block_start = find_block_for_offset(
                         abrv.start_char
                     )
-                    if block is None:
+                    if block is None or block_text is None:
                         continue
 
                     # Adjust offsets to be relative to block
@@ -582,7 +582,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     block, block_text, block_start = find_block_for_offset(
                         ent.start_char
                     )
-                    if block is None:
+                    if block is None or block_text is None:
                         continue
 
                     # Adjust offsets to be relative to block

@@ -149,6 +149,7 @@ class NegationDetector:
             window_start = max(0, match_start - self.window_size)
             prefix = text_lower[window_start:match_start]
         else:
+            window_start = 0
             prefix = text_lower[:self.window_size]
 
         # Look for negation cues in prefix
@@ -159,7 +160,7 @@ class NegationDetector:
                 return NegationResult(
                     is_negated=True,
                     negation_cue=cue,
-                    cue_position=window_start + pos if match_start else pos,
+                    cue_position=window_start + pos,
                     has_exception=has_exception,
                 )
 

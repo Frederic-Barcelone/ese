@@ -576,7 +576,7 @@ class DocumentMetadataStrategy:
 
     def _extract_pdf_metadata(self, path: Path) -> Optional[PDFMetadata]:
         """Extract PDF metadata using PyMuPDF."""
-        if not PYMUPDF_AVAILABLE:
+        if not PYMUPDF_AVAILABLE or fitz is None:
             return None
 
         try:

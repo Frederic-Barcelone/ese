@@ -11,9 +11,6 @@ Extracts structured data from:
 
 from __future__ import annotations
 
-import base64
-import json
-import re
 from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field

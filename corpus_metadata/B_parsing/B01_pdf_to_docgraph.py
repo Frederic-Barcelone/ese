@@ -524,10 +524,11 @@ class PDFToDocGraphParser(BaseParser):
             if use_pymupdf:
                 # PyMuPDF returns dicts
                 cat_norm = (el.get("category") or "").strip().lower()
-                page_num = el.get("page_num")
+                page_num_raw = el.get("page_num")
+                page_num: Optional[int] = int(page_num_raw) if page_num_raw is not None else None
                 text_raw = el.get("text", "")
                 bbox_tuple = el.get("bbox", (0, 0, 0, 0))
-                page_w, page_h = page_dims.get(page_num, (0.0, 0.0))
+                page_w, page_h = page_dims.get(page_num, (0.0, 0.0)) if page_num is not None else (0.0, 0.0)
                 bbox = BoundingBox(coords=bbox_tuple, page_width=page_w, page_height=page_h)
             else:
                 # Unstructured returns element objects
@@ -556,9 +557,8 @@ class PDFToDocGraphParser(BaseParser):
                 cls_name = el.__class__.__name__
                 if cls_name == "Image":
                     # Extract image with base64 data
-                    image_base64 = None
-                    if hasattr(el, "metadata") and hasattr(el.metadata, "image_base64"):
-                        image_base64 = el.metadata.image_base64
+                    el_metadata = getattr(el, "metadata", None)
+                    image_base64 = getattr(el_metadata, "image_base64", None) if el_metadata else None
                     raw_images[page_num].append({
                         "bbox": bbox,
                         "image_base64": image_base64,

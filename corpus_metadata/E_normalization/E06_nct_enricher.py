@@ -14,7 +14,6 @@ API Reference: https://clinicaltrials.gov/data-api/api
 
 from __future__ import annotations
 
-import hashlib
 import json
 import time
 from dataclasses import dataclass
@@ -164,7 +163,7 @@ class ClinicalTrialsGovClient:
 
             # Handle rate limiting
             if resp.status_code == 429:
-                print(f"[NCT] Rate limited, waiting 60s...")
+                print("[NCT] Rate limited, waiting 60s...")
                 time.sleep(60)
                 resp = self._session.get(self.BASE_URL, params=params, timeout=self.timeout)
 

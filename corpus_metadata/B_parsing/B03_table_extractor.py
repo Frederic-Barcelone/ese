@@ -130,7 +130,7 @@ class TableExtractor:
             max_cols = max(max_cols, col_count)
 
         # Build grid with span tracking
-        grid: List[List[Optional[str]]] = []
+        grid: List[List[str]] = []
         rowspan_tracker: Dict[int, Tuple[str, int]] = {}  # col_idx -> (text, remaining_rows)
 
         for tr in all_trs:

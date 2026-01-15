@@ -42,6 +42,7 @@ try:
 
     SCISPACY_AVAILABLE = True
 except ImportError:
+    spacy = None  # type: ignore[assignment]
     SCISPACY_AVAILABLE = False
 
 
@@ -491,7 +492,8 @@ class DrugDetector:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            self.alexion_processor = KeywordProcessor(case_sensitive=False)
+            alexion_proc = KeywordProcessor(case_sensitive=False)
+            self.alexion_processor = alexion_proc
             known_drugs = data.get("known_drugs", {})
             drug_types = data.get("drug_types", {})
 
@@ -504,12 +506,12 @@ class DrugDetector:
                     "source": "alexion",
                 }
                 # Add to FlashText
-                self.alexion_processor.add_keyword(drug_name, drug_name.lower())
+                alexion_proc.add_keyword(drug_name, drug_name.lower())
 
                 # Add variations (brand names, compound IDs if available)
                 if isinstance(drug_info, dict):
                     for alias in drug_info.get("aliases", []):
-                        self.alexion_processor.add_keyword(alias, drug_name.lower())
+                        alexion_proc.add_keyword(alias, drug_name.lower())
 
             self._lexicon_stats.append(
                 ("Alexion drugs", len(known_drugs), "2025_08_alexion_drugs.json")
@@ -529,7 +531,8 @@ class DrugDetector:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            self.investigational_processor = KeywordProcessor(case_sensitive=False)
+            inv_proc = KeywordProcessor(case_sensitive=False)
+            self.investigational_processor = inv_proc
             count = 0
 
             for entry in data:
@@ -551,7 +554,7 @@ class DrugDetector:
                         "title": entry.get("title"),
                         "source": "investigational",
                     }
-                    self.investigational_processor.add_keyword(drug_name, drug_key)
+                    inv_proc.add_keyword(drug_name, drug_key)
                     count += 1
 
             self._lexicon_stats.append(
@@ -572,7 +575,8 @@ class DrugDetector:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            self.fda_processor = KeywordProcessor(case_sensitive=False)
+            fda_proc = KeywordProcessor(case_sensitive=False)
+            self.fda_processor = fda_proc
             count = 0
 
             for entry in data:
@@ -594,7 +598,7 @@ class DrugDetector:
                         "application_number": meta.get("application_number"),
                         "source": "fda",
                     }
-                    self.fda_processor.add_keyword(drug_name, drug_key)
+                    fda_proc.add_keyword(drug_name, drug_key)
                     count += 1
 
                     # Also add brand name if different
@@ -602,7 +606,7 @@ class DrugDetector:
                     if brand and brand.lower() != drug_key:
                         brand_key = brand.lower()
                         if brand_key not in self.fda_drugs:
-                            self.fda_processor.add_keyword(brand, drug_key)
+                            fda_proc.add_keyword(brand, drug_key)
 
             self._lexicon_stats.append(
                 ("FDA approved drugs", count, "2025_08_fda_approved_drugs.json")
@@ -622,7 +626,8 @@ class DrugDetector:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            self.rxnorm_processor = KeywordProcessor(case_sensitive=False)
+            rxnorm_proc = KeywordProcessor(case_sensitive=False)
+            self.rxnorm_processor = rxnorm_proc
             count = 0
 
             for entry in data:
@@ -639,7 +644,7 @@ class DrugDetector:
                         "tty": entry.get("tty"),
                         "source": "rxnorm",
                     }
-                    self.rxnorm_processor.add_keyword(term, term_key)
+                    rxnorm_proc.add_keyword(term, term_key)
                     count += 1
 
             self._lexicon_stats.append(
@@ -651,7 +656,7 @@ class DrugDetector:
 
     def _init_scispacy(self) -> None:
         """Initialize scispacy NER model."""
-        if not SCISPACY_AVAILABLE:
+        if not SCISPACY_AVAILABLE or spacy is None:
             return
 
         try:

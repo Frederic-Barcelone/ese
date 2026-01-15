@@ -132,7 +132,7 @@ class PubTator3Client:
         cache_key = self._cache_key(f"autocomplete_{entity_type}", term)
         cached = self._cache_get(cache_key)
         if cached is not None:
-            return cached
+            return cached if isinstance(cached, list) else [cached]
 
         # Rate limit
         self._rate_limit()
@@ -156,8 +156,12 @@ class PubTator3Client:
                 self._cache_set(cache_key, filtered)
                 return filtered
 
-            self._cache_set(cache_key, results)
-            return results
+            # Handle non-list results (wrap dict in list or return None)
+            if isinstance(results, dict):
+                wrapped = [results]
+                self._cache_set(cache_key, wrapped)
+                return wrapped
+            return None
 
         except requests.exceptions.Timeout:
             print(f"[WARN] PubTator timeout for '{term}'")
@@ -191,7 +195,7 @@ class PubTator3Client:
         cache_key = self._cache_key(f"search_{entity_type}", term)
         cached = self._cache_get(cache_key)
         if cached is not None:
-            return cached
+            return cached if isinstance(cached, list) else [cached]
 
         # Rate limit
         self._rate_limit()
@@ -208,8 +212,17 @@ class PubTator3Client:
             resp.raise_for_status()
             data = resp.json()
 
-            # Extract results
-            results = data.get("results", []) if isinstance(data, dict) else data
+            # Extract results ensuring list type
+            if isinstance(data, dict):
+                results = data.get("results", [])
+            elif isinstance(data, list):
+                results = data
+            else:
+                return None
+
+            if not isinstance(results, list):
+                results = [results] if isinstance(results, dict) else []
+
             self._cache_set(cache_key, results)
             return results
 

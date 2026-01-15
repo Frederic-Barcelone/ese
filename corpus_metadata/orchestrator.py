@@ -517,6 +517,10 @@ class Orchestrator:
         disease_cfg = self.config.get("disease_detection", {})
         self.enable_disease_detection = disease_cfg.get("enabled", True)
 
+        # PubTator enrichment config (used by both disease and drug detection)
+        pubtator_cfg = self.config.get("api", {}).get("pubtator", {})
+        self.enable_pubtator = pubtator_cfg.get("enabled", False)
+
         if self.enable_disease_detection:
             self.disease_detector = DiseaseDetector(
                 config={
@@ -533,8 +537,6 @@ class Orchestrator:
             self.disease_normalizer = DiseaseNormalizer()
 
             # PubTator enrichment
-            pubtator_cfg = self.config.get("api", {}).get("pubtator", {})
-            self.enable_pubtator = pubtator_cfg.get("enabled", False)
             if self.enable_pubtator:
                 self.disease_enricher = DiseaseEnricher(pubtator_cfg)
             else:
@@ -1513,6 +1515,9 @@ Return ONLY the JSON array, nothing else."""
         Returns:
             Number of entities enriched
         """
+        if self.nct_enricher is None:
+            return 0
+
         import re
 
         nct_pattern = re.compile(r"^NCT\d{8}$", re.IGNORECASE)
@@ -1970,6 +1975,9 @@ Return ONLY the JSON array, nothing else."""
 
         Returns validated drug entities.
         """
+        if self.drug_detector is None:
+            return []
+
         print("\n[3c/4] Detecting drug mentions...")
         start = time.time()
 
