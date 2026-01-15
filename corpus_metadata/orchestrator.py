@@ -1890,11 +1890,33 @@ Return ONLY the JSON array, nothing else."""
             provenance=candidate.provenance,
         )
 
+    def _get_output_dir(self, pdf_path: Path) -> Path:
+        """Get output directory for a PDF file.
+
+        Creates a folder with the same name as the PDF (without extension)
+        in the same directory as the PDF file.
+
+        Args:
+            pdf_path: Path to the PDF file being processed
+
+        Returns:
+            Path to output directory (created if it doesn't exist)
+        """
+        if self.output_dir:
+            out_dir = self.output_dir
+        else:
+            # Create folder named after PDF in same directory
+            out_dir = pdf_path.parent / pdf_path.stem
+
+        # Ensure directory exists
+        out_dir.mkdir(parents=True, exist_ok=True)
+        return out_dir
+
     def _export_disease_results(
         self, pdf_path: Path, results: List[ExtractedDisease]
     ) -> None:
         """Export disease detection results to separate JSON file."""
-        out_dir = self.output_dir or pdf_path.parent
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -2061,7 +2083,7 @@ Return ONLY the JSON array, nothing else."""
         self, pdf_path: Path, results: List[ExtractedDrug]
     ) -> None:
         """Export drug detection results to separate JSON file."""
-        out_dir = self.output_dir or pdf_path.parent
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -2185,7 +2207,7 @@ Return ONLY the JSON array, nothing else."""
         self, pdf_path: Path, results: List[FeasibilityCandidate]
     ) -> None:
         """Export feasibility extraction results to JSON file."""
-        out_dir = self.output_dir or pdf_path.parent
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Group by field type
@@ -2290,7 +2312,7 @@ Return ONLY the JSON array, nothing else."""
         if not images:
             return
 
-        out_dir = self.output_dir or pdf_path.parent
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Initialize Vision analyzer if LLM client available
@@ -2420,7 +2442,7 @@ Return ONLY the JSON array, nothing else."""
         self, pdf_path: Path, metadata: DocumentMetadata
     ) -> None:
         """Export document metadata to JSON file."""
-        out_dir = self.output_dir or pdf_path.parent
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Build simplified export
@@ -2525,7 +2547,7 @@ Return ONLY the JSON array, nothing else."""
         drug_results: Optional[List[ExtractedDrug]] = None,
     ) -> None:
         """Export results to JSON."""
-        out_dir = self.output_dir or pdf_path.parent
+        out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         export_data = {
