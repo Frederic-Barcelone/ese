@@ -116,6 +116,7 @@ from C_generators.C07_strategy_drug import DrugDetector
 from C_generators.C08_strategy_feasibility import FeasibilityDetector
 from C_generators.C08b_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
+from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
 from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
@@ -2273,7 +2274,9 @@ Return ONLY the JSON array, nothing else."""
     def _export_images(
         self, pdf_path: Path, doc: "DocumentGraph"
     ) -> None:
-        """Export extracted images to JSON file."""
+        """Export extracted images to JSON file with Vision LLM analysis."""
+        from B_parsing.B02_doc_graph import ImageType
+
         # Collect all images
         images = list(doc.iter_images())
         if not images:
@@ -2281,6 +2284,11 @@ Return ONLY the JSON array, nothing else."""
 
         out_dir = self.output_dir or pdf_path.parent
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Initialize Vision analyzer if LLM client available
+        vision_analyzer = None
+        if hasattr(self, 'claude_client') and self.claude_client:
+            vision_analyzer = VisionImageAnalyzer(self.claude_client)
 
         # Build export data
         export_data = {
@@ -2297,8 +2305,64 @@ Return ONLY the JSON array, nothing else."""
                 "caption": img.caption,
                 "ocr_text": img.ocr_text,
                 "bbox": list(img.bbox.coords) if img.bbox else None,
-                "image_base64": img.image_base64,  # Can be large!
+                "image_base64": img.image_base64,
             }
+
+            # Run Vision LLM analysis based on image type
+            if vision_analyzer and img.image_base64:
+                if img.image_type == ImageType.FLOWCHART:
+                    try:
+                        flow_result = vision_analyzer.analyze_flowchart(
+                            img.image_base64, img.ocr_text
+                        )
+                        if flow_result:
+                            img_data["vision_analysis"] = {
+                                "analysis_type": "patient_flow",
+                                "screened": flow_result.screened,
+                                "screen_failures": flow_result.screen_failures,
+                                "randomized": flow_result.randomized,
+                                "completed": flow_result.completed,
+                                "discontinued": flow_result.discontinued,
+                                "arms": flow_result.arms,
+                                "exclusion_reasons": [
+                                    {"reason": e.reason, "count": e.count}
+                                    for e in flow_result.exclusion_reasons
+                                ],
+                                "stages": [
+                                    {"stage_name": s.stage_name, "count": s.count, "details": s.details}
+                                    for s in flow_result.stages
+                                ],
+                                "notes": flow_result.notes,
+                            }
+                    except Exception as e:
+                        print(f"    [WARN] Flowchart analysis failed: {e}")
+
+                elif img.image_type == ImageType.CHART:
+                    try:
+                        chart_result = vision_analyzer.analyze_chart(
+                            img.image_base64, img.caption
+                        )
+                        if chart_result:
+                            img_data["vision_analysis"] = {
+                                "analysis_type": "chart_data",
+                                "chart_type": chart_result.chart_type,
+                                "title": chart_result.title,
+                                "x_axis": chart_result.x_axis,
+                                "y_axis": chart_result.y_axis,
+                                "data_points": [
+                                    {
+                                        "label": dp.label,
+                                        "value": dp.value,
+                                        "unit": dp.unit,
+                                        "group": dp.group,
+                                    }
+                                    for dp in chart_result.data_points
+                                ],
+                                "statistical_results": chart_result.statistical_results,
+                            }
+                    except Exception as e:
+                        print(f"    [WARN] Chart analysis failed: {e}")
+
             export_data["images"].append(img_data)
 
         # Write to file
@@ -2307,7 +2371,8 @@ Return ONLY the JSON array, nothing else."""
             import json
             json.dump(export_data, f, indent=2)
 
-        print(f"  Images export: {out_file.name} ({len(images)} images)")
+        analyzed_count = sum(1 for img in export_data["images"] if "vision_analysis" in img)
+        print(f"  Images export: {out_file.name} ({len(images)} images, {analyzed_count} analyzed)")
 
     # =========================================================================
     # DOCUMENT METADATA METHODS
