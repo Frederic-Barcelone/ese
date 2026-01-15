@@ -389,8 +389,9 @@ heuristics:
     - "NJ"
     - "IA"
     # ----------------------------------------
-    # UK postal code prefixes
+    # UK postal code prefixes/areas
     # ----------------------------------------
+    - "NE"      # North East England (Newcastle)
     - "NE1"
     - "NE2"
     - "NE3"
@@ -405,6 +406,7 @@ heuristics:
     - "AUG"     # August (month)
     - "INT"     # International
     - "IRCCS"   # Italian research institute
+    - "CC BY"   # Creative Commons license
 
   # ========================================
   # COMMON ENGLISH WORDS - Auto-reject
@@ -482,6 +484,7 @@ heuristics:
   hyphenated_abbrevs:
     APPEAR-C3G: "trial name"  # Auto-enriched from ClinicalTrials.gov
     CKD-EPI: "Chronic Kidney Disease Epidemiology Collaboration"
+    FACIT: "Functional Assessment of Chronic Illness Therapy"
     FACIT-FATIGUE: "Functional Assessment of Chronic Illness Therapy-Fatigue"
     FACIT-Fatigue: "Functional Assessment of Chronic Illness Therapy-Fatigue"
     IL-6: "interleukin-6"
@@ -497,8 +500,8 @@ heuristics:
   direct_search_abbrevs:
     # UK removed - now in blacklist (not domain-specific)
     # RR removed - ambiguous, let syntax generator determine from context
+    # CC BY removed - license identifier, not medical abbreviation
     HR: "hazard ratio"
-    CC BY: "Creative Commons Attribution"
     C3a: "complement C3a anaphylatoxin"
     C5a: "complement C5a anaphylatoxin"
     DOI: "Digital Object Identifier"

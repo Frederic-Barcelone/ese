@@ -206,6 +206,8 @@ class HeuristicsConfig:
             # US state abbreviations (location context, not medical)
             "NY",
             "NJ",
+            # UK postal code areas
+            "NE",   # North East England (Newcastle)
             # Ambiguous 2-letter that are rarely medical
             "IA",  # Iowa, intramural - ambiguous without strong context
             # Common words/months that get lexicon matches
@@ -213,6 +215,7 @@ class HeuristicsConfig:
             "INT",  # International - not a medical abbreviation
             # Research/tool names that aren't medical abbreviations
             "IRCCS",  # Italian research institute
+            "CC BY",  # Creative Commons license
             # Database identifiers - these are references, not abbreviations
             "OMIM",  # Online Mendelian Inheritance in Man
             "MIM",  # Alternative OMIM prefix
@@ -323,8 +326,7 @@ class HeuristicsConfig:
             # Stats that might be missed
             "RR": "risk ratio",
             "HR": "hazard ratio",
-            # Multi-word
-            "CC BY": "Creative Commons Attribution",
+            # CC BY removed - license identifier, not medical abbreviation
             # Complement fragments
             "C3a": "complement C3a anaphylatoxin",
             "C5a": "complement C5a anaphylatoxin",
