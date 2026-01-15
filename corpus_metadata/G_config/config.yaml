@@ -407,6 +407,8 @@ heuristics:
     - "INT"     # International
     - "IRCCS"   # Italian research institute
     - "CC BY"   # Creative Commons license
+    - "CC"      # Creative Commons
+    - "BY"      # Part of CC BY license
 
   # ========================================
   # COMMON ENGLISH WORDS - Auto-reject

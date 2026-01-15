@@ -216,6 +216,8 @@ class HeuristicsConfig:
             # Research/tool names that aren't medical abbreviations
             "IRCCS",  # Italian research institute
             "CC BY",  # Creative Commons license
+            "CC",     # Creative Commons (part of CC BY license)
+            "BY",     # Part of CC BY license
             # Database identifiers - these are references, not abbreviations
             "OMIM",  # Online Mendelian Inheritance in Man
             "MIM",  # Alternative OMIM prefix
