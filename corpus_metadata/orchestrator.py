@@ -2400,7 +2400,8 @@ Return ONLY the JSON array, nothing else."""
             # Save image as file
             if img.image_base64:
                 img_type = img.image_type.value.lower() if img.image_type else "image"
-                img_filename = f"{img_type}_page{img.page_num}_{len([i for i in export_data['images'] if i.get('page') == img.page_num]) + 1}.jpg"
+                img_index = len([i for i in export_data['images'] if i.get('page') == img.page_num]) + 1
+                img_filename = f"{pdf_path.stem}_{img_type}_page{img.page_num}_{img_index}.jpg"
                 img_path = out_dir / img_filename
                 try:
                     img_bytes = base64.b64decode(img.image_base64)
