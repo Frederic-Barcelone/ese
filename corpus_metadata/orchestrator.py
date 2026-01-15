@@ -320,7 +320,7 @@ class Orchestrator:
         self.output_dir = Path(output_dir) if output_dir else None
         self.pdf_dir = Path(base_path) / paths.get("pdf_input", "Pdfs")
         self.gold_json = gold_json or str(
-            Path(base_path) / paths.get("gold_json", "gold_data/papers_gold.json")
+            Path(base_path) / paths.get("gold_json", "gold_data/papers_gold_v2.json")
         )
 
         # API settings

@@ -61,7 +61,7 @@ def get_paths_from_config(config: Dict[str, Any]) -> Tuple[str, str]:
         Path(base_path) / paths.get("papers_folder", "gold_data/PAPERS")
     )
     gold_json = str(
-        Path(base_path) / paths.get("gold_json", "gold_data/papers_gold.json")
+        Path(base_path) / paths.get("gold_json", "gold_data/papers_gold_v2.json")
     )
 
     return papers_folder, gold_json
