@@ -424,6 +424,8 @@ class PDFToDocGraphParser(BaseParser):
         self.extract_image_block_types = self.config.get(
             "extract_image_block_types", ["Image", "Table", "Figure"]
         )
+        # Image output directory (set per-parse call)
+        self._image_output_dir: Optional[str] = None
 
         # OCR and structure options
         self.languages = self.config.get("languages", ["eng"])  # improves OCR accuracy
@@ -492,8 +494,11 @@ class PDFToDocGraphParser(BaseParser):
     # Public
     # -----------------------
 
-    def parse(self, file_path: str) -> DocumentGraph:
+    def parse(self, file_path: str, image_output_dir: Optional[str] = None) -> DocumentGraph:
         page_dims = self._get_page_dimensions(file_path)
+
+        # Store image output directory for partition_pdf
+        self._image_output_dir = image_output_dir
 
         # Select extraction method
         use_pymupdf = False
@@ -792,6 +797,9 @@ class PDFToDocGraphParser(BaseParser):
             if self.extract_image_block_to_payload:
                 kwargs["extract_image_block_types"] = self.extract_image_block_types
                 kwargs["extract_image_block_to_payload"] = True
+            # Save extracted images to output directory
+            if self._image_output_dir:
+                kwargs["image_output_dir_path"] = self._image_output_dir
 
         return partition_pdf(**kwargs)
 

@@ -859,7 +859,10 @@ class Orchestrator:
         print("\n[1/4] Parsing PDF...")
         start = time.time()
 
-        doc = self.parser.parse(str(pdf_path))
+        # Get output directory for images (creates folder if needed)
+        output_dir = self._get_output_dir(pdf_path)
+
+        doc = self.parser.parse(str(pdf_path), image_output_dir=str(output_dir))
         doc = self.table_extractor.populate_document_graph(doc, str(pdf_path))
 
         total_blocks = sum(len(p.blocks) for p in doc.pages.values())
