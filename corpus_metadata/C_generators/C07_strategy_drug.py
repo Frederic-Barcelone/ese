@@ -54,6 +54,192 @@ except ImportError:
 class DrugFalsePositiveFilter:
     """Filter false positive drug matches."""
 
+    # NCT trial ID pattern (clinical trial identifiers, not drugs)
+    NCT_PATTERN = re.compile(r"^NCT\d+$", re.IGNORECASE)
+
+    # Bacteria names (often appear in vaccine trial data, not drugs)
+    BACTERIA_ORGANISMS: Set[str] = {
+        # Bacteria commonly in vaccine trials
+        "neisseria meningitidis",
+        "streptococcus pneumoniae",
+        "haemophilus influenzae",
+        "escherichia coli",
+        "e. coli",
+        "staphylococcus aureus",
+        "s. aureus",
+        "clostridium difficile",
+        "c. difficile",
+        "mycobacterium tuberculosis",
+        "bordetella pertussis",
+        "salmonella typhi",
+        "vibrio cholerae",
+        "corynebacterium diphtheriae",
+        "shigella",
+        "listeria monocytogenes",
+        "legionella pneumophila",
+        "pseudomonas aeruginosa",
+        "klebsiella pneumoniae",
+        "enterococcus",
+        "helicobacter pylori",
+        "h. pylori",
+        # Viruses (not drugs)
+        "influenza",
+        "coronavirus",
+        "sars-cov-2",
+        "hepatitis",
+        "hiv",
+        "herpes",
+        "measles",
+        "mumps",
+        "rubella",
+        "varicella",
+        "rotavirus",
+        "polio",
+        "rabies",
+        "yellow fever",
+        "dengue",
+        "zika",
+        "ebola",
+        "rsv",
+    }
+
+    # Vaccine-related terms (not drugs per se)
+    VACCINE_TERMS: Set[str] = {
+        "meningococcal",
+        "pneumococcal",
+        "conjugate vaccine",
+        "polysaccharide vaccine",
+        "inactivated vaccine",
+        "live attenuated",
+        "mrna vaccine",
+        "viral vector",
+        "subunit vaccine",
+        "toxoid",
+        "antigen",
+        "adjuvant",
+        "immunization",
+        "vaccination",
+        "booster",
+        "serogroup",
+        "serotype",
+    }
+
+    # Credentials and titles (not drugs)
+    CREDENTIALS: Set[str] = {
+        "md",
+        "phd",
+        "mph",
+        "mbbs",
+        "frcp",
+        "do",
+        "rn",
+        "np",
+        "pa",
+        "pharmd",
+        "dnp",
+        "dpt",
+        "ms",
+        "ma",
+        "msc",
+        "bsc",
+        "ba",
+    }
+
+    # Biological entities (proteins, complexes, pathways - not drugs)
+    BIOLOGICAL_ENTITIES: Set[str] = {
+        # Complement system components (biological, not drugs)
+        "c3",
+        "c4",
+        "c5",
+        "c3b",
+        "c4b",
+        "c5b",
+        "c3a",
+        "c5a",
+        "c3 convertase",
+        "c5 convertase",
+        "membrane attack complex",
+        "mac",
+        "terminal complement complex",
+        "alternative pathway",
+        "classical pathway",
+        "lectin pathway",
+        # Immunoglobulins (biological markers)
+        "igg",
+        "iga",
+        "igm",
+        "ige",
+        "igd",
+        "igg1",
+        "igg2",
+        "igg3",
+        "igg4",
+        # Cytokines and growth factors (biological)
+        "tnf",
+        "tnf-alpha",
+        "tnf-α",
+        "interferon",
+        "ifn",
+        "ifn-gamma",
+        "ifn-γ",
+        "interleukin",
+        "il-1",
+        "il-2",
+        "il-6",
+        "il-10",
+        "tgf-beta",
+        "tgf-β",
+        "vegf",
+        "egf",
+        "fgf",
+        "pdgf",
+        # Enzymes and proteins
+        "crp",
+        "ldh",
+        "ast",
+        "alt",
+        "alp",
+        "ggt",
+        "lipase",
+        "amylase",
+        "transferase",
+        "kinase",
+        "phosphatase",
+        "protease",
+        # Cellular components
+        "mitochondria",
+        "ribosome",
+        "endoplasmic reticulum",
+        "golgi",
+        "nucleus",
+        "cytoplasm",
+        "membrane",
+        "receptor",
+        "channel",
+        "transporter",
+        # Lab markers (not drugs)
+        "hemoglobin",
+        "hematocrit",
+        "platelet",
+        "neutrophil",
+        "lymphocyte",
+        "monocyte",
+        "eosinophil",
+        "basophil",
+        "albumin",
+        "globulin",
+        "bilirubin",
+        "urea",
+        "creatinine",
+        "potassium",
+        "sodium",
+        "calcium",
+        "magnesium",
+        "phosphate",
+        "chloride",
+        "bicarbonate",
+    }
+
     # Common words that might match drug names
     COMMON_WORDS: Set[str] = {
         # Dosage forms
@@ -327,6 +513,10 @@ class DrugFalsePositiveFilter:
         self.equipment_lower = {w.lower() for w in self.EQUIPMENT_PROCEDURES}
         self.non_drug_allcaps_lower = {w.lower() for w in self.NON_DRUG_ALLCAPS}
         self.always_filter_lower = {w.lower() for w in self.ALWAYS_FILTER}
+        self.bacteria_organisms_lower = {w.lower() for w in self.BACTERIA_ORGANISMS}
+        self.vaccine_terms_lower = {w.lower() for w in self.VACCINE_TERMS}
+        self.credentials_lower = {w.lower() for w in self.CREDENTIALS}
+        self.biological_entities_lower = {w.lower() for w in self.BIOLOGICAL_ENTITIES}
 
     def is_false_positive(
         self, matched_text: str, context: str, generator_type: DrugGeneratorType
@@ -341,6 +531,10 @@ class DrugFalsePositiveFilter:
 
         # Skip very short matches
         if len(text_lower) < self.MIN_LENGTH:
+            return True
+
+        # Filter NCT trial IDs (e.g., NCT04817618) - these are trial identifiers, not drugs
+        if self.NCT_PATTERN.match(text_stripped):
             return True
 
         # Always filter generic placeholder terms (even from specialized lexicons)
@@ -358,11 +552,39 @@ class DrugFalsePositiveFilter:
                 return True
 
         # Filter text containing trial status in parentheses like "Medications (NOT_YET_RECRUITING)"
+        # or "Iptacopan (RECRUITING)"
         if "(" in text_stripped and ")" in text_stripped:
+            paren_content = text_stripped[text_stripped.find("(")+1:text_stripped.find(")")]
+            paren_lower = paren_content.lower().replace("_", " ")
+            # Check if parentheses contain trial status
+            for status in self.trial_status_lower:
+                if status in paren_lower:
+                    return True
             # Also check the base word before parentheses
             base_word = text_stripped[:text_stripped.find("(")].strip().lower()
             if base_word in self.common_words_lower:
                 return True
+
+        # Always filter bacteria/organism names (not drugs)
+        if text_lower in self.bacteria_organisms_lower:
+            return True
+
+        # Check for partial bacteria matches (e.g., "Neisseria meningitidis serogroup B")
+        for organism in self.bacteria_organisms_lower:
+            if organism in text_lower:
+                return True
+
+        # Always filter vaccine-related terms (not drugs per se)
+        if text_lower in self.vaccine_terms_lower:
+            return True
+
+        # Always filter credentials (MD, PhD, MPH, etc.)
+        if text_lower in self.credentials_lower:
+            return True
+
+        # Always filter biological entities (proteins, enzymes, markers - not drugs)
+        if text_lower in self.biological_entities_lower:
+            return True
 
         # Always filter body parts
         if text_lower in self.body_parts_lower:
@@ -919,6 +1141,7 @@ class DrugDetector:
                         run_id=self.run_id,
                         doc_fingerprint=doc_fingerprint,
                         generator_name=DrugGeneratorType.PATTERN_COMPOUND_ID,
+                        lexicon_source="pattern:compound_id",
                     ),
                 )
                 candidates.append(candidate)
@@ -1004,6 +1227,7 @@ class DrugDetector:
                         run_id=self.run_id,
                         doc_fingerprint=doc_fingerprint,
                         generator_name=DrugGeneratorType.SCISPACY_NER,
+                        lexicon_source="ner:scispacy_umls",
                     ),
                 )
                 candidates.append(candidate)
