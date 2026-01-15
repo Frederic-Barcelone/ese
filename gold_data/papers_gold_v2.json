@@ -7,8 +7,8 @@
   "summary": {
     "total_original": 156,
     "defined": 62,
-    "mentioned": 83,
-    "excluded": 11,
+    "mentioned": 81,
+    "excluded": 15,
     "defined_diseases": 12,
     "defined_drugs": 10
   },
@@ -396,7 +396,7 @@
     {
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "LoA",
-      "long_form": "level of agreement on a scale of 0–10",
+      "long_form": "level of agreement on a scale of 0\u201310",
       "category": "ABBREV",
       "page": 4,
       "occurrences": 2,
@@ -852,6 +852,26 @@
       "category": "ABBREV",
       "page": 5,
       "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FACIT",
+      "long_form": "Functional Assessment of Chronic Illness Therapy",
+      "category": "ABBREV",
+      "page": 5,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "GSK",
+      "long_form": "GlaxoSmithKline",
+      "category": "ABBREV",
+      "page": 10,
+      "occurrences": 2,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
@@ -1516,6 +1536,46 @@
       "occurrences": 1,
       "audit_bucket": "PARSE_ISSUE",
       "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "BY",
+      "long_form": "(part of CC BY license)",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "FALSE_POSITIVE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CC",
+      "long_form": "(part of CC BY license)",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "FALSE_POSITIVE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "NCT04817618",
+      "long_form": "(trial identifier)",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "FALSE_POSITIVE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "ORAL",
+      "long_form": "(false positive - common word)",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "FALSE_POSITIVE",
+      "gold_type": "EXCLUDED"
     }
   ],
   "all_sf_annotations": [
@@ -1902,7 +1962,7 @@
     {
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "LoA",
-      "long_form": "level of agreement on a scale of 0–10",
+      "long_form": "level of agreement on a scale of 0\u201310",
       "category": "ABBREV",
       "page": 4,
       "occurrences": 2,
