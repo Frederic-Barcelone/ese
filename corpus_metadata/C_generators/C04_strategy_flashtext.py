@@ -278,6 +278,26 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             )
         )
 
+        # NEW LEXICONS: Meta-Inventory, MONDO, ChEMBL
+        self.meta_inventory_path = Path(
+            self.config.get(
+                "meta_inventory_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_meta_inventory_abbreviations.json",
+            )
+        )
+        self.mondo_lexicon_path = Path(
+            self.config.get(
+                "mondo_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_mondo_diseases.json",
+            )
+        )
+        self.chembl_lexicon_path = Path(
+            self.config.get(
+                "chembl_lexicon_path",
+                "/Users/frederictetard/Projects/ese/ouput_datasources/2025_chembl_drugs.json",
+            )
+        )
+
         self.context_window = int(self.config.get("context_window", 300))
 
         # Abbreviation entries (regex-based)
@@ -321,6 +341,14 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_trial_acronyms(self.trial_acronyms_path)
         self._load_pro_scales(self.pro_scales_path)
         self._load_pharma_companies(self.pharma_companies_path)
+
+        # NEW LEXICONS: Meta-Inventory, MONDO, ChEMBL
+        # Meta-Inventory: 104K+ clinical abbreviations (increases coverage 28-52%)
+        self._load_meta_inventory(self.meta_inventory_path)
+        # MONDO: Unified disease ontology with precise semantic mappings
+        self._load_mondo_lexicon(self.mondo_lexicon_path)
+        # ChEMBL: Open drug database with approved drugs
+        self._load_chembl_lexicon(self.chembl_lexicon_path)
 
         # Initialize scispacy NER for biomedical entity recognition
         self.scispacy_nlp = None
@@ -1350,6 +1378,170 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 loaded += 1
 
         self._lexicon_stats.append(("Pharma companies", loaded, path.name))
+
+    # =========================================================================
+    # NEW LEXICONS: Meta-Inventory, MONDO, ChEMBL
+    # =========================================================================
+
+    def _load_meta_inventory(self, path: Path) -> None:
+        """
+        Load Meta-Inventory clinical abbreviations (104K+ abbreviations).
+
+        Source: https://github.com/lisavirginia/clinical-abbreviations
+        Paper: https://www.nature.com/articles/s41597-021-00929-4
+
+        Format: {SF: {canonical_expansion, regex, expansions: [...]}}
+        """
+        if not path.exists():
+            print(f"Meta-Inventory not found: {path}")
+            return
+
+        print(f"Loading Meta-Inventory: {path}")
+        data = json.loads(path.read_text(encoding="utf-8"))
+        loaded = 0
+
+        for sf, entry in data.items():
+            if not sf or not isinstance(entry, dict):
+                continue
+
+            lf = entry.get("canonical_expansion")
+            regex_str = entry.get("regex")
+
+            if not lf or not regex_str:
+                continue
+
+            # Skip very short abbreviations
+            if len(sf) < 2:
+                continue
+
+            try:
+                case_insensitive = bool(entry.get("case_insensitive", True))
+                flags = re.IGNORECASE if case_insensitive else 0
+                pattern = re.compile(regex_str, flags)
+
+                self.abbrev_entries.append(
+                    LexiconEntry(
+                        sf=sf,
+                        lf=lf,
+                        pattern=pattern,
+                        source="meta-inventory"
+                    )
+                )
+                loaded += 1
+            except re.error:
+                pass
+
+        self._lexicon_stats.append(("Meta-Inventory", loaded, path.name))
+        print(f"Loaded {loaded} abbreviations from Meta-Inventory")
+
+    def _load_mondo_lexicon(self, path: Path) -> None:
+        """
+        Load MONDO disease ontology.
+
+        Source: https://mondo.monarchinitiative.org/
+        Provides unified disease mappings with precise semantics.
+
+        Format: [{label, sources: [{source, id}], synonyms: [...]}]
+        """
+        if not path.exists():
+            print(f"MONDO lexicon not found: {path}")
+            return
+
+        print(f"Loading MONDO diseases: {path}")
+        data = json.loads(path.read_text(encoding="utf-8"))
+        source = path.name
+        loaded = 0
+
+        for entry in data:
+            if not isinstance(entry, dict):
+                continue
+
+            label = (entry.get("label") or "").strip()
+            if not label or len(label) < 3:
+                continue
+
+            # Extract MONDO and cross-reference IDs
+            sources_list = entry.get("sources", [])
+            lexicon_ids = [
+                {"source": s.get("source", ""), "id": s.get("id", "")}
+                for s in sources_list
+                if isinstance(s, dict) and s.get("id")
+            ]
+
+            # Use canonical label if this is a synonym entry
+            canonical = entry.get("canonical", label)
+
+            self.entity_kp.add_keyword(label, label)
+            self.entity_canonical[label] = canonical
+            self.entity_source[label] = source
+            self.entity_ids[label] = lexicon_ids
+            loaded += 1
+
+        self._lexicon_stats.append(("MONDO diseases", loaded, path.name))
+        print(f"Loaded {loaded} disease terms from MONDO")
+
+    def _load_chembl_lexicon(self, path: Path) -> None:
+        """
+        Load ChEMBL approved drugs.
+
+        Source: https://www.ebi.ac.uk/chembl/
+        Open data drug database with bioactivity information.
+
+        Format: [{label, chembl_id, max_phase, synonyms: [...]}]
+        """
+        if not path.exists():
+            print(f"ChEMBL lexicon not found: {path}")
+            return
+
+        print(f"Loading ChEMBL drugs: {path}")
+        data = json.loads(path.read_text(encoding="utf-8"))
+        source = path.name
+        loaded = 0
+
+        # Handle placeholder format
+        if isinstance(data, dict) and "drugs" in data:
+            drugs = data.get("drugs", [])
+        elif isinstance(data, list):
+            drugs = data
+        else:
+            print(f"Unknown ChEMBL format in {path}")
+            return
+
+        for entry in drugs:
+            if not isinstance(entry, dict):
+                continue
+
+            label = (entry.get("label") or "").strip()
+            if not label or len(label) < 2:
+                continue
+
+            chembl_id = entry.get("chembl_id", "")
+            synonyms = entry.get("synonyms", [])
+
+            # Build identifier list
+            lexicon_ids = []
+            if chembl_id:
+                lexicon_ids.append({"source": "ChEMBL", "id": chembl_id})
+
+            # Add main drug name
+            self.entity_kp.add_keyword(label, label)
+            self.entity_canonical[label] = label
+            self.entity_source[label] = source
+            self.entity_ids[label] = lexicon_ids
+            loaded += 1
+
+            # Add synonyms
+            for syn in synonyms[:5]:  # Limit synonyms per drug
+                syn = (syn or "").strip()
+                if syn and len(syn) >= 2 and syn != label:
+                    self.entity_kp.add_keyword(syn, syn)
+                    self.entity_canonical[syn] = label
+                    self.entity_source[syn] = source
+                    self.entity_ids[syn] = lexicon_ids
+                    loaded += 1
+
+        self._lexicon_stats.append(("ChEMBL drugs", loaded, path.name))
+        print(f"Loaded {loaded} drug terms from ChEMBL")
 
     def _make_context(self, text: str, start: int, end: int) -> str:
         left = max(0, start - self.context_window)

@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/C_generators/C08b_llm_feasibility.py
+# corpus_metadata/corpus_metadata/C_generators/C11_llm_feasibility.py
 """
 LLM-based clinical trial feasibility extraction.
 
