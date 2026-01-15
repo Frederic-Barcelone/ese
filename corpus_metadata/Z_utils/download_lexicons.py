@@ -1,4 +1,4 @@
-# corpus_metadata/Z_tests/download_lexicons.py
+# corpus_metadata/Z_utils/download_lexicons.py
 """
 Download and convert public lexicons for the extraction pipeline.
 
@@ -8,7 +8,7 @@ Lexicons:
 3. ChEMBL (drug database) - Open drug data
 
 Usage:
-    python -m corpus_metadata.Z_tests.download_lexicons
+    python -m corpus_metadata.Z_utils.download_lexicons
 """
 
 import csv

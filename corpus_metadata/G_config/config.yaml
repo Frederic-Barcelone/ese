@@ -476,9 +476,11 @@ heuristics:
 
   # ========================================
   # HYPHENATED ABBREVIATIONS (PASO C)
+  # Note: "trial name" placeholders are auto-enriched at runtime
+  # using ClinicalTrials.gov API to fetch official trial titles
   # ========================================
   hyphenated_abbrevs:
-    APPEAR-C3G: "trial name"
+    APPEAR-C3G: "trial name"  # Auto-enriched from ClinicalTrials.gov
     CKD-EPI: "Chronic Kidney Disease Epidemiology Collaboration"
     FACIT-FATIGUE: "Functional Assessment of Chronic Illness Therapy-Fatigue"
     FACIT-Fatigue: "Functional Assessment of Chronic Illness Therapy-Fatigue"

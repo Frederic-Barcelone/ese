@@ -127,7 +127,7 @@ from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E04_pubtator_enricher import DiseaseEnricher
 from E_normalization.E05_drug_enricher import DrugEnricher
-from E_normalization.E06_nct_enricher import NCTEnricher
+from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
 from F_evaluation.F05_extraction_analysis import run_analysis
 
@@ -1231,11 +1231,19 @@ class Orchestrator:
             pattern = rf"\b{re.escape(hyph_sf)}\b"
             match = re.search(pattern, full_text, re.IGNORECASE)
             if match:
+                # If long form is "trial name", enrich from ClinicalTrials.gov API
+                actual_lf = hyph_lf
+                if hyph_lf.lower() == "trial name":
+                    enriched_title = enrich_trial_acronym(hyph_sf)
+                    if enriched_title:
+                        actual_lf = enriched_title
+                        print(f"    Enriched trial '{hyph_sf}': {enriched_title[:60]}...")
+
                 entity = self._create_entity_from_search(
                     doc_id,
                     full_text,
                     match,
-                    hyph_lf,
+                    actual_lf,
                     FieldType.DEFINITION_PAIR,
                     0.85,
                     ["auto_approved_hyphenated"],

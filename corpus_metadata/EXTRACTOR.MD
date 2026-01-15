@@ -160,7 +160,7 @@ corpus_metadata/
 ├── G_config/                            # CONFIGURATION
 │   └── config.yaml                      # Central configuration (v15.0)
 │
-├── Z_tests/                             # DEVELOPMENT TESTS
+├── Z_utils/                             # UTILITIES & SCRIPTS
 ├── cache/                               # Runtime cache (PubTator)
 ├── orchestrator.py                      # Main pipeline entry point (v0.8)
 └── EXTRACTOR.MD                         # This documentation
@@ -417,12 +417,40 @@ class LLMEngine:
 |------|------|---------|
 | **A** | Auto-approve statistics with numeric context | CI 95%, SD 2.3, HR 0.65 |
 | **B** | Auto-reject country codes | US, UK, EU, FR, DE |
-| **C** | Detect hyphenated abbreviations | CKD-EPI, sC5b-9, FACIT-Fatigue |
+| **C** | Detect hyphenated abbreviations + trial enrichment | CKD-EPI, APPEAR-C3G |
 | **D** | LLM extraction for undefined SFs | Abbreviations without definitions |
 
 ---
 
 ## Normalization (E_normalization)
+
+### E06_nct_enricher.py - Trial Acronym Enrichment
+
+```python
+class TrialAcronymEnricher:
+    """Enrich trial acronyms from ClinicalTrials.gov API."""
+
+    def search_by_acronym(self, acronym: str) -> NCTTrialInfo:
+        """Search for trial by acronym, returns official title."""
+        # Returns: nct_id, official_title, brief_title, conditions, etc.
+
+# Convenience function
+def enrich_trial_acronym(acronym: str) -> Optional[str]:
+    """Get official trial title for an acronym."""
+```
+
+**Example:**
+```python
+>>> enrich_trial_acronym("APPEAR-C3G")
+"A Multicenter, Randomized, Double-blind Study to Evaluate
+the Efficacy and Safety of Iptacopan in C3 Glomerulopathy"
+```
+
+**Features:**
+- Searches ClinicalTrials.gov API by acronym
+- 30-day disk cache to avoid repeated API calls
+- Rate limiting (1 req/sec)
+- Auto-enriches "trial name" placeholders in heuristics config
 
 ### E04_pubtator_enricher.py - PubTator Integration
 
