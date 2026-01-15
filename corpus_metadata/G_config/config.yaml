@@ -400,6 +400,7 @@ heuristics:
     - "EC1"
     - "WC1"
     - "W1"
+    - "LP"      # UK postal code suffix (e.g., NE1 4LP)
     # ----------------------------------------
     # Other non-medical terms
     # ----------------------------------------

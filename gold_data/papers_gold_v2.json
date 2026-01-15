@@ -8,7 +8,7 @@
     "total_original": 156,
     "defined": 62,
     "mentioned": 81,
-    "excluded": 15,
+    "excluded": 16,
     "defined_diseases": 12,
     "defined_drugs": 10
   },
@@ -1571,6 +1571,16 @@
       "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
       "short_form": "ORAL",
       "long_form": "(false positive - common word)",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "FALSE_POSITIVE",
+      "gold_type": "EXCLUDED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "LP",
+      "long_form": "(UK postal code suffix)",
       "category": "ABBREV",
       "page": 1,
       "occurrences": 1,

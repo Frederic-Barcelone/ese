@@ -206,8 +206,9 @@ class HeuristicsConfig:
             # US state abbreviations (location context, not medical)
             "NY",
             "NJ",
-            # UK postal code areas
+            # UK postal code areas/suffixes
             "NE",   # North East England (Newcastle)
+            "LP",   # UK postal code suffix (e.g., NE1 4LP)
             # Ambiguous 2-letter that are rarely medical
             "IA",  # Iowa, intramural - ambiguous without strong context
             # Common words/months that get lexicon matches
