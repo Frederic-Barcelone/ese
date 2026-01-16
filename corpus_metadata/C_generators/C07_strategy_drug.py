@@ -577,9 +577,11 @@ class DrugFalsePositiveFilter:
         "immunoglobulin",
         "immunoglobulins",
         # Specific NER false positives observed
-        "importal",  # Not a drug
+        "importal",  # Laxative, not relevant to trials
+        "antagon",  # False match
         "sc5b-9 protein complex",
         "serum, horse",
+        "horse serum",
         "serum",
         "plasma",
         "blood",
@@ -604,6 +606,7 @@ class DrugFalsePositiveFilter:
         "degradation products",
         "metabolite",
         "metabolites",
+        "soc",  # Standard of Care
         # Hormone-related (biological, not drugs unless specific)
         "hormone",
         "hormones",
@@ -708,6 +711,38 @@ class DrugFalsePositiveFilter:
     # Minimum drug name length
     MIN_LENGTH = 3
 
+    # Pattern suffixes that indicate biological entities, not specific drugs
+    # These catch "X protein", "X receptor", "X inhibitor", etc.
+    BIOLOGICAL_SUFFIXES = [
+        " protein",
+        " proteins",
+        " receptor",
+        " receptors",
+        " inhibitor",
+        " inhibitors",
+        " antagonist",
+        " antagonists",
+        " agonist",
+        " agonists",
+        " transporter",
+        " transporters",
+        " channel",
+        " channels",
+        " enzyme",
+        " enzymes",
+        " kinase",
+        " kinases",
+        " factor",
+        " factors",
+        " complex",
+        " pathway",
+        " system",
+        " agents",
+        ", human",
+        ", mouse",
+        ", rat",
+    ]
+
     def __init__(self):
         self.common_words_lower = {w.lower() for w in self.COMMON_WORDS}
         self.body_parts_lower = {w.lower() for w in self.BODY_PARTS}
@@ -793,6 +828,13 @@ class DrugFalsePositiveFilter:
         # These are commonly returned by scispacy UMLS but are not actual drugs
         if text_lower in self.ner_false_positives_lower:
             return True
+
+        # Pattern-based filtering for NER results
+        # Catches "X protein", "X receptor", "X inhibitors", etc.
+        if generator_type == DrugGeneratorType.SCISPACY_NER:
+            for suffix in self.BIOLOGICAL_SUFFIXES:
+                if text_lower.endswith(suffix):
+                    return True
 
         # Always filter body parts
         if text_lower in self.body_parts_lower:
@@ -1473,15 +1515,8 @@ class DrugDetector:
         Deduplicate candidates, preferring specialized sources.
 
         Priority: Alexion > Investigational > FDA > RxNorm > NER
+        Deduplicates by both matched_text AND preferred_name.
         """
-        # Group by matched text (case-insensitive)
-        by_text: Dict[str, List[DrugCandidate]] = {}
-        for c in candidates:
-            key = c.matched_text.lower()
-            if key not in by_text:
-                by_text[key] = []
-            by_text[key].append(c)
-
         # Priority order
         priority = {
             DrugGeneratorType.LEXICON_ALEXION: 0,
@@ -1492,12 +1527,25 @@ class DrugDetector:
             DrugGeneratorType.SCISPACY_NER: 5,
         }
 
-        # Keep highest priority for each text
-        deduped = []
-        for text_key, group in by_text.items():
-            # Sort by priority
-            group.sort(key=lambda c: priority.get(c.generator_type, 99))
-            # Keep the highest priority (first after sort)
-            deduped.append(group[0])
+        # Sort all candidates by priority first
+        candidates.sort(key=lambda c: priority.get(c.generator_type, 99))
+
+        # Track seen names (both matched_text and preferred_name)
+        seen_names: Set[str] = set()
+        deduped: List[DrugCandidate] = []
+
+        for c in candidates:
+            matched_key = c.matched_text.lower().strip()
+            preferred_key = (c.preferred_name or "").lower().strip()
+
+            # Skip if we've seen this name already
+            if matched_key in seen_names or (preferred_key and preferred_key in seen_names):
+                continue
+
+            # Add to result and mark as seen
+            deduped.append(c)
+            seen_names.add(matched_key)
+            if preferred_key:
+                seen_names.add(preferred_key)
 
         return deduped
