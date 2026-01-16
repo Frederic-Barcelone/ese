@@ -7,7 +7,7 @@
   "summary": {
     "total_original": 156,
     "defined": 62,
-    "mentioned": 82,
+    "mentioned": 89,
     "excluded": 16,
     "defined_diseases": 12,
     "defined_drugs": 10
@@ -886,6 +886,66 @@
       "gold_type": "MENTIONED"
     },
     {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "ASTRAZENECA",
+      "long_form": "AstraZeneca PLC",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "NOVARTIS",
+      "long_form": "Novartis AG",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "RADAR",
+      "long_form": "National Registry of Rare Kidney Diseases (RaDaR)",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SC5B-9",
+      "long_form": "soluble terminal complement complex",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "IGA",
+      "long_form": "Immunoglobulin A",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "FACIT-FATIGUE",
+      "long_form": "Functional Assessment of Chronic Illness Therapy-Fatigue",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "AAV",
       "long_form": "ANCA-associated vasculitides",
@@ -1429,6 +1489,16 @@
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "USA",
       "long_form": "United States of America",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "NCT04817618",
+      "long_form": "APPEAR-C3G trial identifier",
       "category": "ABBREV",
       "page": 1,
       "occurrences": 1,

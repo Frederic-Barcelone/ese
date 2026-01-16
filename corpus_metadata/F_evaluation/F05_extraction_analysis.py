@@ -61,8 +61,8 @@ class ExtractionAnalyzer:
         # Get system extractions
         validated = results_data.get("abbreviations", [])
 
-        # Build comparison data
-        comparison = self._build_comparison(validated, gold_defined)
+        # Build comparison data (check against both defined AND mentioned)
+        comparison = self._build_comparison(validated, gold_defined, gold_mentioned)
 
         # Print report
         self._print_report(
@@ -153,13 +153,16 @@ class ExtractionAnalyzer:
     # COMPARISON LOGIC
     # -------------------------------------------------------------------------
     def _build_comparison(
-        self, validated: List[Dict], gold_defined: List[Dict]
+        self, validated: List[Dict], gold_defined: List[Dict], gold_mentioned: List[Dict] = None
     ) -> Dict[str, Any]:
         """
         Build comparison between system output and gold standard.
 
         Returns structured data for both sections of the report.
         """
+        if gold_mentioned is None:
+            gold_mentioned = []
+
         # Deduplicate validated by (SF, LF)
         seen = set()
         unique_validated = []
@@ -177,7 +180,7 @@ class ExtractionAnalyzer:
                     }
                 )
 
-        # Deduplicate gold by (SF, LF)
+        # Deduplicate gold DEFINED by (SF, LF)
         seen_gold = set()
         unique_gold = []
         for item in gold_defined:
@@ -194,6 +197,10 @@ class ExtractionAnalyzer:
                         "page": item.get("page", "?"),
                     }
                 )
+
+        # Build set of ALL gold SFs (defined + mentioned) for Section 2 matching
+        all_gold_sfs = {self._norm_sf(item.get("short_form", "")) for item in gold_defined}
+        all_gold_sfs.update({self._norm_sf(item.get("short_form", "")) for item in gold_mentioned})
 
         # SECTION 1: Check each gold item - was it found?
         gold_results = []
@@ -223,19 +230,21 @@ class ExtractionAnalyzer:
                 }
             )
 
-        # SECTION 2: Check each extracted item - does it match gold?
+        # SECTION 2: Check each extracted item - does it match gold (defined OR mentioned)?
         extracted_results = []
 
         for sys_item in unique_validated:
             sys_sf = sys_item["short_form"]
             sys_lf_norm = sys_item["long_form_norm"]
 
-            matches_gold = False
+            # Check if SF is in ALL gold (defined + mentioned)
+            matches_gold = sys_sf in all_gold_sfs
             matched_gold_lf = None
-            for gold_item in unique_gold:
-                if gold_item["short_form"] == sys_sf:
-                    if self._lf_matches(sys_lf_norm, gold_item["long_form_norm"]):
-                        matches_gold = True
+
+            # Try to find matching long form from defined list
+            if matches_gold:
+                for gold_item in unique_gold:
+                    if gold_item["short_form"] == sys_sf:
                         matched_gold_lf = gold_item["long_form"]
                         break
 
@@ -434,8 +443,8 @@ class ExtractionAnalyzer:
         if gold_mentioned:
             print("\n")
             print("━" * 80)
-            print(" SECTION 3: MENTIONED ABBREVIATIONS (not scored) ")
-            print(" (Used in document but not explicitly defined - bonus if found)")
+            print(" SECTION 3: LEXICON COVERAGE CHECK ")
+            print(" (MISS = add to lexicon | FOUND = lexicon working)")
             print("━" * 80)
 
             # Build set of extracted SFs
