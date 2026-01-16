@@ -118,7 +118,8 @@ from C_generators.C08_strategy_feasibility import FeasibilityDetector
 from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
-from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument
+from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument, TrialIdentifier
+from C_generators.C00_strategy_identifiers import IdentifierExtractor, IdentifierType
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
@@ -1709,7 +1710,7 @@ Return ONLY the JSON array, nothing else."""
 
         # Export feasibility results
         if feasibility_results:
-            self._export_feasibility_results(pdf_path_obj, feasibility_results)
+            self._export_feasibility_results(pdf_path_obj, feasibility_results, doc)
 
         # Export images
         if doc is not None:
@@ -2235,11 +2236,50 @@ Return ONLY the JSON array, nothing else."""
         return candidates
 
     def _export_feasibility_results(
-        self, pdf_path: Path, results: List[FeasibilityCandidate]
+        self, pdf_path: Path, results: List[FeasibilityCandidate], doc: Optional["DocumentGraph"] = None
     ) -> None:
         """Export feasibility extraction results to JSON file."""
         out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Extract trial identifiers (NCT, EudraCT, CTIS, etc.)
+        trial_ids: List[TrialIdentifier] = []
+        if doc is not None:
+            try:
+                id_extractor = IdentifierExtractor()
+                extracted_ids = id_extractor.extract_identifiers(doc)
+
+                # Registry URLs
+                registry_urls = {
+                    "NCT": "https://clinicaltrials.gov/study/",
+                    "EudraCT": "https://www.clinicaltrialsregister.eu/ctr-search/search?query=",
+                    "ISRCTN": "https://www.isrctn.com/",
+                }
+
+                for ext_id in extracted_ids:
+                    # Only include trial-related identifiers
+                    if ext_id.id_type in {IdentifierType.NCT, IdentifierType.EUDRACT, IdentifierType.ISRCTN}:
+                        url = None
+                        registry = None
+                        if ext_id.id_type == IdentifierType.NCT:
+                            registry = "ClinicalTrials.gov"
+                            url = f"{registry_urls['NCT']}NCT{ext_id.normalized}"
+                        elif ext_id.id_type == IdentifierType.EUDRACT:
+                            registry = "EU Clinical Trials Register"
+                            url = f"{registry_urls['EudraCT']}{ext_id.normalized}"
+                        elif ext_id.id_type == IdentifierType.ISRCTN:
+                            registry = "ISRCTN Registry"
+                            url = f"{registry_urls['ISRCTN']}ISRCTN{ext_id.normalized}"
+
+                        trial_ids.append(TrialIdentifier(
+                            id_type=ext_id.id_type.value,
+                            value=ext_id.value,
+                            registry=registry,
+                            url=url,
+                            title=ext_id.long_form,
+                        ))
+            except Exception as e:
+                print(f"  [WARN] Trial ID extraction failed: {e}")
 
         # Group by field type
         from A_core.A07_feasibility_models import FeasibilityExportEntry
@@ -2316,6 +2356,7 @@ Return ONLY the JSON array, nothing else."""
         export_doc = FeasibilityExportDocument(
             doc_id=pdf_path.stem,
             doc_filename=pdf_path.name,
+            trial_ids=trial_ids,
             study_design=study_design_data,
             eligibility_inclusion=eligibility_inclusion,
             eligibility_exclusion=eligibility_exclusion,

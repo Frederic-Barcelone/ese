@@ -204,6 +204,23 @@ class StudySite(BaseModel):
 
 
 # -------------------------
+# Trial Identifiers
+# -------------------------
+
+
+class TrialIdentifier(BaseModel):
+    """Clinical trial registry identifier."""
+
+    id_type: str  # "NCT", "EudraCT", "CTIS", "ISRCTN", "ACTRN", etc.
+    value: str  # e.g., "NCT04817618", "2020-001234-56"
+    registry: Optional[str] = None  # e.g., "ClinicalTrials.gov", "EU CTIS"
+    url: Optional[str] = None  # Direct link to registry entry
+    title: Optional[str] = None  # Trial title if available
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
 # Feasibility Provenance
 # -------------------------
 
@@ -289,6 +306,9 @@ class FeasibilityExportDocument(BaseModel):
 
     doc_id: str
     doc_filename: str
+
+    # Trial identifiers (NCT, EudraCT, CTIS, etc.)
+    trial_ids: List[TrialIdentifier] = Field(default_factory=list)
 
     # Study design (single structured object)
     study_design: Optional[Dict[str, Any]] = None
