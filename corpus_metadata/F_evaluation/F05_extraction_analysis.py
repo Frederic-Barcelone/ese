@@ -235,7 +235,6 @@ class ExtractionAnalyzer:
 
         for sys_item in unique_validated:
             sys_sf = sys_item["short_form"]
-            sys_lf_norm = sys_item["long_form_norm"]
 
             # Check if SF is in ALL gold (defined + mentioned)
             matches_gold = sys_sf in all_gold_sfs
