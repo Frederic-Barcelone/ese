@@ -199,8 +199,11 @@ class PharmaCompanyDetector:
 
         for candidate in candidates:
             evidence = EvidenceSpan(
-                span_text=candidate.matched_text,
-                span_location=candidate.context_location,
+                text=candidate.matched_text,
+                location=candidate.context_location,
+                scope_ref="pharma_detection",
+                start_char_offset=0,
+                end_char_offset=len(candidate.matched_text),
             )
 
             extracted = ExtractedPharma(

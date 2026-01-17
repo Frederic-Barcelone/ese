@@ -2295,10 +2295,10 @@ Return ONLY the JSON array, nothing else."""
                 parent_company=entity.parent_company,
                 subsidiaries=entity.subsidiaries,
                 confidence=entity.confidence_score,
-                context=entity.primary_evidence.span_text
+                context=entity.primary_evidence.text
                 if entity.primary_evidence
                 else None,
-                page=entity.primary_evidence.span_location.page_num
+                page=entity.primary_evidence.location.page_num
                 if entity.primary_evidence
                 else None,
                 lexicon_source=entity.provenance.lexicon_source
