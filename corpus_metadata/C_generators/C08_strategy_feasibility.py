@@ -23,20 +23,32 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A07_feasibility_models import (
+    BackgroundTherapy,
     CriterionType,
+    DiagnosisConfirmation,
     EligibilityCriterion,
     EndpointType,
     EpidemiologyData,
+    EvidenceSpan,
+    ExtractionMethod,
     FeasibilityCandidate,
     FeasibilityFieldType,
     FeasibilityGeneratorType,
     FeasibilityProvenanceMetadata,
+    InvasiveProcedure,
+    LabCriterion,
+    LabTimepoint,
+    OperationalBurden,
     PatientJourneyPhase,
     PatientJourneyPhaseType,
+    ScreenFailReason,
+    ScreeningFlow,
     ScreeningYield,
     StudyEndpoint,
+    StudyFootprint,
     StudySite,
     VaccinationRequirement,
+    VisitSchedule,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
@@ -463,6 +475,46 @@ SITE_COUNT_PATTERNS = [
     r"(\d+)\s*(?:participating|active)\s*sites?",
     r"multinational\s*(?:study|trial)\s*(?:in|across)\s*(\d+)\s*countries?",
     r"(\d+)\s*countries?\s*(?:participated|enrolled|recruited)",
+]
+
+
+# =============================================================================
+# OPERATIONAL BURDEN PATTERNS
+# =============================================================================
+
+INVASIVE_PROCEDURE_PATTERNS = [
+    r"(?:renal|kidney)\s*biops(?:y|ies)",
+    r"bone\s*marrow\s*(?:aspirat(?:e|ion)|biops(?:y|ies))",
+    r"lumbar\s*puncture",
+    r"liver\s*biops(?:y|ies)",
+    r"skin\s*biops(?:y|ies)",
+    r"bronchoscop(?:y|ic)",
+    r"colonoscop(?:y|ic)",
+    r"endoscop(?:y|ic)",
+    r"(?:central\s*)?venous\s*(?:catheter|line)",
+]
+
+VISIT_SCHEDULE_PATTERNS = [
+    r"(?:day|week)\s*(\d+)(?:\s*[,/]\s*(?:day|week)\s*(\d+))+",
+    r"visits?\s*(?:at|on)\s*(?:day|week)s?\s*(\d+(?:\s*[,/and]+\s*\d+)*)",
+    r"every\s*(\d+)\s*(?:days?|weeks?|months?)",
+    r"(\d+)\s*(?:study\s*)?visits?\s*(?:over|during)\s*(\d+)\s*(?:weeks?|months?)",
+    r"follow[\s-]?up\s*(?:at|for)\s*(\d+)\s*(?:weeks?|months?|years?)",
+]
+
+BACKGROUND_THERAPY_PATTERNS = [
+    r"(?:stable\s*)?(?:dose\s*of\s*)?(?:ACE[\s-]?inhibitor|ARB|ACEi)s?\s*(?:for\s*)?(?:≥|>=|at\s*least)?\s*(\d+)\s*(?:days?|weeks?|months?)",
+    r"(?:background|concomitant)\s*(?:therapy|treatment|medication)\s*(?:with|of)\s*([\w\s/-]+)",
+    r"(?:immunosuppressant|corticosteroid)s?\s*(?:at\s*)?(?:stable\s*)?(?:dose\s*)?(?:for\s*)?(?:≥|>=)?\s*(\d+)\s*(?:days?|weeks?|months?)",
+    r"(?:prohibited|not\s*permitted|excluded).*(?:live\s*)?vaccin(?:e|ation)",
+]
+
+LAB_CRITERION_PATTERNS = [
+    r"(?:UPCR|proteinuria)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:\.\d+)?)\s*(?:g/g|mg/mmol|mg/g)",
+    r"(?:eGFR|GFR)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+)\s*(?:mL/min|ml/min)",
+    r"(?:C3|C4|complement)\s*(?:level)?\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:\.\d+)?)\s*(?:mg/dL|g/L|mg/L)",
+    r"(?:hemoglobin|Hgb|Hb)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:\.\d+)?)\s*(?:g/dL|g/L)",
+    r"(?:platelet|PLT)\s*(?:count)?\s*(?:≥|>=|>|≤|<=|<)\s*(\d+)\s*(?:×\s*10\^?9/L|/μL|K/μL)",
 ]
 
 
@@ -1744,14 +1796,27 @@ class FeasibilityDetector:
         section: str,
         confidence: float,
         confidence_features: Optional[Dict[str, float]] = None,
+        evidence_quote: Optional[str] = None,
+        char_start: Optional[int] = None,
+        char_end: Optional[int] = None,
     ) -> FeasibilityCandidate:
-        """Create a FeasibilityCandidate with provenance."""
+        """Create a FeasibilityCandidate with provenance and evidence."""
         provenance = FeasibilityProvenanceMetadata(
             pipeline_version=self.pipeline_version,
             run_id=self.run_id,
             doc_fingerprint=doc_fingerprint,
             generator_name=FeasibilityGeneratorType.PATTERN_MATCH,
         )
+
+        evidence = []
+        if evidence_quote or matched_text:
+            evidence.append(EvidenceSpan(
+                page=page_num,
+                section_header=section if section != "unknown" else None,
+                quote=evidence_quote or matched_text[:500],
+                char_start=char_start,
+                char_end=char_end,
+            ))
 
         return FeasibilityCandidate(
             doc_id=doc_id,
@@ -1761,6 +1826,8 @@ class FeasibilityDetector:
             context_text=context_text,
             page_number=page_num,
             section_name=section,
+            evidence=evidence,
+            extraction_method=ExtractionMethod.REGEX,
             confidence=confidence,
             confidence_features=confidence_features,
             provenance=provenance,

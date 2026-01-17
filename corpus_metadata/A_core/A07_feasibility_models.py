@@ -35,11 +35,17 @@ class FeasibilityFieldType(str, Enum):
     PATIENT_JOURNEY_PHASE = "PATIENT_JOURNEY_PHASE"
     STUDY_ENDPOINT = "STUDY_ENDPOINT"
     STUDY_SITE = "STUDY_SITE"
+    STUDY_FOOTPRINT = "STUDY_FOOTPRINT"
     STUDY_DESIGN = "STUDY_DESIGN"
     STUDY_DURATION = "STUDY_DURATION"
     TREATMENT_PATHWAY = "TREATMENT_PATHWAY"
     SCREENING_YIELD = "SCREENING_YIELD"
+    SCREENING_FLOW = "SCREENING_FLOW"
     VACCINATION_REQUIREMENT = "VACCINATION_REQUIREMENT"
+    OPERATIONAL_BURDEN = "OPERATIONAL_BURDEN"
+    INVASIVE_PROCEDURE = "INVASIVE_PROCEDURE"
+    BACKGROUND_THERAPY = "BACKGROUND_THERAPY"
+    LAB_CRITERION = "LAB_CRITERION"
 
 
 class FeasibilityGeneratorType(str, Enum):
@@ -78,20 +84,141 @@ class EndpointType(str, Enum):
     SAFETY = "safety"
 
 
+class ExtractionMethod(str, Enum):
+    """How the value was extracted."""
+
+    REGEX = "regex"
+    TABLE = "table"
+    LLM = "llm"
+    HYBRID = "hybrid"
+
+
+class EligibilityCategory(str, Enum):
+    """Refined eligibility criterion categories for computability."""
+
+    AGE = "age"
+    DISEASE_DEFINITION = "disease_definition"
+    DISEASE_SEVERITY = "disease_severity"
+    DISEASE_DURATION = "disease_duration"
+    DIAGNOSIS_CONFIRMATION = "diagnosis_confirmation"
+    HISTOPATHOLOGY = "histopathology"
+    PRIOR_TREATMENT = "prior_treatment"
+    CONCOMITANT_MEDICATIONS = "concomitant_medications"
+    BACKGROUND_THERAPY = "background_therapy"
+    LAB_VALUE = "lab_value"
+    BIOMARKER = "biomarker"
+    ORGAN_FUNCTION = "organ_function"
+    COMORBIDITY = "comorbidity"
+    VACCINATION_REQUIREMENT = "vaccination_requirement"
+    PROPHYLAXIS_REQUIREMENT = "prophylaxis_requirement"
+    PREGNANCY = "pregnancy"
+    CONSENT = "consent"
+    ADMINISTRATIVE = "administrative"
+    HISTOPATHOLOGY_EXCLUSION = "histopathology_exclusion"
+    RUN_IN_REQUIREMENT = "run_in_requirement"
+
+
+# -------------------------
+# Evidence Span (Provenance)
+# -------------------------
+
+
+class EvidenceSpan(BaseModel):
+    """Evidence supporting an extracted value - critical for auditability."""
+
+    page: Optional[int] = None
+    section_header: Optional[str] = None
+    quote: str
+    char_start: Optional[int] = None
+    char_end: Optional[int] = None
+    bbox: Optional[List[float]] = None  # [x0, y0, x1, y1]
+    source_node_id: Optional[str] = None  # doc-graph node reference
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Entity Normalization
+# -------------------------
+
+
+class EntityNormalization(BaseModel):
+    """Normalized coding for drugs, conditions, labs."""
+
+    system: str  # "LOINC", "RxNorm", "ATC", "Orphanet", "SNOMED", "ICD-10"
+    code: str
+    label: Optional[str] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Lab Criterion (Computable)
+# -------------------------
+
+
+class LabTimepoint(BaseModel):
+    """Structured timepoint for lab requirements."""
+
+    day: Optional[int] = None  # relative to randomization
+    visit_name: Optional[str] = None  # "screening", "baseline"
+    window_days: Optional[int] = None  # +/- days
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class LabCriterion(BaseModel):
+    """Fully computable lab eligibility criterion."""
+
+    analyte: str  # "UPCR", "eGFR", "C3"
+    operator: str  # ">=", "<=", ">", "<", "=="
+    value: float
+    unit: str
+    specimen: Optional[str] = None  # "first_morning_void", "serum", "plasma"
+    timepoints: List[LabTimepoint] = Field(default_factory=list)
+    normalization: Optional[EntityNormalization] = None  # LOINC code
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Diagnosis Confirmation
+# -------------------------
+
+
+class DiagnosisConfirmation(BaseModel):
+    """Structured diagnosis confirmation requirement."""
+
+    method: str  # "biopsy", "genetic_testing", "clinical_criteria"
+    window_months: Optional[int] = None  # within X months of screening
+    assessor: Optional[str] = None  # "local histopathologist", "central review"
+    findings: Optional[str] = None  # specific pathological findings
+
+    model_config = ConfigDict(extra="forbid")
+
+
 # -------------------------
 # Eligibility Criteria
 # -------------------------
 
 
 class EligibilityCriterion(BaseModel):
-    """Single inclusion or exclusion criterion."""
+    """Single inclusion or exclusion criterion with full provenance."""
 
     criterion_type: CriterionType
-    text: str  # Full criterion text
-    category: Optional[str] = None  # e.g., "age", "disease_definition", "biomarker"
-    is_negated: bool = False  # True if criterion contains negation
-    parsed_value: Optional[Dict[str, Any]] = None  # Structured extraction
-    derived_variables: Optional[Dict[str, Any]] = None  # ML-ready: age_min, pediatric_allowed
+    text: str
+    category: Optional[str] = None
+    is_negated: bool = False
+    parsed_value: Optional[Dict[str, Any]] = None
+    derived_variables: Optional[Dict[str, Any]] = None
+
+    # Structured sub-types for computability
+    lab_criterion: Optional[LabCriterion] = None
+    diagnosis_confirmation: Optional[DiagnosisConfirmation] = None
+
+    # Evidence/provenance
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+    extraction_method: Optional[ExtractionMethod] = None
 
     model_config = ConfigDict(extra="forbid")
 
@@ -191,8 +318,52 @@ class StudyDesign(BaseModel):
 # -------------------------
 
 
+class ScreenFailReason(BaseModel):
+    """Reason for screen failure with count and evidence."""
+
+    reason: str
+    count: Optional[int] = None
+    percentage: Optional[float] = None
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class ScreeningFlow(BaseModel):
+    """Complete CONSORT flow with screen fail reasons - key for feasibility."""
+
+    # Planned vs actual
+    planned_sample_size: Optional[int] = None
+    actual_enrollment: Optional[int] = None
+
+    # CONSORT flow numbers
+    screened: Optional[int] = None
+    screen_failures: Optional[int] = None
+    randomized: Optional[int] = None
+    treated: Optional[int] = None
+    completed: Optional[int] = None
+    discontinued: Optional[int] = None
+
+    # Derived metrics
+    screening_yield: Optional[float] = None  # randomized/screened
+    screen_failure_rate: Optional[float] = None
+    dropout_rate: Optional[float] = None
+
+    # Screen failure breakdown - critical for feasibility
+    screen_fail_reasons: List[ScreenFailReason] = Field(default_factory=list)
+
+    # Run-in failures (separate from screen failures)
+    run_in_failures: Optional[int] = None
+    run_in_failure_reasons: List[ScreenFailReason] = Field(default_factory=list)
+
+    # Evidence
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
 class ScreeningYield(BaseModel):
-    """CONSORT flow metrics for screening and enrollment."""
+    """CONSORT flow metrics for screening and enrollment (legacy, use ScreeningFlow)."""
 
     screened: Optional[int] = None
     screen_failures: Optional[int] = None
@@ -217,6 +388,99 @@ class VaccinationRequirement(BaseModel):
     vaccine_type: str
     requirement_type: str  # "required", "prohibited", "completed_before"
     timing: Optional[str] = None  # "at least 4 weeks before", "within 6 months"
+    agents: List[str] = Field(default_factory=list)  # specific vaccines
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Operational Burden (Key Feasibility Driver)
+# -------------------------
+
+
+class InvasiveProcedure(BaseModel):
+    """Invasive procedure requirement."""
+
+    name: str  # "renal biopsy", "lumbar puncture", "bone marrow aspirate"
+    timing: List[str] = Field(default_factory=list)  # ["screening", "month 6"]
+    optional: bool = False
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class VisitSchedule(BaseModel):
+    """Trial visit schedule intensity."""
+
+    total_visits: Optional[int] = None
+    visit_days: List[int] = Field(default_factory=list)  # days from randomization
+    frequency: Optional[str] = None  # "every 4 weeks", "monthly"
+    duration_weeks: Optional[int] = None
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class BackgroundTherapy(BaseModel):
+    """Background/concomitant therapy requirements."""
+
+    therapy_class: str  # "ACEi/ARB", "immunosuppressant"
+    requirement: str  # "stable dose ≥90 days", "prohibited"
+    agents: List[str] = Field(default_factory=list)
+    stable_duration_days: Optional[int] = None
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class OperationalBurden(BaseModel):
+    """Operational burden assessment - major feasibility driver."""
+
+    # Invasive procedures
+    invasive_procedures: List[InvasiveProcedure] = Field(default_factory=list)
+
+    # Visit schedule
+    visit_schedule: Optional[VisitSchedule] = None
+
+    # Lab/sample handling
+    central_lab_required: bool = False
+    special_sample_handling: List[str] = Field(default_factory=list)  # "frozen samples", "timed collection"
+
+    # Vaccinations/prophylaxis
+    vaccination_requirements: List[VaccinationRequirement] = Field(default_factory=list)
+
+    # Background therapy
+    background_therapy: List[BackgroundTherapy] = Field(default_factory=list)
+
+    # Run-in requirements
+    run_in_duration_days: Optional[int] = None
+    run_in_requirements: List[str] = Field(default_factory=list)
+
+    # Derived scores (heuristic)
+    burden_score: Optional[float] = None  # 0-10 composite
+    site_complexity_score: Optional[float] = None
+
+    # Hard gates (criteria most likely to limit enrollment)
+    hard_gates: List[str] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Study Footprint (Reshaped Sites)
+# -------------------------
+
+
+class StudyFootprint(BaseModel):
+    """Study geographic footprint - consolidated site information."""
+
+    sites_total: Optional[int] = None
+    countries_total: Optional[int] = None
+    countries: List[str] = Field(default_factory=list)  # ISO codes or names
+    regions: List[str] = Field(default_factory=list)  # "North America", "Europe"
+    sites_by_country: Optional[Dict[str, int]] = None  # only if counts available
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
 
@@ -285,10 +549,13 @@ class FeasibilityCandidate(BaseModel):
     Pre-validation feasibility information candidate.
 
     Contains extracted information about clinical trial feasibility:
-    - Eligibility criteria
+    - Eligibility criteria (with lab criteria, diagnosis confirmation)
     - Epidemiology data
     - Patient journey phases
     - Study design parameters
+    - Screening flow (CONSORT with screen fail reasons)
+    - Operational burden (procedures, visits, vaccines)
+    - Study footprint (sites/countries consolidated)
     """
 
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
@@ -304,7 +571,11 @@ class FeasibilityCandidate(BaseModel):
 
     # Location in document
     page_number: Optional[int] = None
-    section_name: Optional[str] = None  # e.g., "Methods", "Eligibility", "Study Design"
+    section_name: Optional[str] = None
+
+    # Evidence/provenance - CRITICAL for auditability
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+    extraction_method: Optional[ExtractionMethod] = None
 
     # Structured data (one of these will be populated based on field_type)
     eligibility_criterion: Optional[EligibilityCriterion] = None
@@ -312,13 +583,19 @@ class FeasibilityCandidate(BaseModel):
     patient_journey_phase: Optional[PatientJourneyPhase] = None
     study_endpoint: Optional[StudyEndpoint] = None
     study_site: Optional[StudySite] = None
+    study_footprint: Optional[StudyFootprint] = None
     study_design: Optional[StudyDesign] = None
     screening_yield: Optional[ScreeningYield] = None
+    screening_flow: Optional[ScreeningFlow] = None
     vaccination_requirement: Optional[VaccinationRequirement] = None
+    operational_burden: Optional[OperationalBurden] = None
+    lab_criterion: Optional[LabCriterion] = None
+    background_therapy: Optional[BackgroundTherapy] = None
+    invasive_procedure: Optional[InvasiveProcedure] = None
 
     # Confidence
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
-    confidence_features: Optional[Dict[str, float]] = None  # For debugging/calibration
+    confidence_features: Optional[Dict[str, float]] = None
 
     provenance: FeasibilityProvenanceMetadata
 
