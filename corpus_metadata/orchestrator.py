@@ -104,6 +104,12 @@ from A_core.A06_drug_models import (
     DrugGeneratorType,
     ExtractedDrug,
 )
+from A_core.A09_pharma_models import (
+    ExtractedPharma,
+    PharmaCandidate,
+    PharmaExportDocument,
+    PharmaExportEntry,
+)
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B03_table_extractor import TableExtractor
@@ -114,6 +120,7 @@ from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
 from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
+from C_generators.C12_strategy_pharma import PharmaCompanyDetector
 from C_generators.C08_strategy_feasibility import FeasibilityDetector
 from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
@@ -582,6 +589,20 @@ class Orchestrator:
             self.drug_detector = None
             self.drug_enricher = None
 
+        # Pharma company detection
+        pharma_cfg = self.config.get("pharma_detection", {})
+        self.enable_pharma_detection = pharma_cfg.get("enabled", True)
+
+        if self.enable_pharma_detection:
+            self.pharma_detector = PharmaCompanyDetector(
+                config={
+                    "run_id": self.run_id,
+                    "lexicon_base_path": str(dict_path),
+                }
+            )
+        else:
+            self.pharma_detector = None
+
         # Feasibility detection components
         feasibility_cfg = self.config.get("feasibility_extraction", {})
         self.enable_feasibility = feasibility_cfg.get("enabled", True)
@@ -858,7 +879,7 @@ class Orchestrator:
 
     def _parse_pdf(self, pdf_path: Path):
         """Stage 1: Parse PDF into DocumentGraph."""
-        print("\n[1/9] Parsing PDF...")
+        print("\n[1/10] Parsing PDF...")
         start = time.time()
 
         # Get output directory for images (creates folder if needed)
@@ -880,7 +901,7 @@ class Orchestrator:
 
     def _generate_candidates(self, doc) -> Tuple[List[Candidate], str]:
         """Stage 2: Generate and deduplicate candidates."""
-        print("\n[2/9] Generating candidates...")
+        print("\n[2/10] Generating candidates...")
         start = time.time()
 
         all_candidates = []
@@ -1484,7 +1505,7 @@ Return ONLY the JSON array, nothing else."""
             2. Disambiguate: Resolve ambiguous SF meanings (disambiguator)
             3. Deduplicate: Merge same-SF entries, pick best LF (deduplicator)
         """
-        print("\n[4/9] Normalizing, disambiguating & deduplicating...")
+        print("\n[4/10] Normalizing, disambiguating & deduplicating...")
 
         # Step 1: Normalize
         normalized_count = 0
@@ -1592,7 +1613,7 @@ Return ONLY the JSON array, nothing else."""
 
         # Early exit if validation disabled
         if self.skip_validation:
-            print("\n[3/9] Validation SKIPPED")
+            print("\n[3/10] Validation SKIPPED")
             self._export_results(pdf_path_obj, [], unique_candidates)
             return []
 
@@ -1616,7 +1637,7 @@ Return ONLY the JSON array, nothing else."""
             and word_counts.get(c.short_form.upper(), 0) >= 2
         )
 
-        print("\n[3/9] Validating candidates with Claude...")
+        print("\n[3/10] Validating candidates with Claude...")
         print(f"  Corroborated SFs: {len(corroborated_sfs)}")
         print(f"  Frequent SFs (2+): {frequent_sfs}")
         print(f"  Filtered (lexicon-only, rare): {filtered_count}")
@@ -1676,6 +1697,11 @@ Return ONLY the JSON array, nothing else."""
         if self.enable_drug_detection and self.drug_detector is not None:
             drug_results = self._process_drugs(doc, pdf_path_obj)
 
+        # Pharma company detection (parallel pipeline)
+        pharma_results: List[ExtractedPharma] = []
+        if self.enable_pharma_detection and self.pharma_detector is not None:
+            pharma_results = self._process_pharma(doc, pdf_path_obj)
+
         # Feasibility extraction (parallel pipeline)
         feasibility_results: List[FeasibilityCandidate] = []
         if self.enable_feasibility and self.feasibility_detector is not None:
@@ -1689,7 +1715,7 @@ Return ONLY the JSON array, nothing else."""
             )
 
         # Stage 4: Summary & Export
-        print("\n[9/9] Writing summary...")
+        print("\n[10/10] Writing summary...")
         self.logger.write_summary()
         self.logger.print_summary()
         counters.log_summary()
@@ -1707,6 +1733,10 @@ Return ONLY the JSON array, nothing else."""
         # Export drug results
         if drug_results:
             self._export_drug_results(pdf_path_obj, drug_results)
+
+        # Export pharma results
+        if pharma_results:
+            self._export_pharma_results(pdf_path_obj, pharma_results)
 
         # Export feasibility results
         if feasibility_results:
@@ -1772,6 +1802,17 @@ Return ONLY the JSON array, nothing else."""
                     src = f" <{lex}>"
                 print(f"  * {d.preferred_name}{compound}{phase}{src}")
 
+        # Print validated pharma companies with provenance
+        validated_pharma = [
+            p for p in pharma_results if p.status == ValidationStatus.VALIDATED
+        ]
+        if validated_pharma:
+            print(f"\nValidated pharma companies ({len(validated_pharma)}):")
+            for p in validated_pharma:
+                hq = f" ({p.headquarters})" if p.headquarters else ""
+                parent = f" [parent: {p.parent_company}]" if p.parent_company else ""
+                print(f"  * {p.canonical_name}{hq}{parent}")
+
         # Print feasibility summary
         if feasibility_results:
             print(f"\nFeasibility information ({len(feasibility_results)} items):")
@@ -1810,7 +1851,7 @@ Return ONLY the JSON array, nothing else."""
         if self.disease_detector is None:
             return []
 
-        print("\n[5/9] Detecting disease mentions...")
+        print("\n[5/10] Detecting disease mentions...")
         start = time.time()
 
         # Generate disease candidates
@@ -2032,7 +2073,7 @@ Return ONLY the JSON array, nothing else."""
         if self.drug_detector is None:
             return []
 
-        print("\n[6/9] Detecting drug mentions...")
+        print("\n[6/10] Detecting drug mentions...")
         start = time.time()
 
         # Run drug detection
@@ -2068,6 +2109,47 @@ Return ONLY the JSON array, nothing else."""
             [r for r in results if r.status == ValidationStatus.VALIDATED]
         )
         print(f"  Validated drugs: {validated_count}")
+        print(f"  Time: {time.time() - start:.2f}s")
+
+        return results
+
+    def _process_pharma(self, doc, pdf_path: Path) -> List[ExtractedPharma]:
+        """
+        Process document for pharma company mentions.
+
+        Returns validated pharma company entities.
+        """
+        if self.pharma_detector is None:
+            return []
+
+        print("\n[7/10] Detecting pharma company mentions...")
+        start = time.time()
+
+        # Build full text for detection
+        full_text = " ".join(
+            block.text
+            for block in doc.iter_linear_blocks()
+            if block.text
+        )
+
+        doc_fingerprint = hash_string(full_text[:5000])
+
+        # Run pharma detection
+        candidates = self.pharma_detector.detect(
+            doc_graph=doc,
+            doc_id=doc.doc_id,
+            doc_fingerprint=doc_fingerprint,
+            full_text=full_text,
+        )
+        print(f"  Pharma candidates: {len(candidates)}")
+
+        # Validate candidates (auto-validated for lexicon matches)
+        results = self.pharma_detector.validate_candidates(candidates)
+
+        validated_count = len(
+            [r for r in results if r.status == ValidationStatus.VALIDATED]
+        )
+        print(f"  Validated pharma companies: {validated_count}")
         print(f"  Time: {time.time() - start:.2f}s")
 
         return results
@@ -2193,6 +2275,58 @@ Return ONLY the JSON array, nothing else."""
 
         print(f"  Drug export: {out_file.name}")
 
+    def _export_pharma_results(
+        self, pdf_path: Path, results: List[ExtractedPharma]
+    ) -> None:
+        """Export pharma company detection results to separate JSON file."""
+        out_dir = self._get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
+
+        # Build export entries
+        pharma_entries: List[PharmaExportEntry] = []
+        for entity in validated:
+            entry = PharmaExportEntry(
+                matched_text=entity.matched_text,
+                canonical_name=entity.canonical_name,
+                full_name=entity.full_name,
+                headquarters=entity.headquarters,
+                parent_company=entity.parent_company,
+                subsidiaries=entity.subsidiaries,
+                confidence=entity.confidence_score,
+                context=entity.primary_evidence.span_text
+                if entity.primary_evidence
+                else None,
+                page=entity.primary_evidence.span_location.page_num
+                if entity.primary_evidence
+                else None,
+                lexicon_source=entity.provenance.lexicon_source
+                if entity.provenance
+                else None,
+            )
+            pharma_entries.append(entry)
+
+        # Build export document
+        unique_companies = set(e.canonical_name for e in pharma_entries)
+        export_doc = PharmaExportDocument(
+            run_id=self.run_id,
+            timestamp=datetime.now().isoformat(),
+            document=pdf_path.name,
+            document_path=str(pdf_path.absolute()),
+            pipeline_version=PIPELINE_VERSION,
+            total_detected=len(results),
+            unique_companies=len(unique_companies),
+            companies=pharma_entries,
+        )
+
+        # Write to file
+        out_file = out_dir / f"pharma_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export_doc.model_dump_json(indent=2))
+
+        print(f"  Pharma export: {out_file.name}")
+
     # =========================================================================
     # FEASIBILITY EXTRACTION METHODS
     # =========================================================================
@@ -2211,7 +2345,7 @@ Return ONLY the JSON array, nothing else."""
         if self.feasibility_detector is None:
             return []
 
-        print("\n[7/9] Extracting feasibility information...")
+        print("\n[8/10] Extracting feasibility information...")
         start = time.time()
 
         # Use LLM extraction if available (preferred - more precise structured output)
@@ -2506,7 +2640,7 @@ Return ONLY the JSON array, nothing else."""
         if self.doc_metadata_strategy is None:
             return None
 
-        print("\n[8/9] Extracting document metadata...")
+        print("\n[9/10] Extracting document metadata...")
         start = time.time()
 
         try:
