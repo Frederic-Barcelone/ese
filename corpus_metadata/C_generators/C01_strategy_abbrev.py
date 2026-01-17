@@ -528,6 +528,8 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
     Strategy A (Explicit):  Long Form (SF)
     Strategy B (Explicit):  SF (Long Form)
     Strategy C (Implicit):  SF, defined as/stands for/... Long Form
+    Strategy D (Inline):    SF=Long Form or SF: Long Form
+    Strategy E (Comma):     SF, Long Form (common in tables/legends)
     """
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
@@ -568,10 +570,28 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         # Explicit inline definition patterns: "SF=long form" or "SF: long form"
         # Captures patterns like "RR=relative reduction" or "UPCR: urine protein-creatinine ratio"
         self.inline_definition_patterns = [
-            # SF=long form (e.g., "RR=relative reduction")
+            # SF=long form or SF: long form (e.g., "RR=relative reduction")
             # Uses greedy match for LF, stopping at period, comma, or uppercase letter
             re.compile(
                 r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([a-z][a-z\s\-/]{3,60})(?=[.,;)\]A-Z]|$)",
+            ),
+            # SF: Capitalized Long Form (e.g., "LOA: Level of Agreement", "SOR: Strength of Recommendation")
+            # Handles title-case definitions common in methodology tables
+            re.compile(
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([A-Z][a-z]+(?:\s+[a-zA-Z][a-z]*){1,8})(?=[.,;)\]\n]|$)",
+            ),
+        ]
+
+        # Comma-separated definition patterns: "SF, Long Form" (common in tables/legends)
+        # E.g., "FV, Final Vote" or "LOA, Level of Agreement"
+        self.comma_definition_patterns = [
+            # SF, Capitalized Long Form
+            re.compile(
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*,\s*([A-Z][a-z]+(?:\s+[a-zA-Z][a-z]*){1,8})(?=[.,;)\]\n]|$)",
+            ),
+            # SF, lowercase long form
+            re.compile(
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*,\s*([a-z][a-z\s\-/]{3,60})(?=[.,;)\]A-Z\n]|$)",
             ),
         ]
 
@@ -841,6 +861,62 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                             m.end(),
                             method="inline_definition",
                             confidence=0.97,  # High confidence - explicit definition
+                        )
+                    )
+                    added_this_block += 1
+
+            # -------------------------
+            # Strategy E: Comma-separated definitions (SF, Long Form)
+            # HIGH PRIORITY: Catches "LOA, Level of Agreement" patterns in tables/legends
+            # -------------------------
+            for pat in self.comma_definition_patterns:
+                if added_this_block >= self.max_candidates_per_block:
+                    break
+
+                for m in pat.finditer(text_block):
+                    if added_this_block >= self.max_candidates_per_block:
+                        break
+
+                    sf = _clean_ws(m.group(1))
+                    lf = _clean_ws(m.group(2))
+
+                    if not _looks_like_short_form(
+                        sf, self.min_sf_length, self.max_sf_length
+                    ):
+                        continue
+
+                    # Skip author initials
+                    if _is_likely_author_initial(sf, text_block):
+                        continue
+
+                    # LF should be a proper phrase (not another abbreviation)
+                    if not lf or len(lf) < 4:
+                        continue
+
+                    # Skip if LF is all uppercase (likely another abbreviation)
+                    if lf.isupper():
+                        continue
+
+                    # Skip if LF is too long (likely noise)
+                    if len(lf) > 50:
+                        continue
+
+                    key = (doc.doc_id, sf.upper(), lf.lower())
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
+                    out.append(
+                        self._make_candidate(
+                            doc,
+                            block,
+                            sf,
+                            lf,
+                            text_block,
+                            m.start(),
+                            m.end(),
+                            method="comma_definition",
+                            confidence=0.92,  # Slightly lower - comma patterns can be ambiguous
                         )
                     )
                     added_this_block += 1

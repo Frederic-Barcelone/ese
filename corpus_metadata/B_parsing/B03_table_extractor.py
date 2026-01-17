@@ -370,6 +370,50 @@ class TableExtractor:
             print(f"[WARN] Failed to render table image: {e}")
             return None
 
+    def render_full_page(
+        self,
+        file_path: str,
+        page_num: int,
+        dpi: int = 150,
+    ) -> Optional[str]:
+        """
+        Render full page as image (fallback when bbox is unavailable).
+
+        Args:
+            file_path: Path to PDF
+            page_num: 1-indexed page number
+            dpi: Resolution for rendering
+
+        Returns:
+            Base64-encoded PNG string, or None if rendering fails
+        """
+        if not PYMUPDF_AVAILABLE or fitz is None:
+            print("[WARN] PyMuPDF not available for page image rendering")
+            return None
+
+        try:
+            doc = fitz.open(file_path)
+            if page_num < 1 or page_num > len(doc):
+                doc.close()
+                return None
+
+            page = doc[page_num - 1]  # 0-indexed
+
+            # Render full page to pixmap
+            mat = fitz.Matrix(dpi / 72, dpi / 72)
+            pix = page.get_pixmap(matrix=mat)
+
+            # Convert to base64
+            img_bytes = pix.tobytes("png")
+            img_base64 = base64.b64encode(img_bytes).decode("utf-8")
+
+            doc.close()
+            return img_base64
+
+        except Exception as e:
+            print(f"[WARN] Failed to render full page image: {e}")
+            return None
+
     def render_multipage_table(
         self,
         file_path: str,
@@ -404,22 +448,27 @@ class TableExtractor:
             for part in table_parts:
                 page_num = part["page_num"]
                 bbox = part["bbox"]
+                full_page = part.get("full_page", False)
 
                 if page_num < 1 or page_num > len(doc):
                     continue
 
                 page = doc[page_num - 1]
-                x0, y0, x1, y1 = bbox
-
-                clip_rect = fitz.Rect(
-                    max(0, x0 - padding),
-                    max(0, y0 - padding),
-                    min(page.rect.width, x1 + padding),
-                    min(page.rect.height, y1 + padding),
-                )
-
                 mat = fitz.Matrix(dpi / 72, dpi / 72)
-                pix = page.get_pixmap(matrix=mat, clip=clip_rect)
+
+                if full_page or bbox == (0.0, 0.0, 0.0, 0.0):
+                    # Render full page when bbox is unavailable
+                    pix = page.get_pixmap(matrix=mat)
+                else:
+                    # Render specific table region
+                    x0, y0, x1, y1 = bbox
+                    clip_rect = fitz.Rect(
+                        max(0, x0 - padding),
+                        max(0, y0 - padding),
+                        min(page.rect.width, x1 + padding),
+                        min(page.rect.height, y1 + padding),
+                    )
+                    pix = page.get_pixmap(matrix=mat, clip=clip_rect)
 
                 # Convert to PIL Image
                 img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
@@ -600,13 +649,22 @@ class TableExtractor:
                 table["page_nums"] = [table["page_num"]]
                 table["is_multipage"] = False
 
-                if render_images and table["bbox"] != (0.0, 0.0, 0.0, 0.0):
-                    table["image_base64"] = self.render_table_as_image(
-                        file_path,
-                        table["page_num"],
-                        table["bbox"],
-                        dpi=dpi,
-                    )
+                if render_images:
+                    if table["bbox"] != (0.0, 0.0, 0.0, 0.0):
+                        # Render specific table region
+                        table["image_base64"] = self.render_table_as_image(
+                            file_path,
+                            table["page_num"],
+                            table["bbox"],
+                            dpi=dpi,
+                        )
+                    else:
+                        # Fallback: render full page when bbox is unavailable
+                        table["image_base64"] = self.render_full_page(
+                            file_path,
+                            table["page_num"],
+                            dpi=dpi,
+                        )
                 else:
                     table["image_base64"] = None
 
@@ -616,10 +674,14 @@ class TableExtractor:
                 merged = self._merge_table_parts(group)
 
                 if render_images:
+                    # Include all parts, marking those with empty bbox for full-page render
                     parts = [
-                        {"page_num": t["page_num"], "bbox": t["bbox"]}
+                        {
+                            "page_num": t["page_num"],
+                            "bbox": t["bbox"],
+                            "full_page": t["bbox"] == (0.0, 0.0, 0.0, 0.0),
+                        }
                         for t in group
-                        if t["bbox"] != (0.0, 0.0, 0.0, 0.0)
                     ]
                     merged["image_base64"] = self.render_multipage_table(
                         file_path, parts, dpi=dpi
