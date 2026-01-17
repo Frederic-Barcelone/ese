@@ -340,7 +340,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         self._load_pah_lexicon(self.pah_lexicon_path)
         self._load_trial_acronyms(self.trial_acronyms_path)
         self._load_pro_scales(self.pro_scales_path)
-        self._load_pharma_companies(self.pharma_companies_path)
+        # Pharma companies now extracted via dedicated C12_strategy_pharma detector
+        # self._load_pharma_companies(self.pharma_companies_path)
 
         # NEW LEXICONS: Meta-Inventory, MONDO, ChEMBL
         # Meta-Inventory: 104K+ clinical abbreviations (increases coverage 28-52%)
