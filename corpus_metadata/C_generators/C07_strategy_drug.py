@@ -343,6 +343,19 @@ class DrugFalsePositiveFilter:
         "nature",
         "science",
         "cell",
+        # Geographic/organization names (not drugs)
+        "turkey",
+        "genesis",
+        "urban",
+        # Generic medical terms
+        "promote",
+        "cartilage",
+        "bone marrow",
+        "lymphocytes",
+        "no data",
+        "arthritis foundation",
+        # Antibody types (markers, not drugs unless specific)
+        "anca",
         # Generic process/action words
         "via",
         "met",
@@ -943,6 +956,24 @@ class DrugDetector:
     5. scispacy NER (fallback)
     """
 
+    # Terms to skip when loading lexicons (prevent indexing obvious false positives)
+    # These are filtered at load time for efficiency - no runtime overhead
+    LEXICON_LOAD_BLACKLIST: Set[str] = {
+        # Country names (often appear as study sites)
+        "turkey", "china", "india", "jordan", "guinea", "chile", "mali",
+        "niger", "chad", "togo", "peru", "cuba", "iran", "iraq", "oman",
+        # Common English words that appear in RxNorm
+        "genesis", "urban", "promote", "vital", "complete", "balance",
+        "comfort", "relief", "choice", "nature", "natural", "pure",
+        "basic", "simple", "clear", "fresh", "bright", "calm", "gentle",
+        # Biological terms (not drugs)
+        "cartilage", "bone marrow", "lymphocytes", "plasma", "serum",
+        # Organizations/misc
+        "arthritis foundation", "no data", "not available", "unknown",
+        # Antibody markers (diagnostic, not therapeutic)
+        "anca",
+    }
+
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
         self.run_id = str(self.config.get("run_id") or generate_run_id("DRUG"))
@@ -1074,6 +1105,7 @@ class DrugDetector:
             self.investigational_processor = inv_proc
             count = 0
 
+            skipped = 0
             for entry in data:
                 drug_name = entry.get("interventionName", "").strip()
                 if not drug_name or len(drug_name) < 3:
@@ -1084,6 +1116,12 @@ class DrugDetector:
                     continue
 
                 drug_key = drug_name.lower()
+
+                # Skip blacklisted terms at load time (efficiency)
+                if drug_key in self.LEXICON_LOAD_BLACKLIST:
+                    skipped += 1
+                    continue
+
                 if drug_key not in self.investigational_drugs:
                     self.investigational_drugs[drug_key] = {
                         "preferred_name": drug_name,
@@ -1096,6 +1134,8 @@ class DrugDetector:
                     inv_proc.add_keyword(drug_name, drug_key)
                     count += 1
 
+            if skipped > 0:
+                print(f"    [INFO] Skipped {skipped} blacklisted investigational terms")
             self._lexicon_stats.append(
                 ("Investigational drugs", count, "2025_08_investigational_drugs.json")
             )
@@ -1117,6 +1157,7 @@ class DrugDetector:
             fda_proc = KeywordProcessor(case_sensitive=False)
             self.fda_processor = fda_proc
             count = 0
+            skipped = 0
 
             for entry in data:
                 drug_name = entry.get("key", "").strip()
@@ -1124,6 +1165,12 @@ class DrugDetector:
                     continue
 
                 drug_key = drug_name.lower()
+
+                # Skip blacklisted terms at load time (efficiency)
+                if drug_key in self.LEXICON_LOAD_BLACKLIST:
+                    skipped += 1
+                    continue
+
                 meta = entry.get("meta", {})
 
                 if drug_key not in self.fda_drugs:
@@ -1147,6 +1194,8 @@ class DrugDetector:
                         if brand_key not in self.fda_drugs:
                             fda_proc.add_keyword(brand, drug_key)
 
+            if skipped > 0:
+                print(f"    [INFO] Skipped {skipped} blacklisted FDA terms")
             self._lexicon_stats.append(
                 ("FDA approved drugs", count, "2025_08_fda_approved_drugs.json")
             )
@@ -1169,12 +1218,19 @@ class DrugDetector:
             self.rxnorm_processor = rxnorm_proc
             count = 0
 
+            skipped = 0
             for entry in data:
                 term = entry.get("term", "").strip()
                 if not term or len(term) < 3:
                     continue
 
                 term_key = term.lower()
+
+                # Skip blacklisted terms at load time (efficiency)
+                if term_key in self.LEXICON_LOAD_BLACKLIST:
+                    skipped += 1
+                    continue
+
                 if term_key not in self.rxnorm_drugs:
                     self.rxnorm_drugs[term_key] = {
                         "preferred_name": term,
@@ -1186,6 +1242,8 @@ class DrugDetector:
                     rxnorm_proc.add_keyword(term, term_key)
                     count += 1
 
+            if skipped > 0:
+                print(f"    [INFO] Skipped {skipped} blacklisted RxNorm terms")
             self._lexicon_stats.append(
                 ("RxNorm terms", count, "2025_08_lexicon_drug.json")
             )

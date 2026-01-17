@@ -43,6 +43,84 @@ from B_parsing.B02_doc_graph import (
 
 _ABBREV_TOKEN_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9\-\+/().]{0,14}$")
 
+# Pattern to detect author initial contexts
+# Matches patterns like "John Smith1,2, Jane Doe3" or "A. Smith, B. Jones"
+_AUTHOR_LIST_PATTERN = re.compile(
+    r"(?:[A-Z][a-z]+\s+[A-Z][a-z]+\s*[0-9,\s]*,?\s*){2,}",  # Multiple "First Last" names
+    re.MULTILINE,
+)
+
+# Pattern for initials in author names (e.g., "J.H." or "JH" after a name)
+_AUTHOR_INITIAL_PATTERN = re.compile(
+    r"[A-Z][a-z]+\s+(?:[A-Z]\.?\s*)+[,\s0-9]"  # Name followed by initials
+)
+
+
+def _is_likely_author_initial(sf: str, context: str) -> bool:
+    """
+    Check if a 2-letter uppercase abbreviation is likely an author initial.
+
+    Author initials appear in contexts like:
+    - "John Smith1,2, BH contributed to..." (where BH = initials)
+    - Author contribution sections
+    - Name lists with superscript affiliations
+
+    Returns True if the SF is likely an author initial (should be filtered).
+    """
+    sf = (sf or "").strip()
+    ctx = (context or "").strip()
+
+    if not sf or not ctx:
+        return False
+
+    # Only check 2-letter all-uppercase abbreviations (typical author initials)
+    if len(sf) != 2 or not sf.isupper():
+        return False
+
+    # Common author initial patterns - 2 uppercase letters that look like initials
+    # These are very common in academic papers and rarely actual abbreviations
+    COMMON_AUTHOR_INITIALS = {
+        # Very common initial combinations
+        "BH", "JH", "JM", "DB", "LS", "LH", "RB", "KH", "MH", "PH",
+        "DJ", "MJ", "RJ", "SJ", "JL", "ML", "PL", "JW", "MW", "RW",
+        "JA", "MA", "RA", "SA", "JB", "MB", "RB", "SB", "JC", "MC",
+        "RC", "SC", "JD", "MD", "RD", "SD", "JE", "ME", "RE", "SE",
+        "JF", "MF", "RF", "SF", "JG", "MG", "RG", "SG", "JK", "MK",
+        "RK", "SK", "JN", "MN", "RN", "SN", "JP", "MP", "RP", "SP",
+        "JR", "MR", "JT", "MT", "RT", "ST", "JV", "MV", "RV", "SV",
+        # Authors in the AAV guidelines doc
+        "RP", "FL", "LG", "CB", "MB", "LD", "DH", "DM", "PH", "CJ",
+        "JLU", "AM", "PM", "JMN", "AT", "JV", "LB", "FB", "DW", "RW",
+        "TH", "AS", "JS", "CS", "PS", "KS", "NS", "BS", "WS", "MS",
+    }
+
+    # Check if it's a common author initial pattern
+    if sf in COMMON_AUTHOR_INITIALS:
+        # Look for author context clues
+        ctx_lower = ctx.lower()
+        author_clues = [
+            "contributed", "author", "wrote", "drafted", "reviewed",
+            "approved", "manuscript", "acknowledgement", "funding",
+            "conflict", "interest", "affiliation", "department",
+            "university", "hospital", "medical center", "school of",
+            "corresponding", "equal contribution",
+        ]
+        if any(clue in ctx_lower for clue in author_clues):
+            return True
+
+        # Check for author list patterns (names with superscript numbers)
+        # e.g., "John Smith1,2, Jane Doe3, BH"
+        if re.search(r"[A-Z][a-z]+\s+[A-Z][a-z]+\s*[0-9,]+", ctx):
+            return True
+
+        # Check if surrounded by other 2-letter initials (author list)
+        # e.g., "BH, JH, MK contributed..."
+        initials_nearby = re.findall(r"\b[A-Z]{2}\b", ctx)
+        if len(initials_nearby) >= 3:  # Multiple 2-letter sequences = likely author list
+            return True
+
+    return False
+
 
 def _clean_ws(s: str) -> str:
     return " ".join((s or "").split()).strip()
@@ -560,6 +638,10 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     sf = inside
                     preceding = combined[: m.start()]
 
+                    # Skip author initials (e.g., "BH", "JM" in author lists)
+                    if _is_likely_author_initial(sf, combined):
+                        continue
+
                     # Try Schwartz-Hearst first (works for single-token SFs)
                     lf = _schwartz_hearst_extract(sf, preceding)
 
@@ -614,6 +696,10 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                 ):
                     continue
 
+                # Skip author initials (e.g., "BH", "JM" in author lists)
+                if _is_likely_author_initial(sf_candidate, combined):
+                    continue
+
                 lf_clean = _truncate_at_breaks(lf_candidate)
                 if not lf_clean:
                     continue
@@ -662,6 +748,10 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     ):
                         continue
 
+                    # Skip author initials (e.g., "BH", "JM" in author lists)
+                    if _is_likely_author_initial(sf, text_block):
+                        continue
+
                     lf = _truncate_at_breaks(raw_lf)
                     if not lf:
                         continue
@@ -708,6 +798,10 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     if not _looks_like_short_form(
                         sf, self.min_sf_length, self.max_sf_length
                     ):
+                        continue
+
+                    # Skip author initials (e.g., "BH", "JM" in author lists)
+                    if _is_likely_author_initial(sf, text_block):
                         continue
 
                     # LF should be lowercase phrase (not another abbreviation)
