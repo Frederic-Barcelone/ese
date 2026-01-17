@@ -115,6 +115,7 @@ class Table(BaseModel):
       - cells: geometric view (audit/highlight)
       - logical_rows: semantic view (generator-friendly)
       - logical_cell_refs: bridge logical -> physical (row/col coords)
+      - image_base64: rendered image for vision analysis
     """
 
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -136,6 +137,14 @@ class Table(BaseModel):
     logical_cell_refs: List[Dict[str, Dict[str, Tuple[int, int]]]] = Field(
         default_factory=list
     )
+
+    # View 4: rendered image (for vision LLM analysis)
+    image_base64: Optional[str] = None  # Base64-encoded table image
+    image_format: str = "png"  # Format hint (png, jpg)
+
+    # Multi-page table support
+    page_nums: List[int] = Field(default_factory=list)  # All pages this table spans
+    is_multipage: bool = False  # True if table spans multiple pages
 
     bbox: BoundingBox
     metadata: Dict[str, Any] = Field(default_factory=dict)

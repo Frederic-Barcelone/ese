@@ -136,6 +136,95 @@ IMPORTANT:
 
 Return JSON only."""
 
+TABLE_PROMPT = """Analyze this clinical trial table image.
+
+Extract the complete table structure into this JSON format:
+{
+    "title": "<table title/caption if visible>",
+    "headers": ["Column 1", "Column 2", "Column 3", ...],
+    "rows": [
+        ["cell1", "cell2", "cell3", ...],
+        ["cell1", "cell2", "cell3", ...]
+    ],
+    "merged_cells": [
+        {"text": "<merged cell content>", "row_span": 2, "col_span": 1, "start_row": 0, "start_col": 0}
+    ],
+    "table_type": "data" | "glossary" | "demographics" | "results" | "endpoints" | "adverse_events",
+    "notes": "<any footnotes or additional context>"
+}
+
+IMPORTANT:
+- Extract ALL rows and columns - do not truncate
+- Preserve exact cell values (numbers, text, symbols)
+- Note merged/spanning cells in the merged_cells array
+- For multi-level headers, include all header rows in 'headers' as nested arrays
+- Identify table type based on content:
+  - "glossary": abbreviation/definition tables
+  - "demographics": baseline characteristics
+  - "results": primary/secondary endpoint results
+  - "endpoints": endpoint definitions
+  - "adverse_events": safety data
+  - "data": general data tables
+
+Return JSON only."""
+
+GLOSSARY_TABLE_PROMPT = """Extract abbreviations and definitions from this glossary/abbreviation table.
+
+Return JSON format:
+{
+    "abbreviations": [
+        {"short_form": "AE", "long_form": "Adverse Event"},
+        {"short_form": "CI", "long_form": "Confidence Interval"}
+    ],
+    "table_title": "<title if visible>",
+    "notes": "<any footnotes>"
+}
+
+IMPORTANT:
+- Extract ALL abbreviation-definition pairs
+- Short form is typically in the first column
+- Long form/definition is in the second column
+- Some tables have multiple columns of pairs - extract all
+
+Return JSON only."""
+
+
+# =============================================================================
+# DATA MODELS FOR TABLES
+# =============================================================================
+
+
+class TableCellData(BaseModel):
+    """A cell in a table with potential spanning."""
+    text: str
+    row_span: int = 1
+    col_span: int = 1
+    start_row: int = 0
+    start_col: int = 0
+
+
+class VisionTableData(BaseModel):
+    """Structured table data extracted by vision LLM."""
+    title: Optional[str] = None
+    headers: List[Any] = Field(default_factory=list)  # Can be nested for multi-level
+    rows: List[List[str]] = Field(default_factory=list)
+    merged_cells: List[TableCellData] = Field(default_factory=list)
+    table_type: str = "data"
+    notes: Optional[str] = None
+
+
+class GlossaryEntry(BaseModel):
+    """An abbreviation-definition pair from a glossary table."""
+    short_form: str
+    long_form: str
+
+
+class GlossaryTableData(BaseModel):
+    """Extracted glossary/abbreviation table."""
+    abbreviations: List[GlossaryEntry] = Field(default_factory=list)
+    table_title: Optional[str] = None
+    notes: Optional[str] = None
+
 
 # =============================================================================
 # VISION IMAGE ANALYZER
@@ -267,6 +356,107 @@ class VisionImageAnalyzer:
             )
         except Exception as e:
             print(f"[WARN] Failed to parse chart response: {e}")
+            return None
+
+    def analyze_table(
+        self,
+        image_base64: str,
+        caption: Optional[str] = None,
+        is_glossary: bool = False,
+    ) -> Optional[VisionTableData]:
+        """
+        Analyze a table image and extract structured data.
+
+        Args:
+            image_base64: Base64-encoded table image
+            caption: Optional table caption
+            is_glossary: If True, use glossary-specific extraction
+
+        Returns:
+            VisionTableData with headers, rows, and metadata
+        """
+        if not image_base64:
+            return None
+
+        prompt = TABLE_PROMPT
+        if caption:
+            prompt += f"\n\nTable caption: {caption}"
+
+        response = self._call_vision_llm(image_base64, prompt)
+        if not response:
+            return None
+
+        try:
+            # Parse merged cells
+            merged_cells = []
+            for mc in response.get("merged_cells", []):
+                if isinstance(mc, dict) and mc.get("text"):
+                    merged_cells.append(TableCellData(
+                        text=mc["text"],
+                        row_span=int(mc.get("row_span", 1)),
+                        col_span=int(mc.get("col_span", 1)),
+                        start_row=int(mc.get("start_row", 0)),
+                        start_col=int(mc.get("start_col", 0)),
+                    ))
+
+            return VisionTableData(
+                title=response.get("title"),
+                headers=response.get("headers", []),
+                rows=response.get("rows", []),
+                merged_cells=merged_cells,
+                table_type=response.get("table_type", "data"),
+                notes=response.get("notes"),
+            )
+        except Exception as e:
+            print(f"[WARN] Failed to parse table response: {e}")
+            return None
+
+    def analyze_glossary_table(
+        self,
+        image_base64: str,
+        caption: Optional[str] = None,
+    ) -> Optional[GlossaryTableData]:
+        """
+        Extract abbreviations from a glossary/abbreviation table image.
+
+        Args:
+            image_base64: Base64-encoded table image
+            caption: Optional table caption
+
+        Returns:
+            GlossaryTableData with abbreviation-definition pairs
+        """
+        if not image_base64:
+            return None
+
+        prompt = GLOSSARY_TABLE_PROMPT
+        if caption:
+            prompt += f"\n\nTable caption: {caption}"
+
+        response = self._call_vision_llm(image_base64, prompt)
+        if not response:
+            return None
+
+        try:
+            # Parse abbreviation entries
+            entries = []
+            for entry in response.get("abbreviations", []):
+                if isinstance(entry, dict):
+                    sf = entry.get("short_form", "").strip()
+                    lf = entry.get("long_form", "").strip()
+                    if sf and lf:
+                        entries.append(GlossaryEntry(
+                            short_form=sf,
+                            long_form=lf,
+                        ))
+
+            return GlossaryTableData(
+                abbreviations=entries,
+                table_title=response.get("table_title"),
+                notes=response.get("notes"),
+            )
+        except Exception as e:
+            print(f"[WARN] Failed to parse glossary table response: {e}")
             return None
 
     def _call_vision_llm(
