@@ -33,8 +33,10 @@ from A_core.A07_feasibility_models import (
     FeasibilityProvenanceMetadata,
     PatientJourneyPhase,
     PatientJourneyPhaseType,
+    ScreeningYield,
     StudyEndpoint,
     StudySite,
+    VaccinationRequirement,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
@@ -403,6 +405,68 @@ ENDPOINT_PATTERNS = {
 
 
 # =============================================================================
+# SCREENING YIELD PATTERNS (CONSORT Flow)
+# =============================================================================
+
+SCREENING_YIELD_PATTERNS = [
+    r"(\d+)\s*(?:patients?|subjects?|participants?)\s*(?:were\s*)?screened",
+    r"screened\s*(?:n\s*=\s*)?(\d+)",
+    r"(\d+)\s*(?:patients?|subjects?)\s*randomized",
+    r"randomized\s*(?:n\s*=\s*)?(\d+)",
+    r"(\d+)\s*(?:patients?|subjects?)\s*enrolled",
+    r"enrolled\s*(?:n\s*=\s*)?(\d+)",
+    r"(\d+)\s*(?:screen(?:ing)?\s*)?failures?",
+    r"(\d+)\s*(?:patients?|subjects?)\s*discontinued",
+    r"(\d+)\s*(?:patients?|subjects?)\s*completed",
+    r"completion\s*rate\s*(?:of\s*)?(\d+(?:\.\d+)?)\s*%",
+    r"screen\s*failure\s*rate\s*(?:of\s*)?(\d+(?:\.\d+)?)\s*%",
+    r"dropout\s*rate\s*(?:of\s*)?(\d+(?:\.\d+)?)\s*%",
+]
+
+CONSORT_FLOW_PATTERNS = [
+    r"(?:assessed\s*for\s*eligibility|screened)\s*\(?n\s*=\s*(\d+)\)?",
+    r"(?:excluded|screen\s*failures?)\s*\(?n\s*=\s*(\d+)\)?",
+    r"(?:randomized|allocated)\s*\(?n\s*=\s*(\d+)\)?",
+    r"(?:analysed|analyzed|completed)\s*\(?n\s*=\s*(\d+)\)?",
+    r"(?:lost\s*to\s*follow[\s-]?up|discontinued)\s*\(?n\s*=\s*(\d+)\)?",
+]
+
+
+# =============================================================================
+# VACCINATION REQUIREMENT PATTERNS
+# =============================================================================
+
+VACCINATION_PATTERNS = [
+    r"(?:covid[\s-]?19|sars[\s-]?cov[\s-]?2)\s*vaccin(?:e|ation)\s*(?:required|completed|received)",
+    r"(?:fully\s*)?vaccinated\s*(?:against|for)\s*([\w\s-]+)",
+    r"(?:prior|previous)\s*(?:covid[\s-]?19|influenza|hepatitis\s*[ab])\s*vaccination",
+    r"vaccin(?:e|ation)\s*(?:at\s*least\s*)?(\d+)\s*(?:weeks?|days?|months?)\s*(?:before|prior)",
+    r"(?:live|attenuated)\s*vaccine\s*(?:within|in\s*the\s*past)\s*(\d+)\s*(?:weeks?|days?|months?)",
+    r"(?:no|without)\s*(?:live|attenuated)\s*vaccine",
+]
+
+VACCINE_TYPES = [
+    "covid-19", "sars-cov-2", "influenza", "hepatitis a", "hepatitis b",
+    "pneumococcal", "meningococcal", "mmr", "varicella", "zoster",
+    "yellow fever", "bcg", "live attenuated",
+]
+
+
+# =============================================================================
+# SITE/COUNTRY COUNT PATTERNS
+# =============================================================================
+
+SITE_COUNT_PATTERNS = [
+    r"(\d+)\s*(?:study\s*)?sites?\s*(?:in|across)\s*(\d+)\s*countries?",
+    r"(\d+)\s*(?:investigational?\s*)?centers?\s*(?:in|across)\s*(\d+)\s*countries?",
+    r"conducted\s*(?:at|in)\s*(\d+)\s*(?:study\s*)?sites?",
+    r"(\d+)\s*(?:participating|active)\s*sites?",
+    r"multinational\s*(?:study|trial)\s*(?:in|across)\s*(\d+)\s*countries?",
+    r"(\d+)\s*countries?\s*(?:participated|enrolled|recruited)",
+]
+
+
+# =============================================================================
 # SITE/COUNTRY PATTERNS (with disambiguation)
 # =============================================================================
 
@@ -455,6 +519,8 @@ EXPECTED_SECTIONS = {
     FeasibilityFieldType.STUDY_ENDPOINT: ["endpoints", "methods"],
     FeasibilityFieldType.PATIENT_JOURNEY_PHASE: ["patient_journey", "methods"],
     FeasibilityFieldType.STUDY_SITE: ["methods"],
+    FeasibilityFieldType.SCREENING_YIELD: ["results", "methods", "abstract"],
+    FeasibilityFieldType.VACCINATION_REQUIREMENT: ["eligibility", "methods"],
 }
 
 
@@ -489,12 +555,6 @@ class FeasibilityDetector:
         # Context window for evidence extraction
         self.context_window = int(self.config.get("context_window", 300))
 
-        # Feature flags
-        self.enable_eligibility = self.config.get("enable_eligibility", True)
-        self.enable_epidemiology = self.config.get("enable_epidemiology", True)
-        self.enable_patient_journey = self.config.get("enable_patient_journey", True)
-        self.enable_endpoints = self.config.get("enable_endpoints", True)
-        self.enable_sites = self.config.get("enable_sites", True)
 
         # Shared parsing utilities from B_parsing
         self.section_detector = SectionDetector()
@@ -541,6 +601,11 @@ class FeasibilityDetector:
         self.procedure_re = re.compile(PROCEDURE_PATTERNS[0], re.IGNORECASE)
         self.inpatient_re = [re.compile(p, re.IGNORECASE) for p in INPATIENT_PATTERNS]
 
+        self.screening_yield_re = [re.compile(p, re.IGNORECASE) for p in SCREENING_YIELD_PATTERNS]
+        self.consort_flow_re = [re.compile(p, re.IGNORECASE) for p in CONSORT_FLOW_PATTERNS]
+        self.vaccination_re = [re.compile(p, re.IGNORECASE) for p in VACCINATION_PATTERNS]
+        self.site_count_re = [re.compile(p, re.IGNORECASE) for p in SITE_COUNT_PATTERNS]
+
     def extract(self, doc_structure: DocumentGraph) -> List[FeasibilityCandidate]:
         """Extract feasibility information from document."""
         doc = doc_structure
@@ -564,40 +629,41 @@ class FeasibilityDetector:
             if section:
                 current_section = section
 
-            if self.enable_eligibility:
-                candidates.extend(
-                    self._extract_eligibility(
-                        text, doc_id, doc_fingerprint, page_num, current_section, seen
-                    )
+            candidates.extend(
+                self._extract_eligibility(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
                 )
-
-            if self.enable_epidemiology:
-                candidates.extend(
-                    self._extract_epidemiology(
-                        text, doc_id, doc_fingerprint, page_num, current_section, seen
-                    )
+            )
+            candidates.extend(
+                self._extract_epidemiology(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
                 )
-
-            if self.enable_patient_journey:
-                candidates.extend(
-                    self._extract_patient_journey(
-                        text, doc_id, doc_fingerprint, page_num, current_section, seen
-                    )
+            )
+            candidates.extend(
+                self._extract_patient_journey(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
                 )
-
-            if self.enable_endpoints:
-                candidates.extend(
-                    self._extract_endpoints(
-                        text, doc_id, doc_fingerprint, page_num, current_section, seen
-                    )
+            )
+            candidates.extend(
+                self._extract_endpoints(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
                 )
-
-            if self.enable_sites:
-                candidates.extend(
-                    self._extract_sites(
-                        text, doc_id, doc_fingerprint, page_num, current_section, seen
-                    )
+            )
+            candidates.extend(
+                self._extract_sites(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
                 )
+            )
+            candidates.extend(
+                self._extract_screening_yield(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
+                )
+            )
+            candidates.extend(
+                self._extract_vaccination(
+                    text, doc_id, doc_fingerprint, page_num, current_section, seen
+                )
+            )
 
         self._update_stats(candidates)
         return candidates
@@ -1335,24 +1401,38 @@ class FeasibilityDetector:
                         continue
                 found_countries.add(country)
 
+        site_count = None
+        country_count = None
+
+        for pattern in self.site_count_re:
+            match = pattern.search(text)
+            if match:
+                groups = match.groups()
+                if len(groups) >= 2:
+                    site_count = int(groups[0])
+                    country_count = int(groups[1])
+                elif len(groups) >= 1:
+                    site_count = int(groups[0])
+                break
+
+        if not site_count:
+            site_count_match = re.search(
+                r"(\d+)\s*(?:sites?|centers?)", text_lower
+            )
+            if site_count_match:
+                site_count = int(site_count_match.group(1))
+
         if found_countries:
-            # Normalize and deduplicate
             normalized_countries = list(set(self._normalize_country(c) for c in found_countries))
 
             dedup_key = f"sites:{','.join(sorted(normalized_countries)[:3])}"
             if dedup_key not in seen:
                 seen.add(dedup_key)
 
-                site_count_match = re.search(
-                    r"(\d+)\s*(?:sites?|centers?|countries)", text_lower
-                )
-                site_count = int(site_count_match.group(1)) if site_count_match else None
-
                 for country in normalized_countries[:5]:
                     features = self._calculate_confidence_features(
                         FeasibilityFieldType.STUDY_SITE, section, text, country
                     )
-                    # Boost confidence for validated countries
                     features.pattern_strength = 0.2
 
                     candidate = self._make_candidate(
@@ -1367,12 +1447,40 @@ class FeasibilityDetector:
                         confidence_features=features.to_dict(),
                     )
                     candidate.study_site = StudySite(
-                        country=country,  # Already normalized
+                        country=country,
                         country_code=COUNTRY_CODES.get(country.lower()),
                         site_count=site_count,
                         validation_context="site_context_cue_present",
                     )
                     candidates.append(candidate)
+
+        elif site_count:
+            dedup_key = f"sites:count:{site_count}:{country_count or 0}"
+            if dedup_key not in seen:
+                seen.add(dedup_key)
+
+                features = self._calculate_confidence_features(
+                    FeasibilityFieldType.STUDY_SITE, section, text, f"{site_count} sites"
+                )
+                features.pattern_strength = 0.2
+
+                candidate = self._make_candidate(
+                    doc_id=doc_id,
+                    doc_fingerprint=doc_fingerprint,
+                    matched_text=f"{site_count} sites" + (f" in {country_count} countries" if country_count else ""),
+                    context_text=text[:self.context_window],
+                    field_type=FeasibilityFieldType.STUDY_SITE,
+                    page_num=page_num,
+                    section=section,
+                    confidence=features.total(),
+                    confidence_features=features.to_dict(),
+                )
+                candidate.study_site = StudySite(
+                    country="multiple" if country_count else "unknown",
+                    site_count=site_count,
+                    validation_context="site_count_pattern",
+                )
+                candidates.append(candidate)
 
         return candidates
 
@@ -1394,6 +1502,193 @@ class FeasibilityDetector:
 
         # Positive signals
         return any(cue in window for cue in COUNTRY_CONTEXT_CUES)
+
+    # =========================================================================
+    # SCREENING YIELD EXTRACTION (CONSORT Flow)
+    # =========================================================================
+
+    def _extract_screening_yield(
+        self,
+        text: str,
+        doc_id: str,
+        doc_fingerprint: str,
+        page_num: Optional[int],
+        section: str,
+        seen: Set[str],
+    ) -> List[FeasibilityCandidate]:
+        """Extract CONSORT flow metrics (screened, randomized, completed)."""
+        candidates = []
+        text_lower = text.lower()
+
+        if self.fp_filter.is_caption(text):
+            return []
+
+        yield_data: Dict[str, Any] = {}
+
+        for pattern in self.screening_yield_re:
+            match = pattern.search(text)
+            if match:
+                value = match.group(1)
+                matched_text = match.group(0).lower()
+
+                try:
+                    num_value = int(value) if '.' not in value else float(value)
+                except ValueError:
+                    continue
+
+                if "screened" in matched_text:
+                    yield_data["screened"] = num_value
+                elif "randomized" in matched_text:
+                    yield_data["randomized"] = num_value
+                elif "enrolled" in matched_text:
+                    yield_data["enrolled"] = num_value
+                elif "failure" in matched_text:
+                    if "rate" in matched_text:
+                        yield_data["screen_failure_rate"] = num_value
+                    else:
+                        yield_data["screen_failures"] = num_value
+                elif "discontinued" in matched_text:
+                    yield_data["discontinued"] = num_value
+                elif "completed" in matched_text or "completion" in matched_text:
+                    if "rate" in matched_text:
+                        pass
+                    else:
+                        yield_data["completed"] = num_value
+                elif "dropout" in matched_text:
+                    yield_data["dropout_rate"] = num_value
+
+        for pattern in self.consort_flow_re:
+            match = pattern.search(text)
+            if match:
+                value = match.group(1)
+                matched_text = match.group(0).lower()
+
+                try:
+                    num_value = int(value)
+                except ValueError:
+                    continue
+
+                if "eligibility" in matched_text or "screened" in matched_text:
+                    yield_data["screened"] = num_value
+                elif "excluded" in matched_text or "failure" in matched_text:
+                    yield_data["screen_failures"] = num_value
+                elif "randomized" in matched_text or "allocated" in matched_text:
+                    yield_data["randomized"] = num_value
+                elif "analysed" in matched_text or "analyzed" in matched_text or "completed" in matched_text:
+                    yield_data["completed"] = num_value
+                elif "discontinued" in matched_text or "lost" in matched_text:
+                    yield_data["discontinued"] = num_value
+
+        if yield_data:
+            if yield_data.get("screened") and yield_data.get("screen_failures"):
+                yield_data["screen_failure_rate"] = round(
+                    yield_data["screen_failures"] / yield_data["screened"] * 100, 1
+                )
+            if yield_data.get("randomized") and yield_data.get("discontinued"):
+                yield_data["dropout_rate"] = round(
+                    yield_data["discontinued"] / yield_data["randomized"] * 100, 1
+                )
+
+            dedup_key = f"yield:{yield_data.get('screened', 0)}:{yield_data.get('randomized', 0)}"
+            if dedup_key in seen:
+                return []
+            seen.add(dedup_key)
+
+            features = self._calculate_confidence_features(
+                FeasibilityFieldType.SCREENING_YIELD, section, text, str(yield_data)
+            )
+            features.pattern_strength = 0.2
+
+            candidate = self._make_candidate(
+                doc_id=doc_id,
+                doc_fingerprint=doc_fingerprint,
+                matched_text=text[:200],
+                context_text=text[:self.context_window],
+                field_type=FeasibilityFieldType.SCREENING_YIELD,
+                page_num=page_num,
+                section=section,
+                confidence=features.total(),
+                confidence_features=features.to_dict(),
+            )
+            candidate.screening_yield = ScreeningYield(**yield_data)
+            candidates.append(candidate)
+
+        return candidates
+
+    # =========================================================================
+    # VACCINATION REQUIREMENT EXTRACTION
+    # =========================================================================
+
+    def _extract_vaccination(
+        self,
+        text: str,
+        doc_id: str,
+        doc_fingerprint: str,
+        page_num: Optional[int],
+        section: str,
+        seen: Set[str],
+    ) -> List[FeasibilityCandidate]:
+        """Extract vaccination requirements from eligibility criteria."""
+        candidates = []
+        text_lower = text.lower()
+
+        if self.fp_filter.is_caption(text):
+            return []
+
+        for pattern in self.vaccination_re:
+            match = pattern.search(text)
+            if match:
+                matched_text = match.group(0)
+
+                vaccine_type = "unknown"
+                for vt in VACCINE_TYPES:
+                    if vt in text_lower:
+                        vaccine_type = vt
+                        break
+
+                requirement_type = "required"
+                if re.search(r"\b(?:no|without|prohibited|excluded)\b", text_lower):
+                    requirement_type = "prohibited"
+                elif re.search(r"\b(?:completed|received|prior)\b", text_lower):
+                    requirement_type = "completed_before"
+
+                timing = None
+                timing_match = re.search(
+                    r"(?:at\s*least\s*)?(\d+)\s*(weeks?|days?|months?)\s*(?:before|prior|after)",
+                    text_lower
+                )
+                if timing_match:
+                    timing = f"{timing_match.group(1)} {timing_match.group(2)}"
+
+                dedup_key = f"vacc:{vaccine_type}:{requirement_type}"
+                if dedup_key in seen:
+                    continue
+                seen.add(dedup_key)
+
+                features = self._calculate_confidence_features(
+                    FeasibilityFieldType.VACCINATION_REQUIREMENT, section, text, matched_text
+                )
+                features.pattern_strength = 0.2
+
+                candidate = self._make_candidate(
+                    doc_id=doc_id,
+                    doc_fingerprint=doc_fingerprint,
+                    matched_text=matched_text,
+                    context_text=text[:self.context_window],
+                    field_type=FeasibilityFieldType.VACCINATION_REQUIREMENT,
+                    page_num=page_num,
+                    section=section,
+                    confidence=features.total(),
+                    confidence_features=features.to_dict(),
+                )
+                candidate.vaccination_requirement = VaccinationRequirement(
+                    vaccine_type=vaccine_type,
+                    requirement_type=requirement_type,
+                    timing=timing,
+                )
+                candidates.append(candidate)
+
+        return candidates
 
     # =========================================================================
     # CONFIDENCE CALCULATION (P2)

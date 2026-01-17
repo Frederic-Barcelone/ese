@@ -523,134 +523,59 @@ class Orchestrator:
         )
 
         # Disease detection components
-        disease_cfg = self.config.get("disease_detection", {})
-        self.enable_disease_detection = disease_cfg.get("enabled", True)
-
-        # PubTator enrichment config (used by both disease and drug detection)
-        pubtator_cfg = self.config.get("api", {}).get("pubtator", {})
-        self.enable_pubtator = pubtator_cfg.get("enabled", False)
-
-        if self.enable_disease_detection:
-            self.disease_detector = DiseaseDetector(
-                config={
-                    "run_id": self.run_id,
-                    "lexicon_base_path": str(dict_path),
-                    "enable_general_lexicon": disease_cfg.get(
-                        "enable_general_lexicon", True
-                    ),
-                    "enable_orphanet": disease_cfg.get("enable_orphanet", True),
-                    "enable_scispacy": disease_cfg.get("enable_scispacy", True),
-                    "context_window": disease_cfg.get("context_window", 300),
-                }
-            )
-            self.disease_normalizer = DiseaseNormalizer()
-
-            # PubTator enrichment
-            if self.enable_pubtator:
-                self.disease_enricher = DiseaseEnricher(pubtator_cfg)
-            else:
-                self.disease_enricher = None
-        else:
-            self.disease_detector = None
-            self.disease_normalizer = None
-            self.disease_enricher = None
+        self.disease_detector = DiseaseDetector(
+            config={
+                "run_id": self.run_id,
+                "lexicon_base_path": str(dict_path),
+            }
+        )
+        self.disease_normalizer = DiseaseNormalizer()
+        self.disease_enricher = None
 
         # Drug detection components
-        drug_cfg = self.config.get("drug_detection", {})
-        self.enable_drug_detection = drug_cfg.get("enabled", True)
-
-        if self.enable_drug_detection:
-            self.drug_detector = DrugDetector(
-                config={
-                    "run_id": self.run_id,
-                    "lexicon_base_path": str(dict_path),
-                    "enable_alexion_lexicon": drug_cfg.get(
-                        "enable_alexion_lexicon", True
-                    ),
-                    "enable_investigational_lexicon": drug_cfg.get(
-                        "enable_investigational_lexicon", True
-                    ),
-                    "enable_fda_lexicon": drug_cfg.get("enable_fda_lexicon", True),
-                    "enable_rxnorm_lexicon": drug_cfg.get(
-                        "enable_rxnorm_lexicon", True
-                    ),
-                    "enable_scispacy": drug_cfg.get("enable_scispacy", True),
-                    "enable_patterns": drug_cfg.get("enable_patterns", True),
-                    "context_window": drug_cfg.get("context_window", 300),
-                }
-            )
-
-            # Drug PubTator enrichment (reuses same pubtator config)
-            if self.enable_pubtator:
-                self.drug_enricher = DrugEnricher(pubtator_cfg)
-            else:
-                self.drug_enricher = None
-        else:
-            self.drug_detector = None
-            self.drug_enricher = None
+        self.drug_detector = DrugDetector(
+            config={
+                "run_id": self.run_id,
+                "lexicon_base_path": str(dict_path),
+            }
+        )
+        self.drug_enricher = None
 
         # Pharma company detection
-        pharma_cfg = self.config.get("pharma_detection", {})
-        self.enable_pharma_detection = pharma_cfg.get("enabled", True)
-
-        if self.enable_pharma_detection:
-            self.pharma_detector = PharmaCompanyDetector(
-                config={
-                    "run_id": self.run_id,
-                    "lexicon_base_path": str(dict_path),
-                }
-            )
-        else:
-            self.pharma_detector = None
+        self.pharma_detector = PharmaCompanyDetector(
+            config={
+                "run_id": self.run_id,
+                "lexicon_base_path": str(dict_path),
+            }
+        )
 
         # Feasibility detection components
-        feasibility_cfg = self.config.get("feasibility_extraction", {})
-        self.enable_feasibility = feasibility_cfg.get("enabled", True)
-
-        if self.enable_feasibility:
-            self.feasibility_detector = FeasibilityDetector(
-                config={
-                    "run_id": self.run_id,
-                    "enable_eligibility": feasibility_cfg.get("enable_eligibility", True),
-                    "enable_epidemiology": feasibility_cfg.get("enable_epidemiology", True),
-                    "enable_patient_journey": feasibility_cfg.get("enable_patient_journey", True),
-                    "enable_endpoints": feasibility_cfg.get("enable_endpoints", True),
-                    "enable_sites": feasibility_cfg.get("enable_sites", True),
-                    "context_window": feasibility_cfg.get("context_window", 300),
-                }
+        self.feasibility_detector = FeasibilityDetector(
+            config={"run_id": self.run_id}
+        )
+        self.use_llm_feasibility = self.config.get("feasibility_extraction", {}).get("use_llm", True)
+        if self.use_llm_feasibility and self.claude_client:
+            self.llm_feasibility_extractor = LLMFeasibilityExtractor(
+                llm_client=self.claude_client,
+                llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
+                config={"run_id": self.run_id},
             )
-            # LLM-based structured extraction (more precise, replaces pattern-based)
-            self.use_llm_feasibility = feasibility_cfg.get("use_llm", True)
-            if self.use_llm_feasibility and self.claude_client:
-                self.llm_feasibility_extractor = LLMFeasibilityExtractor(
-                    llm_client=self.claude_client,
-                    llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
-                    config={"run_id": self.run_id},
-                )
-            else:
-                self.llm_feasibility_extractor = None
         else:
-            self.feasibility_detector = None
             self.llm_feasibility_extractor = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
-        self.enable_doc_metadata = doc_metadata_cfg.get("enabled", True)
-
-        if self.enable_doc_metadata:
-            doc_types_path = doc_metadata_cfg.get(
-                "document_types_path",
-                str(dict_path / "2025_08_document_types.json")
-            )
-            self.doc_metadata_strategy = DocumentMetadataStrategy(
-                document_types_path=doc_types_path if Path(doc_types_path).exists() else None,
-                llm_client=self.claude_client,
-                llm_model=self.model,
-                run_id=self.run_id,
-                pipeline_version=PIPELINE_VERSION,
-            )
-        else:
-            self.doc_metadata_strategy = None
+        doc_types_path = doc_metadata_cfg.get(
+            "document_types_path",
+            str(dict_path / "2025_08_document_types.json")
+        )
+        self.doc_metadata_strategy = DocumentMetadataStrategy(
+            document_types_path=doc_types_path if Path(doc_types_path).exists() else None,
+            llm_client=self.claude_client,
+            llm_model=self.model,
+            run_id=self.run_id,
+            pipeline_version=PIPELINE_VERSION,
+        )
 
         # Load rare disease acronyms for fallback lookup (SF→LF when LLM has no expansion)
         self.rare_disease_lookup: Dict[str, str] = {}
@@ -1687,32 +1612,22 @@ Return ONLY the JSON array, nothing else."""
         # Normalize (pass full_text to avoid rebuilding)
         results = self._normalize_results(results, full_text)
 
-        # Disease detection (parallel pipeline)
-        disease_results: List[ExtractedDisease] = []
-        if self.enable_disease_detection and self.disease_detector is not None:
-            disease_results = self._process_diseases(doc, pdf_path_obj)
+        # Disease detection
+        disease_results: List[ExtractedDisease] = self._process_diseases(doc, pdf_path_obj)
 
-        # Drug detection (parallel pipeline)
-        drug_results: List[ExtractedDrug] = []
-        if self.enable_drug_detection and self.drug_detector is not None:
-            drug_results = self._process_drugs(doc, pdf_path_obj)
+        # Drug detection
+        drug_results: List[ExtractedDrug] = self._process_drugs(doc, pdf_path_obj)
 
-        # Pharma company detection (parallel pipeline)
-        pharma_results: List[ExtractedPharma] = []
-        if self.enable_pharma_detection and self.pharma_detector is not None:
-            pharma_results = self._process_pharma(doc, pdf_path_obj)
+        # Pharma company detection
+        pharma_results: List[ExtractedPharma] = self._process_pharma(doc, pdf_path_obj)
 
-        # Feasibility extraction (parallel pipeline)
-        feasibility_results: List[FeasibilityCandidate] = []
-        if self.enable_feasibility and self.feasibility_detector is not None:
-            feasibility_results = self._process_feasibility(doc, pdf_path_obj, full_text)
+        # Feasibility extraction
+        feasibility_results: List[FeasibilityCandidate] = self._process_feasibility(doc, pdf_path_obj, full_text)
 
-        # Document metadata extraction (runs early, uses LLM for classification)
-        doc_metadata: Optional[DocumentMetadata] = None
-        if self.enable_doc_metadata and self.doc_metadata_strategy is not None:
-            doc_metadata = self._process_document_metadata(
-                doc, pdf_path_obj, full_text[:5000]
-            )
+        # Document metadata extraction
+        doc_metadata: Optional[DocumentMetadata] = self._process_document_metadata(
+            doc, pdf_path_obj, full_text[:5000]
+        )
 
         # Stage 4: Summary & Export
         print("\n[10/10] Writing summary...")

@@ -38,6 +38,8 @@ class FeasibilityFieldType(str, Enum):
     STUDY_DESIGN = "STUDY_DESIGN"
     STUDY_DURATION = "STUDY_DURATION"
     TREATMENT_PATHWAY = "TREATMENT_PATHWAY"
+    SCREENING_YIELD = "SCREENING_YIELD"
+    VACCINATION_REQUIREMENT = "VACCINATION_REQUIREMENT"
 
 
 class FeasibilityGeneratorType(str, Enum):
@@ -185,6 +187,41 @@ class StudyDesign(BaseModel):
 
 
 # -------------------------
+# Screening Yield (CONSORT Flow)
+# -------------------------
+
+
+class ScreeningYield(BaseModel):
+    """CONSORT flow metrics for screening and enrollment."""
+
+    screened: Optional[int] = None
+    screen_failures: Optional[int] = None
+    randomized: Optional[int] = None
+    enrolled: Optional[int] = None
+    completed: Optional[int] = None
+    discontinued: Optional[int] = None
+    screen_failure_rate: Optional[float] = None
+    dropout_rate: Optional[float] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Vaccination Requirement
+# -------------------------
+
+
+class VaccinationRequirement(BaseModel):
+    """Vaccination requirement for trial eligibility."""
+
+    vaccine_type: str
+    requirement_type: str  # "required", "prohibited", "completed_before"
+    timing: Optional[str] = None  # "at least 4 weeks before", "within 6 months"
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
 # Study Site Information
 # -------------------------
 
@@ -276,6 +313,8 @@ class FeasibilityCandidate(BaseModel):
     study_endpoint: Optional[StudyEndpoint] = None
     study_site: Optional[StudySite] = None
     study_design: Optional[StudyDesign] = None
+    screening_yield: Optional[ScreeningYield] = None
+    vaccination_requirement: Optional[VaccinationRequirement] = None
 
     # Confidence
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)

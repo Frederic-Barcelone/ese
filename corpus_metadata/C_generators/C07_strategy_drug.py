@@ -997,16 +997,6 @@ class DrugDetector:
             self.config.get("lexicon_base_path", "ouput_datasources")
         )
 
-        # Feature flags
-        self.enable_alexion = self.config.get("enable_alexion_lexicon", True)
-        self.enable_investigational = self.config.get(
-            "enable_investigational_lexicon", True
-        )
-        self.enable_fda = self.config.get("enable_fda_lexicon", True)
-        self.enable_rxnorm = self.config.get("enable_rxnorm_lexicon", True)
-        self.enable_scispacy = self.config.get("enable_scispacy", True)
-        self.enable_patterns = self.config.get("enable_patterns", True)
-
         # Initialize FlashText processors
         self.alexion_processor: Optional[KeywordProcessor] = None
         self.investigational_processor: Optional[KeywordProcessor] = None
@@ -1037,19 +1027,15 @@ class DrugDetector:
 
         # scispacy NER model
         self.nlp = None
-        if self.enable_scispacy and SCISPACY_AVAILABLE:
+        if SCISPACY_AVAILABLE:
             self._init_scispacy()
 
     def _load_lexicons(self) -> None:
         """Load all drug lexicons."""
-        if self.enable_alexion:
-            self._load_alexion_lexicon()
-        if self.enable_investigational:
-            self._load_investigational_lexicon()
-        if self.enable_fda:
-            self._load_fda_lexicon()
-        if self.enable_rxnorm:
-            self._load_rxnorm_lexicon()
+        self._load_alexion_lexicon()
+        self._load_investigational_lexicon()
+        self._load_fda_lexicon()
+        self._load_rxnorm_lexicon()
 
     def _load_alexion_lexicon(self) -> None:
         """Load Alexion specialized drug lexicon."""
@@ -1330,10 +1316,9 @@ class DrugDetector:
             )
 
         # Layer 2: Compound ID patterns
-        if self.enable_patterns:
-            candidates.extend(
-                self._detect_compound_patterns(full_text, doc_graph, doc_fingerprint)
-            )
+        candidates.extend(
+            self._detect_compound_patterns(full_text, doc_graph, doc_fingerprint)
+        )
 
         # Layer 3: Investigational drugs
         if self.investigational_processor:

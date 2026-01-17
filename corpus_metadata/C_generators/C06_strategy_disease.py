@@ -414,13 +414,6 @@ class DiseaseDetector:
         self.general_disease_path = lexicon_base / "2025_08_lexicon_disease.json"
         self.orphanet_path = lexicon_base / "2025_08_orphanet_diseases.json"
 
-        # Feature flags
-        self.enable_general_lexicon = bool(
-            self.config.get("enable_general_lexicon", True)
-        )
-        self.enable_orphanet = bool(self.config.get("enable_orphanet", True))
-        self.enable_scispacy = bool(self.config.get("enable_scispacy", True))
-
         # Context window for snippets
         self.context_window = int(self.config.get("context_window", 300))
 
@@ -458,16 +451,13 @@ class DiseaseDetector:
 
         # Load lexicons
         self._load_specialized_lexicons()
-        if self.enable_general_lexicon:
-            self._load_general_lexicon()
-        if self.enable_orphanet:
-            self._load_orphanet_lexicon()
+        self._load_general_lexicon()
+        self._load_orphanet_lexicon()
 
         # Initialize scispacy
         self.scispacy_nlp = None
         self.umls_linker = None
-        if self.enable_scispacy:
-            self._init_scispacy()
+        self._init_scispacy()
 
     def _load_specialized_lexicons(self) -> None:
         """Load specialized disease lexicons (PAH, ANCA, IgAN)."""
