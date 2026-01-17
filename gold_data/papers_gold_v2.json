@@ -946,6 +946,86 @@
       "gold_type": "MENTIONED"
     },
     {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "GYROSCOPE",
+      "long_form": "Gyroscope Therapeutics",
+      "category": "PHARMA_COMPANY",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "ACHILLION",
+      "long_form": "Achillion Pharmaceuticals",
+      "category": "PHARMA_COMPANY",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "ALEXION",
+      "long_form": "Alexion Pharmaceuticals",
+      "category": "PHARMA_COMPANY",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CATALYST",
+      "long_form": "Catalyst Biosciences",
+      "category": "PHARMA_COMPANY",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CHEMOCENTRYX",
+      "long_form": "ChemoCentryx, Inc.",
+      "category": "PHARMA_COMPANY",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "SILENCE",
+      "long_form": "Silence Therapeutics",
+      "category": "PHARMA_COMPANY",
+      "page": 12,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "CC BY",
+      "long_form": "Creative Commons Attribution",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
+      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
+      "short_form": "MEDDRA",
+      "long_form": "Medical Dictionary for Regulatory Activities",
+      "category": "ABBREV",
+      "page": 1,
+      "occurrences": 1,
+      "audit_bucket": "SF_ONLY",
+      "gold_type": "MENTIONED"
+    },
+    {
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "AAV",
       "long_form": "ANCA-associated vasculitides",
