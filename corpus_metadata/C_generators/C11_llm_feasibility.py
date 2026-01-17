@@ -17,17 +17,27 @@ from typing import Any, Dict, List, Optional
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A07_feasibility_models import (
+    BackgroundTherapy,
     CriterionType,
     EligibilityCriterion,
     EndpointType,
+    EvidenceSpan,
+    ExtractionMethod,
     FeasibilityCandidate,
     FeasibilityFieldType,
     FeasibilityGeneratorType,
     FeasibilityProvenanceMetadata,
+    InvasiveProcedure,
+    OperationalBurden,
+    ScreenFailReason,
+    ScreeningFlow,
     StudyDesign,
     StudyEndpoint,
+    StudyFootprint,
     StudySite,
     TreatmentArm,
+    VaccinationRequirement,
+    VisitSchedule,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
 
@@ -140,6 +150,107 @@ IMPORTANT:
 Return JSON only."""
 
 
+OPERATIONAL_BURDEN_PROMPT = """Extract operational burden information from this clinical trial document.
+
+This is CRITICAL for feasibility assessment. Look for:
+- Invasive procedures (biopsies, aspirations, catheterizations)
+- Visit schedule intensity (number of visits, frequency)
+- Vaccination/prophylaxis requirements
+- Background therapy requirements (stable dose requirements)
+- Run-in period requirements
+- Special sample handling requirements
+
+Return:
+{
+    "invasive_procedures": [
+        {
+            "name": "renal biopsy" or "bone marrow aspirate" etc,
+            "timing": ["screening", "month 6"] or ["baseline"],
+            "optional": false,
+            "quote": "exact text from document describing this requirement"
+        }
+    ],
+    "visit_schedule": {
+        "total_visits": integer or null,
+        "visit_days": [1, 14, 28, 56, 84, ...] or null,
+        "frequency": "every 4 weeks" or "monthly" etc,
+        "duration_weeks": integer or null
+    },
+    "vaccination_requirements": [
+        {
+            "vaccine_type": "meningococcal" or "pneumococcal" etc,
+            "requirement_type": "required" or "prohibited",
+            "timing": "at least 2 weeks before treatment" or null,
+            "quote": "exact text"
+        }
+    ],
+    "background_therapy": [
+        {
+            "therapy_class": "ACE inhibitor/ARB" or "immunosuppressant" etc,
+            "requirement": "stable dose ≥90 days" or "prohibited",
+            "agents": ["lisinopril", "losartan"] or [],
+            "stable_duration_days": 90 or null,
+            "quote": "exact text"
+        }
+    ],
+    "run_in_duration_days": integer or null,
+    "run_in_requirements": ["list of run-in requirements"],
+    "central_lab_required": true/false,
+    "special_sample_handling": ["frozen samples", "timed urine collection"] or [],
+    "hard_gates": ["biopsy requirement", "vaccination", "rare lab threshold"] - criteria most likely to limit enrollment
+}
+
+IMPORTANT:
+- Include EXACT quotes from the document for each procedure/requirement
+- Focus on requirements that create patient burden or site complexity
+- Hard gates are the top 3-5 criteria most likely to exclude patients
+
+Return JSON only."""
+
+
+SCREENING_FLOW_PROMPT = """Extract CONSORT flow and screening information from this clinical trial document.
+
+Look for:
+- Patient disposition or CONSORT flow diagram data
+- "X patients screened", "Y randomized", "Z completed"
+- Screen failure reasons and counts
+- Discontinuation reasons
+
+Return:
+{
+    "planned_sample_size": integer or null (target enrollment),
+    "screened": integer or null,
+    "screen_failures": integer or null,
+    "randomized": integer or null,
+    "treated": integer or null,
+    "completed": integer or null,
+    "discontinued": integer or null,
+    "screen_fail_reasons": [
+        {
+            "reason": "Did not meet inclusion criteria" or "eGFR too low" etc,
+            "count": integer or null,
+            "percentage": float or null,
+            "quote": "exact text if available"
+        }
+    ],
+    "discontinuation_reasons": [
+        {
+            "reason": "Adverse event" or "Withdrew consent" etc,
+            "count": integer or null
+        }
+    ],
+    "run_in_failures": integer or null,
+    "run_in_failure_reasons": ["list of reasons"] or []
+}
+
+IMPORTANT:
+- Extract ALL screen failure reasons if listed (often in supplementary tables or figures)
+- Screen failure breakdown is critical for feasibility - helps predict enrollment difficulty
+- Include exact quotes where possible
+
+Return JSON only."""
+
+
 # =============================================================================
 # LLM FEASIBILITY EXTRACTOR
 # =============================================================================
@@ -209,6 +320,8 @@ class LLMFeasibilityExtractor:
         candidates.extend(self._extract_eligibility(content, doc_id, doc_fingerprint))
         candidates.extend(self._extract_endpoints(content, doc_id, doc_fingerprint))
         candidates.extend(self._extract_sites(content, doc_id, doc_fingerprint))
+        candidates.extend(self._extract_operational_burden(content, doc_id, doc_fingerprint))
+        candidates.extend(self._extract_screening_flow(content, doc_id, doc_fingerprint))
 
         return candidates
 
@@ -495,6 +608,227 @@ class LLMFeasibilityExtractor:
             self._extraction_stats["site"] = self._extraction_stats.get("site", 0) + 1
 
         return candidates
+
+    # =========================================================================
+    # OPERATIONAL BURDEN EXTRACTION
+    # =========================================================================
+
+    def _extract_operational_burden(
+        self,
+        content: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[FeasibilityCandidate]:
+        """Extract operational burden using LLM."""
+        response = self._call_llm(OPERATIONAL_BURDEN_PROMPT, content)
+        if not response:
+            return []
+
+        candidates = []
+
+        # Parse invasive procedures
+        procedures = []
+        for proc_data in (response.get("invasive_procedures") or []):
+            if isinstance(proc_data, dict) and proc_data.get("name"):
+                evidence = []
+                if proc_data.get("quote"):
+                    evidence.append(EvidenceSpan(quote=proc_data["quote"]))
+                procedures.append(InvasiveProcedure(
+                    name=proc_data["name"],
+                    timing=proc_data.get("timing", []),
+                    optional=proc_data.get("optional", False),
+                    evidence=evidence,
+                ))
+
+        # Parse visit schedule
+        visit_data = response.get("visit_schedule") or {}
+        visit_schedule = None
+        if visit_data:
+            visit_schedule = VisitSchedule(
+                total_visits=visit_data.get("total_visits"),
+                visit_days=visit_data.get("visit_days", []),
+                frequency=visit_data.get("frequency"),
+                duration_weeks=visit_data.get("duration_weeks"),
+            )
+
+        # Parse vaccination requirements
+        vaccinations = []
+        for vacc_data in (response.get("vaccination_requirements") or []):
+            if isinstance(vacc_data, dict) and vacc_data.get("vaccine_type"):
+                evidence = []
+                if vacc_data.get("quote"):
+                    evidence.append(EvidenceSpan(quote=vacc_data["quote"]))
+                vaccinations.append(VaccinationRequirement(
+                    vaccine_type=vacc_data["vaccine_type"],
+                    requirement_type=vacc_data.get("requirement_type", "required"),
+                    timing=vacc_data.get("timing"),
+                    evidence=evidence,
+                ))
+
+        # Parse background therapy
+        bg_therapy = []
+        for bg_data in (response.get("background_therapy") or []):
+            if isinstance(bg_data, dict) and bg_data.get("therapy_class"):
+                evidence = []
+                if bg_data.get("quote"):
+                    evidence.append(EvidenceSpan(quote=bg_data["quote"]))
+                bg_therapy.append(BackgroundTherapy(
+                    therapy_class=bg_data["therapy_class"],
+                    requirement=bg_data.get("requirement", ""),
+                    agents=bg_data.get("agents", []),
+                    stable_duration_days=bg_data.get("stable_duration_days"),
+                    evidence=evidence,
+                ))
+
+        # Build OperationalBurden
+        burden = OperationalBurden(
+            invasive_procedures=procedures,
+            visit_schedule=visit_schedule,
+            vaccination_requirements=vaccinations,
+            background_therapy=bg_therapy,
+            run_in_duration_days=response.get("run_in_duration_days"),
+            run_in_requirements=response.get("run_in_requirements", []),
+            central_lab_required=response.get("central_lab_required", False),
+            special_sample_handling=response.get("special_sample_handling", []),
+            hard_gates=response.get("hard_gates", []),
+        )
+
+        # Only return if we have meaningful data
+        has_data = (
+            procedures or vaccinations or bg_therapy or
+            visit_schedule or burden.run_in_duration_days or
+            burden.hard_gates
+        )
+        if not has_data:
+            return []
+
+        self._extraction_stats["operational_burden"] = 1
+
+        summary_parts = []
+        if procedures:
+            summary_parts.append(f"{len(procedures)} procedures")
+        if vaccinations:
+            summary_parts.append(f"{len(vaccinations)} vaccinations")
+        if bg_therapy:
+            summary_parts.append(f"{len(bg_therapy)} background therapies")
+        if burden.hard_gates:
+            summary_parts.append(f"{len(burden.hard_gates)} hard gates")
+
+        candidates.append(FeasibilityCandidate(
+            doc_id=doc_id,
+            field_type=FeasibilityFieldType.OPERATIONAL_BURDEN,
+            generator_type=FeasibilityGeneratorType.LLM_EXTRACTION,
+            matched_text=", ".join(summary_parts) or "Operational burden extracted",
+            context_text="",
+            section_name="operational_burden",
+            extraction_method=ExtractionMethod.LLM,
+            confidence=0.85,
+            operational_burden=burden,
+            provenance=self._make_provenance(doc_fingerprint),
+        ))
+
+        return candidates
+
+    # =========================================================================
+    # SCREENING FLOW EXTRACTION
+    # =========================================================================
+
+    def _extract_screening_flow(
+        self,
+        content: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[FeasibilityCandidate]:
+        """Extract CONSORT flow / screening information using LLM."""
+        response = self._call_llm(SCREENING_FLOW_PROMPT, content)
+        if not response:
+            return []
+
+        # Parse screen fail reasons
+        screen_fail_reasons = []
+        for sfr_data in (response.get("screen_fail_reasons") or []):
+            if isinstance(sfr_data, dict) and sfr_data.get("reason"):
+                evidence = []
+                if sfr_data.get("quote"):
+                    evidence.append(EvidenceSpan(quote=sfr_data["quote"]))
+                screen_fail_reasons.append(ScreenFailReason(
+                    reason=sfr_data["reason"],
+                    count=sfr_data.get("count"),
+                    percentage=sfr_data.get("percentage"),
+                    evidence=evidence,
+                ))
+
+        # Calculate derived metrics
+        screened = response.get("screened")
+        randomized = response.get("randomized")
+        screen_failures = response.get("screen_failures")
+        discontinued = response.get("discontinued")
+
+        screening_yield = None
+        screen_failure_rate = None
+        dropout_rate = None
+
+        if screened and randomized and screened > 0:
+            screening_yield = round(randomized / screened, 3)
+        if screened and screen_failures and screened > 0:
+            screen_failure_rate = round(screen_failures / screened, 3)
+        if randomized and discontinued and randomized > 0:
+            dropout_rate = round(discontinued / randomized, 3)
+
+        # Build ScreeningFlow
+        flow = ScreeningFlow(
+            planned_sample_size=response.get("planned_sample_size"),
+            actual_enrollment=randomized,
+            screened=screened,
+            screen_failures=screen_failures,
+            randomized=randomized,
+            treated=response.get("treated"),
+            completed=response.get("completed"),
+            discontinued=discontinued,
+            screening_yield=screening_yield,
+            screen_failure_rate=screen_failure_rate,
+            dropout_rate=dropout_rate,
+            screen_fail_reasons=screen_fail_reasons,
+            run_in_failures=response.get("run_in_failures"),
+            run_in_failure_reasons=[
+                ScreenFailReason(reason=r)
+                for r in (response.get("run_in_failure_reasons") or [])
+                if r
+            ],
+        )
+
+        # Only return if we have meaningful data
+        has_data = (
+            flow.screened or flow.randomized or flow.completed or
+            screen_fail_reasons
+        )
+        if not has_data:
+            return []
+
+        self._extraction_stats["screening_flow"] = 1
+
+        summary_parts = []
+        if flow.screened:
+            summary_parts.append(f"{flow.screened} screened")
+        if flow.randomized:
+            summary_parts.append(f"{flow.randomized} randomized")
+        if screening_yield:
+            summary_parts.append(f"{screening_yield*100:.1f}% yield")
+        if screen_fail_reasons:
+            summary_parts.append(f"{len(screen_fail_reasons)} fail reasons")
+
+        return [FeasibilityCandidate(
+            doc_id=doc_id,
+            field_type=FeasibilityFieldType.SCREENING_FLOW,
+            generator_type=FeasibilityGeneratorType.LLM_EXTRACTION,
+            matched_text=", ".join(summary_parts) or "Screening flow extracted",
+            context_text="",
+            section_name="screening_flow",
+            extraction_method=ExtractionMethod.LLM,
+            confidence=0.9,
+            screening_flow=flow,
+            provenance=self._make_provenance(doc_fingerprint),
+        )]
 
     def get_stats(self) -> Dict[str, int]:
         """Return extraction statistics."""
