@@ -858,7 +858,7 @@ class Orchestrator:
 
     def _parse_pdf(self, pdf_path: Path):
         """Stage 1: Parse PDF into DocumentGraph."""
-        print("\n[1/4] Parsing PDF...")
+        print("\n[1/9] Parsing PDF...")
         start = time.time()
 
         # Get output directory for images (creates folder if needed)
@@ -880,7 +880,7 @@ class Orchestrator:
 
     def _generate_candidates(self, doc) -> Tuple[List[Candidate], str]:
         """Stage 2: Generate and deduplicate candidates."""
-        print("\n[2/4] Generating candidates...")
+        print("\n[2/9] Generating candidates...")
         start = time.time()
 
         all_candidates = []
@@ -1484,7 +1484,7 @@ Return ONLY the JSON array, nothing else."""
             2. Disambiguate: Resolve ambiguous SF meanings (disambiguator)
             3. Deduplicate: Merge same-SF entries, pick best LF (deduplicator)
         """
-        print("\n[3.5/4] Normalizing, disambiguating & deduplicating...")
+        print("\n[4/9] Normalizing, disambiguating & deduplicating...")
 
         # Step 1: Normalize
         normalized_count = 0
@@ -1592,7 +1592,7 @@ Return ONLY the JSON array, nothing else."""
 
         # Early exit if validation disabled
         if self.skip_validation:
-            print("\n[3/4] Validation SKIPPED")
+            print("\n[3/9] Validation SKIPPED")
             self._export_results(pdf_path_obj, [], unique_candidates)
             return []
 
@@ -1616,7 +1616,7 @@ Return ONLY the JSON array, nothing else."""
             and word_counts.get(c.short_form.upper(), 0) >= 2
         )
 
-        print("\n[3/4] Validating candidates with Claude...")
+        print("\n[3/9] Validating candidates with Claude...")
         print(f"  Corroborated SFs: {len(corroborated_sfs)}")
         print(f"  Frequent SFs (2+): {frequent_sfs}")
         print(f"  Filtered (lexicon-only, rare): {filtered_count}")
@@ -1689,7 +1689,7 @@ Return ONLY the JSON array, nothing else."""
             )
 
         # Stage 4: Summary & Export
-        print("\n[4/4] Writing summary...")
+        print("\n[9/9] Writing summary...")
         self.logger.write_summary()
         self.logger.print_summary()
         counters.log_summary()
@@ -1810,7 +1810,7 @@ Return ONLY the JSON array, nothing else."""
         if self.disease_detector is None:
             return []
 
-        print("\n[3b/4] Detecting disease mentions...")
+        print("\n[5/9] Detecting disease mentions...")
         start = time.time()
 
         # Generate disease candidates
@@ -2032,7 +2032,7 @@ Return ONLY the JSON array, nothing else."""
         if self.drug_detector is None:
             return []
 
-        print("\n[3c/4] Detecting drug mentions...")
+        print("\n[6/9] Detecting drug mentions...")
         start = time.time()
 
         # Run drug detection
@@ -2211,7 +2211,7 @@ Return ONLY the JSON array, nothing else."""
         if self.feasibility_detector is None:
             return []
 
-        print("\n[3d/4] Extracting feasibility information...")
+        print("\n[7/9] Extracting feasibility information...")
         start = time.time()
 
         # Use LLM extraction if available (preferred - more precise structured output)
@@ -2506,7 +2506,7 @@ Return ONLY the JSON array, nothing else."""
         if self.doc_metadata_strategy is None:
             return None
 
-        print("\n[3e/4] Extracting document metadata...")
+        print("\n[8/9] Extracting document metadata...")
         start = time.time()
 
         try:

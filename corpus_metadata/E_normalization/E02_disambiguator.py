@@ -94,6 +94,43 @@ class Disambiguator:
                 "Adverse Event": ["safety", "toxicity", "grade", "serious"],
                 "Anti-Epileptic": ["seizure", "drug", "epilepsy"],
             },
+            "SSRS": {
+                "Columbia Suicide Severity Rating Scale": [
+                    "suicide",
+                    "suicidal",
+                    "ideation",
+                    "depression",
+                    "psychiatric",
+                    "mental",
+                    "safety",
+                    "c-ssrs",
+                ],
+                "Simple Sequence Repeats": [
+                    "microsatellite",
+                    "genetic",
+                    "dna",
+                    "polymorphism",
+                    "marker",
+                    "pcr",
+                ],
+            },
+            "ET": {
+                "Early Termination": [
+                    "discontinuation",
+                    "withdrawal",
+                    "dropout",
+                    "visit",
+                    "protocol",
+                    "study",
+                ],
+                "Essential Thrombocythemia": [
+                    "thrombocytosis",
+                    "platelet",
+                    "myeloproliferative",
+                    "jak2",
+                    "blood",
+                ],
+            },
         }
 
     # -------------------------

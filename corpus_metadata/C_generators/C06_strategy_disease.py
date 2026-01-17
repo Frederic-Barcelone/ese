@@ -159,6 +159,23 @@ class DiseaseFalsePositiveFilter:
         "complement deficiencies",
         "infections of musculoskeletal system",
         "infection due to encapsulated bacteria",
+        # Symptoms/signs that are too generic
+        "confusion",
+        "erythema",
+        "paresis",
+        # Behavioral (not diseases in clinical context)
+        "firesetting behavior",
+        "drug abuse",
+        # Genetic/molecular terms (not diseases)
+        "transition mutation",
+        # Laboratory artifacts or model organisms
+        "sarcoma, yoshida",
+        "yoshida sarcoma",
+        # Anatomical variants (not diseases)
+        "short forearm",
+        "cavitation",
+        # Too generic symptoms
+        "mental depression",
     }
 
     # Layer 1: Chromosome/karyotype patterns to block

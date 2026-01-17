@@ -271,7 +271,7 @@ class LLMFeasibilityExtractor:
 
         # Parse treatment arms
         arms = []
-        for arm_data in response.get("treatment_arms", []):
+        for arm_data in (response.get("treatment_arms") or []):
             if isinstance(arm_data, dict) and arm_data.get("name"):
                 arms.append(TreatmentArm(
                     name=arm_data["name"],
@@ -341,7 +341,7 @@ class LLMFeasibilityExtractor:
             return []
 
         candidates = []
-        criteria_list = response.get("criteria", [])
+        criteria_list = response.get("criteria") or []
 
         for crit_data in criteria_list:
             if not isinstance(crit_data, dict):
@@ -407,7 +407,7 @@ class LLMFeasibilityExtractor:
             return []
 
         candidates = []
-        endpoints_list = response.get("endpoints", [])
+        endpoints_list = response.get("endpoints") or []
 
         for ep_data in endpoints_list:
             if not isinstance(ep_data, dict):
