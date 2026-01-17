@@ -446,8 +446,18 @@ class ExtractionAnalyzer:
             print(" (MISS = add to lexicon | FOUND = lexicon working)")
             print("━" * 80)
 
-            # Build set of extracted SFs
+            # Build set of extracted SFs (including pharma company names)
             extracted_sfs = {e["short_form"] for e in extracted_results}
+
+            # Also add pharma company names to the extracted set
+            pharma_companies = results_data.get("pharma", [])
+            for pharma in pharma_companies:
+                # Add canonical name (e.g., "Novartis")
+                if pharma.get("name"):
+                    extracted_sfs.add(self._norm_sf(pharma["name"]))
+                # Add matched text if different
+                if pharma.get("matched_text"):
+                    extracted_sfs.add(self._norm_sf(pharma["matched_text"]))
 
             # Deduplicate mentioned
             seen_mentioned = set()

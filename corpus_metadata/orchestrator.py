@@ -1724,6 +1724,7 @@ Return ONLY the JSON array, nothing else."""
             pdf_path_obj, results, unique_candidates, counters,
             disease_results=disease_results if disease_results else None,
             drug_results=drug_results if drug_results else None,
+            pharma_results=pharma_results if pharma_results else None,
         )
 
         # Export disease results
@@ -2767,6 +2768,7 @@ Return ONLY the JSON array, nothing else."""
         counters: Optional[HeuristicsCounters] = None,
         disease_results: Optional[List[ExtractedDisease]] = None,
         drug_results: Optional[List[ExtractedDrug]] = None,
+        pharma_results: Optional[List[ExtractedPharma]] = None,
     ) -> None:
         """Export results to JSON."""
         out_dir = self._get_output_dir(pdf_path)
@@ -2791,6 +2793,7 @@ Return ONLY the JSON array, nothing else."""
             "abbreviations": [],
             "diseases": [],
             "drugs": [],
+            "pharma": [],
         }
 
         for entity in results:
@@ -2847,6 +2850,21 @@ Return ONLY the JSON array, nothing else."""
                             "confidence": drug.confidence_score,
                             "is_investigational": drug.is_investigational,
                             "phase": drug.development_phase,
+                        }
+                    )
+
+        # Add pharma companies to export
+        if pharma_results:
+            for pharma in pharma_results:
+                if pharma.status == ValidationStatus.VALIDATED:
+                    export_data["pharma"].append(
+                        {
+                            "name": pharma.canonical_name,
+                            "matched_text": pharma.matched_text,
+                            "full_name": pharma.full_name,
+                            "headquarters": pharma.headquarters,
+                            "parent_company": pharma.parent_company,
+                            "confidence": pharma.confidence_score,
                         }
                     )
 
