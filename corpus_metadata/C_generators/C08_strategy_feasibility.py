@@ -479,42 +479,41 @@ SITE_COUNT_PATTERNS = [
 
 
 # =============================================================================
-# OPERATIONAL BURDEN PATTERNS
+# OPERATIONAL BURDEN PATTERNS (Generic - works across disease areas)
 # =============================================================================
 
 INVASIVE_PROCEDURE_PATTERNS = [
-    r"(?:renal|kidney)\s*biops(?:y|ies)",
-    r"bone\s*marrow\s*(?:aspirat(?:e|ion)|biops(?:y|ies))",
+    r"(?:\w+\s+)?biops(?:y|ies)(?:\s+of\s+\w+)?",
+    r"(?:\w+\s+)?aspirat(?:e|ion)(?:\s+of\s+\w+)?",
     r"lumbar\s*puncture",
-    r"liver\s*biops(?:y|ies)",
-    r"skin\s*biops(?:y|ies)",
-    r"bronchoscop(?:y|ic)",
-    r"colonoscop(?:y|ic)",
-    r"endoscop(?:y|ic)",
-    r"(?:central\s*)?venous\s*(?:catheter|line)",
+    r"(?:\w+)?scop(?:y|ic|ies)",
+    r"(?:central\s*)?(?:venous|arterial)\s*(?:catheter|line|access)",
+    r"(?:surgical|invasive)\s*(?:procedure|intervention)",
+    r"(?:blood|tissue)\s*sampl(?:e|ing)",
+    r"infusion\s*(?:therapy|treatment)",
 ]
 
 VISIT_SCHEDULE_PATTERNS = [
-    r"(?:day|week)\s*(\d+)(?:\s*[,/]\s*(?:day|week)\s*(\d+))+",
-    r"visits?\s*(?:at|on)\s*(?:day|week)s?\s*(\d+(?:\s*[,/and]+\s*\d+)*)",
+    r"(?:day|week|month)\s*(\d+)(?:\s*[,/]\s*(?:day|week|month)\s*(\d+))+",
+    r"visits?\s*(?:at|on)\s*(?:day|week|month)s?\s*(\d+(?:\s*[,/and]+\s*\d+)*)",
     r"every\s*(\d+)\s*(?:days?|weeks?|months?)",
-    r"(\d+)\s*(?:study\s*)?visits?\s*(?:over|during)\s*(\d+)\s*(?:weeks?|months?)",
-    r"follow[\s-]?up\s*(?:at|for)\s*(\d+)\s*(?:weeks?|months?|years?)",
+    r"(\d+)\s*(?:study\s*)?visits?\s*(?:over|during)\s*(\d+)\s*(?:weeks?|months?|years?)",
+    r"follow[\s-]?up\s*(?:at|for|every)\s*(\d+)\s*(?:days?|weeks?|months?|years?)",
+    r"(?:weekly|monthly|quarterly|annual)\s*(?:visits?|assessments?)",
 ]
 
 BACKGROUND_THERAPY_PATTERNS = [
-    r"(?:stable\s*)?(?:dose\s*of\s*)?(?:ACE[\s-]?inhibitor|ARB|ACEi)s?\s*(?:for\s*)?(?:≥|>=|at\s*least)?\s*(\d+)\s*(?:days?|weeks?|months?)",
-    r"(?:background|concomitant)\s*(?:therapy|treatment|medication)\s*(?:with|of)\s*([\w\s/-]+)",
-    r"(?:immunosuppressant|corticosteroid)s?\s*(?:at\s*)?(?:stable\s*)?(?:dose\s*)?(?:for\s*)?(?:≥|>=)?\s*(\d+)\s*(?:days?|weeks?|months?)",
-    r"(?:prohibited|not\s*permitted|excluded).*(?:live\s*)?vaccin(?:e|ation)",
+    r"(?:stable\s*)?(?:dose\s*(?:of\s*)?)?(.+?)\s*(?:for\s*)?(?:≥|>=|at\s*least)\s*(\d+)\s*(?:days?|weeks?|months?)",
+    r"(?:background|concomitant|prior)\s*(?:therapy|treatment|medication)(?:\s+(?:with|of))?\s*(.+?)(?:\s+for|\s*$)",
+    r"(?:stable|unchanged)\s+(?:dose|regimen)\s+(?:of\s+)?(.+?)\s+(?:for\s+)?(\d+)\s*(?:days?|weeks?|months?)",
+    r"(?:prohibited|not\s*permitted|excluded|disallowed)(?:\s+.+?)?(?:vaccin|therap|medicat|treatment)",
+    r"washout\s*(?:period\s*)?(?:of\s*)?(\d+)\s*(?:days?|weeks?|months?)",
 ]
 
 LAB_CRITERION_PATTERNS = [
-    r"(?:UPCR|proteinuria)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:\.\d+)?)\s*(?:g/g|mg/mmol|mg/g)",
-    r"(?:eGFR|GFR)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+)\s*(?:mL/min|ml/min)",
-    r"(?:C3|C4|complement)\s*(?:level)?\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:\.\d+)?)\s*(?:mg/dL|g/L|mg/L)",
-    r"(?:hemoglobin|Hgb|Hb)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:\.\d+)?)\s*(?:g/dL|g/L)",
-    r"(?:platelet|PLT)\s*(?:count)?\s*(?:≥|>=|>|≤|<=|<)\s*(\d+)\s*(?:×\s*10\^?9/L|/μL|K/μL)",
+    r"([A-Za-z][A-Za-z0-9/-]{1,20})\s*(?:level\s*)?(?:≥|>=|>|≤|<=|<|=)\s*(\d+(?:[.,]\d+)?)\s*([a-zA-Z/%·×\^0-9/-]+)",
+    r"(?:serum|plasma|blood|urine)\s+([A-Za-z][A-Za-z0-9/-]+)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:[.,]\d+)?)",
+    r"([A-Za-z]+)\s*(?:of|at)\s*(?:≥|>=|>|≤|<=|<)\s*(\d+(?:[.,]\d+)?)\s*(\w+(?:/\w+)?)",
 ]
 
 
