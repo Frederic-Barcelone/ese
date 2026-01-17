@@ -348,12 +348,23 @@ class TableExtractor:
 
             # Create clip rectangle with padding
             x0, y0, x1, y1 = bbox
+
+            # Validate bbox dimensions
+            if x1 <= x0 or y1 <= y0:
+                doc.close()
+                return self.render_full_page(file_path, page_num, dpi)
+
             clip_rect = fitz.Rect(
                 max(0, x0 - padding),
                 max(0, y0 - padding),
                 min(page.rect.width, x1 + padding),
                 min(page.rect.height, y1 + padding),
             )
+
+            # Check if clip rect has valid dimensions after clamping
+            if clip_rect.width <= 0 or clip_rect.height <= 0:
+                doc.close()
+                return self.render_full_page(file_path, page_num, dpi)
 
             # Render to pixmap
             mat = fitz.Matrix(dpi / 72, dpi / 72)
@@ -456,19 +467,30 @@ class TableExtractor:
                 page = doc[page_num - 1]
                 mat = fitz.Matrix(dpi / 72, dpi / 72)
 
-                if full_page or bbox == (0.0, 0.0, 0.0, 0.0):
-                    # Render full page when bbox is unavailable
+                x0, y0, x1, y1 = bbox
+                invalid_bbox = (
+                    full_page
+                    or bbox == (0.0, 0.0, 0.0, 0.0)
+                    or x1 <= x0
+                    or y1 <= y0
+                )
+
+                if invalid_bbox:
+                    # Render full page when bbox is unavailable or invalid
                     pix = page.get_pixmap(matrix=mat)
                 else:
                     # Render specific table region
-                    x0, y0, x1, y1 = bbox
                     clip_rect = fitz.Rect(
                         max(0, x0 - padding),
                         max(0, y0 - padding),
                         min(page.rect.width, x1 + padding),
                         min(page.rect.height, y1 + padding),
                     )
-                    pix = page.get_pixmap(matrix=mat, clip=clip_rect)
+                    # Check if clip rect has valid dimensions
+                    if clip_rect.width <= 0 or clip_rect.height <= 0:
+                        pix = page.get_pixmap(matrix=mat)
+                    else:
+                        pix = page.get_pixmap(matrix=mat, clip=clip_rect)
 
                 # Convert to PIL Image
                 img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
