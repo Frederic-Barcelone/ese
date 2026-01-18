@@ -83,6 +83,8 @@ CRITICAL ANTI-HALLUCINATION RULES:
 4. NEVER invent, guess, or infer values that are not explicitly stated in the document.
 5. For numerical values (sample_size, counts, percentages), the exact number MUST appear in the document.
 6. If the value is implicit or requires calculation, set the field to null.
+7. PAGE NUMBERS: The document contains [PAGE X] markers. Always include the page number with each evidence quote.
+   Look for the nearest [PAGE X] marker before the quote to determine the page number.
 """
 
 STUDY_DESIGN_PROMPT = """Extract study design information from this clinical trial document.
@@ -140,6 +142,7 @@ For each criterion, provide:
             "category": "age" | "diagnosis" | "biomarker" | "lab_value" | "prior_treatment" | "comorbidity" | "organ_function" | "pregnancy" | "consent" | "other",
             "text": "The exact criterion text from the document",
             "exact_quote": "REQUIRED: Copy-paste the exact text from the document",
+            "page": integer (from nearest [PAGE X] marker before the quote),
             "operator": ">=" | "<=" | ">" | "<" | "=" | "range" | "boolean" | null,
             "value": numeric value if applicable or null,
             "unit": "years" | "mg/dL" | "mL/min" | etc or null
@@ -152,6 +155,7 @@ IMPORTANT:
 - Extract at least 3-5 criteria of each type if present
 - Look for numbered lists or bullet points in eligibility sections
 - The exact_quote field MUST contain verbatim text from the document - not paraphrased
+- ALWAYS include the page number from the nearest [PAGE X] marker
 """ + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
@@ -171,7 +175,8 @@ For each endpoint, provide:
             "measure": "What is measured (e.g., '24-hour UPCR')",
             "timepoint": "When measured (e.g., '6 months')",
             "analysis_method": "How analyzed (e.g., 'log-transformed ratio to baseline')" or null,
-            "exact_quote": "REQUIRED: Copy-paste the exact text from the document describing this endpoint"
+            "exact_quote": "REQUIRED: Copy-paste the exact text from the document describing this endpoint",
+            "page": integer (from nearest [PAGE X] marker before the quote)
         }
     ]
 }
@@ -182,6 +187,7 @@ IMPORTANT:
 - Safety endpoints: adverse events, treatment-emergent AEs, serious AEs
 - Use concise names, not full sentences
 - The exact_quote field MUST contain verbatim text from the document
+- ALWAYS include the page number from the nearest [PAGE X] marker
 """ + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
@@ -214,14 +220,12 @@ Return JSON only."""
 OPERATIONAL_BURDEN_PROMPT = """Extract operational burden information from this clinical trial document.
 
 This is CRITICAL for feasibility assessment. Look for:
-- Invasive procedures (biopsies, aspirations, catheterizations)
-- Visit schedule intensity (number of visits, frequency)
+- Invasive procedures (biopsies, aspirations, catheterizations) - ONLY from protocol/methods, with explicit timing
+- Visit schedule intensity (look for "Scheduled study visits occurred at..." or similar)
 - Vaccination/prophylaxis requirements
-- Background therapy requirements (stable dose requirements)
-- Concomitant medications allowed (SGLT2 inhibitors, immunosuppressants, etc.)
+- Background therapy requirements - ONLY from explicit protocol statements like "allowed if stable for X days"
+- Central laboratory requirements - look for explicit "assessed at central laboratory" statements
 - Run-in period requirements
-- Special sample handling requirements
-- Central laboratory requirements
 
 Return:
 {
@@ -233,29 +237,26 @@ Return:
             "optional": false,
             "purpose": "diagnosis_confirmation" | "efficacy_assessment" | "safety_monitoring",
             "is_eligibility_requirement": true (if this confirms prior diagnosis, not a study procedure),
-            "quote": "exact text from document describing this requirement"
+            "quote": "exact text from document describing this requirement",
+            "page": integer (from nearest [PAGE X] marker)
         }
     ],
     "visit_schedule": {
         "total_visits": integer or null,
-        "visit_days": [1, 14, 28, 56, 84, ...] or null (legacy flat list),
+        "visit_days": [14, 30, 90, 180, 210, 270, 360] (from explicit "visits occurred at days X, Y, Z" statement),
         "frequency": "every 4 weeks" or "monthly" etc,
         "duration_weeks": integer or null,
-        "pre_randomization_days": [-75, -15, 1] (days before/at randomization),
         "on_treatment_days": [14, 30, 90, 180] (scheduled on-treatment visits),
-        "follow_up_days": [210, 270, 360] (post-treatment or open-label visits),
-        "scheduled_visits": [
-            {"day": 14, "visit_name": "Week 2", "phase": "double_blind"},
-            {"day": 180, "visit_name": "Month 6", "phase": "double_blind"},
-            {"day": 360, "visit_name": "Month 12", "phase": "open_label"}
-        ]
+        "quote": "exact text listing visit schedule",
+        "page": integer
     },
     "vaccination_requirements": [
         {
             "vaccine_type": "meningococcal" or "pneumococcal" etc,
             "requirement_type": "required" or "prohibited",
             "timing": "at least 2 weeks before treatment" or null,
-            "quote": "exact text"
+            "quote": "exact text",
+            "page": integer
         }
     ],
     "background_therapy": [
@@ -266,7 +267,8 @@ Return:
             "agents": ["lisinopril", "losartan"] or [],
             "stable_duration_days": 90 or null,
             "max_dose": "≤7.5 mg prednisone equivalent" or null,
-            "quote": "exact text"
+            "quote": "exact text FROM PROTOCOL/METHODS stating the requirement - NOT from baseline characteristics",
+            "page": integer
         }
     ],
     "concomitant_meds_allowed": [
@@ -274,7 +276,8 @@ Return:
             "therapy_class": "SGLT2 inhibitors",
             "requirement_type": "allowed",
             "stable_duration_days": 90,
-            "quote": "exact text"
+            "quote": "exact text FROM PROTOCOL stating 'allowed' or 'permitted' - NOT from baseline usage",
+            "page": integer
         }
     ],
     "run_in_duration_days": integer or null,
@@ -283,20 +286,20 @@ Return:
     "central_lab": {
         "required": true/false,
         "analytes": ["UPCR", "eGFR", "serum C3", "sC5b-9"],
-        "quote": "exact text mentioning central laboratory"
+        "quote": "exact text like 'X, Y, and Z were assessed at central laboratory' - must explicitly say central lab",
+        "page": integer
     },
     "special_sample_handling": ["frozen samples", "timed urine collection"] or [],
-    "hard_gates": ["biopsy requirement", "vaccination", "rare lab threshold"] - criteria most likely to limit enrollment
+    "hard_gates": ["biopsy requirement", "vaccination", "rare lab threshold"]
 }
 
-IMPORTANT:
-- Include EXACT quotes from the document for each procedure/requirement WITH PAGE NUMBERS if visible
-- Distinguish "diagnosis confirmation" biopsies (eligibility) from "study-required" biopsies (operational burden)
-- For visit schedule, distinguish pre-randomization visits from on-treatment visits
-- For concomitant meds, extract what's ALLOWED (affects who qualifies and SOC background)
-- For central lab, cite evidence if the document mentions central laboratory assessment
-- Hard gates are the top 3-5 criteria most likely to exclude patients
-
+CRITICAL EVIDENCE RULES:
+- ALWAYS include page number from nearest [PAGE X] marker
+- For background_therapy and concomitant_meds_allowed: ONLY use quotes from PROTOCOL/METHODS sections that explicitly state "allowed", "permitted", or "required". Do NOT infer allowed meds from baseline characteristics or screen failure footnotes.
+- For central_lab: Look for explicit statements like "assessed at central laboratory" or "central lab assessment". Do NOT use quotes about "normal range" - that doesn't prove central processing.
+- For invasive_procedures: ONLY include if you find explicit timing in the protocol (e.g., "renal biopsy at screening day 45 and month 6"). If timing is unclear, omit the procedure.
+- For visit_schedule: Look for explicit "Scheduled study visits occurred at days X, Y, Z" or similar. If not found, leave visit_days empty.
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
 
@@ -350,6 +353,7 @@ IMPORTANT:
 - Look for specific gate failures: serum C3, UPCR, eGFR, biopsy confirmation, etc.
 - If document says "some participants had >1 reason", set reasons_can_overlap: true and can_overlap: true on each reason
 - Distinguish percentage_reported (what document says, e.g., "58 (44%)") from percentage_computed
+- ALWAYS include page numbers from nearest [PAGE X] marker for each evidence quote
 - Include page numbers in evidence where visible
 
 Return JSON only."""
@@ -458,12 +462,14 @@ class LLMFeasibilityExtractor:
 
     def _build_section_map(self, doc_graph: DocumentGraph) -> Dict[str, str]:
         """
-        Build a map of section names to their text content.
+        Build a map of section names to their text content with page markers.
 
-        Returns dict like {"abstract": "text...", "methods": "text...", ...}
+        Returns dict like {"abstract": "[PAGE 1] text...", "methods": "[PAGE 2] text...", ...}
+        Page markers are included so LLM can report page numbers with evidence quotes.
         """
         section_map: Dict[str, List[str]] = {}
         current_section = "preamble"
+        current_page: Optional[int] = None
 
         for block in doc_graph.iter_linear_blocks():
             if not block.text:
@@ -477,6 +483,14 @@ class LLMFeasibilityExtractor:
             # Add text to current section
             if current_section not in section_map:
                 section_map[current_section] = []
+                current_page = None  # Reset page tracking for new section
+
+            # Add page marker when page changes
+            block_page = getattr(block, "page_num", None)
+            if block_page and block_page != current_page:
+                section_map[current_section].append(f"[PAGE {block_page}]")
+                current_page = block_page
+
             section_map[current_section].append(block.text)
 
         # Join text for each section
@@ -885,6 +899,7 @@ class LLMFeasibilityExtractor:
             # Apply verification and confidence penalty
             # No fallback: if exact_quote is missing, penalty will apply
             exact_quote = crit_data.get("exact_quote")
+            page_num = crit_data.get("page")
             numerical_values = {}
             if crit_data.get("value") is not None:
                 numerical_values["value"] = crit_data["value"]
@@ -896,10 +911,14 @@ class LLMFeasibilityExtractor:
                 numerical_values=numerical_values,
             )
 
-            # Build evidence from verified quote
+            # Build evidence from verified quote with page number
             evidence = []
             if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
-                evidence.append(EvidenceSpan(quote=exact_quote.strip(), source_doc_id=doc_id))
+                evidence.append(EvidenceSpan(
+                    quote=exact_quote.strip(),
+                    source_doc_id=doc_id,
+                    page=page_num if isinstance(page_num, int) else None,
+                ))
 
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
@@ -974,16 +993,21 @@ class LLMFeasibilityExtractor:
 
             # Apply verification and confidence penalty
             exact_quote = ep_data.get("exact_quote")
+            page_num = ep_data.get("page")
             confidence = self._apply_verification_penalty(
                 base_confidence=0.88,
                 quote=exact_quote,
                 context=content,
             )
 
-            # Build evidence from verified quote
+            # Build evidence from verified quote with page number
             evidence = []
             if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
-                evidence.append(EvidenceSpan(quote=exact_quote.strip(), source_doc_id=doc_id))
+                evidence.append(EvidenceSpan(
+                    quote=exact_quote.strip(),
+                    source_doc_id=doc_id,
+                    page=page_num if isinstance(page_num, int) else None,
+                ))
 
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
@@ -1133,7 +1157,12 @@ class LLMFeasibilityExtractor:
             if isinstance(vacc_data, dict) and vacc_data.get("vaccine_type"):
                 evidence = []
                 if vacc_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=vacc_data["quote"], source_doc_id=doc_id))
+                    page_num = vacc_data.get("page")
+                    evidence.append(EvidenceSpan(
+                        quote=vacc_data["quote"],
+                        source_doc_id=doc_id,
+                        page=page_num if isinstance(page_num, int) else None,
+                    ))
                 vaccinations.append(VaccinationRequirement(
                     vaccine_type=vacc_data["vaccine_type"],
                     requirement_type=vacc_data.get("requirement_type", "required"),
@@ -1147,7 +1176,12 @@ class LLMFeasibilityExtractor:
             if isinstance(bg_data, dict) and bg_data.get("therapy_class"):
                 evidence = []
                 if bg_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=bg_data["quote"], source_doc_id=doc_id))
+                    page_num = bg_data.get("page")
+                    evidence.append(EvidenceSpan(
+                        quote=bg_data["quote"],
+                        source_doc_id=doc_id,
+                        page=page_num if isinstance(page_num, int) else None,
+                    ))
                 bg_therapy.append(BackgroundTherapy(
                     therapy_class=bg_data["therapy_class"],
                     requirement_type=bg_data.get("requirement_type", "allowed"),
@@ -1164,7 +1198,12 @@ class LLMFeasibilityExtractor:
             if isinstance(cm_data, dict) and cm_data.get("therapy_class"):
                 evidence = []
                 if cm_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=cm_data["quote"], source_doc_id=doc_id))
+                    page_num = cm_data.get("page")
+                    evidence.append(EvidenceSpan(
+                        quote=cm_data["quote"],
+                        source_doc_id=doc_id,
+                        page=page_num if isinstance(page_num, int) else None,
+                    ))
                 concomitant_allowed.append(BackgroundTherapy(
                     therapy_class=cm_data["therapy_class"],
                     requirement_type="allowed",
@@ -1182,7 +1221,12 @@ class LLMFeasibilityExtractor:
         if isinstance(central_lab_data, dict):
             evidence = []
             if central_lab_data.get("quote"):
-                evidence.append(EvidenceSpan(quote=central_lab_data["quote"], source_doc_id=doc_id))
+                page_num = central_lab_data.get("page")
+                evidence.append(EvidenceSpan(
+                    quote=central_lab_data["quote"],
+                    source_doc_id=doc_id,
+                    page=page_num if isinstance(page_num, int) else None,
+                ))
             central_lab = CentralLabRequirement(
                 required=self._get_bool(central_lab_data, "required", False),
                 analytes=self._get_list(central_lab_data, "analytes"),
