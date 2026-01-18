@@ -156,6 +156,10 @@ class QuoteVerifier:
         normalized_quote = self._normalize_whitespace(quote)
         normalized_context = self._normalize_whitespace(context)
 
+        # Check after normalization (handles whitespace-only quotes)
+        if not normalized_quote:
+            return QuoteVerificationResult(verified=False, match_ratio=0.0)
+
         # Try exact match first
         exact_result = self._try_exact_match(
             normalized_quote, normalized_context, case_sensitive

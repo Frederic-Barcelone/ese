@@ -608,23 +608,30 @@ class LLMFeasibilityExtractor:
         """
         Apply confidence penalties based on verification results.
 
+        NO FALLBACKS: Missing or unverified evidence results in penalties.
+
         Args:
             base_confidence: Starting confidence score (0.0 - 1.0).
-            quote: Quote to verify (if provided).
+            quote: Quote to verify. If None/empty, penalty applies.
             context: Source document text.
             numerical_values: Dict of field -> value to verify.
 
         Returns:
             Adjusted confidence score with penalties applied.
+            - Missing quote: confidence × 0.5
             - Unverified quote: confidence × 0.5
             - Unverified number: confidence × 0.7 (per unverified number)
         """
         confidence = base_confidence
 
-        # Verify quote if provided
-        if quote:
-            if not self._verify_quote(quote, context):
-                confidence *= 0.5
+        # Quote verification: missing or unverified quote = penalty
+        if not quote or not quote.strip():
+            # No quote provided - apply penalty
+            self._verification_stats["quotes_failed"] += 1
+            confidence *= 0.5
+        elif not self._verify_quote(quote, context):
+            # Quote provided but not found in context
+            confidence *= 0.5
 
         # Verify numerical values if provided
         if numerical_values:
@@ -800,7 +807,8 @@ class LLMFeasibilityExtractor:
             )
 
             # Apply verification and confidence penalty
-            exact_quote = crit_data.get("exact_quote") or text
+            # No fallback: if exact_quote is missing, penalty will apply
+            exact_quote = crit_data.get("exact_quote")
             numerical_values = {}
             if crit_data.get("value") is not None:
                 numerical_values["value"] = crit_data["value"]
