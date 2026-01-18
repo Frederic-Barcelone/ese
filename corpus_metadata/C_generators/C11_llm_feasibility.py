@@ -40,6 +40,28 @@ from A_core.A07_feasibility_models import (
     VisitSchedule,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
+from B_parsing.B05_section_detector import SectionDetector
+
+
+# =============================================================================
+# SECTION-TO-PROMPT MAPPING
+# =============================================================================
+
+# Maps each extraction type to relevant sections (in priority order)
+SECTION_TARGETS = {
+    "study_design": ["abstract", "methods", "eligibility"],
+    "eligibility": ["eligibility", "methods", "abstract"],
+    "endpoints": ["endpoints", "methods", "results", "abstract"],
+    "sites": ["methods", "abstract", "results"],
+    "operational_burden": ["patient_journey", "methods", "eligibility"],
+    "screening_flow": ["results", "patient_journey", "abstract"],
+}
+
+# Maximum chars per section to include
+MAX_SECTION_CHARS = 8000
+
+# Total max chars to send to LLM per extraction
+MAX_TOTAL_CHARS = 15000
 
 
 # =============================================================================
@@ -277,8 +299,8 @@ class LLMFeasibilityExtractor:
             self.config.get("pipeline_version") or get_git_revision_hash()
         )
 
-        # Content limits for LLM context (20k to include full methods section)
-        self.max_content_chars = int(self.config.get("max_content_chars", 20000))
+        # Section detector for targeted extraction
+        self.section_detector = SectionDetector()
 
         # Stats
         self._extraction_stats: Dict[str, int] = {}
@@ -291,39 +313,114 @@ class LLMFeasibilityExtractor:
         full_text: Optional[str] = None,
     ) -> List[FeasibilityCandidate]:
         """
-        Extract feasibility information using LLM.
+        Extract feasibility information using LLM with section-targeted extraction.
 
         Args:
-            doc_graph: Document graph (for future use)
+            doc_graph: Document graph for section-aware extraction
             doc_id: Document identifier
             doc_fingerprint: Document fingerprint
-            full_text: Pre-built full text (optional, built from doc_graph if not provided)
+            full_text: Pre-built full text (fallback if doc_graph unavailable)
 
         Returns list of FeasibilityCandidate with structured data.
         """
         candidates: List[FeasibilityCandidate] = []
 
-        # Get document text
-        if not full_text:
-            # Build from doc_graph
-            full_text = " ".join(
-                block.text for block in doc_graph.iter_linear_blocks() if block.text
-            )
-        if not full_text:
-            return candidates
+        # Build section map from doc_graph
+        section_map = self._build_section_map(doc_graph)
 
-        # Truncate for LLM context
-        content = full_text[:self.max_content_chars]
-
-        # Extract each category
-        candidates.extend(self._extract_study_design(content, doc_id, doc_fingerprint))
-        candidates.extend(self._extract_eligibility(content, doc_id, doc_fingerprint))
-        candidates.extend(self._extract_endpoints(content, doc_id, doc_fingerprint))
-        candidates.extend(self._extract_sites(content, doc_id, doc_fingerprint))
-        candidates.extend(self._extract_operational_burden(content, doc_id, doc_fingerprint))
-        candidates.extend(self._extract_screening_flow(content, doc_id, doc_fingerprint))
+        # Extract each category with targeted sections
+        candidates.extend(self._extract_study_design(
+            self._get_targeted_content("study_design", section_map, full_text),
+            doc_id, doc_fingerprint
+        ))
+        candidates.extend(self._extract_eligibility(
+            self._get_targeted_content("eligibility", section_map, full_text),
+            doc_id, doc_fingerprint
+        ))
+        candidates.extend(self._extract_endpoints(
+            self._get_targeted_content("endpoints", section_map, full_text),
+            doc_id, doc_fingerprint
+        ))
+        candidates.extend(self._extract_sites(
+            self._get_targeted_content("sites", section_map, full_text),
+            doc_id, doc_fingerprint
+        ))
+        candidates.extend(self._extract_operational_burden(
+            self._get_targeted_content("operational_burden", section_map, full_text),
+            doc_id, doc_fingerprint
+        ))
+        candidates.extend(self._extract_screening_flow(
+            self._get_targeted_content("screening_flow", section_map, full_text),
+            doc_id, doc_fingerprint
+        ))
 
         return candidates
+
+    def _build_section_map(self, doc_graph: DocumentGraph) -> Dict[str, str]:
+        """
+        Build a map of section names to their text content.
+
+        Returns dict like {"abstract": "text...", "methods": "text...", ...}
+        """
+        section_map: Dict[str, List[str]] = {}
+        current_section = "preamble"
+
+        for block in doc_graph.iter_linear_blocks():
+            if not block.text:
+                continue
+
+            # Check if this block is a section header
+            section_info = self.section_detector.detect(block.text, block)
+            if section_info:
+                current_section = section_info.name
+
+            # Add text to current section
+            if current_section not in section_map:
+                section_map[current_section] = []
+            section_map[current_section].append(block.text)
+
+        # Join text for each section
+        return {
+            section: " ".join(texts)[:MAX_SECTION_CHARS]
+            for section, texts in section_map.items()
+        }
+
+    def _get_targeted_content(
+        self,
+        extraction_type: str,
+        section_map: Dict[str, str],
+        fallback_text: Optional[str] = None,
+    ) -> str:
+        """
+        Get content targeted for a specific extraction type.
+
+        Combines relevant sections up to MAX_TOTAL_CHARS.
+        """
+        target_sections = SECTION_TARGETS.get(extraction_type, ["abstract", "methods"])
+        content_parts = []
+        total_chars = 0
+
+        for section in target_sections:
+            if section in section_map:
+                section_text = section_map[section]
+                if total_chars + len(section_text) <= MAX_TOTAL_CHARS:
+                    content_parts.append(f"[{section.upper()}]\n{section_text}")
+                    total_chars += len(section_text)
+                else:
+                    # Add partial section to fill remaining space
+                    remaining = MAX_TOTAL_CHARS - total_chars
+                    if remaining > 500:  # Only add if meaningful amount left
+                        content_parts.append(f"[{section.upper()}]\n{section_text[:remaining]}")
+                    break
+
+        if content_parts:
+            return "\n\n".join(content_parts)
+
+        # Fallback to full text if no sections matched
+        if fallback_text:
+            return fallback_text[:MAX_TOTAL_CHARS]
+
+        return ""
 
     def _call_llm(self, system_prompt: str, content: str) -> Optional[Dict[str, Any]]:
         """Call LLM and parse JSON response."""
