@@ -23,9 +23,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A07_feasibility_models import (
-    BackgroundTherapy,
     CriterionType,
-    DiagnosisConfirmation,
     EligibilityCriterion,
     EndpointType,
     EpidemiologyData,
@@ -35,20 +33,12 @@ from A_core.A07_feasibility_models import (
     FeasibilityFieldType,
     FeasibilityGeneratorType,
     FeasibilityProvenanceMetadata,
-    InvasiveProcedure,
-    LabCriterion,
-    LabTimepoint,
-    OperationalBurden,
     PatientJourneyPhase,
     PatientJourneyPhaseType,
-    ScreenFailReason,
-    ScreeningFlow,
     ScreeningYield,
     StudyEndpoint,
-    StudyFootprint,
     StudySite,
     VaccinationRequirement,
-    VisitSchedule,
 )
 from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
@@ -1569,7 +1559,6 @@ class FeasibilityDetector:
     ) -> List[FeasibilityCandidate]:
         """Extract CONSORT flow metrics (screened, randomized, completed)."""
         candidates = []
-        text_lower = text.lower()
 
         if self.fp_filter.is_caption(text):
             return []

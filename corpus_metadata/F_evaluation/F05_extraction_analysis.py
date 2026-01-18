@@ -153,7 +153,7 @@ class ExtractionAnalyzer:
     # COMPARISON LOGIC
     # -------------------------------------------------------------------------
     def _build_comparison(
-        self, validated: List[Dict], gold_defined: List[Dict], gold_mentioned: List[Dict] = None
+        self, validated: List[Dict], gold_defined: List[Dict], gold_mentioned: Optional[List[Dict]] = None
     ) -> Dict[str, Any]:
         """
         Build comparison between system output and gold standard.

@@ -249,8 +249,8 @@ class PharmaCompanyDetector:
                 parent_company=pharma.parent_company,
                 subsidiaries=pharma.subsidiaries,
                 confidence=pharma.confidence_score,
-                context=pharma.primary_evidence.span_text,
-                page=pharma.primary_evidence.span_location.page_num,
+                context=pharma.primary_evidence.text,
+                page=pharma.primary_evidence.location.page_num,
                 lexicon_source="pharma_companies_lexicon.json",
             )
             entries.append(entry)

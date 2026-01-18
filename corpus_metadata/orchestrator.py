@@ -106,7 +106,6 @@ from A_core.A06_drug_models import (
 )
 from A_core.A09_pharma_models import (
     ExtractedPharma,
-    PharmaCandidate,
     PharmaExportDocument,
     PharmaExportEntry,
 )
@@ -130,12 +129,9 @@ from C_generators.C00_strategy_identifiers import IdentifierExtractor, Identifie
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
-from D_validation.D05_quote_verifier import ExtractionVerifier, verify_quote, verify_number
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
-from E_normalization.E04_pubtator_enricher import DiseaseEnricher
-from E_normalization.E05_drug_enricher import DrugEnricher
 from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
 from F_evaluation.F05_extraction_analysis import run_analysis
@@ -2583,7 +2579,6 @@ Return ONLY the JSON array, nothing else."""
         self, pdf_path: Path, doc: "DocumentGraph"
     ) -> None:
         """Export extracted tables as images to JSON file."""
-        from B_parsing.B02_doc_graph import TableType
 
         # Collect all tables with images
         tables = [t for t in doc.iter_tables() if t.image_base64]

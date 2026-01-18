@@ -149,7 +149,7 @@ class TableExtractor:
         max_cols = 0
         for tr in all_trs:
             col_count = sum(
-                int(td.get("colspan", 1)) for td in tr.find_all(["th", "td"])
+                int(td.get("colspan") or 1) for td in tr.find_all(["th", "td"])
             )
             max_cols = max(max_cols, col_count)
 
@@ -176,8 +176,8 @@ class TableExtractor:
                     break
 
                 cell_text = td.get_text(strip=True)
-                colspan = int(td.get("colspan", 1))
-                rowspan = int(td.get("rowspan", 1))
+                colspan = int(td.get("colspan") or 1)
+                rowspan = int(td.get("rowspan") or 1)
 
                 # Fill cells for colspan
                 for i in range(colspan):
@@ -263,6 +263,8 @@ class TableExtractor:
                             text=cell_text,
                             row_index=row_idx,
                             col_index=col_idx,
+                            row_span=1,
+                            col_span=1,
                             is_header=(row_idx == 0),
                             bbox=BoundingBox(coords=bbox_coords),
                         )

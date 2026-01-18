@@ -581,7 +581,7 @@ class DocumentMetadataStrategy:
 
         try:
             doc = fitz.open(str(path))
-            meta = doc.metadata
+            meta = doc.metadata or {}
 
             # Parse dates from PDF metadata
             creation_date = self._parse_pdf_date(meta.get("creationDate"))
@@ -616,7 +616,7 @@ class DocumentMetadataStrategy:
                 creation_date=creation_date,
                 modification_date=mod_date,
                 page_count=len(doc),
-                pdf_version=f"PDF {doc.metadata.get('format', '1.x')}",
+                pdf_version=f"PDF {meta.get('format', '1.x')}",
                 is_encrypted=doc.is_encrypted,
                 is_tagged=doc.is_pdf,  # Simplified check
                 has_form_fields=has_forms,
@@ -663,7 +663,7 @@ class DocumentMetadataStrategy:
     ) -> str:
         """Get content sample from document graph."""
         # Get first N characters of content
-        full_text = doc_graph.get_full_text() if hasattr(doc_graph, "get_full_text") else ""
+        full_text = doc_graph.get_full_text() if hasattr(doc_graph, "get_full_text") else ""  # type: ignore[union-attr]
         return full_text[:max_chars] if full_text else ""
 
     def _extract_dates(

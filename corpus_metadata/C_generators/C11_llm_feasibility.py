@@ -34,7 +34,6 @@ from A_core.A07_feasibility_models import (
     ScreeningFlow,
     StudyDesign,
     StudyEndpoint,
-    StudyFootprint,
     StudySite,
     TreatmentArm,
     VaccinationRequirement,

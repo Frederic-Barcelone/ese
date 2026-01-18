@@ -1482,6 +1482,10 @@ class DrugDetector:
                 ):
                     continue
 
+                conditions_raw = drug_info.get("conditions", [])
+                conditions_list: List[str] = (
+                    conditions_raw if isinstance(conditions_raw, list) else []
+                )
                 candidate = DrugCandidate(
                     doc_id=doc_graph.doc_id,
                     matched_text=matched_text,
@@ -1493,7 +1497,7 @@ class DrugDetector:
                     context_text=context,
                     context_location=Coordinate(page_num=1),
                     is_investigational=True,
-                    conditions=drug_info.get("conditions", []),
+                    conditions=conditions_list,
                     nct_id=drug_info.get("nct_id"),
                     initial_confidence=0.8,
                     provenance=DrugProvenanceMetadata(

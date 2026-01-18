@@ -479,19 +479,19 @@ class ExtractionVerifier:
         numerical_fields = numerical_fields or []
 
         # Verify quote fields
-        for field in quote_fields:
-            if field in extraction and extraction[field]:
-                quote = extraction[field]
+        for field_name in quote_fields:
+            if field_name in extraction and extraction[field_name]:
+                quote = extraction[field_name]
                 if isinstance(quote, str):
-                    results[field] = self.verify_field(field, context, quote=quote)
+                    results[field_name] = self.verify_field(field_name, context, quote=quote)
 
         # Verify numerical fields
-        for field in numerical_fields:
-            if field in extraction and extraction[field] is not None:
-                value = extraction[field]
+        for field_name in numerical_fields:
+            if field_name in extraction and extraction[field_name] is not None:
+                value = extraction[field_name]
                 if isinstance(value, (int, float)):
-                    results[field] = self.verify_field(
-                        field, context, numerical_values={field: value}
+                    results[field_name] = self.verify_field(
+                        field_name, context, numerical_values={field_name: value}
                     )
 
         return results
