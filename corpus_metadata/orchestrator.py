@@ -2606,11 +2606,17 @@ Return ONLY the JSON array, nothing else."""
             # Convert evidence from the candidate
             evidence_export = _convert_evidence(r.evidence)
 
+            # Propagate page from evidence if not set on parent
+            # Rule: if evidence[0].page exists, use it for parent.page
+            page_num = r.page_number
+            if page_num is None and evidence_export:
+                page_num = evidence_export[0].page
+
             entry = FeasibilityExportEntry(
                 field_type=r.field_type.value,
                 text=r.matched_text,
                 section=r.section_name,
-                page=r.page_number,
+                page=page_num,
                 structured_data=None,
                 confidence=r.confidence,
                 evidence=evidence_export,
@@ -2626,6 +2632,9 @@ Return ONLY the JSON array, nothing else."""
                 # Add evidence from eligibility criterion if not already present
                 if not entry.evidence and r.eligibility_criterion.evidence:
                     entry.evidence = _convert_evidence(r.eligibility_criterion.evidence)
+                    # Also propagate page from this evidence
+                    if entry.page is None and entry.evidence:
+                        entry.page = entry.evidence[0].page
             elif r.epidemiology_data:
                 entry.structured_data = {
                     "data_type": r.epidemiology_data.data_type,

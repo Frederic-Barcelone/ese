@@ -94,7 +94,7 @@ Return JSON with these fields (use null if not found):
     "phase": "1" or "2" or "3" or "2/3" or "2b" or "3b" or null,
     "design_type": "parallel" or "crossover" or "single-arm" or null,
     "blinding": "double-blind" or "single-blind" or "open-label" or null,
-    "randomization_ratio": "1:1" or "2:1" or null,
+    "randomization_ratio": "1:1" or "2:1" or "3:1" etc (IMPORTANT: look for "randomised 1:1" or "randomized 2:1" - extract the exact ratio),
     "allocation": "iptacopan n=38, placebo n=36" (describe how participants were allocated to arms),
     "sample_size": integer or null (planned enrollment),
     "actual_enrollment": integer or null (actual number randomized),
@@ -282,23 +282,24 @@ Return:
     ],
     "run_in_duration_days": integer or null,
     "run_in_requirements": ["list of run-in requirements"],
-    "central_lab_required": true/false,
+    "central_lab_required": true/false/null (ONLY set true if you find EXPLICIT text like "assessed at central laboratory" or "central lab"),
     "central_lab": {
-        "required": true/false,
-        "analytes": ["UPCR", "eGFR", "serum C3", "sC5b-9"],
-        "quote": "exact text like 'X, Y, and Z were assessed at central laboratory' - must explicitly say central lab",
+        "required": true/false/null (ONLY true if explicit "central laboratory" statement found),
+        "analytes": ["UPCR", "eGFR", "serum C3", "sC5b-9"] (only if central lab confirmed),
+        "quote": "REQUIRED: exact text containing 'central laboratory' - NOT 'normal range' or 'reference range'",
         "page": integer
     },
-    "special_sample_handling": ["frozen samples", "timed urine collection"] or [],
+    "special_sample_handling": ["frozen samples", "24-h urine collection", "first morning void"] or [],
     "hard_gates": ["biopsy requirement", "vaccination", "rare lab threshold"]
 }
 
 CRITICAL EVIDENCE RULES:
 - ALWAYS include page number from nearest [PAGE X] marker
 - For background_therapy and concomitant_meds_allowed: ONLY use quotes from PROTOCOL/METHODS sections that explicitly state "allowed", "permitted", or "required". Do NOT infer allowed meds from baseline characteristics or screen failure footnotes.
-- For central_lab: Look for explicit statements like "assessed at central laboratory" or "central lab assessment". Do NOT use quotes about "normal range" - that doesn't prove central processing.
-- For invasive_procedures: ONLY include if you find explicit timing in the protocol (e.g., "renal biopsy at screening day 45 and month 6"). If timing is unclear, omit the procedure.
-- For visit_schedule: Look for explicit "Scheduled study visits occurred at days X, Y, Z" or similar. If not found, leave visit_days empty.
+- For central_lab: ONLY set required=true if you find explicit text containing "central laboratory" or "centralized lab". Do NOT use quotes about "normal range" or "reference range" - that doesn't prove central processing. If no explicit central lab statement, set central_lab_required=null.
+- For invasive_procedures: Include BOTH eligibility requirements (e.g., "biopsy-confirmed") AND scheduled study procedures (e.g., "renal biopsy at day 45 and month 6"). Mark is_eligibility_requirement=true for the former.
+- For visit_schedule: Look for explicit "Scheduled study visits occurred at days X, Y, Z" or similar. If not found, leave visit_days empty. Set duration_weeks=null if you cannot determine from explicit text.
+- For special_sample_handling: Look for "24-h urine", "24-hour urine collection", "first morning void", "timed urine", frozen samples, etc.
 """ + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
@@ -1215,24 +1216,32 @@ class LLMFeasibilityExtractor:
                 ))
 
         # Parse central lab requirement with evidence
+        # IMPORTANT: Only create CentralLabRequirement if we have explicit evidence
         from A_core.A07_feasibility_models import CentralLabRequirement
         central_lab = None
         central_lab_data = response.get("central_lab")
+        central_lab_required_raw = response.get("central_lab_required")
         if isinstance(central_lab_data, dict):
-            evidence = []
-            if central_lab_data.get("quote"):
+            quote = central_lab_data.get("quote")
+            # Only create central_lab if we have a valid quote containing "central"
+            if quote and isinstance(quote, str) and "central" in quote.lower():
+                evidence = []
                 page_num = central_lab_data.get("page")
                 evidence.append(EvidenceSpan(
-                    quote=central_lab_data["quote"],
+                    quote=quote,
                     source_doc_id=doc_id,
                     page=page_num if isinstance(page_num, int) else None,
                 ))
-            central_lab = CentralLabRequirement(
-                required=self._get_bool(central_lab_data, "required", False),
-                analytes=self._get_list(central_lab_data, "analytes"),
-                confidence=0.8 if evidence else 0.5,
-                evidence=evidence,
-            )
+                central_lab = CentralLabRequirement(
+                    required=central_lab_data.get("required") is True,  # Only true if explicitly True
+                    analytes=self._get_list(central_lab_data, "analytes"),
+                    confidence=0.85,
+                    evidence=evidence,
+                )
+            # If no valid quote or quote doesn't mention "central", set to null
+        # Override central_lab_required to null if no evidence
+        if central_lab is None:
+            central_lab_required_raw = None
 
         # Build OperationalBurden
         burden = OperationalBurden(
@@ -1243,7 +1252,7 @@ class LLMFeasibilityExtractor:
             concomitant_meds_allowed=concomitant_allowed,
             run_in_duration_days=response.get("run_in_duration_days"),
             run_in_requirements=self._get_list(response, "run_in_requirements"),
-            central_lab_required=self._get_bool(response, "central_lab_required", False),
+            central_lab_required=central_lab_required_raw if central_lab_required_raw is True else None,
             central_lab=central_lab,
             special_sample_handling=self._get_list(response, "special_sample_handling"),
             hard_gates=self._get_list(response, "hard_gates"),
