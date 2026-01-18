@@ -133,6 +133,7 @@ class EvidenceSpan(BaseModel):
     char_end: Optional[int] = None
     bbox: Optional[List[float]] = None  # [x0, y0, x1, y1]
     source_node_id: Optional[str] = None  # doc-graph node reference
+    source_doc_id: Optional[str] = None  # document ID for cross-paper verification
 
     model_config = ConfigDict(extra="forbid")
 
@@ -689,6 +690,7 @@ class EvidenceExport(BaseModel):
     page: Optional[int] = None
     quote: Optional[str] = None
     source_node_id: Optional[str] = None
+    source_doc_id: Optional[str] = None  # document ID for cross-paper verification
 
     model_config = ConfigDict(extra="forbid")
 

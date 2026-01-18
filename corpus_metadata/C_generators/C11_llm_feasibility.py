@@ -753,6 +753,7 @@ class LLMFeasibilityExtractor:
                 evidence.append(EvidenceSpan(
                     page=ev_data.get("page"),
                     quote=ev_data["quote"],
+                    source_doc_id=doc_id,
                 ))
 
         study_design = StudyDesign(
@@ -898,7 +899,7 @@ class LLMFeasibilityExtractor:
             # Build evidence from verified quote
             evidence = []
             if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
-                evidence.append(EvidenceSpan(quote=exact_quote.strip()))
+                evidence.append(EvidenceSpan(quote=exact_quote.strip(), source_doc_id=doc_id))
 
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
@@ -982,7 +983,7 @@ class LLMFeasibilityExtractor:
             # Build evidence from verified quote
             evidence = []
             if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
-                evidence.append(EvidenceSpan(quote=exact_quote.strip()))
+                evidence.append(EvidenceSpan(quote=exact_quote.strip(), source_doc_id=doc_id))
 
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
@@ -1087,6 +1088,7 @@ class LLMFeasibilityExtractor:
                     evidence.append(EvidenceSpan(
                         quote=proc_data["quote"],
                         page=proc_data.get("page"),
+                        source_doc_id=doc_id,
                     ))
                 procedures.append(InvasiveProcedure(
                     name=proc_data["name"],
@@ -1131,7 +1133,7 @@ class LLMFeasibilityExtractor:
             if isinstance(vacc_data, dict) and vacc_data.get("vaccine_type"):
                 evidence = []
                 if vacc_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=vacc_data["quote"]))
+                    evidence.append(EvidenceSpan(quote=vacc_data["quote"], source_doc_id=doc_id))
                 vaccinations.append(VaccinationRequirement(
                     vaccine_type=vacc_data["vaccine_type"],
                     requirement_type=vacc_data.get("requirement_type", "required"),
@@ -1145,7 +1147,7 @@ class LLMFeasibilityExtractor:
             if isinstance(bg_data, dict) and bg_data.get("therapy_class"):
                 evidence = []
                 if bg_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=bg_data["quote"]))
+                    evidence.append(EvidenceSpan(quote=bg_data["quote"], source_doc_id=doc_id))
                 bg_therapy.append(BackgroundTherapy(
                     therapy_class=bg_data["therapy_class"],
                     requirement_type=bg_data.get("requirement_type", "allowed"),
@@ -1162,7 +1164,7 @@ class LLMFeasibilityExtractor:
             if isinstance(cm_data, dict) and cm_data.get("therapy_class"):
                 evidence = []
                 if cm_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=cm_data["quote"]))
+                    evidence.append(EvidenceSpan(quote=cm_data["quote"], source_doc_id=doc_id))
                 concomitant_allowed.append(BackgroundTherapy(
                     therapy_class=cm_data["therapy_class"],
                     requirement_type="allowed",
@@ -1180,7 +1182,7 @@ class LLMFeasibilityExtractor:
         if isinstance(central_lab_data, dict):
             evidence = []
             if central_lab_data.get("quote"):
-                evidence.append(EvidenceSpan(quote=central_lab_data["quote"]))
+                evidence.append(EvidenceSpan(quote=central_lab_data["quote"], source_doc_id=doc_id))
             central_lab = CentralLabRequirement(
                 required=self._get_bool(central_lab_data, "required", False),
                 analytes=self._get_list(central_lab_data, "analytes"),
@@ -1284,6 +1286,7 @@ class LLMFeasibilityExtractor:
                     evidence.append(EvidenceSpan(
                         quote=sfr_data["quote"],
                         page=sfr_data.get("page"),
+                        source_doc_id=doc_id,
                     ))
                 screen_fail_reasons.append(ScreenFailReason(
                     reason=sfr_data["reason"],
@@ -1318,6 +1321,7 @@ class LLMFeasibilityExtractor:
                 evidence.append(EvidenceSpan(
                     page=ev_data.get("page"),
                     quote=ev_data["quote"],
+                    source_doc_id=doc_id,
                 ))
 
         # Build ScreeningFlow with enhanced fields
