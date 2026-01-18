@@ -84,6 +84,28 @@ class AuthorDetector:
     # ORCID pattern
     ORCID_PATTERN = re.compile(r"(?:ORCID[:\s]*)?(\d{4}-\d{4}-\d{4}-\d{3}[\dX])")
 
+    # Author byline pattern - matches names in comma-separated lists
+    # Handles: "David Kavanagh*, Andrew S Bomback*, Marina Vivarelli"
+    # Also handles names with middle initials: "John A. Smith" or "John A Smith"
+    AUTHOR_BYLINE_NAME = re.compile(
+        r"([A-Z][a-z]+(?:\s+[A-Z](?:\.|(?=\s)))?(?:\s+[A-Z][a-z]+)+)\*?",
+        re.UNICODE,
+    )
+
+    # Pattern to detect "on behalf of" investigator groups
+    ON_BEHALF_PATTERN = re.compile(
+        r"on\s+behalf\s+of\s+(?:the\s+)?([A-Z][A-Za-z0-9\-]+(?:\s+[A-Za-z]+)*)\s+(?:investigators?|group|consortium|committee|study\s+group)",
+        re.IGNORECASE,
+    )
+
+    # Pattern to find author list sections (near beginning of document)
+    AUTHOR_LIST_MARKERS = [
+        r"^[A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+\*?,",  # Starts with name, comma
+        r"Authors?:",
+        r"Contributors?:",
+        r"Writing\s+(?:group|committee)",
+    ]
+
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
         self.run_id = str(self.config.get("run_id") or generate_run_id("AUTHOR"))
@@ -123,6 +145,12 @@ class AuthorDetector:
 
         if not full_text:
             return candidates
+
+        # First, try to detect author byline in the first part of document
+        # Journal articles typically have authors listed near the title
+        candidates.extend(
+            self._detect_author_byline(full_text, doc_id, doc_fingerprint, seen_names)
+        )
 
         # Detect role-prefixed names (higher confidence)
         for pattern, role in self.ROLE_PATTERNS:
@@ -217,6 +245,223 @@ class AuthorDetector:
                 provenance=provenance,
             )
             candidates.append(candidate)
+
+        return candidates
+
+    def _detect_author_byline(
+        self,
+        full_text: str,
+        doc_id: str,
+        doc_fingerprint: str,
+        seen_names: Set[str],
+    ) -> List[AuthorCandidate]:
+        """
+        Detect author names in journal-style bylines.
+
+        Looks for comma-separated lists of names near the beginning of the document,
+        typically following the title. Handles asterisks for corresponding authors.
+        """
+        candidates: List[AuthorCandidate] = []
+
+        # Focus on the first ~3000 chars where author lists typically appear
+        search_text = full_text[:3000]
+
+        # Look for "on behalf of" patterns first to identify investigator groups
+        on_behalf_match = self.ON_BEHALF_PATTERN.search(full_text[:5000])
+        investigator_group = on_behalf_match.group(1) if on_behalf_match else None
+
+        # Find potential author list sections
+        # Look for patterns like "Name1, Name2, Name3" or "Name1*, Name2*, Name3"
+        # Usually appears after a title (ends with newline) and before Abstract/Introduction
+
+        # Split into potential segments
+        lines = search_text.split("\n")
+
+        author_block = None
+        author_block_start = None
+
+        for i, line in enumerate(lines):
+            line = line.strip()
+            if not line:
+                continue
+
+            # Check if this line looks like an author list
+            # Must have multiple commas and names
+            comma_count = line.count(",")
+            if comma_count >= 2:
+                # Count potential names (capitalized words)
+                potential_names = re.findall(
+                    r"[A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+", line
+                )
+                if len(potential_names) >= 3:
+                    author_block = line
+                    author_block_start = i
+                    break
+
+            # Also check for "Authors:" style
+            if re.match(r"^Authors?:", line, re.IGNORECASE):
+                # Author list might be on this line or next
+                author_block = line
+                author_block_start = i
+                break
+
+        # If we found an author block, look for continuation lines
+        if author_block and author_block_start is not None:
+            for j in range(author_block_start + 1, min(author_block_start + 5, len(lines))):
+                next_line = lines[j].strip()
+                if not next_line:
+                    continue
+
+                # Check if this line continues the author list
+                # It should have commas and capitalized names, but not be a new section
+                if any(
+                    kw in next_line.lower()
+                    for kw in ["abstract", "summary", "background", "introduction", "methods"]
+                ):
+                    break
+
+                # If it has author-like content (names with commas), add it
+                potential_names = re.findall(
+                    r"[A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+", next_line
+                )
+                if len(potential_names) >= 1 and "," in next_line:
+                    author_block += " " + next_line
+                elif "on behalf of" in next_line.lower():
+                    author_block += " " + next_line
+                    break  # This is typically the end
+                else:
+                    break  # Not an author line
+
+        if not author_block:
+            return candidates
+
+        # Parse names from the author block
+        # Remove common suffixes/markers
+        author_block = re.sub(r"\d+,?", "", author_block)  # Remove affiliation numbers
+        author_block = re.sub(r"\†|\‡|§|¶|#", "", author_block)  # Remove symbols
+        author_block = re.sub(r"\(.*?\)", "", author_block)  # Remove parentheticals
+
+        # Find names by splitting on commas and parsing each segment
+        # This handles complex names with multiple middle initials like "Edwin K S Wong"
+        segments = re.split(r",\s*", author_block)
+
+        for segment in segments:
+            segment = segment.strip()
+            if not segment:
+                continue
+
+            # Check for corresponding author marker
+            is_corresponding = "*" in segment
+            segment = segment.replace("*", "").strip()
+
+            # Skip if it's a group name or too short
+            if len(segment) < 5:
+                continue
+            if any(
+                kw in segment.lower()
+                for kw in ["behalf", "investigator", "group", "committee", "abstract"]
+            ):
+                continue
+
+            # Try to parse as a name
+            # Pattern: First [Middle...] Last
+            # Where Middle can be initials (K S) or full names
+            name_match = re.match(
+                r"^([A-Z][a-z]+(?:[-'][A-Z][a-z]+)?)"  # First name
+                r"((?:\s+[A-Z](?:\.|\s|$))*)"  # Middle initials (K S or K. S.)
+                r"(?:\s+([A-Z][a-z]+(?:[-'][A-Z][a-z]+)?))?$",  # Last name
+                segment,
+            )
+
+            if name_match:
+                first = name_match.group(1)
+                middle = (name_match.group(2) or "").strip()
+                last = name_match.group(3)
+
+                if not last:
+                    # Maybe the "middle" is actually the last name
+                    # e.g., "Yaqin Wang" where Wang is captured as middle
+                    parts = segment.split()
+                    if len(parts) >= 2:
+                        first = parts[0]
+                        middle = " ".join(parts[1:-1]) if len(parts) > 2 else ""
+                        last = parts[-1]
+
+                if not first or not last:
+                    continue
+
+                # Build full name
+                if middle:
+                    full_name = f"{first} {middle} {last}"
+                else:
+                    full_name = f"{first} {last}"
+            else:
+                # Fallback: just split by spaces
+                parts = segment.split()
+                if len(parts) < 2:
+                    continue
+                # Assume first is first name, last is last name, middle is everything else
+                first = parts[0]
+                last = parts[-1]
+                middle = " ".join(parts[1:-1]) if len(parts) > 2 else ""
+
+                # Validate first and last are capitalized names
+                if not (
+                    first[0].isupper()
+                    and last[0].isupper()
+                    and (len(last) > 1 and last[1:].islower())
+                ):
+                    continue
+
+                if middle:
+                    full_name = f"{first} {middle} {last}"
+                else:
+                    full_name = f"{first} {last}"
+
+            # Clean up extra spaces
+            full_name = " ".join(full_name.split())
+
+            normalized = self._normalize_name(full_name)
+            if normalized in seen_names:
+                continue
+            if not self._is_valid_name(full_name):
+                continue
+
+            seen_names.add(normalized)
+
+            # Determine role
+            role = (
+                AuthorRoleType.CORRESPONDING_AUTHOR
+                if is_corresponding
+                else AuthorRoleType.AUTHOR
+            )
+
+            provenance = AuthorProvenanceMetadata(
+                pipeline_version=self.pipeline_version,
+                run_id=self.run_id,
+                doc_fingerprint=doc_fingerprint,
+                generator_name=AuthorGeneratorType.HEADER_PATTERN,
+            )
+
+            candidate = AuthorCandidate(
+                doc_id=doc_id,
+                full_name=full_name,
+                role=role,
+                generator_type=AuthorGeneratorType.HEADER_PATTERN,
+                context_text=author_block[:200],
+                context_location=Coordinate(page_num=1, block_id="author_byline"),
+                initial_confidence=0.90 if is_corresponding else 0.85,
+                provenance=provenance,
+            )
+            candidates.append(candidate)
+
+        # If we found an investigator group, add it as a note
+        if investigator_group and candidates:
+            # Mark first author as part of investigator group
+            for c in candidates:
+                if c.affiliation is None:
+                    c.affiliation = f"on behalf of {investigator_group} investigators"
+                    break
 
         return candidates
 
