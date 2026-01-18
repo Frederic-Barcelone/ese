@@ -582,7 +582,7 @@ class LLMFeasibilityExtractor:
             self._verification_stats["quotes_failed"] += 1
         return result.verified
 
-    def _verify_number(self, value: Optional[int | float], context: str) -> bool:
+    def _verify_number(self, value: Optional[int | float | str], context: str) -> bool:
         """
         Verify that a numerical value exists in the context.
 
@@ -590,6 +590,11 @@ class LLMFeasibilityExtractor:
         Updates verification stats.
         """
         if value is None or not context:
+            return False
+
+        # Handle case where value is not a number (e.g., dict, list)
+        if not isinstance(value, (int, float, str)):
+            self._verification_stats["numbers_failed"] += 1
             return False
 
         result = self.numerical_verifier.verify(value, context)

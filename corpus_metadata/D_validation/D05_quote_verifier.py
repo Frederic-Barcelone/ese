@@ -321,8 +321,19 @@ class NumericalVerifier:
         # Convert string to number if needed
         if isinstance(value, str):
             try:
-                value = float(value.replace(',', ''))
-            except (ValueError, AttributeError):
+                # Remove common prefixes/suffixes: "≥18", ">= 18", "18 years", etc.
+                clean_value = value.replace(',', '').strip()
+                # Remove comparison operators
+                for prefix in ['>=', '<=', '≥', '≤', '>', '<', '=']:
+                    clean_value = clean_value.lstrip(prefix).strip()
+                # Extract first number from string (handles "18 years", "18mg", etc.)
+                import re
+                match = re.search(r'[\d.]+', clean_value)
+                if match:
+                    value = float(match.group())
+                else:
+                    return NumericalVerificationResult(verified=False)
+            except (ValueError, AttributeError, TypeError):
                 return NumericalVerificationResult(verified=False)
 
         positions: List[Tuple[int, int]] = []
