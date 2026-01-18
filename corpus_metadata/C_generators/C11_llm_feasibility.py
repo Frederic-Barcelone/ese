@@ -400,6 +400,7 @@ class LLMFeasibilityExtractor:
             "quotes_failed": 0,
             "numbers_verified": 0,
             "numbers_failed": 0,
+            "missing_fields": 0,
         }
 
     def extract(
@@ -641,6 +642,55 @@ class LLMFeasibilityExtractor:
 
         return round(confidence, 3)
 
+    def _check_required_fields(
+        self,
+        data: Dict[str, Any],
+        required_fields: List[str],
+        context_name: str,
+    ) -> int:
+        """
+        Check for missing required fields and track them.
+
+        Args:
+            data: The data dict to check
+            required_fields: List of field names that should be present
+            context_name: Name for logging (e.g., "eligibility_criterion")
+
+        Returns:
+            Count of missing required fields
+        """
+        missing_count = 0
+        for field in required_fields:
+            value = data.get(field)
+            if value is None or (isinstance(value, str) and not value.strip()):
+                missing_count += 1
+                self._verification_stats["missing_fields"] += 1
+
+        return missing_count
+
+    def _apply_completeness_penalty(
+        self,
+        base_confidence: float,
+        missing_field_count: int,
+        penalty_per_field: float = 0.05,
+    ) -> float:
+        """
+        Apply confidence penalty for missing fields.
+
+        Args:
+            base_confidence: Starting confidence
+            missing_field_count: Number of missing required fields
+            penalty_per_field: Penalty per missing field (default 5%)
+
+        Returns:
+            Adjusted confidence (minimum 0.1)
+        """
+        if missing_field_count <= 0:
+            return base_confidence
+
+        penalty = missing_field_count * penalty_per_field
+        return max(0.1, base_confidence - penalty)
+
     # =========================================================================
     # STUDY DESIGN EXTRACTION
     # =========================================================================
@@ -778,11 +828,20 @@ class LLMFeasibilityExtractor:
             if not isinstance(crit_data, dict):
                 continue
 
-            text = crit_data.get("text", "").strip()
-            if not text or len(text) < 10:
+            # Check required fields - no silent defaults
+            text = crit_data.get("text")
+            if not text or not isinstance(text, str) or len(text.strip()) < 10:
+                self._verification_stats["missing_fields"] += 1
                 continue
 
-            crit_type_str = crit_data.get("type", "inclusion").lower()
+            text = text.strip()
+
+            # Check for missing type field (required, no default)
+            crit_type_str = crit_data.get("type")
+            if not crit_type_str:
+                self._verification_stats["missing_fields"] += 1
+                continue
+            crit_type_str = crit_type_str.lower()
             crit_type = CriterionType.EXCLUSION if crit_type_str == "exclusion" else CriterionType.INCLUSION
             field_type = (
                 FeasibilityFieldType.ELIGIBILITY_EXCLUSION
@@ -858,19 +917,29 @@ class LLMFeasibilityExtractor:
             if not isinstance(ep_data, dict):
                 continue
 
-            name = ep_data.get("name", "").strip()
-            if not name or len(name) < 5:
+            # Check required fields - no silent defaults
+            name = ep_data.get("name")
+            if not name or not isinstance(name, str) or len(name.strip()) < 5:
+                self._verification_stats["missing_fields"] += 1
+                continue
+            name = name.strip()
+
+            # Check required type field - no default fallback
+            type_str = ep_data.get("type")
+            if not type_str:
+                self._verification_stats["missing_fields"] += 1
                 continue
 
-            # Map type string to enum
-            type_str = ep_data.get("type", "primary").lower()
             type_map = {
                 "primary": EndpointType.PRIMARY,
                 "secondary": EndpointType.SECONDARY,
                 "exploratory": EndpointType.EXPLORATORY,
                 "safety": EndpointType.SAFETY,
             }
-            endpoint_type = type_map.get(type_str, EndpointType.PRIMARY)
+            endpoint_type = type_map.get(type_str.lower())
+            if not endpoint_type:
+                self._verification_stats["missing_fields"] += 1
+                continue
 
             endpoint = StudyEndpoint(
                 endpoint_type=endpoint_type,
@@ -1335,3 +1404,7 @@ class LLMFeasibilityExtractor:
             if total_numbers > 0:
                 number_rate = numbers_verified / total_numbers * 100
                 print(f"  Numbers verified: {numbers_verified}/{total_numbers} ({number_rate:.1f}%)")
+
+            missing_fields = self._verification_stats.get("missing_fields", 0)
+            if missing_fields > 0:
+                print(f"  Missing required fields: {missing_fields} (items skipped)")
