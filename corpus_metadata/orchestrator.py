@@ -2614,6 +2614,13 @@ Return ONLY the JSON array, nothing else."""
             num_rows = len(table.logical_rows) if table.logical_rows else 0
             num_cols = len(table.logical_rows[0]) if table.logical_rows else 0
 
+            # Extract headers from metadata if available
+            headers = []
+            if table.metadata and "headers" in table.metadata:
+                headers_map = table.metadata["headers"]
+                if isinstance(headers_map, dict):
+                    headers = [headers_map.get(i, f"col_{i}") for i in range(num_cols)]
+
             table_data = {
                 "page": page_num,
                 "page_nums": table.page_nums if table.is_multipage else [table.page_num],
@@ -2622,6 +2629,8 @@ Return ONLY the JSON array, nothing else."""
                 "caption": table.caption,
                 "rows": num_rows,
                 "cols": num_cols,
+                "headers": headers,
+                "data": table.logical_rows if table.logical_rows else [],
                 "bbox": list(table.bbox.coords) if table.bbox else None,
                 "image_base64": table.image_base64,
             }
