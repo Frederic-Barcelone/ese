@@ -642,6 +642,18 @@ class LLMFeasibilityExtractor:
 
         return round(confidence, 3)
 
+    @staticmethod
+    def _get_bool(data: Dict[str, Any], key: str, default: bool = False) -> bool:
+        """Get boolean value, handling None from LLM responses."""
+        val = data.get(key)
+        return val if val is not None else default
+
+    @staticmethod
+    def _get_list(data: Dict[str, Any], key: str) -> list:
+        """Get list value, handling None from LLM responses."""
+        val = data.get(key)
+        return val if val is not None else []
+
     def _check_required_fields(
         self,
         data: Dict[str, Any],
@@ -1062,11 +1074,11 @@ class LLMFeasibilityExtractor:
                     ))
                 procedures.append(InvasiveProcedure(
                     name=proc_data["name"],
-                    timing=proc_data.get("timing", []),
-                    timing_days=proc_data.get("timing_days", []),
-                    optional=proc_data.get("optional", False),
+                    timing=self._get_list(proc_data, "timing"),
+                    timing_days=self._get_list(proc_data, "timing_days"),
+                    optional=self._get_bool(proc_data, "optional", False),
                     purpose=proc_data.get("purpose"),
-                    is_eligibility_requirement=proc_data.get("is_eligibility_requirement", False),
+                    is_eligibility_requirement=self._get_bool(proc_data, "is_eligibility_requirement", False),
                     evidence=evidence,
                 ))
 
@@ -1083,18 +1095,18 @@ class LLMFeasibilityExtractor:
                         day=sv_data["day"],
                         visit_name=sv_data.get("visit_name"),
                         phase=sv_data.get("phase"),
-                        procedures=sv_data.get("procedures", []),
+                        procedures=self._get_list(sv_data, "procedures"),
                     ))
 
             visit_schedule = VisitSchedule(
                 total_visits=visit_data.get("total_visits"),
-                visit_days=visit_data.get("visit_days", []),
+                visit_days=visit_data.get("visit_days") or [],
                 frequency=visit_data.get("frequency"),
                 duration_weeks=visit_data.get("duration_weeks"),
                 scheduled_visits=scheduled_visits,
-                pre_randomization_days=visit_data.get("pre_randomization_days", []),
-                on_treatment_days=visit_data.get("on_treatment_days", []),
-                follow_up_days=visit_data.get("follow_up_days", []),
+                pre_randomization_days=visit_data.get("pre_randomization_days") or [],
+                on_treatment_days=visit_data.get("on_treatment_days") or [],
+                follow_up_days=visit_data.get("follow_up_days") or [],
             )
 
         # Parse vaccination requirements
@@ -1122,7 +1134,7 @@ class LLMFeasibilityExtractor:
                     therapy_class=bg_data["therapy_class"],
                     requirement_type=bg_data.get("requirement_type", "allowed"),
                     requirement=bg_data.get("requirement", ""),
-                    agents=bg_data.get("agents", []),
+                    agents=self._get_list(bg_data, "agents"),
                     stable_duration_days=bg_data.get("stable_duration_days"),
                     max_dose=bg_data.get("max_dose"),
                     evidence=evidence,
@@ -1139,7 +1151,7 @@ class LLMFeasibilityExtractor:
                     therapy_class=cm_data["therapy_class"],
                     requirement_type="allowed",
                     requirement=cm_data.get("requirement", "allowed"),
-                    agents=cm_data.get("agents", []),
+                    agents=self._get_list(cm_data, "agents"),
                     stable_duration_days=cm_data.get("stable_duration_days"),
                     max_dose=cm_data.get("max_dose"),
                     evidence=evidence,
@@ -1154,8 +1166,8 @@ class LLMFeasibilityExtractor:
             if central_lab_data.get("quote"):
                 evidence.append(EvidenceSpan(quote=central_lab_data["quote"]))
             central_lab = CentralLabRequirement(
-                required=central_lab_data.get("required", False),
-                analytes=central_lab_data.get("analytes", []),
+                required=self._get_bool(central_lab_data, "required", False),
+                analytes=self._get_list(central_lab_data, "analytes"),
                 confidence=0.8 if evidence else 0.5,
                 evidence=evidence,
             )
@@ -1168,11 +1180,11 @@ class LLMFeasibilityExtractor:
             background_therapy=bg_therapy,
             concomitant_meds_allowed=concomitant_allowed,
             run_in_duration_days=response.get("run_in_duration_days"),
-            run_in_requirements=response.get("run_in_requirements", []),
-            central_lab_required=response.get("central_lab_required", False),
+            run_in_requirements=self._get_list(response, "run_in_requirements"),
+            central_lab_required=self._get_bool(response, "central_lab_required", False),
             central_lab=central_lab,
-            special_sample_handling=response.get("special_sample_handling", []),
-            hard_gates=response.get("hard_gates", []),
+            special_sample_handling=self._get_list(response, "special_sample_handling"),
+            hard_gates=self._get_list(response, "hard_gates"),
         )
 
         # Only return if we have meaningful data
@@ -1262,7 +1274,7 @@ class LLMFeasibilityExtractor:
                     count=sfr_data.get("count"),
                     percentage_reported=sfr_data.get("percentage_reported") or sfr_data.get("percentage"),
                     percentage_computed=sfr_data.get("percentage_computed"),
-                    can_overlap=sfr_data.get("can_overlap", False),
+                    can_overlap=self._get_bool(sfr_data, "can_overlap", False),
                     evidence=evidence,
                 ))
 
@@ -1308,7 +1320,7 @@ class LLMFeasibilityExtractor:
             screen_failure_rate_computed=screen_failure_rate_computed,
             dropout_rate=dropout_rate,
             screen_fail_reasons=screen_fail_reasons,
-            reasons_can_overlap=response.get("reasons_can_overlap", False),
+            reasons_can_overlap=self._get_bool(response, "reasons_can_overlap", False),
             run_in_failures=response.get("run_in_failures"),
             run_in_failure_reasons=[
                 ScreenFailReason(reason=r)

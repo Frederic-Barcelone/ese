@@ -300,7 +300,7 @@ class NumericalVerifier:
 
     def verify(
         self,
-        value: int | float,
+        value: int | float | str,
         context: str,
         tolerance: float = 0.0,
     ) -> NumericalVerificationResult:
@@ -308,15 +308,22 @@ class NumericalVerifier:
         Verify that a numerical value exists in the context.
 
         Args:
-            value: The numerical value to verify.
+            value: The numerical value to verify (can be string, will be converted).
             context: The source document text to search.
             tolerance: Relative tolerance for matching (0.0 = exact, 0.1 = 10%).
 
         Returns:
             NumericalVerificationResult with verification status and details.
         """
-        if context is None:
+        if context is None or value is None:
             return NumericalVerificationResult(verified=False)
+
+        # Convert string to number if needed
+        if isinstance(value, str):
+            try:
+                value = float(value.replace(',', ''))
+            except (ValueError, AttributeError):
+                return NumericalVerificationResult(verified=False)
 
         positions: List[Tuple[int, int]] = []
         matched_formats: List[str] = []
