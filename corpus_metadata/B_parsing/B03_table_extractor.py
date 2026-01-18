@@ -52,6 +52,13 @@ GLOSSARY_HEADER_PATTERNS = [
 ]
 GLOSSARY_HEADER_RE = re.compile("|".join(GLOSSARY_HEADER_PATTERNS), re.IGNORECASE)
 
+# Minimum confidence threshold for table detection (0.0-1.0)
+MIN_TABLE_CONFIDENCE = 0.5
+
+# Minimum requirements for a valid table
+MIN_TABLE_ROWS = 2  # At least header + 1 data row
+MIN_TABLE_COLS = 2  # At least 2 columns
+
 
 class TableExtractor:
     """
@@ -81,29 +88,41 @@ class TableExtractor:
             if el.category != "Table":
                 continue
 
-            table_data = self._element_to_dict(el)
+            table_data = self._element_to_dict(el, file_path)
             if table_data:
                 tables.append(table_data)
 
         return tables
 
-    def _element_to_dict(self, el) -> Optional[Dict[str, Any]]:
+    def _element_to_dict(self, el, file_path: str = "") -> Optional[Dict[str, Any]]:
         """Convert unstructured table element to dict."""
         md = getattr(el, "metadata", None)
         if not md:
+            return None
+
+        # Check confidence score if available
+        detection_confidence = getattr(md, "detection_class_prob", None)
+        if detection_confidence is not None and detection_confidence < MIN_TABLE_CONFIDENCE:
+            print(f"[INFO] Skipping low-confidence table detection: {detection_confidence:.2f}")
             return None
 
         # Get HTML table if available
         html = getattr(md, "text_as_html", None)
         page_num = getattr(md, "page_number", None) or 1
 
-        # Get bounding box
-        bbox = self._get_bbox(md)
-
-        # Parse HTML to rows
+        # Parse HTML to rows FIRST to validate table structure
         rows = self._parse_html_table(html) if html else []
+
+        # Validate table structure - reject false positives
+        if not self._is_valid_table(rows, html):
+            print(f"[INFO] Skipping invalid table structure on page {page_num}")
+            return None
+
         headers = rows[0] if rows else []
         data_rows = rows[1:] if len(rows) > 1 else []
+
+        # Get bounding box with coordinate conversion
+        bbox = self._get_bbox(md, file_path, page_num)
 
         # Classify table type
         table_type = self._classify_table(headers)
@@ -115,10 +134,97 @@ class TableExtractor:
             "rows": data_rows,
             "table_type": table_type,
             "html": html,
+            "confidence": detection_confidence,
         }
 
-    def _get_bbox(self, md) -> Tuple[float, float, float, float]:
-        """Extract bounding box from metadata."""
+    def _is_valid_table(self, rows: List[List[str]], html: Optional[str]) -> bool:
+        """
+        Validate that the detected element is actually a table, not misclassified text.
+
+        Returns False for false positives like:
+        - Multi-column article text
+        - Single-column lists
+        - Elements with no proper table structure
+        - Tables that are mostly prose text
+        """
+        # Must have minimum rows
+        if len(rows) < MIN_TABLE_ROWS:
+            return False
+
+        # Must have minimum columns
+        if not rows or len(rows[0]) < MIN_TABLE_COLS:
+            return False
+
+        # Check that HTML actually contains table structure
+        if html:
+            # Must have actual table tags (not just text wrapped in table tags)
+            if "<tr" not in html.lower() or "<td" not in html.lower():
+                return False
+
+            # Count actual table cells vs text length ratio
+            # A real table has structured short cells, not long paragraphs
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(html, "html.parser")
+            cells = soup.find_all(["td", "th"])
+
+            if not cells:
+                return False
+
+            # Calculate average cell text length
+            cell_texts = [cell.get_text(strip=True) for cell in cells]
+            if cell_texts:
+                avg_cell_length = sum(len(t) for t in cell_texts) / len(cell_texts)
+
+                # If average cell length is very long (>150 chars), likely not a table
+                # Real table cells are typically short
+                if avg_cell_length > 150:
+                    return False
+
+                # Check for paragraph-like content (multiple sentences in many cells)
+                long_text_cells = sum(1 for t in cell_texts if len(t) > 100)
+                if long_text_cells > len(cell_texts) * 0.25:  # >25% cells have long text
+                    return False
+
+                # Check for sentence-like content (periods followed by capital letters)
+                # This indicates prose text, not tabular data
+                prose_indicators = 0
+                for text in cell_texts:
+                    # Count cells with multiple sentences (prose indicators)
+                    if '. ' in text and len(text) > 80:
+                        # Check if it's a sentence pattern (period followed by capital)
+                        import re
+                        if re.search(r'\. [A-Z]', text):
+                            prose_indicators += 1
+
+                # If >20% of cells look like prose, reject
+                if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > 0.2:
+                    return False
+
+                # Check total text length - real tables shouldn't have huge amounts of text
+                total_text = sum(len(t) for t in cell_texts)
+                if total_text > 5000 and len(cell_texts) < 20:  # Lots of text, few cells
+                    return False
+
+        # Validate column consistency across rows
+        col_counts = [len(row) for row in rows]
+        if col_counts:
+            # Allow some variation (for merged cells) but not wild inconsistency
+            min_cols = min(col_counts)
+            max_cols = max(col_counts)
+            if max_cols > 0 and min_cols / max_cols < 0.5:  # >50% column count variation
+                return False
+
+        return True
+
+    def _get_bbox(
+        self, md, file_path: str = "", page_num: int = 1
+    ) -> Tuple[float, float, float, float]:
+        """
+        Extract bounding box from metadata and convert coordinates.
+
+        Unstructured's hi_res mode returns coordinates in pixel space (at ~200 DPI).
+        We need to convert to PDF point space (72 DPI) for PyMuPDF rendering.
+        """
         coords = getattr(md, "coordinates", None)
         if not coords:
             return (0.0, 0.0, 0.0, 0.0)
@@ -130,7 +236,36 @@ class TableExtractor:
         try:
             xs = [p[0] for p in points]
             ys = [p[1] for p in points]
-            return (min(xs), min(ys), max(xs), max(ys))
+            x0, y0, x1, y1 = min(xs), min(ys), max(xs), max(ys)
+
+            # Get coordinate system info from Unstructured metadata
+            _system = getattr(coords, "system", None)  # noqa: F841 - reserved for future use
+            layout_width = getattr(coords, "layout_width", None)
+            layout_height = getattr(coords, "layout_height", None)
+
+            # If we have layout dimensions, convert from pixel space to PDF space
+            if layout_width and layout_height and file_path:
+                try:
+                    if PYMUPDF_AVAILABLE and fitz is not None:
+                        doc = fitz.open(file_path)
+                        if 0 < page_num <= len(doc):
+                            page = doc[page_num - 1]
+                            pdf_width = page.rect.width
+                            pdf_height = page.rect.height
+
+                            # Scale coordinates from pixel space to PDF space
+                            scale_x = pdf_width / layout_width
+                            scale_y = pdf_height / layout_height
+
+                            x0 = x0 * scale_x
+                            y0 = y0 * scale_y
+                            x1 = x1 * scale_x
+                            y1 = y1 * scale_y
+                        doc.close()
+                except Exception as e:
+                    print(f"[WARN] Coordinate conversion failed: {e}")
+
+            return (x0, y0, x1, y1)
         except (TypeError, IndexError):
             return (0.0, 0.0, 0.0, 0.0)
 
@@ -315,13 +450,82 @@ class TableExtractor:
     # IMAGE RENDERING METHODS
     # =========================================================================
 
+    def _find_table_bbox_pymupdf(
+        self,
+        file_path: str,
+        page_num: int,
+        hint_bbox: Optional[Tuple[float, float, float, float]] = None,
+    ) -> Optional[Tuple[float, float, float, float]]:
+        """
+        Use PyMuPDF's table detection to find actual table boundaries.
+
+        Args:
+            file_path: Path to PDF
+            page_num: 1-indexed page number
+            hint_bbox: Optional hint bbox to find the nearest table
+
+        Returns:
+            Bbox tuple (x0, y0, x1, y1) or None if no table found
+        """
+        if not PYMUPDF_AVAILABLE or fitz is None:
+            return None
+
+        try:
+            doc = fitz.open(file_path)
+            if page_num < 1 or page_num > len(doc):
+                doc.close()
+                return None
+
+            page = doc[page_num - 1]
+
+            # Use PyMuPDF's table finder
+            tables = page.find_tables()
+
+            if not tables or len(tables.tables) == 0:
+                doc.close()
+                return None
+
+            # If we have a hint bbox, find the closest table
+            if hint_bbox:
+                hint_center_x = (hint_bbox[0] + hint_bbox[2]) / 2
+                hint_center_y = (hint_bbox[1] + hint_bbox[3]) / 2
+
+                best_table = None
+                best_distance = float('inf')
+
+                for table in tables.tables:
+                    table_bbox = table.bbox
+                    table_center_x = (table_bbox[0] + table_bbox[2]) / 2
+                    table_center_y = (table_bbox[1] + table_bbox[3]) / 2
+
+                    distance = ((hint_center_x - table_center_x) ** 2 +
+                               (hint_center_y - table_center_y) ** 2) ** 0.5
+
+                    if distance < best_distance:
+                        best_distance = distance
+                        best_table = table
+
+                if best_table:
+                    doc.close()
+                    return tuple(best_table.bbox)
+
+            # Otherwise return the largest table
+            largest_table = max(tables.tables, key=lambda t: (t.bbox[2] - t.bbox[0]) * (t.bbox[3] - t.bbox[1]))
+            doc.close()
+            return tuple(largest_table.bbox)
+
+        except Exception as e:
+            print(f"[WARN] PyMuPDF table detection failed: {e}")
+            return None
+
     def render_table_as_image(
         self,
         file_path: str,
         page_num: int,
         bbox: Tuple[float, float, float, float],
         dpi: int = 150,
-        padding: int = 10,
+        padding: int = 5,
+        use_pymupdf_detection: bool = True,
     ) -> Optional[str]:
         """
         Render a table region as a base64-encoded PNG image.
@@ -329,9 +533,10 @@ class TableExtractor:
         Args:
             file_path: Path to PDF
             page_num: 1-indexed page number
-            bbox: (x0, y0, x1, y1) bounding box
+            bbox: (x0, y0, x1, y1) bounding box in PDF points
             dpi: Resolution for rendering
-            padding: Extra pixels around the table
+            padding: Extra points around the table (default 5pt, ~1.8mm)
+            use_pymupdf_detection: Try to refine bbox using PyMuPDF table detection
 
         Returns:
             Base64-encoded PNG string, or None if rendering fails
@@ -347,8 +552,10 @@ class TableExtractor:
                 return None
 
             page = doc[page_num - 1]  # 0-indexed
+            page_width = page.rect.width
+            page_height = page.rect.height
 
-            # Create clip rectangle with padding
+            # Get bbox coordinates
             x0, y0, x1, y1 = bbox
 
             # Validate bbox dimensions
@@ -356,11 +563,51 @@ class TableExtractor:
                 doc.close()
                 return self.render_full_page(file_path, page_num, dpi)
 
+            # If bbox seems too large or out of bounds, it might be in wrong coordinate space
+            if x1 > page_width * 1.5 or y1 > page_height * 1.5:
+                print(f"[WARN] Bbox {bbox} seems out of bounds for page size {page_width}x{page_height}")
+                # Try to auto-correct by scaling down (likely pixel coords at ~200 DPI)
+                estimated_dpi = max(x1 / page_width, y1 / page_height) * 72
+                if estimated_dpi > 100:  # Likely in pixel space
+                    scale = 72 / estimated_dpi
+                    x0, y0, x1, y1 = x0 * scale, y0 * scale, x1 * scale, y1 * scale
+                    print(f"[INFO] Auto-corrected bbox to {(x0, y0, x1, y1)}")
+
+            # Optionally try to refine bbox using PyMuPDF's table detection
+            # Only do this if the original bbox seems unreliable (e.g., was auto-corrected)
+            # This is disabled by default as PyMuPDF may find different/smaller tables
+            if use_pymupdf_detection and False:  # Disabled - often finds fragments
+                doc.close()  # Close before calling detection
+                refined_bbox = self._find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
+                if refined_bbox:
+                    # Check if refined bbox is reasonable
+                    orig_area = (x1 - x0) * (y1 - y0)
+                    new_area = (refined_bbox[2] - refined_bbox[0]) * (refined_bbox[3] - refined_bbox[1])
+
+                    # Use refined bbox if it has reasonable dimensions (min 50pt in each direction)
+                    # and is not tiny compared to page
+                    new_width = refined_bbox[2] - refined_bbox[0]
+                    new_height = refined_bbox[3] - refined_bbox[1]
+
+                    if new_width > 50 and new_height > 30:
+                        # Prefer PyMuPDF's detection - it's usually more accurate
+                        # Only reject if the new area is extremely small (<5% of original)
+                        if new_area > orig_area * 0.05 or new_area > 5000:
+                            print(f"[INFO] Refined bbox from {(x0, y0, x1, y1)} to {refined_bbox}")
+                            x0, y0, x1, y1 = refined_bbox
+                        else:
+                            print(f"[INFO] Skipping refined bbox {refined_bbox} - too small")
+
+                # Reopen doc
+                doc = fitz.open(file_path)
+                page = doc[page_num - 1]
+
+            # Create clip rectangle with minimal padding to avoid capturing surrounding text
             clip_rect = fitz.Rect(
                 max(0, x0 - padding),
                 max(0, y0 - padding),
-                min(page.rect.width, x1 + padding),
-                min(page.rect.height, y1 + padding),
+                min(page_width, x1 + padding),
+                min(page_height, y1 + padding),
             )
 
             # Check if clip rect has valid dimensions after clamping
@@ -432,7 +679,7 @@ class TableExtractor:
         file_path: str,
         table_parts: List[Dict[str, Any]],
         dpi: int = 150,
-        padding: int = 10,
+        padding: int = 5,
     ) -> Optional[str]:
         """
         Render a multi-page table by stitching images vertically.
@@ -470,6 +717,9 @@ class TableExtractor:
                 mat = fitz.Matrix(dpi / 72, dpi / 72)
 
                 x0, y0, x1, y1 = bbox
+                page_width = page.rect.width
+                page_height = page.rect.height
+
                 invalid_bbox = (
                     full_page
                     or bbox == (0.0, 0.0, 0.0, 0.0)
@@ -481,12 +731,19 @@ class TableExtractor:
                     # Render full page when bbox is unavailable or invalid
                     pix = page.get_pixmap(matrix=mat)
                 else:
+                    # Auto-correct coordinates if they seem out of bounds
+                    if x1 > page_width * 1.5 or y1 > page_height * 1.5:
+                        estimated_dpi = max(x1 / page_width, y1 / page_height) * 72
+                        if estimated_dpi > 100:
+                            scale = 72 / estimated_dpi
+                            x0, y0, x1, y1 = x0 * scale, y0 * scale, x1 * scale, y1 * scale
+
                     # Render specific table region
                     clip_rect = fitz.Rect(
                         max(0, x0 - padding),
                         max(0, y0 - padding),
-                        min(page.rect.width, x1 + padding),
-                        min(page.rect.height, y1 + padding),
+                        min(page_width, x1 + padding),
+                        min(page_height, y1 + padding),
                     )
                     # Check if clip rect has valid dimensions
                     if clip_rect.width <= 0 or clip_rect.height <= 0:

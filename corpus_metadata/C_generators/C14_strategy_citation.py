@@ -8,7 +8,7 @@ Uses regex patterns to detect citations with identifiers (PMID, PMCID, DOI, NCT,
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set
 
 from A_core.A01_domain_models import Coordinate, EvidenceSpan, ValidationStatus
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
@@ -310,7 +310,6 @@ class CitationDetector:
         longer = max(ctx1, ctx2, key=len)
 
         # Check if significant portion of shorter is in longer
-        overlap_threshold = len(shorter) * 0.5
         for i in range(len(shorter) - 20):
             if shorter[i : i + 20] in longer:
                 return True
