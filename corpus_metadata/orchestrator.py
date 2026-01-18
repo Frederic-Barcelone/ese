@@ -2336,7 +2336,7 @@ Return ONLY the JSON array, nothing else."""
                 print(f"  [WARN] Trial ID extraction failed: {e}")
 
         # Group by field type
-        from A_core.A07_feasibility_models import FeasibilityExportEntry
+        from A_core.A07_feasibility_models import FeasibilityExportEntry, EvidenceExport
 
         study_design_data = None
         operational_burden_data = None
@@ -2347,6 +2347,17 @@ Return ONLY the JSON array, nothing else."""
         patient_journey = []
         endpoints = []
         sites = []
+
+        def _convert_evidence(evidence_list) -> List[EvidenceExport]:
+            """Convert EvidenceSpan list to EvidenceExport list for export."""
+            result = []
+            for ev in (evidence_list or []):
+                result.append(EvidenceExport(
+                    page=ev.page,
+                    quote=ev.quote,
+                    source_node_id=ev.source_node_id,
+                ))
+            return result
 
         for r in results:
             # Handle study design separately (single object, not list)
@@ -2364,21 +2375,29 @@ Return ONLY the JSON array, nothing else."""
                 screening_flow_data = r.screening_flow.model_dump()
                 continue
 
+            # Convert evidence from the candidate
+            evidence_export = _convert_evidence(r.evidence)
+
             entry = FeasibilityExportEntry(
                 field_type=r.field_type.value,
                 text=r.matched_text,
                 section=r.section_name,
+                page=r.page_number,
                 structured_data=None,
                 confidence=r.confidence,
+                evidence=evidence_export,
             )
 
-            # Add structured data based on type
+            # Add structured data based on type, including evidence from nested objects
             if r.eligibility_criterion:
                 entry.structured_data = {
                     "type": r.eligibility_criterion.criterion_type.value,
                     "category": r.eligibility_criterion.category,
                     "derived": r.eligibility_criterion.derived_variables,
                 }
+                # Add evidence from eligibility criterion if not already present
+                if not entry.evidence and r.eligibility_criterion.evidence:
+                    entry.evidence = _convert_evidence(r.eligibility_criterion.evidence)
             elif r.epidemiology_data:
                 entry.structured_data = {
                     "data_type": r.epidemiology_data.data_type,

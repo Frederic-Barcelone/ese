@@ -290,9 +290,21 @@ class TreatmentArm(BaseModel):
     """Treatment arm in a clinical trial."""
 
     name: str  # e.g., "Iptacopan", "Placebo"
+    n: Optional[int] = None  # number randomized to this arm
     dose: Optional[str] = None  # e.g., "200mg"
     frequency: Optional[str] = None  # e.g., "twice daily"
     route: Optional[str] = None  # e.g., "oral"
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class StudyPeriod(BaseModel):
+    """A distinct period/phase within the study design."""
+
+    name: str  # e.g., "double_blind", "open_label", "run_in", "follow_up"
+    duration_months: Optional[float] = None
+    duration_weeks: Optional[int] = None
+    description: Optional[str] = None
 
     model_config = ConfigDict(extra="forbid")
 
@@ -304,11 +316,23 @@ class StudyDesign(BaseModel):
     design_type: Optional[str] = None  # e.g., "parallel", "crossover", "single-arm"
     blinding: Optional[str] = None  # e.g., "double-blind", "open-label"
     randomization_ratio: Optional[str] = None  # e.g., "1:1", "2:1"
+    allocation: Optional[str] = None  # e.g., "iptacopan n=38, placebo n=36"
     sample_size: Optional[int] = None  # Planned enrollment
     actual_enrollment: Optional[int] = None  # Actual enrollment
     duration_months: Optional[int] = None  # Total study duration
     treatment_arms: List[TreatmentArm] = Field(default_factory=list)
     control_type: Optional[str] = None  # e.g., "placebo", "active", "standard of care"
+
+    # Study setting
+    setting: Optional[str] = None  # e.g., "35 hospitals/medical centres in 18 countries"
+    sites_total: Optional[int] = None
+    countries_total: Optional[int] = None
+
+    # Study periods (for complex designs with multiple phases)
+    periods: List[StudyPeriod] = Field(default_factory=list)
+
+    # Evidence
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
 
@@ -323,7 +347,11 @@ class ScreenFailReason(BaseModel):
 
     reason: str
     count: Optional[int] = None
-    percentage: Optional[float] = None
+    # Dual percentage tracking for numeric hygiene
+    percentage_reported: Optional[float] = None  # What the document explicitly states
+    percentage_computed: Optional[float] = None  # Calculated from counts
+    # Overlap flag - critical when participants can fail multiple criteria
+    can_overlap: bool = False  # True if this reason can co-occur with others
     evidence: List[EvidenceSpan] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
@@ -344,13 +372,19 @@ class ScreeningFlow(BaseModel):
     completed: Optional[int] = None
     discontinued: Optional[int] = None
 
-    # Derived metrics
+    # Derived metrics (computed)
     screening_yield: Optional[float] = None  # randomized/screened
-    screen_failure_rate: Optional[float] = None
+    screen_failure_rate: Optional[float] = None  # Legacy - computed value
     dropout_rate: Optional[float] = None
+
+    # Numeric hygiene: distinguish reported vs computed
+    screen_failure_rate_reported: Optional[float] = None  # What document states (e.g., "44%")
+    screen_failure_rate_computed: Optional[float] = None  # Calculated: failures/screened
 
     # Screen failure breakdown - critical for feasibility
     screen_fail_reasons: List[ScreenFailReason] = Field(default_factory=list)
+    # Note: screen fail reasons may overlap (participants can fail multiple criteria)
+    reasons_can_overlap: bool = False  # Set True if document indicates overlap
 
     # Run-in failures (separate from screen failures)
     run_in_failures: Optional[int] = None
@@ -400,35 +434,73 @@ class VaccinationRequirement(BaseModel):
 
 
 class InvasiveProcedure(BaseModel):
-    """Invasive procedure requirement."""
+    """Invasive procedure requirement - distinguishes eligibility vs study procedures."""
 
     name: str  # "renal biopsy", "lumbar puncture", "bone marrow aspirate"
     timing: List[str] = Field(default_factory=list)  # ["screening", "month 6"]
+    timing_days: List[int] = Field(default_factory=list)  # [45, 180] - days from randomization
     optional: bool = False
+    # Purpose distinction - critical for separating eligibility from operational burden
+    purpose: Optional[str] = None  # "diagnosis_confirmation", "efficacy_assessment", "safety_monitoring"
+    is_eligibility_requirement: bool = False  # True if this confirms prior diagnosis (not study procedure)
     evidence: List[EvidenceSpan] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
 
 
+class ScheduledVisit(BaseModel):
+    """A single scheduled visit with phase context."""
+
+    day: int  # relative to randomization (negative = pre-randomization)
+    visit_name: Optional[str] = None  # e.g., "Screening", "Week 2", "Month 6"
+    phase: Optional[str] = None  # "pre_randomization", "double_blind", "open_label", "follow_up"
+    procedures: List[str] = Field(default_factory=list)  # what happens at this visit
+
+    model_config = ConfigDict(extra="forbid")
+
+
 class VisitSchedule(BaseModel):
-    """Trial visit schedule intensity."""
+    """Trial visit schedule intensity with phase-structured visits."""
 
     total_visits: Optional[int] = None
+    # Legacy flat list - kept for backward compatibility
     visit_days: List[int] = Field(default_factory=list)  # days from randomization
     frequency: Optional[str] = None  # "every 4 weeks", "monthly"
     duration_weeks: Optional[int] = None
+
+    # Structured visits with phase information (preferred)
+    scheduled_visits: List[ScheduledVisit] = Field(default_factory=list)
+
+    # Phase-grouped visit days (alternative structure)
+    pre_randomization_days: List[int] = Field(default_factory=list)  # e.g., [-75, -15, 1]
+    on_treatment_days: List[int] = Field(default_factory=list)  # e.g., [14, 30, 90, 180]
+    follow_up_days: List[int] = Field(default_factory=list)
+
     evidence: List[EvidenceSpan] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
 
 
 class BackgroundTherapy(BaseModel):
-    """Background/concomitant therapy requirements."""
+    """Background/concomitant therapy requirements - critical for feasibility."""
 
-    therapy_class: str  # "ACEi/ARB", "immunosuppressant"
-    requirement: str  # "stable dose ≥90 days", "prohibited"
+    therapy_class: str  # "ACEi/ARB", "immunosuppressant", "SGLT2 inhibitors"
+    requirement_type: str  # "allowed", "required", "prohibited"
+    requirement: str  # "stable dose ≥90 days", "prohibited", "required"
     agents: List[str] = Field(default_factory=list)
     stable_duration_days: Optional[int] = None
+    max_dose: Optional[str] = None  # e.g., "≤7.5 mg prednisone equivalent"
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class CentralLabRequirement(BaseModel):
+    """Central laboratory requirement with evidence."""
+
+    required: bool = False
+    analytes: List[str] = Field(default_factory=list)  # ["UPCR", "eGFR", "C3", "sC5b-9"]
+    confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     evidence: List[EvidenceSpan] = Field(default_factory=list)
 
     model_config = ConfigDict(extra="forbid")
@@ -437,21 +509,25 @@ class BackgroundTherapy(BaseModel):
 class OperationalBurden(BaseModel):
     """Operational burden assessment - major feasibility driver."""
 
-    # Invasive procedures
+    # Invasive procedures (study-required, not eligibility confirmation)
     invasive_procedures: List[InvasiveProcedure] = Field(default_factory=list)
 
     # Visit schedule
     visit_schedule: Optional[VisitSchedule] = None
 
-    # Lab/sample handling
-    central_lab_required: bool = False
+    # Lab/sample handling - enhanced with evidence
+    central_lab_required: bool = False  # Legacy boolean for backward compatibility
+    central_lab: Optional[CentralLabRequirement] = None  # Rich model with evidence
     special_sample_handling: List[str] = Field(default_factory=list)  # "frozen samples", "timed collection"
 
     # Vaccinations/prophylaxis
     vaccination_requirements: List[VaccinationRequirement] = Field(default_factory=list)
 
-    # Background therapy
+    # Background/concomitant therapy (legacy field)
     background_therapy: List[BackgroundTherapy] = Field(default_factory=list)
+
+    # Concomitant medications allowed (feasibility-critical)
+    concomitant_meds_allowed: List[BackgroundTherapy] = Field(default_factory=list)
 
     # Run-in requirements
     run_in_duration_days: Optional[int] = None
@@ -607,14 +683,26 @@ class FeasibilityCandidate(BaseModel):
 # -------------------------
 
 
+class EvidenceExport(BaseModel):
+    """Simplified evidence for export - what reviewers need to trust extraction."""
+
+    page: Optional[int] = None
+    quote: Optional[str] = None
+    source_node_id: Optional[str] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
 class FeasibilityExportEntry(BaseModel):
     """Single feasibility entry for export."""
 
     field_type: str
     text: str
     section: Optional[str] = None
+    page: Optional[int] = None  # Page number for quick reference
     structured_data: Optional[Dict[str, Any]] = None
     confidence: float
+    evidence: List[EvidenceExport] = Field(default_factory=list)  # Supporting quotes
 
 
 class FeasibilityExportDocument(BaseModel):

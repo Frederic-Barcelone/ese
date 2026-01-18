@@ -77,19 +77,34 @@ Return JSON with these fields (use null if not found):
     "design_type": "parallel" or "crossover" or "single-arm" or null,
     "blinding": "double-blind" or "single-blind" or "open-label" or null,
     "randomization_ratio": "1:1" or "2:1" or null,
+    "allocation": "iptacopan n=38, placebo n=36" (describe how participants were allocated to arms),
     "sample_size": integer or null (planned enrollment),
     "actual_enrollment": integer or null (actual number randomized),
     "duration_months": integer or null (total study duration),
     "treatment_arms": [
-        {"name": "Drug name", "dose": "200mg", "frequency": "twice daily", "route": "oral"},
-        {"name": "Placebo", "dose": null}
+        {"name": "Drug name", "n": 38, "dose": "200mg", "frequency": "twice daily", "route": "oral"},
+        {"name": "Placebo", "n": 36, "dose": null}
     ],
-    "control_type": "placebo" or "active" or "standard of care" or null
+    "control_type": "placebo" or "active" or "standard of care" or null,
+    "setting": "35 hospitals/medical centres in 18 countries" (study setting description),
+    "sites_total": integer or null,
+    "countries_total": integer or null,
+    "periods": [
+        {"name": "double_blind", "duration_months": 6},
+        {"name": "open_label", "duration_months": 6}
+    ],
+    "evidence": [
+        {"page": integer or null, "quote": "exact text supporting this extraction"}
+    ]
 }
 
 IMPORTANT for phase: Look for "phase 2" or "phase 3" in the study title, abstract, or methods.
 If the document mentions both phases (e.g., reporting phase 2 results while discussing phase 3 plans),
 extract the phase of THIS study being reported, not future planned phases.
+
+IMPORTANT: Extract n (number randomized) for each treatment arm if available.
+IMPORTANT: Extract study periods - many trials have distinct phases (e.g., double-blind + open-label extension).
+IMPORTANT: Include evidence quotes with page numbers where possible.
 
 Focus on extracting ACTUAL values from the text. Return JSON only."""
 
@@ -180,24 +195,37 @@ This is CRITICAL for feasibility assessment. Look for:
 - Visit schedule intensity (number of visits, frequency)
 - Vaccination/prophylaxis requirements
 - Background therapy requirements (stable dose requirements)
+- Concomitant medications allowed (SGLT2 inhibitors, immunosuppressants, etc.)
 - Run-in period requirements
 - Special sample handling requirements
+- Central laboratory requirements
 
 Return:
 {
     "invasive_procedures": [
         {
             "name": "renal biopsy" or "bone marrow aspirate" etc,
-            "timing": ["screening", "month 6"] or ["baseline"],
+            "timing": ["screening day 45", "month 6"] or ["baseline"],
+            "timing_days": [45, 180] (days relative to randomization, negative for pre-randomization),
             "optional": false,
+            "purpose": "diagnosis_confirmation" | "efficacy_assessment" | "safety_monitoring",
+            "is_eligibility_requirement": true (if this confirms prior diagnosis, not a study procedure),
             "quote": "exact text from document describing this requirement"
         }
     ],
     "visit_schedule": {
         "total_visits": integer or null,
-        "visit_days": [1, 14, 28, 56, 84, ...] or null,
+        "visit_days": [1, 14, 28, 56, 84, ...] or null (legacy flat list),
         "frequency": "every 4 weeks" or "monthly" etc,
-        "duration_weeks": integer or null
+        "duration_weeks": integer or null,
+        "pre_randomization_days": [-75, -15, 1] (days before/at randomization),
+        "on_treatment_days": [14, 30, 90, 180] (scheduled on-treatment visits),
+        "follow_up_days": [210, 270, 360] (post-treatment or open-label visits),
+        "scheduled_visits": [
+            {"day": 14, "visit_name": "Week 2", "phase": "double_blind"},
+            {"day": 180, "visit_name": "Month 6", "phase": "double_blind"},
+            {"day": 360, "visit_name": "Month 12", "phase": "open_label"}
+        ]
     },
     "vaccination_requirements": [
         {
@@ -210,22 +238,40 @@ Return:
     "background_therapy": [
         {
             "therapy_class": "ACE inhibitor/ARB" or "immunosuppressant" etc,
+            "requirement_type": "required" | "allowed" | "prohibited",
             "requirement": "stable dose ≥90 days" or "prohibited",
             "agents": ["lisinopril", "losartan"] or [],
             "stable_duration_days": 90 or null,
+            "max_dose": "≤7.5 mg prednisone equivalent" or null,
+            "quote": "exact text"
+        }
+    ],
+    "concomitant_meds_allowed": [
+        {
+            "therapy_class": "SGLT2 inhibitors",
+            "requirement_type": "allowed",
+            "stable_duration_days": 90,
             "quote": "exact text"
         }
     ],
     "run_in_duration_days": integer or null,
     "run_in_requirements": ["list of run-in requirements"],
     "central_lab_required": true/false,
+    "central_lab": {
+        "required": true/false,
+        "analytes": ["UPCR", "eGFR", "serum C3", "sC5b-9"],
+        "quote": "exact text mentioning central laboratory"
+    },
     "special_sample_handling": ["frozen samples", "timed urine collection"] or [],
     "hard_gates": ["biopsy requirement", "vaccination", "rare lab threshold"] - criteria most likely to limit enrollment
 }
 
 IMPORTANT:
-- Include EXACT quotes from the document for each procedure/requirement
-- Focus on requirements that create patient burden or site complexity
+- Include EXACT quotes from the document for each procedure/requirement WITH PAGE NUMBERS if visible
+- Distinguish "diagnosis confirmation" biopsies (eligibility) from "study-required" biopsies (operational burden)
+- For visit schedule, distinguish pre-randomization visits from on-treatment visits
+- For concomitant meds, extract what's ALLOWED (affects who qualifies and SOC background)
+- For central lab, cite evidence if the document mentions central laboratory assessment
 - Hard gates are the top 3-5 criteria most likely to exclude patients
 
 Return JSON only."""
@@ -236,7 +282,7 @@ SCREENING_FLOW_PROMPT = """Extract CONSORT flow and screening information from t
 Look for:
 - Patient disposition or CONSORT flow diagram data
 - "X patients screened", "Y randomized", "Z completed"
-- Screen failure reasons and counts
+- Screen failure reasons and counts (often in trial profile/CONSORT figures)
 - Discontinuation reasons
 
 Return:
@@ -248,12 +294,18 @@ Return:
     "treated": integer or null,
     "completed": integer or null,
     "discontinued": integer or null,
+    "screen_failure_rate_reported": float or null (percentage stated in document, e.g., 44 for "44%"),
+    "screen_failure_rate_computed": float or null (computed: screen_failures / screened * 100),
+    "reasons_can_overlap": true/false (set true if document indicates participants could fail multiple criteria),
     "screen_fail_reasons": [
         {
-            "reason": "Did not meet inclusion criteria" or "eGFR too low" etc,
+            "reason": "Did not meet serum C3 criterion" or "UPCR threshold not met" etc,
             "count": integer or null,
-            "percentage": float or null,
-            "quote": "exact text if available"
+            "percentage_reported": float or null (what document explicitly states),
+            "percentage_computed": float or null (calculated from count/total),
+            "can_overlap": true (if this reason can co-occur with others),
+            "quote": "exact text if available",
+            "page": integer or null
         }
     ],
     "discontinuation_reasons": [
@@ -263,13 +315,19 @@ Return:
         }
     ],
     "run_in_failures": integer or null,
-    "run_in_failure_reasons": ["list of reasons"] or []
+    "run_in_failure_reasons": ["list of reasons"] or [],
+    "evidence": [
+        {"page": integer or null, "quote": "exact text supporting these numbers"}
+    ]
 }
 
 IMPORTANT:
-- Extract ALL screen failure reasons if listed (often in supplementary tables or figures)
+- Extract ALL screen failure reasons if listed (often in supplementary tables, figures, or footnotes)
 - Screen failure breakdown is critical for feasibility - helps predict enrollment difficulty
-- Include exact quotes where possible
+- Look for specific gate failures: serum C3, UPCR, eGFR, biopsy confirmation, etc.
+- If document says "some participants had >1 reason", set reasons_can_overlap: true and can_overlap: true on each reason
+- Distinguish percentage_reported (what document says, e.g., "58 (44%)") from percentage_computed
+- Include page numbers in evidence where visible
 
 Return JSON only."""
 
@@ -489,9 +547,31 @@ class LLMFeasibilityExtractor:
             if isinstance(arm_data, dict) and arm_data.get("name"):
                 arms.append(TreatmentArm(
                     name=arm_data["name"],
+                    n=arm_data.get("n"),
                     dose=arm_data.get("dose"),
                     frequency=arm_data.get("frequency"),
                     route=arm_data.get("route"),
+                ))
+
+        # Parse study periods
+        from A_core.A07_feasibility_models import StudyPeriod
+        periods = []
+        for period_data in (response.get("periods") or []):
+            if isinstance(period_data, dict) and period_data.get("name"):
+                periods.append(StudyPeriod(
+                    name=period_data["name"],
+                    duration_months=period_data.get("duration_months"),
+                    duration_weeks=period_data.get("duration_weeks"),
+                    description=period_data.get("description"),
+                ))
+
+        # Parse evidence
+        evidence = []
+        for ev_data in (response.get("evidence") or []):
+            if isinstance(ev_data, dict) and ev_data.get("quote"):
+                evidence.append(EvidenceSpan(
+                    page=ev_data.get("page"),
+                    quote=ev_data["quote"],
                 ))
 
         study_design = StudyDesign(
@@ -499,11 +579,17 @@ class LLMFeasibilityExtractor:
             design_type=response.get("design_type"),
             blinding=response.get("blinding"),
             randomization_ratio=response.get("randomization_ratio"),
+            allocation=response.get("allocation"),
             sample_size=response.get("sample_size"),
             actual_enrollment=response.get("actual_enrollment"),
             duration_months=response.get("duration_months"),
             treatment_arms=arms,
             control_type=response.get("control_type"),
+            setting=response.get("setting"),
+            sites_total=response.get("sites_total"),
+            countries_total=response.get("countries_total"),
+            periods=periods,
+            evidence=evidence,
         )
 
         # Only return if we have meaningful data
@@ -727,29 +813,51 @@ class LLMFeasibilityExtractor:
 
         candidates = []
 
-        # Parse invasive procedures
+        # Parse invasive procedures with enhanced fields
         procedures = []
         for proc_data in (response.get("invasive_procedures") or []):
             if isinstance(proc_data, dict) and proc_data.get("name"):
                 evidence = []
                 if proc_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=proc_data["quote"]))
+                    evidence.append(EvidenceSpan(
+                        quote=proc_data["quote"],
+                        page=proc_data.get("page"),
+                    ))
                 procedures.append(InvasiveProcedure(
                     name=proc_data["name"],
                     timing=proc_data.get("timing", []),
+                    timing_days=proc_data.get("timing_days", []),
                     optional=proc_data.get("optional", False),
+                    purpose=proc_data.get("purpose"),
+                    is_eligibility_requirement=proc_data.get("is_eligibility_requirement", False),
                     evidence=evidence,
                 ))
 
-        # Parse visit schedule
+        # Parse visit schedule with phase-structured visits
+        from A_core.A07_feasibility_models import ScheduledVisit
         visit_data = response.get("visit_schedule") or {}
         visit_schedule = None
         if visit_data:
+            # Parse scheduled visits with phase information
+            scheduled_visits = []
+            for sv_data in (visit_data.get("scheduled_visits") or []):
+                if isinstance(sv_data, dict) and sv_data.get("day") is not None:
+                    scheduled_visits.append(ScheduledVisit(
+                        day=sv_data["day"],
+                        visit_name=sv_data.get("visit_name"),
+                        phase=sv_data.get("phase"),
+                        procedures=sv_data.get("procedures", []),
+                    ))
+
             visit_schedule = VisitSchedule(
                 total_visits=visit_data.get("total_visits"),
                 visit_days=visit_data.get("visit_days", []),
                 frequency=visit_data.get("frequency"),
                 duration_weeks=visit_data.get("duration_weeks"),
+                scheduled_visits=scheduled_visits,
+                pre_randomization_days=visit_data.get("pre_randomization_days", []),
+                on_treatment_days=visit_data.get("on_treatment_days", []),
+                follow_up_days=visit_data.get("follow_up_days", []),
             )
 
         # Parse vaccination requirements
@@ -766,7 +874,7 @@ class LLMFeasibilityExtractor:
                     evidence=evidence,
                 ))
 
-        # Parse background therapy
+        # Parse background therapy with requirement_type
         bg_therapy = []
         for bg_data in (response.get("background_therapy") or []):
             if isinstance(bg_data, dict) and bg_data.get("therapy_class"):
@@ -775,11 +883,45 @@ class LLMFeasibilityExtractor:
                     evidence.append(EvidenceSpan(quote=bg_data["quote"]))
                 bg_therapy.append(BackgroundTherapy(
                     therapy_class=bg_data["therapy_class"],
+                    requirement_type=bg_data.get("requirement_type", "allowed"),
                     requirement=bg_data.get("requirement", ""),
                     agents=bg_data.get("agents", []),
                     stable_duration_days=bg_data.get("stable_duration_days"),
+                    max_dose=bg_data.get("max_dose"),
                     evidence=evidence,
                 ))
+
+        # Parse concomitant meds allowed (feasibility-critical)
+        concomitant_allowed = []
+        for cm_data in (response.get("concomitant_meds_allowed") or []):
+            if isinstance(cm_data, dict) and cm_data.get("therapy_class"):
+                evidence = []
+                if cm_data.get("quote"):
+                    evidence.append(EvidenceSpan(quote=cm_data["quote"]))
+                concomitant_allowed.append(BackgroundTherapy(
+                    therapy_class=cm_data["therapy_class"],
+                    requirement_type="allowed",
+                    requirement=cm_data.get("requirement", "allowed"),
+                    agents=cm_data.get("agents", []),
+                    stable_duration_days=cm_data.get("stable_duration_days"),
+                    max_dose=cm_data.get("max_dose"),
+                    evidence=evidence,
+                ))
+
+        # Parse central lab requirement with evidence
+        from A_core.A07_feasibility_models import CentralLabRequirement
+        central_lab = None
+        central_lab_data = response.get("central_lab")
+        if isinstance(central_lab_data, dict):
+            evidence = []
+            if central_lab_data.get("quote"):
+                evidence.append(EvidenceSpan(quote=central_lab_data["quote"]))
+            central_lab = CentralLabRequirement(
+                required=central_lab_data.get("required", False),
+                analytes=central_lab_data.get("analytes", []),
+                confidence=0.8 if evidence else 0.5,
+                evidence=evidence,
+            )
 
         # Build OperationalBurden
         burden = OperationalBurden(
@@ -787,18 +929,20 @@ class LLMFeasibilityExtractor:
             visit_schedule=visit_schedule,
             vaccination_requirements=vaccinations,
             background_therapy=bg_therapy,
+            concomitant_meds_allowed=concomitant_allowed,
             run_in_duration_days=response.get("run_in_duration_days"),
             run_in_requirements=response.get("run_in_requirements", []),
             central_lab_required=response.get("central_lab_required", False),
+            central_lab=central_lab,
             special_sample_handling=response.get("special_sample_handling", []),
             hard_gates=response.get("hard_gates", []),
         )
 
         # Only return if we have meaningful data
         has_data = (
-            procedures or vaccinations or bg_therapy or
+            procedures or vaccinations or bg_therapy or concomitant_allowed or
             visit_schedule or burden.run_in_duration_days or
-            burden.hard_gates
+            burden.hard_gates or central_lab
         )
         if not has_data:
             return []
@@ -845,17 +989,22 @@ class LLMFeasibilityExtractor:
         if not response:
             return []
 
-        # Parse screen fail reasons
+        # Parse screen fail reasons with enhanced fields (overlap, dual percentages)
         screen_fail_reasons = []
         for sfr_data in (response.get("screen_fail_reasons") or []):
             if isinstance(sfr_data, dict) and sfr_data.get("reason"):
                 evidence = []
                 if sfr_data.get("quote"):
-                    evidence.append(EvidenceSpan(quote=sfr_data["quote"]))
+                    evidence.append(EvidenceSpan(
+                        quote=sfr_data["quote"],
+                        page=sfr_data.get("page"),
+                    ))
                 screen_fail_reasons.append(ScreenFailReason(
                     reason=sfr_data["reason"],
                     count=sfr_data.get("count"),
-                    percentage=sfr_data.get("percentage"),
+                    percentage_reported=sfr_data.get("percentage_reported") or sfr_data.get("percentage"),
+                    percentage_computed=sfr_data.get("percentage_computed"),
+                    can_overlap=sfr_data.get("can_overlap", False),
                     evidence=evidence,
                 ))
 
@@ -866,17 +1015,26 @@ class LLMFeasibilityExtractor:
         discontinued = response.get("discontinued")
 
         screening_yield = None
-        screen_failure_rate = None
+        screen_failure_rate_computed = None
         dropout_rate = None
 
         if screened and randomized and screened > 0:
-            screening_yield = round(randomized / screened, 3)
+            screening_yield = round(randomized / screened, 4)
         if screened and screen_failures and screened > 0:
-            screen_failure_rate = round(screen_failures / screened, 3)
+            screen_failure_rate_computed = round(screen_failures / screened * 100, 2)
         if randomized and discontinued and randomized > 0:
-            dropout_rate = round(discontinued / randomized, 3)
+            dropout_rate = round(discontinued / randomized, 4)
 
-        # Build ScreeningFlow
+        # Parse evidence
+        evidence = []
+        for ev_data in (response.get("evidence") or []):
+            if isinstance(ev_data, dict) and ev_data.get("quote"):
+                evidence.append(EvidenceSpan(
+                    page=ev_data.get("page"),
+                    quote=ev_data["quote"],
+                ))
+
+        # Build ScreeningFlow with enhanced fields
         flow = ScreeningFlow(
             planned_sample_size=response.get("planned_sample_size"),
             actual_enrollment=randomized,
@@ -887,15 +1045,19 @@ class LLMFeasibilityExtractor:
             completed=response.get("completed"),
             discontinued=discontinued,
             screening_yield=screening_yield,
-            screen_failure_rate=screen_failure_rate,
+            screen_failure_rate=screen_failure_rate_computed,  # Legacy field
+            screen_failure_rate_reported=response.get("screen_failure_rate_reported"),
+            screen_failure_rate_computed=screen_failure_rate_computed,
             dropout_rate=dropout_rate,
             screen_fail_reasons=screen_fail_reasons,
+            reasons_can_overlap=response.get("reasons_can_overlap", False),
             run_in_failures=response.get("run_in_failures"),
             run_in_failure_reasons=[
                 ScreenFailReason(reason=r)
                 for r in (response.get("run_in_failure_reasons") or [])
                 if r
             ],
+            evidence=evidence,
         )
 
         # Only return if we have meaningful data
