@@ -637,5 +637,9 @@ class FeasibilityExportDocument(BaseModel):
     endpoints: List[FeasibilityExportEntry] = Field(default_factory=list)
     sites: List[FeasibilityExportEntry] = Field(default_factory=list)
 
+    # Operational feasibility data (single structured objects)
+    operational_burden: Optional[Dict[str, Any]] = None
+    screening_flow: Optional[Dict[str, Any]] = None
+
     # Metadata
     extraction_timestamp: datetime = Field(default_factory=datetime.utcnow)

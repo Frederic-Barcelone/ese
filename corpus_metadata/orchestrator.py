@@ -2335,6 +2335,8 @@ Return ONLY the JSON array, nothing else."""
         from A_core.A07_feasibility_models import FeasibilityExportEntry
 
         study_design_data = None
+        operational_burden_data = None
+        screening_flow_data = None
         eligibility_inclusion = []
         eligibility_exclusion = []
         epidemiology = []
@@ -2346,6 +2348,16 @@ Return ONLY the JSON array, nothing else."""
             # Handle study design separately (single object, not list)
             if r.field_type.value == "STUDY_DESIGN" and r.study_design:
                 study_design_data = r.study_design.model_dump()
+                continue
+
+            # Handle operational burden (single object)
+            if r.field_type.value == "OPERATIONAL_BURDEN" and r.operational_burden:
+                operational_burden_data = r.operational_burden.model_dump()
+                continue
+
+            # Handle screening flow (single object)
+            if r.field_type.value == "SCREENING_FLOW" and r.screening_flow:
+                screening_flow_data = r.screening_flow.model_dump()
                 continue
 
             entry = FeasibilityExportEntry(
@@ -2414,6 +2426,8 @@ Return ONLY the JSON array, nothing else."""
             patient_journey=patient_journey,
             endpoints=endpoints,
             sites=sites,
+            operational_burden=operational_burden_data,
+            screening_flow=screening_flow_data,
         )
 
         # Write to file
