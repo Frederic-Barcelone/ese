@@ -2583,6 +2583,7 @@ Return ONLY the JSON array, nothing else."""
                     page=ev.page,
                     quote=ev.quote,
                     source_node_id=ev.source_node_id,
+                    source_doc_id=ev.source_doc_id,
                 ))
             return result
 

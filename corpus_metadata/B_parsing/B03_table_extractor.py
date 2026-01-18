@@ -487,6 +487,8 @@ class TableExtractor:
                 return None
 
             page = doc[page_num - 1]
+            page_width = page.rect.width
+            page_height = page.rect.height
 
             # Use PyMuPDF's table finder
             tables = page.find_tables()
@@ -497,8 +499,28 @@ class TableExtractor:
 
             # If we have a hint bbox, find the closest table
             if hint_bbox:
-                hint_center_x = (hint_bbox[0] + hint_bbox[2]) / 2
-                hint_center_y = (hint_bbox[1] + hint_bbox[3]) / 2
+                # Check if hint_bbox is in a different coordinate space
+                hint_out_of_bounds = (
+                    hint_bbox[2] > page_width * 1.5 or
+                    hint_bbox[3] > page_height * 1.5
+                )
+
+                if hint_out_of_bounds:
+                    # Hint bbox is in different coordinate space - scale it
+                    scale_x = page_width / max(hint_bbox[2], page_width)
+                    scale_y = page_height / max(hint_bbox[3], page_height)
+                    scale = min(scale_x, scale_y)
+                    scaled_hint = (
+                        hint_bbox[0] * scale,
+                        hint_bbox[1] * scale,
+                        hint_bbox[2] * scale,
+                        hint_bbox[3] * scale,
+                    )
+                    hint_center_x = (scaled_hint[0] + scaled_hint[2]) / 2
+                    hint_center_y = (scaled_hint[1] + scaled_hint[3]) / 2
+                else:
+                    hint_center_x = (hint_bbox[0] + hint_bbox[2]) / 2
+                    hint_center_y = (hint_bbox[1] + hint_bbox[3]) / 2
 
                 best_table = None
                 best_distance = float('inf')

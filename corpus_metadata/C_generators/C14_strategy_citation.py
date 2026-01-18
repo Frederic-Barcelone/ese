@@ -61,6 +61,11 @@ class CitationDetector:
     # NCT pattern for filtering false PMID matches
     NCT_NUMBER_PATTERN = re.compile(r"NCT\s*(\d{8})", re.IGNORECASE)
 
+    # Pattern to fix broken DOIs (line breaks in PDF extraction can split DOIs)
+    BROKEN_DOI_PATTERN = re.compile(
+        r"(10\.\d{4,9}/)\s+(\S+)",  # DOI prefix, whitespace, then continuation
+    )
+
     # Reference section header patterns
     REFERENCE_SECTION_PATTERNS = [
         re.compile(r"^References?\s*$", re.IGNORECASE | re.MULTILINE),
@@ -80,6 +85,17 @@ class CitationDetector:
         self.pipeline_version = (
             self.config.get("pipeline_version") or get_git_revision_hash()
         )
+
+    def _normalize_broken_dois(self, text: str) -> str:
+        """
+        Fix DOIs that are broken by line breaks in PDF text extraction.
+
+        PDF extraction can introduce line breaks/spaces within DOIs, e.g.:
+        "10.1016/ S0140-6736(25)01148-1" should become "10.1016/S0140-6736(25)01148-1"
+        """
+        # Pattern: DOI registrant code (10.xxxx/) followed by whitespace then suffix
+        # This catches cases like "10.1016/ S0140" and rejoins them
+        return self.BROKEN_DOI_PATTERN.sub(r"\1\2", text)
 
     def detect(
         self,
@@ -113,6 +129,10 @@ class CitationDetector:
 
         if not full_text:
             return candidates
+
+        # Preprocess: Fix broken DOIs (line breaks in PDF extraction can split DOIs)
+        # E.g., "10.1016/ S0140-6736(25)01148-1" -> "10.1016/S0140-6736(25)01148-1"
+        full_text = self._normalize_broken_dois(full_text)
 
         # Detect each identifier type
         for id_type, patterns in self.CITATION_PATTERNS.items():
