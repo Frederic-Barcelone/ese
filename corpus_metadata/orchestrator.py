@@ -1662,6 +1662,10 @@ Return ONLY the JSON array, nothing else."""
         if doc is not None:
             self._export_images(pdf_path_obj, doc)
 
+        # Export tables as images
+        if doc is not None:
+            self._export_tables(pdf_path_obj, doc)
+
         # Export document metadata
         if doc_metadata:
             self._export_document_metadata(pdf_path_obj, doc_metadata)
@@ -2554,6 +2558,77 @@ Return ONLY the JSON array, nothing else."""
         saved_count = sum(1 for img in export_data["images"] if "saved_file" in img)
         analyzed_count = sum(1 for img in export_data["images"] if "vision_analysis" in img)
         print(f"  Images export: {out_file.name} ({len(images)} images, {saved_count} saved, {analyzed_count} analyzed)")
+
+    def _export_tables(
+        self, pdf_path: Path, doc: "DocumentGraph"
+    ) -> None:
+        """Export extracted tables as images to JSON file."""
+        from B_parsing.B02_doc_graph import TableType
+
+        # Collect all tables with images
+        tables = [t for t in doc.iter_tables() if t.image_base64]
+        if not tables:
+            return
+
+        out_dir = self._get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Build export data
+        export_data = {
+            "doc_id": pdf_path.stem,
+            "doc_filename": pdf_path.name,
+            "total_tables": len(tables),
+            "tables": []
+        }
+
+        for idx, table in enumerate(tables):
+            # Determine page number(s)
+            if table.is_multipage and table.page_nums:
+                page_str = f"pages{table.page_nums[0]}-{table.page_nums[-1]}"
+                page_num = table.page_nums[0]
+            else:
+                page_str = f"page{table.page_num}"
+                page_num = table.page_num
+
+            # Calculate row/col counts from cells or logical_rows
+            num_rows = len(table.logical_rows) if table.logical_rows else 0
+            num_cols = len(table.logical_rows[0]) if table.logical_rows else 0
+
+            table_data = {
+                "page": page_num,
+                "page_nums": table.page_nums if table.is_multipage else [table.page_num],
+                "is_multipage": table.is_multipage,
+                "type": table.table_type.value if table.table_type else "UNKNOWN",
+                "caption": table.caption,
+                "rows": num_rows,
+                "cols": num_cols,
+                "bbox": list(table.bbox.coords) if table.bbox else None,
+                "image_base64": table.image_base64,
+            }
+
+            # Save table image as file
+            if table.image_base64:
+                table_type = table.table_type.value.lower() if table.table_type else "table"
+                img_filename = f"{pdf_path.stem}_table_{table_type}_{page_str}_{idx + 1}.png"
+                img_path = out_dir / img_filename
+                try:
+                    img_bytes = base64.b64decode(table.image_base64)
+                    with open(img_path, "wb") as img_file:
+                        img_file.write(img_bytes)
+                    table_data["saved_file"] = img_filename
+                except Exception as e:
+                    print(f"    [WARN] Failed to save table image {img_filename}: {e}")
+
+            export_data["tables"].append(table_data)
+
+        # Write JSON metadata
+        out_file = out_dir / f"tables_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            import json
+            json.dump(export_data, f, indent=2)
+
+        saved_count = sum(1 for t in export_data["tables"] if "saved_file" in t)
+        print(f"  Tables export: {out_file.name} ({len(tables)} tables, {saved_count} saved)")
 
     # =========================================================================
     # DOCUMENT METADATA METHODS
