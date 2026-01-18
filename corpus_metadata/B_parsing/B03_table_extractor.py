@@ -556,7 +556,7 @@ class TableExtractor:
         page_num: int,
         bbox: Tuple[float, float, float, float],
         dpi: int = 150,
-        padding: int = 5,
+        padding: int = 15,
         use_pymupdf_detection: bool = True,
     ) -> Optional[str]:
         """
@@ -567,7 +567,7 @@ class TableExtractor:
             page_num: 1-indexed page number
             bbox: (x0, y0, x1, y1) bounding box in PDF points
             dpi: Resolution for rendering
-            padding: Extra points around the table (default 5pt, ~1.8mm)
+            padding: Extra points around the table (default 15pt, ~5mm)
             use_pymupdf_detection: Try to refine bbox using PyMuPDF table detection
 
         Returns:
@@ -610,20 +610,36 @@ class TableExtractor:
                     print(f"[INFO] Using PyMuPDF detected bbox: {pymupdf_bbox}")
                 else:
                     # Fallback: scale coordinates from pixel space to PDF point space
-                    # Calculate scale factors based on the ratio
-                    scale_x = page_width / max(x1, page_width)
-                    scale_y = page_height / max(y1, page_height)
-                    scale = min(scale_x, scale_y)
+                    # Calculate the DPI ratio - Unstructured typically uses 200-300 DPI
+                    max_coord = max(x1, y1)
+                    max_page = max(page_width, page_height)
+                    dpi_ratio = max_page / max_coord  # Approximate scale factor
 
-                    x0, y0, x1, y1 = x0 * scale, y0 * scale, x1 * scale, y1 * scale
+                    x0_scaled = x0 * dpi_ratio
+                    y0_scaled = y0 * dpi_ratio
+                    x1_scaled = x1 * dpi_ratio
+                    y1_scaled = y1 * dpi_ratio
 
-                    # Expand slightly to ensure we capture the full table
-                    expand = 20  # points
-                    x0 = max(0, x0 - expand)
-                    y0 = max(0, y0 - expand)
-                    x1 = min(page_width, x1 + expand)
-                    y1 = min(page_height, y1 + expand)
-                    print(f"[INFO] Scaled and expanded bbox to {(x0, y0, x1, y1)}")
+                    # Calculate table dimensions after scaling
+                    table_width = x1_scaled - x0_scaled
+                    table_height = y1_scaled - y0_scaled
+
+                    # Be very generous with expansion - 30% of table size on each side
+                    # minimum 40 points, capped at 100 points
+                    expand_x = max(40, min(100, table_width * 0.3))
+                    expand_y = max(40, min(100, table_height * 0.3))
+
+                    x0 = max(0, x0_scaled - expand_x)
+                    y0 = max(0, y0_scaled - expand_y)
+                    x1 = min(page_width, x1_scaled + expand_x)
+                    y1 = min(page_height, y1_scaled + expand_y)
+                    print(f"[INFO] Scaled bbox with generous margins: {(x0, y0, x1, y1)}")
+
+                    # Sanity check: if scaled table is suspiciously small, render full page
+                    if (x1 - x0) < 100 or (y1 - y0) < 50:
+                        print(f"[WARN] Scaled bbox too small, rendering full page")
+                        doc.close()
+                        return self.render_full_page(file_path, page_num, dpi)
 
             # Optionally try to refine bbox using PyMuPDF's table detection
             # Only do this if the original bbox seems unreliable (e.g., was auto-corrected)
