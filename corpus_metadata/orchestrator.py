@@ -136,6 +136,7 @@ from C_generators.C08_strategy_feasibility import FeasibilityDetector
 from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
+from C_generators.C15_vlm_table_extractor import VLMTableExtractor
 from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument, TrialIdentifier
 from C_generators.C00_strategy_identifiers import IdentifierExtractor, IdentifierType
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
@@ -485,6 +486,22 @@ class Orchestrator:
         else:
             self.claude_client = None
             self.llm_engine = None
+
+        # VLM Table Extractor (uses Claude Vision for better table extraction)
+        self.use_vlm_tables = self.config.get("table_extraction", {}).get("use_vlm", True)
+        if self.use_vlm_tables and self.claude_client:
+            self.vlm_table_extractor = VLMTableExtractor(
+                llm_client=self.claude_client,
+                llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
+                config={"run_id": self.run_id},
+            )
+            print(f"  VLM table extraction: ENABLED")
+        else:
+            self.vlm_table_extractor = None
+            if self.use_vlm_tables:
+                print(f"  VLM table extraction: DISABLED (no LLM client)")
+            else:
+                print(f"  VLM table extraction: DISABLED (config)")
 
         # Logger
         self.logger = ValidationLogger(log_dir=str(self.log_dir), run_id=self.run_id)
@@ -836,7 +853,15 @@ class Orchestrator:
         output_dir = self._get_output_dir(pdf_path)
 
         doc = self.parser.parse(str(pdf_path), image_output_dir=str(output_dir))
-        doc = self.table_extractor.populate_document_graph(doc, str(pdf_path))
+
+        # Extract tables with VLM if available (300 DPI for optimal VLM reading)
+        doc = self.table_extractor.populate_document_graph(
+            doc,
+            str(pdf_path),
+            render_images=True,
+            use_vlm=self.use_vlm_tables and self.vlm_table_extractor is not None,
+            vlm_extractor=self.vlm_table_extractor,
+        )
 
         total_blocks = sum(len(p.blocks) for p in doc.pages.values())
         total_tables = sum(len(p.tables) for p in doc.pages.values())

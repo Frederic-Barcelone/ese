@@ -234,6 +234,9 @@ class TableExtractor:
 
         Unstructured's hi_res mode returns coordinates in pixel space (at ~200 DPI).
         We need to convert to PDF point space (72 DPI) for PyMuPDF rendering.
+
+        If layout_width/layout_height are not available, we detect pixel-space
+        coordinates by checking if they exceed PDF page dimensions and scale accordingly.
         """
         coords = getattr(md, "coordinates", None)
         if not coords:
@@ -249,29 +252,55 @@ class TableExtractor:
             x0, y0, x1, y1 = min(xs), min(ys), max(xs), max(ys)
 
             # Get coordinate system info from Unstructured metadata
-            _system = getattr(coords, "system", None)  # noqa: F841 - reserved for future use
             layout_width = getattr(coords, "layout_width", None)
             layout_height = getattr(coords, "layout_height", None)
 
-            # If we have layout dimensions, convert from pixel space to PDF space
-            if layout_width and layout_height and file_path:
+            # Always try to convert coordinates to PDF space
+            if file_path and PYMUPDF_AVAILABLE and fitz is not None:
                 try:
-                    if PYMUPDF_AVAILABLE and fitz is not None:
-                        doc = fitz.open(file_path)
-                        if 0 < page_num <= len(doc):
-                            page = doc[page_num - 1]
-                            pdf_width = page.rect.width
-                            pdf_height = page.rect.height
+                    doc = fitz.open(file_path)
+                    if 0 < page_num <= len(doc):
+                        page = doc[page_num - 1]
+                        pdf_width = page.rect.width
+                        pdf_height = page.rect.height
 
-                            # Scale coordinates from pixel space to PDF space
+                        # Determine if we need to scale coordinates
+                        # If layout dimensions provided, use them
+                        if layout_width and layout_height:
                             scale_x = pdf_width / layout_width
                             scale_y = pdf_height / layout_height
+                        else:
+                            # No layout dimensions - check if coords are in pixel space
+                            # by seeing if they exceed PDF page dimensions
+                            max_coord = max(x1, y1)
+                            max_page = max(pdf_width, pdf_height)
 
-                            x0 = x0 * scale_x
-                            y0 = y0 * scale_y
-                            x1 = x1 * scale_x
-                            y1 = y1 * scale_y
-                        doc.close()
+                            if max_coord > max_page * 1.1:  # Coords are in pixel space
+                                # Estimate scale based on typical Unstructured DPI (~200)
+                                # Unstructured renders at 200 DPI, PDF is 72 DPI
+                                # So pixel_coord * (72/200) = pdf_coord
+                                estimated_dpi = 200
+                                scale = 72.0 / estimated_dpi
+                                scale_x = scale
+                                scale_y = scale
+                            else:
+                                # Coords already in PDF space
+                                scale_x = 1.0
+                                scale_y = 1.0
+
+                        # Apply scaling
+                        x0 = x0 * scale_x
+                        y0 = y0 * scale_y
+                        x1 = x1 * scale_x
+                        y1 = y1 * scale_y
+
+                        # Clamp to page bounds with small margin
+                        x0 = max(0, x0)
+                        y0 = max(0, y0)
+                        x1 = min(pdf_width, x1)
+                        y1 = min(pdf_height, y1)
+
+                    doc.close()
                 except Exception as e:
                     print(f"[WARN] Coordinate conversion failed: {e}")
 
@@ -365,7 +394,12 @@ class TableExtractor:
         return TableType.DATA_GRID.value
 
     def populate_document_graph(
-        self, doc: DocumentGraph, file_path: str, render_images: bool = True
+        self,
+        doc: DocumentGraph,
+        file_path: str,
+        render_images: bool = True,
+        use_vlm: bool = False,
+        vlm_extractor: Optional[Any] = None,
     ) -> DocumentGraph:
         """
         Extract tables from PDF and add them to DocumentGraph.
@@ -374,10 +408,15 @@ class TableExtractor:
             doc: DocumentGraph to populate
             file_path: Path to PDF file
             render_images: Whether to render table images (default True)
+            use_vlm: Whether to use VLM for table structure extraction
+            vlm_extractor: VLMTableExtractor instance (required if use_vlm=True)
         """
         # Use the new method that includes images and multi-page detection
         tables_data = self.extract_tables_with_images(
-            file_path, render_images=render_images
+            file_path,
+            render_images=render_images,
+            use_vlm=use_vlm,
+            vlm_extractor=vlm_extractor,
         )
 
         for idx, t in enumerate(tables_data):
@@ -419,6 +458,23 @@ class TableExtractor:
             headers_map = {i: h for i, h in enumerate(headers)}
             glossary_cols = self._detect_glossary_cols(headers)
 
+            # Build table metadata
+            table_metadata = {
+                "headers": headers_map,
+                "ordered_cols": list(range(len(headers))),
+                "glossary_cols": glossary_cols,
+                "html": t.get("html", ""),
+                "extraction_method": t.get("extraction_method", "html"),
+            }
+
+            # Add VLM-specific metadata if available
+            if t.get("vlm_confidence"):
+                table_metadata["vlm_confidence"] = t["vlm_confidence"]
+            if t.get("vlm_warning"):
+                table_metadata["vlm_warning"] = t["vlm_warning"]
+            if t.get("notes"):
+                table_metadata["notes"] = t["notes"]
+
             table = Table(
                 page_num=page_num,
                 reading_order_index=len(page.tables),
@@ -431,12 +487,9 @@ class TableExtractor:
                 image_format="png",
                 page_nums=t.get("page_nums", [page_num]),
                 is_multipage=t.get("is_multipage", False),
-                metadata={
-                    "headers": headers_map,
-                    "ordered_cols": list(range(len(headers))),
-                    "glossary_cols": glossary_cols,
-                    "html": t.get("html", ""),
-                },
+                # Extraction method tracking
+                extraction_method=t.get("extraction_method", "html"),
+                metadata=table_metadata,
             )
 
             page.tables.append(table)
@@ -555,8 +608,9 @@ class TableExtractor:
         file_path: str,
         page_num: int,
         bbox: Tuple[float, float, float, float],
-        dpi: int = 150,
+        dpi: int = 300,
         padding: int = 15,
+        bottom_padding: int = 120,
         use_pymupdf_detection: bool = True,
     ) -> Optional[str]:
         """
@@ -567,7 +621,8 @@ class TableExtractor:
             page_num: 1-indexed page number
             bbox: (x0, y0, x1, y1) bounding box in PDF points
             dpi: Resolution for rendering
-            padding: Extra points around the table (default 15pt, ~5mm)
+            padding: Extra points around the table sides/top (default 15pt, ~5mm)
+            bottom_padding: Extra points below table for footnotes/captions (default 70pt)
             use_pymupdf_detection: Try to refine bbox using PyMuPDF table detection
 
         Returns:
@@ -670,12 +725,13 @@ class TableExtractor:
                 doc = fitz.open(file_path)
                 page = doc[page_num - 1]
 
-            # Create clip rectangle with minimal padding to avoid capturing surrounding text
+            # Create clip rectangle with padding
+            # Use extra bottom padding to capture footnotes and table captions
             clip_rect = fitz.Rect(
                 max(0, x0 - padding),
                 max(0, y0 - padding),
                 min(page_width, x1 + padding),
-                min(page_height, y1 + padding),
+                min(page_height, y1 + bottom_padding),
             )
 
             # Check if clip rect has valid dimensions after clamping
@@ -702,7 +758,7 @@ class TableExtractor:
         self,
         file_path: str,
         page_num: int,
-        dpi: int = 150,
+        dpi: int = 300,
     ) -> Optional[str]:
         """
         Render full page as image (fallback when bbox is unavailable).
@@ -746,7 +802,7 @@ class TableExtractor:
         self,
         file_path: str,
         table_parts: List[Dict[str, Any]],
-        dpi: int = 150,
+        dpi: int = 300,
         padding: int = 5,
     ) -> Optional[str]:
         """
@@ -976,15 +1032,25 @@ class TableExtractor:
         self,
         file_path: str,
         render_images: bool = True,
-        dpi: int = 150,
+        dpi: int = 300,
+        use_vlm: bool = False,
+        vlm_extractor: Optional[Any] = None,
     ) -> List[Dict[str, Any]]:
         """
         Extract tables with both structural data and rendered images.
 
+        Pipeline:
+        1. Get bbox from Unstructured (YOLOX detection)
+        2. Render table image at 300 DPI
+        3. If use_vlm=True, send to VLM for structure extraction
+        4. Otherwise fall back to Unstructured HTML parsing
+
         Args:
             file_path: Path to PDF
             render_images: Whether to render table images
-            dpi: Resolution for image rendering
+            dpi: Resolution for image rendering (default 300)
+            use_vlm: Whether to use VLM for table structure extraction
+            vlm_extractor: VLMTableExtractor instance (required if use_vlm=True)
 
         Returns:
             List of table dicts, each containing:
@@ -992,8 +1058,9 @@ class TableExtractor:
             - 'image_base64': rendered image (if render_images=True)
             - 'page_nums': list of pages (for multi-page tables)
             - 'is_multipage': boolean
+            - 'extraction_method': 'vlm', 'html', or 'html_fallback'
         """
-        # First, extract structural data
+        # First, extract structural data (bbox from Unstructured)
         tables_data = self.extract_tables(file_path)
 
         if not tables_data:
@@ -1009,6 +1076,7 @@ class TableExtractor:
                 table = group[0]
                 table["page_nums"] = [table["page_num"]]
                 table["is_multipage"] = False
+                table["extraction_method"] = "html"  # Default
 
                 if render_images:
                     if table["bbox"] != (0.0, 0.0, 0.0, 0.0):
@@ -1029,10 +1097,36 @@ class TableExtractor:
                 else:
                     table["image_base64"] = None
 
+                # VLM extraction (replaces HTML parsing)
+                if use_vlm and vlm_extractor and table.get("image_base64"):
+                    try:
+                        vlm_result = vlm_extractor.extract(table["image_base64"])
+                        if vlm_result and vlm_result.get("confidence", 0) > 0.3:
+                            # Use VLM results
+                            table["headers"] = vlm_result.get("headers", [])
+                            table["rows"] = vlm_result.get("rows", [])
+                            table["extraction_method"] = "vlm"
+                            table["vlm_confidence"] = vlm_result.get("confidence", 0.95)
+                            if vlm_result.get("verification_warning"):
+                                table["vlm_warning"] = vlm_result["verification_warning"]
+                            if vlm_result.get("notes"):
+                                table["notes"] = vlm_result["notes"]
+                            print(f"[INFO] VLM extracted table on page {table['page_num']}: "
+                                  f"{len(table['headers'])} cols, {len(table['rows'])} rows")
+                        else:
+                            # VLM failed, keep HTML fallback
+                            table["extraction_method"] = "html_fallback"
+                            print(f"[WARN] VLM extraction failed for table on page {table['page_num']}, "
+                                  f"using HTML fallback")
+                    except Exception as e:
+                        print(f"[WARN] VLM extraction error on page {table['page_num']}: {e}")
+                        table["extraction_method"] = "html_fallback"
+
                 result.append(table)
             else:
                 # Multi-page table - merge data and stitch image
                 merged = self._merge_table_parts(group)
+                merged["extraction_method"] = "html"  # Default for multi-page
 
                 if render_images:
                     # Include all parts, marking those with empty bbox for full-page render
@@ -1049,6 +1143,28 @@ class TableExtractor:
                     )
                 else:
                     merged["image_base64"] = None
+
+                # VLM extraction for multi-page tables
+                if use_vlm and vlm_extractor and merged.get("image_base64"):
+                    try:
+                        vlm_result = vlm_extractor.extract(merged["image_base64"])
+                        if vlm_result and vlm_result.get("confidence", 0) > 0.3:
+                            merged["headers"] = vlm_result.get("headers", [])
+                            merged["rows"] = vlm_result.get("rows", [])
+                            merged["extraction_method"] = "vlm"
+                            merged["vlm_confidence"] = vlm_result.get("confidence", 0.95)
+                            if vlm_result.get("verification_warning"):
+                                merged["vlm_warning"] = vlm_result["verification_warning"]
+                            if vlm_result.get("notes"):
+                                merged["notes"] = vlm_result["notes"]
+                            print(f"[INFO] VLM extracted multi-page table: "
+                                  f"{len(merged['headers'])} cols, {len(merged['rows'])} rows")
+                        else:
+                            merged["extraction_method"] = "html_fallback"
+                            print(f"[WARN] VLM extraction failed for multi-page table, using HTML fallback")
+                    except Exception as e:
+                        print(f"[WARN] VLM extraction error for multi-page table: {e}")
+                        merged["extraction_method"] = "html_fallback"
 
                 result.append(merged)
 

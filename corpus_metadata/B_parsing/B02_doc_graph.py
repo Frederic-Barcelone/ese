@@ -146,6 +146,9 @@ class Table(BaseModel):
     page_nums: List[int] = Field(default_factory=list)  # All pages this table spans
     is_multipage: bool = False  # True if table spans multiple pages
 
+    # Extraction method tracking
+    extraction_method: str = "html"  # "vlm", "html", or "html_fallback"
+
     bbox: BoundingBox
     metadata: Dict[str, Any] = Field(default_factory=dict)
 

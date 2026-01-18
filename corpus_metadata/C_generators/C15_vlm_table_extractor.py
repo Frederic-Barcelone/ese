@@ -1,0 +1,240 @@
+# corpus_metadata/C_generators/C15_vlm_table_extractor.py
+"""
+VLM-based table structure extraction using Claude Vision.
+
+Replaces HTML parsing from Unstructured with direct VLM extraction
+for more accurate table data, especially for:
+- Numeric precision (26.1 not 26-1)
+- Complex table layouts
+- Multi-row headers
+"""
+
+from __future__ import annotations
+
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field
+
+
+# =============================================================================
+# DATA MODELS
+# =============================================================================
+
+
+class VLMTableResponse(BaseModel):
+    """Response from VLM table extraction."""
+
+    headers: List[str] = Field(default_factory=list)
+    rows: List[List[str]] = Field(default_factory=list)
+    row_count: int = 0
+    col_count: int = 0
+    notes: Optional[str] = None
+
+    # Verification fields
+    confidence: float = 0.95
+    verification_warning: Optional[str] = None
+
+
+# =============================================================================
+# VLM TABLE EXTRACTOR
+# =============================================================================
+
+
+class VLMTableExtractor:
+    """
+    Extract table structure using Vision LLM.
+
+    Uses Claude Vision to read table images and extract structured data,
+    replacing OCR-based extraction from Unstructured which often has errors.
+    """
+
+    VLM_PROMPT = """You see an image of a table from a scientific PDF.
+
+Extract ALL visible text and output a machine-readable table.
+
+Return JSON:
+{
+    "headers": ["Column 1", "Column 2", ...],
+    "rows": [
+        ["cell1", "cell2", ...],
+        ["cell3", "cell4", ...]
+    ],
+    "row_count": <integer - number of data rows, not including header>,
+    "col_count": <integer - number of columns>,
+    "notes": "any footnotes or captions visible below the table"
+}
+
+CRITICAL RULES:
+- Extract EXACTLY what you see - no summarization
+- Preserve numeric precision (26.1, not 26-1 or ~26)
+- Multi-row headers: concatenate with " | " (e.g. "Treatment | n=38")
+- Empty cells: use empty string ""
+- Do NOT add or remove rows/columns
+- Do NOT include the header row in the "rows" array
+- Include ALL data rows, even if the table is long
+- For merged cells spanning multiple rows, repeat the value in each row
+- Preserve special characters and symbols exactly as shown
+
+Return valid JSON only, no additional text."""
+
+    def __init__(
+        self,
+        llm_client: Any,
+        llm_model: str = "claude-sonnet-4-20250514",
+        config: Optional[Dict[str, Any]] = None,
+    ):
+        """
+        Initialize VLM table extractor.
+
+        Args:
+            llm_client: LLM client with complete_vision_json method
+            llm_model: Model to use for vision tasks
+            config: Optional configuration dict
+        """
+        self.llm_client = llm_client
+        self.llm_model = llm_model
+        self.config = config or {}
+
+    def extract(self, image_base64: str) -> Dict[str, Any]:
+        """
+        Send table image to VLM and parse response.
+
+        Args:
+            image_base64: Base64-encoded table image (PNG)
+
+        Returns:
+            Dict with headers, rows, row_count, col_count, notes, confidence
+        """
+        if not image_base64:
+            return self._empty_response("No image provided")
+
+        if not self.llm_client:
+            return self._empty_response("No LLM client available")
+
+        try:
+            # Call Vision LLM
+            response = self.llm_client.complete_vision_json(
+                image_base64=image_base64,
+                prompt=self.VLM_PROMPT,
+                model=self.llm_model,
+                max_tokens=4000,  # Tables can be large
+                temperature=0.0,  # Deterministic extraction
+            )
+
+            if not response:
+                return self._empty_response("VLM returned empty response")
+
+            # Parse and verify response
+            return self._verify_extraction(response)
+
+        except AttributeError as e:
+            print(f"[WARN] VLM client missing vision method: {e}")
+            return self._empty_response(f"VLM not available: {e}")
+        except Exception as e:
+            print(f"[WARN] VLM table extraction failed: {e}")
+            return self._empty_response(f"Extraction failed: {e}")
+
+    def _verify_extraction(self, response: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Verify VLM extraction for consistency and add confidence score.
+
+        Args:
+            response: Raw VLM response dict
+
+        Returns:
+            Verified response with confidence score
+        """
+        headers = response.get("headers", [])
+        rows = response.get("rows", [])
+        claimed_rows = response.get("row_count", 0)
+        claimed_cols = response.get("col_count", 0)
+        notes = response.get("notes")
+
+        actual_rows = len(rows)
+        actual_cols = len(headers) if headers else (len(rows[0]) if rows else 0)
+
+        result = {
+            "headers": headers,
+            "rows": rows,
+            "row_count": actual_rows,
+            "col_count": actual_cols,
+            "notes": notes,
+            "confidence": 0.95,
+            "verification_warning": None,
+        }
+
+        # Check row count consistency
+        if claimed_rows != actual_rows and claimed_rows > 0:
+            result["verification_warning"] = (
+                f"Row count mismatch: claimed {claimed_rows}, actual {actual_rows}"
+            )
+            result["confidence"] = 0.7
+
+        # Check column count consistency
+        if claimed_cols != actual_cols and claimed_cols > 0:
+            warning = f"Col count mismatch: claimed {claimed_cols}, actual {actual_cols}"
+            if result["verification_warning"]:
+                result["verification_warning"] += f"; {warning}"
+            else:
+                result["verification_warning"] = warning
+            result["confidence"] = min(result["confidence"], 0.7)
+
+        # Check row consistency (all rows should have same column count)
+        if rows:
+            row_lengths = [len(row) for row in rows]
+            if len(set(row_lengths)) > 1:
+                warning = f"Inconsistent row lengths: {row_lengths}"
+                if result["verification_warning"]:
+                    result["verification_warning"] += f"; {warning}"
+                else:
+                    result["verification_warning"] = warning
+                result["confidence"] = min(result["confidence"], 0.6)
+
+        # Check header/row column alignment
+        if headers and rows:
+            if len(headers) != actual_cols:
+                warning = f"Header/row column mismatch: {len(headers)} vs {actual_cols}"
+                if result["verification_warning"]:
+                    result["verification_warning"] += f"; {warning}"
+                else:
+                    result["verification_warning"] = warning
+                result["confidence"] = min(result["confidence"], 0.5)
+
+        return result
+
+    def _empty_response(self, reason: str) -> Dict[str, Any]:
+        """Return empty response with error reason."""
+        return {
+            "headers": [],
+            "rows": [],
+            "row_count": 0,
+            "col_count": 0,
+            "notes": None,
+            "confidence": 0.0,
+            "verification_warning": reason,
+        }
+
+
+# =============================================================================
+# CONVENIENCE FUNCTION
+# =============================================================================
+
+
+def extract_table_with_vlm(
+    image_base64: str,
+    llm_client: Any,
+    llm_model: str = "claude-sonnet-4-20250514",
+) -> Dict[str, Any]:
+    """
+    Extract table structure from image using VLM.
+
+    Args:
+        image_base64: Base64-encoded table image
+        llm_client: LLM client with complete_vision_json method
+        llm_model: Model to use
+
+    Returns:
+        Dict with headers, rows, and metadata
+    """
+    extractor = VLMTableExtractor(llm_client, llm_model)
+    return extractor.extract(image_base64)
