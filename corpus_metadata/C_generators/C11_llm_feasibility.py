@@ -13,6 +13,7 @@ This replaces the noisy regex-based extraction with high-quality structured outp
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Dict, List, Optional
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
@@ -315,6 +316,8 @@ class LLMFeasibilityExtractor:
         """
         Extract feasibility information using LLM with section-targeted extraction.
 
+        Runs all 6 extraction types in parallel for ~6x speedup.
+
         Args:
             doc_graph: Document graph for section-aware extraction
             doc_id: Document identifier
@@ -328,31 +331,32 @@ class LLMFeasibilityExtractor:
         # Build section map from doc_graph
         section_map = self._build_section_map(doc_graph)
 
-        # Extract each category with targeted sections
-        candidates.extend(self._extract_study_design(
-            self._get_targeted_content("study_design", section_map, full_text),
-            doc_id, doc_fingerprint
-        ))
-        candidates.extend(self._extract_eligibility(
-            self._get_targeted_content("eligibility", section_map, full_text),
-            doc_id, doc_fingerprint
-        ))
-        candidates.extend(self._extract_endpoints(
-            self._get_targeted_content("endpoints", section_map, full_text),
-            doc_id, doc_fingerprint
-        ))
-        candidates.extend(self._extract_sites(
-            self._get_targeted_content("sites", section_map, full_text),
-            doc_id, doc_fingerprint
-        ))
-        candidates.extend(self._extract_operational_burden(
-            self._get_targeted_content("operational_burden", section_map, full_text),
-            doc_id, doc_fingerprint
-        ))
-        candidates.extend(self._extract_screening_flow(
-            self._get_targeted_content("screening_flow", section_map, full_text),
-            doc_id, doc_fingerprint
-        ))
+        # Define extraction tasks: (method, extraction_type)
+        extraction_tasks = [
+            (self._extract_study_design, "study_design"),
+            (self._extract_eligibility, "eligibility"),
+            (self._extract_endpoints, "endpoints"),
+            (self._extract_sites, "sites"),
+            (self._extract_operational_burden, "operational_burden"),
+            (self._extract_screening_flow, "screening_flow"),
+        ]
+
+        # Run all extractions in parallel
+        with ThreadPoolExecutor(max_workers=6) as executor:
+            futures = {}
+            for method, extraction_type in extraction_tasks:
+                content = self._get_targeted_content(extraction_type, section_map, full_text)
+                future = executor.submit(method, content, doc_id, doc_fingerprint)
+                futures[future] = extraction_type
+
+            # Collect results as they complete
+            for future in as_completed(futures):
+                extraction_type = futures[future]
+                try:
+                    result = future.result()
+                    candidates.extend(result)
+                except Exception as e:
+                    print(f"[WARN] LLM extraction failed for {extraction_type}: {e}")
 
         return candidates
 
