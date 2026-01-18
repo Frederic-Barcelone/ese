@@ -461,7 +461,7 @@ class TrialAcronymEnricher:
             resp = self._session.get(base_url, params=params, timeout=self.timeout)
 
             if resp.status_code == 429:
-                print(f"[TrialAcronym] Rate limited, waiting 60s...")
+                print("[TrialAcronym] Rate limited, waiting 60s...")
                 time.sleep(60)
                 resp = self._session.get(base_url, params=params, timeout=self.timeout)
 

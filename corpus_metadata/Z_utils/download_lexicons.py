@@ -13,7 +13,6 @@ Usage:
 
 import csv
 import json
-import os
 import re
 import urllib.request
 from pathlib import Path
@@ -270,7 +269,7 @@ def download_chembl():
     # The molecule_dictionary contains drug names
 
     # Using ChEMBL's UniChem data which is smaller
-    url = "https://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_34_chemreps.txt.gz"
+    # Reference: https://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_34_chemreps.txt.gz
 
     print("Note: ChEMBL full database is very large (>1GB).")
     print("For production use, consider:")

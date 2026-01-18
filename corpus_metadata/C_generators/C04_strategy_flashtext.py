@@ -642,6 +642,57 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 # Don't fail entire extraction if scispacy has issues
                 pass
 
+        # 4) Regex-based inline definition detector
+        # Catches patterns scispacy's Schwartz-Hearst might miss:
+        # - Mixed-case abbreviations like "LoE", "LoA"
+        # - Reversed patterns "ABBREV (long form)"
+        # - Comma-separated definitions "ABBREV, the long form"
+        if blocks_data:
+            full_text = "\n\n".join(full_text_parts)
+            inline_matches = self._extract_inline_definitions(full_text)
+
+            for sf, lf, start, end in inline_matches:
+                if not self._is_valid_match(sf):
+                    continue
+
+                key = (sf.upper(), lf.lower())
+                if key in seen:
+                    continue
+                seen.add(key)
+
+                # Find the block this definition belongs to
+                block = None
+                block_text = None
+                block_start = 0
+                for b, text, s, e in blocks_data:
+                    if s <= start < e:
+                        block = b
+                        block_text = text
+                        block_start = s
+                        break
+
+                if block is None or block_text is None:
+                    continue
+
+                # Adjust offsets to be relative to block
+                local_start = start - block_start
+                local_end = end - block_start
+
+                out.append(
+                    self._make_candidate(
+                        doc=doc,
+                        block=block,
+                        short_form=sf,
+                        long_form=lf,
+                        start=local_start,
+                        end=local_end,
+                        text=block_text,
+                        rule_version="inline_regex::v1",
+                        lexicon_source="inline_definition",
+                        lexicon_ids=None,
+                    )
+                )
+
         return out
 
     def _make_candidate(
@@ -1570,3 +1621,169 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             return False
 
         return True
+
+    def _extract_inline_definitions(
+        self, text: str
+    ) -> List[Tuple[str, str, int, int]]:
+        """
+        Extract inline abbreviation definitions using regex patterns.
+
+        Catches patterns that scispacy's Schwartz-Hearst detector might miss:
+        1. "long form (ABBREV)" - standard pattern with mixed-case abbreviations
+        2. "ABBREV (long form)" - reversed pattern
+        3. "ABBREV, the/or/i.e. long form" - comma-separated definitions
+        4. "ABBREV = long form" - equals-separated definitions
+
+        Returns:
+            List of (short_form, long_form, start, end) tuples
+        """
+        results: List[Tuple[str, str, int, int]] = []
+
+        # Pattern 1a: "Long Form (ABBREV)" - title case long form
+        # Catches mixed-case abbreviations like LoE, LoA
+        pattern1a = re.compile(
+            r"\b((?:[A-Z][a-z]+\s+){1,7}[A-Za-z]+)\s*"  # Long form: capitalized words
+            r"\(([A-Za-z][A-Za-z0-9/-]{1,9})\)",  # (ABBREV) - mixed case allowed
+            re.UNICODE
+        )
+
+        for match in pattern1a.finditer(text):
+            lf = match.group(1).strip()
+            sf = match.group(2).strip()
+
+            # Validate: SF should have at least one uppercase
+            if not any(c.isupper() for c in sf):
+                continue
+
+            # Validate: SF should look like an abbreviation (not a word)
+            if sf.lower() == sf:  # All lowercase
+                continue
+
+            # Check if SF could plausibly be an abbreviation of LF
+            if self._could_be_abbreviation(sf, lf):
+                results.append((sf, lf, match.start(), match.end()))
+
+        # Pattern 1b: "long form (ABBREV)" - lowercase long form (common in clinical text)
+        # e.g., "level of agreement (LoA)", "eosinophilic GPA (EGPA)"
+        pattern1b = re.compile(
+            r"\b([a-z][a-z\s]{3,60})\s*"  # Long form: lowercase words
+            r"\(([A-Z][A-Za-z0-9/-]{1,9})\)",  # (ABBREV) - must start with uppercase
+            re.UNICODE
+        )
+
+        for match in pattern1b.finditer(text):
+            lf = match.group(1).strip()
+            sf = match.group(2).strip()
+
+            # Validate: long form should have multiple words
+            if len(lf.split()) < 2:
+                continue
+
+            # Skip if LF looks like it could be part of a sentence (too long)
+            if len(lf.split()) > 8:
+                continue
+
+            # Check if SF could plausibly be an abbreviation of LF
+            if self._could_be_abbreviation(sf, lf):
+                results.append((sf, lf, match.start(), match.end()))
+
+        # Pattern 2: "ABBREV, (the|or|i.e.|ie) long form"
+        # e.g., "FV, the final vote" or "GPA, or granulomatosis with polyangiitis"
+        pattern2 = re.compile(
+            r"\b([A-Z][A-Za-z0-9/-]{1,9})"  # ABBREV
+            r",?\s+(?:the|or|i\.?e\.?|namely|meaning)\s+"  # separator
+            r"([a-z][a-z\s,/-]{5,60})"  # long form (lowercase start)
+            r"(?=[.,;:\)\]\s]|$)",  # followed by punctuation or end
+            re.UNICODE
+        )
+
+        for match in pattern2.finditer(text):
+            sf = match.group(1).strip()
+            lf = match.group(2).strip()
+
+            # Clean up long form - remove trailing punctuation
+            lf = re.sub(r"[.,;:]+$", "", lf).strip()
+
+            if len(lf) < 5:
+                continue
+
+            if self._could_be_abbreviation(sf, lf):
+                results.append((sf, lf, match.start(), match.end()))
+
+        # Pattern 3: "ABBREV (long form)" - reversed Schwartz-Hearst
+        # e.g., "LoE (level of evidence)"
+        pattern3 = re.compile(
+            r"\b([A-Z][A-Za-z0-9/-]{1,9})\s*"  # ABBREV
+            r"\(([a-z][a-z\s,/-]{5,60})\)",  # (long form)
+            re.UNICODE
+        )
+
+        for match in pattern3.finditer(text):
+            sf = match.group(1).strip()
+            lf = match.group(2).strip()
+
+            if self._could_be_abbreviation(sf, lf):
+                results.append((sf, lf, match.start(), match.end()))
+
+        # Pattern 4: "ABBREV = long form" or "ABBREV: long form"
+        pattern4 = re.compile(
+            r"\b([A-Z][A-Za-z0-9/-]{1,9})\s*"  # ABBREV
+            r"[=:]\s*"  # = or :
+            r"([a-z][a-z\s,/-]{5,60})"  # long form
+            r"(?=[.,;:\)\]\s]|$)",
+            re.UNICODE
+        )
+
+        for match in pattern4.finditer(text):
+            sf = match.group(1).strip()
+            lf = match.group(2).strip()
+
+            # Clean up long form
+            lf = re.sub(r"[.,;:]+$", "", lf).strip()
+
+            if len(lf) < 5:
+                continue
+
+            if self._could_be_abbreviation(sf, lf):
+                results.append((sf, lf, match.start(), match.end()))
+
+        return results
+
+    def _could_be_abbreviation(self, sf: str, lf: str) -> bool:
+        """
+        Check if short form could plausibly be an abbreviation of long form.
+
+        Uses a simple heuristic: at least half of the SF letters should
+        appear in LF (in order), OR the SF appears as initials of LF words.
+        """
+        sf_upper = sf.upper()
+        lf_lower = lf.lower()
+        lf_words = lf_lower.split()
+
+        # Check 1: Initials match
+        # Get first letter of each word in LF
+        initials = "".join(w[0] for w in lf_words if w)
+        if initials.upper() == sf_upper:
+            return True
+
+        # Check 2: Partial initials match (for abbreviations that skip words)
+        # Allow some flexibility - at least 50% of SF chars match LF initials
+        matching = sum(1 for c in sf_upper if c.lower() in initials)
+        if len(sf) >= 2 and matching >= len(sf) * 0.5:
+            return True
+
+        # Check 3: Letters appear in order in LF
+        lf_idx = 0
+        matches = 0
+        for c in sf_upper:
+            # Find this character in the remaining LF
+            found = lf_lower.find(c.lower(), lf_idx)
+            if found >= 0:
+                matches += 1
+                lf_idx = found + 1
+
+        # At least half the SF letters should be found in order
+        if matches >= len(sf) * 0.5:
+            return True
+
+        return False
