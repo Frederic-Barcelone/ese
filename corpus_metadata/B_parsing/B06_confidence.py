@@ -84,6 +84,16 @@ class ConfidenceFeatures:
     # Bonus when validated by external source (PubTator, UMLS)
     external_validation: float = 0.0
 
+    # Quote verification penalty (-0.5 to 0.0)
+    # Penalty when quote cannot be verified in source document
+    # Set to -0.5 (50% penalty) when quote is unverified
+    quote_verification_penalty: float = 0.0
+
+    # Numerical verification penalty (-0.3 to 0.0)
+    # Penalty when numerical values cannot be verified in source document
+    # Set to -0.3 (30% of current score) per unverified number
+    numerical_verification_penalty: float = 0.0
+
     def to_dict(self) -> Dict[str, float]:
         """Convert features to dictionary for storage/debugging."""
         return {
@@ -95,6 +105,8 @@ class ConfidenceFeatures:
             "source_quality": self.source_quality,
             "lexicon_match": self.lexicon_match,
             "external_validation": self.external_validation,
+            "quote_verification_penalty": self.quote_verification_penalty,
+            "numerical_verification_penalty": self.numerical_verification_penalty,
         }
 
     def total(self, base: float = 0.5, min_score: float = 0.1, max_score: float = 0.95) -> float:
@@ -109,6 +121,7 @@ class ConfidenceFeatures:
         Returns:
             Clamped confidence score
         """
+        # Calculate additive score first
         score = base + sum([
             self.section_match,
             self.pattern_strength,
@@ -119,6 +132,16 @@ class ConfidenceFeatures:
             self.lexicon_match,
             self.external_validation,
         ])
+
+        # Apply verification penalties as multipliers
+        # Quote verification: unverified quote multiplies by 0.5
+        if self.quote_verification_penalty < 0:
+            score *= (1.0 + self.quote_verification_penalty)
+
+        # Numerical verification: each unverified number multiplies by 0.7
+        if self.numerical_verification_penalty < 0:
+            score *= (1.0 + self.numerical_verification_penalty)
+
         return max(min_score, min(max_score, score))
 
     def apply_speculation_check(self, text: str, window_size: int = 100) -> None:
@@ -153,6 +176,37 @@ class ConfidenceFeatures:
         """
         if current_section in expected_sections:
             self.section_match = bonus
+
+    def apply_quote_verification_penalty(self, verified: bool) -> None:
+        """
+        Apply penalty for unverified quote.
+
+        Unverified quotes result in a 50% confidence reduction.
+
+        Args:
+            verified: Whether the quote was verified in source document
+        """
+        if not verified:
+            self.quote_verification_penalty = -0.5
+
+    def apply_numerical_verification_penalty(
+        self,
+        unverified_count: int,
+        penalty_per_number: float = 0.3,
+    ) -> None:
+        """
+        Apply penalty for unverified numerical values.
+
+        Each unverified number results in a 30% confidence reduction.
+
+        Args:
+            unverified_count: Number of unverified numerical values
+            penalty_per_number: Penalty multiplier per unverified number (default 0.3)
+        """
+        if unverified_count > 0:
+            # Cap at 0.7 total penalty (30% of original score)
+            total_penalty = min(0.7, unverified_count * penalty_per_number)
+            self.numerical_verification_penalty = -total_penalty
 
 
 # =============================================================================
@@ -208,6 +262,8 @@ class ConfidenceCalculator:
         lexicon_matched: bool = False,
         externally_validated: bool = False,
         from_table: bool = False,
+        quote_verified: Optional[bool] = None,
+        unverified_numbers: int = 0,
     ) -> ConfidenceFeatures:
         """
         Calculate confidence features for a candidate.
@@ -220,6 +276,8 @@ class ConfidenceCalculator:
             lexicon_matched: Whether matched against lexicon
             externally_validated: Whether validated by external source
             from_table: Whether extracted from structured table
+            quote_verified: Whether quote was verified (None = not checked)
+            unverified_numbers: Count of unverified numerical values
 
         Returns:
             ConfidenceFeatures with calculated values
@@ -247,6 +305,14 @@ class ConfidenceCalculator:
         # External validation bonus
         if externally_validated:
             features.external_validation = 0.15
+
+        # Quote verification penalty
+        if quote_verified is not None:
+            features.apply_quote_verification_penalty(quote_verified)
+
+        # Numerical verification penalty
+        if unverified_numbers > 0:
+            features.apply_numerical_verification_penalty(unverified_numbers)
 
         return features
 
@@ -286,3 +352,45 @@ def calculate_confidence(
     calculator = get_confidence_calculator()
     features = calculator.calculate(field_type, section, text, match_text, **kwargs)
     return features.total()
+
+
+def apply_verification_penalty(
+    base_confidence: float,
+    quote_verified: Optional[bool] = None,
+    unverified_numbers: int = 0,
+    min_confidence: float = 0.1,
+) -> float:
+    """
+    Apply verification penalties to a confidence score.
+
+    This is a standalone function for applying anti-hallucination penalties
+    without going through the full ConfidenceFeatures calculation.
+
+    Args:
+        base_confidence: Starting confidence score (0.0 - 1.0)
+        quote_verified: Whether quote was verified (None = not checked, True/False = verified/unverified)
+        unverified_numbers: Count of unverified numerical values
+        min_confidence: Minimum confidence floor
+
+    Returns:
+        Adjusted confidence score with penalties applied.
+        - Unverified quote: confidence × 0.5
+        - Unverified numbers: confidence × 0.7 (per number, capped at 0.3)
+
+    Example:
+        >>> apply_verification_penalty(0.9, quote_verified=False)
+        0.45
+        >>> apply_verification_penalty(0.9, unverified_numbers=2)
+        0.441  # 0.9 * 0.7 * 0.7
+    """
+    confidence = base_confidence
+
+    # Apply quote verification penalty (50% reduction)
+    if quote_verified is False:
+        confidence *= 0.5
+
+    # Apply numerical verification penalty (30% reduction per number)
+    for _ in range(min(unverified_numbers, 3)):  # Cap at 3 numbers
+        confidence *= 0.7
+
+    return max(min_confidence, round(confidence, 3))

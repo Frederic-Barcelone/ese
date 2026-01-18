@@ -42,6 +42,11 @@ from A_core.A07_feasibility_models import (
 )
 from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
+from D_validation.D05_quote_verifier import (
+    ExtractionVerifier,
+    QuoteVerifier,
+    NumericalVerifier,
+)
 
 
 # =============================================================================
@@ -68,6 +73,18 @@ MAX_TOTAL_CHARS = 15000
 # =============================================================================
 # LLM PROMPTS
 # =============================================================================
+
+# Anti-hallucination instruction block (appended to prompts)
+ANTI_HALLUCINATION_INSTRUCTIONS = """
+
+CRITICAL ANTI-HALLUCINATION RULES:
+1. For EVERY extracted value, you MUST provide an exact_quote field with the EXACT text from the document that supports it.
+2. The exact_quote must be a verbatim copy-paste from the document - DO NOT paraphrase or summarize.
+3. If you cannot find explicit text supporting a value, return null for that field.
+4. NEVER invent, guess, or infer values that are not explicitly stated in the document.
+5. For numerical values (sample_size, counts, percentages), the exact number MUST appear in the document.
+6. If the value is implicit or requires calculation, set the field to null.
+"""
 
 STUDY_DESIGN_PROMPT = """Extract study design information from this clinical trial document.
 
@@ -105,7 +122,8 @@ extract the phase of THIS study being reported, not future planned phases.
 IMPORTANT: Extract n (number randomized) for each treatment arm if available.
 IMPORTANT: Extract study periods - many trials have distinct phases (e.g., double-blind + open-label extension).
 IMPORTANT: Include evidence quotes with page numbers where possible.
-
+IMPORTANT: Each evidence quote MUST be verbatim copy-paste from the document.
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Focus on extracting ACTUAL values from the text. Return JSON only."""
 
 ELIGIBILITY_PROMPT = """Extract ALL eligibility criteria from this clinical trial document.
@@ -122,6 +140,7 @@ For each criterion, provide:
             "type": "inclusion" or "exclusion",
             "category": "age" | "diagnosis" | "biomarker" | "lab_value" | "prior_treatment" | "comorbidity" | "organ_function" | "pregnancy" | "consent" | "other",
             "text": "The exact criterion text from the document",
+            "exact_quote": "REQUIRED: Copy-paste the exact text from the document",
             "operator": ">=" | "<=" | ">" | "<" | "=" | "range" | "boolean" | null,
             "value": numeric value if applicable or null,
             "unit": "years" | "mg/dL" | "mL/min" | etc or null
@@ -133,7 +152,8 @@ IMPORTANT:
 - Include ALL exclusion criteria (transplant history, disease progression, contraindications, etc.)
 - Extract at least 3-5 criteria of each type if present
 - Look for numbered lists or bullet points in eligibility sections
-
+- The exact_quote field MUST contain verbatim text from the document - not paraphrased
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
 ENDPOINTS_PROMPT = """Extract ALL study endpoints from this clinical trial document.
@@ -151,7 +171,8 @@ For each endpoint, provide:
             "name": "Short descriptive name (e.g., 'Proteinuria reduction')",
             "measure": "What is measured (e.g., '24-hour UPCR')",
             "timepoint": "When measured (e.g., '6 months')",
-            "analysis_method": "How analyzed (e.g., 'log-transformed ratio to baseline')" or null
+            "analysis_method": "How analyzed (e.g., 'log-transformed ratio to baseline')" or null,
+            "exact_quote": "REQUIRED: Copy-paste the exact text from the document describing this endpoint"
         }
     ]
 }
@@ -161,7 +182,8 @@ IMPORTANT:
 - Common secondary endpoints: eGFR change, composite endpoints, patient-reported outcomes, biomarkers
 - Safety endpoints: adverse events, treatment-emergent AEs, serious AEs
 - Use concise names, not full sentences
-
+- The exact_quote field MUST contain verbatim text from the document
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
 SITES_PROMPT = """Extract study site and country information from this clinical trial document.
@@ -177,14 +199,16 @@ Return:
     "total_sites": integer or null (e.g., "18 sites" → 18),
     "total_countries": integer or null,
     "countries": ["Country1", "Country2", ...],
-    "regions": ["Europe", "North America", "Asia", etc.] or null
+    "regions": ["Europe", "North America", "Asia", etc.] or null,
+    "exact_quote": "REQUIRED: Copy-paste the exact text mentioning sites/countries"
 }
 
 IMPORTANT:
 - List ALL countries where the trial was conducted
 - Use full country names (e.g., "United States" not "US", "United Kingdom" not "UK")
 - Common countries in multinational trials: United States, Germany, France, Italy, Spain, Japan, etc.
-
+- The exact_quote MUST contain the verbatim text listing sites/countries
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
 Return JSON only."""
 
 
@@ -361,8 +385,22 @@ class LLMFeasibilityExtractor:
         # Section detector for targeted extraction
         self.section_detector = SectionDetector()
 
+        # Anti-hallucination verification
+        self.quote_verifier = QuoteVerifier(fuzzy_threshold=0.90)
+        self.numerical_verifier = NumericalVerifier()
+        self.extraction_verifier = ExtractionVerifier(
+            fuzzy_threshold=0.90,
+            numerical_tolerance=0.0,
+        )
+
         # Stats
         self._extraction_stats: Dict[str, int] = {}
+        self._verification_stats: Dict[str, int] = {
+            "quotes_verified": 0,
+            "quotes_failed": 0,
+            "numbers_verified": 0,
+            "numbers_failed": 0,
+        }
 
     def extract(
         self,
@@ -526,6 +564,76 @@ class LLMFeasibilityExtractor:
             generator_name=FeasibilityGeneratorType.LLM_EXTRACTION,
         )
 
+    def _verify_quote(self, quote: Optional[str], context: str) -> bool:
+        """
+        Verify that a quote exists in the context.
+
+        Returns True if verified, False otherwise.
+        Updates verification stats.
+        """
+        if not quote or not context:
+            return False
+
+        result = self.quote_verifier.verify(quote, context)
+        if result.verified:
+            self._verification_stats["quotes_verified"] += 1
+        else:
+            self._verification_stats["quotes_failed"] += 1
+        return result.verified
+
+    def _verify_number(self, value: Optional[int | float], context: str) -> bool:
+        """
+        Verify that a numerical value exists in the context.
+
+        Returns True if verified, False otherwise.
+        Updates verification stats.
+        """
+        if value is None or not context:
+            return False
+
+        result = self.numerical_verifier.verify(value, context)
+        if result.verified:
+            self._verification_stats["numbers_verified"] += 1
+        else:
+            self._verification_stats["numbers_failed"] += 1
+        return result.verified
+
+    def _apply_verification_penalty(
+        self,
+        base_confidence: float,
+        quote: Optional[str],
+        context: str,
+        numerical_values: Optional[Dict[str, int | float]] = None,
+    ) -> float:
+        """
+        Apply confidence penalties based on verification results.
+
+        Args:
+            base_confidence: Starting confidence score (0.0 - 1.0).
+            quote: Quote to verify (if provided).
+            context: Source document text.
+            numerical_values: Dict of field -> value to verify.
+
+        Returns:
+            Adjusted confidence score with penalties applied.
+            - Unverified quote: confidence × 0.5
+            - Unverified number: confidence × 0.7 (per unverified number)
+        """
+        confidence = base_confidence
+
+        # Verify quote if provided
+        if quote:
+            if not self._verify_quote(quote, context):
+                confidence *= 0.5
+
+        # Verify numerical values if provided
+        if numerical_values:
+            for field_name, value in numerical_values.items():
+                if value is not None and not self._verify_number(value, context):
+                    confidence *= 0.7
+
+        return round(confidence, 3)
+
     # =========================================================================
     # STUDY DESIGN EXTRACTION
     # =========================================================================
@@ -613,6 +721,22 @@ class LLMFeasibilityExtractor:
             summary_parts.append(f"N={study_design.sample_size}")
         summary_text = ", ".join(summary_parts) or "Study design extracted"
 
+        # Apply verification and confidence penalty
+        # Collect first evidence quote for verification
+        first_quote = evidence[0].quote if evidence else None
+        numerical_values = {}
+        if study_design.sample_size:
+            numerical_values["sample_size"] = study_design.sample_size
+        if study_design.actual_enrollment:
+            numerical_values["actual_enrollment"] = study_design.actual_enrollment
+
+        confidence = self._apply_verification_penalty(
+            base_confidence=0.9,
+            quote=first_quote,
+            context=content,
+            numerical_values=numerical_values,
+        )
+
         return [FeasibilityCandidate(
             doc_id=doc_id,
             field_type=FeasibilityFieldType.STUDY_DESIGN,
@@ -620,7 +744,7 @@ class LLMFeasibilityExtractor:
             matched_text=summary_text,
             context_text="",
             section_name="study_design",
-            confidence=0.9,
+            confidence=confidence,
             study_design=study_design,
             provenance=self._make_provenance(doc_fingerprint),
         )]
@@ -675,6 +799,19 @@ class LLMFeasibilityExtractor:
                 derived_variables=derived if derived else None,
             )
 
+            # Apply verification and confidence penalty
+            exact_quote = crit_data.get("exact_quote") or text
+            numerical_values = {}
+            if crit_data.get("value") is not None:
+                numerical_values["value"] = crit_data["value"]
+
+            confidence = self._apply_verification_penalty(
+                base_confidence=0.85,
+                quote=exact_quote,
+                context=content,
+                numerical_values=numerical_values,
+            )
+
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
                 field_type=field_type,
@@ -682,7 +819,7 @@ class LLMFeasibilityExtractor:
                 matched_text=text,
                 context_text="",
                 section_name="eligibility",
-                confidence=0.85,
+                confidence=confidence,
                 eligibility_criterion=criterion,
                 provenance=self._make_provenance(doc_fingerprint),
             ))
@@ -735,6 +872,14 @@ class LLMFeasibilityExtractor:
                 analysis_method=ep_data.get("analysis_method"),
             )
 
+            # Apply verification and confidence penalty
+            exact_quote = ep_data.get("exact_quote")
+            confidence = self._apply_verification_penalty(
+                base_confidence=0.88,
+                quote=exact_quote,
+                context=content,
+            )
+
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
                 field_type=FeasibilityFieldType.STUDY_ENDPOINT,
@@ -742,7 +887,7 @@ class LLMFeasibilityExtractor:
                 matched_text=name,
                 context_text="",
                 section_name="endpoints",
-                confidence=0.88,
+                confidence=confidence,
                 study_endpoint=endpoint,
                 provenance=self._make_provenance(doc_fingerprint),
             ))
@@ -770,6 +915,21 @@ class LLMFeasibilityExtractor:
         countries = response.get("countries") or []
         total_sites = response.get("total_sites")
         total_countries = response.get("total_countries")
+        exact_quote = response.get("exact_quote")
+
+        # Apply verification penalty once for the sites extraction
+        numerical_values = {}
+        if total_sites:
+            numerical_values["total_sites"] = total_sites
+        if total_countries:
+            numerical_values["total_countries"] = total_countries
+
+        confidence = self._apply_verification_penalty(
+            base_confidence=0.85,
+            quote=exact_quote,
+            context=content,
+            numerical_values=numerical_values,
+        )
 
         for country in countries:
             if not country or not isinstance(country, str):
@@ -787,7 +947,7 @@ class LLMFeasibilityExtractor:
                 matched_text=country,
                 context_text=f"{total_sites or '?'} sites in {total_countries or len(countries)} countries",
                 section_name="sites",
-                confidence=0.85,
+                confidence=confidence,
                 study_site=site,
                 provenance=self._make_provenance(doc_fingerprint),
             ))
@@ -959,6 +1119,27 @@ class LLMFeasibilityExtractor:
         if burden.hard_gates:
             summary_parts.append(f"{len(burden.hard_gates)} hard gates")
 
+        # Collect quotes from procedures for verification
+        first_quote = None
+        for proc in procedures:
+            if proc.evidence:
+                first_quote = proc.evidence[0].quote
+                break
+
+        # Collect numerical values
+        numerical_values = {}
+        if burden.run_in_duration_days:
+            numerical_values["run_in_duration_days"] = burden.run_in_duration_days
+        if visit_schedule and visit_schedule.total_visits:
+            numerical_values["total_visits"] = visit_schedule.total_visits
+
+        confidence = self._apply_verification_penalty(
+            base_confidence=0.85,
+            quote=first_quote,
+            context=content,
+            numerical_values=numerical_values,
+        )
+
         candidates.append(FeasibilityCandidate(
             doc_id=doc_id,
             field_type=FeasibilityFieldType.OPERATIONAL_BURDEN,
@@ -967,7 +1148,7 @@ class LLMFeasibilityExtractor:
             context_text="",
             section_name="operational_burden",
             extraction_method=ExtractionMethod.LLM,
-            confidence=0.85,
+            confidence=confidence,
             operational_burden=burden,
             provenance=self._make_provenance(doc_fingerprint),
         ))
@@ -1080,6 +1261,25 @@ class LLMFeasibilityExtractor:
         if screen_fail_reasons:
             summary_parts.append(f"{len(screen_fail_reasons)} fail reasons")
 
+        # Collect first evidence quote for verification
+        first_quote = evidence[0].quote if evidence else None
+
+        # Collect numerical values
+        numerical_values = {}
+        if screened:
+            numerical_values["screened"] = screened
+        if randomized:
+            numerical_values["randomized"] = randomized
+        if screen_failures:
+            numerical_values["screen_failures"] = screen_failures
+
+        confidence = self._apply_verification_penalty(
+            base_confidence=0.9,
+            quote=first_quote,
+            context=content,
+            numerical_values=numerical_values,
+        )
+
         return [FeasibilityCandidate(
             doc_id=doc_id,
             field_type=FeasibilityFieldType.SCREENING_FLOW,
@@ -1088,7 +1288,7 @@ class LLMFeasibilityExtractor:
             context_text="",
             section_name="screening_flow",
             extraction_method=ExtractionMethod.LLM,
-            confidence=0.9,
+            confidence=confidence,
             screening_flow=flow,
             provenance=self._make_provenance(doc_fingerprint),
         )]
@@ -1108,3 +1308,22 @@ class LLMFeasibilityExtractor:
         print("─" * 50)
         for field_type, count in sorted(self._extraction_stats.items()):
             print(f"  {field_type:<40} {count:>5}")
+
+        # Print verification stats
+        if any(self._verification_stats.values()):
+            print("\nVerification statistics:")
+            print("─" * 50)
+            quotes_verified = self._verification_stats.get("quotes_verified", 0)
+            quotes_failed = self._verification_stats.get("quotes_failed", 0)
+            numbers_verified = self._verification_stats.get("numbers_verified", 0)
+            numbers_failed = self._verification_stats.get("numbers_failed", 0)
+
+            total_quotes = quotes_verified + quotes_failed
+            total_numbers = numbers_verified + numbers_failed
+
+            if total_quotes > 0:
+                quote_rate = quotes_verified / total_quotes * 100
+                print(f"  Quotes verified: {quotes_verified}/{total_quotes} ({quote_rate:.1f}%)")
+            if total_numbers > 0:
+                number_rate = numbers_verified / total_numbers * 100
+                print(f"  Numbers verified: {numbers_verified}/{total_numbers} ({number_rate:.1f}%)")

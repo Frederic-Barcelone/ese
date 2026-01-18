@@ -130,6 +130,7 @@ from C_generators.C00_strategy_identifiers import IdentifierExtractor, Identifie
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
 from D_validation.D03_validation_logger import ValidationLogger
+from D_validation.D05_quote_verifier import ExtractionVerifier, verify_quote, verify_number
 from E_normalization.E01_term_mapper import TermMapper
 from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
