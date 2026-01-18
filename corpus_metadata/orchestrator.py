@@ -109,6 +109,16 @@ from A_core.A09_pharma_models import (
     PharmaExportDocument,
     PharmaExportEntry,
 )
+from A_core.A10_author_models import (
+    AuthorExportDocument,
+    AuthorExportEntry,
+    ExtractedAuthor,
+)
+from A_core.A11_citation_models import (
+    CitationExportDocument,
+    CitationExportEntry,
+    ExtractedCitation,
+)
 from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
 from B_parsing.B02_doc_graph import DocumentGraph
 from B_parsing.B03_table_extractor import TableExtractor
@@ -120,6 +130,8 @@ from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
 from C_generators.C12_strategy_pharma import PharmaCompanyDetector
+from C_generators.C13_strategy_author import AuthorDetector
+from C_generators.C14_strategy_citation import CitationDetector
 from C_generators.C08_strategy_feasibility import FeasibilityDetector
 from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
@@ -543,6 +555,22 @@ class Orchestrator:
             config={
                 "run_id": self.run_id,
                 "lexicon_base_path": str(dict_path),
+            }
+        )
+
+        # Author detection
+        self.author_detector = AuthorDetector(
+            config={
+                "run_id": self.run_id,
+                "pipeline_version": PIPELINE_VERSION,
+            }
+        )
+
+        # Citation detection
+        self.citation_detector = CitationDetector(
+            config={
+                "run_id": self.run_id,
+                "pipeline_version": PIPELINE_VERSION,
             }
         )
 
@@ -1618,6 +1646,12 @@ Return ONLY the JSON array, nothing else."""
         # Pharma company detection
         pharma_results: List[ExtractedPharma] = self._process_pharma(doc, pdf_path_obj)
 
+        # Author detection
+        author_results: List[ExtractedAuthor] = self._process_authors(doc, pdf_path_obj, full_text)
+
+        # Citation detection
+        citation_results: List[ExtractedCitation] = self._process_citations(doc, pdf_path_obj, full_text)
+
         # Feasibility extraction
         feasibility_results: List[FeasibilityCandidate] = self._process_feasibility(doc, pdf_path_obj, full_text)
 
@@ -1650,6 +1684,14 @@ Return ONLY the JSON array, nothing else."""
         # Export pharma results
         if pharma_results:
             self._export_pharma_results(pdf_path_obj, pharma_results)
+
+        # Export author results
+        if author_results:
+            self._export_author_results(pdf_path_obj, author_results)
+
+        # Export citation results
+        if citation_results:
+            self._export_citation_results(pdf_path_obj, citation_results)
 
         # Export feasibility results
         if feasibility_results:
@@ -2243,6 +2285,194 @@ Return ONLY the JSON array, nothing else."""
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Pharma export: {out_file.name}")
+
+    # =========================================================================
+    # AUTHOR EXTRACTION METHODS
+    # =========================================================================
+
+    def _process_authors(
+        self, doc, pdf_path: Path, full_text: str
+    ) -> List[ExtractedAuthor]:
+        """
+        Process document for author/investigator mentions.
+
+        Returns validated author entities.
+        """
+        if self.author_detector is None:
+            return []
+
+        print("\n[7a/10] Detecting author/investigator mentions...")
+        start = time.time()
+
+        # Build document fingerprint
+        doc_fingerprint = pdf_path.stem
+
+        # Run author detection
+        candidates = self.author_detector.detect(
+            doc_graph=doc,
+            doc_id=doc.doc_id if doc else pdf_path.stem,
+            doc_fingerprint=doc_fingerprint,
+            full_text=full_text,
+        )
+        print(f"  Author candidates found: {len(candidates)}")
+
+        # Validate candidates
+        results = self.author_detector.validate_candidates(candidates)
+
+        validated_count = len(
+            [r for r in results if r.status == ValidationStatus.VALIDATED]
+        )
+        print(f"  Validated authors: {validated_count}")
+        print(f"  Author detection took {time.time() - start:.2f}s")
+
+        return results
+
+    def _export_author_results(
+        self, pdf_path: Path, results: List[ExtractedAuthor]
+    ) -> None:
+        """Export author detection results to separate JSON file."""
+        out_dir = self._get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
+
+        # Build export entries
+        author_entries: List[AuthorExportEntry] = []
+        unique_names: set = set()
+        for entity in validated:
+            unique_names.add(entity.full_name.lower())
+            entry = AuthorExportEntry(
+                full_name=entity.full_name,
+                role=entity.role.value,
+                affiliation=entity.affiliation,
+                email=entity.email,
+                orcid=entity.orcid,
+                confidence=entity.confidence_score,
+                context=entity.primary_evidence.text
+                if entity.primary_evidence
+                else None,
+                page=entity.primary_evidence.location.page_num
+                if entity.primary_evidence
+                else None,
+            )
+            author_entries.append(entry)
+
+        # Build export document
+        export_doc = AuthorExportDocument(
+            run_id=self.run_id,
+            timestamp=datetime.now().isoformat(),
+            document=pdf_path.name,
+            document_path=str(pdf_path.absolute()),
+            pipeline_version=PIPELINE_VERSION,
+            total_detected=len(results),
+            unique_authors=len(unique_names),
+            authors=author_entries,
+        )
+
+        # Write to file
+        out_file = out_dir / f"authors_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export_doc.model_dump_json(indent=2))
+
+        print(f"  Author export: {out_file.name}")
+
+    # =========================================================================
+    # CITATION EXTRACTION METHODS
+    # =========================================================================
+
+    def _process_citations(
+        self, doc, pdf_path: Path, full_text: str
+    ) -> List[ExtractedCitation]:
+        """
+        Process document for citation/reference mentions.
+
+        Returns validated citation entities.
+        """
+        if self.citation_detector is None:
+            return []
+
+        print("\n[7b/10] Detecting citation/reference mentions...")
+        start = time.time()
+
+        # Build document fingerprint
+        doc_fingerprint = pdf_path.stem
+
+        # Run citation detection
+        candidates = self.citation_detector.detect(
+            doc_graph=doc,
+            doc_id=doc.doc_id if doc else pdf_path.stem,
+            doc_fingerprint=doc_fingerprint,
+            full_text=full_text,
+        )
+        print(f"  Citation candidates found: {len(candidates)}")
+
+        # Validate candidates
+        results = self.citation_detector.validate_candidates(candidates)
+
+        validated_count = len(
+            [r for r in results if r.status == ValidationStatus.VALIDATED]
+        )
+        print(f"  Validated citations: {validated_count}")
+        print(f"  Citation detection took {time.time() - start:.2f}s")
+
+        return results
+
+    def _export_citation_results(
+        self, pdf_path: Path, results: List[ExtractedCitation]
+    ) -> None:
+        """Export citation detection results to separate JSON file."""
+        out_dir = self._get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
+
+        # Build export entries
+        citation_entries: List[CitationExportEntry] = []
+        unique_ids: set = set()
+        for entity in validated:
+            # Track unique identifiers
+            if entity.pmid:
+                unique_ids.add(f"pmid:{entity.pmid}")
+            if entity.pmcid:
+                unique_ids.add(f"pmcid:{entity.pmcid}")
+            if entity.doi:
+                unique_ids.add(f"doi:{entity.doi}")
+            if entity.nct:
+                unique_ids.add(f"nct:{entity.nct}")
+
+            entry = CitationExportEntry(
+                pmid=entity.pmid,
+                pmcid=entity.pmcid,
+                doi=entity.doi,
+                nct=entity.nct,
+                url=entity.url,
+                citation_text=entity.citation_text,
+                citation_number=entity.citation_number,
+                confidence=entity.confidence_score,
+                page=entity.primary_evidence.location.page_num
+                if entity.primary_evidence
+                else None,
+            )
+            citation_entries.append(entry)
+
+        # Build export document
+        export_doc = CitationExportDocument(
+            run_id=self.run_id,
+            timestamp=datetime.now().isoformat(),
+            document=pdf_path.name,
+            document_path=str(pdf_path.absolute()),
+            pipeline_version=PIPELINE_VERSION,
+            total_detected=len(results),
+            unique_identifiers=len(unique_ids),
+            citations=citation_entries,
+        )
+
+        # Write to file
+        out_file = out_dir / f"citations_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export_doc.model_dump_json(indent=2))
+
+        print(f"  Citation export: {out_file.name}")
 
     # =========================================================================
     # FEASIBILITY EXTRACTION METHODS

@@ -24,6 +24,12 @@ class PromptTask(str, Enum):
     VERIFY_DISEASE = "verify_disease"  # Single disease mention validation
     VERIFY_DISEASE_BATCH = "verify_disease_batch"  # Batch disease validation
 
+    # Author detection tasks
+    VERIFY_AUTHOR_BATCH = "verify_author_batch"  # Batch author validation
+
+    # Citation detection tasks
+    VERIFY_CITATION_BATCH = "verify_citation_batch"  # Batch citation validation
+
 
 class PromptBundle(BaseModel):
     task: PromptTask
@@ -52,6 +58,8 @@ class PromptRegistry:
         PromptTask.FAST_REJECT: "v1.0",
         PromptTask.VERIFY_DISEASE: "v1.0",
         PromptTask.VERIFY_DISEASE_BATCH: "v1.0",
+        PromptTask.VERIFY_AUTHOR_BATCH: "v1.0",
+        PromptTask.VERIFY_CITATION_BATCH: "v1.0",
     }
 
     _TEMPLATES: Dict[Tuple[PromptTask, str], Dict[str, Any]] = {
@@ -387,6 +395,101 @@ class PromptRegistry:
                 '  "results": [\n'
                 '    {{"id": "<id>", "status": "VALIDATED|REJECTED|AMBIGUOUS", '
                 '"confidence": 0.0-1.0, "reason": "<=12 words", "is_disease": true|false}},\n'
+                "    ...\n"
+                "  ]\n"
+                "}}\n\n"
+                "HARD CONSTRAINTS:\n"
+                "- Output must be valid JSON\n"
+                "- results array must have exactly {count} items\n"
+                "- Each result must include the id from input"
+            ),
+            "schema": None,
+        },
+        # -------------------------
+        # Author batch validation
+        # -------------------------
+        (PromptTask.VERIFY_AUTHOR_BATCH, "v1.0"): {
+            "system": (
+                "You validate author/investigator mentions in clinical documents. "
+                "Return ONLY valid JSON. No markdown. No extra text."
+            ),
+            "user": (
+                "Task: Validate author/investigator mentions independently.\n\n"
+                "=== INPUT FIELDS ===\n"
+                "- full_name: Detected person name\n"
+                "- role: Detected role (author, principal_investigator, etc.)\n"
+                "- context: Text surrounding the mention\n"
+                "- source: Detection method (header_pattern, regex, etc.)\n\n"
+                "=== DECISION RULES ===\n\n"
+                "VALIDATED if ANY:\n"
+                "- Name appears with credentials (MD, PhD, etc.) in author context\n"
+                "- Name explicitly listed as author, investigator, or committee member\n"
+                "- Name appears in byline or author list section\n"
+                "- Name associated with affiliation/institution in academic context\n\n"
+                "REJECTED if ANY:\n"
+                "- Text is not a person's name (institution, company, journal)\n"
+                "- Name appears only in reference/citation context (not as author of this doc)\n"
+                "- Name is part of a disease/condition name (e.g., 'Parkinson', 'Alzheimer')\n"
+                "- Context clearly indicates this is not an author attribution\n\n"
+                "AMBIGUOUS only if:\n"
+                "- Insufficient context to determine if person is an author\n"
+                "- Name could be author or cited reference author\n\n"
+                "=== CANDIDATES ===\n{candidates}\n\n"
+                "=== OUTPUT CONTRACT ===\n"
+                "Return JSON object:\n"
+                "{{\n"
+                '  "expected_count": {count},\n'
+                '  "results": [\n'
+                '    {{"id": "<id>", "status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": 0.0-1.0, "reason": "<=12 words", "is_author": true|false}},\n'
+                "    ...\n"
+                "  ]\n"
+                "}}\n\n"
+                "HARD CONSTRAINTS:\n"
+                "- Output must be valid JSON\n"
+                "- results array must have exactly {count} items\n"
+                "- Each result must include the id from input"
+            ),
+            "schema": None,
+        },
+        # -------------------------
+        # Citation batch validation
+        # -------------------------
+        (PromptTask.VERIFY_CITATION_BATCH, "v1.0"): {
+            "system": (
+                "You validate citation/reference identifiers in clinical documents. "
+                "Return ONLY valid JSON. No markdown. No extra text."
+            ),
+            "user": (
+                "Task: Validate citation identifiers independently.\n\n"
+                "=== INPUT FIELDS ===\n"
+                "- identifier_type: Type of ID (pmid, pmcid, doi, nct, url)\n"
+                "- identifier_value: The detected identifier\n"
+                "- citation_text: Surrounding citation text\n"
+                "- context: Text surrounding the mention\n\n"
+                "=== DECISION RULES ===\n\n"
+                "VALIDATED if ANY:\n"
+                "- PMID/PMCID follows standard format (7-8 digits)\n"
+                "- DOI follows standard format (10.xxxx/...)\n"
+                "- NCT follows ClinicalTrials.gov format (NCT + 8 digits)\n"
+                "- Identifier appears in reference section or citation context\n"
+                "- URL points to valid academic/medical resource\n\n"
+                "REJECTED if ANY:\n"
+                "- Identifier format is invalid\n"
+                "- Number is clearly not a citation ID (e.g., page number, year)\n"
+                "- URL is clearly not a citation (e.g., institution homepage)\n"
+                "- Context indicates this is not a bibliographic reference\n\n"
+                "AMBIGUOUS only if:\n"
+                "- Insufficient context to determine if this is a citation\n"
+                "- Format is valid but usage context is unclear\n\n"
+                "=== CANDIDATES ===\n{candidates}\n\n"
+                "=== OUTPUT CONTRACT ===\n"
+                "Return JSON object:\n"
+                "{{\n"
+                '  "expected_count": {count},\n'
+                '  "results": [\n'
+                '    {{"id": "<id>", "status": "VALIDATED|REJECTED|AMBIGUOUS", '
+                '"confidence": 0.0-1.0, "reason": "<=12 words", "is_citation": true|false}},\n'
                 "    ...\n"
                 "  ]\n"
                 "}}\n\n"
