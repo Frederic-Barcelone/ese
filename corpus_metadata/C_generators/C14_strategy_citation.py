@@ -34,26 +34,32 @@ class CitationDetector:
     # Citation identifier patterns
     CITATION_PATTERNS: Dict[CitationIdentifierType, List[re.Pattern]] = {
         CitationIdentifierType.PMID: [
+            # Explicit PMID prefix required - no standalone number matching to avoid NCT confusion
             re.compile(r"PMID[:\s]*(\d{7,8})", re.IGNORECASE),
             re.compile(r"PubMed\s*(?:ID)?[:\s]*(\d{7,8})", re.IGNORECASE),
-            re.compile(r"(?:^|[^\d])(\d{8})(?:[^\d]|$)"),  # Standalone 8-digit numbers in reference context
         ],
         CitationIdentifierType.PMCID: [
             re.compile(r"PMC\s*(\d{6,8})", re.IGNORECASE),
             re.compile(r"PMCID[:\s]*PMC?(\d{6,8})", re.IGNORECASE),
         ],
         CitationIdentifierType.DOI: [
-            re.compile(r"(?:doi[:\s]*)?10\.\d{4,9}/[^\s\])<>\"',;]+", re.IGNORECASE),
-            re.compile(r"https?://doi\.org/10\.\d{4,9}/[^\s\])<>\"',;]+"),
+            # DOI pattern - handles both bare DOIs and doi.org URLs
+            re.compile(r"(?:doi[:\s]*)(10\.\d{4,9}/[^\s\])<>\"',;\n]+)", re.IGNORECASE),
+            re.compile(r"(?<!\w)10\.\d{4,9}/[^\s\])<>\"',;\n]+"),  # Bare DOI starting with 10.
+            re.compile(r"https?://(?:dx\.)?doi\.org/(10\.\d{4,9}/[^\s\])<>\"',;\n]+)"),
         ],
         CitationIdentifierType.NCT: [
-            re.compile(r"NCT\s*(\d{8})", re.IGNORECASE),
+            re.compile(r"NCT[:\s]*(\d{8})", re.IGNORECASE),
             re.compile(r"ClinicalTrials\.gov[:\s]*(?:NCT)?(\d{8})", re.IGNORECASE),
         ],
         CitationIdentifierType.URL: [
-            re.compile(r"https?://(?:www\.)?[^\s\])<>\"']+"),
+            # URL pattern - exclude doi.org URLs (handled by DOI pattern)
+            re.compile(r"https?://(?!(?:dx\.)?doi\.org)(?:www\.)?[^\s\])<>\"'\n]+"),
         ],
     }
+
+    # NCT pattern for filtering false PMID matches
+    NCT_NUMBER_PATTERN = re.compile(r"NCT\s*(\d{8})", re.IGNORECASE)
 
     # Reference section header patterns
     REFERENCE_SECTION_PATTERNS = [
@@ -180,14 +186,24 @@ class CitationDetector:
         self, match: re.Match, id_type: CitationIdentifierType
     ) -> Optional[str]:
         """Extract the identifier value from a regex match."""
-        if id_type in (CitationIdentifierType.DOI, CitationIdentifierType.URL):
-            # For DOI and URL, take the full match
+        if id_type == CitationIdentifierType.DOI:
+            # Try to get captured group first (for patterns with capture groups)
+            try:
+                identifier = match.group(1)
+            except IndexError:
+                identifier = match.group(0)
+            # Clean up DOI - remove any prefix, keep just 10.xxxx/yyyy
+            identifier = re.sub(r"^(?:doi[:\s]*|https?://(?:dx\.)?doi\.org/)", "", identifier, flags=re.IGNORECASE)
+            # Remove trailing punctuation and whitespace
+            identifier = identifier.rstrip(".,;: \t\n")
+            return identifier
+        elif id_type == CitationIdentifierType.URL:
             identifier = match.group(0)
-            # Clean up DOI prefix
-            if id_type == CitationIdentifierType.DOI:
-                identifier = re.sub(r"^(?:doi[:\s]*|https?://doi\.org/)", "", identifier, flags=re.IGNORECASE)
-                # Remove trailing punctuation
-                identifier = identifier.rstrip(".,;:")
+            # Clean up URL - remove trailing punctuation
+            identifier = identifier.rstrip(".,;:)")
+            # Skip URLs that are just fragments (truncated)
+            if len(identifier) < 15 or identifier.endswith("."):
+                return None
             return identifier
         else:
             # For PMID, PMCID, NCT - extract captured group
@@ -207,15 +223,30 @@ class CitationDetector:
             # PMCID should be 6-8 digits
             return bool(re.match(r"^\d{6,8}$", identifier))
         elif id_type == CitationIdentifierType.DOI:
-            # DOI should start with 10.
-            return identifier.startswith("10.")
+            # DOI should start with 10. and have content after the slash
+            if not identifier.startswith("10."):
+                return False
+            # Must have registrant code and suffix
+            parts = identifier.split("/", 1)
+            if len(parts) < 2 or len(parts[1]) < 2:
+                return False
+            return True
         elif id_type == CitationIdentifierType.NCT:
             # NCT should be 8 digits (with or without NCT prefix)
             clean = identifier.replace("NCT", "")
             return bool(re.match(r"^\d{8}$", clean))
         elif id_type == CitationIdentifierType.URL:
-            # Basic URL validation
-            return identifier.startswith(("http://", "https://"))
+            # Basic URL validation - must start with http(s) and have meaningful content
+            if not identifier.startswith(("http://", "https://")):
+                return False
+            # Must have domain (at least x.xx)
+            domain_part = identifier.split("://", 1)[1] if "://" in identifier else ""
+            if len(domain_part) < 4 or "." not in domain_part:
+                return False
+            # Reject truncated URLs (ending with incomplete domain)
+            if domain_part.endswith("."):
+                return False
+            return True
         return False
 
     def _get_confidence_for_type(self, id_type: CitationIdentifierType) -> float:
@@ -232,33 +263,42 @@ class CitationDetector:
     def _extract_citation_text(
         self, full_text: str, match_start: int, match_end: int
     ) -> str:
-        """Extract the full citation text around a match."""
-        # Look for the start of the citation (numbered reference or line start)
-        search_start = max(0, match_start - 300)
-        prefix = full_text[search_start:match_start]
+        """Extract focused citation text around a match."""
+        # Get a reasonable window around the match (50 chars before, 80 after)
+        context_before = 50
+        context_after = 80
 
-        # Find line start or reference number
-        line_match = re.search(r"(?:^|\n)\s*(\d{1,3}\.)?\s*", prefix[::-1])
-        if line_match:
-            citation_start = match_start - line_match.end()
-        else:
-            citation_start = max(0, match_start - 100)
+        citation_start = max(0, match_start - context_before)
+        citation_end = min(len(full_text), match_end + context_after)
 
-        # Look for end of citation (next reference number or double newline)
-        search_end = min(len(full_text), match_end + 300)
-        suffix = full_text[match_end:search_end]
+        # Try to start at a word boundary
+        if citation_start > 0:
+            # Look for space or newline to start at word boundary
+            prefix = full_text[max(0, citation_start - 20):citation_start]
+            space_pos = prefix.rfind(" ")
+            newline_pos = prefix.rfind("\n")
+            boundary = max(space_pos, newline_pos)
+            if boundary >= 0:
+                citation_start = citation_start - (len(prefix) - boundary - 1)
 
-        end_match = re.search(r"\n\s*\d{1,3}\.|(\n\s*\n)", suffix)
-        if end_match:
-            citation_end = match_end + end_match.start()
-        else:
-            citation_end = min(len(full_text), match_end + 200)
+        # Try to end at a word/sentence boundary
+        if citation_end < len(full_text):
+            suffix = full_text[citation_end:min(len(full_text), citation_end + 30)]
+            # Prefer sentence end
+            for end_char in [".", ")", " "]:
+                pos = suffix.find(end_char)
+                if pos >= 0:
+                    citation_end = citation_end + pos + 1
+                    break
 
         citation_text = full_text[citation_start:citation_end].strip()
 
-        # Truncate if too long
-        if len(citation_text) > 500:
-            citation_text = citation_text[:500] + "..."
+        # Clean up - remove excessive whitespace
+        citation_text = re.sub(r"\s+", " ", citation_text)
+
+        # Truncate if still too long
+        if len(citation_text) > 200:
+            citation_text = citation_text[:200]
 
         return citation_text
 
