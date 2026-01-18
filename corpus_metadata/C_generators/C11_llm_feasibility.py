@@ -895,6 +895,11 @@ class LLMFeasibilityExtractor:
                 numerical_values=numerical_values,
             )
 
+            # Build evidence from verified quote
+            evidence = []
+            if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
+                evidence.append(EvidenceSpan(quote=exact_quote.strip()))
+
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
                 field_type=field_type,
@@ -904,6 +909,7 @@ class LLMFeasibilityExtractor:
                 section_name="eligibility",
                 confidence=confidence,
                 eligibility_criterion=criterion,
+                evidence=evidence,
                 provenance=self._make_provenance(doc_fingerprint),
             ))
 
@@ -973,6 +979,11 @@ class LLMFeasibilityExtractor:
                 context=content,
             )
 
+            # Build evidence from verified quote
+            evidence = []
+            if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
+                evidence.append(EvidenceSpan(quote=exact_quote.strip()))
+
             candidates.append(FeasibilityCandidate(
                 doc_id=doc_id,
                 field_type=FeasibilityFieldType.STUDY_ENDPOINT,
@@ -982,6 +993,7 @@ class LLMFeasibilityExtractor:
                 section_name="endpoints",
                 confidence=confidence,
                 study_endpoint=endpoint,
+                evidence=evidence,
                 provenance=self._make_provenance(doc_fingerprint),
             ))
 
