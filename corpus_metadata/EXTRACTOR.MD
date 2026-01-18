@@ -6,6 +6,9 @@ A production-grade 6-layer pipeline for extracting structured metadata from clin
 - Abbreviations and acronyms with definitions
 - Diseases (rare diseases, conditions, syndromes)
 - Drugs (approved, investigational, compounds)
+- Pharmaceutical companies (sponsors, manufacturers)
+- Authors and investigators (names, roles, affiliations)
+- Citations and references (PMID, DOI, NCT, URLs)
 - Clinical trial feasibility data (eligibility, endpoints, patient journey)
 - Document metadata (classification, dates, identifiers)
 - Images with Vision LLM analysis (flowcharts, charts, figures)
@@ -66,6 +69,9 @@ PDF Input
 │ • C08: Feasibility extraction           │
 │ • C09: Document metadata                │
 │ • C10: Vision image analysis            │
+│ • C12: Pharma company detection         │
+│ • C13: Author/investigator detection    │
+│ • C14: Citation/reference detection     │
 └─────────────────────────────────────────┘
     │
     ▼
@@ -89,6 +95,9 @@ Output Directory (named after PDF)
 ├── abbreviations_{stem}_{timestamp}.json
 ├── diseases_{stem}_{timestamp}.json
 ├── drugs_{stem}_{timestamp}.json
+├── pharma_{stem}_{timestamp}.json
+├── authors_{stem}_{timestamp}.json
+├── citations_{stem}_{timestamp}.json
 ├── feasibility_{stem}_{timestamp}.json
 ├── images_{stem}_{timestamp}.json
 ├── metadata_{stem}_{timestamp}.json
@@ -111,7 +120,10 @@ corpus_metadata/
 │   ├── A05_disease_models.py            # Disease domain models (ICD-10, SNOMED, ORPHA)
 │   ├── A06_drug_models.py               # Drug domain models (RxCUI, NDC, DrugBank)
 │   ├── A07_feasibility_models.py        # Clinical trial feasibility models
-│   └── A08_document_metadata_models.py  # Document-level metadata models
+│   ├── A08_document_metadata_models.py  # Document-level metadata models
+│   ├── A09_pharma_models.py             # Pharma company models
+│   ├── A10_author_models.py             # Author/investigator models
+│   └── A11_citation_models.py           # Citation/reference models
 │
 ├── B_parsing/                           # LAYER 1: DOCUMENT STRUCTURE
 │   ├── B01_pdf_to_docgraph.py           # PDF parsing with Unstructured.io
@@ -132,9 +144,12 @@ corpus_metadata/
 │   ├── C06_strategy_disease.py          # Disease mention detection
 │   ├── C07_strategy_drug.py             # Drug/chemical detection
 │   ├── C08_strategy_feasibility.py      # Rule-based feasibility extraction
-│   ├── C11_llm_feasibility.py           # LLM-based feasibility extraction
 │   ├── C09_strategy_document_metadata.py # Document metadata extraction
-│   └── C10_vision_image_analysis.py     # Vision LLM image analysis
+│   ├── C10_vision_image_analysis.py     # Vision LLM image analysis
+│   ├── C11_llm_feasibility.py           # LLM-based feasibility extraction
+│   ├── C12_strategy_pharma.py           # Pharma company detection
+│   ├── C13_strategy_author.py           # Author/investigator detection
+│   └── C14_strategy_citation.py         # Citation/reference detection
 │
 ├── D_validation/                        # LAYER 3: LLM VERIFICATION
 │   ├── D01_prompt_registry.py           # Versioned prompts with hash tracking
@@ -179,6 +194,9 @@ When processing a PDF, all outputs are saved to a dedicated folder named after t
 ├── abbreviations_ClinicalTrial_20260115_103045.json
 ├── diseases_ClinicalTrial_20260115_103045.json
 ├── drugs_ClinicalTrial_20260115_103045.json
+├── pharma_ClinicalTrial_20260115_103045.json
+├── authors_ClinicalTrial_20260115_103045.json
+├── citations_ClinicalTrial_20260115_103045.json
 ├── feasibility_ClinicalTrial_20260115_103045.json
 ├── images_ClinicalTrial_20260115_103045.json
 ├── metadata_ClinicalTrial_20260115_103045.json
@@ -195,6 +213,9 @@ When processing a PDF, all outputs are saved to a dedicated folder named after t
 | `abbreviations_*.json` | Validated abbreviation-expansion pairs with confidence, context, provenance |
 | `diseases_*.json` | Disease entities with ICD-10, SNOMED, MONDO, ORPHA codes |
 | `drugs_*.json` | Drug entities with RxCUI, NDC, MeSH, DrugBank identifiers |
+| `pharma_*.json` | Pharmaceutical company mentions with headquarters, subsidiaries |
+| `authors_*.json` | Authors/investigators with roles, affiliations, ORCID |
+| `citations_*.json` | References with PMID, PMCID, DOI, NCT identifiers |
 | `feasibility_*.json` | Eligibility criteria, endpoints, epidemiology data |
 | `images_*.json` | Image metadata with Vision LLM analysis (flowcharts, charts) |
 | `metadata_*.json` | Document classification, dates, file info |
@@ -296,6 +317,167 @@ class ExtractedDrug(BaseModel):
     identifiers: List[DrugIdentifier]
 ```
 
+### A10_author_models.py - Author/Investigator Types
+
+```python
+class AuthorRoleType(str, Enum):
+    """Role of the author in the document."""
+    AUTHOR = "author"
+    PRINCIPAL_INVESTIGATOR = "principal_investigator"
+    CO_INVESTIGATOR = "co_investigator"
+    CORRESPONDING_AUTHOR = "corresponding_author"
+    STEERING_COMMITTEE = "steering_committee"
+    STUDY_CHAIR = "study_chair"
+    DATA_SAFETY_BOARD = "data_safety_board"
+    UNKNOWN = "unknown"
+
+class AuthorGeneratorType(str, Enum):
+    """Tracks which strategy produced the author candidate."""
+    HEADER_PATTERN = "gen:author_header"        # From document header
+    AFFILIATION_BLOCK = "gen:author_affiliation" # From affiliation section
+    CONTRIBUTION_SECTION = "gen:author_contribution"
+    INVESTIGATOR_LIST = "gen:author_investigator"
+    REGEX_PATTERN = "gen:author_regex"
+
+class AuthorCandidate(BaseModel):
+    """Pre-validation author mention."""
+    full_name: str                     # "John Smith"
+    role: AuthorRoleType               # principal_investigator
+    affiliation: Optional[str]         # "Harvard Medical School"
+    email: Optional[str]               # "jsmith@hms.harvard.edu"
+    orcid: Optional[str]               # "0000-0001-2345-6789"
+    context_text: str
+    context_location: Coordinate
+    initial_confidence: float
+
+class ExtractedAuthor(BaseModel):
+    """Validated author entity for output."""
+    full_name: str
+    role: AuthorRoleType
+    affiliation: Optional[str]
+    email: Optional[str]
+    orcid: Optional[str]
+    primary_evidence: EvidenceSpan
+    status: ValidationStatus
+    confidence_score: float
+
+class AuthorExportEntry(BaseModel):
+    """Simplified author entry for JSON export."""
+    full_name: str
+    role: str                          # "principal_investigator"
+    affiliation: Optional[str]
+    email: Optional[str]
+    orcid: Optional[str]
+    context: Optional[str]
+    page: Optional[int]
+    confidence: float
+```
+
+**Example Output:**
+```json
+{
+  "run_id": "RUN_AUTHOR_20260118_120000_abc123",
+  "timestamp": "2026-01-18T12:00:00",
+  "document": "ClinicalTrial.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 5,
+  "unique_authors": 5,
+  "authors": [
+    {
+      "full_name": "John Smith",
+      "role": "principal_investigator",
+      "affiliation": "Harvard Medical School",
+      "email": "jsmith@hms.harvard.edu",
+      "orcid": "0000-0001-2345-6789",
+      "context": "Principal Investigator: John Smith, MD, PhD...",
+      "page": 1,
+      "confidence": 0.95
+    }
+  ]
+}
+```
+
+### A11_citation_models.py - Citation/Reference Types
+
+```python
+class CitationIdentifierType(str, Enum):
+    """Type of citation identifier found."""
+    PMID = "pmid"                      # PubMed ID (e.g., "12345678")
+    PMCID = "pmcid"                    # PubMed Central ID (e.g., "PMC1234567")
+    DOI = "doi"                        # Digital Object Identifier
+    NCT = "nct"                        # ClinicalTrials.gov ID
+    URL = "url"                        # Web URL
+
+class CitationGeneratorType(str, Enum):
+    """Tracks which strategy produced the citation candidate."""
+    REGEX_PATTERN = "gen:citation_regex"
+    REFERENCE_SECTION = "gen:citation_reference"
+    INLINE_CITATION = "gen:citation_inline"
+
+class CitationCandidate(BaseModel):
+    """Pre-validation citation mention."""
+    pmid: Optional[str]                # "12345678"
+    pmcid: Optional[str]               # "PMC1234567"
+    doi: Optional[str]                 # "10.1000/xyz123"
+    nct: Optional[str]                 # "NCT01234567"
+    url: Optional[str]                 # "https://..."
+    citation_text: str                 # Full citation string
+    citation_number: Optional[int]     # Reference number [1], [2], etc.
+    identifier_types: List[CitationIdentifierType]
+    context_text: str
+    initial_confidence: float
+
+class ExtractedCitation(BaseModel):
+    """Validated citation entity for output."""
+    pmid: Optional[str]
+    pmcid: Optional[str]
+    doi: Optional[str]
+    nct: Optional[str]
+    url: Optional[str]
+    citation_text: str
+    citation_number: Optional[int]
+    primary_evidence: EvidenceSpan
+    status: ValidationStatus
+    confidence_score: float
+
+class CitationExportEntry(BaseModel):
+    """Simplified citation entry for JSON export."""
+    pmid: Optional[str]
+    pmcid: Optional[str]
+    doi: Optional[str]
+    nct: Optional[str]
+    url: Optional[str]
+    citation_text: str
+    citation_number: Optional[int]
+    page: Optional[int]
+    confidence: float
+```
+
+**Example Output:**
+```json
+{
+  "run_id": "RUN_CITATION_20260118_120000_def456",
+  "timestamp": "2026-01-18T12:00:00",
+  "document": "ClinicalTrial.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 25,
+  "unique_identifiers": 22,
+  "citations": [
+    {
+      "pmid": "12345678",
+      "pmcid": null,
+      "doi": "10.1056/NEJMoa2025314",
+      "nct": "NCT04817618",
+      "url": null,
+      "citation_text": "Smith J et al. Iptacopan in C3G. N Engl J Med. 2024;390:1-12.",
+      "citation_number": 1,
+      "page": 15,
+      "confidence": 0.98
+    }
+  ]
+}
+```
+
 ---
 
 ## Generators (C_generators)
@@ -387,6 +569,130 @@ class VisionImageAnalyzer:
         # Returns: chart_type, axes, data_points, statistics
 ```
 
+### C12_strategy_pharma.py - Pharma Company Detection
+
+```python
+class PharmaCompanyDetector:
+    """Detect pharmaceutical company mentions using lexicon matching."""
+
+    # Uses FlashText for fast keyword matching against pharma_companies_lexicon.json
+    # Includes: canonical name, full legal name, headquarters, parent/subsidiaries
+
+    def detect(self, doc_graph, doc_id, doc_fingerprint) -> List[PharmaCandidate]:
+        # Matches company names and variants
+        # Deduplicates by canonical name
+        # Returns with provenance metadata
+```
+
+### C13_strategy_author.py - Author/Investigator Detection
+
+```python
+class AuthorDetector:
+    """Detect author/investigator mentions using regex patterns."""
+
+    # Name with credentials pattern
+    NAME_WITH_CREDENTIALS = r"([A-Z][a-z]+(?:\s+[A-Z]\.?\s*)?[A-Z][a-z]+)(?:,\s*(?:MD|PhD|MPH|DO|PharmD|RN|FRCPC?))+,"
+
+    # Role-prefixed patterns (higher confidence)
+    ROLE_PATTERNS = [
+        (r"Principal\s+[Ii]nvestigator[s]?[:\s]+(...)", PRINCIPAL_INVESTIGATOR),
+        (r"Corresponding\s+[Aa]uthor[s]?[:\s]+(...)", CORRESPONDING_AUTHOR),
+        (r"Co-?[Ii]nvestigator[s]?[:\s]+(...)", CO_INVESTIGATOR),
+        (r"Study\s+[Cc]hair[:\s]+(...)", STUDY_CHAIR),
+        (r"Steering\s+[Cc]ommittee[:\s]+(...)", STEERING_COMMITTEE),
+    ]
+
+    # Additional extractions
+    EMAIL_PATTERN = r"[\w.+-]+@[\w.-]+\.\w+"
+    ORCID_PATTERN = r"(\d{4}-\d{4}-\d{4}-\d{3}[\dX])"
+
+    def detect(self, doc_graph, doc_id, doc_fingerprint, full_text) -> List[AuthorCandidate]:
+        # 1. Detect role-prefixed names (high confidence: 0.95)
+        # 2. Detect names with credentials (medium confidence: 0.85)
+        # 3. Extract email and ORCID from context
+        # 4. Infer role from surrounding text
+
+    def validate_candidates(self, candidates) -> List[ExtractedAuthor]:
+        # Auto-validate pattern matches
+        # Create evidence spans
+
+    def export_to_json(self, validated, doc_id) -> AuthorExportDocument:
+        # Generate JSON export with unique author count
+```
+
+**Detection Examples:**
+| Pattern | Example Match | Role |
+|---------|---------------|------|
+| Role-prefixed | "Principal Investigator: John Smith, MD" | `principal_investigator` |
+| Credentials | "Jane Doe, MD, PhD" | `author` |
+| Corresponding | "Corresponding Author: Bob Wilson" | `corresponding_author` |
+| Committee | "Steering Committee: Alice Brown" | `steering_committee` |
+
+### C14_strategy_citation.py - Citation/Reference Detection
+
+```python
+class CitationDetector:
+    """Detect citation/reference mentions using regex patterns."""
+
+    CITATION_PATTERNS = {
+        "pmid": [
+            r"PMID[:\s]*(\d{7,8})",
+            r"PubMed\s*(?:ID)?[:\s]*(\d{7,8})",
+        ],
+        "pmcid": [
+            r"PMC\s*(\d{6,8})",
+            r"PMCID[:\s]*PMC?(\d{6,8})",
+        ],
+        "doi": [
+            r"(?:doi[:\s]*)?10\.\d{4,9}/[^\s\])<>\"',;]+",
+            r"https?://doi\.org/10\.\d{4,9}/[^\s\])<>\"',;]+",
+        ],
+        "nct": [
+            r"NCT\s*(\d{8})",
+            r"ClinicalTrials\.gov[:\s]*(?:NCT)?(\d{8})",
+        ],
+        "url": [
+            r"https?://(?:www\.)?[^\s\])<>\"']+",
+        ],
+    }
+
+    def detect(self, doc_graph, doc_id, doc_fingerprint, full_text) -> List[CitationCandidate]:
+        # 1. Detect each identifier type with regex
+        # 2. Validate identifier formats
+        # 3. Extract citation text context
+        # 4. Merge related citations (same reference, multiple IDs)
+
+    def _merge_related_citations(self, candidates) -> List[CitationCandidate]:
+        # Combine PMID + DOI from same reference
+        # Use longest citation text
+        # Take highest confidence
+
+    def validate_candidates(self, candidates) -> List[ExtractedCitation]:
+        # Auto-validate valid identifier formats
+        # Build evidence with all identifiers
+
+    def export_to_json(self, validated, doc_id) -> CitationExportDocument:
+        # Generate JSON export with unique identifier count
+```
+
+**Identifier Confidence Scores:**
+| Type | Confidence | Reason |
+|------|------------|--------|
+| DOI | 0.98 | Highly structured, unique |
+| PMID | 0.95 | Standard 7-8 digit format |
+| PMCID | 0.95 | PMC prefix is distinctive |
+| NCT | 0.95 | ClinicalTrials.gov standard |
+| URL | 0.80 | May be non-citation links |
+
+**Detection Examples:**
+| Pattern | Example Match | Type |
+|---------|---------------|------|
+| PMID | "PMID: 12345678" | `pmid` |
+| DOI | "doi:10.1056/NEJMoa2025314" | `doi` |
+| PMCID | "PMC7654321" | `pmcid` |
+| NCT | "NCT04817618" | `nct` |
+| URL DOI | "https://doi.org/10.1000/xyz" | `doi` |
+
 ---
 
 ## Validation (D_validation)
@@ -410,6 +716,21 @@ class LLMEngine:
         - Returns VALIDATED/REJECTED/AMBIGUOUS
         """
 ```
+
+### D01_prompt_registry.py - Validation Prompts
+
+**Available Prompt Tasks:**
+
+| Task | Purpose |
+|------|---------|
+| `VERIFY_DEFINITION_PAIR` | Validate SF→LF abbreviation mappings |
+| `VERIFY_SHORT_FORM_ONLY` | Validate orphan abbreviations |
+| `VERIFY_BATCH` | Batch abbreviation validation |
+| `FAST_REJECT` | Haiku screening for obvious rejections |
+| `VERIFY_DISEASE` | Single disease mention validation |
+| `VERIFY_DISEASE_BATCH` | Batch disease validation |
+| `VERIFY_AUTHOR_BATCH` | Batch author/investigator validation |
+| `VERIFY_CITATION_BATCH` | Batch citation/reference validation |
 
 ### Heuristic Shortcuts (PASO A-D)
 
@@ -552,6 +873,8 @@ results = orch.process_pdf("/path/to/document.pdf")
 print(f"Abbreviations: {len(results.get('abbreviations', []))}")
 print(f"Diseases: {len(results.get('diseases', []))}")
 print(f"Drugs: {len(results.get('drugs', []))}")
+print(f"Authors: {len(results.get('authors', []))}")
+print(f"Citations: {len(results.get('citations', []))}")
 ```
 
 ### Batch Processing
@@ -644,6 +967,8 @@ pip install flashtext          # Fast lexicon matching
 | Abbreviations | >80% |
 | Diseases | >75% |
 | Drugs | >85% |
+| Authors | >80% |
+| Citations | >90% |
 
 ---
 
@@ -651,7 +976,7 @@ pip install flashtext          # Fast lexicon matching
 
 ### Adding a New Generator
 
-1. Create `C_generators/C11_strategy_new.py`
+1. Create `C_generators/C15_strategy_new.py`
 2. Implement `BaseCandidateGenerator` interface:
 
 ```python
@@ -671,7 +996,7 @@ class NewGenerator(BaseCandidateGenerator):
 3. Register in `orchestrator.py`:
 
 ```python
-from C_generators.C11_strategy_new import NewGenerator
+from C_generators.C15_strategy_new import NewGenerator
 
 # In Orchestrator.__init__():
 self.new_generator = NewGenerator(config)
@@ -700,6 +1025,8 @@ candidates.extend(self.new_generator.extract(doc))
 | "API rate limit exceeded" | Too many Claude calls | Increase `batch_delay_ms` in config |
 | "PubTator timeout" | API slow/unavailable | Check network; results cached locally |
 | Empty disease results | Lexicons not loaded | Verify `paths.dictionaries` in config |
+| No authors detected | No credentials found | Check PDF has author section with MD/PhD |
+| No citations detected | References in images | OCR not applied to reference images |
 
 ### Debug Mode
 
@@ -723,6 +1050,7 @@ logging:
 - **PubTator3 API:** https://www.ncbi.nlm.nih.gov/research/pubtator3/api
 - **Unstructured.io:** https://unstructured.io/
 - **scispacy:** https://allenai.github.io/scispacy/
+- **ClinicalTrials.gov API:** https://clinicaltrials.gov/data-api/api
 
 ---
 
@@ -730,6 +1058,7 @@ logging:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 0.9 | 2026-01 | Author/investigator extraction, citation/reference extraction |
 | 0.8 | 2026-01 | Output folder restructure, image file saving, Vision LLM analysis |
 | 0.7 | 2025-12 | Image extraction, Vision LLM integration |
 | 0.6 | 2025-11 | Feasibility extraction, document metadata |

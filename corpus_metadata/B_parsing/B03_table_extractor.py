@@ -175,14 +175,14 @@ class TableExtractor:
             if cell_texts:
                 avg_cell_length = sum(len(t) for t in cell_texts) / len(cell_texts)
 
-                # If average cell length is very long (>150 chars), likely not a table
-                # Real table cells are typically short
-                if avg_cell_length > 150:
+                # If average cell length is very long (>100 chars), likely not a table
+                # Real table cells are typically short (numbers, names, codes)
+                if avg_cell_length > 100:
                     return False
 
                 # Check for paragraph-like content (multiple sentences in many cells)
-                long_text_cells = sum(1 for t in cell_texts if len(t) > 100)
-                if long_text_cells > len(cell_texts) * 0.25:  # >25% cells have long text
+                long_text_cells = sum(1 for t in cell_texts if len(t) > 80)
+                if long_text_cells > len(cell_texts) * 0.2:  # >20% cells have long text
                     return False
 
                 # Check for sentence-like content (periods followed by capital letters)
@@ -190,20 +190,30 @@ class TableExtractor:
                 prose_indicators = 0
                 for text in cell_texts:
                     # Count cells with multiple sentences (prose indicators)
-                    if '. ' in text and len(text) > 80:
+                    if '. ' in text and len(text) > 50:
                         # Check if it's a sentence pattern (period followed by capital)
-                        import re
                         if re.search(r'\. [A-Z]', text):
                             prose_indicators += 1
 
-                # If >20% of cells look like prose, reject
-                if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > 0.2:
+                # If >15% of cells look like prose, reject
+                if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > 0.15:
                     return False
 
                 # Check total text length - real tables shouldn't have huge amounts of text
                 total_text = sum(len(t) for t in cell_texts)
-                if total_text > 5000 and len(cell_texts) < 20:  # Lots of text, few cells
+                if total_text > 3000 and len(cell_texts) < 15:  # Lots of text, few cells
                     return False
+
+                # Check for multi-column layout (article text split into columns)
+                # If cells have very similar lengths and are long, it's likely prose
+                if len(cell_texts) >= 4:
+                    lengths = [len(t) for t in cell_texts if len(t) > 20]
+                    if lengths:
+                        avg_len = sum(lengths) / len(lengths)
+                        # If most cells are similar length and long (>60 chars), likely prose columns
+                        similar_long = sum(1 for l in lengths if abs(l - avg_len) < avg_len * 0.3 and l > 60)
+                        if similar_long > len(lengths) * 0.6:
+                            return False
 
         # Validate column consistency across rows
         col_counts = [len(row) for row in rows]
@@ -564,14 +574,34 @@ class TableExtractor:
                 return self.render_full_page(file_path, page_num, dpi)
 
             # If bbox seems too large or out of bounds, it might be in wrong coordinate space
-            if x1 > page_width * 1.5 or y1 > page_height * 1.5:
+            if x1 > page_width * 1.1 or y1 > page_height * 1.1:
                 print(f"[WARN] Bbox {bbox} seems out of bounds for page size {page_width}x{page_height}")
-                # Try to auto-correct by scaling down (likely pixel coords at ~200 DPI)
-                estimated_dpi = max(x1 / page_width, y1 / page_height) * 72
-                if estimated_dpi > 100:  # Likely in pixel space
-                    scale = 72 / estimated_dpi
+
+                # First, try PyMuPDF's native table detection for accurate bbox
+                doc.close()
+                pymupdf_bbox = self._find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
+                doc = fitz.open(file_path)
+                page = doc[page_num - 1]
+
+                if pymupdf_bbox:
+                    x0, y0, x1, y1 = pymupdf_bbox
+                    print(f"[INFO] Using PyMuPDF detected bbox: {pymupdf_bbox}")
+                else:
+                    # Fallback: scale coordinates from pixel space to PDF point space
+                    # Calculate scale factors based on the ratio
+                    scale_x = page_width / max(x1, page_width)
+                    scale_y = page_height / max(y1, page_height)
+                    scale = min(scale_x, scale_y)
+
                     x0, y0, x1, y1 = x0 * scale, y0 * scale, x1 * scale, y1 * scale
-                    print(f"[INFO] Auto-corrected bbox to {(x0, y0, x1, y1)}")
+
+                    # Expand slightly to ensure we capture the full table
+                    expand = 20  # points
+                    x0 = max(0, x0 - expand)
+                    y0 = max(0, y0 - expand)
+                    x1 = min(page_width, x1 + expand)
+                    y1 = min(page_height, y1 + expand)
+                    print(f"[INFO] Scaled and expanded bbox to {(x0, y0, x1, y1)}")
 
             # Optionally try to refine bbox using PyMuPDF's table detection
             # Only do this if the original bbox seems unreliable (e.g., was auto-corrected)
@@ -732,11 +762,23 @@ class TableExtractor:
                     pix = page.get_pixmap(matrix=mat)
                 else:
                     # Auto-correct coordinates if they seem out of bounds
-                    if x1 > page_width * 1.5 or y1 > page_height * 1.5:
-                        estimated_dpi = max(x1 / page_width, y1 / page_height) * 72
-                        if estimated_dpi > 100:
-                            scale = 72 / estimated_dpi
+                    if x1 > page_width * 1.1 or y1 > page_height * 1.1:
+                        # Try PyMuPDF's native table detection
+                        pymupdf_bbox = self._find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
+                        if pymupdf_bbox:
+                            x0, y0, x1, y1 = pymupdf_bbox
+                        else:
+                            # Fallback: scale coordinates
+                            scale_x = page_width / max(x1, page_width)
+                            scale_y = page_height / max(y1, page_height)
+                            scale = min(scale_x, scale_y)
                             x0, y0, x1, y1 = x0 * scale, y0 * scale, x1 * scale, y1 * scale
+                            # Expand to capture full table
+                            expand = 20
+                            x0 = max(0, x0 - expand)
+                            y0 = max(0, y0 - expand)
+                            x1 = min(page_width, x1 + expand)
+                            y1 = min(page_height, y1 + expand)
 
                     # Render specific table region
                     clip_rect = fitz.Rect(
