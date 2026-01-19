@@ -2033,9 +2033,15 @@ Return ONLY the JSON array, nothing else."""
         if feasibility_results:
             print(f"\nFeasibility information ({len(feasibility_results)} items):")
             # Group by type
-            by_type: Dict[str, List[FeasibilityCandidate]] = {}
+            by_type: Dict[str, List] = {}
             for f in feasibility_results:
-                key = f.field_type.value.split("_")[0]  # Get main category
+                # Handle both FeasibilityCandidate (has field_type) and NERCandidate (has category)
+                if hasattr(f, 'field_type') and f.field_type is not None:
+                    key = f.field_type.value.split("_")[0]  # Get main category
+                elif hasattr(f, 'category'):
+                    key = f.category.upper()
+                else:
+                    key = "OTHER"
                 by_type.setdefault(key, []).append(f)
             for ftype, items in sorted(by_type.items()):
                 print(f"  {ftype}: {len(items)} items")
