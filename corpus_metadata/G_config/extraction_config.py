@@ -90,7 +90,7 @@ class ExtractionConfig:
     use_llm_validation: bool = True  # LLM validation for abbreviations
     use_llm_feasibility: bool = True  # LLM-based feasibility extraction
     use_vlm_tables: bool = False  # Vision model for table extraction
-    skip_normalization: bool = False  # Skip enrichment/normalization
+    use_normalization: bool = True  # Entity normalization/enrichment
 
     # Output options
     output_dir: Optional[Path] = None
@@ -344,8 +344,8 @@ class ExtractionConfig:
             config.use_llm_feasibility = options["use_llm_feasibility"]
         if "use_vlm_tables" in options:
             config.use_vlm_tables = options["use_vlm_tables"]
-        if "skip_normalization" in options:
-            config.skip_normalization = options["skip_normalization"]
+        if "use_normalization" in options:
+            config.use_normalization = options["use_normalization"]
         if "parallel_extraction" in options:
             config.parallel_extraction = options["parallel_extraction"]
 
@@ -397,7 +397,7 @@ class ExtractionConfig:
             "use_llm_validation": self.use_llm_validation,
             "use_llm_feasibility": self.use_llm_feasibility,
             "use_vlm_tables": self.use_vlm_tables,
-            "skip_normalization": self.skip_normalization,
+            "use_normalization": self.use_normalization,
             "output_dir": str(self.output_dir) if self.output_dir else None,
             "export_json": self.export_json,
             "export_combined": self.export_combined,

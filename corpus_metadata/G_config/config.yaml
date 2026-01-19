@@ -751,7 +751,7 @@ extraction_pipeline:
     use_llm_validation: true      # LLM validation for abbreviations
     use_llm_feasibility: true     # LLM-based feasibility extraction (vs pattern-based)
     use_vlm_tables: false         # Vision model for table extraction
-    skip_normalization: false     # Skip entity normalization/enrichment
+    use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
     parallel_extraction: true     # Run independent extractors in parallel
 
   # Page limits (optional)
