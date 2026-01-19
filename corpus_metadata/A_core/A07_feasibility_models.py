@@ -172,14 +172,34 @@ class LabCriterion(BaseModel):
     """Fully computable lab eligibility criterion."""
 
     analyte: str  # "UPCR", "eGFR", "C3"
-    operator: str  # ">=", "<=", ">", "<", "=="
+    operator: str  # ">=", "<=", ">", "<", "==", "between"
     value: float
     unit: str
+    # Range support: min_value and max_value for "between" operator
+    min_value: Optional[float] = None  # For ranges like "eGFR 30-89"
+    max_value: Optional[float] = None  # For ranges
     specimen: Optional[str] = None  # "first_morning_void", "serum", "plasma"
     timepoints: List[LabTimepoint] = Field(default_factory=list)
     normalization: Optional[EntityNormalization] = None  # LOINC code
 
     model_config = ConfigDict(extra="forbid")
+
+    def evaluate(self, actual_value: float) -> bool:
+        """Evaluate if actual_value satisfies this criterion."""
+        if self.operator == ">=":
+            return actual_value >= self.value
+        elif self.operator == "<=":
+            return actual_value <= self.value
+        elif self.operator == ">":
+            return actual_value > self.value
+        elif self.operator == "<":
+            return actual_value < self.value
+        elif self.operator == "==":
+            return actual_value == self.value
+        elif self.operator == "between":
+            if self.min_value is not None and self.max_value is not None:
+                return self.min_value <= actual_value <= self.max_value
+        return False
 
 
 # -------------------------
@@ -196,6 +216,211 @@ class DiagnosisConfirmation(BaseModel):
     findings: Optional[str] = None  # specific pathological findings
 
     model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Severity Grade Normalization
+# -------------------------
+
+
+class SeverityGradeType(str, Enum):
+    """Standard clinical severity grading systems."""
+
+    NYHA = "nyha"  # Heart failure: I-IV
+    ECOG = "ecog"  # Performance status: 0-5
+    CKD = "ckd"  # Chronic kidney disease: 1-5
+    CHILD_PUGH = "child_pugh"  # Liver function: A, B, C (5-15 points)
+    MELD = "meld"  # Liver disease: 6-40
+    BCLC = "bclc"  # Liver cancer: 0, A, B, C, D
+    TNM = "tnm"  # Cancer staging: T0-4, N0-3, M0-1
+    EDSS = "edss"  # MS disability: 0-10
+
+
+class SeverityGrade(BaseModel):
+    """Normalized severity grade for clinical scales."""
+
+    grade_type: SeverityGradeType
+    raw_value: str  # Original text (e.g., "NYHA Class II", "ECOG 0-1")
+    numeric_value: Optional[int] = None  # Normalized integer (e.g., 2 for NYHA II)
+    min_value: Optional[int] = None  # For ranges (e.g., ECOG 0-1 -> min=0)
+    max_value: Optional[int] = None  # For ranges (e.g., ECOG 0-1 -> max=1)
+    operator: Optional[str] = None  # "<=", ">=", "==", "between"
+
+    model_config = ConfigDict(extra="forbid")
+
+    def evaluate(self, actual_grade: int) -> bool:
+        """Evaluate if actual_grade satisfies this criterion."""
+        if self.operator == "<=":
+            return actual_grade <= (self.numeric_value or self.max_value or 0)
+        elif self.operator == ">=":
+            return actual_grade >= (self.numeric_value or self.min_value or 0)
+        elif self.operator == "==":
+            return actual_grade == self.numeric_value
+        elif self.operator == "between" and self.min_value is not None and self.max_value is not None:
+            return self.min_value <= actual_grade <= self.max_value
+        return False
+
+
+# Severity grade normalization mappings
+SEVERITY_GRADE_MAPPINGS = {
+    SeverityGradeType.NYHA: {
+        "i": 1, "1": 1, "class i": 1, "class 1": 1,
+        "ii": 2, "2": 2, "class ii": 2, "class 2": 2,
+        "iii": 3, "3": 3, "class iii": 3, "class 3": 3,
+        "iv": 4, "4": 4, "class iv": 4, "class 4": 4,
+    },
+    SeverityGradeType.ECOG: {
+        "0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5,
+    },
+    SeverityGradeType.CKD: {
+        "1": 1, "2": 2, "3": 3, "3a": 3, "3b": 3, "4": 4, "5": 5,
+        "stage 1": 1, "stage 2": 2, "stage 3": 3, "stage 3a": 3,
+        "stage 3b": 3, "stage 4": 4, "stage 5": 5,
+    },
+    SeverityGradeType.CHILD_PUGH: {
+        "a": 1, "b": 2, "c": 3,
+        "class a": 1, "class b": 2, "class c": 3,
+        "5": 1, "6": 1, "7": 2, "8": 2, "9": 2, "10": 3,
+        "11": 3, "12": 3, "13": 3, "14": 3, "15": 3,
+    },
+}
+
+
+# -------------------------
+# Logical Expression Models (Eligibility Computability)
+# -------------------------
+
+
+class LogicalOperator(str, Enum):
+    """Logical operators for combining eligibility criteria."""
+
+    AND = "AND"
+    OR = "OR"
+    NOT = "NOT"
+
+
+class CriterionNode(BaseModel):
+    """
+    Node in a logical expression tree for eligibility criteria.
+
+    Can be:
+    - A leaf node containing a single criterion
+    - An internal node with an operator and children
+    """
+
+    # For leaf nodes
+    criterion: Optional["EligibilityCriterion"] = None
+    criterion_id: Optional[str] = None  # Reference to criterion by ID
+
+    # For internal nodes
+    operator: Optional[LogicalOperator] = None
+    children: List["CriterionNode"] = Field(default_factory=list)
+
+    # Metadata
+    raw_text: Optional[str] = None  # Original text fragment
+    confidence: float = Field(default=1.0, ge=0.0, le=1.0)
+
+    model_config = ConfigDict(extra="forbid")
+
+    def is_leaf(self) -> bool:
+        """Check if this is a leaf node."""
+        return self.criterion is not None or self.criterion_id is not None
+
+    def evaluate(self, criterion_values: Dict[str, bool]) -> bool:
+        """
+        Evaluate the logical expression given criterion truth values.
+
+        Args:
+            criterion_values: Dict mapping criterion_id to True/False
+
+        Returns:
+            Boolean result of evaluating the expression
+        """
+        if self.is_leaf():
+            if self.criterion_id:
+                return criterion_values.get(self.criterion_id, False)
+            return False
+
+        if self.operator == LogicalOperator.AND:
+            return all(child.evaluate(criterion_values) for child in self.children)
+        elif self.operator == LogicalOperator.OR:
+            return any(child.evaluate(criterion_values) for child in self.children)
+        elif self.operator == LogicalOperator.NOT:
+            if self.children:
+                return not self.children[0].evaluate(criterion_values)
+        return False
+
+
+class LogicalExpression(BaseModel):
+    """
+    Complete logical expression for eligibility criteria.
+
+    Represents structured eligibility like:
+    "(Age >= 18 AND Age <= 75) AND (eGFR >= 30 OR on_dialysis)"
+    """
+
+    root: CriterionNode
+    raw_text: str  # Original eligibility text
+    criteria_refs: Dict[str, "EligibilityCriterion"] = Field(default_factory=dict)
+
+    model_config = ConfigDict(extra="forbid")
+
+    def evaluate(self, patient_data: Dict[str, Any]) -> bool:
+        """
+        Evaluate eligibility for a patient.
+
+        Args:
+            patient_data: Dict with patient values (age, eGFR, etc.)
+
+        Returns:
+            True if patient meets eligibility criteria
+        """
+        # First evaluate each criterion against patient data
+        criterion_values = {}
+        for crit_id, criterion in self.criteria_refs.items():
+            criterion_values[crit_id] = self._evaluate_criterion(criterion, patient_data)
+
+        # Then evaluate the logical expression
+        return self.root.evaluate(criterion_values)
+
+    def _evaluate_criterion(
+        self, criterion: "EligibilityCriterion", patient_data: Dict[str, Any]
+    ) -> bool:
+        """Evaluate a single criterion against patient data."""
+        if criterion.lab_criterion:
+            lab = criterion.lab_criterion
+            actual = patient_data.get(lab.analyte.lower())
+            if actual is not None:
+                result = lab.evaluate(actual)
+                return not result if criterion.is_negated else result
+        return False
+
+    def to_sql_where(self) -> str:
+        """Convert expression to SQL WHERE clause (for EHR queries)."""
+        return self._node_to_sql(self.root)
+
+    def _node_to_sql(self, node: CriterionNode) -> str:
+        """Convert a node to SQL."""
+        if node.is_leaf():
+            crit = self.criteria_refs.get(node.criterion_id)
+            if crit and crit.lab_criterion:
+                lab = crit.lab_criterion
+                col = lab.analyte.lower()
+                if lab.operator == "between":
+                    return f"({col} BETWEEN {lab.min_value} AND {lab.max_value})"
+                return f"({col} {lab.operator} {lab.value})"
+            return "TRUE"
+
+        if node.operator == LogicalOperator.AND:
+            parts = [self._node_to_sql(c) for c in node.children]
+            return f"({' AND '.join(parts)})"
+        elif node.operator == LogicalOperator.OR:
+            parts = [self._node_to_sql(c) for c in node.children]
+            return f"({' OR '.join(parts)})"
+        elif node.operator == LogicalOperator.NOT:
+            if node.children:
+                return f"(NOT {self._node_to_sql(node.children[0])})"
+        return "TRUE"
 
 
 # -------------------------
@@ -216,12 +441,21 @@ class EligibilityCriterion(BaseModel):
     # Structured sub-types for computability
     lab_criterion: Optional[LabCriterion] = None
     diagnosis_confirmation: Optional[DiagnosisConfirmation] = None
+    severity_grade: Optional[SeverityGrade] = None  # NYHA, ECOG, CKD staging
+
+    # Logical structure (for complex criteria with AND/OR)
+    logical_expression: Optional[LogicalExpression] = None
 
     # Evidence/provenance
     evidence: List[EvidenceSpan] = Field(default_factory=list)
     extraction_method: Optional[ExtractionMethod] = None
 
     model_config = ConfigDict(extra="forbid")
+
+
+# Update forward references for recursive models
+CriterionNode.model_rebuild()
+LogicalExpression.model_rebuild()
 
 
 # -------------------------

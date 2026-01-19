@@ -9,7 +9,7 @@ Confidence is computed from multiple features rather than a single heuristic.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 
 # =============================================================================
@@ -394,3 +394,266 @@ def apply_verification_penalty(
         confidence *= 0.7
 
     return max(min_confidence, round(confidence, 3))
+
+
+# =============================================================================
+# CRITERION-SPECIFIC CONFIDENCE SCORING
+# =============================================================================
+
+
+# Learned confidence weights per eligibility category
+# These weights reflect empirical trustworthiness by criterion type
+CRITERION_TYPE_WEIGHTS: Dict[str, float] = {
+    # High confidence - structured, verifiable criteria
+    "lab_value": 0.9,  # Lab values are objective and verifiable
+    "age": 0.85,  # Age criteria are straightforward
+    "biomarker": 0.85,  # Biomarkers have clear thresholds
+    "organ_function": 0.8,  # Organ function tests are standardized
+
+    # Medium-high confidence - clinical standards
+    "disease_definition": 0.75,  # Disease definitions can be verified against ICD/SNOMED
+    "diagnosis_confirmation": 0.75,  # Biopsy/genetic testing requirements
+    "prior_treatment": 0.7,  # Treatment history is documentable
+    "vaccination_requirement": 0.7,  # Vaccination records exist
+
+    # Medium confidence - some subjectivity
+    "disease_severity": 0.65,  # Severity grades (NYHA, ECOG) have standards but vary
+    "comorbidity": 0.6,  # Comorbidity assessment can be subjective
+    "concomitant_medications": 0.6,  # Medication lists may be incomplete
+    "background_therapy": 0.6,  # Background therapy requirements vary
+
+    # Lower confidence - high subjectivity
+    "disease_duration": 0.55,  # Duration estimates are often imprecise
+    "consent": 0.5,  # Consent criteria are procedural
+    "administrative": 0.5,  # Administrative criteria are site-specific
+    "pregnancy": 0.5,  # Pregnancy exclusions are standard but not always explicit
+}
+
+
+class CriterionConfidenceCalculator:
+    """
+    Criterion-specific confidence calculator.
+
+    Adjusts confidence based on criterion type, recognizing that
+    some criterion types are inherently more reliable than others.
+    """
+
+    def __init__(self, type_weights: Optional[Dict[str, float]] = None):
+        self.type_weights = type_weights or CRITERION_TYPE_WEIGHTS
+        self.base_calculator = get_confidence_calculator()
+
+    def calculate(
+        self,
+        criterion_category: str,
+        section: str,
+        text: str,
+        match_text: str,
+        has_structured_value: bool = False,
+        has_normalization: bool = False,
+        **kwargs,
+    ) -> float:
+        """
+        Calculate criterion-specific confidence.
+
+        Args:
+            criterion_category: Category of eligibility criterion (e.g., "lab_value", "age")
+            section: Document section
+            text: Full context text
+            match_text: Extracted text
+            has_structured_value: Whether criterion has structured value (LabCriterion, SeverityGrade)
+            has_normalization: Whether criterion has ontology normalization
+            **kwargs: Additional arguments for base calculator
+
+        Returns:
+            Adjusted confidence score
+        """
+        # Get base confidence features
+        features = self.base_calculator.calculate(
+            f"ELIGIBILITY_{criterion_category.upper()}",
+            section,
+            text,
+            match_text,
+            **kwargs,
+        )
+        base_score = features.total()
+
+        # Get type-specific weight
+        type_weight = self.type_weights.get(criterion_category.lower(), 0.6)
+
+        # Bonuses for structured/normalized criteria
+        structure_bonus = 0.1 if has_structured_value else 0.0
+        normalization_bonus = 0.05 if has_normalization else 0.0
+
+        # Calculate adjusted score
+        adjusted = base_score * type_weight + structure_bonus + normalization_bonus
+
+        return min(0.95, max(0.1, adjusted))
+
+    def get_type_weight(self, criterion_category: str) -> float:
+        """Get the confidence weight for a criterion type."""
+        return self.type_weights.get(criterion_category.lower(), 0.6)
+
+
+# =============================================================================
+# CROSS-CRITERIA CONTRADICTION DETECTION
+# =============================================================================
+
+
+class ContradictionType:
+    """Types of contradictions between criteria."""
+
+    VALUE_CONFLICT = "value_conflict"  # e.g., age >= 18 AND age <= 16
+    LOGICAL_CONFLICT = "logical_conflict"  # e.g., must have X AND must not have X
+    RANGE_OVERLAP = "range_overlap"  # e.g., overlapping but incompatible ranges
+    SEVERITY_CONFLICT = "severity_conflict"  # e.g., NYHA I-II AND NYHA III-IV
+
+
+@dataclass
+class Contradiction:
+    """A detected contradiction between criteria."""
+
+    type: str
+    criterion_a_text: str
+    criterion_b_text: str
+    criterion_a_id: Optional[str] = None
+    criterion_b_id: Optional[str] = None
+    description: str = ""
+    severity: str = "error"  # "error", "warning", "info"
+
+
+class ContradictionDetector:
+    """
+    Detects contradictions between eligibility criteria.
+
+    Identifies logical inconsistencies that would make eligibility
+    impossible or ambiguous.
+    """
+
+    def detect_lab_contradictions(
+        self, criteria: List[Dict[str, Any]]
+    ) -> List[Contradiction]:
+        """
+        Detect contradictions in lab value criteria.
+
+        Args:
+            criteria: List of criteria with lab_criterion fields
+
+        Returns:
+            List of detected contradictions
+        """
+        contradictions = []
+        lab_criteria = [c for c in criteria if c.get("lab_criterion")]
+
+        # Group by analyte
+        by_analyte: Dict[str, List[Dict[str, Any]]] = {}
+        for crit in lab_criteria:
+            lab = crit["lab_criterion"]
+            analyte = lab.get("analyte", "").lower()
+            if analyte not in by_analyte:
+                by_analyte[analyte] = []
+            by_analyte[analyte].append(crit)
+
+        # Check each analyte group for conflicts
+        for analyte, group in by_analyte.items():
+            if len(group) < 2:
+                continue
+
+            for i, crit_a in enumerate(group):
+                for crit_b in group[i + 1:]:
+                    lab_a = crit_a["lab_criterion"]
+                    lab_b = crit_b["lab_criterion"]
+
+                    conflict = self._check_lab_conflict(lab_a, lab_b)
+                    if conflict:
+                        contradictions.append(
+                            Contradiction(
+                                type=ContradictionType.VALUE_CONFLICT,
+                                criterion_a_text=crit_a.get("text", ""),
+                                criterion_b_text=crit_b.get("text", ""),
+                                description=f"Conflicting {analyte} criteria: {conflict}",
+                            )
+                        )
+
+        return contradictions
+
+    def _check_lab_conflict(
+        self, lab_a: Dict[str, Any], lab_b: Dict[str, Any]
+    ) -> Optional[str]:
+        """Check if two lab criteria conflict."""
+        op_a, val_a = lab_a.get("operator"), lab_a.get("value")
+        op_b, val_b = lab_b.get("operator"), lab_b.get("value")
+
+        if None in (op_a, val_a, op_b, val_b):
+            return None
+
+        # Check for impossible combinations
+        # e.g., >= 30 AND <= 20 is impossible
+        if op_a == ">=" and op_b == "<=" and val_a > val_b:
+            return f">= {val_a} conflicts with <= {val_b}"
+        if op_a == "<=" and op_b == ">=" and val_a < val_b:
+            return f"<= {val_a} conflicts with >= {val_b}"
+        if op_a == ">" and op_b == "<" and val_a >= val_b:
+            return f"> {val_a} conflicts with < {val_b}"
+        if op_a == "<" and op_b == ">" and val_a <= val_b:
+            return f"< {val_a} conflicts with > {val_b}"
+
+        return None
+
+    def detect_severity_contradictions(
+        self, criteria: List[Dict[str, Any]]
+    ) -> List[Contradiction]:
+        """
+        Detect contradictions in severity grade criteria.
+
+        Args:
+            criteria: List of criteria with severity_grade fields
+
+        Returns:
+            List of detected contradictions
+        """
+        contradictions = []
+        severity_criteria = [c for c in criteria if c.get("severity_grade")]
+
+        # Group by grade type
+        by_type: Dict[str, List[Dict[str, Any]]] = {}
+        for crit in severity_criteria:
+            grade = crit["severity_grade"]
+            grade_type = grade.get("grade_type", "")
+            if grade_type not in by_type:
+                by_type[grade_type] = []
+            by_type[grade_type].append(crit)
+
+        # Check each type group for conflicts
+        for grade_type, group in by_type.items():
+            if len(group) < 2:
+                continue
+
+            for i, crit_a in enumerate(group):
+                for crit_b in group[i + 1:]:
+                    grade_a = crit_a["severity_grade"]
+                    grade_b = crit_b["severity_grade"]
+
+                    # Check for non-overlapping ranges
+                    min_a = grade_a.get("min_value") or grade_a.get("numeric_value", 0)
+                    max_a = grade_a.get("max_value") or grade_a.get("numeric_value", 10)
+                    min_b = grade_b.get("min_value") or grade_b.get("numeric_value", 0)
+                    max_b = grade_b.get("max_value") or grade_b.get("numeric_value", 10)
+
+                    if max_a < min_b or max_b < min_a:
+                        contradictions.append(
+                            Contradiction(
+                                type=ContradictionType.SEVERITY_CONFLICT,
+                                criterion_a_text=crit_a.get("text", ""),
+                                criterion_b_text=crit_b.get("text", ""),
+                                description=f"Non-overlapping {grade_type} ranges",
+                            )
+                        )
+
+        return contradictions
+
+    def detect_all(self, criteria: List[Dict[str, Any]]) -> List[Contradiction]:
+        """Detect all types of contradictions."""
+        contradictions = []
+        contradictions.extend(self.detect_lab_contradictions(criteria))
+        contradictions.extend(self.detect_severity_contradictions(criteria))
+        return contradictions
