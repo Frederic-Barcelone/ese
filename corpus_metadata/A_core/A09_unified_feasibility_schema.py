@@ -294,10 +294,21 @@ def candidates_to_unified_schema(
     source_counts: Dict[str, int] = {}
 
     for cand in candidates:
-        category = getattr(cand, 'category', 'unknown')
-        text = getattr(cand, 'text', '')
+        # Handle both FeasibilityCandidate and NERCandidate
+        # FeasibilityCandidate uses: field_type, matched_text, generator_type
+        # NERCandidate uses: category, text, source
+        if hasattr(cand, 'field_type') and cand.field_type is not None:
+            # FeasibilityCandidate from LLM extraction
+            category = cand.field_type.value if hasattr(cand.field_type, 'value') else str(cand.field_type)
+            text = getattr(cand, 'matched_text', '')
+            source = cand.generator_type.value if hasattr(cand, 'generator_type') and cand.generator_type else 'LLM'
+        else:
+            # NERCandidate from NER enrichers
+            category = getattr(cand, 'category', 'unknown')
+            text = getattr(cand, 'text', '')
+            source = getattr(cand, 'source', 'unknown')
+
         confidence = getattr(cand, 'confidence', 0.5)
-        source = getattr(cand, 'source', 'unknown')
 
         # Track source counts
         source_counts[source] = source_counts.get(source, 0) + 1
@@ -327,13 +338,15 @@ def _route_span_to_section(
     """Route a span to the appropriate section in the unified output."""
     cat_lower = category.lower()
 
-    # Epidemiology
-    if cat_lower in ["epidemiology", "prevalence"]:
+    # Epidemiology (handles both NER "epidemiology" and LLM "epidemiology_prevalence")
+    if cat_lower in ["epidemiology", "prevalence", "epidemiology_prevalence"]:
         output.epidemiology.prevalence.append(span)
-    elif cat_lower == "incidence":
+    elif cat_lower in ["incidence", "epidemiology_incidence"]:
         output.epidemiology.incidence.append(span)
-    elif cat_lower == "mortality":
+    elif cat_lower in ["mortality", "epidemiology_mortality"]:
         output.epidemiology.mortality.append(span)
+    elif cat_lower == "epidemiology_demographics":
+        output.epidemiology.statistics.append(span)
     elif cat_lower in ["geography", "location"]:
         output.epidemiology.geography.append(span)
 
@@ -413,10 +426,21 @@ def _route_span_to_section(
         )
         output.eligibility.exclusion.append(crit)
 
+    # Patient journey (from LLM)
+    elif cat_lower == "patient_journey_phase":
+        output.patient_journey.care_pathway.append(span)
+    elif cat_lower == "treatment_pathway":
+        output.patient_journey.treatment_history.append(span)
+
     # Study design
     elif cat_lower in ["endpoint", "study_endpoint"]:
         output.study_design.endpoints.append(span)
-    elif cat_lower in ["study_duration"]:
+    elif cat_lower in ["study_duration", "duration"]:
         output.study_design.duration.append(span)
     elif cat_lower in ["site", "study_site"]:
+        output.study_design.sites.append(span)
+    elif cat_lower == "study_design":
+        # Study design metadata - store as endpoint for now
+        output.study_design.endpoints.append(span)
+    elif cat_lower == "study_footprint":
         output.study_design.sites.append(span)
