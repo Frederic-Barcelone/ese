@@ -325,6 +325,16 @@ class BiomedicalNEREnricher:
             if score < self.confidence_threshold:
                 continue
 
+            # Get entity text
+            text = ent.get("word", "")
+
+            # Filter out garbage/subword tokens
+            # - Skip tokens with ## (BERT subword continuation)
+            # - Skip single characters
+            # - Skip tokens that are too short
+            if not text or len(text) < 3 or "##" in text:
+                continue
+
             # Get entity type (remove B- or I- prefix if present)
             raw_label = ent.get("entity_group", ent.get("entity", ""))
             entity_type = raw_label.replace("B-", "").replace("I-", "")
@@ -333,7 +343,7 @@ class BiomedicalNEREnricher:
             category = ENTITY_TO_CATEGORY.get(entity_type, "other")
 
             entity = BiomedicalEntity(
-                text=ent.get("word", ""),
+                text=text,
                 entity_type=entity_type,
                 category=category,
                 score=score,
