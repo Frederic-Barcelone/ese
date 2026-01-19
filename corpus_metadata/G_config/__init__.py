@@ -2,37 +2,54 @@
 """
 Configuration module for corpus_metadata extraction pipeline.
 
-Provides selective extraction configuration:
+RECOMMENDED: Load configuration from config.yaml:
+
+    from G_config import load_config
+
+    # Load from config.yaml (recommended)
+    config = load_config()
+    print(config.enabled_extractors)
+
+Configure which extractors run by editing G_config/config.yaml:
+
+    extraction_pipeline:
+      preset: null  # Or use a preset name below
+      extractors:
+        drugs: true
+        diseases: true
+        abbreviations: true
+        feasibility: true
+        pharma_companies: false
+        authors: false
+        citations: false
+        document_metadata: false
+        tables: true
+
+Or use presets programmatically:
 
     from G_config import ExtractionConfig, ExtractionPreset
 
-    # Use presets
     config = ExtractionConfig.from_preset(ExtractionPreset.DRUGS_ONLY)
     config = ExtractionConfig.from_preset(ExtractionPreset.CLINICAL_ENTITIES)
 
-    # Or build custom config
-    config = ExtractionConfig(drugs=True, diseases=True, abbreviations=False)
-
-    # Or from flags
-    config = ExtractionConfig.from_flags("drugs", "diseases")
-
 Available presets:
-    - DRUGS_ONLY: Drug detection only
-    - DISEASES_ONLY: Disease detection only
-    - ABBREVIATIONS_ONLY: Abbreviation extraction only
-    - FEASIBILITY_ONLY: Feasibility extraction only
-    - ENTITIES_ONLY: Drugs + Diseases + Abbreviations
-    - CLINICAL_ENTITIES: Drugs + Diseases
-    - METADATA_ONLY: Authors + Citations + Doc metadata
-    - STANDARD: Drugs + Diseases + Abbreviations + Feasibility
-    - ALL: Everything
-    - MINIMAL: Just abbreviations (fastest)
+    - drugs_only: Drug detection only
+    - diseases_only: Disease detection only
+    - abbreviations_only: Abbreviation extraction only
+    - feasibility_only: Feasibility extraction only
+    - entities_only: Drugs + Diseases + Abbreviations
+    - clinical_entities: Drugs + Diseases
+    - metadata_only: Authors + Citations + Doc metadata
+    - standard: Drugs + Diseases + Abbreviations + Feasibility (DEFAULT)
+    - all: Everything
+    - minimal: Just abbreviations (fastest)
 """
 
 from .extraction_config import (
     ExtractionConfig,
     ExtractionPreset,
     # Convenience functions
+    load_config,
     drugs_only,
     diseases_only,
     abbreviations_only,
@@ -46,6 +63,7 @@ from .extraction_config import (
 __all__ = [
     "ExtractionConfig",
     "ExtractionPreset",
+    "load_config",
     "drugs_only",
     "diseases_only",
     "abbreviations_only",

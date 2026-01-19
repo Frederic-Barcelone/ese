@@ -709,7 +709,63 @@ deduplication:
   remove_expansion_matches: true
 
 # ==============================================================================
-# EXTRACTION SETTINGS
+# EXTRACTION PIPELINE CONFIGURATION
+# ==============================================================================
+# Controls which extractors run. Set individual flags or use a preset.
+#
+# Available presets:
+#   - drugs_only: Drug detection only
+#   - diseases_only: Disease detection only
+#   - abbreviations_only: Abbreviation extraction only
+#   - feasibility_only: Feasibility extraction only
+#   - entities_only: Drugs + Diseases + Abbreviations
+#   - clinical_entities: Drugs + Diseases
+#   - metadata_only: Authors + Citations + Document metadata
+#   - standard: Drugs + Diseases + Abbreviations + Feasibility (DEFAULT)
+#   - all: Everything
+#   - minimal: Just abbreviations (no LLM)
+#
+# To use a preset, set: preset: "standard"
+# To customize, set preset: null and configure individual flags below.
+# ==============================================================================
+extraction_pipeline:
+  # Use a preset (overrides individual flags below if set)
+  # Set to null or remove to use individual flags
+  preset: null  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
+                # entities_only, clinical_entities, metadata_only, standard, all, minimal
+
+  # Individual extractor flags (used when preset is null)
+  extractors:
+    drugs: true
+    diseases: true
+    abbreviations: true
+    feasibility: true
+    pharma_companies: false
+    authors: false
+    citations: false
+    document_metadata: false
+    tables: true
+
+  # Processing options
+  options:
+    use_llm_validation: true      # LLM validation for abbreviations
+    use_llm_feasibility: true     # LLM-based feasibility extraction (vs pattern-based)
+    use_vlm_tables: false         # Vision model for table extraction
+    skip_normalization: false     # Skip entity normalization/enrichment
+    parallel_extraction: true     # Run independent extractors in parallel
+
+  # Page limits (optional)
+  page_limits:
+    max_pages: null               # Maximum pages to process (null = all)
+    page_range: null              # Specific range [start, end] (null = all)
+
+  # Output options
+  output:
+    export_json: true             # Export individual JSON files per extractor
+    export_combined: false        # Also export single combined JSON file
+
+# ==============================================================================
+# EXTRACTION SETTINGS (per-extractor detailed config)
 # ==============================================================================
 extraction:
   citation:

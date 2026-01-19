@@ -148,6 +148,7 @@ from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
 from F_evaluation.F05_extraction_analysis import run_analysis
+from G_config.extraction_config import ExtractionConfig
 
 PIPELINE_VERSION = "0.8"
 
@@ -369,6 +370,9 @@ class Orchestrator:
             self.config_path
         )
 
+        # Load extraction pipeline configuration from config.yaml
+        self.extraction_config = ExtractionConfig.from_yaml(Path(self.config_path))
+
         # Initialize components
         self._init_components(paths, base_path, api_key, val_cfg)
 
@@ -381,6 +385,7 @@ class Orchestrator:
         print(
             f"  Haiku screening: {'ENABLED' if self.enable_haiku_screening else 'OFF'}"
         )
+        print(f"  Extractors: {self.extraction_config}")
 
     def _init_components(
         self, paths: dict, base_path: str, api_key: Optional[str], val_cfg: dict
@@ -495,13 +500,13 @@ class Orchestrator:
                 llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
                 config={"run_id": self.run_id},
             )
-            print(f"  VLM table extraction: ENABLED")
+            print("  VLM table extraction: ENABLED")
         else:
             self.vlm_table_extractor = None
             if self.use_vlm_tables:
-                print(f"  VLM table extraction: DISABLED (no LLM client)")
+                print("  VLM table extraction: DISABLED (no LLM client)")
             else:
-                print(f"  VLM table extraction: DISABLED (config)")
+                print("  VLM table extraction: DISABLED (config)")
 
         # Logger
         self.logger = ValidationLogger(log_dir=str(self.log_dir), run_id=self.run_id)
@@ -1583,107 +1588,144 @@ Return ONLY the JSON array, nothing else."""
         # Stage 1: Parse
         doc = self._parse_pdf(pdf_path_obj)
 
-        # Stage 2: Generate candidates
-        unique_candidates, full_text = self._generate_candidates(doc)
-
-        # Early exit if validation disabled
-        if self.skip_validation:
-            print("\n[3/10] Validation SKIPPED")
-            self._export_results(pdf_path_obj, [], unique_candidates)
-            return []
-
-        # Filter candidates
-        needs_validation, corroborated_sfs, word_counts, filtered_count = (
-            self._filter_candidates(unique_candidates, full_text)
-        )
-
-        # Apply heuristics
-        counters = HeuristicsCounters()
-        auto_results, llm_candidates = self._apply_heuristics(
-            needs_validation, counters
-        )
-
-        # Print stats
-        frequent_sfs = sum(
-            1
-            for c in unique_candidates
-            if c.generator_type == GeneratorType.LEXICON_MATCH
-            and c.short_form.upper() not in corroborated_sfs
-            and word_counts.get(c.short_form.upper(), 0) >= 2
-        )
-
-        print("\n[3/10] Validating candidates with Claude...")
-        print(f"  Corroborated SFs: {len(corroborated_sfs)}")
-        print(f"  Frequent SFs (2+): {frequent_sfs}")
-        print(f"  Filtered (lexicon-only, rare): {filtered_count}")
-        print(f"  Auto-approved stats: {counters.recovered_by_stats_whitelist}")
-        print(f"  Auto-approved country: {counters.recovered_by_country_code}")
-        print(f"  Auto-rejected blacklist: {counters.blacklisted_fp_count}")
-        print(f"  Auto-rejected context: {counters.context_rejected}")
-        print(f"  Auto-rejected trial IDs: {counters.trial_id_excluded}")
-        print(f"  Auto-rejected common words: {counters.common_word_rejected}")
-        print(f"  Candidates for LLM: {len(llm_candidates)}")
-
-        start = time.time()
-
-        # Collect results
+        # Stage 2: Generate candidates (abbreviations conditional on config)
+        unique_candidates: List[Candidate] = []
+        full_text = ""
         results: List[ExtractedEntity] = []
+        counters = HeuristicsCounters()
 
-        # Log auto results
-        for candidate, entity in auto_results:
-            self.logger.log_validation(candidate, entity, entity.raw_llm_response, 0)
-            results.append(entity)
-
-        # LLM validation
-        llm_results = self._validate_with_llm(llm_candidates, delay)
-        results.extend(llm_results)
-
-        print(f"  Time: {time.time() - start:.2f}s")
-
-        # Search for missing abbreviations
-        doc_id = str(pdf_path_obj.stem)
-        found_sfs = {
-            r.short_form.upper()
-            for r in results
-            if r.status == ValidationStatus.VALIDATED
-        }
-
-        search_results = self._search_missing_abbreviations(
-            doc_id, full_text, found_sfs, counters
+        # Build full_text (always needed for other extractors)
+        full_text = "\n".join(
+            block.text for block in doc.iter_linear_blocks()
         )
-        results.extend(search_results)
 
-        # LLM SF-only extraction
-        sf_only_results = self._extract_sf_only_with_llm(
-            doc_id, full_text, found_sfs, counters
-        )
-        results.extend(sf_only_results)
+        if self.extraction_config.abbreviations:
+            # Run abbreviation extraction
+            unique_candidates, full_text = self._generate_candidates(doc)
+
+            # Check if validation should be skipped
+            if self.skip_validation:
+                print("\n[3/10] Validation SKIPPED")
+                self._export_results(pdf_path_obj, [], unique_candidates)
+            else:
+                # Filter candidates
+                needs_validation, corroborated_sfs, word_counts, filtered_count = (
+                    self._filter_candidates(unique_candidates, full_text)
+                )
+
+                # Apply heuristics
+                auto_results, llm_candidates = self._apply_heuristics(
+                    needs_validation, counters
+                )
+
+                # Print stats
+                frequent_sfs = sum(
+                    1
+                    for c in unique_candidates
+                    if c.generator_type == GeneratorType.LEXICON_MATCH
+                    and c.short_form.upper() not in corroborated_sfs
+                    and word_counts.get(c.short_form.upper(), 0) >= 2
+                )
+
+                print("\n[3/10] Validating candidates with Claude...")
+                print(f"  Corroborated SFs: {len(corroborated_sfs)}")
+                print(f"  Frequent SFs (2+): {frequent_sfs}")
+                print(f"  Filtered (lexicon-only, rare): {filtered_count}")
+                print(f"  Auto-approved stats: {counters.recovered_by_stats_whitelist}")
+                print(f"  Auto-approved country: {counters.recovered_by_country_code}")
+                print(f"  Auto-rejected blacklist: {counters.blacklisted_fp_count}")
+                print(f"  Auto-rejected context: {counters.context_rejected}")
+                print(f"  Auto-rejected trial IDs: {counters.trial_id_excluded}")
+                print(f"  Auto-rejected common words: {counters.common_word_rejected}")
+                print(f"  Candidates for LLM: {len(llm_candidates)}")
+
+                start = time.time()
+
+                # Log auto results
+                for candidate, entity in auto_results:
+                    self.logger.log_validation(candidate, entity, entity.raw_llm_response, 0)
+                    results.append(entity)
+
+                # LLM validation
+                llm_results = self._validate_with_llm(llm_candidates, delay)
+                results.extend(llm_results)
+
+                print(f"  Time: {time.time() - start:.2f}s")
+
+                # Search for missing abbreviations
+                doc_id = str(pdf_path_obj.stem)
+                found_sfs = {
+                    r.short_form.upper()
+                    for r in results
+                    if r.status == ValidationStatus.VALIDATED
+                }
+
+                search_results = self._search_missing_abbreviations(
+                    doc_id, full_text, found_sfs, counters
+                )
+                results.extend(search_results)
+
+                # LLM SF-only extraction
+                sf_only_results = self._extract_sf_only_with_llm(
+                    doc_id, full_text, found_sfs, counters
+                )
+                results.extend(sf_only_results)
+        else:
+            print("\n[Abbreviation detection] SKIPPED (disabled in config)")
 
         # Normalize (pass full_text to avoid rebuilding)
         results = self._normalize_results(results, full_text)
 
-        # Disease detection
-        disease_results: List[ExtractedDisease] = self._process_diseases(doc, pdf_path_obj)
+        # Disease detection (conditional on config)
+        disease_results: List[ExtractedDisease] = []
+        if self.extraction_config.diseases:
+            disease_results = self._process_diseases(doc, pdf_path_obj)
+        else:
+            print("\n[Disease detection] SKIPPED (disabled in config)")
 
-        # Drug detection
-        drug_results: List[ExtractedDrug] = self._process_drugs(doc, pdf_path_obj)
+        # Drug detection (conditional on config)
+        drug_results: List[ExtractedDrug] = []
+        if self.extraction_config.drugs:
+            drug_results = self._process_drugs(doc, pdf_path_obj)
+        else:
+            print("\n[Drug detection] SKIPPED (disabled in config)")
 
-        # Pharma company detection
-        pharma_results: List[ExtractedPharma] = self._process_pharma(doc, pdf_path_obj)
+        # Pharma company detection (conditional on config)
+        pharma_results: List[ExtractedPharma] = []
+        if self.extraction_config.pharma_companies:
+            pharma_results = self._process_pharma(doc, pdf_path_obj)
+        else:
+            print("\n[Pharma detection] SKIPPED (disabled in config)")
 
-        # Author detection
-        author_results: List[ExtractedAuthor] = self._process_authors(doc, pdf_path_obj, full_text)
+        # Author detection (conditional on config)
+        author_results: List[ExtractedAuthor] = []
+        if self.extraction_config.authors:
+            author_results = self._process_authors(doc, pdf_path_obj, full_text)
+        else:
+            print("\n[Author detection] SKIPPED (disabled in config)")
 
-        # Citation detection
-        citation_results: List[ExtractedCitation] = self._process_citations(doc, pdf_path_obj, full_text)
+        # Citation detection (conditional on config)
+        citation_results: List[ExtractedCitation] = []
+        if self.extraction_config.citations:
+            citation_results = self._process_citations(doc, pdf_path_obj, full_text)
+        else:
+            print("\n[Citation detection] SKIPPED (disabled in config)")
 
-        # Feasibility extraction
-        feasibility_results: List[FeasibilityCandidate] = self._process_feasibility(doc, pdf_path_obj, full_text)
+        # Feasibility extraction (conditional on config)
+        feasibility_results: List[FeasibilityCandidate] = []
+        if self.extraction_config.feasibility:
+            feasibility_results = self._process_feasibility(doc, pdf_path_obj, full_text)
+        else:
+            print("\n[Feasibility extraction] SKIPPED (disabled in config)")
 
-        # Document metadata extraction
-        doc_metadata: Optional[DocumentMetadata] = self._process_document_metadata(
-            doc, pdf_path_obj, full_text[:5000]
-        )
+        # Document metadata extraction (conditional on config)
+        doc_metadata: Optional[DocumentMetadata] = None
+        if self.extraction_config.document_metadata:
+            doc_metadata = self._process_document_metadata(
+                doc, pdf_path_obj, full_text[:5000]
+            )
+        else:
+            print("\n[Document metadata] SKIPPED (disabled in config)")
 
         # Stage 4: Summary & Export
         print("\n[10/10] Writing summary...")
@@ -1726,8 +1768,8 @@ Return ONLY the JSON array, nothing else."""
         if doc is not None:
             self._export_images(pdf_path_obj, doc)
 
-        # Export tables as images
-        if doc is not None:
+        # Export tables as images (conditional on config)
+        if doc is not None and self.extraction_config.tables:
             self._export_tables(pdf_path_obj, doc)
 
         # Export document metadata

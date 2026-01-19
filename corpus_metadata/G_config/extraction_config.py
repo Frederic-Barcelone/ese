@@ -30,10 +30,15 @@ Usage:
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+import yaml
+
+logger = logging.getLogger(__name__)
 
 
 class ExtractionPreset(str, Enum):
@@ -277,6 +282,106 @@ class ExtractionConfig:
         """Create configuration from a dictionary."""
         return cls(**{k: v for k, v in d.items() if hasattr(cls, k)})
 
+    @classmethod
+    def from_yaml(cls, config_path: Optional[Path] = None) -> "ExtractionConfig":
+        """
+        Load configuration from config.yaml file.
+
+        Args:
+            config_path: Path to config.yaml. If None, uses default location.
+
+        Returns:
+            ExtractionConfig loaded from YAML file.
+        """
+        if config_path is None:
+            # Default to G_config/config.yaml relative to this file
+            config_path = Path(__file__).parent / "config.yaml"
+
+        if not config_path.exists():
+            logger.warning(f"Config file not found: {config_path}, using defaults")
+            return cls.from_preset(ExtractionPreset.STANDARD)
+
+        try:
+            with open(config_path, "r", encoding="utf-8") as f:
+                full_config = yaml.safe_load(f)
+        except Exception as e:
+            logger.error(f"Failed to load config.yaml: {e}")
+            return cls.from_preset(ExtractionPreset.STANDARD)
+
+        pipeline_config = full_config.get("extraction_pipeline", {})
+        return cls._from_pipeline_config(pipeline_config)
+
+    @classmethod
+    def _from_pipeline_config(cls, pipeline_config: Dict[str, Any]) -> "ExtractionConfig":
+        """
+        Create ExtractionConfig from extraction_pipeline section of config.yaml.
+
+        Args:
+            pipeline_config: The extraction_pipeline dict from config.yaml
+
+        Returns:
+            Configured ExtractionConfig
+        """
+        # Check for preset first
+        preset_name = pipeline_config.get("preset")
+        if preset_name:
+            try:
+                preset = ExtractionPreset(preset_name)
+                config = cls.from_preset(preset)
+                logger.info(f"Using extraction preset: {preset_name}")
+            except ValueError:
+                logger.warning(f"Unknown preset '{preset_name}', using individual flags")
+                config = cls._build_from_flags(pipeline_config)
+        else:
+            # Build from individual flags
+            config = cls._build_from_flags(pipeline_config)
+
+        # Apply processing options
+        options = pipeline_config.get("options", {})
+        if "use_llm_validation" in options:
+            config.use_llm_validation = options["use_llm_validation"]
+        if "use_llm_feasibility" in options:
+            config.use_llm_feasibility = options["use_llm_feasibility"]
+        if "use_vlm_tables" in options:
+            config.use_vlm_tables = options["use_vlm_tables"]
+        if "skip_normalization" in options:
+            config.skip_normalization = options["skip_normalization"]
+        if "parallel_extraction" in options:
+            config.parallel_extraction = options["parallel_extraction"]
+
+        # Apply page limits
+        page_limits = pipeline_config.get("page_limits", {})
+        if page_limits.get("max_pages"):
+            config.max_pages = page_limits["max_pages"]
+        if page_limits.get("page_range"):
+            config.page_range = tuple(page_limits["page_range"])
+
+        # Apply output options
+        output = pipeline_config.get("output", {})
+        if "export_json" in output:
+            config.export_json = output["export_json"]
+        if "export_combined" in output:
+            config.export_combined = output["export_combined"]
+
+        return config
+
+    @classmethod
+    def _build_from_flags(cls, pipeline_config: Dict[str, Any]) -> "ExtractionConfig":
+        """Build config from individual extractor flags."""
+        extractors = pipeline_config.get("extractors", {})
+
+        return cls(
+            drugs=extractors.get("drugs", True),
+            diseases=extractors.get("diseases", True),
+            abbreviations=extractors.get("abbreviations", True),
+            feasibility=extractors.get("feasibility", True),
+            pharma_companies=extractors.get("pharma_companies", False),
+            authors=extractors.get("authors", False),
+            citations=extractors.get("citations", False),
+            document_metadata=extractors.get("document_metadata", False),
+            tables=extractors.get("tables", True),
+        )
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary."""
         return {
@@ -379,3 +484,25 @@ def all_extractors() -> ExtractionConfig:
 def standard() -> ExtractionConfig:
     """Standard configuration (drugs, diseases, abbreviations, feasibility)."""
     return ExtractionConfig.from_preset(ExtractionPreset.STANDARD)
+
+
+def load_config(config_path: Optional[Path] = None) -> ExtractionConfig:
+    """
+    Load extraction configuration from config.yaml.
+
+    This is the recommended way to get the extraction configuration.
+    The config.yaml file's extraction_pipeline section controls which
+    extractors run and their options.
+
+    Args:
+        config_path: Optional path to config.yaml. Defaults to G_config/config.yaml.
+
+    Returns:
+        ExtractionConfig loaded from YAML file.
+
+    Example:
+        from G_config import load_config
+        config = load_config()
+        print(config.enabled_extractors)
+    """
+    return ExtractionConfig.from_yaml(config_path)
