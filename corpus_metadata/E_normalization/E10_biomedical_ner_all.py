@@ -101,6 +101,20 @@ for category, entities in ENTITY_CATEGORIES.items():
         ENTITY_TO_CATEGORY[entity] = category
 
 
+# Stopwords/garbage tokens to filter out
+# These are common BERT artifacts or non-informative fragments
+GARBAGE_TOKENS = {
+    # Common fragments
+    "rate", "reduced", "crea", "min", "per", "the", "and", "for", "with",
+    "from", "that", "this", "were", "was", "are", "has", "had", "have",
+    "been", "being", "will", "would", "could", "should", "may", "might",
+    # Partial units/measurements
+    "mg", "ml", "dl", "kg", "cm", "mm", "hr", "hrs", "day", "days",
+    # Common partial lab values
+    "higher", "lower", "normal", "above", "below", "within",
+}
+
+
 @dataclass
 class BiomedicalEntity:
     """Single entity extracted by biomedical-ner-all."""
@@ -330,9 +344,33 @@ class BiomedicalNEREnricher:
 
             # Filter out garbage/subword tokens
             # - Skip tokens with ## (BERT subword continuation)
-            # - Skip single characters
-            # - Skip tokens that are too short
-            if not text or len(text) < 3 or "##" in text:
+            # - Skip tokens that are too short (< 4 chars for most, allow >= 3 for specific valid entities)
+            # - Skip tokens starting with punctuation (partial units like "· 73 m²")
+            # - Skip known garbage tokens
+            if not text:
+                continue
+
+            text_stripped = text.strip()
+            text_lower = text_stripped.lower()
+
+            # Skip BERT subword tokens
+            if "##" in text:
+                continue
+
+            # Skip tokens starting with punctuation (partial extractions)
+            if text_stripped and text_stripped[0] in "·•.,;:/\\|<>=-+*":
+                continue
+
+            # Skip very short tokens (less than 4 chars)
+            if len(text_stripped) < 4:
+                continue
+
+            # Skip known garbage tokens
+            if text_lower in GARBAGE_TOKENS:
+                continue
+
+            # Skip tokens that are just numbers or units
+            if text_stripped.replace(".", "").replace(",", "").replace(" ", "").isdigit():
                 continue
 
             # Get entity type (remove B- or I- prefix if present)

@@ -3203,8 +3203,25 @@ Return ONLY the JSON array, nothing else."""
             return result
 
         for r in results:
-            # Skip NERCandidate objects (they're exported via unified schema)
+            # Handle NERCandidate objects - merge epidemiology into main export
             if not hasattr(r, 'field_type') or r.field_type is None:
+                # Check if this is an NERCandidate with epidemiology data
+                if hasattr(r, 'epidemiology_data') and r.epidemiology_data is not None:
+                    epi_entry = FeasibilityExportEntry(
+                        field_type="EPIDEMIOLOGY_NER",
+                        text=getattr(r, 'text', ''),
+                        section="epidemiology",
+                        page=None,
+                        structured_data={
+                            "data_type": r.epidemiology_data.data_type,
+                            "value": r.epidemiology_data.value,
+                            "population": r.epidemiology_data.population,
+                            "source": getattr(r, 'source', 'NER'),
+                        },
+                        confidence=getattr(r, 'confidence', 0.8),
+                        evidence=[],
+                    )
+                    epidemiology.append(epi_entry)
                 continue
 
             # Handle study design separately (single object, not list)
