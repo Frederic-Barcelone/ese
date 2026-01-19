@@ -914,6 +914,34 @@ class FeasibilityCandidate(BaseModel):
 
 
 # -------------------------
+# NER Candidate (Simplified)
+# -------------------------
+
+
+class NERCandidate(BaseModel):
+    """
+    Simplified candidate for NER-extracted entities.
+
+    Used by NER enrichers (EpiExtract4GARD, ZeroShotBioNER, BiomedicalNER,
+    PatientJourneyNER) that extract entities without full feasibility context.
+
+    These are later routed to the unified schema via candidates_to_unified_schema().
+    """
+
+    category: str  # e.g., "epidemiology", "adverse_event", "diagnostic_delay"
+    text: str
+    evidence_text: str
+    confidence: float = Field(default=0.5, ge=0.0, le=1.0)
+    source: str  # e.g., "EpiExtract4GARD-v2", "ZeroShotBioNER", "PatientJourneyNER"
+
+    # Optional structured data
+    epidemiology_data: Optional[EpidemiologyData] = None
+    entity_type: Optional[str] = None  # Original entity type from NER model
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
 # Export Models
 # -------------------------
 

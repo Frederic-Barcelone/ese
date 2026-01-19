@@ -137,7 +137,7 @@ from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
 from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
 from C_generators.C15_vlm_table_extractor import VLMTableExtractor
-from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument, TrialIdentifier
+from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument, NERCandidate, TrialIdentifier
 from A_core.A09_unified_feasibility_schema import candidates_to_unified_schema
 from C_generators.C00_strategy_identifiers import IdentifierExtractor, IdentifierType
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
@@ -2778,8 +2778,8 @@ Return ONLY the JSON array, nothing else."""
             epi_data_list = epi_result.to_epidemiology_data()
             if epi_data_list:
                 for epi_data in epi_data_list:
-                    # Create a FeasibilityCandidate for each epidemiology finding
-                    epi_candidate = FeasibilityCandidate(
+                    # Create a NERCandidate for each epidemiology finding
+                    epi_candidate = NERCandidate(
                         category="epidemiology",
                         text=epi_data.value,
                         evidence_text=epi_data.value,
@@ -2808,7 +2808,7 @@ Return ONLY the JSON array, nothing else."""
             if total_entities > 0:
                 # Add adverse events as candidates
                 for ade in bioner_result.adverse_events:
-                    ade_candidate = FeasibilityCandidate(
+                    ade_candidate = NERCandidate(
                         category="adverse_event",
                         text=ade.text,
                         evidence_text=ade.text,
@@ -2819,7 +2819,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add drug administration details as candidates
                 for dosage in bioner_result.dosages:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="drug_dosage",
                         text=dosage.text,
                         evidence_text=dosage.text,
@@ -2827,7 +2827,7 @@ Return ONLY the JSON array, nothing else."""
                         source="ZeroShotBioNER",
                     ))
                 for freq in bioner_result.frequencies:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="drug_frequency",
                         text=freq.text,
                         evidence_text=freq.text,
@@ -2835,7 +2835,7 @@ Return ONLY the JSON array, nothing else."""
                         source="ZeroShotBioNER",
                     ))
                 for route in bioner_result.routes:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="drug_route",
                         text=route.text,
                         evidence_text=route.text,
@@ -2843,7 +2843,7 @@ Return ONLY the JSON array, nothing else."""
                         source="ZeroShotBioNER",
                     ))
                 for duration in bioner_result.durations:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="treatment_duration",
                         text=duration.text,
                         evidence_text=duration.text,
@@ -2874,7 +2874,7 @@ Return ONLY the JSON array, nothing else."""
                 # Add symptoms as candidates
                 for entity in biomed_result.clinical:
                     if entity.entity_type == "Sign_symptom":
-                        candidates.append(FeasibilityCandidate(
+                        candidates.append(NERCandidate(
                             category="symptom",
                             text=entity.text,
                             evidence_text=entity.text,
@@ -2882,7 +2882,7 @@ Return ONLY the JSON array, nothing else."""
                             source="BiomedicalNER",
                         ))
                     elif entity.entity_type == "Diagnostic_procedure":
-                        candidates.append(FeasibilityCandidate(
+                        candidates.append(NERCandidate(
                             category="diagnostic_procedure",
                             text=entity.text,
                             evidence_text=entity.text,
@@ -2890,7 +2890,7 @@ Return ONLY the JSON array, nothing else."""
                             source="BiomedicalNER",
                         ))
                     elif entity.entity_type == "Therapeutic_procedure":
-                        candidates.append(FeasibilityCandidate(
+                        candidates.append(NERCandidate(
                             category="therapeutic_procedure",
                             text=entity.text,
                             evidence_text=entity.text,
@@ -2898,7 +2898,7 @@ Return ONLY the JSON array, nothing else."""
                             source="BiomedicalNER",
                         ))
                     elif entity.entity_type == "Lab_value":
-                        candidates.append(FeasibilityCandidate(
+                        candidates.append(NERCandidate(
                             category="lab_value",
                             text=entity.text,
                             evidence_text=entity.text,
@@ -2906,7 +2906,7 @@ Return ONLY the JSON array, nothing else."""
                             source="BiomedicalNER",
                         ))
                     elif entity.entity_type == "Outcome":
-                        candidates.append(FeasibilityCandidate(
+                        candidates.append(NERCandidate(
                             category="outcome",
                             text=entity.text,
                             evidence_text=entity.text,
@@ -2916,7 +2916,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add demographics as candidates
                 for entity in biomed_result.demographics:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category=f"demographics_{entity.entity_type.lower()}",
                         text=entity.text,
                         evidence_text=entity.text,
@@ -2944,7 +2944,7 @@ Return ONLY the JSON array, nothing else."""
             if total_entities > 0:
                 # Add diagnostic delays
                 for entity in pj_result.diagnostic_delays:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="diagnostic_delay",
                         text=entity.text,
                         evidence_text=entity.text,
@@ -2954,7 +2954,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add treatment lines
                 for entity in pj_result.treatment_lines:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="treatment_line",
                         text=entity.text,
                         evidence_text=entity.text,
@@ -2964,7 +2964,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add care pathway steps
                 for entity in pj_result.care_pathway_steps:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="care_pathway_step",
                         text=entity.text,
                         evidence_text=entity.text,
@@ -2974,7 +2974,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add surveillance frequencies
                 for entity in pj_result.surveillance_frequencies:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="surveillance_frequency",
                         text=entity.text,
                         evidence_text=entity.text,
@@ -2984,7 +2984,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add pain points
                 for entity in pj_result.pain_points:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="pain_point",
                         text=entity.text,
                         evidence_text=entity.text,
@@ -2994,7 +2994,7 @@ Return ONLY the JSON array, nothing else."""
 
                 # Add recruitment touchpoints
                 for entity in pj_result.recruitment_touchpoints:
-                    candidates.append(FeasibilityCandidate(
+                    candidates.append(NERCandidate(
                         category="recruitment_touchpoint",
                         text=entity.text,
                         evidence_text=entity.text,
