@@ -138,6 +138,7 @@ from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
 from C_generators.C15_vlm_table_extractor import VLMTableExtractor
 from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument, TrialIdentifier
+from A_core.A09_unified_feasibility_schema import candidates_to_unified_schema, UnifiedFeasibilityOutput
 from C_generators.C00_strategy_identifiers import IdentifierExtractor, IdentifierType
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
@@ -3113,6 +3114,19 @@ Return ONLY the JSON array, nothing else."""
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Feasibility export: {out_file.name}")
+
+        # Also export unified schema format
+        unified_output = candidates_to_unified_schema(
+            candidates=results,
+            document_id=pdf_path.stem,
+            document_name=pdf_path.name,
+            pipeline_version=PIPELINE_VERSION,
+        )
+        unified_file = out_dir / f"feasibility_unified_{pdf_path.stem}_{timestamp}.json"
+        with open(unified_file, "w", encoding="utf-8") as f:
+            f.write(unified_output.model_dump_json(indent=2))
+
+        print(f"  Unified schema: {unified_file.name}")
 
     def _export_images(
         self, pdf_path: Path, doc: "DocumentGraph"
