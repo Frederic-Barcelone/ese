@@ -361,19 +361,12 @@ class Orchestrator:
         # Initialize components
         self._init_components(paths, base_path, api_key, val_cfg)
 
-        print(f"Orchestrator v{PIPELINE_VERSION} initialized")
+        print(f"\nOrchestrator v{PIPELINE_VERSION} initialized")
         print(f"  Run ID: {self.run_id}")
         print(f"  Config: {self.config_path}")
-        print(f"  Model: {self.model}")
-        print(f"  Log dir: {self.log_dir}")
-        print(f"  LLM validation: {'ON' if self.use_llm_validation else 'OFF'}")
-        print(f"  LLM feasibility: {'ON' if self.use_llm_feasibility else 'OFF'}")
-        print(f"  VLM tables: {'ON' if self.use_vlm_tables else 'OFF'}")
-        print(f"  Normalization: {'ON' if self.use_normalization else 'OFF'}")
-        print(
-            f"  Haiku screening: {'ON' if self.enable_haiku_screening else 'OFF'}"
-        )
-        print(f"  Extractors: {self._enabled_extractors_str()}")
+        print(f"  Model:  {self.model}")
+        print(f"  Logs:   {self.log_dir}")
+        self._print_extraction_config()
 
     def _load_extraction_settings(self) -> None:
         """Load extraction pipeline settings from config.yaml."""
@@ -420,6 +413,43 @@ class Orchestrator:
         if self.extract_tables:
             enabled.append("tables")
         return ", ".join(enabled) if enabled else "none"
+
+    def _print_extraction_config(self) -> None:
+        """Print extraction configuration summary."""
+        print("\n  Extraction Pipeline Configuration:")
+        print("  " + "-" * 40)
+
+        # Extractors
+        print("  EXTRACTORS:")
+        extractors = [
+            ("drugs", self.extract_drugs),
+            ("diseases", self.extract_diseases),
+            ("abbreviations", self.extract_abbreviations),
+            ("feasibility", self.extract_feasibility),
+            ("pharma_companies", self.extract_pharma),
+            ("authors", self.extract_authors),
+            ("citations", self.extract_citations),
+            ("document_metadata", self.extract_doc_metadata),
+            ("tables", self.extract_tables),
+        ]
+        for name, enabled in extractors:
+            status = "ON" if enabled else "OFF"
+            print(f"    {name:<20} {status}")
+
+        # Options
+        print("\n  OPTIONS:")
+        options = [
+            ("use_llm_validation", self.use_llm_validation),
+            ("use_llm_feasibility", self.use_llm_feasibility),
+            ("use_vlm_tables", self.use_vlm_tables),
+            ("use_normalization", self.use_normalization),
+            ("haiku_screening", self.enable_haiku_screening),
+        ]
+        for name, enabled in options:
+            status = "ON" if enabled else "OFF"
+            print(f"    {name:<20} {status}")
+
+        print("  " + "-" * 40)
 
     def _init_components(
         self, paths: dict, base_path: str, api_key: Optional[str], val_cfg: dict
