@@ -148,6 +148,7 @@ from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
 from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
+from E_normalization.E09_zeroshot_bioner import ZeroShotBioNEREnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -392,6 +393,7 @@ class Orchestrator:
         self.use_vlm_tables = options.get("use_vlm_tables", False)
         self.use_normalization = options.get("use_normalization", True)
         self.use_epi_enricher = options.get("use_epi_enricher", True)
+        self.use_zeroshot_bioner = options.get("use_zeroshot_bioner", True)
 
     def _enabled_extractors_str(self) -> str:
         """Return string of enabled extractors."""
@@ -446,6 +448,7 @@ class Orchestrator:
             ("use_vlm_tables", self.use_vlm_tables),
             ("use_normalization", self.use_normalization),
             ("use_epi_enricher", self.use_epi_enricher),
+            ("use_zeroshot_bioner", self.use_zeroshot_bioner),
             ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
@@ -680,6 +683,15 @@ class Orchestrator:
             )
         else:
             self.epi_enricher = None
+
+        # ZeroShotBioNER enricher for flexible biomedical entity extraction
+        # Extracts ADE, dosage, frequency, route, duration, etc.
+        if self.use_zeroshot_bioner:
+            self.zeroshot_bioner = ZeroShotBioNEREnricher(
+                config={"run_id": self.run_id}
+            )
+        else:
+            self.zeroshot_bioner = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -2679,6 +2691,71 @@ Return ONLY the JSON array, nothing else."""
                 print(f"      Epi types: {len(epi_result.epi_types)}")
                 print(f"      Statistics: {len(epi_result.statistics)}")
             print(f"    EpiExtract time: {time.time() - epi_start:.2f}s")
+
+        # Enrich with ZeroShotBioNER (ADE, dosage, frequency, route, etc.)
+        if self.zeroshot_bioner is not None:
+            print("  Running ZeroShotBioNER enrichment...")
+            bioner_start = time.time()
+            bioner_result = self.zeroshot_bioner.extract(full_text)
+
+            # Add extracted entities as feasibility candidates
+            summary = bioner_result.to_summary()
+            entity_counts = summary.get("entity_counts", {})
+            total_entities = sum(entity_counts.values())
+
+            if total_entities > 0:
+                # Add adverse events as candidates
+                for ade in bioner_result.adverse_events:
+                    ade_candidate = FeasibilityCandidate(
+                        category="adverse_event",
+                        text=ade.text,
+                        evidence_text=ade.text,
+                        confidence=ade.score,
+                        source="ZeroShotBioNER",
+                    )
+                    candidates.append(ade_candidate)
+
+                # Add drug administration details as candidates
+                for dosage in bioner_result.dosages:
+                    candidates.append(FeasibilityCandidate(
+                        category="drug_dosage",
+                        text=dosage.text,
+                        evidence_text=dosage.text,
+                        confidence=dosage.score,
+                        source="ZeroShotBioNER",
+                    ))
+                for freq in bioner_result.frequencies:
+                    candidates.append(FeasibilityCandidate(
+                        category="drug_frequency",
+                        text=freq.text,
+                        evidence_text=freq.text,
+                        confidence=freq.score,
+                        source="ZeroShotBioNER",
+                    ))
+                for route in bioner_result.routes:
+                    candidates.append(FeasibilityCandidate(
+                        category="drug_route",
+                        text=route.text,
+                        evidence_text=route.text,
+                        confidence=route.score,
+                        source="ZeroShotBioNER",
+                    ))
+                for duration in bioner_result.durations:
+                    candidates.append(FeasibilityCandidate(
+                        category="treatment_duration",
+                        text=duration.text,
+                        evidence_text=duration.text,
+                        confidence=duration.score,
+                        source="ZeroShotBioNER",
+                    ))
+
+                print(f"    ZeroShotBioNER: {total_entities} entities extracted")
+                print(f"      ADE: {entity_counts.get('ADE', 0)}")
+                print(f"      Dosage: {entity_counts.get('dosage', 0)}")
+                print(f"      Frequency: {entity_counts.get('frequency', 0)}")
+                print(f"      Route: {entity_counts.get('route', 0)}")
+                print(f"      Duration: {entity_counts.get('duration', 0)}")
+            print(f"    ZeroShotBioNER time: {time.time() - bioner_start:.2f}s")
 
         print(f"  Feasibility items: {len(candidates)}")
         print(f"  Time: {time.time() - start:.2f}s")

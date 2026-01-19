@@ -753,6 +753,7 @@ extraction_pipeline:
     use_vlm_tables: true         # Vision model for table extraction
     use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
     use_epi_enricher: true        # EpiExtract4GARD-v2 for epidemiology NER (LOC, EPI, STAT)
+    use_zeroshot_bioner: true     # ZeroShotBioNER for ADE, dosage, frequency, route extraction
     parallel_extraction: true     # Run independent extractors in parallel
 
   # Page limits (optional)
