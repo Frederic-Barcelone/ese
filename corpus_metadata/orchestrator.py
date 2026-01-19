@@ -3098,6 +3098,10 @@ Return ONLY the JSON array, nothing else."""
             return result
 
         for r in results:
+            # Skip NERCandidate objects (they're exported via unified schema)
+            if not hasattr(r, 'field_type') or r.field_type is None:
+                continue
+
             # Handle study design separately (single object, not list)
             if r.field_type.value == "STUDY_DESIGN" and r.study_design:
                 study_design_data = r.study_design.model_dump()
