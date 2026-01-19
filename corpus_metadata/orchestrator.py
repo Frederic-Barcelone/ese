@@ -150,6 +150,7 @@ from E_normalization.E07_deduplicator import Deduplicator
 from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
 from E_normalization.E09_zeroshot_bioner import ZeroShotBioNEREnricher
 from E_normalization.E10_biomedical_ner_all import BiomedicalNEREnricher
+from E_normalization.E11_span_deduplicator import deduplicate_feasibility_candidates
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -2916,6 +2917,16 @@ Return ONLY the JSON array, nothing else."""
                 print(f"      Temporal: {category_counts.get('temporal', 0)}")
                 print(f"      Anatomical: {category_counts.get('anatomical', 0)}")
             print(f"    BiomedicalNER time: {time.time() - biomed_start:.2f}s")
+
+        # Deduplicate overlapping NER spans (keep highest confidence)
+        pre_dedup_count = len(candidates)
+        candidates, dedup_result = deduplicate_feasibility_candidates(candidates)
+        if dedup_result.merged_count > 0:
+            print(f"  Span deduplication:")
+            print(f"    Before: {pre_dedup_count} → After: {len(candidates)}")
+            print(f"    Merged: {dedup_result.merged_count} overlapping spans")
+            summary = dedup_result.to_summary()
+            print(f"    By source: {summary.get('by_source', {})}")
 
         print(f"  Feasibility items: {len(candidates)}")
         print(f"  Time: {time.time() - start:.2f}s")
