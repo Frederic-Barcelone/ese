@@ -754,6 +754,7 @@ extraction_pipeline:
     use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
     use_epi_enricher: true        # EpiExtract4GARD-v2 for epidemiology NER (LOC, EPI, STAT)
     use_zeroshot_bioner: true     # ZeroShotBioNER for ADE, dosage, frequency, route extraction
+    use_biomedical_ner: true      # d4data/biomedical-ner-all for 84 entity types (symptoms, procedures, labs)
     parallel_extraction: true     # Run independent extractors in parallel
 
   # Page limits (optional)

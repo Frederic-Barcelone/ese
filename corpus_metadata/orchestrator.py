@@ -149,6 +149,7 @@ from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
 from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
 from E_normalization.E09_zeroshot_bioner import ZeroShotBioNEREnricher
+from E_normalization.E10_biomedical_ner_all import BiomedicalNEREnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -394,6 +395,7 @@ class Orchestrator:
         self.use_normalization = options.get("use_normalization", True)
         self.use_epi_enricher = options.get("use_epi_enricher", True)
         self.use_zeroshot_bioner = options.get("use_zeroshot_bioner", True)
+        self.use_biomedical_ner = options.get("use_biomedical_ner", True)
 
     def _enabled_extractors_str(self) -> str:
         """Return string of enabled extractors."""
@@ -449,6 +451,7 @@ class Orchestrator:
             ("use_normalization", self.use_normalization),
             ("use_epi_enricher", self.use_epi_enricher),
             ("use_zeroshot_bioner", self.use_zeroshot_bioner),
+            ("use_biomedical_ner", self.use_biomedical_ner),
             ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
@@ -692,6 +695,15 @@ class Orchestrator:
             )
         else:
             self.zeroshot_bioner = None
+
+        # d4data/biomedical-ner-all for comprehensive biomedical NER
+        # Extracts 84 entity types: symptoms, procedures, lab values, demographics
+        if self.use_biomedical_ner:
+            self.biomedical_ner = BiomedicalNEREnricher(
+                config={"run_id": self.run_id}
+            )
+        else:
+            self.biomedical_ner = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -2756,6 +2768,78 @@ Return ONLY the JSON array, nothing else."""
                 print(f"      Route: {entity_counts.get('route', 0)}")
                 print(f"      Duration: {entity_counts.get('duration', 0)}")
             print(f"    ZeroShotBioNER time: {time.time() - bioner_start:.2f}s")
+
+        # Enrich with d4data/biomedical-ner-all (84 entity types)
+        if self.biomedical_ner is not None:
+            print("  Running BiomedicalNER enrichment...")
+            biomed_start = time.time()
+            biomed_result = self.biomedical_ner.extract(full_text)
+
+            # Add extracted entities as feasibility candidates
+            summary = biomed_result.to_summary()
+            category_counts = summary.get("category_counts", {})
+            total_entities = sum(category_counts.values())
+
+            if total_entities > 0:
+                # Add symptoms as candidates
+                for entity in biomed_result.clinical:
+                    if entity.entity_type == "Sign_symptom":
+                        candidates.append(FeasibilityCandidate(
+                            category="symptom",
+                            text=entity.text,
+                            evidence_text=entity.text,
+                            confidence=entity.score,
+                            source="BiomedicalNER",
+                        ))
+                    elif entity.entity_type == "Diagnostic_procedure":
+                        candidates.append(FeasibilityCandidate(
+                            category="diagnostic_procedure",
+                            text=entity.text,
+                            evidence_text=entity.text,
+                            confidence=entity.score,
+                            source="BiomedicalNER",
+                        ))
+                    elif entity.entity_type == "Therapeutic_procedure":
+                        candidates.append(FeasibilityCandidate(
+                            category="therapeutic_procedure",
+                            text=entity.text,
+                            evidence_text=entity.text,
+                            confidence=entity.score,
+                            source="BiomedicalNER",
+                        ))
+                    elif entity.entity_type == "Lab_value":
+                        candidates.append(FeasibilityCandidate(
+                            category="lab_value",
+                            text=entity.text,
+                            evidence_text=entity.text,
+                            confidence=entity.score,
+                            source="BiomedicalNER",
+                        ))
+                    elif entity.entity_type == "Outcome":
+                        candidates.append(FeasibilityCandidate(
+                            category="outcome",
+                            text=entity.text,
+                            evidence_text=entity.text,
+                            confidence=entity.score,
+                            source="BiomedicalNER",
+                        ))
+
+                # Add demographics as candidates
+                for entity in biomed_result.demographics:
+                    candidates.append(FeasibilityCandidate(
+                        category=f"demographics_{entity.entity_type.lower()}",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="BiomedicalNER",
+                    ))
+
+                print(f"    BiomedicalNER: {total_entities} entities extracted")
+                print(f"      Clinical: {category_counts.get('clinical', 0)}")
+                print(f"      Demographics: {category_counts.get('demographics', 0)}")
+                print(f"      Temporal: {category_counts.get('temporal', 0)}")
+                print(f"      Anatomical: {category_counts.get('anatomical', 0)}")
+            print(f"    BiomedicalNER time: {time.time() - biomed_start:.2f}s")
 
         print(f"  Feasibility items: {len(candidates)}")
         print(f"  Time: {time.time() - start:.2f}s")
