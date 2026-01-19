@@ -10,6 +10,7 @@ Sources:
 - EpiExtract4GARD-v2: Epidemiology (prevalence, incidence, geography)
 - ZeroShotBioNER: Drug administration (ADE, dosage, frequency, route)
 - BiomedicalNER: Clinical signals (symptoms, procedures, labs, demographics)
+- PatientJourneyEnricher: Patient journey (diagnostic delay, treatment lines, care pathway)
 """
 
 from __future__ import annotations
@@ -152,6 +153,37 @@ class StudyDesignOutput(BaseModel):
 
 
 # -------------------------
+# Patient Journey Section
+# -------------------------
+
+
+class PatientJourneyOutput(BaseModel):
+    """
+    Patient journey data from PatientJourneyEnricher.
+
+    Captures longitudinal progression and real-world barriers that determine
+    how patients reach (or fail to reach) trial eligibility.
+    """
+
+    # Diagnostic timeline: Time from symptom onset to diagnosis
+    diagnostic_delay: List[ExtractedSpan] = Field(default_factory=list)
+
+    # Care pathway: Healthcare journey milestones (GP -> specialist -> CoE -> trial)
+    care_pathway: List[ExtractedSpan] = Field(default_factory=list)
+
+    # Treatment history: Prior therapies (1L/2L/3L), washout considerations
+    treatment_history: List[ExtractedSpan] = Field(default_factory=list)
+
+    # Trial burden: Monitoring intervals, visit schedules
+    trial_burden: List[ExtractedSpan] = Field(default_factory=list)
+
+    # Retention risks: Patient barriers, travel burden, recruitment touchpoints
+    retention_risks: List[ExtractedSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
 # Unified Output Schema
 # -------------------------
 
@@ -173,6 +205,7 @@ class UnifiedFeasibilityOutput(BaseModel):
     epidemiology: EpidemiologyOutput = Field(default_factory=EpidemiologyOutput)
     drug_admin: DrugAdminOutput = Field(default_factory=DrugAdminOutput)
     clinical: ClinicalOutput = Field(default_factory=ClinicalOutput)
+    patient_journey: PatientJourneyOutput = Field(default_factory=PatientJourneyOutput)
     eligibility: EligibilityOutput = Field(default_factory=EligibilityOutput)
     study_design: StudyDesignOutput = Field(default_factory=StudyDesignOutput)
 
@@ -208,6 +241,13 @@ class UnifiedFeasibilityOutput(BaseModel):
                     "therapeutic_procedures": len(self.clinical.therapeutic_procedures),
                     "lab_values": len(self.clinical.lab_values),
                     "outcomes": len(self.clinical.outcomes),
+                },
+                "patient_journey": {
+                    "diagnostic_delay": len(self.patient_journey.diagnostic_delay),
+                    "care_pathway": len(self.patient_journey.care_pathway),
+                    "treatment_history": len(self.patient_journey.treatment_history),
+                    "trial_burden": len(self.patient_journey.trial_burden),
+                    "retention_risks": len(self.patient_journey.retention_risks),
                 },
                 "eligibility": {
                     "inclusion": len(self.eligibility.inclusion),
@@ -330,6 +370,18 @@ def _route_span_to_section(
         output.clinical.diseases.append(span)
     elif cat_lower == "medication":
         output.clinical.medications.append(span)
+
+    # Patient Journey
+    elif cat_lower == "diagnostic_delay":
+        output.patient_journey.diagnostic_delay.append(span)
+    elif cat_lower in ["treatment_line", "prior_therapy"]:
+        output.patient_journey.treatment_history.append(span)
+    elif cat_lower in ["care_pathway_step", "care_pathway"]:
+        output.patient_journey.care_pathway.append(span)
+    elif cat_lower in ["surveillance_frequency", "visit_frequency"]:
+        output.patient_journey.trial_burden.append(span)
+    elif cat_lower in ["pain_point", "recruitment_touchpoint"]:
+        output.patient_journey.retention_risks.append(span)
 
     # Demographics
     elif cat_lower.startswith("demographics_") or cat_lower in ["age", "sex"]:

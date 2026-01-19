@@ -124,6 +124,12 @@ class SpanDeduplicator:
         # Demographics
         "demographics": ["demographics_age", "demographics_sex", "demographics_family_history",
                         "age", "sex", "family_history", "personal_background"],
+        # Patient Journey
+        "diagnostic_delay": ["diagnostic_delay"],
+        "treatment_history": ["treatment_line", "prior_therapy"],
+        "care_pathway": ["care_pathway_step", "care_pathway"],
+        "trial_burden": ["surveillance_frequency", "visit_frequency"],
+        "retention_risks": ["pain_point", "recruitment_touchpoint"],
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
@@ -242,7 +248,7 @@ def deduplicate_feasibility_candidates(
     for i, cand in enumerate(candidates):
         # Only deduplicate NER-sourced candidates
         source = getattr(cand, 'source', None)
-        if source not in ["EpiExtract4GARD-v2", "ZeroShotBioNER", "BiomedicalNER"]:
+        if source not in ["EpiExtract4GARD-v2", "ZeroShotBioNER", "BiomedicalNER", "PatientJourneyNER"]:
             continue
 
         span = NERSpan(
@@ -263,7 +269,7 @@ def deduplicate_feasibility_candidates(
     # Keep non-NER candidates + deduplicated NER candidates
     non_ner_candidates = [
         c for c in candidates
-        if getattr(c, 'source', None) not in ["EpiExtract4GARD-v2", "ZeroShotBioNER", "BiomedicalNER"]
+        if getattr(c, 'source', None) not in ["EpiExtract4GARD-v2", "ZeroShotBioNER", "BiomedicalNER", "PatientJourneyNER"]
     ]
 
     # Find original candidates for unique spans

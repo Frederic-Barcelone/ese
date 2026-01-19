@@ -152,6 +152,7 @@ from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
 from E_normalization.E09_zeroshot_bioner import ZeroShotBioNEREnricher
 from E_normalization.E10_biomedical_ner_all import BiomedicalNEREnricher
 from E_normalization.E11_span_deduplicator import deduplicate_feasibility_candidates
+from E_normalization.E12_patient_journey_enricher import PatientJourneyEnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -468,6 +469,7 @@ class Orchestrator:
         self.use_epi_enricher = options.get("use_epi_enricher", True)
         self.use_zeroshot_bioner = options.get("use_zeroshot_bioner", True)
         self.use_biomedical_ner = options.get("use_biomedical_ner", True)
+        self.use_patient_journey = options.get("use_patient_journey", True)
 
     def _enabled_extractors_str(self) -> str:
         """Return string of enabled extractors."""
@@ -530,6 +532,7 @@ class Orchestrator:
             ("use_epi_enricher", self.use_epi_enricher),
             ("use_zeroshot_bioner", self.use_zeroshot_bioner),
             ("use_biomedical_ner", self.use_biomedical_ner),
+            ("use_patient_journey", self.use_patient_journey),
             ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
@@ -782,6 +785,15 @@ class Orchestrator:
             )
         else:
             self.biomedical_ner = None
+
+        # Patient journey enricher for diagnostic delay, treatment lines, care pathway
+        # Uses ZeroShotBioNER with custom entity labels
+        if self.use_patient_journey:
+            self.patient_journey_enricher = PatientJourneyEnricher(
+                config={"run_id": self.run_id}
+            )
+        else:
+            self.patient_journey_enricher = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -2918,6 +2930,86 @@ Return ONLY the JSON array, nothing else."""
                 print(f"      Temporal: {category_counts.get('temporal', 0)}")
                 print(f"      Anatomical: {category_counts.get('anatomical', 0)}")
             print(f"    BiomedicalNER time: {time.time() - biomed_start:.2f}s")
+
+        # Enrich with PatientJourneyNER (diagnostic delay, treatment lines, care pathway)
+        if self.patient_journey_enricher is not None:
+            print("  Running PatientJourneyNER enrichment...")
+            pj_start = time.time()
+            pj_result = self.patient_journey_enricher.extract(full_text)
+
+            # Add extracted entities as feasibility candidates
+            summary = pj_result.to_summary()
+            total_entities = summary.get("total", 0)
+
+            if total_entities > 0:
+                # Add diagnostic delays
+                for entity in pj_result.diagnostic_delays:
+                    candidates.append(FeasibilityCandidate(
+                        category="diagnostic_delay",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="PatientJourneyNER",
+                    ))
+
+                # Add treatment lines
+                for entity in pj_result.treatment_lines:
+                    candidates.append(FeasibilityCandidate(
+                        category="treatment_line",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="PatientJourneyNER",
+                    ))
+
+                # Add care pathway steps
+                for entity in pj_result.care_pathway_steps:
+                    candidates.append(FeasibilityCandidate(
+                        category="care_pathway_step",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="PatientJourneyNER",
+                    ))
+
+                # Add surveillance frequencies
+                for entity in pj_result.surveillance_frequencies:
+                    candidates.append(FeasibilityCandidate(
+                        category="surveillance_frequency",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="PatientJourneyNER",
+                    ))
+
+                # Add pain points
+                for entity in pj_result.pain_points:
+                    candidates.append(FeasibilityCandidate(
+                        category="pain_point",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="PatientJourneyNER",
+                    ))
+
+                # Add recruitment touchpoints
+                for entity in pj_result.recruitment_touchpoints:
+                    candidates.append(FeasibilityCandidate(
+                        category="recruitment_touchpoint",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="PatientJourneyNER",
+                    ))
+
+                print(f"    PatientJourney: {total_entities} entities extracted")
+                print(f"      diagnostic_delay: {summary.get('diagnostic_delay', 0)}")
+                print(f"      treatment_line: {summary.get('treatment_line', 0)}")
+                print(f"      care_pathway_step: {summary.get('care_pathway_step', 0)}")
+                print(f"      surveillance_frequency: {summary.get('surveillance_frequency', 0)}")
+                print(f"      pain_point: {summary.get('pain_point', 0)}")
+                print(f"      recruitment_touchpoint: {summary.get('recruitment_touchpoint', 0)}")
+            print(f"    PatientJourney time: {time.time() - pj_start:.2f}s")
 
         # Deduplicate overlapping NER spans (keep highest confidence)
         pre_dedup_count = len(candidates)
