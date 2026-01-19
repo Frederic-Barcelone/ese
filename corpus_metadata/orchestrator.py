@@ -138,7 +138,7 @@ from C_generators.C09_strategy_document_metadata import DocumentMetadataStrategy
 from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
 from C_generators.C15_vlm_table_extractor import VLMTableExtractor
 from A_core.A07_feasibility_models import FeasibilityCandidate, FeasibilityExportDocument, TrialIdentifier
-from A_core.A09_unified_feasibility_schema import candidates_to_unified_schema, UnifiedFeasibilityOutput
+from A_core.A09_unified_feasibility_schema import candidates_to_unified_schema
 from C_generators.C00_strategy_identifiers import IdentifierExtractor, IdentifierType
 from A_core.A08_document_metadata_models import DocumentMetadata, DocumentMetadataExport
 from D_validation.D02_llm_engine import ClaudeClient, LLMEngine
@@ -3015,7 +3015,7 @@ Return ONLY the JSON array, nothing else."""
         pre_dedup_count = len(candidates)
         candidates, dedup_result = deduplicate_feasibility_candidates(candidates)
         if dedup_result.merged_count > 0:
-            print(f"  Span deduplication:")
+            print("  Span deduplication:")
             print(f"    Before: {pre_dedup_count} → After: {len(candidates)}")
             print(f"    Merged: {dedup_result.merged_count} overlapping spans")
             summary = dedup_result.to_summary()
