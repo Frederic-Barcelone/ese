@@ -1,0 +1,21 @@
+[project]
+name = "ese"
+requires-python = ">=3.12"
+
+# Type checking configuration for ty (Astral's fast type checker)
+# https://docs.astral.sh/ty/
+
+[tool.ty.environment]
+python-version = "3.12"
+root = ["corpus_metadata"]
+
+[tool.ty.src]
+# Exclude patterns (gitignore-style)
+exclude = [
+    "venv/**",
+    ".venv/**",
+    "backup_*/**",
+    "__pycache__/**",
+    ".ruff_cache/**",
+    ".pytest_cache/**",
+]
