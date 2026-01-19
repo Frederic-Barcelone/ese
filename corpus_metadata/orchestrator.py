@@ -153,6 +153,7 @@ from E_normalization.E09_zeroshot_bioner import ZeroShotBioNEREnricher
 from E_normalization.E10_biomedical_ner_all import BiomedicalNEREnricher
 from E_normalization.E11_span_deduplicator import deduplicate_feasibility_candidates
 from E_normalization.E12_patient_journey_enricher import PatientJourneyEnricher
+from E_normalization.E13_registry_enricher import RegistryEnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -470,6 +471,7 @@ class Orchestrator:
         self.use_zeroshot_bioner = options.get("use_zeroshot_bioner", True)
         self.use_biomedical_ner = options.get("use_biomedical_ner", True)
         self.use_patient_journey = options.get("use_patient_journey", True)
+        self.use_registry_extraction = options.get("use_registry_extraction", True)
 
     def _enabled_extractors_str(self) -> str:
         """Return string of enabled extractors."""
@@ -533,6 +535,7 @@ class Orchestrator:
             ("use_zeroshot_bioner", self.use_zeroshot_bioner),
             ("use_biomedical_ner", self.use_biomedical_ner),
             ("use_patient_journey", self.use_patient_journey),
+            ("use_registry_extraction", self.use_registry_extraction),
             ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
@@ -794,6 +797,15 @@ class Orchestrator:
             )
         else:
             self.patient_journey_enricher = None
+
+        # Registry enricher for cohort access, natural history data
+        # Uses ZeroShotBioNER with registry-specific entity labels
+        if self.use_registry_extraction:
+            self.registry_enricher = RegistryEnricher(
+                config={"run_id": self.run_id}
+            )
+        else:
+            self.registry_enricher = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -3016,6 +3028,93 @@ Return ONLY the JSON array, nothing else."""
                 print(f"      pain_point: {summary.get('pain_point', 0)}")
                 print(f"      recruitment_touchpoint: {summary.get('recruitment_touchpoint', 0)}")
             print(f"    PatientJourney time: {time.time() - pj_start:.2f}s")
+
+        # Enrich with RegistryNER (registry names, sizes, data types, access policies)
+        if self.registry_enricher is not None:
+            print("  Running RegistryNER enrichment...")
+            reg_start = time.time()
+            reg_result = self.registry_enricher.extract(full_text)
+
+            # Add extracted entities as feasibility candidates
+            summary = reg_result.to_summary()
+            total_entities = summary.get("total", 0)
+
+            if total_entities > 0:
+                # Add registry names
+                for entity in reg_result.registry_names:
+                    candidates.append(NERCandidate(
+                        category="registry_name",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="RegistryNER",
+                    ))
+
+                # Add registry sizes
+                for entity in reg_result.registry_sizes:
+                    candidates.append(NERCandidate(
+                        category="registry_size",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="RegistryNER",
+                    ))
+
+                # Add geographic coverage
+                for entity in reg_result.geographic_coverages:
+                    candidates.append(NERCandidate(
+                        category="geographic_coverage",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="RegistryNER",
+                    ))
+
+                # Add data types
+                for entity in reg_result.data_types:
+                    candidates.append(NERCandidate(
+                        category="data_types",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="RegistryNER",
+                    ))
+
+                # Add access policies
+                for entity in reg_result.access_policies:
+                    candidates.append(NERCandidate(
+                        category="access_policy",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="RegistryNER",
+                    ))
+
+                # Add eligibility criteria
+                for entity in reg_result.eligibility_criteria:
+                    candidates.append(NERCandidate(
+                        category="eligibility_criteria",
+                        text=entity.text,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="RegistryNER",
+                    ))
+
+                print(f"    RegistryNER: {total_entities} entities extracted")
+                print(f"      registry_name: {summary.get('registry_name', 0)}")
+                print(f"      registry_size: {summary.get('registry_size', 0)}")
+                print(f"      geographic_coverage: {summary.get('geographic_coverage', 0)}")
+                print(f"      data_types: {summary.get('data_types', 0)}")
+                print(f"      access_policy: {summary.get('access_policy', 0)}")
+                print(f"      eligibility_criteria: {summary.get('eligibility_criteria', 0)}")
+
+                # Report linked registries
+                linked = reg_result.get_linked_registries()
+                if linked:
+                    print(f"    Linked to known registries: {len(linked)}")
+                    for lr in linked[:3]:  # Show first 3
+                        print(f"      {lr.get('extracted_text')} -> {lr.get('full_name', 'N/A')}")
+            print(f"    RegistryNER time: {time.time() - reg_start:.2f}s")
 
         # Deduplicate overlapping NER spans (keep highest confidence)
         pre_dedup_count = len(candidates)

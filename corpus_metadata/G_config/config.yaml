@@ -756,6 +756,7 @@ extraction_pipeline:
     use_zeroshot_bioner: true     # ZeroShotBioNER for ADE, dosage, frequency, route extraction
     use_biomedical_ner: true      # d4data/biomedical-ner-all for 84 entity types (symptoms, procedures, labs)
     use_patient_journey: true     # Patient journey extraction (diagnostic delay, treatment lines, care pathway)
+    use_registry_extraction: true # Registry extraction (registry names, sizes, data types, access policies)
     parallel_extraction: true     # Run independent extractors in parallel
 
   # Page limits (optional)

@@ -184,6 +184,32 @@ class PatientJourneyOutput(BaseModel):
 
 
 # -------------------------
+# Registry Section
+# -------------------------
+
+
+class RegistryOutput(BaseModel):
+    """
+    Patient registry data from RegistryEnricher.
+
+    Captures registry information for real-world cohort access,
+    natural history data, and external control arms.
+    """
+
+    # Core registry profile
+    registry_names: List[ExtractedSpan] = Field(default_factory=list)
+    registry_sizes: List[ExtractedSpan] = Field(default_factory=list)
+    geographic_coverage: List[ExtractedSpan] = Field(default_factory=list)
+
+    # Data & access
+    data_types: List[ExtractedSpan] = Field(default_factory=list)
+    access_policies: List[ExtractedSpan] = Field(default_factory=list)
+    eligibility_criteria: List[ExtractedSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
 # Unified Output Schema
 # -------------------------
 
@@ -206,6 +232,7 @@ class UnifiedFeasibilityOutput(BaseModel):
     drug_admin: DrugAdminOutput = Field(default_factory=DrugAdminOutput)
     clinical: ClinicalOutput = Field(default_factory=ClinicalOutput)
     patient_journey: PatientJourneyOutput = Field(default_factory=PatientJourneyOutput)
+    registries: RegistryOutput = Field(default_factory=RegistryOutput)
     eligibility: EligibilityOutput = Field(default_factory=EligibilityOutput)
     study_design: StudyDesignOutput = Field(default_factory=StudyDesignOutput)
 
@@ -248,6 +275,14 @@ class UnifiedFeasibilityOutput(BaseModel):
                     "treatment_history": len(self.patient_journey.treatment_history),
                     "trial_burden": len(self.patient_journey.trial_burden),
                     "retention_risks": len(self.patient_journey.retention_risks),
+                },
+                "registries": {
+                    "registry_names": len(self.registries.registry_names),
+                    "registry_sizes": len(self.registries.registry_sizes),
+                    "geographic_coverage": len(self.registries.geographic_coverage),
+                    "data_types": len(self.registries.data_types),
+                    "access_policies": len(self.registries.access_policies),
+                    "eligibility_criteria": len(self.registries.eligibility_criteria),
                 },
                 "eligibility": {
                     "inclusion": len(self.eligibility.inclusion),
@@ -431,6 +466,20 @@ def _route_span_to_section(
         output.patient_journey.care_pathway.append(span)
     elif cat_lower == "treatment_pathway":
         output.patient_journey.treatment_history.append(span)
+
+    # Registries (from RegistryEnricher)
+    elif cat_lower == "registry_name":
+        output.registries.registry_names.append(span)
+    elif cat_lower == "registry_size":
+        output.registries.registry_sizes.append(span)
+    elif cat_lower == "geographic_coverage":
+        output.registries.geographic_coverage.append(span)
+    elif cat_lower == "data_types":
+        output.registries.data_types.append(span)
+    elif cat_lower == "access_policy":
+        output.registries.access_policies.append(span)
+    elif cat_lower in ["eligibility_criteria", "registry_eligibility"]:
+        output.registries.eligibility_criteria.append(span)
 
     # Study design
     elif cat_lower in ["endpoint", "study_endpoint"]:
