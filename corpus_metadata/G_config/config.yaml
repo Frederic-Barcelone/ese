@@ -731,7 +731,7 @@ deduplication:
 extraction_pipeline:
   # Use a preset (overrides individual flags below if set)
   # Set to null or remove to use individual flags
-  preset: null  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
+  preset: feasibility_only  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
                 # entities_only, clinical_entities, metadata_only, standard, all, minimal
 
   # Individual extractor flags (used when preset is null)
@@ -752,6 +752,7 @@ extraction_pipeline:
     use_llm_feasibility: true     # LLM-based feasibility extraction (vs pattern-based)
     use_vlm_tables: true         # Vision model for table extraction
     use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
+    use_epi_enricher: true        # EpiExtract4GARD-v2 for epidemiology NER (LOC, EPI, STAT)
     parallel_extraction: true     # Run independent extractors in parallel
 
   # Page limits (optional)

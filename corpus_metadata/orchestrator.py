@@ -147,6 +147,7 @@ from E_normalization.E02_disambiguator import Disambiguator
 from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
+from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -390,6 +391,7 @@ class Orchestrator:
         self.use_llm_feasibility = options.get("use_llm_feasibility", True)
         self.use_vlm_tables = options.get("use_vlm_tables", False)
         self.use_normalization = options.get("use_normalization", True)
+        self.use_epi_enricher = options.get("use_epi_enricher", True)
 
     def _enabled_extractors_str(self) -> str:
         """Return string of enabled extractors."""
@@ -443,6 +445,7 @@ class Orchestrator:
             ("use_llm_feasibility", self.use_llm_feasibility),
             ("use_vlm_tables", self.use_vlm_tables),
             ("use_normalization", self.use_normalization),
+            ("use_epi_enricher", self.use_epi_enricher),
             ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
@@ -668,6 +671,15 @@ class Orchestrator:
             )
         else:
             self.llm_feasibility_extractor = None
+
+        # EpiExtract4GARD-v2 enricher for rare disease epidemiology NER
+        # Uses BioBERT model to extract LOC, EPI, STAT entities
+        if self.use_epi_enricher:
+            self.epi_enricher = EpiExtractEnricher(
+                config={"run_id": self.run_id}
+            )
+        else:
+            self.epi_enricher = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -2641,6 +2653,32 @@ Return ONLY the JSON array, nothing else."""
             print("  Using pattern-based extraction...")
             candidates = self.feasibility_detector.extract(doc)
             self.feasibility_detector.print_summary()
+
+        # Enrich with EpiExtract4GARD-v2 (rare disease epidemiology NER)
+        if self.epi_enricher is not None:
+            print("  Running EpiExtract4GARD-v2 enrichment...")
+            epi_start = time.time()
+            epi_result = self.epi_enricher.extract(full_text)
+
+            # Convert to EpidemiologyData and add as feasibility candidates
+            epi_data_list = epi_result.to_epidemiology_data()
+            if epi_data_list:
+                for epi_data in epi_data_list:
+                    # Create a FeasibilityCandidate for each epidemiology finding
+                    epi_candidate = FeasibilityCandidate(
+                        category="epidemiology",
+                        text=epi_data.value,
+                        evidence_text=epi_data.value,
+                        confidence=0.8,
+                        source="EpiExtract4GARD-v2",
+                        epidemiology_data=epi_data,
+                    )
+                    candidates.append(epi_candidate)
+                print(f"    EpiExtract4GARD: {len(epi_data_list)} epidemiology items")
+                print(f"      Locations: {len(epi_result.locations)}")
+                print(f"      Epi types: {len(epi_result.epi_types)}")
+                print(f"      Statistics: {len(epi_result.statistics)}")
+            print(f"    EpiExtract time: {time.time() - epi_start:.2f}s")
 
         print(f"  Feasibility items: {len(candidates)}")
         print(f"  Time: {time.time() - start:.2f}s")
