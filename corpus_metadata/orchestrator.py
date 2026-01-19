@@ -322,12 +322,14 @@ class Orchestrator:
         config_path: Optional[str] = None,
         run_id: Optional[str] = None,
         gold_json: Optional[str] = None,
-        skip_validation: Optional[bool] = None,
-        enable_haiku_screening: Optional[bool] = None,
         heuristics_config: Optional[HeuristicsConfig] = None,
     ):
         self.config_path = config_path or self.DEFAULT_CONFIG
         self.config = self._load_config(self.config_path)
+
+        # Load extraction pipeline configuration from config.yaml FIRST
+        # (other settings may depend on it)
+        self.extraction_config = ExtractionConfig.from_yaml(Path(self.config_path))
 
         # Extract paths from config
         paths = self.config.get("paths", {})
@@ -349,29 +351,14 @@ class Orchestrator:
         self.model = model or val_cfg.get("model", "claude-sonnet-4-20250514")
         self.batch_delay_ms = api_cfg.get("batch_delay_ms", 100)
 
-        # Validation settings
-        validation_cfg = self.config.get("validation", {}).get("abbreviation", {})
-        self.skip_validation = (
-            skip_validation
-            if skip_validation is not None
-            else not validation_cfg.get("enabled", True)
-        )
-
         # Heuristics settings
         heur_cfg = self.config.get("heuristics", {})
-        self.enable_haiku_screening = (
-            enable_haiku_screening
-            if enable_haiku_screening is not None
-            else heur_cfg.get("enable_haiku_screening", False)
-        )
+        self.enable_haiku_screening = heur_cfg.get("enable_haiku_screening", False)
 
         self.run_id = run_id or generate_run_id("RUN")
         self.heuristics = heuristics_config or HeuristicsConfig.from_yaml(
             self.config_path
         )
-
-        # Load extraction pipeline configuration from config.yaml
-        self.extraction_config = ExtractionConfig.from_yaml(Path(self.config_path))
 
         # Initialize components
         self._init_components(paths, base_path, api_key, val_cfg)
@@ -381,9 +368,12 @@ class Orchestrator:
         print(f"  Config: {self.config_path}")
         print(f"  Model: {self.model}")
         print(f"  Log dir: {self.log_dir}")
-        print(f"  Validation: {'ENABLED' if not self.skip_validation else 'DISABLED'}")
+        print(f"  LLM validation: {'ON' if self.extraction_config.use_llm_validation else 'OFF'}")
+        print(f"  LLM feasibility: {'ON' if self.extraction_config.use_llm_feasibility else 'OFF'}")
+        print(f"  VLM tables: {'ON' if self.extraction_config.use_vlm_tables else 'OFF'}")
+        print(f"  Normalization: {'ON' if self.extraction_config.use_normalization else 'OFF'}")
         print(
-            f"  Haiku screening: {'ENABLED' if self.enable_haiku_screening else 'OFF'}"
+            f"  Haiku screening: {'ON' if self.enable_haiku_screening else 'OFF'}"
         )
         print(f"  Extractors: {self.extraction_config}")
 
@@ -475,8 +465,8 @@ class Orchestrator:
             RegexLexiconGenerator(config=lexicon_gen_config),
         ]
 
-        # Validation
-        if not self.skip_validation:
+        # Validation (controlled by extraction_pipeline.options.use_llm_validation)
+        if self.extraction_config.use_llm_validation:
             self.claude_client = ClaudeClient(
                 api_key=api_key, model=self.model, config_path=self.config_path
             )
@@ -493,20 +483,15 @@ class Orchestrator:
             self.llm_engine = None
 
         # VLM Table Extractor (uses Claude Vision for better table extraction)
-        self.use_vlm_tables = self.config.get("table_extraction", {}).get("use_vlm", True)
-        if self.use_vlm_tables and self.claude_client:
+        # Controlled by extraction_pipeline.options.use_vlm_tables
+        if self.extraction_config.use_vlm_tables and self.claude_client:
             self.vlm_table_extractor = VLMTableExtractor(
                 llm_client=self.claude_client,
                 llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
                 config={"run_id": self.run_id},
             )
-            print("  VLM table extraction: ENABLED")
         else:
             self.vlm_table_extractor = None
-            if self.use_vlm_tables:
-                print("  VLM table extraction: DISABLED (no LLM client)")
-            else:
-                print("  VLM table extraction: DISABLED (config)")
 
         # Logger
         self.logger = ValidationLogger(log_dir=str(self.log_dir), run_id=self.run_id)
@@ -597,11 +582,11 @@ class Orchestrator:
         )
 
         # Feasibility detection components
+        # Controlled by extraction_pipeline.options.use_llm_feasibility
         self.feasibility_detector = FeasibilityDetector(
             config={"run_id": self.run_id}
         )
-        self.use_llm_feasibility = self.config.get("feasibility_extraction", {}).get("use_llm", True)
-        if self.use_llm_feasibility and self.claude_client:
+        if self.extraction_config.use_llm_feasibility and self.claude_client:
             self.llm_feasibility_extractor = LLMFeasibilityExtractor(
                 llm_client=self.claude_client,
                 llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
@@ -864,7 +849,7 @@ class Orchestrator:
             doc,
             str(pdf_path),
             render_images=True,
-            use_vlm=self.use_vlm_tables and self.vlm_table_extractor is not None,
+            use_vlm=self.extraction_config.use_vlm_tables and self.vlm_table_extractor is not None,
             vlm_extractor=self.vlm_table_extractor,
         )
 
@@ -1485,6 +1470,11 @@ Return ONLY the JSON array, nothing else."""
             2. Disambiguate: Resolve ambiguous SF meanings (disambiguator)
             3. Deduplicate: Merge same-SF entries, pick best LF (deduplicator)
         """
+        # Check if normalization is disabled in config
+        if not self.extraction_config.use_normalization:
+            print("\n[4/10] Normalization SKIPPED (disabled in config)")
+            return results
+
         print("\n[4/10] Normalizing, disambiguating & deduplicating...")
 
         # Step 1: Normalize
@@ -1603,8 +1593,8 @@ Return ONLY the JSON array, nothing else."""
             # Run abbreviation extraction
             unique_candidates, full_text = self._generate_candidates(doc)
 
-            # Check if validation should be skipped
-            if self.skip_validation:
+            # Check if LLM validation is disabled
+            if not self.extraction_config.use_llm_validation:
                 print("\n[3/10] Validation SKIPPED")
                 self._export_results(pdf_path_obj, [], unique_candidates)
             else:

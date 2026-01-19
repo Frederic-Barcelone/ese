@@ -740,17 +740,17 @@ extraction_pipeline:
     diseases: true
     abbreviations: true
     feasibility: true
-    pharma_companies: false
-    authors: false
-    citations: false
-    document_metadata: false
+    pharma_companies: true
+    authors: true
+    citations: true
+    document_metadata: true
     tables: true
 
   # Processing options
   options:
     use_llm_validation: true      # LLM validation for abbreviations
     use_llm_feasibility: true     # LLM-based feasibility extraction (vs pattern-based)
-    use_vlm_tables: false         # Vision model for table extraction
+    use_vlm_tables: true         # Vision model for table extraction
     use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
     parallel_extraction: true     # Run independent extractors in parallel
 
