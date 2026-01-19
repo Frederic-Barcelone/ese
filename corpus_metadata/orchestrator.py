@@ -374,21 +374,91 @@ class Orchestrator:
     def _load_extraction_settings(self) -> None:
         """Load extraction pipeline settings from config.yaml."""
         pipeline = self.config.get("extraction_pipeline", {})
+        preset = pipeline.get("preset")
         extractors = pipeline.get("extractors", {})
         options = pipeline.get("options", {})
 
-        # Extractor flags
-        self.extract_drugs = extractors.get("drugs", True)
-        self.extract_diseases = extractors.get("diseases", True)
-        self.extract_abbreviations = extractors.get("abbreviations", True)
-        self.extract_feasibility = extractors.get("feasibility", True)
-        self.extract_pharma = extractors.get("pharma_companies", False)
-        self.extract_authors = extractors.get("authors", False)
-        self.extract_citations = extractors.get("citations", False)
-        self.extract_doc_metadata = extractors.get("document_metadata", False)
-        self.extract_tables = extractors.get("tables", True)
+        # Define presets (override individual flags if preset is set)
+        PRESETS = {
+            "drugs_only": {
+                "drugs": True, "diseases": False, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+            "diseases_only": {
+                "drugs": False, "diseases": True, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+            "abbreviations_only": {
+                "drugs": False, "diseases": False, "abbreviations": True,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+            "feasibility_only": {
+                "drugs": False, "diseases": False, "abbreviations": False,
+                "feasibility": True, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+            "entities_only": {
+                "drugs": True, "diseases": True, "abbreviations": True,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+            "clinical_entities": {
+                "drugs": True, "diseases": True, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+            "metadata_only": {
+                "drugs": False, "diseases": False, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": True,
+                "citations": True, "document_metadata": True, "tables": False,
+            },
+            "standard": {
+                "drugs": True, "diseases": True, "abbreviations": True,
+                "feasibility": True, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": True,
+            },
+            "all": {
+                "drugs": True, "diseases": True, "abbreviations": True,
+                "feasibility": True, "pharma_companies": True, "authors": True,
+                "citations": True, "document_metadata": True, "tables": True,
+            },
+            "minimal": {
+                "drugs": False, "diseases": False, "abbreviations": True,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
+        }
 
-        # Processing options
+        # Apply preset if set, otherwise use individual flags
+        self.active_preset = preset
+        if preset and preset in PRESETS:
+            preset_config = PRESETS[preset]
+            self.extract_drugs = preset_config["drugs"]
+            self.extract_diseases = preset_config["diseases"]
+            self.extract_abbreviations = preset_config["abbreviations"]
+            self.extract_feasibility = preset_config["feasibility"]
+            self.extract_pharma = preset_config["pharma_companies"]
+            self.extract_authors = preset_config["authors"]
+            self.extract_citations = preset_config["citations"]
+            self.extract_doc_metadata = preset_config["document_metadata"]
+            self.extract_tables = preset_config["tables"]
+        else:
+            # Use individual extractor flags
+            self.active_preset = None
+            self.extract_drugs = extractors.get("drugs", True)
+            self.extract_diseases = extractors.get("diseases", True)
+            self.extract_abbreviations = extractors.get("abbreviations", True)
+            self.extract_feasibility = extractors.get("feasibility", True)
+            self.extract_pharma = extractors.get("pharma_companies", False)
+            self.extract_authors = extractors.get("authors", False)
+            self.extract_citations = extractors.get("citations", False)
+            self.extract_doc_metadata = extractors.get("document_metadata", False)
+            self.extract_tables = extractors.get("tables", True)
+
+        # Processing options (always read from options, not affected by preset)
         self.use_llm_validation = options.get("use_llm_validation", True)
         self.use_llm_feasibility = options.get("use_llm_feasibility", True)
         self.use_vlm_tables = options.get("use_vlm_tables", False)
@@ -425,8 +495,14 @@ class Orchestrator:
         print("\n  Extraction Pipeline Configuration:")
         print("  " + "-" * 40)
 
+        # Show active preset if set
+        if self.active_preset:
+            print(f"  PRESET: {self.active_preset}")
+        else:
+            print("  PRESET: (custom - using individual flags)")
+
         # Extractors
-        print("  EXTRACTORS:")
+        print("\n  EXTRACTORS:")
         extractors = [
             ("drugs", self.extract_drugs),
             ("diseases", self.extract_diseases),
