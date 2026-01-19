@@ -148,7 +148,6 @@ from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 from E_normalization.E06_nct_enricher import NCTEnricher, enrich_trial_acronym
 from E_normalization.E07_deduplicator import Deduplicator
 from F_evaluation.F05_extraction_analysis import run_analysis
-from G_config.extraction_config import ExtractionConfig
 
 PIPELINE_VERSION = "0.8"
 
@@ -327,9 +326,8 @@ class Orchestrator:
         self.config_path = config_path or self.DEFAULT_CONFIG
         self.config = self._load_config(self.config_path)
 
-        # Load extraction pipeline configuration from config.yaml FIRST
-        # (other settings may depend on it)
-        self.extraction_config = ExtractionConfig.from_yaml(Path(self.config_path))
+        # Load extraction pipeline settings directly from config.yaml
+        self._load_extraction_settings()
 
         # Extract paths from config
         paths = self.config.get("paths", {})
@@ -368,14 +366,60 @@ class Orchestrator:
         print(f"  Config: {self.config_path}")
         print(f"  Model: {self.model}")
         print(f"  Log dir: {self.log_dir}")
-        print(f"  LLM validation: {'ON' if self.extraction_config.use_llm_validation else 'OFF'}")
-        print(f"  LLM feasibility: {'ON' if self.extraction_config.use_llm_feasibility else 'OFF'}")
-        print(f"  VLM tables: {'ON' if self.extraction_config.use_vlm_tables else 'OFF'}")
-        print(f"  Normalization: {'ON' if self.extraction_config.use_normalization else 'OFF'}")
+        print(f"  LLM validation: {'ON' if self.use_llm_validation else 'OFF'}")
+        print(f"  LLM feasibility: {'ON' if self.use_llm_feasibility else 'OFF'}")
+        print(f"  VLM tables: {'ON' if self.use_vlm_tables else 'OFF'}")
+        print(f"  Normalization: {'ON' if self.use_normalization else 'OFF'}")
         print(
             f"  Haiku screening: {'ON' if self.enable_haiku_screening else 'OFF'}"
         )
-        print(f"  Extractors: {self.extraction_config}")
+        print(f"  Extractors: {self._enabled_extractors_str()}")
+
+    def _load_extraction_settings(self) -> None:
+        """Load extraction pipeline settings from config.yaml."""
+        pipeline = self.config.get("extraction_pipeline", {})
+        extractors = pipeline.get("extractors", {})
+        options = pipeline.get("options", {})
+
+        # Extractor flags
+        self.extract_drugs = extractors.get("drugs", True)
+        self.extract_diseases = extractors.get("diseases", True)
+        self.extract_abbreviations = extractors.get("abbreviations", True)
+        self.extract_feasibility = extractors.get("feasibility", True)
+        self.extract_pharma = extractors.get("pharma_companies", False)
+        self.extract_authors = extractors.get("authors", False)
+        self.extract_citations = extractors.get("citations", False)
+        self.extract_doc_metadata = extractors.get("document_metadata", False)
+        self.extract_tables = extractors.get("tables", True)
+
+        # Processing options
+        self.use_llm_validation = options.get("use_llm_validation", True)
+        self.use_llm_feasibility = options.get("use_llm_feasibility", True)
+        self.use_vlm_tables = options.get("use_vlm_tables", False)
+        self.use_normalization = options.get("use_normalization", True)
+
+    def _enabled_extractors_str(self) -> str:
+        """Return string of enabled extractors."""
+        enabled = []
+        if self.extract_drugs:
+            enabled.append("drugs")
+        if self.extract_diseases:
+            enabled.append("diseases")
+        if self.extract_abbreviations:
+            enabled.append("abbreviations")
+        if self.extract_feasibility:
+            enabled.append("feasibility")
+        if self.extract_pharma:
+            enabled.append("pharma")
+        if self.extract_authors:
+            enabled.append("authors")
+        if self.extract_citations:
+            enabled.append("citations")
+        if self.extract_doc_metadata:
+            enabled.append("doc_metadata")
+        if self.extract_tables:
+            enabled.append("tables")
+        return ", ".join(enabled) if enabled else "none"
 
     def _init_components(
         self, paths: dict, base_path: str, api_key: Optional[str], val_cfg: dict
@@ -466,7 +510,7 @@ class Orchestrator:
         ]
 
         # Validation (controlled by extraction_pipeline.options.use_llm_validation)
-        if self.extraction_config.use_llm_validation:
+        if self.use_llm_validation:
             self.claude_client = ClaudeClient(
                 api_key=api_key, model=self.model, config_path=self.config_path
             )
@@ -484,7 +528,7 @@ class Orchestrator:
 
         # VLM Table Extractor (uses Claude Vision for better table extraction)
         # Controlled by extraction_pipeline.options.use_vlm_tables
-        if self.extraction_config.use_vlm_tables and self.claude_client:
+        if self.use_vlm_tables and self.claude_client:
             self.vlm_table_extractor = VLMTableExtractor(
                 llm_client=self.claude_client,
                 llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
@@ -586,7 +630,7 @@ class Orchestrator:
         self.feasibility_detector = FeasibilityDetector(
             config={"run_id": self.run_id}
         )
-        if self.extraction_config.use_llm_feasibility and self.claude_client:
+        if self.use_llm_feasibility and self.claude_client:
             self.llm_feasibility_extractor = LLMFeasibilityExtractor(
                 llm_client=self.claude_client,
                 llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
@@ -849,7 +893,7 @@ class Orchestrator:
             doc,
             str(pdf_path),
             render_images=True,
-            use_vlm=self.extraction_config.use_vlm_tables and self.vlm_table_extractor is not None,
+            use_vlm=self.use_vlm_tables and self.vlm_table_extractor is not None,
             vlm_extractor=self.vlm_table_extractor,
         )
 
@@ -1471,7 +1515,7 @@ Return ONLY the JSON array, nothing else."""
             3. Deduplicate: Merge same-SF entries, pick best LF (deduplicator)
         """
         # Check if normalization is disabled in config
-        if not self.extraction_config.use_normalization:
+        if not self.use_normalization:
             print("\n[4/10] Normalization SKIPPED (disabled in config)")
             return results
 
@@ -1589,12 +1633,12 @@ Return ONLY the JSON array, nothing else."""
             block.text for block in doc.iter_linear_blocks()
         )
 
-        if self.extraction_config.abbreviations:
+        if self.extract_abbreviations:
             # Run abbreviation extraction
             unique_candidates, full_text = self._generate_candidates(doc)
 
             # Check if LLM validation is disabled
-            if not self.extraction_config.use_llm_validation:
+            if not self.use_llm_validation:
                 print("\n[3/10] Validation SKIPPED")
                 self._export_results(pdf_path_obj, [], unique_candidates)
             else:
@@ -1668,49 +1712,49 @@ Return ONLY the JSON array, nothing else."""
 
         # Disease detection (conditional on config)
         disease_results: List[ExtractedDisease] = []
-        if self.extraction_config.diseases:
+        if self.extract_diseases:
             disease_results = self._process_diseases(doc, pdf_path_obj)
         else:
             print("\n[Disease detection] SKIPPED (disabled in config)")
 
         # Drug detection (conditional on config)
         drug_results: List[ExtractedDrug] = []
-        if self.extraction_config.drugs:
+        if self.extract_drugs:
             drug_results = self._process_drugs(doc, pdf_path_obj)
         else:
             print("\n[Drug detection] SKIPPED (disabled in config)")
 
         # Pharma company detection (conditional on config)
         pharma_results: List[ExtractedPharma] = []
-        if self.extraction_config.pharma_companies:
+        if self.extract_pharma:
             pharma_results = self._process_pharma(doc, pdf_path_obj)
         else:
             print("\n[Pharma detection] SKIPPED (disabled in config)")
 
         # Author detection (conditional on config)
         author_results: List[ExtractedAuthor] = []
-        if self.extraction_config.authors:
+        if self.extract_authors:
             author_results = self._process_authors(doc, pdf_path_obj, full_text)
         else:
             print("\n[Author detection] SKIPPED (disabled in config)")
 
         # Citation detection (conditional on config)
         citation_results: List[ExtractedCitation] = []
-        if self.extraction_config.citations:
+        if self.extract_citations:
             citation_results = self._process_citations(doc, pdf_path_obj, full_text)
         else:
             print("\n[Citation detection] SKIPPED (disabled in config)")
 
         # Feasibility extraction (conditional on config)
         feasibility_results: List[FeasibilityCandidate] = []
-        if self.extraction_config.feasibility:
+        if self.extract_feasibility:
             feasibility_results = self._process_feasibility(doc, pdf_path_obj, full_text)
         else:
             print("\n[Feasibility extraction] SKIPPED (disabled in config)")
 
         # Document metadata extraction (conditional on config)
         doc_metadata: Optional[DocumentMetadata] = None
-        if self.extraction_config.document_metadata:
+        if self.extract_doc_metadata:
             doc_metadata = self._process_document_metadata(
                 doc, pdf_path_obj, full_text[:5000]
             )
@@ -1759,7 +1803,7 @@ Return ONLY the JSON array, nothing else."""
             self._export_images(pdf_path_obj, doc)
 
         # Export tables as images (conditional on config)
-        if doc is not None and self.extraction_config.tables:
+        if doc is not None and self.extract_tables:
             self._export_tables(pdf_path_obj, doc)
 
         # Export document metadata
