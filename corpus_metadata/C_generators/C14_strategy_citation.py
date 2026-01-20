@@ -1,15 +1,42 @@
 # corpus_metadata/C_generators/C14_strategy_citation.py
 """
-Citation/reference mention detection.
+Citation and reference mention detection using regex patterns.
 
-Uses regex patterns to detect citations with identifiers (PMID, PMCID, DOI, NCT, URL).
+This module detects academic citations and identifier references in clinical documents,
+extracting structured identifiers for validation and linking to external databases.
+
+Supported Identifier Types:
+    - PMID: PubMed identifiers (7-8 digit numbers)
+    - PMCID: PubMed Central identifiers (PMC + 6-8 digits)
+    - DOI: Digital Object Identifiers (10.xxxx/yyyy format)
+    - NCT: ClinicalTrials.gov identifiers (NCT + 8 digits)
+    - URL: Web URLs (excluding doi.org, which are handled as DOIs)
+
+Key Features:
+    - Handles DOIs with parentheses (e.g., Lancet DOIs like S0140-6736(25)01148-1)
+    - Fixes broken DOIs caused by PDF line breaks
+    - Validates URLs and rejects truncated/incomplete ones
+    - Merges related citations that appear near each other
+    - Extracts context text for validation
+
+Example:
+    >>> from C_generators.C14_strategy_citation import CitationDetector
+    >>> detector = CitationDetector()
+    >>> candidates = detector.detect(doc_graph, "doc123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"Found: {c.doi or c.pmid or c.nct}")
+
+Dependencies:
+    - A_core.A11_citation_models: Data models for citations
+    - B_parsing.B02_doc_graph: Document graph for text extraction
 """
 
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set, TYPE_CHECKING
 
+from A_core.A00_logging import get_logger
 from A_core.A01_domain_models import Coordinate, EvidenceSpan, ValidationStatus
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A11_citation_models import (
@@ -21,22 +48,46 @@ from A_core.A11_citation_models import (
     CitationProvenanceMetadata,
     ExtractedCitation,
 )
-from B_parsing.B02_doc_graph import DocumentGraph
+
+if TYPE_CHECKING:
+    from B_parsing.B02_doc_graph import DocumentGraph
+
+# Module logger
+logger = get_logger(__name__)
 
 
 class CitationDetector:
     """
-    Detect citation/reference mentions using regex patterns.
+    Detect citation and reference mentions using regex patterns.
 
-    Detects PMID, PMCID, DOI, NCT identifiers, and URLs in clinical documents.
+    This class scans document text for academic identifiers (PMID, DOI, NCT, etc.)
+    and extracts structured citation candidates for downstream validation.
+
+    The detector handles common edge cases in PDF extraction:
+        - DOIs broken by line breaks
+        - Parentheses in DOI suffixes (e.g., Lancet format)
+        - Truncated URLs from PDF rendering issues
+
+    Attributes:
+        CITATION_PATTERNS: Compiled regex patterns for each identifier type.
+        config: Configuration dictionary.
+        run_id: Unique identifier for this detection run.
+        pipeline_version: Version string for provenance tracking.
+
+    Example:
+        >>> detector = CitationDetector({"run_id": "RUN_123"})
+        >>> candidates = detector.detect(doc_graph, "doc_id", "fingerprint")
+        >>> validated = detector.validate_candidates(candidates)
+        >>> export = detector.export_to_json(validated, "doc_id")
     """
 
     # Citation identifier patterns
     # Note: DOIs can contain parentheses (e.g., 10.1016/S0140-6736(25)01148-1)
     # so we allow () in patterns but strip trailing unbalanced ) later
-    CITATION_PATTERNS: Dict[CitationIdentifierType, List[re.Pattern]] = {
+    CITATION_PATTERNS: Dict[CitationIdentifierType, List[re.Pattern[str]]] = {
         CitationIdentifierType.PMID: [
-            # Explicit PMID prefix required - no standalone number matching to avoid NCT confusion
+            # Explicit PMID prefix required - no standalone number matching
+            # to avoid confusion with NCT numbers
             re.compile(r"PMID[:\s]*(\d{7,8})", re.IGNORECASE),
             re.compile(r"PubMed\s*(?:ID)?[:\s]*(\d{7,8})", re.IGNORECASE),
         ],
@@ -45,9 +96,9 @@ class CitationDetector:
             re.compile(r"PMCID[:\s]*PMC?(\d{6,8})", re.IGNORECASE),
         ],
         CitationIdentifierType.DOI: [
-            # DOI pattern - allow parentheses (common in Lancet DOIs like S0140-6736(25)01148-1)
+            # DOI pattern - allow parentheses (common in Lancet DOIs)
             re.compile(r"(?:doi[:\s]*)(10\.\d{4,9}/[^\s\]<>\"',;\n]+)", re.IGNORECASE),
-            re.compile(r"(?<!\w)10\.\d{4,9}/[^\s\]<>\"',;\n]+"),  # Bare DOI starting with 10.
+            re.compile(r"(?<!\w)10\.\d{4,9}/[^\s\]<>\"',;\n]+"),  # Bare DOI
             re.compile(r"https?://(?:dx\.)?doi\.org/(10\.\d{4,9}/[^\s\]<>\"',;\n]+)"),
         ],
         CitationIdentifierType.NCT: [
@@ -56,68 +107,88 @@ class CitationDetector:
         ],
         CitationIdentifierType.URL: [
             # URL pattern - exclude doi.org URLs (handled by DOI pattern)
-            # Allow parentheses but strip trailing unbalanced ones later
             re.compile(r"https?://(?!(?:dx\.)?doi\.org)(?:www\.)?[^\s\]<>\"'\n]+"),
         ],
     }
 
     # NCT pattern for filtering false PMID matches
-    NCT_NUMBER_PATTERN = re.compile(r"NCT\s*(\d{8})", re.IGNORECASE)
+    NCT_NUMBER_PATTERN: re.Pattern[str] = re.compile(r"NCT\s*(\d{8})", re.IGNORECASE)
 
-    # Pattern to fix broken DOIs (line breaks in PDF extraction can split DOIs)
-    BROKEN_DOI_PATTERN = re.compile(
+    # Pattern to fix broken DOIs (line breaks in PDF extraction)
+    BROKEN_DOI_PATTERN: re.Pattern[str] = re.compile(
         r"(10\.\d{4,9}/)\s+(\S+)",  # DOI prefix, whitespace, then continuation
     )
 
     # Reference section header patterns
-    REFERENCE_SECTION_PATTERNS = [
+    REFERENCE_SECTION_PATTERNS: List[re.Pattern[str]] = [
         re.compile(r"^References?\s*$", re.IGNORECASE | re.MULTILINE),
         re.compile(r"^Bibliography\s*$", re.IGNORECASE | re.MULTILINE),
         re.compile(r"^Literature\s+Cited\s*$", re.IGNORECASE | re.MULTILINE),
     ]
 
     # Numbered reference pattern (e.g., "1. Smith J et al...")
-    NUMBERED_REF_PATTERN = re.compile(
+    NUMBERED_REF_PATTERN: re.Pattern[str] = re.compile(
         r"^\s*(\d{1,3})\.\s+(.+?)(?=\n\s*\d{1,3}\.|$)",
         re.MULTILINE | re.DOTALL,
     )
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    # Known truncated TLDs (incomplete government/organization domains)
+    TRUNCATED_TLDS: Set[str] = {"fda", "nih", "cdc", "cms", "hhs", "europa", "who", "ema"}
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        """
+        Initialize the citation detector.
+
+        Args:
+            config: Optional configuration dictionary with keys:
+                - run_id: Unique run identifier (auto-generated if not provided)
+                - pipeline_version: Version string for provenance
+                - timestamp: ISO timestamp for exports
+        """
         self.config = config or {}
         self.run_id = str(self.config.get("run_id") or generate_run_id("CITATION"))
         self.pipeline_version = (
             self.config.get("pipeline_version") or get_git_revision_hash()
         )
+        logger.debug(f"CitationDetector initialized with run_id={self.run_id}")
 
     def _normalize_broken_dois(self, text: str) -> str:
         """
         Fix DOIs that are broken by line breaks in PDF text extraction.
 
         PDF extraction can introduce line breaks/spaces within DOIs, e.g.:
-        "10.1016/ S0140-6736(25)01148-1" should become "10.1016/S0140-6736(25)01148-1"
+        "10.1016/ S0140-6736(25)01148-1" should become
+        "10.1016/S0140-6736(25)01148-1"
+
+        Args:
+            text: Input text potentially containing broken DOIs.
+
+        Returns:
+            Text with DOIs rejoined.
         """
-        # Pattern: DOI registrant code (10.xxxx/) followed by whitespace then suffix
-        # This catches cases like "10.1016/ S0140" and rejoins them
         return self.BROKEN_DOI_PATTERN.sub(r"\1\2", text)
 
     def detect(
         self,
-        doc_graph: DocumentGraph,
+        doc_graph: "DocumentGraph",
         doc_id: str,
         doc_fingerprint: str,
         full_text: Optional[str] = None,
     ) -> List[CitationCandidate]:
         """
-        Detect citation mentions in document.
+        Detect citation mentions in a document.
+
+        Scans the document text for all supported identifier types,
+        validates their format, and creates structured candidates.
 
         Args:
-            doc_graph: Document graph
-            doc_id: Document identifier
-            doc_fingerprint: Document fingerprint
-            full_text: Optional pre-built full text
+            doc_graph: Parsed document graph containing text blocks.
+            doc_id: Unique document identifier.
+            doc_fingerprint: Hash fingerprint for provenance.
+            full_text: Optional pre-built full text (extracted if not provided).
 
         Returns:
-            List of CitationCandidate objects
+            List of CitationCandidate objects, deduplicated and potentially merged.
         """
         candidates: List[CitationCandidate] = []
         seen_identifiers: Set[str] = set()
@@ -131,10 +202,10 @@ class CitationDetector:
             )
 
         if not full_text:
+            logger.debug(f"No text found in document {doc_id}")
             return candidates
 
-        # Preprocess: Fix broken DOIs (line breaks in PDF extraction can split DOIs)
-        # E.g., "10.1016/ S0140-6736(25)01148-1" -> "10.1016/S0140-6736(25)01148-1"
+        # Preprocess: Fix broken DOIs
         full_text = self._normalize_broken_dois(full_text)
 
         # Detect each identifier type
@@ -152,6 +223,7 @@ class CitationDetector:
 
                     # Validate identifier format
                     if not self._is_valid_identifier(identifier, id_type):
+                        logger.debug(f"Invalid {id_type.value}: {identifier}")
                         continue
 
                     seen_identifiers.add(unique_key)
@@ -161,7 +233,7 @@ class CitationDetector:
                     context_end = min(len(full_text), match.end() + 150)
                     context_text = full_text[context_start:context_end]
 
-                    # Extract citation text (try to get full citation line)
+                    # Extract citation text
                     citation_text = self._extract_citation_text(
                         full_text, match.start(), match.end()
                     )
@@ -193,47 +265,73 @@ class CitationDetector:
                     elif id_type == CitationIdentifierType.DOI:
                         candidate_kwargs["doi"] = identifier
                     elif id_type == CitationIdentifierType.NCT:
-                        candidate_kwargs["nct"] = f"NCT{identifier}" if not identifier.startswith("NCT") else identifier
+                        nct_value = identifier if identifier.startswith("NCT") else f"NCT{identifier}"
+                        candidate_kwargs["nct"] = nct_value
                     elif id_type == CitationIdentifierType.URL:
                         candidate_kwargs["url"] = identifier
 
                     candidate = CitationCandidate(**candidate_kwargs)
                     candidates.append(candidate)
 
-        # Try to merge candidates that refer to the same citation
+        logger.debug(f"Found {len(candidates)} citation candidates before merging")
+
+        # Merge candidates that refer to the same citation
         candidates = self._merge_related_citations(candidates)
 
+        logger.debug(f"Found {len(candidates)} citation candidates after merging")
         return candidates
 
     def _extract_identifier(
-        self, match: re.Match, id_type: CitationIdentifierType
+        self,
+        match: re.Match[str],
+        id_type: CitationIdentifierType,
     ) -> Optional[str]:
-        """Extract the identifier value from a regex match."""
+        """
+        Extract the identifier value from a regex match.
+
+        Handles cleanup for each identifier type:
+        - DOIs: Remove prefixes, balance parentheses
+        - URLs: Clean trailing punctuation, validate completeness
+        - Others: Extract captured group
+
+        Args:
+            match: Regex match object.
+            id_type: Type of identifier being extracted.
+
+        Returns:
+            Cleaned identifier string, or None if invalid.
+        """
         if id_type == CitationIdentifierType.DOI:
-            # Try to get captured group first (for patterns with capture groups)
+            # Try to get captured group first
             try:
                 identifier = match.group(1)
             except IndexError:
                 identifier = match.group(0)
-            # Clean up DOI - remove any prefix, keep just 10.xxxx/yyyy
-            identifier = re.sub(r"^(?:doi[:\s]*|https?://(?:dx\.)?doi\.org/)", "", identifier, flags=re.IGNORECASE)
-            # Remove trailing punctuation and whitespace
+
+            # Clean up DOI - remove any prefix
+            identifier = re.sub(
+                r"^(?:doi[:\s]*|https?://(?:dx\.)?doi\.org/)",
+                "",
+                identifier,
+                flags=re.IGNORECASE,
+            )
+            # Remove trailing punctuation
             identifier = identifier.rstrip(".,;: \t\n")
-            # Handle trailing unbalanced parentheses
-            # DOIs can contain balanced () like S0140-6736(25)01148-1
-            # but we may have captured extra ) at end
+            # Balance parentheses
             identifier = self._balance_parentheses(identifier)
             return identifier
+
         elif id_type == CitationIdentifierType.URL:
             identifier = match.group(0)
-            # Clean up URL - remove trailing punctuation
+            # Clean up URL
             identifier = identifier.rstrip(".,;:")
-            # Handle trailing unbalanced parentheses
             identifier = self._balance_parentheses(identifier)
-            # Skip URLs that are just fragments (truncated)
+
+            # Skip truncated URLs
             if len(identifier) < 15 or identifier.endswith("."):
                 return None
             return identifier
+
         else:
             # For PMID, PMCID, NCT - extract captured group
             try:
@@ -247,15 +345,19 @@ class CitationDetector:
 
         DOIs like 10.1016/S0140-6736(25)01148-1 have balanced ()
         but we may capture extra ) from surrounding text.
+
+        Args:
+            text: Input string potentially with unbalanced parens.
+
+        Returns:
+            String with balanced parentheses.
         """
         if not text:
             return text
 
-        # Count open and close parens
         open_count = text.count("(")
         close_count = text.count(")")
 
-        # Remove trailing ) if unbalanced
         while close_count > open_count and text.endswith(")"):
             text = text[:-1]
             close_count -= 1
@@ -263,59 +365,92 @@ class CitationDetector:
         return text
 
     def _is_valid_identifier(
-        self, identifier: str, id_type: CitationIdentifierType
+        self,
+        identifier: str,
+        id_type: CitationIdentifierType,
     ) -> bool:
-        """Validate identifier format."""
+        """
+        Validate identifier format.
+
+        Each identifier type has specific format requirements:
+        - PMID: 7-8 digits
+        - PMCID: 6-8 digits
+        - DOI: 10.xxxx/yyyy with meaningful suffix
+        - NCT: 8 digits
+        - URL: Valid scheme, domain, and TLD
+
+        Args:
+            identifier: The identifier string to validate.
+            id_type: Type of identifier.
+
+        Returns:
+            True if valid, False otherwise.
+        """
         if id_type == CitationIdentifierType.PMID:
-            # PMID should be 7-8 digits
             return bool(re.match(r"^\d{7,8}$", identifier))
+
         elif id_type == CitationIdentifierType.PMCID:
-            # PMCID should be 6-8 digits
             return bool(re.match(r"^\d{6,8}$", identifier))
+
         elif id_type == CitationIdentifierType.DOI:
-            # DOI should start with 10. and have content after the slash
             if not identifier.startswith("10."):
                 return False
-            # Must have registrant code and suffix
             parts = identifier.split("/", 1)
             if len(parts) < 2 or len(parts[1]) < 2:
                 return False
             return True
+
         elif id_type == CitationIdentifierType.NCT:
-            # NCT should be 8 digits (with or without NCT prefix)
             clean = identifier.replace("NCT", "")
             return bool(re.match(r"^\d{8}$", clean))
+
         elif id_type == CitationIdentifierType.URL:
-            # Basic URL validation - must start with http(s) and have meaningful content
+            # Must start with http(s)
             if not identifier.startswith(("http://", "https://")):
                 return False
-            # Must have domain (at least x.xx)
+
+            # Must have domain
             domain_part = identifier.split("://", 1)[1] if "://" in identifier else ""
             if len(domain_part) < 4 or "." not in domain_part:
                 return False
-            # Reject truncated URLs (ending with incomplete domain)
+
+            # Reject incomplete domains
             if domain_part.endswith("."):
                 return False
-            # Extract just the domain (before any path)
+
+            # Extract TLD
             domain_only = domain_part.split("/")[0].split("?")[0]
-            # Get the TLD (last part after final dot)
             parts = domain_only.split(".")
             if len(parts) < 2:
                 return False
+
             tld = parts[-1].lower()
+
             # Reject truncated government/organization domains
-            # e.g., "accessdata.fda" should be "accessdata.fda.gov"
-            truncated_domains = {"fda", "nih", "cdc", "cms", "hhs", "europa", "who", "ema"}
-            if tld in truncated_domains:
+            if tld in self.TRUNCATED_TLDS:
                 return False
+
             # TLD should be at least 2 chars
             if len(tld) < 2:
                 return False
+
             return True
+
         return False
 
     def _get_confidence_for_type(self, id_type: CitationIdentifierType) -> float:
-        """Get confidence score based on identifier type."""
+        """
+        Get confidence score based on identifier type.
+
+        DOIs have highest confidence (0.98) as they're well-structured.
+        URLs have lowest confidence (0.80) due to truncation risk.
+
+        Args:
+            id_type: Type of identifier.
+
+        Returns:
+            Confidence score between 0.0 and 1.0.
+        """
         confidence_map = {
             CitationIdentifierType.PMID: 0.95,
             CitationIdentifierType.PMCID: 0.95,
@@ -326,10 +461,25 @@ class CitationDetector:
         return confidence_map.get(id_type, 0.85)
 
     def _extract_citation_text(
-        self, full_text: str, match_start: int, match_end: int
+        self,
+        full_text: str,
+        match_start: int,
+        match_end: int,
     ) -> str:
-        """Extract focused citation text around a match."""
-        # Get a reasonable window around the match (50 chars before, 80 after)
+        """
+        Extract focused citation text around a match.
+
+        Attempts to find natural word/sentence boundaries for cleaner
+        extraction.
+
+        Args:
+            full_text: Complete document text.
+            match_start: Start position of the identifier match.
+            match_end: End position of the identifier match.
+
+        Returns:
+            Extracted citation text, max 200 characters.
+        """
         context_before = 50
         context_after = 80
 
@@ -338,7 +488,6 @@ class CitationDetector:
 
         # Try to start at a word boundary
         if citation_start > 0:
-            # Look for space or newline to start at word boundary
             prefix = full_text[max(0, citation_start - 20):citation_start]
             space_pos = prefix.rfind(" ")
             newline_pos = prefix.rfind("\n")
@@ -349,7 +498,6 @@ class CitationDetector:
         # Try to end at a word/sentence boundary
         if citation_end < len(full_text):
             suffix = full_text[citation_end:min(len(full_text), citation_end + 30)]
-            # Prefer sentence end
             for end_char in [".", ")", " "]:
                 pos = suffix.find(end_char)
                 if pos >= 0:
@@ -357,28 +505,32 @@ class CitationDetector:
                     break
 
         citation_text = full_text[citation_start:citation_end].strip()
-
-        # Clean up - remove excessive whitespace
         citation_text = re.sub(r"\s+", " ", citation_text)
 
-        # Truncate if still too long
         if len(citation_text) > 200:
             citation_text = citation_text[:200]
 
         return citation_text
 
     def _merge_related_citations(
-        self, candidates: List[CitationCandidate]
+        self,
+        candidates: List[CitationCandidate],
     ) -> List[CitationCandidate]:
         """
         Merge candidates that appear to be from the same citation.
 
-        E.g., if PMID and DOI are found near each other, combine them.
+        If PMID and DOI are found near each other, combine them into
+        a single citation record.
+
+        Args:
+            candidates: List of citation candidates.
+
+        Returns:
+            List with related candidates merged.
         """
         if len(candidates) <= 1:
             return candidates
 
-        # Group by proximity in context
         merged: List[CitationCandidate] = []
         used: Set[int] = set()
 
@@ -386,7 +538,6 @@ class CitationDetector:
             if i in used:
                 continue
 
-            # Find other candidates with overlapping context
             related: List[CitationCandidate] = [c1]
             used.add(i)
 
@@ -394,12 +545,10 @@ class CitationDetector:
                 if j in used:
                     continue
 
-                # Check if contexts overlap significantly
                 if self._contexts_overlap(c1.context_text, c2.context_text):
                     related.append(c2)
                     used.add(j)
 
-            # Merge related candidates
             if len(related) > 1:
                 merged_candidate = self._merge_candidates(related)
                 merged.append(merged_candidate)
@@ -409,24 +558,44 @@ class CitationDetector:
         return merged
 
     def _contexts_overlap(self, ctx1: str, ctx2: str) -> bool:
-        """Check if two context strings overlap significantly."""
-        # Simple overlap check based on common substring length
+        """
+        Check if two context strings overlap significantly.
+
+        Uses substring matching to detect overlapping context windows.
+
+        Args:
+            ctx1: First context string.
+            ctx2: Second context string.
+
+        Returns:
+            True if significant overlap detected.
+        """
         shorter = min(ctx1, ctx2, key=len)
         longer = max(ctx1, ctx2, key=len)
 
-        # Check if significant portion of shorter is in longer
         for i in range(len(shorter) - 20):
             if shorter[i : i + 20] in longer:
                 return True
         return False
 
     def _merge_candidates(
-        self, candidates: List[CitationCandidate]
+        self,
+        candidates: List[CitationCandidate],
     ) -> CitationCandidate:
-        """Merge multiple candidates into one."""
+        """
+        Merge multiple candidates into one.
+
+        Combines all identifiers, uses longest citation text,
+        and takes highest confidence.
+
+        Args:
+            candidates: List of candidates to merge.
+
+        Returns:
+            Single merged CitationCandidate.
+        """
         base = candidates[0]
 
-        # Collect all identifiers
         pmid = base.pmid
         pmcid = base.pmcid
         doi = base.doi
@@ -450,10 +619,7 @@ class CitationDetector:
                 if it not in identifier_types:
                     identifier_types.append(it)
 
-        # Use the longest citation text
         citation_text = max((c.citation_text for c in candidates), key=len)
-
-        # Use highest confidence
         confidence = max(c.initial_confidence for c in candidates)
 
         return CitationCandidate(
@@ -473,19 +639,25 @@ class CitationDetector:
         )
 
     def validate_candidates(
-        self, candidates: List[CitationCandidate]
+        self,
+        candidates: List[CitationCandidate],
     ) -> List[ExtractedCitation]:
         """
         Validate citation candidates.
 
         Since these are pattern matches for well-defined identifiers,
-        we auto-validate with the initial confidence.
+        candidates are auto-validated with their initial confidence.
+
+        Args:
+            candidates: List of candidates to validate.
+
+        Returns:
+            List of ExtractedCitation objects.
         """
         validated: List[ExtractedCitation] = []
 
         for candidate in candidates:
-            # Build evidence text
-            evidence_parts = []
+            evidence_parts: List[str] = []
             if candidate.pmid:
                 evidence_parts.append(f"PMID:{candidate.pmid}")
             if candidate.pmcid:
@@ -535,12 +707,19 @@ class CitationDetector:
     ) -> CitationExportDocument:
         """
         Create export document for citations.
+
+        Args:
+            validated: List of validated citations.
+            doc_id: Document identifier.
+            doc_path: Optional file path for provenance.
+
+        Returns:
+            CitationExportDocument ready for JSON serialization.
         """
         entries: List[CitationExportEntry] = []
         unique_ids: Set[str] = set()
 
         for citation in validated:
-            # Track unique identifiers
             if citation.pmid:
                 unique_ids.add(f"pmid:{citation.pmid}")
             if citation.pmcid:
@@ -575,5 +754,6 @@ class CitationDetector:
         )
 
     def print_summary(self) -> None:
-        """Print loading summary."""
+        """Print loading summary to console."""
         print("  Citation detector: regex-based detection initialized")
+        logger.info("Citation detector initialized")

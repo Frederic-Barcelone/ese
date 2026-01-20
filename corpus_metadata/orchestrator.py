@@ -71,6 +71,20 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
+# Configure logging first (before slow imports)
+from A_core.A00_logging import (
+    configure_logging,
+    get_logger,
+    LogContext,
+    StepLogger,
+    INFO,
+    DEBUG,
+    WARNING,
+)
+
+# Initialize module logger
+logger = get_logger(__name__)
+
 # Print startup message before slow imports (scispacy takes ~30s to load)
 print("Starting pipeline... (loading NLP models, this may take a moment)")
 
@@ -306,13 +320,30 @@ def score_lf_quality(
 
 class Orchestrator:
     """
-    Main pipeline orchestrator.
+    Main pipeline orchestrator for clinical document metadata extraction.
 
-    Stages:
-        1. Parse PDF -> DocumentGraph
-        2. Generate candidates (syntax + lexicon)
-        3. Validate with Claude
-        4. Log results to corpus_log/
+    This class coordinates the entire extraction pipeline, processing PDF documents
+    through multiple stages to extract structured metadata including abbreviations,
+    drugs, diseases, feasibility information, and more.
+
+    Pipeline Stages:
+        1. Parse PDF -> DocumentGraph (structure extraction)
+        2. Generate candidates (syntax patterns + lexicon matching)
+        3. Validate candidates with Claude LLM
+        4. Normalize and deduplicate entities
+        5. Detect domain-specific entities (drugs, diseases, etc.)
+        6. Export results to JSON
+
+    Attributes:
+        config: Configuration dictionary loaded from YAML.
+        run_id: Unique identifier for this pipeline run.
+        log_dir: Directory for validation logs.
+        pdf_dir: Directory containing input PDFs.
+        model: Claude model to use for validation.
+
+    Example:
+        >>> orchestrator = Orchestrator(config_path="config.yaml")
+        >>> orchestrator.process_folder()
     """
 
     DEFAULT_CONFIG = (
@@ -329,7 +360,22 @@ class Orchestrator:
         run_id: Optional[str] = None,
         gold_json: Optional[str] = None,
         heuristics_config: Optional[HeuristicsConfig] = None,
-    ):
+    ) -> None:
+        """
+        Initialize the orchestrator with configuration.
+
+        Args:
+            log_dir: Directory for validation logs. Defaults to config value.
+            output_dir: Directory for output files. Defaults to PDF subdirectories.
+            model: Claude model for validation. Defaults to config value.
+            api_key: Anthropic API key. Defaults to environment variable.
+            config_path: Path to config.yaml file.
+            run_id: Unique run identifier. Auto-generated if not provided.
+            gold_json: Path to gold standard JSON for evaluation.
+            heuristics_config: Pre-loaded heuristics configuration.
+        """
+        self._logger = get_logger(__name__)
+
         self.config_path = config_path or self.DEFAULT_CONFIG
         self.config = self._load_config(self.config_path)
 
@@ -368,6 +414,13 @@ class Orchestrator:
         # Initialize components
         self._init_components(paths, base_path, api_key, val_cfg)
 
+        # Log initialization (both console and file)
+        self._logger.info(f"Orchestrator v{PIPELINE_VERSION} initialized")
+        self._logger.info(f"Run ID: {self.run_id}")
+        self._logger.info(f"Config: {self.config_path}")
+        self._logger.info(f"Model: {self.model}")
+
+        # Console output for user visibility
         print(f"\nOrchestrator v{PIPELINE_VERSION} initialized")
         print(f"  Run ID: {self.run_id}")
         print(f"  Config: {self.config_path}")
@@ -3982,9 +4035,23 @@ Return ONLY the JSON array, nothing else."""
         return all_results
 
 
-def main():
-    """Process all PDFs in the default folder."""
-    Orchestrator().process_folder()
+def main() -> None:
+    """
+    Process all PDFs in the default folder.
+
+    Initializes the logging system and runs the pipeline orchestrator
+    on all PDF files found in the configured input directory.
+    """
+    # Configure logging for the pipeline run
+    configure_logging(
+        log_dir="logs",
+        log_level=INFO,
+        enable_file_logging=True,
+        enable_console_logging=False,  # Use print() for console output
+    )
+
+    orchestrator = Orchestrator()
+    orchestrator.process_folder()
     print("\nPipeline finished.")
 
 

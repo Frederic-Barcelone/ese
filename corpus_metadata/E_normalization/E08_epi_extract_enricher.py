@@ -2,34 +2,70 @@
 """
 EpiExtract4GARD-v2 integration for rare disease epidemiology NER.
 
-Uses NCATS BioBERT-based model to extract:
-- LOC: Geographic locations
-- EPI: Epidemiology type indicators (prevalence, incidence, etc.)
-- STAT: Statistical rates and values
+This module provides Named Entity Recognition (NER) for epidemiology data
+using the NCATS BioBERT-based model fine-tuned on rare disease literature.
 
-Model: https://huggingface.co/ncats/EpiExtract4GARD-v2
-Paper: https://translational-medicine.biomedcentral.com/articles/10.1186/s12967-023-04011-y
+Entity Types Extracted:
+    - LOC: Geographic locations (countries, regions, populations)
+    - EPI: Epidemiology type indicators (prevalence, incidence, mortality)
+    - STAT: Statistical rates and values (e.g., "1 per 100,000")
+
+The module handles:
+    - Lazy model loading to minimize startup overhead
+    - Sentence-level processing for long documents
+    - Statistical value normalization to per-million rates
+    - Entity proximity analysis to associate statistics with their context
+
+Model Information:
+    - Source: https://huggingface.co/ncats/EpiExtract4GARD-v2
+    - Paper: https://doi.org/10.1186/s12967-023-04011-y
+    - Architecture: BioBERT fine-tuned for token classification
+
+Example:
+    >>> from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
+    >>> enricher = EpiExtractEnricher()
+    >>> result = enricher.extract("The prevalence is 1 per 100,000 in Europe.")
+    >>> print(result.statistics[0].text)
+    '1 per 100,000'
+
+Dependencies:
+    - transformers (HuggingFace)
+    - torch
 """
 
 from __future__ import annotations
 
-import logging
 import re
+import warnings
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
+from A_core.A00_logging import get_logger
 from A_core.A07_feasibility_models import EpidemiologyData
 
-logger = logging.getLogger(__name__)
+if TYPE_CHECKING:
+    from transformers import Pipeline
 
-# Lazy load transformers to avoid import overhead
-_pipeline = None
-_model_loaded = False
+# Module logger
+logger = get_logger(__name__)
+
+# Global state for lazy model loading (singleton pattern)
+_pipeline: Optional["Pipeline"] = None
+_model_loaded: bool = False
 
 
 @dataclass
 class EpiEntity:
-    """Single epidemiology entity extracted by the model."""
+    """
+    Single epidemiology entity extracted by the NER model.
+
+    Attributes:
+        text: The extracted text span.
+        label: Entity type (LOC, EPI, or STAT).
+        score: Model confidence score (0.0-1.0).
+        start: Character start position in source text.
+        end: Character end position in source text.
+    """
 
     text: str
     label: str  # LOC, EPI, STAT
@@ -37,10 +73,25 @@ class EpiEntity:
     start: int
     end: int
 
+    def __repr__(self) -> str:
+        """Return a concise string representation."""
+        return f"EpiEntity({self.label}: '{self.text}' @{self.start}-{self.end}, conf={self.score:.2f})"
+
 
 @dataclass
 class EpiExtractionResult:
-    """Structured extraction result from EpiExtract4GARD."""
+    """
+    Structured extraction result from EpiExtract4GARD model.
+
+    Groups extracted entities by type and provides methods for
+    converting to pipeline-compatible data structures.
+
+    Attributes:
+        locations: Geographic location entities (LOC).
+        epi_types: Epidemiology type indicators (EPI).
+        statistics: Statistical values and rates (STAT).
+        raw_entities: Original model output for debugging.
+    """
 
     locations: List[EpiEntity] = field(default_factory=list)
     epi_types: List[EpiEntity] = field(default_factory=list)
@@ -48,10 +99,17 @@ class EpiExtractionResult:
     raw_entities: List[Dict[str, Any]] = field(default_factory=list)
 
     def to_epidemiology_data(self) -> List[EpidemiologyData]:
-        """Convert to EpidemiologyData models for integration with feasibility pipeline."""
-        results = []
+        """
+        Convert extraction results to EpidemiologyData models.
 
-        # Group statistics with their associated epi types and locations
+        Associates each statistic with its nearest epidemiology type
+        and location entities using proximity analysis.
+
+        Returns:
+            List of EpidemiologyData objects suitable for the feasibility pipeline.
+        """
+        results: List[EpidemiologyData] = []
+
         for stat in self.statistics:
             # Find closest epi_type (prevalence/incidence indicator)
             epi_type = self._find_nearest_entity(stat, self.epi_types)
@@ -60,7 +118,7 @@ class EpiExtractionResult:
             # Determine data_type from epi_type entity
             data_type = self._classify_epi_type(epi_type.text if epi_type else "")
 
-            # Normalize the statistical value
+            # Normalize the statistical value to per-million
             normalized = self._normalize_stat_value(stat.text)
 
             results.append(
@@ -76,13 +134,29 @@ class EpiExtractionResult:
         return results
 
     def _find_nearest_entity(
-        self, target: EpiEntity, candidates: List[EpiEntity], max_distance: int = 200
+        self,
+        target: EpiEntity,
+        candidates: List[EpiEntity],
+        max_distance: int = 200,
     ) -> Optional[EpiEntity]:
-        """Find the nearest entity to target within max_distance characters."""
+        """
+        Find the nearest entity to target within max_distance characters.
+
+        Uses character-level proximity to associate entities that appear
+        close together in the source text.
+
+        Args:
+            target: The entity to find neighbors for.
+            candidates: List of candidate entities to search.
+            max_distance: Maximum character distance to consider.
+
+        Returns:
+            The nearest candidate entity, or None if none within range.
+        """
         if not candidates:
             return None
 
-        nearest = None
+        nearest: Optional[EpiEntity] = None
         min_dist = float("inf")
 
         for cand in candidates:
@@ -98,28 +172,48 @@ class EpiExtractionResult:
         return nearest
 
     def _classify_epi_type(self, epi_text: str) -> str:
-        """Classify epidemiology type from extracted text."""
+        """
+        Classify epidemiology type from extracted indicator text.
+
+        Args:
+            epi_text: Text from an EPI entity.
+
+        Returns:
+            Classification string: "prevalence", "incidence", "mortality",
+            "demographics", or "epidemiology" (default).
+        """
         text_lower = epi_text.lower()
 
-        if any(
-            kw in text_lower
-            for kw in ["prevalence", "prevalent", "affected", "living with"]
-        ):
+        # Prevalence indicators
+        if any(kw in text_lower for kw in ["prevalence", "prevalent", "affected", "living with"]):
             return "prevalence"
-        elif any(
-            kw in text_lower
-            for kw in ["incidence", "incident", "new cases", "diagnosed", "annual"]
-        ):
+        # Incidence indicators
+        if any(kw in text_lower for kw in ["incidence", "incident", "new cases", "diagnosed", "annual"]):
             return "incidence"
-        elif any(kw in text_lower for kw in ["mortality", "death", "survival", "fatal"]):
+        # Mortality indicators
+        if any(kw in text_lower for kw in ["mortality", "death", "survival", "fatal"]):
             return "mortality"
-        elif any(kw in text_lower for kw in ["age", "male", "female", "sex", "gender"]):
+        # Demographic indicators
+        if any(kw in text_lower for kw in ["age", "male", "female", "sex", "gender"]):
             return "demographics"
-        else:
-            return "epidemiology"
+
+        return "epidemiology"
 
     def _normalize_stat_value(self, stat_text: str) -> Optional[float]:
-        """Normalize statistical value to per-million rate."""
+        """
+        Normalize statistical value to per-million rate.
+
+        Handles various formats:
+            - "X per Y" (e.g., "1.5 per 100,000")
+            - "X%" (percentages)
+            - "1:X" or "1 in X" (ratios)
+
+        Args:
+            stat_text: Raw statistical text from STAT entity.
+
+        Returns:
+            Normalized per-million rate, or None if parsing fails.
+        """
         text = stat_text.lower().strip()
 
         # Pattern: X per Y (e.g., "1.5 per 100,000")
@@ -177,22 +271,55 @@ class EpiExtractEnricher:
     """
     Enricher using EpiExtract4GARD-v2 BioBERT model for epidemiology NER.
 
-    Extracts structured epidemiology information from text using a fine-tuned
-    BioBERT model trained on rare disease literature.
+    Extracts structured epidemiology information from clinical text using
+    a fine-tuned BioBERT model trained on rare disease literature.
+
+    The model is loaded lazily on first use and cached globally to avoid
+    repeated loading overhead.
+
+    Attributes:
+        MODEL_NAME: HuggingFace model identifier.
+        MAX_SEQUENCE_LENGTH: Maximum tokens per inference (model limit).
+        device: Compute device (-1 for CPU, 0+ for GPU).
+        batch_size: Batch size for inference.
+        confidence_threshold: Minimum score to accept an entity.
+
+    Example:
+        >>> enricher = EpiExtractEnricher({"confidence_threshold": 0.7})
+        >>> result = enricher.extract(abstract_text)
+        >>> for stat in result.statistics:
+        ...     print(f"{stat.text} (confidence: {stat.score:.2f})")
     """
 
-    MODEL_NAME = "ncats/EpiExtract4GARD-v2"
-    MAX_SEQUENCE_LENGTH = 192  # Model limit
+    MODEL_NAME: str = "ncats/EpiExtract4GARD-v2"
+    MAX_SEQUENCE_LENGTH: int = 192  # Model token limit
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        """
+        Initialize the enricher with configuration.
+
+        Args:
+            config: Optional configuration dictionary with keys:
+                - device: Compute device (-1 for CPU, 0+ for GPU)
+                - batch_size: Inference batch size
+                - confidence_threshold: Minimum entity confidence (0.0-1.0)
+        """
         config = config or {}
-        self.device = config.get("device", -1)  # -1 for CPU, 0+ for GPU
-        self.batch_size = config.get("batch_size", 8)
-        self.confidence_threshold = config.get("confidence_threshold", 0.5)
-        self._pipeline = None
+        self.device: int = config.get("device", -1)
+        self.batch_size: int = config.get("batch_size", 8)
+        self.confidence_threshold: float = config.get("confidence_threshold", 0.5)
+        self._pipeline: Optional["Pipeline"] = None
 
     def _load_model(self) -> bool:
-        """Lazy load the transformers pipeline."""
+        """
+        Lazy load the transformers pipeline.
+
+        Uses global singleton pattern to avoid loading the model multiple
+        times across different enricher instances.
+
+        Returns:
+            True if model loaded successfully, False otherwise.
+        """
         global _pipeline, _model_loaded
 
         if _model_loaded and _pipeline is not None:
@@ -200,8 +327,6 @@ class EpiExtractEnricher:
             return True
 
         try:
-            import warnings
-
             from transformers import (
                 AutoModelForTokenClassification,
                 AutoTokenizer,
@@ -209,14 +334,16 @@ class EpiExtractEnricher:
             )
 
             logger.info("Loading EpiExtract4GARD-v2 model...")
-            # Suppress "Invalid model-index" warning from HF Hub (model metadata issue, not functional)
+
+            # Suppress "Invalid model-index" warning from HF Hub
+            # (model metadata issue, not functional)
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", message="Invalid model-index")
                 model = AutoModelForTokenClassification.from_pretrained(self.MODEL_NAME)
                 tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
 
             self._pipeline = pipeline(
-                "token-classification",  # NER is token-classification
+                "token-classification",
                 model=model,
                 tokenizer=tokenizer,
                 aggregation_strategy="simple",
@@ -241,11 +368,14 @@ class EpiExtractEnricher:
         """
         Extract epidemiology entities from text.
 
+        Processes text sentence-by-sentence to handle documents longer
+        than the model's maximum sequence length.
+
         Args:
-            text: Input text (abstract, section, or document)
+            text: Input text (abstract, section, or full document).
 
         Returns:
-            EpiExtractionResult with categorized entities
+            EpiExtractionResult with categorized entities.
         """
         if not self._load_model():
             return EpiExtractionResult()
@@ -255,7 +385,7 @@ class EpiExtractEnricher:
 
         # Split into sentences for better handling of long texts
         sentences = self._split_sentences(text)
-        all_entities = []
+        all_entities: List[Dict[str, Any]] = []
         offset = 0
 
         for sentence in sentences:
@@ -264,9 +394,9 @@ class EpiExtractEnricher:
                 continue
 
             try:
-                # Truncate if needed (model limit is 192 tokens)
-                truncated = sentence[: self.MAX_SEQUENCE_LENGTH * 4]  # Rough char limit
-                entities = self._pipeline(truncated)
+                # Truncate if needed (model limit is 192 tokens, ~4 chars/token)
+                truncated = sentence[: self.MAX_SEQUENCE_LENGTH * 4]
+                entities = self._pipeline(truncated)  # type: ignore[misc]
 
                 # Adjust offsets for full text position
                 for ent in entities:
@@ -286,32 +416,33 @@ class EpiExtractEnricher:
         Extract epidemiology entities from multiple texts.
 
         Args:
-            texts: List of input texts
+            texts: List of input texts.
 
         Returns:
-            List of EpiExtractionResult for each input
+            List of EpiExtractionResult, one per input text.
         """
         if not self._load_model():
             return [EpiExtractionResult() for _ in texts]
 
-        results = []
-        for text in texts:
-            results.append(self.extract(text))
-
-        return results
+        return [self.extract(text) for text in texts]
 
     def enrich_epidemiology_data(
-        self, text: str, existing_data: Optional[List[EpidemiologyData]] = None
+        self,
+        text: str,
+        existing_data: Optional[List[EpidemiologyData]] = None,
     ) -> List[EpidemiologyData]:
         """
         Enrich existing epidemiology data or extract new data from text.
 
+        Merges newly extracted data with existing data, avoiding duplicates
+        based on value text matching.
+
         Args:
-            text: Source text
-            existing_data: Existing EpidemiologyData to merge with
+            text: Source text to extract from.
+            existing_data: Existing EpidemiologyData to merge with.
 
         Returns:
-            Merged list of EpidemiologyData
+            Merged list of EpidemiologyData (existing + new unique items).
         """
         extraction = self.extract(text)
         new_data = extraction.to_epidemiology_data()
@@ -330,15 +461,35 @@ class EpiExtractEnricher:
         return merged
 
     def _split_sentences(self, text: str) -> List[str]:
-        """Split text into sentences for processing."""
-        # Simple sentence splitting - handles common patterns
-        sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", text)
-        return sentences
+        """
+        Split text into sentences for processing.
+
+        Uses a simple regex pattern that handles common sentence boundaries.
+
+        Args:
+            text: Input text to split.
+
+        Returns:
+            List of sentence strings.
+        """
+        return re.split(r"(?<=[.!?])\s+(?=[A-Z])", text)
 
     def _categorize_entities(
-        self, entities: List[Dict[str, Any]]
+        self,
+        entities: List[Dict[str, Any]],
     ) -> EpiExtractionResult:
-        """Categorize raw NER entities into typed lists."""
+        """
+        Categorize raw NER output into typed entity lists.
+
+        Filters entities by confidence threshold and routes them
+        to appropriate lists based on entity label.
+
+        Args:
+            entities: Raw model output dictionaries.
+
+        Returns:
+            EpiExtractionResult with categorized entities.
+        """
         result = EpiExtractionResult(raw_entities=entities)
 
         for ent in entities:
@@ -363,19 +514,27 @@ class EpiExtractEnricher:
         return result
 
 
-# Convenience function for quick extraction
 def extract_epidemiology(
-    text: str, config: Optional[Dict[str, Any]] = None
+    text: str,
+    config: Optional[Dict[str, Any]] = None,
 ) -> List[EpidemiologyData]:
     """
     Quick extraction of epidemiology data from text.
 
+    Convenience function for one-off extractions without
+    managing an enricher instance.
+
     Args:
-        text: Input text
-        config: Optional configuration
+        text: Input text to process.
+        config: Optional enricher configuration.
 
     Returns:
-        List of EpidemiologyData
+        List of EpidemiologyData extracted from the text.
+
+    Example:
+        >>> data = extract_epidemiology("Prevalence is 1 in 50,000.")
+        >>> print(data[0].normalized_value)
+        20.0
     """
     enricher = EpiExtractEnricher(config)
     result = enricher.extract(text)
