@@ -154,6 +154,7 @@ from E_normalization.E10_biomedical_ner_all import BiomedicalNEREnricher
 from E_normalization.E11_span_deduplicator import deduplicate_feasibility_candidates
 from E_normalization.E12_patient_journey_enricher import PatientJourneyEnricher
 from E_normalization.E13_registry_enricher import RegistryEnricher
+from E_normalization.E14_citation_validator import CitationValidator
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -2695,7 +2696,9 @@ Return ONLY the JSON array, nothing else."""
     def _export_citation_results(
         self, pdf_path: Path, results: List[ExtractedCitation]
     ) -> None:
-        """Export citation detection results to separate JSON file."""
+        """Export citation detection results to separate JSON file with API validation."""
+        from A_core.A11_citation_models import CitationValidation, CitationValidationSummary
+
         out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -2730,6 +2733,64 @@ Return ONLY the JSON array, nothing else."""
             )
             citation_entries.append(entry)
 
+        # Run API validation on citations
+        validation_summary = None
+        if citation_entries:
+            print("  Validating citations via API...")
+            validator = CitationValidator({"validate_urls": False})  # Skip URL validation for speed
+            valid_count = 0
+            invalid_count = 0
+            error_count = 0
+
+            for entry in citation_entries:
+                # Validate primary identifier (prefer DOI > NCT > PMID)
+                validation_result = None
+
+                if entry.doi:
+                    result = validator.validate_doi(entry.doi)
+                    validation_result = CitationValidation(
+                        is_valid=result.is_valid,
+                        resolved_url=result.resolved_url,
+                        title=result.metadata.get("title"),
+                        error=result.error_message,
+                    )
+                elif entry.nct:
+                    result = validator.validate_nct(entry.nct)
+                    validation_result = CitationValidation(
+                        is_valid=result.is_valid,
+                        resolved_url=result.resolved_url,
+                        title=result.metadata.get("title"),
+                        status=result.metadata.get("status"),
+                        error=result.error_message,
+                    )
+                elif entry.pmid:
+                    result = validator.validate_pmid(entry.pmid)
+                    validation_result = CitationValidation(
+                        is_valid=result.is_valid,
+                        resolved_url=result.resolved_url,
+                        title=result.metadata.get("title"),
+                        error=result.error_message,
+                    )
+
+                if validation_result:
+                    entry.validation = validation_result
+                    if validation_result.is_valid:
+                        valid_count += 1
+                        print(f"    ✓ {entry.doi or entry.nct or entry.pmid}: valid")
+                    elif validation_result.error:
+                        error_count += 1
+                        print(f"    ✗ {entry.doi or entry.nct or entry.pmid}: {validation_result.error}")
+                    else:
+                        invalid_count += 1
+                        print(f"    ✗ {entry.doi or entry.nct or entry.pmid}: not found")
+
+            validation_summary = CitationValidationSummary(
+                total_validated=valid_count + invalid_count + error_count,
+                valid_count=valid_count,
+                invalid_count=invalid_count,
+                error_count=error_count,
+            )
+
         # Build export document
         export_doc = CitationExportDocument(
             run_id=self.run_id,
@@ -2739,6 +2800,7 @@ Return ONLY the JSON array, nothing else."""
             pipeline_version=PIPELINE_VERSION,
             total_detected=len(results),
             unique_identifiers=len(unique_ids),
+            validation_summary=validation_summary,
             citations=citation_entries,
         )
 

@@ -140,6 +140,18 @@ class ExtractedCitation(BaseModel):
 # -------------------------
 
 
+class CitationValidation(BaseModel):
+    """Validation result for a citation identifier."""
+
+    is_valid: bool
+    resolved_url: Optional[str] = None
+    title: Optional[str] = None
+    status: Optional[str] = None  # For NCT: trial status
+    error: Optional[str] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
 class CitationExportEntry(BaseModel):
     """Simplified citation entry for JSON export."""
 
@@ -152,6 +164,20 @@ class CitationExportEntry(BaseModel):
     citation_number: Optional[int] = None
     page: Optional[int] = None
     confidence: float
+
+    # API validation results
+    validation: Optional[CitationValidation] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class CitationValidationSummary(BaseModel):
+    """Summary of citation validation results."""
+
+    total_validated: int = 0
+    valid_count: int = 0
+    invalid_count: int = 0
+    error_count: int = 0
 
     model_config = ConfigDict(extra="forbid")
 
@@ -168,6 +194,9 @@ class CitationExportDocument(BaseModel):
     # Counts
     total_detected: int
     unique_identifiers: int
+
+    # Validation summary
+    validation_summary: Optional[CitationValidationSummary] = None
 
     # Results
     citations: List[CitationExportEntry]
