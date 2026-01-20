@@ -168,6 +168,7 @@ from E_normalization.E11_span_deduplicator import deduplicate_feasibility_candid
 from E_normalization.E12_patient_journey_enricher import PatientJourneyEnricher
 from E_normalization.E13_registry_enricher import RegistryEnricher
 from E_normalization.E14_citation_validator import CitationValidator
+from E_normalization.E15_genetic_enricher import GeneticEnricher
 from F_evaluation.F05_extraction_analysis import run_analysis
 
 PIPELINE_VERSION = "0.8"
@@ -525,6 +526,7 @@ class Orchestrator:
         self.use_biomedical_ner = options.get("use_biomedical_ner", True)
         self.use_patient_journey = options.get("use_patient_journey", True)
         self.use_registry_extraction = options.get("use_registry_extraction", True)
+        self.use_genetic_extraction = options.get("use_genetic_extraction", True)
 
     def _enabled_extractors_str(self) -> str:
         """Return string of enabled extractors."""
@@ -589,6 +591,7 @@ class Orchestrator:
             ("use_biomedical_ner", self.use_biomedical_ner),
             ("use_patient_journey", self.use_patient_journey),
             ("use_registry_extraction", self.use_registry_extraction),
+            ("use_genetic_extraction", self.use_genetic_extraction),
             ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
@@ -859,6 +862,15 @@ class Orchestrator:
             )
         else:
             self.registry_enricher = None
+
+        # Genetic enricher for gene symbols, HGVS variants, HPO, ORDO
+        # Uses regex patterns - no model loading required
+        if self.use_genetic_extraction:
+            self.genetic_enricher = GeneticEnricher(
+                config={"run_id": self.run_id}
+            )
+        else:
+            self.genetic_enricher = None
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -3229,6 +3241,82 @@ Return ONLY the JSON array, nothing else."""
                         print(f"      {lr.get('extracted_text')} -> {lr.get('full_name', 'N/A')}")
             print(f"    RegistryNER: {total_entities} entities extracted")
             print(f"    RegistryNER time: {time.time() - reg_start:.2f}s")
+
+        # Enrich with GeneticNER (gene symbols, HGVS variants, HPO, ORDO)
+        if self.genetic_enricher is not None:
+            print("  Running GeneticNER enrichment...")
+            gen_start = time.time()
+            gen_result = self.genetic_enricher.extract(full_text)
+
+            # Add extracted entities as feasibility candidates
+            summary = gen_result.to_summary()
+            total_entities = summary.get("total", 0)
+
+            if total_entities > 0:
+                # Add gene symbols
+                for entity in gen_result.gene_symbols:
+                    candidates.append(NERCandidate(
+                        category="gene_symbol",
+                        text=entity.normalized,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="GeneticNER",
+                    ))
+
+                # Add HGVS variants
+                for entity in gen_result.variants_hgvs:
+                    candidates.append(NERCandidate(
+                        category="variant_hgvs",
+                        text=entity.normalized,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="GeneticNER",
+                    ))
+
+                # Add rsID variants
+                for entity in gen_result.variants_rsid:
+                    candidates.append(NERCandidate(
+                        category="variant_rsid",
+                        text=entity.normalized,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="GeneticNER",
+                    ))
+
+                # Add HPO terms
+                for entity in gen_result.hpo_terms:
+                    candidates.append(NERCandidate(
+                        category="hpo_term",
+                        text=entity.normalized,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="GeneticNER",
+                    ))
+
+                # Add ORDO disease codes
+                for entity in gen_result.disease_ordo:
+                    candidates.append(NERCandidate(
+                        category="disease_ordo",
+                        text=entity.normalized,
+                        evidence_text=entity.text,
+                        confidence=entity.score,
+                        source="GeneticNER",
+                    ))
+
+                print(f"      gene_symbols: {summary.get('gene_symbols', 0)}")
+                print(f"      variants_hgvs: {summary.get('variants_hgvs', 0)}")
+                print(f"      variants_rsid: {summary.get('variants_rsid', 0)}")
+                print(f"      hpo_terms: {summary.get('hpo_terms', 0)}")
+                print(f"      disease_ordo: {summary.get('disease_ordo', 0)}")
+
+                # Report gene-variant associations
+                genes_with_variants = gen_result.get_genes_with_variants()
+                if genes_with_variants:
+                    print(f"    Gene-variant associations: {len(genes_with_variants)} genes")
+                    for gene, variants in list(genes_with_variants.items())[:3]:  # Show first 3
+                        print(f"      {gene}: {len(variants)} variant(s)")
+            print(f"    GeneticNER: {total_entities} entities extracted")
+            print(f"    GeneticNER time: {time.time() - gen_start:.2f}s")
 
         # Deduplicate overlapping NER spans (keep highest confidence)
         pre_dedup_count = len(candidates)
