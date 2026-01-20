@@ -1049,7 +1049,7 @@ class Orchestrator:
 
     def _parse_pdf(self, pdf_path: Path):
         """Stage 1: Parse PDF into DocumentGraph."""
-        print("\n[1/10] Parsing PDF...")
+        print("\n[1/12] Parsing PDF...")
         start = time.time()
 
         # Get output directory for images (creates folder if needed)
@@ -1079,7 +1079,7 @@ class Orchestrator:
 
     def _generate_candidates(self, doc) -> Tuple[List[Candidate], str]:
         """Stage 2: Generate and deduplicate candidates."""
-        print("\n[2/10] Generating candidates...")
+        print("\n[2/12] Generating candidates...")
         start = time.time()
 
         all_candidates = []
@@ -1685,10 +1685,10 @@ Return ONLY the JSON array, nothing else."""
         """
         # Check if normalization is disabled in config
         if not self.use_normalization:
-            print("\n[4/10] Normalization SKIPPED (disabled in config)")
+            print("\n[4/12] Normalization SKIPPED (disabled in config)")
             return results
 
-        print("\n[4/10] Normalizing, disambiguating & deduplicating...")
+        print("\n[4/12] Normalizing, disambiguating & deduplicating...")
 
         # Step 1: Normalize
         normalized_count = 0
@@ -1808,7 +1808,7 @@ Return ONLY the JSON array, nothing else."""
 
             # Check if LLM validation is disabled
             if not self.use_llm_validation:
-                print("\n[3/10] Validation SKIPPED")
+                print("\n[3/12] Validation SKIPPED")
                 self._export_results(pdf_path_obj, [], unique_candidates)
             else:
                 # Filter candidates
@@ -1830,7 +1830,7 @@ Return ONLY the JSON array, nothing else."""
                     and word_counts.get(c.short_form.upper(), 0) >= 2
                 )
 
-                print("\n[3/10] Validating candidates with Claude...")
+                print("\n[3/12] Validating candidates with Claude...")
                 print(f"  Corroborated SFs: {len(corroborated_sfs)}")
                 print(f"  Frequent SFs (2+): {frequent_sfs}")
                 print(f"  Filtered (lexicon-only, rare): {filtered_count}")
@@ -1931,7 +1931,7 @@ Return ONLY the JSON array, nothing else."""
             print("\n[Document metadata] SKIPPED (disabled in config)")
 
         # Stage 4: Summary & Export
-        print("\n[10/10] Writing summary...")
+        print("\n[12/12] Writing summary...")
         self.logger.write_summary()
         self.logger.print_summary()
         counters.log_summary()
@@ -2086,7 +2086,7 @@ Return ONLY the JSON array, nothing else."""
         if self.disease_detector is None:
             return []
 
-        print("\n[5/10] Detecting disease mentions...")
+        print("\n[5/12] Detecting disease mentions...")
         start = time.time()
 
         # Generate disease candidates
@@ -2308,7 +2308,7 @@ Return ONLY the JSON array, nothing else."""
         if self.drug_detector is None:
             return []
 
-        print("\n[6/10] Detecting drug mentions...")
+        print("\n[6/12] Detecting drug mentions...")
         start = time.time()
 
         # Run drug detection
@@ -2357,7 +2357,7 @@ Return ONLY the JSON array, nothing else."""
         if self.pharma_detector is None:
             return []
 
-        print("\n[7/10] Detecting pharma company mentions...")
+        print("\n[7/12] Detecting pharma company mentions...")
         start = time.time()
 
         # Build full text for detection
@@ -2577,7 +2577,7 @@ Return ONLY the JSON array, nothing else."""
         if self.author_detector is None:
             return []
 
-        print("\n[7a/10] Detecting author/investigator mentions...")
+        print("\n[8/12] Detecting author/investigator mentions...")
         start = time.time()
 
         # Build document fingerprint
@@ -2667,7 +2667,7 @@ Return ONLY the JSON array, nothing else."""
         if self.citation_detector is None:
             return []
 
-        print("\n[7b/10] Detecting citation/reference mentions...")
+        print("\n[9/12] Detecting citation/reference mentions...")
         start = time.time()
 
         # Build document fingerprint
@@ -2829,7 +2829,7 @@ Return ONLY the JSON array, nothing else."""
         if self.feasibility_detector is None:
             return []
 
-        print("\n[8/10] Extracting feasibility information...")
+        print("\n[10/12] Extracting feasibility information...")
         start = time.time()
 
         # Use LLM extraction if available (preferred - more precise structured output)
@@ -3082,13 +3082,13 @@ Return ONLY the JSON array, nothing else."""
                         source="PatientJourneyNER",
                     ))
 
-                print(f"    PatientJourney: {total_entities} entities extracted")
                 print(f"      diagnostic_delay: {summary.get('diagnostic_delay', 0)}")
                 print(f"      treatment_line: {summary.get('treatment_line', 0)}")
                 print(f"      care_pathway_step: {summary.get('care_pathway_step', 0)}")
                 print(f"      surveillance_frequency: {summary.get('surveillance_frequency', 0)}")
                 print(f"      pain_point: {summary.get('pain_point', 0)}")
                 print(f"      recruitment_touchpoint: {summary.get('recruitment_touchpoint', 0)}")
+            print(f"    PatientJourney: {total_entities} entities extracted")
             print(f"    PatientJourney time: {time.time() - pj_start:.2f}s")
 
         # Enrich with RegistryNER (registry names, sizes, data types, access policies)
@@ -3162,7 +3162,6 @@ Return ONLY the JSON array, nothing else."""
                         source="RegistryNER",
                     ))
 
-                print(f"    RegistryNER: {total_entities} entities extracted")
                 print(f"      registry_name: {summary.get('registry_name', 0)}")
                 print(f"      registry_size: {summary.get('registry_size', 0)}")
                 print(f"      geographic_coverage: {summary.get('geographic_coverage', 0)}")
@@ -3176,6 +3175,7 @@ Return ONLY the JSON array, nothing else."""
                     print(f"    Linked to known registries: {len(linked)}")
                     for lr in linked[:3]:  # Show first 3
                         print(f"      {lr.get('extracted_text')} -> {lr.get('full_name', 'N/A')}")
+            print(f"    RegistryNER: {total_entities} entities extracted")
             print(f"    RegistryNER time: {time.time() - reg_start:.2f}s")
 
         # Deduplicate overlapping NER spans (keep highest confidence)
@@ -3717,7 +3717,7 @@ Return ONLY the JSON array, nothing else."""
         if self.doc_metadata_strategy is None:
             return None
 
-        print("\n[9/10] Extracting document metadata...")
+        print("\n[11/12] Extracting document metadata...")
         start = time.time()
 
         try:

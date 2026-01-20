@@ -200,6 +200,8 @@ class EpiExtractEnricher:
             return True
 
         try:
+            import warnings
+
             from transformers import (
                 AutoModelForTokenClassification,
                 AutoTokenizer,
@@ -207,8 +209,11 @@ class EpiExtractEnricher:
             )
 
             logger.info("Loading EpiExtract4GARD-v2 model...")
-            model = AutoModelForTokenClassification.from_pretrained(self.MODEL_NAME)
-            tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
+            # Suppress "Invalid model-index" warning from HF Hub (model metadata issue, not functional)
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", message="Invalid model-index")
+                model = AutoModelForTokenClassification.from_pretrained(self.MODEL_NAME)
+                tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
 
             self._pipeline = pipeline(
                 "token-classification",  # NER is token-classification
