@@ -1,3 +1,6 @@
+
+# doc : https://chunkforge.com/blog/nlp-named-entity-recognition
+
 # Metadata Extraction Pipeline
 
 A production-grade 6-layer pipeline for extracting structured metadata from clinical trial and medical PDF documents.
