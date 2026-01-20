@@ -3471,7 +3471,7 @@ Return ONLY the JSON array, nothing else."""
             return img_base64
 
         except Exception as e:
-            logger.warning(f"Failed to render figure with padding: {e}")
+            print(f"  [WARN] Failed to render figure with padding: {e}")
             return None
 
     def _export_images(
