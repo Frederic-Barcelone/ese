@@ -296,6 +296,21 @@ class CitationDetector:
             # Reject truncated URLs (ending with incomplete domain)
             if domain_part.endswith("."):
                 return False
+            # Extract just the domain (before any path)
+            domain_only = domain_part.split("/")[0].split("?")[0]
+            # Get the TLD (last part after final dot)
+            parts = domain_only.split(".")
+            if len(parts) < 2:
+                return False
+            tld = parts[-1].lower()
+            # Reject truncated government/organization domains
+            # e.g., "accessdata.fda" should be "accessdata.fda.gov"
+            truncated_domains = {"fda", "nih", "cdc", "cms", "hhs", "europa", "who", "ema"}
+            if tld in truncated_domains:
+                return False
+            # TLD should be at least 2 chars
+            if len(tld) < 2:
+                return False
             return True
         return False
 
