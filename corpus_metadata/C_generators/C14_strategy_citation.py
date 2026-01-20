@@ -32,6 +32,8 @@ class CitationDetector:
     """
 
     # Citation identifier patterns
+    # Note: DOIs can contain parentheses (e.g., 10.1016/S0140-6736(25)01148-1)
+    # so we allow () in patterns but strip trailing unbalanced ) later
     CITATION_PATTERNS: Dict[CitationIdentifierType, List[re.Pattern]] = {
         CitationIdentifierType.PMID: [
             # Explicit PMID prefix required - no standalone number matching to avoid NCT confusion
@@ -43,10 +45,10 @@ class CitationDetector:
             re.compile(r"PMCID[:\s]*PMC?(\d{6,8})", re.IGNORECASE),
         ],
         CitationIdentifierType.DOI: [
-            # DOI pattern - handles both bare DOIs and doi.org URLs
-            re.compile(r"(?:doi[:\s]*)(10\.\d{4,9}/[^\s\])<>\"',;\n]+)", re.IGNORECASE),
-            re.compile(r"(?<!\w)10\.\d{4,9}/[^\s\])<>\"',;\n]+"),  # Bare DOI starting with 10.
-            re.compile(r"https?://(?:dx\.)?doi\.org/(10\.\d{4,9}/[^\s\])<>\"',;\n]+)"),
+            # DOI pattern - allow parentheses (common in Lancet DOIs like S0140-6736(25)01148-1)
+            re.compile(r"(?:doi[:\s]*)(10\.\d{4,9}/[^\s\]<>\"',;\n]+)", re.IGNORECASE),
+            re.compile(r"(?<!\w)10\.\d{4,9}/[^\s\]<>\"',;\n]+"),  # Bare DOI starting with 10.
+            re.compile(r"https?://(?:dx\.)?doi\.org/(10\.\d{4,9}/[^\s\]<>\"',;\n]+)"),
         ],
         CitationIdentifierType.NCT: [
             re.compile(r"NCT[:\s]*(\d{8})", re.IGNORECASE),
@@ -54,7 +56,8 @@ class CitationDetector:
         ],
         CitationIdentifierType.URL: [
             # URL pattern - exclude doi.org URLs (handled by DOI pattern)
-            re.compile(r"https?://(?!(?:dx\.)?doi\.org)(?:www\.)?[^\s\])<>\"'\n]+"),
+            # Allow parentheses but strip trailing unbalanced ones later
+            re.compile(r"https?://(?!(?:dx\.)?doi\.org)(?:www\.)?[^\s\]<>\"'\n]+"),
         ],
     }
 
@@ -216,11 +219,17 @@ class CitationDetector:
             identifier = re.sub(r"^(?:doi[:\s]*|https?://(?:dx\.)?doi\.org/)", "", identifier, flags=re.IGNORECASE)
             # Remove trailing punctuation and whitespace
             identifier = identifier.rstrip(".,;: \t\n")
+            # Handle trailing unbalanced parentheses
+            # DOIs can contain balanced () like S0140-6736(25)01148-1
+            # but we may have captured extra ) at end
+            identifier = self._balance_parentheses(identifier)
             return identifier
         elif id_type == CitationIdentifierType.URL:
             identifier = match.group(0)
             # Clean up URL - remove trailing punctuation
-            identifier = identifier.rstrip(".,;:)")
+            identifier = identifier.rstrip(".,;:")
+            # Handle trailing unbalanced parentheses
+            identifier = self._balance_parentheses(identifier)
             # Skip URLs that are just fragments (truncated)
             if len(identifier) < 15 or identifier.endswith("."):
                 return None
@@ -231,6 +240,27 @@ class CitationDetector:
                 return match.group(1)
             except IndexError:
                 return match.group(0)
+
+    def _balance_parentheses(self, text: str) -> str:
+        """
+        Remove trailing unbalanced closing parentheses.
+
+        DOIs like 10.1016/S0140-6736(25)01148-1 have balanced ()
+        but we may capture extra ) from surrounding text.
+        """
+        if not text:
+            return text
+
+        # Count open and close parens
+        open_count = text.count("(")
+        close_count = text.count(")")
+
+        # Remove trailing ) if unbalanced
+        while close_count > open_count and text.endswith(")"):
+            text = text[:-1]
+            close_count -= 1
+
+        return text
 
     def _is_valid_identifier(
         self, identifier: str, id_type: CitationIdentifierType
