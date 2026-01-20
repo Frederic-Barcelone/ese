@@ -2,12 +2,14 @@
   "metadata": {
     "source": "/Users/frederictetard/Projects/ese/gold_data/papers_gold.json",
     "audit_report": "/Users/frederictetard/Projects/ese/gold_data/audit_report.json",
-    "reclassification_version": "1.0"
+    "reclassification_version": "1.0",
+    "deduplication_version": "1.1",
+    "deduplication_note": "Removed duplicate short_forms per document, kept canonical long_form"
   },
   "summary": {
     "total_original": 156,
-    "defined": 62,
-    "mentioned": 89,
+    "defined": 55,
+    "mentioned": 91,
     "excluded": 16,
     "defined_diseases": 12,
     "defined_drugs": 10
@@ -226,20 +228,10 @@
     {
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "EGPA",
-      "long_form": "eosinophilic GPA",
-      "category": "ABBREV",
-      "page": 1,
-      "occurrences": 10,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "EGPA",
       "long_form": "eosinophilic granulomatosis with polyangiitis",
       "category": "ABBREV",
-      "page": 5,
-      "occurrences": 70,
+      "page": 1,
+      "occurrences": 80,
       "audit_bucket": "EXTRACTABLE_PAIR",
       "gold_type": "DEFINED"
     },
@@ -299,17 +291,7 @@
       "long_form": "Final Vote",
       "category": "ABBREV",
       "page": 3,
-      "occurrences": 1,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "FV",
-      "long_form": "final vote (% of expert panel members who agreed with the recommendation)",
-      "category": "ABBREV",
-      "page": 4,
-      "occurrences": 2,
+      "occurrences": 3,
       "audit_bucket": "EXTRACTABLE_PAIR",
       "gold_type": "DEFINED"
     },
@@ -389,17 +371,7 @@
       "long_form": "Level of Agreement",
       "category": "ABBREV",
       "page": 3,
-      "occurrences": 1,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "LoA",
-      "long_form": "level of agreement on a scale of 0\u201310",
-      "category": "ABBREV",
-      "page": 4,
-      "occurrences": 2,
+      "occurrences": 3,
       "audit_bucket": "EXTRACTABLE_PAIR",
       "gold_type": "DEFINED"
     },
@@ -409,17 +381,7 @@
       "long_form": "Level of Evidence",
       "category": "ABBREV",
       "page": 3,
-      "occurrences": 1,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "LoE",
-      "long_form": "level of evidence",
-      "category": "ABBREV",
-      "page": 4,
-      "occurrences": 2,
+      "occurrences": 3,
       "audit_bucket": "EXTRACTABLE_PAIR",
       "gold_type": "DEFINED"
     },
@@ -569,17 +531,7 @@
       "long_form": "Strength of Recommendation",
       "category": "ABBREV",
       "page": 3,
-      "occurrences": 1,
-      "audit_bucket": "EXTRACTABLE_PAIR",
-      "gold_type": "DEFINED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "SoR",
-      "long_form": "strength of recommendation",
-      "category": "ABBREV",
-      "page": 4,
-      "occurrences": 2,
+      "occurrences": 3,
       "audit_bucket": "EXTRACTABLE_PAIR",
       "gold_type": "DEFINED"
     },
@@ -618,20 +570,10 @@
     {
       "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
       "short_form": "APPEAR-C3G",
-      "long_form": "(trial name)",
-      "category": "ABBREV",
-      "page": 10,
-      "occurrences": 8,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "APPEAR-C3G",
       "long_form": "study name",
       "category": "ABBREV",
-      "page": 1,
-      "occurrences": 5,
+      "page": 10,
+      "occurrences": 13,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
@@ -691,7 +633,7 @@
       "long_form": "Creative Commons Attribution",
       "category": "ABBREV",
       "page": 1,
-      "occurrences": 1,
+      "occurrences": 2,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
@@ -838,20 +780,10 @@
     {
       "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
       "short_form": "sC5b-9",
-      "long_form": "soluble C5b-9 (membrane attack complex)",
-      "category": "ABBREV",
-      "page": 8,
-      "occurrences": 8,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "sC5b-9",
       "long_form": "soluble C5b-9 membrane attack complex",
       "category": "ABBREV",
-      "page": 5,
-      "occurrences": 1,
+      "page": 8,
+      "occurrences": 9,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
@@ -1001,16 +933,6 @@
       "long_form": "Silence Therapeutics",
       "category": "PHARMA_COMPANY",
       "page": 12,
-      "occurrences": 1,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "01_Article_Iptacopan C3G Trial.pdf",
-      "short_form": "CC BY",
-      "long_form": "Creative Commons Attribution",
-      "category": "ABBREV",
-      "page": 1,
       "occurrences": 1,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
@@ -1418,30 +1340,10 @@
     {
       "doc_id": "02_Article_AAV Management Guidelines.pdf",
       "short_form": "PEXIVAS",
-      "long_form": "Plasma Exchange and Glucocorticoids for Treatment of ANCA-Associated Vasculitis",
-      "category": "ABBREV",
-      "page": 5,
-      "occurrences": 9,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "PEXIVAS",
       "long_form": "Plasma Exchange and Glucocorticoids for Treatment of ANCA-associated Vasculitis",
       "category": "ABBREV",
-      "page": 16,
-      "occurrences": 1,
-      "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "PR3-ANCA",
-      "long_form": "proteinase 3 ANCA",
-      "category": "ABBREV",
-      "page": 3,
-      "occurrences": 1,
+      "page": 5,
+      "occurrences": 10,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
@@ -1450,8 +1352,8 @@
       "short_form": "PR3-ANCA",
       "long_form": "proteinase 3-ANCA",
       "category": "ABBREV",
-      "page": 4,
-      "occurrences": 17,
+      "page": 3,
+      "occurrences": 18,
       "audit_bucket": "SF_ONLY",
       "gold_type": "MENTIONED"
     },
@@ -1471,18 +1373,8 @@
       "long_form": "Rituximab versus Cyclophosphamide for ANCA-Associated Vasculitis trial",
       "category": "ABBREV",
       "page": 6,
-      "occurrences": 3,
+      "occurrences": 4,
       "audit_bucket": "SF_ONLY",
-      "gold_type": "MENTIONED"
-    },
-    {
-      "doc_id": "02_Article_AAV Management Guidelines.pdf",
-      "short_form": "RAVE",
-      "long_form": "Rituximab versus cyclophosphamide for ANCA-Associated Vasculitis",
-      "category": "ABBREV",
-      "page": 5,
-      "occurrences": 1,
-      "audit_bucket": "UNSUPPORTED_PAIR",
       "gold_type": "MENTIONED"
     },
     {

@@ -143,9 +143,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "on magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Melorheostosis.pdf"
+      "doc_id": "Melorheostosis.pdf",
+      "original_long_form": "on magnetic resonance imaging"
     },
     {
       "short_form": "TBM",
@@ -197,7 +198,7 @@
     },
     {
       "short_form": "WMG",
-      "long_form": "Waldenström's macroglobulinemia",
+      "long_form": "Waldenstr\u00f6m's macroglobulinemia",
       "category": "RAREDISEASE",
       "doc_id": "Waldenstrom_s-Macroglobulinemia.pdf"
     },
@@ -257,9 +258,10 @@
     },
     {
       "short_form": "CGH",
-      "long_form": "and comparative genomic hybridization",
+      "long_form": "comparative genomic hybridization",
       "category": "RAREDISEASE",
-      "doc_id": "Arthrogryposis-Multiplex-Congenita.pdf"
+      "doc_id": "Arthrogryposis-Multiplex-Congenita.pdf",
+      "original_long_form": "and comparative genomic hybridization"
     },
     {
       "short_form": "AD-HIES",
@@ -449,7 +451,7 @@
     },
     {
       "short_form": "MRKH",
-      "long_form": "Mayer-Rokitansky-Küster-Hauser",
+      "long_form": "Mayer-Rokitansky-K\u00fcster-Hauser",
       "category": "RAREDISEASE",
       "doc_id": "Mayer.pdf"
     },
@@ -515,9 +517,10 @@
     },
     {
       "short_form": "MRS",
-      "long_form": "and magnetic resonance spectroscopy",
+      "long_form": "magnetic resonance spectroscopy",
       "category": "RAREDISEASE",
-      "doc_id": "Pyruvate-Dehydrogenase-Complex-Deficiency.pdf"
+      "doc_id": "Pyruvate-Dehydrogenase-Complex-Deficiency.pdf",
+      "original_long_form": "and magnetic resonance spectroscopy"
     },
     {
       "short_form": "ROHHAD",
@@ -545,9 +548,10 @@
     },
     {
       "short_form": "TPN",
-      "long_form": "and total parental nutrition",
+      "long_form": "total parental nutrition",
       "category": "RAREDISEASE",
-      "doc_id": "Refractory-Celiac-Disease.pdf"
+      "doc_id": "Refractory-Celiac-Disease.pdf",
+      "original_long_form": "and total parental nutrition"
     },
     {
       "short_form": "RLS",
@@ -581,9 +585,10 @@
     },
     {
       "short_form": "CT",
-      "long_form": "a computed tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Wyburn.pdf"
+      "doc_id": "Wyburn.pdf",
+      "original_long_form": "a computed tomography"
     },
     {
       "short_form": "MRI",
@@ -701,9 +706,10 @@
     },
     {
       "short_form": "CT",
-      "long_form": "or computerized tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Binswanger-Disease.pdf"
+      "doc_id": "Binswanger-Disease.pdf",
+      "original_long_form": "or computerized tomography"
     },
     {
       "short_form": "BTD",
@@ -731,9 +737,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "Magnetic resonance imagining",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Budd-Chiari-Syndrome.pdf"
+      "doc_id": "Budd-Chiari-Syndrome.pdf",
+      "original_long_form": "Magnetic resonance imagining"
     },
     {
       "short_form": "CPSID",
@@ -761,9 +768,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "Magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Cervical-Dystonia.pdf"
+      "doc_id": "Cervical-Dystonia.pdf",
+      "original_long_form": "Magnetic resonance imaging"
     },
     {
       "short_form": "CS",
@@ -773,9 +781,10 @@
     },
     {
       "short_form": "CT",
-      "long_form": "computerized tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Chilaiditi_s-Syndrome.pdf"
+      "doc_id": "Chilaiditi_s-Syndrome.pdf",
+      "original_long_form": "computerized tomography"
     },
     {
       "short_form": "DGS",
@@ -809,9 +818,10 @@
     },
     {
       "short_form": "WHO",
-      "long_form": "The World Health Organization",
+      "long_form": "World Health Organization",
       "category": "RAREDISEASE",
-      "doc_id": "Common-Variable-Immune-Deficiency.pdf"
+      "doc_id": "Common-Variable-Immune-Deficiency.pdf",
+      "original_long_form": "The World Health Organization"
     },
     {
       "short_form": "CAH",
@@ -881,15 +891,17 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "Magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Cysticercosis.pdf"
+      "doc_id": "Cysticercosis.pdf",
+      "original_long_form": "Magnetic resonance imaging"
     },
     {
       "short_form": "CT",
-      "long_form": "and computed tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Cysticercosis.pdf"
+      "doc_id": "Cysticercosis.pdf",
+      "original_long_form": "and computed tomography"
     },
     {
       "short_form": "CMV",
@@ -947,9 +959,10 @@
     },
     {
       "short_form": "CDC",
-      "long_form": "The Centers for Disease Control",
+      "long_form": "Centers for Disease Control",
       "category": "RAREDISEASE",
-      "doc_id": "Encephalocele.pdf"
+      "doc_id": "Encephalocele.pdf",
+      "original_long_form": "The Centers for Disease Control"
     },
     {
       "short_form": "EFE",
@@ -1085,9 +1098,10 @@
     },
     {
       "short_form": "CDC",
-      "long_form": "The Centers for Disease Control",
+      "long_form": "Centers for Disease Control",
       "category": "RAREDISEASE",
-      "doc_id": "Gastroschisis.pdf"
+      "doc_id": "Gastroschisis.pdf",
+      "original_long_form": "The Centers for Disease Control"
     },
     {
       "short_form": "GCA",
@@ -1109,9 +1123,10 @@
     },
     {
       "short_form": "LE",
-      "long_form": "and low excretors",
+      "long_form": "low excretors",
       "category": "RAREDISEASE",
-      "doc_id": "Glutaric-Aciduria-Type-I.pdf"
+      "doc_id": "Glutaric-Aciduria-Type-I.pdf",
+      "original_long_form": "and low excretors"
     },
     {
       "short_form": "GS",
@@ -1133,9 +1148,10 @@
     },
     {
       "short_form": "CT",
-      "long_form": "and computed tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Hepatic-Encephalopathy.pdf"
+      "doc_id": "Hepatic-Encephalopathy.pdf",
+      "original_long_form": "and computed tomography"
     },
     {
       "short_form": "MRI",
@@ -1157,9 +1173,10 @@
     },
     {
       "short_form": "CT",
-      "long_form": "computerized tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Huntington_s-Disease.pdf"
+      "doc_id": "Huntington_s-Disease.pdf",
+      "original_long_form": "computerized tomography"
     },
     {
       "short_form": "MRI",
@@ -1229,9 +1246,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "and magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Klippel.pdf"
+      "doc_id": "Klippel.pdf",
+      "original_long_form": "and magnetic resonance imaging"
     },
     {
       "short_form": "KRS",
@@ -1301,9 +1319,10 @@
     },
     {
       "short_form": "NHL",
-      "long_form": "non-Hodgkin’s lymphoma",
+      "long_form": "non-Hodgkin lymphoma",
       "category": "RAREDISEASE",
-      "doc_id": "Mantle-Cell-Lymphoma.pdf"
+      "doc_id": "Mantle-Cell-Lymphoma.pdf",
+      "original_long_form": "non-Hodgkin\u2019s lymphoma"
     },
     {
       "short_form": "MAS",
@@ -1313,9 +1332,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "Magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Meckel-Syndrome.pdf"
+      "doc_id": "Meckel-Syndrome.pdf",
+      "original_long_form": "Magnetic resonance imaging"
     },
     {
       "short_form": "MALS",
@@ -1367,9 +1387,10 @@
     },
     {
       "short_form": "CDC",
-      "long_form": "The Centers for Disease Control",
+      "long_form": "Centers for Disease Control",
       "category": "RAREDISEASE",
-      "doc_id": "Mumps.pdf"
+      "doc_id": "Mumps.pdf",
+      "original_long_form": "The Centers for Disease Control"
     },
     {
       "short_form": "SIP",
@@ -1415,9 +1436,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "Magnetic Resonance Imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Ocular-Motor-Apraxia-Cogan-Type.pdf"
+      "doc_id": "Ocular-Motor-Apraxia-Cogan-Type.pdf",
+      "original_long_form": "Magnetic Resonance Imaging"
     },
     {
       "short_form": "PET",
@@ -1517,15 +1539,17 @@
     },
     {
       "short_form": "CBC",
-      "long_form": "A complete blood count",
+      "long_form": "complete blood count",
       "category": "RAREDISEASE",
-      "doc_id": "Primary-Myelofibrosis.pdf"
+      "doc_id": "Primary-Myelofibrosis.pdf",
+      "original_long_form": "A complete blood count"
     },
     {
       "short_form": "MRI",
-      "long_form": "and magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Primary-Visual-Agnosia.pdf"
+      "doc_id": "Primary-Visual-Agnosia.pdf",
+      "original_long_form": "and magnetic resonance imaging"
     },
     {
       "short_form": "PME",
@@ -1565,9 +1589,10 @@
     },
     {
       "short_form": "CT",
-      "long_form": "Computed tomography",
+      "long_form": "computed tomography",
       "category": "RAREDISEASE",
-      "doc_id": "Retinoblastoma.pdf"
+      "doc_id": "Retinoblastoma.pdf",
+      "original_long_form": "Computed tomography"
     },
     {
       "short_form": "ROP",
@@ -1601,9 +1626,10 @@
     },
     {
       "short_form": "CBC",
-      "long_form": "A complete blood count",
+      "long_form": "complete blood count",
       "category": "RAREDISEASE",
-      "doc_id": "Severe-Combined-Immunodeficiency.pdf"
+      "doc_id": "Severe-Combined-Immunodeficiency.pdf",
+      "original_long_form": "A complete blood count"
     },
     {
       "short_form": "SCADD",
@@ -1733,9 +1759,10 @@
     },
     {
       "short_form": "MRI",
-      "long_form": "Magnetic resonance imaging",
+      "long_form": "magnetic resonance imaging",
       "category": "RAREDISEASE",
-      "doc_id": "Tietze-Syndrome.pdf"
+      "doc_id": "Tietze-Syndrome.pdf",
+      "original_long_form": "Magnetic resonance imaging"
     },
     {
       "short_form": "TSS",
@@ -1775,9 +1802,10 @@
     },
     {
       "short_form": "TB",
-      "long_form": "Tuberculosis",
+      "long_form": "tuberculosis",
       "category": "RAREDISEASE",
-      "doc_id": "Tuberculosis.pdf"
+      "doc_id": "Tuberculosis.pdf",
+      "original_long_form": "Tuberculosis"
     },
     {
       "short_form": "TTTS",
@@ -1851,5 +1879,14 @@
       "category": "RAREDISEASE",
       "doc_id": "Zollinger.pdf"
     }
+  ],
+  "normalization_version": "1.1",
+  "normalization_note": "Long forms normalized: removed leading articles/prepositions, fixed typos, standardized common terms",
+  "polysemous_short_forms": [
+    "ACC",
+    "HME",
+    "CS",
+    "HGE",
+    "IH"
   ]
 }
