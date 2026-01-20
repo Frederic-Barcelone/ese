@@ -3346,6 +3346,86 @@ Return ONLY the JSON array, nothing else."""
 
         print(f"  Unified schema: {unified_file.name}")
 
+    def _render_figure_with_padding(
+        self,
+        pdf_path: Path,
+        page_num: int,
+        bbox: Tuple[float, float, float, float],
+        dpi: int = 200,
+        padding: int = 15,
+        bottom_padding: int = 150,
+    ) -> Optional[str]:
+        """
+        Re-render a figure from PDF with extra bottom padding for captions/legends.
+
+        Args:
+            pdf_path: Path to PDF file
+            page_num: 1-indexed page number
+            bbox: (x0, y0, x1, y1) bounding box in PDF points
+            dpi: Resolution for rendering
+            padding: Extra points around sides/top
+            bottom_padding: Extra points below figure for captions (default 150pt)
+
+        Returns:
+            Base64-encoded PNG string, or None if rendering fails
+        """
+        try:
+            import fitz  # PyMuPDF
+        except ImportError:
+            return None
+
+        try:
+            doc = fitz.open(str(pdf_path))
+            if page_num < 1 or page_num > len(doc):
+                doc.close()
+                return None
+
+            page = doc[page_num - 1]  # 0-indexed
+            page_width = page.rect.width
+            page_height = page.rect.height
+
+            x0, y0, x1, y1 = bbox
+
+            # Handle coordinate space issues (Unstructured uses higher DPI)
+            if x1 > page_width * 1.1 or y1 > page_height * 1.1:
+                # Scale from pixel space to PDF point space
+                max_coord = max(x1, y1)
+                max_page = max(page_width, page_height)
+                dpi_ratio = max_page / max_coord
+
+                x0 = x0 * dpi_ratio
+                y0 = y0 * dpi_ratio
+                x1 = x1 * dpi_ratio
+                y1 = y1 * dpi_ratio
+
+            # Create clip rectangle with padding
+            clip_rect = fitz.Rect(
+                max(0, x0 - padding),
+                max(0, y0 - padding),
+                min(page_width, x1 + padding),
+                min(page_height, y1 + bottom_padding),
+            )
+
+            # Validate clip rect
+            if clip_rect.width <= 0 or clip_rect.height <= 0:
+                doc.close()
+                return None
+
+            # Render to pixmap
+            mat = fitz.Matrix(dpi / 72, dpi / 72)
+            pix = page.get_pixmap(matrix=mat, clip=clip_rect)
+
+            # Convert to base64 PNG
+            img_bytes = pix.tobytes("png")
+            img_base64 = base64.b64encode(img_bytes).decode("utf-8")
+
+            doc.close()
+            return img_base64
+
+        except Exception as e:
+            logger.warning(f"Failed to render figure with padding: {e}")
+            return None
+
     def _export_images(
         self, pdf_path: Path, doc: "DocumentGraph"
     ) -> None:
@@ -3438,14 +3518,31 @@ Return ONLY the JSON array, nothing else."""
                     except Exception as e:
                         print(f"    [WARN] Chart analysis failed: {e}")
 
-            # Save image as file
+            # Save image as file - re-render with padding if bbox available
             if img.image_base64:
                 img_type = img.image_type.value.lower() if img.image_type else "image"
                 img_index = len([i for i in export_data['images'] if i.get('page') == img.page_num]) + 1
-                img_filename = f"{pdf_path.stem}_{img_type}_page{img.page_num}_{img_index}.jpg"
+                img_filename = f"{pdf_path.stem}_{img_type}_page{img.page_num}_{img_index}.png"
                 img_path = out_dir / img_filename
+
                 try:
-                    img_bytes = base64.b64decode(img.image_base64)
+                    # Try to re-render with bottom padding for captions/legends
+                    rendered_base64 = None
+                    if img.bbox:
+                        rendered_base64 = self._render_figure_with_padding(
+                            pdf_path=pdf_path,
+                            page_num=img.page_num,
+                            bbox=img.bbox.coords,
+                            bottom_padding=150,  # Extra space for figure legends
+                        )
+
+                    # Use re-rendered image if successful, otherwise use original
+                    if rendered_base64:
+                        img_bytes = base64.b64decode(rendered_base64)
+                        img_data["image_base64"] = rendered_base64  # Update for analysis
+                    else:
+                        img_bytes = base64.b64decode(img.image_base64)
+
                     with open(img_path, "wb") as img_file:
                         img_file.write(img_bytes)
                     img_data["saved_file"] = img_filename
