@@ -1,4 +1,4 @@
-# corpus_metadata/E_normalization/E09_drug_combination_parser.py
+# corpus_metadata/E_normalization/E16_drug_combination_parser.py
 """
 Drug combination decomposition parser.
 
@@ -11,16 +11,23 @@ Also handles:
 - Dose/frequency extraction
 - Drug class recognition
 - Background therapy vs investigational drug distinction
+
+Example:
+    >>> from E_normalization.E16_drug_combination_parser import parse_drug_combination
+    >>> result = parse_drug_combination("ACE-I + SGLT2i")
+    >>> print([c.name for c in result.components])
+    ['ACE-I', 'SGLT2i']
 """
 
 from __future__ import annotations
 
-import logging
 import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
-logger = logging.getLogger(__name__)
+from A_core.A00_logging import get_logger
+
+logger = get_logger(__name__)
 
 
 @dataclass

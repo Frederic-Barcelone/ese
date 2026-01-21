@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/E_normalization/E05_drug_enricher.py
+# corpus_metadata/E_normalization/E05_drug_enricher.py
 """
 PubTator3 API integration for drug/chemical enrichment.
 
@@ -8,20 +8,29 @@ Enriches extracted drugs with:
 - Aliases/synonyms from PubTator
 
 Reuses PubTator3Client from E04_pubtator_enricher.
+
+Example:
+    >>> from E_normalization.E05_drug_enricher import DrugEnricher
+    >>> enricher = DrugEnricher()
+    >>> enriched = enricher.enrich(drug_entity)
 """
 
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
+from A_core.A00_logging import get_logger
+from A_core.A02_interfaces import BaseEnricher
 from A_core.A06_drug_models import (
     DrugIdentifier,
     ExtractedDrug,
 )
 from E_normalization.E04_pubtator_enricher import PubTator3Client
 
+logger = get_logger(__name__)
 
-class DrugEnricher:
+
+class DrugEnricher(BaseEnricher[ExtractedDrug, ExtractedDrug]):
     """
     Enriches ExtractedDrug entities with PubTator3 chemical data.
 
@@ -29,17 +38,31 @@ class DrugEnricher:
     - MeSH ID (if missing)
     - Normalized name from PubTator
     - Aliases/synonyms
+
+    Attributes:
+        client: PubTator3Client for API access.
+        enrich_missing_mesh: Add MeSH IDs to drugs missing them.
+        add_aliases: Add aliases from PubTator.
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        config = config or {}
-        self.client = PubTator3Client(config)
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        super().__init__(config)
+        self.client = PubTator3Client(self.config)
 
         # Enrichment settings
-        enrichment_cfg = config.get("enrichment", {})
+        enrichment_cfg = self.config.get("enrichment", {})
         self.enrich_missing_mesh = enrichment_cfg.get("enrich_missing_mesh", True)
         self.add_aliases = enrichment_cfg.get("add_aliases", True)
-        self.enabled = config.get("enabled", True)
+
+        logger.debug(
+            f"DrugEnricher initialized: mesh={self.enrich_missing_mesh}, "
+            f"aliases={self.add_aliases}, enabled={self.enabled}"
+        )
+
+    @property
+    def enricher_name(self) -> str:
+        """Return the enricher identifier."""
+        return "drug_enricher"
 
     def enrich(self, drug: ExtractedDrug) -> ExtractedDrug:
         """
@@ -132,11 +155,11 @@ class DrugEnricher:
         Enrich a batch of drug entities.
 
         Args:
-            drugs: List of validated drug entities
-            verbose: Print progress
+            drugs: List of validated drug entities.
+            verbose: Log progress information.
 
         Returns:
-            List of enriched drug entities
+            List of enriched drug entities.
         """
         if not self.enabled:
             return drugs
@@ -153,6 +176,6 @@ class DrugEnricher:
                     enriched_count += 1
 
         if verbose and enriched_count > 0:
-            print(f"    PubTator enriched: {enriched_count}/{len(drugs)} drugs")
+            logger.info(f"PubTator enriched: {enriched_count}/{len(drugs)} drugs")
 
         return enriched

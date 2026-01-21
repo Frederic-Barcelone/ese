@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/E_normalization/E04_pubtator_enricher.py
+# corpus_metadata/E_normalization/E04_pubtator_enricher.py
 """
 PubTator3 API integration for disease enrichment.
 
@@ -8,103 +8,57 @@ Enriches extracted diseases with:
 - Aliases/synonyms from PubTator
 
 API Reference: https://www.ncbi.nlm.nih.gov/research/pubtator3/api
+
+Example:
+    >>> from E_normalization.E04_pubtator_enricher import DiseaseEnricher
+    >>> enricher = DiseaseEnricher()
+    >>> enriched = enricher.enrich(disease_entity)
 """
 
 from __future__ import annotations
 
-import hashlib
 import json
-import time
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import requests
 
+from A_core.A00_logging import get_logger
+from A_core.A02_interfaces import BaseEnricher
 from A_core.A05_disease_models import (
     DiseaseIdentifier,
     ExtractedDisease,
 )
+from Z_utils.Z01_api_client import BaseAPIClient
+
+logger = get_logger(__name__)
 
 
-class PubTator3Client:
+class PubTator3Client(BaseAPIClient):
     """
     PubTator3 API client with rate limiting and disk caching.
 
+    Extends BaseAPIClient to leverage shared cache and rate limiting.
+
     Rate limit: 3 requests/second max (per NCBI guidelines).
-    Cache: Disk-based with configurable TTL.
+    Cache: Disk-based with 7-day TTL (configurable).
+
+    Attributes:
+        base_url: PubTator3 API base URL.
+        cache: DiskCache instance for caching responses.
+        rate_limiter: RateLimiter instance for API rate limiting.
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        config = config or {}
-        self.base_url = config.get(
-            "base_url", "https://www.ncbi.nlm.nih.gov/research/pubtator3-api"
+    DEFAULT_BASE_URL = "https://www.ncbi.nlm.nih.gov/research/pubtator3-api"
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        super().__init__(
+            config=config,
+            service_name="pubtator",
+            default_base_url=self.DEFAULT_BASE_URL,
+            default_rate_limit=3.0,  # NCBI guideline: 3 req/sec
+            default_cache_ttl_hours=168,  # 7 days
+            default_cache_dir="cache/pubtator",
         )
-        self.timeout = config.get("timeout_seconds", 30)
-        self.rate_limit = config.get("rate_limit_per_second", 3)
-
-        # Cache configuration
-        cache_cfg = config.get("cache", {})
-        self.cache_enabled = cache_cfg.get("enabled", True)
-        self.cache_dir = Path(cache_cfg.get("directory", "cache/pubtator"))
-        self.cache_ttl = cache_cfg.get("ttl_hours", 168) * 3600  # Default 7 days
-
-        # Rate limiting state
-        self._last_request_time = 0.0
-
-        # Create cache directory if enabled
-        if self.cache_enabled:
-            self.cache_dir.mkdir(parents=True, exist_ok=True)
-
-    def _rate_limit(self) -> None:
-        """Enforce rate limit (3 req/sec max per NCBI guidelines)."""
-        if self.rate_limit <= 0:
-            return
-        min_interval = 1.0 / self.rate_limit
-        elapsed = time.time() - self._last_request_time
-        if elapsed < min_interval:
-            time.sleep(min_interval - elapsed)
-        self._last_request_time = time.time()
-
-    def _cache_key(self, prefix: str, term: str) -> str:
-        """Generate cache key from prefix and term."""
-        normalized = term.lower().strip()
-        hash_val = hashlib.md5(normalized.encode()).hexdigest()[:12]
-        return f"{prefix}_{hash_val}"
-
-    def _cache_path(self, key: str) -> Path:
-        """Get cache file path for key."""
-        return self.cache_dir / f"{key}.json"
-
-    def _cache_get(self, key: str) -> Optional[Dict[str, Any]]:
-        """Get value from cache if exists and not expired."""
-        if not self.cache_enabled:
-            return None
-
-        path = self._cache_path(key)
-        if not path.exists():
-            return None
-
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-            timestamp = data.get("_cached_at", 0)
-            if time.time() - timestamp > self.cache_ttl:
-                path.unlink()  # Expired, remove
-                return None
-            return data.get("result")
-        except Exception:
-            return None
-
-    def _cache_set(self, key: str, value: Any) -> None:
-        """Store value in cache."""
-        if not self.cache_enabled:
-            return
-
-        path = self._cache_path(key)
-        try:
-            data = {"_cached_at": time.time(), "result": value}
-            path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
-        except Exception:
-            pass  # Cache write failures are non-fatal
 
     def autocomplete(
         self, term: str, entity_type: str = "disease"
@@ -113,8 +67,8 @@ class PubTator3Client:
         Query PubTator3 autocomplete endpoint for entity normalization.
 
         Args:
-            term: Disease name to search
-            entity_type: Entity type ("disease", "chemical", "gene", etc.)
+            term: Disease name to search.
+            entity_type: Entity type ("disease", "chemical", "gene", etc.).
 
         Returns:
             List of matching entities with identifiers, or None on error.
@@ -129,20 +83,19 @@ class PubTator3Client:
             return None
 
         # Check cache
-        cache_key = self._cache_key(f"autocomplete_{entity_type}", term)
-        cached = self._cache_get(cache_key)
+        cache_key = self.cache.make_key(f"autocomplete_{entity_type}", term)
+        cached = self.cache.get(cache_key)
         if cached is not None:
             return cached if isinstance(cached, list) else [cached]
 
-        # Rate limit
-        self._rate_limit()
+        # Rate limit and make request
+        self.rate_limiter.wait()
 
-        # Make request
         url = f"{self.base_url}/entity/autocomplete/"
         params = {"query": term}
 
         try:
-            resp = requests.get(url, params=params, timeout=self.timeout)
+            resp = self._session.get(url, params=params, timeout=self.timeout)
             resp.raise_for_status()
             results = resp.json()
 
@@ -153,24 +106,24 @@ class PubTator3Client:
                     for r in results
                     if r.get("biotype", "").lower() == entity_type.lower()
                 ]
-                self._cache_set(cache_key, filtered)
+                self.cache.set(cache_key, filtered)
                 return filtered
 
             # Handle non-list results (wrap dict in list or return None)
             if isinstance(results, dict):
                 wrapped = [results]
-                self._cache_set(cache_key, wrapped)
+                self.cache.set(cache_key, wrapped)
                 return wrapped
             return None
 
         except requests.exceptions.Timeout:
-            print(f"[WARN] PubTator timeout for '{term}'")
+            logger.warning(f"PubTator timeout for '{term}'")
             return None
         except requests.exceptions.RequestException as e:
-            print(f"[WARN] PubTator request failed for '{term}': {e}")
+            logger.warning(f"PubTator request failed for '{term}': {e}")
             return None
         except json.JSONDecodeError:
-            print(f"[WARN] PubTator invalid JSON for '{term}'")
+            logger.warning(f"PubTator invalid JSON for '{term}'")
             return None
 
     def search_entity(
@@ -182,7 +135,7 @@ class PubTator3Client:
         Alternative to autocomplete for more comprehensive results.
 
         Args:
-            term: Entity name to search
+            term: Entity name to search.
             entity_type: "disease", "chemical", "gene", "species", etc.
 
         Returns:
@@ -192,15 +145,14 @@ class PubTator3Client:
             return None
 
         # Check cache
-        cache_key = self._cache_key(f"search_{entity_type}", term)
-        cached = self._cache_get(cache_key)
+        cache_key = self.cache.make_key(f"search_{entity_type}", term)
+        cached = self.cache.get(cache_key)
         if cached is not None:
             return cached if isinstance(cached, list) else [cached]
 
-        # Rate limit
-        self._rate_limit()
+        # Rate limit and make request
+        self.rate_limiter.wait()
 
-        # Build search query with entity type prefix
         type_prefix = entity_type.upper()
         query = f"@{type_prefix}_{term}"
 
@@ -208,7 +160,7 @@ class PubTator3Client:
         params = {"text": query}
 
         try:
-            resp = requests.get(url, params=params, timeout=self.timeout)
+            resp = self._session.get(url, params=params, timeout=self.timeout)
             resp.raise_for_status()
             data = resp.json()
 
@@ -223,15 +175,15 @@ class PubTator3Client:
             if not isinstance(results, list):
                 results = [results] if isinstance(results, dict) else []
 
-            self._cache_set(cache_key, results)
+            self.cache.set(cache_key, results)
             return results
 
-        except Exception as e:
-            print(f"[WARN] PubTator search failed for '{term}': {e}")
+        except requests.exceptions.RequestException as e:
+            logger.warning(f"PubTator search failed for '{term}': {e}")
             return None
 
 
-class DiseaseEnricher:
+class DiseaseEnricher(BaseEnricher[ExtractedDisease, ExtractedDisease]):
     """
     Enriches ExtractedDisease entities with PubTator3 data.
 
@@ -239,17 +191,31 @@ class DiseaseEnricher:
     - MeSH ID (if missing)
     - Normalized name from PubTator
     - Aliases/synonyms
+
+    Attributes:
+        client: PubTator3Client for API access.
+        enrich_missing_mesh: Add MeSH IDs to diseases missing them.
+        add_aliases: Add aliases from PubTator.
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        config = config or {}
-        self.client = PubTator3Client(config)
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        super().__init__(config)
+        self.client = PubTator3Client(self.config)
 
         # Enrichment settings
-        enrichment_cfg = config.get("enrichment", {})
+        enrichment_cfg = self.config.get("enrichment", {})
         self.enrich_missing_mesh = enrichment_cfg.get("enrich_missing_mesh", True)
         self.add_aliases = enrichment_cfg.get("add_aliases", True)
-        self.enabled = config.get("enabled", True)
+
+        logger.debug(
+            f"DiseaseEnricher initialized: mesh={self.enrich_missing_mesh}, "
+            f"aliases={self.add_aliases}, enabled={self.enabled}"
+        )
+
+    @property
+    def enricher_name(self) -> str:
+        """Return the enricher identifier."""
+        return "disease_enricher"
 
     def enrich(self, disease: ExtractedDisease) -> ExtractedDisease:
         """
@@ -343,11 +309,11 @@ class DiseaseEnricher:
         Enrich a batch of disease entities.
 
         Args:
-            diseases: List of validated disease entities
-            verbose: Print progress
+            diseases: List of validated disease entities.
+            verbose: Log progress information.
 
         Returns:
-            List of enriched disease entities
+            List of enriched disease entities.
         """
         if not self.enabled:
             return diseases
@@ -355,7 +321,7 @@ class DiseaseEnricher:
         enriched = []
         enriched_count = 0
 
-        for i, disease in enumerate(diseases):
+        for disease in diseases:
             result = self.enrich(disease)
             enriched.append(result)
 
@@ -364,6 +330,6 @@ class DiseaseEnricher:
                     enriched_count += 1
 
         if verbose and enriched_count > 0:
-            print(f"    PubTator enriched: {enriched_count}/{len(diseases)} diseases")
+            logger.info(f"PubTator enriched: {enriched_count}/{len(diseases)} diseases")
 
         return enriched

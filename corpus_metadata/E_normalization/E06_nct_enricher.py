@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/E_normalization/E06_nct_enricher.py
+# corpus_metadata/E_normalization/E06_nct_enricher.py
 """
 ClinicalTrials.gov API integration for NCT identifier enrichment.
 
@@ -10,6 +10,12 @@ Enriches extracted NCT identifiers with:
 - Interventions/drugs
 
 API Reference: https://clinicaltrials.gov/data-api/api
+
+Example:
+    >>> from E_normalization.E06_nct_enricher import NCTEnricher
+    >>> enricher = NCTEnricher()
+    >>> info = enricher.enrich("NCT04817618")
+    >>> print(info.official_title)
 """
 
 from __future__ import annotations
@@ -17,10 +23,15 @@ from __future__ import annotations
 import json
 import time
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Dict, Optional
 
 import requests
+
+from A_core.A00_logging import get_logger
+from A_core.A02_interfaces import BaseEnricher
+from Z_utils.Z01_api_client import BaseAPIClient
+
+logger = get_logger(__name__)
 
 
 @dataclass
@@ -42,97 +53,52 @@ class NCTTrialInfo:
         return self.official_title or self.brief_title
 
 
-class ClinicalTrialsGovClient:
+class ClinicalTrialsGovClient(BaseAPIClient):
     """
     ClinicalTrials.gov API v2 client with rate limiting and disk caching.
 
+    Extends BaseAPIClient to leverage shared cache and rate limiting.
+
     Rate limit: 1 request/second (conservative, API allows more).
     Cache: Disk-based with 30-day TTL (trial data changes infrequently).
+
+    Attributes:
+        base_url: ClinicalTrials.gov API base URL.
+        cache: DiskCache instance for caching responses.
+        rate_limiter: RateLimiter instance for API rate limiting.
     """
 
-    BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
+    DEFAULT_BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        # Convert ttl_days to ttl_hours for BaseAPIClient
         config = config or {}
-        self.timeout = config.get("timeout_seconds", 30)
-        self.rate_limit = config.get("rate_limit_per_second", 1)
-
-        # Cache configuration
         cache_cfg = config.get("cache", {})
-        self.cache_enabled = cache_cfg.get("enabled", True)
-        self.cache_dir = Path(cache_cfg.get("directory", "cache/clinicaltrials"))
-        self.cache_ttl = cache_cfg.get("ttl_days", 30) * 86400  # Default 30 days
+        if "ttl_days" in cache_cfg and "ttl_hours" not in cache_cfg:
+            cache_cfg["ttl_hours"] = cache_cfg["ttl_days"] * 24
 
-        # Rate limiting state
-        self._last_request_time = 0.0
+        super().__init__(
+            config=config,
+            service_name="clinicaltrials",
+            default_base_url=self.DEFAULT_BASE_URL,
+            default_rate_limit=1.0,  # Conservative rate limit
+            default_cache_ttl_hours=720,  # 30 days
+            default_cache_dir="cache/clinicaltrials",
+        )
 
-        # Session for connection pooling
-        self._session = requests.Session()
-        self._session.headers["User-Agent"] = "ESE-Pipeline/1.0 (NCT Enrichment)"
-
-        # Create cache directory if enabled
-        if self.cache_enabled:
-            self.cache_dir.mkdir(parents=True, exist_ok=True)
-
-    def _rate_limit(self) -> None:
-        """Enforce rate limit."""
-        if self.rate_limit <= 0:
-            return
-        min_interval = 1.0 / self.rate_limit
-        elapsed = time.time() - self._last_request_time
-        if elapsed < min_interval:
-            time.sleep(min_interval - elapsed)
-        self._last_request_time = time.time()
-
-    def _cache_key(self, nct_id: str) -> str:
+    def _make_cache_key(self, nct_id: str) -> str:
         """Generate cache key from NCT ID."""
         normalized = nct_id.upper().strip()
-        # Ensure NCT prefix
         if not normalized.startswith("NCT"):
             normalized = f"NCT{normalized}"
         return f"nct_{normalized}"
-
-    def _cache_path(self, key: str) -> Path:
-        """Get cache file path for key."""
-        return self.cache_dir / f"{key}.json"
-
-    def _cache_get(self, key: str) -> Optional[Dict[str, Any]]:
-        """Get value from cache if exists and not expired."""
-        if not self.cache_enabled:
-            return None
-
-        path = self._cache_path(key)
-        if not path.exists():
-            return None
-
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-            timestamp = data.get("_cached_at", 0)
-            if time.time() - timestamp > self.cache_ttl:
-                path.unlink()  # Expired, remove
-                return None
-            return data.get("result")
-        except Exception:
-            return None
-
-    def _cache_set(self, key: str, value: Any) -> None:
-        """Store value in cache."""
-        if not self.cache_enabled:
-            return
-
-        path = self._cache_path(key)
-        try:
-            data = {"_cached_at": time.time(), "result": value}
-            path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-        except Exception:
-            pass  # Cache write failures are non-fatal
 
     def get_trial_info(self, nct_id: str) -> Optional[NCTTrialInfo]:
         """
         Fetch trial information from ClinicalTrials.gov API.
 
         Args:
-            nct_id: NCT identifier (e.g., "NCT04817618" or "04817618")
+            nct_id: NCT identifier (e.g., "NCT04817618" or "04817618").
 
         Returns:
             NCTTrialInfo with trial details, or None on error/not found.
@@ -143,15 +109,14 @@ class ClinicalTrialsGovClient:
             nct_id = f"NCT{nct_id}"
 
         # Check cache
-        cache_key = self._cache_key(nct_id)
-        cached = self._cache_get(cache_key)
+        cache_key = self._make_cache_key(nct_id)
+        cached = self.cache.get(cache_key)
         if cached is not None:
             return NCTTrialInfo(**cached) if cached else None
 
-        # Rate limit
-        self._rate_limit()
+        # Rate limit and make request
+        self.rate_limiter.wait()
 
-        # Build API request
         params = {
             "format": "json",
             "query.id": nct_id,
@@ -159,28 +124,26 @@ class ClinicalTrialsGovClient:
         }
 
         try:
-            resp = self._session.get(self.BASE_URL, params=params, timeout=self.timeout)
+            resp = self._session.get(self.base_url, params=params, timeout=self.timeout)
 
             # Handle rate limiting
             if resp.status_code == 429:
-                print("[NCT] Rate limited, waiting 60s...")
+                logger.warning("ClinicalTrials.gov rate limited, waiting 60s...")
                 time.sleep(60)
-                resp = self._session.get(self.BASE_URL, params=params, timeout=self.timeout)
+                resp = self._session.get(self.base_url, params=params, timeout=self.timeout)
 
             resp.raise_for_status()
             data = resp.json()
 
         except requests.RequestException as e:
-            print(f"[NCT] API error for {nct_id}: {e}")
-            # Cache the failure (short TTL) to avoid repeated failed requests
-            self._cache_set(cache_key, None)
+            logger.warning(f"ClinicalTrials.gov API error for {nct_id}: {e}")
+            self.cache.set(cache_key, None)
             return None
 
         # Parse response
         studies = data.get("studies", [])
         if not studies:
-            # Trial not found - cache this to avoid repeated lookups
-            self._cache_set(cache_key, None)
+            self.cache.set(cache_key, None)
             return None
 
         study = studies[0]
@@ -188,7 +151,7 @@ class ClinicalTrialsGovClient:
 
         # Cache the result
         if trial_info:
-            self._cache_set(cache_key, {
+            self.cache.set(cache_key, {
                 "nct_id": trial_info.nct_id,
                 "official_title": trial_info.official_title,
                 "brief_title": trial_info.brief_title,
@@ -233,23 +196,33 @@ class ClinicalTrialsGovClient:
                 phase=phase,
             )
         except Exception as e:
-            print(f"[NCT] Parse error for {nct_id}: {e}")
+            logger.warning(f"ClinicalTrials.gov parse error for {nct_id}: {e}")
             return None
 
 
-class NCTEnricher:
+class NCTEnricher(BaseEnricher[str, Optional[NCTTrialInfo]]):
     """
     Enriches NCT identifiers with trial information from ClinicalTrials.gov.
 
-    Usage:
-        enricher = NCTEnricher()
-        info = enricher.enrich("NCT04817618")
-        if info:
-            print(f"Trial: {info.long_form}")
+    Attributes:
+        client: ClinicalTrialsGovClient for API access.
+
+    Example:
+        >>> enricher = NCTEnricher()
+        >>> info = enricher.enrich("NCT04817618")
+        >>> if info:
+        ...     print(f"Trial: {info.long_form}")
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.client = ClinicalTrialsGovClient(config)
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        super().__init__(config)
+        self.client = ClinicalTrialsGovClient(self.config)
+        logger.debug(f"NCTEnricher initialized: enabled={self.enabled}")
+
+    @property
+    def enricher_name(self) -> str:
+        """Return the enricher identifier."""
+        return "nct_enricher"
 
     def enrich(self, nct_id: str) -> Optional[NCTTrialInfo]:
         """
@@ -338,97 +311,54 @@ def get_nct_expansion(nct_id: str, config: Optional[Dict[str, Any]] = None) -> O
 # =============================================================================
 
 
-class TrialAcronymEnricher:
+class TrialAcronymEnricher(BaseAPIClient):
     """
     Enriches trial acronyms (e.g., APPEAR-C3G, NEPTUNE) with full trial descriptions.
 
+    Extends BaseAPIClient to leverage shared cache and rate limiting.
     Searches ClinicalTrials.gov by acronym to find the official trial title.
 
-    Usage:
-        enricher = TrialAcronymEnricher()
-        info = enricher.search_by_acronym("APPEAR-C3G")
-        if info:
-            print(f"Trial: {info.official_title}")
+    Attributes:
+        base_url: ClinicalTrials.gov API base URL.
+        cache: DiskCache instance for caching responses.
+        rate_limiter: RateLimiter instance for API rate limiting.
+
+    Example:
+        >>> enricher = TrialAcronymEnricher()
+        >>> info = enricher.search_by_acronym("APPEAR-C3G")
+        >>> if info:
+        ...     print(f"Trial: {info.official_title}")
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    DEFAULT_BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
+        # Convert ttl_days to ttl_hours for BaseAPIClient
         config = config or {}
-        self.timeout = config.get("timeout_seconds", 30)
-        self.rate_limit = config.get("rate_limit_per_second", 1)
-
-        # Cache configuration
         cache_cfg = config.get("cache", {})
-        self.cache_enabled = cache_cfg.get("enabled", True)
-        self.cache_dir = Path(cache_cfg.get("directory", "cache/clinicaltrials"))
-        self.cache_ttl = cache_cfg.get("ttl_days", 30) * 86400
+        if "ttl_days" in cache_cfg and "ttl_hours" not in cache_cfg:
+            cache_cfg["ttl_hours"] = cache_cfg["ttl_days"] * 24
 
-        # Rate limiting state
-        self._last_request_time = 0.0
+        super().__init__(
+            config=config,
+            service_name="trial_acronym",
+            default_base_url=self.DEFAULT_BASE_URL,
+            default_rate_limit=1.0,
+            default_cache_ttl_hours=720,  # 30 days
+            default_cache_dir="cache/clinicaltrials",
+        )
 
-        # Session for connection pooling
-        self._session = requests.Session()
-        self._session.headers["User-Agent"] = "ESE-Pipeline/1.0 (Trial Acronym Enrichment)"
-
-        # Create cache directory
-        if self.cache_enabled:
-            self.cache_dir.mkdir(parents=True, exist_ok=True)
-
-    def _rate_limit(self) -> None:
-        """Enforce rate limit."""
-        if self.rate_limit <= 0:
-            return
-        min_interval = 1.0 / self.rate_limit
-        elapsed = time.time() - self._last_request_time
-        if elapsed < min_interval:
-            time.sleep(min_interval - elapsed)
-        self._last_request_time = time.time()
-
-    def _cache_key(self, acronym: str) -> str:
+    def _make_cache_key(self, acronym: str) -> str:
         """Generate cache key from acronym."""
         normalized = acronym.upper().strip().replace(" ", "_")
         return f"acronym_{normalized}"
-
-    def _cache_path(self, key: str) -> Path:
-        """Get cache file path for key."""
-        return self.cache_dir / f"{key}.json"
-
-    def _cache_get(self, key: str) -> Optional[Dict[str, Any]]:
-        """Get value from cache if exists and not expired."""
-        if not self.cache_enabled:
-            return None
-
-        path = self._cache_path(key)
-        if not path.exists():
-            return None
-
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-            timestamp = data.get("_cached_at", 0)
-            if time.time() - timestamp > self.cache_ttl:
-                path.unlink()
-                return None
-            return data.get("result")
-        except Exception:
-            return None
-
-    def _cache_set(self, key: str, value: Any) -> None:
-        """Store value in cache."""
-        if not self.cache_enabled:
-            return
-
-        path = self._cache_path(key)
-        try:
-            data = {"_cached_at": time.time(), "result": value}
-            path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-        except Exception:
-            pass
 
     def search_by_acronym(self, acronym: str) -> Optional[NCTTrialInfo]:
         """
         Search ClinicalTrials.gov for a trial by its acronym.
 
         Args:
-            acronym: Trial acronym (e.g., "APPEAR-C3G", "NEPTUNE", "FABHALTA")
+            acronym: Trial acronym (e.g., "APPEAR-C3G", "NEPTUNE", "FABHALTA").
 
         Returns:
             NCTTrialInfo with trial details, or None if not found.
@@ -439,17 +369,14 @@ class TrialAcronymEnricher:
         acronym = acronym.strip()
 
         # Check cache
-        cache_key = self._cache_key(acronym)
-        cached = self._cache_get(cache_key)
+        cache_key = self._make_cache_key(acronym)
+        cached = self.cache.get(cache_key)
         if cached is not None:
             return NCTTrialInfo(**cached) if cached else None
 
-        # Rate limit
-        self._rate_limit()
+        # Rate limit and make request
+        self.rate_limiter.wait()
 
-        # Search by acronym using ClinicalTrials.gov API v2
-        # The API supports searching in the Acronym field
-        base_url = "https://clinicaltrials.gov/api/v2/studies"
         params = {
             "format": "json",
             "query.term": f"AREA[Acronym]{acronym}",
@@ -458,19 +385,19 @@ class TrialAcronymEnricher:
         }
 
         try:
-            resp = self._session.get(base_url, params=params, timeout=self.timeout)
+            resp = self._session.get(self.base_url, params=params, timeout=self.timeout)
 
             if resp.status_code == 429:
-                print("[TrialAcronym] Rate limited, waiting 60s...")
+                logger.warning("TrialAcronym rate limited, waiting 60s...")
                 time.sleep(60)
-                resp = self._session.get(base_url, params=params, timeout=self.timeout)
+                resp = self._session.get(self.base_url, params=params, timeout=self.timeout)
 
             resp.raise_for_status()
             data = resp.json()
 
         except requests.RequestException as e:
-            print(f"[TrialAcronym] API error for '{acronym}': {e}")
-            self._cache_set(cache_key, None)
+            logger.warning(f"TrialAcronym API error for '{acronym}': {e}")
+            self.cache.set(cache_key, None)
             return None
 
         # Find best match from results
@@ -479,7 +406,7 @@ class TrialAcronymEnricher:
             # Try alternative search without AREA prefix
             params["query.term"] = acronym
             try:
-                resp = self._session.get(base_url, params=params, timeout=self.timeout)
+                resp = self._session.get(self.base_url, params=params, timeout=self.timeout)
                 resp.raise_for_status()
                 data = resp.json()
                 studies = data.get("studies", [])
@@ -487,7 +414,7 @@ class TrialAcronymEnricher:
                 pass
 
         if not studies:
-            self._cache_set(cache_key, None)
+            self.cache.set(cache_key, None)
             return None
 
         # Find exact acronym match
@@ -510,7 +437,7 @@ class TrialAcronymEnricher:
 
         # Cache result
         if trial_info:
-            self._cache_set(cache_key, {
+            self.cache.set(cache_key, {
                 "nct_id": trial_info.nct_id,
                 "official_title": trial_info.official_title,
                 "brief_title": trial_info.brief_title,
@@ -521,7 +448,7 @@ class TrialAcronymEnricher:
                 "phase": trial_info.phase,
             })
         else:
-            self._cache_set(cache_key, None)
+            self.cache.set(cache_key, None)
 
         return trial_info
 
@@ -555,7 +482,7 @@ class TrialAcronymEnricher:
                 phase=phase,
             )
         except Exception as e:
-            print(f"[TrialAcronym] Parse error for '{search_acronym}': {e}")
+            logger.warning(f"TrialAcronym parse error for '{search_acronym}': {e}")
             return None
 
     def get_trial_description(self, acronym: str) -> Optional[str]:
