@@ -150,6 +150,26 @@ OBVIOUS_NOISE: set = {
     "ny",
     "ca",
     "tx",  # US states - usually location, not abbreviation
+    # Company names (not abbreviations, even if in UMLS)
+    "roche",
+    "novartis",
+    "pfizer",
+    "merck",
+    "bayer",
+    "sanofi",
+    "gsk",
+    "astrazeneca",
+    "amgen",
+    "gilead",
+    "biogen",
+    "regeneron",
+    "vertex",
+    "alexion",
+    "takeda",
+    "abbvie",
+    "lilly",
+    "bristol",
+    "johnson",
 }
 
 # Minimum length (allow 2-char if uppercase like CT, MR, IV)
