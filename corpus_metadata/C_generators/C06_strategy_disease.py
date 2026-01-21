@@ -198,6 +198,17 @@ class DiseaseFalsePositiveFilter:
         "insufficiency",
         # Other overly generic
         "abnormality",
+        # Partial adjective phrases (not complete disease names)
+        "infection-related",
+        "drug-related",
+        "drug-induced",
+        "treatment-related",
+        "therapy-related",
+        "age-related",
+        "virus-related",
+        "vaccine-related",
+        "immune-related",
+        "complement-related",
         "abnormalities",
         "anomaly",
         "anomalies",

@@ -435,6 +435,7 @@ class DrugFalsePositiveFilter:
         "angiotensin",
         "aldosterone",
         "renin",
+        "renin–",
         "complement",
         "factor b",
         "serum",
@@ -454,6 +455,21 @@ class DrugFalsePositiveFilter:
         "membrane attack complex",
         "com",
         "importal",
+    }
+
+    # Organizations and agencies (not drugs)
+    ORGANIZATIONS: Set[str] = {
+        "medicines agency",
+        "european medicines agency",
+        "ema",
+        "fda",
+        "food and drug administration",
+        "world health organization",
+        "who",
+        "nih",
+        "national institutes of health",
+        "cdc",
+        "centers for disease control",
     }
 
     # Body parts and organs (not drugs)
@@ -786,6 +802,15 @@ class DrugFalsePositiveFilter:
         "glycation end products, advanced",
         "stop brand of fluoride",
         "gastrointestinal agents",
+        # Additional NER false positives observed in Iptacopan trial
+        "sodium-glucose transporter 1",
+        "sodium-glucose cotransporter-2",
+        "at1 receptor blockers",
+        "c5a anaphylatoxins",
+        "c3 activation products",
+        "normal serum c3",
+        "complement bio",
+        "medicines agency",
         # Generic amino acids (not drugs)
         "alanine",
         "tyrosine",
@@ -860,6 +885,8 @@ class DrugFalsePositiveFilter:
         " antagonists",
         " agonist",
         " agonists",
+        " blocker",
+        " blockers",
         " transporter",
         " transporters",
         " channel",
@@ -874,9 +901,34 @@ class DrugFalsePositiveFilter:
         " pathway",
         " system",
         " agents",
+        " products",
+        " product",
         ", human",
         ", mouse",
         ", rat",
+    ]
+
+    # Substring patterns that indicate false positives
+    # If matched_text contains any of these, it's likely a false positive
+    FP_SUBSTRINGS = [
+        "serum c3",
+        "serum c4",
+        "serum c5",
+        "serum igg",
+        "serum iga",
+        "serum igm",
+        "complement bio",
+        "complement system",
+        "activation product",
+        "normal serum",
+        "plasma c3",
+        "medicines agency",
+        "pharmaceutical",
+        "anaphylatoxin",
+        "sc5b-9",
+        "sc5b9",
+        "c5b-9",
+        "c5b9",
     ]
 
     def __init__(self):
@@ -892,6 +944,8 @@ class DrugFalsePositiveFilter:
         self.biological_entities_lower = {w.lower() for w in self.BIOLOGICAL_ENTITIES}
         self.ner_false_positives_lower = {w.lower() for w in self.NER_FALSE_POSITIVES}
         self.pharma_company_names_lower = {w.lower() for w in self.PHARMA_COMPANY_NAMES}
+        self.organizations_lower = {w.lower() for w in self.ORGANIZATIONS}
+        self.fp_substrings_lower = [s.lower() for s in self.FP_SUBSTRINGS]
 
     def is_false_positive(
         self, matched_text: str, context: str, generator_type: DrugGeneratorType
@@ -962,16 +1016,33 @@ class DrugFalsePositiveFilter:
             return True
 
         # Always filter pharmaceutical company names (not drugs)
+        # Check both exact match and partial match (e.g., "Novartis Pharma" contains "novartis")
         if text_lower in self.pharma_company_names_lower:
             return True
+        for company in self.pharma_company_names_lower:
+            if company in text_lower or text_lower in company:
+                return True
+
+        # Always filter organizations and agencies
+        if text_lower in self.organizations_lower:
+            return True
+        for org in self.organizations_lower:
+            if org in text_lower:
+                return True
 
         # Filter NER-specific false positives (drug classes, generic terms, biological entities)
         # These are commonly returned by scispacy UMLS but are not actual drugs
         if text_lower in self.ner_false_positives_lower:
             return True
 
+        # Substring-based filtering for known false positive patterns
+        # Catches things like "normal serum C3", "complement bio", "activation products"
+        for fp_substr in self.fp_substrings_lower:
+            if fp_substr in text_lower:
+                return True
+
         # Pattern-based filtering for NER results
-        # Catches "X protein", "X receptor", "X inhibitors", etc.
+        # Catches "X protein", "X receptor", "X inhibitors", "X blockers", etc.
         if generator_type == DrugGeneratorType.SCISPACY_NER:
             for suffix in self.BIOLOGICAL_SUFFIXES:
                 if text_lower.endswith(suffix):
