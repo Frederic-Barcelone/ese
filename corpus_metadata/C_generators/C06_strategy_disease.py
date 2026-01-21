@@ -71,7 +71,76 @@ class DiseaseFalsePositiveFilter:
     - "10p Deletion Syndrome" -> matches chromosome "10p"
     - "45,X syndrome" -> matches karyotype "45,X"
     - "Chromosome 22q11.2 deletion" -> matches "22q11.2"
+
+    Also filters:
+    - Physiological systems (RAAS, RAS) that are not diseases
+    - Journal name abbreviations that match disease names
+    - Abbreviations that are too ambiguous
     """
+
+    # Physiological systems and pathways (not diseases)
+    PHYSIOLOGICAL_SYSTEMS: Set[str] = {
+        # Renin-angiotensin-aldosterone system
+        "raas",
+        "ras",
+        "renin-angiotensin system",
+        "renin-angiotensin-aldosterone system",
+        "renin angiotensin system",
+        "renin angiotensin aldosterone system",
+        # Other physiological systems
+        "hpa axis",
+        "hypothalamic-pituitary-adrenal axis",
+        "sns",
+        "sympathetic nervous system",
+        "pns",
+        "parasympathetic nervous system",
+        "cns",
+        "central nervous system",
+        "ans",
+        "autonomic nervous system",
+        "immune system",
+        "complement system",
+        "coagulation cascade",
+        "kinin system",
+        "kallikrein-kinin system",
+    }
+
+    # Journal name patterns and abbreviations (not diseases)
+    JOURNAL_PATTERNS: Set[str] = {
+        # Nephrology journals
+        "adv chronic kidney dis",
+        "advances in chronic kidney disease",
+        "kidney int",
+        "kidney international",
+        "j am soc nephrol",
+        "jasn",
+        "clin j am soc nephrol",
+        "cjasn",
+        "nephrol dial transplant",
+        "ndt",
+        "am j kidney dis",
+        "ajkd",
+        # General medical journals
+        "n engl j med",
+        "nejm",
+        "lancet",
+        "the lancet",
+        "jama",
+        "bmj",
+        "ann intern med",
+        "j clin invest",
+        "nat med",
+        "nature medicine",
+        "cell",
+        "science",
+        "plos one",
+        "plos med",
+        # Other specialty journals
+        "blood",
+        "circulation",
+        "j immunol",
+        "j biol chem",
+    }
 
     # Layer 0: Generic/overly broad terms that are not specific diseases
     GENERIC_TERMS: Set[str] = {
@@ -263,6 +332,8 @@ class DiseaseFalsePositiveFilter:
         ]
         self._gene_pattern = re.compile(self.GENE_PATTERN)
         self._generic_terms_lower = {t.lower() for t in self.GENERIC_TERMS}
+        self._physiological_systems_lower = {t.lower() for t in self.PHYSIOLOGICAL_SYSTEMS}
+        self._journal_patterns_lower = {t.lower() for t in self.JOURNAL_PATTERNS}
 
     def should_filter(
         self, matched_text: str, context: str, is_abbreviation: bool = False
@@ -280,6 +351,18 @@ class DiseaseFalsePositiveFilter:
         # Layer 0: Filter generic/overly broad terms
         if matched_lower in self._generic_terms_lower:
             return True, "generic_term"
+
+        # Filter physiological systems (RAAS, RAS, etc.)
+        if matched_lower in self._physiological_systems_lower:
+            return True, "physiological_system"
+
+        # Filter journal names and abbreviations
+        if matched_lower in self._journal_patterns_lower:
+            return True, "journal_name"
+
+        # Check if the matched text is part of a journal citation
+        if self._is_journal_citation_context(matched_lower, ctx_lower):
+            return True, "journal_citation_context"
 
         # Layer 1: Check chromosome patterns
         for pattern in self._compiled_chr_patterns:
@@ -320,6 +403,49 @@ class DiseaseFalsePositiveFilter:
 
         # If strong gene context and weak disease context, filter it
         return gene_score >= 2 and gene_score > dis_score
+
+    def _is_journal_citation_context(self, matched_lower: str, ctx_lower: str) -> bool:
+        """
+        Check if the match appears in a journal citation context.
+
+        This catches cases like "Adv Chronic Kidney Dis" where a disease name
+        is actually a journal abbreviation in a reference/citation.
+
+        Args:
+            matched_lower: The matched text (lowercase).
+            ctx_lower: The context around the match (lowercase).
+
+        Returns:
+            True if the match is likely in a citation context.
+        """
+        # Citation indicators
+        citation_indicators = [
+            # Volume/issue patterns
+            r"\d{4};\s*\d+",  # year; volume
+            r"vol\.\s*\d+",   # vol. number
+            r"pp?\.\s*\d+",   # p. or pp. page numbers
+            r"doi:",          # DOI reference
+            r"pmid:",         # PubMed ID
+            r"\[\d+\]",       # Reference numbers like [1], [23]
+            # Journal context words
+            "published in",
+            "et al",
+            "authors",
+            "reference",
+            "citation",
+            "bibliography",
+        ]
+
+        for indicator in citation_indicators:
+            if indicator in ctx_lower:
+                return True
+
+        # Check for common citation patterns near the match
+        # Pattern: "Journal Name Year;Volume:Pages"
+        if re.search(r"\d{4}\s*;\s*\d+\s*:\s*\d+", ctx_lower):
+            return True
+
+        return False
 
 
 # =============================================================================

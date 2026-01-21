@@ -238,6 +238,62 @@ class DrugFalsePositiveFilter:
         "phosphate",
         "chloride",
         "bicarbonate",
+        # Kidney function markers (lab values, not drugs)
+        "egfr",  # estimated Glomerular Filtration Rate
+        "gfr",   # Glomerular Filtration Rate
+        "upcr",  # Urine Protein-Creatinine Ratio
+        "uacr",  # Urine Albumin-Creatinine Ratio
+        "proteinuria",
+        "microalbuminuria",
+        "macroalbuminuria",
+    }
+
+    # Pharmaceutical company names (not drugs)
+    # These often get incorrectly matched to drug entities by NER models
+    PHARMA_COMPANY_NAMES: Set[str] = {
+        # Major pharma companies
+        "novartis",
+        "pfizer",
+        "roche",
+        "merck",
+        "johnson",
+        "johnson & johnson",
+        "astrazeneca",
+        "sanofi",
+        "gsk",
+        "glaxosmithkline",
+        "abbvie",
+        "amgen",
+        "gilead",
+        "eli lilly",
+        "lilly",
+        "bristol-myers squibb",
+        "bms",
+        "bayer",
+        "boehringer ingelheim",
+        "takeda",
+        "novo nordisk",
+        "regeneron",
+        "biogen",
+        "vertex",
+        "moderna",
+        # Specialty/biotech companies often in clinical trials
+        "alexion",
+        "biocryst",
+        "biocryst pharmaceuticals",
+        "chemocentryx",
+        "achillion",
+        "achillion pharmaceuticals",
+        "catalyst biosciences",
+        "catalyst",
+        "gyroscope therapeutics",
+        "gyroscope",
+        "silence therapeutics",
+        # Other common false positives
+        "pharmaceuticals",
+        "therapeutics",
+        "biosciences",
+        "biopharma",
     }
 
     # Common words that might match drug names
@@ -835,6 +891,7 @@ class DrugFalsePositiveFilter:
         self.credentials_lower = {w.lower() for w in self.CREDENTIALS}
         self.biological_entities_lower = {w.lower() for w in self.BIOLOGICAL_ENTITIES}
         self.ner_false_positives_lower = {w.lower() for w in self.NER_FALSE_POSITIVES}
+        self.pharma_company_names_lower = {w.lower() for w in self.PHARMA_COMPANY_NAMES}
 
     def is_false_positive(
         self, matched_text: str, context: str, generator_type: DrugGeneratorType
@@ -902,6 +959,10 @@ class DrugFalsePositiveFilter:
 
         # Always filter biological entities (proteins, enzymes, markers - not drugs)
         if text_lower in self.biological_entities_lower:
+            return True
+
+        # Always filter pharmaceutical company names (not drugs)
+        if text_lower in self.pharma_company_names_lower:
             return True
 
         # Filter NER-specific false positives (drug classes, generic terms, biological entities)
