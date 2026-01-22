@@ -114,8 +114,9 @@ class TableExtractor:
         rows = self._parse_html_table(html) if html else []
 
         # Validate table structure - reject false positives
-        if not self._is_valid_table(rows, html):
-            print(f"[INFO] Skipping invalid table structure on page {page_num}")
+        is_valid, rejection_reason = self._is_valid_table(rows, html)
+        if not is_valid:
+            print(f"[INFO] Skipping invalid table on page {page_num}: {rejection_reason}")
             return None
 
         headers = rows[0] if rows else []
@@ -137,29 +138,32 @@ class TableExtractor:
             "confidence": detection_confidence,
         }
 
-    def _is_valid_table(self, rows: List[List[str]], html: Optional[str]) -> bool:
+    def _is_valid_table(self, rows: List[List[str]], html: Optional[str]) -> Tuple[bool, Optional[str]]:
         """
         Validate that the detected element is actually a table, not misclassified text.
 
-        Returns False for false positives like:
+        Returns (False, reason) for false positives like:
         - Multi-column article text
         - Single-column lists
         - Elements with no proper table structure
         - Tables that are mostly prose text
+
+        Returns (True, None) for valid tables.
         """
         # Must have minimum rows
         if len(rows) < MIN_TABLE_ROWS:
-            return False
+            return False, f"too few rows ({len(rows)} < {MIN_TABLE_ROWS})"
 
         # Must have minimum columns
         if not rows or len(rows[0]) < MIN_TABLE_COLS:
-            return False
+            col_count = len(rows[0]) if rows else 0
+            return False, f"too few columns ({col_count} < {MIN_TABLE_COLS})"
 
         # Check that HTML actually contains table structure
         if html:
             # Must have actual table tags (not just text wrapped in table tags)
             if "<tr" not in html.lower() or "<td" not in html.lower():
-                return False
+                return False, "missing HTML table tags (<tr>/<td>)"
 
             # Count actual table cells vs text length ratio
             # A real table has structured short cells, not long paragraphs
@@ -168,7 +172,7 @@ class TableExtractor:
             cells = soup.find_all(["td", "th"])
 
             if not cells:
-                return False
+                return False, "no table cells found in HTML"
 
             # Calculate average cell text length
             cell_texts = [cell.get_text(strip=True) for cell in cells]
@@ -178,12 +182,13 @@ class TableExtractor:
                 # If average cell length is very long (>100 chars), likely not a table
                 # Real table cells are typically short (numbers, names, codes)
                 if avg_cell_length > 100:
-                    return False
+                    return False, f"avg cell length too long ({avg_cell_length:.0f} > 100 chars) - likely prose"
 
                 # Check for paragraph-like content (multiple sentences in many cells)
                 long_text_cells = sum(1 for t in cell_texts if len(t) > 80)
+                long_pct = long_text_cells / len(cell_texts) * 100
                 if long_text_cells > len(cell_texts) * 0.2:  # >20% cells have long text
-                    return False
+                    return False, f"too many long cells ({long_pct:.0f}% > 80 chars) - likely paragraph text"
 
                 # Check for sentence-like content (periods followed by capital letters)
                 # This indicates prose text, not tabular data
@@ -196,13 +201,14 @@ class TableExtractor:
                             prose_indicators += 1
 
                 # If >15% of cells look like prose, reject
+                prose_pct = prose_indicators / len(cell_texts) * 100 if cell_texts else 0
                 if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > 0.15:
-                    return False
+                    return False, f"too many prose cells ({prose_pct:.0f}% contain sentences) - likely article text"
 
                 # Check total text length - real tables shouldn't have huge amounts of text
                 total_text = sum(len(t) for t in cell_texts)
                 if total_text > 3000 and len(cell_texts) < 15:  # Lots of text, few cells
-                    return False
+                    return False, f"too much text ({total_text} chars) in few cells ({len(cell_texts)}) - likely prose block"
 
                 # Check for multi-column layout (article text split into columns)
                 # If cells have very similar lengths and are long, it's likely prose
@@ -213,7 +219,8 @@ class TableExtractor:
                         # If most cells are similar length and long (>60 chars), likely prose columns
                         similar_long = sum(1 for l in lengths if abs(l - avg_len) < avg_len * 0.3 and l > 60)
                         if similar_long > len(lengths) * 0.6:
-                            return False
+                            similar_pct = similar_long / len(lengths) * 100
+                            return False, f"multi-column prose layout detected ({similar_pct:.0f}% cells have similar long text)"
 
         # Validate column consistency across rows
         col_counts = [len(row) for row in rows]
@@ -222,9 +229,9 @@ class TableExtractor:
             min_cols = min(col_counts)
             max_cols = max(col_counts)
             if max_cols > 0 and min_cols / max_cols < 0.5:  # >50% column count variation
-                return False
+                return False, f"inconsistent column counts ({min_cols}-{max_cols} cols across rows)"
 
-        return True
+        return True, None
 
     def _get_bbox(
         self, md, file_path: str = "", page_num: int = 1
