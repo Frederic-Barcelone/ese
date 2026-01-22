@@ -16,12 +16,10 @@ Usage:
         assert result.mesh_id is not None
 """
 
-import json
-import os
 import sys
 import tempfile
 from pathlib import Path
-from typing import Any, Dict, Generator, List, Optional
+from typing import Any, Dict, Generator, List
 from unittest.mock import MagicMock, patch
 
 import pytest

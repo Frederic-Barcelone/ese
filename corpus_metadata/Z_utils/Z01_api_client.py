@@ -40,7 +40,7 @@ import hashlib
 import json
 import threading
 import time
-from abc import ABC, abstractmethod
+from abc import ABC
 from pathlib import Path
 from typing import Any, Dict, Optional, Union
 

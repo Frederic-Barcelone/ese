@@ -1,7 +1,6 @@
 # corpus_metadata/tests/test_core/test_api_client.py
 """Tests for Z_utils/Z01_api_client.py - Shared API client utilities."""
 
-import json
 import tempfile
 import time
 from pathlib import Path
@@ -14,7 +13,6 @@ from Z_utils.Z01_api_client import (
     RateLimiter,
     BaseAPIClient,
     APIError,
-    RateLimitError,
 )
 
 
@@ -87,8 +85,9 @@ class TestDiskCache:
         """Test that cache creates directory if needed."""
         with tempfile.TemporaryDirectory() as tmpdir:
             cache_dir = Path(tmpdir) / "nested" / "cache"
-            cache = DiskCache(cache_dir=cache_dir)
+            _cache = DiskCache(cache_dir=cache_dir)
             assert cache_dir.exists()
+            assert _cache is not None  # Verify cache was created
 
 
 class TestRateLimiter:

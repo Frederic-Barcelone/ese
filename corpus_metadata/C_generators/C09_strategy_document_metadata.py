@@ -199,10 +199,10 @@ class DateExtractor:
                             continue
                     elif fmt == "%b %Y" and len(groups) >= 2:
                         month_str = groups[0].lower()[:3]
-                        month = self.MONTH_MAP.get(month_str)
+                        month_val = self.MONTH_MAP.get(month_str)
                         year = int(groups[1])
-                        if month:
-                            dt = datetime(year, month, 1)
+                        if month_val:
+                            dt = datetime(year, month_val, 1)
                         else:
                             continue
                     elif fmt == "%Y" and len(groups) >= 1:
@@ -247,29 +247,29 @@ class DateExtractor:
                     elif fmt_type == "dmy" and len(groups) >= 3:
                         day = int(groups[0])
                         month_str = groups[1].lower()[:3]
-                        month = self.MONTH_MAP.get(month_str)
+                        month_val = self.MONTH_MAP.get(month_str)
                         year = int(groups[2])
-                        if month:
-                            dt = datetime(year, month, day)
+                        if month_val:
+                            dt = datetime(year, month_val, day)
                             is_approx = False
                         else:
                             continue
                     elif fmt_type == "mdy" and len(groups) >= 3:
                         month_str = groups[0].lower()[:3]
-                        month = self.MONTH_MAP.get(month_str)
+                        month_val = self.MONTH_MAP.get(month_str)
                         day = int(groups[1])
                         year = int(groups[2])
-                        if month:
-                            dt = datetime(year, month, day)
+                        if month_val:
+                            dt = datetime(year, month_val, day)
                             is_approx = False
                         else:
                             continue
                     elif fmt_type == "my" and len(groups) >= 2:
                         month_str = groups[0].lower()[:3]
-                        month = self.MONTH_MAP.get(month_str)
+                        month_val = self.MONTH_MAP.get(month_str)
                         year = int(groups[1])
-                        if month:
-                            dt = datetime(year, month, 1)
+                        if month_val:
+                            dt = datetime(year, month_val, 1)
                             is_approx = True
                         else:
                             continue

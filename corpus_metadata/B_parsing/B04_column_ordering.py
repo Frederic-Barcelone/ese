@@ -640,8 +640,8 @@ def find_columns_by_clustering(
 
     gaps = []
     for i in range(len(x_centers) - 1):
-        gap = x_centers[i + 1] - x_centers[i]
-        if gap > min_gap:
+        gap_distance = x_centers[i + 1] - x_centers[i]
+        if gap_distance > min_gap:
             # Found a potential column boundary
             gap_center = (x_centers[i] + x_centers[i + 1]) / 2
             # Only consider gaps in middle portion of page
@@ -651,7 +651,7 @@ def find_columns_by_clustering(
                         "x_left": x_centers[i],
                         "x_right": x_centers[i + 1],
                         "center": gap_center,
-                        "width": gap,
+                        "width": gap_distance,
                     }
                 )
 
@@ -913,7 +913,8 @@ def _find_x_cut(
 
     cfg = config or LayoutConfig()
     sorted_by_x = sorted(geoms, key=lambda g: g.x1)
-    best_gap, best_pos = 0, None
+    best_gap: float = 0.0
+    best_pos: Optional[float] = None
     min_gap = stats.median_x_gap * cfg.min_gap_factor
 
     for i in range(len(sorted_by_x) - 1):
@@ -934,7 +935,8 @@ def _find_y_cut(
 
     cfg = config or LayoutConfig()
     sorted_by_y = sorted(geoms, key=lambda g: g.y1)
-    best_gap, best_pos = 0, None
+    best_gap: float = 0.0
+    best_pos: Optional[float] = None
     min_gap = stats.median_y_gap * cfg.min_gap_factor
 
     for i in range(len(sorted_by_y) - 1):
@@ -1371,8 +1373,8 @@ def get_layout_info(
     layout = detect_layout(blocks, page_width, page_height, cfg)
 
     # Compute XY-Cut++ stats
-    geoms = [extract_block_geometry(b, cfg) for b in blocks]
-    geoms = [g for g in geoms if g is not None]
+    geoms_raw = [extract_block_geometry(b, cfg) for b in blocks]
+    geoms: List[BlockGeom] = [g for g in geoms_raw if g is not None]
     stats = PageStats.compute(geoms, page_width, page_height) if geoms else None
 
     info = {

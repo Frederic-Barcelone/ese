@@ -21,7 +21,7 @@ Usage:
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any, Dict, List, Optional, Type, Union
+from typing import Any, Dict, Optional
 
 
 class ConfigKeyBase(str, Enum):
@@ -30,6 +30,9 @@ class ConfigKeyBase(str, Enum):
 
     Inherits from str to allow direct use as dictionary keys.
     """
+
+    _default: Any
+    _description: str
 
     def __new__(cls, key: str, default: Any = None, description: str = "") -> "ConfigKeyBase":
         """Create enum member with key, default value, and description."""

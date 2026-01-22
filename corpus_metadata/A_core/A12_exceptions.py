@@ -141,7 +141,7 @@ class ParsingError(ESEPipelineError):
             file_path: Path to the problematic file.
             page_number: Page number where error occurred.
         """
-        context = {}
+        context: Dict[str, Any] = {}
         if file_path:
             context["file"] = file_path
         if page_number is not None:

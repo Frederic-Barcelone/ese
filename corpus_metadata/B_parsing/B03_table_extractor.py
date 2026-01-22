@@ -217,7 +217,7 @@ class TableExtractor:
                     if lengths:
                         avg_len = sum(lengths) / len(lengths)
                         # If most cells are similar length and long (>60 chars), likely prose columns
-                        similar_long = sum(1 for l in lengths if abs(l - avg_len) < avg_len * 0.3 and l > 60)
+                        similar_long = sum(1 for length in lengths if abs(length - avg_len) < avg_len * 0.3 and length > 60)
                         if similar_long > len(lengths) * 0.6:
                             similar_pct = similar_long / len(lengths) * 100
                             return False, f"multi-column prose layout detected ({similar_pct:.0f}% cells have similar long text)"
@@ -699,7 +699,7 @@ class TableExtractor:
 
                     # Sanity check: if scaled table is suspiciously small, render full page
                     if (x1 - x0) < 100 or (y1 - y0) < 50:
-                        print(f"[WARN] Scaled bbox too small, rendering full page")
+                        print("[WARN] Scaled bbox too small, rendering full page")
                         doc.close()
                         return self.render_full_page(file_path, page_num, dpi)
 
@@ -1168,7 +1168,7 @@ class TableExtractor:
                                   f"{len(merged['headers'])} cols, {len(merged['rows'])} rows")
                         else:
                             merged["extraction_method"] = "html_fallback"
-                            print(f"[WARN] VLM extraction failed for multi-page table, using HTML fallback")
+                            print("[WARN] VLM extraction failed for multi-page table, using HTML fallback")
                     except Exception as e:
                         print(f"[WARN] VLM extraction error for multi-page table: {e}")
                         merged["extraction_method"] = "html_fallback"

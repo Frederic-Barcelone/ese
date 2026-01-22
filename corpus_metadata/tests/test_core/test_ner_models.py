@@ -1,7 +1,6 @@
 # corpus_metadata/tests/test_core/test_ner_models.py
 """Tests for A_core/A13_ner_models.py - Unified NER data models."""
 
-import pytest
 
 from A_core.A13_ner_models import (
     EntityCategory,

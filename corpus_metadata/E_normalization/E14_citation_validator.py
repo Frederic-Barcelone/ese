@@ -268,7 +268,7 @@ class CitationValidator:
 
         try:
             # Use NCBI E-utilities esummary
-            url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+            url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
             params = {
                 "db": "pubmed",
                 "id": pmid,
