@@ -171,8 +171,14 @@ class DrugFalsePositiveFilter:
         "fc receptor",
         "ache",  # Acetylcholinesterase
         "acetylcholinesterase",
+        "acetylcholine esterase",  # variant spelling
         "acetylcholine receptor",
         "cholinergic receptors",
+        "anti-acetylcholine receptor antibody",  # biomarker, not drug
+        # Hormones (biological, not therapeutic drugs unless specific formulation)
+        "fsh",  # Follicle Stimulating Hormone
+        "follicle stimulating hormone",
+        "follicle-stimulating hormone",
         # Immunoglobulins (biological markers)
         "igg",
         "iga",
@@ -717,6 +723,10 @@ class DrugFalsePositiveFilter:
         "antibodies",
         "immunoglobulin",
         "immunoglobulins",
+        "immunoglobulin g",  # biomarker, not drug
+        "immunoglobulin a",
+        "immunoglobulin m",
+        "immunoglobulin e",
         # Specific NER false positives observed
         "importal",  # Laxative, not relevant to trials
         "antagon",  # False match
@@ -755,6 +765,10 @@ class DrugFalsePositiveFilter:
         "steroid hormones",
         "thyroid hormones",
         "pituitary hormones",
+        "fsh",
+        "follicle stimulating hormone",
+        "follicle-stimulating hormone",
+        "human follicle-stimulating hormone",
         "renin",
         "aldosterone",
         "angiotensin",
@@ -764,6 +778,8 @@ class DrugFalsePositiveFilter:
         "serotonin",
         "histamine",
         "acetylcholine",
+        "acetylcholine esterase",
+        "anti-acetylcholine receptor antibody",
         # Receptor types (biological targets, not drugs)
         "receptors, corticosteroid",
         "serotonin antagonists",

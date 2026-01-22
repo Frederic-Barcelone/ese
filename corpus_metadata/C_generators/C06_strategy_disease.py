@@ -243,6 +243,11 @@ class DiseaseFalsePositiveFilter:
         "confusion",
         "erythema",
         "paresis",
+        # Long UMLS disease names that are clearly FP in clinical trial context
+        "intellectual developmental disorder, skeletal dysplasia, and abducens palsy",
+        "childhood soft tissue sarcoma",
+        "hydrops fetalis, non-immune",
+        "hydrops fetalis",
         # Behavioral (not diseases in clinical context)
         "firesetting behavior",
         "drug abuse",
