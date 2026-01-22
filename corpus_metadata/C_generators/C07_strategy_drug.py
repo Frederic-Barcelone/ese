@@ -164,6 +164,15 @@ class DrugFalsePositiveFilter:
         "alternative pathway",
         "classical pathway",
         "lectin pathway",
+        # Receptors and kinases (biological targets, not drugs)
+        "musk",  # Muscle-Specific Kinase - often mislinked to "musk deer"
+        "achr",  # Acetylcholine receptor
+        "fcrn",  # Neonatal Fc receptor
+        "fc receptor",
+        "ache",  # Acetylcholinesterase
+        "acetylcholinesterase",
+        "acetylcholine receptor",
+        "cholinergic receptors",
         # Immunoglobulins (biological markers)
         "igg",
         "iga",
@@ -664,6 +673,11 @@ class DrugFalsePositiveFilter:
         "complement factor b",
         "complement c3 convertases",
         "complement c5 convertases",
+        "complement component",
+        "complement inhibition",
+        # Lab reagents (not therapeutic drugs)
+        "sds",
+        "sodium dodecyl sulfate",
         "anaphylatoxins",
         "membrane attack complex",
         "serum proteins",
@@ -794,6 +808,8 @@ class DrugFalsePositiveFilter:
         "wright stain",
         "rheumatoid factor",
         "dbl oncoprotein",
+        "prevent (product)",
+        "prevent product",
         "glycophorin a",
         "nervous system involved sulfotransferase",
         "estrogens, non-steroidal",
@@ -802,6 +818,26 @@ class DrugFalsePositiveFilter:
         "glycation end products, advanced",
         "stop brand of fluoride",
         "gastrointestinal agents",
+        # Drugs of abuse / controlled substances (not trial drugs unless specific formulation)
+        "cocaine",
+        "cocaine (substance)",
+        "heroin",
+        "methamphetamine",
+        "cannabis",
+        "marijuana",
+        "morphine",  # Unless specific formulation
+        "fentanyl",  # Unless specific formulation
+        # Muscle-specific kinase variants (often confused with animal product)
+        "musk",
+        "musk secretion",
+        "musk deer",
+        # Additional false positives from clinical trial protocols
+        "immune complex",
+        "fc receptor",
+        "autoantibodies",
+        "biological factors",
+        "investigational new drugs",
+        "antibodies, anti-idiotypic",
         # Additional NER false positives observed in Iptacopan trial
         "sodium-glucose transporter 1",
         "sodium-glucose cotransporter-2",
@@ -817,12 +853,37 @@ class DrugFalsePositiveFilter:
         "proline",
         "histidine",
         "l-histidine",
+        "glycine",
         "aspartate",
-        # Biochemical components
+        "serine",
+        "threonine",
+        "leucine",
+        "isoleucine",
+        "valine",
+        "phenylalanine",
+        "tryptophan",
+        "methionine",
+        "cysteine",
+        "asparagine",
+        "glutamine",
+        "glutamate",
+        "arginine",
+        "lysine",
+        # Biochemical components / excipients
         "sucrose",
         "polysorbate 80",
         "polysorbates",
         "hydrochloride",
+        "inosine monophosphate",
+        "trientine",  # Chelating agent, often false positive
+        # Additional NER false positives observed in myasthenia gravis protocols
+        "alanine transaminase",
+        "complement component c1",
+        "c1s protein, human",
+        "c1s protein",
+        "human follicle-stimulating hormone",
+        "ldl-receptor related protein 1",
+        "ldl receptor",
     }
 
     # Generic all-caps words that are not drugs
@@ -929,6 +990,17 @@ class DrugFalsePositiveFilter:
         "sc5b9",
         "c5b-9",
         "c5b9",
+        # Animal/natural product false positives
+        "musk deer",
+        "musk secretion",
+        "brand of fluoride",
+        # Oncoprotein/genetic false positives
+        "oncoprotein",
+        "plasmid",
+        "sulfotransferase",
+        # Biological markers
+        "end products, advanced",
+        "glycation end",
     ]
 
     def __init__(self):
@@ -1700,6 +1772,28 @@ class DrugDetector:
                 if self.fp_filter.is_false_positive(
                     matched_text, context, DrugGeneratorType.SCISPACY_NER
                 ):
+                    continue
+
+                # Also check the UMLS canonical name (preferred_name) against blacklist
+                # This catches cases where matched_text is "MuSK" but UMLS returns
+                # "Musk secretion from Musk Deer" which is a false positive
+                canonical_name = entity_info.canonical_name or matched_text
+                if self.fp_filter.is_false_positive(
+                    canonical_name, context, DrugGeneratorType.SCISPACY_NER
+                ):
+                    continue
+
+                # Additional check: if canonical_name contains known FP substrings
+                canonical_lower = canonical_name.lower()
+                skip_entity = False
+                for fp_substr in self.fp_filter.fp_substrings_lower:
+                    if fp_substr in canonical_lower:
+                        skip_entity = True
+                        break
+                # Check for musk deer specifically (common UMLS mislinking)
+                if "musk deer" in canonical_lower or "musk secretion" in canonical_lower:
+                    skip_entity = True
+                if skip_entity:
                     continue
 
                 candidate = DrugCandidate(

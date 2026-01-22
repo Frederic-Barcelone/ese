@@ -174,6 +174,41 @@ OBVIOUS_NOISE: set = {
 
 # Minimum length (allow 2-char if uppercase like CT, MR, IV)
 MIN_ABBREV_LENGTH = 2
+
+# =============================================================================
+# WRONG EXPANSION BLACKLIST
+# =============================================================================
+# Some UMLS/lexicon entries have clearly wrong or contextually inappropriate
+# expansions. These SF -> LF pairs should never be used.
+#
+# Format: (short_form_lower, bad_long_form_lower)
+WRONG_EXPANSION_BLACKLIST: Set[Tuple[str, str]] = {
+    # UMLS mapping errors
+    ("task", "product"),  # TASK in protocols = schedule/activity, not SNOMED "product"
+    ("musk", "musk secretion from musk deer"),  # MuSK = muscle-specific kinase
+    # Clinical trial context - these expansions are wrong in protocol context
+    ("et", "essential thrombocythemia"),  # ET in protocols = Early Termination
+    ("sc", "subcutaneous"),  # Often correct, but sometimes wrong
+    # Generic wrong mappings
+    ("exam", "examination"),  # Too generic, not an abbreviation
+    ("dose", "dosage"),  # Too generic
+    ("task", "kcnk3 gene"),  # TASK is not usually a gene reference in protocols
+}
+
+# Long forms that are ALWAYS wrong (regardless of short form)
+# These are UMLS artifacts or clearly incorrect expansions
+BAD_LONG_FORMS: Set[str] = {
+    "product",  # Too generic, SNOMED artifact
+    "musk secretion from musk deer",  # Wrong MuSK expansion
+    "essential thrombocythemia",  # Often wrong in clinical trial context
+    "ambulatory care facilities",  # Wrong expansion for "Clinic"
+    "simultaneous",  # Wrong expansion for "CONCOMITANT"
+    "kit dosing unit",  # Wrong expansion for "Kits"
+    "medical devices",  # Wrong expansion for "Device"
+    "planum polare",  # Wrong expansion for "PP" (usually Per Protocol)
+    "follicle stimulating hormone injectable",  # Wrong for FSH in most contexts
+}
+
 from A_core.A01_domain_models import (
     Candidate,
     Coordinate,
@@ -601,7 +636,12 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                                     umls_cui
                                 )
                                 if kb_entry:
-                                    lf_from_umls = kb_entry.canonical_name
+                                    candidate_lf = kb_entry.canonical_name
+                                    # Filter out known wrong expansions from UMLS
+                                    sf_lower = ent_text.lower()
+                                    lf_lower = candidate_lf.lower() if candidate_lf else ""
+                                    if (sf_lower, lf_lower) not in WRONG_EXPANSION_BLACKLIST and lf_lower not in BAD_LONG_FORMS:
+                                        lf_from_umls = candidate_lf
                             except Exception:
                                 pass
 
@@ -971,6 +1011,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
         source = path.name
         loaded = 0
+        skipped_wrong_expansion = 0
 
         with open(path, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f, delimiter="\t")
@@ -980,6 +1021,18 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 top_source = (row.get("TopSource") or "").strip()
 
                 if not abbrev or len(abbrev) < 2 or not expansion:
+                    continue
+
+                # Filter out known wrong SF -> LF pairs
+                abbrev_lower = abbrev.lower()
+                expansion_lower = expansion.lower()
+                if (abbrev_lower, expansion_lower) in WRONG_EXPANSION_BLACKLIST:
+                    skipped_wrong_expansion += 1
+                    continue
+
+                # Filter out known bad long forms (regardless of short form)
+                if expansion_lower in BAD_LONG_FORMS:
+                    skipped_wrong_expansion += 1
                     continue
 
                 # Build lexicon IDs from UMLS source
@@ -996,6 +1049,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         # Extract a short name from filename for display
         name = "UMLS biological" if "biological" in source else "UMLS clinical"
         self._lexicon_stats.append((name, loaded, path.name))
+        if skipped_wrong_expansion > 0:
+            print(f"    [INFO] Skipped {skipped_wrong_expansion} wrong expansions from {path.name}")
 
     def _extract_identifiers(self, identifiers: Dict) -> List[Dict[str, str]]:
         """Extract lexicon IDs from an identifiers dict."""

@@ -1,5 +1,7 @@
 
 # doc : https://chunkforge.com/blog/nlp-named-entity-recognition
+# Ralph Wiggum: Continuous Agent Loops in Claude Code
+
 
 # Metadata Extraction Pipeline
 

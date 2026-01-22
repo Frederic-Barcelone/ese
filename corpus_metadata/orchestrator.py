@@ -139,7 +139,11 @@ from B_parsing.B03_table_extractor import TableExtractor
 from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
 from C_generators.C02_strategy_regex import RegexCandidateGenerator
 from C_generators.C03_strategy_layout import LayoutCandidateGenerator
-from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
+from C_generators.C04_strategy_flashtext import (
+    RegexLexiconGenerator,
+    BAD_LONG_FORMS,
+    WRONG_EXPANSION_BLACKLIST,
+)
 from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
@@ -894,11 +898,20 @@ class Orchestrator:
         if rare_disease_path.exists():
             try:
                 data = json.loads(rare_disease_path.read_text(encoding="utf-8"))
+                skipped_bad = 0
                 for acronym, entry in data.items():
                     if isinstance(entry, dict) and entry.get("name"):
-                        self.rare_disease_lookup[acronym.strip().upper()] = entry[
-                            "name"
-                        ].strip()
+                        sf_key = acronym.strip().upper()
+                        sf_lower = acronym.strip().lower()
+                        lf_value = entry["name"].strip()
+                        lf_lower = lf_value.lower()
+                        # Filter out known wrong SF -> LF pairs and bad long forms
+                        if (sf_lower, lf_lower) in WRONG_EXPANSION_BLACKLIST or lf_lower in BAD_LONG_FORMS:
+                            skipped_bad += 1
+                            continue
+                        self.rare_disease_lookup[sf_key] = lf_value
+                if skipped_bad > 0:
+                    print(f"    [INFO] Skipped {skipped_bad} bad rare disease entries")
             except Exception as e:
                 print(f"  [WARN] Failed to load rare disease lexicon: {e}")
 
@@ -1690,9 +1703,14 @@ Return ONLY the JSON array, nothing else."""
             lexicon_fallback_used = False
             if not lf_candidate:
                 sf_upper = sf_candidate.upper()
+                sf_lower = sf_candidate.lower()
                 if sf_upper in self.rare_disease_lookup:
-                    lf_candidate = self.rare_disease_lookup[sf_upper]
-                    lexicon_fallback_used = True
+                    candidate_lf = self.rare_disease_lookup[sf_upper]
+                    lf_lower = candidate_lf.lower()
+                    # Filter out known wrong SF -> LF pairs and bad long forms
+                    if (sf_lower, lf_lower) not in WRONG_EXPANSION_BLACKLIST and lf_lower not in BAD_LONG_FORMS:
+                        lf_candidate = candidate_lf
+                        lexicon_fallback_used = True
 
             prov = ProvenanceMetadata(
                 pipeline_version=PIPELINE_VERSION,

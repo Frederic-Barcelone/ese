@@ -1244,6 +1244,7 @@ class LLMFeasibilityExtractor:
             central_lab_required_raw = None
 
         # Build OperationalBurden
+        # central_lab_required must be bool, not None (Pydantic validation)
         burden = OperationalBurden(
             invasive_procedures=procedures,
             visit_schedule=visit_schedule,
@@ -1252,7 +1253,7 @@ class LLMFeasibilityExtractor:
             concomitant_meds_allowed=concomitant_allowed,
             run_in_duration_days=response.get("run_in_duration_days"),
             run_in_requirements=self._get_list(response, "run_in_requirements"),
-            central_lab_required=central_lab_required_raw if central_lab_required_raw is True else None,
+            central_lab_required=central_lab_required_raw is True,  # Ensure bool, default False
             central_lab=central_lab,
             special_sample_handling=self._get_list(response, "special_sample_handling"),
             hard_gates=self._get_list(response, "hard_gates"),
