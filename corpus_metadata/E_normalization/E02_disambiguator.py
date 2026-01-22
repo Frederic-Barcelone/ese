@@ -131,6 +131,32 @@ class Disambiguator:
                     "blood",
                 ],
             },
+            "MSD": {
+                "Merck Sharp & Dohme": [
+                    "merck",
+                    "pharmaceutical",
+                    "drug",
+                    "clinical",
+                    "trial",
+                    "regulatory",
+                    "fda",
+                    "ema",
+                    "approval",
+                    "marketing",
+                    "press",
+                    "release",
+                    "company",
+                ],
+                "Multiple sulfatase deficiency": [
+                    "sulfatase",
+                    "enzyme",
+                    "lysosomal",
+                    "mucopolysaccharidosis",
+                    "genetic",
+                    "metabolic",
+                    "storage",
+                ],
+            },
         }
 
     # -------------------------

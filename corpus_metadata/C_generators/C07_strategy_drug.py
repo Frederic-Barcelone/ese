@@ -313,7 +313,7 @@ class DrugFalsePositiveFilter:
 
     # Common words that might match drug names
     COMMON_WORDS: Set[str] = {
-        # Dosage forms
+        # Dosage forms and containers
         "oral",
         "tablet",
         "capsule",
@@ -324,6 +324,12 @@ class DrugFalsePositiveFilter:
         "patch",
         "spray",
         "drops",
+        "vial",
+        "vials",
+        "ampoule",
+        "ampule",
+        "syringe",
+        "kit",
         # Generic substances
         "water",
         "salt",
@@ -443,6 +449,23 @@ class DrugFalsePositiveFilter:
         "monotherapy",
         "targeted therapy",
         "soc",
+        # Common English words that happen to be drug brand names
+        "today",  # TODAY is a brand for nonoxynol-9 contraceptive
+        "choice",  # Various brand names
+        "plan",  # Plan B
+        "clear",
+        "complete",
+        "simple",
+        "natural",
+        "daily",
+        "one",
+        "first",
+        "total",
+        # Disease abbreviations that are also in RxNorm (prefer disease meaning)
+        "pah",  # Pulmonary Arterial Hypertension (not Phenylalanine)
+        "als",  # Amyotrophic Lateral Sclerosis (not Aluminum Salt)
+        "ms",   # Multiple Sclerosis (not Morphine Sulfate in most contexts)
+        "hiv",  # Human Immunodeficiency Virus
         # Biomolecules (not drugs per se)
         "protein",
         "creatinine",
@@ -470,6 +493,65 @@ class DrugFalsePositiveFilter:
         "membrane attack complex",
         "com",
         "importal",
+        # Animals and biological terms
+        "animals",
+        "animal",
+        "mice",
+        "mouse",
+        "rat",
+        "rats",
+        "dog",
+        "dogs",
+        "monkey",
+        "monkeys",
+        "rabbit",
+        "rabbits",
+        # Medical symptoms/processes (not drugs)
+        "constriction",
+        "dilation",
+        "stenosis",
+        "obstruction",
+        "occlusion",
+        "inflammation",
+        "infection",
+        "hemorrhage",
+        "bleeding",
+        # Common first names that appear in press releases (not drugs)
+        "julie",
+        "peter",
+        "john",
+        "david",
+        "michael",
+        "james",
+        "robert",
+        "william",
+        "richard",
+        "thomas",
+        "mary",
+        "patricia",
+        "jennifer",
+        "linda",
+        "elizabeth",
+        "barbara",
+        "susan",
+        "sarah",
+        "karen",
+        "nancy",
+        "nikki",
+        "ayn",
+        # Generic medical/scientific terms (not specific drugs)
+        "vaccines",  # Generic term, not a specific drug
+        "vaccine",
+        "protection",  # Common word, not Protectin
+        "protections",
+        # Disease/clinical abbreviations wrongly matched to drugs
+        "ctd",  # Connective Tissue Diseases (not a drug)
+        # WHO Functional Class designations (clinical classification, not drugs)
+        "fc",
+        "fc i",
+        "fc ii",
+        "fc iii",
+        "fc iv",
     }
 
     # Organizations and agencies (not drugs)

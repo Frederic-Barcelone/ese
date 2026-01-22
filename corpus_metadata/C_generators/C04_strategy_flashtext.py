@@ -207,6 +207,7 @@ BAD_LONG_FORMS: Set[str] = {
     "medical devices",  # Wrong expansion for "Device"
     "planum polare",  # Wrong expansion for "PP" (usually Per Protocol)
     "follicle stimulating hormone injectable",  # Wrong for FSH in most contexts
+    "multiple sulfatase deficiency",  # MSD in pharma context = Merck Sharp & Dohme
 }
 
 from A_core.A01_domain_models import (
