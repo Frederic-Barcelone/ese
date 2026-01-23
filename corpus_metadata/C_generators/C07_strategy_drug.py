@@ -1157,6 +1157,28 @@ class DrugFalsePositiveFilter:
         self.organizations_lower = {w.lower() for w in self.ORGANIZATIONS}
         self.fp_substrings_lower = [s.lower() for s in self.FP_SUBSTRINGS]
 
+        # Load gene symbols from lexicon (genes are not drugs)
+        self.gene_symbols_lower: Set[str] = set()
+        self._load_gene_lexicon()
+
+    def _load_gene_lexicon(self) -> None:
+        """Load gene symbols to filter from drug matches."""
+        gene_path = Path("ouput_datasources/2025_08_orphadata_genes.json")
+        if not gene_path.exists():
+            return
+        try:
+            with open(gene_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            # Only load primary gene symbols (not aliases) for drug filtering
+            # Aliases might be too aggressive (some drugs share names with gene aliases)
+            for entry in data:
+                if entry.get("source") == "orphadata_hgnc":
+                    symbol = entry.get("term", "").lower()
+                    if symbol and len(symbol) >= 3:  # Skip very short symbols
+                        self.gene_symbols_lower.add(symbol)
+        except Exception:
+            pass  # Silently fail - gene filtering is optional enhancement
+
     def is_false_positive(
         self, matched_text: str, context: str, generator_type: DrugGeneratorType
     ) -> bool:
@@ -1270,6 +1292,16 @@ class DrugFalsePositiveFilter:
         # Always filter equipment/procedures
         if text_lower in self.equipment_lower:
             return True
+
+        # Filter gene symbols (genes are not drugs)
+        # Only for NER and general lexicons - specialized lexicons may have valid overlaps
+        if generator_type in {
+            DrugGeneratorType.SCISPACY_NER,
+            DrugGeneratorType.LEXICON_RXNORM,
+            DrugGeneratorType.LEXICON_FDA,
+        }:
+            if text_lower in self.gene_symbols_lower:
+                return True
 
         # Skip common words (unless from specialized lexicon)
         if generator_type not in {
