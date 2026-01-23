@@ -458,6 +458,50 @@ heuristics:
     - "TABLE"
     - "FIGURE"
     - "BASELINE"
+    # Transition/connector words commonly misidentified
+    - "CRUCIALLY"
+    - "THEREFORE"
+    - "FIRST"
+    - "SECOND"
+    - "THIRD"
+    - "FURTHERMORE"
+    - "HOWEVER"
+    - "NOTABLY"
+    - "ADDITIONALLY"
+    - "FINALLY"
+    - "MOREOVER"
+    - "SIMILARLY"
+    - "CONSEQUENTLY"
+    # Academic/journal context words
+    - "EDITOR"
+    - "AUTHOR"
+    - "AUTHORS"
+    # Location/address words
+    - "ROAD"
+    - "STREET"
+    - "DISTRICT"
+    # Department/institutional names
+    - "CARDIOLOGY"
+    - "MEDICINE"
+    - "SURGERY"
+    - "PATHOLOGY"
+    - "RADIOLOGY"
+    - "ONCOLOGY"
+    - "NEUROLOGY"
+    - "PEDIATRICS"
+    # Radiomic feature partial names (not standalone abbreviations)
+    - "RADIOMICS"
+    # Author names that get misidentified
+    - "CAI"
+    - "SUN"
+    # Institutional words
+    - "UNIVERSITY"
+    - "HOSPITAL"
+    - "INSTITUTE"
+    - "DEPARTMENT"
+    - "COLLEGE"
+    - "CENTER"
+    - "SCHOOL"
 
   # ========================================
   # ALLOWED SHORT SFs (2-letter exceptions)

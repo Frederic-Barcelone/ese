@@ -257,6 +257,17 @@ class HeuristicsConfig:
             "TABLE", "FIGURE", "FIG",
             # Common research terms (not abbreviations)
             "DATA", "STUDY", "YEARS", "PATIENTS", "BASELINE", "WHITE",
+            # Transition/connector words commonly misidentified
+            "CRUCIALLY", "THEREFORE", "FIRST", "SECOND", "THIRD",
+            "FURTHERMORE", "HOWEVER", "NOTABLY", "ADDITIONALLY",
+            "FINALLY", "MOREOVER", "SIMILARLY", "CONSEQUENTLY",
+            # Academic/journal context words
+            "EDITOR", "AUTHOR", "AUTHORS",
+            # Location/address words
+            "ROAD", "STREET", "DISTRICT", "HOSPITAL", "UNIVERSITY",
+            # Department names (not abbreviations)
+            "CARDIOLOGY", "MEDICINE", "SURGERY", "PATHOLOGY",
+            "RADIOLOGY", "ONCOLOGY", "NEUROLOGY", "PEDIATRICS",
         }
     )
 

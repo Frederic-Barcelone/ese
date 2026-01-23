@@ -252,6 +252,20 @@ def is_valid_sf_form(
     if sf_upper in allowed_mixed:
         return True
 
+    # Reject author initials pattern (X.Y., A.B., M.C., etc.)
+    if re.match(r"^[A-Z]\.[A-Z]\.$", sf):
+        return False
+
+    # Reject figure/table references (Figure 3B, Table S1, etc.)
+    if re.match(r"^(Figure|Table|Fig)\s*\d+[A-Za-z]?$", sf, re.IGNORECASE):
+        return False
+    if re.match(r"^(Figure|Table|Fig)\s*S\d+$", sf, re.IGNORECASE):
+        return False
+
+    # Reject lowercase "al" from "et al."
+    if sf == "al":
+        return False
+
     # Special case: IG only if near immunoglobulin context
     if sf_upper == "IG":
         ctx_lower = context.lower()
@@ -264,8 +278,8 @@ def is_valid_sf_form(
         return False
     if len(sf) > 6 and sf.islower():
         return False
-    # Reject capitalized words (e.g., "Medications")
-    if len(sf) > 6 and sf[0].isupper() and sf[1:].islower():
+    # Reject capitalized words (e.g., "Medications", "Crucially")
+    if len(sf) > 5 and sf[0].isupper() and sf[1:].islower():
         return False
     return True
 
@@ -283,9 +297,30 @@ def score_lf_quality(
     score = 0
     lf = (candidate.long_form or "").lower()
     sf = candidate.short_form
+    sf_upper = sf.upper()
 
     # Use cached lowercase or compute once
     text_lower = full_text_lower if full_text_lower is not None else full_text.lower()
+
+    # PRIORITY BOOST: Stats abbreviations prefer canonical forms
+    # This ensures CI→"confidence interval" beats CI→"Curie"
+    STATS_CANONICAL = {
+        "CI": "confidence interval",
+        "SD": "standard deviation",
+        "SE": "standard error",
+        "OR": "odds ratio",
+        "RR": "risk ratio",
+        "HR": "hazard ratio",
+        "IQR": "interquartile range",
+        "AUC": "area under the curve",
+        "ROC": "receiver operating characteristic",
+    }
+    if sf_upper in STATS_CANONICAL:
+        canonical = STATS_CANONICAL[sf_upper]
+        if canonical in lf:
+            score += 200  # Strong boost for canonical stats LF
+        else:
+            score -= 100  # Penalize non-canonical stats LF
 
     if lf and sf in full_text:
         # Check if LF appears within 200 chars of SF - use islice to avoid materializing all matches
@@ -306,6 +341,9 @@ def score_lf_quality(
         lf_words = set(lf.split())
         if lf_words & {"the", "a", "an", "is", "are", "was"}:
             score -= 10
+        # Penalize LFs that look like partial text extractions
+        if lf.startswith("and ") or lf.startswith("or ") or lf.startswith("the "):
+            score -= 50
 
     if candidate.provenance and candidate.provenance.lexicon_source:
         if "umls" in candidate.provenance.lexicon_source.lower():
@@ -1286,6 +1324,34 @@ class Orchestrator:
                 counters.blacklisted_fp_count += 1
                 continue
 
+            # Auto-reject Figure/Table references (Figure 3B, Table S1, Tables S1-S13, etc.)
+            if re.match(r"^(Figure|Table|Fig|Figures|Tables)\s*S?\d*[A-Za-z]?(-S?\d+)?$", c.short_form, re.IGNORECASE):
+                entity = self._create_entity_from_candidate(
+                    c,
+                    ValidationStatus.REJECTED,
+                    0.95,
+                    "Figure/Table reference, not an abbreviation",
+                    ["auto_rejected_form"],
+                    {"auto": "figure_table_ref"},
+                )
+                auto_results.append((c, entity))
+                counters.form_filter_rejected += 1
+                continue
+
+            # Auto-reject author initials pattern (X.Y., A.B., etc.)
+            if re.match(r"^[A-Z]\.[A-Z]\.$", c.short_form):
+                entity = self._create_entity_from_candidate(
+                    c,
+                    ValidationStatus.REJECTED,
+                    0.95,
+                    "Author initials pattern, not an abbreviation",
+                    ["auto_rejected_form"],
+                    {"auto": "author_initials"},
+                )
+                auto_results.append((c, entity))
+                counters.form_filter_rejected += 1
+                continue
+
             # Auto-reject context mismatch
             if not check_context_match(c.short_form, ctx, self.heuristics):
                 entity = self._create_entity_from_candidate(
@@ -1361,6 +1427,43 @@ class Orchestrator:
                 auto_results.append((c, entity))
                 counters.common_word_rejected += 1
                 continue
+
+            # Auto-reject malformed long forms (partial sentences, truncated, etc.)
+            lf = c.long_form or ""
+            if lf:
+                # Reject LFs that look like partial sentences
+                lf_lower = lf.lower()
+                partial_starters = (
+                    "and ", "or ", "our ", "the ", "a ", "an ",
+                    "whereas ", "although ", "because ", "while ",
+                    "from the ", "in the ", "of the ", "to the ",
+                )
+                if any(lf_lower.startswith(s) for s in partial_starters):
+                    entity = self._create_entity_from_candidate(
+                        c,
+                        ValidationStatus.REJECTED,
+                        0.90,
+                        "Malformed LF: starts with article/conjunction",
+                        ["auto_rejected_form"],
+                        {"auto": "malformed_lf"},
+                    )
+                    auto_results.append((c, entity))
+                    counters.form_filter_rejected += 1
+                    continue
+
+                # Reject LFs with unclosed brackets
+                if lf.count("[") != lf.count("]") or lf.count("(") != lf.count(")"):
+                    entity = self._create_entity_from_candidate(
+                        c,
+                        ValidationStatus.REJECTED,
+                        0.90,
+                        "Malformed LF: unclosed brackets",
+                        ["auto_rejected_form"],
+                        {"auto": "malformed_lf"},
+                    )
+                    auto_results.append((c, entity))
+                    counters.form_filter_rejected += 1
+                    continue
 
             llm_candidates.append(c)
 
@@ -3557,17 +3660,19 @@ Return ONLY the JSON array, nothing else."""
         dpi: int = 200,
         padding: int = 15,
         bottom_padding: int = 150,
+        right_padding: int = 100,
     ) -> Optional[str]:
         """
-        Re-render a figure from PDF with extra bottom padding for captions/legends.
+        Re-render a figure from PDF with extra padding for captions/legends.
 
         Args:
             pdf_path: Path to PDF file
             page_num: 1-indexed page number
             bbox: (x0, y0, x1, y1) bounding box in PDF points
             dpi: Resolution for rendering
-            padding: Extra points around sides/top
+            padding: Extra points around left/top
             bottom_padding: Extra points below figure for captions (default 150pt)
+            right_padding: Extra points to right for multi-panel figures (default 100pt)
 
         Returns:
             Base64-encoded PNG string, or None if rendering fails
@@ -3601,11 +3706,20 @@ Return ONLY the JSON array, nothing else."""
                 x1 = x1 * dpi_ratio
                 y1 = y1 * dpi_ratio
 
+            # For figures that span more than 40% of page width, expand to capture full width
+            # This handles multi-panel figures where Unstructured may only detect one panel
+            figure_width = x1 - x0
+            if figure_width > page_width * 0.4:
+                # Expand to page margins (typically 50pt on each side)
+                margin = 50
+                x0 = margin
+                x1 = page_width - margin
+
             # Create clip rectangle with padding
             clip_rect = fitz.Rect(
                 max(0, x0 - padding),
                 max(0, y0 - padding),
-                min(page_width, x1 + padding),
+                min(page_width, x1 + right_padding),
                 min(page_height, y1 + bottom_padding),
             )
 
@@ -3736,7 +3850,8 @@ Return ONLY the JSON array, nothing else."""
                             pdf_path=pdf_path,
                             page_num=img.page_num,
                             bbox=img.bbox.coords,
-                            bottom_padding=150,  # Extra space for figure legends
+                            bottom_padding=250,  # Extra space for long figure captions/legends
+                            right_padding=150,   # Extra space for multi-panel figures
                         )
 
                     # Use re-rendered image if successful, otherwise use original
