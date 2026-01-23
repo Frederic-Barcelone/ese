@@ -542,7 +542,7 @@ class DiseaseDetector:
         lexicon_base = Path(
             self.config.get(
                 "lexicon_base_path",
-                "/Users/frederictetard/Projects/ese/ouput_datasources",
+                "ouput_datasources",
             )
         )
 
