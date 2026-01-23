@@ -1109,9 +1109,25 @@ class TableExtractor:
                     try:
                         vlm_result = vlm_extractor.extract(table["image_base64"])
                         if vlm_result and vlm_result.get("confidence", 0) > 0.3:
+                            vlm_rows = vlm_result.get("rows", [])
+                            vlm_headers = vlm_result.get("headers", [])
+                            vlm_row_count = len(vlm_rows)
+                            vlm_col_count = len(vlm_headers)
+
+                            # Validate VLM extraction meets minimum table requirements
+                            # Require at least 2 data rows (not just 1) for a meaningful table
+                            # This filters out false positives where VLM extracts a tiny snippet
+                            min_vlm_data_rows = 2  # Stricter than MIN_TABLE_ROWS - 1
+                            if vlm_row_count < min_vlm_data_rows or vlm_col_count < MIN_TABLE_COLS:
+                                print(f"[INFO] Rejecting VLM table on page {table['page_num']}: "
+                                      f"too small ({vlm_col_count} cols, {vlm_row_count} data rows) - "
+                                      f"requires at least {MIN_TABLE_COLS} cols and {min_vlm_data_rows} data rows")
+                                # Skip this table entirely - VLM confirmed it's not a real table
+                                continue
+
                             # Use VLM results
-                            table["headers"] = vlm_result.get("headers", [])
-                            table["rows"] = vlm_result.get("rows", [])
+                            table["headers"] = vlm_headers
+                            table["rows"] = vlm_rows
                             table["extraction_method"] = "vlm"
                             table["vlm_confidence"] = vlm_result.get("confidence", 0.95)
                             if vlm_result.get("verification_warning"):
@@ -1156,8 +1172,20 @@ class TableExtractor:
                     try:
                         vlm_result = vlm_extractor.extract(merged["image_base64"])
                         if vlm_result and vlm_result.get("confidence", 0) > 0.3:
-                            merged["headers"] = vlm_result.get("headers", [])
-                            merged["rows"] = vlm_result.get("rows", [])
+                            vlm_rows = vlm_result.get("rows", [])
+                            vlm_headers = vlm_result.get("headers", [])
+                            vlm_row_count = len(vlm_rows)
+                            vlm_col_count = len(vlm_headers)
+
+                            # Validate VLM extraction meets minimum table requirements
+                            min_vlm_data_rows = 2  # Stricter than MIN_TABLE_ROWS - 1
+                            if vlm_row_count < min_vlm_data_rows or vlm_col_count < MIN_TABLE_COLS:
+                                print(f"[INFO] Rejecting VLM multi-page table on pages {merged['page_nums']}: "
+                                      f"too small ({vlm_col_count} cols, {vlm_row_count} data rows)")
+                                continue
+
+                            merged["headers"] = vlm_headers
+                            merged["rows"] = vlm_rows
                             merged["extraction_method"] = "vlm"
                             merged["vlm_confidence"] = vlm_result.get("confidence", 0.95)
                             if vlm_result.get("verification_warning"):
