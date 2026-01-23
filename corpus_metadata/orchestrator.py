@@ -266,6 +266,35 @@ def is_valid_sf_form(
     if sf == "al":
         return False
 
+    # Reject DOI patterns (10.xxxx/yyyy)
+    if re.match(r"^10\.\d{4,}", sf):
+        return False
+
+    # Reject statistical method names that look like abbreviations
+    if sf_upper in {"COX", "KAPLAN", "MEIER"}:
+        return False
+
+    # Reject plural forms of common abbreviations (e.g., "CIs" when "CI" exists)
+    # These are just plurals, not separate abbreviations
+    if sf_upper.endswith("S") and len(sf) >= 3:
+        base = sf_upper[:-1]
+        if base in {"CI", "HR", "OR", "RR", "SD", "SE", "AUC", "ROC"}:
+            return False
+
+    # Reject author initials pattern in reference/citation context
+    # Patterns like "Hoffman EA," or "Celermajer DS," in author lists
+    if len(sf) == 2 and sf.isupper():
+        # Check if SF appears right after a capitalized name (author pattern)
+        author_pattern = re.search(
+            rf"[A-Z][a-z]+\s+{re.escape(sf)}[,\.\s]",
+            context
+        )
+        if author_pattern:
+            # Check if this appears in reference-like context
+            ctx_lower = context.lower()
+            if any(ind in ctx_lower for ind in ["doi:", "et al", "10.", "pmid", "j ", "vol", "pp.", "issue"]):
+                return False
+
     # Special case: IG only if near immunoglobulin context
     if sf_upper == "IG":
         ctx_lower = context.lower()
@@ -1776,6 +1805,21 @@ Return ONLY the JSON array, nothing else."""
                 len(sf_candidate) < 2
                 or len(sf_candidate) > 15
                 or not any(c.isupper() for c in sf_candidate)
+            ):
+                continue
+
+            # Get context for form validation
+            idx = full_text.find(sf_candidate)
+            if idx == -1:
+                idx = full_text.lower().find(sf_candidate.lower())
+            temp_ctx = full_text[max(0, idx - 200):idx + len(sf_candidate) + 200] if idx >= 0 else ""
+
+            # Apply the same form validation used for other candidates
+            if not is_valid_sf_form(
+                sf_candidate,
+                temp_ctx,
+                self.heuristics.allowed_2letter_sfs,
+                self.heuristics.allowed_mixed_case
             ):
                 continue
 

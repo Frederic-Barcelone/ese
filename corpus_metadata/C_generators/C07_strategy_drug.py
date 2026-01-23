@@ -982,6 +982,30 @@ class DrugFalsePositiveFilter:
         "human follicle-stimulating hormone",
         "ldl-receptor related protein 1",
         "ldl receptor",
+        # Statistical/ML terms commonly misidentified as drugs
+        "lasso",
+        "metric",
+        "metric (substance)",
+        "metrics",
+        "correlation",
+        "coefficient",
+        "regression",
+        "classifier",
+        "model",
+        "algorithm",
+        "variance",
+        "covariance",
+        "standard deviation",
+        "confidence interval",
+        "hazard ratio",
+        "odds ratio",
+        # Author name patterns that get mismatched to drugs
+        "fluorouracil",  # Often matched to "Fu Y" (author name)
+        "antigens, cd15",  # Often matched to "Lewis JH" (author name)
+        # Equipment/scanner brand names
+        "revolution",
+        "somatom",
+        "aquilion",
     }
 
     # Generic all-caps words that are not drugs
@@ -1238,6 +1262,34 @@ class DrugFalsePositiveFilter:
             if text_lower in self.non_drug_allcaps_lower:
                 return True
 
+        # Context-based author name detection
+        # Patterns that indicate the matched text is likely an author name, not a drug
+        if context:
+            ctx_lower = context.lower()
+            # Author list patterns: "Name1 A, Name2 B, Name3 C" or "by Name,"
+            # Check if matched text appears in author-like context
+            author_indicators = [
+                f"by {text_lower},",
+                f"by {text_lower}.",
+                f"by {text_lower} ",
+                f"{text_lower} et al",
+                f", {text_lower},",  # In author list
+                f", {text_lower}.",
+            ]
+            for indicator in author_indicators:
+                if indicator in ctx_lower:
+                    return True
+
+            # Check for author initials pattern: "Name AB" where AB are initials
+            # Pattern: matched_text followed by space and 1-2 capital letters
+            import re
+            author_pattern = re.compile(
+                rf"\b{re.escape(text_stripped)}\s+[A-Z]{{1,2}}[,\.\s]",
+                re.IGNORECASE
+            )
+            if author_pattern.search(context):
+                return True
+
         return False
 
 
@@ -1268,12 +1320,21 @@ class DrugDetector:
         "genesis", "urban", "promote", "vital", "complete", "balance",
         "comfort", "relief", "choice", "nature", "natural", "pure",
         "basic", "simple", "clear", "fresh", "bright", "calm", "gentle",
+        "precise", "dimension", "filter", "essence", "revolution", "metric",
+        "metrics", "optimal", "standard", "ideal", "normal", "advanced",
+        "select", "prime", "premier", "elite", "ultra", "supreme", "max",
+        # Statistical/ML terms (not drugs)
+        "lasso", "mcc", "correlation", "coefficient", "regression",
+        # Equipment/brand names (not drugs)
+        "siemens", "philips", "toshiba", "aquilion", "somatom",
         # Biological terms (not drugs)
         "cartilage", "bone marrow", "lymphocytes", "plasma", "serum",
         # Organizations/misc
         "arthritis foundation", "no data", "not available", "unknown",
         # Antibody markers (diagnostic, not therapeutic)
         "anca",
+        # Common author surnames that match drug names
+        "cai", "lewis", "sun", "chen", "wang", "li", "zhang", "liu",
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
