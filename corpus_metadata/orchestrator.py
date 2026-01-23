@@ -3706,12 +3706,19 @@ Return ONLY the JSON array, nothing else."""
                 x1 = x1 * dpi_ratio
                 y1 = y1 * dpi_ratio
 
-            # For figures that span more than 40% of page width, expand to capture full width
+            # For figures that span a significant portion of page, expand to capture full width
             # This handles multi-panel figures where Unstructured may only detect one panel
+            # Use aggressive expansion: any figure >15% of page width OR >20% of page height
+            # gets expanded to full page width to capture all panels
             figure_width = x1 - x0
-            if figure_width > page_width * 0.4:
-                # Expand to page margins (typically 50pt on each side)
-                margin = 50
+            figure_height = y1 - y0
+            is_significant_figure = (
+                figure_width > page_width * 0.15 or
+                figure_height > page_height * 0.20
+            )
+            if is_significant_figure:
+                # Expand to nearly full page width (small margins to avoid edge artifacts)
+                margin = 36  # ~0.5 inch margin
                 x0 = margin
                 x1 = page_width - margin
 
