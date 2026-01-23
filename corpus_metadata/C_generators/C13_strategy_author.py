@@ -341,9 +341,29 @@ class AuthorDetector:
         author_block = re.sub(r"\†|\‡|§|¶|#", "", author_block)  # Remove symbols
         author_block = re.sub(r"\(.*?\)", "", author_block)  # Remove parentheticals
 
-        # Find names by splitting on commas and parsing each segment
+        # Handle cases where title and authors are joined without line breaks
+        # Try to split on common title/section patterns that precede author lists
+        title_pattern = r"(?:Hypertension|Research|Article|Study|Report|Analysis|Review|Investigation)\s+"
+        if re.search(title_pattern, author_block, re.IGNORECASE):
+            # Split at the title word and check each part for author-like content
+            parts = re.split(title_pattern, author_block, flags=re.IGNORECASE)
+            # Find the part that contains author names with credentials
+            for part in parts:
+                part_stripped = part.strip()
+                if not part_stripped:
+                    continue
+                # Check if this part has author-like content (names with credentials)
+                # Look for pattern: Name + credential (MM, PhD, MD, etc.)
+                if re.search(r"^[A-Z][a-z]+\s+[A-Z][a-z]+.*?(?:MM|MD|PhD|MPH|PharmD|DO)", part_stripped):
+                    # Also verify it has multiple names (at least 2-3 comma or semicolon separated)
+                    if part_stripped.count(";") >= 2 or part_stripped.count(",") >= 3:
+                        author_block = part_stripped
+                        break
+
+        # Find names by splitting on commas or semicolons and parsing each segment
         # This handles complex names with multiple middle initials like "Edwin K S Wong"
-        segments = re.split(r",\s*", author_block)
+        # Also handles journal-style semicolon separation like "Name1, PhD; Name2, MD"
+        segments = re.split(r"[;,]\s*", author_block)
 
         for segment in segments:
             segment = segment.strip()
@@ -353,6 +373,20 @@ class AuthorDetector:
             # Check for corresponding author marker
             is_corresponding = "*" in segment
             segment = segment.replace("*", "").strip()
+
+            # Remove ORCID symbols (® or similar icons that appear after names)
+            segment = re.sub(r"[®©™\u00AE\u00A9\u2122\uFFFD]", "", segment).strip()
+
+            # Remove trailing credentials (MM, PhD, MD, etc.) from segment
+            # This handles "Lihua Guan, PhD" -> "Lihua Guan"
+            # Or "MM; Lihua Guan" -> "Lihua Guan" (when credentials are prefix from previous)
+            credentials_pattern = r"(?:^|\s)(?:MM|MD|PhD|MPH|DO|PharmD|RN|MSN|DrPH|ScD|MBBS|MBChB|FRCPC?|FACP|MS|MA|MSc|BSc|BA|DNP|DPT)\s*$"
+            segment = re.sub(credentials_pattern, "", segment, flags=re.IGNORECASE).strip()
+
+            # Also remove leading credentials (from semicolon split artifacts)
+            # Handles cases like "PhD; Weiping Xie" where "PhD" is leftover from previous name
+            leading_cred_pattern = r"^(?:MM|MD|PhD|MPH|DO|PharmD|RN|MSN|DrPH|ScD|MBBS|MBChB|FRCPC?|FACP|MS|MA|MSc|BSc|BA|DNP|DPT)(?:\s*[;,]?\s*)"
+            segment = re.sub(leading_cred_pattern, "", segment, flags=re.IGNORECASE).strip()
 
             # Skip if it's a group name or too short
             if len(segment) < 5:

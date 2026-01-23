@@ -57,6 +57,13 @@ class DrugFalsePositiveFilter:
     # NCT trial ID pattern (clinical trial identifiers, not drugs)
     NCT_PATTERN = re.compile(r"^NCT\d+$", re.IGNORECASE)
 
+    # Ethics committee approval code patterns (not drugs)
+    # Matches patterns like KY2022, IRB2023, EC2024, REC2022, IEC2023
+    # These are institutional review board/ethics committee approval codes
+    ETHICS_CODE_PATTERN = re.compile(
+        r"^(?:KY|IRB|EC|REC|IEC|ERB|REB)\d{4}$", re.IGNORECASE
+    )
+
     # Bacteria names (often appear in vaccine trial data, not drugs)
     BACTERIA_ORGANISMS: Set[str] = {
         # Bacteria commonly in vaccine trials
@@ -552,6 +559,15 @@ class DrugFalsePositiveFilter:
         "fc ii",
         "fc iii",
         "fc iv",
+        # Common statistical abbreviations that get misread
+        "cls",  # Often misread from "CIs" (confidence intervals)
+        "cis",  # Confidence intervals
+        # Common measurement abbreviations
+        "mm",   # millimeters (credential or unit, not drug)
+        "cm",   # centimeters
+        "kg",   # kilograms
+        "mg",   # milligrams (unit, not drug name)
+        "ml",   # milliliters
     }
 
     # Organizations and agencies (not drugs)
@@ -1158,6 +1174,11 @@ class DrugFalsePositiveFilter:
 
         # Filter NCT trial IDs (e.g., NCT04817618) - these are trial identifiers, not drugs
         if self.NCT_PATTERN.match(text_stripped):
+            return True
+
+        # Filter ethics committee approval codes (e.g., KY2022, IRB2023)
+        # These are institutional codes, not drug compound IDs
+        if self.ETHICS_CODE_PATTERN.match(text_stripped):
             return True
 
         # Always filter generic placeholder terms (even from specialized lexicons)
