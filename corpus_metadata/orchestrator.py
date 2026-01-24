@@ -189,10 +189,6 @@ class Orchestrator:
         self.model = model or val_cfg.get("model", "claude-sonnet-4-20250514")
         self.batch_delay_ms = api_cfg.get("batch_delay_ms", 100)
 
-        # Heuristics settings
-        heur_cfg = self.config.get("heuristics", {})
-        self.enable_haiku_screening = heur_cfg.get("enable_haiku_screening", False)
-
         self.run_id = run_id or generate_run_id("RUN")
         self.heuristics = heuristics_config or HeuristicsConfig.from_yaml(
             self.config_path
@@ -372,7 +368,6 @@ class Orchestrator:
             ("use_patient_journey", self.use_patient_journey),
             ("use_registry_extraction", self.use_registry_extraction),
             ("use_genetic_extraction", self.use_genetic_extraction),
-            ("haiku_screening", self.enable_haiku_screening),
         ]
         for name, enabled in options:
             status = "ON" if enabled else "OFF"
@@ -462,7 +457,6 @@ class Orchestrator:
             rare_disease_lookup=self.rare_disease_lookup,
             use_vlm_tables=self.use_vlm_tables,
             use_normalization=self.use_normalization,
-            enable_haiku_screening=self.enable_haiku_screening,
             model=self.model,
         )
 

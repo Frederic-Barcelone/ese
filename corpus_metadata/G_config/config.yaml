@@ -619,7 +619,6 @@ heuristics:
   # ========================================
   # TIERED VALIDATION SETTINGS
   # ========================================
-  enable_haiku_screening: false
   batch_validation_size: 10
   lexicon_validation_batch_size: 15
   min_sf_occurrences: 2

@@ -76,7 +76,6 @@ class AbbreviationPipeline:
         rare_disease_lookup: Optional[Dict[str, str]] = None,
         use_vlm_tables: bool = False,
         use_normalization: bool = True,
-        enable_haiku_screening: bool = False,
         model: str = "claude-sonnet-4-20250514",
     ) -> None:
         """
@@ -100,7 +99,6 @@ class AbbreviationPipeline:
             rare_disease_lookup: Optional rare disease SF->LF lookup
             use_vlm_tables: Whether to use VLM for table extraction
             use_normalization: Whether to run normalization
-            enable_haiku_screening: Whether to use Haiku pre-screening
             model: Model name for LLM calls
         """
         self.run_id = run_id
@@ -120,7 +118,6 @@ class AbbreviationPipeline:
         self.rare_disease_lookup = rare_disease_lookup or {}
         self.use_vlm_tables = use_vlm_tables
         self.use_normalization = use_normalization
-        self.enable_haiku_screening = enable_haiku_screening
         self.model = model
 
     def parse_pdf(self, pdf_path: Path, output_dir: Path) -> "DocumentGraph":
@@ -459,42 +456,6 @@ class AbbreviationPipeline:
 
         print(f"  Batch (explicit pairs): {len(explicit_candidates)}")
         print(f"  Individual (lexicon): {len(lexicon_candidates)}")
-
-        # Haiku screening (optional)
-        if self.enable_haiku_screening and lexicon_candidates:
-            print(
-                f"\n  Haiku screening {len(lexicon_candidates)} lexicon candidates..."
-            )
-            haiku_start = time.time()
-            needs_review, haiku_rejected = self.llm_engine.fast_reject_batch(
-                lexicon_candidates,
-                haiku_model="claude-3-5-haiku-20241022",
-                batch_size=20,
-            )
-            haiku_time = time.time() - haiku_start
-            print(
-                f"    Haiku rejected: {len(haiku_rejected)}, Needs review: {len(needs_review)}, Time: {haiku_time:.2f}s"
-            )
-
-            for entity in haiku_rejected:
-                candidate = next(
-                    (
-                        c
-                        for c in lexicon_candidates
-                        if str(c.id) == str(entity.candidate_id)
-                    ),
-                    None,
-                )
-                if candidate:
-                    self.logger.log_validation(
-                        candidate,
-                        entity,
-                        entity.raw_llm_response,
-                        haiku_time * 1000 / len(lexicon_candidates),
-                    )
-                results.append(entity)
-
-            lexicon_candidates = needs_review
 
         # Batch validate explicit pairs
         if explicit_candidates:

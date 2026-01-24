@@ -395,7 +395,6 @@ class HeuristicsConfig:
     # ========================================
     # TIERED VALIDATION SETTINGS
     # ========================================
-    enable_haiku_screening: bool = False
     batch_validation_size: int = 10
     lexicon_validation_batch_size: int = 15
 
@@ -541,8 +540,6 @@ class HeuristicsConfig:
             kwargs["exclude_trial_ids"] = bool(heur["exclude_trial_ids"])
         if "enable_llm_sf_extractor" in heur:
             kwargs["enable_llm_sf_extractor"] = bool(heur["enable_llm_sf_extractor"])
-        if "enable_haiku_screening" in heur:
-            kwargs["enable_haiku_screening"] = bool(heur["enable_haiku_screening"])
 
         # Numeric values
         if "llm_sf_max_chunks" in heur:
