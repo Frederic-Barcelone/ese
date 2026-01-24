@@ -1911,10 +1911,15 @@ class DrugDetector:
                 DrugGeneratorType.PATTERN_COMPOUND_ID,
             }
 
+            # Use canonical name if the preferred_name is a known abbreviation
+            raw_preferred = drug_info.get("preferred_name", matched_text)
+            canonical_name = DRUG_ABBREVIATIONS.get(raw_preferred.lower())
+            final_preferred = canonical_name.title() if canonical_name else raw_preferred
+
             candidate = DrugCandidate(
                 doc_id=doc_graph.doc_id,
                 matched_text=matched_text,
-                preferred_name=drug_info.get("preferred_name", matched_text),
+                preferred_name=final_preferred,
                 brand_name=drug_info.get("brand_name"),
                 compound_id=drug_info.get("compound_id"),
                 field_type=DrugFieldType.EXACT_MATCH,
