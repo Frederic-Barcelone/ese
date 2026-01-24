@@ -732,11 +732,13 @@ class PDFToDocGraphParser(BaseParser):
                     "excluded", "discontinued", "completed", "allocation"
                 ]):
                     img_type = ImageType.FLOWCHART
-                # Chart: various clinical trial result charts
+                # Chart: various clinical trial result charts (including pie charts)
                 elif any(kw in check_lower for kw in [
                     "kaplan", "survival", "curve", "plot", "bar", "proportion",
                     "percentage", "reduction", "change", "effect", "endpoint",
-                    "month", "week", "baseline", "placebo", "treatment"
+                    "month", "week", "baseline", "placebo", "treatment",
+                    "pie", "distribution", "frequency", "symptoms", "serology",
+                    "fig.", "figure"
                 ]):
                     img_type = ImageType.CHART
                 # Diagram: mechanism, pathway diagrams
