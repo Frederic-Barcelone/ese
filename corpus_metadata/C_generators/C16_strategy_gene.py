@@ -40,7 +40,7 @@ try:
 
     SCISPACY_AVAILABLE = True
 except ImportError:
-    spacy = None  # type: ignore[assignment]
+    spacy = None
     SCISPACY_AVAILABLE = False
 
 
@@ -899,7 +899,7 @@ class GeneDetector:
         doc_fingerprint: str,
     ) -> List[GeneCandidate]:
         """Detect genes using scispacy NER as fallback."""
-        candidates = []
+        candidates: list[GeneCandidate] = []
 
         if not self.nlp:
             return candidates

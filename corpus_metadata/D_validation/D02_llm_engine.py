@@ -198,7 +198,7 @@ class ClaudeClient:
         raw_text = ""
         for block in message.content:
             if hasattr(block, "text"):
-                raw_text += block.text  # type: ignore[union-attr]
+                raw_text += block.text
 
         # Parse JSON from response
         return self._extract_json(raw_text)
@@ -238,7 +238,7 @@ class ClaudeClient:
         raw_text = ""
         for block in message.content:
             if hasattr(block, "text"):
-                raw_text += block.text  # type: ignore[union-attr]
+                raw_text += block.text
 
         # Parse JSON from response (handles arrays and objects)
         return self._extract_json_any(raw_text)
@@ -306,7 +306,7 @@ class ClaudeClient:
         raw_text = ""
         for block in message.content:
             if hasattr(block, "text"):
-                raw_text += block.text  # type: ignore[union-attr]
+                raw_text += block.text
 
         # Parse JSON from response
         return self._extract_json_any(raw_text)

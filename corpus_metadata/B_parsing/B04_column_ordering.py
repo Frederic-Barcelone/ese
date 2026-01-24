@@ -1295,7 +1295,7 @@ def _order_body_bands(
         bands[get_band(g)].append((get_column(g), g))
 
     # Order within each band
-    ordered = []
+    ordered: list[BlockGeom] = []
     for band_idx in sorted(bands.keys()):
         band_items = bands[band_idx]
         # Sort by: column, then Y, then X
@@ -1525,7 +1525,7 @@ def analyze_pdf_layout(
         print(f"\n{'=' * 60}")
         print("SUMMARY")
         print(f"{'=' * 60}")
-        layout_counts = {}
+        layout_counts: dict[str, int] = {}
         for r in results:
             lt = r["layout_type"]
             layout_counts[lt] = layout_counts.get(lt, 0) + 1

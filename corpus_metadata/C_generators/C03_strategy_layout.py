@@ -352,7 +352,7 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         self, doc: DocumentGraph, seen: Set[str]
     ) -> List[Candidate]:
         """Extract data from specific page zones (first page only for now)."""
-        candidates = []
+        candidates: list[Candidate] = []
 
         # Only process first page for zone extraction
         if 1 not in doc.pages:

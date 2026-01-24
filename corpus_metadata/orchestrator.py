@@ -1082,7 +1082,7 @@ class Orchestrator:
             return
 
         # Group by category with explicit order
-        categories = [
+        categories: list[tuple[str, list[tuple[str, int, str]]]] = [
             ("Abbreviation", []),
             ("Drug", []),
             ("Disease", []),

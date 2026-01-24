@@ -678,7 +678,6 @@ def create_orchestrator() -> Orchestrator:
     return Orchestrator(
         config_path=str(CONFIG_PATH),
         gold_json=str(GOLD_JSON),
-        skip_validation=SKIP_VALIDATION,
     )
 
 

@@ -28,7 +28,7 @@ try:
 
     PYMUPDF_AVAILABLE = True
 except ImportError:
-    fitz = None  # type: ignore[assignment]
+    fitz = None
     PYMUPDF_AVAILABLE = False
 
 # Optional PIL for image stitching
@@ -37,7 +37,7 @@ try:
 
     PIL_AVAILABLE = True
 except ImportError:
-    Image = None  # type: ignore[assignment, misc]
+    Image = None
     PIL_AVAILABLE = False
 
 

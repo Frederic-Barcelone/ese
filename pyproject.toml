@@ -2,6 +2,29 @@
 name = "ese"
 requires-python = ">=3.12"
 
+# Mypy configuration
+[tool.mypy]
+python_version = "3.12"
+files = ["corpus_metadata"]
+mypy_path = "corpus_metadata"
+explicit_package_bases = true
+exclude = [
+    "venv/",
+    ".venv/",
+    "backup_.*/",
+    "__pycache__/",
+    ".ruff_cache/",
+    ".pytest_cache/",
+]
+# Ignore missing stubs for third-party libraries
+ignore_missing_imports = true
+# Enable strict optional checking
+strict_optional = true
+# Warn about unused ignores
+warn_unused_ignores = true
+# Check untyped function bodies
+check_untyped_defs = true
+
 # Type checking configuration for ty (Astral's fast type checker)
 # https://docs.astral.sh/ty/
 

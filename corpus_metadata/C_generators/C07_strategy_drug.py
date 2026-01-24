@@ -42,7 +42,7 @@ try:
 
     SCISPACY_AVAILABLE = True
 except ImportError:
-    spacy = None  # type: ignore[assignment]
+    spacy = None
     SCISPACY_AVAILABLE = False
 
 
@@ -1935,7 +1935,7 @@ class DrugDetector:
         doc_fingerprint: str,
     ) -> List[DrugCandidate]:
         """Detect drugs using scispacy NER."""
-        candidates = []
+        candidates: list[DrugCandidate] = []
 
         if not self.nlp:
             return candidates

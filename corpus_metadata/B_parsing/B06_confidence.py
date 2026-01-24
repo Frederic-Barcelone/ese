@@ -586,6 +586,9 @@ class ContradictionDetector:
         if None in (op_a, val_a, op_b, val_b):
             return None
 
+        # After None check, assert for type narrowing
+        assert val_a is not None and val_b is not None
+
         # Check for impossible combinations
         # e.g., >= 30 AND <= 20 is impossible
         if op_a == ">=" and op_b == "<=" and val_a > val_b:

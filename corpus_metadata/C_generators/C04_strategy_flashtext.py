@@ -28,7 +28,7 @@ try:
         module="scispacy.abbreviation",
     )
 except ImportError:
-    spacy = None  # type: ignore
+    spacy = None
     SCISPACY_AVAILABLE = False
 
 from A_core.A02_interfaces import BaseCandidateGenerator
@@ -805,7 +805,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             return
 
         # Categorize lexicons with explicit ordering: Abbreviation, Drug, Disease, Other
-        categories = [
+        categories: list[tuple[str, list[tuple[str, int, str]]]] = [
             ("Abbreviation", []),
             ("Drug", []),
             ("Disease", []),
@@ -1055,7 +1055,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
     def _extract_identifiers(self, identifiers: Dict) -> List[Dict[str, str]]:
         """Extract lexicon IDs from an identifiers dict."""
-        lexicon_ids = []
+        lexicon_ids: list[dict[str, str]] = []
         if not identifiers or not isinstance(identifiers, dict):
             return lexicon_ids
 

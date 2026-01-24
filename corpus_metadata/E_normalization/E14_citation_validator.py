@@ -90,10 +90,11 @@ class CitationValidator:
         if self._session is None:
             try:
                 import requests
-                self._session = requests.Session()
-                self._session.headers.update({
+                session = requests.Session()
+                session.headers.update({
                     "User-Agent": "CorpusMetadata/0.8 (Clinical Trial Feasibility Extractor)"
                 })
+                self._session = session
             except ImportError:
                 logger.warning("requests library not available for citation validation")
                 return None

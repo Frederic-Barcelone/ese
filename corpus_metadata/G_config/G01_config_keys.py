@@ -1,4 +1,5 @@
 # corpus_metadata/G_config/G01_config_keys.py
+# mypy: disable-error-code="var-annotated"
 """
 Configuration key constants for the ESE pipeline.
 

@@ -236,7 +236,7 @@ class SectionDetector:
 
         Returns list of signals that indicate header-like text.
         """
-        signals = []
+        signals: list[str] = []
 
         # Too long to be a header
         if len(text) > self.max_header_length:

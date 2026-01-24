@@ -217,7 +217,7 @@ class Table(BaseModel):
         yields (sf, lf, sf_cell, lf_cell) for each logical row.
         """
         if self.table_type != TableType.GLOSSARY:
-            return iter(())  # type: ignore
+            return iter(())
 
         meta = self.metadata.get("glossary_cols") or {}
         headers = self.metadata.get("headers") or {}
@@ -225,9 +225,9 @@ class Table(BaseModel):
         sf_col = meta.get("sf_col_idx")
         lf_col = meta.get("lf_col_idx")
         if sf_col is None or lf_col is None:
-            return iter(())  # type: ignore
+            return iter(())
         if sf_col not in headers or lf_col not in headers:
-            return iter(())  # type: ignore
+            return iter(())
 
         sf_key = headers[sf_col]
         lf_key = headers[lf_col]

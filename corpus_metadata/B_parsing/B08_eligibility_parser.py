@@ -309,8 +309,8 @@ class EligibilityParser:
         text = text.replace("(", " ( ").replace(")", " ) ")
 
         # Split on AND/OR patterns
-        parts = []
-        current = []
+        parts: list[str] = []
+        current: list[str] = []
 
         # Simple tokenization - split on spaces and recognize operators
         words = text.split()

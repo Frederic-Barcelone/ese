@@ -54,7 +54,7 @@ try:
         module="scispacy.abbreviation",
     )
 except ImportError:
-    spacy = None  # type: ignore
+    spacy = None
     SCISPACY_AVAILABLE = False
 
 
@@ -1012,7 +1012,7 @@ class DiseaseDetector:
         seen: Set[Tuple[str, str]],
     ) -> List[DiseaseCandidate]:
         """Extract using scispacy NER with UMLS linking."""
-        candidates = []
+        candidates: list[DiseaseCandidate] = []
 
         if self.scispacy_nlp is None:
             return candidates

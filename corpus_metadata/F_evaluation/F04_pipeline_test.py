@@ -108,7 +108,6 @@ class PipelineEvaluator:
         # Orchestrator (full pipeline)
         self.orchestrator = Orchestrator(
             run_id=self.run_id,
-            skip_validation=False,
         )
 
     def _load_gold(self) -> Tuple[Any, Dict[str, List[GoldAnnotation]]]:

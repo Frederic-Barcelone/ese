@@ -42,7 +42,7 @@ try:
     import fitz  # PyMuPDF
     PYMUPDF_AVAILABLE = True
 except ImportError:
-    fitz = None  # type: ignore
+    fitz = None
     PYMUPDF_AVAILABLE = False
 
 
@@ -663,7 +663,7 @@ class DocumentMetadataStrategy:
     ) -> str:
         """Get content sample from document graph."""
         # Get first N characters of content
-        full_text = doc_graph.get_full_text() if hasattr(doc_graph, "get_full_text") else ""  # type: ignore[union-attr]
+        full_text = doc_graph.get_full_text() if hasattr(doc_graph, "get_full_text") else ""
         return full_text[:max_chars] if full_text else ""
 
     def _extract_dates(
