@@ -58,12 +58,19 @@ _AUTHOR_INITIAL_PATTERN = re.compile(
 
 def _is_likely_author_initial(sf: str, context: str) -> bool:
     """
-    Check if a 2-letter uppercase abbreviation is likely an author initial.
+    Check if a short uppercase abbreviation is likely an author initial.
+
+    Uses pattern + context detection (no hardcoded initial lists).
 
     Author initials appear in contexts like:
     - "John Smith1,2, BH contributed to..." (where BH = initials)
     - Author contribution sections
     - Name lists with superscript affiliations
+
+    Detection strategy:
+    1. Pattern: 2-3 letter all-uppercase alphabetic string
+    2. Context: author-related keywords nearby
+    3. Proximity: multiple similar initials nearby (author list pattern)
 
     Returns True if the SF is likely an author initial (should be filtered).
     """
@@ -73,57 +80,141 @@ def _is_likely_author_initial(sf: str, context: str) -> bool:
     if not sf or not ctx:
         return False
 
-    # Only check 2-letter all-uppercase abbreviations (typical author initials)
-    if len(sf) != 2 or not sf.isupper():
+    # Pattern check: 2-3 letter all-uppercase alphabetic (typical author initials)
+    # Examples: "BH", "JM", "JLU" (but not "IL6", "TNF")
+    if not (2 <= len(sf) <= 3 and sf.isupper() and sf.isalpha()):
         return False
 
-    # Common author initial patterns - 2 uppercase letters that look like initials
-    # These are very common in academic papers and rarely actual abbreviations
-    COMMON_AUTHOR_INITIALS = {
-        # Very common initial combinations
-        "BH", "JH", "JM", "DB", "LS", "LH", "RB", "KH", "MH", "PH",
-        "DJ", "MJ", "RJ", "SJ", "JL", "ML", "PL", "JW", "MW", "RW",
-        "JA", "MA", "RA", "SA", "JB", "MB", "RB", "SB", "JC", "MC",
-        "RC", "SC", "JD", "MD", "RD", "SD", "JE", "ME", "RE", "SE",
-        "JF", "MF", "RF", "SF", "JG", "MG", "RG", "SG", "JK", "MK",
-        "RK", "SK", "JN", "MN", "RN", "SN", "JP", "MP", "RP", "SP",
-        "JR", "MR", "JT", "MT", "RT", "ST", "JV", "MV", "RV", "SV",
-        # Authors in the AAV guidelines doc
-        "RP", "FL", "LG", "CB", "MB", "LD", "DH", "DM", "PH", "CJ",
-        "JLU", "AM", "PM", "JMN", "AT", "JV", "LB", "FB", "DW", "RW",
-        "TH", "AS", "JS", "CS", "PS", "KS", "NS", "BS", "WS", "MS",
+    ctx_lower = ctx.lower()
+
+    # Context clues that indicate author/contributor section
+    author_clues = [
+        "contributed", "author", "wrote", "drafted", "reviewed",
+        "approved", "manuscript", "acknowledgement", "acknowledgment",
+        "funding", "conflict", "interest", "affiliation", "department",
+        "university", "hospital", "medical center", "school of",
+        "corresponding", "equal contribution", "contributors",
+        "conceptualization", "methodology", "investigation",
+        "writing", "supervision", "declaration",
+    ]
+
+    # Strong author context: if any author clue present, likely an initial
+    if any(clue in ctx_lower for clue in author_clues):
+        return True
+
+    # Author list patterns: names with superscript numbers/affiliations
+    # e.g., "John Smith1,2, Jane Doe3, BH"
+    if re.search(r"[A-Z][a-z]+\s+[A-Z][a-z]+\s*[0-9,*†‡§]+", ctx):
+        return True
+
+    # Proximity heuristic: multiple 2-3 letter uppercase sequences nearby
+    # e.g., "BH, JH, MK contributed..." or "BH and JM designed..."
+    # This catches author lists even without explicit author keywords
+    initials_nearby = re.findall(r"\b[A-Z]{2,3}\b", ctx)
+    # Filter out known non-initial abbreviations (common medical/scientific)
+    known_abbrevs = {
+        "TNF", "DNA", "RNA", "PCR", "MRI", "HIV", "HCV", "HBV",
+        "ACE", "ARB", "GFR", "CKD", "AKI", "RRT", "PAH", "PH",
+        "USA", "FDA", "EMA", "WHO", "BMI", "ICU", "CCU",
     }
+    initials_nearby = [i for i in initials_nearby if i not in known_abbrevs]
 
-    # Check if it's a common author initial pattern
-    if sf in COMMON_AUTHOR_INITIALS:
-        # Look for author context clues
-        ctx_lower = ctx.lower()
-        author_clues = [
-            "contributed", "author", "wrote", "drafted", "reviewed",
-            "approved", "manuscript", "acknowledgement", "funding",
-            "conflict", "interest", "affiliation", "department",
-            "university", "hospital", "medical center", "school of",
-            "corresponding", "equal contribution",
-        ]
-        if any(clue in ctx_lower for clue in author_clues):
-            return True
+    if len(initials_nearby) >= 3:
+        return True
 
-        # Check for author list patterns (names with superscript numbers)
-        # e.g., "John Smith1,2, Jane Doe3, BH"
-        if re.search(r"[A-Z][a-z]+\s+[A-Z][a-z]+\s*[0-9,]+", ctx):
-            return True
-
-        # Check if surrounded by other 2-letter initials (author list)
-        # e.g., "BH, JH, MK contributed..."
-        initials_nearby = re.findall(r"\b[A-Z]{2}\b", ctx)
-        if len(initials_nearby) >= 3:  # Multiple 2-letter sequences = likely author list
-            return True
+    # Check for comma-separated initial pattern: "BH, JM, and SK"
+    if re.search(r"\b[A-Z]{2,3}\s*,\s*[A-Z]{2,3}\s*(?:,|and)\s*[A-Z]{2,3}\b", ctx):
+        return True
 
     return False
 
 
 def _clean_ws(s: str) -> str:
     return " ".join((s or "").split()).strip()
+
+
+def _dehyphenate_long_form(lf: str) -> str:
+    """
+    Remove line-break hyphens from long forms.
+
+    PDF extraction often produces hyphenated words where lines break:
+    - "gastroin-testinal" -> "gastrointestinal"
+    - "Vasculi-tis Study Group" -> "Vasculitis Study Group"
+
+    Pattern: hyphen followed by whitespace (from line break) then lowercase letter
+    indicates a word was split across lines.
+    """
+    if not lf:
+        return lf
+
+    # First normalize whitespace
+    lf = _clean_ws(lf)
+
+    # Pattern: hyphen + space + lowercase continuation
+    # This catches line-break hyphenation where space remains after normalization
+    lf = re.sub(r"-\s+([a-z])", r"\1", lf)
+
+    # Pattern: lowercase-hyphen-lowercase within a "word" that looks broken
+    # Be careful to preserve valid compounds like "anti-inflammatory"
+    # Only dehyphenate if it doesn't match a known compound prefix pattern
+
+    # Common prefixes that form valid hyphenated compounds - don't dehyphenate these
+    compound_prefixes = (
+        "anti", "non", "pre", "post", "re", "co", "sub", "inter",
+        "intra", "extra", "multi", "semi", "self", "cross", "over",
+        "under", "out", "well", "ill", "full", "half", "pro", "counter",
+    )
+
+    def maybe_dehyphenate(match: re.Match) -> str:
+        """Decide whether to remove a hyphen."""
+        before = match.group(1)
+        after = match.group(2)
+
+        # Check if this looks like a valid compound
+        for prefix in compound_prefixes:
+            if before.lower().endswith(prefix):
+                return match.group(0)  # Keep hyphen
+
+        # Otherwise, likely a line-break artifact - remove hyphen
+        return before + after
+
+    # Match: word-chars + hyphen + lowercase continuation
+    # Only process if it looks like a broken word (not at word boundary)
+    lf = re.sub(r"(\w)-([a-z]{2,})", maybe_dehyphenate, lf)
+
+    return lf
+
+
+def _normalize_long_form(lf: str) -> str:
+    """
+    Full normalization for long forms: clean whitespace, dehyphenate, truncate at breaks.
+    """
+    if not lf:
+        return lf
+
+    original = lf
+
+    # First clean whitespace (collapses newlines to spaces)
+    lf = _clean_ws(lf)
+
+    # Truncate at obvious clause/sentence breaks
+    # This prevents long forms from including unrelated text
+    truncated = _truncate_at_breaks(lf)
+
+    # Only use truncated version if it's not too short
+    # (truncation might over-aggressively cut valid long forms)
+    if truncated and len(truncated) >= 3:
+        lf = truncated
+    # Else keep the cleaned but non-truncated version
+
+    # Dehyphenate line-break artifacts
+    lf = _dehyphenate_long_form(lf)
+
+    # Ensure we return something meaningful
+    if not lf or len(lf) < 2:
+        return _dehyphenate_long_form(_clean_ws(original))
+
+    return lf
 
 
 def _looks_like_short_form(sf: str, min_len: int = 2, max_len: int = 10) -> bool:
@@ -569,16 +660,17 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
         # Explicit inline definition patterns: "SF=long form" or "SF: long form"
         # Captures patterns like "RR=relative reduction" or "UPCR: urine protein-creatinine ratio"
+        # NOTE: Use [ \t] instead of \s to avoid matching newlines in long forms
         self.inline_definition_patterns = [
             # SF=long form or SF: long form (e.g., "RR=relative reduction")
-            # Uses greedy match for LF, stopping at period, comma, or uppercase letter
+            # Uses greedy match for LF, stopping at period, comma, newline, or uppercase letter
             re.compile(
-                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([a-z][a-z\s\-/]{3,60})(?=[.,;)\]A-Z]|$)",
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([a-z][a-z \t\-/]{3,60})(?=[.,;)\]A-Z\n\r]|$)",
             ),
             # SF: Capitalized Long Form (e.g., "LOA: Level of Agreement", "SOR: Strength of Recommendation")
             # Handles title-case definitions common in methodology tables
             re.compile(
-                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([A-Z][a-z]+(?:\s+[a-zA-Z][a-z]*){1,8})(?=[.,;)\]\n]|$)",
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*[=:]\s*([A-Z][a-z]+(?:[ \t]+[a-zA-Z][a-z]*){1,8})(?=[.,;)\]\n\r]|$)",
             ),
         ]
 
@@ -587,11 +679,11 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         self.comma_definition_patterns = [
             # SF, Capitalized Long Form
             re.compile(
-                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*,\s*([A-Z][a-z]+(?:\s+[a-zA-Z][a-z]*){1,8})(?=[.,;)\]\n]|$)",
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*,\s*([A-Z][a-z]+(?:[ \t]+[a-zA-Z][a-z]*){1,8})(?=[.,;)\]\n\r]|$)",
             ),
             # SF, lowercase long form
             re.compile(
-                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*,\s*([a-z][a-z\s\-/]{3,60})(?=[.,;)\]A-Z\n]|$)",
+                r"(?<![A-Za-z0-9])([A-Z][A-Za-z0-9\-]{1,10})\s*,\s*([a-z][a-z \t\-/]{3,60})(?=[.,;)\]A-Z\n\r]|$)",
             ),
         ]
 
@@ -969,7 +1061,7 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
             field_type=FieldType.DEFINITION_PAIR,
             generator_type=self.generator_type,
             short_form=_clean_ws(sf),
-            long_form=_clean_ws(lf),
+            long_form=_normalize_long_form(lf),  # Dehyphenate line-break artifacts
             context_text=ctx if ctx else context_source_text,
             context_location=loc,
             initial_confidence=float(max(0.0, min(1.0, confidence))),

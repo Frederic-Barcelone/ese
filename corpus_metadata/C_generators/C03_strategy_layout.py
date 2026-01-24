@@ -43,6 +43,41 @@ def _clean_ws(s: str) -> str:
     return " ".join((s or "").split()).strip()
 
 
+def _dehyphenate_long_form(lf: str) -> str:
+    """
+    Remove line-break hyphens from long forms.
+
+    PDF extraction often produces hyphenated words where lines break:
+    - "gastroin-testinal" -> "gastrointestinal"
+    - "Vasculi-tis Study Group" -> "Vasculitis Study Group"
+    """
+    if not lf:
+        return lf
+
+    lf = _clean_ws(lf)
+
+    # Pattern: hyphen + space + lowercase continuation
+    lf = re.sub(r"-\s+([a-z])", r"\1", lf)
+
+    # Common prefixes that form valid hyphenated compounds
+    compound_prefixes = (
+        "anti", "non", "pre", "post", "re", "co", "sub", "inter",
+        "intra", "extra", "multi", "semi", "self", "cross", "over",
+        "under", "out", "well", "ill", "full", "half", "pro", "counter",
+    )
+
+    def maybe_dehyphenate(match: re.Match) -> str:
+        before = match.group(1)
+        after = match.group(2)
+        for prefix in compound_prefixes:
+            if before.lower().endswith(prefix):
+                return match.group(0)
+        return before + after
+
+    lf = re.sub(r"(\w)-([a-z]{2,})", maybe_dehyphenate, lf)
+    return lf
+
+
 def _bbox_coords(bbox) -> Tuple[float, float, float, float]:
     """Extract (x0, y0, x1, y1) from BoundingBox."""
     if bbox is None:
@@ -412,7 +447,7 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
         for table in doc.iter_tables(table_type=TableType.GLOSSARY):
             for sf, lf, sf_cell, lf_cell in table.iter_glossary_pairs():
                 sf_clean = _clean_ws(sf).upper()
-                lf_clean = _clean_ws(lf)
+                lf_clean = _dehyphenate_long_form(lf)
 
                 if not sf_clean or not lf_clean:
                     continue
@@ -483,7 +518,7 @@ class LayoutCandidateGenerator(BaseCandidateGenerator):
 
             for sf_block, lf_block in pairs:
                 sf_clean = _clean_ws(sf_block.text).upper()
-                lf_clean = _clean_ws(lf_block.text)
+                lf_clean = _dehyphenate_long_form(lf_block.text)
 
                 if not sf_clean or not lf_clean:
                     continue

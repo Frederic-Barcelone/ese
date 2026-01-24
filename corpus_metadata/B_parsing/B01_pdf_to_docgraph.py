@@ -84,26 +84,24 @@ def normalize_abbrev_hyphens(text: str) -> str:
 
 
 # -----------------------------
-# Noise patterns (typical journal footers/headers)
+# Noise patterns (truly generic footer indicators)
 # -----------------------------
-KNOWN_FOOTER_PATTERNS = [
-    r"\bdownloaded from\b",
-    r"\bwiley online library\b",
-    r"\bterms and conditions\b",
-    r"\boa articles?\b",
-    r"\bcreative commons\b",
-    r"\bdoi:\s*10\.\d{4,9}/",
-    r"\bhttps?://onlinelibrary\.wiley\.com\b",
-    r"\bsee the terms and conditions\b",
-    r"\beuropean journal of neurology\b",
-    r"\bdovepress\b",
-    r"\btaylor\s*&\s*francis\s*group\b",
-    r"\bpublish your work in this journal\b",
-    r"\bjournal of inflammation research\b",
-    r"\bsubmit your manuscript\b",
-    r"\bopen access full text article\b",
+# NOTE: Publisher-specific patterns removed to avoid corpus overfitting.
+# Use repetition-based detection (_infer_repeated_headers_footers) as primary.
+# These patterns are truly generic properties of academic PDFs.
+GENERIC_FOOTER_PATTERNS = [
+    r"\bdownloaded from\b",              # Generic access notice
+    r"\bterms and conditions\b",         # Legal boilerplate
+    r"\bcreative commons\b",             # License text
+    r"\bdoi:\s*10\.\d{4,9}/",            # DOI always noise in footer
+    r"\bopen access\b",                  # OA notice
+    r"\bcopyright\s*©?\s*\d{4}\b",       # Copyright notices
+    r"\ball rights reserved\b",          # Copyright boilerplate
+    r"\breceived:?\s*\d{1,2}\s+\w+\s+\d{4}\b",  # Received date
+    r"\baccepted:?\s*\d{1,2}\s+\w+\s+\d{4}\b",  # Accepted date
+    r"\bpublished:?\s*\d{1,2}\s+\w+\s+\d{4}\b", # Published date
 ]
-KNOWN_FOOTER_RE = re.compile("|".join(KNOWN_FOOTER_PATTERNS), flags=re.IGNORECASE)
+KNOWN_FOOTER_RE = re.compile("|".join(GENERIC_FOOTER_PATTERNS), flags=re.IGNORECASE)
 
 # Running header patterns (author names like "Liao et al", "Smith et al.")
 RUNNING_HEADER_RE = re.compile(r"^[A-Z][a-z]+\s+et\s+al\.?$", flags=re.IGNORECASE)
@@ -898,26 +896,63 @@ class PDFToDocGraphParser(BaseParser):
         norm_zone_votes: Dict[str, Counter[str]],
         norm_sample_text: Dict[str, str],
     ) -> Tuple[set, set]:
+        """
+        Infer repeated headers/footers using repetition-based detection.
+
+        This is the PRIMARY detection method (not pattern-based filtering).
+
+        Algorithm:
+        1. Collect normalized text from header/footer zones
+        2. Text appearing on >= min_repeat_pages pages -> repeated
+        3. Zone majority vote determines header vs footer
+        4. Generic patterns (DOI, copyright, etc.) boost footer classification
+
+        Normalization: lowercase, collapse whitespace, replace digits with #
+        This groups "Page 1" and "Page 23" as the same normalized text.
+        """
         repeated_headers: set = set()
         repeated_footers: set = set()
 
         for norm, total_c in norm_count.items():
             pages = norm_pages.get(norm, set())
+
+            # Repetition threshold: must appear on multiple pages
             if total_c < self.min_repeat_count:
                 continue
             if len(pages) < self.min_repeat_pages:
                 continue
 
             sample = norm_sample_text.get(norm, "")
+
+            # Generic footer patterns (truly generic, not publisher-specific)
             if self._looks_like_known_footer(sample):
                 repeated_footers.add(norm)
                 continue
 
-            # page-number-only lines are usually footers
+            # Page-number-only lines are usually footers
             if sample.strip().isdigit():
                 repeated_footers.add(norm)
                 continue
 
+            # Short repeated text in zones is likely header/footer noise
+            # e.g., "Research Article", journal names, author names
+            if len(sample) <= 50 and total_c >= self.min_repeat_count:
+                zone_votes = norm_zone_votes.get(norm)
+                if zone_votes:
+                    top_zone, top_votes = zone_votes.most_common(1)[0]
+                    frac = float(top_votes) / float(total_c) if total_c else 0.0
+
+                    # Lower threshold for short repeated text
+                    threshold = self.repeat_zone_majority * 0.8
+
+                    if top_zone == "HEADER" and frac >= threshold:
+                        repeated_headers.add(norm)
+                        continue
+                    elif top_zone == "FOOTER" and frac >= threshold:
+                        repeated_footers.add(norm)
+                        continue
+
+            # Standard zone-based classification
             zone_votes = norm_zone_votes.get(norm)
             if not zone_votes:
                 continue

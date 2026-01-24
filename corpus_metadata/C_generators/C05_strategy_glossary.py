@@ -23,6 +23,8 @@ from A_core.A03_provenance import (
     generate_run_id,
     get_git_revision_hash,
 )
+import re
+
 from B_parsing.B02_doc_graph import (
     DocumentGraph,
     TableType,
@@ -31,6 +33,32 @@ from B_parsing.B02_doc_graph import (
 
 def _clean_ws(s: str) -> str:
     return " ".join((s or "").split()).strip()
+
+
+def _dehyphenate_long_form(lf: str) -> str:
+    """Remove line-break hyphens from long forms."""
+    if not lf:
+        return lf
+
+    lf = _clean_ws(lf)
+    lf = re.sub(r"-\s+([a-z])", r"\1", lf)
+
+    compound_prefixes = (
+        "anti", "non", "pre", "post", "re", "co", "sub", "inter",
+        "intra", "extra", "multi", "semi", "self", "cross", "over",
+        "under", "out", "well", "ill", "full", "half", "pro", "counter",
+    )
+
+    def maybe_dehyphenate(match: re.Match) -> str:
+        before = match.group(1)
+        after = match.group(2)
+        for prefix in compound_prefixes:
+            if before.lower().endswith(prefix):
+                return match.group(0)
+        return before + after
+
+    lf = re.sub(r"(\w)-([a-z]{2,})", maybe_dehyphenate, lf)
+    return lf
 
 
 class GlossaryTableCandidateGenerator(BaseCandidateGenerator):
@@ -67,7 +95,7 @@ class GlossaryTableCandidateGenerator(BaseCandidateGenerator):
                     break
 
                 sf = _clean_ws(sf)
-                lf = _clean_ws(lf)
+                lf = _dehyphenate_long_form(lf)
                 if not sf or not lf:
                     continue
 

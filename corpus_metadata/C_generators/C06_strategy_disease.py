@@ -59,211 +59,31 @@ except ImportError:
 
 
 # =============================================================================
-# FALSE POSITIVE FILTER
+# FALSE POSITIVE FILTER (Confidence-Based, Not Hard Filtering)
 # =============================================================================
+
+
+# Import domain profile system
+from A_core.A15_domain_profile import DomainProfile, load_domain_profile
 
 
 class DiseaseFalsePositiveFilter:
     """
-    Multi-layer filtering to avoid chromosome/gene false positives.
+    Confidence-based scoring for disease matches.
 
-    The problem: Disease lexicons contain entries like:
-    - "10p Deletion Syndrome" -> matches chromosome "10p"
-    - "45,X syndrome" -> matches karyotype "45,X"
-    - "Chromosome 22q11.2 deletion" -> matches "22q11.2"
+    CHANGED: Converted from hard filtering to confidence adjustment.
+    Most cases now adjust confidence instead of hard-rejecting.
+    This prevents catastrophic recall loss on out-of-domain corpora.
 
-    Also filters:
-    - Physiological systems (RAAS, RAS) that are not diseases
-    - Journal name abbreviations that match disease names
-    - Abbreviations that are too ambiguous
+    The filter uses:
+    1. Domain profiles for domain-specific adjustments
+    2. Generic patterns for truly universal filters
+    3. Context analysis for disambiguation
+
+    Only hard-filters truly catastrophic false positives (chromosomes, genes).
     """
 
-    # Physiological systems and pathways (not diseases)
-    PHYSIOLOGICAL_SYSTEMS: Set[str] = {
-        # Renin-angiotensin-aldosterone system
-        "raas",
-        "ras",
-        "renin-angiotensin system",
-        "renin-angiotensin-aldosterone system",
-        "renin angiotensin system",
-        "renin angiotensin aldosterone system",
-        # Other physiological systems
-        "hpa axis",
-        "hypothalamic-pituitary-adrenal axis",
-        "sns",
-        "sympathetic nervous system",
-        "pns",
-        "parasympathetic nervous system",
-        "cns",
-        "central nervous system",
-        "ans",
-        "autonomic nervous system",
-        "immune system",
-        "complement system",
-        "coagulation cascade",
-        "kinin system",
-        "kallikrein-kinin system",
-    }
-
-    # Journal name patterns and abbreviations (not diseases)
-    JOURNAL_PATTERNS: Set[str] = {
-        # Nephrology journals
-        "adv chronic kidney dis",
-        "advances in chronic kidney disease",
-        "kidney int",
-        "kidney international",
-        "j am soc nephrol",
-        "jasn",
-        "clin j am soc nephrol",
-        "cjasn",
-        "nephrol dial transplant",
-        "ndt",
-        "am j kidney dis",
-        "ajkd",
-        # General medical journals
-        "n engl j med",
-        "nejm",
-        "lancet",
-        "the lancet",
-        "jama",
-        "bmj",
-        "ann intern med",
-        "j clin invest",
-        "nat med",
-        "nature medicine",
-        "cell",
-        "science",
-        "plos one",
-        "plos med",
-        # Other specialty journals
-        "blood",
-        "circulation",
-        "j immunol",
-        "j biol chem",
-    }
-
-    # Layer 0: Generic/overly broad terms that are not specific diseases
-    GENERIC_TERMS: Set[str] = {
-        # Too generic - categories, not specific diseases
-        "disease",
-        "diseases",
-        "syndrome",
-        "syndromes",
-        "disorder",
-        "disorders",
-        "condition",
-        "conditions",
-        "rare diseases",
-        "rare disease",
-        "orphan disease",
-        "orphan diseases",
-        "genetic disease",
-        "genetic diseases",
-        "hereditary disease",
-        "hereditary diseases",
-        "communicable diseases",
-        "infectious disease",
-        "infectious diseases",
-        "chronic disease",
-        "chronic diseases",
-        "autoimmune disease",
-        "autoimmune diseases",
-        "metabolic disease",
-        "metabolic diseases",
-        "neurological disease",
-        "neurological diseases",
-        # Generic anatomical terms
-        "neoplasm",
-        "neoplasms",
-        "malignant neoplasms",
-        "benign neoplasms",
-        "tumor",
-        "tumors",
-        "cancer",
-        "cancers",
-        "carcinoma",
-        "sarcoma",
-        "lymphoma",
-        "leukemia",
-        # Generic process terms
-        "agenesis",
-        "aplasia",
-        "hypoplasia",
-        "hyperplasia",
-        "atrophy",
-        "hypertrophy",
-        "inflammation",
-        "infection",
-        "deficiency",
-        "insufficiency",
-        # Other overly generic
-        "abnormality",
-        # Partial adjective phrases (not complete disease names)
-        "infection-related",
-        "drug-related",
-        "drug-induced",
-        "treatment-related",
-        "therapy-related",
-        "age-related",
-        "virus-related",
-        "vaccine-related",
-        "immune-related",
-        "complement-related",
-        "abnormalities",
-        "anomaly",
-        "anomalies",
-        "malformation",
-        "malformations",
-        "deformity",
-        "deformities",
-        # Veterinary/animal diseases (FP in human context)
-        "newcastle disease",
-        # Mental/behavioral (too generic)
-        "mental blocking",
-        "learning disabilities",
-        # Clinical status terms (not diseases)
-        "progressive disease",
-        "kidney diseases",
-        "kidney failure",
-        "renal glomerular disease",
-        # Generic infection terms
-        "infections",
-        "pneumonia",
-        "meningitis",
-        "nephritis",
-        # Symptoms/signs, not diseases
-        "ascites",
-        "hypertensive disease",
-        "neoplasm metastasis",
-        # Too broad categories
-        "complement deficiencies",
-        "infections of musculoskeletal system",
-        "infection due to encapsulated bacteria",
-        # Symptoms/signs that are too generic
-        "confusion",
-        "erythema",
-        "paresis",
-        # Long UMLS disease names that are clearly FP in clinical trial context
-        "intellectual developmental disorder, skeletal dysplasia, and abducens palsy",
-        "childhood soft tissue sarcoma",
-        "hydrops fetalis, non-immune",
-        "hydrops fetalis",
-        # Behavioral (not diseases in clinical context)
-        "firesetting behavior",
-        "drug abuse",
-        # Genetic/molecular terms (not diseases)
-        "transition mutation",
-        # Laboratory artifacts or model organisms
-        "sarcoma, yoshida",
-        "yoshida sarcoma",
-        # Anatomical variants (not diseases)
-        "short forearm",
-        "cavitation",
-        # Too generic symptoms
-        "mental depression",
-    }
-
-    # Layer 1: Chromosome/karyotype patterns to block
+    # Layer 1: Chromosome/karyotype patterns - HARD FILTER (universal)
     CHROMOSOME_PATTERNS = [
         r"^\d{1,2}[pq]$",  # 10p, 22q, etc.
         r"^\d{1,2}[pq]\d+",  # 10p15, 22q11
@@ -277,85 +97,104 @@ class DiseaseFalsePositiveFilter:
         r"^-\d{1,2}$",  # -7, -5 (monosomy notation)
     ]
 
-    # Layer 2: Context keywords for disambiguation
+    # Context keywords for disambiguation
     CHROMOSOME_CONTEXT_KEYWORDS = [
-        "chromosome",
-        "karyotype",
-        "cytogenetic",
-        "translocation",
-        "deletion",
-        "duplication",
-        "trisomy",
-        "monosomy",
-        "band",
-        "breakpoint",
-        "FISH",
-        "CGH",
-        "array",
-        "copy number",
-        "ploidy",
-        "aneuploidy",
-        "mosaicism",
+        "chromosome", "karyotype", "cytogenetic", "translocation",
+        "deletion", "duplication", "trisomy", "monosomy", "band",
+        "breakpoint", "FISH", "CGH", "array", "copy number",
+        "ploidy", "aneuploidy", "mosaicism",
     ]
 
     DISEASE_CONTEXT_KEYWORDS = [
-        "syndrome",
-        "disease",
-        "disorder",
-        "condition",
-        "patient",
-        "diagnosis",
-        "diagnosed",
-        "treatment",
-        "therapy",
-        "symptom",
-        "clinical",
-        "prognosis",
-        "affected",
-        "prevalence",
-        "incidence",
-        "rare",
-        "orphan",
-        "trial",
-        "study",
+        "syndrome", "disease", "disorder", "condition", "patient",
+        "diagnosis", "diagnosed", "treatment", "therapy", "symptom",
+        "clinical", "prognosis", "affected", "prevalence", "incidence",
+        "rare", "orphan", "trial", "study",
     ]
 
-    # Layer 3: Gene name patterns (genes used as genes, not diseases)
+    # Gene context (for disambiguation)
     GENE_PATTERN = r"^[A-Z][A-Z0-9]{1,6}$"  # BRCA1, TP53, EGFR, etc.
-
     GENE_CONTEXT_KEYWORDS = [
-        "mutation",
-        "variant",
-        "expression",
-        "gene",
-        "protein",
-        "encoded",
-        "pathway",
-        "receptor",
-        "kinase",
-        "transcription",
-        "allele",
-        "polymorphism",
-        "genotype",
+        "mutation", "variant", "expression", "gene", "protein",
+        "encoded", "pathway", "receptor", "kinase", "transcription",
+        "allele", "polymorphism", "genotype",
     ]
 
-    # Short match threshold - matches <= this length need disease context
+    # Short match threshold
     SHORT_MATCH_THRESHOLD = 4
 
-    def __init__(self):
+    def __init__(self, domain_profile: Optional[DomainProfile] = None):
+        """
+        Initialize filter with optional domain profile.
+
+        Args:
+            domain_profile: Domain-specific configuration. If None, uses generic.
+        """
         self._compiled_chr_patterns = [
             re.compile(p, re.IGNORECASE) for p in self.CHROMOSOME_PATTERNS
         ]
         self._gene_pattern = re.compile(self.GENE_PATTERN)
-        self._generic_terms_lower = {t.lower() for t in self.GENERIC_TERMS}
-        self._physiological_systems_lower = {t.lower() for t in self.PHYSIOLOGICAL_SYSTEMS}
-        self._journal_patterns_lower = {t.lower() for t in self.JOURNAL_PATTERNS}
+
+        # Load domain profile (defaults to generic if not provided)
+        self.domain_profile = domain_profile or load_domain_profile("generic")
+
+    def score_adjustment(
+        self,
+        matched_text: str,
+        context: str,
+        is_abbreviation: bool = False,
+    ) -> Tuple[float, str]:
+        """
+        Calculate confidence adjustment for a match.
+
+        CHANGED: Primary method - returns adjustment instead of filter decision.
+
+        Returns:
+            (adjustment, reason) where adjustment is -1.0 to +0.3
+            Negative = likely FP, Positive = domain-relevant boost
+        """
+        matched_clean = matched_text.strip()
+        matched_lower = matched_clean.lower()
+        ctx_lower = context.lower()
+
+        # Start with domain profile adjustment
+        is_short = len(matched_clean) <= self.SHORT_MATCH_THRESHOLD and not is_abbreviation
+        is_citation = self._is_journal_citation_context(ctx_lower)
+
+        adjustment = self.domain_profile.get_confidence_adjustment(
+            matched_text=matched_text,
+            context=context,
+            is_short_match=is_short,
+            is_citation_context=is_citation,
+        )
+
+        reason = ""
+
+        # Additional context-based adjustments
+        if self._is_chromosome_context(ctx_lower):
+            adjustment -= 0.3
+            reason = "chromosome_context"
+
+        if self._is_gene_as_gene(matched_clean, ctx_lower):
+            adjustment -= 0.25
+            reason = "gene_context"
+
+        # Positive adjustment if strong disease context
+        if self._has_disease_context(ctx_lower):
+            adjustment += 0.1
+            if not reason:
+                reason = "disease_context_boost"
+
+        return adjustment, reason
 
     def should_filter(
         self, matched_text: str, context: str, is_abbreviation: bool = False
     ) -> Tuple[bool, str]:
         """
-        Determine if a match should be filtered out.
+        Determine if a match should be HARD filtered.
+
+        CHANGED: Now only hard-filters truly catastrophic FPs.
+        Most filtering is done via score_adjustment() instead.
 
         Returns:
             (should_filter, reason)
@@ -364,38 +203,27 @@ class DiseaseFalsePositiveFilter:
         matched_lower = matched_clean.lower()
         ctx_lower = context.lower()
 
-        # Layer 0: Filter generic/overly broad terms
-        if matched_lower in self._generic_terms_lower:
-            return True, "generic_term"
-
-        # Filter physiological systems (RAAS, RAS, etc.)
-        if matched_lower in self._physiological_systems_lower:
-            return True, "physiological_system"
-
-        # Filter journal names and abbreviations
-        if matched_lower in self._journal_patterns_lower:
-            return True, "journal_name"
-
-        # Check if the matched text is part of a journal citation
-        if self._is_journal_citation_context(matched_lower, ctx_lower):
-            return True, "journal_citation_context"
-
-        # Layer 1: Check chromosome patterns
+        # Hard filter 1: Chromosome patterns in chromosome context
         for pattern in self._compiled_chr_patterns:
             if pattern.match(matched_clean):
-                # Check if context suggests disease vs chromosome
                 if self._is_chromosome_context(ctx_lower):
                     return True, "chromosome_pattern_in_chromosome_context"
 
-        # Layer 2: Short matches need disease context
-        if len(matched_clean) <= self.SHORT_MATCH_THRESHOLD and not is_abbreviation:
-            if not self._has_disease_context(ctx_lower):
-                return True, "short_match_no_disease_context"
-
-        # Layer 3: Check if it's a gene name used as gene (not disease)
+        # Hard filter 2: Gene names used clearly as genes
         if self._is_gene_as_gene(matched_clean, ctx_lower):
-            return True, "gene_name_not_disease"
+            # Only hard filter if very strong gene context
+            gene_score = sum(1 for kw in self.GENE_CONTEXT_KEYWORDS if kw in ctx_lower)
+            if gene_score >= 3:
+                return True, "strong_gene_context"
 
+        # Hard filter 3: Domain profile catastrophic FPs
+        should_filter, reason = self.domain_profile.should_hard_filter(
+            matched_text, context
+        )
+        if should_filter:
+            return True, reason
+
+        # Everything else: use confidence adjustment, not hard filter
         return False, ""
 
     def _is_chromosome_context(self, ctx_lower: str) -> bool:
@@ -409,7 +237,7 @@ class DiseaseFalsePositiveFilter:
         return any(kw in ctx_lower for kw in self.DISEASE_CONTEXT_KEYWORDS)
 
     def _is_gene_as_gene(self, matched_text: str, ctx_lower: str) -> bool:
-        """Check if text is a gene name being used as a gene (not disease abbreviation)."""
+        """Check if text is a gene name being used as a gene (not disease)."""
         if not self._gene_pattern.match(matched_text):
             return False
 
@@ -417,47 +245,24 @@ class DiseaseFalsePositiveFilter:
         gene_score = sum(1 for kw in self.GENE_CONTEXT_KEYWORDS if kw in ctx_lower)
         dis_score = sum(1 for kw in self.DISEASE_CONTEXT_KEYWORDS if kw in ctx_lower)
 
-        # If strong gene context and weak disease context, filter it
+        # If strong gene context and weak disease context, it's a gene
         return gene_score >= 2 and gene_score > dis_score
 
-    def _is_journal_citation_context(self, matched_lower: str, ctx_lower: str) -> bool:
-        """
-        Check if the match appears in a journal citation context.
-
-        This catches cases like "Adv Chronic Kidney Dis" where a disease name
-        is actually a journal abbreviation in a reference/citation.
-
-        Args:
-            matched_lower: The matched text (lowercase).
-            ctx_lower: The context around the match (lowercase).
-
-        Returns:
-            True if the match is likely in a citation context.
-        """
-        # Citation indicators
+    def _is_journal_citation_context(self, ctx_lower: str) -> bool:
+        """Check if context is a journal citation."""
         citation_indicators = [
-            # Volume/issue patterns
             r"\d{4};\s*\d+",  # year; volume
-            r"vol\.\s*\d+",   # vol. number
-            r"pp?\.\s*\d+",   # p. or pp. page numbers
-            r"doi:",          # DOI reference
-            r"pmid:",         # PubMed ID
-            r"\[\d+\]",       # Reference numbers like [1], [23]
-            # Journal context words
-            "published in",
-            "et al",
-            "authors",
-            "reference",
-            "citation",
-            "bibliography",
+            r"vol\.\s*\d+",
+            r"pp?\.\s*\d+",
+            "doi:", "pmid:",
+            r"\[\d+\]",
+            "et al", "reference", "citation",
         ]
 
         for indicator in citation_indicators:
             if indicator in ctx_lower:
                 return True
 
-        # Check for common citation patterns near the match
-        # Pattern: "Journal Name Year;Volume:Pages"
         if re.search(r"\d{4}\s*;\s*\d+\s*:\s*\d+", ctx_lower):
             return True
 
@@ -564,8 +369,17 @@ class DiseaseDetector:
         self.negation_detector = NegationDetector()
         self.confidence_calculator = ConfidenceCalculator()
 
-        # FP filter
-        self.fp_filter = DiseaseFalsePositiveFilter()
+        # Load domain profile for confidence adjustments
+        # Check disease_detection.domain_profile first, then domain_profile.active
+        profile_name = self.config.get("domain_profile")
+        if profile_name is None:
+            # Try to get from nested config structure
+            domain_profile_cfg = self.config.get("domain_profile_config", {})
+            profile_name = domain_profile_cfg.get("active", "generic")
+        self.domain_profile = load_domain_profile(profile_name, self.config)
+
+        # FP filter with domain profile
+        self.fp_filter = DiseaseFalsePositiveFilter(domain_profile=self.domain_profile)
 
         # Disease entries storage
         self.specialized_entries: Dict[str, DiseaseEntry] = {}  # key -> DiseaseEntry
@@ -914,7 +728,13 @@ class DiseaseDetector:
         doc: DocumentGraph,
         seen: Set[Tuple[str, str]],
     ) -> List[DiseaseCandidate]:
-        """Extract from general lexicons with FP filtering."""
+        """
+        Extract from general lexicons with confidence-based scoring.
+
+        CHANGED: Uses confidence adjustments instead of hard filtering.
+        Only catastrophic FPs are hard-filtered; everything else gets
+        a confidence adjustment that downstream components can use.
+        """
         candidates = []
 
         hits = self.general_kp.extract_keywords(text, span_info=True)
@@ -926,18 +746,28 @@ class DiseaseDetector:
             entry = self.general_entries[key]
             context = self._make_context(text, start, end)
 
-            # Apply FP filter to matched text
+            # Hard filter only catastrophic FPs (chromosomes, strong gene context)
             should_filter, reason = self.fp_filter.should_filter(
                 matched_text, context, is_abbreviation=False
             )
             if should_filter:
                 continue
 
-            # Also filter by preferred_label (lexicon entry might have generic name)
+            # Also hard-filter by preferred_label for catastrophic FPs
             should_filter_label, _ = self.fp_filter.should_filter(
                 entry.preferred_label, context, is_abbreviation=False
             )
             if should_filter_label:
+                continue
+
+            # Calculate confidence adjustment (replaces most filtering)
+            adjustment, _ = self.fp_filter.score_adjustment(
+                matched_text, context, is_abbreviation=False
+            )
+
+            # Skip if adjustment is extremely negative (very likely FP)
+            # but less strict than hard filtering
+            if adjustment < -0.5:
                 continue
 
             # Dedup
@@ -952,6 +782,10 @@ class DiseaseDetector:
                 else DiseaseGeneratorType.LEXICON_GENERAL
             )
 
+            # Apply confidence adjustment to initial confidence
+            base_confidence = 0.85
+            adjusted_confidence = max(0.1, min(1.0, base_confidence + adjustment))
+
             candidates.append(
                 self._make_candidate(
                     doc=doc,
@@ -960,6 +794,7 @@ class DiseaseDetector:
                     entry=entry,
                     context=context,
                     generator_type=gen_type,
+                    initial_confidence=adjusted_confidence,
                 )
             )
 
@@ -1066,18 +901,26 @@ class DiseaseDetector:
                 preferred_label = kb_entry.canonical_name or ent_text
                 context = self._make_context(text, ent.start_char, ent.end_char)
 
-                # Apply FP filter to matched text
+                # Hard filter only catastrophic FPs
                 should_filter, _ = self.fp_filter.should_filter(
                     ent_text, context, is_abbreviation=False
                 )
                 if should_filter:
                     continue
 
-                # Also filter by preferred_label (UMLS canonical name might be generic)
                 should_filter_label, _ = self.fp_filter.should_filter(
                     preferred_label, context, is_abbreviation=False
                 )
                 if should_filter_label:
+                    continue
+
+                # Calculate confidence adjustment
+                adjustment, _ = self.fp_filter.score_adjustment(
+                    ent_text, context, is_abbreviation=False
+                )
+
+                # Skip if extremely negative
+                if adjustment < -0.5:
                     continue
 
                 # Dedup
@@ -1094,6 +937,9 @@ class DiseaseDetector:
                     source="scispacy_ner",
                 )
 
+                # Apply adjustment to NER confidence score
+                adjusted_score = max(0.1, min(1.0, score + adjustment))
+
                 candidates.append(
                     self._make_candidate(
                         doc=doc,
@@ -1103,7 +949,7 @@ class DiseaseDetector:
                         context=context,
                         generator_type=DiseaseGeneratorType.SCISPACY_NER,
                         field_type=DiseaseFieldType.NER_DETECTION,
-                        initial_confidence=score,
+                        initial_confidence=adjusted_score,
                     )
                 )
 
