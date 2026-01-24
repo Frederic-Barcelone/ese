@@ -149,6 +149,39 @@ class ExtractionAnalyzer:
         ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
         return ratio >= self.fuzzy_threshold
 
+    def _infer_entity_type(
+        self, lexicon_source: Optional[str], gold_category: Optional[str]
+    ) -> str:
+        """Infer entity type from lexicon source or gold category."""
+        # If we have a gold category, use a shortened display version
+        if gold_category:
+            category_map = {
+                "ABBREV": "Abbrev",
+                "PHARMA_COMPANY": "Pharma",
+                "DISEASE": "Disease",
+                "DRUG": "Drug",
+                "GENE": "Gene",
+                "IDENTIFIER": "ID",
+                "STUDY": "Study",
+            }
+            return category_map.get(gold_category, gold_category[:8])
+
+        # Infer from lexicon source
+        if lexicon_source:
+            source_lower = lexicon_source.lower()
+            if "disease" in source_lower or "orpha" in source_lower:
+                return "Disease"
+            if "drug" in source_lower or "compound" in source_lower:
+                return "Drug"
+            if "gene" in source_lower or "hgnc" in source_lower:
+                return "Gene"
+            if "pharma" in source_lower or "company" in source_lower:
+                return "Pharma"
+            if "trial" in source_lower or "nct" in source_lower:
+                return "Study"
+
+        return "Abbrev"
+
     # -------------------------------------------------------------------------
     # COMPARISON LOGIC
     # -------------------------------------------------------------------------
@@ -177,6 +210,8 @@ class ExtractionAnalyzer:
                         "short_form": sf,
                         "long_form": item.get("long_form"),
                         "long_form_norm": lf,
+                        "lexicon_source": item.get("lexicon_source"),
+                        "field_type": item.get("field_type"),
                     }
                 )
 
@@ -195,6 +230,7 @@ class ExtractionAnalyzer:
                         "long_form": item.get("long_form"),
                         "long_form_norm": lf,
                         "page": item.get("page", "?"),
+                        "category": item.get("category", "ABBREV"),
                     }
                 )
 
@@ -225,6 +261,7 @@ class ExtractionAnalyzer:
                     "short_form": gold_sf,
                     "long_form": gold_item["long_form"],
                     "page": gold_item["page"],
+                    "category": gold_item.get("category", "ABBREV"),
                     "found": found,
                     "matched_lf": matched_lf,
                 }
@@ -239,13 +276,21 @@ class ExtractionAnalyzer:
             # Check if SF is in ALL gold (defined + mentioned)
             matches_gold = sys_sf in all_gold_sfs
             matched_gold_lf = None
+            matched_category = None
 
-            # Try to find matching long form from defined list
+            # Try to find matching long form and category from defined list
             if matches_gold:
                 for gold_item in unique_gold:
                     if gold_item["short_form"] == sys_sf:
                         matched_gold_lf = gold_item["long_form"]
+                        matched_category = gold_item.get("category")
                         break
+
+            # Infer entity type from lexicon source or use matched category
+            entity_type = self._infer_entity_type(
+                sys_item.get("lexicon_source"),
+                matched_category,
+            )
 
             extracted_results.append(
                 {
@@ -253,6 +298,7 @@ class ExtractionAnalyzer:
                     "long_form": sys_item["long_form"],
                     "matches_gold": matches_gold,
                     "gold_long_form": matched_gold_lf,
+                    "entity_type": entity_type,
                 }
             )
 
@@ -367,8 +413,8 @@ class ExtractionAnalyzer:
             print("\n  (No gold standard entries for this document)")
         else:
             # Header
-            print(f"\n  {'Status':<8} {'Short Form':<15} {'Long Form':<55} {'Page':<5}")
-            print("  " + "─" * 85)
+            print(f"\n  {'Status':<8} {'Short Form':<15} {'Type':<10} {'Long Form':<48} {'Page':<5}")
+            print("  " + "─" * 90)
 
             # Sort: found first, then not found
             gold_sorted = sorted(
@@ -379,20 +425,31 @@ class ExtractionAnalyzer:
                 sf = item["short_form"]
                 lf = item["long_form"] or "(no definition)"
                 page = str(item["page"])
+                # Get short display type from category
+                category = item.get("category", "ABBREV")
+                type_display = {
+                    "ABBREV": "Abbrev",
+                    "PHARMA_COMPANY": "Pharma",
+                    "DISEASE": "Disease",
+                    "DRUG": "Drug",
+                    "GENE": "Gene",
+                    "IDENTIFIER": "ID",
+                    "STUDY": "Study",
+                }.get(category, category[:8])
 
                 if item["found"]:
                     status = "  ✓ FOUND"
-                    print(f"  {status:<8} {sf:<15} {lf:<55} {page:<5}")
+                    print(f"  {status:<8} {sf:<15} {type_display:<10} {lf:<48} {page:<5}")
                 else:
                     status = "  ✗ MISS "
                     print(
-                        f"  \033[91m{status:<8} {sf:<15} {lf:<55} {page:<5}\033[0m"
+                        f"  \033[91m{status:<8} {sf:<15} {type_display:<10} {lf:<48} {page:<5}\033[0m"
                     )
 
             # Summary
             found_count = sum(1 for g in gold_results if g["found"])
             total_count = len(gold_results)
-            print("  " + "─" * 85)
+            print("  " + "─" * 90)
             print(
                 f"  TOTAL: {found_count}/{total_count} found ({found_count / total_count * 100:.0f}% recall)"
             )
@@ -414,24 +471,25 @@ class ExtractionAnalyzer:
             print("\n  (No abbreviations extracted)")
         else:
             # Header
-            print(f"\n  {'Status':<10} {'Short Form':<15} {'Extracted Long Form':<55}")
-            print("  " + "─" * 85)
+            print(f"\n  {'Status':<10} {'Short Form':<15} {'Type':<10} {'Extracted Long Form':<48}")
+            print("  " + "─" * 90)
 
             for item in extracted_results:
                 sf = item["short_form"]
                 lf = item["long_form"] or "(no expansion)"
+                entity_type = item.get("entity_type", "Abbrev")
 
                 if item["matches_gold"]:
                     status = "  ✓ MATCH "
-                    print(f"  {status:<10} {sf:<15} {lf:<55}")
+                    print(f"  {status:<10} {sf:<15} {entity_type:<10} {lf:<48}")
                 else:
                     status = "  ○ EXTRA "
-                    print(f"  \033[93m{status:<10} {sf:<15} {lf:<55}\033[0m")
+                    print(f"  \033[93m{status:<10} {sf:<15} {entity_type:<10} {lf:<48}\033[0m")
 
             # Summary
             match_count = sum(1 for e in extracted_results if e["matches_gold"])
             total_count = len(extracted_results)
-            print("  " + "─" * 85)
+            print("  " + "─" * 90)
             print(
                 f"  TOTAL: {match_count}/{total_count} match gold ({match_count / total_count * 100:.0f}% precision)"
             )
@@ -468,23 +526,34 @@ class ExtractionAnalyzer:
                     seen_mentioned.add(sf)
                     unique_mentioned.append(m)
 
-            print(f"\n  {'Status':<10} {'Short Form':<15} {'Expected Long Form':<55}")
-            print("  " + "─" * 85)
+            print(f"\n  {'Status':<10} {'Short Form':<15} {'Type':<10} {'Expected Long Form':<48}")
+            print("  " + "─" * 90)
 
             found_count = 0
             for m in sorted(unique_mentioned, key=lambda x: x.get("short_form", "")):
                 sf = self._norm_sf(m.get("short_form", ""))
                 lf = m.get("long_form", "(unknown)")
+                # Get type from category field
+                category = m.get("category", "ABBREV")
+                type_display = {
+                    "ABBREV": "Abbrev",
+                    "PHARMA_COMPANY": "Pharma",
+                    "DISEASE": "Disease",
+                    "DRUG": "Drug",
+                    "GENE": "Gene",
+                    "IDENTIFIER": "ID",
+                    "STUDY": "Study",
+                }.get(category, category[:8])
 
                 if sf in extracted_sfs:
-                    print(f"  {'  ✓ FOUND':<10} {sf:<15} {lf:<55}")
+                    print(f"  {'  ✓ FOUND':<10} {sf:<15} {type_display:<10} {lf:<48}")
                     found_count += 1
                 else:
                     print(
-                        f"  \033[90m{'  - MISS':<10} {sf:<15} {lf:<55}\033[0m"
+                        f"  \033[90m{'  - MISS':<10} {sf:<15} {type_display:<10} {lf:<48}\033[0m"
                     )
 
-            print("  " + "─" * 85)
+            print("  " + "─" * 90)
             print(f"  BONUS: {found_count}/{len(unique_mentioned)} found")
 
         # =====================================================================
