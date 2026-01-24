@@ -191,6 +191,30 @@ class GeneFalsePositiveFilter:
         "gcp",  # Good Clinical Practice
     }
 
+    # Common English words that happen to be gene aliases
+    # These should ALWAYS be filtered unless there's strong gene context
+    COMMON_ENGLISH_WORDS: Set[str] = {
+        # Articles, prepositions, conjunctions
+        "of", "an", "as", "on", "at", "by", "to", "in", "is", "it",
+        "be", "we", "me", "he", "or", "so", "do", "go", "no", "up",
+        # Common verbs/nouns
+        "was", "set", "can", "not", "for", "had", "has", "get", "let",
+        "put", "run", "use", "see", "may", "day", "way", "say", "new",
+        "now", "old", "man", "men", "one", "two", "few", "all", "any",
+        "end", "big", "bad", "red", "hot", "cut", "hit", "bit", "fit",
+        "sit", "got", "put", "yet", "met", "net", "wet", "bet", "pet",
+        # Common words that are gene aliases
+        "large", "small", "long", "short", "high", "low", "fast", "slow",
+        "simple", "fix", "max", "min", "med", "per", "pre", "pro",
+        "cox", "age", "lar", "van", "lee", "kim", "li", "wu", "liu",
+        "wang", "chen", "yang", "zhang", "lin", "sun", "ma",
+        # Abbreviations commonly mistaken
+        "ge", "et", "ds", "wr", "uk", "us",
+        # Section headers and document structure
+        "methods", "results", "discussion", "conclusion", "abstract",
+        "introduction", "background", "references", "table", "figure",
+    }
+
     # Context keywords that suggest gene usage
     GENE_CONTEXT_KEYWORDS: Set[str] = {
         "gene", "genes", "genetic", "genomic", "genome",
@@ -238,7 +262,7 @@ class GeneFalsePositiveFilter:
         "ta", "tb", "tc", "td", "te", "tf", "tg", "th", "ti", "tk", "tl", "tm", "tn", "to", "tp", "tr", "ts", "tt", "tu", "tv", "tx", "ty",
     }
 
-    def __init__(self):
+    def __init__(self, lexicon_base_path: Optional[Path] = None):
         self.statistical_lower = {w.lower() for w in self.STATISTICAL_TERMS}
         self.units_lower = {w.lower() for w in self.UNITS}
         self.clinical_lower = {w.lower() for w in self.CLINICAL_TERMS}
@@ -246,6 +270,7 @@ class GeneFalsePositiveFilter:
         self.credentials_lower = {w.lower() for w in self.CREDENTIALS}
         self.drug_terms_lower = {w.lower() for w in self.DRUG_TERMS}
         self.study_terms_lower = {w.lower() for w in self.STUDY_TERMS}
+        self.common_english_lower = {w.lower() for w in self.COMMON_ENGLISH_WORDS}
         self.short_genes_lower = {w.lower() for w in self.SHORT_GENES_NEED_CONTEXT}
         self.gene_context_lower = {w.lower() for w in self.GENE_CONTEXT_KEYWORDS}
         self.non_gene_context_lower = {w.lower() for w in self.NON_GENE_CONTEXT_KEYWORDS}
@@ -258,8 +283,89 @@ class GeneFalsePositiveFilter:
             self.countries_lower |
             self.credentials_lower |
             self.drug_terms_lower |
-            self.study_terms_lower
+            self.study_terms_lower |
+            self.common_english_lower
         )
+
+        # Load disease lexicons for disambiguation
+        self.disease_abbreviations: Dict[str, Dict[str, Any]] = {}
+        if lexicon_base_path:
+            self._load_disease_lexicons(lexicon_base_path)
+
+    def _load_disease_lexicons(self, base_path: Path) -> None:
+        """Load disease lexicons for gene-disease disambiguation."""
+        lexicon_files = [
+            "disease_lexicon_pah.json",
+            "disease_lexicon_anca.json",
+            "disease_lexicon_c3g.json",
+            "disease_lexicon_igan.json",
+        ]
+
+        for filename in lexicon_files:
+            lexicon_path = base_path / filename
+            if not lexicon_path.exists():
+                continue
+
+            try:
+                with open(lexicon_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+
+                # Extract abbreviations and their context keywords
+                if "abbreviation_expansions" in data:
+                    for abbrev, info in data["abbreviation_expansions"].items():
+                        abbrev_lower = abbrev.lower()
+                        if abbrev_lower not in self.disease_abbreviations:
+                            self.disease_abbreviations[abbrev_lower] = {
+                                "preferred": info.get("preferred", ""),
+                                "context_keywords": [],
+                                "exclude_keywords": [],
+                            }
+                        # Add context keywords from alternatives
+                        if "alternatives" in info:
+                            for alt_name, alt_info in info.get("alternatives", {}).items():
+                                # These are contexts where the abbrev is NOT the disease
+                                self.disease_abbreviations[abbrev_lower]["exclude_keywords"].extend(
+                                    alt_info.get("context_keywords", [])
+                                )
+
+                # Also get context_keywords from diseases
+                if "diseases" in data:
+                    for disease_key, disease_info in data["diseases"].items():
+                        abbrev = disease_info.get("abbreviation", "")
+                        if abbrev:
+                            abbrev_lower = abbrev.lower()
+                            if abbrev_lower not in self.disease_abbreviations:
+                                self.disease_abbreviations[abbrev_lower] = {
+                                    "preferred": disease_info.get("preferred_label", ""),
+                                    "context_keywords": [],
+                                    "exclude_keywords": [],
+                                }
+                            self.disease_abbreviations[abbrev_lower]["context_keywords"].extend(
+                                disease_info.get("context_keywords", [])
+                            )
+            except Exception:
+                pass  # Silently ignore malformed lexicons
+
+    def _is_disease_abbreviation_context(self, abbrev: str, context: str) -> bool:
+        """Check if abbreviation is used as a disease (not gene) in this context."""
+        abbrev_lower = abbrev.lower()
+        if abbrev_lower not in self.disease_abbreviations:
+            return False
+
+        info = self.disease_abbreviations[abbrev_lower]
+        ctx_lower = context.lower()
+
+        # Check if disease context keywords are present
+        disease_keywords = info.get("context_keywords", [])
+        disease_score = sum(1 for kw in disease_keywords if kw.lower() in ctx_lower)
+
+        # Check if gene context keywords are present (from exclude list)
+        gene_keywords = info.get("exclude_keywords", [])
+        gene_score = sum(1 for kw in gene_keywords if kw.lower() in ctx_lower)
+
+        # If disease context is present, it's being used as disease
+        # Lower threshold: just 1 disease keyword is enough if no gene keywords
+        return disease_score > gene_score or disease_score >= 1
 
     def is_false_positive(
         self,
@@ -267,6 +373,7 @@ class GeneFalsePositiveFilter:
         context: str,
         generator_type: GeneGeneratorType,
         is_from_lexicon: bool = False,
+        is_alias: bool = False,
     ) -> Tuple[bool, str]:
         """
         Check if a gene match is likely a false positive.
@@ -280,14 +387,28 @@ class GeneFalsePositiveFilter:
         if len(text_lower) < self.MIN_LENGTH:
             return True, "too_short"
 
-        # Check always-filter terms (unless from specialized lexicon)
-        if not is_from_lexicon:
-            if text_lower in self.always_filter:
+        # ALWAYS filter common English words - even from lexicon
+        # These are problematic aliases that cause too many false positives
+        if text_lower in self.common_english_lower:
+            return True, "common_english_word"
+
+        # Check other always-filter terms (unless from specialized lexicon)
+        if not is_from_lexicon or is_alias:
+            other_filters = (
+                self.statistical_lower |
+                self.units_lower |
+                self.clinical_lower |
+                self.countries_lower |
+                self.credentials_lower |
+                self.drug_terms_lower |
+                self.study_terms_lower
+            )
+            if text_lower in other_filters:
                 return True, "common_abbreviation"
 
         # For short gene symbols (2-3 chars), require context validation
         if len(text_lower) <= 3:
-            if text_lower in self.short_genes_lower or not is_from_lexicon:
+            if text_lower in self.short_genes_lower or not is_from_lexicon or is_alias:
                 is_valid, reason = self._validate_short_gene_context(text_lower, context)
                 if not is_valid:
                     return True, reason
@@ -296,6 +417,11 @@ class GeneFalsePositiveFilter:
         if text_lower == "egfr":
             if self._is_kidney_egfr_context(context):
                 return True, "egfr_kidney_function"
+
+        # Disambiguate gene vs disease abbreviations using disease lexicons
+        if text_lower in self.disease_abbreviations:
+            if self._is_disease_abbreviation_context(text_lower, context):
+                return True, f"disease_abbreviation_{text_lower}"
 
         # Context-based validation for pattern matches
         if generator_type == GeneGeneratorType.PATTERN_GENE_SYMBOL:
@@ -399,7 +525,7 @@ class GeneDetector:
         )
 
         # Context window for evidence extraction
-        self.context_window = int(self.config.get("context_window", 300))
+        self.context_window = int(self.config.get("context_window", 600))
 
         # Confidence calculator
         self.confidence_calculator = ConfidenceCalculator()
@@ -423,8 +549,8 @@ class GeneDetector:
         # Load lexicons
         self._load_lexicons()
 
-        # False positive filter
-        self.fp_filter = GeneFalsePositiveFilter()
+        # False positive filter with disease lexicon disambiguation
+        self.fp_filter = GeneFalsePositiveFilter(lexicon_base_path=self.lexicon_base_path)
 
         # scispacy NER model
         self.nlp = None
@@ -608,15 +734,19 @@ class GeneDetector:
             )
 
         # Layer 3: Gene symbol patterns with context validation
-        candidates.extend(
-            self._detect_gene_patterns(full_text, doc_graph, doc_fingerprint)
-        )
+        # DISABLED: Causes too many false positives - the lexicon coverage is sufficient
+        # for rare disease genes. Uncomment if you need pattern-based detection.
+        # candidates.extend(
+        #     self._detect_gene_patterns(full_text, doc_graph, doc_fingerprint)
+        # )
 
         # Layer 4: scispacy NER fallback
-        if self.nlp:
-            candidates.extend(
-                self._detect_with_ner(full_text, doc_graph, doc_fingerprint)
-            )
+        # DISABLED: Causes too many false positives without proper validation.
+        # Uncomment if you need NER-based detection.
+        # if self.nlp:
+        #     candidates.extend(
+        #         self._detect_with_ner(full_text, doc_graph, doc_fingerprint)
+        #     )
 
         # Deduplicate
         candidates = self._deduplicate(candidates)
@@ -648,8 +778,10 @@ class GeneDetector:
             context = self._extract_context(text, start, end)
 
             # Apply false positive filter
+            # Aliases need stricter filtering than primary genes
             is_fp, reason = self.fp_filter.is_false_positive(
-                matched_text, context, generator_type, is_from_lexicon=True
+                matched_text, context, generator_type,
+                is_from_lexicon=True, is_alias=(not is_primary)
             )
             if is_fp:
                 continue

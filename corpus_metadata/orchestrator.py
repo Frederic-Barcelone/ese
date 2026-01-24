@@ -114,6 +114,12 @@ from A_core.A06_drug_models import (
     DrugGeneratorType,
     ExtractedDrug,
 )
+from A_core.A12_gene_models import (
+    GeneCandidate,
+    GeneExportDocument,
+    GeneExportEntry,
+    ExtractedGene,
+)
 from A_core.A09_pharma_models import (
     ExtractedPharma,
     PharmaExportDocument,
@@ -143,6 +149,7 @@ from C_generators.C04_strategy_flashtext import (
 from C_generators.C05_strategy_glossary import GlossaryTableCandidateGenerator
 from C_generators.C06_strategy_disease import DiseaseDetector
 from C_generators.C07_strategy_drug import DrugDetector
+from C_generators.C16_strategy_gene import GeneDetector
 from C_generators.C12_strategy_pharma import PharmaCompanyDetector
 from C_generators.C13_strategy_author import AuthorDetector
 from C_generators.C14_strategy_citation import CitationDetector
@@ -541,17 +548,17 @@ class Orchestrator:
                 "citations": True, "document_metadata": True, "tables": False,
             },
             "standard": {
-                "drugs": True, "diseases": True, "abbreviations": True,
+                "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": True,
             },
             "all": {
-                "drugs": True, "diseases": True, "abbreviations": True,
+                "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": True, "authors": True,
                 "citations": True, "document_metadata": True, "tables": True,
             },
             "minimal": {
-                "drugs": False, "diseases": False, "abbreviations": True,
+                "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
@@ -563,6 +570,7 @@ class Orchestrator:
             preset_config = PRESETS[preset]
             self.extract_drugs = preset_config["drugs"]
             self.extract_diseases = preset_config["diseases"]
+            self.extract_genes = preset_config.get("genes", True)
             self.extract_abbreviations = preset_config["abbreviations"]
             self.extract_feasibility = preset_config["feasibility"]
             self.extract_pharma = preset_config["pharma_companies"]
@@ -575,6 +583,7 @@ class Orchestrator:
             self.active_preset = None
             self.extract_drugs = extractors.get("drugs", True)
             self.extract_diseases = extractors.get("diseases", True)
+            self.extract_genes = extractors.get("genes", True)
             self.extract_abbreviations = extractors.get("abbreviations", True)
             self.extract_feasibility = extractors.get("feasibility", True)
             self.extract_pharma = extractors.get("pharma_companies", False)
@@ -602,6 +611,8 @@ class Orchestrator:
             enabled.append("drugs")
         if self.extract_diseases:
             enabled.append("diseases")
+        if self.extract_genes:
+            enabled.append("genes")
         if self.extract_abbreviations:
             enabled.append("abbreviations")
         if self.extract_feasibility:
@@ -634,6 +645,7 @@ class Orchestrator:
         extractors = [
             ("drugs", self.extract_drugs),
             ("diseases", self.extract_diseases),
+            ("genes", self.extract_genes),
             ("abbreviations", self.extract_abbreviations),
             ("feasibility", self.extract_feasibility),
             ("pharma_companies", self.extract_pharma),
@@ -846,6 +858,14 @@ class Orchestrator:
             }
         )
         self.drug_enricher = None
+
+        # Gene detection components (rare disease-associated genes)
+        self.gene_detector = GeneDetector(
+            config={
+                "run_id": self.run_id,
+                "lexicon_base_path": str(dict_path),
+            }
+        )
 
         # Pharma company detection
         self.pharma_detector = PharmaCompanyDetector(
@@ -2111,6 +2131,13 @@ Return ONLY the JSON array, nothing else."""
         else:
             print("\n[Disease detection] SKIPPED (disabled in config)")
 
+        # Gene detection (conditional on config)
+        gene_results: List[ExtractedGene] = []
+        if self.extract_genes:
+            gene_results = self._process_genes(doc, pdf_path_obj)
+        else:
+            print("\n[Gene detection] SKIPPED (disabled in config)")
+
         # Drug detection (conditional on config)
         drug_results: List[ExtractedDrug] = []
         if self.extract_drugs:
@@ -2171,6 +2198,10 @@ Return ONLY the JSON array, nothing else."""
         # Export disease results
         if disease_results:
             self._export_disease_results(pdf_path_obj, disease_results)
+
+        # Export gene results
+        if gene_results:
+            self._export_gene_results(pdf_path_obj, gene_results)
 
         # Export drug results
         if drug_results:
@@ -2238,6 +2269,24 @@ Return ONLY the JSON array, nothing else."""
                         lex = lex.replace("disease_lexicon_", "").replace(".json", "")
                     src = f" ({lex})"
                 print(f"  * {d.preferred_label}{code_str}{src}")
+
+        # Print validated genes with provenance
+        validated_genes = [
+            g for g in gene_results if g.status == ValidationStatus.VALIDATED
+        ]
+        if validated_genes:
+            print(f"\nValidated genes ({len(validated_genes)}):")
+            for g in validated_genes:
+                codes = []
+                if g.hgnc_id:
+                    codes.append(f"HGNC:{g.hgnc_id}")
+                if g.entrez_id:
+                    codes.append(f"Entrez:{g.entrez_id}")
+                code_str = f" [{', '.join(codes)}]" if codes else ""
+                alias_str = f" (alias of {g.alias_of})" if g.is_alias and g.alias_of else ""
+                diseases = len(g.associated_diseases)
+                disease_str = f" ({diseases} diseases)" if diseases else ""
+                print(f"  * {g.hgnc_symbol}{code_str}{alias_str}{disease_str}")
 
         # Print validated drugs with provenance
         validated_drugs = [
@@ -2519,6 +2568,192 @@ Return ONLY the JSON array, nothing else."""
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Disease export: {out_file.name}")
+
+    # =========================================================================
+    # GENE DETECTION METHODS
+    # =========================================================================
+
+    def _process_genes(self, doc, pdf_path: Path) -> List[ExtractedGene]:
+        """
+        Process document for gene mentions (rare disease-associated).
+
+        Returns validated gene entities.
+        """
+        if self.gene_detector is None:
+            return []
+
+        print("\n[5b/12] Detecting gene mentions...")
+        start = time.time()
+
+        # Generate gene candidates
+        candidates = self.gene_detector.detect(doc)
+        print(f"  Gene candidates: {len(candidates)}")
+
+        if not candidates:
+            print(f"  Time: {time.time() - start:.2f}s")
+            return []
+
+        # Auto-validate based on source
+        results: List[ExtractedGene] = []
+        for candidate in candidates:
+            entity = self._create_gene_entity(
+                candidate=candidate,
+                status=ValidationStatus.VALIDATED,
+                confidence=candidate.initial_confidence,
+                flags=["auto_validated_lexicon"],
+            )
+            results.append(entity)
+
+        validated_count = len(
+            [r for r in results if r.status == ValidationStatus.VALIDATED]
+        )
+        print(f"  Validated genes: {validated_count}")
+        print(f"  Time: {time.time() - start:.2f}s")
+
+        return results
+
+    def _create_gene_entity(
+        self,
+        candidate: GeneCandidate,
+        status: ValidationStatus,
+        confidence: float,
+        flags: List[str],
+    ) -> ExtractedGene:
+        """Create ExtractedGene from a GeneCandidate."""
+        context = (candidate.context_text or "").strip()
+        ctx_hash = hash_string(context) if context else "no_context"
+
+        primary = EvidenceSpan(
+            text=context,
+            location=candidate.context_location,
+            scope_ref=ctx_hash,
+            start_char_offset=0,
+            end_char_offset=len(context),
+        )
+
+        # Extract primary codes from identifiers
+        hgnc_id = None
+        entrez_id = None
+        ensembl_id = None
+        omim_id = None
+        uniprot_id = None
+
+        for ident in candidate.identifiers:
+            if ident.system == "HGNC" and not hgnc_id:
+                hgnc_id = ident.code
+            elif ident.system == "ENTREZ" and not entrez_id:
+                entrez_id = ident.code
+            elif ident.system == "ENSEMBL" and not ensembl_id:
+                ensembl_id = ident.code
+            elif ident.system == "OMIM" and not omim_id:
+                omim_id = ident.code
+            elif ident.system == "UNIPROT" and not uniprot_id:
+                uniprot_id = ident.code
+
+        return ExtractedGene(
+            candidate_id=candidate.id,
+            doc_id=candidate.doc_id,
+            matched_text=candidate.matched_text,
+            hgnc_symbol=candidate.hgnc_symbol,
+            full_name=candidate.full_name,
+            is_alias=candidate.is_alias,
+            alias_of=candidate.alias_of,
+            identifiers=candidate.identifiers,
+            hgnc_id=hgnc_id,
+            entrez_id=entrez_id,
+            ensembl_id=ensembl_id,
+            omim_id=omim_id,
+            uniprot_id=uniprot_id,
+            primary_evidence=primary,
+            supporting_evidence=[],
+            status=status,
+            confidence_score=min(1.0, confidence),
+            validation_flags=flags,
+            locus_type=candidate.locus_type,
+            chromosome=candidate.chromosome,
+            associated_diseases=candidate.associated_diseases,
+            provenance=candidate.provenance,
+        )
+
+    def _export_gene_results(
+        self, pdf_path: Path, results: List[ExtractedGene]
+    ) -> None:
+        """Export gene detection results to separate JSON file."""
+        out_dir = self._get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
+        rejected = [r for r in results if r.status == ValidationStatus.REJECTED]
+
+        # Build export entries
+        gene_entries: List[GeneExportEntry] = []
+        for entity in validated:
+            codes = {
+                "hgnc_id": entity.hgnc_id,
+                "entrez": entity.entrez_id,
+                "ensembl": entity.ensembl_id,
+                "omim": entity.omim_id,
+                "uniprot": entity.uniprot_id,
+            }
+
+            all_identifiers = [
+                {"system": i.system, "code": i.code, "display": i.display}
+                for i in entity.identifiers
+            ]
+
+            # Simplified disease associations
+            disease_assocs = [
+                {
+                    "orphacode": d.orphacode,
+                    "name": d.disease_name,
+                    "association_type": d.association_type or "",
+                }
+                for d in entity.associated_diseases
+            ]
+
+            entry = GeneExportEntry(
+                matched_text=entity.matched_text,
+                hgnc_symbol=entity.hgnc_symbol,
+                full_name=entity.full_name,
+                confidence=entity.confidence_score,
+                is_alias=entity.is_alias,
+                locus_type=entity.locus_type,
+                chromosome=entity.chromosome,
+                codes=codes,
+                all_identifiers=all_identifiers,
+                associated_diseases=disease_assocs,
+                context=entity.primary_evidence.text
+                if entity.primary_evidence
+                else None,
+                page=entity.primary_evidence.location.page_num
+                if entity.primary_evidence
+                else None,
+                lexicon_source=entity.provenance.lexicon_source
+                if entity.provenance
+                else None,
+                validation_flags=entity.validation_flags,
+            )
+            gene_entries.append(entry)
+
+        # Build export document
+        export_doc = GeneExportDocument(
+            run_id=self.run_id,
+            timestamp=datetime.now().isoformat(),
+            document=pdf_path.name,
+            document_path=str(pdf_path.absolute()),
+            pipeline_version=PIPELINE_VERSION,
+            total_candidates=len(results),
+            total_validated=len(validated),
+            total_rejected=len(rejected),
+            genes=gene_entries,
+        )
+
+        # Write to file
+        out_file = out_dir / f"genes_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(export_doc.model_dump_json(indent=2))
+
+        print(f"  Gene export: {out_file.name}")
 
     # =========================================================================
     # DRUG DETECTION METHODS
