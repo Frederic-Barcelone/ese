@@ -1022,6 +1022,18 @@ class DrugFalsePositiveFilter:
         "revolution",
         "somatom",
         "aquilion",
+        # Generic clinical terms (not drugs)
+        "therapeutic intervention",
+        "induction",
+        "intervention",
+        "interventions",
+        # Enzymes/proteins commonly misidentified as drugs
+        "alkaline phosphatase",
+        "myeloperoxidase",
+        "proteinase 3",
+        "proteinase",
+        "aspartate aminotransferase",
+        "aspartate transaminase",
     }
 
     # Generic all-caps words that are not drugs
@@ -1386,8 +1398,14 @@ class DrugDetector:
         "arthritis foundation", "no data", "not available", "unknown",
         # Antibody markers (diagnostic, not therapeutic)
         "anca",
+        # Disease abbreviations that are ambiguous with drug names
+        "mpa",  # Microscopic polyangiitis (disease) vs mycophenolic acid (drug)
         # Common author surnames that match drug names
         "cai", "lewis", "sun", "chen", "wang", "li", "zhang", "liu",
+        # Generic clinical terms (not drugs)
+        "therapeutic intervention", "induction", "intervention",
+        # Enzymes/proteins commonly misidentified as drugs
+        "alkaline phosphatase", "myeloperoxidase", "proteinase 3",
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):

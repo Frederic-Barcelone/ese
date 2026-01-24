@@ -511,6 +511,14 @@ class GeneDetector:
         "us", "uk", "eu", "ca", "au", "de", "fr", "jp", "cn",
         # Credentials
         "md", "phd", "mph", "do", "rn", "ms", "ma", "mba",
+        # Common abbreviations that conflict with gene symbols
+        "kl", "li", "gi", "hf", "nt", "sg", "fa", "wd", "ac",
+        # Medical abbreviations commonly misidentified as genes
+        "ent", "mpo", "pr3",
+        # Common English words that are gene aliases (filter at load time)
+        "type", "face", "fritz", "act", "alpha", "beta", "gamma", "delta",
+        # Journal names and other common terms
+        "acta",  # Journal name (Acta Otorhinolaryngol, etc.)
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):

@@ -410,6 +410,29 @@ heuristics:
     - "CC BY"   # Creative Commons license
     - "CC"      # Creative Commons
     - "BY"      # Part of CC BY license
+    # ----------------------------------------
+    # Author initials (commonly misidentified)
+    # ----------------------------------------
+    - "JM"      # Author initials
+    - "MJ"      # Author initials
+    - "Fig"     # Figure reference
+    - "Figs"    # Figures reference
+    # ----------------------------------------
+    # Software/Journal names (not medical abbreviations)
+    # ----------------------------------------
+    - "BMC"     # BioMed Central (journal publisher)
+    - "SPSS"    # Statistical software
+    - "Excel"   # Spreadsheet software
+    - "Dx"      # Diagnosis (not standardized abbreviation)
+    - "Tx"      # Treatment (not standardized abbreviation)
+    # ----------------------------------------
+    # Units and common terms (not medical abbreviations)
+    # ----------------------------------------
+    - "IU"      # International Unit (unit)
+    - "ML"      # Milliliter (unit)
+    - "LK"      # Unknown, likely artifact
+    - "PM"      # Postmortem or other (ambiguous)
+    - "SE"      # Standard error (statistics)
 
   # ========================================
   # COMMON ENGLISH WORDS - Auto-reject
