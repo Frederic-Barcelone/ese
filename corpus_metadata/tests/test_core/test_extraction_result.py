@@ -19,7 +19,6 @@ from A_core.A14_extraction_result import (
     Provenance,
     compute_result_id,
     compute_regression_hash,
-    to_canonical_dict,
 )
 from A_core.A02_interfaces import RawExtraction, ExecutionContext
 from B_parsing.B06_confidence import UnifiedConfidenceCalculator

@@ -9,7 +9,11 @@ Confidence is computed from multiple features rather than a single heuristic.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Set
+
+if TYPE_CHECKING:
+    from A_core.A02_interfaces import RawExtraction
+    from A_core.A14_extraction_result import ExtractionResult
 
 
 # =============================================================================
@@ -749,7 +753,6 @@ class UnifiedConfidenceCalculator:
             Tuple of (confidence_score, feature_breakdown as tuple of tuples)
         """
         # Import here to avoid circular imports
-        from A_core.A02_interfaces import RawExtraction
 
         features: Dict[str, float] = {}
 
@@ -800,7 +803,6 @@ class UnifiedConfidenceCalculator:
             Immutable ExtractionResult with computed confidence.
         """
         # Import here to avoid circular imports
-        from A_core.A02_interfaces import RawExtraction
         from A_core.A14_extraction_result import ExtractionResult, Provenance
 
         confidence, features = self.calculate(raw)

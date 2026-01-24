@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from A_core.A02_interfaces import RawExtraction
 
@@ -81,7 +81,7 @@ class MergeResolver:
         >>> merged = resolver.merge(raw_extractions)
     """
 
-    def __init__(self, config: MergeConfig = None):
+    def __init__(self, config: Optional[MergeConfig] = None):
         """
         Initialize the merge resolver.
 
@@ -267,7 +267,7 @@ class MergeResolver:
 
 
 # Singleton instance
-_DEFAULT_RESOLVER: MergeResolver = None
+_DEFAULT_RESOLVER: Optional[MergeResolver] = None
 
 
 def get_merge_resolver() -> MergeResolver:

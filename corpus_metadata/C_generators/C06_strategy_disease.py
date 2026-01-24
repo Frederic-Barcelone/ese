@@ -154,7 +154,6 @@ class DiseaseFalsePositiveFilter:
             Negative = likely FP, Positive = domain-relevant boost
         """
         matched_clean = matched_text.strip()
-        matched_lower = matched_clean.lower()
         ctx_lower = context.lower()
 
         # Start with domain profile adjustment
@@ -200,7 +199,6 @@ class DiseaseFalsePositiveFilter:
             (should_filter, reason)
         """
         matched_clean = matched_text.strip()
-        matched_lower = matched_clean.lower()
         ctx_lower = context.lower()
 
         # Hard filter 1: Chromosome patterns in chromosome context

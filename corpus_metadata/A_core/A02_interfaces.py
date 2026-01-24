@@ -12,7 +12,7 @@ from A_core.A01_domain_models import (
     Candidate,
     ExtractedEntity,
 )
-from A_core.A14_extraction_result import EntityType, ExtractionResult
+from A_core.A14_extraction_result import EntityType
 
 # Flexible doc model
 DocumentModel: TypeAlias = Any

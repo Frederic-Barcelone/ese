@@ -131,10 +131,16 @@ class TestRateLimiter:
 class TestBaseAPIClient:
     """Tests for BaseAPIClient abstract class."""
 
-    def test_cannot_instantiate_abstract(self):
-        """Test that BaseAPIClient cannot be instantiated directly."""
-        with pytest.raises(TypeError):
-            BaseAPIClient()
+    def test_can_instantiate_base_class(self):
+        """Test that BaseAPIClient can be instantiated (no abstract methods)."""
+        # BaseAPIClient is a concrete class that can be instantiated directly.
+        # It provides common functionality; subclasses add specific API methods.
+        client = BaseAPIClient(
+            config={"base_url": "https://api.example.com"},
+            service_name="test",
+        )
+        assert client.base_url == "https://api.example.com"
+        client.close()
 
     def test_concrete_implementation(self, temp_cache_dir: Path):
         """Test concrete implementation of BaseAPIClient."""
