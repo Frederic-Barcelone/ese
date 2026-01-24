@@ -1359,6 +1359,69 @@ class DrugFalsePositiveFilter:
 
 
 # -------------------------
+# Drug Abbreviation Mappings
+# -------------------------
+
+# Common drug abbreviations mapped to their canonical full names.
+# Used during deduplication to link abbreviations with their full forms.
+# Keys are lowercase abbreviations, values are lowercase canonical names.
+DRUG_ABBREVIATIONS: Dict[str, str] = {
+    # Immunosuppressants
+    "mtx": "methotrexate",
+    "aza": "azathioprine",
+    "mmf": "mycophenolate mofetil",
+    "cspa": "cyclosporine",
+    "csa": "cyclosporine",
+    "cyc": "cyclophosphamide",
+    "ctx": "cyclophosphamide",
+    "rtx": "rituximab",
+    # Corticosteroids
+    "pred": "prednisolone",
+    "mpd": "methylprednisolone",
+    "dex": "dexamethasone",
+    "hc": "hydrocortisone",
+    # Common chemotherapy
+    "5-fu": "fluorouracil",
+    "5fu": "fluorouracil",
+    "dox": "doxorubicin",
+    "cis": "cisplatin",
+    "carbo": "carboplatin",
+    "pacl": "paclitaxel",
+    "vcr": "vincristine",
+    "vbl": "vinblastine",
+    # Antibiotics
+    "amox": "amoxicillin",
+    "augmentin": "amoxicillin clavulanate",
+    "vanco": "vancomycin",
+    "gent": "gentamicin",
+    "ceftx": "ceftriaxone",
+    "tmp-smx": "trimethoprim sulfamethoxazole",
+    "bactrim": "trimethoprim sulfamethoxazole",
+    # Anticoagulants
+    "ufh": "unfractionated heparin",
+    "lmwh": "low molecular weight heparin",
+    # Biologics
+    "ivig": "intravenous immunoglobulin",
+    "scig": "subcutaneous immunoglobulin",
+    "tnfi": "tumor necrosis factor inhibitor",
+    # Cardiovascular
+    "asa": "aspirin",
+    "atenol": "atenolol",
+    "ntg": "nitroglycerin",
+    "acei": "angiotensin converting enzyme inhibitor",
+    "arb": "angiotensin receptor blocker",
+    # Pain management
+    "apap": "acetaminophen",
+    "nsaid": "nonsteroidal anti-inflammatory drug",
+    # Diabetes
+    "met": "metformin",
+    # Other common
+    "ppi": "proton pump inhibitor",
+    "h2ra": "h2 receptor antagonist",
+}
+
+
+# -------------------------
 # Drug Detector
 # -------------------------
 
@@ -2087,6 +2150,7 @@ class DrugDetector:
 
         Priority: Alexion > Investigational > FDA > RxNorm > NER
         Deduplicates by both matched_text AND preferred_name.
+        Also links common abbreviations to their full forms (e.g., MTX = methotrexate).
         """
         # Priority order
         priority = {
@@ -2105,18 +2169,43 @@ class DrugDetector:
         seen_names: Set[str] = set()
         deduped: List[DrugCandidate] = []
 
+        def get_canonical_name(name: str) -> Optional[str]:
+            """Get canonical drug name if input is a known abbreviation."""
+            name_lower = name.lower().strip()
+            return DRUG_ABBREVIATIONS.get(name_lower)
+
+        def is_seen(name: str) -> bool:
+            """Check if name or its canonical form has been seen."""
+            name_lower = name.lower().strip()
+            if name_lower in seen_names:
+                return True
+            # Check if this is an abbreviation whose canonical form is seen
+            canonical = get_canonical_name(name_lower)
+            if canonical and canonical in seen_names:
+                return True
+            return False
+
+        def mark_as_seen(name: str) -> None:
+            """Mark name and its canonical form as seen."""
+            name_lower = name.lower().strip()
+            seen_names.add(name_lower)
+            # Also add canonical form if this is an abbreviation
+            canonical = get_canonical_name(name_lower)
+            if canonical:
+                seen_names.add(canonical)
+
         for c in candidates:
             matched_key = c.matched_text.lower().strip()
             preferred_key = (c.preferred_name or "").lower().strip()
 
-            # Skip if we've seen this name already
-            if matched_key in seen_names or (preferred_key and preferred_key in seen_names):
+            # Skip if we've seen this name already (including abbreviation links)
+            if is_seen(matched_key) or (preferred_key and is_seen(preferred_key)):
                 continue
 
             # Add to result and mark as seen
             deduped.append(c)
-            seen_names.add(matched_key)
+            mark_as_seen(matched_key)
             if preferred_key:
-                seen_names.add(preferred_key)
+                mark_as_seen(preferred_key)
 
         return deduped
