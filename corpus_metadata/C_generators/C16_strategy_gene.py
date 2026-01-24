@@ -381,7 +381,6 @@ class GeneFalsePositiveFilter:
         Returns (is_fp, reason) tuple.
         """
         text_lower = matched_text.lower().strip()
-        text_stripped = matched_text.strip()
 
         # Skip very short matches
         if len(text_lower) < self.MIN_LENGTH:

@@ -10,12 +10,11 @@ Usage:
     python -m corpus_metadata.Z_utils.download_gene_lexicon
 """
 
-import gzip
 import json
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Set
 
 OUTPUT_DIR = Path("/Users/frederictetard/Projects/ese/ouput_datasources")
 
