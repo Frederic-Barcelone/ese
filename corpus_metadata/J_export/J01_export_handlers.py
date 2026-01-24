@@ -1114,7 +1114,7 @@ class ExportManager:
                     except Exception as e:
                         print(f"    [WARN] Chart analysis failed: {e}")
 
-            # Save image as file - re-render with padding if bbox available
+            # Save image as file - use original or re-render based on source
             if img.image_base64:
                 img_type = img.image_type.value.lower() if img.image_type else "image"
                 img_index = len([i for i in export_data['images'] if i.get('page') == img.page_num]) + 1
@@ -1122,37 +1122,44 @@ class ExportManager:
                 img_path = out_dir / img_filename
 
                 try:
-                    # Determine padding based on extraction source
-                    # Native extraction (caption_linked, orphan_native) has accurate bboxes
-                    # Use minimal padding for these, generous padding for layout_model
+                    # Determine rendering strategy based on extraction source and figure type
+                    # - Raster figures (native xref): use original image_base64 (already exact)
+                    # - Vector figures: re-render region with minimal padding
+                    # - Layout model: re-render with generous padding
                     rendered_base64 = None
-                    if img.bbox:
-                        if extraction_source in ("caption_linked", "orphan_native"):
-                            # Minimal padding for accurate native bboxes
-                            # Caption-linked figures: expand below for caption text
-                            bottom_pad = 150 if extraction_source == "caption_linked" else 50
+
+                    if figure_type == "raster" and extraction_source in ("caption_linked", "orphan_native"):
+                        # For raster figures, use the original image directly
+                        # The xref rendering already gives us the exact figure
+                        # No need to re-render from page (which would include adjacent content)
+                        rendered_base64 = None  # Will use img.image_base64 below
+
+                    elif figure_type == "vector" and extraction_source in ("caption_linked", "orphan_native"):
+                        # Vector figures need re-rendering with caption padding
+                        if img.bbox:
                             rendered_base64 = self.render_figure_with_padding(
                                 pdf_path=pdf_path,
                                 page_num=img.page_num,
                                 bbox=img.bbox.coords,
                                 padding=20,           # Minimal left padding
                                 top_padding=20,       # Minimal top padding
-                                bottom_padding=bottom_pad,  # Include caption below
+                                bottom_padding=150,   # Include caption below
                                 right_padding=30,     # Minimal right padding
                             )
-                        else:
-                            # Generous padding for layout_model or unknown source
-                            rendered_base64 = self.render_figure_with_padding(
-                                pdf_path=pdf_path,
-                                page_num=img.page_num,
-                                bbox=img.bbox.coords,
-                                padding=75,           # Extra space on left side
-                                top_padding=100,      # Extra space above figure
-                                bottom_padding=350,   # Extra space for captions/legends
-                                right_padding=200,    # Extra space for multi-panel
-                            )
 
-                    # Use re-rendered image if successful, otherwise use original
+                    elif img.bbox:
+                        # Layout model or unknown source: generous padding
+                        rendered_base64 = self.render_figure_with_padding(
+                            pdf_path=pdf_path,
+                            page_num=img.page_num,
+                            bbox=img.bbox.coords,
+                            padding=75,           # Extra space on left side
+                            top_padding=100,      # Extra space above figure
+                            bottom_padding=350,   # Extra space for captions/legends
+                            right_padding=200,    # Extra space for multi-panel
+                        )
+
+                    # Use re-rendered image if available, otherwise use original
                     if rendered_base64:
                         img_bytes = base64.b64decode(rendered_base64)
                         img_data["image_base64"] = rendered_base64  # Update for analysis

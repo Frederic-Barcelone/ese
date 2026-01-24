@@ -186,6 +186,9 @@ def detect_vector_figures(
     page_num: int,
     min_drawing_count: int = 20,
     dense_drawing_threshold: int = 50,
+    min_height: float = 80,
+    min_area_ratio: float = 0.02,
+    header_zone_ratio: float = 0.12,
 ) -> List[VectorFigure]:
     """
     Detect vector-only plots using drawing primitives + axis text.
@@ -199,15 +202,20 @@ def detect_vector_figures(
         page_num: 1-indexed page number
         min_drawing_count: Minimum drawings to consider a region (default 20)
         dense_drawing_threshold: Threshold for "dense" region (default 50)
+        min_height: Minimum height in points to be a figure (default 80)
+        min_area_ratio: Minimum area as fraction of page (default 2%)
+        header_zone_ratio: Top zone to exclude as header (default 12%)
 
     Returns:
         List of VectorFigure objects
     """
     page = doc[page_num - 1]
+    page_height = page.rect.height
+    page_area = page.rect.get_area()
     drawings = page.get_drawings()
     text_dict = page.get_text("dict")
 
-    if not drawings:
+    if not drawings or page_area <= 0:
         return []
 
     # Cluster drawings into regions
@@ -216,6 +224,22 @@ def detect_vector_figures(
     vector_figures: List[VectorFigure] = []
     for region_bbox, drawing_count in regions:
         if drawing_count < min_drawing_count:
+            continue
+
+        x0, y0, x1, y1 = region_bbox
+        region_height = y1 - y0
+        region_area = (x1 - x0) * region_height
+
+        # Filter out narrow regions (likely headers/footers/decorations)
+        if region_height < min_height:
+            continue
+
+        # Filter out small regions
+        if region_area / page_area < min_area_ratio:
+            continue
+
+        # Filter out regions entirely in header zone (top of page)
+        if y1 < page_height * header_zone_ratio:
             continue
 
         # Check for axis-like text nearby

@@ -314,6 +314,27 @@ def resolve_all(
         # Get page number
         lm_page = getattr(lm_fig, "page_num", 1)
 
+        # Get page dimensions for filtering
+        page = doc[lm_page - 1]
+        page_height = page.rect.height
+        page_area = page.rect.get_area()
+
+        x0, y0, x1, y1 = lm_bbox
+        region_height = y1 - y0
+        region_area = (x1 - x0) * region_height
+
+        # Filter narrow regions (likely headers/footers/decorations)
+        if region_height < 80:
+            continue
+
+        # Filter small regions (< 2% of page)
+        if page_area > 0 and region_area / page_area < 0.02:
+            continue
+
+        # Filter regions entirely in header zone (top 12% of page)
+        if y1 < page_height * 0.12:
+            continue
+
         # Check if already covered by native figures
         covered_by_native = any(
             rf.page_num == lm_page and bbox_overlaps(lm_bbox, rf.bbox, threshold=0.5)
