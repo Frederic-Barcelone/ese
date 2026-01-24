@@ -722,7 +722,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 seen.add(key)
 
                 # Find the block this definition belongs to
-                block = None
+                block = None  # type: ignore[assignment]
                 block_text = None
                 block_start = 0
                 for b, text, s, e in blocks_data:

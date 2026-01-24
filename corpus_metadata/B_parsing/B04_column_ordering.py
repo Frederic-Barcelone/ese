@@ -1488,7 +1488,7 @@ def analyze_pdf_layout(
                         {
                             "text": text.strip(),
                             "bbox": bbox,
-                            "category": None,
+                            "category": None,  # type: ignore[dict-item]
                             "zone": "BODY",
                         }
                     )
@@ -1577,7 +1577,7 @@ def create_config(document_type: str = "default", **overrides) -> LayoutConfig:
         "default": {},
     }
 
-    preset: dict = dict(presets.get(document_type, {}))
+    preset: dict = dict(presets.get(document_type, {}) or {})  # type: ignore[call-overload]
     preset.update(overrides)
 
     return LayoutConfig(**preset)

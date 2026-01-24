@@ -2167,7 +2167,7 @@ Return ONLY the JSON array, nothing else."""
             print("\n[Citation detection] SKIPPED (disabled in config)")
 
         # Feasibility extraction (conditional on config)
-        feasibility_results: List[FeasibilityCandidate] = []
+        feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
             feasibility_results = self._process_feasibility(doc, pdf_path_obj, full_text)
         else:
@@ -2221,7 +2221,9 @@ Return ONLY the JSON array, nothing else."""
 
         # Export feasibility results
         if feasibility_results:
-            self._export_feasibility_results(pdf_path_obj, feasibility_results, doc)
+            # Filter to only FeasibilityCandidate objects for export
+            feasibility_only = [r for r in feasibility_results if isinstance(r, FeasibilityCandidate)]
+            self._export_feasibility_results(pdf_path_obj, feasibility_only, doc)
 
         # Export images
         if doc is not None:
@@ -3277,7 +3279,7 @@ Return ONLY the JSON array, nothing else."""
 
     def _process_feasibility(
         self, doc, pdf_path: Path, full_text: str
-    ) -> List[FeasibilityCandidate]:
+    ) -> List[FeasibilityCandidate | NERCandidate]:
         """
         Process document for clinical trial feasibility information.
 
@@ -3293,19 +3295,21 @@ Return ONLY the JSON array, nothing else."""
         start = time.time()
 
         # Use LLM extraction if available (preferred - more precise structured output)
+        # Type hint allows both FeasibilityCandidate and NERCandidate from enrichers
+        candidates: list[FeasibilityCandidate | NERCandidate] = []
         if self.llm_feasibility_extractor is not None:
             print("  Using LLM-based extraction...")
-            candidates = self.llm_feasibility_extractor.extract(
+            candidates = list(self.llm_feasibility_extractor.extract(
                 doc_graph=doc,
                 doc_id=pdf_path.stem,
                 doc_fingerprint=pdf_path.stem,
                 full_text=full_text,
-            )
+            ))
             self.llm_feasibility_extractor.print_summary()
         else:
             # Fallback to pattern-based extraction
             print("  Using pattern-based extraction...")
-            candidates = self.feasibility_detector.extract(doc)
+            candidates = list(self.feasibility_detector.extract(doc))
             self.feasibility_detector.print_summary()
 
         # Enrich with EpiExtract4GARD-v2 (rare disease epidemiology NER)
@@ -3483,62 +3487,62 @@ Return ONLY the JSON array, nothing else."""
 
             if total_entities > 0:
                 # Add diagnostic delays
-                for entity in pj_result.diagnostic_delays:
+                for pj_entity in pj_result.diagnostic_delays:
                     candidates.append(NERCandidate(
                         category="diagnostic_delay",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=pj_entity.text,
+                        evidence_text=pj_entity.text,
+                        confidence=pj_entity.score,
                         source="PatientJourneyNER",
                     ))
 
                 # Add treatment lines
-                for entity in pj_result.treatment_lines:
+                for pj_entity in pj_result.treatment_lines:
                     candidates.append(NERCandidate(
                         category="treatment_line",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=pj_entity.text,
+                        evidence_text=pj_entity.text,
+                        confidence=pj_entity.score,
                         source="PatientJourneyNER",
                     ))
 
                 # Add care pathway steps
-                for entity in pj_result.care_pathway_steps:
+                for pj_entity in pj_result.care_pathway_steps:
                     candidates.append(NERCandidate(
                         category="care_pathway_step",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=pj_entity.text,
+                        evidence_text=pj_entity.text,
+                        confidence=pj_entity.score,
                         source="PatientJourneyNER",
                     ))
 
                 # Add surveillance frequencies
-                for entity in pj_result.surveillance_frequencies:
+                for pj_entity in pj_result.surveillance_frequencies:
                     candidates.append(NERCandidate(
                         category="surveillance_frequency",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=pj_entity.text,
+                        evidence_text=pj_entity.text,
+                        confidence=pj_entity.score,
                         source="PatientJourneyNER",
                     ))
 
                 # Add pain points
-                for entity in pj_result.pain_points:
+                for pj_entity in pj_result.pain_points:
                     candidates.append(NERCandidate(
                         category="pain_point",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=pj_entity.text,
+                        evidence_text=pj_entity.text,
+                        confidence=pj_entity.score,
                         source="PatientJourneyNER",
                     ))
 
                 # Add recruitment touchpoints
-                for entity in pj_result.recruitment_touchpoints:
+                for pj_entity in pj_result.recruitment_touchpoints:
                     candidates.append(NERCandidate(
                         category="recruitment_touchpoint",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=pj_entity.text,
+                        evidence_text=pj_entity.text,
+                        confidence=pj_entity.score,
                         source="PatientJourneyNER",
                     ))
 
@@ -3563,62 +3567,62 @@ Return ONLY the JSON array, nothing else."""
 
             if total_entities > 0:
                 # Add registry names
-                for entity in reg_result.registry_names:
+                for reg_entity in reg_result.registry_names:
                     candidates.append(NERCandidate(
                         category="registry_name",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=reg_entity.text,
+                        evidence_text=reg_entity.text,
+                        confidence=reg_entity.score,
                         source="RegistryNER",
                     ))
 
                 # Add registry sizes
-                for entity in reg_result.registry_sizes:
+                for reg_entity in reg_result.registry_sizes:
                     candidates.append(NERCandidate(
                         category="registry_size",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=reg_entity.text,
+                        evidence_text=reg_entity.text,
+                        confidence=reg_entity.score,
                         source="RegistryNER",
                     ))
 
                 # Add geographic coverage
-                for entity in reg_result.geographic_coverages:
+                for reg_entity in reg_result.geographic_coverages:
                     candidates.append(NERCandidate(
                         category="geographic_coverage",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=reg_entity.text,
+                        evidence_text=reg_entity.text,
+                        confidence=reg_entity.score,
                         source="RegistryNER",
                     ))
 
                 # Add data types
-                for entity in reg_result.data_types:
+                for reg_entity in reg_result.data_types:
                     candidates.append(NERCandidate(
                         category="data_types",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=reg_entity.text,
+                        evidence_text=reg_entity.text,
+                        confidence=reg_entity.score,
                         source="RegistryNER",
                     ))
 
                 # Add access policies
-                for entity in reg_result.access_policies:
+                for reg_entity in reg_result.access_policies:
                     candidates.append(NERCandidate(
                         category="access_policy",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=reg_entity.text,
+                        evidence_text=reg_entity.text,
+                        confidence=reg_entity.score,
                         source="RegistryNER",
                     ))
 
                 # Add eligibility criteria
-                for entity in reg_result.eligibility_criteria:
+                for reg_entity in reg_result.eligibility_criteria:
                     candidates.append(NERCandidate(
                         category="eligibility_criteria",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=reg_entity.text,
+                        evidence_text=reg_entity.text,
+                        confidence=reg_entity.score,
                         source="RegistryNER",
                     ))
 
@@ -3650,52 +3654,52 @@ Return ONLY the JSON array, nothing else."""
 
             if total_entities > 0:
                 # Add gene symbols
-                for entity in gen_result.gene_symbols:
+                for gen_entity in gen_result.gene_symbols:
                     candidates.append(NERCandidate(
                         category="gene_symbol",
-                        text=entity.normalized,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=gen_entity.normalized,
+                        evidence_text=gen_entity.text,
+                        confidence=gen_entity.score,
                         source="GeneticNER",
                     ))
 
                 # Add HGVS variants
-                for entity in gen_result.variants_hgvs:
+                for gen_entity in gen_result.variants_hgvs:
                     candidates.append(NERCandidate(
                         category="variant_hgvs",
-                        text=entity.normalized,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=gen_entity.normalized,
+                        evidence_text=gen_entity.text,
+                        confidence=gen_entity.score,
                         source="GeneticNER",
                     ))
 
                 # Add rsID variants
-                for entity in gen_result.variants_rsid:
+                for gen_entity in gen_result.variants_rsid:
                     candidates.append(NERCandidate(
                         category="variant_rsid",
-                        text=entity.normalized,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=gen_entity.normalized,
+                        evidence_text=gen_entity.text,
+                        confidence=gen_entity.score,
                         source="GeneticNER",
                     ))
 
                 # Add HPO terms
-                for entity in gen_result.hpo_terms:
+                for gen_entity in gen_result.hpo_terms:
                     candidates.append(NERCandidate(
                         category="hpo_term",
-                        text=entity.normalized,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=gen_entity.normalized,
+                        evidence_text=gen_entity.text,
+                        confidence=gen_entity.score,
                         source="GeneticNER",
                     ))
 
                 # Add ORDO disease codes
-                for entity in gen_result.disease_ordo:
+                for gen_entity in gen_result.disease_ordo:
                     candidates.append(NERCandidate(
                         category="disease_ordo",
-                        text=entity.normalized,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
+                        text=gen_entity.normalized,
+                        evidence_text=gen_entity.text,
+                        confidence=gen_entity.score,
                         source="GeneticNER",
                     ))
 
@@ -4049,7 +4053,7 @@ Return ONLY the JSON array, nothing else."""
             vision_analyzer = VisionImageAnalyzer(self.claude_client)
 
         # Build export data
-        export_data = {
+        export_data: dict[str, Any] = {
             "doc_id": pdf_path.stem,
             "doc_filename": pdf_path.name,
             "total_images": len(images),
@@ -4057,7 +4061,7 @@ Return ONLY the JSON array, nothing else."""
         }
 
         for img in images:
-            img_data = {
+            img_data: dict[str, Any] = {
                 "page": img.page_num,
                 "type": img.image_type.value,
                 "caption": img.caption,
@@ -4179,7 +4183,7 @@ Return ONLY the JSON array, nothing else."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         # Build export data
-        export_data = {
+        export_data: dict[str, Any] = {
             "doc_id": pdf_path.stem,
             "doc_filename": pdf_path.name,
             "total_tables": len(tables),
@@ -4392,7 +4396,7 @@ Return ONLY the JSON array, nothing else."""
         out_dir = self._get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        export_data = {
+        export_data: dict[str, Any] = {
             "run_id": self.run_id,
             "timestamp": datetime.now().isoformat(),
             "document": pdf_path.name,
