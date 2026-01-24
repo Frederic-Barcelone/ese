@@ -1445,8 +1445,8 @@ class FeasibilityDetector:
         site_count = None
         country_count = None
 
-        for pattern in self.site_count_re:
-            match = pattern.search(text)
+        for site_pattern in self.site_count_re:
+            match = site_pattern.search(text)
             if match:
                 groups = match.groups()
                 if len(groups) >= 2:

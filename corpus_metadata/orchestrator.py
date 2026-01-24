@@ -781,8 +781,8 @@ class Orchestrator:
                 top_p=val_cfg.get("top_p", 1.0),
             )
         else:
-            self.claude_client = None
-            self.llm_engine = None
+            self.claude_client = None  # type: ignore[assignment]
+            self.llm_engine = None  # type: ignore[assignment]
 
         # VLM Table Extractor (uses Claude Vision for better table extraction)
         # Controlled by extraction_pipeline.options.use_vlm_tables
@@ -793,7 +793,7 @@ class Orchestrator:
                 config={"run_id": self.run_id},
             )
         else:
-            self.vlm_table_extractor = None
+            self.vlm_table_extractor = None  # type: ignore[assignment]
 
         # Logger
         self.logger = ValidationLogger(log_dir=str(self.log_dir), run_id=self.run_id)
@@ -903,7 +903,7 @@ class Orchestrator:
                 config={"run_id": self.run_id},
             )
         else:
-            self.llm_feasibility_extractor = None
+            self.llm_feasibility_extractor = None  # type: ignore[assignment]
 
         # EpiExtract4GARD-v2 enricher for rare disease epidemiology NER
         # Uses BioBERT model to extract LOC, EPI, STAT entities
@@ -912,7 +912,7 @@ class Orchestrator:
                 config={"run_id": self.run_id}
             )
         else:
-            self.epi_enricher = None
+            self.epi_enricher = None  # type: ignore[assignment]
 
         # ZeroShotBioNER enricher for flexible biomedical entity extraction
         # Extracts ADE, dosage, frequency, route, duration, etc.
@@ -921,7 +921,7 @@ class Orchestrator:
                 config={"run_id": self.run_id}
             )
         else:
-            self.zeroshot_bioner = None
+            self.zeroshot_bioner = None  # type: ignore[assignment]
 
         # d4data/biomedical-ner-all for comprehensive biomedical NER
         # Extracts 84 entity types: symptoms, procedures, lab values, demographics
@@ -930,7 +930,7 @@ class Orchestrator:
                 config={"run_id": self.run_id}
             )
         else:
-            self.biomedical_ner = None
+            self.biomedical_ner = None  # type: ignore[assignment]
 
         # Patient journey enricher for diagnostic delay, treatment lines, care pathway
         # Uses ZeroShotBioNER with custom entity labels
@@ -939,7 +939,7 @@ class Orchestrator:
                 config={"run_id": self.run_id}
             )
         else:
-            self.patient_journey_enricher = None
+            self.patient_journey_enricher = None  # type: ignore[assignment]
 
         # Registry enricher for cohort access, natural history data
         # Uses ZeroShotBioNER with registry-specific entity labels
@@ -948,7 +948,7 @@ class Orchestrator:
                 config={"run_id": self.run_id}
             )
         else:
-            self.registry_enricher = None
+            self.registry_enricher = None  # type: ignore[assignment]
 
         # Genetic enricher for gene symbols, HGVS variants, HPO, ORDO
         # Uses regex patterns - no model loading required
@@ -957,7 +957,7 @@ class Orchestrator:
                 config={"run_id": self.run_id}
             )
         else:
-            self.genetic_enricher = None
+            self.genetic_enricher = None  # type: ignore[assignment]
 
         # Document metadata extraction
         doc_metadata_cfg = self.config.get("document_metadata", {})
@@ -1003,7 +1003,7 @@ class Orchestrator:
         if nct_cfg.get("enabled", True):
             self.nct_enricher = NCTEnricher(nct_cfg)
         else:
-            self.nct_enricher = None
+            self.nct_enricher = None  # type: ignore[assignment]
 
         # Print unified lexicon summary
         self._print_unified_lexicon_summary()
@@ -2290,20 +2290,20 @@ Return ONLY the JSON array, nothing else."""
 
         # Print validated drugs with provenance
         validated_drugs = [
-            d for d in drug_results if d.status == ValidationStatus.VALIDATED
+            drug for drug in drug_results if drug.status == ValidationStatus.VALIDATED
         ]
         if validated_drugs:
             print(f"\nValidated drugs ({len(validated_drugs)}):")
-            for d in validated_drugs:
-                phase = f" ({d.development_phase})" if d.development_phase else ""
-                compound = f" [{d.compound_id}]" if d.compound_id else ""
+            for drug in validated_drugs:
+                phase = f" ({drug.development_phase})" if drug.development_phase else ""
+                compound = f" [{drug.compound_id}]" if drug.compound_id else ""
                 src = ""
-                if d.provenance and d.provenance.lexicon_source:
-                    lex = d.provenance.lexicon_source
+                if drug.provenance and drug.provenance.lexicon_source:
+                    lex = drug.provenance.lexicon_source
                     if lex.startswith("2025_08_"):
                         lex = lex.replace("2025_08_", "").replace(".json", "")
                     src = f" <{lex}>"
-                print(f"  * {d.preferred_name}{compound}{phase}{src}")
+                print(f"  * {drug.preferred_name}{compound}{phase}{src}")
 
         # Print validated pharma companies with provenance
         validated_pharma = [

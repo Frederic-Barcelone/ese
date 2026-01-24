@@ -285,7 +285,7 @@ class ClaudeClient:
                 {
                     "role": "user",
                     "content": [
-                        {
+                        {  # type: ignore[list-item]
                             "type": "image",
                             "source": {
                                 "type": "base64",
@@ -796,11 +796,11 @@ class LLMEngine:
 
         for candidate in batch:
             cid = str(candidate.id)
-            resp = id_to_response.get(cid)
+            candidate_resp = id_to_response.get(cid)
 
-            if resp:
+            if candidate_resp:
                 results.append(
-                    self._build_entity_from_batch_response(candidate, resp, raw)
+                    self._build_entity_from_batch_response(candidate, candidate_resp, raw)
                 )
             else:
                 missing_ids.append(cid)

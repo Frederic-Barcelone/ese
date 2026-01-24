@@ -138,6 +138,7 @@ class ZeroShotBioNEREnricher:
             self._model = BertForTokenClassification.from_pretrained(
                 self.MODEL_NAME, num_labels=2
             )
+            assert self._model is not None  # Type narrowing for mypy
 
             # Move to device if GPU
             if self.device >= 0:
@@ -172,6 +173,9 @@ class ZeroShotBioNEREnricher:
 
         if not text or len(text.strip()) < 5:
             return []
+
+        # Ensure model and tokenizer are loaded
+        assert self._model is not None and self._tokenizer is not None
 
         try:
             # Truncate text if needed

@@ -426,6 +426,8 @@ class RegistryEnricher:
             logger.warning("ZeroShotBioNER not available, returning empty result")
             return result
 
+        assert self._zeroshot is not None  # Guaranteed after successful _load_zeroshot()
+
         try:
             # Use extract_custom with registry labels
             raw_results = self._zeroshot.extract_custom(text, self.entity_labels)

@@ -654,6 +654,7 @@ class GeneDetector:
             except OSError:
                 self.nlp = spacy.load("en_core_sci_sm")
 
+            assert self.nlp is not None  # Type narrowing for mypy
             if "scispacy_linker" not in self.nlp.pipe_names:
                 self.nlp.add_pipe(
                     "scispacy_linker",

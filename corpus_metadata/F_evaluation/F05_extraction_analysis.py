@@ -257,7 +257,7 @@ class ExtractionAnalyzer:
             )
 
         # Sort extracted alphabetically
-        extracted_results.sort(key=lambda x: x["short_form"])
+        extracted_results.sort(key=lambda x: str(x.get("short_form", "")))
 
         # Calculate metrics
         tp = sum(1 for g in gold_results if g["found"])

@@ -64,11 +64,12 @@ from typing import Any, Dict, List, Optional, Tuple, Set
 import logging
 
 # Import from your core modules
+
 try:
     from A_core.A01_domain_models import BoundingBox
 except ImportError:
     # Fallback for standalone testing
-    BoundingBox = None
+    BoundingBox = None  # type: ignore[assignment, misc]
 
 logger = logging.getLogger(__name__)
 
@@ -1377,7 +1378,7 @@ def get_layout_info(
     geoms: List[BlockGeom] = [g for g in geoms_raw if g is not None]
     stats = PageStats.compute(geoms, page_width, page_height) if geoms else None
 
-    info = {
+    info: dict[str, Any] = {
         "layout_type": layout.layout_type.value,
         "num_columns": layout.num_columns,
         "num_gutters": len(layout.gutters),
@@ -1576,7 +1577,7 @@ def create_config(document_type: str = "default", **overrides) -> LayoutConfig:
         "default": {},
     }
 
-    preset = presets.get(document_type, {})
+    preset: dict = dict(presets.get(document_type, {}))
     preset.update(overrides)
 
     return LayoutConfig(**preset)

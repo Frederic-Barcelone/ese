@@ -792,6 +792,7 @@ class DiseaseDetector:
                 model_name = "en_core_sci_sm"
 
             # Add UMLS linker for disease identification
+            assert self.scispacy_nlp is not None  # Type narrowing for mypy
             try:
                 self.scispacy_nlp.add_pipe(
                     "scispacy_linker",

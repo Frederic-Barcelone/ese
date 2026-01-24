@@ -402,7 +402,7 @@ class LogicalExpression(BaseModel):
     def _node_to_sql(self, node: CriterionNode) -> str:
         """Convert a node to SQL."""
         if node.is_leaf():
-            crit = self.criteria_refs.get(node.criterion_id)
+            crit = self.criteria_refs.get(node.criterion_id) if node.criterion_id else None
             if crit and crit.lab_criterion:
                 lab = crit.lab_criterion
                 col = lab.analyte.lower()

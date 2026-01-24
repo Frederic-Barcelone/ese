@@ -813,7 +813,7 @@ class LLMFeasibilityExtractor:
         # Apply verification and confidence penalty
         # Collect first evidence quote for verification
         first_quote = evidence[0].quote if evidence else None
-        numerical_values = {}
+        numerical_values: dict[str, int | float] = {}
         if study_design.sample_size:
             numerical_values["sample_size"] = study_design.sample_size
         if study_design.actual_enrollment:
@@ -1288,7 +1288,7 @@ class LLMFeasibilityExtractor:
                 break
 
         # Collect numerical values
-        numerical_values = {}
+        numerical_values: dict[str, int | float] = {}
         if burden.run_in_duration_days:
             numerical_values["run_in_duration_days"] = burden.run_in_duration_days
         if visit_schedule and visit_schedule.total_visits:

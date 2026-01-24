@@ -37,7 +37,7 @@ try:
 
     PIL_AVAILABLE = True
 except ImportError:
-    Image = None
+    Image = None  # type: ignore[assignment]
     PIL_AVAILABLE = False
 
 
@@ -330,7 +330,7 @@ class TableExtractor:
         max_cols = 0
         for tr in all_trs:
             col_count = sum(
-                int(td.get("colspan") or 1) for td in tr.find_all(["th", "td"])
+                int(str(td.get("colspan") or 1)) for td in tr.find_all(["th", "td"])
             )
             max_cols = max(max_cols, col_count)
 
@@ -357,8 +357,8 @@ class TableExtractor:
                     break
 
                 cell_text = td.get_text(strip=True)
-                colspan = int(td.get("colspan") or 1)
-                rowspan = int(td.get("rowspan") or 1)
+                colspan = int(str(td.get("colspan") or 1))
+                rowspan = int(str(td.get("rowspan") or 1))
 
                 # Fill cells for colspan
                 for i in range(colspan):
@@ -895,7 +895,7 @@ class TableExtractor:
                         pix = page.get_pixmap(matrix=mat, clip=clip_rect)
 
                 # Convert to PIL Image
-                img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
                 images.append(img)
 
             doc.close()
