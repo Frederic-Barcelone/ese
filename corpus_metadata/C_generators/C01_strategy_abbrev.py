@@ -1018,6 +1018,93 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                 combined[-self.carryover_chars :] if self.carryover_chars > 0 else ""
             )
 
+        # -------------------------
+        # Strategy E: Image/Figure Captions
+        # Process captions from ImageBlocks which are NOT included in iter_linear_blocks
+        # This catches patterns like "RR = relative reduction" in figure captions
+        # -------------------------
+        for img in doc.iter_images():
+            caption = img.caption
+            if not caption:
+                continue
+
+            caption_text = _clean_ws(caption)
+            if not caption_text or len(caption_text) < 10:
+                continue
+
+            # Apply inline definition patterns (SF=LF, SF: LF) to captions
+            # These are common in figure/table legends
+            for pat in self.inline_definition_patterns:
+                for m in pat.finditer(caption_text):
+                    sf = m.group(1).strip()
+                    lf = m.group(2).strip()
+
+                    if not sf or not lf:
+                        continue
+
+                    # Skip if LF is too long
+                    if len(lf) > 60:
+                        continue
+
+                    # Clean long form
+                    lf = _normalize_long_form(lf)
+                    if not lf or len(lf) < 3:
+                        continue
+
+                    key = (doc.doc_id, sf.upper(), lf.lower())
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
+                    out.append(
+                        self._make_candidate_from_image(
+                            doc,
+                            img,
+                            sf,
+                            lf,
+                            caption_text,
+                            m.start(),
+                            m.end(),
+                            method="caption_inline_definition",
+                            confidence=0.95,  # High confidence - explicit definition in caption
+                        )
+                    )
+
+            # Also apply comma definition patterns to captions
+            for pat in self.comma_definition_patterns:
+                for m in pat.finditer(caption_text):
+                    sf = m.group(1).strip()
+                    lf = m.group(2).strip()
+
+                    if not sf or not lf:
+                        continue
+
+                    if len(lf) > 60:
+                        continue
+
+                    lf = _normalize_long_form(lf)
+                    if not lf or len(lf) < 3:
+                        continue
+
+                    key = (doc.doc_id, sf.upper(), lf.lower())
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
+                    out.append(
+                        self._make_candidate_from_image(
+                            doc,
+                            img,
+                            sf,
+                            lf,
+                            caption_text,
+                            m.start(),
+                            m.end(),
+                            method="caption_comma_definition",
+                            confidence=0.92,
+                        )
+                    )
+
         return out
 
     def _make_candidate(
@@ -1062,6 +1149,54 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
             generator_type=self.generator_type,
             short_form=_clean_ws(sf),
             long_form=_normalize_long_form(lf),  # Dehyphenate line-break artifacts
+            context_text=ctx if ctx else context_source_text,
+            context_location=loc,
+            initial_confidence=float(max(0.0, min(1.0, confidence))),
+            provenance=prov,
+        )
+
+    def _make_candidate_from_image(
+        self,
+        doc: DocumentGraph,
+        img,
+        sf: str,
+        lf: str,
+        context_source_text: str,
+        match_start: int,
+        match_end: int,
+        method: str,
+        confidence: float,
+    ) -> Candidate:
+        """Create a candidate from an ImageBlock's caption."""
+        ctx = _context_window(
+            context_source_text,
+            match_start,
+            match_end,
+            window=self.context_window_chars,
+        )
+
+        loc = Coordinate(
+            page_num=int(img.page_num),
+            block_id=str(img.id),
+            bbox=img.bbox,
+        )
+
+        prov = ProvenanceMetadata(
+            pipeline_version=self.pipeline_version,
+            run_id=self.run_id,
+            doc_fingerprint=str(
+                self.config.get("doc_fingerprint") or self.doc_fingerprint_default
+            ),
+            generator_name=self.generator_type,
+            rule_version=f"abbrev_syntax::{method}",
+        )
+
+        return Candidate(
+            doc_id=doc.doc_id,
+            field_type=FieldType.DEFINITION_PAIR,
+            generator_type=self.generator_type,
+            short_form=_clean_ws(sf),
+            long_form=_normalize_long_form(lf),
             context_text=ctx if ctx else context_source_text,
             context_location=loc,
             initial_confidence=float(max(0.0, min(1.0, confidence))),
