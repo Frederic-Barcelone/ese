@@ -1050,8 +1050,6 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         # Extract a short name from filename for display
         name = "UMLS biological" if "biological" in source else "UMLS clinical"
         self._lexicon_stats.append((name, loaded, path.name))
-        if skipped_wrong_expansion > 0:
-            print(f"    [INFO] Skipped {skipped_wrong_expansion} wrong expansions from {path.name}")
 
     def _extract_identifiers(self, identifiers: Dict) -> List[Dict[str, str]]:
         """Extract lexicon IDs from an identifiers dict."""
