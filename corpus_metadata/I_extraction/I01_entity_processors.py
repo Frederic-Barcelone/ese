@@ -238,7 +238,7 @@ class EntityProcessor:
             print("  Enriching with PubTator3...")
             results = self.disease_enricher.enrich_batch(results, verbose=True)
 
-        validated_count = sum(1 for r in results if r.status.value == "validated")
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         print(f"  Validated diseases: {validated_count}")
         print(f"  Time: {time.time() - start:.2f}s")
 
@@ -350,7 +350,7 @@ class EntityProcessor:
             )
             results.append(entity)
 
-        validated_count = sum(1 for r in results if r.status.value == "validated")
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         print(f"  Validated genes: {validated_count}")
         print(f"  Time: {time.time() - start:.2f}s")
 
@@ -469,7 +469,7 @@ class EntityProcessor:
             print("  Enriching with PubTator3...")
             results = self.drug_enricher.enrich_batch(results, verbose=True)
 
-        validated_count = sum(1 for r in results if r.status.value == "validated")
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         print(f"  Validated drugs: {validated_count}")
         print(f"  Time: {time.time() - start:.2f}s")
 
@@ -554,7 +554,7 @@ class EntityProcessor:
         # Validate candidates (auto-validated for lexicon matches)
         results = self.pharma_detector.validate_candidates(candidates)
 
-        validated_count = sum(1 for r in results if r.status.value == "validated")
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         print(f"  Validated pharma companies: {validated_count}")
         print(f"  Time: {time.time() - start:.2f}s")
 
@@ -593,7 +593,7 @@ class EntityProcessor:
         # Validate candidates
         results = self.author_detector.validate_candidates(candidates)
 
-        validated_count = sum(1 for r in results if r.status.value == "validated")
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         print(f"  Validated authors: {validated_count}")
         print(f"  Author detection took {time.time() - start:.2f}s")
 
@@ -632,7 +632,7 @@ class EntityProcessor:
         # Validate candidates
         results = self.citation_detector.validate_candidates(candidates)
 
-        validated_count = sum(1 for r in results if r.status.value == "validated")
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         print(f"  Validated citations: {validated_count}")
         print(f"  Citation detection took {time.time() - start:.2f}s")
 

@@ -235,37 +235,37 @@ class Orchestrator:
         # Define presets (override individual flags if preset is set)
         PRESETS = {
             "drugs_only": {
-                "drugs": True, "diseases": False, "abbreviations": False,
+                "drugs": True, "diseases": False, "genes": False, "abbreviations": False,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
             "diseases_only": {
-                "drugs": False, "diseases": True, "abbreviations": False,
+                "drugs": False, "diseases": True, "genes": False, "abbreviations": False,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
             "abbreviations_only": {
-                "drugs": False, "diseases": False, "abbreviations": True,
+                "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
             "feasibility_only": {
-                "drugs": False, "diseases": False, "abbreviations": False,
+                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
                 "feasibility": True, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
             "entities_only": {
-                "drugs": True, "diseases": True, "abbreviations": True,
+                "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
             "clinical_entities": {
-                "drugs": True, "diseases": True, "abbreviations": False,
+                "drugs": True, "diseases": True, "genes": False, "abbreviations": False,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
             "metadata_only": {
-                "drugs": False, "diseases": False, "abbreviations": False,
+                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
                 "feasibility": False, "pharma_companies": False, "authors": True,
                 "citations": True, "document_metadata": True, "tables": False,
             },
@@ -328,17 +328,23 @@ class Orchestrator:
 
     def _print_extraction_config(self) -> None:
         """Print extraction configuration summary."""
-        print("\n  Extraction Pipeline Configuration:")
+        # ANSI color codes
+        GREEN = "\033[92m"
+        RED = "\033[91m"
+        CYAN = "\033[96m"
+        RESET = "\033[0m"
+
+        print(f"\n  {CYAN}Extraction Pipeline Configuration:{RESET}")
         print("  " + "-" * 40)
 
         # Show active preset if set
         if self.active_preset:
-            print(f"  PRESET: {self.active_preset}")
+            print(f"  PRESET: {CYAN}{self.active_preset}{RESET}")
         else:
             print("  PRESET: (custom - using individual flags)")
 
         # Extractors
-        print("\n  EXTRACTORS:")
+        print(f"\n  {CYAN}EXTRACTORS:{RESET}")
         extractors = [
             ("drugs", self.extract_drugs),
             ("diseases", self.extract_diseases),
@@ -352,11 +358,14 @@ class Orchestrator:
             ("tables", self.extract_tables),
         ]
         for name, enabled in extractors:
-            status = "ON" if enabled else "OFF"
+            if enabled:
+                status = f"{GREEN}ON{RESET}"
+            else:
+                status = f"{RED}OFF{RESET}"
             print(f"    {name:<20} {status}")
 
         # Options
-        print("\n  OPTIONS:")
+        print(f"\n  {CYAN}OPTIONS:{RESET}")
         options = [
             ("use_llm_validation", self.use_llm_validation),
             ("use_llm_feasibility", self.use_llm_feasibility),
@@ -370,7 +379,10 @@ class Orchestrator:
             ("use_genetic_extraction", self.use_genetic_extraction),
         ]
         for name, enabled in options:
-            status = "ON" if enabled else "OFF"
+            if enabled:
+                status = f"{GREEN}ON{RESET}"
+            else:
+                status = f"{RED}OFF{RESET}"
             print(f"    {name:<20} {status}")
 
         print("  " + "-" * 40)
