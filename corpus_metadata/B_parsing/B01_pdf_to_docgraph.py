@@ -733,12 +733,14 @@ class PDFToDocGraphParser(BaseParser):
                 ]):
                     img_type = ImageType.FLOWCHART
                 # Chart: various clinical trial result charts (including pie charts)
-                elif any(kw in check_lower for kw in [
+                # Also detect by percentage patterns in OCR text
+                has_percentages = bool(re.search(r'\d+%|\d+\s*%', check_text))
+                if has_percentages or any(kw in check_lower for kw in [
                     "kaplan", "survival", "curve", "plot", "bar", "proportion",
                     "percentage", "reduction", "change", "effect", "endpoint",
                     "month", "week", "baseline", "placebo", "treatment",
                     "pie", "distribution", "frequency", "symptoms", "serology",
-                    "fig.", "figure"
+                    "fig.", "figure", "organ", "involvement"
                 ]):
                     img_type = ImageType.CHART
                 # Diagram: mechanism, pathway diagrams
