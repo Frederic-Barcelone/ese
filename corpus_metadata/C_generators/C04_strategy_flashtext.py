@@ -1717,8 +1717,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
         # Pattern 1a: "Long Form (ABBREV)" - title case long form
         # Catches mixed-case abbreviations like LoE, LoA
+        # Updated to handle hyphenated words like "Five-Factor Score"
         pattern1a = re.compile(
-            r"\b((?:[A-Z][a-z]+\s+){1,7}[A-Za-z]+)\s*"  # Long form: capitalized words
+            r"\b((?:[A-Z][a-z]+(?:-[A-Z]?[a-z]+)?\s+){1,7}[A-Za-z]+)\s*"  # Long form: capitalized words (with optional hyphen)
             r"\(([A-Za-z][A-Za-z0-9/-]{1,9})\)",  # (ABBREV) - mixed case allowed
             re.UNICODE
         )
@@ -1750,6 +1751,15 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         for match in pattern1b.finditer(text):
             lf = match.group(1).strip()
             sf = match.group(2).strip()
+
+            # Clean up long form - remove common lead-in phrases that aren't part of the term
+            lead_in_patterns = [
+                r"^(?:developed\s+for|known\s+as|called|termed|named|referred\s+to\s+as)\s+",
+                r"^(?:including|such\s+as|like|e\.?g\.?)\s+",
+                r"^(?:is\s+a|was\s+a|are|were)\s+",
+            ]
+            for pattern in lead_in_patterns:
+                lf = re.sub(pattern, "", lf, flags=re.IGNORECASE).strip()
 
             # Validate: long form should have multiple words
             if len(lf.split()) < 2:

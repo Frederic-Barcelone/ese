@@ -1404,6 +1404,8 @@ DRUG_ABBREVIATIONS: Dict[str, str] = {
     "ivig": "intravenous immunoglobulin",
     "scig": "subcutaneous immunoglobulin",
     "tnfi": "tumor necrosis factor inhibitor",
+    # Partial name to full name mappings
+    "mycophenolate": "mycophenolate mofetil",
     # Cardiovascular
     "asa": "aspirin",
     "atenol": "atenolol",
