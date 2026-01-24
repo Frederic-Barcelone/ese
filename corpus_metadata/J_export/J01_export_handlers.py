@@ -1175,7 +1175,7 @@ class ExportManager:
             export_data["images"].append(img_data)
 
         # Write JSON metadata
-        out_file = out_dir / f"images_{pdf_path.stem}_{timestamp}.json"
+        out_file = out_dir / f"figures_{pdf_path.stem}_{timestamp}.json"
         with open(out_file, "w", encoding="utf-8") as f:
             json.dump(export_data, f, indent=2)
 

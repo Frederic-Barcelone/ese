@@ -762,7 +762,7 @@ class Orchestrator:
         if disease_results:
             self.export_manager.export_disease_results(pdf_path_obj, disease_results)
 
-        if gene_results:
+        if self.extract_genes:
             self.export_manager.export_gene_results(pdf_path_obj, gene_results)
 
         if drug_results:
