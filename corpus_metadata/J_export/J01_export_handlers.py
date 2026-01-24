@@ -90,9 +90,10 @@ class ExportManager:
         page_num: int,
         bbox: Tuple[float, float, float, float],
         dpi: int = 200,
-        padding: int = 15,
-        bottom_padding: int = 150,
-        right_padding: int = 100,
+        padding: int = 50,
+        bottom_padding: int = 300,
+        right_padding: int = 200,
+        top_padding: Optional[int] = None,
     ) -> Optional[str]:
         """
         Re-render a figure from PDF with extra padding for captions/legends.
@@ -102,13 +103,16 @@ class ExportManager:
             page_num: 1-indexed page number
             bbox: (x0, y0, x1, y1) bounding box in PDF points
             dpi: Resolution for rendering
-            padding: Extra points around left/top
-            bottom_padding: Extra points below figure for captions (default 150pt)
-            right_padding: Extra points to right for multi-panel figures (default 100pt)
+            padding: Extra points around left side (default 50pt)
+            bottom_padding: Extra points below figure for captions (default 300pt)
+            right_padding: Extra points to right for multi-panel figures (default 200pt)
+            top_padding: Extra points above figure (default same as padding)
 
         Returns:
             Base64-encoded PNG string, or None if rendering fails
         """
+        if top_padding is None:
+            top_padding = padding
         try:
             import fitz  # PyMuPDF
         except ImportError:
@@ -151,10 +155,10 @@ class ExportManager:
                 x0 = margin
                 x1 = page_width - margin
 
-            # Create clip rectangle with padding
+            # Create clip rectangle with generous padding to capture captions/legends
             clip_rect = fitz.Rect(
                 max(0, x0 - padding),
-                max(0, y0 - padding),
+                max(0, y0 - top_padding),
                 min(page_width, x1 + right_padding),
                 min(page_height, y1 + bottom_padding),
             )
@@ -1112,15 +1116,17 @@ class ExportManager:
                 img_path = out_dir / img_filename
 
                 try:
-                    # Try to re-render with bottom padding for captions/legends
+                    # Try to re-render with generous padding for captions/legends
                     rendered_base64 = None
                     if img.bbox:
                         rendered_base64 = self.render_figure_with_padding(
                             pdf_path=pdf_path,
                             page_num=img.page_num,
                             bbox=img.bbox.coords,
-                            bottom_padding=250,  # Extra space for long figure captions/legends
-                            right_padding=150,   # Extra space for multi-panel figures
+                            padding=75,          # Extra space on left side
+                            top_padding=100,     # Extra space above figure
+                            bottom_padding=350,  # Extra space for long figure captions/legends
+                            right_padding=200,   # Extra space for multi-panel figures
                         )
 
                     # Use re-rendered image if successful, otherwise use original
@@ -1201,13 +1207,32 @@ class ExportManager:
                 "image_base64": table.image_base64,
             }
 
-            # Save table image as file
+            # Save table image as file - re-render with padding if bbox available
             if table.image_base64:
                 table_type = table.table_type.value.lower() if table.table_type else "table"
                 img_filename = f"{pdf_path.stem}_table_{table_type}_{page_str}_{idx + 1}.png"
                 img_path = out_dir / img_filename
                 try:
-                    img_bytes = base64.b64decode(table.image_base64)
+                    # Try to re-render with generous padding
+                    rendered_base64 = None
+                    if table.bbox and not table.is_multipage:
+                        rendered_base64 = self.render_figure_with_padding(
+                            pdf_path=pdf_path,
+                            page_num=table.page_num,
+                            bbox=table.bbox.coords,
+                            padding=75,          # Extra space on left side
+                            top_padding=150,     # Extra space above table for title
+                            bottom_padding=200,  # Extra space below table for notes
+                            right_padding=150,   # Extra space on right
+                        )
+
+                    # Use re-rendered image if successful, otherwise use original
+                    if rendered_base64:
+                        img_bytes = base64.b64decode(rendered_base64)
+                        table_data["image_base64"] = rendered_base64
+                    else:
+                        img_bytes = base64.b64decode(table.image_base64)
+
                     with open(img_path, "wb") as img_file:
                         img_file.write(img_bytes)
                     table_data["saved_file"] = img_filename
