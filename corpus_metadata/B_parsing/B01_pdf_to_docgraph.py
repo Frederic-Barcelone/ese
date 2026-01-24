@@ -33,6 +33,28 @@ from B_parsing.B04_column_ordering import (
     get_layout_info,
 )
 
+# PDF Native Figure Extraction (B09-B11)
+from B_parsing.B09_pdf_native_figures import (
+    extract_embedded_figures_from_doc,
+    detect_vector_figures,
+    filter_noise_images,
+    render_figure_by_xref,
+    render_vector_figure,
+    EmbeddedFigure,
+    VectorFigure,
+)
+from B_parsing.B10_caption_detector import (
+    detect_captions_all_pages,
+    Caption,
+)
+from B_parsing.B11_extraction_resolver import (
+    resolve_all,
+    filter_duplicate_figures,
+    ResolvedFigure,
+    ResolvedTable,
+    get_resolution_stats,
+)
+
 
 # -----------------------------
 # Text normalization helpers
@@ -488,6 +510,26 @@ class PDFToDocGraphParser(BaseParser):
         # Store layout info per page (for debugging/export)
         self._page_layouts: Dict[int, Dict[str, Any]] = {}
 
+        # =============================================
+        # PDF Native Figure Extraction (B09-B11) - NEW
+        # =============================================
+        # Use native PDF extraction for figures (raster + vector)
+        # This produces more accurate bounding boxes and catches vector plots
+        self.use_native_figure_extraction = bool(
+            self.config.get("use_native_figure_extraction", True)
+        )
+        # Minimum image area as fraction of page (default 3%)
+        self.min_figure_area_ratio = float(
+            self.config.get("min_figure_area_ratio", 0.03)
+        )
+        # Filter noise images (logos, headers)
+        self.filter_noise_figures = bool(
+            self.config.get("filter_noise_figures", True)
+        )
+
+        # Store resolution stats (for debugging/export)
+        self._resolution_stats: Dict[str, Any] = {}
+
     # -----------------------
     # Public
     # -----------------------
@@ -765,7 +807,206 @@ class PDFToDocGraphParser(BaseParser):
             page_obj.images = page_images
             graph.pages[page_num] = page_obj
 
+        # =============================================
+        # PDF Native Figure Extraction (B09-B11) - NEW
+        # =============================================
+        if self.use_native_figure_extraction:
+            graph = self._apply_native_figure_extraction(
+                graph, file_path, raw_images
+            )
+
         return graph
+
+    def _apply_native_figure_extraction(
+        self,
+        graph: DocumentGraph,
+        file_path: str,
+        layout_model_images: Dict[int, List[Dict[str, Any]]],
+    ) -> DocumentGraph:
+        """
+        Apply PDF-native figure extraction using B09-B11 modules.
+
+        This extracts raster images and vector plots directly from PDF,
+        links them to captions, and produces more accurate bounding boxes.
+
+        Args:
+            graph: DocumentGraph with existing images (from Unstructured)
+            file_path: Path to PDF file
+            layout_model_images: Images from Unstructured (as fallback signal)
+
+        Returns:
+            Updated DocumentGraph with resolved figures
+        """
+        import base64
+
+        doc = fitz.open(file_path)
+
+        try:
+            # Step 1: Extract raster figures from PDF XObjects
+            raster_figures = extract_embedded_figures_from_doc(
+                doc, min_area_ratio=self.min_figure_area_ratio
+            )
+
+            # Step 2: Filter noise (logos, repeated headers)
+            if self.filter_noise_figures:
+                raster_figures = filter_noise_images(raster_figures, doc)
+
+            # Step 3: Detect vector figures (Kaplan-Meier plots, etc.)
+            vector_figures: List[VectorFigure] = []
+            for page_num in range(1, doc.page_count + 1):
+                page_vectors = detect_vector_figures(doc, page_num)
+                vector_figures.extend(page_vectors)
+
+            # Step 4: Detect all captions and column layout
+            all_captions, columns_by_page = detect_captions_all_pages(doc)
+
+            # Step 5: Convert Unstructured images to layout model signal
+            layout_model_figures: List[ImageBlock] = []
+            for page_num, images in layout_model_images.items():
+                for img_data in images:
+                    # Only include if has actual image data
+                    if img_data.get("image_base64"):
+                        layout_model_figures.append(
+                            ImageBlock(
+                                page_num=page_num,
+                                reading_order_index=0,
+                                image_base64=img_data.get("image_base64"),
+                                ocr_text=img_data.get("ocr_text"),
+                                bbox=img_data["bbox"],
+                            )
+                        )
+
+            # Step 6: Resolve all signals
+            resolved_figures, resolved_tables = resolve_all(
+                raster_figures=raster_figures,
+                vector_figures=vector_figures,
+                layout_model_figures=layout_model_figures,
+                captions=all_captions,
+                columns_by_page=columns_by_page,
+                doc=doc,
+            )
+
+            # Step 7: Deduplicate overlapping figures
+            resolved_figures = filter_duplicate_figures(resolved_figures)
+
+            # Step 8: Store resolution stats
+            self._resolution_stats = get_resolution_stats(
+                resolved_figures, resolved_tables
+            )
+
+            # Step 9: Convert resolved figures to ImageBlocks
+            for page_num in sorted(graph.pages.keys()):
+                page_obj = graph.pages[page_num]
+                page_figures = [
+                    rf for rf in resolved_figures if rf.page_num == page_num
+                ]
+
+                new_images: List[ImageBlock] = []
+                for idx, rf in enumerate(page_figures):
+                    # Render image from source
+                    image_base64 = None
+                    ocr_text = None
+
+                    if rf.figure_type == "raster" and isinstance(rf.figure, EmbeddedFigure):
+                        # Render from xref
+                        try:
+                            img_bytes = render_figure_by_xref(doc, rf.figure.xref)
+                            image_base64 = base64.b64encode(img_bytes).decode("utf-8")
+                        except Exception:
+                            pass
+                    elif rf.figure_type == "vector" and isinstance(rf.figure, VectorFigure):
+                        # Render vector region
+                        try:
+                            img_bytes = render_vector_figure(
+                                doc, rf.page_num, rf.bbox, dpi=200
+                            )
+                            image_base64 = base64.b64encode(img_bytes).decode("utf-8")
+                        except Exception:
+                            pass
+                    elif rf.figure_type == "layout_model":
+                        # Use existing base64 from layout model
+                        if hasattr(rf.figure, "image_base64"):
+                            image_base64 = rf.figure.image_base64
+                        if hasattr(rf.figure, "ocr_text"):
+                            ocr_text = rf.figure.ocr_text
+
+                    # Determine image type
+                    img_type = self._classify_image_type(
+                        rf.caption_text, ocr_text
+                    )
+
+                    # Create bounding box
+                    x0, y0, x1, y1 = rf.bbox
+                    page_w, page_h = page_obj.width, page_obj.height
+                    bbox = BoundingBox(
+                        coords=(x0, y0, x1, y1),
+                        page_width=page_w,
+                        page_height=page_h,
+                    )
+
+                    # Store metadata about source
+                    metadata = {
+                        "source": rf.source,
+                        "figure_type": rf.figure_type,
+                    }
+                    if rf.caption:
+                        metadata["caption_number"] = rf.caption.number
+
+                    new_images.append(
+                        ImageBlock(
+                            page_num=page_num,
+                            reading_order_index=len(page_obj.blocks) + idx,
+                            image_base64=image_base64,
+                            ocr_text=ocr_text,
+                            caption=rf.caption_text,
+                            image_type=img_type,
+                            bbox=bbox,
+                            metadata=metadata,
+                        )
+                    )
+
+                # Replace page images with resolved ones
+                page_obj.images = new_images
+
+        finally:
+            doc.close()
+
+        return graph
+
+    def _classify_image_type(
+        self,
+        caption: Optional[str],
+        ocr_text: Optional[str],
+    ) -> ImageType:
+        """Classify image type from caption and OCR text."""
+        check_text = (caption or "") + " " + (ocr_text or "")
+        check_lower = check_text.lower()
+
+        # Flowchart: CONSORT diagrams, patient flow, screening
+        if any(kw in check_lower for kw in [
+            "screened", "randomized", "enrolled", "consort", "flow",
+            "excluded", "discontinued", "completed", "allocation"
+        ]):
+            return ImageType.FLOWCHART
+
+        # Chart: various clinical trial result charts
+        has_percentages = bool(re.search(r'\d+%|\d+\s*%', check_text))
+        if has_percentages or any(kw in check_lower for kw in [
+            "kaplan", "survival", "curve", "plot", "bar", "proportion",
+            "percentage", "reduction", "change", "effect", "endpoint",
+            "month", "week", "baseline", "placebo", "treatment",
+            "pie", "distribution", "frequency", "symptoms", "serology",
+            "fig.", "figure", "organ", "involvement"
+        ]):
+            return ImageType.CHART
+
+        # Diagram: mechanism, pathway diagrams
+        if any(kw in check_lower for kw in [
+            "diagram", "schematic", "mechanism", "pathway", "cascade"
+        ]):
+            return ImageType.DIAGRAM
+
+        return ImageType.UNKNOWN
 
     def get_page_layout_info(self, page_num: int) -> Optional[Dict[str, Any]]:
         """Get detected layout info for a specific page (after parsing)."""
@@ -774,6 +1015,10 @@ class PDFToDocGraphParser(BaseParser):
     def get_all_layout_info(self) -> Dict[int, Dict[str, Any]]:
         """Get detected layout info for all pages (after parsing)."""
         return self._page_layouts.copy()
+
+    def get_resolution_stats(self) -> Dict[str, Any]:
+        """Get figure/table resolution stats (after parsing)."""
+        return self._resolution_stats.copy()
 
     # -----------------------
     # Unstructured call

@@ -1044,6 +1044,10 @@ class ExportManager:
         }
 
         for img in images:
+            # Check extraction source from metadata (B09-B11 native extraction)
+            extraction_source = img.metadata.get("source") if img.metadata else None
+            figure_type = img.metadata.get("figure_type") if img.metadata else None
+
             img_data: Dict[str, Any] = {
                 "page": img.page_num,
                 "type": img.image_type.value,
@@ -1051,6 +1055,8 @@ class ExportManager:
                 "ocr_text": img.ocr_text,
                 "bbox": list(img.bbox.coords) if img.bbox else None,
                 "image_base64": img.image_base64,
+                "extraction_source": extraction_source,
+                "figure_type": figure_type,
             }
 
             # Run Vision LLM analysis based on image type
@@ -1116,18 +1122,35 @@ class ExportManager:
                 img_path = out_dir / img_filename
 
                 try:
-                    # Try to re-render with generous padding for captions/legends
+                    # Determine padding based on extraction source
+                    # Native extraction (caption_linked, orphan_native) has accurate bboxes
+                    # Use minimal padding for these, generous padding for layout_model
                     rendered_base64 = None
                     if img.bbox:
-                        rendered_base64 = self.render_figure_with_padding(
-                            pdf_path=pdf_path,
-                            page_num=img.page_num,
-                            bbox=img.bbox.coords,
-                            padding=75,          # Extra space on left side
-                            top_padding=100,     # Extra space above figure
-                            bottom_padding=350,  # Extra space for long figure captions/legends
-                            right_padding=200,   # Extra space for multi-panel figures
-                        )
+                        if extraction_source in ("caption_linked", "orphan_native"):
+                            # Minimal padding for accurate native bboxes
+                            # Caption-linked figures: expand below for caption text
+                            bottom_pad = 150 if extraction_source == "caption_linked" else 50
+                            rendered_base64 = self.render_figure_with_padding(
+                                pdf_path=pdf_path,
+                                page_num=img.page_num,
+                                bbox=img.bbox.coords,
+                                padding=20,           # Minimal left padding
+                                top_padding=20,       # Minimal top padding
+                                bottom_padding=bottom_pad,  # Include caption below
+                                right_padding=30,     # Minimal right padding
+                            )
+                        else:
+                            # Generous padding for layout_model or unknown source
+                            rendered_base64 = self.render_figure_with_padding(
+                                pdf_path=pdf_path,
+                                page_num=img.page_num,
+                                bbox=img.bbox.coords,
+                                padding=75,           # Extra space on left side
+                                top_padding=100,      # Extra space above figure
+                                bottom_padding=350,   # Extra space for captions/legends
+                                right_padding=200,    # Extra space for multi-panel
+                            )
 
                     # Use re-rendered image if successful, otherwise use original
                     if rendered_base64:
@@ -1149,9 +1172,16 @@ class ExportManager:
         with open(out_file, "w", encoding="utf-8") as f:
             json.dump(export_data, f, indent=2)
 
+        # Count by source
+        source_counts = {}
+        for img in export_data["images"]:
+            src = img.get("extraction_source", "unknown")
+            source_counts[src] = source_counts.get(src, 0) + 1
+
         saved_count = sum(1 for img in export_data["images"] if "saved_file" in img)
         analyzed_count = sum(1 for img in export_data["images"] if "vision_analysis" in img)
-        print(f"  Images export: {out_file.name} ({len(images)} images, {saved_count} saved, {analyzed_count} analyzed)")
+        source_str = ", ".join(f"{k}:{v}" for k, v in source_counts.items()) if source_counts else ""
+        print(f"  Images export: {out_file.name} ({len(images)} images, {saved_count} saved, {analyzed_count} analyzed, sources: {source_str})")
 
     def export_tables(
         self, pdf_path: Path, doc: "DocumentGraph"
