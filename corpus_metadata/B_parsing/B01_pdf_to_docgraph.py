@@ -153,6 +153,9 @@ OCR_GARBAGE_PATTERNS = [
 ]
 OCR_GARBAGE_RE = re.compile("|".join(OCR_GARBAGE_PATTERNS))
 
+# Pattern to detect percentage values in text (for chart classification)
+PERCENTAGE_PATTERN = re.compile(r'\d+%|\d+\s*%')
+
 # Pattern to detect garbled flowchart/diagram content
 # Matches text with numbered steps separated by symbols like + * | ~
 FLOWCHART_PATTERN = re.compile(
@@ -776,7 +779,7 @@ class PDFToDocGraphParser(BaseParser):
                     img_type = ImageType.FLOWCHART
                 # Chart: various clinical trial result charts (including pie charts)
                 # Also detect by percentage patterns in OCR text
-                has_percentages = bool(re.search(r'\d+%|\d+\s*%', check_text))
+                has_percentages = bool(PERCENTAGE_PATTERN.search(check_text))
                 if has_percentages or any(kw in check_lower for kw in [
                     "kaplan", "survival", "curve", "plot", "bar", "proportion",
                     "percentage", "reduction", "change", "effect", "endpoint",
@@ -990,7 +993,7 @@ class PDFToDocGraphParser(BaseParser):
             return ImageType.FLOWCHART
 
         # Chart: various clinical trial result charts
-        has_percentages = bool(re.search(r'\d+%|\d+\s*%', check_text))
+        has_percentages = bool(PERCENTAGE_PATTERN.search(check_text))
         if has_percentages or any(kw in check_lower for kw in [
             "kaplan", "survival", "curve", "plot", "bar", "proportion",
             "percentage", "reduction", "change", "effect", "endpoint",
