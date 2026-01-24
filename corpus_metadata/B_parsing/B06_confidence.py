@@ -660,3 +660,205 @@ class ContradictionDetector:
         contradictions.extend(self.detect_lab_contradictions(criteria))
         contradictions.extend(self.detect_severity_contradictions(criteria))
         return contradictions
+
+
+# =============================================================================
+# UNIFIED CONFIDENCE CALCULATOR (CENTRAL AUTHORITY)
+# =============================================================================
+
+
+class UnifiedConfidenceCalculator:
+    """
+    SINGLE source of truth for ALL confidence calculations.
+
+    INVARIANT: Strategies MUST NOT set confidence directly.
+    All confidence must be computed through this class.
+
+    This calculator takes RawExtraction (which contains features) and produces
+    the final confidence score. It also converts RawExtraction to ExtractionResult.
+
+    Example:
+        >>> from A_core.A02_interfaces import RawExtraction
+        >>> from A_core.A14_extraction_result import EntityType
+        >>>
+        >>> raw = RawExtraction(
+        ...     doc_id="doc1",
+        ...     entity_type=EntityType.DISEASE,
+        ...     field_name="disease",
+        ...     value="pulmonary arterial hypertension",
+        ...     page_num=1,
+        ...     strategy_id="disease_lexicon_orphanet",
+        ...     section_name="abstract",
+        ...     lexicon_matched=True,
+        ... )
+        >>> calc = UnifiedConfidenceCalculator()
+        >>> result = calc.to_extraction_result(raw)
+        >>> result.confidence
+        0.75
+    """
+
+    def __init__(
+        self,
+        base_confidence: float = 0.5,
+        min_confidence: float = 0.1,
+        max_confidence: float = 0.95,
+    ):
+        """
+        Initialize the unified confidence calculator.
+
+        Args:
+            base_confidence: Starting confidence before features (default 0.5)
+            min_confidence: Minimum allowed confidence (default 0.1)
+            max_confidence: Maximum allowed confidence (default 0.95)
+        """
+        self.base = base_confidence
+        self.min = min_confidence
+        self.max = max_confidence
+
+        # Import here to avoid circular imports
+        from A_core.A14_extraction_result import EntityType
+
+        # Expected sections per entity type and field
+        self._expected_sections: Dict[str, List[str]] = {
+            EntityType.DISEASE.value: ["abstract", "methods", "results", "discussion"],
+            EntityType.DRUG.value: ["abstract", "methods", "results"],
+            EntityType.ABBREVIATION.value: ["methods", "abstract"],
+            EntityType.FEASIBILITY.value: ["eligibility", "methods"],
+            EntityType.GENE.value: ["abstract", "methods", "results"],
+            EntityType.PHARMA.value: ["abstract", "methods"],
+            EntityType.AUTHOR.value: ["methods", "abstract"],
+            EntityType.CITATION.value: ["references", "methods"],
+            EntityType.METADATA.value: ["abstract"],
+        }
+
+    def get_expected_sections(self, entity_type_value: str) -> List[str]:
+        """Get expected sections for an entity type."""
+        return self._expected_sections.get(entity_type_value, [])
+
+    def calculate(
+        self,
+        raw: "RawExtraction",
+    ) -> tuple:
+        """
+        Compute final confidence from RawExtraction features.
+
+        Args:
+            raw: RawExtraction with features populated by the strategy.
+
+        Returns:
+            Tuple of (confidence_score, feature_breakdown as tuple of tuples)
+        """
+        # Import here to avoid circular imports
+        from A_core.A02_interfaces import RawExtraction
+
+        features: Dict[str, float] = {}
+
+        # Section matching bonus
+        expected_sections = self.get_expected_sections(raw.entity_type.value)
+        if raw.section_name and raw.section_name.lower() in [s.lower() for s in expected_sections]:
+            features["section_match"] = 0.15
+        else:
+            features["section_match"] = 0.0
+
+        # Pattern strength (from strategy, capped at 0.3)
+        features["pattern_strength"] = min(raw.pattern_strength, 0.3)
+
+        # Source quality bonus for tables
+        features["source_quality"] = 0.15 if raw.from_table else 0.0
+
+        # Lexicon match bonus
+        features["lexicon_match"] = 0.1 if raw.lexicon_matched else 0.0
+
+        # External validation bonus (PubTator, UMLS, etc.)
+        features["external_validation"] = 0.15 if raw.externally_validated else 0.0
+
+        # Negation penalty
+        features["negation_penalty"] = -0.2 if raw.negated else 0.0
+
+        # Calculate total score
+        score = self.base + sum(features.values())
+        score = max(self.min, min(self.max, score))
+
+        # Return as immutable tuple of tuples for ExtractionResult
+        feature_tuple = tuple(sorted(features.items()))
+        return score, feature_tuple
+
+    def to_extraction_result(
+        self,
+        raw: "RawExtraction",
+    ) -> "ExtractionResult":
+        """
+        Convert RawExtraction to final ExtractionResult with computed confidence.
+
+        This is the primary method for producing ExtractionResult instances.
+        The confidence is computed from the features in RawExtraction.
+
+        Args:
+            raw: RawExtraction with features populated by the strategy.
+
+        Returns:
+            Immutable ExtractionResult with computed confidence.
+        """
+        # Import here to avoid circular imports
+        from A_core.A02_interfaces import RawExtraction
+        from A_core.A14_extraction_result import ExtractionResult, Provenance
+
+        confidence, features = self.calculate(raw)
+
+        return ExtractionResult(
+            doc_id=raw.doc_id,
+            entity_type=raw.entity_type,
+            field_name=raw.field_name,
+            value=raw.value,
+            provenance=Provenance(
+                page_num=raw.page_num,
+                strategy_id=raw.strategy_id,
+                bbox=raw.bbox,
+                node_ids=raw.node_ids,
+                char_span=raw.char_span,
+                strategy_version=raw.strategy_version,
+                doc_fingerprint=raw.doc_fingerprint,
+                lexicon_source=raw.lexicon_source,
+            ),
+            normalized_value=raw.normalized_value,
+            confidence=confidence,
+            confidence_features=features,
+            evidence_text=raw.evidence_text,
+            supporting_evidence=raw.supporting_evidence,
+            standard_ids=raw.standard_ids,
+            extensions=raw.extensions,
+            status="pending",
+        )
+
+    def apply_threshold(
+        self,
+        result: "ExtractionResult",
+        threshold: float,
+    ) -> "ExtractionResult":
+        """
+        Apply calibrated threshold to determine validation status.
+
+        Args:
+            result: ExtractionResult with computed confidence.
+            threshold: Confidence threshold for this field.
+
+        Returns:
+            New ExtractionResult with updated status.
+        """
+        if result.confidence >= threshold:
+            return result.with_status("validated")
+        else:
+            reason = f"Confidence {result.confidence:.2f} below threshold {threshold:.2f}"
+            return result.with_status("rejected", rejection_reason=reason)
+
+
+# Singleton unified calculator
+_UNIFIED_CALCULATOR: Optional[UnifiedConfidenceCalculator] = None
+
+
+def get_unified_confidence_calculator() -> UnifiedConfidenceCalculator:
+    """Get the singleton UnifiedConfidenceCalculator instance."""
+    global _UNIFIED_CALCULATOR
+    if _UNIFIED_CALCULATOR is None:
+        _UNIFIED_CALCULATOR = UnifiedConfidenceCalculator()
+    return _UNIFIED_CALCULATOR

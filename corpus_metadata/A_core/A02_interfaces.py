@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, TypeVar, Generic
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple, TypeVar, Generic
 
 # Python 3.9-friendly TypeAlias
 from typing_extensions import TypeAlias
@@ -11,9 +12,180 @@ from A_core.A01_domain_models import (
     Candidate,
     ExtractedEntity,
 )
+from A_core.A14_extraction_result import EntityType, ExtractionResult
 
 # Flexible doc model
 DocumentModel: TypeAlias = Any
+
+
+# -----------------------------------------------------------------------------
+# Execution Context for Deterministic Orchestration
+# -----------------------------------------------------------------------------
+
+
+@dataclass
+class ExecutionContext:
+    """
+    Shared context passed through all extraction steps.
+    Strategies can READ prior outputs but NEVER gate execution.
+
+    INVARIANT: All steps run unconditionally; this context is for data sharing only.
+    """
+
+    plan_id: str
+    doc_id: str
+    doc_fingerprint: str
+    outputs_by_step: Dict[str, List["RawExtraction"]] = None  # type: ignore[assignment]
+
+    def __post_init__(self) -> None:
+        if self.outputs_by_step is None:
+            self.outputs_by_step = {}
+
+    def get_prior_outputs(self, strategy_id: str) -> List["RawExtraction"]:
+        """Get outputs from a prior step. Returns empty list if none."""
+        return self.outputs_by_step.get(strategy_id, [])
+
+
+# -----------------------------------------------------------------------------
+# RawExtraction: Strategy Output with Features (NOT final confidence)
+# -----------------------------------------------------------------------------
+
+
+@dataclass
+class RawExtraction:
+    """
+    Raw extraction output from strategies.
+    Contains features but NOT final confidence.
+
+    INVARIANT: Confidence is computed ONLY by UnifiedConfidenceCalculator.
+    Strategies MUST NOT set confidence directly; they emit features instead.
+    """
+
+    # Required fields
+    doc_id: str
+    entity_type: EntityType
+    field_name: str  # e.g., "disease", "drug_name", "abbreviation"
+    value: str  # Primary extracted value
+    page_num: int  # 1-based page number
+    strategy_id: str  # Which strategy produced this
+
+    # Optional fields
+    normalized_value: Optional[str] = None
+    bbox: Optional[Tuple[float, float, float, float]] = None  # (x0, y0, x1, y1)
+    node_ids: Tuple[str, ...] = ()  # Immutable tuple of block_id, table_id, etc.
+    char_span: Optional[Tuple[int, int]] = None  # (start, end) within node
+    strategy_version: str = "1.0.0"
+    doc_fingerprint: str = ""
+    lexicon_source: Optional[str] = None
+
+    # Evidence
+    evidence_text: str = ""
+    supporting_evidence: Tuple[str, ...] = ()  # Immutable
+
+    # Standard IDs
+    standard_ids: Tuple[Tuple[str, str], ...] = ()  # e.g., (("ORPHA", "182090"),)
+    extensions: Tuple[Tuple[str, Any], ...] = ()  # Domain-specific extras
+
+    # -------------------------------------------------------------------------
+    # FEATURES for confidence calculation (NOT final confidence)
+    # These are used by UnifiedConfidenceCalculator to compute the final score.
+    # -------------------------------------------------------------------------
+    section_name: Optional[str] = None  # Which section was this found in
+    from_table: bool = False  # Was this extracted from a table (higher quality)
+    lexicon_matched: bool = False  # Did this match a curated lexicon
+    externally_validated: bool = False  # PubTator, UMLS, etc.
+    pattern_strength: float = 0.0  # How strong was the pattern match (0.0-1.0)
+    negated: bool = False  # Was this in a negation context
+
+
+# -----------------------------------------------------------------------------
+# BaseExtractor: Universal Interface for All Extraction Strategies
+# -----------------------------------------------------------------------------
+
+
+class BaseExtractor(ABC):
+    """
+    Universal interface for all extraction strategies.
+
+    INVARIANT: Extractors consume DocumentGraph only (via doc_graph parameter).
+    INVARIANT: Extractors emit RawExtraction (features), NOT final confidence.
+    INVARIANT: Extractors never skip execution; they may return empty list.
+
+    Example:
+        >>> class DiseaseExtractor(BaseExtractor):
+        ...     @property
+        ...     def strategy_id(self) -> str:
+        ...         return "disease_lexicon_orphanet"
+        ...
+        ...     @property
+        ...     def strategy_version(self) -> str:
+        ...         return "1.0.0"
+        ...
+        ...     @property
+        ...     def entity_type(self) -> EntityType:
+        ...         return EntityType.DISEASE
+        ...
+        ...     def extract(self, doc_graph, ctx, config) -> List[RawExtraction]:
+        ...         # Extraction logic here
+        ...         return []
+    """
+
+    @property
+    @abstractmethod
+    def strategy_id(self) -> str:
+        """
+        Unique identifier for this strategy.
+        Used in provenance and merge conflict resolution.
+        Example: "disease_lexicon_orphanet", "abbreviation_syntax"
+        """
+        raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def strategy_version(self) -> str:
+        """
+        Version string for reproducibility.
+        Should be updated when strategy logic changes.
+        Example: "1.0.0", "2.1.3"
+        """
+        raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def entity_type(self) -> EntityType:
+        """What type of entity this extractor produces."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def extract(
+        self,
+        doc_graph: DocumentModel,
+        ctx: ExecutionContext,
+        config: Dict[str, Any],
+    ) -> List[RawExtraction]:
+        """
+        Extract entities from DocumentGraph.
+
+        Args:
+            doc_graph: Parsed document structure with stable node IDs.
+                       This is a DocumentGraph from B_parsing/B02_doc_graph.py.
+            ctx: Shared execution context. Use ctx.get_prior_outputs()
+                 to read outputs from earlier steps. NEVER gate execution
+                 based on ctx contents; always run and return results
+                 (possibly empty list).
+            config: Step-specific configuration from the extraction plan.
+
+        Returns:
+            List of RawExtraction with features (NOT final confidence).
+            Return empty list if no entities found.
+
+        IMPORTANT:
+            - Do NOT set confidence directly; emit features instead.
+            - Always return a list (possibly empty), never raise to skip.
+            - Use doc_graph.iter_linear_blocks() or doc_graph.iter_tables()
+              for iteration; never access raw text outside of DocGraph.
+        """
+        raise NotImplementedError
 
 # Type variables for generic enricher
 InputT = TypeVar("InputT")
