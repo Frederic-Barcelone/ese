@@ -658,7 +658,8 @@ class Orchestrator:
                     counters.blacklisted_fp_count +
                     counters.context_rejected +
                     counters.trial_id_excluded +
-                    counters.common_word_rejected
+                    counters.common_word_rejected +
+                    counters.form_filter_rejected
                 )
                 metrics.heuristics.total_processed = len(needs_validation)
                 metrics.heuristics.auto_approved = auto_approved
