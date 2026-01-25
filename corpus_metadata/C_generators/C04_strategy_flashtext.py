@@ -117,6 +117,9 @@ OBVIOUS_NOISE: set = {
     # Citation artifacts
     "et",
     "al",
+    # Name suffixes (part of author names, not abbreviations)
+    "jr",
+    "sr",
     # Month names and abbreviations (not domain abbreviations)
     "jan",
     "feb",
