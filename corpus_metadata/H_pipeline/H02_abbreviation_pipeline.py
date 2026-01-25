@@ -738,6 +738,22 @@ Return ONLY the JSON array, nothing else."""
             ):
                 continue
 
+            # Skip likely author initials: short (2-5 char) all-uppercase with no expansion
+            # appearing in author/contributor context
+            if (
+                lf_candidate is None
+                and len(sf_candidate) <= 5
+                and sf_candidate.isupper()
+            ):
+                ctx_lower = temp_ctx.lower()
+                author_keywords = [
+                    "contributor", "author", "academic", "steering committee",
+                    "wrote the", "drafted", "reviewed", "edited", "et al",
+                    "declaration of interests", "conflicts of interest"
+                ]
+                if any(kw in ctx_lower for kw in author_keywords):
+                    continue  # Likely author initials, skip
+
             # Find context
             idx = full_text.find(sf_candidate)
             if idx == -1:
