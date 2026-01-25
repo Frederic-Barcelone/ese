@@ -754,6 +754,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                         rule_version="inline_regex::v1",
                         lexicon_source="inline_definition",
                         lexicon_ids=None,
+                        generator_type=GeneratorType.INLINE_DEFINITION,
                     )
                 )
 
@@ -771,6 +772,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         rule_version: str,
         lexicon_source: str,
         lexicon_ids: Optional[List[LexiconIdentifier]] = None,
+        generator_type: Optional[GeneratorType] = None,
     ) -> Candidate:
         ctx = self._make_context(text, start, end)
 
@@ -780,11 +782,14 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
             bbox=block.bbox,
         )
 
+        # Use provided generator_type or fall back to self.generator_type
+        gen_type = generator_type or self.generator_type
+
         prov = ProvenanceMetadata(
             pipeline_version=self.pipeline_version,
             run_id=self.run_id,
             doc_fingerprint=self.doc_fingerprint_default,
-            generator_name=self.generator_type,
+            generator_name=gen_type,
             rule_version=rule_version,
             lexicon_source=lexicon_source,
             lexicon_ids=lexicon_ids,
@@ -793,7 +798,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         return Candidate(
             doc_id=doc.doc_id,
             field_type=FieldType.DEFINITION_PAIR,
-            generator_type=self.generator_type,
+            generator_type=gen_type,
             short_form=short_form,
             long_form=long_form,
             context_text=ctx,

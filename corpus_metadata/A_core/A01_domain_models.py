@@ -49,6 +49,7 @@ class GeneratorType(str, Enum):
     RIGID_PATTERN = "gen:rigid_pattern"  # C02: DOI, trial IDs, doses, etc.
     TABLE_LAYOUT = "gen:table_layout"  # C03: Spatial extraction
     LEXICON_MATCH = "gen:lexicon_match"  # C04: Dictionary matching
+    INLINE_DEFINITION = "gen:inline_definition"  # C04: Explicit inline definitions (SF=LF)
 
 
 class ValidationStatus(str, Enum):
