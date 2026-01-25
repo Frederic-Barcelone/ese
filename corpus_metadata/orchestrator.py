@@ -51,11 +51,61 @@ warnings.filterwarnings("ignore", message=r".*Could not get FontBBox.*")  # pdfm
 
 import sys
 import time
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import yaml
 from dotenv import load_dotenv
+
+
+@dataclass
+class StageTimer:
+    """Track timing for pipeline stages."""
+
+    timings: Dict[str, float] = field(default_factory=dict)
+    _start_times: Dict[str, float] = field(default_factory=dict)
+
+    def start(self, stage: str) -> None:
+        """Start timing a stage."""
+        self._start_times[stage] = time.time()
+
+    def stop(self, stage: str) -> float:
+        """Stop timing a stage and return elapsed time."""
+        if stage not in self._start_times:
+            return 0.0
+        elapsed = time.time() - self._start_times[stage]
+        self.timings[stage] = elapsed
+        return elapsed
+
+    def get(self, stage: str) -> float:
+        """Get elapsed time for a stage."""
+        return self.timings.get(stage, 0.0)
+
+    def total(self) -> float:
+        """Get total time across all stages."""
+        return sum(self.timings.values())
+
+    def print_summary(self) -> None:
+        """Print timing summary."""
+        if not self.timings:
+            return
+
+        total = self.total()
+        print(f"\n{'─' * 50}")
+        print("⏱  TIMING SUMMARY")
+        print(f"{'─' * 50}")
+
+        # Sort by execution order (approximate by order added)
+        for stage, elapsed in self.timings.items():
+            pct = (elapsed / total * 100) if total > 0 else 0
+            bar_len = int(pct / 5)  # 20 chars max
+            bar = "█" * bar_len + "░" * (20 - bar_len)
+            print(f"  {stage:<25} {elapsed:>6.1f}s  {bar} {pct:>5.1f}%")
+
+        print(f"{'─' * 50}")
+        print(f"  {'TOTAL':<25} {total:>6.1f}s")
+        print(f"{'─' * 50}")
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 # =============================================================================
@@ -608,13 +658,20 @@ class Orchestrator:
         doc_id = str(pdf_path_obj.stem)
         metrics = PipelineMetrics(run_id=self.run_id, doc_id=doc_id)
 
+        # Initialize stage timer
+        timer = StageTimer()
+        timer.start("total")
+
         print(f"\n{'=' * 60}")
         print(f"Processing: {pdf_path_obj.name}")
         print(f"{'=' * 60}")
 
         # Stage 1: Parse PDF
+        timer.start("1. PDF Parsing")
         output_dir = self._get_output_dir(pdf_path_obj)
         doc = self.abbreviation_pipeline.parse_pdf(pdf_path_obj, output_dir)
+        parse_time = timer.stop("1. PDF Parsing")
+        print(f"  ⏱  {parse_time:.1f}s")
 
         # Export extracted text
         self.export_manager.export_extracted_text(pdf_path_obj, doc)
@@ -630,7 +687,10 @@ class Orchestrator:
         counters = HeuristicsCounters()
 
         if self.extract_abbreviations:
+            timer.start("2. Candidate Generation")
             unique_candidates, full_text = self.abbreviation_pipeline.generate_candidates(doc)
+            gen_time = timer.stop("2. Candidate Generation")
+            print(f"  ⏱  {gen_time:.1f}s")
 
             # Update generation metrics
             metrics.generation.generated_candidates = len(unique_candidates)
@@ -699,7 +759,7 @@ class Orchestrator:
                 print(f"  Auto-rejected common words: {counters.common_word_rejected}")
                 print(f"  Candidates for LLM: {len(llm_candidates)}")
 
-                start = time.time()
+                timer.start("3. LLM Validation")
 
                 # Log auto results
                 for candidate, entity in auto_results:
@@ -720,7 +780,8 @@ class Orchestrator:
                 metrics.validation.llm_ambiguous = llm_ambiguous
                 metrics.validation.llm_calls = len(llm_candidates)
 
-                print(f"  Time: {time.time() - start:.2f}s")
+                val_time = timer.stop("3. LLM Validation")
+                print(f"  ⏱  {val_time:.1f}s")
 
                 # Search for missing abbreviations
                 found_sfs = {
@@ -745,64 +806,92 @@ class Orchestrator:
                 metrics.validation.sf_only_from_llm = len(sf_only_results)
 
             # Normalize
+            timer.start("4. Normalization")
             results = self.abbreviation_pipeline.normalize_results(results, full_text)
+            norm_time = timer.stop("4. Normalization")
+            print(f"  ⏱  {norm_time:.1f}s")
         else:
             print("\n[Abbreviation detection] SKIPPED (disabled in config)")
 
         # Stage 5-9: Entity extraction
         disease_results: List[ExtractedDisease] = []
         if self.extract_diseases:
+            timer.start("5. Disease Detection")
             disease_results = self.entity_processor.process_diseases(doc, pdf_path_obj)
+            disease_time = timer.stop("5. Disease Detection")
+            print(f"  ⏱  {disease_time:.1f}s")
         else:
             print("\n[Disease detection] SKIPPED (disabled in config)")
 
         gene_results: List[ExtractedGene] = []
         if self.extract_genes:
+            timer.start("6. Gene Detection")
             gene_results = self.entity_processor.process_genes(doc, pdf_path_obj)
+            gene_time = timer.stop("6. Gene Detection")
+            print(f"  ⏱  {gene_time:.1f}s")
         else:
             print("\n[Gene detection] SKIPPED (disabled in config)")
 
         drug_results: List[ExtractedDrug] = []
         if self.extract_drugs:
+            timer.start("7. Drug Detection")
             drug_results = self.entity_processor.process_drugs(doc, pdf_path_obj)
+            drug_time = timer.stop("7. Drug Detection")
+            print(f"  ⏱  {drug_time:.1f}s")
         else:
             print("\n[Drug detection] SKIPPED (disabled in config)")
 
         pharma_results: List[ExtractedPharma] = []
         if self.extract_pharma:
+            timer.start("8. Pharma Detection")
             pharma_results = self.entity_processor.process_pharma(doc, pdf_path_obj)
+            pharma_time = timer.stop("8. Pharma Detection")
+            print(f"  ⏱  {pharma_time:.1f}s")
         else:
             print("\n[Pharma detection] SKIPPED (disabled in config)")
 
         author_results: List[ExtractedAuthor] = []
         if self.extract_authors:
+            timer.start("9a. Author Detection")
             author_results = self.entity_processor.process_authors(doc, pdf_path_obj, full_text)
+            author_time = timer.stop("9a. Author Detection")
+            print(f"  ⏱  {author_time:.1f}s")
         else:
             print("\n[Author detection] SKIPPED (disabled in config)")
 
         citation_results: List[ExtractedCitation] = []
         if self.extract_citations:
+            timer.start("9b. Citation Detection")
             citation_results = self.entity_processor.process_citations(doc, pdf_path_obj, full_text)
+            citation_time = timer.stop("9b. Citation Detection")
+            print(f"  ⏱  {citation_time:.1f}s")
         else:
             print("\n[Citation detection] SKIPPED (disabled in config)")
 
         # Stage 10: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
+            timer.start("10. Feasibility")
             feasibility_results = self.feasibility_processor.process(doc, pdf_path_obj, full_text)
+            feas_time = timer.stop("10. Feasibility")
+            print(f"  ⏱  {feas_time:.1f}s")
         else:
             print("\n[Feasibility extraction] SKIPPED (disabled in config)")
 
         # Stage 11: Document metadata extraction
         doc_metadata: Optional[DocumentMetadata] = None
         if self.extract_doc_metadata:
+            timer.start("11. Doc Metadata")
             doc_metadata = self._process_document_metadata(
                 doc, pdf_path_obj, full_text[:5000]
             )
+            meta_time = timer.stop("11. Doc Metadata")
+            print(f"  ⏱  {meta_time:.1f}s")
         else:
             print("\n[Document metadata] SKIPPED (disabled in config)")
 
         # Stage 12: Summary & Export
+        timer.start("12. Export")
         print("\n[12/12] Writing summary...")
         self.logger.write_summary()
         self.logger.print_summary()
@@ -897,6 +986,13 @@ class Orchestrator:
             extract_feasibility=self.extract_feasibility,
         )
 
+        # Stop export timer and total timer
+        timer.stop("12. Export")
+        timer.stop("total")
+
+        # Print timing summary
+        timer.print_summary()
+
         return results
 
     def _process_document_metadata(
@@ -907,7 +1003,6 @@ class Orchestrator:
             return None
 
         print("\n[11/12] Extracting document metadata...")
-        start = time.time()
 
         try:
             metadata = self.doc_metadata_strategy.extract(
@@ -916,10 +1011,6 @@ class Orchestrator:
                 doc_id=pdf_path.stem,
                 content_sample=content_sample,
             )
-
-            elapsed = time.time() - start
-            print(f"  Time: {elapsed:.2f}s")
-
             return metadata
         except Exception as e:
             print(f"  [WARN] Document metadata extraction failed: {e}")
@@ -1063,6 +1154,9 @@ class Orchestrator:
             print(f"No PDF files found in {folder}")
             return {}
 
+        batch_start = time.time()
+        doc_times: Dict[str, float] = {}
+
         print(f"\n{'#' * 60}")
         print(f"BATCH PROCESSING: {len(pdf_files)} PDFs")
         print(f"Folder: {folder}")
@@ -1072,13 +1166,18 @@ class Orchestrator:
 
         for i, pdf_path in enumerate(pdf_files, 1):
             print(f"\n[{i}/{len(pdf_files)}] {pdf_path.name}")
+            doc_start = time.time()
             try:
                 all_results[pdf_path.name] = self.process_pdf(
                     str(pdf_path), batch_delay_ms=batch_delay_ms
                 )
+                doc_times[pdf_path.name] = time.time() - doc_start
             except Exception as e:
                 print(f"  [WARN] ERROR: {e}")
                 all_results[pdf_path.name] = []
+                doc_times[pdf_path.name] = time.time() - doc_start
+
+        batch_elapsed = time.time() - batch_start
 
         print(f"\n{'#' * 60}")
         print("BATCH COMPLETE")
@@ -1091,6 +1190,19 @@ class Orchestrator:
         )
         print(f"Total validated abbreviations: {total_validated}")
         print(f"Log directory: {self.log_dir}")
+
+        # Print batch timing summary
+        print(f"\n{'─' * 50}")
+        print("⏱  BATCH TIMING SUMMARY")
+        print(f"{'─' * 50}")
+        for doc_name, doc_time in doc_times.items():
+            print(f"  {doc_name:<40} {doc_time:>6.1f}s")
+        print(f"{'─' * 50}")
+        print(f"  {'TOTAL BATCH TIME':<40} {batch_elapsed:>6.1f}s")
+        if doc_times:
+            avg_time = batch_elapsed / len(doc_times)
+            print(f"  {'AVERAGE PER DOCUMENT':<40} {avg_time:>6.1f}s")
+        print(f"{'─' * 50}")
 
         return all_results
 
