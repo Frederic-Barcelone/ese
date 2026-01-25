@@ -189,15 +189,35 @@ class TableExtractor:
             if cell_texts:
                 avg_cell_length = sum(len(t) for t in cell_texts) / len(cell_texts)
 
-                # If average cell length is very long (>100 chars), likely not a table
+                # Determine column count for adaptive thresholds
+                # 2-column tables (definition/glossary) get more lenient thresholds
+                num_cols = len(rows[0]) if rows else 0
+                is_two_col = num_cols == 2
+
+                # Adaptive thresholds based on table structure
+                # 2-column tables often have long definitions, so we allow longer cells
+                max_avg_cell_length = 200 if is_two_col else 150
+                max_long_cell_pct = 0.50 if is_two_col else 0.30
+                max_prose_pct = 0.25 if is_two_col else 0.15
+
+                # If average cell length is very long, likely not a table
                 # Real table cells are typically short (numbers, names, codes)
-                if avg_cell_length > 100:
-                    return False, f"avg cell length too long ({avg_cell_length:.0f} > 100 chars) - likely prose"
+                # But definition tables can have longer explanatory text
+                if avg_cell_length > max_avg_cell_length:
+                    # Before rejecting, check if it's a definition table
+                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
+                    if is_def_table:
+                        return True, salvage_reason
+                    return False, f"avg cell length too long ({avg_cell_length:.0f} > {max_avg_cell_length} chars) - likely prose"
 
                 # Check for paragraph-like content (multiple sentences in many cells)
                 long_text_cells = sum(1 for t in cell_texts if len(t) > 80)
                 long_pct = long_text_cells / len(cell_texts) * 100
-                if long_text_cells > len(cell_texts) * 0.2:  # >20% cells have long text
+                if long_text_cells / len(cell_texts) > max_long_cell_pct:
+                    # Before rejecting, check if it's a definition table
+                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
+                    if is_def_table:
+                        return True, salvage_reason
                     return False, f"too many long cells ({long_pct:.0f}% > 80 chars) - likely paragraph text"
 
                 # Check for sentence-like content (periods followed by capital letters)
@@ -210,14 +230,25 @@ class TableExtractor:
                         if re.search(r'\. [A-Z]', text):
                             prose_indicators += 1
 
-                # If >15% of cells look like prose, reject
+                # If too many cells look like prose, reject
                 prose_pct = prose_indicators / len(cell_texts) * 100 if cell_texts else 0
-                if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > 0.15:
+                if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > max_prose_pct:
+                    # Before rejecting, check if it's a definition table
+                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
+                    if is_def_table:
+                        return True, salvage_reason
                     return False, f"too many prose cells ({prose_pct:.0f}% contain sentences) - likely article text"
 
                 # Check total text length - real tables shouldn't have huge amounts of text
+                # Relaxed for 2-column tables which may have lengthy definitions
                 total_text = sum(len(t) for t in cell_texts)
-                if total_text > 3000 and len(cell_texts) < 15:  # Lots of text, few cells
+                max_total_text = 5000 if is_two_col else 3000
+                min_cells_for_text = 10 if is_two_col else 15
+                if total_text > max_total_text and len(cell_texts) < min_cells_for_text:
+                    # Before rejecting, check if it's a definition table
+                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
+                    if is_def_table:
+                        return True, salvage_reason
                     return False, f"too much text ({total_text} chars) in few cells ({len(cell_texts)}) - likely prose block"
 
                 # Check for multi-column layout (article text split into columns)

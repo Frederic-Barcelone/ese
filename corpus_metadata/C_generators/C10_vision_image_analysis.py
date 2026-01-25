@@ -246,6 +246,26 @@ class VisionImageAnalyzer:
         self.llm_client = llm_client
         self.llm_model = llm_model
 
+    @staticmethod
+    def _safe_int(value: Any, default: int = 0) -> int:
+        """Safely convert value to int, handling None and invalid types."""
+        if value is None:
+            return default
+        try:
+            return int(value)
+        except (ValueError, TypeError):
+            return default
+
+    @staticmethod
+    def _safe_float(value: Any, default: float = 0.0) -> float:
+        """Safely convert value to float, handling None and invalid types."""
+        if value is None:
+            return default
+        try:
+            return float(value)
+        except (ValueError, TypeError):
+            return default
+
     def analyze_flowchart(
         self,
         image_base64: str,
@@ -269,7 +289,7 @@ class VisionImageAnalyzer:
         if ocr_text:
             prompt += f"\n\nOCR text from image (for reference):\n{ocr_text[:1000]}"
 
-        response = self._call_vision_llm(image_base64, prompt)
+        response = self._call_vision_llm(image_base64, prompt, ocr_fallback_text=ocr_text)
         if not response:
             return None
 
@@ -277,21 +297,25 @@ class VisionImageAnalyzer:
             # Parse exclusion reasons
             exclusions = []
             for exc in response.get("exclusion_reasons", []):
-                if isinstance(exc, dict) and exc.get("reason") and exc.get("count"):
-                    exclusions.append(ExclusionReason(
-                        reason=exc["reason"],
-                        count=int(exc["count"]),
-                    ))
+                if isinstance(exc, dict) and exc.get("reason"):
+                    count = self._safe_int(exc.get("count"), 0)
+                    if count > 0:
+                        exclusions.append(ExclusionReason(
+                            reason=exc["reason"],
+                            count=count,
+                        ))
 
             # Parse stages
             stages = []
             for stg in response.get("stages", []):
-                if isinstance(stg, dict) and stg.get("stage_name") and stg.get("count"):
-                    stages.append(PatientFlowStage(
-                        stage_name=stg["stage_name"],
-                        count=int(stg["count"]),
-                        details=stg.get("details"),
-                    ))
+                if isinstance(stg, dict) and stg.get("stage_name"):
+                    count = self._safe_int(stg.get("count"), 0)
+                    if count > 0:
+                        stages.append(PatientFlowStage(
+                            stage_name=stg["stage_name"],
+                            count=count,
+                            details=stg.get("details"),
+                        ))
 
             return PatientFlowData(
                 screened=response.get("screened"),
@@ -341,7 +365,7 @@ class VisionImageAnalyzer:
                 if isinstance(dp, dict) and dp.get("label") is not None:
                     data_points.append(ChartDataPoint(
                         label=str(dp["label"]),
-                        value=float(dp.get("value", 0)),
+                        value=self._safe_float(dp.get("value"), 0.0),
                         unit=dp.get("unit"),
                         group=dp.get("group"),
                     ))
@@ -393,10 +417,10 @@ class VisionImageAnalyzer:
                 if isinstance(mc, dict) and mc.get("text"):
                     merged_cells.append(TableCellData(
                         text=mc["text"],
-                        row_span=int(mc.get("row_span", 1)),
-                        col_span=int(mc.get("col_span", 1)),
-                        start_row=int(mc.get("start_row", 0)),
-                        start_col=int(mc.get("start_col", 0)),
+                        row_span=self._safe_int(mc.get("row_span"), 1),
+                        col_span=self._safe_int(mc.get("col_span"), 1),
+                        start_row=self._safe_int(mc.get("start_row"), 0),
+                        start_col=self._safe_int(mc.get("start_col"), 0),
                     ))
 
             return VisionTableData(
@@ -463,8 +487,19 @@ class VisionImageAnalyzer:
         self,
         image_base64: str,
         prompt: str,
+        ocr_fallback_text: Optional[str] = None,
     ) -> Optional[Dict[str, Any]]:
-        """Call Vision LLM with image and prompt."""
+        """
+        Call Vision LLM with image and prompt.
+
+        Args:
+            image_base64: Base64-encoded image
+            prompt: Analysis prompt
+            ocr_fallback_text: Optional OCR text to use if Vision fails
+
+        Returns:
+            Parsed response dict or None if failed
+        """
         if not self.llm_client:
             return None
 
@@ -482,9 +517,82 @@ class VisionImageAnalyzer:
         except AttributeError:
             # Fallback: try standard completion with image description
             print("[WARN] Vision LLM not available, using OCR text only")
+            if ocr_fallback_text:
+                return self._extract_from_ocr_text(ocr_fallback_text, prompt)
             return None
         except Exception as e:
-            print(f"[WARN] Vision LLM call failed: {e}")
+            error_msg = str(e)
+            # Check if it's a size limit error
+            if "5 MB" in error_msg or "size" in error_msg.lower() or "exceeds" in error_msg.lower():
+                print(f"[WARN] Vision LLM image too large: {e}")
+            else:
+                print(f"[WARN] Vision LLM call failed: {e}")
+
+            # Try OCR fallback if available
+            if ocr_fallback_text:
+                print("[INFO] Attempting OCR text fallback...")
+                return self._extract_from_ocr_text(ocr_fallback_text, prompt)
+            return None
+
+    def _extract_from_ocr_text(
+        self,
+        ocr_text: str,
+        prompt: str,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Extract structured data from OCR text using text-only LLM.
+
+        This is a fallback when Vision LLM fails (e.g., image too large).
+        Uses Claude's text completion to analyze extracted text.
+
+        Args:
+            ocr_text: OCR text extracted from the figure
+            prompt: Original prompt (used to determine extraction type)
+
+        Returns:
+            Parsed response dict or None if failed
+        """
+        if not self.llm_client or not ocr_text:
+            return None
+
+        # Determine extraction type from prompt
+        extraction_type = "generic"
+        if "flowchart" in prompt.lower() or "screening" in prompt.lower():
+            extraction_type = "flowchart"
+        elif "chart" in prompt.lower() or "kaplan" in prompt.lower():
+            extraction_type = "chart"
+        elif "table" in prompt.lower():
+            extraction_type = "table"
+
+        # Build text-only prompt
+        text_prompt = f"""Analyze the following text extracted from a clinical trial {extraction_type} image.
+Extract any structured data you can find.
+
+Text from image:
+{ocr_text[:3000]}
+
+{prompt}
+
+Note: This is OCR-extracted text, so there may be some extraction errors."""
+
+        try:
+            if hasattr(self.llm_client, "complete_json_any"):
+                response = self.llm_client.complete_json_any(
+                    system_prompt="You are analyzing text extracted from a clinical trial figure.",
+                    user_prompt=text_prompt,
+                    model=self.llm_model,
+                    max_tokens=2000,
+                    temperature=0.0,
+                )
+            else:
+                return None
+
+            result = response if isinstance(response, dict) else None
+            if result:
+                result["_extraction_method"] = "ocr_fallback"
+            return result
+        except Exception as e:
+            print(f"[WARN] OCR text fallback failed: {e}")
             return None
 
 

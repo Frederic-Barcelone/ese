@@ -16,8 +16,8 @@ from __future__ import annotations
 
 import hashlib
 from collections import Counter
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Tuple
 
 import fitz  # PyMuPDF
 
@@ -578,6 +578,88 @@ def detect_all_figures(
         doc.close()
 
 
+def extract_text_from_region(
+    doc: fitz.Document,
+    page_num: int,
+    bbox: Tuple[float, float, float, float],
+    margin: float = 10,
+) -> str:
+    """
+    Extract embedded text from a figure region using PyMuPDF.
+
+    This provides OCR fallback when Vision LLM fails (e.g., image too large).
+    For raster figures, this extracts any text overlays or nearby captions.
+    For vector figures, this extracts axis labels, legends, and data annotations.
+
+    Args:
+        doc: Open PyMuPDF document
+        page_num: 1-indexed page number
+        bbox: Region bounding box (x0, y0, x1, y1)
+        margin: Extra margin around bbox to capture captions (default 10pt)
+
+    Returns:
+        Extracted text from the region, or empty string if none found
+    """
+    if page_num < 1 or page_num > doc.page_count:
+        return ""
+
+    page = doc[page_num - 1]
+    page_width = page.rect.width
+    page_height = page.rect.height
+
+    # Expand bbox with margin
+    x0, y0, x1, y1 = bbox
+    clip_rect = fitz.Rect(
+        max(0, x0 - margin),
+        max(0, y0 - margin),
+        min(page_width, x1 + margin),
+        min(page_height, y1 + margin * 3),  # Extra margin below for captions
+    )
+
+    # Extract text from the clipped region
+    try:
+        text = page.get_text("text", clip=clip_rect)
+        return text.strip() if text else ""
+    except Exception:
+        return ""
+
+
+def extract_text_from_figure_xref(
+    doc: fitz.Document,
+    page_num: int,
+    xref: int,
+) -> str:
+    """
+    Extract embedded text from around a figure identified by xref.
+
+    Args:
+        doc: Open PyMuPDF document
+        page_num: 1-indexed page number
+        xref: Image XObject reference
+
+    Returns:
+        Extracted text from the figure region
+    """
+    if page_num < 1 or page_num > doc.page_count:
+        return ""
+
+    page = doc[page_num - 1]
+
+    # Get the image rectangle
+    try:
+        rects = page.get_image_rects(xref)
+        if not rects:
+            return ""
+
+        # Use the first (usually only) rectangle
+        rect = rects[0]
+        return extract_text_from_region(
+            doc, page_num, (rect.x0, rect.y0, rect.x1, rect.y1)
+        )
+    except Exception:
+        return ""
+
+
 __all__ = [
     "EmbeddedFigure",
     "VectorFigure",
@@ -590,4 +672,6 @@ __all__ = [
     "render_vector_figure",
     "filter_noise_images",
     "detect_all_figures",
+    "extract_text_from_region",
+    "extract_text_from_figure_xref",
 ]

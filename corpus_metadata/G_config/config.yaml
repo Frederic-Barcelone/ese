@@ -945,6 +945,60 @@ logging:
   backup_count: 5
 
 # ==============================================================================
+# VISION LLM CONFIGURATION
+# ==============================================================================
+# Settings for Vision LLM image analysis (figures, charts, flowcharts)
+vision:
+  # Maximum image size for Vision API (5MB limit)
+  max_image_size_bytes: 5242880  # 5 * 1024 * 1024
+
+  # Automatic compression for oversized images
+  compression:
+    enabled: true
+    quality: 85            # JPEG quality (0-100)
+    max_dimension: 2048    # Maximum width/height in pixels
+    min_quality: 30        # Minimum quality before giving up
+
+  # Fallback to OCR text extraction when Vision fails
+  fallback_to_ocr: true
+
+  # Rate limiting
+  delay_between_calls_ms: 100
+
+# ==============================================================================
+# TABLE EXTRACTION CONFIGURATION
+# ==============================================================================
+# Settings for table detection and validation
+table_extraction:
+  # Validation thresholds
+  validation:
+    # Average cell length thresholds (chars)
+    # Tables with longer cells are more likely prose, not tabular data
+    max_avg_cell_length: 150
+    max_avg_cell_length_2col: 200  # More lenient for 2-column definition tables
+
+    # Percentage of cells that can be "long" (>80 chars)
+    max_long_cell_percentage: 0.30
+    max_long_cell_percentage_2col: 0.50  # More lenient for definition tables
+
+    # Percentage of cells that can contain prose patterns
+    max_prose_percentage: 0.15
+    max_prose_percentage_2col: 0.25
+
+  # Definition table salvage settings
+  definition_table_salvage:
+    enabled: true
+    max_col1_median: 15   # Acronym column median length
+    min_col2_median: 30   # Definition column median length
+    min_acronym_ratio: 0.4  # Minimum ratio of acronym-like patterns
+
+  # VLM (Vision Language Model) settings for table extraction
+  vlm:
+    enabled: false        # Enable VLM-based table structure extraction
+    min_confidence: 0.3   # Minimum confidence to accept VLM results
+    min_data_rows: 2      # Minimum data rows to accept
+
+# ==============================================================================
 # RUNTIME
 # ==============================================================================
 runtime:

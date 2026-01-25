@@ -16,6 +16,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, TYPE_CHECKING
 
+from Z_utils.Z04_image_utils import (
+    get_image_size_bytes,
+    is_image_oversized,
+)
+
 if TYPE_CHECKING:
     from B_parsing.B02_doc_graph import DocumentGraph
     from A_core.A01_domain_models import Candidate, ExtractedEntity
@@ -1036,12 +1041,25 @@ class ExportManager:
         if self.claude_client:
             vision_analyzer = VisionImageAnalyzer(self.claude_client)
 
+        # Error tracking for processing issues
+        processing_errors: List[Dict[str, Any]] = []
+        analysis_stats = {
+            "total": len(images),
+            "successful": 0,
+            "failed": 0,
+            "compressed": 0,
+            "skipped_oversized": 0,
+            "vision_analyzed": 0,
+        }
+
         # Build export data
         export_data: Dict[str, Any] = {
             "doc_id": pdf_path.stem,
             "doc_filename": pdf_path.name,
             "total_images": len(images),
-            "images": []
+            "images": [],
+            "processing_errors": processing_errors,
+            "analysis_summary": analysis_stats,
         }
 
         vision_call_count = 0
@@ -1061,8 +1079,18 @@ class ExportManager:
                 "figure_type": figure_type,
             }
 
+            # Check image size before Vision analysis
+            image_size = get_image_size_bytes(img.image_base64) if img.image_base64 else 0
+            img_data["image_size_bytes"] = image_size
+
             # Run Vision LLM analysis based on image type
             if vision_analyzer and img.image_base64:
+                # Check if image is oversized
+                if is_image_oversized(img.image_base64):
+                    # Will be auto-compressed by the Vision client
+                    img_data["was_compressed"] = True
+                    analysis_stats["compressed"] += 1
+
                 # Add delay between Vision LLM calls to avoid rate limiting
                 if vision_call_count > 0:
                     time.sleep(0.1)  # 100ms delay
@@ -1091,7 +1119,29 @@ class ExportManager:
                                 ],
                                 "notes": flow_result.notes,
                             }
+                            analysis_stats["vision_analyzed"] += 1
+                        else:
+                            analysis_stats["failed"] += 1
+                            processing_errors.append({
+                                "type": "VISION_API_NO_RESULT",
+                                "page": img.page_num,
+                                "image_type": "flowchart",
+                                "action": "ocr_fallback",
+                            })
                     except Exception as e:
+                        error_msg = str(e)
+                        analysis_stats["failed"] += 1
+                        error_type = "VISION_API_ERROR"
+                        if "5 MB" in error_msg or "size" in error_msg.lower():
+                            error_type = "SIZE_EXCEEDED"
+                            analysis_stats["skipped_oversized"] += 1
+                        processing_errors.append({
+                            "type": error_type,
+                            "page": img.page_num,
+                            "image_type": "flowchart",
+                            "error": error_msg[:200],
+                            "action": "ocr_fallback",
+                        })
                         print(f"    [WARN] Flowchart analysis failed: {e}")
 
                 elif img.image_type == ImageType.CHART:
@@ -1118,7 +1168,29 @@ class ExportManager:
                                 ],
                                 "statistical_results": chart_result.statistical_results,
                             }
+                            analysis_stats["vision_analyzed"] += 1
+                        else:
+                            analysis_stats["failed"] += 1
+                            processing_errors.append({
+                                "type": "VISION_API_NO_RESULT",
+                                "page": img.page_num,
+                                "image_type": "chart",
+                                "action": "ocr_fallback",
+                            })
                     except Exception as e:
+                        error_msg = str(e)
+                        analysis_stats["failed"] += 1
+                        error_type = "VISION_API_ERROR"
+                        if "5 MB" in error_msg or "size" in error_msg.lower():
+                            error_type = "SIZE_EXCEEDED"
+                            analysis_stats["skipped_oversized"] += 1
+                        processing_errors.append({
+                            "type": error_type,
+                            "page": img.page_num,
+                            "image_type": "chart",
+                            "error": error_msg[:200],
+                            "action": "ocr_fallback",
+                        })
                         print(f"    [WARN] Chart analysis failed: {e}")
 
             # Save image as file - use original or re-render based on source
@@ -1181,6 +1253,9 @@ class ExportManager:
 
             export_data["images"].append(img_data)
 
+        # Update successful count (total - failed)
+        analysis_stats["successful"] = analysis_stats["total"] - analysis_stats["failed"]
+
         # Write JSON metadata
         out_file = out_dir / f"figures_{pdf_path.stem}_{timestamp}.json"
         with open(out_file, "w", encoding="utf-8") as f:
@@ -1195,7 +1270,15 @@ class ExportManager:
         saved_count = sum(1 for img in export_data["images"] if "saved_file" in img)
         analyzed_count = sum(1 for img in export_data["images"] if "vision_analysis" in img)
         source_str = ", ".join(f"{k}:{v}" for k, v in source_counts.items()) if source_counts else ""
-        print(f"  Images export: {out_file.name} ({len(images)} images, {saved_count} saved, {analyzed_count} analyzed, sources: {source_str})")
+
+        # Include error summary in output
+        error_summary = ""
+        if processing_errors:
+            error_summary = f", errors: {len(processing_errors)}"
+        if analysis_stats["compressed"] > 0:
+            error_summary += f", compressed: {analysis_stats['compressed']}"
+
+        print(f"  Images export: {out_file.name} ({len(images)} images, {saved_count} saved, {analyzed_count} analyzed, sources: {source_str}{error_summary})")
 
     def export_tables(
         self, pdf_path: Path, doc: "DocumentGraph"

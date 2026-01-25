@@ -38,6 +38,11 @@ from D_validation.D01_prompt_registry import (
     PromptRegistry,
     PromptTask,
 )
+from Z_utils.Z04_image_utils import (
+    get_image_size_bytes,
+    compress_image_for_vision,
+    MAX_VISION_IMAGE_SIZE_BYTES,
+)
 
 # Optional anthropic import
 try:
@@ -268,9 +273,13 @@ class ClaudeClient:
         model: Optional[str] = None,
         max_tokens: int = 2000,
         temperature: float = 0.0,
+        auto_compress: bool = True,
+        max_image_size: int = MAX_VISION_IMAGE_SIZE_BYTES,
     ) -> Optional[Dict[str, Any]]:
         """
         Call Claude Vision API with an image and return parsed JSON response.
+
+        Automatically handles images exceeding the 5MB limit by compressing them.
 
         Args:
             image_base64: Base64-encoded image (PNG, JPEG, GIF, or WebP)
@@ -278,11 +287,36 @@ class ClaudeClient:
             model: Model to use (default: claude-sonnet-4-20250514)
             max_tokens: Max response tokens
             temperature: Sampling temperature
+            auto_compress: Whether to auto-compress oversized images (default True)
+            max_image_size: Maximum image size in bytes (default 5MB)
 
         Returns:
             Parsed JSON dict or None if failed
         """
         use_model = model or self.default_model
+
+        # Check image size and compress if needed
+        image_size = get_image_size_bytes(image_base64)
+        if image_size > max_image_size:
+            if auto_compress:
+                print(f"  [INFO] Image exceeds {max_image_size / 1024 / 1024:.1f}MB limit "
+                      f"({image_size / 1024 / 1024:.1f}MB), compressing...")
+                compressed, info = compress_image_for_vision(
+                    image_base64,
+                    max_size_bytes=max_image_size,
+                )
+                if compressed:
+                    image_base64 = compressed
+                    print(f"  [INFO] Compressed image: {info['original_size'] / 1024 / 1024:.1f}MB -> "
+                          f"{info['final_size'] / 1024 / 1024:.1f}MB "
+                          f"(ratio: {info['compression_ratio']:.1f}x)")
+                else:
+                    print(f"  [WARN] Could not compress image below limit: {info.get('error')}")
+                    return None
+            else:
+                print(f"  [WARN] Image exceeds {max_image_size / 1024 / 1024:.1f}MB limit "
+                      f"({image_size / 1024 / 1024:.1f}MB), skipping Vision analysis")
+                return None
 
         # Detect media type from base64 header or default to PNG
         media_type = "image/png"
