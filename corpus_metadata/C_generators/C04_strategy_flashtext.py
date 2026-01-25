@@ -58,8 +58,6 @@ from C_generators.C04a_noise_filters import (
     MIN_ABBREV_LENGTH,
     OBVIOUS_NOISE,
     WRONG_EXPANSION_BLACKLIST,
-    is_valid_abbreviation_match,
-    is_wrong_expansion,
 )
 
 
@@ -1575,8 +1573,9 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
 
         # Pattern 1b: "long form (ABBREV)" - lowercase long form (common in clinical text)
         # e.g., "level of agreement (LoA)", "eosinophilic GPA (EGPA)"
+        # More restrictive: only capture 1-6 words before the parenthesis
         pattern1b = re.compile(
-            r"\b([a-z][a-z\s]{3,60})\s*"  # Long form: lowercase words
+            r"\b([a-z][a-z\s/-]{3,60})\s*"  # Long form: lowercase words (allow hyphens/slashes)
             r"\(([A-Z][A-Za-z0-9/-]{1,9})\)",  # (ABBREV) - must start with uppercase
             re.UNICODE
         )
@@ -1590,16 +1589,31 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                 r"^(?:developed\s+for|known\s+as|called|termed|named|referred\s+to\s+as)\s+",
                 r"^(?:including|such\s+as|like|e\.?g\.?)\s+",
                 r"^(?:is\s+a|was\s+a|are|were)\s+",
+                # NEW: Remove sentence fragments and connector phrases
+                r"^.*?\b(?:with|without|and|or|from|between|patients|subjects)\s+",
+                r"^.*?\b(?:activity|study|trial|treatment)\s+(?:of|in|for|with)\s+",
             ]
             for pattern in lead_in_patterns:
                 lf = re.sub(pattern, "", lf, flags=re.IGNORECASE).strip()
 
-            # Validate: long form should have multiple words
-            if len(lf.split()) < 2:
+            # NEW: Trim to last N words if still too long (likely captured sentence context)
+            lf_words = lf.split()
+            if len(lf_words) > 6:
+                # Keep only the last 4 words closest to the abbreviation
+                lf = " ".join(lf_words[-4:])
+                lf_words = lf.split()
+
+            # Validate: long form should have multiple words (or single word for some abbrevs)
+            if len(lf_words) < 1:
                 continue
 
             # Skip if LF looks like it could be part of a sentence (too long)
-            if len(lf.split()) > 8:
+            if len(lf_words) > 6:
+                continue
+
+            # NEW: Skip if LF contains obvious sentence fragments
+            sentence_indicators = ["patients with", "subjects with", "those with", "activity of"]
+            if any(ind in lf.lower() for ind in sentence_indicators):
                 continue
 
             # Check if SF could plausibly be an abbreviation of LF

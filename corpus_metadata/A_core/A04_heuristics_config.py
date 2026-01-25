@@ -89,6 +89,95 @@ def normalize_context(ctx: str) -> str:
     return c.lower()
 
 
+def clean_long_form(lf: str) -> str:
+    """
+    Clean up long form text extracted from PDFs.
+
+    Fixes common PDF parsing artifacts:
+    - Line-break hyphenation: "gastro-\nintestinal" -> "gastrointestinal"
+    - Truncation detection: returns empty string if truncated
+    - Extra whitespace: collapses multiple spaces
+    - Mojibake: fixes common encoding issues
+
+    Args:
+        lf: Raw long form string from PDF extraction
+
+    Returns:
+        Cleaned long form, or empty string if invalid/truncated
+    """
+    if not lf:
+        return ""
+
+    # Apply NFKC normalization
+    lf = unicodedata.normalize("NFKC", lf).strip()
+
+    # Fix mojibake
+    for bad, good in MOJIBAKE_MAP.items():
+        lf = lf.replace(bad, good)
+
+    # Fix line-break hyphenation: "gastro-\nintestinal" -> "gastrointestinal"
+    # Pattern: hyphen followed by optional whitespace/newline, then lowercase letter
+    lf = re.sub(r"-\s*\n\s*([a-z])", r"\1", lf)
+    lf = re.sub(r"-\s+([a-z])", r"\1", lf)
+
+    # Normalize all hyphens to standard ASCII
+    lf = HYPHENS_PATTERN.sub("-", lf)
+
+    # Collapse whitespace
+    lf = re.sub(r"\s+", " ", lf).strip()
+
+    # Detect truncation: word ending with just 1-3 consonants (likely incomplete)
+    # e.g., "vasculi" (missing "tis"), "gastrointestin" (missing "al")
+    words = lf.split()
+    if words:
+        last_word = words[-1].lower()
+        # Check if last word looks truncated (ends abruptly)
+        if len(last_word) >= 3:
+            # Common truncation patterns: word ends with unusual consonant clusters
+            truncation_endings = [
+                "stin", "culi", "liti", "niti", "rati", "mati",  # -tion, -itis, etc.
+                "gica", "logi", "path", "neur", "chem", "phar",  # -gical, -logy, etc.
+            ]
+            for ending in truncation_endings:
+                if last_word.endswith(ending) and len(last_word) < 8:
+                    # Likely truncated, return empty to trigger fallback
+                    return ""
+
+    return lf
+
+
+def is_truncated_term(term: str) -> bool:
+    """
+    Check if a term appears to be truncated from PDF extraction.
+
+    Returns True if term looks incomplete (likely PDF artifact).
+    """
+    if not term or len(term) < 4:
+        return False
+
+    term_lower = term.lower().strip()
+
+    # Check for common incomplete suffixes
+    incomplete_patterns = [
+        r"vasculit?i?$",      # vasculitis
+        r"glomeru?l?o?$",     # glomerulonephritis
+        r"nephropa?t?h?$",    # nephropathy
+        r"encepha?l?o?$",     # encephalopathy
+        r"myopa?t?h?$",       # myopathy
+        r"neuropa?t?h?$",     # neuropathy
+        r"cardio?m?y?o?$",    # cardiomyopathy
+        r"throm?b?o?$",       # thrombocytopenia
+        r"pancre?a?t?$",      # pancreatitis
+        r"hepat?i?t?$",       # hepatitis
+    ]
+
+    for pattern in incomplete_patterns:
+        if re.search(pattern, term_lower):
+            return True
+
+    return False
+
+
 @dataclass
 class HeuristicsConfig:
     """
@@ -103,6 +192,7 @@ class HeuristicsConfig:
     # ========================================
     stats_abbrevs: Dict[str, str] = field(
         default_factory=lambda: {
+            # Statistical measures
             "CI": "confidence interval",
             "SD": "standard deviation",
             "SE": "standard error",
@@ -112,6 +202,48 @@ class HeuristicsConfig:
             "IQR": "interquartile range",
             "AUC": "area under the curve",
             "ROC": "receiver operating characteristic",
+            "BMI": "body mass index",
+            "BSA": "body surface area",
+            # Common imaging/diagnostics
+            "MRI": "magnetic resonance imaging",
+            "CT": "computed tomography",
+            "PET": "positron emission tomography",
+            "ECG": "electrocardiogram",
+            "EKG": "electrocardiogram",
+            "EEG": "electroencephalogram",
+            # Common clinical abbreviations
+            "AEs": "adverse events",
+            "AE": "adverse event",
+            "SAEs": "serious adverse events",
+            "SAE": "serious adverse event",
+            "TEAEs": "treatment-emergent adverse events",
+            "TEAE": "treatment-emergent adverse event",
+            "IV": "intravenous",
+            "IM": "intramuscular",
+            "SC": "subcutaneous",
+            "PO": "per os",
+            "QD": "once daily",
+            "BID": "twice daily",
+            "TID": "three times daily",
+            # Laboratory/immune markers
+            "IgA": "immunoglobulin A",
+            "IgG": "immunoglobulin G",
+            "IgM": "immunoglobulin M",
+            "IgE": "immunoglobulin E",
+            "ADA": "anti-drug antibody",
+            "ALT": "alanine aminotransferase",
+            "AST": "aspartate aminotransferase",
+            "GFR": "glomerular filtration rate",
+            "eGFR": "estimated glomerular filtration rate",
+            # Complement system
+            "C3": "complement component 3",
+            "C5": "complement component 5",
+            "C5a": "complement C5a anaphylatoxin",
+            # Cardiac
+            "RV": "right ventricle",
+            "LV": "left ventricle",
+            "EF": "ejection fraction",
+            "LVEF": "left ventricular ejection fraction",
         }
     )
 
@@ -231,6 +363,26 @@ class HeuristicsConfig:
             "MONDO",  # Mondo Disease Ontology
             "ORCID",  # Researcher ID
             "ISRCTN",  # Trial registry
+            # ----------------------------------------
+            # Journal names and abbreviations - NOT medical abbreviations
+            # ----------------------------------------
+            "BMJ",      # British Medical Journal
+            "NEJM",     # New England Journal of Medicine
+            "JAMA",     # Journal of the American Medical Association
+            "NAT",      # Nature journal prefix (Nat Med, Nat Rev, etc.)
+            "LANCET",   # The Lancet journal
+            "ANN",      # Annals (journal prefix) - but keep "Artificial Neural Network" sense
+            "PLOS",     # PLOS journals
+            "JCI",      # Journal of Clinical Investigation
+            # ----------------------------------------
+            # DOI and citation identifiers (reference artifacts)
+            # ----------------------------------------
+            "DOI",      # Digital Object Identifier (when extracted as abbreviation)
+            "HTTPS",    # URL protocol artifacts
+            "HTTP",     # URL protocol artifacts
+            "WWW",      # URL artifacts
+            "ORG",      # Domain suffix artifacts
+            "COM",      # Domain suffix artifacts
         }
     )
 
@@ -304,6 +456,19 @@ class HeuristicsConfig:
     )
 
     # ========================================
+    # AUTHOR INITIALS PATTERNS - Auto-reject when in author context
+    # These 2-3 letter sequences often appear after names
+    # ========================================
+    author_initial_context_words: Set[str] = field(
+        default_factory=lambda: {
+            # Words that indicate author/name context (lowercase for matching)
+            "et al", "md", "phd", "professor", "dr", "prof",
+            "corresponding", "author", "authors", "wrote", "contributed",
+            "university", "hospital", "institute", "department", "center",
+        }
+    )
+
+    # ========================================
     # HYPHENATED ABBREVIATIONS (PASO C)
     # Often missed by standard generators
     # Keys are CANONICAL forms; matching uses normalized comparison
@@ -356,6 +521,7 @@ class HeuristicsConfig:
     # ========================================
 
     # SFs that need medical context to be valid
+    # Maps SF -> set of context terms (if ANY term present, SF is valid)
     context_required_sfs: Dict[str, Set[str]] = field(
         default_factory=lambda: {
             "IA": {
@@ -371,6 +537,45 @@ class HeuristicsConfig:
                 "ige",
                 "immunoglobulin",
             },  # Accept only if near immunoglobulin context
+            # ----------------------------------------
+            # Ambiguous clinical abbreviations - require disambiguating context
+            # ----------------------------------------
+            "PD": {
+                # Parkinson's disease context
+                "parkinson", "dopamine", "levodopa", "neurodegenerat",
+                # Pharmacodynamics context
+                "pharmacodynamic", "pk/pd", "pk-pd", "exposure-response",
+                # Progressive disease context (oncology)
+                "progression", "tumor", "cancer", "oncolog", "response criteria",
+            },
+            "OLE": {
+                # Open-label extension context
+                "open-label", "open label", "extension", "long-term", "rollover",
+                "continuing", "follow-up study",
+            },
+            "IMP": {
+                # Investigational medicinal product context
+                "investigational", "medicinal product", "clinical trial",
+                "study drug", "test article", "sponsor",
+            },
+            "GI": {
+                # Gastrointestinal context
+                "gastrointestinal", "stomach", "intestin", "bowel", "digest",
+                "nausea", "vomiting", "diarrhea", "constipation", "abdomin",
+            },
+            "SOC": {
+                # Standard of care context
+                "standard of care", "treatment", "therapy", "comparator",
+                "control arm", "best available",
+                # System organ class context (MedDRA)
+                "meddra", "system organ class", "adverse event",
+            },
+            "MS": {
+                # Multiple sclerosis context
+                "multiple sclerosis", "demyelinat", "relapsing", "neurolog",
+                # Mass spectrometry context
+                "mass spectrometry", "spectrometer", "chromatograph",
+            },
         }
     )
 
@@ -381,6 +586,33 @@ class HeuristicsConfig:
             "SC5B9": "sC5b-9",  # Soluble complement complex
             "SC5B-9": "sC5b-9",
             "EGFR": "eGFR",  # Estimated GFR (lowercase e)
+        }
+    )
+
+    # ========================================
+    # LEXICON PRIORITY SYSTEM
+    # Higher number = higher priority when resolving conflicts
+    # ========================================
+    lexicon_priorities: Dict[str, int] = field(
+        default_factory=lambda: {
+            # Highest priority: document-internal definitions
+            "document_inline": 100,
+            "schwartz_hearst": 95,
+            # Medical/clinical lexicons (generic)
+            "meta_inventory": 80,     # Clinical abbreviations inventory
+            "umls": 75,               # UMLS linked terms
+            "scispacy": 70,           # scispacy NER
+            # Disease/drug ontologies
+            "mondo": 65,              # Disease ontology
+            "rxnorm": 65,             # Drug vocabulary
+            "orphanet": 60,           # Rare diseases
+            "chembl": 55,             # Drug database
+            # Trial-specific (lower priority - often context-specific)
+            "trial_acronyms": 30,     # ClinicalTrials.gov acronyms
+            "nct_enrichment": 25,     # NCT metadata
+            # Fallback
+            "llm_extracted": 20,      # LLM SF-only extraction
+            "unknown": 10,            # Unknown/default source
         }
     )
 
@@ -681,3 +913,160 @@ def get_canonical_case(sf: str, config: HeuristicsConfig) -> str:
     """
     sf_key = normalize_sf_key(sf)
     return config.case_sensitive_sfs.get(sf_key, sf)
+
+
+def get_lexicon_priority(source: str, config: HeuristicsConfig) -> int:
+    """
+    Get the priority score for a lexicon source.
+
+    Higher score = higher priority when resolving conflicts.
+
+    Args:
+        source: Lexicon source name (case-insensitive, normalized)
+        config: HeuristicsConfig instance
+
+    Returns:
+        Priority score (0-100), 10 for unknown sources
+    """
+    source_normalized = source.lower().replace(" ", "_").replace("-", "_")
+    return config.lexicon_priorities.get(source_normalized, 10)
+
+
+def select_best_expansion(
+    candidates: list,
+    config: HeuristicsConfig,
+    source_attr: str = "source",
+) -> "Any":
+    """
+    Select the best expansion from multiple candidates based on lexicon priority.
+
+    Args:
+        candidates: List of candidate objects with source attribute
+        config: HeuristicsConfig instance
+        source_attr: Name of the attribute containing the source
+
+    Returns:
+        The highest-priority candidate, or first if no source info
+    """
+    if not candidates:
+        return None
+    if len(candidates) == 1:
+        return candidates[0]
+
+    # Sort by priority (highest first)
+    def get_priority(c):
+        source = getattr(c, source_attr, None) or "unknown"
+        if isinstance(source, (list, tuple)):
+            source = source[0] if source else "unknown"
+        return get_lexicon_priority(str(source), config)
+
+    sorted_candidates = sorted(candidates, key=get_priority, reverse=True)
+    return sorted_candidates[0]
+
+
+def calibrate_confidence(
+    base_confidence: float,
+    sf: str,
+    lf: str,
+    source: str,
+    context: str,
+    config: HeuristicsConfig,
+) -> float:
+    """
+    Calibrate confidence score based on multiple factors.
+
+    Factors that BOOST confidence:
+    - High-priority source (document_inline, schwartz_hearst)
+    - Stats whitelist match
+    - Context contains definition
+    - Multiple occurrences (indicated by high base confidence)
+
+    Factors that REDUCE confidence:
+    - Low-priority source (trial_acronyms, llm_extracted)
+    - Context-required SF without matching context
+    - Ambiguous SF (in context_required_sfs)
+    - Single occurrence / lexicon-only match
+
+    Args:
+        base_confidence: Initial confidence score (0.0-1.0)
+        sf: Short form
+        lf: Long form
+        source: Lexicon/detection source
+        context: Surrounding text context
+        config: HeuristicsConfig instance
+
+    Returns:
+        Calibrated confidence score (0.0-1.0)
+    """
+    confidence = base_confidence
+    sf_key = normalize_sf_key(sf)
+
+    # BOOST: Stats whitelist (high-confidence canonical forms)
+    if sf_key in config.stats_abbrevs:
+        confidence = min(1.0, confidence + 0.15)
+
+    # BOOST: High-priority source
+    priority = get_lexicon_priority(source, config)
+    if priority >= 90:  # document_inline, schwartz_hearst
+        confidence = min(1.0, confidence + 0.10)
+    elif priority >= 70:  # umls, scispacy, meta_inventory
+        confidence = min(1.0, confidence + 0.05)
+
+    # REDUCE: Low-priority source
+    if priority <= 30:  # trial_acronyms, llm_extracted
+        confidence = max(0.0, confidence - 0.10)
+
+    # REDUCE: Ambiguous SF without context support
+    if sf_key in config.context_required_sfs:
+        if check_context_match(sf, context, config):
+            # Context supports this expansion
+            confidence = min(1.0, confidence + 0.05)
+        else:
+            # No context support for ambiguous SF
+            confidence = max(0.0, confidence - 0.20)
+
+    # REDUCE: Very short SF (2 letters) - often ambiguous
+    if len(sf) <= 2 and sf_key not in config.stats_abbrevs:
+        confidence = max(0.0, confidence - 0.10)
+
+    # BOOST: LF appears in context (strong evidence)
+    if lf and lf.lower() in context.lower():
+        confidence = min(1.0, confidence + 0.10)
+
+    # Clamp to valid range
+    return max(0.0, min(1.0, confidence))
+
+
+def is_likely_author_initials(sf: str, context: str, config: HeuristicsConfig) -> bool:
+    """
+    Check if SF is likely author initials based on context.
+
+    Returns True if SF appears to be author initials (should be rejected).
+
+    Heuristics:
+    1. SF is 2-3 uppercase letters only
+    2. Context contains author-related words
+    3. SF appears after a capitalized word (likely a name)
+    """
+    # Only check 2-3 letter all-uppercase SFs
+    if len(sf) < 2 or len(sf) > 3:
+        return False
+    if not sf.isupper() or not sf.isalpha():
+        return False
+
+    ctx_lower = context.lower()
+
+    # Check for author-related context words
+    for indicator in config.author_initial_context_words:
+        if indicator in ctx_lower:
+            return True
+
+    # Check if SF appears right after a capitalized word (likely a name)
+    # Pattern: "LastName SF" or "FirstName LastName SF"
+    name_pattern = re.compile(
+        rf"\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+{re.escape(sf)}\b"
+    )
+    if name_pattern.search(context):
+        return True
+
+    return False
