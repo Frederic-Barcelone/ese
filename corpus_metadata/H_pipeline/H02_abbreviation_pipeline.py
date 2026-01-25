@@ -182,8 +182,17 @@ class AbbreviationPipeline:
         self,
         candidates: List["Candidate"],
         full_text: str,
-    ) -> Tuple[List["Candidate"], set, Counter, int]:
-        """Filter and reduce candidates before validation."""
+    ) -> Tuple[List["Candidate"], set, Counter, int, int]:
+        """Filter and reduce candidates before validation.
+
+        Returns:
+            Tuple of:
+            - Filtered candidates (non_lexicon + deduped_lexicon)
+            - Corroborated short forms set
+            - Word counts Counter
+            - Total filtered count (for generation metrics)
+            - SF form rejected count (for heuristics metrics)
+        """
         from A_core.A01_domain_models import GeneratorType
 
         # Corroborated SFs (found by non-lexicon generators)
@@ -256,6 +265,7 @@ class AbbreviationPipeline:
             corroborated_sfs,
             word_counts,
             len(candidates) - len(non_lexicon + deduped_lexicon),
+            sf_form_rejected,
         )
 
     def apply_heuristics(

@@ -44,12 +44,14 @@ try:
     import anthropic
     from anthropic import APIError as AnthropicAPIError
     from anthropic import APIConnectionError as AnthropicConnectionError
+    from anthropic import APITimeoutError as AnthropicTimeoutError
     from anthropic import RateLimitError as AnthropicRateLimitError
     from anthropic import APIStatusError as AnthropicStatusError
 except ImportError:
     anthropic = None  # type: ignore
     AnthropicAPIError = Exception  # type: ignore
     AnthropicConnectionError = Exception  # type: ignore
+    AnthropicTimeoutError = Exception  # type: ignore
     AnthropicRateLimitError = Exception  # type: ignore
     AnthropicStatusError = Exception  # type: ignore
 
@@ -856,17 +858,17 @@ class LLMEngine:
             # Rate limited - fall back to individual validation with delay
             print(f"  [WARN] Batch LLM rate limited, falling back: {e}")
             return [self.verify_candidate(c) for c in batch]
-        except AnthropicConnectionError as e:
-            # Connection error - fall back to individual validation
-            print(f"  [WARN] Batch LLM connection error, falling back: {e}")
+        except (AnthropicConnectionError, AnthropicTimeoutError) as e:
+            # Connection/timeout error - fall back to individual validation
+            print(f"  [WARN] Batch LLM connection/timeout error, falling back: {e}")
             return [self.verify_candidate(c) for c in batch]
         except (AnthropicStatusError, AnthropicAPIError) as e:
             # API error - fall back to individual validation
             print(f"  [WARN] Batch LLM API error, falling back: {e}")
             return [self.verify_candidate(c) for c in batch]
         except Exception as e:
-            # Unexpected error - fall back to individual validation
-            print(f"  [WARN] Batch LLM unexpected error ({type(e).__name__}), falling back: {e}")
+            # Truly unexpected error - log at error level and fall back
+            print(f"  [ERROR] Batch LLM unexpected error ({type(e).__name__}): {e}")
             return [self.verify_candidate(c) for c in batch]
 
         # Parse batch response
@@ -1131,11 +1133,15 @@ class LLMEngine:
         except AnthropicRateLimitError as e:
             print(f"  [WARN] Haiku rate limited, sending all to Sonnet: {e}")
             return batch, []
-        except (AnthropicConnectionError, AnthropicStatusError, AnthropicAPIError) as e:
+        except (AnthropicConnectionError, AnthropicTimeoutError) as e:
+            print(f"  [WARN] Haiku connection/timeout error, sending all to Sonnet: {e}")
+            return batch, []
+        except (AnthropicStatusError, AnthropicAPIError) as e:
             print(f"  [WARN] Haiku API error, sending all to Sonnet: {e}")
             return batch, []
         except Exception as e:
-            print(f"  [WARN] Haiku unexpected error ({type(e).__name__}), sending all to Sonnet: {e}")
+            # Truly unexpected error - log at error level
+            print(f"  [ERROR] Haiku unexpected error ({type(e).__name__}): {e}")
             return batch, []
 
         # Parse response

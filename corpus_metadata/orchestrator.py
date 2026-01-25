@@ -640,12 +640,16 @@ class Orchestrator:
                 print("\n[3/12] Validation SKIPPED")
             else:
                 # Filter candidates
-                needs_validation, corroborated_sfs, word_counts, filtered_count = (
+                needs_validation, corroborated_sfs, word_counts, filtered_count, sf_form_rejected = (
                     self.abbreviation_pipeline.filter_candidates(unique_candidates, full_text)
                 )
 
                 # Update generation metrics with filtered count
                 metrics.generation.filtered_lexicon_only = filtered_count
+
+                # Include sf_form_rejected from filter_candidates in counters
+                # These are candidates filtered by is_valid_sf_form() before apply_heuristics
+                counters.form_filter_rejected += sf_form_rejected
 
                 # Apply heuristics
                 auto_results, llm_candidates = self.abbreviation_pipeline.apply_heuristics(
@@ -661,7 +665,8 @@ class Orchestrator:
                     counters.common_word_rejected +
                     counters.form_filter_rejected
                 )
-                metrics.heuristics.total_processed = len(needs_validation)
+                # total_processed includes sf_form_rejected since they were processed (filtered)
+                metrics.heuristics.total_processed = len(needs_validation) + sf_form_rejected
                 metrics.heuristics.auto_approved = auto_approved
                 metrics.heuristics.auto_rejected = auto_rejected_total
                 metrics.heuristics.sent_to_llm = len(llm_candidates)
