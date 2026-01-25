@@ -28,6 +28,7 @@ import requests
 
 from A_core.A00_logging import get_logger
 from A_core.A02_interfaces import BaseEnricher
+from A_core.A12_exceptions import APIError, ParsingError
 from Z_utils.Z01_api_client import BaseAPIClient
 
 logger = get_logger(__name__)
@@ -194,8 +195,13 @@ class ClinicalTrialsGovClient(BaseAPIClient):
                 status=status_mod.get("overallStatus") or None,
                 phase=phase,
             )
-        except Exception as e:
-            logger.warning(f"ClinicalTrials.gov parse error for {nct_id}: {e}")
+        except (KeyError, TypeError) as e:
+            # JSON structure parsing error
+            logger.warning(f"ClinicalTrials.gov parse error for {nct_id} (invalid structure): {e}")
+            return None
+        except ValueError as e:
+            # Data conversion error
+            logger.warning(f"ClinicalTrials.gov parse error for {nct_id} (invalid value): {e}")
             return None
 
 
@@ -409,8 +415,9 @@ class TrialAcronymEnricher(BaseAPIClient):
                 resp.raise_for_status()
                 data = resp.json()
                 studies = data.get("studies", [])
-            except Exception:
-                pass
+            except requests.RequestException as e:
+                # Fallback search failed - log at debug level and continue
+                logger.debug(f"TrialAcronym fallback search failed for '{acronym}': {e}")
 
         if not studies:
             self.cache.set(cache_key, None)
@@ -480,8 +487,13 @@ class TrialAcronymEnricher(BaseAPIClient):
                 status=status_mod.get("overallStatus") or None,
                 phase=phase,
             )
-        except Exception as e:
-            logger.warning(f"TrialAcronym parse error for '{search_acronym}': {e}")
+        except (KeyError, TypeError) as e:
+            # JSON structure parsing error
+            logger.warning(f"TrialAcronym parse error for '{search_acronym}' (invalid structure): {e}")
+            return None
+        except ValueError as e:
+            # Data conversion error
+            logger.warning(f"TrialAcronym parse error for '{search_acronym}' (invalid value): {e}")
             return None
 
     def get_trial_description(self, acronym: str) -> Optional[str]:

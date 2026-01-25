@@ -51,15 +51,27 @@ Pair = Tuple[str, Optional[str]]  # (SF, LF) where LF can be None for SF-only tr
 class ScoreReport(BaseModel):
     """
     Aggregate metrics for a single evaluation run.
+
+    When is_scored=False, the document has no gold annotations and
+    precision/recall/f1 are None. This prevents misleading "0% precision"
+    reports for documents without gold standard data.
     """
 
-    precision: float
-    recall: float
-    f1: float
+    # Scoring status
+    is_scored: bool = True
+    unscored_reason: Optional[str] = None
 
-    true_positives: int
-    false_positives: int
-    false_negatives: int
+    # Metrics (None when unscored)
+    precision: Optional[float] = None
+    recall: Optional[float] = None
+    f1: Optional[float] = None
+
+    true_positives: int = 0
+    false_positives: int = 0
+    false_negatives: int = 0
+
+    # Count of gold annotations (useful for context)
+    gold_count: int = 0
 
     # Debug samples
     fp_examples: List[str] = Field(default_factory=list)
@@ -427,6 +439,36 @@ class Scorer:
         fp = len(fp_set)
         fn = len(fn_set)
 
+        gold_count = tp + fn  # Total gold annotations
+
+        # Check if we have gold annotations to score against
+        if gold_count == 0:
+            # UNSCORED: No gold annotations available
+            # Still track extractions (as FPs) but don't compute misleading metrics
+            fp_examples = [self._pair_to_str(p) for p in sorted(fp_set)[:10]]
+
+            report = ScoreReport(
+                is_scored=False,
+                unscored_reason="no gold annotations",
+                precision=None,
+                recall=None,
+                f1=None,
+                true_positives=0,
+                false_positives=fp,  # Still track what was extracted
+                false_negatives=0,
+                gold_count=0,
+                fp_examples=fp_examples,
+                fn_examples=[],
+            )
+
+            if self.config.include_sets_in_report:
+                report.tp_set = []
+                report.fp_set = [self._pair_to_str(p) for p in sorted(fp_set)]
+                report.fn_set = []
+
+            return report
+
+        # SCORED: Normal evaluation with gold annotations
         precision = tp / (tp + fp) if (tp + fp) else 0.0
         recall = tp / (tp + fn) if (tp + fn) else 0.0
         f1 = (
@@ -440,12 +482,15 @@ class Scorer:
         fn_examples = [self._pair_to_str(p) for p in sorted(fn_set)[:10]]
 
         report = ScoreReport(
+            is_scored=True,
+            unscored_reason=None,
             precision=round(precision, 4),
             recall=round(recall, 4),
             f1=round(f1, 4),
             true_positives=tp,
             false_positives=fp,
             false_negatives=fn,
+            gold_count=gold_count,
             fp_examples=fp_examples,
             fn_examples=fn_examples,
         )
@@ -466,23 +511,46 @@ class Scorer:
     def _macro_average(self, reports: List[ScoreReport]) -> ScoreReport:
         if not reports:
             return ScoreReport(
-                precision=0.0,
-                recall=0.0,
-                f1=0.0,
+                is_scored=False,
+                unscored_reason="no documents",
+                precision=None,
+                recall=None,
+                f1=None,
                 true_positives=0,
                 false_positives=0,
                 false_negatives=0,
+                gold_count=0,
             )
 
-        # Macro averages of metrics (equal weight per doc)
-        p = sum(r.precision for r in reports) / len(reports)
-        r_ = sum(r.recall for r in reports) / len(reports)
-        f = sum(r.f1 for r in reports) / len(reports)
+        # Filter to only scored reports for metric averaging
+        scored_reports = [r for r in reports if r.is_scored]
 
-        # Sums for counts are still useful to show scale
+        if not scored_reports:
+            # All documents were unscored
+            total_fp = sum(r.false_positives for r in reports)
+            return ScoreReport(
+                is_scored=False,
+                unscored_reason="all documents unscored",
+                precision=None,
+                recall=None,
+                f1=None,
+                true_positives=0,
+                false_positives=total_fp,
+                false_negatives=0,
+                gold_count=0,
+            )
+
+        # Macro averages of metrics (equal weight per scored doc)
+        # scored_reports are guaranteed to have non-None precision/recall/f1
+        p = sum(r.precision or 0.0 for r in scored_reports) / len(scored_reports)
+        r_ = sum(r.recall or 0.0 for r in scored_reports) / len(scored_reports)
+        f = sum(r.f1 or 0.0 for r in scored_reports) / len(scored_reports)
+
+        # Sums for counts are still useful to show scale (all reports)
         tp = sum(r.true_positives for r in reports)
         fp = sum(r.false_positives for r in reports)
         fn = sum(r.false_negatives for r in reports)
+        gold = sum(r.gold_count for r in reports)
 
         # Collect a few examples across docs (optional; keep small)
         fp_ex = []
@@ -494,12 +562,15 @@ class Scorer:
                 break
 
         return ScoreReport(
+            is_scored=True,
+            unscored_reason=None,
             precision=round(p, 4),
             recall=round(r_, 4),
             f1=round(f, 4),
             true_positives=tp,
             false_positives=fp,
             false_negatives=fn,
+            gold_count=gold,
             fp_examples=fp_ex[:10],
             fn_examples=fn_ex[:10],
         )
@@ -512,6 +583,21 @@ class Scorer:
         self, report: ScoreReport, title: str = "EVALUATION REPORT"
     ) -> None:
         print(f"\n[CHART] --- {title} ---")
+
+        if not report.is_scored:
+            # Unscored document - no gold annotations
+            reason = report.unscored_reason or "no gold annotations"
+            print(f"[INFO] UNSCORED ({reason})")
+            print(f"  Extractions: {report.false_positives}")
+            print("-" * 40)
+
+            if report.fp_examples:
+                print("\n[INFO] Extracted items (not scored):")
+                for ex in report.fp_examples:
+                    print(f"  - {ex}")
+            return
+
+        # Scored document - show metrics
         print(f"[OK] Precision: {report.precision:.2%}")
         print(f"[TARGET] Recall:    {report.recall:.2%}")
         print(f"[SCALE]  F1 Score:  {report.f1:.2%}")
@@ -519,6 +605,7 @@ class Scorer:
         print(
             f"TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}"
         )
+        print(f"Gold count: {report.gold_count}")
 
         if report.fp_examples:
             print("\n[WARN]  False Positives (examples):")

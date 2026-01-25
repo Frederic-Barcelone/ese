@@ -309,7 +309,28 @@ class ExtractionAnalyzer:
         tp = sum(1 for g in gold_results if g["found"])
         fn = sum(1 for g in gold_results if not g["found"])
         fp = sum(1 for e in extracted_results if not e["matches_gold"])
+        gold_count = tp + fn  # Total gold annotations
 
+        # Check if we have gold annotations to score against
+        if gold_count == 0:
+            # UNSCORED: No gold annotations - don't compute misleading metrics
+            return {
+                "gold_results": gold_results,
+                "extracted_results": extracted_results,
+                "metrics": {
+                    "is_scored": False,
+                    "unscored_reason": "no gold annotations",
+                    "true_positives": 0,
+                    "false_positives": fp,  # Still track extractions
+                    "false_negatives": 0,
+                    "gold_count": 0,
+                    "precision": None,
+                    "recall": None,
+                    "f1": None,
+                },
+            }
+
+        # SCORED: Normal evaluation with gold annotations
         precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
         recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
         f1 = (
@@ -322,9 +343,12 @@ class ExtractionAnalyzer:
             "gold_results": gold_results,
             "extracted_results": extracted_results,
             "metrics": {
+                "is_scored": True,
+                "unscored_reason": None,
                 "true_positives": tp,
                 "false_positives": fp,
                 "false_negatives": fn,
+                "gold_count": gold_count,
                 "precision": precision,
                 "recall": recall,
                 "f1": f1,
@@ -364,12 +388,13 @@ class ExtractionAnalyzer:
         # =====================================================================
         # QUICK SUMMARY BOX
         # =====================================================================
+        is_scored = metrics.get("is_scored", True)
         tp = metrics["true_positives"]
         fp = metrics["false_positives"]
         fn = metrics["false_negatives"]
-        precision = metrics["precision"]
-        recall = metrics["recall"]
-        f1 = metrics["f1"]
+        precision = metrics.get("precision")
+        recall = metrics.get("recall")
+        f1 = metrics.get("f1")
 
         # Get disease and drug counts
         disease_count = len(results_data.get("diseases", []))
@@ -389,15 +414,27 @@ class ExtractionAnalyzer:
                 f"│  Diseases:       {disease_count:3}  |  Drugs: {drug_count:3}                            │"
             )
         print("├─────────────────────────────────────────────────────────────────┤")
-        print(
-            f"│  ✓ Correct (TP):     {tp:3}    │  Precision: {precision:6.1%}                │"
-        )
-        print(
-            f"│  ✗ Extra (FP):       {fp:3}    │  Recall:    {recall:6.1%}                │"
-        )
-        print(
-            f"│  ○ Missed (FN):      {fn:3}    │  F1 Score:  {f1:6.1%}                │"
-        )
+
+        if not is_scored:
+            # UNSCORED: No gold annotations - show different summary
+            unscored_reason = metrics.get("unscored_reason", "no gold annotations")
+            print(
+                f"│  UNSCORED ({unscored_reason})                                 │"
+            )
+            print(
+                f"│  Extractions:        {fp:3}    │  (Metrics not applicable)       │"
+            )
+        else:
+            # SCORED: Normal metrics display
+            print(
+                f"│  ✓ Correct (TP):     {tp:3}    │  Precision: {precision:6.1%}                │"
+            )
+            print(
+                f"│  ✗ Extra (FP):       {fp:3}    │  Recall:    {recall:6.1%}                │"
+            )
+            print(
+                f"│  ○ Missed (FN):      {fn:3}    │  F1 Score:  {f1:6.1%}                │"
+            )
         print("└─────────────────────────────────────────────────────────────────┘")
 
         # =====================================================================

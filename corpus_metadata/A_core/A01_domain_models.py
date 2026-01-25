@@ -37,6 +37,40 @@ class FieldType(str, Enum):
     SHORT_FORM_ONLY = "SHORT_FORM_ONLY"
 
 
+class AbbreviationCategory(str, Enum):
+    """
+    Semantic category for abbreviations.
+
+    Used to distinguish the domain type of an abbreviation without
+    conflating it with the entity type (which is always ABBREVIATION).
+    This prevents confusing metrics in abbreviations_only mode.
+    """
+
+    # General medical/clinical abbreviations
+    ABBREV = "ABBREV"
+
+    # Statistical abbreviations (CI, SD, HR, etc.)
+    STATISTICAL = "STATISTICAL"
+
+    # Disease-related abbreviations (MS, PD, etc.)
+    DISEASE = "DISEASE"
+
+    # Drug-related abbreviations (compound IDs, etc.)
+    DRUG = "DRUG"
+
+    # Gene-related abbreviations
+    GENE = "GENE"
+
+    # Study/trial-related abbreviations
+    STUDY = "STUDY"
+
+    # Organizational abbreviations (FDA, EMA, etc.)
+    ORGANIZATION = "ORGANIZATION"
+
+    # Uncategorized
+    UNKNOWN = "UNKNOWN"
+
+
 class GeneratorType(str, Enum):
     """
     Tracks which strategy produced the candidate.
@@ -280,6 +314,11 @@ class ExtractedEntity(BaseModel):
     confidence_score: float = Field(..., ge=0.0, le=1.0)
     rejection_reason: Optional[str] = None
     validation_flags: List[str] = Field(default_factory=list)
+
+    # Optional semantic category (for distinguishing abbreviation domains)
+    # This is separate from entity type - an abbreviation can have a disease category
+    # without being counted as a disease entity in metrics.
+    category: Optional[AbbreviationCategory] = None
 
     # Audit trail
     provenance: ProvenanceMetadata

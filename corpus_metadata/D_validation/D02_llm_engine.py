@@ -42,8 +42,16 @@ from D_validation.D01_prompt_registry import (
 # Optional anthropic import
 try:
     import anthropic
+    from anthropic import APIError as AnthropicAPIError
+    from anthropic import APIConnectionError as AnthropicConnectionError
+    from anthropic import RateLimitError as AnthropicRateLimitError
+    from anthropic import APIStatusError as AnthropicStatusError
 except ImportError:
     anthropic = None  # type: ignore
+    AnthropicAPIError = Exception  # type: ignore
+    AnthropicConnectionError = Exception  # type: ignore
+    AnthropicRateLimitError = Exception  # type: ignore
+    AnthropicStatusError = Exception  # type: ignore
 
 
 # -----------------------------------------------------------------------------
@@ -160,8 +168,14 @@ class ClaudeClient:
                 "max_tokens": val_cfg.get("max_tokens"),
                 "temperature": val_cfg.get("temperature"),
             }
-        except Exception as e:
-            print(f"Warning: Failed to load config from {config_path}: {e}")
+        except (OSError, IOError) as e:
+            print(f"Warning: Failed to read config file {config_path}: {e}")
+            return {}
+        except yaml.YAMLError as e:
+            print(f"Warning: Failed to parse config YAML {config_path}: {e}")
+            return {}
+        except (KeyError, TypeError) as e:
+            print(f"Warning: Invalid config structure in {config_path}: {e}")
             return {}
 
     def complete_json(
@@ -494,12 +508,47 @@ class LLMEngine:
                 seed=self.seed,
                 response_format=self.response_format,
             )
-        except Exception as e:
+        except AnthropicRateLimitError as e:
+            # Rate limited - mark as ambiguous for retry
+            return self._entity_ambiguous(
+                candidate,
+                reason=f"LLM rate limited: {e}",
+                flags=["llm_rate_limited"],
+                raw_llm={"error": str(e), "error_type": "rate_limit"},
+                context_hash=context_hash,
+                prompt_bundle_hash=bundle.prompt_bundle_hash,
+                rule_version=f"{task.value}:{bundle.version}",
+            )
+        except AnthropicConnectionError as e:
+            # Connection error - mark as ambiguous for retry
+            return self._entity_ambiguous(
+                candidate,
+                reason=f"LLM connection failed: {e}",
+                flags=["llm_connection_error"],
+                raw_llm={"error": str(e), "error_type": "connection"},
+                context_hash=context_hash,
+                prompt_bundle_hash=bundle.prompt_bundle_hash,
+                rule_version=f"{task.value}:{bundle.version}",
+            )
+        except AnthropicStatusError as e:
+            # API status error (4xx/5xx) - mark as ambiguous
+            status_code = getattr(e, "status_code", None)
+            return self._entity_ambiguous(
+                candidate,
+                reason=f"LLM API error (HTTP {status_code}): {e}",
+                flags=["llm_api_error"],
+                raw_llm={"error": str(e), "error_type": "api_status", "status_code": status_code},
+                context_hash=context_hash,
+                prompt_bundle_hash=bundle.prompt_bundle_hash,
+                rule_version=f"{task.value}:{bundle.version}",
+            )
+        except (AnthropicAPIError, Exception) as e:
+            # Catch-all for other API errors or unexpected issues
             return self._entity_ambiguous(
                 candidate,
                 reason=f"LLM call failed: {e}",
                 flags=["llm_call_error"],
-                raw_llm={"error": str(e)},
+                raw_llm={"error": str(e), "error_type": type(e).__name__},
                 context_hash=context_hash,
                 prompt_bundle_hash=bundle.prompt_bundle_hash,
                 rule_version=f"{task.value}:{bundle.version}",
@@ -668,11 +717,29 @@ class LLMEngine:
             rule_version="cached",
         )
 
+        # Build evidence span from candidate context
+        context = candidate.context_text or ""
+        start_off, end_off = self._infer_offsets(
+            context=context,
+            sf=candidate.short_form,
+            lf=candidate.long_form,
+        )
+        primary = EvidenceSpan(
+            text=context.strip(),
+            location=candidate.context_location,
+            scope_ref="cached",
+            start_char_offset=start_off,
+            end_char_offset=end_off,
+        )
+
         return ExtractedEntity(
+            candidate_id=candidate.id,
+            doc_id=candidate.doc_id,
             short_form=candidate.short_form,
             long_form=candidate.long_form,
             field_type=candidate.field_type,
-            evidence_spans=candidate.evidence_spans,
+            primary_evidence=primary,
+            supporting_evidence=[],
             status=status,
             confidence_score=cached.get("confidence", 0.5),
             rejection_reason=cached.get("rejection_reason"),
@@ -785,9 +852,21 @@ class LLMEngine:
                     seed=self.seed,
                     response_format=self.response_format,
                 )
+        except AnthropicRateLimitError as e:
+            # Rate limited - fall back to individual validation with delay
+            print(f"  [WARN] Batch LLM rate limited, falling back: {e}")
+            return [self.verify_candidate(c) for c in batch]
+        except AnthropicConnectionError as e:
+            # Connection error - fall back to individual validation
+            print(f"  [WARN] Batch LLM connection error, falling back: {e}")
+            return [self.verify_candidate(c) for c in batch]
+        except (AnthropicStatusError, AnthropicAPIError) as e:
+            # API error - fall back to individual validation
+            print(f"  [WARN] Batch LLM API error, falling back: {e}")
+            return [self.verify_candidate(c) for c in batch]
         except Exception as e:
-            # On error, fall back to individual validation
-            print(f"  [WARN] Batch LLM error, falling back: {e}")
+            # Unexpected error - fall back to individual validation
+            print(f"  [WARN] Batch LLM unexpected error ({type(e).__name__}), falling back: {e}")
             return [self.verify_candidate(c) for c in batch]
 
         # Parse batch response
@@ -1049,8 +1128,14 @@ class LLMEngine:
                     max_tokens=self.max_tokens,
                     top_p=1.0,
                 )
+        except AnthropicRateLimitError as e:
+            print(f"  [WARN] Haiku rate limited, sending all to Sonnet: {e}")
+            return batch, []
+        except (AnthropicConnectionError, AnthropicStatusError, AnthropicAPIError) as e:
+            print(f"  [WARN] Haiku API error, sending all to Sonnet: {e}")
+            return batch, []
         except Exception as e:
-            print(f"  [WARN] Haiku error, sending all to Sonnet: {e}")
+            print(f"  [WARN] Haiku unexpected error ({type(e).__name__}), sending all to Sonnet: {e}")
             return batch, []
 
         # Parse response

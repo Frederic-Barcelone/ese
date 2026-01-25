@@ -133,14 +133,25 @@ class PipelineEvaluator:
         gold_annos = self.gold_index.get(doc_id, [])
 
         if not gold_annos:
-            print(f"  [WARN] No gold annotations for {doc_id}")
-            return [], ScoreReport(
-                precision=0.0,
-                recall=0.0,
-                f1=0.0,
+            print(f"  [INFO] No gold annotations for {doc_id} - will be UNSCORED")
+            # Run pipeline anyway to get extractions
+            entities = self.orchestrator.process_pdf(str(pdf_path))
+            entities = [e.model_copy(update={"doc_id": doc_id}) for e in entities]
+
+            # Return unscored report
+            validated_count = sum(
+                1 for e in entities if e.status == ValidationStatus.VALIDATED
+            )
+            return entities, ScoreReport(
+                is_scored=False,
+                unscored_reason="no gold annotations",
+                precision=None,
+                recall=None,
+                f1=None,
                 true_positives=0,
-                false_positives=0,
+                false_positives=validated_count,  # Track extractions
                 false_negatives=0,
+                gold_count=0,
             )
 
         # Run full pipeline via Orchestrator
@@ -209,12 +220,18 @@ class PipelineEvaluator:
 
             print("\n  SCORE:")
             print(f"  Extracted: {len(validated)} | Gold: {gold_count}")
-            print(
-                f"  P: {report.precision:.1%} | R: {report.recall:.1%} | F1: {report.f1:.1%}"
-            )
-            print(
-                f"  TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}"
-            )
+
+            if not report.is_scored:
+                # UNSCORED document
+                print(f"  UNSCORED ({report.unscored_reason or 'no gold annotations'})")
+            else:
+                # SCORED document
+                print(
+                    f"  P: {report.precision:.1%} | R: {report.recall:.1%} | F1: {report.f1:.1%}"
+                )
+                print(
+                    f"  TP: {report.true_positives} | FP: {report.false_positives} | FN: {report.false_negatives}"
+                )
             print(f"  Time: {elapsed:.1f}s")
 
             all_entities.extend(entities)
@@ -228,17 +245,24 @@ class PipelineEvaluator:
         corpus_report = self.scorer.evaluate_corpus(all_entities, all_gold)
 
         print("\nMICRO (global):")
-        print(f"  Precision: {corpus_report.micro.precision:.1%}")
-        print(f"  Recall:    {corpus_report.micro.recall:.1%}")
-        print(f"  F1:        {corpus_report.micro.f1:.1%}")
-        print(
-            f"  TP: {corpus_report.micro.true_positives} | FP: {corpus_report.micro.false_positives} | FN: {corpus_report.micro.false_negatives}"
-        )
+        if not corpus_report.micro.is_scored:
+            print(f"  UNSCORED ({corpus_report.micro.unscored_reason})")
+            print(f"  Extractions: {corpus_report.micro.false_positives}")
+        else:
+            print(f"  Precision: {corpus_report.micro.precision:.1%}")
+            print(f"  Recall:    {corpus_report.micro.recall:.1%}")
+            print(f"  F1:        {corpus_report.micro.f1:.1%}")
+            print(
+                f"  TP: {corpus_report.micro.true_positives} | FP: {corpus_report.micro.false_positives} | FN: {corpus_report.micro.false_negatives}"
+            )
 
         print("\nMACRO (per-doc average):")
-        print(f"  Precision: {corpus_report.macro.precision:.1%}")
-        print(f"  Recall:    {corpus_report.macro.recall:.1%}")
-        print(f"  F1:        {corpus_report.macro.f1:.1%}")
+        if not corpus_report.macro.is_scored:
+            print(f"  UNSCORED ({corpus_report.macro.unscored_reason})")
+        else:
+            print(f"  Precision: {corpus_report.macro.precision:.1%}")
+            print(f"  Recall:    {corpus_report.macro.recall:.1%}")
+            print(f"  F1:        {corpus_report.macro.f1:.1%}")
 
         # Error analysis
         if corpus_report.micro.fp_examples:

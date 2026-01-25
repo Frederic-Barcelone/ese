@@ -713,6 +713,22 @@ normalization:
     min_margin: 1
     fill_long_form_for_orphans: true
 
+    # Whitelist of SFs allowed to remain unexpanded without being flagged as AMBIGUOUS.
+    # These are typically unambiguous domain-specific abbreviations.
+    whitelist_unexpanded:
+      - "CI"       # Confidence interval (unambiguous in stats context)
+      - "SD"       # Standard deviation
+      - "HR"       # Hazard ratio
+      - "OR"       # Odds ratio
+      - "IQR"      # Interquartile range
+      - "BMI"      # Body mass index
+      - "DNA"      # Deoxyribonucleic acid
+      - "RNA"      # Ribonucleic acid
+      - "IV"       # Intravenous
+      - "IM"       # Intramuscular
+      - "SC"       # Subcutaneous
+      - "PO"       # Per oral
+
 # ==============================================================================
 # DISEASE DETECTION CONFIGURATION
 # ==============================================================================

@@ -36,19 +36,200 @@ Usage:
 
 from __future__ import annotations
 
+import functools
 import hashlib
 import json
+import random
 import threading
 import time
 from abc import ABC
 from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Tuple, Type, TypeVar, Union
 
 import requests
 
 from A_core.A00_logging import get_logger
 
 logger = get_logger(__name__)
+
+# Type variable for generic retry decorator
+F = TypeVar("F", bound=Callable[..., Any])
+
+
+# =============================================================================
+# RETRY WITH EXPONENTIAL BACKOFF
+# =============================================================================
+
+
+def retry_with_backoff(
+    max_retries: int = 3,
+    base_delay: float = 1.0,
+    max_delay: float = 30.0,
+    retryable_exceptions: Tuple[Type[Exception], ...] = (
+        requests.exceptions.Timeout,
+        requests.exceptions.ConnectionError,
+    ),
+    retryable_status_codes: Tuple[int, ...] = (429, 500, 502, 503, 504),
+) -> Callable[[F], F]:
+    """
+    Decorator that adds retry with exponential backoff to a function.
+
+    Retries the decorated function on specific exceptions or HTTP status codes,
+    with exponentially increasing delays between attempts plus jitter to avoid
+    thundering herd problems.
+
+    Args:
+        max_retries: Maximum number of retry attempts (default: 3)
+        base_delay: Initial delay in seconds (default: 1.0)
+        max_delay: Maximum delay in seconds (default: 30.0)
+        retryable_exceptions: Tuple of exception types to retry on
+        retryable_status_codes: HTTP status codes that trigger retry
+
+    Returns:
+        Decorated function with retry logic
+
+    Usage:
+        @retry_with_backoff(max_retries=3, base_delay=1.0)
+        def fetch_data(url: str) -> dict:
+            response = requests.get(url)
+            response.raise_for_status()
+            return response.json()
+
+    Example with custom exceptions:
+        @retry_with_backoff(
+            max_retries=5,
+            retryable_exceptions=(APIError, TimeoutError),
+        )
+        def call_external_api() -> dict:
+            ...
+    """
+    def decorator(func: F) -> F:
+        @functools.wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            last_exception: Optional[Exception] = None
+
+            for attempt in range(max_retries + 1):
+                try:
+                    result = func(*args, **kwargs)
+
+                    # Check for retryable HTTP response (if result is Response)
+                    if isinstance(result, requests.Response):
+                        if result.status_code in retryable_status_codes:
+                            if attempt == max_retries:
+                                result.raise_for_status()
+                            delay = _calculate_delay(attempt, base_delay, max_delay)
+                            logger.warning(
+                                f"Retry {attempt + 1}/{max_retries} for "
+                                f"{func.__name__} after HTTP {result.status_code}, "
+                                f"waiting {delay:.1f}s"
+                            )
+                            time.sleep(delay)
+                            continue
+
+                    return result
+
+                except retryable_exceptions as e:
+                    last_exception = e
+                    if attempt == max_retries:
+                        logger.error(
+                            f"Max retries ({max_retries}) exceeded for "
+                            f"{func.__name__}: {e}"
+                        )
+                        raise
+
+                    delay = _calculate_delay(attempt, base_delay, max_delay)
+                    logger.warning(
+                        f"Retry {attempt + 1}/{max_retries} for {func.__name__} "
+                        f"after {type(e).__name__}: {e}, waiting {delay:.1f}s"
+                    )
+                    time.sleep(delay)
+
+            # Should not reach here, but raise last exception if we do
+            if last_exception:
+                raise last_exception
+            return None
+
+        return wrapper  # type: ignore[return-value]
+    return decorator
+
+
+def _calculate_delay(attempt: int, base_delay: float, max_delay: float) -> float:
+    """
+    Calculate delay with exponential backoff and jitter.
+
+    Uses exponential backoff (2^attempt) with a random jitter factor
+    to prevent thundering herd problems.
+
+    Args:
+        attempt: Current attempt number (0-indexed)
+        base_delay: Base delay in seconds
+        max_delay: Maximum delay cap in seconds
+
+    Returns:
+        Delay in seconds
+    """
+    # Exponential backoff: base_delay * 2^attempt
+    exponential = base_delay * (2 ** attempt)
+
+    # Add jitter (0-50% of exponential delay)
+    jitter = random.uniform(0, exponential * 0.5)
+
+    # Cap at max_delay
+    return min(exponential + jitter, max_delay)
+
+
+class RetryConfig:
+    """
+    Configuration for retry behavior.
+
+    Use this class to create reusable retry configurations.
+
+    Example:
+        api_retry = RetryConfig(max_retries=5, base_delay=2.0)
+
+        @api_retry.decorator
+        def call_api():
+            ...
+    """
+
+    def __init__(
+        self,
+        max_retries: int = 3,
+        base_delay: float = 1.0,
+        max_delay: float = 30.0,
+        retryable_exceptions: Tuple[Type[Exception], ...] = (
+            requests.exceptions.Timeout,
+            requests.exceptions.ConnectionError,
+        ),
+        retryable_status_codes: Tuple[int, ...] = (429, 500, 502, 503, 504),
+    ):
+        self.max_retries = max_retries
+        self.base_delay = base_delay
+        self.max_delay = max_delay
+        self.retryable_exceptions = retryable_exceptions
+        self.retryable_status_codes = retryable_status_codes
+
+    @property
+    def decorator(self) -> Callable[[F], F]:
+        """Get a decorator with this configuration."""
+        return retry_with_backoff(
+            max_retries=self.max_retries,
+            base_delay=self.base_delay,
+            max_delay=self.max_delay,
+            retryable_exceptions=self.retryable_exceptions,
+            retryable_status_codes=self.retryable_status_codes,
+        )
+
+
+# Pre-configured retry policies for common use cases
+DEFAULT_RETRY = RetryConfig()
+API_RETRY = RetryConfig(max_retries=3, base_delay=1.0, max_delay=60.0)
+AGGRESSIVE_RETRY = RetryConfig(max_retries=5, base_delay=0.5, max_delay=30.0)
+
+
+# =============================================================================
+# EXCEPTIONS
+# =============================================================================
 
 
 class CacheError(Exception):

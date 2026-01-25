@@ -114,10 +114,16 @@ class TableExtractor:
         rows = self._parse_html_table(html) if html else []
 
         # Validate table structure - reject false positives
-        is_valid, rejection_reason = self._is_valid_table(rows, html)
+        # Returns (is_valid, reason) where reason may indicate salvage info
+        is_valid, validation_info = self._is_valid_table(rows, html)
         if not is_valid:
-            print(f"[INFO] Skipping invalid table on page {page_num}: {rejection_reason}")
+            print(f"[INFO] Skipping invalid table on page {page_num}: {validation_info}")
             return None
+
+        # Check if this table was salvaged as a definition table
+        is_salvaged = validation_info and "definition_table_salvaged" in validation_info
+        if is_salvaged:
+            print(f"[INFO] Salvaged definition table on page {page_num}: {validation_info}")
 
         headers = rows[0] if rows else []
         data_rows = rows[1:] if len(rows) > 1 else []
@@ -125,8 +131,11 @@ class TableExtractor:
         # Get bounding box with coordinate conversion
         bbox = self._get_bbox(md, file_path, page_num)
 
-        # Classify table type
-        table_type = self._classify_table(headers)
+        # Classify table type (force GLOSSARY for salvaged definition tables)
+        if is_salvaged:
+            table_type = TableType.GLOSSARY.value
+        else:
+            table_type = self._classify_table(headers)
 
         return {
             "page_num": page_num,
@@ -149,6 +158,7 @@ class TableExtractor:
         - Tables that are mostly prose text
 
         Returns (True, None) for valid tables.
+        Returns (True, "definition_table_salvaged ...") for tables salvaged as definition tables.
         """
         # Must have minimum rows
         if len(rows) < MIN_TABLE_ROWS:
@@ -219,6 +229,12 @@ class TableExtractor:
                         # If most cells are similar length and long (>60 chars), likely prose columns
                         similar_long = sum(1 for length in lengths if abs(length - avg_len) < avg_len * 0.3 and length > 60)
                         if similar_long > len(lengths) * 0.6:
+                            # SALVAGE CHECK: Before rejecting, check if it's a definition table
+                            # Definition tables have 2 columns: short acronyms + long definitions
+                            is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
+                            if is_def_table:
+                                # Salvage this as a definition table
+                                return True, salvage_reason
                             similar_pct = similar_long / len(lengths) * 100
                             return False, f"multi-column prose layout detected ({similar_pct:.0f}% cells have similar long text)"
 
@@ -232,6 +248,69 @@ class TableExtractor:
                 return False, f"inconsistent column counts ({min_cols}-{max_cols} cols across rows)"
 
         return True, None
+
+    def _is_definition_table_candidate(
+        self, rows: List[List[str]], html: str
+    ) -> Tuple[bool, Optional[str]]:
+        """
+        Check if a table is a definition/glossary table that should be salvaged.
+
+        Definition tables have the signature:
+        - 2 columns
+        - Column 1: Short text (acronyms/abbreviations) with median <= 10 chars
+        - Column 2: Long text (definitions) with median >= 40 chars
+        - High ratio of acronym-like patterns in column 1
+
+        This allows us to salvage tables that would otherwise be rejected as
+        "multi-column prose" because their definitions are long.
+
+        Args:
+            rows: List of rows, where each row is a list of cell strings
+            html: Raw HTML content of the table
+
+        Returns:
+            (is_definition_table, reason_string_or_none)
+        """
+        # Must have at least 2 rows (header + 1 data)
+        if len(rows) < 2:
+            return False, None
+
+        # Must be exactly 2 columns
+        if not all(len(row) == 2 for row in rows):
+            return False, None
+
+        # Extract column 1 and column 2 texts
+        col1_texts = [row[0].strip() for row in rows if len(row) >= 2 and row[0].strip()]
+        col2_texts = [row[1].strip() for row in rows if len(row) >= 2 and row[1].strip()]
+
+        if len(col1_texts) < 2 or len(col2_texts) < 2:
+            return False, None
+
+        # Calculate median lengths
+        col1_lengths = sorted([len(t) for t in col1_texts])
+        col2_lengths = sorted([len(t) for t in col2_texts])
+
+        col1_median = col1_lengths[len(col1_lengths) // 2]
+        col2_median = col2_lengths[len(col2_lengths) // 2]
+
+        # Check definition table signature: short col1, long col2
+        if col1_median > 15:  # Acronyms should be short
+            return False, None
+
+        if col2_median < 30:  # Definitions should be reasonably long
+            return False, None
+
+        # Check for acronym-like patterns in column 1
+        # Acronyms: uppercase letters, possibly with numbers/hyphens
+        acronym_pattern = re.compile(r'^[A-Z][A-Z0-9\-/]{0,15}$|^[A-Z][a-z]?[A-Z]')
+        acronym_matches = sum(1 for t in col1_texts if acronym_pattern.match(t))
+        acronym_ratio = acronym_matches / len(col1_texts)
+
+        if acronym_ratio < 0.4:  # At least 40% should look like acronyms
+            return False, None
+
+        # This is a definition table - salvage it
+        return True, f"definition_table_salvaged (col1_median={col1_median}, col2_median={col2_median}, acronym_ratio={acronym_ratio:.0%})"
 
     def _get_bbox(
         self, md, file_path: str = "", page_num: int = 1

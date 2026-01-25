@@ -157,6 +157,123 @@ class Disambiguator:
                     "storage",
                 ],
             },
+            # ========================================
+            # NEW: Guideline-specific ambiguous SFs
+            # ========================================
+            "ACR": {
+                "American College of Rheumatology": [
+                    "eular",
+                    "rheumatology",
+                    "guideline",
+                    "recommendation",
+                    "criteria",
+                    "classification",
+                    "rheumatoid",
+                    "arthritis",
+                    "lupus",
+                    "vasculitis",
+                    "spondyloarthritis",
+                ],
+                "Albumin-to-Creatinine Ratio": [
+                    "albumin",
+                    "urine",
+                    "creatinine",
+                    "kidney",
+                    "nephropathy",
+                    "proteinuria",
+                    "uacr",
+                    "microalbuminuria",
+                ],
+            },
+            "LOA": {
+                "Level of Agreement": [
+                    "guideline",
+                    "consensus",
+                    "delphi",
+                    "voting",
+                    "agreement",
+                    "panel",
+                    "recommendation",
+                    "statement",
+                    "expert",
+                ],
+                "Leave of Absence": [
+                    "employee",
+                    "hr",
+                    "work",
+                    "personnel",
+                    "leave",
+                    "absence",
+                ],
+            },
+            "FV": {
+                "Final Vote": [
+                    "guideline",
+                    "consensus",
+                    "voting",
+                    "panel",
+                    "delphi",
+                    "recommendation",
+                    "agreement",
+                ],
+                "Femoral Vein": [
+                    "vein",
+                    "venous",
+                    "catheter",
+                    "vascular",
+                    "thrombosis",
+                    "femoral",
+                ],
+            },
+            "AI": {
+                "Artificial Intelligence": [
+                    "machine",
+                    "learning",
+                    "algorithm",
+                    "deep",
+                    "neural",
+                    "network",
+                    "model",
+                    "prediction",
+                    "computer",
+                ],
+                "Autoimmune": [
+                    "autoimmune",
+                    "immune",
+                    "autoantibody",
+                    "inflammation",
+                    "disease",
+                    "disorder",
+                ],
+                "Aortic Insufficiency": [
+                    "aortic",
+                    "valve",
+                    "regurgitation",
+                    "cardiac",
+                    "heart",
+                    "echocardiography",
+                ],
+            },
+            "LOE": {
+                "Level of Evidence": [
+                    "guideline",
+                    "recommendation",
+                    "evidence",
+                    "grade",
+                    "quality",
+                    "strength",
+                    "systematic",
+                    "review",
+                ],
+                "Loss of Expression": [
+                    "gene",
+                    "mutation",
+                    "protein",
+                    "expression",
+                    "loss",
+                    "tumor",
+                ],
+            },
         }
 
     # -------------------------
@@ -320,3 +437,141 @@ class Disambiguator:
             return merged
         # if it's a string or other type
         return {"previous_normalized_value": existing, **patch}
+
+    def flag_unexpanded(
+        self,
+        entities: List[ExtractedEntity],
+        whitelist_unexpanded: Optional[List[str]] = None,
+    ) -> List[ExtractedEntity]:
+        """
+        Flag unexpanded abbreviations as AMBIGUOUS unless whitelisted.
+
+        Abbreviations with no long_form (SF-only) may be ambiguous if they
+        weren't expanded. Unless they're on a whitelist (known unambiguous SFs),
+        we flag them as AMBIGUOUS to alert downstream consumers.
+
+        Args:
+            entities: List of extracted entities to check
+            whitelist_unexpanded: List of SFs that are allowed to remain
+                                  unexpanded without being flagged as AMBIGUOUS.
+                                  These are typically unambiguous domain-specific SFs.
+
+        Returns:
+            Updated list of entities with AMBIGUOUS flags added where appropriate
+        """
+        whitelist = set((sf.upper() for sf in (whitelist_unexpanded or [])))
+
+        out: List[ExtractedEntity] = []
+        for e in entities:
+            # Only check validated SF-only entities
+            if e.status != ValidationStatus.VALIDATED:
+                out.append(e)
+                continue
+
+            # Skip if has a long form
+            if e.long_form and e.long_form.strip():
+                out.append(e)
+                continue
+
+            sf = (e.short_form or "").strip().upper()
+            if not sf:
+                out.append(e)
+                continue
+
+            # Check whitelist
+            if sf in whitelist:
+                out.append(e)
+                continue
+
+            # Flag as ambiguous
+            flags = list(e.validation_flags or [])
+            flags.append("unexpanded_ambiguous")
+
+            updated = e.model_copy(
+                update={
+                    "status": ValidationStatus.AMBIGUOUS,
+                    "validation_flags": flags,
+                    "rejection_reason": "No expansion found; may be ambiguous",
+                }
+            )
+            out.append(updated)
+
+        return out
+
+    def decide_meaning_with_context(
+        self,
+        sf: str,
+        local_context: str,
+        global_profile: Optional[Counter] = None,
+        proximity_window: int = 50,
+    ) -> Optional[Tuple[str, float]]:
+        """
+        Decide meaning using proximity-weighted context scoring.
+
+        Words closer to the SF get higher weight than distant words.
+        This helps disambiguate when the local context strongly suggests
+        one meaning even if the global document profile doesn't.
+
+        Args:
+            sf: Short form to disambiguate
+            local_context: Text surrounding the SF occurrence
+            global_profile: Optional pre-computed global document word profile
+            proximity_window: Number of characters around SF to weight highly
+
+        Returns:
+            (best_meaning, confidence_score) or None if ambiguous
+        """
+        sf_key = sf.upper()
+        options = self.ambiguity_map.get(sf_key)
+        if not options:
+            return None
+
+        # Build weighted profile from local context
+        local_lower = local_context.lower() if self.lowercase else local_context
+
+        scored: List[Tuple[str, float]] = []
+        for meaning, keywords in options.items():
+            score = 0.0
+
+            for kw in keywords:
+                k = kw.lower() if self.lowercase else kw
+
+                # Check local context with proximity weighting
+                if k in local_lower:
+                    # Find position relative to SF
+                    sf_pos = local_lower.find(sf.lower())
+                    kw_pos = local_lower.find(k)
+
+                    if sf_pos >= 0 and kw_pos >= 0:
+                        distance = abs(kw_pos - sf_pos)
+                        # Higher weight for closer words
+                        if distance <= proximity_window:
+                            weight = 2.0 - (distance / proximity_window)  # 2.0 to 1.0
+                        else:
+                            weight = 0.5  # Further away
+                        score += weight
+                    else:
+                        score += 1.0  # Default weight
+
+                # Also check global profile if provided
+                if global_profile and k in global_profile:
+                    score += global_profile[k] * 0.3  # Lower weight for global
+
+            scored.append((meaning, score))
+
+        scored.sort(key=lambda x: x[1], reverse=True)
+        best_meaning, best_score = scored[0]
+        second_score = scored[1][1] if len(scored) > 1 else 0.0
+
+        # Confidence based on margin
+        if best_score < self.min_context_score:
+            return None
+
+        margin = best_score - second_score
+        if margin < self.min_margin:
+            return None
+
+        # Normalize confidence to 0-1 range
+        confidence = min(1.0, margin / 5.0)
+
+        return best_meaning, confidence

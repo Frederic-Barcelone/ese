@@ -87,6 +87,7 @@ from A_core.A04_heuristics_config import (
     HeuristicsConfig,
     HeuristicsCounters,
 )
+from A_core.A16_pipeline_metrics import PipelineMetrics
 from A_core.A05_disease_models import ExtractedDisease
 from A_core.A06_drug_models import ExtractedDrug
 from A_core.A12_gene_models import ExtractedGene
@@ -603,6 +604,10 @@ class Orchestrator:
         if not pdf_path_obj.exists():
             raise FileNotFoundError(f"PDF not found: {pdf_path}")
 
+        # Create metrics for this document (single source of truth)
+        doc_id = str(pdf_path_obj.stem)
+        metrics = PipelineMetrics(run_id=self.run_id, doc_id=doc_id)
+
         print(f"\n{'=' * 60}")
         print(f"Processing: {pdf_path_obj.name}")
         print(f"{'=' * 60}")
@@ -627,6 +632,10 @@ class Orchestrator:
         if self.extract_abbreviations:
             unique_candidates, full_text = self.abbreviation_pipeline.generate_candidates(doc)
 
+            # Update generation metrics
+            metrics.generation.generated_candidates = len(unique_candidates)
+            metrics.generation.unique_short_forms = len({c.short_form.upper() for c in unique_candidates})
+
             if not self.use_llm_validation:
                 print("\n[3/12] Validation SKIPPED")
             else:
@@ -635,10 +644,32 @@ class Orchestrator:
                     self.abbreviation_pipeline.filter_candidates(unique_candidates, full_text)
                 )
 
+                # Update generation metrics with filtered count
+                metrics.generation.filtered_lexicon_only = filtered_count
+
                 # Apply heuristics
                 auto_results, llm_candidates = self.abbreviation_pipeline.apply_heuristics(
                     needs_validation, counters
                 )
+
+                # Update heuristics metrics from counters
+                auto_approved = len([e for _, e in auto_results if e.status == ValidationStatus.VALIDATED])
+                auto_rejected_total = (
+                    counters.blacklisted_fp_count +
+                    counters.context_rejected +
+                    counters.trial_id_excluded +
+                    counters.common_word_rejected
+                )
+                metrics.heuristics.total_processed = len(needs_validation)
+                metrics.heuristics.auto_approved = auto_approved
+                metrics.heuristics.auto_rejected = auto_rejected_total
+                metrics.heuristics.sent_to_llm = len(llm_candidates)
+                metrics.heuristics.approved_by_stats_whitelist = counters.recovered_by_stats_whitelist
+                metrics.heuristics.approved_by_country_code = counters.recovered_by_country_code
+                metrics.heuristics.rejected_by_blacklist = counters.blacklisted_fp_count
+                metrics.heuristics.rejected_by_context = counters.context_rejected
+                metrics.heuristics.rejected_by_trial_id = counters.trial_id_excluded
+                metrics.heuristics.rejected_by_common_word = counters.common_word_rejected
 
                 # Print stats
                 from A_core.A01_domain_models import GeneratorType
@@ -673,10 +704,19 @@ class Orchestrator:
                 llm_results = self.abbreviation_pipeline.validate_with_llm(llm_candidates, delay)
                 results.extend(llm_results)
 
+                # Update validation metrics
+                llm_approved = sum(1 for r in llm_results if r.status == ValidationStatus.VALIDATED)
+                llm_rejected = sum(1 for r in llm_results if r.status == ValidationStatus.REJECTED)
+                llm_ambiguous = sum(1 for r in llm_results if r.status == ValidationStatus.AMBIGUOUS)
+                metrics.validation.total_validated = len(llm_results)
+                metrics.validation.llm_approved = llm_approved
+                metrics.validation.llm_rejected = llm_rejected
+                metrics.validation.llm_ambiguous = llm_ambiguous
+                metrics.validation.llm_calls = len(llm_candidates)
+
                 print(f"  Time: {time.time() - start:.2f}s")
 
                 # Search for missing abbreviations
-                doc_id = str(pdf_path_obj.stem)
                 found_sfs = {
                     r.short_form.upper()
                     for r in results
@@ -693,6 +733,10 @@ class Orchestrator:
                     doc_id, full_text, found_sfs, counters, delay_ms=delay
                 )
                 results.extend(sf_only_results)
+
+                # Update SF-only metrics
+                metrics.validation.sf_only_extracted = len(search_results)
+                metrics.validation.sf_only_from_llm = len(sf_only_results)
 
             # Normalize
             results = self.abbreviation_pipeline.normalize_results(results, full_text)
@@ -797,10 +841,54 @@ class Orchestrator:
         if doc_metadata:
             self.export_manager.export_document_metadata(pdf_path_obj, doc_metadata)
 
-        # Print validated results summary
+        # Update export metrics
+        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
+        rejected_count = sum(1 for r in results if r.status == ValidationStatus.REJECTED)
+        ambiguous_count = sum(1 for r in results if r.status == ValidationStatus.AMBIGUOUS)
+        metrics.export.validated = validated_count
+        metrics.export.rejected = rejected_count
+        metrics.export.ambiguous = ambiguous_count
+
+        # Entity type breakdown for export metrics
+        if disease_results:
+            metrics.export.by_entity_type["disease"] = sum(
+                1 for d in disease_results if d.status == ValidationStatus.VALIDATED
+            )
+        if gene_results:
+            metrics.export.by_entity_type["gene"] = sum(
+                1 for g in gene_results if g.status == ValidationStatus.VALIDATED
+            )
+        if drug_results:
+            metrics.export.by_entity_type["drug"] = sum(
+                1 for d in drug_results if d.status == ValidationStatus.VALIDATED
+            )
+
+        # Validate metrics invariants
+        invariant_errors = metrics.validate_invariants()
+        if invariant_errors:
+            self._logger.warning(f"Metrics invariant violations: {invariant_errors}")
+            for err in invariant_errors:
+                print(f"  [WARN] Metrics: {err}")
+
+        # Print metrics summary
+        print(f"\nPIPELINE METRICS ({doc_id}):")
+        print(f"  Generated:      {metrics.generation.generated_candidates}")
+        print(f"  Auto-approved:  {metrics.heuristics.auto_approved}")
+        print(f"  Auto-rejected:  {metrics.heuristics.auto_rejected}")
+        print(f"  Sent to LLM:    {metrics.heuristics.sent_to_llm}")
+        print(f"  LLM approved:   {metrics.validation.llm_approved}")
+        print(f"  LLM rejected:   {metrics.validation.llm_rejected}")
+        print(f"  Exported:       {metrics.export.validated} validated / {metrics.export.rejected} rejected")
+
+        # Print validated results summary (only for enabled extractors)
         self._print_validated_summary(
             results, disease_results, gene_results, drug_results,
-            pharma_results, feasibility_results, doc_metadata
+            pharma_results, feasibility_results, doc_metadata,
+            extract_diseases=self.extract_diseases,
+            extract_genes=self.extract_genes,
+            extract_drugs=self.extract_drugs,
+            extract_pharma=self.extract_pharma,
+            extract_feasibility=self.extract_feasibility,
         )
 
         return results
@@ -840,8 +928,33 @@ class Orchestrator:
         pharma_results: List[ExtractedPharma],
         feasibility_results: List,
         doc_metadata: Optional[DocumentMetadata],
+        *,
+        extract_diseases: bool = True,
+        extract_genes: bool = True,
+        extract_drugs: bool = True,
+        extract_pharma: bool = True,
+        extract_feasibility: bool = True,
     ) -> None:
-        """Print summary of validated entities."""
+        """Print summary of validated entities.
+
+        Only prints sections for extractors that were enabled.
+        This prevents confusing output like "0 diseases" when disease
+        extraction was intentionally disabled.
+
+        Args:
+            results: Validated abbreviation entities
+            disease_results: Disease extraction results
+            gene_results: Gene extraction results
+            drug_results: Drug extraction results
+            pharma_results: Pharma company extraction results
+            feasibility_results: Feasibility extraction results
+            doc_metadata: Document metadata
+            extract_diseases: Whether disease extractor was enabled
+            extract_genes: Whether gene extractor was enabled
+            extract_drugs: Whether drug extractor was enabled
+            extract_pharma: Whether pharma extractor was enabled
+            extract_feasibility: Whether feasibility extractor was enabled
+        """
         # Print validated abbreviations
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
         if validated:
@@ -855,53 +968,57 @@ class Orchestrator:
                     src = f" [{lex}]"
                 print(f"  * {v.short_form} -> {v.long_form or '(no expansion)'}{src}")
 
-        # Print validated diseases
-        validated_diseases = [d for d in disease_results if d.status == ValidationStatus.VALIDATED]
-        if validated_diseases:
-            print(f"\nValidated diseases ({len(validated_diseases)}):")
-            for d in validated_diseases:
-                codes = []
-                if d.icd10_code:
-                    codes.append(f"ICD-10:{d.icd10_code}")
-                if d.orpha_code:
-                    codes.append(f"ORPHA:{d.orpha_code}")
-                code_str = f" [{', '.join(codes)}]" if codes else ""
-                print(f"  * {d.preferred_label}{code_str}")
+        # Print validated diseases (only if extractor was enabled)
+        if extract_diseases:
+            validated_diseases = [d for d in disease_results if d.status == ValidationStatus.VALIDATED]
+            if validated_diseases:
+                print(f"\nValidated diseases ({len(validated_diseases)}):")
+                for d in validated_diseases:
+                    codes = []
+                    if d.icd10_code:
+                        codes.append(f"ICD-10:{d.icd10_code}")
+                    if d.orpha_code:
+                        codes.append(f"ORPHA:{d.orpha_code}")
+                    code_str = f" [{', '.join(codes)}]" if codes else ""
+                    print(f"  * {d.preferred_label}{code_str}")
 
-        # Print validated genes
-        validated_genes = [g for g in gene_results if g.status == ValidationStatus.VALIDATED]
-        if validated_genes:
-            print(f"\nValidated genes ({len(validated_genes)}):")
-            for g in validated_genes:
-                codes = []
-                if g.hgnc_id:
-                    codes.append(f"HGNC:{g.hgnc_id}")
-                if g.entrez_id:
-                    codes.append(f"Entrez:{g.entrez_id}")
-                code_str = f" [{', '.join(codes)}]" if codes else ""
-                diseases = len(g.associated_diseases)
-                disease_str = f" ({diseases} diseases)" if diseases else ""
-                print(f"  * {g.hgnc_symbol}{code_str}{disease_str}")
+        # Print validated genes (only if extractor was enabled)
+        if extract_genes:
+            validated_genes = [g for g in gene_results if g.status == ValidationStatus.VALIDATED]
+            if validated_genes:
+                print(f"\nValidated genes ({len(validated_genes)}):")
+                for g in validated_genes:
+                    codes = []
+                    if g.hgnc_id:
+                        codes.append(f"HGNC:{g.hgnc_id}")
+                    if g.entrez_id:
+                        codes.append(f"Entrez:{g.entrez_id}")
+                    code_str = f" [{', '.join(codes)}]" if codes else ""
+                    diseases = len(g.associated_diseases)
+                    disease_str = f" ({diseases} diseases)" if diseases else ""
+                    print(f"  * {g.hgnc_symbol}{code_str}{disease_str}")
 
-        # Print validated drugs
-        validated_drugs = [drug for drug in drug_results if drug.status == ValidationStatus.VALIDATED]
-        if validated_drugs:
-            print(f"\nValidated drugs ({len(validated_drugs)}):")
-            for drug in validated_drugs:
-                phase = f" ({drug.development_phase})" if drug.development_phase else ""
-                compound = f" [{drug.compound_id}]" if drug.compound_id else ""
-                print(f"  * {drug.preferred_name}{compound}{phase}")
+        # Print validated drugs (only if extractor was enabled)
+        if extract_drugs:
+            validated_drugs = [drug for drug in drug_results if drug.status == ValidationStatus.VALIDATED]
+            if validated_drugs:
+                print(f"\nValidated drugs ({len(validated_drugs)}):")
+                for drug in validated_drugs:
+                    phase = f" ({drug.development_phase})" if drug.development_phase else ""
+                    compound = f" [{drug.compound_id}]" if drug.compound_id else ""
+                    print(f"  * {drug.preferred_name}{compound}{phase}")
 
-        # Print validated pharma companies
-        validated_pharma = [p for p in pharma_results if p.status == ValidationStatus.VALIDATED]
-        if validated_pharma:
-            print(f"\nValidated pharma companies ({len(validated_pharma)}):")
-            for p in validated_pharma:
-                hq = f" ({p.headquarters})" if p.headquarters else ""
-                print(f"  * {p.canonical_name}{hq}")
+        # Print validated pharma companies (only if extractor was enabled)
+        if extract_pharma:
+            validated_pharma = [p for p in pharma_results if p.status == ValidationStatus.VALIDATED]
+            if validated_pharma:
+                print(f"\nValidated pharma companies ({len(validated_pharma)}):")
+                for p in validated_pharma:
+                    hq = f" ({p.headquarters})" if p.headquarters else ""
+                    print(f"  * {p.canonical_name}{hq}")
 
-        # Print feasibility summary
-        if feasibility_results:
+        # Print feasibility summary (only if extractor was enabled)
+        if extract_feasibility and feasibility_results:
             print(f"\nFeasibility information ({len(feasibility_results)} items):")
             by_type: Dict[str, List] = {}
             for f in feasibility_results:
