@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections import Counter
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -173,6 +174,11 @@ class Disambiguator:
                     "lupus",
                     "vasculitis",
                     "spondyloarthritis",
+                    "anca",
+                    "gpa",
+                    "mpa",
+                    "egpa",
+                    "aav",
                 ],
                 "Albumin-to-Creatinine Ratio": [
                     "albumin",
@@ -384,6 +390,132 @@ class Disambiguator:
             out.append(e.model_copy(update=updates))
 
         return out
+
+    def re_disambiguate_with_context(
+        self, entities: List[ExtractedEntity], full_doc_text: str
+    ) -> List[ExtractedEntity]:
+        """
+        Re-disambiguate entities that already have long_forms from lexicons.
+
+        This handles the case where a lexicon (like UMLS) provides a wrong expansion
+        for an ambiguous SF. For example:
+        - ACR from UMLS might be "albumin-to-creatinine ratio" but in a rheumatology
+          guideline context, it should be "American College of Rheumatology"
+        - FV from UMLS might be "Immunoglobulin Fv Fragments" but in a guideline
+          context, it should be "Final Vote"
+
+        Args:
+            entities: extracted entities (may have long_forms from lexicons)
+            full_doc_text: document-level text for context scoring
+
+        Returns:
+            list of entities, with some lexicon LFs replaced if context suggests different meaning
+        """
+        profile = self._profile_document(full_doc_text)
+        out: List[ExtractedEntity] = []
+
+        for e in entities:
+            # Skip non-validated
+            if self.only_validated and e.status != ValidationStatus.VALIDATED:
+                out.append(e)
+                continue
+
+            sf = (e.short_form or "").strip()
+            if not sf:
+                out.append(e)
+                continue
+
+            sf_key = sf.upper()
+            options = self.ambiguity_map.get(sf_key)
+            if not options:
+                # SF not in ambiguity map, keep as-is
+                out.append(e)
+                continue
+
+            # Get current long_form (might be None or from lexicon)
+            current_lf = (e.long_form or "").strip()
+
+            # Decide best meaning based on context
+            decision = self._decide_meaning(sf_key, profile)
+            if not decision:
+                out.append(e)
+                continue
+
+            chosen_lf, score, runner_up_score = decision
+
+            # Check if current LF matches one of the known meanings
+            current_lf_lower = current_lf.lower()
+            chosen_lf_lower = chosen_lf.lower()
+
+            # If current LF is already the best match, no change needed
+            if self._lf_matches(current_lf_lower, chosen_lf_lower):
+                out.append(e)
+                continue
+
+            # Check if current LF matches ANY known meaning in ambiguity_map
+            current_matches_any_known = False
+            for meaning_lf in options.keys():
+                if self._lf_matches(current_lf_lower, meaning_lf.lower()):
+                    current_matches_any_known = True
+                    break
+
+            # Override if:
+            # 1. Current LF is empty, OR
+            # 2. Current LF matches a known wrong meaning (not the best), OR
+            # 3. Current LF doesn't match ANY known meaning (e.g., "Immunoglobulin Fv Fragments" for FV)
+            #    AND context strongly suggests a specific meaning
+            should_override = (
+                not current_lf or  # Empty
+                current_matches_any_known or  # Known wrong meaning
+                (not current_matches_any_known and score >= self.min_context_score * 2)  # Unknown LF but strong context
+            )
+
+            if not should_override:
+                out.append(e)
+                continue
+
+            # Override with contextually correct meaning
+            updates: Dict[str, Any] = {}
+            flags = list(e.validation_flags or [])
+
+            payload = {
+                "re_disambiguation": {
+                    "method": "context_override",
+                    "short_form": sf_key,
+                    "original_long_form": current_lf or None,
+                    "chosen_long_form": chosen_lf,
+                    "score": score,
+                    "runner_up_score": runner_up_score,
+                }
+            }
+
+            merged_norm = self._merge_normalized_value(e.normalized_value, payload)
+            updates["normalized_value"] = merged_norm
+
+            if "re_disambiguated" not in flags:
+                flags.append("re_disambiguated")
+            updates["validation_flags"] = flags
+
+            # Replace long_form with contextually correct one
+            updates["long_form"] = chosen_lf
+
+            out.append(e.model_copy(update=updates))
+
+        return out
+
+    def _lf_matches(self, lf1: str, lf2: str) -> bool:
+        """
+        Check if two long forms match, allowing for minor variations.
+        E.g., "albumin to creatinine ratio" matches "albumin-to-creatinine ratio"
+        """
+        # Normalize: lowercase, remove hyphens/punctuation, collapse spaces
+        def normalize(s: str) -> str:
+            s = s.lower()
+            s = re.sub(r"[^a-z0-9\s]", " ", s)
+            s = re.sub(r"\s+", " ", s).strip()
+            return s
+
+        return normalize(lf1) == normalize(lf2)
 
     # -------------------------
     # Internal helpers

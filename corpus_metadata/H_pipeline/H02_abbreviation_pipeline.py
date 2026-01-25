@@ -848,10 +848,16 @@ Return ONLY the JSON array, nothing else."""
         if self.nct_enricher is not None:
             nct_enriched_count = self._enrich_nct_entities(results)
 
-        # Step 2: Disambiguate
+        # Step 2: Disambiguate orphans (no long_form)
         results = self.disambiguator.resolve(results, full_text)
         disambiguated_count = sum(
             1 for r in results if "disambiguated" in (r.validation_flags or [])
+        )
+
+        # Step 2.5: Re-disambiguate entities with wrong lexicon expansions
+        results = self.disambiguator.re_disambiguate_with_context(results, full_text)
+        re_disambiguated_count = sum(
+            1 for r in results if "re_disambiguated" in (r.validation_flags or [])
         )
 
         # Step 3: Deduplicate
@@ -864,6 +870,8 @@ Return ONLY the JSON array, nothing else."""
         if nct_enriched_count > 0:
             print(f"  NCT enriched: {nct_enriched_count}")
         print(f"  Disambiguated: {disambiguated_count}")
+        if re_disambiguated_count > 0:
+            print(f"  Re-disambiguated (context override): {re_disambiguated_count}")
         print(f"  Deduplicated: {dedup_removed} duplicates merged")
 
         return results
