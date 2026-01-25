@@ -274,6 +274,40 @@ class Disambiguator:
                     "tumor",
                 ],
             },
+            "SOC": {
+                "Standard of Care": [
+                    "trial",
+                    "clinical",
+                    "treatment",
+                    "therapy",
+                    "placebo",
+                    "comparator",
+                    "arm",
+                    "randomized",
+                    "control",
+                    "intervention",
+                    "patient",
+                    "efficacy",
+                    "safety",
+                ],
+                "System Organ Class": [
+                    "adverse",
+                    "event",
+                    "meddra",
+                    "safety",
+                    "teae",
+                    "ae",
+                    "serious",
+                ],
+                "Superior Olivary Complex": [
+                    "auditory",
+                    "brainstem",
+                    "cochlear",
+                    "hearing",
+                    "neuron",
+                    "acoustic",
+                ],
+            },
         }
 
     # -------------------------
