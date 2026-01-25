@@ -483,6 +483,14 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     if not matched_text:
                         continue  # Skip empty matches
 
+                    # Skip matches that are part of a longer hyphenated term
+                    # e.g., skip "APPEAR" when the text contains "APPEAR-C3G"
+                    if end < len(text) and text[end] == '-':
+                        # Check if hyphen is followed by alphanumeric chars
+                        rest = text[end + 1:]
+                        if rest and (rest[0].isalnum()):
+                            continue  # Part of a longer hyphenated term
+
                     sf_to_use = matched_text if entry.preserve_case else entry.sf
 
                     key = (sf_to_use.upper(), entry.lf.lower())
