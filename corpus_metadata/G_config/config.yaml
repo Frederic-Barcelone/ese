@@ -609,6 +609,13 @@ heuristics:
   exclude_trial_ids: true  # Filter out NCT trial IDs from abbreviation extraction
 
   # ========================================
+  # SCISPACY + UMLS SETTINGS
+  # ========================================
+  # Max blocks to process with UMLS linking (avoids O(n²) scaling on large docs)
+  # Entities beyond this limit still extracted, but use lexicon fallback instead of UMLS
+  umls_max_blocks: 500
+
+  # ========================================
   # LLM SF-ONLY EXTRACTOR (PASO D)
   # ========================================
   enable_llm_sf_extractor: true
@@ -841,7 +848,7 @@ deduplication:
 extraction_pipeline:
   # Use a preset (overrides individual flags below if set)
   # Set to null or remove to use individual flags
-  preset: null  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
+  preset: abbreviations_only  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
                 # entities_only, clinical_entities, metadata_only, standard, all, minimal
 
   # Individual extractor flags (used when preset is null)
@@ -860,7 +867,7 @@ extraction_pipeline:
   options:
     use_llm_validation: true      # LLM validation for abbreviations
     use_llm_feasibility: true     # LLM-based feasibility extraction (vs pattern-based)
-    use_vlm_tables: true         # Vision model for table extraction
+    use_vlm_tables: true          # Vision model for table extraction
     use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
     use_epi_enricher: true        # EpiExtract4GARD-v2 for epidemiology NER (LOC, EPI, STAT)
     use_zeroshot_bioner: true     # ZeroShotBioNER for ADE, dosage, frequency, route extraction

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import base64
 import json
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, TYPE_CHECKING
@@ -1043,6 +1044,7 @@ class ExportManager:
             "images": []
         }
 
+        vision_call_count = 0
         for img in images:
             # Check extraction source from metadata (B09-B11 native extraction)
             extraction_source = img.metadata.get("source") if img.metadata else None
@@ -1061,8 +1063,12 @@ class ExportManager:
 
             # Run Vision LLM analysis based on image type
             if vision_analyzer and img.image_base64:
+                # Add delay between Vision LLM calls to avoid rate limiting
+                if vision_call_count > 0:
+                    time.sleep(0.1)  # 100ms delay
                 if img.image_type == ImageType.FLOWCHART:
                     try:
+                        vision_call_count += 1
                         flow_result = vision_analyzer.analyze_flowchart(
                             img.image_base64, img.ocr_text
                         )
@@ -1090,6 +1096,7 @@ class ExportManager:
 
                 elif img.image_type == ImageType.CHART:
                     try:
+                        vision_call_count += 1
                         chart_result = vision_analyzer.analyze_chart(
                             img.image_base64, img.caption
                         )

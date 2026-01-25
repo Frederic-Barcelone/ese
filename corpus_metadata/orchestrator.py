@@ -689,7 +689,7 @@ class Orchestrator:
 
                 # LLM SF-only extraction
                 sf_only_results = self.abbreviation_pipeline.extract_sf_only_with_llm(
-                    doc_id, full_text, found_sfs, counters
+                    doc_id, full_text, found_sfs, counters, delay_ms=delay
                 )
                 results.extend(sf_only_results)
 

@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
 from pathlib import Path
 from typing import Any, Dict, Optional, Protocol, Tuple
 
@@ -436,6 +437,9 @@ class LLMEngine:
         self.run_id = run_id or generate_run_id("RUN")
         self.pipeline_version = pipeline_version or get_git_revision_hash()
 
+        # Cache for LLM responses: (sf_upper, lf_lower) -> validation result
+        self._validation_cache: Dict[Tuple[str, Optional[str]], Dict[str, Any]] = {}
+
     def verify_candidate(self, candidate: Candidate) -> ExtractedEntity:
         """Verify a single candidate using the LLM."""
         # 1) Basic guardrails
@@ -584,6 +588,7 @@ class LLMEngine:
         self,
         candidates: list[Candidate],
         batch_size: int = 15,
+        delay_ms: float = 100,
     ) -> list[ExtractedEntity]:
         """
         Verify multiple candidates in batches using a single LLM call per batch.
@@ -594,6 +599,7 @@ class LLMEngine:
         Args:
             candidates: List of candidates to validate
             batch_size: Number of candidates per LLM call (default 15)
+            delay_ms: Delay between batch API calls in milliseconds (default 100)
 
         Returns:
             List of ExtractedEntity results in the same order as input
@@ -603,13 +609,76 @@ class LLMEngine:
 
         results: list[ExtractedEntity] = []
 
-        # Process in batches
-        for batch_start in range(0, len(candidates), batch_size):
-            batch = candidates[batch_start : batch_start + batch_size]
+        # Separate cached vs uncached candidates
+        uncached_candidates: list[Candidate] = []
+        cached_results: dict[int, ExtractedEntity] = {}  # index -> cached result
+
+        for i, c in enumerate(candidates):
+            cache_key = (c.short_form.upper(), (c.long_form or "").lower() or None)
+            if cache_key in self._validation_cache:
+                # Reuse cached result with updated candidate reference
+                cached = self._validation_cache[cache_key]
+                cached_results[i] = self._build_entity_from_cache(c, cached)
+            else:
+                uncached_candidates.append((i, c))  # type: ignore[arg-type]
+
+        # Process uncached candidates in batches with delay
+        uncached_results: dict[int, ExtractedEntity] = {}
+        batch_candidates = [c for _, c in uncached_candidates]  # type: ignore[misc]
+        batch_indices = [i for i, _ in uncached_candidates]  # type: ignore[misc]
+
+        for batch_start in range(0, len(batch_candidates), batch_size):
+            if batch_start > 0 and delay_ms > 0:
+                time.sleep(delay_ms / 1000)
+            batch = batch_candidates[batch_start : batch_start + batch_size]
+            batch_idx = batch_indices[batch_start : batch_start + batch_size]
             batch_results = self._verify_batch(batch)
-            results.extend(batch_results)
+
+            # Cache and store results
+            for idx, candidate, entity in zip(batch_idx, batch, batch_results):
+                cache_key = (candidate.short_form.upper(), (candidate.long_form or "").lower() or None)
+                self._validation_cache[cache_key] = {
+                    "status": entity.status.value,
+                    "confidence": entity.confidence_score,
+                    "rejection_reason": entity.rejection_reason,
+                }
+                uncached_results[idx] = entity
+
+        # Combine results in original order
+        for i in range(len(candidates)):
+            if i in cached_results:
+                results.append(cached_results[i])
+            else:
+                results.append(uncached_results[i])
 
         return results
+
+    def _build_entity_from_cache(
+        self, candidate: Candidate, cached: Dict[str, Any]
+    ) -> ExtractedEntity:
+        """Build an ExtractedEntity from cached validation result."""
+        status_str = cached.get("status", "AMBIGUOUS")
+        status = ValidationStatus(status_str) if status_str in [s.value for s in ValidationStatus] else ValidationStatus.AMBIGUOUS
+
+        prov = ProvenanceMetadata(
+            run_id=self.run_id,
+            pipeline_version=self.pipeline_version,
+            doc_fingerprint=candidate.provenance.doc_fingerprint if candidate.provenance else "unknown",
+            rule_version="cached",
+        )
+
+        return ExtractedEntity(
+            short_form=candidate.short_form,
+            long_form=candidate.long_form,
+            field_type=candidate.field_type,
+            evidence_spans=candidate.evidence_spans,
+            status=status,
+            confidence_score=cached.get("confidence", 0.5),
+            rejection_reason=cached.get("rejection_reason"),
+            validation_flags=["from_cache"],
+            provenance=prov,
+            raw_llm_response={"cached": True},
+        )
 
     def _verify_batch(self, batch: list[Candidate]) -> list[ExtractedEntity]:
         """Verify a single batch of candidates with one LLM call."""

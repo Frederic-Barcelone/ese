@@ -355,6 +355,7 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
         )
 
         self.context_window = int(self.config.get("context_window", 300))
+        self.umls_max_blocks = int(self.config.get("umls_max_blocks", 500))
 
         # Abbreviation entries (regex-based)
         self.abbrev_entries: List[LexiconEntry] = []
@@ -610,6 +611,8 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     )
 
                 # Extract NER entities with UMLS linking
+                # For large documents, only do UMLS lookup for first N blocks to avoid O(n²) scaling
+                umls_char_limit = blocks_data[min(self.umls_max_blocks, len(blocks_data)) - 1][3] if blocks_data else 0
                 for ent in spacy_doc.ents:
                     ent_text = ent.text.strip()
 
@@ -623,10 +626,10 @@ class RegexLexiconGenerator(BaseCandidateGenerator):
                     if not self._is_valid_match(ent_text):
                         continue
 
-                    # Try UMLS linker first for expansion
+                    # Try UMLS linker first for expansion (only for first N blocks in large docs)
                     lf_from_umls = None
                     umls_cui = None
-                    if hasattr(ent._, "kb_ents") and ent._.kb_ents:
+                    if ent.start_char < umls_char_limit and hasattr(ent._, "kb_ents") and ent._.kb_ents:
                         # kb_ents is [(CUI, score), ...] - take top match
                         top_match = ent._.kb_ents[0]
                         umls_cui = top_match[0]

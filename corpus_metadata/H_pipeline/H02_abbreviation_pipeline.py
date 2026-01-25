@@ -462,7 +462,7 @@ class AbbreviationPipeline:
             try:
                 val_start = time.time()
                 batch_results = self.llm_engine.verify_candidates_batch(
-                    explicit_candidates, batch_size=10
+                    explicit_candidates, batch_size=10, delay_ms=batch_delay_ms
                 )
                 elapsed_ms = (time.time() - val_start) * 1000
 
@@ -491,7 +491,7 @@ class AbbreviationPipeline:
             try:
                 val_start = time.time()
                 batch_results = self.llm_engine.verify_candidates_batch(
-                    lexicon_candidates, batch_size=15
+                    lexicon_candidates, batch_size=15, delay_ms=batch_delay_ms
                 )
                 elapsed_ms = (time.time() - val_start) * 1000
 
@@ -597,6 +597,7 @@ class AbbreviationPipeline:
         full_text: str,
         found_sfs: set,
         counters: "HeuristicsCounters",
+        delay_ms: float = 100,
     ) -> List["ExtractedEntity"]:
         """PASO D: Extract SF-only using LLM."""
         from A_core.A01_domain_models import (
@@ -653,7 +654,9 @@ Return ONLY the JSON array, nothing else."""
         llm_sf_candidates: Dict[str, Optional[str]] = {}  # sf -> lf mapping
         llm_errors = 0
 
-        for chunk in text_chunks:
+        for i, chunk in enumerate(text_chunks):
+            if i > 0 and delay_ms > 0:
+                time.sleep(delay_ms / 1000)
             try:
                 prompt = sf_extraction_prompt.format(
                     already_found=", ".join(sorted(found_sfs)[:50]), text=chunk
