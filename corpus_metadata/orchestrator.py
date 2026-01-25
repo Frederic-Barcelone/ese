@@ -46,6 +46,7 @@ for _cat, _pat in _WARNING_FILTERS:
 warnings.filterwarnings("ignore", module=r"sklearn\.base")
 warnings.filterwarnings("ignore", category=FutureWarning, module=r"spacy\.language")
 warnings.filterwarnings("ignore", category=UserWarning, module=r"transformers")
+warnings.filterwarnings("ignore", message=r".*Could not get FontBBox.*")  # pdfminer.six
 # =============================================================================
 
 import sys
