@@ -664,6 +664,7 @@ class LLMEngine:
             run_id=self.run_id,
             pipeline_version=self.pipeline_version,
             doc_fingerprint=candidate.provenance.doc_fingerprint if candidate.provenance else "unknown",
+            generator_name=candidate.generator_type,
             rule_version="cached",
         )
 
