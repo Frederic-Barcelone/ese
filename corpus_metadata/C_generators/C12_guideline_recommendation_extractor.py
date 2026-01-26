@@ -29,6 +29,45 @@ from A_core.A18_recommendation_models import (
 
 
 # =============================================================================
+# GUIDELINE METADATA PATTERNS
+# =============================================================================
+
+# Known guideline organizations
+ORGANIZATION_PATTERNS = {
+    r"\bEULAR\b": "EULAR",
+    r"\bACR\b": "ACR",
+    r"\bAmerican College of Rheumatology\b": "ACR",
+    r"\bFDA\b": "FDA",
+    r"\bEMA\b": "EMA",
+    r"\bNICE\b": "NICE",
+    r"\bBSR\b": "BSR",
+    r"\bBritish Society for Rheumatology\b": "BSR",
+    r"\bKDIGO\b": "KDIGO",
+    r"\bACCF\b": "ACCF",
+    r"\bAHA\b": "AHA",
+    r"\bESC\b": "ESC",
+    r"\bWHO\b": "WHO",
+}
+
+# Guideline title patterns
+GUIDELINE_TITLE_PATTERNS = [
+    # "EULAR recommendations for the management of X: 2022 update" - capture full title
+    r"((?:EULAR|ACR|NICE|BSR|KDIGO|FDA|EMA|AHA|ESC)\s+(?:recommendations?|guidelines?)\s+(?:for\s+)?(?:the\s+)?(?:management|treatment|diagnosis)\s+of\s+[^:]+:\s*(\d{4})\s*(?:update)?)",
+    # Same pattern without colon/year suffix
+    r"((?:EULAR|ACR|NICE|BSR|KDIGO|FDA|EMA|AHA|ESC)\s+(?:recommendations?|guidelines?)\s+(?:for\s+)?(?:the\s+)?(?:management|treatment|diagnosis)\s+of\s+[A-Za-z][A-Za-z0-9\s-]+(?:vasculitis|disease|syndrome|disorder|arthritis|lupus))",
+    # "2022 EULAR/ACR recommendations for X"
+    r"(\d{4})\s+((?:EULAR|ACR|NICE|BSR|KDIGO|FDA|EMA|AHA|ESC)(?:/(?:EULAR|ACR|NICE|BSR|KDIGO|FDA|EMA|AHA|ESC))?\s+(?:recommendations?|guidelines?)\s+(?:for\s+)?[^.\n]+)",
+    # "Guidelines for X management (2022)"
+    r"((?:Guidelines?|Recommendations?)\s+(?:for\s+)?(?:the\s+)?(?:management|treatment|diagnosis)\s+of\s+[^(\n]+)\s*\((\d{4})\)",
+]
+
+# Target condition patterns
+CONDITION_PATTERNS = [
+    r"(?:management|treatment|diagnosis)\s+of\s+([A-Z][^,.]+?)(?:\s*[,:.]|\s+in\s+|\s+with\s+|\s*$)",
+    r"patients?\s+with\s+([A-Z][a-zA-Z\s-]+(?:vasculitis|disease|syndrome|disorder))",
+]
+
+# =============================================================================
 # EXTRACTION PATTERNS
 # =============================================================================
 
@@ -64,70 +103,143 @@ DURATION_PATTERN = re.compile(
     re.IGNORECASE
 )
 
-# Evidence level patterns
+# Evidence level patterns - includes GRADE/Oxford levels
 EVIDENCE_PATTERNS = {
+    # Descriptive evidence levels
     r"high\s*(?:quality)?\s*evidence": EvidenceLevel.HIGH,
     r"moderate\s*(?:quality)?\s*evidence": EvidenceLevel.MODERATE,
     r"low\s*(?:quality)?\s*evidence": EvidenceLevel.LOW,
     r"very\s*low\s*(?:quality)?\s*evidence": EvidenceLevel.VERY_LOW,
     r"expert\s*(?:opinion|consensus)": EvidenceLevel.EXPERT_OPINION,
+    # Oxford/GRADE numeric levels (1a = high, 1b = high, 2a/2b = moderate, etc.)
+    r"\bLoE\s*[:\s]*1[aA]\b": EvidenceLevel.HIGH,
+    r"\bLoE\s*[:\s]*1[bB]\b": EvidenceLevel.HIGH,
+    r"\b1[aA]\b": EvidenceLevel.HIGH,
+    r"\b1[bB]\b": EvidenceLevel.HIGH,
+    r"\bLoE\s*[:\s]*2[aA]\b": EvidenceLevel.MODERATE,
+    r"\bLoE\s*[:\s]*2[bB]\b": EvidenceLevel.MODERATE,
+    r"\b2[aA]\b": EvidenceLevel.MODERATE,
+    r"\b2[bB]\b": EvidenceLevel.MODERATE,
+    r"\bLoE\s*[:\s]*3[aAbB]?\b": EvidenceLevel.LOW,
+    r"\b3[aAbB]\b": EvidenceLevel.LOW,
+    r"\bLoE\s*[:\s]*4\b": EvidenceLevel.VERY_LOW,
+    r"\bLoE\s*[:\s]*5\b": EvidenceLevel.EXPERT_OPINION,
 }
 
-# Recommendation strength patterns
+# Recommendation strength patterns - includes letter grades
 STRENGTH_PATTERNS = {
+    # Descriptive strength
     r"strong(?:ly)?\s*recommend": RecommendationStrength.STRONG,
     r"conditional(?:ly)?\s*recommend": RecommendationStrength.CONDITIONAL,
     r"weak(?:ly)?\s*recommend": RecommendationStrength.WEAK,
     r"should\s*(?:be\s*)?consider": RecommendationStrength.CONDITIONAL,
     r"may\s*(?:be\s*)?consider": RecommendationStrength.WEAK,
+    # Letter grades (SoR = Strength of Recommendation)
+    r"\bSoR\s*[:\s]*A\b": RecommendationStrength.STRONG,
+    r"\bgrade\s*A\b": RecommendationStrength.STRONG,
+    r"\bSoR\s*[:\s]*B\b": RecommendationStrength.CONDITIONAL,
+    r"\bgrade\s*B\b": RecommendationStrength.CONDITIONAL,
+    r"\bSoR\s*[:\s]*C\b": RecommendationStrength.WEAK,
+    r"\bgrade\s*C\b": RecommendationStrength.WEAK,
 }
+
+# Population/severity patterns
+SEVERITY_PATTERNS = [
+    r"(organ[- ]threatening)",
+    r"(life[- ]threatening)",
+    r"(severe)",
+    r"(non[- ]?severe)",
+    r"(mild(?:\s+to\s+moderate)?)",
+    r"(moderate(?:\s+to\s+severe)?)",
+    r"(refractory)",
+    r"(relapsing)",
+    r"(new[- ]onset)",
+    r"(active)",
+]
+
+# Specific condition patterns within recommendations
+SPECIFIC_CONDITION_PATTERNS = [
+    r"\b(GPA|granulomatosis with polyangiitis)\b",
+    r"\b(MPA|microscopic polyangiitis)\b",
+    r"\b(EGPA|eosinophilic GPA)\b",
+    r"\b(AAV|ANCA[- ]associated vasculitis)\b",
+    r"\b(lupus nephritis)\b",
+    r"\b(rheumatoid arthritis)\b",
+    r"\b(systemic sclerosis)\b",
+]
 
 
 # =============================================================================
 # LLM PROMPT FOR RECOMMENDATION EXTRACTION
 # =============================================================================
 
-RECOMMENDATION_EXTRACTION_PROMPT = """Extract clinical recommendations from this text.
+RECOMMENDATION_EXTRACTION_PROMPT = """Extract clinical guideline recommendations from this text.
 
-For each distinct recommendation, extract:
+FIRST, identify the guideline metadata from the document header/title:
+- guideline_name: Full title (e.g., "EULAR recommendations for the management of ANCA-associated vasculitis: 2022 update")
+- guideline_year: Publication year (e.g., 2022)
+- organization: Issuing body (e.g., "EULAR", "ACR", "FDA", "NICE")
+- target_condition: Main condition (e.g., "ANCA-associated vasculitis")
+
+THEN, for each distinct recommendation, extract:
 {
+    "guideline_name": "<full guideline title>",
+    "guideline_year": <year as integer or null>,
+    "organization": "<EULAR, ACR, FDA, NICE, BSR, KDIGO, etc.>",
+    "target_condition": "<main condition addressed>",
     "recommendations": [
         {
-            "population": "<target population, e.g., 'GPA/MPA organ-threatening'>",
-            "condition": "<specific condition, e.g., 'newly diagnosed'>",
-            "severity": "<severity if specified>",
-            "action": "<recommended action, e.g., 'GC + RTX or CYC'>",
+            "population": "<specific target population, e.g., 'patients with GPA/MPA with organ-threatening disease'>",
+            "condition": "<specific condition state, e.g., 'new-onset', 'relapsing', 'refractory'>",
+            "severity": "<organ-threatening, life-threatening, severe, non-severe, mild, moderate>",
+            "action": "<recommended action - be specific>",
             "preferred": "<preferred option if stated>",
             "alternatives": ["<alternative 1>", "<alternative 2>"],
             "dosing": [
                 {
                     "drug_name": "<drug>",
-                    "dose_range": "<dose range>",
-                    "route": "<IV, oral, SC>",
-                    "frequency": "<daily, weekly>"
+                    "dose_range": "<dose range with units>",
+                    "starting_dose": "<starting dose if specified>",
+                    "maintenance_dose": "<maintenance dose if specified>",
+                    "max_dose": "<maximum dose if specified>",
+                    "route": "<IV, oral, SC, IM>",
+                    "frequency": "<daily, weekly, monthly, every X weeks>"
                 }
             ],
-            "taper_target": "<target dose and timepoint for tapering>",
-            "duration": "<treatment duration>",
-            "stop_window": "<when to stop treatment>",
+            "taper_target": "<target dose and timepoint for tapering, e.g., '5 mg/day by 4-5 months'>",
+            "duration": "<treatment duration, e.g., '24-48 months'>",
+            "stop_window": "<when to consider stopping>",
             "evidence_level": "high" | "moderate" | "low" | "very_low" | "expert_opinion",
             "strength": "strong" | "conditional" | "weak",
-            "source_text": "<original text snippet>"
+            "source_text": "<exact original text of the recommendation>",
+            "loe_code": "<original LoE code if present, e.g., '1a', '1b', '2b', '3b'>",
+            "sor_code": "<original SoR grade if present, e.g., 'A', 'B', 'C'>"
         }
-    ],
-    "guideline_name": "<guideline title if identifiable>",
-    "target_condition": "<main condition addressed>"
+    ]
 }
 
-IMPORTANT:
-- Extract EACH distinct recommendation separately
-- Capture exact dosing information (mg/day, ranges)
-- Note taper targets with timepoints (e.g., "5 mg/day by 4-5 months")
-- Identify treatment durations
-- Capture evidence levels and recommendation strength
-- Include the source text for each recommendation
+EVIDENCE LEVEL MAPPING:
+- 1a, 1b → "high"
+- 2a, 2b → "moderate"
+- 3a, 3b → "low"
+- 4 → "very_low"
+- 5, expert consensus → "expert_opinion"
 
-Return JSON only."""
+STRENGTH MAPPING:
+- Grade A, "we recommend", "strongly recommend" → "strong"
+- Grade B, "we suggest", "should consider" → "conditional"
+- Grade C, "may consider", "can be considered" → "weak"
+
+IMPORTANT:
+- Extract EACH distinct recommendation as a separate entry
+- Look for numbered recommendations (1., 2., etc.) or bulleted lists
+- Capture EXACT dosing (mg/day, mg/kg, ranges)
+- Note taper targets with timepoints
+- Identify treatment durations
+- Extract LoE/SoR codes from tables if present
+- Include the EXACT source text for each recommendation
+
+Return JSON only, no markdown."""
 
 
 # =============================================================================
@@ -170,24 +282,134 @@ class GuidelineRecommendationExtractor:
         Returns:
             RecommendationSet with extracted recommendations
         """
-        recommendations = []
+        # First, extract guideline metadata from the document
+        guideline_metadata = self._extract_guideline_metadata(text)
 
         if use_llm and self.llm_client:
             # Use LLM-based extraction
             llm_results = self._extract_with_llm(text, source, page_num)
             if llm_results:
+                # Merge any missing metadata from pattern extraction
+                if llm_results.guideline_name in ("Unknown", "Unknown Guideline", None):
+                    llm_results.guideline_name = guideline_metadata.get("guideline_name", "Unknown Guideline")
+                if llm_results.guideline_year is None:
+                    llm_results.guideline_year = guideline_metadata.get("guideline_year")
+                if llm_results.organization is None:
+                    llm_results.organization = guideline_metadata.get("organization")
+                if llm_results.target_condition in ("Unknown", None):
+                    llm_results.target_condition = guideline_metadata.get("target_condition", "Unknown")
                 return llm_results
 
         # Fall back to pattern-based extraction
         recommendations = self._extract_with_patterns(text, source, page_num)
 
         return RecommendationSet(
-            guideline_name="Unknown Guideline",
-            target_condition="Unknown",
+            guideline_name=guideline_metadata.get("guideline_name", "Unknown Guideline"),
+            guideline_year=guideline_metadata.get("guideline_year"),
+            organization=guideline_metadata.get("organization"),
+            target_condition=guideline_metadata.get("target_condition", "Unknown"),
             recommendations=recommendations,
             source_document=source,
             extraction_confidence=0.5 if recommendations else 0.0,
         )
+
+    def _extract_guideline_metadata(self, text: str) -> Dict[str, Any]:
+        """
+        Extract guideline metadata from document text.
+
+        Parses the document header/title to extract:
+        - Guideline name
+        - Organization (EULAR, ACR, etc.)
+        - Publication year
+        - Target condition
+
+        Args:
+            text: Full document text
+
+        Returns:
+            Dictionary with extracted metadata
+        """
+        metadata: Dict[str, Any] = {}
+
+        # Work with first 2000 chars (title/abstract area)
+        header_text = text[:2000]
+
+        # Extract organization
+        for pattern, org in ORGANIZATION_PATTERNS.items():
+            if re.search(pattern, header_text, re.IGNORECASE):
+                metadata["organization"] = org
+                break
+
+        # Extract guideline title and year
+        for pattern in GUIDELINE_TITLE_PATTERNS:
+            match = re.search(pattern, header_text, re.IGNORECASE)
+            if match:
+                groups = match.groups()
+                # Handle different pattern formats
+                if groups[0] and len(groups[0]) == 4 and groups[0].isdigit():
+                    # Pattern: "2022 EULAR recommendations..."
+                    metadata["guideline_year"] = int(groups[0])
+                    if len(groups) > 1 and groups[1]:
+                        metadata["guideline_name"] = groups[1].strip()
+                elif len(groups) >= 2 and groups[1] and len(groups[1]) == 4 and groups[1].isdigit():
+                    # Pattern: "EULAR recommendations...: 2022 update" (year in group 2)
+                    # Full title is in group 1
+                    metadata["guideline_name"] = groups[0].strip()
+                    metadata["guideline_year"] = int(groups[1])
+                else:
+                    # Pattern: just title, no year
+                    metadata["guideline_name"] = groups[0].strip()
+                break
+
+        # If no title found, try to extract from first line
+        if "guideline_name" not in metadata:
+            first_lines = header_text.split("\n")[:5]
+            for line in first_lines:
+                line = line.strip()
+                if len(line) > 20 and any(kw in line.lower() for kw in ["recommendation", "guideline", "management", "treatment"]):
+                    metadata["guideline_name"] = line[:200]
+                    break
+
+        # Extract year if not found yet
+        if "guideline_year" not in metadata:
+            year_match = re.search(r"\b(20[0-2]\d)\b", header_text)
+            if year_match:
+                metadata["guideline_year"] = int(year_match.group(1))
+
+        # Extract target condition
+        for pattern in CONDITION_PATTERNS:
+            match = re.search(pattern, header_text, re.IGNORECASE)
+            if match:
+                condition = match.group(1).strip()
+                # Clean up common artifacts
+                condition = re.sub(r"\s+", " ", condition)
+                if len(condition) > 5 and len(condition) < 100:
+                    metadata["target_condition"] = condition
+                    break
+
+        return metadata
+
+    def _get_page_number(self, text: str, position: int) -> Optional[int]:
+        """
+        Determine the page number for a position in the text.
+
+        Looks for page markers like "--- Page X ---" that precede the position.
+
+        Args:
+            text: Full document text
+            position: Character position in text
+
+        Returns:
+            Page number or None if not determinable
+        """
+        # Find all page markers before this position
+        page_pattern = re.compile(r"---\s*Page\s+(\d+)\s*---", re.IGNORECASE)
+        last_page = None
+
+        for match in page_pattern.finditer(text[:position]):
+            last_page = int(match.group(1))
+
+        return last_page
 
     def extract_from_table(
         self,
@@ -310,6 +532,9 @@ class GuidelineRecommendationExtractor:
                 data = json.loads(text_response.strip())
                 return self._parse_llm_response(data, source, page_num)
 
+            # No content in response
+            return None
+
         except Exception as e:
             print(f"[WARN] LLM recommendation extraction failed: {e}")
             return None
@@ -327,37 +552,70 @@ class GuidelineRecommendationExtractor:
             if not isinstance(rec_data, dict):
                 continue
 
-            # Parse dosing
+            # Parse dosing - handle both full and partial dosing info
             dosing = []
             for dose_data in rec_data.get("dosing", []):
                 if isinstance(dose_data, dict) and dose_data.get("drug_name"):
                     dosing.append(DrugDosingInfo(
                         drug_name=dose_data["drug_name"],
                         dose_range=dose_data.get("dose_range"),
+                        starting_dose=dose_data.get("starting_dose"),
+                        maintenance_dose=dose_data.get("maintenance_dose"),
+                        max_dose=dose_data.get("max_dose"),
                         route=dose_data.get("route"),
                         frequency=dose_data.get("frequency"),
                     ))
 
-            # Parse evidence level
+            # Parse evidence level - handle both descriptive and code formats
             evidence = EvidenceLevel.UNKNOWN
             ev_str = rec_data.get("evidence_level", "")
+            loe_code = rec_data.get("loe_code", "")
+
             if ev_str:
                 try:
-                    evidence = EvidenceLevel(ev_str.lower())
+                    evidence = EvidenceLevel(ev_str.lower().replace(" ", "_"))
                 except ValueError:
                     pass
 
-            # Parse strength
+            # If we have a LoE code, try to map it
+            if evidence == EvidenceLevel.UNKNOWN and loe_code:
+                loe_mapping = {
+                    "1a": EvidenceLevel.HIGH,
+                    "1b": EvidenceLevel.HIGH,
+                    "2a": EvidenceLevel.MODERATE,
+                    "2b": EvidenceLevel.MODERATE,
+                    "3a": EvidenceLevel.LOW,
+                    "3b": EvidenceLevel.LOW,
+                    "4": EvidenceLevel.VERY_LOW,
+                    "5": EvidenceLevel.EXPERT_OPINION,
+                }
+                evidence = loe_mapping.get(loe_code.lower(), EvidenceLevel.UNKNOWN)
+
+            # Parse strength - handle both descriptive and code formats
             strength = RecommendationStrength.UNKNOWN
             str_str = rec_data.get("strength", "")
+            sor_code = rec_data.get("sor_code", "")
+
             if str_str:
                 try:
                     strength = RecommendationStrength(str_str.lower())
                 except ValueError:
                     pass
 
+            # If we have a SoR code, try to map it
+            if strength == RecommendationStrength.UNKNOWN and sor_code:
+                sor_mapping = {
+                    "a": RecommendationStrength.STRONG,
+                    "b": RecommendationStrength.CONDITIONAL,
+                    "c": RecommendationStrength.WEAK,
+                }
+                strength = sor_mapping.get(sor_code.lower(), RecommendationStrength.UNKNOWN)
+
+            # Build recommendation ID with more context
+            rec_id = f"rec_{source}_{idx+1}"
+
             recommendations.append(GuidelineRecommendation(
-                recommendation_id=f"rec_{source}_{idx+1}",
+                recommendation_id=rec_id,
                 recommendation_type=RecommendationType.TREATMENT,
                 population=rec_data.get("population", "Unknown"),
                 condition=rec_data.get("condition"),
@@ -373,31 +631,43 @@ class GuidelineRecommendationExtractor:
                 strength=strength,
                 source=source,
                 source_text=rec_data.get("source_text"),
-                page_num=page_num,
+                page_num=rec_data.get("page_num", page_num),
             ))
+
+        # Parse guideline year
+        guideline_year = data.get("guideline_year")
+        if isinstance(guideline_year, str) and guideline_year.isdigit():
+            guideline_year = int(guideline_year)
+        elif not isinstance(guideline_year, int):
+            guideline_year = None
 
         return RecommendationSet(
             guideline_name=data.get("guideline_name", "Unknown"),
+            guideline_year=guideline_year,
+            organization=data.get("organization"),
             target_condition=data.get("target_condition", "Unknown"),
             recommendations=recommendations,
             source_document=source,
-            extraction_confidence=0.8 if recommendations else 0.0,
+            extraction_confidence=0.85 if recommendations else 0.0,
         )
 
     def _extract_with_patterns(
         self,
         text: str,
         source: str,
-        page_num: Optional[int],
+        default_page_num: Optional[int],
     ) -> List[GuidelineRecommendation]:
         """Extract recommendations using pattern matching."""
         recommendations = []
 
-        # Split into sentences/clauses
-        sentences = re.split(r'[.;]\s+', text)
+        # Split into sentences/clauses while tracking position
+        sentence_pattern = re.compile(r'[^.;]+[.;]')
 
         rec_idx = 0
-        for sentence in sentences:
+        for match in sentence_pattern.finditer(text):
+            sentence = match.group().strip()
+            position = match.start()
+
             # Look for recommendation indicators
             if not re.search(r'recommend|should|may\s+(?:be\s+)?consider|prefer', sentence, re.IGNORECASE):
                 continue
@@ -440,11 +710,40 @@ class GuidelineRecommendationExtractor:
                     strength = s
                     break
 
+            # Extract severity
+            severity = None
+            for pattern in SEVERITY_PATTERNS:
+                sev_match = re.search(pattern, sentence, re.IGNORECASE)
+                if sev_match:
+                    severity = sev_match.group(1).lower().replace("-", " ")
+                    break
+
+            # Extract specific condition
+            condition = None
+            for pattern in SPECIFIC_CONDITION_PATTERNS:
+                cond_match = re.search(pattern, sentence, re.IGNORECASE)
+                if cond_match:
+                    condition = cond_match.group(1)
+                    break
+
+            # Build population string from condition and severity
+            population_parts = []
+            if condition:
+                population_parts.append(f"patients with {condition}")
+            if severity:
+                population_parts.append(severity)
+            population = " ".join(population_parts) if population_parts else "General"
+
+            # Get page number for this recommendation
+            page_num = self._get_page_number(text, position) or default_page_num
+
             rec_idx += 1
             recommendations.append(GuidelineRecommendation(
                 recommendation_id=f"rec_{source}_pattern_{rec_idx}",
                 recommendation_type=RecommendationType.TREATMENT,
-                population="General",
+                population=population,
+                condition=condition,
+                severity=severity,
                 action=sentence[:200],
                 dosing=dosing,
                 duration=duration,

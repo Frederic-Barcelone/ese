@@ -150,6 +150,16 @@ class ClaudeClient:
         # Initialize client
         self.client = anthropic.Anthropic(api_key=self.api_key)
 
+    @property
+    def messages(self):
+        """
+        Provide access to the messages API for direct usage.
+
+        This allows code to use `client.messages.create(...)` syntax
+        which is consistent with the raw Anthropic client interface.
+        """
+        return self.client.messages
+
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load Claude config from YAML file."""
         path = Path(config_path)
