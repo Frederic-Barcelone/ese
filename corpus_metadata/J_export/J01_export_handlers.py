@@ -19,6 +19,8 @@ from typing import Any, Dict, List, Optional, Tuple, TYPE_CHECKING
 from Z_utils.Z04_image_utils import (
     get_image_size_bytes,
     is_image_oversized,
+    extract_ocr_text_from_base64,
+    PYTESSERACT_AVAILABLE,
 )
 
 if TYPE_CHECKING:
@@ -33,6 +35,8 @@ if TYPE_CHECKING:
     from A_core.A11_citation_models import ExtractedCitation, CitationExportEntry
     from A_core.A07_feasibility_models import FeasibilityCandidate
     from A_core.A08_document_metadata_models import DocumentMetadata
+    from A_core.A17_care_pathway_models import CarePathway
+    from A_core.A18_recommendation_models import RecommendationSet
     from D_validation.D02_llm_engine import ClaudeClient
 
 
@@ -1050,6 +1054,8 @@ class ExportManager:
             "compressed": 0,
             "skipped_oversized": 0,
             "vision_analyzed": 0,
+            "ocr_extracted": 0,
+            "ocr_failed": 0,
         }
 
         # Build export data
@@ -1068,11 +1074,34 @@ class ExportManager:
             extraction_source = img.metadata.get("source") if img.metadata else None
             figure_type = img.metadata.get("figure_type") if img.metadata else None
 
+            # Extract OCR text if not already present
+            ocr_text = img.ocr_text
+            ocr_method = None
+            if not ocr_text and img.image_base64 and PYTESSERACT_AVAILABLE:
+                try:
+                    ocr_text, ocr_info = extract_ocr_text_from_base64(
+                        img.image_base64,
+                        lang="eng",
+                        config="--psm 6"  # Assume uniform block of text
+                    )
+                    if ocr_info.get("success") and ocr_text:
+                        ocr_method = ocr_info.get("method")
+                        analysis_stats["ocr_extracted"] += 1
+                        # Truncate very long OCR text to avoid bloating JSON
+                        if len(ocr_text) > 5000:
+                            ocr_text = ocr_text[:5000] + "...[truncated]"
+                    else:
+                        analysis_stats["ocr_failed"] += 1
+                except Exception as e:
+                    analysis_stats["ocr_failed"] += 1
+                    print(f"    [DEBUG] OCR extraction failed for page {img.page_num}: {e}")
+
             img_data: Dict[str, Any] = {
                 "page": img.page_num,
                 "type": img.image_type.value,
                 "caption": img.caption,
-                "ocr_text": img.ocr_text,
+                "ocr_text": ocr_text,
+                "ocr_method": ocr_method,
                 "bbox": list(img.bbox.coords) if img.bbox else None,
                 "image_base64": img.image_base64,
                 "extraction_source": extraction_source,
@@ -1151,12 +1180,21 @@ class ExportManager:
                             img.image_base64, img.caption
                         )
                         if chart_result:
-                            img_data["vision_analysis"] = {
+                            vision_data: Dict[str, Any] = {
                                 "analysis_type": "chart_data",
                                 "chart_type": chart_result.chart_type,
                                 "title": chart_result.title,
                                 "x_axis": chart_result.x_axis,
                                 "y_axis": chart_result.y_axis,
+                                "legend_entries": [
+                                    {
+                                        "color": le.color,
+                                        "marker": le.marker,
+                                        "label": le.label,
+                                        "series_id": le.series_id,
+                                    }
+                                    for le in chart_result.legend_entries
+                                ] if chart_result.legend_entries else [],
                                 "data_points": [
                                     {
                                         "label": dp.label,
@@ -1168,6 +1206,15 @@ class ExportManager:
                                 ],
                                 "statistical_results": chart_result.statistical_results,
                             }
+                            # Add taper schedule if present
+                            if chart_result.taper_schedule:
+                                vision_data["taper_schedule"] = {
+                                    "drug_name": chart_result.taper_schedule.drug_name,
+                                    "starting_dose": chart_result.taper_schedule.starting_dose,
+                                    "target_dose": chart_result.taper_schedule.target_dose,
+                                    "target_timepoint": chart_result.taper_schedule.target_timepoint,
+                                }
+                            img_data["vision_analysis"] = vision_data
                             analysis_stats["vision_analyzed"] += 1
                         else:
                             analysis_stats["failed"] += 1
@@ -1192,6 +1239,96 @@ class ExportManager:
                             "action": "ocr_fallback",
                         })
                         print(f"    [WARN] Chart analysis failed: {e}")
+
+                # Handle UNKNOWN type images - classify and analyze
+                elif img.image_type == ImageType.UNKNOWN:
+                    try:
+                        vision_call_count += 1
+                        detected_type, analysis_result = vision_analyzer.analyze_unknown_image(
+                            img.image_base64, ocr_text, img.caption
+                        )
+                        # Update the image type based on classification
+                        img_data["detected_type"] = detected_type
+
+                        if detected_type == "flowchart" and analysis_result:
+                            img_data["type"] = "FLOWCHART"  # Override UNKNOWN
+                            img_data["vision_analysis"] = {
+                                "analysis_type": "patient_flow",
+                                "screened": analysis_result.screened,
+                                "screen_failures": analysis_result.screen_failures,
+                                "randomized": analysis_result.randomized,
+                                "completed": analysis_result.completed,
+                                "discontinued": analysis_result.discontinued,
+                                "arms": analysis_result.arms,
+                                "exclusion_reasons": [
+                                    {"reason": e.reason, "count": e.count}
+                                    for e in analysis_result.exclusion_reasons
+                                ],
+                                "stages": [
+                                    {"stage_name": s.stage_name, "count": s.count, "details": s.details}
+                                    for s in analysis_result.stages
+                                ],
+                                "notes": analysis_result.notes,
+                            }
+                            analysis_stats["vision_analyzed"] += 1
+
+                        elif detected_type == "chart" and analysis_result:
+                            img_data["type"] = "CHART"  # Override UNKNOWN
+                            img_data["vision_analysis"] = {
+                                "analysis_type": "chart_data",
+                                "chart_type": analysis_result.chart_type,
+                                "title": analysis_result.title,
+                                "x_axis": analysis_result.x_axis,
+                                "y_axis": analysis_result.y_axis,
+                                "data_points": [
+                                    {
+                                        "label": dp.label,
+                                        "value": dp.value,
+                                        "unit": dp.unit,
+                                        "group": dp.group,
+                                    }
+                                    for dp in analysis_result.data_points
+                                ],
+                                "statistical_results": analysis_result.statistical_results,
+                            }
+                            analysis_stats["vision_analyzed"] += 1
+
+                        elif detected_type == "table" and analysis_result:
+                            img_data["type"] = "TABLE"  # Override UNKNOWN
+                            img_data["vision_analysis"] = {
+                                "analysis_type": "table_data",
+                                "title": analysis_result.title,
+                                "headers": analysis_result.headers,
+                                "rows": analysis_result.rows,
+                                "table_type": analysis_result.table_type,
+                                "notes": analysis_result.notes,
+                            }
+                            analysis_stats["vision_analyzed"] += 1
+
+                        elif detected_type in ("text_page", "logo"):
+                            # Mark as skipped - false positive figure extraction
+                            img_data["type"] = detected_type.upper()
+                            img_data["skipped_reason"] = "false_positive_figure"
+
+                        else:
+                            # Classification didn't yield analyzable content
+                            analysis_stats["failed"] += 1
+
+                    except Exception as e:
+                        error_msg = str(e)
+                        analysis_stats["failed"] += 1
+                        error_type = "VISION_API_ERROR"
+                        if "5 MB" in error_msg or "size" in error_msg.lower():
+                            error_type = "SIZE_EXCEEDED"
+                            analysis_stats["skipped_oversized"] += 1
+                        processing_errors.append({
+                            "type": error_type,
+                            "page": img.page_num,
+                            "image_type": "unknown",
+                            "error": error_msg[:200],
+                            "action": "ocr_fallback",
+                        })
+                        print(f"    [WARN] Unknown image analysis failed: {e}")
 
             # Save image as file - use original or re-render based on source
             if img.image_base64:
@@ -1445,6 +1582,162 @@ class ExportManager:
             f.write(export.model_dump_json(indent=2))
 
         print(f"  Document metadata export: {out_file.name}")
+
+    def export_care_pathways(
+        self, pdf_path: Path, pathways: List["CarePathway"]
+    ) -> None:
+        """Export care pathway graphs extracted from treatment algorithm figures."""
+        if not pathways:
+            return
+
+        out_dir = self.get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Build export data
+        export_data: Dict[str, Any] = {
+            "run_id": self.run_id,
+            "timestamp": datetime.now().isoformat(),
+            "document": pdf_path.name,
+            "document_path": str(pdf_path.absolute()),
+            "pipeline_version": self.pipeline_version,
+            "total_pathways": len(pathways),
+            "pathways": [],
+        }
+
+        for pathway in pathways:
+            # Export nodes with full structure
+            nodes_export = []
+            for node in pathway.nodes:
+                nodes_export.append({
+                    "id": node.id,
+                    "type": node.type.value,
+                    "text": node.text,
+                    "phase": node.phase,
+                    "drugs": node.drugs,
+                    "dose": node.dose,
+                    "duration": node.duration,
+                })
+
+            # Export edges
+            edges_export = []
+            for edge in pathway.edges:
+                edges_export.append({
+                    "source_id": edge.source_id,
+                    "target_id": edge.target_id,
+                    "condition": edge.condition,
+                    "condition_type": edge.condition_type,
+                })
+
+            pathway_data = {
+                "pathway_id": pathway.pathway_id,
+                "title": pathway.title,
+                "condition": pathway.condition,
+                "phases": pathway.phases,
+                "nodes": nodes_export,
+                "edges": edges_export,
+                "entry_criteria": pathway.entry_criteria,
+                "primary_drugs": pathway.primary_drugs,
+                "alternative_drugs": pathway.alternative_drugs,
+                "decision_points": pathway.decision_points,
+                "target_dose": pathway.target_dose,
+                "target_timepoint": pathway.target_timepoint,
+                "maintenance_duration": pathway.maintenance_duration,
+                "relapse_handling": pathway.relapse_handling,
+                "source_figure": pathway.source_figure,
+                "source_page": pathway.source_page,
+                "extraction_confidence": pathway.extraction_confidence,
+            }
+            export_data["pathways"].append(pathway_data)
+
+        # Write to file
+        out_file = out_dir / f"care_pathways_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            json.dump(export_data, f, indent=2, ensure_ascii=False)
+
+        total_nodes = sum(len(p.nodes) for p in pathways)
+        total_edges = sum(len(p.edges) for p in pathways)
+        print(f"  Care pathways export: {out_file.name} ({len(pathways)} pathways, {total_nodes} nodes, {total_edges} edges)")
+
+    def export_recommendations(
+        self, pdf_path: Path, recommendation_sets: List["RecommendationSet"]
+    ) -> None:
+        """Export guideline recommendations extracted from text and tables."""
+        if not recommendation_sets:
+            return
+
+        out_dir = self.get_output_dir(pdf_path)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Build export data
+        export_data: Dict[str, Any] = {
+            "run_id": self.run_id,
+            "timestamp": datetime.now().isoformat(),
+            "document": pdf_path.name,
+            "document_path": str(pdf_path.absolute()),
+            "pipeline_version": self.pipeline_version,
+            "total_recommendation_sets": len(recommendation_sets),
+            "total_recommendations": sum(len(rs.recommendations) for rs in recommendation_sets),
+            "recommendation_sets": [],
+        }
+
+        for rec_set in recommendation_sets:
+            # Export individual recommendations
+            recs_export = []
+            for rec in rec_set.recommendations:
+                # Export dosing info
+                dosing_export = []
+                for dose in rec.dosing:
+                    dosing_export.append({
+                        "drug_name": dose.drug_name,
+                        "dose_range": dose.dose_range,
+                        "starting_dose": dose.starting_dose,
+                        "maintenance_dose": dose.maintenance_dose,
+                        "max_dose": dose.max_dose,
+                        "route": dose.route,
+                        "frequency": dose.frequency,
+                    })
+
+                recs_export.append({
+                    "recommendation_id": rec.recommendation_id,
+                    "recommendation_type": rec.recommendation_type.value,
+                    "population": rec.population,
+                    "condition": rec.condition,
+                    "severity": rec.severity,
+                    "action": rec.action,
+                    "action_description": rec.action_description,
+                    "preferred": rec.preferred,
+                    "alternatives": rec.alternatives,
+                    "dosing": dosing_export,
+                    "taper_target": rec.taper_target,
+                    "duration": rec.duration,
+                    "stop_window": rec.stop_window,
+                    "evidence_level": rec.evidence_level.value,
+                    "strength": rec.strength.value,
+                    "references": rec.references,
+                    "source": rec.source,
+                    "source_text": rec.source_text,
+                    "page_num": rec.page_num,
+                })
+
+            set_data = {
+                "guideline_name": rec_set.guideline_name,
+                "guideline_year": rec_set.guideline_year,
+                "organization": rec_set.organization,
+                "target_condition": rec_set.target_condition,
+                "target_population": rec_set.target_population,
+                "recommendations": recs_export,
+                "source_document": rec_set.source_document,
+                "extraction_confidence": rec_set.extraction_confidence,
+            }
+            export_data["recommendation_sets"].append(set_data)
+
+        # Write to file
+        out_file = out_dir / f"recommendations_{pdf_path.stem}_{timestamp}.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            json.dump(export_data, f, indent=2, ensure_ascii=False)
+
+        total_recs = export_data["total_recommendations"]
+        print(f"  Recommendations export: {out_file.name} ({len(recommendation_sets)} sets, {total_recs} recommendations)")
 
 
 __all__ = ["ExportManager"]

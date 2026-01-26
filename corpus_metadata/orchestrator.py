@@ -146,6 +146,8 @@ from A_core.A10_author_models import ExtractedAuthor
 from A_core.A11_citation_models import ExtractedCitation
 from A_core.A07_feasibility_models import FeasibilityCandidate, NERCandidate
 from A_core.A08_document_metadata_models import DocumentMetadata
+from A_core.A17_care_pathway_models import CarePathway
+from A_core.A18_recommendation_models import RecommendationSet
 
 # Import refactored modules
 from H_pipeline.H01_component_factory import ComponentFactory
@@ -153,6 +155,10 @@ from H_pipeline.H02_abbreviation_pipeline import AbbreviationPipeline
 from I_extraction.I01_entity_processors import EntityProcessor
 from I_extraction.I02_feasibility_processor import FeasibilityProcessor
 from J_export.J01_export_handlers import ExportManager
+
+# Clinical intelligence extractors
+from C_generators.C11_flowchart_graph_extractor import FlowchartGraphExtractor
+from C_generators.C12_guideline_recommendation_extractor import GuidelineRecommendationExtractor
 
 PIPELINE_VERSION = "0.8"
 
@@ -325,11 +331,13 @@ class Orchestrator:
                 "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": True,
+                "care_pathways": True, "recommendations": True,
             },
             "all": {
                 "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": True, "authors": True,
                 "citations": True, "document_metadata": True, "tables": True,
+                "care_pathways": True, "recommendations": True,
             },
             "minimal": {
                 "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
@@ -352,6 +360,8 @@ class Orchestrator:
             self.extract_citations = preset_config["citations"]
             self.extract_doc_metadata = preset_config["document_metadata"]
             self.extract_tables = preset_config["tables"]
+            self.extract_care_pathways = preset_config.get("care_pathways", False)
+            self.extract_recommendations = preset_config.get("recommendations", False)
         else:
             # Use individual extractor flags
             self.active_preset = None
@@ -365,6 +375,8 @@ class Orchestrator:
             self.extract_citations = extractors.get("citations", False)
             self.extract_doc_metadata = extractors.get("document_metadata", False)
             self.extract_tables = extractors.get("tables", True)
+            self.extract_care_pathways = extractors.get("care_pathways", True)
+            self.extract_recommendations = extractors.get("recommendations", True)
 
         # Processing options (always read from options, not affected by preset)
         self.use_llm_validation = options.get("use_llm_validation", True)
@@ -408,6 +420,8 @@ class Orchestrator:
             ("citations", self.extract_citations),
             ("document_metadata", self.extract_doc_metadata),
             ("tables", self.extract_tables),
+            ("care_pathways", self.extract_care_pathways),
+            ("recommendations", self.extract_recommendations),
         ]
         for name, enabled in extractors:
             if enabled:
@@ -501,6 +515,17 @@ class Orchestrator:
 
         # Load rare disease lookup
         self.rare_disease_lookup = self.factory.load_rare_disease_lookup()
+
+        # Create clinical intelligence extractors
+        self.flowchart_extractor = FlowchartGraphExtractor(
+            llm_client=self.claude_client,
+            llm_model=self.model,
+        ) if self.claude_client else None
+
+        self.recommendation_extractor = GuidelineRecommendationExtractor(
+            llm_client=self.claude_client,
+            llm_model=self.model,
+        ) if self.claude_client else None
 
         # Create abbreviation pipeline
         self.abbreviation_pipeline = AbbreviationPipeline(
@@ -878,6 +903,31 @@ class Orchestrator:
         else:
             print("\n[Feasibility extraction] SKIPPED (disabled in config)")
 
+        # Stage 10a: Care pathway extraction from flowchart figures
+        care_pathway_results: List[CarePathway] = []
+        if self.extract_care_pathways and self.flowchart_extractor:
+            timer.start("10a. Care Pathways")
+            print("\n[10a/12] Extracting care pathways from flowchart figures...")
+            care_pathway_results = self._extract_care_pathways(doc, pdf_path_obj)
+            pathway_time = timer.stop("10a. Care Pathways")
+            print(f"  Extracted {len(care_pathway_results)} care pathways")
+            print(f"  ⏱  {pathway_time:.1f}s")
+        else:
+            print("\n[Care pathway extraction] SKIPPED (disabled in config)")
+
+        # Stage 10b: Guideline recommendation extraction
+        recommendation_results: List[RecommendationSet] = []
+        if self.extract_recommendations and self.recommendation_extractor:
+            timer.start("10b. Recommendations")
+            print("\n[10b/12] Extracting guideline recommendations...")
+            recommendation_results = self._extract_recommendations(doc, pdf_path_obj, full_text)
+            rec_time = timer.stop("10b. Recommendations")
+            total_recs = sum(len(rs.recommendations) for rs in recommendation_results)
+            print(f"  Extracted {len(recommendation_results)} recommendation sets ({total_recs} recommendations)")
+            print(f"  ⏱  {rec_time:.1f}s")
+        else:
+            print("\n[Recommendation extraction] SKIPPED (disabled in config)")
+
         # Stage 11: Document metadata extraction
         doc_metadata: Optional[DocumentMetadata] = None
         if self.extract_doc_metadata:
@@ -936,6 +986,12 @@ class Orchestrator:
         if doc_metadata:
             self.export_manager.export_document_metadata(pdf_path_obj, doc_metadata)
 
+        if care_pathway_results:
+            self.export_manager.export_care_pathways(pdf_path_obj, care_pathway_results)
+
+        if recommendation_results:
+            self.export_manager.export_recommendations(pdf_path_obj, recommendation_results)
+
         # Update export metrics
         validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
         rejected_count = sum(1 for r in results if r.status == ValidationStatus.REJECTED)
@@ -979,11 +1035,14 @@ class Orchestrator:
         self._print_validated_summary(
             results, disease_results, gene_results, drug_results,
             pharma_results, feasibility_results, doc_metadata,
+            care_pathway_results, recommendation_results,
             extract_diseases=self.extract_diseases,
             extract_genes=self.extract_genes,
             extract_drugs=self.extract_drugs,
             extract_pharma=self.extract_pharma,
             extract_feasibility=self.extract_feasibility,
+            extract_care_pathways=self.extract_care_pathways,
+            extract_recommendations=self.extract_recommendations,
         )
 
         # Stop export timer and total timer
@@ -1016,6 +1075,107 @@ class Orchestrator:
             print(f"  [WARN] Document metadata extraction failed: {e}")
             return None
 
+    def _extract_care_pathways(
+        self, doc, pdf_path: Path
+    ) -> List[CarePathway]:
+        """Extract care pathways from flowchart/algorithm figures."""
+        from B_parsing.B02_doc_graph import ImageType
+
+        if not self.flowchart_extractor:
+            return []
+
+        pathways: List[CarePathway] = []
+
+        # Look for flowchart images in the document
+        for img in doc.iter_images():
+            # Only process flowcharts (patient flow diagrams, treatment algorithms)
+            if img.image_type != ImageType.FLOWCHART:
+                continue
+
+            if not img.image_base64:
+                continue
+
+            try:
+                # Extract care pathway from the flowchart
+                pathway = self.flowchart_extractor.extract_care_pathway(
+                    image_base64=img.image_base64,
+                    ocr_text=img.ocr_text,
+                    caption=img.caption,
+                    figure_id=f"Figure_p{img.page_num}",
+                    page_num=img.page_num,
+                )
+
+                if pathway and pathway.nodes:
+                    pathways.append(pathway)
+                    print(f"    + Page {img.page_num}: {len(pathway.nodes)} nodes, {len(pathway.edges)} edges")
+
+            except Exception as e:
+                print(f"    [WARN] Care pathway extraction failed for page {img.page_num}: {e}")
+
+        return pathways
+
+    def _extract_recommendations(
+        self, doc, pdf_path: Path, full_text: str
+    ) -> List[RecommendationSet]:
+        """Extract guideline recommendations from text and tables."""
+        if not self.recommendation_extractor:
+            return []
+
+        recommendation_sets: List[RecommendationSet] = []
+
+        # Extract from full text (LLM-based extraction)
+        try:
+            text_recs = self.recommendation_extractor.extract_from_text(
+                text=full_text[:15000],  # Limit to first ~15k chars to avoid context limits
+                source=pdf_path.stem,
+                use_llm=True,
+            )
+            if text_recs and text_recs.recommendations:
+                recommendation_sets.append(text_recs)
+                print(f"    + Text extraction: {len(text_recs.recommendations)} recommendations")
+        except Exception as e:
+            print(f"    [WARN] Text recommendation extraction failed: {e}")
+
+        # Extract from tables (pattern-based extraction)
+        for table in doc.iter_tables():
+            if not table.logical_rows:
+                continue
+
+            # Check if table looks like a recommendation table
+            # (has treatment/recommendation columns)
+            headers = table.logical_rows[0] if table.logical_rows else []
+            headers_lower = [str(h).lower() for h in headers]
+
+            is_rec_table = any(
+                keyword in " ".join(headers_lower)
+                for keyword in ["recommend", "treatment", "therapy", "dose", "indication"]
+            )
+
+            if not is_rec_table:
+                continue
+
+            try:
+                table_data = {
+                    "title": table.caption or f"Table page {table.page_num}",
+                    "headers": headers,
+                    "rows": table.logical_rows[1:] if len(table.logical_rows) > 1 else [],
+                }
+
+                table_recs = self.recommendation_extractor.extract_from_table(
+                    table_data=table_data,
+                    source=f"table_p{table.page_num}",
+                    page_num=table.page_num,
+                )
+
+                if table_recs and table_recs.recommendations:
+                    recommendation_sets.append(table_recs)
+                    print(f"    + Table page {table.page_num}: {len(table_recs.recommendations)} recommendations")
+
+            except Exception as e:
+                print(f"    [WARN] Table recommendation extraction failed for page {table.page_num}: {e}")
+
+        return recommendation_sets
+
     def _print_validated_summary(
         self,
         results: List[ExtractedEntity],
@@ -1025,12 +1185,16 @@ class Orchestrator:
         pharma_results: List[ExtractedPharma],
         feasibility_results: List,
         doc_metadata: Optional[DocumentMetadata],
+        care_pathway_results: Optional[List[CarePathway]] = None,
+        recommendation_results: Optional[List[RecommendationSet]] = None,
         *,
         extract_diseases: bool = True,
         extract_genes: bool = True,
         extract_drugs: bool = True,
         extract_pharma: bool = True,
         extract_feasibility: bool = True,
+        extract_care_pathways: bool = True,
+        extract_recommendations: bool = True,
     ) -> None:
         """Print summary of validated entities.
 
@@ -1046,11 +1210,15 @@ class Orchestrator:
             pharma_results: Pharma company extraction results
             feasibility_results: Feasibility extraction results
             doc_metadata: Document metadata
+            care_pathway_results: Care pathway extraction results
+            recommendation_results: Recommendation extraction results
             extract_diseases: Whether disease extractor was enabled
             extract_genes: Whether gene extractor was enabled
             extract_drugs: Whether drug extractor was enabled
             extract_pharma: Whether pharma extractor was enabled
             extract_feasibility: Whether feasibility extractor was enabled
+            extract_care_pathways: Whether care pathway extractor was enabled
+            extract_recommendations: Whether recommendation extractor was enabled
         """
         # Print validated abbreviations
         validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
@@ -1140,6 +1308,27 @@ class Orchestrator:
             if doc_metadata.date_extraction and doc_metadata.date_extraction.primary_date:
                 pd = doc_metadata.date_extraction.primary_date
                 print(f"  Date: {pd.date.strftime('%Y-%m-%d')} (source: {pd.source.value})")
+
+        # Print care pathway summary (only if extractor was enabled)
+        if extract_care_pathways and care_pathway_results:
+            total_nodes = sum(len(p.nodes) for p in care_pathway_results)
+            total_edges = sum(len(p.edges) for p in care_pathway_results)
+            print(f"\nCare pathways ({len(care_pathway_results)} pathways, {total_nodes} nodes, {total_edges} edges):")
+            for p in care_pathway_results:
+                drugs_str = f" [{', '.join(p.primary_drugs[:3])}]" if p.primary_drugs else ""
+                print(f"  * {p.title or 'Unknown'}{drugs_str}")
+
+        # Print recommendation summary (only if extractor was enabled)
+        if extract_recommendations and recommendation_results:
+            total_recs = sum(len(rs.recommendations) for rs in recommendation_results)
+            print(f"\nGuideline recommendations ({len(recommendation_results)} sets, {total_recs} recommendations):")
+            for rs in recommendation_results:
+                print(f"  * {rs.guideline_name}: {len(rs.recommendations)} recommendations")
+                for rec in rs.recommendations[:3]:  # Show first 3
+                    action_short = (rec.action[:60] + "...") if len(rec.action) > 60 else rec.action
+                    print(f"    - {rec.population}: {action_short}")
+                if len(rs.recommendations) > 3:
+                    print(f"    ... and {len(rs.recommendations) - 3} more")
 
     def process_folder(
         self, folder_path: Optional[str] = None, batch_delay_ms: float = 100

@@ -36,6 +36,7 @@ if TYPE_CHECKING:
     from C_generators.C14_strategy_citation import CitationDetector
     from E_normalization.E03_disease_normalizer import DiseaseNormalizer
 
+from A_core.A01_domain_models import ValidationStatus
 from A_core.A03_provenance import hash_string
 from Z_utils.Z02_text_helpers import extract_context_snippet
 

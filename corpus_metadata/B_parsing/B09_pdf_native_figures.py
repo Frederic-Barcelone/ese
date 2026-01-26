@@ -471,12 +471,83 @@ def render_vector_figure(
     return pix.tobytes("png")
 
 
+def is_text_heavy_region(
+    doc: fitz.Document,
+    page_num: int,
+    bbox: Tuple[float, float, float, float],
+    text_density_threshold: float = 0.6,
+    min_text_blocks: int = 10,
+) -> bool:
+    """
+    Check if a region is primarily text (not a figure).
+
+    This helps filter false positive figure extractions where a text-heavy
+    page or region was mistakenly identified as a figure.
+
+    Args:
+        doc: Open PyMuPDF document
+        page_num: 1-indexed page number
+        bbox: Region bounding box (x0, y0, x1, y1)
+        text_density_threshold: Text area / region area threshold (default 0.6)
+        min_text_blocks: Minimum text blocks to trigger text-heavy check
+
+    Returns:
+        True if the region appears to be primarily text
+    """
+    if page_num < 1 or page_num > doc.page_count:
+        return False
+
+    page = doc[page_num - 1]
+    x0, y0, x1, y1 = bbox
+    clip_rect = fitz.Rect(x0, y0, x1, y1)
+    region_area = clip_rect.get_area()
+
+    if region_area <= 0:
+        return False
+
+    # Get text blocks in the region
+    text_dict = page.get_text("dict", clip=clip_rect)
+    blocks = text_dict.get("blocks", [])
+
+    # Count text blocks and calculate text coverage
+    text_blocks = [b for b in blocks if b.get("type") == 0]  # type 0 = text
+
+    if len(text_blocks) < min_text_blocks:
+        return False
+
+    # Calculate total text area
+    text_area = 0
+    for block in text_blocks:
+        block_bbox = block.get("bbox", (0, 0, 0, 0))
+        block_area = (block_bbox[2] - block_bbox[0]) * (block_bbox[3] - block_bbox[1])
+        text_area += block_area
+
+    text_density = text_area / region_area if region_area > 0 else 0
+
+    # Also check character count - text pages have lots of characters
+    char_count = sum(
+        len(span.get("text", ""))
+        for block in text_blocks
+        for line in block.get("lines", [])
+        for span in line.get("spans", [])
+    )
+
+    # High text density or many characters indicates text page
+    is_text_heavy = (
+        text_density > text_density_threshold or
+        char_count > 500  # More than 500 chars is likely a text page
+    )
+
+    return is_text_heavy
+
+
 def filter_noise_images(
     figures: List[EmbeddedFigure],
     doc: fitz.Document,
     repeat_threshold: int = 3,
     small_area_ratio: float = 0.03,
     top_margin_ratio: float = 0.10,
+    filter_text_heavy: bool = True,
 ) -> List[EmbeddedFigure]:
     """
     Filter logos/headers by:
@@ -533,6 +604,10 @@ def filter_noise_images(
 
         # Skip small images in top margin (likely logos)
         if area_ratio < small_area_ratio and in_top_margin:
+            continue
+
+        # Skip text-heavy regions (false positive figure extractions)
+        if filter_text_heavy and is_text_heavy_region(doc, fig.page_num, fig.bbox):
             continue
 
         filtered.append(fig)
@@ -670,6 +745,7 @@ __all__ = [
     "cluster_drawings_into_regions",
     "check_axis_text_nearby",
     "render_vector_figure",
+    "is_text_heavy_region",
     "filter_noise_images",
     "detect_all_figures",
     "extract_text_from_region",

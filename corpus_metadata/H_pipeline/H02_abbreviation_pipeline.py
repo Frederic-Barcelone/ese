@@ -280,9 +280,26 @@ class AbbreviationPipeline:
         auto_results = []
         llm_candidates = []
 
+        import re
+        DOI_PATTERN = re.compile(r"^10\.\d{4,}|^\d+\.\d+/|doi:|/10\.")
+
         for c in candidates:
             sf_upper = c.short_form.upper()
             ctx = c.context_text or ""
+
+            # Auto-reject DOI patterns (before blacklist check)
+            if DOI_PATTERN.search(c.short_form.lower()):
+                entity = self._create_entity_from_candidate(
+                    c,
+                    ValidationStatus.REJECTED,
+                    0.99,
+                    "Rejected: DOI pattern is not an abbreviation",
+                    ["auto_rejected_doi"],
+                    {"auto": "doi_pattern"},
+                )
+                auto_results.append((c, entity))
+                counters.form_filter_rejected += 1
+                continue
 
             # Auto-reject blacklisted
             if sf_upper in self.heuristics.sf_blacklist:

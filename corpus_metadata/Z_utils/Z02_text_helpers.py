@@ -144,8 +144,15 @@ def is_valid_sf_form(
     if sf == "al":
         return False
 
-    # Reject DOI patterns (10.xxxx/yyyy)
+    # Reject DOI patterns (10.xxxx/yyyy or partial DOIs)
+    # DOIs always start with "10." followed by registrant code
     if re.match(r"^10\.\d{4,}", sf):
+        return False
+    # Also reject if SF contains DOI-like fragments
+    if "/10." in sf or sf.startswith("doi:") or sf.startswith("DOI:"):
+        return False
+    # Reject partial DOI fragments that might be extracted
+    if re.match(r"^\d+\.\d+/", sf):  # e.g., "1177/2045894019841990"
         return False
 
     # Reject statistical method names that look like abbreviations
