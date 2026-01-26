@@ -16,8 +16,6 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
-from pydantic import BaseModel
-
 from A_core.A18_recommendation_models import (
     GuidelineRecommendation,
     RecommendationSet,
@@ -173,73 +171,62 @@ SPECIFIC_CONDITION_PATTERNS = [
 # LLM PROMPT FOR RECOMMENDATION EXTRACTION
 # =============================================================================
 
-RECOMMENDATION_EXTRACTION_PROMPT = """Extract clinical guideline recommendations from this text.
+RECOMMENDATION_EXTRACTION_PROMPT = """Extract clinical guideline recommendations from this text. Return ONLY valid JSON.
 
-FIRST, identify the guideline metadata from the document header/title:
-- guideline_name: Full title (e.g., "EULAR recommendations for the management of ANCA-associated vasculitis: 2022 update")
-- guideline_year: Publication year (e.g., 2022)
-- organization: Issuing body (e.g., "EULAR", "ACR", "FDA", "NICE")
-- target_condition: Main condition (e.g., "ANCA-associated vasculitis")
+EXTRACT:
+1. Guideline metadata (name, year, organization, target condition)
+2. Each numbered recommendation with its evidence level and strength
 
-THEN, for each distinct recommendation, extract:
+OUTPUT FORMAT (JSON only, no markdown):
 {
-    "guideline_name": "<full guideline title>",
-    "guideline_year": <year as integer or null>,
-    "organization": "<EULAR, ACR, FDA, NICE, BSR, KDIGO, etc.>",
-    "target_condition": "<main condition addressed>",
+    "guideline_name": "full title with year",
+    "guideline_year": 2022,
+    "organization": "EULAR",
+    "target_condition": "condition name",
     "recommendations": [
         {
-            "population": "<specific target population, e.g., 'patients with GPA/MPA with organ-threatening disease'>",
-            "condition": "<specific condition state, e.g., 'new-onset', 'relapsing', 'refractory'>",
-            "severity": "<organ-threatening, life-threatening, severe, non-severe, mild, moderate>",
-            "action": "<recommended action - be specific>",
-            "preferred": "<preferred option if stated>",
-            "alternatives": ["<alternative 1>", "<alternative 2>"],
-            "dosing": [
-                {
-                    "drug_name": "<drug>",
-                    "dose_range": "<dose range with units>",
-                    "starting_dose": "<starting dose if specified>",
-                    "maintenance_dose": "<maintenance dose if specified>",
-                    "max_dose": "<maximum dose if specified>",
-                    "route": "<IV, oral, SC, IM>",
-                    "frequency": "<daily, weekly, monthly, every X weeks>"
-                }
-            ],
-            "taper_target": "<target dose and timepoint for tapering, e.g., '5 mg/day by 4-5 months'>",
-            "duration": "<treatment duration, e.g., '24-48 months'>",
-            "stop_window": "<when to consider stopping>",
-            "evidence_level": "high" | "moderate" | "low" | "very_low" | "expert_opinion",
-            "strength": "strong" | "conditional" | "weak",
-            "source_text": "<exact original text of the recommendation>",
-            "loe_code": "<original LoE code if present, e.g., '1a', '1b', '2b', '3b'>",
-            "sor_code": "<original SoR grade if present, e.g., 'A', 'B', 'C'>"
+            "rec_number": 1,
+            "population": "patients with X",
+            "condition": "new-onset/relapsing/refractory",
+            "severity": "organ-threatening/life-threatening/severe/non-severe",
+            "action": "recommended treatment/action",
+            "preferred": "preferred treatment if stated",
+            "alternatives": ["alt1", "alt2"],
+            "taper_target": "target dose by timepoint",
+            "duration": "treatment duration",
+            "loe_code": "1a/1b/2a/2b/3b/4/5/na",
+            "sor_code": "A/B/C",
+            "evidence_level": "high/moderate/low/very_low/expert_opinion",
+            "strength": "strong/conditional/weak",
+            "source_text": "exact recommendation text"
         }
     ]
 }
 
-EVIDENCE LEVEL MAPPING:
-- 1a, 1b → "high"
-- 2a, 2b → "moderate"
-- 3a, 3b → "low"
-- 4 → "very_low"
-- 5, expert consensus → "expert_opinion"
+EVIDENCE MAPPING:
+- 1a, 1b → high
+- 2a, 2b → moderate
+- 3a, 3b → low
+- 4 → very_low
+- 5, na, consensus → expert_opinion
 
 STRENGTH MAPPING:
-- Grade A, "we recommend", "strongly recommend" → "strong"
-- Grade B, "we suggest", "should consider" → "conditional"
-- Grade C, "may consider", "can be considered" → "weak"
+- Grade A, "we recommend" → strong
+- Grade B, "should consider" → conditional
+- Grade C, "may consider" → weak
 
-IMPORTANT:
-- Extract EACH distinct recommendation as a separate entry
-- Look for numbered recommendations (1., 2., etc.) or bulleted lists
-- Capture EXACT dosing (mg/day, mg/kg, ranges)
-- Note taper targets with timepoints
-- Identify treatment durations
-- Extract LoE/SoR codes from tables if present
-- Include the EXACT source text for each recommendation
+FINDING LoE/SoR CODES:
+Look in tables for patterns like:
+- "LoE SoR FV LoA" column headers
+- Codes at END of recommendation rows: "...we recommend rituximab. 1b A 100 9.2"
+- Numbered recommendations with trailing codes
 
-Return JSON only, no markdown."""
+CRITICAL:
+- Only extract ACTUAL recommendations (not commentary or rationale)
+- Each numbered recommendation is ONE entry
+- Look for the LoE/SoR table - codes are there
+- Keep responses concise - max 20 recommendations
+- Return VALID JSON only"""
 
 
 # =============================================================================
@@ -506,13 +493,16 @@ class GuidelineRecommendationExtractor:
             return None
 
         try:
+            # Build context that includes both header and table sections
+            context_text = self._build_llm_context(text)
+
             response = self.llm_client.messages.create(
                 model=self.llm_model,
-                max_tokens=4096,
+                max_tokens=8192,
                 messages=[
                     {
                         "role": "user",
-                        "content": f"{RECOMMENDATION_EXTRACTION_PROMPT}\n\nText to analyze:\n{text[:8000]}",
+                        "content": f"{RECOMMENDATION_EXTRACTION_PROMPT}\n\n---\nTEXT TO ANALYZE:\n---\n{context_text}",
                     }
                 ],
             )
@@ -521,16 +511,20 @@ class GuidelineRecommendationExtractor:
                 import json
                 text_response = response.content[0].text.strip()
 
-                # Parse JSON
-                if text_response.startswith("```json"):
-                    text_response = text_response[7:]
-                if text_response.startswith("```"):
-                    text_response = text_response[3:]
-                if text_response.endswith("```"):
-                    text_response = text_response[:-3]
+                # Parse JSON - handle common issues
+                text_response = self._clean_json_response(text_response)
 
-                data = json.loads(text_response.strip())
-                return self._parse_llm_response(data, source, page_num)
+                try:
+                    data = json.loads(text_response)
+                    return self._parse_llm_response(data, source, page_num)
+                except json.JSONDecodeError as je:
+                    # Try to fix common JSON issues
+                    fixed = self._attempt_json_fix(text_response)
+                    if fixed:
+                        data = json.loads(fixed)
+                        return self._parse_llm_response(data, source, page_num)
+                    print(f"[WARN] LLM returned invalid JSON: {je}")
+                    return None
 
             # No content in response
             return None
@@ -538,6 +532,200 @@ class GuidelineRecommendationExtractor:
         except Exception as e:
             print(f"[WARN] LLM recommendation extraction failed: {e}")
             return None
+
+    def _clean_json_response(self, text: str) -> str:
+        """Clean up JSON response from LLM."""
+        # Remove markdown code blocks
+        if text.startswith("```json"):
+            text = text[7:]
+        if text.startswith("```"):
+            text = text[3:]
+        if text.endswith("```"):
+            text = text[:-3]
+
+        text = text.strip()
+
+        # Remove any trailing garbage after the closing brace
+        last_brace = text.rfind("}")
+        if last_brace > 0:
+            text = text[:last_brace + 1]
+
+        return text
+
+    def _attempt_json_fix(self, text: str) -> Optional[str]:
+        """Attempt to fix common JSON issues."""
+        import json
+
+        # Try adding missing closing brackets
+        open_braces = text.count("{") - text.count("}")
+        open_brackets = text.count("[") - text.count("]")
+
+        if open_braces > 0 or open_brackets > 0:
+            fixed = text
+            fixed += "]" * open_brackets
+            fixed += "}" * open_braces
+            try:
+                json.loads(fixed)
+                return fixed
+            except json.JSONDecodeError:
+                pass
+
+        # Try truncating at the last valid point
+        for i in range(len(text) - 1, 0, -1):
+            if text[i] in "}]":
+                try:
+                    candidate = text[:i + 1]
+                    json.loads(candidate)
+                    return candidate
+                except json.JSONDecodeError:
+                    continue
+
+        return None
+
+    def _build_llm_context(self, text: str) -> str:
+        """
+        Build optimized context for LLM extraction.
+
+        Focuses on finding the recommendation table with LoE/SoR codes.
+
+        Args:
+            text: Full document text
+
+        Returns:
+            Optimized context string (up to 12000 chars)
+        """
+        # Find the main recommendation table section
+        table_section = self._find_main_recommendation_table(text)
+
+        if table_section and len(table_section) > 500:
+            # We found a good table section - use it with some header context
+            header = text[:2000]
+            return header + "\n\n--- RECOMMENDATION TABLE WITH LoE/SoR ---\n" + table_section[:10000]
+
+        # Fallback: use header + first 10000 chars
+        return text[:12000]
+
+    def _find_main_recommendation_table(self, text: str) -> Optional[str]:
+        """
+        Find the main recommendation table that contains LoE/SoR codes.
+
+        Looks for "Table X" sections with recommendation content and evidence codes.
+
+        Args:
+            text: Full document text
+
+        Returns:
+            Table section text or None
+        """
+        # Look for "Table 3" or similar recommendation tables
+        # These typically have "LoE SoR" headers and numbered recommendations
+        table_patterns = [
+            # "Table 3. EULAR recommendations..." followed by "LoE SoR"
+            r"(Table\s+\d+[.\s]+[^\n]*(?:recommendations?|guidelines?)[^\n]*\n.*?LoE\s+SoR.*?)(?=\n\n\n|Table\s+\d+[.\s]|--- Page \d+ ---|$)",
+            # "Table X Continued" sections
+            r"(Table\s+\d+\s+Continued\s*\n.*?LoE\s+SoR.*?)(?=\n\n\n|Table\s+\d+[.\s]|--- Page \d+ ---|$)",
+            # Any table with "LoE" and "SoR" columns
+            r"(LoE\s+SoR\s+FV.*?(?:\d{1,2}\s+(?:We\s+recommend|For\s+|In\s+patients|Patients).*?[1-5][ab]?\s+[ABC].*?)+)",
+        ]
+
+        best_match = None
+        best_length = 0
+
+        for pattern in table_patterns:
+            for match in re.finditer(pattern, text, re.IGNORECASE | re.DOTALL):
+                section = match.group(1)
+                # Prefer longer matches that contain more content
+                if len(section) > best_length and len(section) < 15000:
+                    # Verify it has actual recommendation content
+                    if re.search(r"we\s+recommend|should\s+be|may\s+(?:be\s+)?consider", section, re.IGNORECASE):
+                        best_match = section
+                        best_length = len(section)
+
+        return best_match
+
+    def _find_evidence_table_sections(self, text: str) -> List[str]:
+        """
+        Find table sections containing evidence levels and recommendations.
+
+        Looks for:
+        - "Table X" headers followed by recommendation content
+        - Sections with "LoE" and "SoR" headers
+        - Content with evidence codes (1a, 1b, 2a, 2b, etc.)
+
+        Args:
+            text: Full document text
+
+        Returns:
+            List of table section strings
+        """
+        sections = []
+
+        # Pattern 1: Find "Table X" sections with LoE/SoR
+        table_pattern = re.compile(
+            r"(Table\s+\d+[.\s].*?(?:LoE|SoR|Level of [Ee]vidence|Strength of [Rr]ecommendation).*?)(?=Table\s+\d+[.\s]|--- Page|$)",
+            re.IGNORECASE | re.DOTALL
+        )
+        for match in table_pattern.finditer(text):
+            section = match.group(1).strip()
+            if len(section) > 200:  # Meaningful content
+                sections.append(section[:4000])  # Limit each section
+
+        # Pattern 2: Find sections with "LoE SoR" column headers
+        loe_sor_pattern = re.compile(
+            r"(LoE\s+SoR.*?)(?=--- Page|\n\n\n|$)",
+            re.IGNORECASE | re.DOTALL
+        )
+        for match in loe_sor_pattern.finditer(text):
+            section = match.group(1).strip()
+            if len(section) > 100 and section not in sections:
+                sections.append(section[:4000])
+
+        # Pattern 3: Find sections with recommendation numbers and evidence codes
+        # e.g., "1 We recommend... 1b A" or numbered recommendations
+        numbered_rec_pattern = re.compile(
+            r"(\d{1,2}\s+(?:We\s+recommend|For\s+(?:induction|maintenance|patients)|In\s+patients|A\s+positive).*?(?:[1-5][ab]?\s+[ABC]|n\.?a\.?\s+[ABC]))",
+            re.IGNORECASE | re.DOTALL
+        )
+        for match in numbered_rec_pattern.finditer(text):
+            section = match.group(1).strip()
+            if len(section) > 50:
+                # Extend to capture full row if truncated
+                start = match.start()
+                end = min(match.end() + 200, len(text))
+                extended = text[start:end]
+                # Cut at sentence boundary
+                period_pos = extended.rfind(". ", len(section))
+                if period_pos > 0:
+                    extended = extended[:period_pos + 1]
+                if extended not in sections:
+                    sections.append(extended)
+
+        return sections
+
+    def _find_recommendation_sections(self, text: str) -> List[str]:
+        """
+        Find text sections containing recommendations.
+
+        Args:
+            text: Full document text
+
+        Returns:
+            List of recommendation section strings
+        """
+        sections = []
+
+        # Find paragraphs with recommendation keywords
+        rec_pattern = re.compile(
+            r"([^.]*(?:we recommend|we suggest|should be|may be considered|is recommended)[^.]*\.)",
+            re.IGNORECASE
+        )
+
+        for match in rec_pattern.finditer(text):
+            section = match.group(1).strip()
+            if len(section) > 30:
+                sections.append(section)
+
+        return sections[:20]  # Limit to 20 sections
 
     def _parse_llm_response(
         self,
@@ -660,6 +848,9 @@ class GuidelineRecommendationExtractor:
         """Extract recommendations using pattern matching."""
         recommendations = []
 
+        # First, try to extract LoE/SoR mapping from table format
+        loe_sor_map = self._extract_loe_sor_from_table(text)
+
         # Split into sentences/clauses while tracking position
         sentence_pattern = re.compile(r'[^.;]+[.;]')
 
@@ -696,19 +887,35 @@ class GuidelineRecommendationExtractor:
                 else:
                     duration = f"{start} {unit}"
 
-            # Extract evidence level
+            # Extract evidence level - first check table mapping, then inline patterns
             evidence = EvidenceLevel.UNKNOWN
-            for pattern, level in EVIDENCE_PATTERNS.items():
-                if re.search(pattern, sentence, re.IGNORECASE):
-                    evidence = level
-                    break
+            loe_code = None
+            sor_code = None
 
-            # Extract strength
+            # Try to match recommendation to table data
+            table_match = self._match_rec_to_table(sentence, loe_sor_map)
+            if table_match:
+                loe_code, sor_code = table_match
+                evidence = self._loe_code_to_level(loe_code)
+
+            # Fall back to inline patterns
+            if evidence == EvidenceLevel.UNKNOWN:
+                for pattern, level in EVIDENCE_PATTERNS.items():
+                    if re.search(pattern, sentence, re.IGNORECASE):
+                        evidence = level
+                        break
+
+            # Extract strength - first check table mapping
             strength = RecommendationStrength.UNKNOWN
-            for pattern, s in STRENGTH_PATTERNS.items():
-                if re.search(pattern, sentence, re.IGNORECASE):
-                    strength = s
-                    break
+            if sor_code:
+                strength = self._sor_code_to_strength(sor_code)
+
+            # Fall back to inline patterns
+            if strength == RecommendationStrength.UNKNOWN:
+                for pattern, s in STRENGTH_PATTERNS.items():
+                    if re.search(pattern, sentence, re.IGNORECASE):
+                        strength = s
+                        break
 
             # Extract severity
             severity = None
@@ -755,6 +962,99 @@ class GuidelineRecommendationExtractor:
             ))
 
         return recommendations
+
+    def _extract_loe_sor_from_table(self, text: str) -> Dict[str, Tuple[str, str]]:
+        """
+        Extract LoE/SoR codes from table format.
+
+        Looks for patterns like:
+        - "16 In patients with AAV... 1b B 100 9.2"
+        - Recommendation number followed by text and trailing codes
+
+        Returns:
+            Dict mapping recommendation key phrases to (loe_code, sor_code) tuples
+        """
+        loe_sor_map: Dict[str, Tuple[str, str]] = {}
+
+        # Pattern to find table rows with recommendation number, text, and trailing codes
+        # Format: [number] [recommendation text] [LoE code] [SoR grade] [FV%] [LoA]
+        table_row_pattern = re.compile(
+            r"(\d{1,2})\s+"  # Recommendation number
+            r"((?:We\s+recommend|For\s+(?:induction|maintenance|patients)|In\s+patients|A\s+positive|Patients\s+with)[^0-9]{20,200}?)"  # Rec text
+            r"\s+([1-5][ab]?|n\.?a\.?)\s+"  # LoE code
+            r"([ABC*†])\s*"  # SoR grade
+            r"(?:\d{2,3}|\*|†)",  # FV% or symbols
+            re.IGNORECASE | re.DOTALL
+        )
+
+        for match in table_row_pattern.finditer(text):
+            rec_num = match.group(1)
+            rec_text = match.group(2).strip()
+            loe_code = match.group(3).lower().replace(".", "")
+            sor_code = match.group(4).upper().replace("*", "").replace("†", "")
+
+            # Create key from first few meaningful words
+            key_words = re.sub(r'\s+', ' ', rec_text)[:100].lower()
+            loe_sor_map[key_words] = (loe_code, sor_code)
+
+            # Also store by recommendation number
+            loe_sor_map[f"rec_{rec_num}"] = (loe_code, sor_code)
+
+        return loe_sor_map
+
+    def _match_rec_to_table(
+        self,
+        sentence: str,
+        loe_sor_map: Dict[str, Tuple[str, str]]
+    ) -> Optional[Tuple[str, str]]:
+        """
+        Match a recommendation sentence to table LoE/SoR data.
+
+        Args:
+            sentence: Recommendation text
+            loe_sor_map: Mapping from key phrases to (loe, sor) tuples
+
+        Returns:
+            Tuple of (loe_code, sor_code) or None
+        """
+        sentence_lower = sentence.lower()[:100]
+
+        # Try direct match
+        for key, codes in loe_sor_map.items():
+            if not key.startswith("rec_"):
+                # Check if key phrase is in sentence
+                if key[:50] in sentence_lower or sentence_lower[:50] in key:
+                    return codes
+
+        return None
+
+    def _loe_code_to_level(self, loe_code: str) -> EvidenceLevel:
+        """Convert LoE code to EvidenceLevel enum."""
+        code = loe_code.lower().replace(".", "")
+        mapping = {
+            "1a": EvidenceLevel.HIGH,
+            "1b": EvidenceLevel.HIGH,
+            "la": EvidenceLevel.HIGH,  # Handle OCR errors
+            "lb": EvidenceLevel.HIGH,
+            "2a": EvidenceLevel.MODERATE,
+            "2b": EvidenceLevel.MODERATE,
+            "3a": EvidenceLevel.LOW,
+            "3b": EvidenceLevel.LOW,
+            "4": EvidenceLevel.VERY_LOW,
+            "5": EvidenceLevel.EXPERT_OPINION,
+            "na": EvidenceLevel.EXPERT_OPINION,
+        }
+        return mapping.get(code, EvidenceLevel.UNKNOWN)
+
+    def _sor_code_to_strength(self, sor_code: str) -> RecommendationStrength:
+        """Convert SoR grade to RecommendationStrength enum."""
+        code = sor_code.upper()
+        mapping = {
+            "A": RecommendationStrength.STRONG,
+            "B": RecommendationStrength.CONDITIONAL,
+            "C": RecommendationStrength.WEAK,
+        }
+        return mapping.get(code, RecommendationStrength.UNKNOWN)
 
     def _extract_drugs(self, text: str) -> List[str]:
         """Extract drug names from text."""
