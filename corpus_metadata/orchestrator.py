@@ -1121,6 +1121,9 @@ class Orchestrator:
         if not self.recommendation_extractor:
             return []
 
+        # Set PDF path for VLM-based extraction
+        self.recommendation_extractor.pdf_path = str(pdf_path)
+
         recommendation_sets: List[RecommendationSet] = []
 
         # Extract from full text (LLM-based extraction)
