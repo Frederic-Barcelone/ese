@@ -1324,8 +1324,18 @@ class GuidelineRecommendationExtractor:
         return None
 
     def _loe_code_to_level(self, loe_code: str) -> EvidenceLevel:
-        """Convert LoE code to EvidenceLevel enum."""
-        code = loe_code.lower().replace(".", "")
+        """Convert LoE code to EvidenceLevel enum.
+
+        Note: 'na' (not available) returns UNKNOWN to trigger language inference,
+        since 'na' means the LLM couldn't find a code, not that it found evidence
+        of expert opinion.
+        """
+        code = loe_code.lower().replace(".", "").strip()
+
+        # 'na' or empty means no code was found - return UNKNOWN to trigger fallback
+        if not code or code == "na":
+            return EvidenceLevel.UNKNOWN
+
         mapping = {
             "1a": EvidenceLevel.HIGH,
             "1b": EvidenceLevel.HIGH,
@@ -1337,13 +1347,20 @@ class GuidelineRecommendationExtractor:
             "3b": EvidenceLevel.LOW,
             "4": EvidenceLevel.VERY_LOW,
             "5": EvidenceLevel.EXPERT_OPINION,
-            "na": EvidenceLevel.EXPERT_OPINION,
         }
         return mapping.get(code, EvidenceLevel.UNKNOWN)
 
     def _sor_code_to_strength(self, sor_code: str) -> RecommendationStrength:
-        """Convert SoR grade to RecommendationStrength enum."""
-        code = sor_code.upper()
+        """Convert SoR grade to RecommendationStrength enum.
+
+        Note: 'na' (not available) returns UNKNOWN to trigger language inference.
+        """
+        code = sor_code.upper().strip()
+
+        # 'NA' or empty means no code was found - return UNKNOWN to trigger fallback
+        if not code or code == "NA":
+            return RecommendationStrength.UNKNOWN
+
         mapping = {
             "A": RecommendationStrength.STRONG,
             "B": RecommendationStrength.CONDITIONAL,
