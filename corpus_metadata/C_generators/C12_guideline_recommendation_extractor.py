@@ -336,10 +336,10 @@ class GuidelineRecommendationExtractor:
         recommendations = self._extract_with_patterns(text, source, page_num)
 
         return RecommendationSet(
-            guideline_name=guideline_metadata.get("guideline_name", "Unknown Guideline"),
+            guideline_name=guideline_metadata.get("guideline_name") or "Unknown Guideline",
             guideline_year=guideline_metadata.get("guideline_year"),
             organization=guideline_metadata.get("organization"),
-            target_condition=guideline_metadata.get("target_condition", "Unknown"),
+            target_condition=guideline_metadata.get("target_condition") or "Unknown",
             recommendations=recommendations,
             source_document=source,
             extraction_confidence=0.5 if recommendations else 0.0,
@@ -1117,10 +1117,10 @@ class GuidelineRecommendationExtractor:
             guideline_year = None
 
         return RecommendationSet(
-            guideline_name=data.get("guideline_name", "Unknown"),
+            guideline_name=data.get("guideline_name") or "Unknown",
             guideline_year=guideline_year,
             organization=data.get("organization"),
-            target_condition=data.get("target_condition", "Unknown"),
+            target_condition=data.get("target_condition") or "Unknown",
             recommendations=recommendations,
             source_document=source,
             extraction_confidence=0.85 if recommendations else 0.0,
