@@ -203,11 +203,11 @@ OUTPUT FORMAT (JSON only, no markdown):
     ]
 }
 
-EVIDENCE MAPPING:
-- 1a, 1b → high
-- 2a, 2b → moderate
-- 3a, 3b → low
-- 4 → very_low
+EVIDENCE MAPPING (Oxford/CEBM levels):
+- 1a, 1b → high (meta-analyses, RCTs)
+- 2a, 2b → moderate (cohort studies)
+- 3a, 3b → low (case-control, case series)
+- 4 → very_low (expert opinion without appraisal)
 - 5, na, consensus → expert_opinion
 
 STRENGTH MAPPING:
@@ -215,16 +215,23 @@ STRENGTH MAPPING:
 - Grade B, "should consider" → conditional
 - Grade C, "may consider" → weak
 
-FINDING LoE/SoR CODES:
-Look in tables for patterns like:
-- "LoE SoR FV LoA" column headers
-- Codes at END of recommendation rows: "...we recommend rituximab. 1b A 100 9.2"
-- Numbered recommendations with trailing codes
+IMPORTANT - TABLE FORMAT ISSUES:
+PDF table extraction can garble table data. Look for LoE/SoR codes in these patterns:
+
+1. EMBEDDED IN TEXT: Codes appear IN THE MIDDLE of recommendation text due to column extraction:
+   "16 In patients with AAV, we recommend serum 1b B 100 9.2 immunoglobulin testing"
+   → The "1b B 100 9.2" is LoE=1b, SoR=B, FV%=100, LoA=9.2
+
+2. BUNCHED AT END: All codes may be grouped together after all recommendation text:
+   "...recommend rituximab. na. na. 3b 1a 1b na. A B A B na. 90 100 100..."
+   → Codes are in order matching the recommendations
+
+3. If you find a PRE-EXTRACTED MAPPING section, use those mappings directly.
 
 CRITICAL:
-- Only extract ACTUAL recommendations (not commentary or rationale)
-- Each numbered recommendation is ONE entry
-- Look for the LoE/SoR table - codes are there
+- Only extract ACTUAL recommendations (numbered items, not overarching principles)
+- Each numbered recommendation (1, 2, 3...) is ONE entry
+- Use the LoE/SoR codes if you can find them, otherwise infer from language
 - Keep responses concise - max 20 recommendations
 - Return VALID JSON only"""
 
@@ -587,6 +594,7 @@ class GuidelineRecommendationExtractor:
         Build optimized context for LLM extraction.
 
         Focuses on finding the recommendation table with LoE/SoR codes.
+        Also pre-extracts embedded LoE/SoR codes to help the LLM.
 
         Args:
             text: Full document text
@@ -597,13 +605,78 @@ class GuidelineRecommendationExtractor:
         # Find the main recommendation table section
         table_section = self._find_main_recommendation_table(text)
 
-        if table_section and len(table_section) > 500:
-            # We found a good table section - use it with some header context
-            header = text[:2000]
-            return header + "\n\n--- RECOMMENDATION TABLE WITH LoE/SoR ---\n" + table_section[:10000]
+        # Pre-extract embedded LoE/SoR codes from the text
+        extracted_codes = self._extract_embedded_loe_sor(text)
 
-        # Fallback: use header + first 10000 chars
-        return text[:12000]
+        # Build context
+        header = text[:2000]
+        context_parts = [header]
+
+        # Add pre-extracted codes if found
+        if extracted_codes:
+            codes_text = "\n\n--- PRE-EXTRACTED LoE/SoR MAPPING ---\n"
+            codes_text += "Use these LoE/SoR codes for the numbered recommendations:\n"
+            for rec_num, (loe, sor) in sorted(extracted_codes.items()):
+                codes_text += f"  Recommendation {rec_num}: LoE={loe}, SoR={sor}\n"
+            context_parts.append(codes_text)
+
+        if table_section and len(table_section) > 500:
+            context_parts.append("\n\n--- RECOMMENDATION TABLE ---\n" + table_section[:8000])
+        else:
+            context_parts.append(text[2000:10000])
+
+        return "".join(context_parts)
+
+    def _extract_embedded_loe_sor(self, text: str) -> Dict[str, Tuple[str, str]]:
+        """
+        Extract LoE/SoR codes embedded in recommendation text.
+
+        Handles format where codes appear in the middle of recommendation text
+        due to PDF table column extraction issues:
+        "16 In patients with AAV, we recommend serum 1b B 100 9.2 immunoglobulin..."
+
+        Args:
+            text: Document text
+
+        Returns:
+            Dict mapping recommendation number to (loe_code, sor_code) tuple
+        """
+        codes: Dict[str, Tuple[str, str]] = {}
+
+        # Pattern for embedded codes: number + text + LoE + SoR + FV% + LoA + more text
+        # The LoA can be like "9.241.4" (garbled "9.2±1.4") or "9.2+1.4"
+        embedded_pattern = re.compile(
+            r'(\d{1,2})\s+'  # Recommendation number
+            r'(?:In\s+patients|For\s+patients|For\s+(?:induction|maintenance)|We\s+recommend|A\s+positive|Patients\s+with)'
+            r'[^.]{10,200}?'  # Recommendation text (not too greedy)
+            r'\s+([1-5][ab]?|n\.?a\.?)\s+'  # LoE code
+            r'([ABC*†])\s+'  # SoR grade
+            r'(?:\d{2,3}[*†]?)\s+'  # FV% (we don't capture this)
+            r'(?:\d+\.?\d*(?:[+±]|\.)\d+\.?\d*)',  # LoA score (garbled or normal)
+            re.IGNORECASE
+        )
+
+        for match in embedded_pattern.finditer(text):
+            rec_num = match.group(1)
+            loe_code = match.group(2).lower().replace(".", "")
+            sor_code = match.group(3).upper().replace("*", "").replace("†", "")
+
+            # Only store if we don't already have this recommendation
+            if rec_num not in codes:
+                codes[rec_num] = (loe_code, sor_code)
+
+        # Also try to extract from "Table 3 Continued" style format specifically
+        table3_cont = re.search(r'Table\s+3\s+Continued(.*?)(?=\n\n\n|Table\s+\d|$)', text, re.IGNORECASE | re.DOTALL)
+        if table3_cont:
+            section = table3_cont.group(1)
+            for match in embedded_pattern.finditer(section):
+                rec_num = match.group(1)
+                loe_code = match.group(2).lower().replace(".", "")
+                sor_code = match.group(3).upper().replace("*", "").replace("†", "")
+                if rec_num not in codes:
+                    codes[rec_num] = (loe_code, sor_code)
+
+        return codes
 
     def _find_main_recommendation_table(self, text: str) -> Optional[str]:
         """
@@ -767,17 +840,14 @@ class GuidelineRecommendationExtractor:
 
             # If we have a LoE code, try to map it
             if evidence == EvidenceLevel.UNKNOWN and loe_code:
-                loe_mapping = {
-                    "1a": EvidenceLevel.HIGH,
-                    "1b": EvidenceLevel.HIGH,
-                    "2a": EvidenceLevel.MODERATE,
-                    "2b": EvidenceLevel.MODERATE,
-                    "3a": EvidenceLevel.LOW,
-                    "3b": EvidenceLevel.LOW,
-                    "4": EvidenceLevel.VERY_LOW,
-                    "5": EvidenceLevel.EXPERT_OPINION,
-                }
-                evidence = loe_mapping.get(loe_code.lower(), EvidenceLevel.UNKNOWN)
+                evidence = self._loe_code_to_level(loe_code)
+
+            # Fallback: infer evidence level from language if still unknown
+            if evidence == EvidenceLevel.UNKNOWN:
+                source_text = rec_data.get("source_text", "")
+                action = rec_data.get("action", "")
+                combined = (source_text + " " + action).lower()
+                evidence = self._infer_evidence_from_language(combined)
 
             # Parse strength - handle both descriptive and code formats
             strength = RecommendationStrength.UNKNOWN
@@ -792,12 +862,14 @@ class GuidelineRecommendationExtractor:
 
             # If we have a SoR code, try to map it
             if strength == RecommendationStrength.UNKNOWN and sor_code:
-                sor_mapping = {
-                    "a": RecommendationStrength.STRONG,
-                    "b": RecommendationStrength.CONDITIONAL,
-                    "c": RecommendationStrength.WEAK,
-                }
-                strength = sor_mapping.get(sor_code.lower(), RecommendationStrength.UNKNOWN)
+                strength = self._sor_code_to_strength(sor_code)
+
+            # Fallback: infer strength from language if still unknown
+            if strength == RecommendationStrength.UNKNOWN:
+                source_text = rec_data.get("source_text", "")
+                action = rec_data.get("action", "")
+                combined = (source_text + " " + action).lower()
+                strength = self._infer_strength_from_language(combined)
 
             # Build recommendation ID with more context
             rec_id = f"rec_{source}_{idx+1}"
@@ -1055,6 +1127,136 @@ class GuidelineRecommendationExtractor:
             "C": RecommendationStrength.WEAK,
         }
         return mapping.get(code, RecommendationStrength.UNKNOWN)
+
+    def _infer_evidence_from_language(self, text: str) -> EvidenceLevel:
+        """
+        Infer evidence level from recommendation language when codes are unavailable.
+
+        Uses language patterns to estimate evidence quality:
+        - References to RCTs, meta-analyses → HIGH
+        - References to cohort studies, clinical experience → MODERATE
+        - "May consider", "based on expert opinion" → EXPERT_OPINION
+
+        Args:
+            text: Recommendation text or source text
+
+        Returns:
+            Inferred EvidenceLevel (defaults to EXPERT_OPINION if no indicators)
+        """
+        text_lower = text.lower()
+
+        # Check for high evidence indicators (RCTs, systematic reviews)
+        high_indicators = [
+            r"randomized\s+(?:controlled\s+)?trial",
+            r"rct",
+            r"meta-analysis",
+            r"systematic\s+review",
+            r"level\s+1[ab]?\s+evidence",
+            r"high[\s-]+quality\s+evidence",
+        ]
+        for pattern in high_indicators:
+            if re.search(pattern, text_lower):
+                return EvidenceLevel.HIGH
+
+        # Check for moderate evidence indicators
+        moderate_indicators = [
+            r"cohort\s+stud(?:y|ies)",
+            r"observational\s+stud(?:y|ies)",
+            r"moderate[\s-]+quality\s+evidence",
+            r"level\s+2[ab]?\s+evidence",
+        ]
+        for pattern in moderate_indicators:
+            if re.search(pattern, text_lower):
+                return EvidenceLevel.MODERATE
+
+        # Check for low evidence indicators
+        low_indicators = [
+            r"case[\s-]+control",
+            r"case\s+series",
+            r"low[\s-]+quality\s+evidence",
+            r"level\s+3[ab]?\s+evidence",
+            r"limited\s+evidence",
+        ]
+        for pattern in low_indicators:
+            if re.search(pattern, text_lower):
+                return EvidenceLevel.LOW
+
+        # Check for explicit expert opinion indicators
+        expert_indicators = [
+            r"expert\s+(?:opinion|consensus)",
+            r"best\s+practice",
+            r"clinical\s+experience",
+            r"based\s+on\s+(?:clinical\s+)?experience",
+            r"n\.?a\.?\s+evidence",
+        ]
+        for pattern in expert_indicators:
+            if re.search(pattern, text_lower):
+                return EvidenceLevel.EXPERT_OPINION
+
+        # Default to expert opinion when no clear indicators
+        # Most guideline recommendations without explicit RCT references
+        # are based on expert consensus
+        return EvidenceLevel.EXPERT_OPINION
+
+    def _infer_strength_from_language(self, text: str) -> RecommendationStrength:
+        """
+        Infer recommendation strength from language patterns.
+
+        Uses verb forms and modal language to estimate recommendation strength:
+        - "We recommend", "should" → STRONG
+        - "Should consider", "is recommended" → CONDITIONAL
+        - "May consider", "can be considered" → WEAK
+
+        Args:
+            text: Recommendation text
+
+        Returns:
+            Inferred RecommendationStrength
+        """
+        text_lower = text.lower()
+
+        # Strong indicators
+        strong_patterns = [
+            r"\bwe\s+recommend\b",
+            r"\bstrongly\s+recommend\b",
+            r"\bis\s+(?:strongly\s+)?recommended\b",
+            r"\bshould\s+(?:be\s+)?(?:used|given|administered|initiated)\b",
+            r"\bmust\s+be\b",
+        ]
+        for pattern in strong_patterns:
+            if re.search(pattern, text_lower):
+                return RecommendationStrength.STRONG
+
+        # Weak indicators (check before conditional)
+        weak_patterns = [
+            r"\bmay\s+(?:be\s+)?considered?\b",
+            r"\bcan\s+be\s+considered\b",
+            r"\bcould\s+be\s+considered\b",
+            r"\bmight\s+be\s+considered\b",
+            r"\bweak(?:ly)?\s+recommend\b",
+            r"\bmay\s+be\s+used\b",
+        ]
+        for pattern in weak_patterns:
+            if re.search(pattern, text_lower):
+                return RecommendationStrength.WEAK
+
+        # Conditional indicators
+        conditional_patterns = [
+            r"\bshould\s+(?:be\s+)?considered?\b",
+            r"\bconditional(?:ly)?\s+recommend\b",
+            r"\bis\s+suggested\b",
+            r"\bwe\s+suggest\b",
+            r"\bcan\s+be\s+used\b",
+        ]
+        for pattern in conditional_patterns:
+            if re.search(pattern, text_lower):
+                return RecommendationStrength.CONDITIONAL
+
+        # Default based on presence of "recommend" anywhere
+        if "recommend" in text_lower:
+            return RecommendationStrength.STRONG
+
+        return RecommendationStrength.UNKNOWN
 
     def _extract_drugs(self, text: str) -> List[str]:
         """Extract drug names from text."""
