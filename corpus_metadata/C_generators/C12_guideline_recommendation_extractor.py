@@ -7,12 +7,13 @@ including treatment recommendations, dosing guidance, and evidence levels.
 
 Works with:
 - Recommendation text blocks
-- Summary tables
+- Summary tables (with VLM fallback for garbled PDF extraction)
 - Treatment algorithm figures
 """
 
 from __future__ import annotations
 
+import base64
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -24,6 +25,15 @@ from A_core.A18_recommendation_models import (
     RecommendationStrength,
     DrugDosingInfo,
 )
+
+# Optional PyMuPDF for page image rendering
+try:
+    import fitz  # PyMuPDF
+
+    PYMUPDF_AVAILABLE = True
+except ImportError:
+    fitz = None
+    PYMUPDF_AVAILABLE = False
 
 
 # =============================================================================
@@ -236,6 +246,30 @@ CRITICAL:
 - Return VALID JSON only"""
 
 
+# VLM prompt for extracting LoE/SoR from recommendation table images
+VLM_LOE_SOR_EXTRACTION_PROMPT = """You are looking at a guideline recommendation table image.
+
+Extract the Level of Evidence (LoE) and Strength of Recommendation (SoR) for each numbered recommendation.
+
+The table typically has columns: Recommendation Number, Recommendation Text, LoE, SoR, FV%, LoA
+
+Return JSON mapping recommendation numbers to their evidence codes:
+{
+    "recommendations": [
+        {"rec_num": 1, "loe": "1b", "sor": "A"},
+        {"rec_num": 2, "loe": "2a", "sor": "B"},
+        {"rec_num": 3, "loe": "na", "sor": "C"}
+    ]
+}
+
+IMPORTANT:
+- Only include NUMBERED recommendations (1, 2, 3...), not overarching principles
+- LoE codes are typically: 1a, 1b, 2a, 2b, 3a, 3b, 4, 5, or na
+- SoR codes are typically: A, B, C, or na
+- If a code has a footnote marker (*, †), ignore the marker
+- Return valid JSON only"""
+
+
 # =============================================================================
 # GUIDELINE RECOMMENDATION EXTRACTOR CLASS
 # =============================================================================
@@ -246,16 +280,20 @@ class GuidelineRecommendationExtractor:
     Extracts structured clinical recommendations from guideline documents.
 
     Uses both pattern matching and LLM-based extraction to identify
-    and structure clinical recommendations.
+    and structure clinical recommendations. Supports VLM fallback for
+    extracting LoE/SoR codes from table images when text is garbled.
     """
 
     def __init__(
         self,
         llm_client: Any = None,
         llm_model: str = "claude-sonnet-4-20250514",
+        pdf_path: Optional[str] = None,
     ):
         self.llm_client = llm_client
         self.llm_model = llm_model
+        self.pdf_path = pdf_path
+        self._vlm_loe_sor_cache: Dict[str, Tuple[str, str]] = {}
 
     def extract_from_text(
         self,
@@ -608,6 +646,13 @@ class GuidelineRecommendationExtractor:
         # Pre-extract embedded LoE/SoR codes from the text
         extracted_codes = self._extract_embedded_loe_sor(text)
 
+        # If text-based extraction found few codes, try VLM extraction
+        if len(extracted_codes) < 5 and self.pdf_path and self.llm_client:
+            vlm_codes = self.extract_loe_sor_with_vlm(text)
+            # Merge VLM codes (VLM takes precedence for conflicts)
+            for rec_num, codes in vlm_codes.items():
+                extracted_codes[rec_num] = codes
+
         # Build context
         header = text[:2000]
         context_parts = [header]
@@ -616,7 +661,7 @@ class GuidelineRecommendationExtractor:
         if extracted_codes:
             codes_text = "\n\n--- PRE-EXTRACTED LoE/SoR MAPPING ---\n"
             codes_text += "Use these LoE/SoR codes for the numbered recommendations:\n"
-            for rec_num, (loe, sor) in sorted(extracted_codes.items()):
+            for rec_num, (loe, sor) in sorted(extracted_codes.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 99):
                 codes_text += f"  Recommendation {rec_num}: LoE={loe}, SoR={sor}\n"
             context_parts.append(codes_text)
 
@@ -677,6 +722,176 @@ class GuidelineRecommendationExtractor:
                     codes[rec_num] = (loe_code, sor_code)
 
         return codes
+
+    def extract_loe_sor_with_vlm(self, text: str) -> Dict[str, Tuple[str, str]]:
+        """
+        Extract LoE/SoR codes from recommendation table using VLM.
+
+        When text-based extraction fails due to garbled PDF parsing,
+        this method renders the relevant pages as images and uses
+        vision LLM to extract the table structure.
+
+        Args:
+            text: Document text (used to identify table pages)
+
+        Returns:
+            Dict mapping recommendation number to (loe_code, sor_code) tuple
+        """
+        if not self.pdf_path or not self.llm_client:
+            return {}
+
+        if not PYMUPDF_AVAILABLE or fitz is None:
+            return {}
+
+        # Return cached results if available
+        if self._vlm_loe_sor_cache:
+            return self._vlm_loe_sor_cache
+
+        # Find pages containing recommendation tables
+        table_pages = self._find_recommendation_table_pages(text)
+        if not table_pages:
+            return {}
+
+        codes: Dict[str, Tuple[str, str]] = {}
+
+        for page_num in table_pages:
+            # Render page as image
+            img_base64 = self._render_page_as_image(page_num)
+            if not img_base64:
+                continue
+
+            # Extract LoE/SoR using VLM
+            page_codes = self._extract_loe_sor_from_image(img_base64)
+            for rec_num, (loe, sor) in page_codes.items():
+                if rec_num not in codes:
+                    codes[rec_num] = (loe, sor)
+
+        self._vlm_loe_sor_cache = codes
+        return codes
+
+    def _find_recommendation_table_pages(self, text: str) -> List[int]:
+        """
+        Find page numbers containing recommendation tables with LoE/SoR.
+
+        Args:
+            text: Document text with page markers
+
+        Returns:
+            List of 1-indexed page numbers
+        """
+        pages = []
+
+        # Split text by page markers
+        page_pattern = re.compile(r'---\s*Page\s+(\d+)\s*---', re.IGNORECASE)
+        page_matches = list(page_pattern.finditer(text))
+
+        for i, match in enumerate(page_matches):
+            page_num = int(match.group(1))
+            start = match.end()
+            end = page_matches[i + 1].start() if i + 1 < len(page_matches) else len(text)
+            page_text = text[start:end]
+
+            # Check if this page has recommendation table content
+            if re.search(r'Table\s+\d+.*(?:recommendation|LoE\s+SoR)', page_text, re.IGNORECASE):
+                pages.append(page_num)
+
+        return pages
+
+    def _render_page_as_image(self, page_num: int, dpi: int = 150) -> Optional[str]:
+        """
+        Render a PDF page as base64-encoded PNG image.
+
+        Args:
+            page_num: 1-indexed page number
+            dpi: Resolution for rendering
+
+        Returns:
+            Base64-encoded PNG string, or None if fails
+        """
+        if not PYMUPDF_AVAILABLE or fitz is None or not self.pdf_path:
+            return None
+
+        try:
+            doc = fitz.open(self.pdf_path)
+            if page_num < 1 or page_num > len(doc):
+                doc.close()
+                return None
+
+            page = doc[page_num - 1]
+            mat = fitz.Matrix(dpi / 72, dpi / 72)
+            pix = page.get_pixmap(matrix=mat)
+
+            img_bytes = pix.tobytes("png")
+            img_base64 = base64.b64encode(img_bytes).decode("utf-8")
+
+            doc.close()
+            return img_base64
+
+        except Exception as e:
+            print(f"[WARN] Failed to render page {page_num}: {e}")
+            return None
+
+    def _extract_loe_sor_from_image(self, img_base64: str) -> Dict[str, Tuple[str, str]]:
+        """
+        Extract LoE/SoR codes from a table image using VLM.
+
+        Args:
+            img_base64: Base64-encoded PNG image
+
+        Returns:
+            Dict mapping recommendation number to (loe_code, sor_code) tuple
+        """
+        if not self.llm_client or not img_base64:
+            return {}
+
+        try:
+            # Call VLM with the image
+            response = self.llm_client.messages.create(
+                model=self.llm_model,
+                max_tokens=2000,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "image",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "image/png",
+                                    "data": img_base64,
+                                },
+                            },
+                            {
+                                "type": "text",
+                                "text": VLM_LOE_SOR_EXTRACTION_PROMPT,
+                            },
+                        ],
+                    }
+                ],
+            )
+
+            if not response.content:
+                return {}
+
+            # Parse JSON response
+            import json
+            text_response = response.content[0].text.strip()
+            text_response = self._clean_json_response(text_response)
+            data = json.loads(text_response)
+
+            codes: Dict[str, Tuple[str, str]] = {}
+            for rec in data.get("recommendations", []):
+                rec_num = str(rec.get("rec_num", ""))
+                loe = rec.get("loe", "").lower()
+                sor = rec.get("sor", "").upper()
+                if rec_num and (loe or sor):
+                    codes[rec_num] = (loe, sor)
+
+            return codes
+
+        except Exception as e:
+            print(f"[WARN] VLM LoE/SoR extraction failed: {e}")
+            return {}
 
     def _find_main_recommendation_table(self, text: str) -> Optional[str]:
         """
