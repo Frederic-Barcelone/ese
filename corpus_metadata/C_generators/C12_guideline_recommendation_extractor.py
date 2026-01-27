@@ -1042,44 +1042,52 @@ class GuidelineRecommendationExtractor:
                         frequency=dose_data.get("frequency"),
                     ))
 
-            # Parse evidence level - handle both descriptive and code formats
+            # Parse evidence level - PRIORITIZE raw codes over LLM interpretation
             evidence = EvidenceLevel.UNKNOWN
             ev_str = rec_data.get("evidence_level", "")
             loe_code = rec_data.get("loe_code", "")
 
-            if ev_str:
-                try:
-                    evidence = EvidenceLevel(ev_str.lower().replace(" ", "_"))
-                except ValueError:
-                    pass
-
-            # If we have a LoE code, try to map it
-            if evidence == EvidenceLevel.UNKNOWN and loe_code:
+            # FIRST: Try to use the raw LoE code if available (most reliable)
+            if loe_code:
                 evidence = self._loe_code_to_level(loe_code)
 
-            # Fallback: infer evidence level from language if still unknown
+            # SECOND: If no code worked, check LLM's descriptive evidence level
+            # BUT: treat "expert_opinion" as unknown since that's the LLM's fallback
+            if evidence == EvidenceLevel.UNKNOWN and ev_str:
+                ev_lower = ev_str.lower().replace(" ", "_")
+                # Only accept specific evidence levels, not the default "expert_opinion"
+                if ev_lower in ("high", "moderate", "low", "very_low"):
+                    try:
+                        evidence = EvidenceLevel(ev_lower)
+                    except ValueError:
+                        pass
+
+            # THIRD: Infer from language patterns when codes/levels unavailable
             if evidence == EvidenceLevel.UNKNOWN:
                 source_text = rec_data.get("source_text", "")
                 action = rec_data.get("action", "")
                 combined = (source_text + " " + action).lower()
                 evidence = self._infer_evidence_from_language(combined)
 
-            # Parse strength - handle both descriptive and code formats
+            # Parse strength - PRIORITIZE raw codes over LLM interpretation
             strength = RecommendationStrength.UNKNOWN
             str_str = rec_data.get("strength", "")
             sor_code = rec_data.get("sor_code", "")
 
-            if str_str:
-                try:
-                    strength = RecommendationStrength(str_str.lower())
-                except ValueError:
-                    pass
-
-            # If we have a SoR code, try to map it
-            if strength == RecommendationStrength.UNKNOWN and sor_code:
+            # FIRST: Try to use the raw SoR code if available (most reliable)
+            if sor_code:
                 strength = self._sor_code_to_strength(sor_code)
 
-            # Fallback: infer strength from language if still unknown
+            # SECOND: If no code worked, check LLM's descriptive strength
+            if strength == RecommendationStrength.UNKNOWN and str_str:
+                str_lower = str_str.lower()
+                if str_lower in ("strong", "conditional", "weak"):
+                    try:
+                        strength = RecommendationStrength(str_lower)
+                    except ValueError:
+                        pass
+
+            # THIRD: Infer from language patterns when codes unavailable
             if strength == RecommendationStrength.UNKNOWN:
                 source_text = rec_data.get("source_text", "")
                 action = rec_data.get("action", "")
