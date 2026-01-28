@@ -294,9 +294,22 @@ class GuidelineRecommendationExtractor:
     ):
         self.llm_client = llm_client
         self.llm_model = llm_model
-        self.pdf_path = pdf_path
+        self._pdf_path = pdf_path
         # Cache: rec_num -> (loe_code, sor_code, text_snippet, keywords)
         self._vlm_loe_sor_cache: Dict[str, Tuple[str, str, str, List[str]]] = {}
+
+    @property
+    def pdf_path(self) -> Optional[str]:
+        """Get the current PDF path."""
+        return self._pdf_path
+
+    @pdf_path.setter
+    def pdf_path(self, value: Optional[str]) -> None:
+        """Set PDF path and clear VLM cache if path changed."""
+        if value != self._pdf_path:
+            # Clear cache when switching to a new document
+            self._vlm_loe_sor_cache = {}
+        self._pdf_path = value
 
     def extract_from_text(
         self,
