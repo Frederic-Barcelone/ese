@@ -249,16 +249,16 @@ CRITICAL:
 # VLM prompt for extracting LoE/SoR from recommendation table images
 VLM_LOE_SOR_EXTRACTION_PROMPT = """You are looking at a guideline recommendation table image.
 
-Extract the Level of Evidence (LoE), Strength of Recommendation (SoR), and the first ~50 characters of recommendation text for each numbered recommendation.
+Extract the Level of Evidence (LoE), Strength of Recommendation (SoR), and key identifying text for each numbered recommendation.
 
 The table typically has columns: Recommendation Number, Recommendation Text, LoE, SoR, FV%, LoA
 
 Return JSON with recommendation data:
 {
     "recommendations": [
-        {"rec_num": 1, "loe": "1b", "sor": "A", "text": "A positive biopsy is strongly supportive of a diag"},
-        {"rec_num": 2, "loe": "2a", "sor": "B", "text": "In patients with signs and/or symptoms raising sus"},
-        {"rec_num": 3, "loe": "na", "sor": "C", "text": "For induction of remission in patients with new-on"}
+        {"rec_num": 1, "loe": "1b", "sor": "A", "text": "A positive biopsy is strongly supportive of a diagnosis of vasculitis", "keywords": ["biopsy", "diagnosis", "vasculitis"]},
+        {"rec_num": 2, "loe": "2a", "sor": "B", "text": "In patients with signs and/or symptoms raising suspicion of AAV, test for PR3-ANCA and MPO-ANCA", "keywords": ["PR3-ANCA", "MPO-ANCA", "testing"]},
+        {"rec_num": 3, "loe": "na", "sor": "C", "text": "For induction of remission in patients with new-onset or relapsing GPA or MPA with organ-threatening disease", "keywords": ["induction", "remission", "organ-threatening", "rituximab", "cyclophosphamide"]}
     ]
 }
 
@@ -267,7 +267,8 @@ IMPORTANT:
 - LoE codes are typically: 1a, 1b, 2a, 2b, 3a, 3b, 4, 5, or na
 - SoR codes are typically: A, B, C, D, or na
 - If a code has a footnote marker (*, †), ignore the marker
-- For "text", extract the FIRST ~50 characters of the recommendation text (enough to identify it)
+- For "text", extract ~80-100 characters of the recommendation text (enough to identify it)
+- For "keywords", extract 3-5 distinctive medical terms/drug names that uniquely identify this recommendation
 - Return valid JSON only"""
 
 
@@ -294,8 +295,8 @@ class GuidelineRecommendationExtractor:
         self.llm_client = llm_client
         self.llm_model = llm_model
         self.pdf_path = pdf_path
-        # Cache: rec_num -> (loe_code, sor_code, text_snippet)
-        self._vlm_loe_sor_cache: Dict[str, Tuple[str, str, str]] = {}
+        # Cache: rec_num -> (loe_code, sor_code, text_snippet, keywords)
+        self._vlm_loe_sor_cache: Dict[str, Tuple[str, str, str, List[str]]] = {}
 
     def extract_from_text(
         self,
@@ -660,8 +661,8 @@ class GuidelineRecommendationExtractor:
         if len(extracted_codes) < 5 and self.pdf_path and self.llm_client:
             vlm_codes = self.extract_loe_sor_with_vlm(text)
             # Merge VLM codes (VLM takes precedence for conflicts)
-            # Only store loe/sor (first 2 elements), text_snippet is cached separately
-            for rec_num, (loe, sor, _text_snippet) in vlm_codes.items():
+            # Only store loe/sor (first 2 elements), text_snippet and keywords are cached separately
+            for rec_num, (loe, sor, _text_snippet, _keywords) in vlm_codes.items():
                 extracted_codes[rec_num] = (loe, sor)
 
         # Build context
@@ -734,7 +735,7 @@ class GuidelineRecommendationExtractor:
 
         return codes
 
-    def extract_loe_sor_with_vlm(self, text: str) -> Dict[str, Tuple[str, str, str]]:
+    def extract_loe_sor_with_vlm(self, text: str) -> Dict[str, Tuple[str, str, str, List[str]]]:
         """
         Extract LoE/SoR codes from recommendation table using VLM.
 
@@ -746,7 +747,7 @@ class GuidelineRecommendationExtractor:
             text: Document text (used to identify table pages)
 
         Returns:
-            Dict mapping recommendation number to (loe_code, sor_code, text_snippet) tuple
+            Dict mapping recommendation number to (loe_code, sor_code, text_snippet, keywords) tuple
         """
         if not self.pdf_path or not self.llm_client:
             return {}
@@ -763,7 +764,7 @@ class GuidelineRecommendationExtractor:
         if not table_pages:
             return {}
 
-        codes: Dict[str, Tuple[str, str, str]] = {}
+        codes: Dict[str, Tuple[str, str, str, List[str]]] = {}
 
         for page_num in table_pages:
             # Render page as image
@@ -773,16 +774,17 @@ class GuidelineRecommendationExtractor:
 
             # Extract LoE/SoR using VLM
             page_codes = self._extract_loe_sor_from_image(img_base64)
-            for rec_num, (loe, sor, text_snippet) in page_codes.items():
+            for rec_num, (loe, sor, text_snippet, keywords) in page_codes.items():
                 if rec_num not in codes:
-                    codes[rec_num] = (loe, sor, text_snippet)
+                    codes[rec_num] = (loe, sor, text_snippet, keywords)
 
         self._vlm_loe_sor_cache = codes
         if codes:
             print(f"    [VLM] Extracted {len(codes)} LoE/SoR codes with text snippets:")
-            for rec_num, (loe, sor, text_snippet) in sorted(codes.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 999):
+            for rec_num, (loe, sor, text_snippet, keywords) in sorted(codes.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 999):
                 snippet_preview = text_snippet[:50] + "..." if text_snippet else "(no text)"
-                print(f"      Rec {rec_num}: LoE={loe}, SoR={sor}, text=\"{snippet_preview}\"")
+                kw_str = ", ".join(keywords[:3]) if keywords else "(no keywords)"
+                print(f"      Rec {rec_num}: LoE={loe}, SoR={sor}, text=\"{snippet_preview}\", kw=[{kw_str}]")
         return codes
 
     def _find_recommendation_table_pages(self, text: str) -> List[int]:
@@ -852,15 +854,15 @@ class GuidelineRecommendationExtractor:
             print(f"[WARN] Failed to render page {page_num}: {e}")
             return None
 
-    def _extract_loe_sor_from_image(self, img_base64: str) -> Dict[str, Tuple[str, str, str]]:
+    def _extract_loe_sor_from_image(self, img_base64: str) -> Dict[str, Tuple[str, str, str, List[str]]]:
         """
-        Extract LoE/SoR codes and text snippets from a table image using VLM.
+        Extract LoE/SoR codes, text snippets, and keywords from a table image using VLM.
 
         Args:
             img_base64: Base64-encoded PNG image
 
         Returns:
-            Dict mapping recommendation number to (loe_code, sor_code, text_snippet) tuple
+            Dict mapping recommendation number to (loe_code, sor_code, text_snippet, keywords) tuple
         """
         if not self.llm_client or not img_base64:
             return {}
@@ -900,14 +902,17 @@ class GuidelineRecommendationExtractor:
             text_response = self._clean_json_response(text_response)
             data = json.loads(text_response)
 
-            codes: Dict[str, Tuple[str, str, str]] = {}
+            codes: Dict[str, Tuple[str, str, str, List[str]]] = {}
             for rec in data.get("recommendations", []):
                 rec_num = str(rec.get("rec_num", ""))
                 loe = rec.get("loe", "").lower()
                 sor = rec.get("sor", "").upper()
                 text_snippet = rec.get("text", "")
+                keywords = rec.get("keywords", [])
+                if isinstance(keywords, str):
+                    keywords = [keywords]
                 if rec_num and (loe or sor):
-                    codes[rec_num] = (loe, sor, text_snippet)
+                    codes[rec_num] = (loe, sor, text_snippet, keywords)
 
             return codes
 
@@ -1161,11 +1166,11 @@ class GuidelineRecommendationExtractor:
         rec_set: RecommendationSet,
     ) -> None:
         """
-        Apply VLM-extracted LoE/SoR codes to recommendations using text matching.
+        Apply VLM-extracted LoE/SoR codes to recommendations using text and keyword matching.
 
         This post-processing step matches recommendations by text similarity
-        rather than by index, handling cases where LLM extraction creates
-        more recommendations than the PDF table (e.g., splitting multi-part recs).
+        and keyword overlap, handling cases where LLM extraction creates
+        different recommendation groupings than the PDF table.
 
         Args:
             rec_set: RecommendationSet to update (modified in place)
@@ -1177,74 +1182,110 @@ class GuidelineRecommendationExtractor:
             """Normalize text for comparison."""
             if not text:
                 return ""
-            # Lowercase, remove extra whitespace, remove common punctuation
             text = text.lower()
             text = re.sub(r'[\s\-–—]+', ' ', text)
             text = re.sub(r'[^\w\s]', '', text)
             return text.strip()
 
+        def get_content_words(text: str) -> set:
+            """Extract meaningful content words, filtering out common words."""
+            if not text:
+                return set()
+            # Common words to ignore in matching
+            stopwords = {
+                'the', 'a', 'an', 'in', 'of', 'for', 'with', 'and', 'or', 'to',
+                'is', 'are', 'be', 'we', 'recommend', 'should', 'may', 'can',
+                'patients', 'patient', 'treatment', 'disease', 'therapy',
+                'new', 'onset', 'relapsing', 'that', 'this', 'as', 'by', 'on'
+            }
+            words = set(normalize_text(text).split())
+            return words - stopwords
+
         def text_similarity(text1: str, text2: str) -> float:
-            """Calculate simple word overlap similarity."""
-            if not text1 or not text2:
-                return 0.0
-            words1 = set(normalize_text(text1).split())
-            words2 = set(normalize_text(text2).split())
+            """Calculate word overlap similarity using content words."""
+            words1 = get_content_words(text1)
+            words2 = get_content_words(text2)
             if not words1 or not words2:
                 return 0.0
             intersection = len(words1 & words2)
-            # Jaccard-like but weighted toward shorter text coverage
             return intersection / min(len(words1), len(words2))
+
+        def keyword_match_score(keywords: List[str], text: str) -> float:
+            """Calculate how many keywords appear in the text."""
+            if not keywords or not text:
+                return 0.0
+            text_lower = text.lower()
+            matches = sum(1 for kw in keywords if kw.lower() in text_lower)
+            return matches / len(keywords) if keywords else 0.0
 
         # Build list of VLM entries for matching
         vlm_entries = []
-        for rec_num, (loe_code, sor_code, text_snippet) in self._vlm_loe_sor_cache.items():
+        for rec_num, (loe_code, sor_code, text_snippet, keywords) in self._vlm_loe_sor_cache.items():
             vlm_entries.append({
                 'rec_num': rec_num,
                 'loe_code': loe_code,
                 'sor_code': sor_code,
                 'text_snippet': text_snippet,
+                'keywords': keywords or [],
                 'matched': False,
             })
 
-        # Match each recommendation to best VLM entry by text similarity
+        # Match each recommendation to best VLM entry by combined text + keyword similarity
         for rec in rec_set.recommendations:
             rec_text = rec.source_text or rec.action or ""
             if not rec_text:
                 continue
 
             best_match = None
-            best_score = 0.3  # Minimum threshold for matching
+            best_score = 0.0
+            best_text_score = 0.0
+            best_kw_score = 0.0
 
             for entry in vlm_entries:
                 if entry['matched']:
                     continue
 
                 snippet = entry['text_snippet']
-                if not snippet:
-                    continue
+                keywords = entry['keywords']
 
-                # Calculate similarity
-                score = text_similarity(snippet, rec_text[:100])
+                # Calculate text similarity (using more of the text)
+                text_score = text_similarity(snippet, rec_text[:150]) if snippet else 0.0
 
-                if score > best_score:
-                    best_score = score
+                # Calculate keyword match score
+                kw_score = keyword_match_score(keywords, rec_text)
+
+                # Combined score: weighted average favoring keywords when available
+                if keywords:
+                    combined_score = 0.4 * text_score + 0.6 * kw_score
+                else:
+                    combined_score = text_score
+
+                if combined_score > best_score:
+                    best_score = combined_score
+                    best_text_score = text_score
+                    best_kw_score = kw_score
                     best_match = entry
 
-            if best_match:
+            # Apply match if score is above threshold
+            # Lower threshold (0.25) since we now use keyword matching
+            if best_match and best_score >= 0.25:
                 best_match['matched'] = True
                 loe_code = best_match['loe_code']
                 sor_code = best_match['sor_code']
 
                 # Debug output
-                print(f"    [VLM-MATCH] Rec '{rec_text[:40]}...' -> PDF rec {best_match['rec_num']} (score={best_score:.2f})")
+                match_detail = f"txt={best_text_score:.2f}"
+                if best_match['keywords']:
+                    match_detail += f", kw={best_kw_score:.2f}"
+                print(f"    [VLM-MATCH] Rec '{rec_text[:40]}...' -> PDF rec {best_match['rec_num']} (score={best_score:.2f}, {match_detail})")
 
                 # Apply LoE from VLM - VLM reads actual PDF table, so it's authoritative
-                # For high-confidence matches (score >= 0.7), always apply VLM codes
-                # For lower scores, only apply if current level is uncertain
+                # For matches above 0.5, always apply VLM codes
+                # For lower scores (0.25-0.5), only apply if current level is uncertain
                 new_evidence = self._loe_code_to_level(loe_code)
                 should_update_evidence = (
                     new_evidence != EvidenceLevel.UNKNOWN and (
-                        best_score >= 0.7 or  # High confidence - trust VLM
+                        best_score >= 0.5 or  # Good confidence - trust VLM
                         rec.evidence_level in (EvidenceLevel.UNKNOWN, EvidenceLevel.EXPERT_OPINION)
                     )
                 )
@@ -1256,7 +1297,7 @@ class GuidelineRecommendationExtractor:
                 new_strength = self._sor_code_to_strength(sor_code)
                 should_update_strength = (
                     new_strength != RecommendationStrength.UNKNOWN and (
-                        best_score >= 0.7 or
+                        best_score >= 0.5 or
                         rec.strength == RecommendationStrength.UNKNOWN
                     )
                 )

@@ -864,7 +864,7 @@ deduplication:
 extraction_pipeline:
   # Use a preset (overrides individual flags below if set)
   # Set to null or remove to use individual flags
-  preset: abbreviations_only  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
+  preset: standard  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
                 # entities_only, clinical_entities, metadata_only, standard, all, minimal
 
   # Individual extractor flags (used when preset is null)
