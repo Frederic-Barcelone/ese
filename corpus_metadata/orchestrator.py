@@ -1127,9 +1127,11 @@ class Orchestrator:
         recommendation_sets: List[RecommendationSet] = []
 
         # Extract from full text (LLM-based extraction)
+        # Pass full text to extractor - it handles truncation internally for LLM context
+        # while using full text for VLM page detection
         try:
             text_recs = self.recommendation_extractor.extract_from_text(
-                text=full_text[:15000],  # Limit to first ~15k chars to avoid context limits
+                text=full_text,
                 source=pdf_path.stem,
                 use_llm=True,
             )
