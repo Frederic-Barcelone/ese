@@ -701,10 +701,21 @@ class Orchestrator:
         # Export extracted text
         self.export_manager.export_extracted_text(pdf_path_obj, doc)
 
-        # Build full_text (always needed for other extractors)
-        full_text = "\n".join(
-            block.text for block in doc.iter_linear_blocks()
-        )
+        # Build full_text with page markers (needed for VLM page detection in recommendations)
+        text_lines = []
+        current_page = None
+        for block in doc.iter_linear_blocks():
+            if block.page_num != current_page:
+                if current_page is not None:
+                    text_lines.append("")
+                text_lines.append(f"--- Page {block.page_num} ---")
+                text_lines.append("")
+                current_page = block.page_num
+            text = (block.text or "").strip()
+            if text:
+                text_lines.append(text)
+        full_text_with_pages = "\n".join(text_lines)
+        full_text = full_text_with_pages  # Will be overwritten by abbreviation pipeline if enabled
 
         # Stage 2-4: Abbreviation extraction
         results: List[ExtractedEntity] = []
@@ -714,6 +725,7 @@ class Orchestrator:
         if self.extract_abbreviations:
             timer.start("2. Candidate Generation")
             unique_candidates, full_text = self.abbreviation_pipeline.generate_candidates(doc)
+            # Abbreviation pipeline returns text without page markers, but we keep full_text_with_pages
             gen_time = timer.stop("2. Candidate Generation")
             print(f"  ⏱  {gen_time:.1f}s")
 
@@ -920,7 +932,8 @@ class Orchestrator:
         if self.extract_recommendations and self.recommendation_extractor:
             timer.start("10b. Recommendations")
             print("\n[10b/12] Extracting guideline recommendations...")
-            recommendation_results = self._extract_recommendations(doc, pdf_path_obj, full_text)
+            # Use full_text_with_pages for VLM page detection
+            recommendation_results = self._extract_recommendations(doc, pdf_path_obj, full_text_with_pages)
             rec_time = timer.stop("10b. Recommendations")
             total_recs = sum(len(rs.recommendations) for rs in recommendation_results)
             print(f"  Extracted {len(recommendation_results)} recommendation sets ({total_recs} recommendations)")
