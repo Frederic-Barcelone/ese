@@ -7,9 +7,12 @@ Writes structured logs to corpus_log directory.
 from __future__ import annotations
 
 import json
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+
+logger = logging.getLogger(__name__)
 
 from A_core.A01_domain_models import (
     Candidate,
@@ -170,25 +173,17 @@ class ValidationLogger:
         Print summary to console.
         """
         total = self.stats["total"]
-        print(f"\n{'=' * 50}")
-        print(f"VALIDATION SUMMARY - {self.run_id}")
-        print(f"{'=' * 50}")
-        print(f"Total candidates:  {total}")
-        print(
-            f"  [OK] Validated:     {self.stats['validated']} ({self.stats['validated'] / total * 100:.1f}%)"
-            if total
-            else "  [OK] Validated:     0"
-        )
-        print(
-            f"  [X] Rejected:      {self.stats['rejected']} ({self.stats['rejected'] / total * 100:.1f}%)"
-            if total
-            else "  [X] Rejected:      0"
-        )
-        print(
-            f"  ? Ambiguous:     {self.stats['ambiguous']} ({self.stats['ambiguous'] / total * 100:.1f}%)"
-            if total
-            else "  ? Ambiguous:     0"
-        )
-        print(f"  [WARN] Errors:        {self.stats['errors']}")
-        print(f"\nLog file: {self.log_file}")
-        print(f"{'=' * 50}\n")
+        validated_pct = self.stats['validated'] / total * 100 if total else 0
+        rejected_pct = self.stats['rejected'] / total * 100 if total else 0
+        ambiguous_pct = self.stats['ambiguous'] / total * 100 if total else 0
+
+        logger.info("=" * 50)
+        logger.info("VALIDATION SUMMARY - %s", self.run_id)
+        logger.info("=" * 50)
+        logger.info("Total candidates:  %d", total)
+        logger.info("  [OK] Validated:     %d (%.1f%%)", self.stats['validated'], validated_pct)
+        logger.info("  [X] Rejected:      %d (%.1f%%)", self.stats['rejected'], rejected_pct)
+        logger.info("  ? Ambiguous:     %d (%.1f%%)", self.stats['ambiguous'], ambiguous_pct)
+        logger.info("  [WARN] Errors:        %d", self.stats['errors'])
+        logger.info("Log file: %s", self.log_file)
+        logger.info("=" * 50)

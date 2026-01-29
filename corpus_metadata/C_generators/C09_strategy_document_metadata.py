@@ -15,11 +15,14 @@ Uses pattern matching for dates and LLM for classification/description.
 from __future__ import annotations
 
 import json
+import logging
 import re
 import stat
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A08_document_metadata_models import (
@@ -88,7 +91,7 @@ class DocumentTypeRegistry:
                     self.types.append(t)
                     self.code_to_type[t["code"]] = t
         except Exception as e:
-            print(f"[WARN] Failed to load document types from {path}: {e}")
+            logger.warning("Failed to load document types from %s: %s", path, e)
 
     def get_type_by_code(self, code: str) -> Optional[Dict[str, Any]]:
         """Get document type by code."""
@@ -628,7 +631,7 @@ class DocumentMetadataStrategy:
             doc.close()
             return pdf_meta
         except Exception as e:
-            print(f"[WARN] Failed to extract PDF metadata: {e}")
+            logger.warning("Failed to extract PDF metadata: %s", e)
             return None
 
     def _parse_pdf_date(self, date_str: Optional[str]) -> Optional[datetime]:
@@ -814,11 +817,11 @@ Classify this document. Return JSON only."""
                 if len(response) > 0 and isinstance(response[0], dict):
                     response = response[0]
                 else:
-                    print(f"[WARN] Unexpected LLM response format: {type(response)}")
+                    logger.warning("Unexpected LLM response format: %s", type(response))
                     return None
 
             if not isinstance(response, dict):
-                print(f"[WARN] Expected dict response, got: {type(response)}")
+                logger.warning("Expected dict response, got: %s", type(response))
                 return None
 
             # Parse response - handle both "primary_code" and "code" formats
@@ -829,10 +832,10 @@ Classify this document. Return JSON only."""
             # Get type info
             type_info = self.type_registry.get_type_by_code(primary_code)
             if not type_info:
-                print(f"  [WARN] Unknown document type code: '{primary_code}'")
+                logger.warning("Unknown document type code: '%s'", primary_code)
                 return None
 
-            print(f"  Classification: {primary_code} - {type_info['name']} (conf: {primary_conf:.2f})")
+            logger.info("Classification: %s - %s (conf: %.2f)", primary_code, type_info['name'], primary_conf)
 
             primary_type = DocumentType(
                 code=type_info["code"],
@@ -862,7 +865,7 @@ Classify this document. Return JSON only."""
                 classification_method="llm",
             )
         except Exception as e:
-            print(f"[WARN] Document classification failed: {e}")
+            logger.warning("Document classification failed: %s", e)
             return None
 
     def _generate_descriptions(
@@ -946,7 +949,7 @@ Generate title and descriptions. Return JSON only."""
                 llm_model=self.llm_model,
             )
         except Exception as e:
-            print(f"[WARN] Description generation failed: {e}")
+            logger.warning("Description generation failed: %s", e)
             return None
 
 

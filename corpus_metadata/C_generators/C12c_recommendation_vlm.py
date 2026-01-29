@@ -11,8 +11,11 @@ Provides methods for:
 from __future__ import annotations
 
 import base64
+import logging
 import re
 from typing import Any, Dict, List, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 from A_core.A18_recommendation_models import (
     EvidenceLevel,
@@ -95,11 +98,11 @@ class VLMExtractionMixin:
 
         self._vlm_loe_sor_cache = codes
         if codes:
-            print(f"    [VLM] Extracted {len(codes)} LoE/SoR codes with text snippets:")
+            logger.info("VLM: Extracted %d LoE/SoR codes with text snippets", len(codes))
             for rec_num, (loe, sor, text_snippet, keywords) in sorted(codes.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 999):
                 snippet_preview = text_snippet[:50] + "..." if text_snippet else "(no text)"
                 kw_str = ", ".join(keywords[:3]) if keywords else "(no keywords)"
-                print(f"      Rec {rec_num}: LoE={loe}, SoR={sor}, text=\"{snippet_preview}\", kw=[{kw_str}]")
+                logger.debug("Rec %s: LoE=%s, SoR=%s, text=%r, kw=[%s]", rec_num, loe, sor, snippet_preview, kw_str)
         return codes
 
     def _find_recommendation_table_pages(self, text: str) -> List[int]:
@@ -166,7 +169,7 @@ class VLMExtractionMixin:
             return img_base64
 
         except Exception as e:
-            print(f"[WARN] Failed to render page {page_num}: {e}")
+            logger.warning("Failed to render page %d: %s", page_num, e)
             return None
 
     def _extract_loe_sor_from_image(self, img_base64: str) -> Dict[str, Tuple[str, str, str, List[str]]]:
@@ -232,7 +235,7 @@ class VLMExtractionMixin:
             return codes
 
         except Exception as e:
-            print(f"[WARN] VLM LoE/SoR extraction failed: {e}")
+            logger.warning("VLM LoE/SoR extraction failed: %s", e)
             return {}
 
     def _apply_vlm_codes_to_recommendations(
@@ -351,7 +354,7 @@ class VLMExtractionMixin:
                 match_detail = f"txt={best_text_score:.2f}"
                 if best_match['keywords']:
                     match_detail += f", kw={best_kw_score:.2f}"
-                print(f"    [VLM-MATCH] Rec '{rec_text[:40]}...' -> PDF rec {best_match['rec_num']} (score={best_score:.2f}, {match_detail})")
+                logger.debug("VLM-MATCH: Rec '%s...' -> PDF rec %s (score=%.2f, %s)", rec_text[:40], best_match['rec_num'], best_score, match_detail)
 
                 # Apply LoE from VLM - VLM reads actual PDF table, so it's authoritative
                 # For matches above 0.5, always apply VLM codes
@@ -364,7 +367,7 @@ class VLMExtractionMixin:
                     )
                 )
                 if should_update_evidence and new_evidence != rec.evidence_level:
-                    print(f"      Updated evidence: {rec.evidence_level.value} -> {new_evidence.value} (from LoE={loe_code})")
+                    logger.debug("Updated evidence: %s -> %s (from LoE=%s)", rec.evidence_level.value, new_evidence.value, loe_code)
                     rec.evidence_level = new_evidence
 
                 # Apply SoR from VLM with same logic
@@ -376,7 +379,7 @@ class VLMExtractionMixin:
                     )
                 )
                 if should_update_strength and new_strength != rec.strength:
-                    print(f"      Updated strength: {rec.strength.value} -> {new_strength.value} (from SoR={sor_code})")
+                    logger.debug("Updated strength: %s -> %s (from SoR=%s)", rec.strength.value, new_strength.value, sor_code)
                     rec.strength = new_strength
 
 

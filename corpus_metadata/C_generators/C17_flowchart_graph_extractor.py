@@ -11,10 +11,13 @@ the actual decision logic that can be used for clinical decision support.
 
 from __future__ import annotations
 
+import logging
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
 
 from A_core.A17_care_pathway_models import (
     CarePathway,
@@ -161,7 +164,7 @@ class FlowchartGraphExtractor:
         try:
             return self._parse_response(response, figure_id, page_num)
         except Exception as e:
-            print(f"[WARN] Failed to parse care pathway response: {e}")
+            logger.warning("Failed to parse care pathway response: %s", e)
             return None
 
     def _parse_response(
@@ -305,7 +308,7 @@ class FlowchartGraphExtractor:
                 return json.loads(text.strip())
 
         except Exception as e:
-            print(f"[WARN] Vision LLM call failed: {e}")
+            logger.warning("Vision LLM call failed: %s", e)
             return None
 
         return None

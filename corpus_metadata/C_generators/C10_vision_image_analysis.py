@@ -11,9 +11,12 @@ Extracts structured data from:
 
 from __future__ import annotations
 
+import logging
 from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
 
 
 # =============================================================================
@@ -383,7 +386,7 @@ class VisionImageAnalyzer:
                 notes=response.get("notes"),
             )
         except Exception as e:
-            print(f"[WARN] Failed to parse flowchart response: {e}")
+            logger.warning("Failed to parse flowchart response: %s", e)
             return None
 
     def analyze_chart(
@@ -473,7 +476,7 @@ class VisionImageAnalyzer:
                 taper_schedule=taper_info,
             )
         except Exception as e:
-            print(f"[WARN] Failed to parse chart response: {e}")
+            logger.warning("Failed to parse chart response: %s", e)
             return None
 
     def analyze_table(
@@ -526,7 +529,7 @@ class VisionImageAnalyzer:
                 notes=response.get("notes"),
             )
         except Exception as e:
-            print(f"[WARN] Failed to parse table response: {e}")
+            logger.warning("Failed to parse table response: %s", e)
             return None
 
     def analyze_glossary_table(
@@ -574,7 +577,7 @@ class VisionImageAnalyzer:
                 notes=response.get("notes"),
             )
         except Exception as e:
-            print(f"[WARN] Failed to parse glossary table response: {e}")
+            logger.warning("Failed to parse glossary table response: %s", e)
             return None
 
     def classify_image(
@@ -623,7 +626,7 @@ class VisionImageAnalyzer:
                 "analysis_recommendation": response.get("analysis_recommendation", "skip"),
             }
         except Exception as e:
-            print(f"[WARN] Failed to parse classification response: {e}")
+            logger.warning("Failed to parse classification response: %s", e)
             return default_result
 
     def analyze_unknown_image(
@@ -712,7 +715,7 @@ class VisionImageAnalyzer:
             return response if isinstance(response, dict) else None
         except AttributeError:
             # Fallback: try standard completion with image description
-            print("[WARN] Vision LLM not available, using OCR text only")
+            logger.warning("Vision LLM not available, using OCR text only")
             if ocr_fallback_text:
                 return self._extract_from_ocr_text(ocr_fallback_text, prompt)
             return None
@@ -720,13 +723,13 @@ class VisionImageAnalyzer:
             error_msg = str(e)
             # Check if it's a size limit error
             if "5 MB" in error_msg or "size" in error_msg.lower() or "exceeds" in error_msg.lower():
-                print(f"[WARN] Vision LLM image too large: {e}")
+                logger.warning("Vision LLM image too large: %s", e)
             else:
-                print(f"[WARN] Vision LLM call failed: {e}")
+                logger.warning("Vision LLM call failed: %s", e)
 
             # Try OCR fallback if available
             if ocr_fallback_text:
-                print("[INFO] Attempting OCR text fallback...")
+                logger.info("Attempting OCR text fallback...")
                 return self._extract_from_ocr_text(ocr_fallback_text, prompt)
             return None
 
@@ -788,7 +791,7 @@ Note: This is OCR-extracted text, so there may be some extraction errors."""
                 result["_extraction_method"] = "ocr_fallback"
             return result
         except Exception as e:
-            print(f"[WARN] OCR text fallback failed: {e}")
+            logger.warning("OCR text fallback failed: %s", e)
             return None
 
 

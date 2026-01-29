@@ -15,7 +15,10 @@ from __future__ import annotations
 
 import base64
 import io
+import logging
 from typing import Any, Dict, List, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 # Optional pymupdf for image rendering
 try:
@@ -120,7 +123,7 @@ def find_table_bbox_pymupdf(
         return tuple(largest_table.bbox)
 
     except Exception as e:
-        print(f"[WARN] PyMuPDF table detection failed: {e}")
+        logger.warning("PyMuPDF table detection failed: %s", e)
         return None
 
 
@@ -147,7 +150,7 @@ def render_table_as_image(
         Base64-encoded PNG string, or None if rendering fails
     """
     if not PYMUPDF_AVAILABLE or fitz is None:
-        print("[WARN] PyMuPDF not available for table image rendering")
+        logger.warning("PyMuPDF not available for table image rendering")
         return None
 
     try:
@@ -170,7 +173,7 @@ def render_table_as_image(
 
         # If bbox seems too large or out of bounds, it might be in wrong coordinate space
         if x1 > page_width * 1.1 or y1 > page_height * 1.1:
-            print(f"[WARN] Bbox {bbox} seems out of bounds for page size {page_width}x{page_height}")
+            logger.warning("Bbox %s seems out of bounds for page size %.0fx%.0f", bbox, page_width, page_height)
 
             # First, try PyMuPDF's native table detection for accurate bbox
             doc.close()
@@ -180,7 +183,7 @@ def render_table_as_image(
 
             if pymupdf_bbox:
                 x0, y0, x1, y1 = pymupdf_bbox
-                print(f"[INFO] Using PyMuPDF detected bbox: {pymupdf_bbox}")
+                logger.info("Using PyMuPDF detected bbox: %s", pymupdf_bbox)
             else:
                 # Fallback: scale coordinates from pixel space to PDF point space
                 # Calculate the DPI ratio - Unstructured typically uses 200-300 DPI
@@ -206,11 +209,11 @@ def render_table_as_image(
                 y0 = max(0, y0_scaled - expand_y)
                 x1 = min(page_width, x1_scaled + expand_x)
                 y1 = min(page_height, y1_scaled + expand_y)
-                print(f"[INFO] Scaled bbox with generous margins: {(x0, y0, x1, y1)}")
+                logger.info("Scaled bbox with generous margins: %s", (x0, y0, x1, y1))
 
                 # Sanity check: if scaled table is suspiciously small, render full page
                 if (x1 - x0) < 100 or (y1 - y0) < 50:
-                    print("[WARN] Scaled bbox too small, rendering full page")
+                    logger.warning("Scaled bbox too small, rendering full page")
                     doc.close()
                     return render_full_page(file_path, page_num, dpi)
 
@@ -240,7 +243,7 @@ def render_table_as_image(
         return img_base64
 
     except Exception as e:
-        print(f"[WARN] Failed to render table image: {e}")
+        logger.warning("Failed to render table image: %s", e)
         return None
 
 
@@ -261,7 +264,7 @@ def render_full_page(
         Base64-encoded PNG string, or None if rendering fails
     """
     if not PYMUPDF_AVAILABLE or fitz is None:
-        print("[WARN] PyMuPDF not available for page image rendering")
+        logger.warning("PyMuPDF not available for page image rendering")
         return None
 
     try:
@@ -284,7 +287,7 @@ def render_full_page(
         return img_base64
 
     except Exception as e:
-        print(f"[WARN] Failed to render full page image: {e}")
+        logger.warning("Failed to render full page image: %s", e)
         return None
 
 
@@ -307,11 +310,11 @@ def render_multipage_table(
         Base64-encoded PNG string of stitched image, or None if fails
     """
     if not PYMUPDF_AVAILABLE or fitz is None:
-        print("[WARN] PyMuPDF not available for table image rendering")
+        logger.warning("PyMuPDF not available for table image rendering")
         return None
 
     if not PIL_AVAILABLE or Image is None:
-        print("[WARN] PIL not available for image stitching")
+        logger.warning("PIL not available for image stitching")
         return None
 
     try:
@@ -405,7 +408,7 @@ def render_multipage_table(
         return img_base64
 
     except Exception as e:
-        print(f"[WARN] Failed to render multi-page table: {e}")
+        logger.warning("Failed to render multi-page table: %s", e)
         return None
 
 

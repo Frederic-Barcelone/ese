@@ -8,8 +8,11 @@ Uses FlashText lexicon matching against pharma_companies_lexicon.json.
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
+
+logger = logging.getLogger(__name__)
 
 from flashtext import KeywordProcessor
 
@@ -59,7 +62,7 @@ class PharmaCompanyDetector:
         """Load pharma companies lexicon."""
         path = self.lexicon_base_path / "pharma_companies_lexicon.json"
         if not path.exists():
-            print(f"[WARN] Pharma lexicon not found: {path}")
+            logger.warning("Pharma lexicon not found: %s", path)
             return
 
         try:
@@ -102,7 +105,7 @@ class PharmaCompanyDetector:
                 self._loaded_count += 1
 
         except Exception as e:
-            print(f"[WARN] Failed to load pharma lexicon: {e}")
+            logger.warning("Failed to load pharma lexicon: %s", e)
 
     def detect(
         self,
@@ -272,4 +275,4 @@ class PharmaCompanyDetector:
 
     def print_summary(self) -> None:
         """Print loading summary."""
-        print(f"  Pharma companies lexicon: {self._loaded_count} companies loaded")
+        logger.info("Pharma companies lexicon: %d companies loaded", self._loaded_count)

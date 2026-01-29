@@ -755,5 +755,4 @@ class CitationDetector:
 
     def print_summary(self) -> None:
         """Print loading summary to console."""
-        print("  Citation detector: regex-based detection initialized")
-        logger.info("Citation detector initialized")
+        logger.info("Citation detector: regex-based detection initialized")

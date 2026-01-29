@@ -11,9 +11,12 @@ for more accurate table data, especially for:
 
 from __future__ import annotations
 
+import logging
 from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
 
 
 # =============================================================================
@@ -128,10 +131,10 @@ Return valid JSON only, no additional text."""
             return self._verify_extraction(response)
 
         except AttributeError as e:
-            print(f"[WARN] VLM client missing vision method: {e}")
+            logger.warning("VLM client missing vision method: %s", e)
             return self._empty_response(f"VLM not available: {e}")
         except Exception as e:
-            print(f"[WARN] VLM table extraction failed: {e}")
+            logger.warning("VLM table extraction failed: %s", e)
             return self._empty_response(f"Extraction failed: {e}")
 
     def _verify_extraction(self, response: Dict[str, Any]) -> Dict[str, Any]:

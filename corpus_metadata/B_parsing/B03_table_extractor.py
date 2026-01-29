@@ -12,8 +12,11 @@ CHANGELOG v2.0:
 
 from __future__ import annotations
 
+import logging
 import re
 from typing import Any, Dict, List, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 from unstructured.partition.pdf import partition_pdf
 
@@ -101,7 +104,7 @@ class TableExtractor:
         # Check confidence score if available
         detection_confidence = getattr(md, "detection_class_prob", None)
         if detection_confidence is not None and detection_confidence < MIN_TABLE_CONFIDENCE:
-            print(f"[INFO] Skipping low-confidence table detection: {detection_confidence:.2f}")
+            logger.info("Skipping low-confidence table detection: %.2f", detection_confidence)
             return None
 
         # Get HTML table if available
@@ -115,13 +118,13 @@ class TableExtractor:
         # Returns (is_valid, reason) where reason may indicate salvage info
         is_valid, validation_info = is_valid_table(rows, html)
         if not is_valid:
-            print(f"[INFO] Skipping invalid table on page {page_num}: {validation_info}")
+            logger.info("Skipping invalid table on page %d: %s", page_num, validation_info)
             return None
 
         # Check if this table was salvaged as a definition table
         is_salvaged = validation_info and "definition_table_salvaged" in validation_info
         if is_salvaged:
-            print(f"[INFO] Salvaged definition table on page {page_num}: {validation_info}")
+            logger.info("Salvaged definition table on page %d: %s", page_num, validation_info)
 
         headers = rows[0] if rows else []
         data_rows = rows[1:] if len(rows) > 1 else []
@@ -221,7 +224,7 @@ class TableExtractor:
 
                     doc.close()
                 except Exception as e:
-                    print(f"[WARN] Coordinate conversion failed: {e}")
+                    logger.warning("Coordinate conversion failed: %s", e)
 
             return (x0, y0, x1, y1)
         except (TypeError, IndexError):
@@ -623,9 +626,11 @@ class TableExtractor:
                             # This filters out false positives where VLM extracts a tiny snippet
                             min_vlm_data_rows = 2  # Stricter than MIN_TABLE_ROWS - 1
                             if vlm_row_count < min_vlm_data_rows or vlm_col_count < MIN_TABLE_COLS:
-                                print(f"[INFO] Rejecting VLM table on page {table['page_num']}: "
-                                      f"too small ({vlm_col_count} cols, {vlm_row_count} data rows) - "
-                                      f"requires at least {MIN_TABLE_COLS} cols and {min_vlm_data_rows} data rows")
+                                logger.info(
+                                    "Rejecting VLM table on page %d: too small (%d cols, %d data rows) - "
+                                    "requires at least %d cols and %d data rows",
+                                    table['page_num'], vlm_col_count, vlm_row_count, MIN_TABLE_COLS, min_vlm_data_rows
+                                )
                                 # Skip this table entirely - VLM confirmed it's not a real table
                                 continue
 
@@ -638,15 +643,19 @@ class TableExtractor:
                                 table["vlm_warning"] = vlm_result["verification_warning"]
                             if vlm_result.get("notes"):
                                 table["notes"] = vlm_result["notes"]
-                            print(f"[INFO] VLM extracted table on page {table['page_num']}: "
-                                  f"{len(table['headers'])} cols, {len(table['rows'])} rows")
+                            logger.info(
+                                "VLM extracted table on page %d: %d cols, %d rows",
+                                table['page_num'], len(table['headers']), len(table['rows'])
+                            )
                         else:
                             # VLM failed, keep HTML fallback
                             table["extraction_method"] = "html_fallback"
-                            print(f"[WARN] VLM extraction failed for table on page {table['page_num']}, "
-                                  f"using HTML fallback")
+                            logger.warning(
+                                "VLM extraction failed for table on page %d, using HTML fallback",
+                                table['page_num']
+                            )
                     except Exception as e:
-                        print(f"[WARN] VLM extraction error on page {table['page_num']}: {e}")
+                        logger.warning("VLM extraction error on page %d: %s", table['page_num'], e)
                         table["extraction_method"] = "html_fallback"
 
                 result.append(table)
@@ -684,8 +693,10 @@ class TableExtractor:
                             # Validate VLM extraction meets minimum table requirements
                             min_vlm_data_rows = 2  # Stricter than MIN_TABLE_ROWS - 1
                             if vlm_row_count < min_vlm_data_rows or vlm_col_count < MIN_TABLE_COLS:
-                                print(f"[INFO] Rejecting VLM multi-page table on pages {merged['page_nums']}: "
-                                      f"too small ({vlm_col_count} cols, {vlm_row_count} data rows)")
+                                logger.info(
+                                    "Rejecting VLM multi-page table on pages %s: too small (%d cols, %d data rows)",
+                                    merged['page_nums'], vlm_col_count, vlm_row_count
+                                )
                                 continue
 
                             merged["headers"] = vlm_headers
@@ -696,13 +707,15 @@ class TableExtractor:
                                 merged["vlm_warning"] = vlm_result["verification_warning"]
                             if vlm_result.get("notes"):
                                 merged["notes"] = vlm_result["notes"]
-                            print(f"[INFO] VLM extracted multi-page table: "
-                                  f"{len(merged['headers'])} cols, {len(merged['rows'])} rows")
+                            logger.info(
+                                "VLM extracted multi-page table: %d cols, %d rows",
+                                len(merged['headers']), len(merged['rows'])
+                            )
                         else:
                             merged["extraction_method"] = "html_fallback"
-                            print("[WARN] VLM extraction failed for multi-page table, using HTML fallback")
+                            logger.warning("VLM extraction failed for multi-page table, using HTML fallback")
                     except Exception as e:
-                        print(f"[WARN] VLM extraction error for multi-page table: {e}")
+                        logger.warning("VLM extraction error for multi-page table: %s", e)
                         merged["extraction_method"] = "html_fallback"
 
                 result.append(merged)

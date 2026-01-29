@@ -7,8 +7,11 @@ Uses regex patterns to detect author names, roles, and affiliations.
 
 from __future__ import annotations
 
+import logging
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
+
+logger = logging.getLogger(__name__)
 
 from A_core.A01_domain_models import Coordinate, EvidenceSpan, ValidationStatus
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
@@ -623,4 +626,4 @@ class AuthorDetector:
 
     def print_summary(self) -> None:
         """Print loading summary."""
-        print("  Author detector: regex-based detection initialized")
+        logger.info("Author detector: regex-based detection initialized")
