@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
+from Z_utils.Z05_path_utils import get_base_path
+
 if TYPE_CHECKING:
     from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
     from B_parsing.B03_table_extractor import TableExtractor
@@ -72,9 +74,9 @@ class ComponentFactory:
         self.log_dir = log_dir
         self.api_key = api_key
 
-        # Extract paths from config
+        # Extract paths from config (uses CORPUS_BASE_PATH env var or auto-detects)
         self.paths = config.get("paths", {})
-        self.base_path = self.paths.get("base", "/Users/frederictetard/Projects/ese")
+        self.base_path = str(get_base_path(config))
         self.dict_path = Path(self.base_path) / self.paths.get(
             "dictionaries", "ouput_datasources"
         )

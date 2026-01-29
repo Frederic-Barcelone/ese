@@ -21,8 +21,8 @@ system:
 # PATHS (relative to CORPUS_BASE_PATH or absolute)
 # ==============================================================================
 paths:
-  # Base paths
-  base: "/Users/frederictetard/Projects/ese"
+  # Base paths (null = auto-detect from CORPUS_BASE_PATH env var or corpus_metadata location)
+  base: null
   dictionaries: "ouput_datasources"
   databases: "corpus_db"
   logs: "corpus_log"

@@ -58,6 +58,8 @@ from typing import Any, Dict, List, Optional
 import yaml
 from dotenv import load_dotenv
 
+from Z_utils.Z05_path_utils import get_base_path
+
 
 @dataclass
 class StageTimer:
@@ -227,9 +229,9 @@ class Orchestrator:
         # Load extraction pipeline settings directly from config.yaml
         self._load_extraction_settings()
 
-        # Extract paths from config
+        # Extract paths from config (uses CORPUS_BASE_PATH env var or auto-detects)
         paths = self.config.get("paths", {})
-        base_path = paths.get("base", "/Users/frederictetard/Projects/ese")
+        base_path = get_base_path(self.config)
 
         self.log_dir = Path(
             log_dir or Path(base_path) / paths.get("logs", "corpus_log")

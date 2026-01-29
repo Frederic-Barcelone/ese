@@ -27,14 +27,13 @@ from A_core.A03_provenance import generate_run_id
 from F_evaluation.F01_gold_loader import GoldLoader, GoldAnnotation
 from F_evaluation.F02_scorer import Scorer, ScorerConfig, ScoreReport
 from orchestrator import Orchestrator
+from Z_utils.Z05_path_utils import get_base_path
 
 # =============================================================================
 # CONFIGURATION - All loaded from config.yaml
 # =============================================================================
 
-DEFAULT_CONFIG_PATH = (
-    "/Users/frederictetard/Projects/ese/corpus_metadata/G_config/config.yaml"
-)
+DEFAULT_CONFIG_PATH = str(ROOT / "G_config" / "config.yaml")
 
 
 def load_config(config_path: str = DEFAULT_CONFIG_PATH) -> Dict[str, Any]:
@@ -55,13 +54,13 @@ def load_config(config_path: str = DEFAULT_CONFIG_PATH) -> Dict[str, Any]:
 def get_paths_from_config(config: Dict[str, Any]) -> Tuple[str, str]:
     """Extract papers folder and gold JSON paths from config."""
     paths = config.get("paths", {})
-    base_path = paths.get("base", "/Users/frederictetard/Projects/ese")
+    base_path = get_base_path(config)
 
     papers_folder = str(
-        Path(base_path) / paths.get("papers_folder", "gold_data/PAPERS")
+        base_path / paths.get("papers_folder", "gold_data/PAPERS")
     )
     gold_json = str(
-        Path(base_path) / paths.get("gold_json", "gold_data/papers_gold_v2.json")
+        base_path / paths.get("gold_json", "gold_data/papers_gold_v2.json")
     )
 
     return papers_folder, gold_json
