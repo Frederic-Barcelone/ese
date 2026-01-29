@@ -19,10 +19,13 @@ Compatible with Unstructured.io hi_res, fast, auto strategies.
 
 from __future__ import annotations
 
+import logging
 import os
 import re
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 import fitz  # PyMuPDF
 from unstructured.partition.pdf import partition_pdf
@@ -734,7 +737,8 @@ class PDFToDocGraphParser(BaseParser):
             pn = getattr(md, "page", None)
         try:
             return int(pn) if pn is not None else None
-        except Exception:
+        except Exception as e:
+            logger.debug("Failed to convert page number %r to int: %s", pn, e)
             return None
 
     def _bbox_from_element(self, el, page_w: float, page_h: float) -> BoundingBox:
@@ -751,7 +755,8 @@ class PDFToDocGraphParser(BaseParser):
         if coords_meta is not None and hasattr(coords_meta, "points"):
             try:
                 points = list(coords_meta.points)
-            except Exception:
+            except Exception as e:
+                logger.debug("Failed to extract coordinate points: %s", e)
                 points = None
 
         if points is None and isinstance(coords_meta, dict) and "points" in coords_meta:

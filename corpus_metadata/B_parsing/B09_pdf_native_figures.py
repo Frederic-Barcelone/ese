@@ -15,11 +15,14 @@ Key capabilities:
 from __future__ import annotations
 
 import hashlib
+import logging
 from collections import Counter
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
 import fitz  # PyMuPDF
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -73,7 +76,8 @@ def extract_embedded_figures(
                 # Get all rectangles where this image appears on the page
                 try:
                     rects = page.get_image_rects(xref)
-                except Exception:
+                except Exception as e:
+                    logger.debug("Failed to get image rects for xref=%d: %s", xref, e)
                     continue
 
                 for rect in rects:
@@ -86,8 +90,9 @@ def extract_embedded_figures(
                         pix = fitz.Pixmap(doc, xref)
                         image_hash = hashlib.sha1(pix.tobytes()).hexdigest()[:12]
                         pix = None  # Release immediately
-                    except Exception:
+                    except Exception as e:
                         # Fallback: use xref as hash
+                        logger.debug("Failed to create pixmap for xref=%d, using fallback hash: %s", xref, e)
                         image_hash = f"xref_{xref}"
 
                     figures.append(
@@ -132,7 +137,8 @@ def extract_embedded_figures_from_doc(
 
             try:
                 rects = page.get_image_rects(xref)
-            except Exception:
+            except Exception as e:
+                logger.debug("Failed to get image rects for xref=%d: %s", xref, e)
                 continue
 
             for rect in rects:
@@ -144,7 +150,8 @@ def extract_embedded_figures_from_doc(
                     pix = fitz.Pixmap(doc, xref)
                     image_hash = hashlib.sha1(pix.tobytes()).hexdigest()[:12]
                     pix = None
-                except Exception:
+                except Exception as e:
+                    logger.debug("Failed to create pixmap for xref=%d, using fallback hash: %s", xref, e)
                     image_hash = f"xref_{xref}"
 
                 figures.append(
@@ -288,7 +295,8 @@ def cluster_drawings_into_regions(
                     bboxes.append((rect.x0, rect.y0, rect.x1, rect.y1))
                 elif len(rect) >= 4:
                     bboxes.append((float(rect[0]), float(rect[1]), float(rect[2]), float(rect[3])))
-            except (TypeError, IndexError):
+            except (TypeError, IndexError) as e:
+                logger.debug("Failed to parse drawing rect: %s", e)
                 continue
 
     if not bboxes:
@@ -695,7 +703,8 @@ def extract_text_from_region(
     try:
         text = page.get_text("text", clip=clip_rect)
         return text.strip() if text else ""
-    except Exception:
+    except Exception as e:
+        logger.debug("Failed to extract text from region on page %d: %s", page_num, e)
         return ""
 
 
@@ -731,7 +740,8 @@ def extract_text_from_figure_xref(
         return extract_text_from_region(
             doc, page_num, (rect.x0, rect.y0, rect.x1, rect.y1)
         )
-    except Exception:
+    except Exception as e:
+        logger.debug("Failed to extract text for xref=%d on page %d: %s", xref, page_num, e)
         return ""
 
 

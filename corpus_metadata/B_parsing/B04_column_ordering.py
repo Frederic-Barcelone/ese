@@ -807,8 +807,9 @@ def analyze_pdf_layout(
                             "zone": "BODY",
                         }
                     )
-        except Exception:
+        except Exception as e:
             # Fallback to PyMuPDF blocks
+            logger.debug("Element processing failed, falling back to PyMuPDF: %s", e)
             blocks = []
             for block in page.get_text("dict")["blocks"]:
                 if block.get("type") == 0:  # Text block

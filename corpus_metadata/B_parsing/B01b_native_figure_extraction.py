@@ -13,7 +13,10 @@ Extracted from B01_pdf_to_docgraph.py to reduce file size.
 from __future__ import annotations
 
 import base64
+import logging
 from typing import Any, Dict, List, Optional, TYPE_CHECKING
+
+logger = logging.getLogger(__name__)
 
 import fitz  # PyMuPDF
 
@@ -177,8 +180,8 @@ def apply_native_figure_extraction(
                     try:
                         img_bytes = render_figure_by_xref(doc, rf.figure.xref)
                         image_base64 = base64.b64encode(img_bytes).decode("utf-8")
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.debug("Failed to render raster figure xref=%s: %s", rf.figure.xref, e)
                 elif rf.figure_type == "vector" and isinstance(rf.figure, VectorFigure):
                     # Render vector region
                     try:
@@ -186,8 +189,8 @@ def apply_native_figure_extraction(
                             doc, rf.page_num, rf.bbox, dpi=200
                         )
                         image_base64 = base64.b64encode(img_bytes).decode("utf-8")
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.debug("Failed to render vector figure on page %d: %s", rf.page_num, e)
                 elif rf.figure_type == "layout_model":
                     # Use existing base64 from layout model
                     if hasattr(rf.figure, "image_base64"):
