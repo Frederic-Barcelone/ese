@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/orchestrator.py
+# corpus_metadata/orchestrator.py
 """
 Orchestrator v0.8: PDF -> Parse -> Generate -> Validate -> Log
 
@@ -10,6 +10,8 @@ Usage:
 Requires:
     - ANTHROPIC_API_KEY in .env file (or set in config.yaml)
     - pip install anthropic pyyaml python-dotenv
+
+REFACTORED: StageTimer and warning suppression extracted to orchestrator_utils.py
 """
 
 from __future__ import annotations
@@ -17,41 +19,15 @@ from __future__ import annotations
 # =============================================================================
 # SILENCE WARNINGS FIRST (must be before library imports)
 # =============================================================================
-import os
-import warnings
-
 from dotenv import load_dotenv
 
 load_dotenv()  # Load .env file from current directory or parent
 
-# Suppress at environment level for subprocesses
-os.environ["PYTHONWARNINGS"] = (
-    "ignore::UserWarning,ignore::FutureWarning,ignore::DeprecationWarning"
-)
-os.environ["TRANSFORMERS_VERBOSITY"] = "error"
-os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
-
-_WARNING_FILTERS = [
-    (UserWarning, r".*W036.*"),
-    (UserWarning, r".*matcher.*does not have any patterns.*"),
-    (UserWarning, r".*InconsistentVersionWarning.*"),
-    (UserWarning, r".*max_size.*deprecated.*"),
-    (FutureWarning, r".*max_size.*deprecated.*"),
-    (DeprecationWarning, r".*max_size.*"),
-]
-
-for _cat, _pat in _WARNING_FILTERS:
-    warnings.filterwarnings("ignore", category=_cat, message=_pat)
-
-warnings.filterwarnings("ignore", module=r"sklearn\.base")
-warnings.filterwarnings("ignore", category=FutureWarning, module=r"spacy\.language")
-warnings.filterwarnings("ignore", category=UserWarning, module=r"transformers")
-warnings.filterwarnings("ignore", message=r".*Could not get FontBBox.*")  # pdfminer.six
+from orchestrator_utils import setup_warning_suppression, StageTimer
+setup_warning_suppression()
 # =============================================================================
 
 import sys
-import time
-from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -59,55 +35,6 @@ import yaml
 from dotenv import load_dotenv
 
 from Z_utils.Z05_path_utils import get_base_path
-
-
-@dataclass
-class StageTimer:
-    """Track timing for pipeline stages."""
-
-    timings: Dict[str, float] = field(default_factory=dict)
-    _start_times: Dict[str, float] = field(default_factory=dict)
-
-    def start(self, stage: str) -> None:
-        """Start timing a stage."""
-        self._start_times[stage] = time.time()
-
-    def stop(self, stage: str) -> float:
-        """Stop timing a stage and return elapsed time."""
-        if stage not in self._start_times:
-            return 0.0
-        elapsed = time.time() - self._start_times[stage]
-        self.timings[stage] = elapsed
-        return elapsed
-
-    def get(self, stage: str) -> float:
-        """Get elapsed time for a stage."""
-        return self.timings.get(stage, 0.0)
-
-    def total(self) -> float:
-        """Get total time across all stages."""
-        return sum(self.timings.values())
-
-    def print_summary(self) -> None:
-        """Print timing summary."""
-        if not self.timings:
-            return
-
-        total = self.total()
-        print(f"\n{'─' * 50}")
-        print("⏱  TIMING SUMMARY")
-        print(f"{'─' * 50}")
-
-        # Sort by execution order (approximate by order added)
-        for stage, elapsed in self.timings.items():
-            pct = (elapsed / total * 100) if total > 0 else 0
-            bar_len = int(pct / 5)  # 20 chars max
-            bar = "█" * bar_len + "░" * (20 - bar_len)
-            print(f"  {stage:<25} {elapsed:>6.1f}s  {bar} {pct:>5.1f}%")
-
-        print(f"{'─' * 50}")
-        print(f"  {'TOTAL':<25} {total:>6.1f}s")
-        print(f"{'─' * 50}")
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 # =============================================================================

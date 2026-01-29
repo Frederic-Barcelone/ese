@@ -5,6 +5,10 @@ Export handlers for pipeline results.
 Handles exporting extraction results to various JSON formats including
 abbreviations, diseases, genes, drugs, pharma companies, authors, citations,
 feasibility data, images, tables, and document metadata.
+
+REFACTORED: Entity and metadata exporters extracted to:
+- J01a_entity_exporters.py: Disease, gene, drug, pharma, author, citation exports
+- J01b_metadata_exporters.py: Document metadata, care pathways, recommendations
 """
 
 from __future__ import annotations
@@ -21,6 +25,23 @@ from Z_utils.Z04_image_utils import (
     is_image_oversized,
     extract_ocr_text_from_base64,
     PYTESSERACT_AVAILABLE,
+)
+
+# Extracted entity exporters
+from J_export.J01a_entity_exporters import (
+    export_disease_results as _export_disease_results,
+    export_gene_results as _export_gene_results,
+    export_drug_results as _export_drug_results,
+    export_pharma_results as _export_pharma_results,
+    export_author_results as _export_author_results,
+    export_citation_results as _export_citation_results,
+)
+
+# Extracted metadata exporters
+from J_export.J01b_metadata_exporters import (
+    export_document_metadata as _export_document_metadata,
+    export_care_pathways as _export_care_pathways,
+    export_recommendations as _export_recommendations,
 )
 
 if TYPE_CHECKING:
@@ -344,479 +365,55 @@ class ExportManager:
         self, pdf_path: Path, results: List["ExtractedDisease"]
     ) -> None:
         """Export disease detection results to separate JSON file."""
-        from A_core.A01_domain_models import ValidationStatus
-        from A_core.A05_disease_models import DiseaseExportDocument, DiseaseExportEntry
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
-        rejected = [r for r in results if r.status == ValidationStatus.REJECTED]
-        ambiguous = [r for r in results if r.status == ValidationStatus.AMBIGUOUS]
-
-        # Build export entries
-        disease_entries: List[DiseaseExportEntry] = []
-        for entity in validated:
-            codes = {
-                "icd10": entity.icd10_code,
-                "icd11": entity.icd11_code,
-                "snomed": entity.snomed_code,
-                "mondo": entity.mondo_id,
-                "orpha": entity.orpha_code,
-                "umls": entity.umls_cui,
-                "mesh": entity.mesh_id,
-            }
-
-            all_identifiers = [
-                {"system": i.system, "code": i.code, "display": i.display}
-                for i in entity.identifiers
-            ]
-
-            entry = DiseaseExportEntry(
-                matched_text=entity.matched_text,
-                preferred_label=entity.preferred_label,
-                abbreviation=entity.abbreviation,
-                confidence=entity.confidence_score,
-                is_rare_disease=entity.is_rare_disease,
-                category=entity.disease_category,
-                codes=codes,
-                all_identifiers=all_identifiers,
-                context=entity.primary_evidence.text
-                if entity.primary_evidence
-                else None,
-                page=entity.primary_evidence.location.page_num
-                if entity.primary_evidence
-                else None,
-                lexicon_source=entity.provenance.lexicon_source
-                if entity.provenance
-                else None,
-                validation_flags=entity.validation_flags,
-                mesh_aliases=entity.mesh_aliases,
-                pubtator_normalized_name=entity.pubtator_normalized_name,
-                enrichment_source=entity.enrichment_source,
-            )
-            disease_entries.append(entry)
-
-        # Build export document
-        export_doc = DiseaseExportDocument(
-            run_id=self.run_id,
-            timestamp=datetime.now().isoformat(),
-            document=pdf_path.name,
-            document_path=str(pdf_path.absolute()),
-            pipeline_version=self.pipeline_version,
-            total_candidates=len(results),
-            total_validated=len(validated),
-            total_rejected=len(rejected),
-            total_ambiguous=len(ambiguous),
-            diseases=disease_entries,
+        _export_disease_results(
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"diseases_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export_doc.model_dump_json(indent=2))
-
-        print(f"  Disease export: {out_file.name}")
 
     def export_gene_results(
         self, pdf_path: Path, results: List["ExtractedGene"]
     ) -> None:
         """Export gene detection results to separate JSON file."""
-        from A_core.A01_domain_models import ValidationStatus
-        from A_core.A19_gene_models import GeneExportDocument, GeneExportEntry
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
-        rejected = [r for r in results if r.status == ValidationStatus.REJECTED]
-
-        # Build export entries
-        gene_entries: List[GeneExportEntry] = []
-        for entity in validated:
-            codes = {
-                "hgnc_id": entity.hgnc_id,
-                "entrez": entity.entrez_id,
-                "ensembl": entity.ensembl_id,
-                "omim": entity.omim_id,
-                "uniprot": entity.uniprot_id,
-            }
-
-            all_identifiers = [
-                {"system": i.system, "code": i.code, "display": i.display}
-                for i in entity.identifiers
-            ]
-
-            # Simplified disease associations
-            disease_assocs = [
-                {
-                    "orphacode": d.orphacode,
-                    "name": d.disease_name,
-                    "association_type": d.association_type or "",
-                }
-                for d in entity.associated_diseases
-            ]
-
-            entry = GeneExportEntry(
-                matched_text=entity.matched_text,
-                hgnc_symbol=entity.hgnc_symbol,
-                full_name=entity.full_name,
-                confidence=entity.confidence_score,
-                is_alias=entity.is_alias,
-                locus_type=entity.locus_type,
-                chromosome=entity.chromosome,
-                codes=codes,
-                all_identifiers=all_identifiers,
-                associated_diseases=disease_assocs,
-                context=entity.primary_evidence.text
-                if entity.primary_evidence
-                else None,
-                page=entity.primary_evidence.location.page_num
-                if entity.primary_evidence
-                else None,
-                lexicon_source=entity.provenance.lexicon_source
-                if entity.provenance
-                else None,
-                validation_flags=entity.validation_flags,
-            )
-            gene_entries.append(entry)
-
-        # Build export document
-        export_doc = GeneExportDocument(
-            run_id=self.run_id,
-            timestamp=datetime.now().isoformat(),
-            document=pdf_path.name,
-            document_path=str(pdf_path.absolute()),
-            pipeline_version=self.pipeline_version,
-            total_candidates=len(results),
-            total_validated=len(validated),
-            total_rejected=len(rejected),
-            genes=gene_entries,
+        _export_gene_results(
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"genes_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export_doc.model_dump_json(indent=2))
-
-        print(f"  Gene export: {out_file.name}")
 
     def export_drug_results(
         self, pdf_path: Path, results: List["ExtractedDrug"]
     ) -> None:
         """Export drug detection results to separate JSON file."""
-        from A_core.A01_domain_models import ValidationStatus
-        from A_core.A06_drug_models import DrugExportDocument, DrugExportEntry
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
-        rejected = [r for r in results if r.status == ValidationStatus.REJECTED]
-        investigational = [r for r in validated if r.is_investigational]
-
-        # Build export entries
-        drug_entries: List[DrugExportEntry] = []
-        for entity in validated:
-            codes = {
-                "rxcui": entity.rxcui,
-                "mesh": entity.mesh_id,
-                "ndc": entity.ndc_code,
-                "drugbank": entity.drugbank_id,
-                "unii": entity.unii,
-            }
-
-            all_identifiers = [
-                {"system": i.system, "code": i.code, "display": i.display}
-                for i in entity.identifiers
-            ]
-
-            entry = DrugExportEntry(
-                matched_text=entity.matched_text,
-                preferred_name=entity.preferred_name,
-                brand_name=entity.brand_name,
-                compound_id=entity.compound_id,
-                confidence=entity.confidence_score,
-                is_investigational=entity.is_investigational,
-                drug_class=entity.drug_class,
-                mechanism=entity.mechanism,
-                development_phase=entity.development_phase,
-                sponsor=entity.sponsor,
-                conditions=entity.conditions,
-                nct_id=entity.nct_id,
-                dosage_form=entity.dosage_form,
-                route=entity.route,
-                marketing_status=entity.marketing_status,
-                codes=codes,
-                all_identifiers=all_identifiers,
-                context=entity.primary_evidence.text
-                if entity.primary_evidence
-                else None,
-                page=entity.primary_evidence.location.page_num
-                if entity.primary_evidence
-                else None,
-                lexicon_source=entity.provenance.lexicon_source
-                if entity.provenance
-                else None,
-                validation_flags=entity.validation_flags,
-                mesh_aliases=entity.mesh_aliases,
-                pubtator_normalized_name=entity.pubtator_normalized_name,
-                enrichment_source=entity.enrichment_source,
-            )
-            drug_entries.append(entry)
-
-        # Build export document
-        export_doc = DrugExportDocument(
-            run_id=self.run_id,
-            timestamp=datetime.now().isoformat(),
-            document=pdf_path.name,
-            document_path=str(pdf_path.absolute()),
-            pipeline_version=self.pipeline_version,
-            total_candidates=len(results),
-            total_validated=len(validated),
-            total_rejected=len(rejected),
-            total_investigational=len(investigational),
-            drugs=drug_entries,
+        _export_drug_results(
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"drugs_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export_doc.model_dump_json(indent=2))
-
-        print(f"  Drug export: {out_file.name}")
 
     def export_pharma_results(
         self, pdf_path: Path, results: List["ExtractedPharma"]
     ) -> None:
         """Export pharma company detection results to separate JSON file."""
-        from A_core.A01_domain_models import ValidationStatus
-        from A_core.A09_pharma_models import PharmaExportDocument, PharmaExportEntry
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
-
-        # Build export entries
-        pharma_entries: List[PharmaExportEntry] = []
-        for entity in validated:
-            entry = PharmaExportEntry(
-                matched_text=entity.matched_text,
-                canonical_name=entity.canonical_name,
-                full_name=entity.full_name,
-                headquarters=entity.headquarters,
-                parent_company=entity.parent_company,
-                subsidiaries=entity.subsidiaries,
-                confidence=entity.confidence_score,
-                context=entity.primary_evidence.text
-                if entity.primary_evidence
-                else None,
-                page=entity.primary_evidence.location.page_num
-                if entity.primary_evidence
-                else None,
-                lexicon_source=entity.provenance.lexicon_source
-                if entity.provenance
-                else None,
-            )
-            pharma_entries.append(entry)
-
-        # Build export document
-        unique_companies = set(e.canonical_name for e in pharma_entries)
-        export_doc = PharmaExportDocument(
-            run_id=self.run_id,
-            timestamp=datetime.now().isoformat(),
-            document=pdf_path.name,
-            document_path=str(pdf_path.absolute()),
-            pipeline_version=self.pipeline_version,
-            total_detected=len(results),
-            unique_companies=len(unique_companies),
-            companies=pharma_entries,
+        _export_pharma_results(
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"pharma_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export_doc.model_dump_json(indent=2))
-
-        print(f"  Pharma export: {out_file.name}")
 
     def export_author_results(
         self, pdf_path: Path, results: List["ExtractedAuthor"]
     ) -> None:
         """Export author detection results to separate JSON file."""
-        from A_core.A01_domain_models import ValidationStatus
-        from A_core.A10_author_models import AuthorExportDocument, AuthorExportEntry
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
-
-        # Build export entries
-        author_entries: List[AuthorExportEntry] = []
-        unique_names: set = set()
-        for entity in validated:
-            unique_names.add(entity.full_name.lower())
-            entry = AuthorExportEntry(
-                full_name=entity.full_name,
-                role=entity.role.value,
-                affiliation=entity.affiliation,
-                email=entity.email,
-                orcid=entity.orcid,
-                confidence=entity.confidence_score,
-                context=entity.primary_evidence.text
-                if entity.primary_evidence
-                else None,
-                page=entity.primary_evidence.location.page_num
-                if entity.primary_evidence
-                else None,
-            )
-            author_entries.append(entry)
-
-        # Build export document
-        export_doc = AuthorExportDocument(
-            run_id=self.run_id,
-            timestamp=datetime.now().isoformat(),
-            document=pdf_path.name,
-            document_path=str(pdf_path.absolute()),
-            pipeline_version=self.pipeline_version,
-            total_detected=len(results),
-            unique_authors=len(unique_names),
-            authors=author_entries,
+        _export_author_results(
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"authors_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export_doc.model_dump_json(indent=2))
-
-        print(f"  Author export: {out_file.name}")
 
     def export_citation_results(
         self, pdf_path: Path, results: List["ExtractedCitation"]
     ) -> None:
         """Export citation detection results to separate JSON file with API validation."""
-        from A_core.A01_domain_models import ValidationStatus
-        from A_core.A11_citation_models import (
-            CitationExportDocument,
-            CitationExportEntry,
-            CitationValidation,
-            CitationValidationSummary,
-        )
-        from E_normalization.E14_citation_validator import CitationValidator
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        validated = [r for r in results if r.status == ValidationStatus.VALIDATED]
-
-        # Build export entries
-        citation_entries: List[CitationExportEntry] = []
-        unique_ids: set = set()
-        for entity in validated:
-            # Track unique identifiers
-            if entity.pmid:
-                unique_ids.add(f"pmid:{entity.pmid}")
-            if entity.pmcid:
-                unique_ids.add(f"pmcid:{entity.pmcid}")
-            if entity.doi:
-                unique_ids.add(f"doi:{entity.doi}")
-            if entity.nct:
-                unique_ids.add(f"nct:{entity.nct}")
-
-            entry = CitationExportEntry(
-                pmid=entity.pmid,
-                pmcid=entity.pmcid,
-                doi=entity.doi,
-                nct=entity.nct,
-                url=entity.url,
-                citation_text=entity.citation_text,
-                citation_number=entity.citation_number,
-                confidence=entity.confidence_score,
-                page=entity.primary_evidence.location.page_num
-                if entity.primary_evidence
-                else None,
-            )
-            citation_entries.append(entry)
-
-        # Run API validation on citations
-        validation_summary = None
-        if citation_entries:
-            print("  Validating citations via API...")
-            validator = CitationValidator({"validate_urls": False})  # Skip URL validation for speed
-            valid_count = 0
-            invalid_count = 0
-            error_count = 0
-
-            for entry in citation_entries:
-                # Validate primary identifier (prefer DOI > NCT > PMID)
-                validation_result = None
-
-                if entry.doi:
-                    result = validator.validate_doi(entry.doi)
-                    validation_result = CitationValidation(
-                        is_valid=result.is_valid,
-                        resolved_url=result.resolved_url,
-                        title=result.metadata.get("title"),
-                        error=result.error_message,
-                    )
-                elif entry.nct:
-                    result = validator.validate_nct(entry.nct)
-                    validation_result = CitationValidation(
-                        is_valid=result.is_valid,
-                        resolved_url=result.resolved_url,
-                        title=result.metadata.get("title"),
-                        status=result.metadata.get("status"),
-                        error=result.error_message,
-                    )
-                elif entry.pmid:
-                    result = validator.validate_pmid(entry.pmid)
-                    validation_result = CitationValidation(
-                        is_valid=result.is_valid,
-                        resolved_url=result.resolved_url,
-                        title=result.metadata.get("title"),
-                        error=result.error_message,
-                    )
-
-                if validation_result:
-                    entry.validation = validation_result
-                    if validation_result.is_valid:
-                        valid_count += 1
-                        print(f"    + {entry.doi or entry.nct or entry.pmid}: valid")
-                    elif validation_result.error:
-                        error_count += 1
-                        print(f"    x {entry.doi or entry.nct or entry.pmid}: {validation_result.error}")
-                    else:
-                        invalid_count += 1
-                        print(f"    x {entry.doi or entry.nct or entry.pmid}: not found")
-
-            validation_summary = CitationValidationSummary(
-                total_validated=valid_count + invalid_count + error_count,
-                valid_count=valid_count,
-                invalid_count=invalid_count,
-                error_count=error_count,
-            )
-
-        # Build export document
-        export_doc = CitationExportDocument(
-            run_id=self.run_id,
-            timestamp=datetime.now().isoformat(),
-            document=pdf_path.name,
-            document_path=str(pdf_path.absolute()),
-            pipeline_version=self.pipeline_version,
-            total_detected=len(results),
-            unique_identifiers=len(unique_ids),
-            validation_summary=validation_summary,
-            citations=citation_entries,
+        _export_citation_results(
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"citations_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export_doc.model_dump_json(indent=2))
-
-        print(f"  Citation export: {out_file.name}")
 
     def export_feasibility_results(
         self, pdf_path: Path, results: List["FeasibilityCandidate"], doc: Optional["DocumentGraph"] = None
@@ -1517,227 +1114,28 @@ class ExportManager:
         self, pdf_path: Path, metadata: "DocumentMetadata"
     ) -> None:
         """Export document metadata to JSON file."""
-        from A_core.A08_document_metadata_models import DocumentMetadataExport
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        # Build simplified export
-        export = DocumentMetadataExport(
-            doc_id=metadata.doc_id,
-            doc_filename=metadata.doc_filename,
-            file_size_bytes=metadata.file_metadata.size_bytes if metadata.file_metadata else None,
-            file_size_human=metadata.file_metadata.size_human if metadata.file_metadata else None,
-            file_extension=metadata.file_metadata.extension if metadata.file_metadata else None,
-            pdf_title=metadata.pdf_metadata.title if metadata.pdf_metadata else None,
-            pdf_author=metadata.pdf_metadata.author if metadata.pdf_metadata else None,
-            pdf_page_count=metadata.pdf_metadata.page_count if metadata.pdf_metadata else None,
-            pdf_creation_date=(
-                metadata.pdf_metadata.creation_date.isoformat()
-                if metadata.pdf_metadata and metadata.pdf_metadata.creation_date
-                else None
-            ),
-            document_type_code=(
-                metadata.classification.primary_type.code
-                if metadata.classification
-                else None
-            ),
-            document_type_name=(
-                metadata.classification.primary_type.name
-                if metadata.classification
-                else None
-            ),
-            document_type_group=(
-                metadata.classification.primary_type.group
-                if metadata.classification
-                else None
-            ),
-            classification_confidence=(
-                metadata.classification.primary_type.confidence
-                if metadata.classification
-                else None
-            ),
-            title=metadata.description.title if metadata.description else None,
-            short_description=(
-                metadata.description.short_description if metadata.description else None
-            ),
-            long_description=(
-                metadata.description.long_description if metadata.description else None
-            ),
-            document_date=(
-                metadata.date_extraction.primary_date.date.isoformat()
-                if metadata.date_extraction and metadata.date_extraction.primary_date
-                else None
-            ),
-            document_date_source=(
-                metadata.date_extraction.primary_date.source.value
-                if metadata.date_extraction and metadata.date_extraction.primary_date
-                else None
-            ),
+        _export_document_metadata(
+            out_dir, pdf_path, metadata, self.run_id, self.pipeline_version
         )
-
-        # Write to file
-        out_file = out_dir / f"metadata_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(export.model_dump_json(indent=2))
-
-        print(f"  Document metadata export: {out_file.name}")
 
     def export_care_pathways(
         self, pdf_path: Path, pathways: List["CarePathway"]
     ) -> None:
         """Export care pathway graphs extracted from treatment algorithm figures."""
-        if not pathways:
-            return
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        # Build export data
-        export_data: Dict[str, Any] = {
-            "run_id": self.run_id,
-            "timestamp": datetime.now().isoformat(),
-            "document": pdf_path.name,
-            "document_path": str(pdf_path.absolute()),
-            "pipeline_version": self.pipeline_version,
-            "total_pathways": len(pathways),
-            "pathways": [],
-        }
-
-        for pathway in pathways:
-            # Export nodes with full structure
-            nodes_export = []
-            for node in pathway.nodes:
-                nodes_export.append({
-                    "id": node.id,
-                    "type": node.type.value,
-                    "text": node.text,
-                    "phase": node.phase,
-                    "drugs": node.drugs,
-                    "dose": node.dose,
-                    "duration": node.duration,
-                })
-
-            # Export edges
-            edges_export = []
-            for edge in pathway.edges:
-                edges_export.append({
-                    "source_id": edge.source_id,
-                    "target_id": edge.target_id,
-                    "condition": edge.condition,
-                    "condition_type": edge.condition_type,
-                })
-
-            pathway_data = {
-                "pathway_id": pathway.pathway_id,
-                "title": pathway.title,
-                "condition": pathway.condition,
-                "phases": pathway.phases,
-                "nodes": nodes_export,
-                "edges": edges_export,
-                "entry_criteria": pathway.entry_criteria,
-                "primary_drugs": pathway.primary_drugs,
-                "alternative_drugs": pathway.alternative_drugs,
-                "decision_points": pathway.decision_points,
-                "target_dose": pathway.target_dose,
-                "target_timepoint": pathway.target_timepoint,
-                "maintenance_duration": pathway.maintenance_duration,
-                "relapse_handling": pathway.relapse_handling,
-                "source_figure": pathway.source_figure,
-                "source_page": pathway.source_page,
-                "extraction_confidence": pathway.extraction_confidence,
-            }
-            export_data["pathways"].append(pathway_data)
-
-        # Write to file
-        out_file = out_dir / f"care_pathways_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            json.dump(export_data, f, indent=2, ensure_ascii=False)
-
-        total_nodes = sum(len(p.nodes) for p in pathways)
-        total_edges = sum(len(p.edges) for p in pathways)
-        print(f"  Care pathways export: {out_file.name} ({len(pathways)} pathways, {total_nodes} nodes, {total_edges} edges)")
+        _export_care_pathways(
+            out_dir, pdf_path, pathways, self.run_id, self.pipeline_version
+        )
 
     def export_recommendations(
         self, pdf_path: Path, recommendation_sets: List["RecommendationSet"]
     ) -> None:
         """Export guideline recommendations extracted from text and tables."""
-        if not recommendation_sets:
-            return
-
         out_dir = self.get_output_dir(pdf_path)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        # Build export data
-        export_data: Dict[str, Any] = {
-            "run_id": self.run_id,
-            "timestamp": datetime.now().isoformat(),
-            "document": pdf_path.name,
-            "document_path": str(pdf_path.absolute()),
-            "pipeline_version": self.pipeline_version,
-            "total_recommendation_sets": len(recommendation_sets),
-            "total_recommendations": sum(len(rs.recommendations) for rs in recommendation_sets),
-            "recommendation_sets": [],
-        }
-
-        for rec_set in recommendation_sets:
-            # Export individual recommendations
-            recs_export = []
-            for rec in rec_set.recommendations:
-                # Export dosing info
-                dosing_export = []
-                for dose in rec.dosing:
-                    dosing_export.append({
-                        "drug_name": dose.drug_name,
-                        "dose_range": dose.dose_range,
-                        "starting_dose": dose.starting_dose,
-                        "maintenance_dose": dose.maintenance_dose,
-                        "max_dose": dose.max_dose,
-                        "route": dose.route,
-                        "frequency": dose.frequency,
-                    })
-
-                recs_export.append({
-                    "recommendation_id": rec.recommendation_id,
-                    "recommendation_type": rec.recommendation_type.value,
-                    "population": rec.population,
-                    "condition": rec.condition,
-                    "severity": rec.severity,
-                    "action": rec.action,
-                    "action_description": rec.action_description,
-                    "preferred": rec.preferred,
-                    "alternatives": rec.alternatives,
-                    "dosing": dosing_export,
-                    "taper_target": rec.taper_target,
-                    "duration": rec.duration,
-                    "stop_window": rec.stop_window,
-                    "evidence_level": rec.evidence_level.value,
-                    "strength": rec.strength.value,
-                    "references": rec.references,
-                    "source": rec.source,
-                    "source_text": rec.source_text,
-                    "page_num": rec.page_num,
-                })
-
-            set_data = {
-                "guideline_name": rec_set.guideline_name,
-                "guideline_year": rec_set.guideline_year,
-                "organization": rec_set.organization,
-                "target_condition": rec_set.target_condition,
-                "target_population": rec_set.target_population,
-                "recommendations": recs_export,
-                "source_document": rec_set.source_document,
-                "extraction_confidence": rec_set.extraction_confidence,
-            }
-            export_data["recommendation_sets"].append(set_data)
-
-        # Write to file
-        out_file = out_dir / f"recommendations_{pdf_path.stem}_{timestamp}.json"
-        with open(out_file, "w", encoding="utf-8") as f:
-            json.dump(export_data, f, indent=2, ensure_ascii=False)
-
-        total_recs = export_data["total_recommendations"]
-        print(f"  Recommendations export: {out_file.name} ({len(recommendation_sets)} sets, {total_recs} recommendations)")
+        _export_recommendations(
+            out_dir, pdf_path, recommendation_sets, self.run_id, self.pipeline_version
+        )
 
 
 __all__ = ["ExportManager"]
