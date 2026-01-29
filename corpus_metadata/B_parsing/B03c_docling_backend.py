@@ -78,7 +78,7 @@ class DoclingTableExtractor:
 
         self.config = config or {}
         self.mode = self.config.get("mode", "accurate")
-        self.do_cell_matching = self.config.get("do_cell_matching", False)
+        self.do_cell_matching = self.config.get("do_cell_matching", True)
         self.ocr_enabled = self.config.get("ocr_enabled", True)
 
         # Initialize converter with optimized settings

@@ -32,41 +32,6 @@ class TestDoclingBackendImport:
 class TestDoclingTableExtractorMocked:
     """Tests for DoclingTableExtractor with mocked Docling."""
 
-    @pytest.fixture
-    def mock_docling_modules(self):
-        """Create mock Docling modules."""
-        # Mock the docling imports
-        mock_converter = mock.MagicMock()
-        mock_pipeline_options = mock.MagicMock()
-        mock_table_former_mode = mock.MagicMock()
-        mock_table_former_mode.ACCURATE = "accurate"
-        mock_table_former_mode.FAST = "fast"
-
-        with mock.patch.dict(
-            "sys.modules",
-            {
-                "docling": mock.MagicMock(),
-                "docling.document_converter": mock.MagicMock(
-                    DocumentConverter=mock_converter,
-                    PdfFormatOption=mock.MagicMock(),
-                ),
-                "docling.datamodel": mock.MagicMock(),
-                "docling.datamodel.base_models": mock.MagicMock(
-                    InputFormat=mock.MagicMock(PDF="pdf"),
-                ),
-                "docling.datamodel.pipeline_options": mock.MagicMock(
-                    PdfPipelineOptions=mock_pipeline_options,
-                    TableFormerMode=mock_table_former_mode,
-                ),
-                "docling_core": mock.MagicMock(),
-                "docling_core.types": mock.MagicMock(),
-                "docling_core.types.doc": mock.MagicMock(
-                    TableItem=mock.MagicMock(),
-                ),
-            },
-        ):
-            yield mock_converter
-
     def test_table_classification_glossary(self):
         """Test table classification for glossary tables."""
         from B_parsing.B03c_docling_backend import DoclingTableExtractor
@@ -162,43 +127,31 @@ class TestDoclingTableExtractorMocked:
             assert grid == []
 
 
-class TestTableExtractorBackendSelection:
-    """Tests for TableExtractor backend selection."""
+class TestTableExtractor:
+    """Tests for TableExtractor class."""
 
-    def test_default_backend_is_docling(self):
-        """Test that Docling is the default backend (with fallback)."""
-        from B_parsing.B03_table_extractor import TableExtractor
+    def test_table_extractor_requires_docling(self):
+        """Test that TableExtractor requires Docling."""
         from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
 
-        extractor = TableExtractor()
+        if not DOCLING_AVAILABLE:
+            from B_parsing.B03_table_extractor import TableExtractor
+
+            with pytest.raises(ImportError):
+                TableExtractor()
+
+    def test_default_config_values(self):
+        """Test default configuration values."""
+        from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
 
         if DOCLING_AVAILABLE:
-            assert extractor.backend == "docling"
-        else:
-            # Falls back to unstructured
-            assert extractor.backend == "unstructured"
+            from B_parsing.B03_table_extractor import TableExtractor
 
-    def test_explicit_unstructured_backend(self):
-        """Test explicit selection of Unstructured backend."""
-        from B_parsing.B03_table_extractor import TableExtractor, UNSTRUCTURED_AVAILABLE
-
-        if UNSTRUCTURED_AVAILABLE:
-            extractor = TableExtractor({"backend": "unstructured"})
-            assert extractor.backend == "unstructured"
-
-    def test_config_propagation(self):
-        """Test that config values are properly propagated."""
-        from B_parsing.B03_table_extractor import TableExtractor
-
-        config = {
-            "backend": "unstructured",
-            "strategy": "fast",
-            "languages": ["eng", "fra"],
-        }
-
-        extractor = TableExtractor(config)
-        assert extractor.strategy == "fast"
-        assert extractor.languages == ["eng", "fra"]
+            extractor = TableExtractor()
+            # Check that defaults are applied
+            assert extractor._extractor.mode == "accurate"
+            assert extractor._extractor.do_cell_matching is True
+            assert extractor._extractor.ocr_enabled is True
 
 
 class TestConvenienceFunction:

@@ -968,33 +968,17 @@ vision:
 # ==============================================================================
 # TABLE EXTRACTION CONFIGURATION
 # ==============================================================================
-# Settings for table detection and validation
+# Uses Docling's TableFormer for 95-98% accuracy on complex tables
+# See: https://github.com/docling-project/docling
 table_extraction:
-  # Backend selection: 'docling' (default, 95-98% accuracy) or 'unstructured' (legacy)
-  # Docling uses TableFormer model for superior table structure recognition
-  # See: https://github.com/docling-project/docling
-  backend: "docling"
+  # TableFormer mode: 'accurate' (default) or 'fast'
+  mode: "accurate"
 
-  # Docling-specific settings (used when backend='docling')
-  docling:
-    # TableFormer mode: 'accurate' (default) or 'fast'
-    # - accurate: Best quality, slower (recommended for production)
-    # - fast: Faster processing, slightly lower accuracy
-    mode: "accurate"
+  # Cell matching: match predicted cells to PDF coordinates
+  do_cell_matching: true
 
-    # Cell matching: whether to match predicted cells to PDF coordinates
-    # - false (default): Uses TableFormer's predicted cells (better column separation)
-    # - true: Maps cells back to PDF coordinates
-    do_cell_matching: false
-
-    # Enable OCR for scanned PDFs
-    ocr_enabled: true
-
-  # Unstructured-specific settings (used when backend='unstructured')
-  unstructured:
-    strategy: "hi_res"
-    hi_res_model_name: "yolox"
-    languages: ["eng"]
+  # Enable OCR for scanned PDFs
+  ocr_enabled: true
 
   # Validation thresholds
     # Average cell length thresholds (chars)
