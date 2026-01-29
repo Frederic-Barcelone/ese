@@ -176,11 +176,18 @@ class DoclingTableExtractor:
 
                 if hasattr(prov, "bbox") and prov.bbox:
                     # Docling bbox has l, t, r, b properties
-                    bbox = (
+                    # Normalize to ensure x0 < x1 and y0 < y1
+                    l, t, r, b = (
                         float(prov.bbox.l),
                         float(prov.bbox.t),
                         float(prov.bbox.r),
                         float(prov.bbox.b),
+                    )
+                    bbox = (
+                        min(l, r),  # x0
+                        min(t, b),  # y0
+                        max(l, r),  # x1
+                        max(t, b),  # y1
                     )
 
             # Export to DataFrame for structured data

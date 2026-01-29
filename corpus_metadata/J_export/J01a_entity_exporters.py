@@ -130,7 +130,7 @@ def export_gene_results(
 
         entry = GeneExportEntry(
             matched_text=entity.matched_text,
-            symbol=entity.symbol,
+            symbol=entity.hgnc_symbol,
             full_name=entity.full_name,
             confidence=entity.confidence_score,
             gene_type=entity.gene_type,
