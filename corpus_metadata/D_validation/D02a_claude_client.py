@@ -13,12 +13,15 @@ Extracted from D02_llm_engine.py to reduce file size.
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 import yaml
+
+logger = logging.getLogger(__name__)
 
 from Z_utils.Z04_image_utils import (
     get_image_size_bytes,
@@ -115,13 +118,13 @@ class ClaudeClient:
                 "temperature": val_cfg.get("temperature"),
             }
         except (OSError, IOError) as e:
-            print(f"Warning: Failed to read config file {config_path}: {e}")
+            logger.warning("Failed to read config file %s: %s", config_path, e)
             return {}
         except yaml.YAMLError as e:
-            print(f"Warning: Failed to parse config YAML {config_path}: {e}")
+            logger.warning("Failed to parse config YAML %s: %s", config_path, e)
             return {}
         except (KeyError, TypeError) as e:
-            print(f"Warning: Invalid config structure in {config_path}: {e}")
+            logger.warning("Invalid config structure in %s: %s", config_path, e)
             return {}
 
     def complete_json(
@@ -238,23 +241,30 @@ class ClaudeClient:
         image_size = get_image_size_bytes(image_base64)
         if image_size > max_image_size:
             if auto_compress:
-                print(f"  [INFO] Image exceeds {max_image_size / 1024 / 1024:.1f}MB limit "
-                      f"({image_size / 1024 / 1024:.1f}MB), compressing...")
+                logger.info(
+                    "Image exceeds %.1fMB limit (%.1fMB), compressing...",
+                    max_image_size / 1024 / 1024, image_size / 1024 / 1024
+                )
                 compressed, info = compress_image_for_vision(
                     image_base64,
                     max_size_bytes=max_image_size,
                 )
                 if compressed:
                     image_base64 = compressed
-                    print(f"  [INFO] Compressed image: {info['original_size'] / 1024 / 1024:.1f}MB -> "
-                          f"{info['final_size'] / 1024 / 1024:.1f}MB "
-                          f"(ratio: {info['compression_ratio']:.1f}x)")
+                    logger.info(
+                        "Compressed image: %.1fMB -> %.1fMB (ratio: %.1fx)",
+                        info['original_size'] / 1024 / 1024,
+                        info['final_size'] / 1024 / 1024,
+                        info['compression_ratio']
+                    )
                 else:
-                    print(f"  [WARN] Could not compress image below limit: {info.get('error')}")
+                    logger.warning("Could not compress image below limit: %s", info.get('error'))
                     return None
             else:
-                print(f"  [WARN] Image exceeds {max_image_size / 1024 / 1024:.1f}MB limit "
-                      f"({image_size / 1024 / 1024:.1f}MB), skipping Vision analysis")
+                logger.warning(
+                    "Image exceeds %.1fMB limit (%.1fMB), skipping Vision analysis",
+                    max_image_size / 1024 / 1024, image_size / 1024 / 1024
+                )
                 return None
 
         # Detect media type from base64 header or default to PNG
@@ -348,7 +358,7 @@ class ClaudeClient:
         except json.JSONDecodeError:
             # Log failed parse for debugging
             preview = text[:200] + "..." if len(text) > 200 else text
-            print(f"  [DEBUG] JSON parse failed. Raw response preview: {preview!r}")
+            logger.debug("JSON parse failed. Raw response preview: %r", preview)
             return None
 
     def _extract_json(self, text: str) -> Dict[str, Any]:
