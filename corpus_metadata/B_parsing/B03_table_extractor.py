@@ -2,8 +2,14 @@
 """
 Table extraction from PDF -> JSON/Table model.
 
-Uses unstructured's table extraction (hi_res with infer_table_structure=True)
-to populate Table objects in the DocumentGraph.
+Supports two backends:
+1. Docling (default): Uses TableFormer for 95-98% accuracy on complex tables
+2. Unstructured: Legacy backend using YOLOX + HTML parsing
+
+CHANGELOG v3.0:
+- Added Docling backend support (B03c_docling_backend.py)
+- Backend selection via config['backend'] = 'docling' | 'unstructured'
+- Docling is now the default for superior accuracy
 
 CHANGELOG v2.0:
 - Extracted validation logic to B03a_table_validation.py
@@ -18,7 +24,23 @@ from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
-from unstructured.partition.pdf import partition_pdf
+# Try to import Docling backend (preferred)
+try:
+    from B_parsing.B03c_docling_backend import (
+        DoclingTableExtractor,
+        DOCLING_AVAILABLE,
+    )
+except ImportError:
+    DOCLING_AVAILABLE = False
+    DoclingTableExtractor = None  # type: ignore
+
+# Unstructured import (fallback)
+try:
+    from unstructured.partition.pdf import partition_pdf
+    UNSTRUCTURED_AVAILABLE = True
+except ImportError:
+    UNSTRUCTURED_AVAILABLE = False
+    partition_pdf = None  # type: ignore
 
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Table, TableCell, TableType
@@ -64,10 +86,54 @@ GLOSSARY_HEADER_RE = re.compile("|".join(GLOSSARY_HEADER_PATTERNS), re.IGNORECAS
 class TableExtractor:
     """
     Extracts tables from PDF and populates DocumentGraph.tables.
+
+    Supports two backends:
+    - 'docling': Uses TableFormer for 95-98% accuracy (default)
+    - 'unstructured': Legacy YOLOX + HTML parsing
+
+    Configure via config['backend'] = 'docling' | 'unstructured'
     """
 
     def __init__(self, config: Optional[dict] = None):
         self.config = config or {}
+
+        # Backend selection: docling (default) or unstructured
+        self.backend = self.config.get("backend", "docling")
+
+        # Auto-fallback if preferred backend not available
+        if self.backend == "docling" and not DOCLING_AVAILABLE:
+            logger.warning(
+                "Docling not available, falling back to Unstructured. "
+                "Install Docling for better accuracy: pip install docling"
+            )
+            self.backend = "unstructured"
+
+        if self.backend == "unstructured" and not UNSTRUCTURED_AVAILABLE:
+            if DOCLING_AVAILABLE:
+                logger.warning(
+                    "Unstructured not available, using Docling instead."
+                )
+                self.backend = "docling"
+            else:
+                raise ImportError(
+                    "No table extraction backend available. "
+                    "Install docling or unstructured."
+                )
+
+        # Initialize the appropriate backend
+        if self.backend == "docling":
+            docling_config = {
+                "mode": self.config.get("docling_mode", "accurate"),
+                "do_cell_matching": self.config.get("docling_cell_matching", False),
+                "ocr_enabled": self.config.get("ocr_enabled", True),
+            }
+            self._docling_extractor = DoclingTableExtractor(docling_config)
+            logger.info("Using Docling backend for table extraction (TableFormer)")
+        else:
+            self._docling_extractor = None
+            logger.info("Using Unstructured backend for table extraction (YOLOX)")
+
+        # Unstructured-specific settings (used when backend='unstructured')
         self.strategy = self.config.get("strategy", "hi_res")
         self.hi_res_model_name = self.config.get("hi_res_model_name", "yolox")
         self.languages = self.config.get("languages", ["eng"])
@@ -75,7 +141,25 @@ class TableExtractor:
     def extract_tables(self, file_path: str) -> List[Dict[str, Any]]:
         """
         Extract tables from PDF as list of dicts (JSON-friendly).
+
+        Uses Docling (TableFormer) by default for 95-98% accuracy,
+        or Unstructured (YOLOX) as fallback.
         """
+        # Use Docling backend if configured
+        if self.backend == "docling" and self._docling_extractor:
+            return self._docling_extractor.extract_tables(file_path)
+
+        # Fallback to Unstructured backend
+        return self._extract_tables_unstructured(file_path)
+
+    def _extract_tables_unstructured(self, file_path: str) -> List[Dict[str, Any]]:
+        """
+        Extract tables using Unstructured (legacy backend).
+        """
+        if not UNSTRUCTURED_AVAILABLE:
+            logger.error("Unstructured not available for table extraction")
+            return []
+
         elements = partition_pdf(
             filename=file_path,
             strategy=self.strategy,

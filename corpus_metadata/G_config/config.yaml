@@ -970,8 +970,33 @@ vision:
 # ==============================================================================
 # Settings for table detection and validation
 table_extraction:
+  # Backend selection: 'docling' (default, 95-98% accuracy) or 'unstructured' (legacy)
+  # Docling uses TableFormer model for superior table structure recognition
+  # See: https://github.com/docling-project/docling
+  backend: "docling"
+
+  # Docling-specific settings (used when backend='docling')
+  docling:
+    # TableFormer mode: 'accurate' (default) or 'fast'
+    # - accurate: Best quality, slower (recommended for production)
+    # - fast: Faster processing, slightly lower accuracy
+    mode: "accurate"
+
+    # Cell matching: whether to match predicted cells to PDF coordinates
+    # - false (default): Uses TableFormer's predicted cells (better column separation)
+    # - true: Maps cells back to PDF coordinates
+    do_cell_matching: false
+
+    # Enable OCR for scanned PDFs
+    ocr_enabled: true
+
+  # Unstructured-specific settings (used when backend='unstructured')
+  unstructured:
+    strategy: "hi_res"
+    hi_res_model_name: "yolox"
+    languages: ["eng"]
+
   # Validation thresholds
-  validation:
     # Average cell length thresholds (chars)
     # Tables with longer cells are more likely prose, not tabular data
     max_avg_cell_length: 150
