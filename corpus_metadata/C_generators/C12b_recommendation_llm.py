@@ -16,8 +16,6 @@ import re
 from typing import Any, Dict, List, Optional, Tuple
 
 from A_core.A18_recommendation_models import (
-
-logger = logging.getLogger(__name__)
     DrugDosingInfo,
     EvidenceLevel,
     GuidelineRecommendation,
@@ -25,6 +23,8 @@ logger = logging.getLogger(__name__)
     RecommendationStrength,
     RecommendationType,
 )
+
+logger = logging.getLogger(__name__)
 
 from .C12a_recommendation_patterns import RECOMMENDATION_EXTRACTION_PROMPT
 
