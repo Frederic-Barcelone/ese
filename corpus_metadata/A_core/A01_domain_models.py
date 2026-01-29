@@ -1,5 +1,13 @@
-# corpus_metadata/corpus_metadata/A_core/A01_domain_models.py
+# corpus_metadata/A_core/A01_domain_models.py
+"""
+Domain models for the ESE extraction pipeline.
 
+Provides Pydantic models for:
+- Pipeline stages and field types (enums)
+- Abbreviation categories and validation status
+- Candidates, extracted entities, and bounding boxes
+- Drug, disease, and other entity-specific models
+"""
 from __future__ import annotations
 
 import uuid

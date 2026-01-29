@@ -1,4 +1,14 @@
-# corpus_metadata/corpus_metadata/B_parsing/B02_doc_graph.py
+# corpus_metadata/B_parsing/B02_doc_graph.py
+"""
+Document graph data structures for parsed PDFs.
+
+Provides Pydantic models for:
+- TextBlock: Atomic text unit with role and position
+- TableBlock: Extracted table with rows/columns
+- ImageBlock: Figure/image with optional OCR text
+- Page: Collection of blocks for a single page
+- DocumentGraph: Full document structure with metadata
+"""
 from __future__ import annotations
 
 import uuid

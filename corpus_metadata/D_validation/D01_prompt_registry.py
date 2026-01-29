@@ -1,5 +1,13 @@
-# corpus_metadata/corpus_metadata/D_validation/D01_prompt_registry.py
+# corpus_metadata/D_validation/D01_prompt_registry.py
+"""
+Prompt registry for LLM validation tasks.
 
+Provides:
+- PromptTask: Enum of validation task types
+- PromptBundle: Versioned prompt templates with system/user components
+- PromptRegistry: Central registry for all validation prompts
+- Prompt versioning and hash computation for reproducibility
+"""
 from __future__ import annotations
 
 from enum import Enum

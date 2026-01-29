@@ -1,3 +1,14 @@
+# corpus_metadata/A_core/A02_interfaces.py
+"""
+Abstract interfaces for pipeline components.
+
+Defines base classes and protocols for:
+- ExecutionContext: Shared context for extraction steps
+- BaseParser: PDF/document parsing interface
+- CandidateGenerator: Entity candidate extraction
+- Validator: LLM-based validation interface
+- Normalizer: Entity normalization/enrichment
+"""
 from __future__ import annotations
 
 from abc import ABC, abstractmethod

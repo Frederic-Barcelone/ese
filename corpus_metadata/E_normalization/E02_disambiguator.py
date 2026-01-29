@@ -1,5 +1,13 @@
-# corpus_metadata/corpus_metadata/E_normalization/E02_disambiguator.py
+# corpus_metadata/E_normalization/E02_disambiguator.py
+"""
+Abbreviation disambiguator using document context.
 
+Provides Disambiguator class that:
+- Resolves ambiguous SHORT_FORM_ONLY entities
+- Uses bag-of-words voting from document context
+- Requires minimum score and margin over runner-up
+- Adds disambiguation payload to normalized_value
+"""
 from __future__ import annotations
 
 import re

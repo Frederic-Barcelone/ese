@@ -1,5 +1,13 @@
-# corpus_metadata/corpus_metadata/A_core/A03_provenance.py
+# corpus_metadata/A_core/A03_provenance.py
+"""
+Provenance and hashing utilities for reproducibility.
 
+Provides:
+- Git revision tracking
+- Content hashing (SHA256)
+- Run ID generation
+- Timestamp utilities
+"""
 import hashlib
 import json
 import subprocess

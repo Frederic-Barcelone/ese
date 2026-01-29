@@ -1,5 +1,13 @@
-# corpus_metadata/corpus_metadata/E_normalization/E01_term_mapper.py
+# corpus_metadata/E_normalization/E01_term_mapper.py
+"""
+Term mapper for abbreviation normalization.
 
+Provides TermMapper class that:
+- Canonicalizes long forms (case normalization, whitespace)
+- Attaches standard IDs from lexicons
+- Stores normalization payloads for audit trail
+- Optionally fills long forms for orphan short forms
+"""
 from __future__ import annotations
 
 import json
