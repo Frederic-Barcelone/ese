@@ -15,6 +15,7 @@ Uses FlashText for fast keyword matching.
 from __future__ import annotations
 
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -22,6 +23,8 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from flashtext import KeywordProcessor
 
 from A_core.A01_domain_models import Coordinate
+
+logger = logging.getLogger(__name__)
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A06_drug_models import (
     DrugCandidate,
@@ -169,7 +172,7 @@ class DrugDetector:
         """Load Alexion specialized drug lexicon."""
         path = self.lexicon_base_path / "2025_08_alexion_drugs.json"
         if not path.exists():
-            print(f"[WARN] Alexion lexicon not found: {path}")
+            logger.warning("Alexion lexicon not found: %s", path)
             return
 
         try:
@@ -202,13 +205,13 @@ class DrugDetector:
             )
 
         except Exception as e:
-            print(f"[WARN] Failed to load Alexion lexicon: {e}")
+            logger.warning("Failed to load Alexion lexicon: %s", e)
 
     def _load_investigational_lexicon(self) -> None:
         """Load investigational drugs from ClinicalTrials.gov data."""
         path = self.lexicon_base_path / "2025_08_investigational_drugs.json"
         if not path.exists():
-            print(f"[WARN] Investigational lexicon not found: {path}")
+            logger.warning("Investigational lexicon not found: %s", path)
             return
 
         try:
@@ -249,19 +252,19 @@ class DrugDetector:
                     count += 1
 
             if skipped > 0:
-                print(f"    [INFO] Skipped {skipped} blacklisted investigational terms")
+                logger.debug("Skipped %d blacklisted investigational terms", skipped)
             self._lexicon_stats.append(
                 ("Investigational drugs", count, "2025_08_investigational_drugs.json")
             )
 
         except Exception as e:
-            print(f"[WARN] Failed to load investigational lexicon: {e}")
+            logger.warning("Failed to load investigational lexicon: %s", e)
 
     def _load_fda_lexicon(self) -> None:
         """Load FDA approved drugs lexicon."""
         path = self.lexicon_base_path / "2025_08_fda_approved_drugs.json"
         if not path.exists():
-            print(f"[WARN] FDA lexicon not found: {path}")
+            logger.warning("FDA lexicon not found: %s", path)
             return
 
         try:
@@ -309,19 +312,19 @@ class DrugDetector:
                             fda_proc.add_keyword(brand, drug_key)
 
             if skipped > 0:
-                print(f"    [INFO] Skipped {skipped} blacklisted FDA terms")
+                logger.debug("Skipped %d blacklisted FDA terms", skipped)
             self._lexicon_stats.append(
                 ("FDA approved drugs", count, "2025_08_fda_approved_drugs.json")
             )
 
         except Exception as e:
-            print(f"[WARN] Failed to load FDA lexicon: {e}")
+            logger.warning("Failed to load FDA lexicon: %s", e)
 
     def _load_rxnorm_lexicon(self) -> None:
         """Load RxNorm general drug lexicon."""
         path = self.lexicon_base_path / "2025_08_lexicon_drug.json"
         if not path.exists():
-            print(f"[WARN] RxNorm lexicon not found: {path}")
+            logger.warning("RxNorm lexicon not found: %s", path)
             return
 
         try:
@@ -357,13 +360,13 @@ class DrugDetector:
                     count += 1
 
             if skipped > 0:
-                print(f"    [INFO] Skipped {skipped} blacklisted RxNorm terms")
+                logger.debug("Skipped %d blacklisted RxNorm terms", skipped)
             self._lexicon_stats.append(
                 ("RxNorm terms", count, "2025_08_lexicon_drug.json")
             )
 
         except Exception as e:
-            print(f"[WARN] Failed to load RxNorm lexicon: {e}")
+            logger.warning("Failed to load RxNorm lexicon: %s", e)
 
     def _init_scispacy(self) -> None:
         """Initialize scispacy NER model."""
@@ -391,7 +394,7 @@ class DrugDetector:
             self._lexicon_stats.append(("scispacy NER", 1, "en_core_sci_lg"))
 
         except Exception as e:
-            print(f"[WARN] Failed to initialize scispacy for drugs: {e}")
+            logger.warning("Failed to initialize scispacy for drugs: %s", e)
             self.nlp = None
 
     def _print_lexicon_summary(self) -> None:
@@ -402,16 +405,14 @@ class DrugDetector:
         # All drug lexicons go under "Drug" category
         total = sum(count for _, count, _ in self._lexicon_stats if count > 1)
         file_count = len([s for s in self._lexicon_stats if s[1] > 0])
-        print(f"\nDrug lexicons: {file_count} sources, {total:,} entries")
-        print("─" * 70)
-        print(f"  Drug ({total:,} entries)")
+        logger.info("Drug lexicons: %d sources, %d entries", file_count, total)
+        logger.info("  Drug (%d entries)", total)
 
         for name, count, filename in self._lexicon_stats:
             if count > 1:
-                print(f"    • {name:<26} {count:>8,}  {filename}")
+                logger.debug("    • %-26s %8d  %s", name, count, filename)
             else:
-                print(f"    • {name:<26} {'enabled':>8}  {filename}")
-        print()
+                logger.debug("    • %-26s %8s  %s", name, "enabled", filename)
 
     def detect(self, doc_graph: DocumentGraph) -> List[DrugCandidate]:
         """
@@ -753,7 +754,7 @@ class DrugDetector:
                 candidates.append(candidate)
 
         except Exception as e:
-            print(f"[WARN] scispacy drug detection error: {e}")
+            logger.warning("scispacy drug detection error: %s", e)
 
         return candidates
 

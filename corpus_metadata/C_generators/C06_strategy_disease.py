@@ -14,6 +14,7 @@ Uses confidence-based false positive filtering (see C06a_disease_fp_filter.py).
 from __future__ import annotations
 
 import json
+import logging
 import re
 import warnings
 from pathlib import Path
@@ -22,6 +23,8 @@ from typing import Dict, List, Optional, Set, Tuple
 from flashtext import KeywordProcessor
 
 from A_core.A01_domain_models import Coordinate
+
+logger = logging.getLogger(__name__)
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A05_disease_models import (
     DiseaseCandidate,
@@ -402,15 +405,13 @@ class DiseaseDetector:
                     config={"resolve_abbreviations": True, "linker_name": "umls"},
                 )
                 self.umls_linker = self.scispacy_nlp.get_pipe("scispacy_linker")
-                print(f"  Disease detector: loaded scispacy {model_name} + UMLS linker")
+                logger.debug("Disease detector: loaded scispacy %s + UMLS linker", model_name)
                 self._lexicon_stats.append(("scispacy NER", 1, model_name))
             except Exception as e:
-                print(
-                    f"  Disease detector: loaded scispacy {model_name} (no UMLS: {e})"
-                )
+                logger.debug("Disease detector: loaded scispacy %s (no UMLS: %s)", model_name, e)
                 self._lexicon_stats.append(("scispacy NER", 1, model_name))
         except OSError as e:
-            print(f"  Disease detector: scispacy not available: {e}")
+            logger.debug("Disease detector: scispacy not available: %s", e)
 
     def _print_summary(self) -> None:
         """Print loading summary grouped by category."""
@@ -418,17 +419,13 @@ class DiseaseDetector:
             return
 
         total = sum(count for _, count, _ in self._lexicon_stats)
-        print(
-            f"\nDisease lexicons: {len(self._lexicon_stats)} sources, {total:,} entries"
-        )
-        print("─" * 70)
-        print(f"  Disease ({total:,} entries)")
+        logger.info("Disease lexicons: %d sources, %d entries", len(self._lexicon_stats), total)
+        logger.info("  Disease (%d entries)", total)
 
         for name, count, filename in self._lexicon_stats:
             # Clean up display name
             display_name = name.replace("Specialized ", "")
-            print(f"    • {display_name:<26} {count:>8,}  {filename}")
-        print()
+            logger.debug("    • %-26s %8d  %s", display_name, count, filename)
 
     def extract(self, doc_structure: DocumentGraph) -> List[DiseaseCandidate]:
         """

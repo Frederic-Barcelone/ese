@@ -13,9 +13,12 @@ from __future__ import annotations
 
 import csv
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Any, Dict, List, TYPE_CHECKING
+
+logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from flashtext import KeywordProcessor
@@ -86,17 +89,15 @@ class LexiconLoaderMixin:
 
         total = sum(count for _, count, _ in self._lexicon_stats)
         file_count = len([s for s in self._lexicon_stats if s[1] > 0])
-        print(f"\nLexicons loaded: {file_count} files, {total:,} terms")
-        print("-" * 70)
+        logger.info("Lexicons loaded: %d files, %d terms", file_count, total)
 
         for cat_name, items in categories:
             if not items:
                 continue
             cat_total = sum(count for _, count, _ in items)
-            print(f"  {cat_name} ({cat_total:,} terms)")
+            logger.info("  %s (%d terms)", cat_name, cat_total)
             for name, count, filename in items:
-                print(f"    * {name:<26} {count:>8,}  {filename}")
-        print()
+                logger.debug("    * %-26s %8d  %s", name, count, filename)
 
     def _load_abbrev_lexicon(self, path: Path, label: str = "Abbreviations") -> None:
         if not path.exists():
@@ -138,10 +139,10 @@ class LexiconLoaderMixin:
 
     def _load_disease_lexicon(self, path: Path) -> None:
         if not path.exists():
-            print(f"Disease lexicon not found: {path}")
+            logger.warning("Disease lexicon not found: %s", path)
             return
 
-        print(f"Loading disease lexicon: {path}")
+        logger.debug("Loading disease lexicon: %s", path)
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
 
@@ -169,14 +170,14 @@ class LexiconLoaderMixin:
             self.entity_ids[label] = lexicon_ids
             loaded += 1
 
-        print(f"Loaded {loaded} disease terms from {path.name}")
+        logger.debug("Loaded %d disease terms from %s", loaded, path.name)
 
     def _load_orphanet_lexicon(self, path: Path) -> None:
         if not path.exists():
-            print(f"Orphanet lexicon not found: {path}")
+            logger.warning("Orphanet lexicon not found: %s", path)
             return
 
-        print(f"Loading Orphanet lexicon: {path}")
+        logger.debug("Loading Orphanet lexicon: %s", path)
         data = json.loads(path.read_text(encoding="utf-8"))
         source = path.name
 
@@ -216,7 +217,7 @@ class LexiconLoaderMixin:
                 self.entity_ids[syn] = lexicon_ids  # Same IDs as canonical
                 loaded += 1
 
-        print(f"Loaded {loaded} Orphanet terms from {path.name}")
+        logger.debug("Loaded %d Orphanet terms from %s", loaded, path.name)
 
     def _load_rare_disease_acronyms(self, path: Path) -> None:
         if not path.exists():

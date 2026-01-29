@@ -11,10 +11,13 @@ Provides methods for:
 
 from __future__ import annotations
 
+import logging
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
 from A_core.A18_recommendation_models import (
+
+logger = logging.getLogger(__name__)
     DrugDosingInfo,
     EvidenceLevel,
     GuidelineRecommendation,
@@ -90,14 +93,14 @@ class LLMExtractionMixin:
                         if result:
                             self._apply_vlm_codes_to_recommendations(result)
                         return result
-                    print(f"[WARN] LLM returned invalid JSON: {je}")
+                    logger.warning("LLM returned invalid JSON: %s", je)
                     return None
 
             # No content in response
             return None
 
         except Exception as e:
-            print(f"[WARN] LLM recommendation extraction failed: {e}")
+            logger.warning("LLM recommendation extraction failed: %s", e)
             return None
 
     def _clean_json_response(self, text: str) -> str:

@@ -15,6 +15,7 @@ False positive filtering in C16a_gene_fp_filter.py.
 from __future__ import annotations
 
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -22,6 +23,8 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from flashtext import KeywordProcessor
 
 from A_core.A01_domain_models import Coordinate
+
+logger = logging.getLogger(__name__)
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A19_gene_models import (
     GeneCandidate,
@@ -146,7 +149,7 @@ class GeneDetector:
         """Load Orphadata gene lexicon (rare disease genes + HGNC aliases)."""
         path = self.lexicon_base_path / "2025_08_orphadata_genes.json"
         if not path.exists():
-            print(f"[WARN] Orphadata gene lexicon not found: {path}")
+            logger.warning("Orphadata gene lexicon not found: %s", path)
             return
 
         try:
@@ -213,7 +216,7 @@ class GeneDetector:
                     alias_count += 1
 
             if skipped > 0:
-                print(f"    [INFO] Skipped {skipped} blacklisted gene terms")
+                logger.debug("Skipped %d blacklisted gene terms", skipped)
 
             self._lexicon_stats.append(
                 ("Orphadata genes", primary_count, "2025_08_orphadata_genes.json")
@@ -223,7 +226,7 @@ class GeneDetector:
             )
 
         except Exception as e:
-            print(f"[WARN] Failed to load Orphadata gene lexicon: {e}")
+            logger.warning("Failed to load Orphadata gene lexicon: %s", e)
 
     def _init_scispacy(self) -> None:
         """Initialize scispacy NER model."""
@@ -249,7 +252,7 @@ class GeneDetector:
             self._lexicon_stats.append(("scispacy NER", 1, "en_core_sci_lg"))
 
         except Exception as e:
-            print(f"[WARN] Failed to initialize scispacy for genes: {e}")
+            logger.warning("Failed to initialize scispacy for genes: %s", e)
             self.nlp = None
 
     def _print_lexicon_summary(self) -> None:
@@ -258,15 +261,13 @@ class GeneDetector:
             return
 
         total = sum(count for _, count, _ in self._lexicon_stats if count > 1)
-        print(f"\nGene lexicons: {len(self._lexicon_stats)} sources, {total:,} entries")
-        print("─" * 70)
+        logger.info("Gene lexicons: %d sources, %d entries", len(self._lexicon_stats), total)
 
         for name, count, filename in self._lexicon_stats:
             if count > 1:
-                print(f"    • {name:<26} {count:>8,}  {filename}")
+                logger.debug("    • %-26s %8d  %s", name, count, filename)
             else:
-                print(f"    • {name:<26} {'enabled':>8}  {filename}")
-        print()
+                logger.debug("    • %-26s %8s  %s", name, "enabled", filename)
 
     def detect(self, doc_graph: DocumentGraph) -> List[GeneCandidate]:
         """
@@ -562,7 +563,7 @@ class GeneDetector:
                 candidates.append(candidate)
 
         except Exception as e:
-            print(f"[WARN] scispacy NER failed: {e}")
+            logger.warning("scispacy NER failed: %s", e)
 
         return candidates
 

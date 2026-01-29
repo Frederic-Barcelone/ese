@@ -18,10 +18,13 @@ Uses a combination of:
 
 from __future__ import annotations
 
+import logging
 import re
 from typing import Any, Dict, List, Optional, Set
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
+
+logger = logging.getLogger(__name__)
 from A_core.A07_feasibility_models import (
     CriterionType,
     EligibilityCriterion,
@@ -1342,14 +1345,13 @@ class FeasibilityDetector:
     def print_summary(self) -> None:
         """Print extraction summary."""
         if not self._extraction_stats:
-            print("\nFeasibility extraction: No items found")
+            logger.info("Feasibility extraction: No items found")
             return
 
         total = sum(self._extraction_stats.values())
-        print(f"\nFeasibility extraction: {total} items found")
-        print("-" * 50)
+        logger.info("Feasibility extraction: %d items found", total)
         for field_type, count in sorted(self._extraction_stats.items()):
-            print(f"  {field_type:<40} {count:>5}")
+            logger.info("  %-40s %5d", field_type, count)
 
 
 __all__ = ["FeasibilityDetector", "FeasibilityFalsePositiveFilter"]

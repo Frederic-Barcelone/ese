@@ -18,10 +18,13 @@ This module uses a mixin class for response parsing:
 
 from __future__ import annotations
 
+import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Dict, List, Optional
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
+
+logger = logging.getLogger(__name__)
 from A_core.A07_feasibility_models import (
     FeasibilityCandidate,
     FeasibilityGeneratorType,
@@ -136,7 +139,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
                     result = future.result()
                     candidates.extend(result)
                 except Exception as e:
-                    print(f"[WARN] LLM extraction failed for {extraction_type}: {e}")
+                    logger.warning("LLM extraction failed for %s: %s", extraction_type, e)
 
         return candidates
 
@@ -246,7 +249,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
 
             return response if isinstance(response, dict) else None
         except Exception as e:
-            print(f"[WARN] LLM feasibility extraction failed: {e}")
+            logger.warning("LLM feasibility extraction failed: %s", e)
             return None
 
     def _make_provenance(self, doc_fingerprint: str) -> FeasibilityProvenanceMetadata:
@@ -408,19 +411,17 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
     def print_summary(self) -> None:
         """Print extraction summary."""
         if not self._extraction_stats:
-            print("\nLLM Feasibility extraction: No items found")
+            logger.info("LLM Feasibility extraction: No items found")
             return
 
         total = sum(self._extraction_stats.values())
-        print(f"\nLLM Feasibility extraction: {total} items found")
-        print("-" * 50)
+        logger.info("LLM Feasibility extraction: %d items found", total)
         for field_type, count in sorted(self._extraction_stats.items()):
-            print(f"  {field_type:<40} {count:>5}")
+            logger.info("  %-40s %5d", field_type, count)
 
-        # Print verification stats
+        # Log verification stats
         if any(self._verification_stats.values()):
-            print("\nVerification statistics:")
-            print("-" * 50)
+            logger.info("Verification statistics:")
             quotes_verified = self._verification_stats.get("quotes_verified", 0)
             quotes_failed = self._verification_stats.get("quotes_failed", 0)
             numbers_verified = self._verification_stats.get("numbers_verified", 0)
@@ -431,11 +432,11 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
 
             if total_quotes > 0:
                 quote_rate = quotes_verified / total_quotes * 100
-                print(f"  Quotes verified: {quotes_verified}/{total_quotes} ({quote_rate:.1f}%)")
+                logger.info("  Quotes verified: %d/%d (%.1f%%)", quotes_verified, total_quotes, quote_rate)
             if total_numbers > 0:
                 number_rate = numbers_verified / total_numbers * 100
-                print(f"  Numbers verified: {numbers_verified}/{total_numbers} ({number_rate:.1f}%)")
+                logger.info("  Numbers verified: %d/%d (%.1f%%)", numbers_verified, total_numbers, number_rate)
 
             missing_fields = self._verification_stats.get("missing_fields", 0)
             if missing_fields > 0:
-                print(f"  Missing required fields: {missing_fields} (items skipped)")
+                logger.info("  Missing required fields: %d (items skipped)", missing_fields)

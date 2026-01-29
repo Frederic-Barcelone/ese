@@ -12,10 +12,13 @@ ClaudeClient is imported from D02a_claude_client.py.
 
 from __future__ import annotations
 
+import logging
 import time
 from typing import Any, Dict, Optional, Protocol, Tuple
 
 from pydantic import BaseModel, Field, ValidationError
+
+logger = logging.getLogger(__name__)
 
 from A_core.A01_domain_models import (
     Candidate,
@@ -548,19 +551,19 @@ class LLMEngine:
                 )
         except AnthropicRateLimitError as e:
             # Rate limited - fall back to individual validation with delay
-            print(f"  [WARN] Batch LLM rate limited, falling back: {e}")
+            logger.warning("Batch LLM rate limited, falling back: %s", e)
             return [self.verify_candidate(c) for c in batch]
         except (AnthropicConnectionError, AnthropicTimeoutError) as e:
             # Connection/timeout error - fall back to individual validation
-            print(f"  [WARN] Batch LLM connection/timeout error, falling back: {e}")
+            logger.warning("Batch LLM connection/timeout error, falling back: %s", e)
             return [self.verify_candidate(c) for c in batch]
         except (AnthropicStatusError, AnthropicAPIError) as e:
             # API error - fall back to individual validation
-            print(f"  [WARN] Batch LLM API error, falling back: {e}")
+            logger.warning("Batch LLM API error, falling back: %s", e)
             return [self.verify_candidate(c) for c in batch]
         except Exception as e:
             # Truly unexpected error - log at error level and fall back
-            print(f"  [ERROR] Batch LLM unexpected error ({type(e).__name__}): {e}")
+            logger.error("Batch LLM unexpected error (%s): %s", type(e).__name__, e)
             return [self.verify_candidate(c) for c in batch]
 
         # Parse batch response
@@ -588,7 +591,7 @@ class LLMEngine:
 
         # Handle None (parsing failed)
         if raw is None:
-            print("  [WARN] Batch parse failed (raw=None), falling back")
+            logger.warning("Batch parse failed (raw=None), falling back")
             return [self.verify_candidate(c) for c in batch]
 
         # Extract results list from response
@@ -602,8 +605,8 @@ class LLMEngine:
                 # Hard validation: check expected_count matches
                 resp_expected = raw.get("expected_count", len(response_list))
                 if resp_expected != expected_count:
-                    print(
-                        f"  [WARN] Batch count mismatch (expected {expected_count}, got {resp_expected})"
+                    logger.warning(
+                        "Batch count mismatch (expected %d, got %d)", expected_count, resp_expected
                     )
             else:
                 # Legacy fallback: try other common keys
@@ -617,12 +620,12 @@ class LLMEngine:
 
         # Hard validation: must have exactly expected_count results
         if len(response_list) != expected_count:
-            print(
-                f"  [WARN] Batch parse failed (got {len(response_list)}/{expected_count}), falling back"
+            logger.warning(
+                "Batch parse failed (got %d/%d), falling back", len(response_list), expected_count
             )
             raw_type = type(raw).__name__
             raw_keys = list(raw.keys())[:5] if isinstance(raw, dict) else None
-            print(f"    Raw type: {raw_type}, keys: {raw_keys}")
+            logger.debug("Raw type: %s, keys: %s", raw_type, raw_keys)
             return [self.verify_candidate(c) for c in batch]
 
         # Map responses to candidates by id
@@ -823,17 +826,17 @@ class LLMEngine:
                     top_p=1.0,
                 )
         except AnthropicRateLimitError as e:
-            print(f"  [WARN] Haiku rate limited, sending all to Sonnet: {e}")
+            logger.warning("Haiku rate limited, sending all to Sonnet: %s", e)
             return batch, []
         except (AnthropicConnectionError, AnthropicTimeoutError) as e:
-            print(f"  [WARN] Haiku connection/timeout error, sending all to Sonnet: {e}")
+            logger.warning("Haiku connection/timeout error, sending all to Sonnet: %s", e)
             return batch, []
         except (AnthropicStatusError, AnthropicAPIError) as e:
-            print(f"  [WARN] Haiku API error, sending all to Sonnet: {e}")
+            logger.warning("Haiku API error, sending all to Sonnet: %s", e)
             return batch, []
         except Exception as e:
             # Truly unexpected error - log at error level
-            print(f"  [ERROR] Haiku unexpected error ({type(e).__name__}): {e}")
+            logger.error("Haiku unexpected error (%s): %s", type(e).__name__, e)
             return batch, []
 
         # Parse response
