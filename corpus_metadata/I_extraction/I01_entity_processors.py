@@ -24,14 +24,14 @@ if TYPE_CHECKING:
     )
     from A_core.A05_disease_models import DiseaseCandidate, ExtractedDisease
     from A_core.A06_drug_models import DrugCandidate, ExtractedDrug
-    from A_core.A12_gene_models import GeneCandidate, ExtractedGene
+    from A_core.A19_gene_models import GeneCandidate, ExtractedGene
     from A_core.A09_pharma_models import ExtractedPharma
     from A_core.A10_author_models import ExtractedAuthor
     from A_core.A11_citation_models import ExtractedCitation
     from C_generators.C06_strategy_disease import DiseaseDetector
     from C_generators.C07_strategy_drug import DrugDetector
     from C_generators.C16_strategy_gene import GeneDetector
-    from C_generators.C12_strategy_pharma import PharmaCompanyDetector
+    from C_generators.C18_strategy_pharma import PharmaCompanyDetector
     from C_generators.C13_strategy_author import AuthorDetector
     from C_generators.C14_strategy_citation import CitationDetector
     from E_normalization.E03_disease_normalizer import DiseaseNormalizer
@@ -366,7 +366,7 @@ class EntityProcessor:
     ) -> "ExtractedGene":
         """Create ExtractedGene from a GeneCandidate."""
         from A_core.A01_domain_models import EvidenceSpan, ValidationStatus
-        from A_core.A12_gene_models import ExtractedGene
+        from A_core.A19_gene_models import ExtractedGene
 
         context = (candidate.context_text or "").strip()
         ctx_hash = hash_string(context) if context else "no_context"

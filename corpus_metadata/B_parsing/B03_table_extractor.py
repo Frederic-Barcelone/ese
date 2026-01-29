@@ -1,19 +1,17 @@
-# corpus_metadata/corpus_metadata/B_parsing/B03_table_extractor.py
+# corpus_metadata/B_parsing/B03_table_extractor.py
 """
 Table extraction from PDF -> JSON/Table model.
 
 Uses unstructured's table extraction (hi_res with infer_table_structure=True)
 to populate Table objects in the DocumentGraph.
 
-Also supports:
-- Rendering tables as images for vision LLM analysis
-- Multi-page table detection and stitching
+CHANGELOG v2.0:
+- Extracted validation logic to B03a_table_validation.py
+- Extracted rendering logic to B03b_table_rendering.py
 """
 
 from __future__ import annotations
 
-import base64
-import io
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -22,23 +20,30 @@ from unstructured.partition.pdf import partition_pdf
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Table, TableCell, TableType
 
-# Optional pymupdf for image rendering
+# Validation module (B03a)
+from B_parsing.B03a_table_validation import (
+    MIN_TABLE_CONFIDENCE,
+    MIN_TABLE_ROWS,
+    MIN_TABLE_COLS,
+    is_valid_table,
+    is_definition_table_candidate,
+)
+
+# Rendering module (B03b)
+from B_parsing.B03b_table_rendering import (
+    PYMUPDF_AVAILABLE,
+    PIL_AVAILABLE,
+    find_table_bbox_pymupdf,
+    render_table_as_image,
+    render_full_page,
+    render_multipage_table,
+)
+
+# Optional pymupdf for coordinate handling
 try:
     import fitz  # PyMuPDF
-
-    PYMUPDF_AVAILABLE = True
 except ImportError:
-    fitz = None
-    PYMUPDF_AVAILABLE = False
-
-# Optional PIL for image stitching
-try:
-    from PIL import Image
-
-    PIL_AVAILABLE = True
-except ImportError:
-    Image = None  # type: ignore[assignment]
-    PIL_AVAILABLE = False
+    fitz = None  # type: ignore[assignment]
 
 
 # Patterns to detect glossary/abbreviation tables
@@ -51,13 +56,6 @@ GLOSSARY_HEADER_PATTERNS = [
     r"description",
 ]
 GLOSSARY_HEADER_RE = re.compile("|".join(GLOSSARY_HEADER_PATTERNS), re.IGNORECASE)
-
-# Minimum confidence threshold for table detection (0.0-1.0)
-MIN_TABLE_CONFIDENCE = 0.5
-
-# Minimum requirements for a valid table
-MIN_TABLE_ROWS = 2  # At least header + 1 data row
-MIN_TABLE_COLS = 2  # At least 2 columns
 
 
 class TableExtractor:
@@ -115,7 +113,7 @@ class TableExtractor:
 
         # Validate table structure - reject false positives
         # Returns (is_valid, reason) where reason may indicate salvage info
-        is_valid, validation_info = self._is_valid_table(rows, html)
+        is_valid, validation_info = is_valid_table(rows, html)
         if not is_valid:
             print(f"[INFO] Skipping invalid table on page {page_num}: {validation_info}")
             return None
@@ -146,202 +144,6 @@ class TableExtractor:
             "html": html,
             "confidence": detection_confidence,
         }
-
-    def _is_valid_table(self, rows: List[List[str]], html: Optional[str]) -> Tuple[bool, Optional[str]]:
-        """
-        Validate that the detected element is actually a table, not misclassified text.
-
-        Returns (False, reason) for false positives like:
-        - Multi-column article text
-        - Single-column lists
-        - Elements with no proper table structure
-        - Tables that are mostly prose text
-
-        Returns (True, None) for valid tables.
-        Returns (True, "definition_table_salvaged ...") for tables salvaged as definition tables.
-        """
-        # Must have minimum rows
-        if len(rows) < MIN_TABLE_ROWS:
-            return False, f"too few rows ({len(rows)} < {MIN_TABLE_ROWS})"
-
-        # Must have minimum columns
-        if not rows or len(rows[0]) < MIN_TABLE_COLS:
-            col_count = len(rows[0]) if rows else 0
-            return False, f"too few columns ({col_count} < {MIN_TABLE_COLS})"
-
-        # Check that HTML actually contains table structure
-        if html:
-            # Must have actual table tags (not just text wrapped in table tags)
-            if "<tr" not in html.lower() or "<td" not in html.lower():
-                return False, "missing HTML table tags (<tr>/<td>)"
-
-            # Count actual table cells vs text length ratio
-            # A real table has structured short cells, not long paragraphs
-            from bs4 import BeautifulSoup
-            soup = BeautifulSoup(html, "html.parser")
-            cells = soup.find_all(["td", "th"])
-
-            if not cells:
-                return False, "no table cells found in HTML"
-
-            # Calculate average cell text length
-            cell_texts = [cell.get_text(strip=True) for cell in cells]
-            if cell_texts:
-                avg_cell_length = sum(len(t) for t in cell_texts) / len(cell_texts)
-
-                # Determine column count for adaptive thresholds
-                # 2-column tables (definition/glossary) get more lenient thresholds
-                num_cols = len(rows[0]) if rows else 0
-                is_two_col = num_cols == 2
-
-                # Adaptive thresholds based on table structure
-                # 2-column tables often have long definitions, so we allow longer cells
-                max_avg_cell_length = 200 if is_two_col else 150
-                max_long_cell_pct = 0.50 if is_two_col else 0.30
-                max_prose_pct = 0.25 if is_two_col else 0.15
-
-                # If average cell length is very long, likely not a table
-                # Real table cells are typically short (numbers, names, codes)
-                # But definition tables can have longer explanatory text
-                if avg_cell_length > max_avg_cell_length:
-                    # Before rejecting, check if it's a definition table
-                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
-                    if is_def_table:
-                        return True, salvage_reason
-                    return False, f"avg cell length too long ({avg_cell_length:.0f} > {max_avg_cell_length} chars) - likely prose"
-
-                # Check for paragraph-like content (multiple sentences in many cells)
-                long_text_cells = sum(1 for t in cell_texts if len(t) > 80)
-                long_pct = long_text_cells / len(cell_texts) * 100
-                if long_text_cells / len(cell_texts) > max_long_cell_pct:
-                    # Before rejecting, check if it's a definition table
-                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
-                    if is_def_table:
-                        return True, salvage_reason
-                    return False, f"too many long cells ({long_pct:.0f}% > 80 chars) - likely paragraph text"
-
-                # Check for sentence-like content (periods followed by capital letters)
-                # This indicates prose text, not tabular data
-                prose_indicators = 0
-                for text in cell_texts:
-                    # Count cells with multiple sentences (prose indicators)
-                    if '. ' in text and len(text) > 50:
-                        # Check if it's a sentence pattern (period followed by capital)
-                        if re.search(r'\. [A-Z]', text):
-                            prose_indicators += 1
-
-                # If too many cells look like prose, reject
-                prose_pct = prose_indicators / len(cell_texts) * 100 if cell_texts else 0
-                if len(cell_texts) > 0 and prose_indicators / len(cell_texts) > max_prose_pct:
-                    # Before rejecting, check if it's a definition table
-                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
-                    if is_def_table:
-                        return True, salvage_reason
-                    return False, f"too many prose cells ({prose_pct:.0f}% contain sentences) - likely article text"
-
-                # Check total text length - real tables shouldn't have huge amounts of text
-                # Relaxed for 2-column tables which may have lengthy definitions
-                total_text = sum(len(t) for t in cell_texts)
-                max_total_text = 5000 if is_two_col else 3000
-                min_cells_for_text = 10 if is_two_col else 15
-                if total_text > max_total_text and len(cell_texts) < min_cells_for_text:
-                    # Before rejecting, check if it's a definition table
-                    is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
-                    if is_def_table:
-                        return True, salvage_reason
-                    return False, f"too much text ({total_text} chars) in few cells ({len(cell_texts)}) - likely prose block"
-
-                # Check for multi-column layout (article text split into columns)
-                # If cells have very similar lengths and are long, it's likely prose
-                if len(cell_texts) >= 4:
-                    lengths = [len(t) for t in cell_texts if len(t) > 20]
-                    if lengths:
-                        avg_len = sum(lengths) / len(lengths)
-                        # If most cells are similar length and long (>60 chars), likely prose columns
-                        similar_long = sum(1 for length in lengths if abs(length - avg_len) < avg_len * 0.3 and length > 60)
-                        if similar_long > len(lengths) * 0.6:
-                            # SALVAGE CHECK: Before rejecting, check if it's a definition table
-                            # Definition tables have 2 columns: short acronyms + long definitions
-                            is_def_table, salvage_reason = self._is_definition_table_candidate(rows, html)
-                            if is_def_table:
-                                # Salvage this as a definition table
-                                return True, salvage_reason
-                            similar_pct = similar_long / len(lengths) * 100
-                            return False, f"multi-column prose layout detected ({similar_pct:.0f}% cells have similar long text)"
-
-        # Validate column consistency across rows
-        col_counts = [len(row) for row in rows]
-        if col_counts:
-            # Allow some variation (for merged cells) but not wild inconsistency
-            min_cols = min(col_counts)
-            max_cols = max(col_counts)
-            if max_cols > 0 and min_cols / max_cols < 0.5:  # >50% column count variation
-                return False, f"inconsistent column counts ({min_cols}-{max_cols} cols across rows)"
-
-        return True, None
-
-    def _is_definition_table_candidate(
-        self, rows: List[List[str]], html: str
-    ) -> Tuple[bool, Optional[str]]:
-        """
-        Check if a table is a definition/glossary table that should be salvaged.
-
-        Definition tables have the signature:
-        - 2 columns
-        - Column 1: Short text (acronyms/abbreviations) with median <= 10 chars
-        - Column 2: Long text (definitions) with median >= 40 chars
-        - High ratio of acronym-like patterns in column 1
-
-        This allows us to salvage tables that would otherwise be rejected as
-        "multi-column prose" because their definitions are long.
-
-        Args:
-            rows: List of rows, where each row is a list of cell strings
-            html: Raw HTML content of the table
-
-        Returns:
-            (is_definition_table, reason_string_or_none)
-        """
-        # Must have at least 2 rows (header + 1 data)
-        if len(rows) < 2:
-            return False, None
-
-        # Must be exactly 2 columns
-        if not all(len(row) == 2 for row in rows):
-            return False, None
-
-        # Extract column 1 and column 2 texts
-        col1_texts = [row[0].strip() for row in rows if len(row) >= 2 and row[0].strip()]
-        col2_texts = [row[1].strip() for row in rows if len(row) >= 2 and row[1].strip()]
-
-        if len(col1_texts) < 2 or len(col2_texts) < 2:
-            return False, None
-
-        # Calculate median lengths
-        col1_lengths = sorted([len(t) for t in col1_texts])
-        col2_lengths = sorted([len(t) for t in col2_texts])
-
-        col1_median = col1_lengths[len(col1_lengths) // 2]
-        col2_median = col2_lengths[len(col2_lengths) // 2]
-
-        # Check definition table signature: short col1, long col2
-        if col1_median > 15:  # Acronyms should be short
-            return False, None
-
-        if col2_median < 30:  # Definitions should be reasonably long
-            return False, None
-
-        # Check for acronym-like patterns in column 1
-        # Acronyms: uppercase letters, possibly with numbers/hyphens
-        acronym_pattern = re.compile(r'^[A-Z][A-Z0-9\-/]{0,15}$|^[A-Z][a-z]?[A-Z]')
-        acronym_matches = sum(1 for t in col1_texts if acronym_pattern.match(t))
-        acronym_ratio = acronym_matches / len(col1_texts)
-
-        if acronym_ratio < 0.4:  # At least 40% should look like acronyms
-            return False, None
-
-        # This is a definition table - salvage it
-        return True, f"definition_table_salvaged (col1_median={col1_median}, col2_median={col2_median}, acronym_ratio={acronym_ratio:.0%})"
 
     def _get_bbox(
         self, md, file_path: str = "", page_num: int = 1
@@ -626,415 +428,7 @@ class TableExtractor:
                 result["lf_col_idx"] = i
         return result
 
-    # =========================================================================
-    # IMAGE RENDERING METHODS
-    # =========================================================================
-
-    def _find_table_bbox_pymupdf(
-        self,
-        file_path: str,
-        page_num: int,
-        hint_bbox: Optional[Tuple[float, float, float, float]] = None,
-    ) -> Optional[Tuple[float, float, float, float]]:
-        """
-        Use PyMuPDF's table detection to find actual table boundaries.
-
-        Args:
-            file_path: Path to PDF
-            page_num: 1-indexed page number
-            hint_bbox: Optional hint bbox to find the nearest table
-
-        Returns:
-            Bbox tuple (x0, y0, x1, y1) or None if no table found
-        """
-        if not PYMUPDF_AVAILABLE or fitz is None:
-            return None
-
-        try:
-            doc = fitz.open(file_path)
-            if page_num < 1 or page_num > len(doc):
-                doc.close()
-                return None
-
-            page = doc[page_num - 1]
-            page_width = page.rect.width
-            page_height = page.rect.height
-
-            # Use PyMuPDF's table finder
-            tables = page.find_tables()
-
-            if not tables or len(tables.tables) == 0:
-                doc.close()
-                return None
-
-            # If we have a hint bbox, find the closest table
-            if hint_bbox:
-                # Check if hint_bbox is in a different coordinate space
-                hint_out_of_bounds = (
-                    hint_bbox[2] > page_width * 1.5 or
-                    hint_bbox[3] > page_height * 1.5
-                )
-
-                if hint_out_of_bounds:
-                    # Hint bbox is in different coordinate space - scale it
-                    scale_x = page_width / max(hint_bbox[2], page_width)
-                    scale_y = page_height / max(hint_bbox[3], page_height)
-                    scale = min(scale_x, scale_y)
-                    scaled_hint = (
-                        hint_bbox[0] * scale,
-                        hint_bbox[1] * scale,
-                        hint_bbox[2] * scale,
-                        hint_bbox[3] * scale,
-                    )
-                    hint_center_x = (scaled_hint[0] + scaled_hint[2]) / 2
-                    hint_center_y = (scaled_hint[1] + scaled_hint[3]) / 2
-                else:
-                    hint_center_x = (hint_bbox[0] + hint_bbox[2]) / 2
-                    hint_center_y = (hint_bbox[1] + hint_bbox[3]) / 2
-
-                best_table = None
-                best_distance = float('inf')
-
-                for table in tables.tables:
-                    table_bbox = table.bbox
-                    table_center_x = (table_bbox[0] + table_bbox[2]) / 2
-                    table_center_y = (table_bbox[1] + table_bbox[3]) / 2
-
-                    distance = ((hint_center_x - table_center_x) ** 2 +
-                               (hint_center_y - table_center_y) ** 2) ** 0.5
-
-                    if distance < best_distance:
-                        best_distance = distance
-                        best_table = table
-
-                if best_table:
-                    doc.close()
-                    return tuple(best_table.bbox)
-
-            # Otherwise return the largest table
-            largest_table = max(tables.tables, key=lambda t: (t.bbox[2] - t.bbox[0]) * (t.bbox[3] - t.bbox[1]))
-            doc.close()
-            return tuple(largest_table.bbox)
-
-        except Exception as e:
-            print(f"[WARN] PyMuPDF table detection failed: {e}")
-            return None
-
-    def render_table_as_image(
-        self,
-        file_path: str,
-        page_num: int,
-        bbox: Tuple[float, float, float, float],
-        dpi: int = 300,
-        padding: int = 15,
-        bottom_padding: int = 120,
-        use_pymupdf_detection: bool = True,
-    ) -> Optional[str]:
-        """
-        Render a table region as a base64-encoded PNG image.
-
-        Args:
-            file_path: Path to PDF
-            page_num: 1-indexed page number
-            bbox: (x0, y0, x1, y1) bounding box in PDF points
-            dpi: Resolution for rendering
-            padding: Extra points around the table sides/top (default 15pt, ~5mm)
-            bottom_padding: Extra points below table for footnotes/captions (default 70pt)
-            use_pymupdf_detection: Try to refine bbox using PyMuPDF table detection
-
-        Returns:
-            Base64-encoded PNG string, or None if rendering fails
-        """
-        if not PYMUPDF_AVAILABLE or fitz is None:
-            print("[WARN] PyMuPDF not available for table image rendering")
-            return None
-
-        try:
-            doc = fitz.open(file_path)
-            if page_num < 1 or page_num > len(doc):
-                doc.close()
-                return None
-
-            page = doc[page_num - 1]  # 0-indexed
-            page_width = page.rect.width
-            page_height = page.rect.height
-
-            # Get bbox coordinates
-            x0, y0, x1, y1 = bbox
-
-            # Validate bbox dimensions
-            if x1 <= x0 or y1 <= y0:
-                doc.close()
-                return self.render_full_page(file_path, page_num, dpi)
-
-            # If bbox seems too large or out of bounds, it might be in wrong coordinate space
-            if x1 > page_width * 1.1 or y1 > page_height * 1.1:
-                print(f"[WARN] Bbox {bbox} seems out of bounds for page size {page_width}x{page_height}")
-
-                # First, try PyMuPDF's native table detection for accurate bbox
-                doc.close()
-                pymupdf_bbox = self._find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
-                doc = fitz.open(file_path)
-                page = doc[page_num - 1]
-
-                if pymupdf_bbox:
-                    x0, y0, x1, y1 = pymupdf_bbox
-                    print(f"[INFO] Using PyMuPDF detected bbox: {pymupdf_bbox}")
-                else:
-                    # Fallback: scale coordinates from pixel space to PDF point space
-                    # Calculate the DPI ratio - Unstructured typically uses 200-300 DPI
-                    max_coord = max(x1, y1)
-                    max_page = max(page_width, page_height)
-                    dpi_ratio = max_page / max_coord  # Approximate scale factor
-
-                    x0_scaled = x0 * dpi_ratio
-                    y0_scaled = y0 * dpi_ratio
-                    x1_scaled = x1 * dpi_ratio
-                    y1_scaled = y1 * dpi_ratio
-
-                    # Calculate table dimensions after scaling
-                    table_width = x1_scaled - x0_scaled
-                    table_height = y1_scaled - y0_scaled
-
-                    # Be very generous with expansion - 30% of table size on each side
-                    # minimum 40 points, capped at 100 points
-                    expand_x = max(40, min(100, table_width * 0.3))
-                    expand_y = max(40, min(100, table_height * 0.3))
-
-                    x0 = max(0, x0_scaled - expand_x)
-                    y0 = max(0, y0_scaled - expand_y)
-                    x1 = min(page_width, x1_scaled + expand_x)
-                    y1 = min(page_height, y1_scaled + expand_y)
-                    print(f"[INFO] Scaled bbox with generous margins: {(x0, y0, x1, y1)}")
-
-                    # Sanity check: if scaled table is suspiciously small, render full page
-                    if (x1 - x0) < 100 or (y1 - y0) < 50:
-                        print("[WARN] Scaled bbox too small, rendering full page")
-                        doc.close()
-                        return self.render_full_page(file_path, page_num, dpi)
-
-            # Optionally try to refine bbox using PyMuPDF's table detection
-            # Only do this if the original bbox seems unreliable (e.g., was auto-corrected)
-            # This is disabled by default as PyMuPDF may find different/smaller tables
-            if use_pymupdf_detection and False:  # Disabled - often finds fragments
-                doc.close()  # Close before calling detection
-                refined_bbox = self._find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
-                if refined_bbox:
-                    # Check if refined bbox is reasonable
-                    orig_area = (x1 - x0) * (y1 - y0)
-                    new_area = (refined_bbox[2] - refined_bbox[0]) * (refined_bbox[3] - refined_bbox[1])
-
-                    # Use refined bbox if it has reasonable dimensions (min 50pt in each direction)
-                    # and is not tiny compared to page
-                    new_width = refined_bbox[2] - refined_bbox[0]
-                    new_height = refined_bbox[3] - refined_bbox[1]
-
-                    if new_width > 50 and new_height > 30:
-                        # Prefer PyMuPDF's detection - it's usually more accurate
-                        # Only reject if the new area is extremely small (<5% of original)
-                        if new_area > orig_area * 0.05 or new_area > 5000:
-                            print(f"[INFO] Refined bbox from {(x0, y0, x1, y1)} to {refined_bbox}")
-                            x0, y0, x1, y1 = refined_bbox
-                        else:
-                            print(f"[INFO] Skipping refined bbox {refined_bbox} - too small")
-
-                # Reopen doc
-                doc = fitz.open(file_path)
-                page = doc[page_num - 1]
-
-            # Create clip rectangle with padding
-            # Use extra bottom padding to capture footnotes and table captions
-            clip_rect = fitz.Rect(
-                max(0, x0 - padding),
-                max(0, y0 - padding),
-                min(page_width, x1 + padding),
-                min(page_height, y1 + bottom_padding),
-            )
-
-            # Check if clip rect has valid dimensions after clamping
-            if clip_rect.width <= 0 or clip_rect.height <= 0:
-                doc.close()
-                return self.render_full_page(file_path, page_num, dpi)
-
-            # Render to pixmap
-            mat = fitz.Matrix(dpi / 72, dpi / 72)
-            pix = page.get_pixmap(matrix=mat, clip=clip_rect)
-
-            # Convert to base64
-            img_bytes = pix.tobytes("png")
-            img_base64 = base64.b64encode(img_bytes).decode("utf-8")
-
-            doc.close()
-            return img_base64
-
-        except Exception as e:
-            print(f"[WARN] Failed to render table image: {e}")
-            return None
-
-    def render_full_page(
-        self,
-        file_path: str,
-        page_num: int,
-        dpi: int = 300,
-    ) -> Optional[str]:
-        """
-        Render full page as image (fallback when bbox is unavailable).
-
-        Args:
-            file_path: Path to PDF
-            page_num: 1-indexed page number
-            dpi: Resolution for rendering
-
-        Returns:
-            Base64-encoded PNG string, or None if rendering fails
-        """
-        if not PYMUPDF_AVAILABLE or fitz is None:
-            print("[WARN] PyMuPDF not available for page image rendering")
-            return None
-
-        try:
-            doc = fitz.open(file_path)
-            if page_num < 1 or page_num > len(doc):
-                doc.close()
-                return None
-
-            page = doc[page_num - 1]  # 0-indexed
-
-            # Render full page to pixmap
-            mat = fitz.Matrix(dpi / 72, dpi / 72)
-            pix = page.get_pixmap(matrix=mat)
-
-            # Convert to base64
-            img_bytes = pix.tobytes("png")
-            img_base64 = base64.b64encode(img_bytes).decode("utf-8")
-
-            doc.close()
-            return img_base64
-
-        except Exception as e:
-            print(f"[WARN] Failed to render full page image: {e}")
-            return None
-
-    def render_multipage_table(
-        self,
-        file_path: str,
-        table_parts: List[Dict[str, Any]],
-        dpi: int = 300,
-        padding: int = 5,
-    ) -> Optional[str]:
-        """
-        Render a multi-page table by stitching images vertically.
-
-        Args:
-            file_path: Path to PDF
-            table_parts: List of dicts with 'page_num' and 'bbox' for each part
-            dpi: Resolution for rendering
-            padding: Extra pixels around each part
-
-        Returns:
-            Base64-encoded PNG string of stitched image, or None if fails
-        """
-        if not PYMUPDF_AVAILABLE or fitz is None:
-            print("[WARN] PyMuPDF not available for table image rendering")
-            return None
-
-        if not PIL_AVAILABLE or Image is None:
-            print("[WARN] PIL not available for image stitching")
-            return None
-
-        try:
-            images = []
-            doc = fitz.open(file_path)
-
-            for part in table_parts:
-                page_num = part["page_num"]
-                bbox = part["bbox"]
-                full_page = part.get("full_page", False)
-
-                if page_num < 1 or page_num > len(doc):
-                    continue
-
-                page = doc[page_num - 1]
-                mat = fitz.Matrix(dpi / 72, dpi / 72)
-
-                x0, y0, x1, y1 = bbox
-                page_width = page.rect.width
-                page_height = page.rect.height
-
-                invalid_bbox = (
-                    full_page
-                    or bbox == (0.0, 0.0, 0.0, 0.0)
-                    or x1 <= x0
-                    or y1 <= y0
-                )
-
-                if invalid_bbox:
-                    # Render full page when bbox is unavailable or invalid
-                    pix = page.get_pixmap(matrix=mat)
-                else:
-                    # Auto-correct coordinates if they seem out of bounds
-                    if x1 > page_width * 1.1 or y1 > page_height * 1.1:
-                        # Try PyMuPDF's native table detection
-                        pymupdf_bbox = self._find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
-                        if pymupdf_bbox:
-                            x0, y0, x1, y1 = pymupdf_bbox
-                        else:
-                            # Fallback: scale coordinates
-                            scale_x = page_width / max(x1, page_width)
-                            scale_y = page_height / max(y1, page_height)
-                            scale = min(scale_x, scale_y)
-                            x0, y0, x1, y1 = x0 * scale, y0 * scale, x1 * scale, y1 * scale
-                            # Expand to capture full table
-                            expand = 20
-                            x0 = max(0, x0 - expand)
-                            y0 = max(0, y0 - expand)
-                            x1 = min(page_width, x1 + expand)
-                            y1 = min(page_height, y1 + expand)
-
-                    # Render specific table region
-                    clip_rect = fitz.Rect(
-                        max(0, x0 - padding),
-                        max(0, y0 - padding),
-                        min(page_width, x1 + padding),
-                        min(page_height, y1 + padding),
-                    )
-                    # Check if clip rect has valid dimensions
-                    if clip_rect.width <= 0 or clip_rect.height <= 0:
-                        pix = page.get_pixmap(matrix=mat)
-                    else:
-                        pix = page.get_pixmap(matrix=mat, clip=clip_rect)
-
-                # Convert to PIL Image
-                img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-                images.append(img)
-
-            doc.close()
-
-            if not images:
-                return None
-
-            # Stitch images vertically
-            total_width = max(img.width for img in images)
-            total_height = sum(img.height for img in images)
-
-            stitched = Image.new("RGB", (total_width, total_height), (255, 255, 255))
-            y_offset = 0
-            for img in images:
-                # Center horizontally if widths differ
-                x_offset = (total_width - img.width) // 2
-                stitched.paste(img, (x_offset, y_offset))
-                y_offset += img.height
-
-            # Convert to base64
-            buffer = io.BytesIO()
-            stitched.save(buffer, format="PNG")
-            img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
-
-            return img_base64
-
-        except Exception as e:
-            print(f"[WARN] Failed to render multi-page table: {e}")
-            return None
+    # NOTE: Image rendering methods extracted to B03b_table_rendering.py
 
     def detect_multipage_tables(
         self, tables_data: List[Dict[str, Any]]
@@ -1198,7 +592,7 @@ class TableExtractor:
                 if render_images:
                     if table["bbox"] != (0.0, 0.0, 0.0, 0.0):
                         # Render specific table region
-                        table["image_base64"] = self.render_table_as_image(
+                        table["image_base64"] = render_table_as_image(
                             file_path,
                             table["page_num"],
                             table["bbox"],
@@ -1206,7 +600,7 @@ class TableExtractor:
                         )
                     else:
                         # Fallback: render full page when bbox is unavailable
-                        table["image_base64"] = self.render_full_page(
+                        table["image_base64"] = render_full_page(
                             file_path,
                             table["page_num"],
                             dpi=dpi,
@@ -1271,7 +665,7 @@ class TableExtractor:
                         }
                         for t in group
                     ]
-                    merged["image_base64"] = self.render_multipage_table(
+                    merged["image_base64"] = render_multipage_table(
                         file_path, parts, dpi=dpi
                     )
                 else:

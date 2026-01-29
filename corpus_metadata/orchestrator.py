@@ -140,7 +140,7 @@ from A_core.A04_heuristics_config import (
 from A_core.A16_pipeline_metrics import PipelineMetrics
 from A_core.A05_disease_models import ExtractedDisease
 from A_core.A06_drug_models import ExtractedDrug
-from A_core.A12_gene_models import ExtractedGene
+from A_core.A19_gene_models import ExtractedGene
 from A_core.A09_pharma_models import ExtractedPharma
 from A_core.A10_author_models import ExtractedAuthor
 from A_core.A11_citation_models import ExtractedCitation
@@ -157,7 +157,7 @@ from I_extraction.I02_feasibility_processor import FeasibilityProcessor
 from J_export.J01_export_handlers import ExportManager
 
 # Clinical intelligence extractors
-from C_generators.C11_flowchart_graph_extractor import FlowchartGraphExtractor
+from C_generators.C17_flowchart_graph_extractor import FlowchartGraphExtractor
 from C_generators.C12_guideline_recommendation_extractor import GuidelineRecommendationExtractor
 
 PIPELINE_VERSION = "0.8"

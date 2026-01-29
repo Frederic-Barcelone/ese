@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C11_flowchart_graph_extractor.py
+# corpus_metadata/C_generators/C17_flowchart_graph_extractor.py
 """
 Flowchart Graph Extractor - Extract treatment algorithm decision logic.
 

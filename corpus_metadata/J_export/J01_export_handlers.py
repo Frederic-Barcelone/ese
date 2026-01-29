@@ -29,7 +29,7 @@ if TYPE_CHECKING:
     from A_core.A04_heuristics_config import HeuristicsCounters
     from A_core.A05_disease_models import ExtractedDisease, DiseaseExportEntry
     from A_core.A06_drug_models import ExtractedDrug, DrugExportEntry
-    from A_core.A12_gene_models import ExtractedGene, GeneExportEntry
+    from A_core.A19_gene_models import ExtractedGene, GeneExportEntry
     from A_core.A09_pharma_models import ExtractedPharma, PharmaExportEntry
     from A_core.A10_author_models import ExtractedAuthor, AuthorExportEntry
     from A_core.A11_citation_models import ExtractedCitation, CitationExportEntry
@@ -423,7 +423,7 @@ class ExportManager:
     ) -> None:
         """Export gene detection results to separate JSON file."""
         from A_core.A01_domain_models import ValidationStatus
-        from A_core.A12_gene_models import GeneExportDocument, GeneExportEntry
+        from A_core.A19_gene_models import GeneExportDocument, GeneExportEntry
 
         out_dir = self.get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

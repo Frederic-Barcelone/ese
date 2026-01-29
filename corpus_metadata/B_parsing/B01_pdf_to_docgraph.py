@@ -1,6 +1,12 @@
-# corpus_metadata/corpus_metadata/B_parsing/B01_pdf_to_docgraph.py
+# corpus_metadata/B_parsing/B01_pdf_to_docgraph.py
 """
-PDF to DocumentGraph Parser with SOTA Column Ordering
+PDF to DocumentGraph Parser with SOTA Column Ordering.
+
+CHANGELOG v2.1:
+    - Extracted text helpers to B01a_text_helpers.py
+    - Extracted native figure extraction to B01b_native_figure_extraction.py
+    - Extracted legacy ordering to B01c_legacy_ordering.py
+    - Extracted repetition inference to B01d_repetition_inference.py
 
 CHANGELOG v2.0:
     - Integrated B04_column_ordering for SOTA multi-column layout detection
@@ -25,6 +31,43 @@ from A_core.A02_interfaces import BaseParser
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole, ImageBlock, ImageType
 
+# Text helpers (B01a)
+from B_parsing.B01a_text_helpers import (
+    normalize_repeated_text,
+    NUMBERED_REFERENCE_RE,
+    PERCENTAGE_PATTERN,
+    is_garbled_flowchart,
+    extract_figure_reference,
+    SECTION_NUM_RE,
+    SECTION_PLAIN_RE,
+    META_PREFIX_RE,
+    AFFIL_TOKENS_RE,
+    EMAIL_RE,
+    PIPEY_RE,
+    clean_text,
+    bbox_overlaps,
+    table_to_markdown,
+)
+
+# Native figure extraction (B01b)
+from B_parsing.B01b_native_figure_extraction import (
+    apply_native_figure_extraction,
+    classify_image_type,
+)
+
+# Legacy ordering (B01c)
+from B_parsing.B01c_legacy_ordering import (
+    order_blocks_deterministically,
+)
+
+# Repetition inference (B01d)
+from B_parsing.B01d_repetition_inference import (
+    infer_repeated_headers_footers,
+    looks_like_known_footer,
+    is_short_repeated_noise,
+    is_running_header,
+)
+
 # SOTA Column Ordering (B04)
 from B_parsing.B04_column_ordering import (
     order_page_blocks,
@@ -32,201 +75,6 @@ from B_parsing.B04_column_ordering import (
     create_config as create_layout_config,
     get_layout_info,
 )
-
-# PDF Native Figure Extraction (B09-B11)
-from B_parsing.B09_pdf_native_figures import (
-    extract_embedded_figures_from_doc,
-    detect_vector_figures,
-    filter_noise_images,
-    render_figure_by_xref,
-    render_vector_figure,
-    EmbeddedFigure,
-    VectorFigure,
-)
-from B_parsing.B10_caption_detector import (
-    detect_captions_all_pages,
-    Caption,
-)
-from B_parsing.B11_extraction_resolver import (
-    resolve_all,
-    filter_duplicate_figures,
-    ResolvedFigure,
-    ResolvedTable,
-    get_resolution_stats,
-)
-
-
-# -----------------------------
-# Text normalization helpers
-# -----------------------------
-
-
-def normalize_repeated_text(text: str) -> str:
-    """
-    Normaliza texto para detectar headers/footers repetidos:
-    - lowercase
-    - colapsa espacios
-    - sustituye dígitos por '#'
-    """
-    t = " ".join((text or "").split()).lower()
-    t = re.sub(r"\d+", "#", t)
-    return t.strip()
-
-
-# --- glue hyphens in abbreviation patterns only (MG- ADL -> MG-ADL) ---
-ABBREV_HYPHEN_RE = re.compile(
-    r"(?P<a>[A-Za-z0-9][A-Za-z0-9+\./]{0,12})\s*-\s*(?P<b>[A-Za-z0-9][A-Za-z0-9+\./]{0,12})"
-)
-
-
-def _looks_like_abbrev_token(tok: str) -> bool:
-    if not tok:
-        return False
-    has_upper = any(c.isupper() for c in tok)
-    has_digit = any(c.isdigit() for c in tok)
-    has_plus = "+" in tok
-    shortish = len(tok) <= 12
-    return shortish and (has_upper or has_digit or has_plus)
-
-
-def normalize_abbrev_hyphens(text: str) -> str:
-    """
-    Convierte 'MG- ADL' -> 'MG-ADL' si ambos lados parecen abreviaturas.
-    Evita tocar palabras normales tipo 'long-term' (minúsculas).
-    """
-
-    def repl(m: re.Match) -> str:
-        a = m.group("a")
-        b = m.group("b")
-        if _looks_like_abbrev_token(a) and _looks_like_abbrev_token(b):
-            return f"{a}-{b}"
-        return m.group(0)
-
-    return ABBREV_HYPHEN_RE.sub(repl, text)
-
-
-# -----------------------------
-# Noise patterns (truly generic footer indicators)
-# -----------------------------
-# NOTE: Publisher-specific patterns removed to avoid corpus overfitting.
-# Use repetition-based detection (_infer_repeated_headers_footers) as primary.
-# These patterns are truly generic properties of academic PDFs.
-GENERIC_FOOTER_PATTERNS = [
-    r"\bdownloaded from\b",              # Generic access notice
-    r"\bterms and conditions\b",         # Legal boilerplate
-    r"\bcreative commons\b",             # License text
-    r"\bdoi:\s*10\.\d{4,9}/",            # DOI always noise in footer
-    r"\bopen access\b",                  # OA notice
-    r"\bcopyright\s*©?\s*\d{4}\b",       # Copyright notices
-    r"\ball rights reserved\b",          # Copyright boilerplate
-    r"\breceived:?\s*\d{1,2}\s+\w+\s+\d{4}\b",  # Received date
-    r"\baccepted:?\s*\d{1,2}\s+\w+\s+\d{4}\b",  # Accepted date
-    r"\bpublished:?\s*\d{1,2}\s+\w+\s+\d{4}\b", # Published date
-]
-KNOWN_FOOTER_RE = re.compile("|".join(GENERIC_FOOTER_PATTERNS), flags=re.IGNORECASE)
-
-# Running header patterns (author names like "Liao et al", "Smith et al.")
-RUNNING_HEADER_RE = re.compile(r"^[A-Z][a-z]+\s+et\s+al\.?$", flags=re.IGNORECASE)
-
-# Numbered reference pattern (e.g., "7. Author A, ..." or "7. DCVAS Study Group, ...")
-NUMBERED_REFERENCE_RE = re.compile(
-    r"^\d{1,3}\.\s+[A-Z]",  # Starts with number, period, then capital letter
-    flags=re.MULTILINE,
-)
-
-# OCR garbage patterns to remove
-OCR_GARBAGE_PATTERNS = [
-    r"\b\d+\s*[bBpP»«]+\s*$",  # "18194 bP»" -> page number garbage
-    r'[""]\s*[*>]\s*$',  # ""*", ">" at end
-    r"\bfo\)\s*$",  # "fo)" misread lock icon
-    r"^\s*[+*~>]{2,}\s*$",  # lines of just symbols
-    r"\s+[»«]+\s*$",  # trailing » or «
-    # Additional garbage patterns
-    r"^\s*[◆●○■□▪▫►◄▸◂]+\s*$",  # bullet-only lines
-    r"\b[Il1|]{4,}\b",  # misread vertical bars (||| often OCR'd as Ill1)
-    r"^\s*[-_=]{5,}\s*$",  # horizontal rules
-    r"^\s*\.{5,}\s*$",  # dotted lines (table of contents)
-    r"\b\d{1,2}\s*[oO0]\s*[fF]\s*\d{1,3}\b",  # "1 of 10" page numbers
-    r"^\s*[#*]{3,}\s*$",  # decorative symbol lines
-    r"\[\s*[A-Z]?\s*\]",  # empty checkbox placeholders like "[ ]" or "[X]"
-    r"^\s*\d+\s*$",  # lone page numbers
-]
-OCR_GARBAGE_RE = re.compile("|".join(OCR_GARBAGE_PATTERNS))
-
-# Pattern to detect percentage values in text (for chart classification)
-PERCENTAGE_PATTERN = re.compile(r'\d+%|\d+\s*%')
-
-# Pattern to detect garbled flowchart/diagram content
-# Matches text with numbered steps separated by symbols like + * | ~
-FLOWCHART_PATTERN = re.compile(
-    r"^\d+[a-z]?\.\s+.{10,}\s+[+*|~>-]\s+.{10,}\s+[+*|~>-]\s+", re.IGNORECASE
-)
-
-
-def _is_garbled_flowchart(text: str) -> bool:
-    """
-    Detect if text block is a garbled flowchart/diagram.
-    These typically have numbered steps with symbols like + * | ~ separating them.
-    """
-    if not text or len(text) < 100:
-        return False
-
-    # Count flowchart-like symbols (including various dash types)
-    symbol_count = sum(1 for c in text if c in "+*|~>-")
-    word_count = len(text.split())
-
-    # Check for numbered step pattern with symbols (e.g., "1. ... + ... | 2. ...")
-    has_numbered_steps = bool(
-        re.search(r"\d+[a-z]?\.\s+[^|+*]+[+*|]\s+.*\d+[a-z]?\.\s+", text)
-    )
-
-    # High symbol-to-word ratio suggests garbled diagram
-    if word_count > 0:
-        ratio = symbol_count / word_count
-        # Lower threshold if we detect numbered step pattern
-        if has_numbered_steps and ratio > 0.08:
-            return True
-        if ratio > 0.12:
-            if FLOWCHART_PATTERN.search(text):
-                return True
-            if has_numbered_steps:
-                return True
-
-    return False
-
-
-def _extract_figure_reference(text: str) -> Optional[str]:
-    """Extract figure number from garbled flowchart text."""
-    # Look for patterns like "Figure 5" or "Fig. 5"
-    match = re.search(r"(?:Figure|Fig\.?)\s*(\d+)", text, re.IGNORECASE)
-    if match:
-        return f"Figure {match.group(1)}"
-    return None
-
-
-def _bbox_overlaps(
-    bbox1: BoundingBox, bbox2: BoundingBox, threshold: float = 0.5
-) -> bool:
-    """Check if two bounding boxes overlap significantly."""
-    x1_0, y1_0, x1_1, y1_1 = bbox1.coords
-    x2_0, y2_0, x2_1, y2_1 = bbox2.coords
-
-    # Calculate intersection
-    ix0 = max(x1_0, x2_0)
-    iy0 = max(y1_0, y2_0)
-    ix1 = min(x1_1, x2_1)
-    iy1 = min(y1_1, y2_1)
-
-    if ix1 <= ix0 or iy1 <= iy0:
-        return False
-
-    intersection = (ix1 - ix0) * (iy1 - iy0)
-    area1 = (x1_1 - x1_0) * (y1_1 - y1_0)
-
-    if area1 <= 0:
-        return False
-
-    return (intersection / area1) >= threshold
 
 
 def document_to_markdown(
@@ -258,7 +106,7 @@ def document_to_markdown(
             # Skip blocks that overlap with any table region
             if tables:
                 overlaps_table = any(
-                    _bbox_overlaps(b.bbox, t.bbox, threshold=0.3) for t in tables
+                    bbox_overlaps(b.bbox, t.bbox, threshold=0.3) for t in tables
                 )
                 if overlaps_table:
                     continue
@@ -279,8 +127,8 @@ def document_to_markdown(
                 text = item.text
 
                 # Detect and replace garbled flowcharts/diagrams
-                if _is_garbled_flowchart(text):
-                    fig_ref = _extract_figure_reference(text)
+                if is_garbled_flowchart(text):
+                    fig_ref = extract_figure_reference(text)
                     if fig_ref:
                         lines.append(
                             f"[{fig_ref}: Flowchart/Diagram - see PDF for visual]"
@@ -296,94 +144,11 @@ def document_to_markdown(
             elif item_type == "table":
                 # Render as markdown table
                 lines.append("")
-                lines.append(_table_to_markdown(item))
+                lines.append(table_to_markdown(item))
 
         lines.append("")
 
     return "\n".join(lines).strip() + "\n"
-
-
-def _table_to_markdown(table) -> str:
-    """Convert Table object to markdown table format."""
-    if not table.logical_rows:
-        return f"[Table: {table.caption or 'Empty'}]"
-
-    # Get headers
-    headers_map = table.metadata.get("headers", {})
-    if headers_map:
-        headers = [headers_map.get(i, f"Col{i}") for i in sorted(headers_map.keys())]
-    elif table.logical_rows:
-        headers = list(table.logical_rows[0].keys())
-    else:
-        return f"[Table: {table.caption or 'No data'}]"
-
-    out = []
-    if table.caption:
-        out.append(f"**{table.caption}**")
-        out.append("")
-
-    # Header row
-    out.append("| " + " | ".join(headers) + " |")
-    out.append("| " + " | ".join(["---"] * len(headers)) + " |")
-
-    # Data rows
-    for row in table.logical_rows:
-        cells = [str(row.get(h, "")).replace("|", "\\|") for h in headers]
-        out.append("| " + " | ".join(cells) + " |")
-
-    return "\n".join(out)
-
-
-# -----------------------------
-# Header detection helpers
-# -----------------------------
-
-SECTION_NUM_RE = re.compile(r"^\s*\d+(\.\d+)*\s*[|\.]?\s*\S+")
-
-# Expanded section patterns including clinical/medical sections
-SECTION_PATTERNS = [
-    # Standard academic sections
-    "abstract", "introduction", "methods", "materials and methods",
-    "results", "discussion", "conclusion", "conclusions", "references",
-    "background", "summary", "acknowledgements", "acknowledgments",
-    # Clinical trial sections
-    "study design", "study population", "patient characteristics",
-    "baseline characteristics", "demographics", "eligibility",
-    "inclusion criteria", "exclusion criteria", "eligibility criteria",
-    "primary outcomes", "secondary outcomes", "primary endpoint",
-    "secondary endpoints", "endpoints", "assessments",
-    "efficacy", "efficacy results", "efficacy analysis",
-    "safety", "safety analysis", "safety results", "adverse events",
-    "tolerability", "pharmacokinetics", "pharmacodynamics",
-    "statistical analysis", "statistical methods", "sample size",
-    # Regulatory sections
-    "indications", "contraindications", "warnings", "precautions",
-    "dosage", "dosage and administration", "overdosage",
-    "clinical pharmacology", "nonclinical toxicology",
-    # Review/meta-analysis sections
-    "search strategy", "data extraction", "quality assessment",
-    "risk of bias", "sensitivity analysis", "subgroup analysis",
-]
-SECTION_PLAIN_RE = re.compile(
-    r"^(" + "|".join(re.escape(p) for p in SECTION_PATTERNS) + r")$",
-    flags=re.IGNORECASE,
-)
-
-META_PREFIX_RE = re.compile(
-    r"^(correspondence|received|revised|accepted|funding|keywords)\s*:",
-    flags=re.IGNORECASE,
-)
-
-# very common affiliation tokens in biomedical PDFs
-AFFIL_TOKENS_RE = re.compile(
-    r"\b(university|hospital|college|centre|center|institute|department|school|foundation|clinic|irccs|charité)\b",
-    flags=re.IGNORECASE,
-)
-
-EMAIL_RE = re.compile(r"\b\S+@\S+\b")
-
-# many author blocks have pipes separating names
-PIPEY_RE = re.compile(r"\s\|\s")
 
 
 class PDFToDocGraphParser(BaseParser):
@@ -656,11 +421,14 @@ class PDFToDocGraphParser(BaseParser):
                     norm_zone_votes[norm][zone] += 1
                 norm_sample_text.setdefault(norm, text)
 
-        repeated_headers, repeated_footers = self._infer_repeated_headers_footers(
+        repeated_headers, repeated_footers = infer_repeated_headers_footers(
             norm_count=norm_count,
             norm_pages=norm_pages,
             norm_zone_votes=norm_zone_votes,
             norm_sample_text=norm_sample_text,
+            min_repeat_count=self.min_repeat_count,
+            min_repeat_pages=self.min_repeat_pages,
+            repeat_zone_majority=self.repeat_zone_majority,
         )
 
         # Pass 2: build DocumentGraph
@@ -686,8 +454,11 @@ class PDFToDocGraphParser(BaseParser):
                 )
             else:
                 # Fallback to legacy ordering
-                ordered = self._order_blocks_deterministically(
-                    raw_pages[page_num], page_w=page_w
+                ordered = order_blocks_deterministically(
+                    raw_pages[page_num],
+                    page_w=page_w,
+                    two_col_min_side_blocks=self.two_col_min_side_blocks,
+                    y_tolerance=self.y_tolerance,
                 )
 
             blocks: List[TextBlock] = []
@@ -703,10 +474,10 @@ class PDFToDocGraphParser(BaseParser):
                 is_reference = bool(NUMBERED_REFERENCE_RE.match(txt))
 
                 # Hard override: known footer noise (but not references)
-                if self._looks_like_known_footer(txt) and not is_reference:
+                if looks_like_known_footer(txt) and not is_reference:
                     role = ContentRole.PAGE_FOOTER
                 # Running header pattern: "Author et al" or "Author et al."
-                elif self._is_running_header(txt, rb.get("zone")):
+                elif is_running_header(txt, rb.get("zone")):
                     role = ContentRole.PAGE_HEADER
                 elif rb.get("zone") == "HEADER" and norm in repeated_headers:
                     role = ContentRole.PAGE_HEADER
@@ -719,7 +490,7 @@ class PDFToDocGraphParser(BaseParser):
                 # fallback repetition even if zone couldn't be trusted
                 elif (
                     norm in repeated_footers
-                    and self._is_short_repeated_noise(txt)
+                    and is_short_repeated_noise(txt)
                     and not is_reference
                 ):
                     role = ContentRole.PAGE_FOOTER
@@ -811,205 +582,18 @@ class PDFToDocGraphParser(BaseParser):
             graph.pages[page_num] = page_obj
 
         # =============================================
-        # PDF Native Figure Extraction (B09-B11) - NEW
+        # PDF Native Figure Extraction (B09-B11)
         # =============================================
         if self.use_native_figure_extraction:
-            graph = self._apply_native_figure_extraction(
-                graph, file_path, raw_images
+            graph, self._resolution_stats = apply_native_figure_extraction(
+                graph,
+                file_path,
+                raw_images,
+                min_figure_area_ratio=self.min_figure_area_ratio,
+                filter_noise=self.filter_noise_figures,
             )
 
         return graph
-
-    def _apply_native_figure_extraction(
-        self,
-        graph: DocumentGraph,
-        file_path: str,
-        layout_model_images: Dict[int, List[Dict[str, Any]]],
-    ) -> DocumentGraph:
-        """
-        Apply PDF-native figure extraction using B09-B11 modules.
-
-        This extracts raster images and vector plots directly from PDF,
-        links them to captions, and produces more accurate bounding boxes.
-
-        Args:
-            graph: DocumentGraph with existing images (from Unstructured)
-            file_path: Path to PDF file
-            layout_model_images: Images from Unstructured (as fallback signal)
-
-        Returns:
-            Updated DocumentGraph with resolved figures
-        """
-        import base64
-
-        doc = fitz.open(file_path)
-
-        try:
-            # Step 1: Extract raster figures from PDF XObjects
-            raster_figures = extract_embedded_figures_from_doc(
-                doc, min_area_ratio=self.min_figure_area_ratio
-            )
-
-            # Step 2: Filter noise (logos, repeated headers)
-            if self.filter_noise_figures:
-                raster_figures = filter_noise_images(raster_figures, doc)
-
-            # Step 3: Detect vector figures (Kaplan-Meier plots, etc.)
-            vector_figures: List[VectorFigure] = []
-            for page_num in range(1, doc.page_count + 1):
-                page_vectors = detect_vector_figures(doc, page_num)
-                vector_figures.extend(page_vectors)
-
-            # Step 4: Detect all captions and column layout
-            all_captions, columns_by_page = detect_captions_all_pages(doc)
-
-            # Step 5: Convert Unstructured images to layout model signal
-            layout_model_figures: List[ImageBlock] = []
-            for page_num, images in layout_model_images.items():
-                for img_data in images:
-                    # Only include if has actual image data
-                    if img_data.get("image_base64"):
-                        layout_model_figures.append(
-                            ImageBlock(
-                                page_num=page_num,
-                                reading_order_index=0,
-                                image_base64=img_data.get("image_base64"),
-                                ocr_text=img_data.get("ocr_text"),
-                                bbox=img_data["bbox"],
-                            )
-                        )
-
-            # Step 6: Resolve all signals
-            resolved_figures, resolved_tables = resolve_all(
-                raster_figures=raster_figures,
-                vector_figures=vector_figures,
-                layout_model_figures=layout_model_figures,
-                captions=all_captions,
-                columns_by_page=columns_by_page,
-                doc=doc,
-            )
-
-            # Step 7: Deduplicate overlapping figures
-            resolved_figures = filter_duplicate_figures(resolved_figures)
-
-            # Step 8: Store resolution stats
-            self._resolution_stats = get_resolution_stats(
-                resolved_figures, resolved_tables
-            )
-
-            # Step 9: Convert resolved figures to ImageBlocks
-            for page_num in sorted(graph.pages.keys()):
-                page_obj = graph.pages[page_num]
-                page_figures = [
-                    rf for rf in resolved_figures if rf.page_num == page_num
-                ]
-
-                new_images: List[ImageBlock] = []
-                for idx, rf in enumerate(page_figures):
-                    # Render image from source
-                    image_base64 = None
-                    ocr_text = None
-
-                    if rf.figure_type == "raster" and isinstance(rf.figure, EmbeddedFigure):
-                        # Render from xref
-                        try:
-                            img_bytes = render_figure_by_xref(doc, rf.figure.xref)
-                            image_base64 = base64.b64encode(img_bytes).decode("utf-8")
-                        except Exception:
-                            pass
-                    elif rf.figure_type == "vector" and isinstance(rf.figure, VectorFigure):
-                        # Render vector region
-                        try:
-                            img_bytes = render_vector_figure(
-                                doc, rf.page_num, rf.bbox, dpi=200
-                            )
-                            image_base64 = base64.b64encode(img_bytes).decode("utf-8")
-                        except Exception:
-                            pass
-                    elif rf.figure_type == "layout_model":
-                        # Use existing base64 from layout model
-                        if hasattr(rf.figure, "image_base64"):
-                            image_base64 = rf.figure.image_base64
-                        if hasattr(rf.figure, "ocr_text"):
-                            ocr_text = rf.figure.ocr_text
-
-                    # Determine image type
-                    img_type = self._classify_image_type(
-                        rf.caption_text, ocr_text
-                    )
-
-                    # Create bounding box
-                    x0, y0, x1, y1 = rf.bbox
-                    page_w, page_h = page_obj.width, page_obj.height
-                    bbox = BoundingBox(
-                        coords=(x0, y0, x1, y1),
-                        page_width=page_w,
-                        page_height=page_h,
-                    )
-
-                    # Store metadata about source
-                    metadata = {
-                        "source": rf.source,
-                        "figure_type": rf.figure_type,
-                    }
-                    if rf.caption:
-                        metadata["caption_number"] = rf.caption.number
-
-                    new_images.append(
-                        ImageBlock(
-                            page_num=page_num,
-                            reading_order_index=len(page_obj.blocks) + idx,
-                            image_base64=image_base64,
-                            ocr_text=ocr_text,
-                            caption=rf.caption_text,
-                            image_type=img_type,
-                            bbox=bbox,
-                            metadata=metadata,
-                        )
-                    )
-
-                # Replace page images with resolved ones
-                page_obj.images = new_images
-
-        finally:
-            doc.close()
-
-        return graph
-
-    def _classify_image_type(
-        self,
-        caption: Optional[str],
-        ocr_text: Optional[str],
-    ) -> ImageType:
-        """Classify image type from caption and OCR text."""
-        check_text = (caption or "") + " " + (ocr_text or "")
-        check_lower = check_text.lower()
-
-        # Flowchart: CONSORT diagrams, patient flow, screening
-        if any(kw in check_lower for kw in [
-            "screened", "randomized", "enrolled", "consort", "flow",
-            "excluded", "discontinued", "completed", "allocation"
-        ]):
-            return ImageType.FLOWCHART
-
-        # Chart: various clinical trial result charts
-        has_percentages = bool(PERCENTAGE_PATTERN.search(check_text))
-        if has_percentages or any(kw in check_lower for kw in [
-            "kaplan", "survival", "curve", "plot", "bar", "proportion",
-            "percentage", "reduction", "change", "effect", "endpoint",
-            "month", "week", "baseline", "placebo", "treatment",
-            "pie", "distribution", "frequency", "symptoms", "serology",
-            "fig.", "figure", "organ", "involvement"
-        ]):
-            return ImageType.CHART
-
-        # Diagram: mechanism, pathway diagrams
-        if any(kw in check_lower for kw in [
-            "diagram", "schematic", "mechanism", "pathway", "cascade"
-        ]):
-            return ImageType.DIAGRAM
-
-        return ImageType.UNKNOWN
 
     def get_page_layout_info(self, page_num: int) -> Optional[Dict[str, Any]]:
         """Get detected layout info for a specific page (after parsing)."""
@@ -1136,121 +720,6 @@ class PDFToDocGraphParser(BaseParser):
             return avg_chars < 100  # Less than 100 chars per page = likely scanned
         finally:
             doc.close()
-
-    # -----------------------
-    # Repetition inference
-    # -----------------------
-
-    def _infer_repeated_headers_footers(
-        self,
-        norm_count: Counter[str],
-        norm_pages: Dict[str, set],
-        norm_zone_votes: Dict[str, Counter[str]],
-        norm_sample_text: Dict[str, str],
-    ) -> Tuple[set, set]:
-        """
-        Infer repeated headers/footers using repetition-based detection.
-
-        This is the PRIMARY detection method (not pattern-based filtering).
-
-        Algorithm:
-        1. Collect normalized text from header/footer zones
-        2. Text appearing on >= min_repeat_pages pages -> repeated
-        3. Zone majority vote determines header vs footer
-        4. Generic patterns (DOI, copyright, etc.) boost footer classification
-
-        Normalization: lowercase, collapse whitespace, replace digits with #
-        This groups "Page 1" and "Page 23" as the same normalized text.
-        """
-        repeated_headers: set = set()
-        repeated_footers: set = set()
-
-        for norm, total_c in norm_count.items():
-            pages = norm_pages.get(norm, set())
-
-            # Repetition threshold: must appear on multiple pages
-            if total_c < self.min_repeat_count:
-                continue
-            if len(pages) < self.min_repeat_pages:
-                continue
-
-            sample = norm_sample_text.get(norm, "")
-
-            # Generic footer patterns (truly generic, not publisher-specific)
-            if self._looks_like_known_footer(sample):
-                repeated_footers.add(norm)
-                continue
-
-            # Page-number-only lines are usually footers
-            if sample.strip().isdigit():
-                repeated_footers.add(norm)
-                continue
-
-            # Short repeated text in zones is likely header/footer noise
-            # e.g., "Research Article", journal names, author names
-            if len(sample) <= 50 and total_c >= self.min_repeat_count:
-                zone_votes = norm_zone_votes.get(norm)
-                if zone_votes:
-                    top_zone, top_votes = zone_votes.most_common(1)[0]
-                    frac = float(top_votes) / float(total_c) if total_c else 0.0
-
-                    # Lower threshold for short repeated text
-                    threshold = self.repeat_zone_majority * 0.8
-
-                    if top_zone == "HEADER" and frac >= threshold:
-                        repeated_headers.add(norm)
-                        continue
-                    elif top_zone == "FOOTER" and frac >= threshold:
-                        repeated_footers.add(norm)
-                        continue
-
-            # Standard zone-based classification
-            zone_votes = norm_zone_votes.get(norm)
-            if not zone_votes:
-                continue
-
-            top_zone, top_votes = zone_votes.most_common(1)[0]
-            frac = float(top_votes) / float(total_c) if total_c else 0.0
-            if top_zone == "HEADER" and frac >= self.repeat_zone_majority:
-                repeated_headers.add(norm)
-            elif top_zone == "FOOTER" and frac >= self.repeat_zone_majority:
-                repeated_footers.add(norm)
-
-        return repeated_headers, repeated_footers
-
-    def _looks_like_known_footer(self, text: str) -> bool:
-        t = (text or "").strip()
-        if not t:
-            return False
-        return bool(KNOWN_FOOTER_RE.search(t))
-
-    def _is_short_repeated_noise(self, text: str) -> bool:
-        t = (text or "").strip()
-        if not t:
-            return False
-        if len(t) <= 3 and t.isdigit():
-            return True
-        if self._looks_like_known_footer(t):
-            return True
-        return False
-
-    def _is_running_header(self, text: str, zone: Optional[str]) -> bool:
-        """Detect running headers like 'Liao et al' or 'Smith et al.'"""
-        t = (text or "").strip()
-        if not t:
-            return False
-        # Must be short (author name + et al)
-        if len(t) > 30:
-            return False
-        # Match "Author et al" pattern
-        if RUNNING_HEADER_RE.match(t):
-            return True
-        # Also catch in header zone with page numbers like "Liao et al 18194"
-        if zone == "HEADER" and re.match(
-            r"^[A-Z][a-z]+\s+et\s+al\.?\s*\d*$", t, re.IGNORECASE
-        ):
-            return True
-        return False
 
     # -----------------------
     # Element -> bbox, page, roles
@@ -1449,245 +918,12 @@ class PDFToDocGraphParser(BaseParser):
         return False
 
     # -----------------------
-    # Legacy Ordering (fallback)
-    # -----------------------
-
-    def _is_two_column_page(
-        self, raw_blocks: List[Dict[str, Any]], page_w: float
-    ) -> bool:
-        """Legacy two-column detection. Used when use_sota_layout=False."""
-        if not raw_blocks or page_w <= 0:
-            return False
-
-        xs = []
-        for rb in raw_blocks:
-            x0, _, x1, _ = rb["bbox"].coords
-            xc = (x0 + x1) / 2.0
-            xs.append(xc)
-
-        left = sum(1 for x in xs if x < page_w * 0.45)
-        right = sum(1 for x in xs if x > page_w * 0.55)
-        mid = sum(1 for x in xs if page_w * 0.45 <= x <= page_w * 0.55)
-
-        min_side = self.two_col_min_side_blocks
-        return (
-            left >= min_side
-            and right >= min_side
-            and mid <= max(2, int(0.08 * len(xs)))
-        )
-
-    def _order_single_column(self, items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Legacy single-column ordering. Used when use_sota_layout=False."""
-        items = sorted(items, key=lambda r: (r["y0"], r["x0"]))
-
-        ordered: List[Dict[str, Any]] = []
-        current_line: List[Dict[str, Any]] = []
-        current_y = None
-
-        for it in items:
-            if current_y is None:
-                current_y = it["y0"]
-                current_line = [it]
-                continue
-
-            if abs(it["y0"] - current_y) <= self.y_tolerance:
-                current_line.append(it)
-            else:
-                current_line.sort(key=lambda r: r["x0"])
-                ordered.extend(current_line)
-                current_y = it["y0"]
-                current_line = [it]
-
-        if current_line:
-            current_line.sort(key=lambda r: r["x0"])
-            ordered.extend(current_line)
-
-        return ordered
-
-    def _order_blocks_deterministically(
-        self, raw_blocks: List[Dict[str, Any]], page_w: float
-    ) -> List[Dict[str, Any]]:
-        """
-        Legacy block ordering. Used when use_sota_layout=False.
-
-        NOTE: This method has a known issue with two-column layouts:
-        it reads ALL left column blocks, then ALL right column blocks,
-        instead of interleaving by Y-bands. Use SOTA layout (B04) for
-        correct multi-column reading order.
-        """
-        if not raw_blocks:
-            return []
-
-        two_cols = self._is_two_column_page(raw_blocks, page_w=page_w)
-        if not two_cols:
-            return self._order_single_column(raw_blocks)
-
-        full_width: List[Dict[str, Any]] = []
-        left_items: List[Dict[str, Any]] = []
-        right_items: List[Dict[str, Any]] = []
-
-        for rb in raw_blocks:
-            x0, _, x1, _ = rb["bbox"].coords
-            width = x1 - x0
-
-            if page_w > 0 and width >= page_w * 0.75:
-                full_width.append(rb)
-                continue
-
-            xc = (x0 + x1) / 2.0
-            if xc < page_w / 2.0:
-                left_items.append(rb)
-            else:
-                right_items.append(rb)
-
-        return (
-            self._order_single_column(full_width)
-            + self._order_single_column(left_items)
-            + self._order_single_column(right_items)
-        )
-
-    # -----------------------
     # Utils
     # -----------------------
 
-    _KEEP_HYPHEN_PREFIXES = {
-        "anti",
-        "non",
-        "pre",
-        "post",
-        "co",
-        "multi",
-        "bi",
-        "tri",
-        "long",
-        "short",
-        "open",
-        "double",
-        "single",
-        "high",
-        "low",
-        "well",
-        "self",
-        "cross",
-        "small",
-        "medium",
-        "large",
-    }
-    _COMMON_SUFFIX_FRAGS = {
-        "ment",
-        "tion",
-        "tions",
-        "sion",
-        "sions",
-        "tive",
-        "tives",
-        "ness",
-        "less",
-        "able",
-        "ible",
-        "ated",
-        "ation",
-        "ations",
-        "ing",
-        "ed",
-        "ive",
-        "ous",
-        "ally",
-        "ity",
-        "ies",
-        "es",
-        "ly",
-        "bulin",
-        "blast",
-        "cytes",
-        "rhage",
-        "lines",
-        "tology",  # medical suffixes
-        "alities",
-        "ressive",
-        "pressive",
-        "globulin",
-        "itis",
-        "osis",
-        "emia",
-        "pathy",
-        "plasty",  # more medical suffixes
-    }
-    # Common hyphenated compound words to preserve
-    _KEEP_HYPHENATED = {
-        "anca-associated",
-        "medium-sized",
-        "end-stage",
-    }
-    # Patterns that need space preserved: "small- and" not "small-and"
-    _HYPHEN_SPACE_PRESERVE = {
-        "small",
-        "medium",
-        "large",
-        "short",
-        "long",
-    }
-
     def _clean_text(self, text: str) -> str:
-        """
-        Text cleaning:
-        - Remove OCR garbage artifacts
-        - Rejoin hyphenated words split across lines
-        - Collapse whitespace
-        - Fix abbreviation hyphens: 'MG- ADL' -> 'MG-ADL'
-        """
-        t = text or ""
-        t = t.replace("\r", "\n")
-
-        # 0) Remove OCR garbage patterns
-        t = OCR_GARBAGE_RE.sub("", t)
-
-        # 1) Join hyphenated line-break words: word-\n word -> wordword
-        t = re.sub(r"(\w+)-\s*\n\s*(\w+)", r"\1\2", t)
-
-        # 2) Handle "immuno- globulin" style (hyphen + space, broken word)
-        def _dehyphen_repl(m: re.Match) -> str:
-            a = m.group(1)
-            b = m.group(2)
-            a_l = a.lower()
-            b_l = b.lower()
-            combined = f"{a_l}-{b_l}"
-
-            # Keep known hyphenated compounds
-            if combined in self._KEEP_HYPHENATED:
-                return f"{a}-{b}"
-
-            # Preserve "small- and", "medium- and" patterns (hyphen + space + and)
-            if a_l in self._HYPHEN_SPACE_PRESERVE and b_l == "and":
-                return f"{a}- {b}"
-
-            # Keep hyphen for known prefixes
-            if a_l in self._KEEP_HYPHEN_PREFIXES:
-                return f"{a}-{b}"
-
-            # Remove hyphen when right side looks like a suffix fragment
-            if b_l in self._COMMON_SUFFIX_FRAGS:
-                return f"{a}{b}"
-
-            # Remove hyphen for short left parts (likely broken words)
-            if len(a) <= 5 and len(b) >= 3:
-                return f"{a}{b}"
-
-            return f"{a}-{b}"
-
-        t = re.sub(r"\b([A-Za-z]{2,})-\s+([A-Za-z]{2,})\b", _dehyphen_repl, t)
-
-        # 3) collapse whitespace
-        t = " ".join(t.split()).strip()
-
-        # 4) strip leading pipe artefact ("| Andreas..." -> "Andreas...")
-        if re.match(r"^\|\s*[A-Za-z]", t):
-            t = re.sub(r"^\|\s*", "", t)
-
-        # 5) normalize abbrev hyphen spacing only for abbrev-like tokens
-        t = normalize_abbrev_hyphens(t)
-
-        return t.strip()
+        """Delegate to B01a_text_helpers.clean_text."""
+        return clean_text(text)
 
     def _get_page_dimensions(self, file_path: str) -> Dict[int, Tuple[float, float]]:
         dims: Dict[int, Tuple[float, float]] = {}

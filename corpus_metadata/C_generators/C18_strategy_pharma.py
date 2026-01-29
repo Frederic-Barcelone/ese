@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C12_strategy_pharma.py
+# corpus_metadata/C_generators/C18_strategy_pharma.py
 """
 Pharmaceutical company mention detection.
 

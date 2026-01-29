@@ -263,7 +263,7 @@ corpus_metadata/
 |   +-- C09_strategy_document_metadata.py # Document metadata extraction
 |   +-- C10_vision_image_analysis.py     # Vision LLM image analysis
 |   +-- C11_llm_feasibility.py           # LLM-based feasibility extraction
-|   +-- C12_strategy_pharma.py           # Pharma company detection
+|   +-- C18_strategy_pharma.py           # Pharma company detection
 |   +-- C13_strategy_author.py           # Author/investigator detection
 |   +-- C14_strategy_citation.py         # Citation/reference detection
 |   +-- C16_strategy_gene.py             # Gene/genetic entity detection

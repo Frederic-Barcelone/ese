@@ -1,4 +1,4 @@
-# corpus_metadata/Z_utils/download_lexicons.py
+# corpus_metadata/Z_utils/Z10_download_lexicons.py
 """
 Download and convert public lexicons for the extraction pipeline.
 

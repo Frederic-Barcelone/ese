@@ -1,4 +1,4 @@
-# corpus_metadata/Z_utils/download_gene_lexicon.py
+# corpus_metadata/Z_utils/Z09_download_gene_lexicon.py
 """
 Download and build gene lexicon for rare disease extraction.
 

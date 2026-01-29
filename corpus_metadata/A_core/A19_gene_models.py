@@ -1,4 +1,4 @@
-# corpus_metadata/A_core/A12_gene_models.py
+# corpus_metadata/A_core/A19_gene_models.py
 """
 Domain models for gene/protein entity extraction.
 

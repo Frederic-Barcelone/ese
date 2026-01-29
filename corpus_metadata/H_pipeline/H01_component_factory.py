@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from C_generators.C06_strategy_disease import DiseaseDetector
     from C_generators.C07_strategy_drug import DrugDetector
     from C_generators.C16_strategy_gene import GeneDetector
-    from C_generators.C12_strategy_pharma import PharmaCompanyDetector
+    from C_generators.C18_strategy_pharma import PharmaCompanyDetector
     from C_generators.C13_strategy_author import AuthorDetector
     from C_generators.C14_strategy_citation import CitationDetector
     from C_generators.C08_strategy_feasibility import FeasibilityDetector
@@ -335,7 +335,7 @@ class ComponentFactory:
 
     def create_pharma_detector(self) -> "PharmaCompanyDetector":
         """Create pharma company detection component."""
-        from C_generators.C12_strategy_pharma import PharmaCompanyDetector
+        from C_generators.C18_strategy_pharma import PharmaCompanyDetector
         return PharmaCompanyDetector(
             config={
                 "run_id": self.run_id,
