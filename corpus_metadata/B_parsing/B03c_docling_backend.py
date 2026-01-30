@@ -28,28 +28,18 @@ logger = logging.getLogger(__name__)
 
 # Check if Docling is available
 DOCLING_AVAILABLE = False
-SURYA_AVAILABLE = False
 try:
     from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions, TableFormerMode
     from docling_core.types.doc import TableItem
+    from docling_surya import SuryaOcrOptions
 
     DOCLING_AVAILABLE = True
 
-    # Try to import SuryaOCR for improved table/figure extraction
-    try:
-        from docling_surya import SuryaOcrOptions
-        SURYA_AVAILABLE = True
-    except ImportError:
-        SuryaOcrOptions = None  # type: ignore
-        logger.info(
-            "SuryaOCR not installed. Install with: pip install 'docling[docling-surya]' for 20-30%% better tables"
-        )
-
-except ImportError:
+except ImportError as e:
     logger.warning(
-        "Docling not installed. Install with: pip install docling"
+        "Docling with SuryaOCR not installed. Install with: pip install 'docling[docling-surya]'"
     )
     DocumentConverter = None  # type: ignore
     PdfFormatOption = None  # type: ignore
@@ -99,20 +89,19 @@ class DoclingTableExtractor:
 
     def _create_converter(self) -> "DocumentConverter":
         """Create and configure the Docling DocumentConverter."""
-        # Configure pipeline options for optimal table extraction
-        # Use SuryaOCR if available (20-30% better tables/figures)
-        if SURYA_AVAILABLE and SuryaOcrOptions is not None and self.ocr_enabled:
+        # Configure pipeline options with SuryaOCR for optimal table extraction
+        # SuryaOCR provides 20-30% better accuracy on tables/figures
+        if self.ocr_enabled:
             pipeline_options = PdfPipelineOptions(
                 do_table_structure=True,
                 do_ocr="suryaocr",
                 allow_external_plugins=True,
                 ocr_options=SuryaOcrOptions(lang=["en"]),
             )
-            logger.info("Using SuryaOCR backend for improved table extraction")
         else:
             pipeline_options = PdfPipelineOptions(
                 do_table_structure=True,
-                do_ocr=self.ocr_enabled,
+                do_ocr=False,
             )
 
         # Set TableFormer mode
