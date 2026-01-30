@@ -31,6 +31,9 @@ from B_parsing.B03b_table_rendering import (
 # Validation constants
 from B_parsing.B03a_table_validation import MIN_TABLE_COLS
 
+# Minimum rows required for VLM extraction to be considered valid
+MIN_VLM_DATA_ROWS = 2
+
 
 class TableExtractor:
     """
@@ -254,8 +257,7 @@ class TableExtractor:
                 vlm_rows = vlm_result.get("rows", [])
                 vlm_headers = vlm_result.get("headers", [])
 
-                min_vlm_data_rows = 2
-                if len(vlm_rows) < min_vlm_data_rows or len(vlm_headers) < MIN_TABLE_COLS:
+                if len(vlm_rows) < MIN_VLM_DATA_ROWS or len(vlm_headers) < MIN_TABLE_COLS:
                     logger.info(
                         "Rejecting VLM table on page %d: too small",
                         table.get("page_num", 0),

@@ -7,7 +7,10 @@ These functions are called by ExportManager.
 """
 from __future__ import annotations
 
+import logging
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 from pathlib import Path
 from typing import List, TYPE_CHECKING
 
@@ -174,7 +177,7 @@ def export_gene_results(
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(export_doc.model_dump_json(indent=2))
 
-    print(f"  Gene export: {out_file.name}")
+    logger.info("Gene export: %s", out_file.name)
 
 
 def export_drug_results(

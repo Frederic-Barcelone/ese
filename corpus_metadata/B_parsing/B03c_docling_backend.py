@@ -175,8 +175,9 @@ class DoclingTableExtractor:
                 page_num = prov.page_no if hasattr(prov, "page_no") else 1
 
                 if hasattr(prov, "bbox") and prov.bbox:
-                    # Docling bbox has l, t, r, b properties
-                    # Normalize to ensure x0 < x1 and y0 < y1
+                    # Docling bbox uses (l, t, r, b) but coordinate system may have
+                    # origin at top-left (t > b) or bottom-left (b > t).
+                    # Normalize to ensure x0 < x1 and y0 < y1 for BoundingBox validation.
                     l, t, r, b = (
                         float(prov.bbox.l),
                         float(prov.bbox.t),
