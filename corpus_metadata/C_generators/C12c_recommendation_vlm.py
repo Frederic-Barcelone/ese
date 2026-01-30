@@ -222,7 +222,23 @@ class VLMExtractionMixin:
             import json
             text_response = response.content[0].text.strip()
             text_response = self._clean_json_response(text_response)
-            data = json.loads(text_response)
+
+            # Handle empty response
+            if not text_response or not text_response.strip():
+                logger.debug("VLM returned empty text response for LoE/SoR extraction")
+                return {}
+
+            # Parse JSON with error handling
+            try:
+                data = json.loads(text_response)
+            except json.JSONDecodeError as je:
+                logger.debug("VLM returned invalid JSON for LoE/SoR: %s", je)
+                return {}
+
+            # Ensure data is a dict
+            if not isinstance(data, dict):
+                logger.debug("VLM returned non-dict for LoE/SoR: %s", type(data).__name__)
+                return {}
 
             codes: Dict[str, Tuple[str, str, str, List[str]]] = {}
             for rec in data.get("recommendations", []):

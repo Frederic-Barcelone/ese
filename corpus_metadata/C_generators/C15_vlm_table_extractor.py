@@ -209,6 +209,11 @@ Return valid JSON only, no additional text."""
             if not response:
                 return self._empty_response("VLM returned empty response")
 
+            # Ensure response is a dict (not a list or other type)
+            if not isinstance(response, dict):
+                logger.warning("VLM returned non-dict response: %s", type(response).__name__)
+                return self._empty_response(f"VLM returned {type(response).__name__} instead of dict")
+
             # Parse and verify response
             return self._verify_extraction(response)
 
