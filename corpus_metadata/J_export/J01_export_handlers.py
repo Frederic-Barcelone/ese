@@ -125,6 +125,7 @@ class ExportManager:
         bottom_padding: int = 300,
         right_padding: int = 200,
         top_padding: Optional[int] = None,
+        is_table: bool = False,
     ) -> Optional[str]:
         """
         Re-render a figure from PDF with extra padding for captions/legends.
@@ -138,6 +139,7 @@ class ExportManager:
             bottom_padding: Extra points below figure for captions (default 300pt)
             right_padding: Extra points to right for multi-panel figures (default 200pt)
             top_padding: Extra points above figure (default same as padding)
+            is_table: If True, use PyMuPDF table detection instead of full-width expansion
 
         Returns:
             Base64-encoded PNG string, or None if rendering fails
@@ -173,18 +175,29 @@ class ExportManager:
                 x1 = x1 * dpi_ratio
                 y1 = y1 * dpi_ratio
 
-            # For figures that span a significant portion of page, expand to capture full width
-            figure_width = x1 - x0
-            figure_height = y1 - y0
-            is_significant_figure = (
-                figure_width > page_width * 0.15 or
-                figure_height > page_height * 0.20
-            )
-            if is_significant_figure:
-                # Expand to nearly full page width (small margins to avoid edge artifacts)
-                margin = 36  # ~0.5 inch margin
-                x0 = margin
-                x1 = page_width - margin
+            # For tables, use PyMuPDF's table detection to get accurate boundaries
+            # This prevents capturing content from adjacent columns in 2-column layouts
+            if is_table:
+                from B_parsing.B03b_table_rendering import find_table_bbox_pymupdf
+                doc.close()
+                pymupdf_bbox = find_table_bbox_pymupdf(str(pdf_path), page_num, (x0, y0, x1, y1))
+                doc = fitz.open(str(pdf_path))
+                page = doc[page_num - 1]
+                if pymupdf_bbox:
+                    x0, y0, x1, y1 = pymupdf_bbox
+            else:
+                # For figures that span a significant portion of page, expand to capture full width
+                figure_width = x1 - x0
+                figure_height = y1 - y0
+                is_significant_figure = (
+                    figure_width > page_width * 0.15 or
+                    figure_height > page_height * 0.20
+                )
+                if is_significant_figure:
+                    # Expand to nearly full page width (small margins to avoid edge artifacts)
+                    margin = 36  # ~0.5 inch margin
+                    x0 = margin
+                    x1 = page_width - margin
 
             # Create clip rectangle with generous padding to capture captions/legends
             clip_rect = fitz.Rect(
@@ -1086,6 +1099,7 @@ class ExportManager:
                             top_padding=150,     # Extra space above table for title
                             bottom_padding=200,  # Extra space below table for notes
                             right_padding=150,   # Extra space on right
+                            is_table=True,       # Use PyMuPDF table detection for accurate bbox
                         )
 
                     # Use re-rendered image if successful, otherwise use original
