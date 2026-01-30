@@ -128,16 +128,27 @@ def export_gene_results(
             for i in entity.identifiers
         ]
 
+        # Convert associated diseases from GeneDiseaseLinkage to dict
+        diseases_as_dicts = [
+            {
+                "orphacode": d.orphacode,
+                "disease_name": d.disease_name,
+                "association_type": d.association_type or "",
+            }
+            for d in entity.associated_diseases
+        ]
+
         entry = GeneExportEntry(
             matched_text=entity.matched_text,
-            symbol=entity.hgnc_symbol,
+            hgnc_symbol=entity.hgnc_symbol,
             full_name=entity.full_name,
             confidence=entity.confidence_score,
-            gene_type=entity.gene_type,
+            is_alias=entity.is_alias,
+            locus_type=entity.locus_type,
             chromosome=entity.chromosome,
             codes=codes,
             all_identifiers=all_identifiers,
-            associated_diseases=entity.associated_diseases,
+            associated_diseases=diseases_as_dicts,
             context=entity.primary_evidence.text if entity.primary_evidence else None,
             page=entity.primary_evidence.location.page_num if entity.primary_evidence else None,
             lexicon_source=entity.provenance.lexicon_source if entity.provenance else None,

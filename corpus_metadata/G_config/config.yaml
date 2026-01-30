@@ -981,18 +981,18 @@ table_extraction:
   ocr_enabled: true
 
   # Validation thresholds
-    # Average cell length thresholds (chars)
-    # Tables with longer cells are more likely prose, not tabular data
-    max_avg_cell_length: 150
-    max_avg_cell_length_2col: 200  # More lenient for 2-column definition tables
+  # Average cell length thresholds (chars)
+  # Tables with longer cells are more likely prose, not tabular data
+  max_avg_cell_length: 150
+  max_avg_cell_length_2col: 200  # More lenient for 2-column definition tables
 
-    # Percentage of cells that can be "long" (>80 chars)
-    max_long_cell_percentage: 0.30
-    max_long_cell_percentage_2col: 0.50  # More lenient for definition tables
+  # Percentage of cells that can be "long" (>80 chars)
+  max_long_cell_percentage: 0.30
+  max_long_cell_percentage_2col: 0.50  # More lenient for definition tables
 
-    # Percentage of cells that can contain prose patterns
-    max_prose_percentage: 0.15
-    max_prose_percentage_2col: 0.25
+  # Percentage of cells that can contain prose patterns
+  max_prose_percentage: 0.15
+  max_prose_percentage_2col: 0.25
 
   # Definition table salvage settings
   definition_table_salvage:
