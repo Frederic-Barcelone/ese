@@ -94,7 +94,7 @@ class DoclingTableExtractor:
         if self.ocr_enabled:
             pipeline_options = PdfPipelineOptions(
                 do_table_structure=True,
-                do_ocr="suryaocr",
+                do_ocr=True,
                 allow_external_plugins=True,
                 ocr_options=SuryaOcrOptions(lang=["en"]),
             )
