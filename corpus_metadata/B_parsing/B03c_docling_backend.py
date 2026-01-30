@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 # Check if Docling is available
 DOCLING_AVAILABLE = False
+SURYA_AVAILABLE = False
 try:
     from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
@@ -35,6 +36,17 @@ try:
     from docling_core.types.doc import TableItem
 
     DOCLING_AVAILABLE = True
+
+    # Try to import SuryaOCR for improved table/figure extraction
+    try:
+        from docling_surya import SuryaOcrOptions
+        SURYA_AVAILABLE = True
+    except ImportError:
+        SuryaOcrOptions = None  # type: ignore
+        logger.info(
+            "SuryaOCR not installed. Install with: pip install 'docling[docling-surya]' for 20-30%% better tables"
+        )
+
 except ImportError:
     logger.warning(
         "Docling not installed. Install with: pip install docling"
@@ -45,6 +57,7 @@ except ImportError:
     PdfPipelineOptions = None  # type: ignore
     TableFormerMode = None  # type: ignore
     TableItem = None  # type: ignore
+    SuryaOcrOptions = None  # type: ignore
 
 
 class DoclingTableExtractor:
@@ -87,10 +100,20 @@ class DoclingTableExtractor:
     def _create_converter(self) -> "DocumentConverter":
         """Create and configure the Docling DocumentConverter."""
         # Configure pipeline options for optimal table extraction
-        pipeline_options = PdfPipelineOptions(
-            do_table_structure=True,
-            do_ocr=self.ocr_enabled,
-        )
+        # Use SuryaOCR if available (20-30% better tables/figures)
+        if SURYA_AVAILABLE and SuryaOcrOptions is not None and self.ocr_enabled:
+            pipeline_options = PdfPipelineOptions(
+                do_table_structure=True,
+                do_ocr="suryaocr",
+                allow_external_plugins=True,
+                ocr_options=SuryaOcrOptions(lang=["en"]),
+            )
+            logger.info("Using SuryaOCR backend for improved table extraction")
+        else:
+            pipeline_options = PdfPipelineOptions(
+                do_table_structure=True,
+                do_ocr=self.ocr_enabled,
+            )
 
         # Set TableFormer mode
         if self.mode == "accurate":
@@ -98,8 +121,8 @@ class DoclingTableExtractor:
         else:
             pipeline_options.table_structure_options.mode = TableFormerMode.FAST
 
-        # Disable cell matching for better column separation
-        # This uses TableFormer's predicted cells instead of PDF coordinates
+        # Enable cell matching for better column separation
+        # This uses TableFormer's predicted cells with PDF coordinates
         pipeline_options.table_structure_options.do_cell_matching = self.do_cell_matching
 
         # Create converter with PDF-specific options
