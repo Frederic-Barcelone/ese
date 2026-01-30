@@ -171,51 +171,52 @@ def render_table_as_image(
             doc.close()
             return render_full_page(file_path, page_num, dpi)
 
+        # Always try PyMuPDF's native table detection first for accurate bbox
+        # This handles 2-column layouts where Unstructured may give bbox spanning both columns
+        doc.close()
+        pymupdf_bbox = find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
+        doc = fitz.open(file_path)
+        page = doc[page_num - 1]
+
+        if pymupdf_bbox:
+            # Use PyMuPDF's detected table boundary
+            x0, y0, x1, y1 = pymupdf_bbox
+            logger.debug("Using PyMuPDF refined bbox: %s", pymupdf_bbox)
         # If bbox seems too large or out of bounds, it might be in wrong coordinate space
-        if x1 > page_width * 1.1 or y1 > page_height * 1.1:
-            logger.warning("Bbox %s seems out of bounds for page size %.0fx%.0f", bbox, page_width, page_height)
+        elif x1 > page_width * 1.1 or y1 > page_height * 1.1:
+            logger.warning("Bbox %s seems out of bounds for page size %.0fx%.0f, scaling coordinates", bbox, page_width, page_height)
 
-            # First, try PyMuPDF's native table detection for accurate bbox
-            doc.close()
-            pymupdf_bbox = find_table_bbox_pymupdf(file_path, page_num, (x0, y0, x1, y1))
-            doc = fitz.open(file_path)
-            page = doc[page_num - 1]
+            # Fallback: scale coordinates from pixel space to PDF point space
+            # Calculate the DPI ratio - Unstructured typically uses 200-300 DPI
+            max_coord = max(x1, y1)
+            max_page = max(page_width, page_height)
+            dpi_ratio = max_page / max_coord  # Approximate scale factor
 
-            if pymupdf_bbox:
-                x0, y0, x1, y1 = pymupdf_bbox
-                logger.info("Using PyMuPDF detected bbox: %s", pymupdf_bbox)
-            else:
-                # Fallback: scale coordinates from pixel space to PDF point space
-                # Calculate the DPI ratio - Unstructured typically uses 200-300 DPI
-                max_coord = max(x1, y1)
-                max_page = max(page_width, page_height)
-                dpi_ratio = max_page / max_coord  # Approximate scale factor
+            x0_scaled = x0 * dpi_ratio
+            y0_scaled = y0 * dpi_ratio
+            x1_scaled = x1 * dpi_ratio
+            y1_scaled = y1 * dpi_ratio
 
-                x0_scaled = x0 * dpi_ratio
-                y0_scaled = y0 * dpi_ratio
-                x1_scaled = x1 * dpi_ratio
-                y1_scaled = y1 * dpi_ratio
+            # Calculate table dimensions after scaling
+            table_width = x1_scaled - x0_scaled
+            table_height = y1_scaled - y0_scaled
 
-                # Calculate table dimensions after scaling
-                table_width = x1_scaled - x0_scaled
-                table_height = y1_scaled - y0_scaled
+            # Be very generous with expansion - 30% of table size on each side
+            # minimum 40 points, capped at 100 points
+            expand_x = max(40, min(100, table_width * 0.3))
+            expand_y = max(40, min(100, table_height * 0.3))
 
-                # Be very generous with expansion - 30% of table size on each side
-                # minimum 40 points, capped at 100 points
-                expand_x = max(40, min(100, table_width * 0.3))
-                expand_y = max(40, min(100, table_height * 0.3))
+            x0 = max(0, x0_scaled - expand_x)
+            y0 = max(0, y0_scaled - expand_y)
+            x1 = min(page_width, x1_scaled + expand_x)
+            y1 = min(page_height, y1_scaled + expand_y)
+            logger.info("Scaled bbox with generous margins: %s", (x0, y0, x1, y1))
 
-                x0 = max(0, x0_scaled - expand_x)
-                y0 = max(0, y0_scaled - expand_y)
-                x1 = min(page_width, x1_scaled + expand_x)
-                y1 = min(page_height, y1_scaled + expand_y)
-                logger.info("Scaled bbox with generous margins: %s", (x0, y0, x1, y1))
-
-                # Sanity check: if scaled table is suspiciously small, render full page
-                if (x1 - x0) < 100 or (y1 - y0) < 50:
-                    logger.warning("Scaled bbox too small, rendering full page")
-                    doc.close()
-                    return render_full_page(file_path, page_num, dpi)
+            # Sanity check: if scaled table is suspiciously small, render full page
+            if (x1 - x0) < 100 or (y1 - y0) < 50:
+                logger.warning("Scaled bbox too small, rendering full page")
+                doc.close()
+                return render_full_page(file_path, page_num, dpi)
 
         # Create clip rectangle with padding
         # Use extra bottom padding to capture footnotes and table captions
