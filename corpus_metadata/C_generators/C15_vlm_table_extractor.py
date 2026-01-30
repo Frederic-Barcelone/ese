@@ -11,12 +11,91 @@ for more accurate table data, especially for:
 
 from __future__ import annotations
 
+import base64
+import io
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
+
+# Claude Vision API limits
+MAX_IMAGE_DIMENSION = 8000  # Max pixels in any dimension
+MAX_IMAGE_BYTES = 5 * 1024 * 1024  # 5MB
+
+
+def resize_image_for_vlm(image_base64: str) -> Tuple[str, bool]:
+    """
+    Resize image if it exceeds Claude Vision API limits.
+
+    Args:
+        image_base64: Base64-encoded PNG image
+
+    Returns:
+        Tuple of (resized_base64, was_resized)
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        logger.warning("PIL not available for image resizing")
+        return image_base64, False
+
+    try:
+        # Decode base64 to bytes
+        image_bytes = base64.b64decode(image_base64)
+        original_size = len(image_bytes)
+
+        # Open image
+        img = Image.open(io.BytesIO(image_bytes))
+        width, height = img.size
+        was_resized = False
+
+        # Check if resizing needed for dimensions
+        if width > MAX_IMAGE_DIMENSION or height > MAX_IMAGE_DIMENSION:
+            # Calculate scale factor to fit within limits
+            scale = min(MAX_IMAGE_DIMENSION / width, MAX_IMAGE_DIMENSION / height)
+            new_width = int(width * scale)
+            new_height = int(height * scale)
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            was_resized = True
+            logger.info(
+                "Resized image from %dx%d to %dx%d (dimension limit)",
+                width, height, new_width, new_height
+            )
+
+        # Convert back to bytes and check size
+        buffer = io.BytesIO()
+        img.save(buffer, format="PNG", optimize=True)
+        new_bytes = buffer.getvalue()
+
+        # If still too large, reduce quality/size iteratively
+        quality_scale = 0.9
+        while len(new_bytes) > MAX_IMAGE_BYTES and quality_scale > 0.3:
+            new_width = int(img.size[0] * quality_scale)
+            new_height = int(img.size[1] * quality_scale)
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            buffer = io.BytesIO()
+            img.save(buffer, format="PNG", optimize=True)
+            new_bytes = buffer.getvalue()
+            quality_scale -= 0.1
+            was_resized = True
+            logger.info(
+                "Reduced image to %dx%d (size: %.1fMB)",
+                new_width, new_height, len(new_bytes) / (1024 * 1024)
+            )
+
+        if was_resized:
+            logger.info(
+                "Image resized: %.1fMB -> %.1fMB",
+                original_size / (1024 * 1024), len(new_bytes) / (1024 * 1024)
+            )
+
+        return base64.b64encode(new_bytes).decode("utf-8"), was_resized
+
+    except Exception as e:
+        logger.warning("Image resize failed: %s", e)
+        return image_base64, False
 
 
 # =============================================================================
@@ -115,9 +194,12 @@ Return valid JSON only, no additional text."""
             return self._empty_response("No LLM client available")
 
         try:
+            # Resize image if needed to fit Claude Vision limits
+            resized_image, was_resized = resize_image_for_vlm(image_base64)
+
             # Call Vision LLM
             response = self.llm_client.complete_vision_json(
-                image_base64=image_base64,
+                image_base64=resized_image,
                 prompt=self.VLM_PROMPT,
                 model=self.llm_model,
                 max_tokens=4000,  # Tables can be large

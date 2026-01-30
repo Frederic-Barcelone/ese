@@ -24,6 +24,7 @@ from A_core.A18_recommendation_models import (
 )
 
 from .C12a_recommendation_patterns import VLM_LOE_SOR_EXTRACTION_PROMPT
+from .C15_vlm_table_extractor import resize_image_for_vlm
 
 
 # Optional PyMuPDF for page image rendering
@@ -186,6 +187,9 @@ class VLMExtractionMixin:
             return {}
 
         try:
+            # Resize image if needed to fit Claude Vision limits
+            resized_image, _ = resize_image_for_vlm(img_base64)
+
             # Call VLM with the image
             response = self.llm_client.messages.create(
                 model=self.llm_model,
@@ -199,7 +203,7 @@ class VLMExtractionMixin:
                                 "source": {
                                     "type": "base64",
                                     "media_type": "image/png",
-                                    "data": img_base64,
+                                    "data": resized_image,
                                 },
                             },
                             {
