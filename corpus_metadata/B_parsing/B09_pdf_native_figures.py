@@ -404,12 +404,17 @@ def check_axis_text_nearby(
         bbox: Region bounding box
         text_dict: Text dict from page.get_text("dict")
         keywords: Keywords indicating axis labels
-        margin: Search margin around bbox
+        margin: Base search margin around bbox (adaptive based on figure size)
 
     Returns:
         True if axis-like text found nearby
     """
     x0, y0, x1, y1 = bbox
+
+    # Adaptive margin: larger figures get larger search margins
+    figure_height = y1 - y0
+    figure_width = x1 - x0
+    adaptive_margin = max(margin, figure_height * 0.15, figure_width * 0.1)
 
     for block in text_dict.get("blocks", []):
         if block.get("type") != 0:  # Only text blocks
@@ -418,9 +423,9 @@ def check_axis_text_nearby(
         bx0, by0, bx1, by1 = block.get("bbox", (0, 0, 0, 0))
 
         # Check if text block is near the figure region
-        if bx1 < x0 - margin or bx0 > x1 + margin:
+        if bx1 < x0 - adaptive_margin or bx0 > x1 + adaptive_margin:
             continue
-        if by1 < y0 - margin or by0 > y1 + margin:
+        if by1 < y0 - adaptive_margin or by0 > y1 + adaptive_margin:
             continue
 
         # Extract text from block

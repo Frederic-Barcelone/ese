@@ -121,9 +121,9 @@ class ExportManager:
         page_num: int,
         bbox: Tuple[float, float, float, float],
         dpi: int = 200,
-        padding: int = 50,
-        bottom_padding: int = 300,
-        right_padding: int = 200,
+        padding: int = 30,
+        bottom_padding: int = 100,
+        right_padding: int = 50,
         top_padding: Optional[int] = None,
         is_table: bool = False,
     ) -> Optional[str]:
@@ -135,9 +135,9 @@ class ExportManager:
             page_num: 1-indexed page number
             bbox: (x0, y0, x1, y1) bounding box in PDF points
             dpi: Resolution for rendering
-            padding: Extra points around left side (default 50pt)
-            bottom_padding: Extra points below figure for captions (default 300pt)
-            right_padding: Extra points to right for multi-panel figures (default 200pt)
+            padding: Extra points around left side (default 30pt ~0.4in)
+            bottom_padding: Extra points below figure for captions (default 100pt ~1.4in)
+            right_padding: Extra points to right for legends (default 50pt ~0.7in)
             top_padding: Extra points above figure (default same as padding)
             is_table: If True, use PyMuPDF table detection instead of full-width expansion
 
@@ -164,16 +164,34 @@ class ExportManager:
             x0, y0, x1, y1 = bbox
 
             # Handle coordinate space issues (Unstructured uses higher DPI)
-            if x1 > page_width * 1.1 or y1 > page_height * 1.1:
-                # Scale from pixel space to PDF point space
-                max_coord = max(x1, y1)
-                max_page = max(page_width, page_height)
-                dpi_ratio = max_page / max_coord
+            # Scale each axis independently to avoid distortion
+            needs_x_scale = x1 > page_width * 1.1
+            needs_y_scale = y1 > page_height * 1.1
 
-                x0 = x0 * dpi_ratio
-                y0 = y0 * dpi_ratio
-                x1 = x1 * dpi_ratio
-                y1 = y1 * dpi_ratio
+            if needs_x_scale or needs_y_scale:
+                # Calculate scale ratio per axis
+                if needs_x_scale and needs_y_scale:
+                    # Both axes exceed - use consistent ratio from the more problematic axis
+                    x_ratio = page_width / x1
+                    y_ratio = page_height / y1
+                    ratio = min(x_ratio, y_ratio)  # Use tighter constraint
+                    x0, x1 = x0 * ratio, x1 * ratio
+                    y0, y1 = y0 * ratio, y1 * ratio
+                elif needs_x_scale:
+                    x_ratio = page_width / x1
+                    x0, x1 = x0 * x_ratio, x1 * x_ratio
+                    y0, y1 = y0 * x_ratio, y1 * x_ratio  # Scale Y proportionally
+                else:  # needs_y_scale only
+                    y_ratio = page_height / y1
+                    x0, x1 = x0 * y_ratio, x1 * y_ratio  # Scale X proportionally
+                    y0, y1 = y0 * y_ratio, y1 * y_ratio
+
+            # Detect 2-column layout by checking if figure is in left or right half
+            figure_center_x = (x0 + x1) / 2
+            is_two_column = (
+                (figure_center_x < page_width * 0.45) or  # Left column
+                (figure_center_x > page_width * 0.55)     # Right column
+            )
 
             # For tables, use PyMuPDF's table detection to get accurate boundaries
             # This prevents capturing content from adjacent columns in 2-column layouts
@@ -188,13 +206,20 @@ class ExportManager:
                 # Use minimal horizontal padding for tables to stay within column
                 padding = 15
                 right_padding = 15
+            elif is_two_column:
+                # In 2-column layout, don't expand horizontally - stay within column
+                # Use moderate padding that won't cross column boundary
+                column_width = page_width / 2
+                max_padding = column_width * 0.1  # Max 10% of column width
+                padding = min(padding, max_padding)
+                right_padding = min(right_padding, max_padding)
             else:
-                # For figures that span a significant portion of page, expand to capture full width
+                # Full-width figure (centered or spanning columns)
                 figure_width = x1 - x0
                 figure_height = y1 - y0
                 is_significant_figure = (
-                    figure_width > page_width * 0.15 or
-                    figure_height > page_height * 0.20
+                    figure_width > page_width * 0.4 or  # Must span >40% (not 15%)
+                    figure_height > page_height * 0.25
                 )
                 if is_significant_figure:
                     # Expand to nearly full page width (small margins to avoid edge artifacts)
@@ -978,15 +1003,16 @@ class ExportManager:
                             )
 
                     elif img.bbox:
-                        # Layout model or unknown source: generous padding
+                        # Layout model or unknown source: moderate padding
+                        # Reduced from 350/200 to avoid capturing adjacent content
                         rendered_base64 = self.render_figure_with_padding(
                             pdf_path=pdf_path,
                             page_num=img.page_num,
                             bbox=img.bbox.coords,
-                            padding=75,           # Extra space on left side
-                            top_padding=100,      # Extra space above figure
-                            bottom_padding=350,   # Extra space for captions/legends
-                            right_padding=200,    # Extra space for multi-panel
+                            padding=40,           # ~0.5 inch left
+                            top_padding=50,       # ~0.7 inch above
+                            bottom_padding=120,   # ~1.7 inch for captions
+                            right_padding=60,     # ~0.8 inch right
                         )
 
                     # Use re-rendered image if available, otherwise use original
@@ -1098,10 +1124,10 @@ class ExportManager:
                             pdf_path=pdf_path,
                             page_num=table.page_num,
                             bbox=table.bbox.coords,
-                            padding=75,          # Extra space on left side
-                            top_padding=150,     # Extra space above table for title
-                            bottom_padding=200,  # Extra space below table for notes
-                            right_padding=150,   # Extra space on right
+                            padding=20,          # Minimal left (overridden to 15 for tables)
+                            top_padding=80,      # ~1.1 inch for table title
+                            bottom_padding=60,   # ~0.8 inch for footnotes
+                            right_padding=20,    # Minimal right (overridden to 15 for tables)
                             is_table=True,       # Use PyMuPDF table detection for accurate bbox
                         )
 
