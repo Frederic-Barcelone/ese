@@ -1,0 +1,582 @@
+# corpus_metadata/B_parsing/B13_visual_detector.py
+"""
+Visual Detector with FAST/ACCURATE Tiering.
+
+Detects tables and figures using Docling with tiered TableFormer modes:
+- FAST mode for initial extraction (default)
+- ACCURATE mode for complex tables (escalated)
+
+Key features:
+- Docling v2.71.0 integration
+- Tiered table extraction (FAST -> ACCURATE)
+- Native PDF figure detection
+- Complexity signal computation
+- Multi-page table detection
+"""
+from __future__ import annotations
+
+import hashlib
+import logging
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Tuple
+
+import fitz  # PyMuPDF
+
+from A_core.A13_visual_models import (
+    TableComplexitySignals,
+    TableStructure,
+    VisualCandidate,
+)
+from B_parsing.B15_caption_extractor import (
+    ColumnLayout,
+    extract_all_captions_on_page,
+    infer_column_layout,
+)
+from B_parsing.B16_triage import is_in_margin_zone, should_escalate_to_accurate
+
+logger = logging.getLogger(__name__)
+
+
+# -------------------------
+# Configuration
+# -------------------------
+
+
+@dataclass
+class DetectorConfig:
+    """Configuration for visual detection."""
+
+    # TableFormer mode
+    default_table_mode: str = "fast"  # "fast" or "accurate"
+    enable_escalation: bool = True
+
+    # Escalation thresholds
+    escalation_config: Dict[str, Any] = field(default_factory=lambda: {
+        "header_depth_threshold": 3,
+        "merged_cell_threshold": 5,
+        "token_coverage_threshold": 0.70,
+        "large_table_cols": 8,
+        "large_table_rows": 15,
+    })
+
+    # Figure detection
+    min_figure_area_ratio: float = 0.02  # Minimum 2% of page
+    filter_noise: bool = True
+    repeat_threshold: int = 3
+
+    # OCR settings (for scanned docs)
+    enable_ocr: bool = True
+    ocr_backend: str = "surya"  # "surya" or "easyocr"
+
+    # Docling settings
+    do_cell_matching: bool = True
+
+
+# -------------------------
+# Docling Integration
+# -------------------------
+
+
+def detect_tables_with_docling(
+    pdf_path: str,
+    mode: str = "fast",
+    config: DetectorConfig = DetectorConfig(),
+) -> List[Dict[str, Any]]:
+    """
+    Detect and extract tables using Docling.
+
+    Args:
+        pdf_path: Path to PDF file
+        mode: "fast" or "accurate" TableFormer mode
+        config: Detector configuration
+
+    Returns:
+        List of table detection results with structure
+    """
+    try:
+        # Import Docling components
+        from docling.datamodel.base_models import InputFormat
+        from docling.datamodel.pipeline_options import (
+            PdfPipelineOptions,
+            TableFormerMode,
+        )
+        from docling.document_converter import DocumentConverter, PdfFormatOption
+
+        # Configure TableFormer mode
+        if mode == "accurate":
+            table_mode = TableFormerMode.ACCURATE
+        else:
+            table_mode = TableFormerMode.FAST
+
+        # Configure pipeline
+        pipeline_options = PdfPipelineOptions(
+            do_ocr=config.enable_ocr,
+            do_table_structure=True,
+            table_structure_options={
+                "mode": table_mode,
+                "do_cell_matching": config.do_cell_matching,
+            },
+        )
+
+        format_options = {
+            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+        }
+
+        # Create converter and process
+        converter = DocumentConverter(format_options=format_options)
+        result = converter.convert(pdf_path)
+
+        # Extract tables from result
+        tables = []
+        for item in result.document.tables:
+            table_data = _extract_table_from_docling(item, mode)
+            if table_data:
+                tables.append(table_data)
+
+        return tables
+
+    except ImportError as e:
+        logger.warning(
+            f"Docling not available: {e}. "
+            "Table extraction disabled - only native figure detection will work. "
+            "Install 'docling' package to enable table extraction."
+        )
+        print(
+            f"  [WARN] Docling not available: {e}\n"
+            "         Table extraction disabled. Only figures will be extracted."
+        )
+        return []
+    except Exception as e:
+        logger.error(f"Docling table extraction failed: {e}")
+        print(f"  [ERROR] Docling table extraction failed: {e}")
+        return []
+
+
+def _extract_table_from_docling(
+    table_item: Any,
+    mode: str,
+) -> Optional[Dict[str, Any]]:
+    """
+    Extract table data from a Docling TableItem.
+
+    Args:
+        table_item: Docling TableItem
+        mode: Extraction mode used
+
+    Returns:
+        Dict with table data
+    """
+    try:
+        # Get provenance for page/bbox
+        prov = table_item.prov[0] if table_item.prov else None
+        if not prov:
+            return None
+
+        page_num = prov.page_no  # 1-indexed
+        bbox = prov.bbox  # Docling bbox format
+
+        # Normalize bbox to (x0, y0, x1, y1)
+        if hasattr(bbox, "l"):
+            # Docling uses l, t, r, b
+            bbox_pts = (
+                min(bbox.l, bbox.r),
+                min(bbox.t, bbox.b),
+                max(bbox.l, bbox.r),
+                max(bbox.t, bbox.b),
+            )
+        else:
+            bbox_pts = tuple(bbox)
+
+        # Extract structure
+        headers = []
+        rows = []
+
+        if hasattr(table_item, "data") and table_item.data:
+            df = table_item.data.to_dataframe()
+            headers = [list(df.columns)]
+            rows = df.values.tolist()
+
+        # Count merged cells
+        merged_count = 0
+        header_depth = 1
+
+        if hasattr(table_item, "table_cells"):
+            for cell in table_item.table_cells:
+                if cell.row_span > 1 or cell.col_span > 1:
+                    merged_count += 1
+                if cell.is_header:
+                    header_depth = max(header_depth, cell.row_index + 1)
+
+        return {
+            "page_num": page_num,
+            "bbox_pts": bbox_pts,
+            "headers": headers,
+            "rows": rows,
+            "mode": mode,
+            "merged_cell_count": merged_count,
+            "header_depth": header_depth,
+            "column_count": len(headers[0]) if headers else 0,
+            "row_count": len(rows),
+        }
+
+    except Exception as e:
+        logger.warning(f"Failed to extract table from Docling: {e}")
+        return None
+
+
+# -------------------------
+# Native Figure Detection
+# -------------------------
+
+
+def detect_figures_native(
+    pdf_path: str,
+    config: DetectorConfig = DetectorConfig(),
+) -> List[Dict[str, Any]]:
+    """
+    Detect figures using native PDF extraction.
+
+    Args:
+        pdf_path: Path to PDF file
+        config: Detector configuration
+
+    Returns:
+        List of figure detection results
+    """
+    figures = []
+
+    try:
+        doc = fitz.open(pdf_path)
+
+        # Track image hashes for deduplication
+        hash_counts: Dict[str, int] = {}
+
+        for page_idx in range(doc.page_count):
+            page_num = page_idx + 1
+            page = doc[page_idx]
+            page_width = page.rect.width
+            page_height = page.rect.height
+            page_area = page_width * page_height
+
+            # Get embedded images
+            image_list = page.get_images(full=True)
+
+            for img_info in image_list:
+                xref = img_info[0]
+
+                try:
+                    # Get image rect (position on page)
+                    img_rects = page.get_image_rects(xref)
+                    if not img_rects:
+                        continue
+
+                    rect = img_rects[0]
+                    bbox_pts = (rect.x0, rect.y0, rect.x1, rect.y1)
+
+                    # Compute area ratio
+                    area = (rect.x1 - rect.x0) * (rect.y1 - rect.y0)
+                    area_ratio = area / page_area
+
+                    # Skip tiny images
+                    if area_ratio < config.min_figure_area_ratio:
+                        continue
+
+                    # Compute image hash for deduplication
+                    base_image = doc.extract_image(xref)
+                    if base_image:
+                        img_hash = hashlib.sha1(base_image["image"]).hexdigest()
+                        hash_counts[img_hash] = hash_counts.get(img_hash, 0) + 1
+                    else:
+                        img_hash = None
+
+                    # Check if in margin zone
+                    in_margin = is_in_margin_zone(bbox_pts, page_height)
+
+                    figures.append({
+                        "page_num": page_num,
+                        "bbox_pts": bbox_pts,
+                        "area_ratio": area_ratio,
+                        "xref": xref,
+                        "image_hash": img_hash,
+                        "in_margin_zone": in_margin,
+                        "source": "native_raster",
+                    })
+
+                except Exception as e:
+                    logger.debug(f"Failed to process image xref {xref}: {e}")
+                    continue
+
+        doc.close()
+
+        # Filter repeated images (logos, headers)
+        if config.filter_noise:
+            repeated_hashes = {
+                h for h, c in hash_counts.items() if c >= config.repeat_threshold
+            }
+            figures = [
+                f for f in figures
+                if f["image_hash"] not in repeated_hashes
+            ]
+
+        return figures
+
+    except Exception as e:
+        logger.error(f"Native figure detection failed: {e}")
+        print(f"  [ERROR] Native figure detection failed: {e}")
+        return []
+
+
+# -------------------------
+# Detection Orchestration
+# -------------------------
+
+
+@dataclass
+class DetectionResult:
+    """Result of visual detection for a document."""
+
+    candidates: List[VisualCandidate]
+    tables_detected: int
+    figures_detected: int
+    escalated_tables: int
+    detection_mode: str
+
+
+def detect_all_visuals(
+    pdf_path: str,
+    config: DetectorConfig = DetectorConfig(),
+) -> DetectionResult:
+    """
+    Detect all visuals (tables and figures) in a PDF.
+
+    Uses tiered approach:
+    1. FAST mode for all tables
+    2. Escalate to ACCURATE for complex tables
+    3. Native extraction for figures
+
+    Args:
+        pdf_path: Path to PDF file
+        config: Detector configuration
+
+    Returns:
+        DetectionResult with all candidates
+    """
+    candidates: List[VisualCandidate] = []
+    escalated_count = 0
+
+    # Open PDF for page dimensions
+    doc = fitz.open(pdf_path)
+
+    try:
+        # Pre-extract captions for all pages
+        captions_by_page: Dict[int, List] = {}
+        column_layouts: Dict[int, ColumnLayout] = {}
+
+        for page_idx in range(doc.page_count):
+            page_num = page_idx + 1
+            column_layouts[page_num] = infer_column_layout(doc, page_num)
+            captions_by_page[page_num] = extract_all_captions_on_page(doc, page_num)
+
+        # Step 1: Detect tables with FAST mode
+        tables = detect_tables_with_docling(pdf_path, mode="fast", config=config)
+
+        for table in tables:
+            page_num = table["page_num"]
+            page = doc[page_num - 1]
+            bbox_pts = table["bbox_pts"]
+
+            # Compute complexity signals
+            signals = TableComplexitySignals(
+                merged_cell_count=table.get("merged_cell_count", 0),
+                header_depth=table.get("header_depth", 1),
+                token_coverage_ratio=table.get("token_coverage", 1.0),
+                column_count=table.get("column_count", 0),
+                row_count=table.get("row_count", 0),
+            )
+
+            # Check if escalation needed
+            needs_accurate = False
+            if config.enable_escalation:
+                should_escalate, reason = should_escalate_to_accurate(
+                    signals, config.escalation_config
+                )
+                if should_escalate:
+                    needs_accurate = True
+                    escalated_count += 1
+                    logger.debug(f"Table on page {page_num} flagged for ACCURATE: {reason}")
+
+            # Check for caption
+            page_captions = captions_by_page.get(page_num, [])
+            has_caption = _has_nearby_caption(bbox_pts, page_captions)
+
+            # Create candidate
+            area = (bbox_pts[2] - bbox_pts[0]) * (bbox_pts[3] - bbox_pts[1])
+            page_area = page.rect.width * page.rect.height
+
+            candidate = VisualCandidate(
+                source="docling",
+                docling_type="table",
+                page_num=page_num,
+                bbox_pts=bbox_pts,
+                page_width_pts=page.rect.width,
+                page_height_pts=page.rect.height,
+                area_ratio=area / page_area if page_area > 0 else 0,
+                has_nearby_caption=has_caption,
+                has_grid_structure=True,
+                needs_accurate_rerun=needs_accurate,
+            )
+            candidates.append(candidate)
+
+        tables_count = len(tables)
+
+        # Step 2: Detect figures
+        figures = detect_figures_native(pdf_path, config)
+
+        for fig in figures:
+            page_num = fig["page_num"]
+            page = doc[page_num - 1]
+            bbox_pts = fig["bbox_pts"]
+
+            # Check for caption
+            page_captions = captions_by_page.get(page_num, [])
+            has_caption = _has_nearby_caption(bbox_pts, page_captions)
+
+            candidate = VisualCandidate(
+                source=fig["source"],
+                page_num=page_num,
+                bbox_pts=bbox_pts,
+                page_width_pts=page.rect.width,
+                page_height_pts=page.rect.height,
+                area_ratio=fig["area_ratio"],
+                image_hash=fig.get("image_hash"),
+                has_nearby_caption=has_caption,
+                in_margin_zone=fig.get("in_margin_zone", False),
+            )
+            candidates.append(candidate)
+
+        figures_count = len(figures)
+
+    finally:
+        doc.close()
+
+    return DetectionResult(
+        candidates=candidates,
+        tables_detected=tables_count,
+        figures_detected=figures_count,
+        escalated_tables=escalated_count,
+        detection_mode=config.default_table_mode,
+    )
+
+
+def _has_nearby_caption(
+    bbox_pts: Tuple[float, float, float, float],
+    captions: List,
+    max_distance_pts: float = 72.0,
+) -> bool:
+    """
+    Check if there's a caption nearby the visual.
+
+    Args:
+        bbox_pts: Visual bounding box
+        captions: List of caption candidates on the page
+        max_distance_pts: Maximum distance to consider "nearby"
+
+    Returns:
+        True if a caption is nearby
+    """
+    vx0, vy0, vx1, vy1 = bbox_pts
+
+    for caption in captions:
+        cx0, cy0, cx1, cy1 = caption.bbox_pts
+
+        # Check if caption is below visual
+        if cy0 >= vy1 and cy0 - vy1 <= max_distance_pts:
+            # Check horizontal overlap
+            if cx0 < vx1 and cx1 > vx0:
+                return True
+
+        # Check if caption is above visual
+        if cy1 <= vy0 and vy0 - cy1 <= max_distance_pts:
+            if cx0 < vx1 and cx1 > vx0:
+                return True
+
+    return False
+
+
+# -------------------------
+# Re-extraction with ACCURATE
+# -------------------------
+
+
+def reextract_table_accurate(
+    pdf_path: str,
+    page_num: int,
+    bbox_pts: Tuple[float, float, float, float],
+    config: DetectorConfig = DetectorConfig(),
+) -> Optional[TableStructure]:
+    """
+    Re-extract a specific table using ACCURATE mode.
+
+    Args:
+        pdf_path: Path to PDF file
+        page_num: Page number of the table
+        bbox_pts: Bounding box of the table
+        config: Detector configuration
+
+    Returns:
+        TableStructure with ACCURATE extraction, or None
+    """
+    tables = detect_tables_with_docling(pdf_path, mode="accurate", config=config)
+
+    # Find the matching table by bbox overlap
+    for table in tables:
+        if table["page_num"] != page_num:
+            continue
+
+        # Check bbox overlap
+        t_bbox = table["bbox_pts"]
+        overlap = _compute_bbox_overlap(bbox_pts, t_bbox)
+
+        if overlap > 0.7:  # 70% overlap threshold
+            return TableStructure(
+                headers=table.get("headers", []),
+                rows=table.get("rows", []),
+                token_coverage=table.get("token_coverage", 1.0),
+                structure_confidence=0.95,  # ACCURATE mode = high confidence
+            )
+
+    return None
+
+
+def _compute_bbox_overlap(
+    bbox1: Tuple[float, float, float, float],
+    bbox2: Tuple[float, float, float, float],
+) -> float:
+    """Compute overlap ratio between two bboxes."""
+    x1 = max(bbox1[0], bbox2[0])
+    y1 = max(bbox1[1], bbox2[1])
+    x2 = min(bbox1[2], bbox2[2])
+    y2 = min(bbox1[3], bbox2[3])
+
+    if x2 <= x1 or y2 <= y1:
+        return 0.0
+
+    intersection = (x2 - x1) * (y2 - y1)
+    area1 = (bbox1[2] - bbox1[0]) * (bbox1[3] - bbox1[1])
+    area2 = (bbox2[2] - bbox2[0]) * (bbox2[3] - bbox2[1])
+
+    union = area1 + area2 - intersection
+    return intersection / union if union > 0 else 0.0
+
+
+__all__ = [
+    # Types
+    "DetectorConfig",
+    "DetectionResult",
+    # Main functions
+    "detect_all_visuals",
+    "detect_tables_with_docling",
+    "detect_figures_native",
+    # Re-extraction
+    "reextract_table_accurate",
+]

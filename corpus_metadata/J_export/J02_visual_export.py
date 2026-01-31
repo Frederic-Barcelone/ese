@@ -1,0 +1,345 @@
+# corpus_metadata/J_export/J02_visual_export.py
+"""
+Export handlers for the new visual extraction pipeline.
+
+Exports ExtractedVisual objects to JSON format with:
+- Full metadata (type, reference, caption, relationships)
+- Base64 images (or external file references)
+- Structured table data for table visuals
+"""
+from __future__ import annotations
+
+import json
+import logging
+from pathlib import Path
+from typing import Any, Dict
+
+from A_core.A13_visual_models import (
+    ExtractedVisual,
+)
+from B_parsing.B12_visual_pipeline import PipelineResult
+
+logger = logging.getLogger(__name__)
+
+
+# -------------------------
+# Serialization
+# -------------------------
+
+
+def visual_to_dict(visual: ExtractedVisual, include_image: bool = True) -> Dict[str, Any]:
+    """
+    Convert ExtractedVisual to serializable dict.
+
+    Args:
+        visual: ExtractedVisual to convert
+        include_image: Whether to include base64 image data
+
+    Returns:
+        Dict suitable for JSON serialization
+    """
+    result = {
+        "visual_id": visual.visual_id,
+        "visual_type": visual.visual_type.value,
+        "confidence": visual.confidence,
+        "page_range": visual.page_range,
+        "is_multipage": visual.is_multipage,
+    }
+
+    # Location
+    result["locations"] = [
+        {
+            "page_num": loc.page_num,
+            "bbox_pts": list(loc.bbox_pts),
+        }
+        for loc in visual.bbox_pts_per_page
+    ]
+
+    # Caption
+    if visual.caption_text:
+        result["caption"] = {
+            "text": visual.caption_text,
+            "provenance": visual.caption_provenance.value if visual.caption_provenance else None,
+        }
+        if visual.caption_bbox_pts:
+            result["caption"]["bbox_pts"] = list(visual.caption_bbox_pts)
+
+    # Reference
+    if visual.reference:
+        result["reference"] = {
+            "raw_string": visual.reference.raw_string,
+            "type_label": visual.reference.type_label,
+            "numbers": visual.reference.numbers,
+            "is_range": visual.reference.is_range,
+            "suffix": visual.reference.suffix,
+            "source": visual.reference.source.value,
+        }
+
+    # Image
+    if include_image:
+        result["image"] = {
+            "base64": visual.image_base64,
+            "format": visual.image_format,
+            "dpi": visual.render_dpi,
+        }
+    else:
+        result["image"] = {
+            "format": visual.image_format,
+            "dpi": visual.render_dpi,
+        }
+
+    # Table-specific
+    if visual.is_table:
+        result["table_data"] = {}
+
+        if visual.validated_table:
+            result["table_data"]["structure"] = {
+                "headers": visual.validated_table.headers,
+                "rows": visual.validated_table.rows,
+                "confidence": visual.validated_table.structure_confidence,
+            }
+        elif visual.docling_table:
+            result["table_data"]["structure"] = {
+                "headers": visual.docling_table.headers,
+                "rows": visual.docling_table.rows,
+                "confidence": visual.docling_table.structure_confidence,
+            }
+
+        if visual.table_extraction_mode:
+            result["table_data"]["extraction_mode"] = visual.table_extraction_mode.value
+
+    # Relationships
+    if visual.relationships:
+        mentions = []
+        for mention in visual.relationships.text_mentions:
+            mentions.append({
+                "text": mention.text,
+                "page_num": mention.page_num,
+                "char_offset": mention.char_offset,
+            })
+
+        result["relationships"] = {
+            "text_mentions": mentions,
+            "section_context": visual.relationships.section_context,
+            "continued_from": visual.relationships.continued_from,
+            "continues_to": visual.relationships.continues_to,
+        }
+
+    # Provenance
+    result["provenance"] = {
+        "extraction_method": visual.extraction_method,
+        "source_file": visual.source_file,
+        "extracted_at": visual.extracted_at.isoformat(),
+    }
+
+    # Triage info
+    if visual.triage_decision:
+        result["triage"] = {
+            "decision": visual.triage_decision.value,
+            "reason": visual.triage_reason,
+        }
+
+    return result
+
+
+def pipeline_result_to_dict(result: PipelineResult) -> Dict[str, Any]:
+    """
+    Convert PipelineResult to serializable dict.
+
+    Args:
+        result: Pipeline result to convert
+
+    Returns:
+        Dict suitable for JSON serialization
+    """
+    return {
+        "metadata": {
+            "source_file": result.source_file,
+            "extracted_at": result.extracted_at.isoformat(),
+            "extraction_time_seconds": result.extraction_time_seconds,
+        },
+        "statistics": {
+            "tables_detected": result.tables_detected,
+            "figures_detected": result.figures_detected,
+            "tables_escalated": result.tables_escalated,
+            "vlm_enriched": result.vlm_enriched,
+            "merges_performed": result.merges_performed,
+            "duplicates_removed": result.duplicates_removed,
+            "final_count": len(result.visuals),
+        },
+        "visuals": [visual_to_dict(v) for v in result.visuals],
+    }
+
+
+# -------------------------
+# Export Functions
+# -------------------------
+
+
+def export_visuals_to_json(
+    result: PipelineResult,
+    output_path: Path,
+    include_images: bool = True,
+    pretty_print: bool = True,
+) -> Path:
+    """
+    Export pipeline result to JSON file.
+
+    Args:
+        result: Pipeline result to export
+        output_path: Output file path
+        include_images: Whether to include base64 images
+        pretty_print: Whether to format JSON with indentation
+
+    Returns:
+        Path to exported file
+    """
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    data = {
+        "metadata": {
+            "source_file": result.source_file,
+            "extracted_at": result.extracted_at.isoformat(),
+            "extraction_time_seconds": result.extraction_time_seconds,
+        },
+        "statistics": {
+            "tables_detected": result.tables_detected,
+            "figures_detected": result.figures_detected,
+            "tables_escalated": result.tables_escalated,
+            "vlm_enriched": result.vlm_enriched,
+            "merges_performed": result.merges_performed,
+            "duplicates_removed": result.duplicates_removed,
+            "final_count": len(result.visuals),
+        },
+        "visuals": [
+            visual_to_dict(v, include_image=include_images)
+            for v in result.visuals
+        ],
+    }
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        if pretty_print:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        else:
+            json.dump(data, f, ensure_ascii=False)
+
+    logger.info(f"Exported {len(result.visuals)} visuals to {output_path}")
+    return output_path
+
+
+def export_tables_only(
+    result: PipelineResult,
+    output_path: Path,
+    include_images: bool = True,
+) -> Path:
+    """Export only tables from pipeline result."""
+    tables = [v for v in result.visuals if v.is_table]
+
+    data = {
+        "metadata": {
+            "source_file": result.source_file,
+            "extracted_at": result.extracted_at.isoformat(),
+        },
+        "count": len(tables),
+        "tables": [visual_to_dict(v, include_image=include_images) for v in tables],
+    }
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+    return output_path
+
+
+def export_figures_only(
+    result: PipelineResult,
+    output_path: Path,
+    include_images: bool = True,
+) -> Path:
+    """Export only figures from pipeline result."""
+    figures = [v for v in result.visuals if v.is_figure]
+
+    data = {
+        "metadata": {
+            "source_file": result.source_file,
+            "extracted_at": result.extracted_at.isoformat(),
+        },
+        "count": len(figures),
+        "figures": [visual_to_dict(v, include_image=include_images) for v in figures],
+    }
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+    return output_path
+
+
+# -------------------------
+# Image Export (Optional)
+# -------------------------
+
+
+def export_images_separately(
+    result: PipelineResult,
+    output_dir: Path,
+    format: str = "png",
+) -> Dict[str, Path]:
+    """
+    Export visual images as separate files.
+
+    Args:
+        result: Pipeline result
+        output_dir: Directory for image files
+        format: Image format (png, jpg)
+
+    Returns:
+        Dict mapping visual_id to image file path
+    """
+    import base64
+
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    image_paths: Dict[str, Path] = {}
+
+    for visual in result.visuals:
+        # Generate filename
+        type_prefix = "table" if visual.is_table else "figure"
+        ref_str = ""
+        if visual.reference:
+            ref_str = f"_{visual.reference.numbers[0]}"
+
+        filename = f"{type_prefix}{ref_str}_page{visual.primary_page}_{visual.visual_id[:8]}.{format}"
+        image_path = output_dir / filename
+
+        # Decode and write image
+        try:
+            img_bytes = base64.b64decode(visual.image_base64)
+            with open(image_path, "wb") as f:
+                f.write(img_bytes)
+
+            image_paths[visual.visual_id] = image_path
+
+        except Exception as e:
+            logger.warning(f"Failed to export image {visual.visual_id}: {e}")
+
+    logger.info(f"Exported {len(image_paths)} images to {output_dir}")
+    return image_paths
+
+
+__all__ = [
+    # Serialization
+    "visual_to_dict",
+    "pipeline_result_to_dict",
+    # Export
+    "export_visuals_to_json",
+    "export_tables_only",
+    "export_figures_only",
+    "export_images_separately",
+]

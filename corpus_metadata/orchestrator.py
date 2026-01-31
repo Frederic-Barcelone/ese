@@ -82,6 +82,7 @@ from A_core.A18_recommendation_models import RecommendationSet
 # Import refactored modules
 from H_pipeline.H01_component_factory import ComponentFactory
 from H_pipeline.H02_abbreviation_pipeline import AbbreviationPipeline
+from H_pipeline.H03_visual_integration import VisualPipelineIntegration
 from I_extraction.I01_entity_processors import EntityProcessor
 from I_extraction.I02_feasibility_processor import FeasibilityProcessor
 from J_export.J01_export_handlers import ExportManager
@@ -261,13 +262,13 @@ class Orchestrator:
                 "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": True, "recommendations": True,
+                "care_pathways": True, "recommendations": True, "visuals": True,
             },
             "all": {
                 "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": True, "authors": True,
                 "citations": True, "document_metadata": True, "tables": True,
-                "care_pathways": True, "recommendations": True,
+                "care_pathways": True, "recommendations": True, "visuals": True,
             },
             "minimal": {
                 "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
@@ -292,6 +293,7 @@ class Orchestrator:
             self.extract_tables = preset_config["tables"]
             self.extract_care_pathways = preset_config.get("care_pathways", False)
             self.extract_recommendations = preset_config.get("recommendations", False)
+            self.extract_visuals = preset_config.get("visuals", False)
         else:
             # Use individual extractor flags
             self.active_preset = None
@@ -307,6 +309,7 @@ class Orchestrator:
             self.extract_tables = extractors.get("tables", True)
             self.extract_care_pathways = extractors.get("care_pathways", True)
             self.extract_recommendations = extractors.get("recommendations", True)
+            self.extract_visuals = extractors.get("visuals", True)
 
         # Processing options (always read from options, not affected by preset)
         self.use_llm_validation = options.get("use_llm_validation", True)
@@ -352,6 +355,7 @@ class Orchestrator:
             ("tables", self.extract_tables),
             ("care_pathways", self.extract_care_pathways),
             ("recommendations", self.extract_recommendations),
+            ("visuals", self.extract_visuals),
         ]
         for name, enabled in extractors:
             if enabled:
@@ -513,6 +517,9 @@ class Orchestrator:
             gold_json=self.gold_json,
             claude_client=self.claude_client,
         )
+
+        # Create visual pipeline integration
+        self.visual_integration = VisualPipelineIntegration(self.config)
 
         # Print unified lexicon summary
         self._print_unified_lexicon_summary()
@@ -871,6 +878,25 @@ class Orchestrator:
         else:
             print("\n[Recommendation extraction] SKIPPED (disabled in config)")
 
+        # Stage 10c: Visual extraction (tables and figures as images)
+        visual_result = None
+        self._last_visual_result = None  # Store for summary printing
+        if self.extract_visuals and self.visual_integration.enabled:
+            timer.start("10c. Visual Extraction")
+            print("\n[10c/12] Extracting visuals (tables and figures)...")
+            try:
+                visual_result = self.visual_integration.extract(str(pdf_path_obj))
+                if visual_result:
+                    self._last_visual_result = visual_result
+                    print(f"    + Extracted {len(visual_result.visuals)} visuals "
+                          f"({visual_result.tables_detected} tables, {visual_result.figures_detected} figures)")
+            except Exception as e:
+                print(f"    [WARN] Visual extraction failed: {e}")
+            visual_time = timer.stop("10c. Visual Extraction")
+            print(f"  ⏱  {visual_time:.1f}s")
+        else:
+            print("\n[Visual extraction] SKIPPED (disabled in config)")
+
         # Stage 11: Document metadata extraction
         doc_metadata: Optional[DocumentMetadata] = None
         if self.extract_doc_metadata:
@@ -934,6 +960,15 @@ class Orchestrator:
 
         if recommendation_results:
             self.export_manager.export_recommendations(pdf_path_obj, recommendation_results)
+
+        if visual_result:
+            exported_paths = self.visual_integration.export(
+                visual_result,
+                output_dir,
+                doc_name=pdf_path_obj.stem,
+                export_images=True,
+            )
+            print(f"  Visual exports: {len(exported_paths)} files")
 
         # Update export metrics
         validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
@@ -1277,6 +1312,17 @@ class Orchestrator:
                     print(f"    - {rec.population}: {action_short}")
                 if len(rs.recommendations) > 3:
                     print(f"    ... and {len(rs.recommendations) - 3} more")
+
+        # Print visual extraction summary (only if extractor was enabled)
+        if hasattr(self, '_last_visual_result') and self._last_visual_result:
+            result = self._last_visual_result
+            print(f"\nVisual extraction ({len(result.visuals)} visuals):")
+            print(f"  Tables: {result.tables_detected}")
+            print(f"  Figures: {result.figures_detected}")
+            if result.tables_escalated > 0:
+                print(f"  Tables escalated: {result.tables_escalated}")
+            if result.vlm_enriched > 0:
+                print(f"  VLM enriched: {result.vlm_enriched}")
 
     def process_folder(
         self, folder_path: Optional[str] = None, batch_delay_ms: float = 100

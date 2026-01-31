@@ -871,6 +871,7 @@ extraction_pipeline:
   extractors:
     drugs: true
     diseases: true
+    genes: true
     abbreviations: true
     feasibility: true
     pharma_companies: true
@@ -878,6 +879,7 @@ extraction_pipeline:
     citations: true
     document_metadata: true
     tables: true
+    visuals: true                   # New visual extraction pipeline (tables/figures as images)
 
   # Processing options
   options:
@@ -891,6 +893,44 @@ extraction_pipeline:
     use_patient_journey: true     # Patient journey extraction (diagnostic delay, treatment lines, care pathway)
     use_registry_extraction: true # Registry extraction (registry names, sizes, data types, access policies)
     parallel_extraction: true     # Run independent extractors in parallel
+
+  # Visual extraction pipeline (tables + figures)
+  visual_extraction:
+    enabled: true                   # Enable new unified visual pipeline
+
+    # Detection settings
+    detection:
+      table_mode_default: "fast"    # "fast" or "accurate" TableFormer mode
+      enable_escalation: true       # Escalate complex tables to ACCURATE mode
+      min_figure_area_ratio: 0.02   # Minimum 2% of page area for figures
+      filter_noise: true            # Remove repeated logos/headers
+      repeat_threshold: 3           # Images on 3+ pages = header/footer
+
+    # Rendering settings
+    rendering:
+      default_dpi: 300              # Default render DPI
+      min_dpi: 200                  # Minimum for large visuals
+      max_dpi: 400                  # Maximum for small visuals
+      padding_sides_pts: 12         # Side padding in PDF points
+      padding_caption_pts: 72       # Caption zone padding in points
+
+    # Triage settings
+    triage:
+      skip_area_ratio: 0.02         # Skip visuals <2% page area
+      vlm_area_threshold: 0.10      # VLM for uncaptioned visuals >10%
+      repeat_threshold: 3           # Repeated image threshold
+
+    # VLM enrichment
+    vlm:
+      enabled: true                 # Use VLM for classification/validation
+      model: "claude-sonnet-4-20250514"
+      validate_tables: true         # Validate Docling table structure
+
+    # Resolution settings
+    resolution:
+      merge_multipage: true         # Merge multi-page tables/figures
+      deduplicate: true             # Remove overlapping detections
+      dedupe_threshold: 0.7         # Overlap threshold for deduplication
 
   # Page limits (optional)
   page_limits:
