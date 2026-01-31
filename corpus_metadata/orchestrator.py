@@ -275,6 +275,18 @@ class Orchestrator:
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
+            "images_only": {
+                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": True,
+                "care_pathways": False, "recommendations": False, "visuals": True,
+            },
+            "tables_only": {
+                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": True,
+                "care_pathways": False, "recommendations": False, "visuals": False,
+            },
         }
 
         # Apply preset if set, otherwise use individual flags

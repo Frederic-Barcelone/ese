@@ -854,6 +854,8 @@ deduplication:
 #   - entities_only: Drugs + Diseases + Abbreviations
 #   - clinical_entities: Drugs + Diseases
 #   - metadata_only: Authors + Citations + Document metadata
+#   - images_only: Tables + Figures/Visuals extraction only
+#   - tables_only: Table extraction only (no figures)
 #   - standard: Drugs + Diseases + Abbreviations + Feasibility (DEFAULT)
 #   - all: Everything
 #   - minimal: Just abbreviations (no LLM)
@@ -865,7 +867,8 @@ extraction_pipeline:
   # Use a preset (overrides individual flags below if set)
   # Set to null or remove to use individual flags
   preset: standard  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
-                # entities_only, clinical_entities, metadata_only, standard, all, minimal
+                # entities_only, clinical_entities, metadata_only, images_only, tables_only,
+                # standard, all, minimal
 
   # Individual extractor flags (used when preset is null)
   extractors:
