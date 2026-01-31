@@ -102,21 +102,36 @@ def detect_tables_with_docling(
         )
         from docling.document_converter import DocumentConverter, PdfFormatOption
 
-        # Configure TableFormer mode
-        if mode == "accurate":
-            table_mode = TableFormerMode.ACCURATE
-        else:
-            table_mode = TableFormerMode.FAST
+        # Try to import SuryaOcrOptions for better OCR
+        try:
+            from docling_surya import SuryaOcrOptions
+            has_surya = True
+        except ImportError:
+            has_surya = False
+            logger.info("SuryaOCR not available, using default OCR")
 
-        # Configure pipeline
-        pipeline_options = PdfPipelineOptions(
-            do_ocr=config.enable_ocr,
-            do_table_structure=True,
-            table_structure_options={
-                "mode": table_mode,
-                "do_cell_matching": config.do_cell_matching,
-            },
-        )
+        # Configure pipeline (follow pattern from B03c_docling_backend.py)
+        if config.enable_ocr and has_surya:
+            pipeline_options = PdfPipelineOptions(
+                do_table_structure=True,
+                do_ocr=True,
+                allow_external_plugins=True,
+                ocr_options=SuryaOcrOptions(lang=["en"]),
+            )
+        else:
+            pipeline_options = PdfPipelineOptions(
+                do_table_structure=True,
+                do_ocr=config.enable_ocr,
+            )
+
+        # Set TableFormer mode on existing options object
+        if mode == "accurate":
+            pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+        else:
+            pipeline_options.table_structure_options.mode = TableFormerMode.FAST
+
+        # Set cell matching option
+        pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching
 
         format_options = {
             InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
@@ -128,8 +143,9 @@ def detect_tables_with_docling(
 
         # Extract tables from result
         tables = []
-        for item in result.document.tables:
-            table_data = _extract_table_from_docling(item, mode)
+        document = result.document
+        for item in document.tables:
+            table_data = _extract_table_from_docling(item, document, mode)
             if table_data:
                 tables.append(table_data)
 
@@ -154,6 +170,7 @@ def detect_tables_with_docling(
 
 def _extract_table_from_docling(
     table_item: Any,
+    document: Any,
     mode: str,
 ) -> Optional[Dict[str, Any]]:
     """
@@ -161,6 +178,7 @@ def _extract_table_from_docling(
 
     Args:
         table_item: Docling TableItem
+        document: DoclingDocument for DataFrame export
         mode: Extraction mode used
 
     Returns:
@@ -187,14 +205,16 @@ def _extract_table_from_docling(
         else:
             bbox_pts = tuple(bbox)
 
-        # Extract structure
+        # Extract structure using export_to_dataframe (correct Docling API)
         headers = []
         rows = []
 
-        if hasattr(table_item, "data") and table_item.data:
-            df = table_item.data.to_dataframe()
-            headers = [list(df.columns)]
-            rows = df.values.tolist()
+        try:
+            df = table_item.export_to_dataframe(doc=document)
+            headers = [[str(col) for col in df.columns.tolist()]]
+            rows = [[str(cell) if cell is not None else "" for cell in row] for row in df.values.tolist()]
+        except Exception as df_err:
+            logger.debug(f"DataFrame export failed: {df_err}, trying fallback")
 
         # Count merged cells
         merged_count = 0
