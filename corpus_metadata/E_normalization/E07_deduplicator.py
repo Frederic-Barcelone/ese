@@ -123,9 +123,10 @@ class Deduplicator:
         deduped = []
         for sf_key, group in sf_groups.items():
             if len(group) == 1:
-                # No deduplication needed, but add flag
+                # No deduplication needed, but add mention tracking
                 entity = group[0]
-                deduped.append(self._add_dedup_flag(entity, []))
+                page = entity.primary_evidence.location.page_num if entity.primary_evidence else None
+                deduped.append(self._add_dedup_flag(entity, [], 1, [page] if page else []))
             else:
                 # Multiple entities for same SF - merge them
                 merged = self._merge_group(sf_key, group)
@@ -156,6 +157,14 @@ class Deduplicator:
         # Best entity becomes the canonical one
         best_score, best_entity = scored[0]
 
+        # Collect all pages where the abbreviation appears
+        pages: set = set()
+        for _, e in scored:
+            if e.primary_evidence:
+                pages.add(e.primary_evidence.location.page_num)
+            for ev in e.supporting_evidence or []:
+                pages.add(ev.location.page_num)
+
         # Collect unique alternative LFs (excluding the best one)
         best_lf_norm = _normalize_lf(best_entity.long_form or "")
         alternatives = []
@@ -180,7 +189,7 @@ class Deduplicator:
             if len(alternatives) >= self.max_alternatives:
                 break
 
-        return self._add_dedup_flag(best_entity, alternatives)
+        return self._add_dedup_flag(best_entity, alternatives, len(group), sorted(pages))
 
     def _score_entity(self, entity: ExtractedEntity) -> float:
         """
@@ -228,12 +237,16 @@ class Deduplicator:
         return score
 
     def _add_dedup_flag(
-        self, entity: ExtractedEntity, alternatives: List[Dict[str, Any]]
+        self, entity: ExtractedEntity, alternatives: List[Dict[str, Any]],
+        mention_count: int = 1, pages_mentioned: Optional[List[int]] = None
     ) -> ExtractedEntity:
         """
         Add deduplication metadata to entity.
         """
-        updates: Dict[str, Any] = {}
+        updates: Dict[str, Any] = {
+            "mention_count": mention_count,
+            "pages_mentioned": pages_mentioned or [],
+        }
 
         # Update validation flags
         flags = list(entity.validation_flags or [])

@@ -211,6 +211,10 @@ class ExtractedGene(BaseModel):
     primary_evidence: EvidenceSpan
     supporting_evidence: List[EvidenceSpan] = Field(default_factory=list)
 
+    # Mention frequency (populated during deduplication)
+    mention_count: int = Field(default=1, ge=1, description="Number of times this gene appears in the document")
+    pages_mentioned: List[int] = Field(default_factory=list, description="List of page numbers where gene appears")
+
     # Verdict
     status: ValidationStatus
     confidence_score: float = Field(..., ge=0.0, le=1.0)
@@ -273,6 +277,10 @@ class GeneExportEntry(BaseModel):
     # Context
     context: Optional[str] = None
     page: Optional[int] = None
+
+    # Mention frequency
+    mention_count: int = Field(default=1, ge=1)
+    pages_mentioned: List[int] = Field(default_factory=list)
 
     # Provenance
     lexicon_source: Optional[str] = None

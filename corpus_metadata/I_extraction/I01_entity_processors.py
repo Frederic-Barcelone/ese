@@ -38,6 +38,7 @@ if TYPE_CHECKING:
 
 from A_core.A01_domain_models import ValidationStatus
 from A_core.A03_provenance import hash_string
+from E_normalization.E12_entity_deduplicator import EntityDeduplicator
 from Z_utils.Z02_text_helpers import extract_context_snippet
 
 
@@ -239,8 +240,12 @@ class EntityProcessor:
             print("  Enriching with PubTator3...")
             results = self.disease_enricher.enrich_batch(results, verbose=True)
 
+        # Deduplicate and count mentions
+        deduplicator = EntityDeduplicator()
+        results = deduplicator.deduplicate_diseases(results)
+
         validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
-        print(f"  Validated diseases: {validated_count}")
+        print(f"  Validated diseases: {validated_count} (deduplicated)")
         print(f"  Time: {time.time() - start:.2f}s")
 
         return results
@@ -351,8 +356,12 @@ class EntityProcessor:
             )
             results.append(entity)
 
+        # Deduplicate and count mentions
+        deduplicator = EntityDeduplicator()
+        results = deduplicator.deduplicate_genes(results)
+
         validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
-        print(f"  Validated genes: {validated_count}")
+        print(f"  Validated genes: {validated_count} (deduplicated)")
         print(f"  Time: {time.time() - start:.2f}s")
 
         return results
@@ -470,8 +479,12 @@ class EntityProcessor:
             print("  Enriching with PubTator3...")
             results = self.drug_enricher.enrich_batch(results, verbose=True)
 
+        # Deduplicate and count mentions
+        deduplicator = EntityDeduplicator()
+        results = deduplicator.deduplicate_drugs(results)
+
         validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
-        print(f"  Validated drugs: {validated_count}")
+        print(f"  Validated drugs: {validated_count} (deduplicated)")
         print(f"  Time: {time.time() - start:.2f}s")
 
         return results
