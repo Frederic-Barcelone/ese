@@ -236,6 +236,7 @@ corpus_metadata/
 |   +-- A10_author_models.py             # Author/investigator models
 |   +-- A11_citation_models.py           # Citation/reference models
 |   +-- A12_gene_models.py               # Gene/genetic entity models
+|   +-- A13_visual_models.py             # Visual extraction models (NEW)
 |
 +-- B_parsing/                           # LAYER 1: DOCUMENT STRUCTURE
 |   +-- B01_pdf_to_docgraph.py           # PDF parsing with Unstructured.io + native figures
@@ -246,9 +247,15 @@ corpus_metadata/
 |   +-- B06_confidence.py                # Confidence scoring features
 |   +-- B07_negation.py                  # Negation/assertion detection
 |   +-- B08_eligibility_parser.py        # Eligibility criteria parsing
-|   +-- B09_pdf_native_figures.py        # Raster + vector figure extraction (NEW)
-|   +-- B10_caption_detector.py          # Caption detection + column inference (NEW)
-|   +-- B11_extraction_resolver.py       # Multi-signal figure resolution (NEW)
+|   +-- B09_pdf_native_figures.py        # Raster + vector figure extraction
+|   +-- B10_caption_detector.py          # Caption detection + column inference
+|   +-- B11_extraction_resolver.py       # Multi-signal figure resolution
+|   +-- B12_visual_pipeline.py           # Unified visual extraction pipeline (NEW)
+|   +-- B13_visual_detector.py           # Docling detection with FAST/ACCURATE (NEW)
+|   +-- B14_visual_renderer.py           # PyMuPDF rendering at 200-400 DPI (NEW)
+|   +-- B15_caption_extractor.py         # Multisource caption extraction (NEW)
+|   +-- B16_triage.py                    # SKIP/CHEAP/VLM routing logic (NEW)
+|   +-- B17_document_resolver.py         # Body text scanning, multi-page merge (NEW)
 |
 +-- C_generators/                        # LAYER 2: CANDIDATE GENERATION
 |   +-- C00_strategy_identifiers.py      # Database IDs (OMIM, DOI, NCT, ORCID)
@@ -266,7 +273,9 @@ corpus_metadata/
 |   +-- C18_strategy_pharma.py           # Pharma company detection
 |   +-- C13_strategy_author.py           # Author/investigator detection
 |   +-- C14_strategy_citation.py         # Citation/reference detection
+|   +-- C15_vlm_table_extractor.py       # VLM table extraction
 |   +-- C16_strategy_gene.py             # Gene/genetic entity detection
+|   +-- C16_vlm_visual_enrichment.py     # Claude Vision enrichment (NEW)
 |
 +-- D_validation/                        # LAYER 3: LLM VERIFICATION
 |   +-- D01_prompt_registry.py           # Versioned prompts with hash tracking
@@ -296,6 +305,7 @@ corpus_metadata/
 +-- H_pipeline/                          # PIPELINE COMPONENTS
 |   +-- H01_component_factory.py         # Factory for pipeline components
 |   +-- H02_abbreviation_pipeline.py     # Abbreviation extraction pipeline
+|   +-- H03_visual_integration.py        # Visual pipeline orchestrator integration (NEW)
 |   +-- H04_merge_resolver.py            # Multi-source merge resolution
 |
 +-- I_extraction/                        # ENTITY EXTRACTION
@@ -304,6 +314,7 @@ corpus_metadata/
 |
 +-- J_export/                            # OUTPUT HANDLERS
 |   +-- J01_export_handlers.py           # JSON export for all entity types
+|   +-- J02_visual_export.py             # Visual extraction JSON export (NEW)
 |
 +-- Z_utils/                             # UTILITIES & SCRIPTS
 +-- cache/                               # Runtime cache (PubTator)
@@ -336,6 +347,10 @@ When processing a PDF, all outputs are saved to a dedicated folder named after t
 +-- ClinicalTrial_flowchart_page3_1.png
 +-- ClinicalTrial_chart_page5_1.png
 +-- ClinicalTrial_chart_page7_1.png
++-- visuals_ClinicalTrial_20260115_103045.json        # NEW: Unified visual extraction
++-- visual_images_ClinicalTrial/                       # NEW: Extracted visual images
+    +-- table_1_page4_abc12345.png
+    +-- figure_2_page5_def67890.png
 ```
 
 ### Output File Formats
@@ -682,6 +697,7 @@ print(f'Raster: {len(raster)}, Vector: {len(vector)}')
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1 | 2026-01 | Unified visual extraction pipeline (B12-B17), Docling FAST/ACCURATE tiering, VLM enrichment |
 | 1.0 | 2026-01 | PDF-native figure extraction (B09-B11), vector plot detection, caption linking |
 | 0.9 | 2026-01 | Author/investigator extraction, citation/reference extraction, gene detection |
 | 0.8 | 2026-01 | Output folder restructure, image file saving, Vision LLM analysis |
@@ -705,108 +721,271 @@ print(f'Raster: {len(raster)}, Vector: {len(vector)}')
 - **ClinicalTrials.gov API:** https://clinicaltrials.gov/data-api/api
 - **PyMuPDF (fitz):** https://pymupdf.readthedocs.io/
 - **HGNC:** https://www.genenames.org/
-
-
-
+- **Docling:** https://github.com/DS4SD/docling
 
 ---
-  Design Section 2 (Revised): Refined Pipeline Architecture
 
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │                    STAGE 1: DETECTION + FAST STRUCTURE              │
-  │                         (Docling v2.71.0)                           │
-  ├─────────────────────────────────────────────────────────────────────┤
-  │  PDF ──┬──► Layout detection ──► figure regions + bboxes (pts)      │
-  │        │                                                             │
-  │        └──► Table detection ──► TableFormer FAST ──► initial struct │
-  │                                                                      │
-  │  Flag tables for ACCURATE re-run if:                                 │
-  │    • Many merged cells / deep header stacks                          │
-  │    • Low token coverage in cells                                     │
-  │    • Multi-page span detected                                        │
-  │                                                                      │
-  │  All bboxes stored in PDF points (canonical coordinate space)       │
-  └─────────────────────────────────────────────────────────────────────┘
-                                   │
-                                   ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │              STAGE 2: RENDERING + CAPTION EXTRACTION                │
-  │                    (PyMuPDF + PDF text extraction)                  │
-  ├─────────────────────────────────────────────────────────────────────┤
-  │  For each candidate:                                                 │
-  │    1. Expand bbox by point-based padding (6-12pt sides, 36-72pt     │
-  │       bottom/top depending on expected caption location)             │
-  │    2. Caption extraction (multisource):                              │
-  │       a. PDF text blocks near visual (preferred for born-digital)   │
-  │       b. OCR fallback only if no reliable PDF text found            │
-  │    3. Detect continuation cues early:                                │
-  │       • "(continued)" / "(cont.)" in caption                         │
-  │       • Repeated header structure on next page                       │
-  │       • Same reference number across pages                           │
-  │       • Matching column geometry on consecutive pages                │
-  │    4. Render at 200-300 DPI (adaptive based on visual size)         │
-  │    5. Encode as base64 PNG                                           │
-  │                                                                      │
-  │  Caption provenance tracked: {pdf_text | ocr | vlm}                 │
-  └─────────────────────────────────────────────────────────────────────┘
-                                   │
-                                   ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │                    STAGE 3: TRIAGE + VLM ENRICHMENT                 │
-  │                      (Claude Sonnet Vision)                         │
-  ├─────────────────────────────────────────────────────────────────────┤
-  │  TRIAGE (cheap signals first):                                       │
-  │                                                                      │
-  │  SKIP (no VLM):                     │  VLM PATH:                     │
-  │  • Tiny logos/separators            │  • Has caption-like text       │
-  │  • Repeated header/footer graphics  │  • Docling flagged as table    │
-  │  • No caption + low area + no refs  │  • Dense grid structure        │
-  │                                      │  • Referenced in body text    │
-  │                                      │  • Flagged for ACCURATE re-run│
-  ├──────────────────────────────────────┴───────────────────────────────┤
-  │  VLM tasks (for candidates that pass triage):                        │
-  │    1. Classify: table vs figure (with confidence)                    │
-  │    2. Parse reference from caption: "Table 1" → {type, numbers}      │
-  │    3. Validate/correct caption text                                  │
-  │    4. For tables: validate Docling structure, flag if misparsed      │
-  │    5. If misparsed + complex → trigger ACCURATE re-run               │
-  │    6. Confirm/detect multi-page continuation                         │
-  └─────────────────────────────────────────────────────────────────────┘
-                                   │
-                                   ▼
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │                  STAGE 4: DOCUMENT-LEVEL RESOLUTION                 │
-  │                      (Cross-reference + merge)                      │
-  ├─────────────────────────────────────────────────────────────────────┤
-  │  1. Scan body text for mentions ("see Figure 2", "Table 1 shows")   │
-  │  2. Parse references from body text                                  │
-  │  3. Reconcile: caption reference wins, body fills missing           │
-  │  4. Link mentions to ExtractedVisual by reference number            │
-  │  5. Infer section context from document structure                    │
-  │  6. Merge multi-page visuals (using Stage 2/3 continuation flags)   │
-  │  7. Deduplicate overlapping detections                               │
-  │  8. Final validation pass                                            │
-  └─────────────────────────────────────────────────────────────────────┘
+## Visual Extraction Pipeline (NEW in v1.1)
 
-  ---
+A unified 4-stage pipeline for extracting tables and figures as high-quality images with structured metadata.
 
+### Architecture Overview
 
-  Escalation flow:
+```
+PDF Input
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    STAGE 1: DETECTION                                │
+│                    (Docling + PyMuPDF)                               │
+├─────────────────────────────────────────────────────────────────────┤
+│  • Docling TableFormer FAST mode (default)                           │
+│  • Native figure extraction via PyMuPDF                              │
+│  • Escalate complex tables to ACCURATE mode                          │
+│  • All bboxes in PDF points (coordinate discipline)                  │
+└─────────────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    STAGE 2: RENDERING                                │
+│                    (PyMuPDF + Caption Extraction)                    │
+├─────────────────────────────────────────────────────────────────────┤
+│  • Adaptive DPI: 200-400 based on visual size                        │
+│  • Point-based padding (12pt sides, 72pt caption zone)               │
+│  • Multisource caption: PDF text preferred, OCR fallback             │
+│  • Reference parsing: "Table 1", "Figure 2-4", "Exhibit A"           │
+└─────────────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    STAGE 3: TRIAGE + VLM                             │
+│                    (Claude Vision)                                   │
+├─────────────────────────────────────────────────────────────────────┤
+│  TRIAGE ROUTING:                                                     │
+│  • SKIP: tiny logos, repeated headers, noise                         │
+│  • CHEAP_PATH: simple visuals, heuristic classification              │
+│  • VLM_REQUIRED: captioned, grid structure, body references          │
+│                                                                      │
+│  VLM ENRICHMENT:                                                     │
+│  • Type classification (table vs figure)                             │
+│  • Table structure validation                                        │
+│  • Caption extraction/correction                                     │
+│  • Continuation detection                                            │
+└─────────────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    STAGE 4: RESOLUTION                               │
+│                    (Document-level)                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│  • Body text scanning for mentions                                   │
+│  • Section context inference                                         │
+│  • Multi-page visual merging                                         │
+│  • Deduplication (70% overlap threshold)                             │
+└─────────────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Output: ExtractedVisual objects with images, captions, references
+```
 
-  FAST extraction
+### Key Components
+
+| File | Purpose |
+|------|---------|
+| `B12_visual_pipeline.py` | Main pipeline orchestrator |
+| `B13_visual_detector.py` | Docling detection with FAST/ACCURATE tiering |
+| `B14_visual_renderer.py` | PyMuPDF rendering at adaptive DPI |
+| `B15_caption_extractor.py` | Multisource caption extraction |
+| `B16_triage.py` | SKIP/CHEAP/VLM routing logic |
+| `B17_document_resolver.py` | Body text scanning, merging, deduplication |
+| `C16_vlm_visual_enrichment.py` | Claude Vision integration |
+| `A13_visual_models.py` | Pydantic models (ExtractedVisual, etc.) |
+| `H03_visual_integration.py` | Orchestrator integration |
+| `J02_visual_export.py` | JSON export handlers |
+
+### Data Models
+
+```python
+class ExtractedVisual(BaseModel):
+    """Unified model for tables and figures."""
+    visual_id: str
+    visual_type: VisualType          # TABLE, FIGURE, OTHER
+    confidence: float                 # VLM classification confidence
+
+    # Location (supports multi-page)
+    page_range: List[int]
+    bbox_pts_per_page: List[PageLocation]
+
+    # Caption & Reference
+    caption_text: Optional[str]
+    caption_provenance: CaptionProvenance  # PDF_TEXT, OCR, VLM
+    reference: Optional[VisualReference]   # Parsed "Table 1", etc.
+
+    # Rendered image
+    image_base64: str                 # Base64 PNG
+    render_dpi: int                   # 200-400
+
+    # Table-specific
+    docling_table: Optional[TableStructure]
+    validated_table: Optional[TableStructure]
+
+    # Relationships
+    relationships: VisualRelationships  # Text mentions, section context
+
+class VisualReference(BaseModel):
+    """Parsed reference like 'Figure 2-4' or 'Table 1'."""
+    raw_string: str           # "Figure 2-4"
+    type_label: str           # "Figure"
+    numbers: List[int]        # [2, 3, 4]
+    is_range: bool            # True
+    suffix: Optional[str]     # "A" in "Figure 1A"
+```
+
+### Configuration
+
+```yaml
+extraction_pipeline:
+  extractors:
+    visuals: true              # Enable visual extraction
+
+  visual_extraction:
+    enabled: true
+
+    detection:
+      table_mode_default: "fast"
+      enable_escalation: true
+      min_figure_area_ratio: 0.02
+
+    rendering:
+      default_dpi: 300
+      min_dpi: 200
+      max_dpi: 400
+      padding_sides_pts: 12
+      padding_caption_pts: 72
+
+    triage:
+      skip_area_ratio: 0.02
+      vlm_area_threshold: 0.10
+
+    vlm:
+      enabled: true
+      model: "claude-sonnet-4-20250514"
+      validate_tables: true
+
+    resolution:
+      merge_multipage: true
+      deduplicate: true
+      dedupe_threshold: 0.7
+```
+
+### Output Schema
+
+```json
+{
+  "metadata": {
+    "source_file": "document.pdf",
+    "extracted_at": "2026-01-31T10:30:45",
+    "extraction_time_seconds": 8.21
+  },
+  "statistics": {
+    "tables_detected": 3,
+    "figures_detected": 2,
+    "tables_escalated": 1,
+    "vlm_enriched": 4,
+    "merges_performed": 0,
+    "duplicates_removed": 1
+  },
+  "visuals": [
+    {
+      "visual_id": "abc12345",
+      "visual_type": "table",
+      "confidence": 0.95,
+      "page_range": [4],
+      "caption": {
+        "text": "Table 1: Baseline characteristics",
+        "provenance": "pdf_text"
+      },
+      "reference": {
+        "raw_string": "Table 1",
+        "type_label": "Table",
+        "numbers": [1]
+      },
+      "image": {
+        "base64": "iVBORw0KGgo...",
+        "format": "png",
+        "dpi": 300
+      },
+      "table_data": {
+        "structure": {
+          "headers": [["Characteristic", "Treatment", "Placebo"]],
+          "rows": [["Age, mean (SD)", "45.2 (12.3)", "44.8 (11.9)"]],
+          "confidence": 0.92
+        }
+      }
+    }
+  ]
+}
+```
+
+### Usage
+
+```python
+# Direct pipeline usage
+from B_parsing.B12_visual_pipeline import extract_visuals
+
+result = extract_visuals("document.pdf")
+print(f"Found {len(result.visuals)} visuals")
+print(f"Tables: {result.tables_detected}, Figures: {result.figures_detected}")
+
+# Via orchestrator (automatic when visuals: true)
+from orchestrator import Orchestrator
+orch = Orchestrator()
+orch.process_pdf("document.pdf")
+# Outputs: visuals_document_*.json, visual_images_document/
+```
+
+### Escalation Strategy
+
+```
+TableFormer FAST extraction
         │
         ▼
-  Compute complexity signals
+Compute complexity signals:
+  • merged_cell_count > 5
+  • header_depth > 3
+  • token_coverage < 0.70
+  • VLM flagged misparsed
         │
         ▼
-  should_escalate_to_accurate()?
+should_escalate_to_accurate()?
         │
         ├─► No  ──► Use FAST result
         │
-        └─► Yes ──► Run ACCURATE ──► Use ACCURATE result
-                          │
-                          ▼
-                    (Optional) VLM validation
-                          │
-                          ▼
-                    If still misparsed → flag for manual review
+        └─► Yes ──► Run ACCURATE ──► VLM validation
+                                          │
+                                          ▼
+                                   Final structure
+```
+
+### Dependencies
+
+| Package | Purpose |
+|---------|---------|
+| `docling` | Table detection with TableFormer |
+| `docling-surya` | SuryaOCR integration |
+| `pymupdf` | PDF rendering and figure extraction |
+| `anthropic` | Claude Vision API |
+
+### Warning Messages
+
+When dependencies are unavailable, clear warnings are displayed:
+
+```
+[WARN] Docling not installed - table extraction DISABLED
+       Install with: pip install docling
+
+[WARN] Anthropic SDK not installed - VLM enrichment DISABLED
+       Classification will use heuristics only.
+
+[WARN] VLM not available - 5 visuals classified using heuristics only
+```
