@@ -260,7 +260,7 @@ def detect_figures_native(
     config: DetectorConfig = DetectorConfig(),
 ) -> List[Dict[str, Any]]:
     """
-    Detect figures using native PDF extraction.
+    Detect figures using native PDF extraction (raster + vector).
 
     Args:
         pdf_path: Path to PDF file
@@ -276,6 +276,9 @@ def detect_figures_native(
 
         # Track image hashes for deduplication
         hash_counts: Dict[str, int] = {}
+
+        # Import vector detection from B09
+        from B_parsing.B09_pdf_native_figures import detect_vector_figures
 
         for page_idx in range(doc.page_count):
             page_num = page_idx + 1
@@ -337,6 +340,29 @@ def detect_figures_native(
                 except Exception as e:
                     logger.debug(f"Failed to process image xref {xref}: {e}")
                     continue
+
+            # Detect vector figures on this page (charts, flowcharts rendered as drawings)
+            vector_figs = detect_vector_figures(doc, page_num)
+            for vf in vector_figs:
+                # Debug: log detected vector figure
+                print(f"    [DEBUG] Vector figure detected: page={page_num}, "
+                      f"bbox=({vf.bbox[0]:.1f}, {vf.bbox[1]:.1f}, {vf.bbox[2]:.1f}, {vf.bbox[3]:.1f}), "
+                      f"drawings={vf.drawing_count}, has_axis_text={vf.has_axis_text}")
+
+                area = (vf.bbox[2] - vf.bbox[0]) * (vf.bbox[3] - vf.bbox[1])
+                area_ratio = area / page_area
+
+                figures.append({
+                    "page_num": page_num,
+                    "bbox_pts": vf.bbox,
+                    "area_ratio": area_ratio,
+                    "xref": None,
+                    "image_hash": None,
+                    "in_margin_zone": False,
+                    "source": "native_vector",
+                    "drawing_count": vf.drawing_count,
+                    "has_axis_text": vf.has_axis_text,
+                })
 
         doc.close()
 
