@@ -62,7 +62,7 @@ class AbbreviationPipeline:
         run_id: str,
         pipeline_version: str,
         parser: "PDFToDocGraphParser",
-        table_extractor: "TableExtractor",
+        table_extractor: Optional["TableExtractor"],
         generators: List[Any],
         heuristics: "HeuristicsConfig",
         term_mapper: "TermMapper",
@@ -85,7 +85,7 @@ class AbbreviationPipeline:
             run_id: Unique identifier for this pipeline run
             pipeline_version: Version string for the pipeline
             parser: PDF parser component
-            table_extractor: Table extraction component
+            table_extractor: Table extraction component (None if Docling unavailable)
             generators: List of candidate generators
             heuristics: Heuristics configuration
             term_mapper: Term mapping/normalization component
@@ -128,13 +128,16 @@ class AbbreviationPipeline:
         doc = self.parser.parse(str(pdf_path), image_output_dir=str(output_dir))
 
         # Extract tables with VLM if available (300 DPI for optimal VLM reading)
-        doc = self.table_extractor.populate_document_graph(
-            doc,
-            str(pdf_path),
-            render_images=True,
-            use_vlm=self.use_vlm_tables and self.vlm_table_extractor is not None,
-            vlm_extractor=self.vlm_table_extractor,
-        )
+        if self.table_extractor is not None:
+            doc = self.table_extractor.populate_document_graph(
+                doc,
+                str(pdf_path),
+                render_images=True,
+                use_vlm=self.use_vlm_tables and self.vlm_table_extractor is not None,
+                vlm_extractor=self.vlm_table_extractor,
+            )
+        else:
+            print("  [INFO] Table extraction skipped (Docling not available)")
 
         total_blocks = sum(len(p.blocks) for p in doc.pages.values())
         total_tables = sum(len(p.tables) for p in doc.pages.values())

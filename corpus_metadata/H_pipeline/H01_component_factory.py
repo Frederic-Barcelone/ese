@@ -104,10 +104,29 @@ class ComponentFactory:
         from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
         return PDFToDocGraphParser()
 
-    def create_table_extractor(self) -> "TableExtractor":
-        """Create table extractor component."""
-        from B_parsing.B03_table_extractor import TableExtractor
-        return TableExtractor()
+    def create_table_extractor(self) -> Optional["TableExtractor"]:
+        """Create table extractor component.
+
+        Returns None if Docling is not available (with warning).
+        """
+        # Check if Docling is available before attempting to create extractor
+        try:
+            from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
+            if not DOCLING_AVAILABLE:
+                print(
+                    "  [WARN] Docling not installed - table extraction DISABLED\n"
+                    "         Install with: pip install 'docling[docling-surya]'"
+                )
+                return None
+
+            from B_parsing.B03_table_extractor import TableExtractor
+            return TableExtractor()
+        except ImportError as e:
+            print(
+                f"  [WARN] Table extraction unavailable: {e}\n"
+                "         Install with: pip install 'docling[docling-surya]'"
+            )
+            return None
 
     def create_generators(self) -> List[Any]:
         """Create all candidate generators."""

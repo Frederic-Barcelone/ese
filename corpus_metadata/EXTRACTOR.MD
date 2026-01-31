@@ -984,8 +984,26 @@ When dependencies are unavailable, clear warnings are displayed:
 [WARN] Docling not installed - table extraction DISABLED
        Install with: pip install docling
 
+[WARN] SuryaOCR not available, using default OCR
+       Install with: pip install docling-surya
+
 [WARN] Anthropic SDK not installed - VLM enrichment DISABLED
        Classification will use heuristics only.
 
 [WARN] VLM not available - 5 visuals classified using heuristics only
 ```
+
+### OCR Configuration
+
+The visual detector supports OCR for scanned documents:
+
+```yaml
+visual_extraction:
+  detection:
+    enable_ocr: true
+    ocr_backend: "surya"    # "surya" (recommended) or "easyocr"
+    do_cell_matching: true  # Match OCR text to table cells
+```
+
+- **SuryaOCR** (via `docling-surya`): Recommended for clinical documents, better accuracy
+- **EasyOCR**: Fallback when SuryaOCR not available
