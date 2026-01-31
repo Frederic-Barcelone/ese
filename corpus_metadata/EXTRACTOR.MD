@@ -705,3 +705,108 @@ print(f'Raster: {len(raster)}, Vector: {len(vector)}')
 - **ClinicalTrials.gov API:** https://clinicaltrials.gov/data-api/api
 - **PyMuPDF (fitz):** https://pymupdf.readthedocs.io/
 - **HGNC:** https://www.genenames.org/
+
+
+
+
+---
+  Design Section 2 (Revised): Refined Pipeline Architecture
+
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                    STAGE 1: DETECTION + FAST STRUCTURE              │
+  │                         (Docling v2.71.0)                           │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  PDF ──┬──► Layout detection ──► figure regions + bboxes (pts)      │
+  │        │                                                             │
+  │        └──► Table detection ──► TableFormer FAST ──► initial struct │
+  │                                                                      │
+  │  Flag tables for ACCURATE re-run if:                                 │
+  │    • Many merged cells / deep header stacks                          │
+  │    • Low token coverage in cells                                     │
+  │    • Multi-page span detected                                        │
+  │                                                                      │
+  │  All bboxes stored in PDF points (canonical coordinate space)       │
+  └─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │              STAGE 2: RENDERING + CAPTION EXTRACTION                │
+  │                    (PyMuPDF + PDF text extraction)                  │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  For each candidate:                                                 │
+  │    1. Expand bbox by point-based padding (6-12pt sides, 36-72pt     │
+  │       bottom/top depending on expected caption location)             │
+  │    2. Caption extraction (multisource):                              │
+  │       a. PDF text blocks near visual (preferred for born-digital)   │
+  │       b. OCR fallback only if no reliable PDF text found            │
+  │    3. Detect continuation cues early:                                │
+  │       • "(continued)" / "(cont.)" in caption                         │
+  │       • Repeated header structure on next page                       │
+  │       • Same reference number across pages                           │
+  │       • Matching column geometry on consecutive pages                │
+  │    4. Render at 200-300 DPI (adaptive based on visual size)         │
+  │    5. Encode as base64 PNG                                           │
+  │                                                                      │
+  │  Caption provenance tracked: {pdf_text | ocr | vlm}                 │
+  └─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                    STAGE 3: TRIAGE + VLM ENRICHMENT                 │
+  │                      (Claude Sonnet Vision)                         │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  TRIAGE (cheap signals first):                                       │
+  │                                                                      │
+  │  SKIP (no VLM):                     │  VLM PATH:                     │
+  │  • Tiny logos/separators            │  • Has caption-like text       │
+  │  • Repeated header/footer graphics  │  • Docling flagged as table    │
+  │  • No caption + low area + no refs  │  • Dense grid structure        │
+  │                                      │  • Referenced in body text    │
+  │                                      │  • Flagged for ACCURATE re-run│
+  ├──────────────────────────────────────┴───────────────────────────────┤
+  │  VLM tasks (for candidates that pass triage):                        │
+  │    1. Classify: table vs figure (with confidence)                    │
+  │    2. Parse reference from caption: "Table 1" → {type, numbers}      │
+  │    3. Validate/correct caption text                                  │
+  │    4. For tables: validate Docling structure, flag if misparsed      │
+  │    5. If misparsed + complex → trigger ACCURATE re-run               │
+  │    6. Confirm/detect multi-page continuation                         │
+  └─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                  STAGE 4: DOCUMENT-LEVEL RESOLUTION                 │
+  │                      (Cross-reference + merge)                      │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  1. Scan body text for mentions ("see Figure 2", "Table 1 shows")   │
+  │  2. Parse references from body text                                  │
+  │  3. Reconcile: caption reference wins, body fills missing           │
+  │  4. Link mentions to ExtractedVisual by reference number            │
+  │  5. Infer section context from document structure                    │
+  │  6. Merge multi-page visuals (using Stage 2/3 continuation flags)   │
+  │  7. Deduplicate overlapping detections                               │
+  │  8. Final validation pass                                            │
+  └─────────────────────────────────────────────────────────────────────┘
+
+  ---
+
+
+  Escalation flow:
+
+  FAST extraction
+        │
+        ▼
+  Compute complexity signals
+        │
+        ▼
+  should_escalate_to_accurate()?
+        │
+        ├─► No  ──► Use FAST result
+        │
+        └─► Yes ──► Run ACCURATE ──► Use ACCURATE result
+                          │
+                          ▼
+                    (Optional) VLM validation
+                          │
+                          ▼
+                    If still misparsed → flag for manual review
