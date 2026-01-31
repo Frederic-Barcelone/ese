@@ -185,6 +185,9 @@ class ExportManager:
                 page = doc[page_num - 1]
                 if pymupdf_bbox:
                     x0, y0, x1, y1 = pymupdf_bbox
+                # Use minimal horizontal padding for tables to stay within column
+                padding = 15
+                right_padding = 15
             else:
                 # For figures that span a significant portion of page, expand to capture full width
                 figure_width = x1 - x0
