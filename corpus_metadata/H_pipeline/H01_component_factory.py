@@ -115,7 +115,7 @@ class ComponentFactory:
             if not DOCLING_AVAILABLE:
                 print(
                     "  [WARN] Docling not installed - table extraction DISABLED\n"
-                    "         Install with: pip install 'docling[docling-surya]'"
+                    "         Install with: pip install docling docling-surya"
                 )
                 return None
 
@@ -124,7 +124,7 @@ class ComponentFactory:
         except ImportError as e:
             print(
                 f"  [WARN] Table extraction unavailable: {e}\n"
-                "         Install with: pip install 'docling[docling-surya]'"
+                "         Install with: pip install docling docling-surya"
             )
             return None
 

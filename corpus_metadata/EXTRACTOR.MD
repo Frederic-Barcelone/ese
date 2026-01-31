@@ -336,7 +336,7 @@ When Docling is not installed, table extraction is skipped with a clear warning:
 
 ```
 [WARN] Docling not installed - table extraction DISABLED
-       Install with: pip install 'docling[docling-surya]'
+       Install with: pip install docling docling-surya
 ```
 
 ---
@@ -397,7 +397,7 @@ When dependencies are unavailable, clear warnings are displayed:
 
 ```
 [WARN] Docling not installed - table extraction DISABLED
-       Install with: pip install 'docling[docling-surya]'
+       Install with: pip install docling docling-surya
 
 [WARN] SuryaOCR not available, using default OCR
        Install with: pip install docling-surya

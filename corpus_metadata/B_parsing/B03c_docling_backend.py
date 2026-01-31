@@ -39,7 +39,7 @@ try:
 
 except ImportError as e:
     logger.warning(
-        "Docling with SuryaOCR not installed. Install with: pip install 'docling[docling-surya]'"
+        "Docling with SuryaOCR not installed. Install with: pip install docling docling-surya"
     )
     DocumentConverter = None  # type: ignore
     PdfFormatOption = None  # type: ignore
