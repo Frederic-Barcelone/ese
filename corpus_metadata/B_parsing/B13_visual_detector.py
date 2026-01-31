@@ -344,17 +344,45 @@ def detect_figures_native(
             # Detect vector figures on this page (charts, flowcharts rendered as drawings)
             vector_figs = detect_vector_figures(doc, page_num)
             for vf in vector_figs:
+                fig_width = vf.bbox[2] - vf.bbox[0]
+                fig_height = vf.bbox[3] - vf.bbox[1]
+                area = fig_width * fig_height
+                area_ratio = area / page_area
+
+                # For full-width figures (>70% page width), constrain height
+                # These are likely multi-panel figures that shouldn't capture text below
+                adjusted_bbox = vf.bbox
+                if fig_width > page_width * 0.70:
+                    # Limit height to 55% of page for full-width figures
+                    # (allows for 2-panel figures but clips article text below)
+                    max_height = page_height * 0.55
+                    if fig_height > max_height:
+                        # Trim from bottom (captions are below figures)
+                        new_y1 = vf.bbox[1] + max_height
+                        adjusted_bbox = (vf.bbox[0], vf.bbox[1], vf.bbox[2], new_y1)
+                        print(f"    [DEBUG] Vector figure TRIMMED: page={page_num}, "
+                              f"height {fig_height:.0f}->{max_height:.0f}pts")
+
+                # Recalculate after adjustment
+                adj_width = adjusted_bbox[2] - adjusted_bbox[0]
+                adj_height = adjusted_bbox[3] - adjusted_bbox[1]
+                adj_area = adj_width * adj_height
+                area_ratio = adj_area / page_area
+
+                # Filter out if still too large (>65% of page area)
+                if area_ratio > 0.65:
+                    print(f"    [DEBUG] Vector figure SKIPPED (too large): page={page_num}, "
+                          f"area_ratio={area_ratio:.0%}")
+                    continue
+
                 # Debug: log detected vector figure
                 print(f"    [DEBUG] Vector figure detected: page={page_num}, "
-                      f"bbox=({vf.bbox[0]:.1f}, {vf.bbox[1]:.1f}, {vf.bbox[2]:.1f}, {vf.bbox[3]:.1f}), "
+                      f"bbox=({adjusted_bbox[0]:.1f}, {adjusted_bbox[1]:.1f}, {adjusted_bbox[2]:.1f}, {adjusted_bbox[3]:.1f}), "
                       f"drawings={vf.drawing_count}, has_axis_text={vf.has_axis_text}")
-
-                area = (vf.bbox[2] - vf.bbox[0]) * (vf.bbox[3] - vf.bbox[1])
-                area_ratio = area / page_area
 
                 figures.append({
                     "page_num": page_num,
-                    "bbox_pts": vf.bbox,
+                    "bbox_pts": adjusted_bbox,
                     "area_ratio": area_ratio,
                     "xref": None,
                     "image_hash": None,
