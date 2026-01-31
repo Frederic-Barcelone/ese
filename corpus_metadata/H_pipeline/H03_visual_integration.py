@@ -248,11 +248,10 @@ class VisualPipelineIntegration:
             export_figures_only(result, figures_path)
             exported["figures"] = figures_path
 
-        # Optionally export images as files
+        # Export images directly to output folder (no subfolder)
         if export_images:
-            images_dir = output_dir / f"visual_images_{doc_name}"
-            export_images_separately(result, images_dir)
-            exported["images_dir"] = images_dir
+            image_paths = export_images_separately(result, output_dir, doc_name=doc_name)
+            exported["images"] = image_paths
 
         logger.info(f"Exported visual results to {output_dir}")
         return exported

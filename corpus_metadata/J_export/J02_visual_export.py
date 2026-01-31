@@ -288,6 +288,7 @@ def export_figures_only(
 def export_images_separately(
     result: PipelineResult,
     output_dir: Path,
+    doc_name: str = "",
     format: str = "png",
 ) -> Dict[str, Path]:
     """
@@ -296,6 +297,7 @@ def export_images_separately(
     Args:
         result: Pipeline result
         output_dir: Directory for image files
+        doc_name: Document name prefix for filenames
         format: Image format (png, jpg)
 
     Returns:
@@ -308,14 +310,26 @@ def export_images_separately(
 
     image_paths: Dict[str, Path] = {}
 
-    for visual in result.visuals:
-        # Generate filename
-        type_prefix = "table" if visual.is_table else "figure"
-        ref_str = ""
-        if visual.reference:
-            ref_str = f"_{visual.reference.numbers[0]}"
+    # Track counts per page for numbering
+    page_counts: Dict[str, Dict[int, int]] = {"table": {}, "figure": {}}
 
-        filename = f"{type_prefix}{ref_str}_page{visual.primary_page}_{visual.visual_id[:8]}.{format}"
+    for visual in result.visuals:
+        # Determine type
+        type_prefix = "table" if visual.is_table else "figure"
+        page_num = visual.primary_page
+
+        # Increment count for this type/page
+        if page_num not in page_counts[type_prefix]:
+            page_counts[type_prefix][page_num] = 0
+        page_counts[type_prefix][page_num] += 1
+        idx = page_counts[type_prefix][page_num]
+
+        # Generate filename: {doc_name}_{type}_page{N}_{idx}.png
+        if doc_name:
+            filename = f"{doc_name}_{type_prefix}_page{page_num}_{idx}.{format}"
+        else:
+            filename = f"{type_prefix}_page{page_num}_{idx}.{format}"
+
         image_path = output_dir / filename
 
         # Decode and write image

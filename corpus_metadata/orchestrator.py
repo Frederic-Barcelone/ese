@@ -959,11 +959,7 @@ class Orchestrator:
             feasibility_only = [r for r in feasibility_results if isinstance(r, FeasibilityCandidate)]
             self.export_manager.export_feasibility_results(pdf_path_obj, feasibility_only, doc)
 
-        if doc is not None:
-            self.export_manager.export_images(pdf_path_obj, doc)
-
-        if doc is not None and self.extract_tables:
-            self.export_manager.export_tables(pdf_path_obj, doc)
+        # OLD image/table exports removed - using new visual pipeline instead
 
         if doc_metadata:
             self.export_manager.export_document_metadata(pdf_path_obj, doc_metadata)
