@@ -262,13 +262,13 @@ class Orchestrator:
                 "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": True, "recommendations": True, "visuals": True,
+                "care_pathways": True, "recommendations": True, "figures": True,
             },
             "all": {
                 "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
                 "feasibility": True, "pharma_companies": True, "authors": True,
                 "citations": True, "document_metadata": True, "tables": True,
-                "care_pathways": True, "recommendations": True, "visuals": True,
+                "care_pathways": True, "recommendations": True, "figures": True,
             },
             "minimal": {
                 "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
@@ -279,13 +279,13 @@ class Orchestrator:
                 "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": False, "recommendations": False, "visuals": True,
+                "care_pathways": False, "recommendations": False, "figures": True,
             },
             "tables_only": {
                 "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": False, "recommendations": False, "visuals": False,
+                "care_pathways": False, "recommendations": False, "figures": False,
             },
         }
 
@@ -305,7 +305,7 @@ class Orchestrator:
             self.extract_tables = preset_config["tables"]
             self.extract_care_pathways = preset_config.get("care_pathways", False)
             self.extract_recommendations = preset_config.get("recommendations", False)
-            self.extract_visuals = preset_config.get("visuals", False)
+            self.extract_figures = preset_config.get("figures", False)
         else:
             # Use individual extractor flags
             self.active_preset = None
@@ -321,7 +321,7 @@ class Orchestrator:
             self.extract_tables = extractors.get("tables", True)
             self.extract_care_pathways = extractors.get("care_pathways", True)
             self.extract_recommendations = extractors.get("recommendations", True)
-            self.extract_visuals = extractors.get("visuals", True)
+            self.extract_figures = extractors.get("figures", True)
 
         # Processing options (always read from options, not affected by preset)
         self.use_llm_validation = options.get("use_llm_validation", True)
@@ -367,7 +367,7 @@ class Orchestrator:
             ("tables", self.extract_tables),
             ("care_pathways", self.extract_care_pathways),
             ("recommendations", self.extract_recommendations),
-            ("visuals", self.extract_visuals),
+            ("figures", self.extract_figures),
         ]
         for name, enabled in extractors:
             if enabled:
@@ -893,7 +893,7 @@ class Orchestrator:
         # Stage 10c: Visual extraction (tables and figures as images)
         visual_result = None
         self._last_visual_result = None  # Store for summary printing
-        if self.extract_visuals and self.visual_integration.enabled:
+        if (self.extract_tables or self.extract_figures) and self.visual_integration.enabled:
             timer.start("10c. Visual Extraction")
             print("\n[10c/12] Extracting visuals (tables and figures)...")
             try:
@@ -928,13 +928,14 @@ class Orchestrator:
         self.logger.print_summary()
         counters.log_summary()
 
-        # Export all results
-        self.export_manager.export_results(
-            pdf_path_obj, results, unique_candidates, counters,
-            disease_results=disease_results if disease_results else None,
-            drug_results=drug_results if drug_results else None,
-            pharma_results=pharma_results if pharma_results else None,
-        )
+        # Export abbreviation results (only if extraction was enabled)
+        if self.extract_abbreviations:
+            self.export_manager.export_results(
+                pdf_path_obj, results, unique_candidates, counters,
+                disease_results=disease_results if disease_results else None,
+                drug_results=drug_results if drug_results else None,
+                pharma_results=pharma_results if pharma_results else None,
+            )
 
         if disease_results:
             self.export_manager.export_disease_results(pdf_path_obj, disease_results)

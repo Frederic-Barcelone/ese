@@ -8,9 +8,10 @@ pyyaml>=6.0
 python-dotenv>=1.0
 
 # NLP/Parsing
-unstructured[pdf]>=0.10.0
+unstructured[pdf,pymupdf]>=0.10.0
 flashtext>=2.7
 pymupdf>=1.23.0
+pymupdf4llm>=0.0.17
 
 # spaCy (pinned for scispacy compatibility)
 spacy>=3.7.4,<3.8.0

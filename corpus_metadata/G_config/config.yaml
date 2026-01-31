@@ -882,7 +882,7 @@ extraction_pipeline:
     citations: true
     document_metadata: true
     tables: true
-    visuals: true                   # New visual extraction pipeline (tables/figures as images)
+    figures: true                   # Figure extraction (charts, flowcharts, diagrams)
 
   # Processing options
   options:

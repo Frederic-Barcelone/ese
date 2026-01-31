@@ -333,6 +333,12 @@ def render_visual(
         padding_bottom_pts=padding["bottom"],
     )
 
+    # Debug: log bbox expansion
+    print(f"    [DEBUG] Render {visual_type}: page={page_num}")
+    print(f"             original_bbox=({bbox_pts[0]:.1f}, {bbox_pts[1]:.1f}, {bbox_pts[2]:.1f}, {bbox_pts[3]:.1f})")
+    print(f"             expanded_bbox=({expanded_bbox[0]:.1f}, {expanded_bbox[1]:.1f}, {expanded_bbox[2]:.1f}, {expanded_bbox[3]:.1f})")
+    print(f"             padding: L={padding['left']:.0f}, R={padding['right']:.0f}, T={padding['top']:.0f}, B={padding['bottom']:.0f}pts")
+
     # Compute adaptive DPI
     dpi = compute_adaptive_dpi(bbox_pts, config)
 
