@@ -232,25 +232,7 @@ class VisualExtractionPipeline:
                 # Determine visual type for rendering
                 visual_type = "table" if candidate.docling_type == "table" else "figure"
 
-                # Get caption position hint
-                caption_position = None
-                if candidate.caption_candidate:
-                    caption_position = candidate.caption_candidate.position
-
-                # Render
-                rendered_result = render_visual(
-                    doc,
-                    candidate.page_num,
-                    candidate.bbox_pts,
-                    visual_type=visual_type,
-                    caption_position=caption_position,
-                    config=self.config.render,
-                )
-
-                if rendered_result is None:
-                    continue
-
-                # Extract caption if not already detected
+                # IMPORTANT: Detect caption BEFORE rendering to get correct padding
                 caption = candidate.caption_candidate
                 if caption is None:
                     caption_result = extract_caption_multisource(
@@ -262,6 +244,24 @@ class VisualExtractionPipeline:
                         visual_type_hint=visual_type,
                     )
                     caption = caption_result.best_caption
+
+                # Get caption position hint for padding
+                caption_position = None
+                if caption:
+                    caption_position = caption.position
+
+                # Render with correct caption padding
+                rendered_result = render_visual(
+                    doc,
+                    candidate.page_num,
+                    candidate.bbox_pts,
+                    visual_type=visual_type,
+                    caption_position=caption_position,
+                    config=self.config.render,
+                )
+
+                if rendered_result is None:
+                    continue
 
                 rendered.append({
                     "candidate": candidate,

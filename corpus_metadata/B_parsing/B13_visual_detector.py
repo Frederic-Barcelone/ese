@@ -185,6 +185,9 @@ def _extract_table_from_docling(
         Dict with table data
     """
     try:
+        # Import CoordOrigin for coordinate system check
+        from docling_core.types.doc.base import CoordOrigin
+
         # Get provenance for page/bbox
         prov = table_item.prov[0] if table_item.prov else None
         if not prov:
@@ -193,15 +196,35 @@ def _extract_table_from_docling(
         page_num = prov.page_no  # 1-indexed
         bbox = prov.bbox  # Docling bbox format
 
-        # Normalize bbox to (x0, y0, x1, y1)
+        # Get page height for coordinate conversion
+        page_height = 792.0  # Default letter size
+        if page_num in document.pages:
+            page_info = document.pages[page_num]
+            if hasattr(page_info, 'size') and page_info.size:
+                page_height = page_info.size.height
+
+        # Convert bbox to top-left origin (x0, y0, x1, y1) for PyMuPDF compatibility
         if hasattr(bbox, "l"):
-            # Docling uses l, t, r, b
-            bbox_pts = (
-                min(bbox.l, bbox.r),
-                min(bbox.t, bbox.b),
-                max(bbox.l, bbox.r),
-                max(bbox.t, bbox.b),
-            )
+            # Check coordinate origin and convert if needed
+            if hasattr(bbox, 'coord_origin') and bbox.coord_origin == CoordOrigin.BOTTOMLEFT:
+                # Convert from bottom-left to top-left origin
+                # In bottom-left: y increases upward, t > b for a box
+                # In top-left: y increases downward, t < b for a box
+                x0 = min(bbox.l, bbox.r)
+                x1 = max(bbox.l, bbox.r)
+                # Flip Y coordinates: new_y = page_height - old_y
+                y0 = page_height - max(bbox.t, bbox.b)  # top in top-left = page_height - top in bottom-left
+                y1 = page_height - min(bbox.t, bbox.b)  # bottom in top-left = page_height - bottom in bottom-left
+                bbox_pts = (x0, y0, x1, y1)
+                logger.debug(f"Converted bbox from BOTTOMLEFT: ({bbox.l:.1f},{bbox.t:.1f},{bbox.r:.1f},{bbox.b:.1f}) -> ({x0:.1f},{y0:.1f},{x1:.1f},{y1:.1f})")
+            else:
+                # Already top-left origin
+                bbox_pts = (
+                    min(bbox.l, bbox.r),
+                    min(bbox.t, bbox.b),
+                    max(bbox.l, bbox.r),
+                    max(bbox.t, bbox.b),
+                )
         else:
             bbox_pts = tuple(bbox)
 
@@ -331,23 +354,70 @@ def detect_figures_native(
 
             # Detect vector figures on this page (charts, flowcharts rendered as drawings)
             vector_figs = detect_vector_figures(doc, page_num)
+
+            # Get text blocks for text density filtering
+            text_dict = page.get_text("dict")
+            text_blocks = [
+                b for b in text_dict.get("blocks", [])
+                if b.get("type") == 0  # Text blocks only
+            ]
+
+            # Detect column layout for column-aware filtering
+            column_layout = infer_column_layout(doc, page_num)
+            is_two_column = len(column_layout.columns) >= 2
+            if is_two_column:
+                col_gutter_x = (column_layout.columns[0][1] + column_layout.columns[1][0]) / 2
+
             for vf in vector_figs:
                 fig_width = vf.bbox[2] - vf.bbox[0]
                 fig_height = vf.bbox[3] - vf.bbox[1]
                 area = fig_width * fig_height
                 area_ratio = area / page_area
 
-                # For full-width figures (>70% page width), constrain height
-                # These are likely multi-panel figures that shouldn't capture text below
+                # Text density filter: skip regions with high text coverage
+                text_area_in_region = 0
+                for tb in text_blocks:
+                    tb_bbox = tb.get("bbox", (0, 0, 0, 0))
+                    # Calculate intersection
+                    ix0 = max(vf.bbox[0], tb_bbox[0])
+                    iy0 = max(vf.bbox[1], tb_bbox[1])
+                    ix1 = min(vf.bbox[2], tb_bbox[2])
+                    iy1 = min(vf.bbox[3], tb_bbox[3])
+                    if ix1 > ix0 and iy1 > iy0:
+                        text_area_in_region += (ix1 - ix0) * (iy1 - iy0)
+
+                text_density = text_area_in_region / area if area > 0 else 0
+                # Skip if >40% of the region is covered by text blocks (likely article text)
+                if text_density > 0.40:
+                    logger.debug(f"Skipping vector region on page {page_num} - high text density ({text_density:.1%})")
+                    continue
+
+                # Column-aware constraint: for 2-column layouts, constrain to column width
                 adjusted_bbox = vf.bbox
+                if is_two_column:
+                    # Check if figure spans the column gutter
+                    if vf.bbox[0] < col_gutter_x < vf.bbox[2]:
+                        # Figure spans gutter - only allow if it's wide enough (>60% page width)
+                        # indicating it's intentionally full-width
+                        if fig_width < page_width * 0.60:
+                            # Constrain to the column with more drawing content
+                            left_area = (min(col_gutter_x, vf.bbox[2]) - vf.bbox[0]) * fig_height
+                            right_area = (vf.bbox[2] - max(col_gutter_x, vf.bbox[0])) * fig_height
+                            if left_area >= right_area:
+                                adjusted_bbox = (vf.bbox[0], vf.bbox[1], col_gutter_x - 10, vf.bbox[3])
+                            else:
+                                adjusted_bbox = (col_gutter_x + 10, vf.bbox[1], vf.bbox[2], vf.bbox[3])
+                            logger.debug(f"Constrained vector figure to column: {vf.bbox} -> {adjusted_bbox}")
+
+                # For full-width figures (>70% page width), constrain height
+                fig_width = adjusted_bbox[2] - adjusted_bbox[0]
+                fig_height = adjusted_bbox[3] - adjusted_bbox[1]
                 if fig_width > page_width * 0.70:
                     # Limit height to 55% of page for full-width figures
-                    # (allows for 2-panel figures but clips article text below)
                     max_height = page_height * 0.55
                     if fig_height > max_height:
-                        # Trim from bottom (captions are below figures)
-                        new_y1 = vf.bbox[1] + max_height
-                        adjusted_bbox = (vf.bbox[0], vf.bbox[1], vf.bbox[2], new_y1)
+                        new_y1 = adjusted_bbox[1] + max_height
+                        adjusted_bbox = (adjusted_bbox[0], adjusted_bbox[1], adjusted_bbox[2], new_y1)
 
                 # Recalculate after adjustment
                 adj_width = adjusted_bbox[2] - adjusted_bbox[0]
@@ -357,6 +427,10 @@ def detect_figures_native(
 
                 # Filter out if still too large (>65% of page area)
                 if area_ratio > 0.65:
+                    continue
+
+                # Filter out very small adjusted regions
+                if adj_area < page_area * 0.02:
                     continue
 
                 figures.append({
