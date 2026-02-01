@@ -227,12 +227,6 @@ def _extract_table_from_docling(
                 if cell.is_header:
                     header_depth = max(header_depth, cell.row_index + 1)
 
-        # Debug: log detected table bbox
-        print(f"    [DEBUG] Table detected: page={page_num}, "
-              f"bbox=({bbox_pts[0]:.1f}, {bbox_pts[1]:.1f}, {bbox_pts[2]:.1f}, {bbox_pts[3]:.1f}), "
-              f"size=({bbox_pts[2]-bbox_pts[0]:.1f}x{bbox_pts[3]-bbox_pts[1]:.1f}pts), "
-              f"cols={len(headers[0]) if headers else 0}, rows={len(rows)}")
-
         return {
             "page_num": page_num,
             "bbox_pts": bbox_pts,
@@ -321,12 +315,6 @@ def detect_figures_native(
                     # Check if in margin zone
                     in_margin = is_in_margin_zone(bbox_pts, page_height)
 
-                    # Debug: log detected figure bbox
-                    print(f"    [DEBUG] Figure detected: page={page_num}, "
-                          f"bbox=({bbox_pts[0]:.1f}, {bbox_pts[1]:.1f}, {bbox_pts[2]:.1f}, {bbox_pts[3]:.1f}), "
-                          f"size=({bbox_pts[2]-bbox_pts[0]:.1f}x{bbox_pts[3]-bbox_pts[1]:.1f}pts), "
-                          f"area_ratio={area_ratio:.2%}, page_size=({page_width:.1f}x{page_height:.1f})")
-
                     figures.append({
                         "page_num": page_num,
                         "bbox_pts": bbox_pts,
@@ -360,8 +348,6 @@ def detect_figures_native(
                         # Trim from bottom (captions are below figures)
                         new_y1 = vf.bbox[1] + max_height
                         adjusted_bbox = (vf.bbox[0], vf.bbox[1], vf.bbox[2], new_y1)
-                        print(f"    [DEBUG] Vector figure TRIMMED: page={page_num}, "
-                              f"height {fig_height:.0f}->{max_height:.0f}pts")
 
                 # Recalculate after adjustment
                 adj_width = adjusted_bbox[2] - adjusted_bbox[0]
@@ -371,14 +357,7 @@ def detect_figures_native(
 
                 # Filter out if still too large (>65% of page area)
                 if area_ratio > 0.65:
-                    print(f"    [DEBUG] Vector figure SKIPPED (too large): page={page_num}, "
-                          f"area_ratio={area_ratio:.0%}")
                     continue
-
-                # Debug: log detected vector figure
-                print(f"    [DEBUG] Vector figure detected: page={page_num}, "
-                      f"bbox=({adjusted_bbox[0]:.1f}, {adjusted_bbox[1]:.1f}, {adjusted_bbox[2]:.1f}, {adjusted_bbox[3]:.1f}), "
-                      f"drawings={vf.drawing_count}, has_axis_text={vf.has_axis_text}")
 
                 figures.append({
                     "page_num": page_num,
