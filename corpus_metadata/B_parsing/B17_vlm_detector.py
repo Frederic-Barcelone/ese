@@ -98,25 +98,31 @@ For EACH visual element found, provide:
 2. bbox: bounding box as [x0, y0, x1, y1] where coordinates are fractions (0.0 to 1.0) of page dimensions
    - x0, y0 = top-left corner
    - x1, y1 = bottom-right corner
+   - IMPORTANT: Be GENEROUS with the bbox - include some margin around the visual
 3. label: the reference label if visible (e.g., "Table 1", "Figure 2A", "Fig. 3")
 4. caption_start: first ~50 characters of the caption if visible
 5. is_continuation: true if this is a continuation from a previous page (look for "continued" or similar)
 6. continues_next: true if this visual continues to the next page (incomplete, cut off at bottom)
 
-Important:
-- Include ALL tables and figures, even small ones
-- For 2-column layouts, a visual may span both columns (full width) or be in one column
-- Tables include data tables, demographic tables, results tables
-- Figures include charts, graphs, diagrams, flowcharts, images, plots
-- Be precise with bounding boxes - include the visual AND its caption
-- If a table spans both columns, the bbox should cover the full width
+CRITICAL RULES for bounding boxes:
+- Multi-panel figures (with panels A, B, C, etc.) must have ONE bbox covering ALL panels
+- Include the figure title/label at the top AND the caption at the bottom
+- Include the axis labels and legends
+- Add ~2-3% padding on all sides to avoid cutting off content
+- For 2-column layouts: if a figure spans BOTH columns, use full page width (x0≈0.05, x1≈0.95)
+- For tables: include the table title above AND footnotes below
+- When in doubt, make the bbox LARGER rather than smaller
+
+Visual types to detect:
+- Tables: data tables, demographic tables, results tables (may span 1 or 2 columns)
+- Figures: charts, graphs, bar plots, line plots, Kaplan-Meier curves, flowcharts, diagrams, forest plots
 
 Return ONLY valid JSON in this exact format:
 {
   "visuals": [
     {
       "type": "table",
-      "bbox": [0.05, 0.15, 0.95, 0.45],
+      "bbox": [0.05, 0.12, 0.95, 0.48],
       "label": "Table 1",
       "caption_start": "Baseline characteristics of participants",
       "is_continuation": false,
