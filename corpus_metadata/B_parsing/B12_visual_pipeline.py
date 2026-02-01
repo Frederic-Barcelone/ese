@@ -53,6 +53,10 @@ from B_parsing.B17_document_resolver import (
     ResolutionResult,
     resolve_document,
 )
+from B_parsing.B17_vlm_detector import (
+    detect_visuals_vlm_document,
+    VLMDetectedVisual,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +70,11 @@ logger = logging.getLogger(__name__)
 class PipelineConfig:
     """Configuration for the visual extraction pipeline."""
 
-    # Detection
+    # Detection mode: "heuristic", "vlm-only", or "hybrid"
+    detection_mode: str = "vlm-only"
+    detection_model: str = "claude-sonnet-4-20250514"
+
+    # Detection (used when mode is "heuristic" or "hybrid")
     detector: DetectorConfig = field(default_factory=DetectorConfig)
 
     # Rendering
@@ -78,7 +86,7 @@ class PipelineConfig:
     # Triage
     triage: TriageConfig = field(default_factory=TriageConfig)
 
-    # VLM
+    # VLM enrichment (separate from detection)
     enable_vlm: bool = True
     vlm_model: str = "claude-sonnet-4-20250514"
     validate_tables: bool = True
@@ -206,7 +214,122 @@ class VisualExtractionPipeline:
 
     def _stage_detection(self, pdf_path: str) -> DetectionResult:
         """Stage 1: Detection."""
-        return detect_all_visuals(pdf_path, self.config.detector)
+        mode = self.config.detection_mode
+
+        if mode == "vlm-only":
+            # Use VLM-only detection
+            return self._detect_with_vlm(pdf_path)
+        elif mode == "hybrid":
+            # Use VLM with heuristic fallback
+            vlm_result = self._detect_with_vlm(pdf_path)
+            heuristic_result = detect_all_visuals(pdf_path, self.config.detector)
+            # Merge results (VLM primary, heuristic fills gaps)
+            return self._merge_detection_results(vlm_result, heuristic_result)
+        else:
+            # Default: heuristic detection
+            return detect_all_visuals(pdf_path, self.config.detector)
+
+    def _detect_with_vlm(self, pdf_path: str) -> DetectionResult:
+        """Detect visuals using VLM."""
+        import anthropic
+
+        try:
+            client = anthropic.Anthropic()
+            vlm_result = detect_visuals_vlm_document(
+                pdf_path,
+                client=client,
+                model=self.config.detection_model,
+            )
+
+            # Get page dimensions for each page
+            doc = fitz.open(pdf_path)
+            page_dims = {}
+            for i in range(doc.page_count):
+                page = doc[i]
+                page_dims[i + 1] = (page.rect.width, page.rect.height)
+            doc.close()
+
+            # Convert VLM detections to VisualCandidate format
+            candidates = []
+            for v in vlm_result["visuals"]:
+                page_width, page_height = page_dims.get(v.page_num, (595, 842))
+                page_area = page_width * page_height
+                bbox = v.bbox_pts
+                visual_area = (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
+
+                candidate = VisualCandidate(
+                    page_num=v.page_num,
+                    bbox_pts=v.bbox_pts,
+                    page_width_pts=page_width,
+                    page_height_pts=page_height,
+                    area_ratio=visual_area / page_area if page_area > 0 else 0,
+                    docling_type="table" if v.visual_type == "table" else "figure",
+                    confidence=v.confidence,
+                    source="vlm_detection",
+                    vlm_label=v.label,
+                    vlm_caption_snippet=v.caption_snippet,
+                )
+                candidates.append(candidate)
+
+            return DetectionResult(
+                candidates=candidates,
+                tables_detected=vlm_result["tables_detected"],
+                figures_detected=vlm_result["figures_detected"],
+                escalated_tables=0,
+                detection_mode="vlm-only",
+            )
+
+        except Exception as e:
+            logger.error(f"VLM detection failed: {e}, falling back to heuristic")
+            return detect_all_visuals(pdf_path, self.config.detector)
+
+    def _merge_detection_results(
+        self,
+        vlm_result: DetectionResult,
+        heuristic_result: DetectionResult,
+    ) -> DetectionResult:
+        """Merge VLM and heuristic detection results."""
+        # Start with VLM candidates (primary)
+        merged = list(vlm_result.candidates)
+        vlm_bboxes = [(c.page_num, c.bbox_pts) for c in vlm_result.candidates]
+
+        # Add heuristic candidates that don't overlap with VLM
+        for hc in heuristic_result.candidates:
+            is_duplicate = False
+            for page_num, bbox in vlm_bboxes:
+                if hc.page_num == page_num:
+                    # Check IoU
+                    iou = self._compute_iou(hc.bbox_pts, bbox)
+                    if iou > 0.3:
+                        is_duplicate = True
+                        break
+            if not is_duplicate:
+                merged.append(hc)
+
+        return DetectionResult(
+            candidates=merged,
+            tables_detected=sum(1 for c in merged if c.docling_type == "table"),
+            figures_detected=sum(1 for c in merged if c.docling_type != "table"),
+            escalated_tables=heuristic_result.escalated_tables,
+            detection_mode="hybrid",
+        )
+
+    def _compute_iou(self, bbox1, bbox2) -> float:
+        """Compute Intersection over Union."""
+        x0 = max(bbox1[0], bbox2[0])
+        y0 = max(bbox1[1], bbox2[1])
+        x1 = min(bbox1[2], bbox2[2])
+        y1 = min(bbox1[3], bbox2[3])
+
+        if x1 <= x0 or y1 <= y0:
+            return 0.0
+
+        intersection = (x1 - x0) * (y1 - y0)
+        area1 = (bbox1[2] - bbox1[0]) * (bbox1[3] - bbox1[1])
+        area2 = (bbox2[2] - bbox2[0]) * (bbox2[3] - bbox2[1])
+        union = area1 + area2 - intersection
+
+        return intersection / union if union > 0 else 0.0
 
     def _stage_rendering(
         self,

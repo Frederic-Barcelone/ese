@@ -901,7 +901,16 @@ extraction_pipeline:
   visual_extraction:
     enabled: true                   # Enable new unified visual pipeline
 
-    # Detection settings
+    # Visual detection mode
+    # Options:
+    #   - "heuristic": Docling + PyMuPDF (fast, no API cost)
+    #   - "vlm-only": Claude Vision detection only (higher recall, API cost)
+    #   - "hybrid": VLM with heuristic fallback (best quality, highest cost)
+    visual_detection:
+      mode: "vlm-only"              # Detection method
+      model: "claude-sonnet-4-20250514"  # VLM model for detection
+
+    # Detection settings (used when mode is "heuristic" or "hybrid")
     detection:
       table_mode_default: "fast"    # "fast" or "accurate" TableFormer mode
       enable_escalation: true       # Escalate complex tables to ACCURATE mode

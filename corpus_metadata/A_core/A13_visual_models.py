@@ -280,10 +280,11 @@ class VisualCandidate(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
 
     # Source detection
-    source: Literal["docling", "native_raster", "native_vector", "layout_model"]
+    source: Literal["docling", "native_raster", "native_vector", "layout_model", "vlm_detection"]
     docling_type: Optional[str] = Field(
         default=None, description="Docling's classification if available"
     )
+    confidence: float = Field(default=0.8, description="Detection confidence score")
 
     # Location
     page_num: int = Field(..., ge=1)
@@ -308,6 +309,14 @@ class VisualCandidate(BaseModel):
 
     # Initial caption (if detected in Stage 2)
     caption_candidate: Optional[CaptionCandidate] = None
+
+    # VLM detection fields (when source="vlm_detection")
+    vlm_label: Optional[str] = Field(
+        default=None, description="Label from VLM detection (e.g., 'Table 1', 'Figure 2A')"
+    )
+    vlm_caption_snippet: Optional[str] = Field(
+        default=None, description="Caption snippet from VLM detection"
+    )
 
     # Continuation signals
     continuation_markers: List[str] = Field(
