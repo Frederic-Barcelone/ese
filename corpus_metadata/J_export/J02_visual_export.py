@@ -6,13 +6,15 @@ Exports ExtractedVisual objects to JSON format with:
 - Full metadata (type, reference, caption, relationships)
 - Base64 images (or external file references)
 - Structured table data for table visuals
+- StructEqTable extraction (LaTeX/HTML) for tables
 """
 from __future__ import annotations
 
+import base64
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from A_core.A13_visual_models import (
     ExtractedVisual,
@@ -20,6 +22,52 @@ from A_core.A13_visual_models import (
 from B_parsing.B12_visual_pipeline import PipelineResult
 
 logger = logging.getLogger(__name__)
+
+
+def extract_table_content_structeq(image_bytes: bytes) -> Optional[Dict[str, str]]:
+    """
+    Extract table content using StructEqTable.
+
+    Args:
+        image_bytes: PNG image bytes of the table
+
+    Returns:
+        Dict with 'latex' and 'html' keys, or None if extraction fails
+    """
+    import io
+    try:
+        import struct_eqtable
+        from PIL import Image
+
+        # Load model (lazy initialization)
+        if not hasattr(extract_table_content_structeq, '_model'):
+            logger.info("Loading StructEqTable model...")
+            model = struct_eqtable.build_model()
+            model.max_new_tokens = 4096
+            model.max_generate_time = 300
+            extract_table_content_structeq._model = model
+            logger.info("StructEqTable model loaded")
+
+        model = extract_table_content_structeq._model
+
+        # Convert bytes to PIL Image
+        image = Image.open(io.BytesIO(image_bytes))
+
+        # Extract table structure in both formats
+        latex_result = model(image, 'latex')
+        html_result = model(image, 'html')
+
+        return {
+            "latex": latex_result[0] if latex_result else "",
+            "html": html_result[0] if html_result else "",
+        }
+
+    except ImportError:
+        # StructEqTable not installed - skip silently
+        return None
+    except Exception as e:
+        logger.warning(f"StructEqTable extraction failed: {e}")
+        return None
 
 
 # -------------------------
@@ -31,6 +79,7 @@ def visual_to_dict(
     visual: ExtractedVisual,
     include_image: bool = True,
     image_file: str | None = None,
+    table_content: Dict[str, str] | None = None,
 ) -> Dict[str, Any]:
     """
     Convert ExtractedVisual to serializable dict.
@@ -39,6 +88,7 @@ def visual_to_dict(
         visual: ExtractedVisual to convert
         include_image: Whether to include base64 image data
         image_file: If provided, use this filename instead of base64
+        table_content: StructEqTable extraction (latex/html) for tables
 
     Returns:
         Dict suitable for JSON serialization
@@ -96,6 +146,10 @@ def visual_to_dict(
 
         if visual.table_extraction_mode:
             result["table_data"]["extraction_mode"] = visual.table_extraction_mode.value
+
+        # Add StructEqTable content (LaTeX/HTML)
+        if table_content:
+            result["table_content"] = table_content
 
     # Relationships
     if visual.relationships:
@@ -237,8 +291,6 @@ def export_tables_only(
     Returns:
         Path to exported JSON file
     """
-    import base64
-
     tables = [v for v in result.visuals if v.is_table]
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -259,6 +311,7 @@ def export_tables_only(
 
         image_file = None
         image_save_failed = False
+        img_bytes = None
         if save_images and table.image_base64:
             # Generate filename and save image
             prefix = f"{doc_name}_" if doc_name else ""
@@ -274,12 +327,21 @@ def export_tables_only(
                 logger.warning(f"Failed to save table image: {e}, falling back to base64")
                 image_save_failed = True
 
+        # Extract table content using StructEqTable (LaTeX/HTML)
+        table_content = None
+        if table.image_base64:
+            if img_bytes is None:
+                img_bytes = base64.b64decode(table.image_base64)
+            logger.info(f"Extracting table content with StructEqTable for page {page_num}...")
+            table_content = extract_table_content_structeq(img_bytes)
+
         # If save failed, fall back to embedding base64
         include_base64 = (not save_images) or image_save_failed
         table_dicts.append(visual_to_dict(
             table,
             include_image=include_base64,
             image_file=image_file,
+            table_content=table_content,
         ))
 
     data = {
@@ -318,8 +380,6 @@ def export_figures_only(
     Returns:
         Path to exported JSON file
     """
-    import base64
-
     figures = [v for v in result.visuals if v.is_figure]
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -402,8 +462,6 @@ def export_images_separately(
     Returns:
         Dict mapping visual_id to image file path
     """
-    import base64
-
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
