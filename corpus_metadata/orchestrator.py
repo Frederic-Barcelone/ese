@@ -293,16 +293,16 @@ class Orchestrator:
         self.active_preset = preset
         if preset and preset in PRESETS:
             preset_config = PRESETS[preset]
-            self.extract_drugs = preset_config["drugs"]
-            self.extract_diseases = preset_config["diseases"]
+            self.extract_drugs = preset_config.get("drugs", True)
+            self.extract_diseases = preset_config.get("diseases", True)
             self.extract_genes = preset_config.get("genes", True)
-            self.extract_abbreviations = preset_config["abbreviations"]
-            self.extract_feasibility = preset_config["feasibility"]
-            self.extract_pharma = preset_config["pharma_companies"]
-            self.extract_authors = preset_config["authors"]
-            self.extract_citations = preset_config["citations"]
-            self.extract_doc_metadata = preset_config["document_metadata"]
-            self.extract_tables = preset_config["tables"]
+            self.extract_abbreviations = preset_config.get("abbreviations", True)
+            self.extract_feasibility = preset_config.get("feasibility", True)
+            self.extract_pharma = preset_config.get("pharma_companies", False)
+            self.extract_authors = preset_config.get("authors", False)
+            self.extract_citations = preset_config.get("citations", False)
+            self.extract_doc_metadata = preset_config.get("document_metadata", False)
+            self.extract_tables = preset_config.get("tables", True)
             self.extract_care_pathways = preset_config.get("care_pathways", False)
             self.extract_recommendations = preset_config.get("recommendations", False)
             self.extract_figures = preset_config.get("figures", False)
