@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C04b_lexicon_loaders.py
+# corpus_metadata/C_generators/C22_lexicon_loaders.py
 """
 Lexicon loading methods for FlashText-based extraction.
 
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 if TYPE_CHECKING:
     from flashtext import KeywordProcessor
 
-from C_generators.C04a_noise_filters import (
+from C_generators.C21_noise_filters import (
     BAD_LONG_FORMS,
     LexiconEntry,
     WRONG_EXPANSION_BLACKLIST,

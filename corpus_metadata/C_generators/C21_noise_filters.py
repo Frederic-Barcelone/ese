@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C04a_noise_filters.py
+# corpus_metadata/C_generators/C21_noise_filters.py
 """
 Noise filtering constants and lexicon entry class for abbreviation extraction.
 

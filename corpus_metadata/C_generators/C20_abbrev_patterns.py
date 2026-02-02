@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C01a_abbrev_patterns.py
+# corpus_metadata/C_generators/C20_abbrev_patterns.py
 """
 Pattern constants and helper functions for abbreviation extraction.
 

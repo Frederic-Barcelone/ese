@@ -43,7 +43,7 @@ from B_parsing.B02_doc_graph import (
     DocumentGraph,
 )
 
-from .C01a_abbrev_patterns import (
+from .C20_abbrev_patterns import (
     _is_likely_author_initial,
     _clean_ws,
     _normalize_long_form,

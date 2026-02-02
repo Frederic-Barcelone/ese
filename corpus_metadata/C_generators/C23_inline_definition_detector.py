@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C04c_inline_definition_detector.py
+# corpus_metadata/C_generators/C23_inline_definition_detector.py
 """
 Inline abbreviation definition detection.
 

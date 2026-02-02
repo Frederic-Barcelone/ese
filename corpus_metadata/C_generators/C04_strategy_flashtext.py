@@ -49,7 +49,7 @@ from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from B_parsing.B02_doc_graph import DocumentGraph
 
 # Import noise filters and constants from modularized file
-from C_generators.C04a_noise_filters import (
+from C_generators.C21_noise_filters import (
     BAD_LONG_FORMS,
     LexiconEntry,
     MIN_ABBREV_LENGTH,
@@ -58,8 +58,8 @@ from C_generators.C04a_noise_filters import (
 )
 
 # Import lexicon loading and inline definition detection from modularized files
-from C_generators.C04b_lexicon_loaders import LexiconLoaderMixin
-from C_generators.C04c_inline_definition_detector import InlineDefinitionDetectorMixin
+from C_generators.C22_lexicon_loaders import LexiconLoaderMixin
+from C_generators.C23_inline_definition_detector import InlineDefinitionDetectorMixin
 
 
 class RegexLexiconGenerator(
