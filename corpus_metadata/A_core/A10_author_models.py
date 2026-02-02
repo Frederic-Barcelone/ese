@@ -8,13 +8,17 @@ Detects authors, principal investigators, and contributors from clinical documen
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
 from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from A_core.A01_domain_models import Coordinate, EvidenceSpan, ValidationStatus
+from A_core.A01_domain_models import (
+    BaseProvenanceMetadata,
+    Coordinate,
+    EvidenceSpan,
+    ValidationStatus,
+)
 
 
 # -------------------------
@@ -50,16 +54,17 @@ class AuthorGeneratorType(str, Enum):
 # -------------------------
 
 
-class AuthorProvenanceMetadata(BaseModel):
-    """Provenance metadata for author detection."""
+class AuthorProvenanceMetadata(BaseProvenanceMetadata):
+    """
+    Provenance metadata for author detection.
 
-    pipeline_version: str
-    run_id: str
-    doc_fingerprint: str
+    Inherits common provenance fields from BaseProvenanceMetadata and adds:
+    - generator_name: AuthorGeneratorType (overrides base Enum type)
+
+    Note: No lexicon_ids field - author detection uses pattern-based extraction.
+    """
+
     generator_name: AuthorGeneratorType
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
 
 
 # -------------------------

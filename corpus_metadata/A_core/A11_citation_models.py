@@ -8,13 +8,17 @@ Detects citations with identifiers (PMID, PMCID, DOI, NCT, URL) from clinical do
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
 from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from A_core.A01_domain_models import Coordinate, EvidenceSpan, ValidationStatus
+from A_core.A01_domain_models import (
+    BaseProvenanceMetadata,
+    Coordinate,
+    EvidenceSpan,
+    ValidationStatus,
+)
 
 
 # -------------------------
@@ -45,16 +49,17 @@ class CitationGeneratorType(str, Enum):
 # -------------------------
 
 
-class CitationProvenanceMetadata(BaseModel):
-    """Provenance metadata for citation detection."""
+class CitationProvenanceMetadata(BaseProvenanceMetadata):
+    """
+    Provenance metadata for citation detection.
 
-    pipeline_version: str
-    run_id: str
-    doc_fingerprint: str
+    Inherits common provenance fields from BaseProvenanceMetadata and adds:
+    - generator_name: CitationGeneratorType (overrides base Enum type)
+
+    Note: No lexicon_ids field - citation detection uses regex-based extraction.
+    """
+
     generator_name: CitationGeneratorType
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
 
 
 # -------------------------

@@ -8,13 +8,17 @@ Simple lexicon-based detection of pharma company mentions.
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
 from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from A_core.A01_domain_models import Coordinate, EvidenceSpan, ValidationStatus
+from A_core.A01_domain_models import (
+    BaseProvenanceMetadata,
+    Coordinate,
+    EvidenceSpan,
+    ValidationStatus,
+)
 
 
 # -------------------------
@@ -33,17 +37,17 @@ class PharmaGeneratorType(str, Enum):
 # -------------------------
 
 
-class PharmaProvenanceMetadata(BaseModel):
-    """Provenance metadata for pharma company detection."""
+class PharmaProvenanceMetadata(BaseProvenanceMetadata):
+    """
+    Provenance metadata for pharma company detection.
 
-    pipeline_version: str
-    run_id: str
-    doc_fingerprint: str
+    Inherits common provenance fields from BaseProvenanceMetadata and adds:
+    - generator_name: PharmaGeneratorType (overrides base Enum type)
+
+    Note: No lexicon_ids field - pharma detection uses simpler lexicon matching.
+    """
+
     generator_name: PharmaGeneratorType
-    lexicon_source: Optional[str] = None
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
 
 
 # -------------------------
