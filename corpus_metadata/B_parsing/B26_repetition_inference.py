@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B01d_repetition_inference.py
+# corpus_metadata/B_parsing/B26_repetition_inference.py
 """
 Header/footer repetition inference for PDF parsing.
 
@@ -16,7 +16,7 @@ import re
 from collections import Counter
 from typing import Dict, Optional, Set, Tuple
 
-from B_parsing.B01a_text_helpers import (
+from B_parsing.B23_text_helpers import (
     KNOWN_FOOTER_RE,
     RUNNING_HEADER_RE,
 )

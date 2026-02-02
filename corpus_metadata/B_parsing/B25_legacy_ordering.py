@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B01c_legacy_ordering.py
+# corpus_metadata/B_parsing/B25_legacy_ordering.py
 """
 Legacy block ordering for single and two-column PDF layouts.
 

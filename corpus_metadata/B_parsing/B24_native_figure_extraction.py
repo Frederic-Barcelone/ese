@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B01b_native_figure_extraction.py
+# corpus_metadata/B_parsing/B24_native_figure_extraction.py
 """
 Native PDF figure extraction using PyMuPDF.
 
@@ -23,7 +23,7 @@ import fitz  # PyMuPDF
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import ImageBlock, ImageType
 
-from B_parsing.B01a_text_helpers import PERCENTAGE_PATTERN
+from B_parsing.B23_text_helpers import PERCENTAGE_PATTERN
 
 # B09-B11 modules
 from B_parsing.B09_pdf_native_figures import (

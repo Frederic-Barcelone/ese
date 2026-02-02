@@ -3,10 +3,10 @@
 PDF to DocumentGraph Parser with SOTA Column Ordering.
 
 CHANGELOG v2.1:
-    - Extracted text helpers to B01a_text_helpers.py
-    - Extracted native figure extraction to B01b_native_figure_extraction.py
-    - Extracted legacy ordering to B01c_legacy_ordering.py
-    - Extracted repetition inference to B01d_repetition_inference.py
+    - Extracted text helpers to B23_text_helpers.py
+    - Extracted native figure extraction to B24_native_figure_extraction.py
+    - Extracted legacy ordering to B25_legacy_ordering.py
+    - Extracted repetition inference to B26_repetition_inference.py
 
 CHANGELOG v2.0:
     - Integrated B04_column_ordering for SOTA multi-column layout detection
@@ -37,8 +37,8 @@ from A_core.A02_interfaces import BaseParser
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole, ImageBlock, ImageType
 
-# Text helpers (B01a)
-from B_parsing.B01a_text_helpers import (
+# Text helpers (B23)
+from B_parsing.B23_text_helpers import (
     normalize_repeated_text,
     NUMBERED_REFERENCE_RE,
     PERCENTAGE_PATTERN,
@@ -55,18 +55,18 @@ from B_parsing.B01a_text_helpers import (
     table_to_markdown,
 )
 
-# Native figure extraction (B01b)
-from B_parsing.B01b_native_figure_extraction import (
+# Native figure extraction (B24)
+from B_parsing.B24_native_figure_extraction import (
     apply_native_figure_extraction,
 )
 
-# Legacy ordering (B01c)
-from B_parsing.B01c_legacy_ordering import (
+# Legacy ordering (B25)
+from B_parsing.B25_legacy_ordering import (
     order_blocks_deterministically,
 )
 
-# Repetition inference (B01d)
-from B_parsing.B01d_repetition_inference import (
+# Repetition inference (B26)
+from B_parsing.B26_repetition_inference import (
     infer_repeated_headers_footers,
     looks_like_known_footer,
     is_short_repeated_noise,
@@ -929,7 +929,7 @@ class PDFToDocGraphParser(BaseParser):
     # -----------------------
 
     def _clean_text(self, text: str) -> str:
-        """Delegate to B01a_text_helpers.clean_text."""
+        """Delegate to B23_text_helpers.clean_text."""
         return clean_text(text)
 
     def _get_page_dimensions(self, file_path: str) -> Dict[int, Tuple[float, float]]:
