@@ -187,3 +187,8 @@ class ValidationLogger:
         logger.info("  [WARN] Errors:        %d", self.stats['errors'])
         logger.info("Log file: %s", self.log_file)
         logger.info("=" * 50)
+
+
+__all__ = [
+    "ValidationLogger",
+]

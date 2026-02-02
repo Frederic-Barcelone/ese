@@ -542,3 +542,10 @@ class PromptRegistry:
             output_schema=schema,
             prompt_bundle_hash=bundle_hash,
         )
+
+
+__all__ = [
+    "PromptTask",
+    "PromptBundle",
+    "PromptRegistry",
+]
