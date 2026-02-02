@@ -975,7 +975,7 @@ class Orchestrator:
                 visual_result,
                 output_dir,
                 doc_name=pdf_path_obj.stem,
-                export_images=True,
+                save_images_as_files=True,
             )
             print(f"  Visual exports: {len(exported_paths)} files")
 
