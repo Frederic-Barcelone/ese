@@ -1,15 +1,35 @@
-# corpus_metadata/E_normalization/E10_biomedical_ner_all.py
 """
-d4data/biomedical-ner-all integration for comprehensive biomedical NER.
+Comprehensive biomedical NER using d4data/biomedical-ner-all model.
 
-Uses DistilBERT-based model trained on Maccrobat dataset to extract
-84 biomedical entity types including:
-- Clinical: Disease, Symptom, Procedure, Medication, Lab values
-- Demographics: Age, Sex, Family history
-- Temporal: Date, Duration, History
-- Anatomical: Biological structure, Body part
+This module provides broad biomedical entity extraction using a DistilBERT
+model trained on the Maccrobat dataset, covering 84 entity types across
+clinical, demographic, temporal, and anatomical categories.
+
+Key Components:
+    - BiomedicalNEREnricher: Main enricher using d4data/biomedical-ner-all
+    - ENTITY_CATEGORIES: Groupings for extracted entity types
+    - Entity categories:
+        - Clinical: Disease, Symptom, Procedure, Medication, Lab values
+        - Demographics: Age, Sex, Family history
+        - Temporal: Date, Duration, History
+        - Anatomical: Biological structure, Body part
+        - Drug administration: Dosage, Frequency, Administration
+
+Example:
+    >>> from E_normalization.E10_biomedical_ner_all import BiomedicalNEREnricher
+    >>> enricher = BiomedicalNEREnricher()
+    >>> result = enricher.extract("45-year-old male with diabetes on metformin")
+    >>> for entity in result.entities:
+    ...     print(f"{entity.category}/{entity.entity_type}: {entity.text}")
+    demographics/Age: 45-year-old
+    clinical/Disease_disorder: diabetes
+    clinical/Medication: metformin
 
 Model: https://huggingface.co/d4data/biomedical-ner-all
+
+Dependencies:
+    - transformers: HuggingFace Pipeline (lazy loading)
+    - torch: PyTorch backend (lazy loading)
 """
 
 from __future__ import annotations
@@ -242,7 +262,7 @@ class BiomedicalNEREnricher:
             tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
             model = AutoModelForTokenClassification.from_pretrained(self.MODEL_NAME)
 
-            self._pipeline = pipeline(  # type: ignore[call-overload]
+            self._pipeline = pipeline(
                 "ner",
                 model=model,
                 tokenizer=tokenizer,

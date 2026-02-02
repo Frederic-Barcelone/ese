@@ -457,6 +457,11 @@ class Orchestrator:
         self.registry_enricher = self.factory.create_registry_enricher()
         self.genetic_enricher = self.factory.create_genetic_enricher()
 
+        # Create PubTator enrichers (disease, drug, gene)
+        self.disease_enricher = self.factory.create_disease_enricher()
+        self.drug_enricher = self.factory.create_drug_enricher()
+        self.gene_enricher = self.factory.create_gene_enricher()
+
         # Create document metadata strategy
         self.doc_metadata_strategy = self.factory.create_doc_metadata_strategy(
             self.claude_client, self.model
@@ -513,6 +518,11 @@ class Orchestrator:
             author_detector=self.author_detector,
             citation_detector=self.citation_detector,
         )
+
+        # Set PubTator enrichers on entity processor
+        self.entity_processor.disease_enricher = self.disease_enricher
+        self.entity_processor.drug_enricher = self.drug_enricher
+        self.entity_processor.gene_enricher = self.gene_enricher
 
         # Create feasibility processor
         self.feasibility_processor = FeasibilityProcessor(
@@ -1334,12 +1344,12 @@ class Orchestrator:
 
         # Print care pathway summary (only if extractor was enabled)
         if extract_care_pathways and care_pathway_results:
-            total_nodes = sum(len(p.nodes) for p in care_pathway_results)
-            total_edges = sum(len(p.edges) for p in care_pathway_results)
+            total_nodes = sum(len(pathway.nodes) for pathway in care_pathway_results)
+            total_edges = sum(len(pathway.edges) for pathway in care_pathway_results)
             print(f"\nCare pathways ({len(care_pathway_results)} pathways, {total_nodes} nodes, {total_edges} edges):")
-            for p in care_pathway_results:
-                drugs_str = f" [{', '.join(p.primary_drugs[:3])}]" if p.primary_drugs else ""
-                print(f"  * {p.title or 'Unknown'}{drugs_str}")
+            for pathway in care_pathway_results:
+                drugs_str = f" [{', '.join(pathway.primary_drugs[:3])}]" if pathway.primary_drugs else ""
+                print(f"  * {pathway.title or 'Unknown'}{drugs_str}")
 
         # Print recommendation summary (only if extractor was enabled)
         if extract_recommendations and recommendation_results:

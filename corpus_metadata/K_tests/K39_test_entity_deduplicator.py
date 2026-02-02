@@ -17,10 +17,10 @@ from A_core.A01_domain_models import ValidationStatus
 
 def make_mock_disease(
     name: str,
-    mondo_id: str = None,
-    orpha_code: str = None,
-    umls_cui: str = None,
-    mesh_id: str = None,
+    mondo_id: str | None = None,
+    orpha_code: str | None = None,
+    umls_cui: str | None = None,
+    mesh_id: str | None = None,
     confidence: float = 0.9,
     status: ValidationStatus = ValidationStatus.VALIDATED,
     page: int = 1,
@@ -51,9 +51,9 @@ def make_mock_disease(
 
 def make_mock_drug(
     name: str,
-    rxcui: str = None,
-    drugbank_id: str = None,
-    compound_id: str = None,
+    rxcui: str | None = None,
+    drugbank_id: str | None = None,
+    compound_id: str | None = None,
     confidence: float = 0.9,
     is_investigational: bool = False,
     status: ValidationStatus = ValidationStatus.VALIDATED,
@@ -83,11 +83,11 @@ def make_mock_drug(
 
 def make_mock_gene(
     symbol: str,
-    hgnc_id: str = None,
-    entrez_id: str = None,
+    hgnc_id: str | None = None,
+    entrez_id: str | None = None,
     confidence: float = 0.9,
     is_alias: bool = False,
-    associated_diseases: list = None,
+    associated_diseases: list | None = None,
     status: ValidationStatus = ValidationStatus.VALIDATED,
     page: int = 1,
 ):
