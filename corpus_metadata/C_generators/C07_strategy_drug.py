@@ -1,15 +1,39 @@
-# corpus_metadata/corpus_metadata/C_generators/C07_strategy_drug.py
 """
-Drug/chemical entity detection strategy.
+Drug and chemical entity detection using lexicons and NER.
 
-Multi-layered approach:
-1. Alexion drugs (specialized, highest priority)
-2. Investigational drugs (compound IDs + lexicon)
-3. FDA approved drugs (brand + generic)
-4. RxNorm general terms
-5. scispacy NER (CHEMICAL semantic type, fallback)
+This module detects drug and chemical entity names in clinical documents using
+a multi-layered approach with prioritized lexicon matching. Combines specialized
+drug databases, FDA-approved drugs, RxNorm vocabulary, and scispacy NER with
+false positive filtering for high precision.
 
-Uses FlashText for fast keyword matching.
+Key Components:
+    - DrugDetector: Main detector combining multiple detection strategies
+    - Lexicon layers (in priority order):
+        1. Alexion drugs (specialized, highest priority)
+        2. Investigational drugs (compound IDs + lexicon)
+        3. FDA approved drugs (brand + generic)
+        4. RxNorm general terms
+        5. scispacy NER (CHEMICAL semantic type, fallback)
+    - DrugFalsePositiveFilter: Filters common false positives (C25)
+
+Example:
+    >>> from C_generators.C07_strategy_drug import DrugDetector
+    >>> detector = DrugDetector(config={"lexicon_base_path": "lexicons/"})
+    >>> candidates = detector.detect(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.canonical_name} (source: {c.source})")
+    ravulizumab (source: alexion_drugs)
+
+Dependencies:
+    - A_core.A01_domain_models: Coordinate
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A06_drug_models: DrugCandidate, DrugFieldType, DrugGeneratorType
+    - B_parsing.B01_pdf_to_docgraph: DocumentGraph
+    - B_parsing.B05_section_detector: Section classification
+    - B_parsing.B06_confidence: Confidence scoring
+    - B_parsing.B07_negation: Negation detection
+    - C_generators.C25_drug_fp_filter: False positive filtering
+    - flashtext: KeywordProcessor for fast lexicon matching
 """
 
 from __future__ import annotations

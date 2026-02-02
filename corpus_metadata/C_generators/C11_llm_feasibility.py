@@ -1,19 +1,38 @@
-# corpus_metadata/C_generators/C11_llm_feasibility.py
 """
-LLM-based clinical trial feasibility extraction.
+LLM-based clinical trial feasibility extraction using Claude.
 
-Uses Claude to extract structured feasibility data:
-1. Study design (phase, sample size, randomization, arms)
-2. Eligibility criteria (structured inclusion/exclusion)
-3. Endpoints (primary, secondary with measures/timepoints)
-4. Sites/Countries (full country list)
-5. Operational burden (procedures, vaccinations, visit schedule)
-6. Screening flow (CONSORT data, screen fail reasons)
+This module uses Claude to extract structured feasibility data from clinical
+trial documents, replacing noisy regex-based extraction with high-quality
+structured output. Features section-targeted prompting and quote verification.
 
-This replaces the noisy regex-based extraction with high-quality structured output.
+Key Components:
+    - LLMFeasibilityExtractor: Main extractor using Claude API
+    - FeasibilityResponseParserMixin: Parses LLM JSON responses (C30)
+    - Extraction categories:
+        1. Study design (phase, sample size, randomization, arms)
+        2. Eligibility criteria (structured inclusion/exclusion)
+        3. Endpoints (primary, secondary with measures/timepoints)
+        4. Sites/Countries (full country list)
+        5. Operational burden (procedures, vaccinations, visit schedule)
+        6. Screening flow (CONSORT data, screen fail reasons)
 
-This module uses a mixin class for response parsing:
-- FeasibilityResponseParserMixin: Parses LLM JSON responses into domain objects
+Example:
+    >>> from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
+    >>> extractor = LLMFeasibilityExtractor(config={"model": "claude-sonnet-4-20250514"})
+    >>> candidates = extractor.extract(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.field_type}: {c.value}")
+    STUDY_PHASE: Phase 3
+    SAMPLE_SIZE: 500
+
+Dependencies:
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A07_feasibility_models: FeasibilityCandidate, FeasibilityGeneratorType
+    - B_parsing.B02_doc_graph: DocumentGraph
+    - B_parsing.B05_section_detector: Section classification
+    - D_validation.D04_quote_verifier: Quote and numerical verification
+    - C_generators.C29_feasibility_prompts: LLM prompt templates
+    - C_generators.C30_feasibility_response_parser: Response parsing mixin
 """
 
 from __future__ import annotations

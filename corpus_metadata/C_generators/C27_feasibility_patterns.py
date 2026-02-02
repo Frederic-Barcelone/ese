@@ -1,14 +1,29 @@
-# corpus_metadata/C_generators/C27_feasibility_patterns.py
 """
 Pattern constants for clinical trial feasibility extraction.
 
-Contains all regex patterns and constants used by FeasibilityDetector:
-- Eligibility criteria patterns
-- Epidemiology patterns
-- Patient journey patterns
-- Endpoint patterns
-- Site/country patterns
-- Screening yield patterns
+This module contains all regex patterns and constants used by FeasibilityDetector
+for extracting clinical trial feasibility information. Provides comprehensive
+patterns for eligibility, epidemiology, endpoints, and operational data.
+
+Key Components:
+    - EPIDEMIOLOGY_ANCHORS: Anchor phrases for prevalence/incidence extraction
+    - INCLUSION_MARKERS: Patterns identifying inclusion criteria sections
+    - EXCLUSION_MARKERS: Patterns identifying exclusion criteria sections
+    - ENDPOINT_PATTERNS: Patterns for primary/secondary endpoint extraction
+    - PATIENT_JOURNEY_PATTERNS: Patterns for screening/treatment phases
+    - SITE_COUNTRY_PATTERNS: Patterns for site and country identification
+    - SCREENING_YIELD_PATTERNS: Patterns for screen failure extraction
+
+Example:
+    >>> from C_generators.C27_feasibility_patterns import INCLUSION_MARKERS
+    >>> import re
+    >>> text = "Inclusion criteria: Age >= 18 years"
+    >>> any(re.search(p, text, re.I) for p in INCLUSION_MARKERS)
+    True
+
+Dependencies:
+    - A_core.A07_feasibility_models: EndpointType, FeasibilityFieldType, PatientJourneyPhaseType
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

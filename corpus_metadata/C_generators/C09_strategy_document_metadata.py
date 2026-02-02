@@ -1,15 +1,33 @@
-# corpus_metadata/corpus_metadata/C_generators/C09_strategy_document_metadata.py
 """
-Document metadata extraction strategy.
+Document metadata extraction from files and content.
 
-Extracts comprehensive document metadata:
-1. FILE METADATA - Size, dates, permissions from file system
-2. PDF METADATA - Author, creator, creation date from PDF properties
-3. CLASSIFICATION - Document type classification using LLM
-4. DESCRIPTIONS - Title, short/long descriptions using LLM
-5. DATE EXTRACTION - Date with fallback chain: filename → content → PDF → file system
+This module extracts comprehensive document metadata from clinical trial PDFs,
+combining file system information, PDF properties, and LLM-based classification.
+Implements a fallback chain for date extraction and intelligent document typing.
 
-Uses pattern matching for dates and LLM for classification/description.
+Key Components:
+    - DocumentMetadataExtractor: Main extractor for all metadata types
+    - Extraction categories:
+        1. FILE METADATA - Size, dates, permissions from file system
+        2. PDF METADATA - Author, creator, creation date from PDF properties
+        3. CLASSIFICATION - Document type classification using LLM
+        4. DESCRIPTIONS - Title, short/long descriptions using LLM
+        5. DATE EXTRACTION - Fallback chain: filename → content → PDF → file system
+
+Example:
+    >>> from C_generators.C09_strategy_document_metadata import DocumentMetadataExtractor
+    >>> extractor = DocumentMetadataExtractor(config={})
+    >>> metadata = extractor.extract(doc_graph, pdf_path)
+    >>> print(f"Type: {metadata.classification.document_type}")
+    >>> print(f"Date: {metadata.date_extraction.best_date}")
+    Type: CLINICAL_STUDY_REPORT
+    Date: 2024-01-15
+
+Dependencies:
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A08_document_metadata_models: DocumentMetadata, DocumentType, PDFMetadata
+    - B_parsing.B02_doc_graph: DocumentGraph
+    - fitz (PyMuPDF): PDF metadata extraction (optional)
 """
 
 from __future__ import annotations

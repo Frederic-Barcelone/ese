@@ -1,14 +1,31 @@
-# corpus_metadata/C_generators/C30_feasibility_response_parser.py
 """
 Response parsing mixin for LLM feasibility extraction.
 
-Parses LLM JSON responses into FeasibilityCandidate objects for:
-- Study design
-- Eligibility criteria
-- Study endpoints
-- Sites/countries
-- Operational burden
-- Screening flow
+This module provides methods for parsing LLM JSON responses into structured
+FeasibilityCandidate objects. Handles all feasibility extraction categories
+with validation and error recovery for malformed responses.
+
+Key Components:
+    - FeasibilityResponseParserMixin: Mixin class for response parsing
+    - Parsing methods for each extraction category:
+        - _parse_study_design_response: Phase, sample size, arms
+        - _parse_eligibility_response: Inclusion/exclusion criteria
+        - _parse_endpoints_response: Primary/secondary endpoints
+        - _parse_sites_response: Sites and countries
+        - _parse_operational_burden_response: Procedures, visits
+        - _parse_screening_flow_response: CONSORT data
+
+Example:
+    >>> class MyExtractor(FeasibilityResponseParserMixin):
+    ...     pass
+    >>> extractor = MyExtractor()
+    >>> candidates = extractor._parse_study_design_response(llm_json, provenance)
+    >>> candidates[0].field_type
+    FeasibilityFieldType.STUDY_PHASE
+
+Dependencies:
+    - A_core.A07_feasibility_models: FeasibilityCandidate, StudyDesign, EligibilityCriterion
+    - C_generators.C29_feasibility_prompts: Prompt templates for context
 """
 
 from __future__ import annotations

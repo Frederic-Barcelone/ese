@@ -1,12 +1,29 @@
-# corpus_metadata/C_generators/C17_flowchart_graph_extractor.py
 """
-Flowchart Graph Extractor - Extract treatment algorithm decision logic.
+Flowchart graph extraction for treatment algorithm decision logic.
 
-Extracts structured care pathway graphs from clinical algorithm figures,
-capturing nodes (actions/decisions), edges (transitions), and conditions.
+This module extracts structured care pathway graphs from clinical algorithm
+figures, capturing nodes (actions/decisions), edges (transitions), and conditions.
+Goes beyond patient counts to extract actual decision logic for clinical support.
 
-This goes beyond simple flowchart analysis (patient counts) to extract
-the actual decision logic that can be used for clinical decision support.
+Key Components:
+    - FlowchartGraphExtractor: Main extractor using Claude Vision
+    - CarePathway: Complete extracted pathway graph
+    - CarePathwayNode: Individual nodes (start, end, action, decision)
+    - CarePathwayEdge: Transitions between nodes with conditions
+    - NodeType: Enum for node classification
+
+Example:
+    >>> from C_generators.C17_flowchart_graph_extractor import FlowchartGraphExtractor
+    >>> extractor = FlowchartGraphExtractor(config={})
+    >>> pathway = extractor.extract(image_base64, context)
+    >>> for node in pathway.nodes:
+    ...     print(f"{node.id} ({node.type}): {node.text}")
+    n1 (start): Active GPA/MPA diagnosis
+    n2 (action): Rituximab + glucocorticoids
+
+Dependencies:
+    - A_core.A17_care_pathway_models: CarePathway, CarePathwayNode, CarePathwayEdge
+    - anthropic: Claude Vision API client
 """
 
 from __future__ import annotations

@@ -1,12 +1,31 @@
-# corpus_metadata/C_generators/C32_recommendation_llm.py
 """
 LLM-based extraction mixin for guideline recommendations.
 
-Provides methods for:
-- LLM-based recommendation extraction
-- JSON response cleaning and parsing
-- Context building for LLM prompts
-- Evidence level and strength inference from language
+This module provides mixin methods for LLM-based recommendation extraction
+from clinical guidelines. Handles prompt construction, response parsing,
+and evidence level inference from recommendation language.
+
+Key Components:
+    - LLMExtractionMixin: Mixin class for LLM-based extraction
+    - Methods:
+        - _extract_with_llm: Main extraction using Claude API
+        - _clean_json_response: Response cleaning and parsing
+        - _build_context: Context construction for prompts
+        - _infer_evidence_level: Evidence level from language cues
+        - _infer_strength: Recommendation strength from language
+
+Example:
+    >>> class MyExtractor(LLMExtractionMixin):
+    ...     def __init__(self):
+    ...         self.llm_client = anthropic.Anthropic()
+    ...         self.llm_model = "claude-sonnet-4-20250514"
+    >>> extractor = MyExtractor()
+    >>> recommendations = extractor._extract_with_llm(text, "guidelines")
+
+Dependencies:
+    - A_core.A18_recommendation_models: GuidelineRecommendation, EvidenceLevel
+    - C_generators.C31_recommendation_patterns: RECOMMENDATION_EXTRACTION_PROMPT
+    - anthropic: Claude API client (expected on host class)
 """
 
 from __future__ import annotations

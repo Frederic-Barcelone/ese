@@ -1,15 +1,26 @@
-# corpus_metadata/C_generators/C21_noise_filters.py
 """
-Noise filtering constants and lexicon entry class for abbreviation extraction.
+Noise filtering constants for abbreviation extraction.
 
-This module contains:
-- OBVIOUS_NOISE: Set of terms that are obviously not abbreviations
-- MIN_ABBREV_LENGTH: Minimum length for valid abbreviations
-- WRONG_EXPANSION_BLACKLIST: SF->LF pairs that should never be used
-- BAD_LONG_FORMS: Long forms that are always wrong
-- LexiconEntry: Data class for compiled lexicon entries
+This module provides constants for filtering obvious non-abbreviations and
+invalid expansions. Contains curated sets of noise terms, blacklisted
+SF/LF pairs, and the LexiconEntry data class for lexicon management.
 
-Extracted from C04_strategy_flashtext.py for maintainability.
+Key Components:
+    - OBVIOUS_NOISE: Set of terms that are obviously not abbreviations
+    - MIN_ABBREV_LENGTH: Minimum length for valid abbreviations
+    - WRONG_EXPANSION_BLACKLIST: SF->LF pairs that should never be used
+    - BAD_LONG_FORMS: Long forms that are always wrong
+    - LexiconEntry: Data class for compiled lexicon entries
+
+Example:
+    >>> from C_generators.C21_noise_filters import OBVIOUS_NOISE, WRONG_EXPANSION_BLACKLIST
+    >>> "the" in OBVIOUS_NOISE
+    True
+    >>> ("US", "United States") in WRONG_EXPANSION_BLACKLIST
+    True
+
+Dependencies:
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

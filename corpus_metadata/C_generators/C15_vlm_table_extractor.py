@@ -1,12 +1,31 @@
-# corpus_metadata/C_generators/C15_vlm_table_extractor.py
 """
 VLM-based table structure extraction using Claude Vision.
 
-Replaces HTML parsing from Unstructured with direct VLM extraction
-for more accurate table data, especially for:
-- Numeric precision (26.1 not 26-1)
-- Complex table layouts
-- Multi-row headers
+This module extracts table structures directly from images using Claude Vision,
+replacing HTML parsing from Unstructured with more accurate VLM extraction.
+Handles complex table layouts with superior numeric precision.
+
+Key Components:
+    - VLMTableExtractor: Main extractor using Claude Vision API
+    - resize_image_for_vlm: Image preprocessing for API limits
+    - Extraction benefits:
+        - Numeric precision (26.1 not 26-1)
+        - Complex table layouts with merged cells
+        - Multi-row headers and spanning columns
+
+Example:
+    >>> from C_generators.C15_vlm_table_extractor import VLMTableExtractor
+    >>> extractor = VLMTableExtractor(config={"model": "claude-sonnet-4-20250514"})
+    >>> table_data = extractor.extract(image_base64, table_context)
+    >>> for row in table_data.rows:
+    ...     print(row)
+    ['Patient ID', 'Age', 'Dose (mg)']
+    ['001', '45', '26.1']
+
+Dependencies:
+    - pydantic: Data model definitions
+    - anthropic: Claude Vision API client
+    - PIL: Image resizing (optional)
 """
 
 from __future__ import annotations

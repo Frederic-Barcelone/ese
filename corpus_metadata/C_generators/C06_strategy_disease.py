@@ -1,14 +1,38 @@
-# corpus_metadata/C_generators/C06_strategy_disease.py
 """
-Disease mention detection strategy.
+Disease mention detection using lexicons and NER.
 
-Detects disease names in documents using:
-1. Specialized disease lexicons (PAH, ANCA, IgAN) - high precision
-2. General disease lexicon (29K+ diseases) - with FP filtering
-3. Orphanet rare diseases (9.6K diseases) - with FP filtering
-4. scispacy NER with UMLS disease types
+This module detects disease names in clinical documents using a multi-layered
+approach combining specialized lexicons, general disease vocabularies, and
+biomedical NER. Features confidence-based false positive filtering to balance
+precision and recall across different document types.
 
-Uses confidence-based false positive filtering (see C06a_disease_fp_filter.py).
+Key Components:
+    - DiseaseDetector: Main detector combining multiple detection strategies
+    - Lexicon layers:
+        - Specialized disease lexicons (PAH, ANCA, IgAN) - highest precision
+        - General disease lexicon (29K+ diseases) - with FP filtering
+        - Orphanet rare diseases (9.6K diseases) - with FP filtering
+    - scispacy NER with UMLS disease semantic types
+    - DiseaseFalsePositiveFilter: Confidence-based filtering (C24)
+
+Example:
+    >>> from C_generators.C06_strategy_disease import DiseaseDetector
+    >>> detector = DiseaseDetector(config={"lexicon_base_path": "lexicons/"})
+    >>> candidates = detector.detect(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.canonical_name} (confidence: {c.confidence:.2f})")
+    pulmonary arterial hypertension (confidence: 0.95)
+
+Dependencies:
+    - A_core.A01_domain_models: Coordinate
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A05_disease_models: DiseaseCandidate, DiseaseFieldType, DiseaseGeneratorType
+    - A_core.A15_domain_profile: Domain-specific configuration
+    - B_parsing.B02_doc_graph: DocumentGraph
+    - B_parsing.B05_section_detector: Section classification
+    - B_parsing.B06_confidence: Confidence scoring
+    - B_parsing.B07_negation: Negation detection
+    - C_generators.C24_disease_fp_filter: False positive filtering
 """
 
 from __future__ import annotations

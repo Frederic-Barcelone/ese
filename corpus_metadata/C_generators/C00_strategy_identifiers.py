@@ -1,27 +1,44 @@
-# corpus_metadata/C_generators/C00_strategy_identifiers.py
 """
-Identifier Extractor - Extract standardized IDs from scientific/medical documents.
+Standardized identifier extraction from scientific and medical documents.
 
-Target: Database identifiers, publication references, and standardized codes.
+This module extracts database identifiers, publication references, and standardized
+codes from clinical trial documents using regex pattern matching. Supports a wide
+range of biomedical and clinical trial identifier formats with high precision.
+
+Key Components:
+    - IdentifierExtractor: Main extractor class for all identifier types
+    - IdentifierType: Enum of supported identifier categories (OMIM, DOI, PMID, etc.)
+    - IDENTIFIER_PATTERNS: Regex patterns for each identifier type
 
 Supported ID Types:
-  - OMIM: Online Mendelian Inheritance in Man (e.g., OMIM #118450, MIM:118450)
-  - Orphanet: Rare disease database (e.g., ORPHA:123, Orphanet:123)
-  - DOI: Digital Object Identifier (e.g., 10.1000/xyz123)
-  - PMID: PubMed ID (e.g., PMID:12345678, PMID 12345678)
-  - PMC: PubMed Central (e.g., PMC1234567)
-  - NCT: ClinicalTrials.gov (e.g., NCT01234567)
-  - ORCID: Researcher identifier (e.g., 0000-0002-1234-5678)
-  - ISRCTN: International Standard Randomised Controlled Trial Number
-  - EudraCT: European Clinical Trials Database (e.g., 2020-001234-56)
-  - UMLS CUI: Unified Medical Language System (e.g., C0123456)
-  - MeSH: Medical Subject Headings (e.g., D012345)
-  - ICD-10: International Classification of Diseases (e.g., E11.9)
-  - SNOMED CT: (e.g., 123456789)
+    - OMIM: Online Mendelian Inheritance in Man (e.g., OMIM #118450, MIM:118450)
+    - Orphanet: Rare disease database (e.g., ORPHA:123, Orphanet:123)
+    - DOI: Digital Object Identifier (e.g., 10.1000/xyz123)
+    - PMID: PubMed ID (e.g., PMID:12345678)
+    - PMC: PubMed Central (e.g., PMC1234567)
+    - NCT: ClinicalTrials.gov (e.g., NCT01234567)
+    - ORCID: Researcher identifier (e.g., 0000-0002-1234-5678)
+    - ISRCTN: International Standard Randomised Controlled Trial Number
+    - EudraCT: European Clinical Trials Database (e.g., 2020-001234-56)
+    - UMLS CUI: Unified Medical Language System (e.g., C0123456)
+    - MeSH: Medical Subject Headings (e.g., D012345)
+    - ICD-10: International Classification of Diseases (e.g., E11.9)
+    - SNOMED CT: Systematized Nomenclature of Medicine (e.g., 123456789)
 
-Usage:
-    extractor = IdentifierExtractor()
-    identifiers = extractor.extract(doc_graph)
+Example:
+    >>> from C_generators.C00_strategy_identifiers import IdentifierExtractor
+    >>> extractor = IdentifierExtractor()
+    >>> identifiers = extractor.extract(doc_graph)
+    >>> for ident in identifiers:
+    ...     print(f"{ident.id_type}: {ident.value}")
+    PMID: 12345678
+    NCT: NCT01234567
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, GeneratorType
+    - A_core.A02_interfaces: BaseCandidateGenerator
+    - A_core.A03_provenance: Provenance tracking utilities
+    - B_parsing.B02_doc_graph: DocumentGraph for text extraction
 """
 
 from __future__ import annotations

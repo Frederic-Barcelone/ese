@@ -1,13 +1,29 @@
-# corpus_metadata/C_generators/C24_disease_fp_filter.py
 """
 Disease false positive filtering with confidence-based scoring.
 
-Provides confidence adjustments instead of hard filtering for most cases,
-preserving recall while allowing downstream components to use confidence scores.
+This module provides confidence-based scoring for disease matches, converting
+hard filtering to confidence adjustments to preserve recall while enabling
+downstream components to use confidence scores for filtering decisions.
 
-Only hard-filters truly catastrophic false positives:
-- Chromosome patterns in chromosome context
-- Gene names with very strong gene context
+Key Components:
+    - DiseaseFalsePositiveFilter: Main filter with confidence adjustment logic
+    - Filtering layers:
+        1. Chromosome patterns (hard filter - truly catastrophic FPs)
+        2. Gene names with strong gene context (hard filter)
+        3. Domain-specific adjustments via DomainProfile
+        4. Generic patterns with confidence penalties
+    - CHROMOSOME_PATTERNS: Regex patterns for karyotype notation
+
+Example:
+    >>> from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+    >>> filter = DiseaseFalsePositiveFilter()
+    >>> confidence, reason = filter.adjust_confidence("22q11.2", 0.9, "deletion 22q11.2")
+    >>> confidence
+    0.0  # Hard-filtered as chromosome pattern
+
+Dependencies:
+    - A_core.A15_domain_profile: DomainProfile, load_domain_profile
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

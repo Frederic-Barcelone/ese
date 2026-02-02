@@ -1,34 +1,39 @@
-# corpus_metadata/C_generators/C14_strategy_citation.py
 """
-Citation and reference mention detection using regex patterns.
+Citation and reference detection using regex patterns.
 
-This module detects academic citations and identifier references in clinical documents,
-extracting structured identifiers for validation and linking to external databases.
+This module detects academic citations and identifier references in clinical
+documents, extracting structured identifiers for validation and linking to
+external databases. Handles complex DOI formats and PDF extraction artifacts.
 
-Supported Identifier Types:
-    - PMID: PubMed identifiers (7-8 digit numbers)
-    - PMCID: PubMed Central identifiers (PMC + 6-8 digits)
-    - DOI: Digital Object Identifiers (10.xxxx/yyyy format)
-    - NCT: ClinicalTrials.gov identifiers (NCT + 8 digits)
-    - URL: Web URLs (excluding doi.org, which are handled as DOIs)
-
-Key Features:
-    - Handles DOIs with parentheses (e.g., Lancet DOIs like S0140-6736(25)01148-1)
-    - Fixes broken DOIs caused by PDF line breaks
-    - Validates URLs and rejects truncated/incomplete ones
-    - Merges related citations that appear near each other
-    - Extracts context text for validation
+Key Components:
+    - CitationDetector: Main detector for citation extraction
+    - Supported identifier types:
+        - PMID: PubMed identifiers (7-8 digit numbers)
+        - PMCID: PubMed Central identifiers (PMC + 6-8 digits)
+        - DOI: Digital Object Identifiers (10.xxxx/yyyy format)
+        - NCT: ClinicalTrials.gov identifiers (NCT + 8 digits)
+        - URL: Web URLs (excluding doi.org, handled as DOIs)
+    - Features:
+        - Handles DOIs with parentheses (e.g., Lancet S0140-6736(25)01148-1)
+        - Fixes broken DOIs from PDF line breaks
+        - Validates and rejects truncated URLs
+        - Merges related citations near each other
 
 Example:
     >>> from C_generators.C14_strategy_citation import CitationDetector
     >>> detector = CitationDetector()
     >>> candidates = detector.detect(doc_graph, "doc123", "fingerprint")
     >>> for c in candidates:
-    ...     print(f"Found: {c.doi or c.pmid or c.nct}")
+    ...     print(f"{c.identifier_type}: {c.doi or c.pmid or c.nct}")
+    DOI: 10.1016/S0140-6736(25)01148-1
+    PMID: 12345678
 
 Dependencies:
-    - A_core.A11_citation_models: Data models for citations
-    - B_parsing.B02_doc_graph: Document graph for text extraction
+    - A_core.A00_logging: Logging utilities
+    - A_core.A01_domain_models: Coordinate, EvidenceSpan, ValidationStatus
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A11_citation_models: CitationCandidate, CitationIdentifierType
+    - B_parsing.B02_doc_graph: DocumentGraph for text extraction
 """
 
 from __future__ import annotations

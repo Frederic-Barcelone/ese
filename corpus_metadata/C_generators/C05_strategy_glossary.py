@@ -1,10 +1,28 @@
-# corpus_metadata/corpus_metadata/C_generators/C05_strategy_glossary.py
 """
-Glossary Table Extractor - Extract SF/LF pairs from glossary tables.
+Glossary table extraction for abbreviation definitions.
 
-Target: Tables with columns like "Abbreviation | Definition" or "Term | Meaning".
+This module extracts short form/long form pairs from glossary tables in clinical
+documents. Targets tables with columns like "Abbreviation | Definition" or
+"Term | Meaning", producing high-confidence extractions from authoritative sources.
 
-High confidence extractions since glossary tables are authoritative sources.
+Key Components:
+    - GlossaryTableExtractor: Main extractor for glossary-style tables
+    - Column header detection for abbreviation/definition patterns
+    - Multi-row glossary parsing with cell alignment
+
+Example:
+    >>> from C_generators.C05_strategy_glossary import GlossaryTableExtractor
+    >>> extractor = GlossaryTableExtractor(config={})
+    >>> candidates = extractor.generate(doc_graph)
+    >>> for c in candidates:
+    ...     print(f"{c.short_form} = {c.long_form} (table: {c.table_id})")
+    AE = Adverse Event (table: glossary_1)
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, Coordinate, FieldType, GeneratorType
+    - A_core.A02_interfaces: BaseCandidateGenerator
+    - A_core.A03_provenance: Provenance tracking utilities
+    - B_parsing.B02_doc_graph: DocumentGraph, TableType
 """
 
 from __future__ import annotations

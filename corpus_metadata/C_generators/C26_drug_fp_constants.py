@@ -1,9 +1,35 @@
-# corpus_metadata/C_generators/C26_drug_fp_constants.py
 """
-Drug false positive filtering constants.
+Drug false positive filtering constant sets.
 
-This module contains constant sets used by DrugFalsePositiveFilter to identify
-common false positives in drug name detection.
+This module contains curated constant sets used by DrugFalsePositiveFilter to
+identify common false positives in drug name detection. Includes bacteria,
+biological entities, common words, and other non-drug terms.
+
+Key Components:
+    - BACTERIA_ORGANISMS: Bacteria and virus names (common in vaccine trials)
+    - BIOLOGICAL_ENTITIES: Proteins, enzymes, cell types
+    - BIOLOGICAL_SUFFIXES: Suffixes indicating non-drug biological terms
+    - BODY_PARTS: Anatomical terms
+    - COMMON_WORDS: Generic terms that aren't drugs
+    - CREDENTIALS: Academic/medical credentials
+    - DRUG_ABBREVIATIONS: Valid drug abbreviations to preserve
+    - EQUIPMENT_PROCEDURES: Medical equipment and procedure names
+    - FP_SUBSTRINGS: Substrings indicating false positives
+    - NER_FALSE_POSITIVES: Terms causing NER false positives
+    - NON_DRUG_ALLCAPS: All-caps terms that aren't drugs
+    - ORGANIZATIONS: Organization names
+    - PHARMA_COMPANY_NAMES: Company names (not drugs themselves)
+    - TRIAL_STATUS_TERMS: Clinical trial status terminology
+    - VACCINE_TERMS: Vaccine-related terms
+    - ALWAYS_FILTER: Terms to always filter regardless of context
+
+Example:
+    >>> from C_generators.C26_drug_fp_constants import BACTERIA_ORGANISMS
+    >>> "influenza" in BACTERIA_ORGANISMS
+    True
+
+Dependencies:
+    None (pure constant definitions)
 """
 
 from __future__ import annotations

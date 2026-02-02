@@ -1,19 +1,37 @@
-# corpus_metadata/C_generators/C08_strategy_feasibility.py
 """
-Clinical trial feasibility information extraction strategy.
+Clinical trial feasibility information extraction.
 
-Extracts key information needed for clinical trial feasibility assessment:
-1. Eligibility criteria (inclusion/exclusion) with negation handling
-2. Epidemiology data (prevalence, incidence, demographics) with context
-3. Patient journey phases (screening -> treatment -> follow-up) with burden metrics
-4. Study endpoints (primary, secondary) with proper boundaries
-5. Site/country information with disambiguation
+This module extracts key information needed for clinical trial feasibility
+assessment, including eligibility criteria, epidemiology data, patient journey
+phases, study endpoints, and site information. Combines layout-aware section
+detection with pattern matching and confidence-based scoring.
 
-Uses a combination of:
-- Layout-aware section detection
-- Pattern matching with negation handling
-- Context-gated country extraction
-- Feature-based confidence scoring
+Key Components:
+    - FeasibilityDetector: Main extractor for feasibility data
+    - Extraction categories:
+        1. Eligibility criteria (inclusion/exclusion) with negation handling
+        2. Epidemiology data (prevalence, incidence, demographics)
+        3. Patient journey phases (screening -> treatment -> follow-up)
+        4. Study endpoints (primary, secondary) with boundaries
+        5. Site/country information with disambiguation
+    - FeasibilityFalsePositiveFilter: Multi-layer false positive filtering (C28)
+
+Example:
+    >>> from C_generators.C08_strategy_feasibility import FeasibilityDetector
+    >>> detector = FeasibilityDetector(config={})
+    >>> candidates = detector.detect(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.field_type}: {c.value}")
+    INCLUSION_CRITERION: Age >= 18 years
+    PREVALENCE: 1 in 100,000
+
+Dependencies:
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A07_feasibility_models: FeasibilityCandidate, criterion types, endpoints
+    - B_parsing.B02_doc_graph: DocumentGraph
+    - B_parsing.B05_section_detector: Section classification
+    - B_parsing.B06_confidence: Confidence scoring
+    - B_parsing.B07_negation: Negation detection
 """
 
 from __future__ import annotations

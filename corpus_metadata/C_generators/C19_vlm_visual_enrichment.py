@@ -1,13 +1,32 @@
-# corpus_metadata/C_generators/C19_vlm_visual_enrichment.py
 """
-VLM Visual Enrichment for Visual Pipeline.
+VLM visual enrichment for extracted figures and tables.
 
-Uses Claude Vision to enrich extracted visuals with:
-- Type classification (table vs figure)
-- Reference parsing ("Table 1" -> structured ref)
-- Caption validation/extraction
-- Table structure validation
-- Multi-page continuation detection
+This module uses Claude Vision to enrich extracted visual elements with
+classification, reference parsing, and validation. Enhances raw visual
+extraction with intelligent type detection and multi-page handling.
+
+Key Components:
+    - VLMVisualEnricher: Main enricher using Claude Vision API
+    - VLMConfig: Configuration for model and confidence thresholds
+    - VLMClassificationResult: Type classification output
+    - VLMTableValidation: Table structure validation results
+    - Enrichment features:
+        - Type classification (table vs figure)
+        - Reference parsing ("Table 1" -> structured ref)
+        - Caption validation/extraction
+        - Table structure validation
+        - Multi-page continuation detection
+
+Example:
+    >>> from C_generators.C19_vlm_visual_enrichment import VLMVisualEnricher
+    >>> enricher = VLMVisualEnricher(config=VLMConfig())
+    >>> result = enricher.enrich(visual_element)
+    >>> print(f"Type: {result.visual_type}, Ref: {result.reference}")
+    Type: TABLE, Ref: VisualReference(type='Table', number=1)
+
+Dependencies:
+    - A_core.A13_visual_models: VisualType, VisualReference, VLMEnrichmentResult
+    - anthropic: Claude Vision API client
 """
 from __future__ import annotations
 

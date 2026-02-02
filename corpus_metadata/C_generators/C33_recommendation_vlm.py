@@ -1,11 +1,31 @@
-# corpus_metadata/C_generators/C33_recommendation_vlm.py
 """
 VLM-based extraction mixin for guideline recommendations.
 
-Provides methods for:
-- Vision LLM extraction of LoE/SoR from table images
-- PDF page rendering
-- Text-similarity matching for recommendation correlation
+This module provides mixin methods for vision-based extraction of evidence
+levels and recommendation strengths from guideline table images. Handles
+PDF rendering, image analysis, and correlation with text recommendations.
+
+Key Components:
+    - VLMExtractionMixin: Mixin class for VLM-based extraction
+    - Methods:
+        - extract_loe_sor_with_vlm: Extract LoE/SoR from table images
+        - _render_pdf_page: Render PDF pages to images for VLM
+        - _match_recommendations: Correlate VLM results with text
+    - resize_image_for_vlm: Image preprocessing (from C15)
+
+Example:
+    >>> class MyExtractor(VLMExtractionMixin):
+    ...     def __init__(self):
+    ...         self.llm_client = anthropic.Anthropic()
+    ...         self._vlm_loe_sor_cache = {}
+    >>> extractor = MyExtractor()
+    >>> loe_sor = extractor.extract_loe_sor_with_vlm(pdf_path, page_num)
+
+Dependencies:
+    - A_core.A18_recommendation_models: EvidenceLevel, RecommendationStrength
+    - C_generators.C31_recommendation_patterns: VLM_LOE_SOR_EXTRACTION_PROMPT
+    - C_generators.C15_vlm_table_extractor: resize_image_for_vlm
+    - fitz (PyMuPDF): PDF page rendering (optional)
 """
 
 from __future__ import annotations

@@ -1,15 +1,35 @@
-# corpus_metadata/C_generators/C16_strategy_gene.py
 """
-Gene/protein entity detection strategy for rare diseases.
+Gene and protein entity detection for rare disease documents.
 
-Multi-layered approach:
-1. Orphadata genes (rare disease-associated, highest priority)
-2. HGNC aliases (official gene nomenclature)
-3. Gene symbol patterns with context validation
-4. scispacy NER (GENE semantic type, fallback)
+This module detects gene and protein names in clinical documents using a
+multi-layered approach combining rare disease gene databases, official
+nomenclature, pattern matching, and biomedical NER with false positive filtering.
 
-Uses FlashText for fast keyword matching.
-False positive filtering in C16a_gene_fp_filter.py.
+Key Components:
+    - GeneDetector: Main detector combining multiple detection strategies
+    - Lexicon layers (in priority order):
+        1. Orphadata genes (rare disease-associated, highest priority)
+        2. HGNC aliases (official gene nomenclature)
+        3. Gene symbol patterns with context validation
+        4. scispacy NER (GENE semantic type, fallback)
+    - GeneFalsePositiveFilter: Filters ambiguous symbols (C34)
+
+Example:
+    >>> from C_generators.C16_strategy_gene import GeneDetector
+    >>> detector = GeneDetector(config={"lexicon_base_path": "lexicons/"})
+    >>> candidates = detector.detect(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.symbol} ({c.hgnc_id}): {c.disease_associations}")
+    CFH (HGNC:4883): ['atypical hemolytic uremic syndrome']
+
+Dependencies:
+    - A_core.A01_domain_models: Coordinate
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A19_gene_models: GeneCandidate, GeneFieldType, GeneGeneratorType
+    - B_parsing.B01_pdf_to_docgraph: DocumentGraph
+    - B_parsing.B06_confidence: Confidence scoring
+    - C_generators.C34_gene_fp_filter: False positive filtering
+    - flashtext: KeywordProcessor for fast lexicon matching
 """
 
 from __future__ import annotations

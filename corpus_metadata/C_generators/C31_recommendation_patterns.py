@@ -1,13 +1,35 @@
-# corpus_metadata/C_generators/C31_recommendation_patterns.py
 """
 Pattern constants and prompts for guideline recommendation extraction.
 
-Contains:
-- Organization patterns (EULAR, ACR, etc.)
-- Guideline title patterns
-- Drug, dose, and duration patterns
-- Evidence level and strength patterns
-- LLM and VLM prompt templates
+This module provides regex patterns and LLM/VLM prompts for extracting
+structured recommendations from clinical guideline documents. Covers
+organization detection, evidence grading, and treatment extraction.
+
+Key Components:
+    - ORGANIZATION_PATTERNS: Patterns for guideline organizations (EULAR, ACR, etc.)
+    - GUIDELINE_TITLE_PATTERNS: Patterns for extracting guideline titles
+    - DRUG_PATTERNS: Patterns for drug name detection in recommendations
+    - DOSE_PATTERN: Regex for dosing information extraction
+    - DURATION_PATTERN: Regex for treatment duration extraction
+    - EVIDENCE_PATTERNS: Patterns for evidence level codes
+    - STRENGTH_PATTERNS: Patterns for recommendation strength grades
+    - SEVERITY_PATTERNS: Patterns for disease severity classification
+    - SPECIFIC_CONDITION_PATTERNS: Disease-specific extraction patterns
+    - RECOMMENDATION_EXTRACTION_PROMPT: LLM prompt for recommendation extraction
+    - VLM_LOE_SOR_EXTRACTION_PROMPT: VLM prompt for table-based LoE/SoR
+
+Example:
+    >>> from C_generators.C31_recommendation_patterns import ORGANIZATION_PATTERNS
+    >>> import re
+    >>> text = "EULAR recommendations for GPA management"
+    >>> for pattern, org in ORGANIZATION_PATTERNS.items():
+    ...     if re.search(pattern, text):
+    ...         print(org)
+    EULAR
+
+Dependencies:
+    - A_core.A18_recommendation_models: EvidenceLevel, RecommendationStrength
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

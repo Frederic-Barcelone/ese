@@ -1,15 +1,28 @@
-# corpus_metadata/C_generators/C23_inline_definition_detector.py
 """
-Inline abbreviation definition detection.
+Inline abbreviation definition detection using regex patterns.
 
-Extracts inline abbreviation definitions using regex patterns that
-complement scispacy's Schwartz-Hearst detector.
+This module extracts inline abbreviation definitions that complement scispacy's
+Schwartz-Hearst detector. Catches additional patterns for mixed-case abbreviations,
+reversed definitions, and alternative separators.
 
-Catches patterns like:
-- "Long Form (ABBREV)" - standard with mixed-case abbreviations
-- "ABBREV (long form)" - reversed pattern
-- "ABBREV, the/or/i.e. long form" - comma-separated definitions
-- "ABBREV = long form" - equals-separated definitions
+Key Components:
+    - InlineDefinitionDetectorMixin: Mixin class for inline definition detection
+    - Pattern categories:
+        - "Long Form (ABBREV)" - standard with mixed-case abbreviations
+        - "ABBREV (long form)" - reversed pattern
+        - "ABBREV, the/or/i.e. long form" - comma-separated definitions
+        - "ABBREV = long form" - equals-separated definitions
+
+Example:
+    >>> class MyExtractor(InlineDefinitionDetectorMixin):
+    ...     pass
+    >>> extractor = MyExtractor()
+    >>> definitions = extractor._extract_inline_definitions("LoE, the Level of Evidence")
+    >>> definitions
+    [('LoE', 'Level of Evidence', 0, 28)]
+
+Dependencies:
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

@@ -1,12 +1,26 @@
-# corpus_metadata/C_generators/C10_vision_image_analysis.py
 """
-Vision LLM-based image analysis for clinical trial documents.
+Vision LLM-based image analysis for clinical trial figures.
 
-Extracts structured data from:
-- CONSORT/Screening flowcharts (patient flow numbers)
-- Kaplan-Meier curves
-- Bar/line charts with results
-- Study design diagrams
+This module uses Claude Vision to extract structured data from clinical trial
+figures and diagrams. Analyzes CONSORT flowcharts for patient numbers, interprets
+Kaplan-Meier curves, and extracts data from study design diagrams.
+
+Key Components:
+    - VisionImageAnalyzer: Main analyzer using Claude Vision API
+    - PatientFlowData: Structured patient flow from CONSORT diagrams
+    - ExclusionReason: Patient exclusion reasons with counts
+    - PatientFlowStage: Individual stages in patient flow
+
+Example:
+    >>> from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
+    >>> analyzer = VisionImageAnalyzer(config={"model": "claude-sonnet-4-20250514"})
+    >>> flow_data = analyzer.analyze_flowchart(image_base64)
+    >>> print(f"Screened: {flow_data.screened}, Randomized: {flow_data.randomized}")
+    Screened: 500, Randomized: 350
+
+Dependencies:
+    - pydantic: Data model definitions
+    - anthropic: Claude Vision API client
 """
 
 from __future__ import annotations

@@ -1,24 +1,37 @@
-# corpus_metadata/C_generators/C01_strategy_abbrev.py
 """
-The Syntax Matcher - Schwartz-Hearst for abbreviation extraction.
+Schwartz-Hearst abbreviation extraction from running text.
 
-Target: Explicit definitions of short forms in running text.
+This module extracts abbreviation definitions using the Schwartz-Hearst algorithm
+and related pattern matching strategies. It detects explicit short form/long form
+pairs in clinical trial documents, handling both standard and reversed patterns.
 
-Strategies:
-  1. Schwartz-Hearst: "Tumor Necrosis Factor (TNF)" -> LF (SF)
-  2. Reverse explicit: "TNF (Tumor Necrosis Factor)" -> SF (LF)
-  3. Implicit phrasing: "TNF, defined as Tumor Necrosis Factor"
-  4. Inline definitions: "SF=Long Form" or "SF: Long Form"
-  5. Comma definitions: "SF, Long Form" (common in tables/legends)
+Key Components:
+    - SyntaxMatcherGenerator: Main generator implementing Schwartz-Hearst algorithm
+    - Pattern strategies for multiple definition formats:
+        - Standard: "Tumor Necrosis Factor (TNF)"
+        - Reversed: "TNF (Tumor Necrosis Factor)"
+        - Implicit: "TNF, defined as Tumor Necrosis Factor"
+        - Inline: "SF=Long Form" or "SF: Long Form"
+        - Comma: "SF, Long Form" (common in tables/legends)
+
+Example:
+    >>> from C_generators.C01_strategy_abbrev import SyntaxMatcherGenerator
+    >>> generator = SyntaxMatcherGenerator(config={})
+    >>> candidates = generator.generate(doc_graph)
+    >>> for c in candidates:
+    ...     print(f"{c.short_form} = {c.long_form}")
+    TNF = Tumor Necrosis Factor
 
 References:
-  - Schwartz & Hearst (2003) "A Simple Algorithm for Identifying
-    Abbreviation Definitions in Biomedical Text"
+    - Schwartz & Hearst (2003) "A Simple Algorithm for Identifying
+      Abbreviation Definitions in Biomedical Text"
 
-This module uses helper functions from C01a_abbrev_patterns.py for:
-- Pattern matching and validation
-- Schwartz-Hearst extraction
-- Long form normalization
+Dependencies:
+    - A_core.A01_domain_models: Candidate, Coordinate, FieldType, GeneratorType
+    - A_core.A02_interfaces: BaseCandidateGenerator
+    - A_core.A03_provenance: Provenance tracking utilities
+    - B_parsing.B02_doc_graph: DocumentGraph, ContentRole
+    - C_generators.C20_abbrev_patterns: Pattern matching helpers
 """
 
 from __future__ import annotations

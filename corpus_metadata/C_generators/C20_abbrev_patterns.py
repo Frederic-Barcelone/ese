@@ -1,12 +1,29 @@
-# corpus_metadata/C_generators/C20_abbrev_patterns.py
 """
-Pattern constants and helper functions for abbreviation extraction.
+Pattern constants and helpers for abbreviation extraction.
 
-Contains:
-- Regex patterns for abbreviation token validation
-- Author initial detection patterns
-- Schwartz-Hearst extraction helpers
-- Long form normalization utilities
+This module provides regex patterns and helper functions used by abbreviation
+extraction strategies. Contains token validation, author initial detection,
+Schwartz-Hearst helpers, and long form normalization utilities.
+
+Key Components:
+    - _ABBREV_TOKEN_RE: Regex for validating abbreviation tokens
+    - _AUTHOR_LIST_PATTERN: Pattern detecting author name contexts
+    - _AUTHOR_INITIAL_PATTERN: Pattern for author initials
+    - Helper functions:
+        - _is_likely_author_initial: Context-aware author initial detection
+        - _clean_ws: Whitespace normalization
+        - _normalize_long_form: Long form text normalization
+        - _looks_like_short_form: Short form validation
+
+Example:
+    >>> from C_generators.C20_abbrev_patterns import _looks_like_short_form, _normalize_long_form
+    >>> _looks_like_short_form("TNF")
+    True
+    >>> _normalize_long_form("Tumor  Necrosis   Factor")
+    'Tumor Necrosis Factor'
+
+Dependencies:
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

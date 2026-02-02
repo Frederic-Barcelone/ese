@@ -1,12 +1,30 @@
-# corpus_metadata/C_generators/C29_feasibility_prompts.py
 """
 LLM prompt templates for clinical trial feasibility extraction.
 
-Contains:
-- Section targeting configuration
-- Anti-hallucination instructions
-- Extraction prompts for study design, eligibility, endpoints, sites,
-  operational burden, and screening flow
+This module contains prompt templates and configuration for LLM-based
+feasibility extraction. Provides section targeting, anti-hallucination
+safeguards, and structured extraction prompts for all feasibility categories.
+
+Key Components:
+    - SECTION_TARGETS: Maps extraction types to relevant document sections
+    - MAX_SECTION_CHARS: Maximum characters per section for LLM context
+    - MAX_TOTAL_CHARS: Total character limit for LLM prompts
+    - ANTI_HALLUCINATION_INSTRUCTIONS: Rules preventing LLM fabrication
+    - Extraction prompts:
+        - STUDY_DESIGN_PROMPT: Phase, sample size, randomization
+        - ELIGIBILITY_PROMPT: Inclusion/exclusion criteria
+        - ENDPOINTS_PROMPT: Primary/secondary endpoints
+        - SITES_PROMPT: Site and country extraction
+        - OPERATIONAL_BURDEN_PROMPT: Procedures, visits, vaccinations
+        - SCREENING_FLOW_PROMPT: CONSORT data, screen failures
+
+Example:
+    >>> from C_generators.C29_feasibility_prompts import SECTION_TARGETS, ELIGIBILITY_PROMPT
+    >>> SECTION_TARGETS["eligibility"]
+    ['eligibility', 'methods', 'abstract']
+
+Dependencies:
+    None (pure constant definitions)
 """
 
 from __future__ import annotations

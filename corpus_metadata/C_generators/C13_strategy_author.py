@@ -1,8 +1,31 @@
-# corpus_metadata/C_generators/C13_strategy_author.py
 """
-Author/investigator mention detection.
+Author and investigator mention detection using pattern matching.
 
-Uses regex patterns to detect author names, roles, and affiliations.
+This module detects author and investigator names in clinical documents using
+regex patterns. Identifies names with academic credentials, role-prefixed names,
+and author blocks with affiliations for provenance tracking.
+
+Key Components:
+    - AuthorDetector: Main detector for author/investigator mentions
+    - Pattern categories:
+        - Names with credentials (e.g., "John Smith, MD, PhD")
+        - Role-prefixed names (e.g., "Principal Investigator: Jane Doe")
+        - Author blocks with superscript affiliations
+    - AuthorRoleType: Enum for investigator roles
+
+Example:
+    >>> from C_generators.C13_strategy_author import AuthorDetector
+    >>> detector = AuthorDetector(config={})
+    >>> candidates = detector.detect(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.name} ({c.role}): {c.affiliation}")
+    John Smith (PRINCIPAL_INVESTIGATOR): Harvard Medical School
+
+Dependencies:
+    - A_core.A01_domain_models: Coordinate, EvidenceSpan, ValidationStatus
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A10_author_models: AuthorCandidate, AuthorRoleType, ExtractedAuthor
+    - B_parsing.B02_doc_graph: DocumentGraph
 """
 
 from __future__ import annotations

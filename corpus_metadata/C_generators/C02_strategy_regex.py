@@ -1,18 +1,33 @@
-# corpus_metadata/corpus_metadata/C_generators/C02_strategy_regex.py
 """
-El Cazador de Patrones - The Pattern Hunter.
+Regex-based pattern extraction for structured clinical trial data.
 
-Rigid pattern matching for structured data with predictable formats.
-Context-immune: extracts patterns regardless of surrounding text.
+This module performs rigid pattern matching for structured data with predictable
+formats. It extracts trial IDs, doses, dates, and references regardless of
+surrounding context, functioning like a barcode scanner for document content.
 
-Targets:
-  - Trial IDs: NCT01234567, EudraCT 2020-001234-56, ISRCTN12345678
-  - Doses: 10 mg, 500mg, 2.5 mL
-  - Dates: 2024-01-15, 15/01/2024, January 15, 2024
-  - References: DOI, PMID, PMCID, URLs
+Key Components:
+    - RegexPatternGenerator: Main generator for pattern-based extraction
+    - ReferenceType: Classification enum for reference sources
+    - Pattern categories for:
+        - Trial IDs: NCT01234567, EudraCT 2020-001234-56, ISRCTN12345678
+        - Doses: 10 mg, 500mg, 2.5 mL
+        - Dates: 2024-01-15, 15/01/2024, January 15, 2024
+        - References: DOI, PMID, PMCID, URLs
 
-Analogy: A barcode scanner. If it sees the right pattern, it beeps.
-It doesn't care what product the barcode is on.
+Example:
+    >>> from C_generators.C02_strategy_regex import RegexPatternGenerator
+    >>> generator = RegexPatternGenerator(config={})
+    >>> candidates = generator.generate(doc_graph)
+    >>> for c in candidates:
+    ...     print(f"{c.pattern_type}: {c.value}")
+    NCT: NCT01234567
+    DOSE: 10 mg
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, Coordinate, FieldType, GeneratorType
+    - A_core.A02_interfaces: BaseCandidateGenerator
+    - A_core.A03_provenance: Provenance tracking utilities
+    - B_parsing.B02_doc_graph: DocumentGraph for text extraction
 """
 
 from __future__ import annotations

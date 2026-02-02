@@ -1,18 +1,32 @@
-# corpus_metadata/C_generators/C12_guideline_recommendation_extractor.py
 """
-Guideline Recommendation Extractor.
+Guideline recommendation extraction from clinical guidelines.
 
-Extracts structured clinical recommendations from guideline documents,
-including treatment recommendations, dosing guidance, and evidence levels.
+This module extracts structured clinical recommendations from guideline documents,
+including treatment recommendations, dosing guidance, and evidence levels. Combines
+text extraction, table parsing (with VLM fallback), and algorithm figure analysis.
 
-Works with:
-- Recommendation text blocks
-- Summary tables (with VLM fallback for garbled PDF extraction)
-- Treatment algorithm figures
+Key Components:
+    - GuidelineRecommendationExtractor: Main extractor combining multiple strategies
+    - LLMExtractionMixin: LLM-based recommendation extraction (C32)
+    - VLMExtractionMixin: Vision-based table extraction for LoE/SoR (C33)
+    - Data sources:
+        - Recommendation text blocks
+        - Summary tables (with VLM fallback for garbled PDF extraction)
+        - Treatment algorithm figures
 
-This module uses mixin classes for LLM and VLM extraction:
-- LLMExtractionMixin: LLM-based extraction and parsing
-- VLMExtractionMixin: Vision-based table extraction
+Example:
+    >>> from C_generators.C12_guideline_recommendation_extractor import GuidelineRecommendationExtractor
+    >>> extractor = GuidelineRecommendationExtractor(config={})
+    >>> recommendations = extractor.extract(doc_graph, pdf_path)
+    >>> for rec in recommendations.recommendations:
+    ...     print(f"{rec.drug}: {rec.recommendation_text} (LoE: {rec.evidence_level})")
+    rituximab: First-line treatment for severe GPA (LoE: 1a)
+
+Dependencies:
+    - A_core.A18_recommendation_models: GuidelineRecommendation, EvidenceLevel
+    - C_generators.C31_recommendation_patterns: Regex patterns and prompts
+    - C_generators.C32_recommendation_llm: LLM extraction mixin
+    - C_generators.C33_recommendation_vlm: VLM extraction mixin
 """
 
 from __future__ import annotations

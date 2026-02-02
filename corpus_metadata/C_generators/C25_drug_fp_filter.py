@@ -1,9 +1,31 @@
-# corpus_metadata/C_generators/C25_drug_fp_filter.py
 """
-Drug false positive filtering.
+Drug false positive filtering using curated exclusion sets.
 
-This module contains DrugFalsePositiveFilter which filters false positive drug matches.
-Constants are defined in C26_drug_fp_constants.py.
+This module filters false positive drug matches using extensive curated sets
+of non-drug terms. Identifies bacteria, biological entities, common words,
+and other categories that frequently trigger false positives in drug detection.
+
+Key Components:
+    - DrugFalsePositiveFilter: Main filter class for drug FP detection
+    - DRUG_ABBREVIATIONS: Valid drug abbreviations to preserve
+    - Pattern-based filtering for:
+        - NCT trial identifiers
+        - Ethics committee codes
+        - Minimum length validation
+    - Constants imported from C26_drug_fp_constants
+
+Example:
+    >>> from C_generators.C25_drug_fp_filter import DrugFalsePositiveFilter
+    >>> filter = DrugFalsePositiveFilter()
+    >>> filter.is_false_positive("influenza", "scispacy")
+    True  # Filtered as virus name
+    >>> filter.is_false_positive("ravulizumab", "lexicon")
+    False  # Valid drug name
+
+Dependencies:
+    - C_generators.C26_drug_fp_constants: All constant sets (ALWAYS_FILTER, etc.)
+    - A_core.A06_drug_models: DrugGeneratorType (TYPE_CHECKING)
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

@@ -1,13 +1,29 @@
-# corpus_metadata/C_generators/C28_feasibility_fp_filter.py
 """
 False positive filter for clinical trial feasibility extraction.
 
-Multi-layer filter that rejects:
-- Figure/Table/Appendix captions
-- Definitions (X=...)
-- Statistics/results (95% CI, p<, SE, SD)
-- OCR garbage
-- Bare fractions without epidemiology context
+This module provides multi-layer filtering to reject false positives in
+feasibility extraction. Identifies captions, definitions, statistics, and
+OCR artifacts that should not be treated as eligibility or epidemiology data.
+
+Key Components:
+    - FeasibilityFalsePositiveFilter: Main filter with multiple rejection layers
+    - Filtering layers:
+        1. CAPTION_PATTERNS: Figure/Table/Appendix captions
+        2. DEFINITION_PATTERNS: Variable definitions (X=...)
+        3. STATISTICS_PATTERNS: Results data (95% CI, p<, SE, SD)
+        4. OCR garbage detection
+        5. Bare fractions without epidemiology context
+
+Example:
+    >>> from C_generators.C28_feasibility_fp_filter import FeasibilityFalsePositiveFilter
+    >>> filter = FeasibilityFalsePositiveFilter()
+    >>> filter.is_false_positive("Figure 1. Patient flow diagram")
+    True  # Filtered as caption
+    >>> filter.is_false_positive("Age >= 18 years")
+    False  # Valid eligibility criterion
+
+Dependencies:
+    - re: Regular expression matching
 """
 
 from __future__ import annotations

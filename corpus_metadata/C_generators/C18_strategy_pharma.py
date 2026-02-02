@@ -1,8 +1,29 @@
-# corpus_metadata/C_generators/C18_strategy_pharma.py
 """
-Pharmaceutical company mention detection.
+Pharmaceutical company mention detection using lexicon matching.
 
-Uses FlashText lexicon matching against pharma_companies_lexicon.json.
+This module detects pharmaceutical company names in clinical documents using
+FlashText lexicon matching. Identifies sponsors, manufacturers, and partners
+from a curated pharma company database for document classification and tracking.
+
+Key Components:
+    - PharmaCompanyDetector: Main detector using FlashText keyword matching
+    - pharma_companies_lexicon.json: Curated database of pharma company names
+    - Variant handling for company name aliases and abbreviations
+
+Example:
+    >>> from C_generators.C18_strategy_pharma import PharmaCompanyDetector
+    >>> detector = PharmaCompanyDetector(config={"lexicon_base_path": "lexicons/"})
+    >>> candidates = detector.detect(doc_graph, "doc_123", "fingerprint")
+    >>> for c in candidates:
+    ...     print(f"{c.company_name}: {c.context}")
+    AstraZeneca: sponsored by AstraZeneca Pharmaceuticals
+
+Dependencies:
+    - A_core.A01_domain_models: Coordinate, EvidenceSpan, ValidationStatus
+    - A_core.A03_provenance: Provenance tracking utilities
+    - A_core.A09_pharma_models: PharmaCandidate, PharmaGeneratorType
+    - B_parsing.B02_doc_graph: DocumentGraph
+    - flashtext: KeywordProcessor for fast lexicon matching
 """
 
 from __future__ import annotations

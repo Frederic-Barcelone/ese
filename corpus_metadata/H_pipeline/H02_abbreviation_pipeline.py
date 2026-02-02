@@ -42,6 +42,7 @@ from Z_utils.Z02_text_helpers import (
     is_valid_sf_form,
     score_lf_quality,
 )
+from Z_utils.Z11_console_output import get_printer, reset_printer
 
 
 class AbbreviationPipeline:
@@ -122,7 +123,8 @@ class AbbreviationPipeline:
 
     def parse_pdf(self, pdf_path: Path, output_dir: Path) -> "DocumentGraph":
         """Stage 1: Parse PDF into DocumentGraph."""
-        print("\n[1/12] Parsing PDF...")
+        printer = get_printer(total_steps=16)
+        printer.step("Parsing PDF...", step_num=1)
         start = time.time()
 
         doc = self.parser.parse(str(pdf_path), image_output_dir=str(output_dir))
@@ -137,28 +139,28 @@ class AbbreviationPipeline:
                 vlm_extractor=self.vlm_table_extractor,
             )
         else:
-            print("  [INFO] Table extraction skipped (Docling not available)")
+            printer.detail("[INFO] Table extraction skipped (Docling not available)")
 
         total_blocks = sum(len(p.blocks) for p in doc.pages.values())
         total_tables = sum(len(p.tables) for p in doc.pages.values())
 
-        print(f"  Pages: {len(doc.pages)}")
-        print(f"  Blocks: {total_blocks}")
-        print(f"  Tables: {total_tables}")
-        print(f"  Time: {time.time() - start:.2f}s")
+        printer.detail_highlight("Pages", str(len(doc.pages)))
+        printer.detail_highlight("Blocks", str(total_blocks))
+        printer.detail_highlight("Tables", str(total_tables))
+        printer.time(time.time() - start)
 
         return doc
 
     def generate_candidates(self, doc: "DocumentGraph") -> Tuple[List["Candidate"], str]:
         """Stage 2: Generate and deduplicate candidates."""
-
-        print("\n[2/12] Generating candidates...")
+        printer = get_printer(total_steps=16)
+        printer.step("Generating abbreviation candidates...", step_num=2)
         start = time.time()
 
         all_candidates = []
         for gen in self.generators:
             candidates = gen.extract(doc)
-            print(f"  {gen.generator_type.value}: {len(candidates)} candidates")
+            printer.detail(f"{gen.generator_type.value}: {len(candidates)} candidates")
             all_candidates.extend(candidates)
 
         # Deduplicate using normalized LF to handle punctuation variants
@@ -176,8 +178,8 @@ class AbbreviationPipeline:
             block.text for block in doc.iter_linear_blocks() if block.text
         )
 
-        print(f"  Total unique: {len(unique_candidates)}")
-        print(f"  Time: {time.time() - start:.2f}s")
+        printer.detail_highlight("Total unique", str(len(unique_candidates)))
+        printer.time(time.time() - start)
 
         return unique_candidates, full_text
 
@@ -858,12 +860,13 @@ Return ONLY the JSON array, nothing else."""
     def normalize_results(
         self, results: List["ExtractedEntity"], full_text: str
     ) -> List["ExtractedEntity"]:
-        """Stage 3.5: Normalize, disambiguate, and deduplicate results."""
+        """Stage 4: Normalize, disambiguate, and deduplicate results."""
+        printer = get_printer(total_steps=16)
         if not self.use_normalization:
-            print("\n[4/12] Normalization SKIPPED (disabled in config)")
+            printer.skip("Abbreviation normalization", "disabled in config")
             return results
 
-        print("\n[4/12] Normalizing, disambiguating & deduplicating...")
+        printer.step("Normalizing, disambiguating & deduplicating...", step_num=4)
 
         # Step 1: Normalize
         normalized_count = 0
@@ -896,13 +899,13 @@ Return ONLY the JSON array, nothing else."""
         count_after = len(results)
         dedup_removed = count_before - count_after
 
-        print(f"  Normalized: {normalized_count}")
+        printer.detail_highlight("Normalized", str(normalized_count))
         if nct_enriched_count > 0:
-            print(f"  NCT enriched: {nct_enriched_count}")
-        print(f"  Disambiguated: {disambiguated_count}")
+            printer.detail_highlight("NCT enriched", str(nct_enriched_count))
+        printer.detail_highlight("Disambiguated", str(disambiguated_count))
         if re_disambiguated_count > 0:
-            print(f"  Re-disambiguated (context override): {re_disambiguated_count}")
-        print(f"  Deduplicated: {dedup_removed} duplicates merged")
+            printer.detail_highlight("Re-disambiguated", str(re_disambiguated_count))
+        printer.detail_highlight("Deduplicated", f"{dedup_removed} duplicates merged")
 
         return results
 

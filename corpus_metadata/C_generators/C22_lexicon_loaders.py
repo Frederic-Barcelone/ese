@@ -1,12 +1,30 @@
-# corpus_metadata/C_generators/C22_lexicon_loaders.py
 """
 Lexicon loading methods for FlashText-based extraction.
 
-Contains all lexicon loader methods used by RegexLexiconGenerator:
-- Abbreviation lexicons (general, clinical research, UMLS, Meta-Inventory)
-- Disease lexicons (ANCA, IgAN, PAH, MONDO, rare disease acronyms)
-- Drug lexicons (ChEMBL)
-- Trial and PRO scale lexicons
+This module provides mixin methods for loading various lexicon types into
+FlashText keyword processors. Handles abbreviation, disease, drug, and trial
+lexicons with format-specific parsing and validation.
+
+Key Components:
+    - LexiconLoaderMixin: Mixin class for lexicon loading methods
+    - Supported lexicon types:
+        - Abbreviation lexicons (general, clinical research, UMLS, Meta-Inventory)
+        - Disease lexicons (ANCA, IgAN, PAH, MONDO, rare disease acronyms)
+        - Drug lexicons (ChEMBL)
+        - Trial and PRO scale lexicons
+    - _print_lexicon_summary: Diagnostic output for loaded lexicons
+
+Example:
+    >>> class MyGenerator(LexiconLoaderMixin):
+    ...     def __init__(self):
+    ...         self.abbrev_entries = []
+    ...         self._load_meta_inventory_lexicon("lexicons/meta_inventory.json")
+    >>> len(generator.abbrev_entries)
+    65000
+
+Dependencies:
+    - C_generators.C21_noise_filters: BAD_LONG_FORMS, LexiconEntry, WRONG_EXPANSION_BLACKLIST
+    - flashtext: KeywordProcessor (TYPE_CHECKING only)
 """
 
 from __future__ import annotations

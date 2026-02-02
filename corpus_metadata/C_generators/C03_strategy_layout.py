@@ -1,17 +1,29 @@
-# corpus_metadata/corpus_metadata/C_generators/C03_strategy_layout.py
 """
-El Geógrafo - Spatial Extraction.
+Spatial extraction based on document layout and coordinates.
 
-Extracts data based on WHERE it is, not WHAT it says.
-Uses document graph coordinates to find data in specific zones.
+This module extracts data based on WHERE it appears in the document, not just
+WHAT it says. It uses DocumentGraph coordinates to find data in specific zones,
+enabling extraction from headers, footers, label-value pairs, and column layouts.
 
-Strategies:
-  - Zone extraction: Top-right corner (protocol ID), headers, footers
-  - Label-value pairs: "Protocol ID:" followed by the actual value
-  - Column alignment: Two-column glossary-style layouts
+Key Components:
+    - LayoutExtractor: Main extractor using spatial strategies
+    - Zone extraction: Top-right corner (protocol ID), headers, footers
+    - Label-value pairs: "Protocol ID:" followed by actual value
+    - Column alignment: Two-column glossary-style layouts
 
-Analogy: A mail carrier. Doesn't read the letters, just looks at
-the address on the envelope to know where to deliver.
+Example:
+    >>> from C_generators.C03_strategy_layout import LayoutExtractor
+    >>> extractor = LayoutExtractor(config={})
+    >>> candidates = extractor.generate(doc_graph)
+    >>> for c in candidates:
+    ...     print(f"{c.zone}: {c.value}")
+    header: Protocol ABC-123
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, Coordinate, FieldType, GeneratorType
+    - A_core.A02_interfaces: BaseCandidateGenerator
+    - A_core.A03_provenance: Provenance tracking utilities
+    - B_parsing.B02_doc_graph: DocumentGraph, ContentRole, TableType, TextBlock
 """
 
 from __future__ import annotations

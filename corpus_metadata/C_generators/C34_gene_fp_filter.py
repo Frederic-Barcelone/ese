@@ -1,10 +1,28 @@
-# corpus_metadata/C_generators/C34_gene_fp_filter.py
 """
-Gene false positive filtering.
+Gene false positive filtering for ambiguous gene symbols.
 
-Gene symbols are highly ambiguous - many clash with common abbreviations,
-statistics terms, units, and other non-gene entities. This module provides
-filtering logic to reduce false positives in gene detection.
+This module filters false positive gene matches, handling the high ambiguity
+of gene symbols that clash with common abbreviations, statistics terms, units,
+and other non-gene entities. Provides context-aware filtering to preserve recall.
+
+Key Components:
+    - GeneFalsePositiveFilter: Main filter for gene false positives
+    - STATISTICAL_TERMS: Terms like OR, HR, CI that look like gene symbols
+    - MIN_LENGTH: Minimum gene symbol length
+    - Context-aware filtering using surrounding text
+    - Generator-specific filtering rules
+
+Example:
+    >>> from C_generators.C34_gene_fp_filter import GeneFalsePositiveFilter
+    >>> filter = GeneFalsePositiveFilter()
+    >>> filter.is_false_positive("OR", "hazard ratio OR 1.5", "pattern")
+    True  # Filtered as statistics term
+    >>> filter.is_false_positive("BRCA1", "BRCA1 mutation carriers", "lexicon")
+    False  # Valid gene symbol
+
+Dependencies:
+    - A_core.A19_gene_models: GeneGeneratorType
+    - json, pathlib: For loading external gene data
 """
 
 from __future__ import annotations

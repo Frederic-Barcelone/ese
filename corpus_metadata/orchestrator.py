@@ -37,6 +37,7 @@ from dotenv import load_dotenv
 
 from Z_utils.Z05_path_utils import get_base_path
 from Z_utils.Z10_usage_tracker import UsageTracker
+from Z_utils.Z11_console_output import get_printer, reset_printer
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 # =============================================================================
@@ -640,20 +641,20 @@ class Orchestrator:
         # Start usage tracking for this document
         self.usage_tracker.start_document(doc_id, pdf_path_obj.name)
 
-        # Initialize stage timer
+        # Initialize stage timer and printer
         timer = StageTimer()
         timer.start("total")
+        reset_printer()  # Reset step counter for new document
+        printer = get_printer(total_steps=16)
 
-        print(f"\n{'=' * 60}")
-        print(f"Processing: {pdf_path_obj.name}")
-        print(f"{'=' * 60}")
+        printer.header(f"Processing: {pdf_path_obj.name}")
 
         # Stage 1: Parse PDF
         timer.start("1. PDF Parsing")
         output_dir = self._get_output_dir(pdf_path_obj)
         doc = self.abbreviation_pipeline.parse_pdf(pdf_path_obj, output_dir)
         parse_time = timer.stop("1. PDF Parsing")
-        print(f"  ⏱  {parse_time:.1f}s")
+        printer.time(parse_time)
 
         # Export extracted text
         self.export_manager.export_extracted_text(pdf_path_obj, doc)
@@ -684,14 +685,14 @@ class Orchestrator:
             unique_candidates, full_text = self.abbreviation_pipeline.generate_candidates(doc)
             # Abbreviation pipeline returns text without page markers, but we keep full_text_with_pages
             gen_time = timer.stop("2. Candidate Generation")
-            print(f"  ⏱  {gen_time:.1f}s")
+            printer.time(gen_time)
 
             # Update generation metrics
             metrics.generation.generated_candidates = len(unique_candidates)
             metrics.generation.unique_short_forms = len({c.short_form.upper() for c in unique_candidates})
 
             if not self.use_llm_validation:
-                print("\n[3/12] Validation SKIPPED")
+                printer.skip("Abbreviation validation", "disabled")
             else:
                 # Filter candidates
                 needs_validation, corroborated_sfs, word_counts, filtered_count, sf_form_rejected = (
@@ -741,17 +742,17 @@ class Orchestrator:
                     and word_counts.get(c.short_form.upper(), 0) >= 2
                 )
 
-                print("\n[3/12] Validating candidates with Claude...")
-                print(f"  Corroborated SFs: {len(corroborated_sfs)}")
-                print(f"  Frequent SFs (2+): {frequent_sfs}")
-                print(f"  Filtered (lexicon-only, rare): {filtered_count}")
-                print(f"  Auto-approved stats: {counters.recovered_by_stats_whitelist}")
-                print(f"  Auto-approved country: {counters.recovered_by_country_code}")
-                print(f"  Auto-rejected blacklist: {counters.blacklisted_fp_count}")
-                print(f"  Auto-rejected context: {counters.context_rejected}")
-                print(f"  Auto-rejected trial IDs: {counters.trial_id_excluded}")
-                print(f"  Auto-rejected common words: {counters.common_word_rejected}")
-                print(f"  Candidates for LLM: {len(llm_candidates)}")
+                printer.step("Validating abbreviations with Claude...", step_num=3)
+                printer.detail_highlight("Corroborated SFs", str(len(corroborated_sfs)))
+                printer.detail_highlight("Frequent SFs (2+)", str(frequent_sfs))
+                printer.detail_highlight("Filtered (lexicon-only, rare)", str(filtered_count))
+                printer.detail_highlight("Auto-approved stats", str(counters.recovered_by_stats_whitelist))
+                printer.detail_highlight("Auto-approved country", str(counters.recovered_by_country_code))
+                printer.detail_highlight("Auto-rejected blacklist", str(counters.blacklisted_fp_count))
+                printer.detail_highlight("Auto-rejected context", str(counters.context_rejected))
+                printer.detail_highlight("Auto-rejected trial IDs", str(counters.trial_id_excluded))
+                printer.detail_highlight("Auto-rejected common words", str(counters.common_word_rejected))
+                printer.detail_highlight("Candidates for LLM", str(len(llm_candidates)))
 
                 timer.start("3. LLM Validation")
 
@@ -775,7 +776,7 @@ class Orchestrator:
                 metrics.validation.llm_calls = len(llm_candidates)
 
                 val_time = timer.stop("3. LLM Validation")
-                print(f"  ⏱  {val_time:.1f}s")
+                printer.time(val_time)
 
                 # Search for missing abbreviations
                 found_sfs = {
@@ -803,86 +804,100 @@ class Orchestrator:
             timer.start("4. Normalization")
             results = self.abbreviation_pipeline.normalize_results(results, full_text)
             norm_time = timer.stop("4. Normalization")
-            print(f"  ⏱  {norm_time:.1f}s")
+            printer.time(norm_time)
         else:
-            print("\n[Abbreviation detection] SKIPPED (disabled in config)")
+            printer.skip("Abbreviation detection", "disabled in config")
 
-        # Stage 5-9: Entity extraction
+        # Stage 5-10: Entity extraction
         disease_results: List[ExtractedDisease] = []
         if self.extract_diseases:
+            printer.step("Disease detection...", step_num=5)
             timer.start("5. Disease Detection")
             disease_results = self.entity_processor.process_diseases(doc, pdf_path_obj)
             disease_time = timer.stop("5. Disease Detection")
-            print(f"  ⏱  {disease_time:.1f}s")
+            printer.result("Diseases found", len(disease_results))
+            printer.time(disease_time)
         else:
-            print("\n[Disease detection] SKIPPED (disabled in config)")
+            printer.skip("Disease detection", "disabled in config")
 
         gene_results: List[ExtractedGene] = []
         if self.extract_genes:
+            printer.step("Gene detection...", step_num=6)
             timer.start("6. Gene Detection")
             gene_results = self.entity_processor.process_genes(doc, pdf_path_obj)
             gene_time = timer.stop("6. Gene Detection")
-            print(f"  ⏱  {gene_time:.1f}s")
+            printer.result("Genes found", len(gene_results))
+            printer.time(gene_time)
         else:
-            print("\n[Gene detection] SKIPPED (disabled in config)")
+            printer.skip("Gene detection", "disabled in config")
 
         drug_results: List[ExtractedDrug] = []
         if self.extract_drugs:
+            printer.step("Drug detection...", step_num=7)
             timer.start("7. Drug Detection")
             drug_results = self.entity_processor.process_drugs(doc, pdf_path_obj)
             drug_time = timer.stop("7. Drug Detection")
-            print(f"  ⏱  {drug_time:.1f}s")
+            printer.result("Drugs found", len(drug_results))
+            printer.time(drug_time)
         else:
-            print("\n[Drug detection] SKIPPED (disabled in config)")
+            printer.skip("Drug detection", "disabled in config")
 
         pharma_results: List[ExtractedPharma] = []
         if self.extract_pharma:
+            printer.step("Pharma company detection...", step_num=8)
             timer.start("8. Pharma Detection")
             pharma_results = self.entity_processor.process_pharma(doc, pdf_path_obj)
             pharma_time = timer.stop("8. Pharma Detection")
-            print(f"  ⏱  {pharma_time:.1f}s")
+            printer.result("Pharma companies found", len(pharma_results))
+            printer.time(pharma_time)
         else:
-            print("\n[Pharma detection] SKIPPED (disabled in config)")
+            printer.skip("Pharma detection", "disabled in config")
 
         author_results: List[ExtractedAuthor] = []
         if self.extract_authors:
-            timer.start("9a. Author Detection")
+            printer.step("Author detection...", step_num=9)
+            timer.start("9. Author Detection")
             author_results = self.entity_processor.process_authors(doc, pdf_path_obj, full_text)
-            author_time = timer.stop("9a. Author Detection")
-            print(f"  ⏱  {author_time:.1f}s")
+            author_time = timer.stop("9. Author Detection")
+            printer.result("Authors found", len(author_results))
+            printer.time(author_time)
         else:
-            print("\n[Author detection] SKIPPED (disabled in config)")
+            printer.skip("Author detection", "disabled in config")
 
         citation_results: List[ExtractedCitation] = []
         if self.extract_citations:
-            timer.start("9b. Citation Detection")
+            printer.step("Citation detection...", step_num=10)
+            timer.start("10. Citation Detection")
             citation_results = self.entity_processor.process_citations(doc, pdf_path_obj, full_text)
-            citation_time = timer.stop("9b. Citation Detection")
-            print(f"  ⏱  {citation_time:.1f}s")
+            citation_time = timer.stop("10. Citation Detection")
+            printer.result("Citations found", len(citation_results))
+            printer.time(citation_time)
         else:
-            print("\n[Citation detection] SKIPPED (disabled in config)")
+            printer.skip("Citation detection", "disabled in config")
 
-        # Stage 10: Feasibility extraction
+        # Stage 11: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
-            timer.start("10. Feasibility")
+            printer.step("Feasibility extraction...", step_num=11)
+            timer.start("11. Feasibility")
             feasibility_results = self.feasibility_processor.process(doc, pdf_path_obj, full_text)
-            feas_time = timer.stop("10. Feasibility")
-            print(f"  ⏱  {feas_time:.1f}s")
+            feas_time = timer.stop("11. Feasibility")
+            printer.result("Feasibility items", len(feasibility_results))
+            printer.time(feas_time)
         else:
-            print("\n[Feasibility extraction] SKIPPED (disabled in config)")
+            printer.skip("Feasibility extraction", "disabled in config")
 
-        # Stage 10a: Care pathway extraction from flowchart figures
+        # Stage 12: Care pathway extraction from flowchart figures
         care_pathway_results: List[CarePathway] = []
         if self.extract_care_pathways and self.flowchart_extractor:
-            timer.start("10a. Care Pathways")
-            print("\n[10a/12] Extracting care pathways from flowchart figures...")
+            printer.step("Care pathway extraction...", step_num=12)
+            timer.start("12. Care Pathways")
             care_pathway_results = self._extract_care_pathways(doc, pdf_path_obj)
-            pathway_time = timer.stop("10a. Care Pathways")
-            print(f"  Extracted {len(care_pathway_results)} care pathways")
-            print(f"  ⏱  {pathway_time:.1f}s")
+            pathway_time = timer.stop("12. Care Pathways")
+            printer.result("Care pathways", len(care_pathway_results))
+            printer.time(pathway_time)
         else:
-            print("\n[Care pathway extraction] SKIPPED (disabled in config)")
+            printer.skip("Care pathway extraction", "disabled in config")
 
         # Stage 10b: Guideline recommendation extraction
         recommendation_results: List[RecommendationSet] = []
@@ -1360,37 +1375,47 @@ class Orchestrator:
         citation_results: List,
         feasibility_results: List,
     ) -> None:
-        """Log usage statistics for lexicons and data sources."""
-        # Log abbreviation lexicon usage
-        if abbrev_results:
-            validated = sum(1 for r in abbrev_results if r.status == ValidationStatus.VALIDATED)
+        """Log usage statistics for lexicons and data sources.
+
+        Always logs for enabled extractors, even if they found 0 matches.
+        This helps identify which lexicons are valuable vs. which return nothing.
+        """
+        # Helper to count validated results
+        def count_validated(results: List) -> int:
+            return sum(1 for r in results if hasattr(r, 'status') and r.status == ValidationStatus.VALIDATED)
+
+        # Log abbreviation lexicon usage (if enabled)
+        if self.extract_abbreviations:
+            validated = count_validated(abbrev_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "Abbreviations", matches=len(abbrev_results), validated=validated
             )
 
-        # Log disease detection (uses MONDO, Orphanet, scispacy)
-        if disease_results:
-            validated = sum(1 for r in disease_results if r.status == ValidationStatus.VALIDATED)
+        # Log disease detection - uses MONDO, Orphanet, scispacy (if enabled)
+        if self.extract_diseases:
+            validated = count_validated(disease_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "MONDO", matches=len(disease_results), validated=validated
             )
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "Orphanet", matches=len(disease_results), validated=validated
+            )
             # Track PubTator usage for disease enrichment
-            pubtator_enriched = sum(1 for r in disease_results if r.mesh_codes)
-            if pubtator_enriched:
-                self.usage_tracker.log_datasource_usage(
-                    doc_id, "PubTator3", queries=len(disease_results), results=pubtator_enriched
-                )
+            pubtator_enriched = sum(1 for r in disease_results if hasattr(r, 'mesh_codes') and r.mesh_codes)
+            self.usage_tracker.log_datasource_usage(
+                doc_id, "PubTator3", queries=len(disease_results), results=pubtator_enriched
+            )
 
-        # Log gene detection (uses HGNC)
-        if gene_results:
-            validated = sum(1 for r in gene_results if r.status == ValidationStatus.VALIDATED)
+        # Log gene detection - uses HGNC (if enabled)
+        if self.extract_genes:
+            validated = count_validated(gene_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "HGNC", matches=len(gene_results), validated=validated
             )
 
-        # Log drug detection (uses RxNorm, ChEMBL)
-        if drug_results:
-            validated = sum(1 for r in drug_results if r.status == ValidationStatus.VALIDATED)
+        # Log drug detection - uses RxNorm, ChEMBL (if enabled)
+        if self.extract_drugs:
+            validated = count_validated(drug_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "RxNorm", matches=len(drug_results), validated=validated
             )
@@ -1398,34 +1423,34 @@ class Orchestrator:
                 doc_id, "ChEMBL", matches=len(drug_results), validated=validated
             )
 
-        # Log pharma detection
-        if pharma_results:
-            validated = sum(1 for r in pharma_results if r.status == ValidationStatus.VALIDATED)
+        # Log pharma detection (if enabled)
+        if self.extract_pharma:
+            validated = count_validated(pharma_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "PharmaCompanies", matches=len(pharma_results), validated=validated
             )
 
-        # Log author detection
-        if author_results:
-            validated = sum(1 for r in author_results if r.status == ValidationStatus.VALIDATED)
+        # Log author detection (if enabled)
+        if self.extract_authors:
+            validated = count_validated(author_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "Authors", matches=len(author_results), validated=validated
             )
 
-        # Log citation detection
-        if citation_results:
-            validated = sum(1 for r in citation_results if r.status == ValidationStatus.VALIDATED)
+        # Log citation detection (if enabled)
+        if self.extract_citations:
+            validated = count_validated(citation_results)
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "Citations", matches=len(citation_results), validated=validated
             )
 
-        # Log feasibility extraction
-        if feasibility_results:
+        # Log feasibility extraction (if enabled)
+        if self.extract_feasibility:
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "Feasibility", matches=len(feasibility_results), validated=len(feasibility_results)
             )
 
-        # Log Claude API usage (data source)
+        # Log Claude API usage (data source) - always logged
         self.usage_tracker.log_datasource_usage(
             doc_id, "Claude_API", queries=1, results=1
         )

@@ -1,11 +1,31 @@
-# corpus_metadata/C_generators/C04_strategy_flashtext.py
 """
 FlashText-based lexicon matching for abbreviation and entity extraction.
 
-Uses:
-- Regex patterns for abbreviation lexicon (handles spacing/case variations)
-- FlashText for disease/entity lexicons (fast exact matching)
-- scispacy NER for biomedical entity recognition
+This module provides high-performance lexicon matching using FlashText for
+exact keyword matching (600K+ terms) and scispacy NER for biomedical entity
+recognition. Combines regex patterns for abbreviations with fast lexicon lookup.
+
+Key Components:
+    - RegexLexiconGenerator: Main generator combining FlashText and regex
+    - FlashText keyword processors for disease/entity lexicons
+    - scispacy integration for biomedical NER (when available)
+    - Lexicon loaders via C22_lexicon_loaders mixin
+
+Example:
+    >>> from C_generators.C04_strategy_flashtext import RegexLexiconGenerator
+    >>> generator = RegexLexiconGenerator(config={"lexicon_base_path": "lexicons/"})
+    >>> candidates = generator.generate(doc_graph)
+    >>> for c in candidates:
+    ...     print(f"{c.entity_type}: {c.text} (source: {c.source})")
+    DISEASE: pulmonary arterial hypertension (source: MONDO)
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, Coordinate, FieldType, GeneratorType
+    - A_core.A02_interfaces: BaseCandidateGenerator
+    - A_core.A03_provenance: Provenance tracking utilities
+    - B_parsing.B02_doc_graph: DocumentGraph for text extraction
+    - flashtext: KeywordProcessor for fast lexicon matching
+    - scispacy: Biomedical NER (optional)
 """
 
 from __future__ import annotations
