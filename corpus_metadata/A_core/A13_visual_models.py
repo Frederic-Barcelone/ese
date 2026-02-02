@@ -280,7 +280,7 @@ class VisualCandidate(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
 
     # Source detection
-    source: Literal["docling", "native_raster", "native_vector", "layout_model", "vlm_detection"]
+    source: Literal["docling", "native_raster", "native_vector", "layout_model", "vlm_detection", "layout_aware"]
     docling_type: Optional[str] = Field(
         default=None, description="Docling's classification if available"
     )
@@ -316,6 +316,17 @@ class VisualCandidate(BaseModel):
     )
     vlm_caption_snippet: Optional[str] = Field(
         default=None, description="Caption snippet from VLM detection"
+    )
+
+    # Layout-aware detection fields (when source="layout_aware")
+    layout_code: Optional[str] = Field(
+        default=None, description="Page layout pattern (e.g., 'full', '2col', '2col-fullbot')"
+    )
+    position_code: Optional[str] = Field(
+        default=None, description="Visual position in layout (e.g., 'L', 'R', 'F')"
+    )
+    layout_filename: Optional[str] = Field(
+        default=None, description="Generated filename with layout encoding"
     )
 
     # Continuation signals
@@ -399,6 +410,17 @@ class ExtractedVisual(BaseModel):
     # Triage metadata
     triage_decision: Optional[TriageDecision] = None
     triage_reason: Optional[str] = None
+
+    # Layout metadata (when using layout-aware detection)
+    layout_code: Optional[str] = Field(
+        default=None, description="Page layout pattern (e.g., 'full', '2col', '2col-fullbot')"
+    )
+    position_code: Optional[str] = Field(
+        default=None, description="Visual position in layout (e.g., 'L', 'R', 'F')"
+    )
+    layout_filename: Optional[str] = Field(
+        default=None, description="Generated filename with layout encoding"
+    )
 
     model_config = ConfigDict(extra="forbid")
 
