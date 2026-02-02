@@ -45,6 +45,7 @@ from A_core.A13_visual_models import (
     CaptionProvenance,
     ExtractedVisual,
     PageLocation,
+    TableStructure,
     TriageDecision,
     VisualCandidate,
     VisualType,
@@ -214,7 +215,7 @@ class VisualExtractionPipeline:
         # Stage 3: Triage + VLM Enrichment
         logger.info("Stage 3: Triage and VLM enrichment")
         enriched_visuals, vlm_count = self._stage_enrichment(
-            pdf_path, rendered_candidates
+            pdf_path, rendered_candidates, detection_result.table_structures
         )
 
         # Stage 4: Document Resolution
@@ -272,6 +273,27 @@ class VisualExtractionPipeline:
                 page_dims[i + 1] = (page.rect.width, page.rect.height)
             doc.close()
 
+            # Extract table structures using Docling for tables detected by DocLayout-YOLO
+            table_structures: Dict[tuple, TableStructure] = {}
+            try:
+                from B_parsing.B13_visual_detector import detect_tables_with_docling
+                docling_tables = detect_tables_with_docling(pdf_path, mode="fast")
+
+                # Create a lookup map from Docling extraction
+                for dt in docling_tables:
+                    headers = dt.get("headers", [])
+                    rows = dt.get("rows", [])
+                    if headers or rows:
+                        table_struct = TableStructure(
+                            headers=headers,
+                            rows=rows,
+                            token_coverage=dt.get("token_coverage", 1.0),
+                            structure_confidence=0.85,
+                        )
+                        table_structures[(dt["page_num"], tuple(dt["bbox_pts"]))] = table_struct
+            except Exception as e:
+                logger.warning(f"Docling table structure extraction failed: {e}")
+
             # Convert DocLayout detections to VisualCandidate format
             candidates = []
             for v in result.visuals:
@@ -301,17 +323,47 @@ class VisualExtractionPipeline:
 
                 candidates.append(candidate)
 
+                # Match table structure by finding best overlapping Docling bbox
+                if v.visual_type == "table":
+                    best_match = self._find_best_table_match(
+                        v.page_num, bbox, table_structures
+                    )
+                    if best_match:
+                        # Store with DocLayout bbox as key for later lookup
+                        table_structures[(v.page_num, tuple(bbox))] = best_match
+
             return DetectionResult(
                 candidates=candidates,
                 tables_detected=result.tables_detected,
                 figures_detected=result.figures_detected,
                 escalated_tables=0,
                 detection_mode="doclayout",
+                table_structures=table_structures,
             )
 
         except Exception as e:
             logger.error(f"DocLayout-YOLO detection failed: {e}, falling back to heuristic")
             return detect_all_visuals(pdf_path, self.config.detector)
+
+    def _find_best_table_match(
+        self,
+        page_num: int,
+        bbox: tuple,
+        table_structures: Dict[tuple, TableStructure],
+    ) -> Optional[TableStructure]:
+        """Find the best matching table structure by IoU overlap."""
+        best_iou = 0.3  # Minimum threshold
+        best_match = None
+
+        for (p, stored_bbox), table_struct in table_structures.items():
+            if p != page_num:
+                continue
+            iou = self._compute_iou(bbox, stored_bbox)
+            if iou > best_iou:
+                best_iou = iou
+                best_match = table_struct
+
+        return best_match
 
     def _merge_detection_results(
         self,
@@ -336,12 +388,17 @@ class VisualExtractionPipeline:
             if not is_duplicate:
                 merged.append(hc)
 
+        # Merge table structures from both sources
+        merged_table_structures = dict(vlm_result.table_structures)
+        merged_table_structures.update(heuristic_result.table_structures)
+
         return DetectionResult(
             candidates=merged,
             tables_detected=sum(1 for c in merged if c.docling_type == "table"),
             figures_detected=sum(1 for c in merged if c.docling_type != "table"),
             escalated_tables=heuristic_result.escalated_tables,
             detection_mode="hybrid",
+            table_structures=merged_table_structures,
         )
 
     def _compute_iou(self, bbox1, bbox2) -> float:
@@ -431,12 +488,15 @@ class VisualExtractionPipeline:
         self,
         pdf_path: str,
         rendered_candidates: List[Dict[str, Any]],
+        table_structures: Dict[tuple, TableStructure] = None,
     ) -> tuple[List[ExtractedVisual], int]:
         """
         Stage 3: Triage and VLM enrichment.
 
         Returns (list of ExtractedVisual, count of VLM-enriched).
         """
+        if table_structures is None:
+            table_structures = {}
         # Build candidates list for triage
         candidates = [r["candidate"] for r in rendered_candidates]
 
@@ -564,6 +624,12 @@ class VisualExtractionPipeline:
                 except Exception as e:
                     logger.warning(f"VLM description generation failed: {e}")
 
+            # Look up table structure if this is a table
+            docling_table = None
+            if visual_type == VisualType.TABLE:
+                table_key = (candidate.page_num, tuple(candidate.bbox_pts))
+                docling_table = table_structures.get(table_key)
+
             # Create ExtractedVisual
             visual = ExtractedVisual(
                 visual_type=visual_type,
@@ -581,6 +647,7 @@ class VisualExtractionPipeline:
                 image_base64=rendered.image_base64,
                 image_format=rendered.image_format,
                 render_dpi=rendered.dpi,
+                docling_table=docling_table,
                 extraction_method=extraction_method,
                 source_file=pdf_path,
                 triage_decision=triage_result.decision if triage_result else None,

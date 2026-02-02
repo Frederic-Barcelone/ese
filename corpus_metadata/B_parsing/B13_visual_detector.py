@@ -509,6 +509,8 @@ class DetectionResult:
     figures_detected: int
     escalated_tables: int
     detection_mode: str
+    # Table structures keyed by (page_num, bbox_tuple) for lookup during ExtractedVisual creation
+    table_structures: Dict[tuple, "TableStructure"] = field(default_factory=dict)
 
 
 def detect_all_visuals(
@@ -532,6 +534,7 @@ def detect_all_visuals(
     """
     candidates: List[VisualCandidate] = []
     escalated_count = 0
+    table_structures: Dict[tuple, TableStructure] = {}
 
     # Open PDF for page dimensions
     doc = fitz.open(pdf_path)
@@ -596,6 +599,19 @@ def detect_all_visuals(
             )
             candidates.append(candidate)
 
+            # Store table structure for later use when creating ExtractedVisual
+            headers = table.get("headers", [])
+            rows = table.get("rows", [])
+            if headers or rows:
+                table_structure = TableStructure(
+                    headers=headers,
+                    rows=rows,
+                    token_coverage=table.get("token_coverage", 1.0),
+                    structure_confidence=0.85 if config.default_table_mode == "fast" else 0.95,
+                )
+                # Key by (page_num, bbox_tuple) for lookup
+                table_structures[(page_num, tuple(bbox_pts))] = table_structure
+
         tables_count = len(tables)
 
         # Step 2: Detect figures
@@ -634,6 +650,7 @@ def detect_all_visuals(
         figures_detected=figures_count,
         escalated_tables=escalated_count,
         detection_mode=config.default_table_mode,
+        table_structures=table_structures,
     )
 
 
