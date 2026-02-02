@@ -42,7 +42,7 @@ from Z_utils.Z02_text_helpers import (
     is_valid_sf_form,
     score_lf_quality,
 )
-from Z_utils.Z11_console_output import get_printer
+from Z_utils.Z07_console_output import get_printer
 
 
 class AbbreviationPipeline:

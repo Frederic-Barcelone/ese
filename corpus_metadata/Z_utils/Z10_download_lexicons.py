@@ -8,30 +8,16 @@ Lexicons:
 3. ChEMBL (drug database) - Open drug data
 
 Usage:
-    python -m corpus_metadata.Z_utils.download_lexicons
+    python -m corpus_metadata.Z_utils.Z10_download_lexicons
 """
 
 import csv
 import json
 import re
-import urllib.request
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
-
-OUTPUT_DIR = Path("/Users/frederictetard/Projects/ese/ouput_datasources")
-
-
-def download_file(url: str, dest: Path) -> bool:
-    """Download a file from URL."""
-    print(f"Downloading: {url}")
-    try:
-        urllib.request.urlretrieve(url, dest)
-        print(f"  Saved to: {dest}")
-        return True
-    except Exception as e:
-        print(f"  Error: {e}")
-        return False
+from Z_utils.Z08_download_utils import download_file, get_default_output_dir
 
 
 def generate_abbrev_regex(sf: str) -> str:
@@ -54,29 +40,35 @@ def generate_abbrev_regex(sf: str) -> str:
 # =============================================================================
 # 1. META-INVENTORY (Clinical Abbreviations)
 # =============================================================================
-def download_meta_inventory():
+def download_meta_inventory(output_dir: Optional[Path] = None) -> Optional[Path]:
     """
     Download and convert Meta-Inventory clinical abbreviations.
 
     Source: https://github.com/lisavirginia/clinical-abbreviations
     Paper: https://www.nature.com/articles/s41597-021-00929-4
 
-    Format: CSV with columns: sf, lf, source_inventory
-    Output: JSON in pipeline format
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
+
+    Returns:
+        Path to output file, or None if failed
     """
     print("\n" + "="*60)
     print("META-INVENTORY: Clinical Abbreviations")
     print("="*60)
 
+    if output_dir is None:
+        output_dir = get_default_output_dir()
+
     # Raw GitHub URL for the meta-inventory CSV (pipe-delimited)
     url = "https://raw.githubusercontent.com/lisavirginia/clinical-abbreviations/master/metainventory/Metainventory_Version1.0.0.csv"
-    csv_path = OUTPUT_DIR / "meta_inventory_raw.csv"
-    output_path = OUTPUT_DIR / "2025_meta_inventory_abbreviations.json"
+    csv_path = output_dir / "meta_inventory_raw.csv"
+    output_path = output_dir / "2025_meta_inventory_abbreviations.json"
 
     # Download CSV
     if not download_file(url, csv_path):
         print("Failed to download Meta-Inventory")
-        return
+        return None
 
     # Parse and convert (pipe-delimited CSV)
     abbrevs: Dict[str, Dict[str, Any]] = {}
@@ -144,22 +136,29 @@ def download_meta_inventory():
 # =============================================================================
 # 2. MONDO (Disease Ontology)
 # =============================================================================
-def download_mondo():
+def download_mondo(output_dir: Optional[Path] = None) -> Optional[Path]:
     """
     Download and convert MONDO disease ontology.
 
     Source: https://mondo.monarchinitiative.org/
-    Format: OBO or JSON-LD
-    Output: JSON in pipeline format
+
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
+
+    Returns:
+        Path to output file, or None if failed
     """
     print("\n" + "="*60)
     print("MONDO: Disease Ontology")
     print("="*60)
 
+    if output_dir is None:
+        output_dir = get_default_output_dir()
+
     # MONDO provides JSON releases
     url = "https://github.com/monarch-initiative/mondo/releases/latest/download/mondo.json"
-    json_path = OUTPUT_DIR / "mondo_raw.json"
-    output_path = OUTPUT_DIR / "2025_mondo_diseases.json"
+    json_path = output_dir / "mondo_raw.json"
+    output_path = output_dir / "2025_mondo_diseases.json"
 
     # Download JSON
     if not download_file(url, json_path):
@@ -168,7 +167,7 @@ def download_mondo():
         url = "https://purl.obolibrary.org/obo/mondo.json"
         if not download_file(url, json_path):
             print("Failed to download MONDO")
-            return
+            return None
 
     # Parse MONDO JSON-LD format
     print("Parsing MONDO ontology...")
@@ -249,27 +248,25 @@ def download_mondo():
 # =============================================================================
 # 3. ChEMBL (Drug Database)
 # =============================================================================
-def download_chembl():
+def download_chembl(output_dir: Optional[Path] = None) -> Optional[Path]:
     """
     Download and convert ChEMBL drug data.
 
     Source: https://www.ebi.ac.uk/chembl/
-    Note: Full ChEMBL is very large. We use the molecule dictionary.
-    Output: JSON in pipeline format
+    Note: Full ChEMBL is very large. Creates a placeholder with instructions.
+
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
+
+    Returns:
+        Path to output file
     """
     print("\n" + "="*60)
     print("ChEMBL: Drug Database")
     print("="*60)
 
-    # ChEMBL provides FTP downloads, but they're large
-    # Use the ChEMBL web service API for approved drugs
-    # Alternative: Use pre-built drug name file from ChEMBL
-
-    # For a simpler approach, we'll use the ChEMBL SQLite or TSV
-    # The molecule_dictionary contains drug names
-
-    # Using ChEMBL's UniChem data which is smaller
-    # Reference: https://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_34_chemreps.txt.gz
+    if output_dir is None:
+        output_dir = get_default_output_dir()
 
     print("Note: ChEMBL full database is very large (>1GB).")
     print("For production use, consider:")
@@ -278,7 +275,7 @@ def download_chembl():
     print("  3. Or use ChEMBL web API for specific drug lookups")
 
     # Create a placeholder with instructions
-    output_path = OUTPUT_DIR / "2025_chembl_drugs.json"
+    output_path = output_dir / "2025_chembl_drugs.json"
 
     # For now, create a smaller curated list from ChEMBL's approved drugs
     # This would typically be populated by querying ChEMBL API or database
@@ -304,20 +301,28 @@ def download_chembl():
     return output_path
 
 
-def download_chembl_api():
+def download_chembl_api(output_dir: Optional[Path] = None) -> Optional[Path]:
     """
     Download approved drugs from ChEMBL using their API.
 
     This is a more practical approach than downloading the full database.
+
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
+
+    Returns:
+        Path to output file, or None if failed
     """
     import urllib.request
-    import json
 
     print("\n" + "="*60)
     print("ChEMBL API: Approved Drugs")
     print("="*60)
 
-    output_path = OUTPUT_DIR / "2025_chembl_drugs.json"
+    if output_dir is None:
+        output_dir = get_default_output_dir()
+
+    output_path = output_dir / "2025_chembl_drugs.json"
 
     # ChEMBL API for approved drugs (max_phase = 4)
     base_url = "https://www.ebi.ac.uk/chembl/api/data/molecule.json"
@@ -389,31 +394,42 @@ def download_chembl_api():
 # =============================================================================
 # MAIN
 # =============================================================================
-def main():
-    """Download all lexicons."""
+def main(output_dir: Optional[Path] = None) -> Dict[str, Optional[Path]]:
+    """
+    Download all lexicons.
+
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
+
+    Returns:
+        Dict mapping lexicon name to output path (or None if failed)
+    """
+    if output_dir is None:
+        output_dir = get_default_output_dir()
+
     print("="*60)
     print("LEXICON DOWNLOADER")
     print("="*60)
-    print(f"Output directory: {OUTPUT_DIR}")
+    print(f"Output directory: {output_dir}")
 
     # Ensure output directory exists
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     # Download each lexicon
-    results = {}
+    results: Dict[str, Optional[Path]] = {}
 
     # 1. Meta-Inventory abbreviations
-    results["meta_inventory"] = download_meta_inventory()
+    results["meta_inventory"] = download_meta_inventory(output_dir)
 
     # 2. MONDO diseases
-    results["mondo"] = download_mondo()
+    results["mondo"] = download_mondo(output_dir)
 
     # 3. ChEMBL drugs (API version)
     try:
-        results["chembl"] = download_chembl_api()
+        results["chembl"] = download_chembl_api(output_dir)
     except Exception as e:
         print(f"ChEMBL API failed: {e}")
-        results["chembl"] = download_chembl()
+        results["chembl"] = download_chembl(output_dir)
 
     # Summary
     print("\n" + "="*60)
@@ -424,6 +440,8 @@ def main():
         print(f"  {name}: {status}")
         if path:
             print(f"    -> {path}")
+
+    return results
 
 
 if __name__ == "__main__":

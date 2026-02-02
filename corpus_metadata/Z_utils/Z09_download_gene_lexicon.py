@@ -7,32 +7,19 @@ Sources:
 2. HGNC: Official gene symbols and aliases for normalization
 
 Usage:
-    python -m corpus_metadata.Z_utils.download_gene_lexicon
+    python -m corpus_metadata.Z_utils.Z09_download_gene_lexicon
 """
 
 import json
-import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Optional, Set
 
-OUTPUT_DIR = Path("/Users/frederictetard/Projects/ese/ouput_datasources")
+from Z_utils.Z08_download_utils import download_file, get_default_output_dir
 
 # URLs
 ORPHADATA_GENES_URL = "https://www.orphadata.com/data/xml/en_product6.xml"
 HGNC_TSV_URL = "https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt"
-
-
-def download_file(url: str, dest: Path, is_gzip: bool = False) -> bool:
-    """Download a file from URL."""
-    print(f"Downloading: {url}")
-    try:
-        urllib.request.urlretrieve(url, dest)
-        print(f"  Saved to: {dest}")
-        return True
-    except Exception as e:
-        print(f"  Error: {e}")
-        return False
 
 
 def parse_orphadata_genes(xml_path: Path) -> Dict[str, Dict[str, Any]]:
@@ -137,15 +124,21 @@ def parse_orphadata_genes(xml_path: Path) -> Dict[str, Dict[str, Any]]:
     return genes
 
 
-def download_and_parse_hgnc() -> Dict[str, Dict[str, Any]]:
+def download_and_parse_hgnc(output_dir: Optional[Path] = None) -> Dict[str, Dict[str, Any]]:
     """
     Download HGNC complete set and parse aliases/previous symbols.
+
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
 
     Returns dict keyed by symbol with aliases and metadata.
     """
     print("\nDownloading HGNC gene nomenclature...")
 
-    tsv_path = OUTPUT_DIR / "hgnc_complete_set.txt"
+    if output_dir is None:
+        output_dir = get_default_output_dir()
+
+    tsv_path = output_dir / "hgnc_complete_set.txt"
 
     if not download_file(HGNC_TSV_URL, tsv_path):
         print("  Failed to download HGNC data")
@@ -294,16 +287,27 @@ def merge_gene_data(
     return merged
 
 
-def build_gene_lexicon():
-    """Main function to build the gene lexicon."""
+def build_gene_lexicon(output_dir: Optional[Path] = None) -> Optional[Path]:
+    """
+    Main function to build the gene lexicon.
+
+    Args:
+        output_dir: Output directory (default: get_default_output_dir())
+
+    Returns:
+        Path to output file, or None if failed
+    """
     print("=" * 60)
     print("GENE LEXICON BUILDER (Rare Disease Focus)")
     print("=" * 60)
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    if output_dir is None:
+        output_dir = get_default_output_dir()
+
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     # 1. Download and parse Orphadata genes
-    xml_path = OUTPUT_DIR / "orphadata_genes_raw.xml"
+    xml_path = output_dir / "orphadata_genes_raw.xml"
 
     if not download_file(ORPHADATA_GENES_URL, xml_path):
         print("Failed to download Orphadata genes")
@@ -319,13 +323,13 @@ def build_gene_lexicon():
         return None
 
     # 2. Download and parse HGNC for aliases
-    hgnc_data = download_and_parse_hgnc()
+    hgnc_data = download_and_parse_hgnc(output_dir)
 
     # 3. Merge data
     merged_genes = merge_gene_data(orphadata_genes, hgnc_data)
 
     # 4. Write output
-    output_path = OUTPUT_DIR / "2025_08_orphadata_genes.json"
+    output_path = output_dir / "2025_08_orphadata_genes.json"
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(merged_genes, f, indent=2, ensure_ascii=False)

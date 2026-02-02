@@ -49,45 +49,10 @@ from B_parsing.B02_doc_graph import (
     TableType,
     TextBlock,
 )
-
-
-def _clean_ws(s: str) -> str:
-    return " ".join((s or "").split()).strip()
-
-
-def _dehyphenate_long_form(lf: str) -> str:
-    """
-    Remove line-break hyphens from long forms.
-
-    PDF extraction often produces hyphenated words where lines break:
-    - "gastroin-testinal" -> "gastrointestinal"
-    - "Vasculi-tis Study Group" -> "Vasculitis Study Group"
-    """
-    if not lf:
-        return lf
-
-    lf = _clean_ws(lf)
-
-    # Pattern: hyphen + space + lowercase continuation
-    lf = re.sub(r"-\s+([a-z])", r"\1", lf)
-
-    # Common prefixes that form valid hyphenated compounds
-    compound_prefixes = (
-        "anti", "non", "pre", "post", "re", "co", "sub", "inter",
-        "intra", "extra", "multi", "semi", "self", "cross", "over",
-        "under", "out", "well", "ill", "full", "half", "pro", "counter",
-    )
-
-    def maybe_dehyphenate(match: re.Match) -> str:
-        before = match.group(1)
-        after = match.group(2)
-        for prefix in compound_prefixes:
-            if before.lower().endswith(prefix):
-                return match.group(0)
-        return before + after
-
-    lf = re.sub(r"(\w)-([a-z]{2,})", maybe_dehyphenate, lf)
-    return lf
+from Z_utils.Z03_text_normalization import (
+    clean_whitespace as _clean_ws,
+    dehyphenate_long_form as _dehyphenate_long_form,
+)
 
 
 def _bbox_coords(bbox) -> Tuple[float, float, float, float]:

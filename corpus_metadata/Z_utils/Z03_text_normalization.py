@@ -75,8 +75,8 @@ def dehyphenate_long_form(lf: str) -> str:
         # Otherwise, likely a line-break artifact - remove hyphen
         return before + after
 
-    # Match: word-chars + hyphen + lowercase continuation
-    lf = re.sub(r"(\w)-([a-z]{2,})", maybe_dehyphenate, lf)
+    # Match: word-chars (one or more) + hyphen + lowercase continuation
+    lf = re.sub(r"(\w+)-([a-z]{2,})", maybe_dehyphenate, lf)
 
     return lf
 
@@ -100,8 +100,8 @@ def truncate_at_clause_breaks(text: str) -> str:
     """
     t = (text or "").strip()
 
-    # Stop at punctuation
-    t = re.split(r"[.;:\n\r\)\]]", t, maxsplit=1)[0].strip()
+    # Stop at punctuation (including opening/closing brackets and parentheses)
+    t = re.split(r"[.;:\n\r()\[\]]", t, maxsplit=1)[0].strip()
 
     # Stop at relative clause starters
     t = re.split(

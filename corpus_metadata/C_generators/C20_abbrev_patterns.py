@@ -31,6 +31,11 @@ from __future__ import annotations
 import re
 from typing import Optional
 
+from Z_utils.Z03_text_normalization import (
+    clean_whitespace as _clean_ws,
+    dehyphenate_long_form as _dehyphenate_long_form,
+)
+
 
 # =============================================================================
 # PATTERN CONSTANTS
@@ -126,62 +131,6 @@ def _is_likely_author_initial(sf: str, context: str) -> bool:
         return True
 
     return False
-
-
-def _clean_ws(s: str) -> str:
-    return " ".join((s or "").split()).strip()
-
-
-def _dehyphenate_long_form(lf: str) -> str:
-    """
-    Remove line-break hyphens from long forms.
-
-    PDF extraction often produces hyphenated words where lines break:
-    - "gastroin-testinal" -> "gastrointestinal"
-    - "Vasculi-tis Study Group" -> "Vasculitis Study Group"
-
-    Pattern: hyphen followed by whitespace (from line break) then lowercase letter
-    indicates a word was split across lines.
-    """
-    if not lf:
-        return lf
-
-    # First normalize whitespace
-    lf = _clean_ws(lf)
-
-    # Pattern: hyphen + space + lowercase continuation
-    # This catches line-break hyphenation where space remains after normalization
-    lf = re.sub(r"-\s+([a-z])", r"\1", lf)
-
-    # Pattern: lowercase-hyphen-lowercase within a "word" that looks broken
-    # Be careful to preserve valid compounds like "anti-inflammatory"
-    # Only dehyphenate if it doesn't match a known compound prefix pattern
-
-    # Common prefixes that form valid hyphenated compounds - don't dehyphenate these
-    compound_prefixes = (
-        "anti", "non", "pre", "post", "re", "co", "sub", "inter",
-        "intra", "extra", "multi", "semi", "self", "cross", "over",
-        "under", "out", "well", "ill", "full", "half", "pro", "counter",
-    )
-
-    def maybe_dehyphenate(match: re.Match) -> str:
-        """Decide whether to remove a hyphen."""
-        before = match.group(1)
-        after = match.group(2)
-
-        # Check if this looks like a valid compound
-        for prefix in compound_prefixes:
-            if before.lower().endswith(prefix):
-                return match.group(0)  # Keep hyphen
-
-        # Otherwise, likely a line-break artifact - remove hyphen
-        return before + after
-
-    # Match: word-chars + hyphen + lowercase continuation
-    # Only process if it looks like a broken word (not at word boundary)
-    lf = re.sub(r"(\w)-([a-z]{2,})", maybe_dehyphenate, lf)
-
-    return lf
 
 
 def _truncate_at_breaks(text: str) -> str:
