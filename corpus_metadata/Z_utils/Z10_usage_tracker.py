@@ -407,7 +407,7 @@ class UsageTracker:
         for stat in datasource_stats:
             print(f"{stat['datasource_name']:<25} {stat['documents_used']:<6} "
                   f"{stat['total_queries']:<10} {stat['total_results']:<10} "
-                  f"{stat['errors_count']:<8}")
+                  f"{stat['total_errors']:<8}")
 
         print("\n" + "=" * 60)
 
