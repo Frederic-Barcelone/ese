@@ -36,6 +36,7 @@ import yaml
 from dotenv import load_dotenv
 
 from Z_utils.Z05_path_utils import get_base_path
+from Z_utils.Z10_usage_tracker import UsageTracker
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 # =============================================================================
@@ -185,6 +186,10 @@ class Orchestrator:
 
         # Initialize components using factory
         self._init_components(api_key)
+
+        # Initialize usage tracker
+        usage_db_path = self.log_dir / "usage_stats.db"
+        self.usage_tracker = UsageTracker(usage_db_path)
 
         # Log initialization (both console and file)
         self._logger.info(f"Orchestrator v{PIPELINE_VERSION} initialized")
@@ -632,6 +637,9 @@ class Orchestrator:
         doc_id = str(pdf_path_obj.stem)
         metrics = PipelineMetrics(run_id=self.run_id, doc_id=doc_id)
 
+        # Start usage tracking for this document
+        self.usage_tracker.start_document(doc_id, pdf_path_obj.name)
+
         # Initialize stage timer
         timer = StageTimer()
         timer.start("total")
@@ -1036,6 +1044,13 @@ class Orchestrator:
         timer.stop("12. Export")
         timer.stop("total")
 
+        # Log usage statistics for this document
+        self._log_usage_stats(
+            doc_id, results, disease_results, gene_results, drug_results,
+            pharma_results, author_results, citation_results, feasibility_results
+        )
+        self.usage_tracker.finish_document(doc_id, status="completed")
+
         # Print timing summary
         timer.print_summary()
 
@@ -1332,6 +1347,88 @@ class Orchestrator:
                 print(f"  Tables escalated: {result.tables_escalated}")
             if result.vlm_enriched > 0:
                 print(f"  VLM enriched: {result.vlm_enriched}")
+
+    def _log_usage_stats(
+        self,
+        doc_id: str,
+        abbrev_results: List,
+        disease_results: List,
+        gene_results: List,
+        drug_results: List,
+        pharma_results: List,
+        author_results: List,
+        citation_results: List,
+        feasibility_results: List,
+    ) -> None:
+        """Log usage statistics for lexicons and data sources."""
+        # Log abbreviation lexicon usage
+        if abbrev_results:
+            validated = sum(1 for r in abbrev_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "Abbreviations", matches=len(abbrev_results), validated=validated
+            )
+
+        # Log disease detection (uses MONDO, Orphanet, scispacy)
+        if disease_results:
+            validated = sum(1 for r in disease_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "MONDO", matches=len(disease_results), validated=validated
+            )
+            # Track PubTator usage for disease enrichment
+            pubtator_enriched = sum(1 for r in disease_results if r.mesh_codes)
+            if pubtator_enriched:
+                self.usage_tracker.log_datasource_usage(
+                    doc_id, "PubTator3", queries=len(disease_results), results=pubtator_enriched
+                )
+
+        # Log gene detection (uses HGNC)
+        if gene_results:
+            validated = sum(1 for r in gene_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "HGNC", matches=len(gene_results), validated=validated
+            )
+
+        # Log drug detection (uses RxNorm, ChEMBL)
+        if drug_results:
+            validated = sum(1 for r in drug_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "RxNorm", matches=len(drug_results), validated=validated
+            )
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "ChEMBL", matches=len(drug_results), validated=validated
+            )
+
+        # Log pharma detection
+        if pharma_results:
+            validated = sum(1 for r in pharma_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "PharmaCompanies", matches=len(pharma_results), validated=validated
+            )
+
+        # Log author detection
+        if author_results:
+            validated = sum(1 for r in author_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "Authors", matches=len(author_results), validated=validated
+            )
+
+        # Log citation detection
+        if citation_results:
+            validated = sum(1 for r in citation_results if r.status == ValidationStatus.VALIDATED)
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "Citations", matches=len(citation_results), validated=validated
+            )
+
+        # Log feasibility extraction
+        if feasibility_results:
+            self.usage_tracker.log_lexicon_usage(
+                doc_id, "Feasibility", matches=len(feasibility_results), validated=len(feasibility_results)
+            )
+
+        # Log Claude API usage (data source)
+        self.usage_tracker.log_datasource_usage(
+            doc_id, "Claude_API", queries=1, results=1
+        )
 
     def process_folder(
         self, folder_path: Optional[str] = None, batch_delay_ms: float = 100
