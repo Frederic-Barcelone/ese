@@ -104,39 +104,48 @@ class DoclingTableExtractor:
 
     def _create_converter(self) -> "DocumentConverter":
         """Create and configure the Docling DocumentConverter."""
-        # Configure pipeline options with SuryaOCR for optimal table extraction
-        # SuryaOCR provides 20-30% better accuracy on tables/figures
-        if self.ocr_enabled:
-            pipeline_options = PdfPipelineOptions(
-                do_table_structure=True,
-                do_ocr=True,
-                allow_external_plugins=True,
-                ocr_options=SuryaOcrOptions(lang=["en"]),
-            )
-        else:
-            pipeline_options = PdfPipelineOptions(
-                do_table_structure=True,
-                do_ocr=False,
-            )
+        # Try SuryaOCR first for better accuracy, fall back to default if it fails
+        if self.ocr_enabled and SuryaOcrOptions is not None:
+            try:
+                pipeline_options = PdfPipelineOptions(
+                    do_table_structure=True,
+                    do_ocr=True,
+                    allow_external_plugins=True,
+                    ocr_options=SuryaOcrOptions(lang=["en"]),
+                )
+                self._set_tableformer_options(pipeline_options)
 
-        # Set TableFormer mode
-        if self.mode == "accurate":
-            pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
-        else:
-            pipeline_options.table_structure_options.mode = TableFormerMode.FAST
+                converter = DocumentConverter(
+                    format_options={
+                        InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+                    }
+                )
+                return converter
+            except (NameError, ImportError, Exception) as e:
+                # SuryaOCR has compatibility issues, fall back to default OCR
+                logger.warning(f"SuryaOCR failed ({e}), falling back to default OCR")
 
-        # Enable cell matching for better column separation
-        # This uses TableFormer's predicted cells with PDF coordinates
-        pipeline_options.table_structure_options.do_cell_matching = self.do_cell_matching
+        # Fall back to default OCR (or no OCR if disabled)
+        pipeline_options = PdfPipelineOptions(
+            do_table_structure=True,
+            do_ocr=self.ocr_enabled,
+        )
+        self._set_tableformer_options(pipeline_options)
 
-        # Create converter with PDF-specific options
         converter = DocumentConverter(
             format_options={
                 InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
             }
         )
-
         return converter
+
+    def _set_tableformer_options(self, pipeline_options: "PdfPipelineOptions") -> None:
+        """Set TableFormer mode and cell matching options."""
+        if self.mode == "accurate":
+            pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+        else:
+            pipeline_options.table_structure_options.mode = TableFormerMode.FAST
+        pipeline_options.table_structure_options.do_cell_matching = self.do_cell_matching
 
     def extract_tables(self, file_path: str) -> List[Dict[str, Any]]:
         """

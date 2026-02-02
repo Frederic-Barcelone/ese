@@ -124,36 +124,52 @@ def detect_tables_with_docling(
             has_surya = False
             logger.info("SuryaOCR not available, using default OCR")
 
-        # Configure pipeline (follow pattern from B03c_docling_backend.py)
+        # Configure pipeline - try SuryaOCR first, fall back to default if it fails
+        converter = None
         if config.enable_ocr and has_surya:
-            pipeline_options = PdfPipelineOptions(
-                do_table_structure=True,
-                do_ocr=True,
-                allow_external_plugins=True,
-                ocr_options=SuryaOcrOptions(lang=["en"]),
-            )
-        else:
+            try:
+                pipeline_options = PdfPipelineOptions(
+                    do_table_structure=True,
+                    do_ocr=True,
+                    allow_external_plugins=True,
+                    ocr_options=SuryaOcrOptions(lang=["en"]),
+                )
+                # Set TableFormer mode
+                if mode == "accurate":
+                    pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+                else:
+                    pipeline_options.table_structure_options.mode = TableFormerMode.FAST
+                pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching
+
+                format_options = {
+                    InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+                }
+                converter = DocumentConverter(format_options=format_options)
+                # Test conversion to catch SuryaOCR initialization errors early
+                result = converter.convert(pdf_path)
+            except (NameError, ImportError, Exception) as surya_error:
+                # SuryaOCR has compatibility issues, fall back to default OCR
+                logger.warning(f"SuryaOCR failed ({surya_error}), falling back to default OCR")
+                converter = None
+
+        # Fall back to default OCR if SuryaOCR failed or not available
+        if converter is None:
             pipeline_options = PdfPipelineOptions(
                 do_table_structure=True,
                 do_ocr=config.enable_ocr,
             )
+            # Set TableFormer mode
+            if mode == "accurate":
+                pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+            else:
+                pipeline_options.table_structure_options.mode = TableFormerMode.FAST
+            pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching
 
-        # Set TableFormer mode on existing options object
-        if mode == "accurate":
-            pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
-        else:
-            pipeline_options.table_structure_options.mode = TableFormerMode.FAST
-
-        # Set cell matching option
-        pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching
-
-        format_options = {
-            InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
-        }
-
-        # Create converter and process
-        converter = DocumentConverter(format_options=format_options)
-        result = converter.convert(pdf_path)
+            format_options = {
+                InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+            }
+            converter = DocumentConverter(format_options=format_options)
+            result = converter.convert(pdf_path)
 
         # Extract tables from result
         tables = []
