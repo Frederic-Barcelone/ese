@@ -1493,6 +1493,9 @@ class Orchestrator:
             print(f"  {'AVERAGE PER DOCUMENT':<40} {avg_time:>6.1f}s")
         print(f"{'─' * 50}")
 
+        # Print lexicon/data source usage summary
+        self.usage_tracker.print_summary()
+
         return all_results
 
 
