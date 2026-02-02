@@ -242,3 +242,10 @@ class GoldLoader:
         for a in annos:
             ds[a.doc_id].append(a)
         return ds
+
+
+__all__ = [
+    "GoldAnnotation",
+    "GoldStandard",
+    "GoldLoader",
+]

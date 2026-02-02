@@ -947,5 +947,29 @@ def main():
     print(f"{'=' * 70}\n")
 
 
+__all__ = [
+    "AbbreviationClass",
+    "GENE_PATTERNS",
+    "KNOWN_GENES",
+    "IDENTIFIER_PATTERNS",
+    "GENERAL_MEDICAL",
+    "DISEASE_KEYWORDS",
+    "classify_abbreviation",
+    "GoldEntry",
+    "ExtractedEntry",
+    "DocumentMetrics",
+    "AggregateMetrics",
+    "load_gold_standard",
+    "normalize_medical_synonyms",
+    "lf_matches",
+    "compare_extractions",
+    "create_orchestrator",
+    "run_orchestrator",
+    "evaluate_split",
+    "print_split_report",
+    "print_error_analysis",
+    "main",
+]
+
 if __name__ == "__main__":
     main()

@@ -765,6 +765,11 @@ def run_analysis(results_data: Dict[str, Any], gold_path: str) -> Dict[str, Any]
 # =============================================================================
 # STANDALONE TEST
 # =============================================================================
+__all__ = [
+    "ExtractionAnalyzer",
+    "run_analysis",
+]
+
 if __name__ == "__main__":
     # Test with mock data
     mock_results = {

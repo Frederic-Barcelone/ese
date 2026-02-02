@@ -621,3 +621,12 @@ class Scorer:
         self.print_summary(corpus_report.micro, title="CORPUS (MICRO)")
         self.print_summary(corpus_report.macro, title="CORPUS (MACRO)")
         print(f"\n[DOC] Docs evaluated: {len(corpus_report.per_doc)}")
+
+
+__all__ = [
+    "Pair",
+    "ScoreReport",
+    "CorpusScoreReport",
+    "ScorerConfig",
+    "Scorer",
+]

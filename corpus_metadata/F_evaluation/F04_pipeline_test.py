@@ -290,5 +290,15 @@ def main():
     evaluator.evaluate_corpus()
 
 
+__all__ = [
+    "DEFAULT_CONFIG_PATH",
+    "PAPERS_FOLDER",
+    "GOLD_JSON",
+    "load_config",
+    "get_paths_from_config",
+    "PipelineEvaluator",
+    "main",
+]
+
 if __name__ == "__main__":
     main()
