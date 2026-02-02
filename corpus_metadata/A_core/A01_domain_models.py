@@ -205,6 +205,35 @@ class LLMParameters(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
 
+class BaseProvenanceMetadata(BaseModel):
+    """
+    Base provenance class for audit trail across all entity types.
+
+    Provides common reproducibility and compliance fingerprints that all
+    entity-specific provenance classes inherit from. Accepts any Enum type
+    as generator_name for flexibility across different extraction strategies.
+    """
+
+    pipeline_version: str  # e.g. git commit hash
+    run_id: str  # e.g. RUN_20250101_120000_ab12cd34ef56
+    doc_fingerprint: str  # SHA256 of source PDF bytes
+
+    generator_name: Enum  # Accepts any enum type for flexibility
+    rule_version: Optional[str] = None
+
+    # Lexicon provenance (which dictionary file the match came from)
+    lexicon_source: Optional[str] = None  # e.g. "2025_08_abbreviation_general.json"
+
+    # Populated during verification
+    prompt_bundle_hash: Optional[str] = None
+    context_hash: Optional[str] = None
+    llm_config: Optional[LLMParameters] = None
+
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+
 class LexiconIdentifier(BaseModel):
     """External identifier from a lexicon source (e.g., Orphanet, MONDO, UMLS)."""
 
