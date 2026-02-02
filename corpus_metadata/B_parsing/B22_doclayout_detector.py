@@ -115,6 +115,53 @@ def get_model():
     return _model
 
 
+def extract_table_content(image_bytes: bytes) -> Optional[Dict[str, str]]:
+    """
+    Extract table content using StructEqTable.
+
+    Args:
+        image_bytes: PNG image bytes of the table
+
+    Returns:
+        Dict with 'latex' and 'html' keys, or None if extraction fails
+    """
+    import io
+    try:
+        import struct_eqtable
+        from PIL import Image
+
+        # Load model (lazy initialization)
+        if not hasattr(extract_table_content, '_model'):
+            logger.info("Loading StructEqTable model...")
+            model = struct_eqtable.build_model()
+            # Increase limits for complex tables
+            model.max_new_tokens = 4096
+            model.max_generate_time = 300
+            extract_table_content._model = model
+            logger.info("StructEqTable model loaded")
+
+        model = extract_table_content._model
+
+        # Convert bytes to PIL Image
+        image = Image.open(io.BytesIO(image_bytes))
+
+        # Extract table structure in both formats
+        latex_result = model(image, 'latex')
+        html_result = model(image, 'html')
+
+        return {
+            "latex": latex_result[0] if latex_result else "",
+            "html": html_result[0] if html_result else "",
+        }
+
+    except ImportError as e:
+        logger.warning(f"StructEqTable not available: {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Table content extraction failed: {e}")
+        return None
+
+
 def generate_vlm_description(
     image_bytes: bytes,
     visual_type: str,
@@ -135,10 +182,19 @@ def generate_vlm_description(
     """
     import base64
     import json
+    import os
 
     try:
+        # Load API key from .env if not already set
+        from dotenv import load_dotenv
+        load_dotenv()
+
         import anthropic
-        client = anthropic.Anthropic()
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            logger.warning("ANTHROPIC_API_KEY not set, skipping VLM description")
+            return {"title": None, "description": None}
+        client = anthropic.Anthropic(api_key=api_key)
     except Exception as e:
         logger.warning(f"VLM not available: {e}")
         return {"title": None, "description": None}
@@ -215,6 +271,111 @@ def _extract_text_from_bbox(
     rect = fitz.Rect(bbox_pts)
     text = page.get_text("text", clip=rect)
     return text.strip()
+
+
+def _find_caption_by_text_search(
+    doc: fitz.Document,
+    page_num: int,
+    visual_bbox: Tuple[float, float, float, float],
+    visual_type: str,
+    search_distance_pts: float = 100.0,
+) -> Optional[Dict]:
+    """
+    Search for caption text below/above a visual using regex patterns.
+
+    Fallback when YOLO doesn't detect a caption.
+    """
+    import re
+
+    page = doc[page_num - 1]
+    page_height = page.rect.height
+    page_width = page.rect.width
+
+    v_x0, v_y0, v_x1, v_y1 = visual_bbox
+
+    # Pattern to match "Figure X:" or "Table X:"
+    if visual_type == "figure":
+        pattern = r"(Figure\s+\d+[A-Za-z]?\s*[:.].*)"
+    else:
+        pattern = r"(Table\s+\d+[A-Za-z]?\s*[:.].*)"
+
+    # Search below the visual first (most common)
+    search_below = fitz.Rect(
+        max(0, v_x0 - 20),
+        v_y1,
+        min(page_width, v_x1 + 20),
+        min(page_height, v_y1 + search_distance_pts)
+    )
+
+    text_below = page.get_text("text", clip=search_below)
+    match = re.search(pattern, text_below, re.IGNORECASE | re.DOTALL)
+
+    if match:
+        # Get the text blocks to find exact bbox
+        blocks = page.get_text("dict", clip=search_below)["blocks"]
+        caption_text = ""
+        caption_bbox = None
+
+        for block in blocks:
+            if block.get("type") == 0:  # Text block
+                block_text = ""
+                for line in block.get("lines", []):
+                    for span in line.get("spans", []):
+                        block_text += span.get("text", "")
+
+                if re.search(pattern[:20], block_text, re.IGNORECASE):
+                    # Found the caption block
+                    caption_bbox = block.get("bbox")
+                    # Get all text from this block and following blocks
+                    caption_text = block_text
+
+        if caption_bbox:
+            # Extend bbox to capture multi-line captions
+            extended_bbox = fitz.Rect(
+                caption_bbox[0],
+                caption_bbox[1],
+                min(page_width, max(caption_bbox[2], v_x1)),
+                min(page_height, caption_bbox[3] + 50)  # Extra space for long captions
+            )
+
+            # Re-extract with extended bbox
+            full_caption = page.get_text("text", clip=extended_bbox).strip()
+
+            return {
+                "text": full_caption,
+                "bbox_pts": tuple(extended_bbox),
+                "position": "below",
+            }
+
+    # Search above the visual (less common)
+    search_above = fitz.Rect(
+        max(0, v_x0 - 20),
+        max(0, v_y0 - search_distance_pts),
+        min(page_width, v_x1 + 20),
+        v_y0
+    )
+
+    text_above = page.get_text("text", clip=search_above)
+    match = re.search(pattern, text_above, re.IGNORECASE | re.DOTALL)
+
+    if match:
+        blocks = page.get_text("dict", clip=search_above)["blocks"]
+        for block in blocks:
+            if block.get("type") == 0:
+                block_text = ""
+                for line in block.get("lines", []):
+                    for span in line.get("spans", []):
+                        block_text += span.get("text", "")
+
+                if re.search(pattern[:20], block_text, re.IGNORECASE):
+                    caption_bbox = block.get("bbox")
+                    return {
+                        "text": block_text.strip(),
+                        "bbox_pts": tuple(caption_bbox) if caption_bbox else None,
+                        "position": "above",
+                    }
+
+    return None
 
 
 def _associate_captions_with_visuals(
@@ -432,10 +593,22 @@ def detect_visuals_doclayout(
                 # Deduplicate overlapping detections (keep higher confidence)
                 page_visuals = _deduplicate_visuals(page_visuals, iou_threshold)
 
-                # Associate captions with visuals
+                # Associate captions with visuals (from YOLO detection)
                 page_visuals = _associate_captions_with_visuals(
                     page_visuals, page_captions, page_height_pts
                 )
+
+                # Fallback: search for captions in text when YOLO didn't detect them
+                for v in page_visuals:
+                    if not v.get("caption_text"):
+                        fallback_caption = _find_caption_by_text_search(
+                            doc, page_num, v["bbox_pts"], v["type"]
+                        )
+                        if fallback_caption:
+                            v["caption_text"] = fallback_caption["text"]
+                            v["caption_bbox"] = fallback_caption["bbox_pts"]
+                            v["caption_position"] = fallback_caption["position"]
+                            logger.debug(f"Found caption via text search: {fallback_caption['text'][:50]}...")
 
                 # Count after deduplication
                 for v in page_visuals:
@@ -633,6 +806,12 @@ def detect_and_crop_all(
             # Save crop
             crop_path.write_bytes(png_bytes)
 
+            # Extract table content for tables
+            table_content = None
+            if v.visual_type == "table":
+                logger.info(f"Extracting table content for {crop_filename}...")
+                table_content = extract_table_content(png_bytes)
+
             # Generate VLM title and description
             vlm_title = None
             vlm_description = None
@@ -676,6 +855,10 @@ def detect_and_crop_all(
                     visual_entry["vlm"]["title"] = vlm_title
                 if vlm_description:
                     visual_entry["vlm"]["description"] = vlm_description
+
+            # Add table content (LaTeX/HTML) for tables
+            if table_content:
+                visual_entry["table_content"] = table_content
 
             page_entry["visuals"].append(visual_entry)
 
