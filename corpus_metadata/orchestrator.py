@@ -899,54 +899,56 @@ class Orchestrator:
         else:
             printer.skip("Care pathway extraction", "disabled in config")
 
-        # Stage 10b: Guideline recommendation extraction
+        # Stage 13: Guideline recommendation extraction
         recommendation_results: List[RecommendationSet] = []
         if self.extract_recommendations and self.recommendation_extractor:
-            timer.start("10b. Recommendations")
-            print("\n[10b/12] Extracting guideline recommendations...")
+            printer.step("Recommendation extraction...", step_num=13)
+            timer.start("13. Recommendations")
             # Use full_text_with_pages for VLM page detection
             recommendation_results = self._extract_recommendations(doc, pdf_path_obj, full_text_with_pages)
-            rec_time = timer.stop("10b. Recommendations")
+            rec_time = timer.stop("13. Recommendations")
             total_recs = sum(len(rs.recommendations) for rs in recommendation_results)
-            print(f"  Extracted {len(recommendation_results)} recommendation sets ({total_recs} recommendations)")
-            print(f"  ⏱  {rec_time:.1f}s")
+            printer.result("Recommendation sets", len(recommendation_results))
+            printer.detail(f"Total recommendations: {total_recs}", indent=4)
+            printer.time(rec_time)
         else:
-            print("\n[Recommendation extraction] SKIPPED (disabled in config)")
+            printer.skip("Recommendation extraction", "disabled in config")
 
-        # Stage 10c: Visual extraction (tables and figures as images)
+        # Stage 14: Visual extraction (tables and figures as images)
         visual_result = None
         self._last_visual_result = None  # Store for summary printing
         if (self.extract_tables or self.extract_figures) and self.visual_integration.enabled:
-            timer.start("10c. Visual Extraction")
-            print("\n[10c/12] Extracting visuals (tables and figures)...")
+            printer.step("Visual extraction (tables & figures)...", step_num=14)
+            timer.start("14. Visual Extraction")
             try:
                 visual_result = self.visual_integration.extract(str(pdf_path_obj))
                 if visual_result:
                     self._last_visual_result = visual_result
-                    print(f"    + Extracted {len(visual_result.visuals)} visuals "
-                          f"({visual_result.tables_detected} tables, {visual_result.figures_detected} figures)")
+                    printer.result("Visuals extracted", len(visual_result.visuals))
+                    printer.detail(f"Tables: {visual_result.tables_detected}, Figures: {visual_result.figures_detected}", indent=4)
             except Exception as e:
-                print(f"    [WARN] Visual extraction failed: {e}")
-            visual_time = timer.stop("10c. Visual Extraction")
-            print(f"  ⏱  {visual_time:.1f}s")
+                printer.warning(f"Visual extraction failed: {e}")
+            visual_time = timer.stop("14. Visual Extraction")
+            printer.time(visual_time)
         else:
-            print("\n[Visual extraction] SKIPPED (disabled in config)")
+            printer.skip("Visual extraction", "disabled in config")
 
-        # Stage 11: Document metadata extraction
+        # Stage 15: Document metadata extraction
         doc_metadata: Optional[DocumentMetadata] = None
         if self.extract_doc_metadata:
-            timer.start("11. Doc Metadata")
+            printer.step("Document metadata extraction...", step_num=15)
+            timer.start("15. Doc Metadata")
             doc_metadata = self._process_document_metadata(
                 doc, pdf_path_obj, full_text[:5000]
             )
-            meta_time = timer.stop("11. Doc Metadata")
-            print(f"  ⏱  {meta_time:.1f}s")
+            meta_time = timer.stop("15. Doc Metadata")
+            printer.time(meta_time)
         else:
-            print("\n[Document metadata] SKIPPED (disabled in config)")
+            printer.skip("Document metadata", "disabled in config")
 
-        # Stage 12: Summary & Export
-        timer.start("12. Export")
-        print("\n[12/12] Writing summary...")
+        # Stage 16: Summary & Export
+        printer.step("Export & summary...", step_num=16)
+        timer.start("16. Export")
         self.logger.write_summary()
         self.logger.print_summary()
         counters.log_summary()
