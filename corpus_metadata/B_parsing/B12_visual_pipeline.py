@@ -155,7 +155,7 @@ class VisualExtractionPipeline:
         """Lazy initialization of VLM client."""
         if self._vlm_client is None and self.config.enable_vlm:
             try:
-                from C_generators.C16_vlm_visual_enrichment import VLMClient, VLMConfig
+                from C_generators.C19_vlm_visual_enrichment import VLMClient, VLMConfig
 
                 vlm_config = VLMConfig(model=self.config.vlm_model)
                 self._vlm_client = VLMClient(vlm_config)
@@ -441,7 +441,7 @@ class VisualExtractionPipeline:
             vlm_client = self._get_vlm_client()
             if vlm_client:
                 try:
-                    from C_generators.C16_vlm_visual_enrichment import classify_visual
+                    from C_generators.C19_vlm_visual_enrichment import classify_visual
 
                     logger.info(f"Running VLM enrichment on {len(vlm_candidates)} candidates")
                     for rendered_data in rendered_candidates:

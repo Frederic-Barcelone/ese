@@ -141,7 +141,7 @@ corpus_metadata/
 |   +-- C14_strategy_citation.py             # Citation/reference detection
 |   +-- C15_vlm_table_extractor.py           # VLM table extraction
 |   +-- C16_strategy_gene.py                 # Gene/genetic entity detection
-|   +-- C16_vlm_visual_enrichment.py         # Claude Vision enrichment
+|   +-- C19_vlm_visual_enrichment.py         # Claude Vision enrichment
 |   +-- C16a_gene_fp_filter.py               # Gene false positive filter
 |   +-- C17_flowchart_graph_extractor.py     # Flowchart to graph extraction
 |   +-- C18_strategy_pharma.py               # Pharma company detection

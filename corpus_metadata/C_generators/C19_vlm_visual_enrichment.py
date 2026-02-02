@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C16_vlm_visual_enrichment.py
+# corpus_metadata/C_generators/C19_vlm_visual_enrichment.py
 """
 VLM Visual Enrichment for Visual Pipeline.
 
