@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B04b_xy_cut_ordering.py
+# corpus_metadata/B_parsing/B30_xy_cut_ordering.py
 """
 XY-Cut ordering algorithms for reading order detection.
 
@@ -22,7 +22,7 @@ if TYPE_CHECKING:
         LayoutConfig,
         PageLayout,
     )
-    from B_parsing.B04a_column_detection import PageStats
+    from B_parsing.B29_column_detection import PageStats
 
 
 # =============================================================================
@@ -43,7 +43,7 @@ def xy_cut_order(
     - Semantic priority sorting within groups
     - Configurable min_gap_factor
     """
-    from B_parsing.B04a_column_detection import detect_l_shaped_regions
+    from B_parsing.B29_column_detection import detect_l_shaped_regions
 
     if len(geoms) <= 1:
         return geoms

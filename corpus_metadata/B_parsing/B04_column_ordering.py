@@ -72,7 +72,7 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 # Import from column detection submodule
-from B_parsing.B04a_column_detection import (
+from B_parsing.B29_column_detection import (
     PageStats,
     Gutter,
     find_gutters,
@@ -82,7 +82,7 @@ from B_parsing.B04a_column_detection import (
 )
 
 # Import from XY-Cut ordering submodule
-from B_parsing.B04b_xy_cut_ordering import (
+from B_parsing.B30_xy_cut_ordering import (
     xy_cut_order,
     order_body_bands,
 )

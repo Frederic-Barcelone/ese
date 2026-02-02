@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B04a_column_detection.py
+# corpus_metadata/B_parsing/B29_column_detection.py
 """
 Column detection and layout analysis utilities.
 
