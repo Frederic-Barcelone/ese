@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C08b_feasibility_fp_filter.py
+# corpus_metadata/C_generators/C28_feasibility_fp_filter.py
 """
 False positive filter for clinical trial feasibility extraction.
 

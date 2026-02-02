@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C07b_drug_fp_constants.py
+# corpus_metadata/C_generators/C26_drug_fp_constants.py
 """
 Drug false positive filtering constants.
 

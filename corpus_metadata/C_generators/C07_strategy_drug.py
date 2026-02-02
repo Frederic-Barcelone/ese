@@ -39,7 +39,7 @@ from B_parsing.B06_confidence import ConfidenceCalculator
 from B_parsing.B07_negation import NegationDetector
 
 # Import false positive filter and abbreviations from modularized file
-from C_generators.C07a_drug_fp_filter import (
+from C_generators.C25_drug_fp_filter import (
     DRUG_ABBREVIATIONS,
     DrugFalsePositiveFilter,
 )

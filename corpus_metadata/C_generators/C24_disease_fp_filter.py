@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C06a_disease_fp_filter.py
+# corpus_metadata/C_generators/C24_disease_fp_filter.py
 """
 Disease false positive filtering with confidence-based scoring.
 

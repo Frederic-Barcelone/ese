@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C08a_feasibility_patterns.py
+# corpus_metadata/C_generators/C27_feasibility_patterns.py
 """
 Pattern constants for clinical trial feasibility extraction.
 

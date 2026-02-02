@@ -49,7 +49,7 @@ from B_parsing.B06_confidence import ConfidenceFeatures, ConfidenceCalculator
 from B_parsing.B07_negation import NegationDetector, EXCEPTION_CUES
 
 # Import patterns and FP filter from modularized files
-from C_generators.C08a_feasibility_patterns import (
+from C_generators.C27_feasibility_patterns import (
     AMBIGUOUS_COUNTRIES,
     CONSORT_FLOW_PATTERNS,
     COUNTRIES,
@@ -76,7 +76,7 @@ from C_generators.C08a_feasibility_patterns import (
     VACCINE_TYPES,
     VISIT_PATTERNS,
 )
-from C_generators.C08b_feasibility_fp_filter import FeasibilityFalsePositiveFilter
+from C_generators.C28_feasibility_fp_filter import FeasibilityFalsePositiveFilter
 
 
 class FeasibilityDetector:

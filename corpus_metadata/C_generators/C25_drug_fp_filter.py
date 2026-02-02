@@ -1,9 +1,9 @@
-# corpus_metadata/C_generators/C07a_drug_fp_filter.py
+# corpus_metadata/C_generators/C25_drug_fp_filter.py
 """
 Drug false positive filtering.
 
 This module contains DrugFalsePositiveFilter which filters false positive drug matches.
-Constants are defined in C07b_drug_fp_constants.py.
+Constants are defined in C26_drug_fp_constants.py.
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 from typing import TYPE_CHECKING, Set
 
-from .C07b_drug_fp_constants import (
+from .C26_drug_fp_constants import (
     ALWAYS_FILTER,
     BACTERIA_ORGANISMS,
     BIOLOGICAL_ENTITIES,

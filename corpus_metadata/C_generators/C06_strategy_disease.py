@@ -39,7 +39,7 @@ from B_parsing.B05_section_detector import SectionDetector
 from B_parsing.B06_confidence import ConfidenceCalculator
 from B_parsing.B07_negation import NegationDetector
 
-from .C06a_disease_fp_filter import DiseaseFalsePositiveFilter
+from .C24_disease_fp_filter import DiseaseFalsePositiveFilter
 
 # scispacy for biomedical NER
 try:
