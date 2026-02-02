@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/A_core/A08_document_metadata_models.py
+# corpus_metadata/A_core/A08_document_metadata_models.py
 """
 Domain models for document metadata extraction.
 

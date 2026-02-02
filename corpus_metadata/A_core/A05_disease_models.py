@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/A_core/A05_disease_models.py
+# corpus_metadata/A_core/A05_disease_models.py
 """
 Domain models for disease mention detection.
 Separate from abbreviation models (A01) as diseases have fundamentally different semantics:

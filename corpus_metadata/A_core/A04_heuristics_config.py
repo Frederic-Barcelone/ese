@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/A_core/A04_heuristics_config.py
+# corpus_metadata/A_core/A04_heuristics_config.py
 """
 Centralized Heuristics Configuration
 

@@ -1,4 +1,4 @@
-# corpus_metadata/corpus_metadata/A_core/A06_drug_models.py
+# corpus_metadata/A_core/A06_drug_models.py
 """
 Domain models for drug/chemical entity extraction.
 
