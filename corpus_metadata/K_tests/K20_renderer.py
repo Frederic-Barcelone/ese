@@ -147,28 +147,28 @@ class TestComputeCaptionPadding:
     def test_figure_default_caption_below(self):
         padding = compute_caption_padding("figure", caption_position=None)
 
-        assert padding["bottom"] == 72.0  # Caption zone
-        assert padding["top"] == 12.0  # Normal padding
-        assert padding["left"] == 12.0
-        assert padding["right"] == 12.0
+        assert padding["bottom"] == 12.0  # Caption zone (padding_caption_pts)
+        assert padding["top"] == 6.0  # Normal padding (padding_sides_pts)
+        assert padding["left"] == 6.0
+        assert padding["right"] == 6.0
 
     def test_table_default_caption_above(self):
         padding = compute_caption_padding("table", caption_position=None)
 
-        assert padding["top"] == 72.0  # Caption zone
-        assert padding["bottom"] == 12.0  # Normal padding
+        assert padding["top"] == 12.0  # Caption zone (padding_caption_pts)
+        assert padding["bottom"] == 6.0  # Normal padding (padding_sides_pts)
 
     def test_explicit_caption_above(self):
         padding = compute_caption_padding("figure", caption_position="above")
 
-        assert padding["top"] == 72.0  # Caption zone
-        assert padding["bottom"] == 12.0
+        assert padding["top"] == 12.0  # Caption zone (padding_caption_pts)
+        assert padding["bottom"] == 6.0
 
     def test_explicit_caption_left(self):
         padding = compute_caption_padding("figure", caption_position="left")
 
-        assert padding["left"] == 72.0  # Caption zone
-        assert padding["right"] == 12.0
+        assert padding["left"] == 12.0  # Caption zone (padding_caption_pts)
+        assert padding["right"] == 6.0
 
 
 # -------------------------
@@ -183,8 +183,8 @@ class TestRenderConfig:
         assert config.default_dpi == 300
         assert config.min_dpi == 200
         assert config.max_dpi == 400
-        assert config.padding_sides_pts == 12.0
-        assert config.padding_caption_pts == 72.0
+        assert config.padding_sides_pts == 6.0  # ~0.08 inch minimal margin
+        assert config.padding_caption_pts == 12.0  # ~0.17 inch small buffer
         assert config.image_format == "png"
 
     def test_custom_config(self):

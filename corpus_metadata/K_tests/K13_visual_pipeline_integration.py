@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 from B_parsing.B12_visual_pipeline import (
     PipelineConfig,
     VisualExtractionPipeline,
-    extract_visuals_layout_aware,
+    extract_visuals_doclayout,
 )
 from B_parsing.B18_layout_models import (
     VisualPosition,
@@ -14,81 +14,26 @@ from B_parsing.B18_layout_models import (
 from B_parsing.B20_zone_expander import ExpandedVisual
 
 
-class TestLayoutAwareDetectionMode:
-    """Tests for layout-aware detection mode selection."""
+class TestDoclayoutDetectionMode:
+    """Tests for doclayout detection mode selection."""
 
-    def test_config_accepts_layout_aware_mode(self):
-        """Pipeline config accepts 'layout-aware' detection mode."""
-        config = PipelineConfig(detection_mode="layout-aware")
-        assert config.detection_mode == "layout-aware"
+    def test_config_accepts_doclayout_mode(self):
+        """Pipeline config accepts 'doclayout' detection mode."""
+        config = PipelineConfig(detection_mode="doclayout")
+        assert config.detection_mode == "doclayout"
 
-    def test_pipeline_initializes_with_layout_aware(self):
-        """Pipeline initializes with layout-aware config."""
-        config = PipelineConfig(detection_mode="layout-aware")
+    def test_pipeline_initializes_with_doclayout(self):
+        """Pipeline initializes with doclayout config."""
+        config = PipelineConfig(detection_mode="doclayout")
         pipeline = VisualExtractionPipeline(config)
-        assert pipeline.config.detection_mode == "layout-aware"
+        assert pipeline.config.detection_mode == "doclayout"
 
 
-class TestExtractTextBlocks:
-    """Tests for text block extraction helper."""
-
-    def test_extract_text_blocks_returns_list(self):
-        """_extract_text_blocks returns a list."""
-        pipeline = VisualExtractionPipeline()
-
-        # Mock document and page
-        mock_page = Mock()
-        mock_page.get_text.return_value = {
-            "blocks": [
-                {
-                    "type": 0,  # Text block
-                    "bbox": (50, 100, 280, 120),
-                    "lines": [
-                        {
-                            "spans": [
-                                {"text": "Sample text"}
-                            ]
-                        }
-                    ],
-                }
-            ]
-        }
-
-        mock_doc = Mock()
-        mock_doc.__getitem__ = Mock(return_value=mock_page)
-
-        result = pipeline._extract_text_blocks(mock_doc, 1)
-
-        assert isinstance(result, list)
-        assert len(result) == 1
-        assert result[0]["bbox"] == (50, 100, 280, 120)
-        assert result[0]["text"] == "Sample text"
-
-    def test_extract_text_blocks_filters_non_text(self):
-        """_extract_text_blocks filters out non-text blocks."""
-        pipeline = VisualExtractionPipeline()
-
-        mock_page = Mock()
-        mock_page.get_text.return_value = {
-            "blocks": [
-                {"type": 0, "bbox": (0, 0, 100, 100), "lines": []},  # Text
-                {"type": 1, "bbox": (0, 0, 100, 100)},  # Image (no type 0)
-            ]
-        }
-
-        mock_doc = Mock()
-        mock_doc.__getitem__ = Mock(return_value=mock_page)
-
-        result = pipeline._extract_text_blocks(mock_doc, 1)
-
-        assert len(result) == 1
-
-
-class TestLayoutAwareIntegration:
-    """Integration tests for layout-aware pipeline components."""
+class TestDoclayoutIntegration:
+    """Integration tests for doclayout pipeline components."""
 
     def test_convenience_function_sets_mode(self):
-        """extract_visuals_layout_aware sets correct mode."""
+        """extract_visuals_doclayout sets correct mode."""
         # We can't actually run the function without a PDF,
         # but we can verify it creates the right config
         with patch.object(VisualExtractionPipeline, 'extract') as mock_extract:
@@ -96,7 +41,7 @@ class TestLayoutAwareIntegration:
 
             # This would fail without a real PDF, but the config is created first
             try:
-                extract_visuals_layout_aware("/fake/path.pdf")
+                extract_visuals_doclayout("/fake/path.pdf")
             except Exception:
                 pass
 
@@ -126,31 +71,36 @@ class TestLayoutAwareIntegration:
 class TestDetectionModeSelection:
     """Tests for detection mode selection in _stage_detection."""
 
-    def test_layout_aware_mode_calls_correct_method(self):
-        """'layout-aware' mode calls _detect_with_layout_awareness."""
-        config = PipelineConfig(detection_mode="layout-aware")
+    def test_doclayout_mode_calls_correct_method(self):
+        """'doclayout' mode calls _detect_with_doclayout."""
+        config = PipelineConfig(detection_mode="doclayout")
         pipeline = VisualExtractionPipeline(config)
 
         with patch.object(
-            pipeline, '_detect_with_layout_awareness'
-        ) as mock_layout:
-            mock_layout.return_value = Mock(candidates=[])
+            pipeline, '_detect_with_doclayout'
+        ) as mock_doclayout:
+            mock_doclayout.return_value = Mock(candidates=[])
 
             pipeline._stage_detection("/fake/path.pdf")
 
-            mock_layout.assert_called_once_with("/fake/path.pdf")
+            mock_doclayout.assert_called_once_with("/fake/path.pdf")
 
-    def test_vlm_only_mode_calls_correct_method(self):
-        """'vlm-only' mode calls _detect_with_vlm."""
-        config = PipelineConfig(detection_mode="vlm-only")
+    def test_hybrid_mode_calls_both_methods(self):
+        """'hybrid' mode calls both doclayout and heuristic detection."""
+        config = PipelineConfig(detection_mode="hybrid")
         pipeline = VisualExtractionPipeline(config)
 
-        with patch.object(pipeline, '_detect_with_vlm') as mock_vlm:
-            mock_vlm.return_value = Mock(candidates=[])
+        with patch.object(pipeline, '_detect_with_doclayout') as mock_doclayout, \
+             patch('B_parsing.B12_visual_pipeline.detect_all_visuals') as mock_heuristic, \
+             patch.object(pipeline, '_merge_detection_results') as mock_merge:
+            mock_doclayout.return_value = Mock(candidates=[])
+            mock_heuristic.return_value = Mock(candidates=[])
+            mock_merge.return_value = Mock(candidates=[])
 
             pipeline._stage_detection("/fake/path.pdf")
 
-            mock_vlm.assert_called_once_with("/fake/path.pdf")
+            mock_doclayout.assert_called_once_with("/fake/path.pdf")
+            mock_heuristic.assert_called_once()
 
     def test_heuristic_mode_calls_detect_all(self):
         """'heuristic' mode calls detect_all_visuals."""
