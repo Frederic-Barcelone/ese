@@ -2,10 +2,8 @@
 """Tests for orchestrator_utils.py."""
 
 import time
-from io import StringIO
 from unittest import mock
 
-import pytest
 
 from orchestrator_utils import StageTimer, setup_warning_suppression
 

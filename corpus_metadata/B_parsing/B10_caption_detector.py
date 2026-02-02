@@ -176,10 +176,6 @@ def infer_page_columns(
     # Use histogram-based approach: find x positions with low block density
     gap_threshold = page_width * gap_threshold_ratio
 
-    # Collect all x-ranges covered by blocks
-    all_x0 = [x[0] for x in x_coords]
-    all_x1 = [x[1] for x in x_coords]
-
     # Find gaps in coverage
     # Sort all right edges and look for large gaps before next left edge
     edges = []
@@ -286,7 +282,6 @@ def link_caption_to_figure(
         Matched figure or None
     """
     cap_y = caption.bbox[1]  # Top of caption
-    cap_x = (caption.bbox[0] + caption.bbox[2]) / 2  # Center x
 
     candidates: List[Tuple[float, str, Union[EmbeddedFigure, VectorFigure]]] = []
 

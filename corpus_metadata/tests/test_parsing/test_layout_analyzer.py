@@ -1,7 +1,5 @@
 # corpus_metadata/tests/test_parsing/test_layout_analyzer.py
 """Tests for VLM layout analyzer."""
-import pytest
-from unittest.mock import Mock, patch
 from B_parsing.B18_layout_models import LayoutPattern, VisualPosition
 from B_parsing.B19_layout_analyzer import (
     parse_layout_response,

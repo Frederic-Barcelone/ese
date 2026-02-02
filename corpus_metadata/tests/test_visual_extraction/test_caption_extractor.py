@@ -2,8 +2,6 @@
 """
 Tests for multisource caption extraction.
 """
-import pytest
-from unittest.mock import MagicMock, patch
 
 from A_core.A13_visual_models import (
     CaptionCandidate,
@@ -19,7 +17,6 @@ from B_parsing.B15_caption_extractor import (
     get_relative_position,
     has_horizontal_overlap,
     has_vertical_overlap,
-    infer_column_layout,
     is_continuation_caption,
     parse_reference_from_match,
     select_best_caption,

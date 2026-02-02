@@ -37,7 +37,7 @@ try:
 
     DOCLING_AVAILABLE = True
 
-except ImportError as e:
+except ImportError:
     logger.warning(
         "Docling with SuryaOCR not installed. Install with: pip install docling docling-surya"
     )
@@ -190,17 +190,17 @@ class DoclingTableExtractor:
                     # Docling bbox uses (l, t, r, b) but coordinate system may have
                     # origin at top-left (t > b) or bottom-left (b > t).
                     # Normalize to ensure x0 < x1 and y0 < y1 for BoundingBox validation.
-                    l, t, r, b = (
+                    left, top, right, bottom = (
                         float(prov.bbox.l),
                         float(prov.bbox.t),
                         float(prov.bbox.r),
                         float(prov.bbox.b),
                     )
                     bbox = (
-                        min(l, r),  # x0
-                        min(t, b),  # y0
-                        max(l, r),  # x1
-                        max(t, b),  # y1
+                        min(left, right),  # x0
+                        min(top, bottom),  # y0
+                        max(left, right),  # x1
+                        max(top, bottom),  # y1
                     )
 
             # Export to DataFrame for structured data

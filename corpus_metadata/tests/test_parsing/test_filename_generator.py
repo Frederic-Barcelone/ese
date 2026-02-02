@@ -1,6 +1,5 @@
 # corpus_metadata/tests/test_parsing/test_filename_generator.py
 """Tests for layout-aware filename generation."""
-import pytest
 from B_parsing.B18_layout_models import VisualPosition, VisualZone
 from B_parsing.B20_zone_expander import ExpandedVisual
 from B_parsing.B21_filename_generator import generate_visual_filename, sanitize_name

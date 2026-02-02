@@ -16,10 +16,10 @@ from __future__ import annotations
 
 import statistics
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set, Tuple, TYPE_CHECKING
+from typing import List, Set, Tuple, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from B_parsing.B04_column_ordering import LayoutConfig, BlockGeom, SemanticPriority
+    from B_parsing.B04_column_ordering import LayoutConfig, BlockGeom
 
 
 # =============================================================================

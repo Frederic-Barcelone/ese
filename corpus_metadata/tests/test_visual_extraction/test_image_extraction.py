@@ -22,7 +22,7 @@ class TestDPIRatioCalculation:
     def test_coords_within_page_no_scaling(self):
         """Coordinates within page bounds should not be scaled."""
         page_width, page_height = 612.0, 792.0
-        x0, y0, x1, y1 = 100, 200, 400, 500
+        _x0, _y0, x1, y1 = 100, 200, 400, 500
 
         # Within bounds (< 1.1x page size)
         needs_x_scale = x1 > page_width * 1.1
@@ -35,7 +35,7 @@ class TestDPIRatioCalculation:
         """Coordinates exceeding page bounds should trigger scaling."""
         page_width, page_height = 612.0, 792.0
         # Simulating Unstructured coordinates at ~200 DPI (2.78x)
-        x0, y0, x1, y1 = 278, 556, 1112, 1390
+        _x0, _y0, x1, y1 = 278, 556, 1112, 1390
 
         needs_x_scale = x1 > page_width * 1.1
         needs_y_scale = y1 > page_height * 1.1
@@ -46,7 +46,7 @@ class TestDPIRatioCalculation:
     def test_axis_independent_scaling_both_axes(self):
         """When both axes exceed, use tighter constraint."""
         page_width, page_height = 612.0, 792.0
-        x0, y0, x1, y1 = 0, 0, 1800, 2300  # ~3x scale needed
+        _x0, _y0, x1, y1 = 0, 0, 1800, 2300  # ~3x scale needed
 
         x_ratio = page_width / x1   # 612/1800 = 0.34
         y_ratio = page_height / y1  # 792/2300 = 0.344
@@ -62,7 +62,7 @@ class TestDPIRatioCalculation:
     def test_single_axis_scaling_x_only(self):
         """When only X exceeds, scale proportionally."""
         page_width, page_height = 612.0, 792.0
-        x0, y0, x1, y1 = 0, 0, 1800, 500  # Only X exceeds
+        _x0, _y0, x1, y1 = 0, 0, 1800, 500  # Only X exceeds
 
         needs_x_scale = x1 > page_width * 1.1
         needs_y_scale = y1 > page_height * 1.1
@@ -80,7 +80,7 @@ class TestDPIRatioCalculation:
     def test_single_axis_scaling_y_only(self):
         """When only Y exceeds, scale proportionally."""
         page_width, page_height = 612.0, 792.0
-        x0, y0, x1, y1 = 0, 0, 400, 2000  # Only Y exceeds
+        _x0, _y0, x1, y1 = 0, 0, 400, 2000  # Only Y exceeds
 
         needs_x_scale = x1 > page_width * 1.1
         needs_y_scale = y1 > page_height * 1.1
@@ -107,7 +107,7 @@ class TestTwoColumnDetection:
     def test_left_column_figure(self):
         """Figure in left column should be detected."""
         page_width = 612.0
-        x0, y0, x1, y1 = 36, 100, 280, 400
+        x0, _y0, x1, _y1 = 36, 100, 280, 400
 
         figure_center_x = (x0 + x1) / 2  # 158
         is_two_column = (
@@ -121,7 +121,7 @@ class TestTwoColumnDetection:
     def test_right_column_figure(self):
         """Figure in right column should be detected."""
         page_width = 612.0
-        x0, y0, x1, y1 = 320, 100, 576, 400
+        x0, _y0, x1, _y1 = 320, 100, 576, 400
 
         figure_center_x = (x0 + x1) / 2  # 448
         is_two_column = (
@@ -135,7 +135,7 @@ class TestTwoColumnDetection:
     def test_centered_figure_not_two_column(self):
         """Figure spanning center should not be detected as 2-column."""
         page_width = 612.0
-        x0, y0, x1, y1 = 150, 100, 462, 400
+        x0, _y0, x1, _y1 = 150, 100, 462, 400
 
         figure_center_x = (x0 + x1) / 2  # 306 (center of page)
         is_two_column = (
@@ -148,7 +148,7 @@ class TestTwoColumnDetection:
     def test_full_width_figure_not_two_column(self):
         """Full-width figure should not be detected as 2-column."""
         page_width = 612.0
-        x0, y0, x1, y1 = 36, 100, 576, 400
+        x0, _y0, x1, _y1 = 36, 100, 576, 400
 
         figure_center_x = (x0 + x1) / 2  # 306
         is_two_column = (
@@ -204,7 +204,7 @@ class TestFullWidthExpansion:
     def test_threshold_boundary(self):
         """Test behavior exactly at 40% threshold."""
         page_width = 612.0
-        threshold_width = page_width * 0.4  # 244.8
+        _threshold_width = page_width * 0.4  # 244.8 (for documentation)
 
         # Just below threshold
         assert 244 <= page_width * 0.4
@@ -356,7 +356,7 @@ class TestCoordinateTransformationIntegration:
         page_height_pts = 792.0
 
         # Docling bbox (already in PDF points)
-        x0, y0, x1, y1 = 72, 144, 540, 648
+        _x0, _y0, x1, y1 = 72, 144, 540, 648
 
         needs_x_scale = x1 > page_width_pts * 1.1
         needs_y_scale = y1 > page_height_pts * 1.1
@@ -375,8 +375,8 @@ class TestEdgeCases:
 
     def test_figure_at_page_edge(self):
         """Figure at page edge should not cause negative coordinates."""
-        page_width, page_height = 612.0, 792.0
-        x0, y0, x1, y1 = 0, 0, 200, 200
+        _page_width, _page_height = 612.0, 792.0
+        x0, y0, _x1, _y1 = 0, 0, 200, 200
         padding = 30
 
         # Clamped coordinates
@@ -388,8 +388,8 @@ class TestEdgeCases:
 
     def test_figure_near_right_edge(self):
         """Figure near right edge should not exceed page width."""
-        page_width, page_height = 612.0, 792.0
-        x0, y0, x1, y1 = 500, 100, 600, 400
+        page_width, _page_height = 612.0, 792.0
+        _x0, _y0, x1, _y1 = 500, 100, 600, 400
         right_padding = 50
 
         # Clamped coordinates

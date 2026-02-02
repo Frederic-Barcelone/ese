@@ -14,14 +14,13 @@ Extracted from B04_column_ordering.py to reduce file size.
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Any, Dict, List, Optional, Tuple, TYPE_CHECKING
+from typing import Dict, List, Optional, Tuple, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from B_parsing.B04_column_ordering import (
         BlockGeom,
         LayoutConfig,
         PageLayout,
-        SemanticPriority,
     )
     from B_parsing.B04a_column_detection import PageStats
 

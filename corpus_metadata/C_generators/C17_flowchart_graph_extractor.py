@@ -13,9 +13,8 @@ from __future__ import annotations
 
 import logging
 import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 
@@ -24,8 +23,6 @@ from A_core.A17_care_pathway_models import (
     CarePathwayNode,
     CarePathwayEdge,
     NodeType,
-    TaperSchedule,
-    TaperSchedulePoint,
 )
 
 
@@ -244,7 +241,6 @@ class FlowchartGraphExtractor:
     def _extract_drugs_from_text(self, text: str) -> List[str]:
         """Extract drug names from node text using patterns."""
         drugs = []
-        text_upper = text.upper()
 
         for pattern, drug_name in self.drug_patterns.items():
             if re.search(pattern, text, re.IGNORECASE):

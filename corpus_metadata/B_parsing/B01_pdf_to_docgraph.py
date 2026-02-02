@@ -21,7 +21,6 @@ from __future__ import annotations
 
 import logging
 import os
-import re
 import warnings
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Optional, Tuple
@@ -59,7 +58,6 @@ from B_parsing.B01a_text_helpers import (
 # Native figure extraction (B01b)
 from B_parsing.B01b_native_figure_extraction import (
     apply_native_figure_extraction,
-    classify_image_type,
 )
 
 # Legacy ordering (B01c)

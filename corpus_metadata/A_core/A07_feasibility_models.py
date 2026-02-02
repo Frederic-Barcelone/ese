@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-# Re-exported from A07a_clinical_criteria for backward compatibility
+# Re-exported from A07a_clinical_criteria and A07b_logical_expressions for backward compatibility
 __all__ = [
     "DiagnosisConfirmation",
     "EntityNormalization",
@@ -27,6 +27,10 @@ __all__ = [
     "SeverityGrade",
     "SeverityGradeType",
     "SEVERITY_GRADE_MAPPINGS",
+    # Logical expressions (from A07b)
+    "LogicalOperator",
+    "CriterionNode",
+    "LogicalExpression",
 ]
 
 

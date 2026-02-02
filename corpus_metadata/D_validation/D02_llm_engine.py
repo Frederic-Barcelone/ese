@@ -53,7 +53,6 @@ except ImportError:
     AnthropicStatusError = Exception  # type: ignore
 
 # Import Claude client from submodule
-from D_validation.D02a_claude_client import ClaudeClient
 
 
 # -----------------------------------------------------------------------------

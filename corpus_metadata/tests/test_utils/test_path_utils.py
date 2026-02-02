@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from unittest import mock
 
-import pytest
 
 from Z_utils.Z05_path_utils import get_base_path
 

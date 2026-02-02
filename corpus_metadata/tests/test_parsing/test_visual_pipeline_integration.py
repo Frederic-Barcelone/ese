@@ -1,7 +1,6 @@
 # corpus_metadata/tests/test_parsing/test_visual_pipeline_integration.py
 """Integration tests for layout-aware visual pipeline."""
-import pytest
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 
 from B_parsing.B12_visual_pipeline import (
     PipelineConfig,
@@ -9,8 +8,6 @@ from B_parsing.B12_visual_pipeline import (
     extract_visuals_layout_aware,
 )
 from B_parsing.B18_layout_models import (
-    LayoutPattern,
-    PageLayout,
     VisualPosition,
     VisualZone,
 )

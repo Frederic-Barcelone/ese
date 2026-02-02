@@ -48,12 +48,12 @@ if TYPE_CHECKING:
     from B_parsing.B02_doc_graph import DocumentGraph
     from A_core.A01_domain_models import Candidate, ExtractedEntity
     from A_core.A04_heuristics_config import HeuristicsCounters
-    from A_core.A05_disease_models import ExtractedDisease, DiseaseExportEntry
-    from A_core.A06_drug_models import ExtractedDrug, DrugExportEntry
-    from A_core.A19_gene_models import ExtractedGene, GeneExportEntry
-    from A_core.A09_pharma_models import ExtractedPharma, PharmaExportEntry
-    from A_core.A10_author_models import ExtractedAuthor, AuthorExportEntry
-    from A_core.A11_citation_models import ExtractedCitation, CitationExportEntry
+    from A_core.A05_disease_models import ExtractedDisease
+    from A_core.A06_drug_models import ExtractedDrug
+    from A_core.A19_gene_models import ExtractedGene
+    from A_core.A09_pharma_models import ExtractedPharma
+    from A_core.A10_author_models import ExtractedAuthor
+    from A_core.A11_citation_models import ExtractedCitation
     from A_core.A07_feasibility_models import FeasibilityCandidate
     from A_core.A08_document_metadata_models import DocumentMetadata
     from A_core.A17_care_pathway_models import CarePathway

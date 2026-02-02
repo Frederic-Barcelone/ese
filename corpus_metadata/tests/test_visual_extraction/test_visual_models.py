@@ -3,7 +3,6 @@
 Tests for visual extraction data models.
 """
 import pytest
-from datetime import datetime
 
 from A_core.A13_visual_models import (
     CaptionCandidate,

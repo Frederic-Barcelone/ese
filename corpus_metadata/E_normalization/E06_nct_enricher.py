@@ -28,7 +28,6 @@ import requests
 
 from A_core.A00_logging import get_logger
 from A_core.A02_interfaces import BaseEnricher
-from A_core.A12_exceptions import APIError, ParsingError
 from Z_utils.Z01_api_client import BaseAPIClient
 
 logger = get_logger(__name__)

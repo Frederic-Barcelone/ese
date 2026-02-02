@@ -9,7 +9,7 @@ Runs AFTER normalization to ensure proper ID-based grouping.
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Callable, Dict, List, Optional, Set, TypeVar
+from typing import Callable, Dict, List, Set, TypeVar
 
 from A_core.A01_domain_models import ValidationStatus
 

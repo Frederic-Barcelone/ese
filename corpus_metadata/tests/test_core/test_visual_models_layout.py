@@ -1,7 +1,5 @@
 # corpus_metadata/tests/test_core/test_visual_models_layout.py
 """Tests for layout-aware fields in visual models."""
-import pytest
-from datetime import datetime
 
 from A_core.A13_visual_models import (
     ExtractedVisual,

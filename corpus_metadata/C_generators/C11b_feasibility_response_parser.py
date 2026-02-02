@@ -13,7 +13,7 @@ Parses LLM JSON responses into FeasibilityCandidate objects for:
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import List
 
 from A_core.A07_feasibility_models import (
     BackgroundTherapy,

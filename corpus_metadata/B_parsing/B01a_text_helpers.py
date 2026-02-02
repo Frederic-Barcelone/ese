@@ -14,7 +14,7 @@ Provides:
 from __future__ import annotations
 
 import re
-from typing import List, Optional, Set, TYPE_CHECKING
+from typing import Optional, Set, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from A_core.A01_domain_models import BoundingBox

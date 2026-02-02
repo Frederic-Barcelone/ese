@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import hashlib
 import logging
-from collections import Counter
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
@@ -578,11 +577,7 @@ def filter_noise_images(
     Returns:
         Filtered list of figures
     """
-    # Count by image identity (hash is more reliable than position)
-    hash_counts = Counter(fig.image_hash for fig in figures)
-    xref_counts = Counter(fig.xref for fig in figures)
-
-    # Also count unique pages per hash/xref
+    # Count unique pages per hash/xref (for header/footer/logo detection)
     hash_pages: Dict[str, set] = {}
     xref_pages: Dict[int, set] = {}
     for fig in figures:

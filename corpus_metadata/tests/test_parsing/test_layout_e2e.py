@@ -1,12 +1,10 @@
 # corpus_metadata/tests/test_parsing/test_layout_e2e.py
 """End-to-end tests for layout-aware visual extraction."""
 import pytest
-from unittest.mock import Mock, patch, MagicMock
-from datetime import datetime
+from unittest.mock import Mock, patch
 
 from B_parsing.B12_visual_pipeline import (
     PipelineConfig,
-    PipelineResult,
     VisualExtractionPipeline,
 )
 from B_parsing.B13_visual_detector import DetectionResult
@@ -17,10 +15,6 @@ from B_parsing.B18_layout_models import (
     VisualZone,
 )
 from B_parsing.B20_zone_expander import ExpandedVisual
-from A_core.A13_visual_models import (
-    VisualCandidate,
-    VisualType,
-)
 
 
 class TestLayoutAwareE2E:
@@ -163,7 +157,7 @@ class TestLayoutAwareE2E:
                     detection_mode="vlm-only",
                 )
 
-                result = pipeline._detect_with_layout_awareness("/fake/path.pdf")
+                _result = pipeline._detect_with_layout_awareness("/fake/path.pdf")
 
         # Should have fallen back to VLM-only
         mock_vlm_fallback.assert_called_once()

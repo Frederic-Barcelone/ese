@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import logging
 import tempfile
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -313,7 +313,6 @@ def _find_caption_by_text_search(
     if match:
         # Get the text blocks to find exact bbox
         blocks = page.get_text("dict", clip=search_below)["blocks"]
-        caption_text = ""
         caption_bbox = None
 
         for block in blocks:
@@ -328,8 +327,6 @@ def _find_caption_by_text_search(
                 if re.search(prefix_pattern, block_text, re.IGNORECASE):
                     # Found the caption block
                     caption_bbox = block.get("bbox")
-                    # Get all text from this block and following blocks
-                    caption_text = block_text
 
         if caption_bbox:
             # Extend bbox to capture multi-line captions
