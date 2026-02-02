@@ -1,14 +1,27 @@
 # corpus_metadata/B_parsing/B30_xy_cut_ordering.py
 """
-XY-Cut ordering algorithms for reading order detection.
+XY-Cut++ ordering algorithms for reading order detection.
 
-Provides:
-- xy_cut_order: Main XY-Cut ordering with density-driven axis selection
-- Recursive XY-Cut partitioning
-- Cut quality scoring
-- Multi-column body band ordering
+This module provides the core XY-Cut ordering algorithm with XY-Cut++ enhancements:
+density-driven axis selection, recursive partitioning with quality scoring,
+semantic priority ordering, and multi-column body band interleaving.
 
-Extracted from B04_column_ordering.py to reduce file size.
+Key Components:
+    - xy_cut_order: Main XY-Cut ordering with density-driven axis selection
+    - order_body_bands: Multi-column body band ordering with Y-interleaving
+    - _xy_cut_recursive: Recursive XY-Cut partitioning implementation
+    - _find_best_cut: Find best cut point with quality scoring
+    - _compute_cut_quality: Score cut quality based on gap and balance
+
+Example:
+    >>> from B_parsing.B30_xy_cut_ordering import xy_cut_order
+    >>> ordered_geoms = xy_cut_order(geoms, stats, config)
+    >>> for g in ordered_geoms:
+    ...     print(f"Block at ({g.x0}, {g.y0}): {g.block_ref.get('text', '')[:30]}")
+
+Dependencies:
+    - B_parsing.B04_column_ordering: BlockGeom, LayoutConfig, PageLayout (TYPE_CHECKING only)
+    - B_parsing.B29_column_detection: PageStats (TYPE_CHECKING only)
 """
 
 from __future__ import annotations

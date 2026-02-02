@@ -1,15 +1,32 @@
 # corpus_metadata/B_parsing/B31_vlm_detector.py
 """
-VLM-Assisted Visual Detection.
+VLM-assisted visual detection using Claude Vision for PDF analysis.
 
-Uses Claude Vision to detect tables and figures on PDF pages,
-returning structured bounding box information.
+This module uses Claude Vision to detect tables and figures on PDF pages,
+returning structured bounding box information. It handles multiple visuals
+per page, identifies multi-page tables (continuation markers), supports
+2-column layouts and full-width visuals, and returns normalized bounding boxes.
 
-Key capabilities:
-- Detects multiple visuals per page
-- Identifies multi-page tables (continuation markers)
-- Handles 2-column layouts and full-width visuals
-- Returns normalized bounding boxes in PDF points
+Key Components:
+    - VLMDetectedVisual: Detected visual with bbox, confidence, label, and continuation flags
+    - VLMPageDetection: Detection results for a single page
+    - detect_page_visuals: Detect visuals on a single page using VLM
+    - detect_document_visuals: Detect visuals across entire document
+    - render_page_for_vlm: Render page at appropriate resolution for VLM analysis
+    - VLM_DETECTION_PROMPT: System prompt for Claude Vision detection
+
+Example:
+    >>> from B_parsing.B31_vlm_detector import detect_document_visuals
+    >>> import fitz
+    >>> doc = fitz.open("paper.pdf")
+    >>> detections = detect_document_visuals(doc)
+    >>> for page_det in detections:
+    ...     for visual in page_det.visuals:
+    ...         print(f"Page {visual.page_num}: {visual.visual_type} at {visual.bbox_pts}")
+
+Dependencies:
+    - anthropic: Claude API client
+    - fitz (PyMuPDF): PDF rendering
 """
 from __future__ import annotations
 

@@ -1,15 +1,28 @@
 # corpus_metadata/B_parsing/B29_column_detection.py
 """
-Column detection and layout analysis utilities.
+Column detection and layout analysis utilities for SOTA ordering.
 
-Provides:
-- PageStats computation for adaptive thresholds
-- Gutter detection (Breuel sweep-line method)
-- Column boundary clustering
-- L-shaped region detection (XY-Cut++ pre-mask)
-- Spanning element detection
+This module provides low-level column detection utilities for the SOTA ordering
+algorithm (B04): PageStats computation for adaptive thresholds, gutter detection
+using the Breuel sweep-line method, column boundary clustering, L-shaped region
+detection (XY-Cut++ pre-mask), and spanning element detection.
 
-Extracted from B04_column_ordering.py to reduce file size.
+Key Components:
+    - PageStats: Computed statistics for adaptive thresholds (widths, gaps, density ratio)
+    - Gutter: Detected column separator with position and confidence
+    - find_gutters: Detect gutters using sweep-line method
+    - find_columns_by_clustering: Fallback column detection via x-coordinate clustering
+    - detect_l_shaped_regions: Pre-mask L-shaped regions for XY-Cut++
+    - detect_spanning: Detect spanning elements with adaptive threshold
+
+Example:
+    >>> from B_parsing.B29_column_detection import PageStats, find_gutters
+    >>> stats = PageStats.compute(geoms, page_width=612, page_height=792)
+    >>> gutters = find_gutters(body_geoms, stats, config)
+    >>> print(f"Found {len(gutters)} gutters at {[g.center for g in gutters]}")
+
+Dependencies:
+    - B_parsing.B04_column_ordering: LayoutConfig, BlockGeom (TYPE_CHECKING only)
 """
 
 from __future__ import annotations
