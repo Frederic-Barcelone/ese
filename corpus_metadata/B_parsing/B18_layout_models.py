@@ -104,3 +104,12 @@ class PageLayout:
     margin_right: float = 0.95
     visuals: List[VisualZone] = field(default_factory=list)
     raw_vlm_response: Optional[str] = None
+
+
+__all__ = [
+    # Classes
+    "LayoutPattern",
+    "VisualPosition",
+    "VisualZone",
+    "PageLayout",
+]

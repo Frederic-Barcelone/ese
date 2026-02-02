@@ -265,3 +265,13 @@ def expand_all_zones(
         expanded.append(result)
 
     return expanded
+
+
+__all__ = [
+    # Classes
+    "ExpandedVisual",
+    # Functions
+    "compute_column_boundaries",
+    "expand_zone_to_whitespace",
+    "expand_all_zones",
+]

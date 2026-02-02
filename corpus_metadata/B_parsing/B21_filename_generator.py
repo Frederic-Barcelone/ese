@@ -82,3 +82,10 @@ def generate_visual_filename(
     position_code = visual.position_code
 
     return f"{safe_name}_{visual_type}_p{page_num}_{layout_code}_{position_code}_{index}.{extension}"
+
+
+__all__ = [
+    # Functions
+    "sanitize_name",
+    "generate_visual_filename",
+]
