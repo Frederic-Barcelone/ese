@@ -12,16 +12,15 @@ Supports:
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from A_core.A01_domain_models import (
+    BaseProvenanceMetadata,
     Coordinate,
     EvidenceSpan,
-    LLMParameters,
     ValidationStatus,
 )
 
@@ -78,34 +77,21 @@ class DrugIdentifier(BaseModel):
 
 
 # -------------------------
-# Drug provenance
+# Drug provenance (extends base provenance)
 # -------------------------
 
 
-class DrugProvenanceMetadata(BaseModel):
+class DrugProvenanceMetadata(BaseProvenanceMetadata):
     """
     Provenance metadata for drug detection.
+
+    Inherits common provenance fields from BaseProvenanceMetadata and adds:
+    - generator_name: DrugGeneratorType (overrides base Enum type)
+    - lexicon_ids: Drug-specific identifiers (DrugIdentifier)
     """
 
-    pipeline_version: str
-    run_id: str
-    doc_fingerprint: str
-
     generator_name: DrugGeneratorType
-    rule_version: Optional[str] = None
-
-    # Lexicon provenance
-    lexicon_source: Optional[str] = None
     lexicon_ids: Optional[List[DrugIdentifier]] = None
-
-    # LLM verification (if applicable)
-    prompt_bundle_hash: Optional[str] = None
-    context_hash: Optional[str] = None
-    llm_config: Optional[LLMParameters] = None
-
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
 
 
 # -------------------------
