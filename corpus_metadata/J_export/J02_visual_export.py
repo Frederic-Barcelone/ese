@@ -60,25 +60,14 @@ def visual_to_dict(
         for loc in visual.bbox_pts_per_page
     ]
 
-    # Caption
-    if visual.caption_text:
-        result["caption"] = {
-            "text": visual.caption_text,
-            "provenance": visual.caption_provenance.value if visual.caption_provenance else None,
-        }
-        if visual.caption_bbox_pts:
-            result["caption"]["bbox_pts"] = list(visual.caption_bbox_pts)
+    # Top-level title, description, and caption fields
+    result["title"] = visual.vlm_title
+    result["description"] = visual.vlm_description
+    result["caption"] = visual.caption_text
 
-    # Reference
+    # Reference (e.g., "Table 1", "Figure 2")
     if visual.reference:
-        result["reference"] = {
-            "raw_string": visual.reference.raw_string,
-            "type_label": visual.reference.type_label,
-            "numbers": visual.reference.numbers,
-            "is_range": visual.reference.is_range,
-            "suffix": visual.reference.suffix,
-            "source": visual.reference.source.value,
-        }
+        result["reference"] = visual.reference.raw_string
 
     # Image - either file reference or base64
     if image_file:
@@ -98,14 +87,6 @@ def visual_to_dict(
             "format": visual.image_format,
             "dpi": visual.render_dpi,
         }
-
-    # VLM-generated title and description
-    if visual.vlm_title or visual.vlm_description:
-        result["vlm"] = {}
-        if visual.vlm_title:
-            result["vlm"]["title"] = visual.vlm_title
-        if visual.vlm_description:
-            result["vlm"]["description"] = visual.vlm_description
 
     # Table-specific
     if visual.is_table:
