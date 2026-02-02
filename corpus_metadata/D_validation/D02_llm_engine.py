@@ -52,7 +52,8 @@ except ImportError:
     AnthropicRateLimitError = Exception  # type: ignore
     AnthropicStatusError = Exception  # type: ignore
 
-# Import Claude client from submodule
+# Import Claude client from submodule (re-exported for external use)
+from D_validation.D02a_claude_client import ClaudeClient  # noqa: F401
 
 
 # -----------------------------------------------------------------------------
