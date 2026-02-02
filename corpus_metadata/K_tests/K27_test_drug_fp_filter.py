@@ -51,7 +51,7 @@ class TestBacteriaFiltering:
     def test_bacteria_names_filtered(self, filter):
         """Test that bacteria names are filtered."""
         # Bacteria should be filtered
-        result = filter.is_false_positive(
+        filter.is_false_positive(
             "escherichia", "e. coli bacteria", DrugGeneratorType.SCISPACY_NER
         )
         # May or may not filter depending on exact bacteria list

@@ -7,7 +7,6 @@ Tests noise filtering constants and validation functions.
 
 from __future__ import annotations
 
-import pytest
 
 from C_generators.C21_noise_filters import (
     OBVIOUS_NOISE,

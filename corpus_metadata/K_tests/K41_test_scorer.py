@@ -318,7 +318,7 @@ class TestScorerCorpus:
             make_gold("IL6", "Interleukin 6", doc_id="doc2.pdf"),
         ]
 
-        report = scorer.evaluate_corpus(system, gold)
+        scorer.evaluate_corpus(system, gold)
 
         # Micro: 1 TP, 1 FP, 1 FN -> P=0.5, R=0.5
         # Macro: avg of per-doc (doc1: P=1, R=1; doc2: P=0, R=0) -> depends on scored status

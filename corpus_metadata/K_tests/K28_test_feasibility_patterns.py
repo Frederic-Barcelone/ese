@@ -8,7 +8,6 @@ Tests pattern constants for clinical trial feasibility extraction.
 from __future__ import annotations
 
 import re
-import pytest
 
 from C_generators.C27_feasibility_patterns import (
     EPIDEMIOLOGY_ANCHORS,

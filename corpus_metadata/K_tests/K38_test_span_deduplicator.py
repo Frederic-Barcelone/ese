@@ -13,7 +13,6 @@ from E_normalization.E11_span_deduplicator import (
     NERSpan,
     DeduplicationResult,
     SpanDeduplicator,
-    deduplicate_feasibility_candidates,
 )
 
 

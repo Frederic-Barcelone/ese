@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import pytest
 from unittest.mock import MagicMock, patch
-from typing import Any, Dict
 
 from D_validation.D02_llm_engine import (
     ClaudeClient,

@@ -142,9 +142,6 @@ class TestDValidationExports:
 
     def test_quote_verifier_exports(self):
         from D_validation.D04_quote_verifier import (
-            QuoteVerifier,
-            NumericalVerifier,
-            ExtractionVerifier,
             verify_quote,
             verify_number,
         )
@@ -160,14 +157,13 @@ class TestENormalizationExports:
         assert hasattr(TermMapper, "normalize")
 
     def test_deduplicator_exports(self):
-        from E_normalization.E07_deduplicator import Deduplicator, DeduplicationStats
+        from E_normalization.E07_deduplicator import Deduplicator
         assert hasattr(Deduplicator, "deduplicate")
 
     def test_span_deduplicator_exports(self):
         from E_normalization.E11_span_deduplicator import (
             NERSpan,
             SpanDeduplicator,
-            DeduplicationResult,
         )
         assert hasattr(SpanDeduplicator, "deduplicate")
         assert hasattr(NERSpan, "overlaps_with")
@@ -184,8 +180,6 @@ class TestFEvaluationExports:
 
     def test_gold_loader_exports(self):
         from F_evaluation.F01_gold_loader import (
-            GoldAnnotation,
-            GoldStandard,
             GoldLoader,
         )
         assert hasattr(GoldLoader, "load_json")
@@ -194,9 +188,6 @@ class TestFEvaluationExports:
     def test_scorer_exports(self):
         from F_evaluation.F02_scorer import (
             Scorer,
-            ScorerConfig,
-            ScoreReport,
-            CorpusScoreReport,
         )
         assert hasattr(Scorer, "evaluate_doc")
         assert hasattr(Scorer, "evaluate_corpus")

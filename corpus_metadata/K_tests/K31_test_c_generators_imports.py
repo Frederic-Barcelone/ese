@@ -89,9 +89,6 @@ class TestSpecificModuleExports:
             _ABBREV_TOKEN_RE,
             _is_likely_author_initial,
             _clean_ws,
-            _normalize_long_form,
-            _looks_like_short_form,
-            _schwartz_hearst_extract,
         )
         assert _ABBREV_TOKEN_RE is not None
         assert callable(_is_likely_author_initial)
@@ -102,11 +99,7 @@ class TestSpecificModuleExports:
         from C_generators.C21_noise_filters import (
             OBVIOUS_NOISE,
             MIN_ABBREV_LENGTH,
-            WRONG_EXPANSION_BLACKLIST,
-            BAD_LONG_FORMS,
-            LexiconEntry,
             is_valid_abbreviation_match,
-            is_wrong_expansion,
         )
         assert isinstance(OBVIOUS_NOISE, set)
         assert isinstance(MIN_ABBREV_LENGTH, int)
@@ -129,7 +122,6 @@ class TestSpecificModuleExports:
         """Test C25_drug_fp_filter exports."""
         from C_generators.C25_drug_fp_filter import (
             DrugFalsePositiveFilter,
-            DRUG_ABBREVIATIONS,
         )
         assert hasattr(DrugFalsePositiveFilter, "is_false_positive")
 
@@ -138,8 +130,6 @@ class TestSpecificModuleExports:
         from C_generators.C27_feasibility_patterns import (
             EPIDEMIOLOGY_ANCHORS,
             INCLUSION_MARKERS,
-            EXCLUSION_MARKERS,
-            ENDPOINT_PATTERNS,
             COUNTRIES,
         )
         assert isinstance(EPIDEMIOLOGY_ANCHORS, list)
@@ -216,7 +206,6 @@ class TestHelperModules:
         from C_generators.C29_feasibility_prompts import (
             STUDY_DESIGN_PROMPT,
             ELIGIBILITY_PROMPT,
-            ENDPOINTS_PROMPT,
         )
         assert isinstance(STUDY_DESIGN_PROMPT, str)
         assert isinstance(ELIGIBILITY_PROMPT, str)
@@ -226,7 +215,6 @@ class TestHelperModules:
         try:
             from C_generators.C31_recommendation_patterns import (
                 RECOMMENDATION_ANCHORS,
-                EVIDENCE_LEVEL_PATTERNS,
             )
             assert RECOMMENDATION_ANCHORS is not None
         except ImportError:

@@ -7,7 +7,6 @@ Tests pattern matching, text normalization, and abbreviation extraction helpers.
 
 from __future__ import annotations
 
-import pytest
 
 from C_generators.C20_abbrev_patterns import (
     _ABBREV_TOKEN_RE,
