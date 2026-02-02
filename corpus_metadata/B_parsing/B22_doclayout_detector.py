@@ -189,11 +189,59 @@ def _associate_captions_with_visuals(
     return visuals
 
 
+def _compute_iou(bbox1: Tuple[float, float, float, float], bbox2: Tuple[float, float, float, float]) -> float:
+    """Compute Intersection over Union between two bboxes."""
+    x0 = max(bbox1[0], bbox2[0])
+    y0 = max(bbox1[1], bbox2[1])
+    x1 = min(bbox1[2], bbox2[2])
+    y1 = min(bbox1[3], bbox2[3])
+
+    if x1 <= x0 or y1 <= y0:
+        return 0.0
+
+    intersection = (x1 - x0) * (y1 - y0)
+    area1 = (bbox1[2] - bbox1[0]) * (bbox1[3] - bbox1[1])
+    area2 = (bbox2[2] - bbox2[0]) * (bbox2[3] - bbox2[1])
+    union = area1 + area2 - intersection
+
+    return intersection / union if union > 0 else 0.0
+
+
+def _deduplicate_visuals(visuals: List[Dict], iou_threshold: float = 0.5) -> List[Dict]:
+    """
+    Remove duplicate/overlapping visual detections using NMS-like approach.
+
+    Keeps the detection with higher confidence when IoU > threshold.
+    """
+    if not visuals:
+        return visuals
+
+    # Sort by confidence (highest first)
+    sorted_visuals = sorted(visuals, key=lambda v: v["confidence"], reverse=True)
+
+    keep = []
+    for visual in sorted_visuals:
+        # Check if this visual overlaps significantly with any kept visual
+        dominated = False
+        for kept in keep:
+            iou = _compute_iou(visual["bbox_pts"], kept["bbox_pts"])
+            if iou > iou_threshold:
+                # This visual overlaps with a higher-confidence one - skip it
+                dominated = True
+                break
+
+        if not dominated:
+            keep.append(visual)
+
+    return keep
+
+
 def detect_visuals_doclayout(
     pdf_path: str,
     detect_dpi: int = 144,
     confidence_threshold: float = 0.3,
     imgsz: int = 1024,
+    iou_threshold: float = 0.5,
 ) -> DocLayoutResult:
     """
     Detect figures and tables using DocLayout-YOLO.
@@ -275,11 +323,6 @@ def detect_visuals_doclayout(
                                 "bbox_pts": bbox_pts,
                             })
 
-                            if category == "table":
-                                tables_detected += 1
-                            else:
-                                figures_detected += 1
-
                         elif category in CAPTION_CATEGORIES:
                             # Extract caption text
                             caption_text = _extract_text_from_bbox(
@@ -292,10 +335,20 @@ def detect_visuals_doclayout(
                                 "text": caption_text,
                             })
 
+                # Deduplicate overlapping detections (keep higher confidence)
+                page_visuals = _deduplicate_visuals(page_visuals, iou_threshold)
+
                 # Associate captions with visuals
                 page_visuals = _associate_captions_with_visuals(
                     page_visuals, page_captions, page_height_pts
                 )
+
+                # Count after deduplication
+                for v in page_visuals:
+                    if v["type"] == "table":
+                        tables_detected += 1
+                    else:
+                        figures_detected += 1
 
                 # Create DocLayoutVisual objects
                 for v in page_visuals:
