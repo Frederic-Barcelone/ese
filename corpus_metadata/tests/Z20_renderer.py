@@ -1,4 +1,4 @@
-# corpus_metadata/tests/test_visual_extraction/test_renderer.py
+# corpus_metadata/tests/Z20_renderer.py
 """
 Tests for visual renderer with point-based padding.
 """

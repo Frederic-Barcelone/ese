@@ -1,4 +1,4 @@
-# corpus_metadata/tests/test_core/test_api_client.py
+# corpus_metadata/tests/Z03_api_client.py
 """Tests for Z_utils/Z01_api_client.py - Shared API client utilities."""
 
 import tempfile

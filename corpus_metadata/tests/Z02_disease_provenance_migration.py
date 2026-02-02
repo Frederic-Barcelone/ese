@@ -1,4 +1,4 @@
-# corpus_metadata/tests/test_a05_disease_provenance_migration.py
+# corpus_metadata/tests/Z02_disease_provenance_migration.py
 """
 Tests for DiseaseProvenanceMetadata migration to inherit from BaseProvenanceMetadata.
 

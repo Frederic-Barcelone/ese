@@ -1,4 +1,4 @@
-# corpus_metadata/tests/test_visual_extraction/test_detector.py
+# corpus_metadata/tests/Z18_detector.py
 """
 Tests for visual detector with FAST/ACCURATE tiering.
 

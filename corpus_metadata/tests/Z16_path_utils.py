@@ -1,4 +1,4 @@
-# corpus_metadata/tests/test_utils/test_path_utils.py
+# corpus_metadata/tests/Z16_path_utils.py
 """Tests for Z_utils/Z05_path_utils.py."""
 
 import os
