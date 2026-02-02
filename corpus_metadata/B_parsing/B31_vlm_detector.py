@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B17_vlm_detector.py
+# corpus_metadata/B_parsing/B31_vlm_detector.py
 """
 VLM-Assisted Visual Detection.
 
