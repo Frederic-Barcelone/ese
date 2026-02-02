@@ -196,7 +196,7 @@ class ExportManager:
             # For tables, use PyMuPDF's table detection to get accurate boundaries
             # This prevents capturing content from adjacent columns in 2-column layouts
             if is_table:
-                from B_parsing.B03b_table_rendering import find_table_bbox_pymupdf
+                from B_parsing.B14_visual_renderer import find_table_bbox_pymupdf
                 doc.close()
                 pymupdf_bbox = find_table_bbox_pymupdf(str(pdf_path), page_num, (x0, y0, x1, y1))
                 doc = fitz.open(str(pdf_path))

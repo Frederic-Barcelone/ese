@@ -21,10 +21,10 @@ from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Table, TableCell, TableType
 from B_parsing.B03c_docling_backend import DoclingTableExtractor
 
-# Rendering module (B03b) - still needed for image rendering
-from B_parsing.B03b_table_rendering import (
+# Rendering module (B14) - visual rendering functions
+from B_parsing.B14_visual_renderer import (
     render_table_as_image,
-    render_full_page,
+    render_full_page_from_path as render_full_page,
     render_multipage_table,
 )
 
