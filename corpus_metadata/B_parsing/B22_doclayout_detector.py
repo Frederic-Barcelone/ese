@@ -63,10 +63,14 @@ class DocLayoutVisual:
     bbox_pts: Tuple[float, float, float, float]  # (x0, y0, x1, y1) in PDF points
     bbox_normalized: Tuple[float, float, float, float]  # (x0, y0, x1, y1) as 0-1 fractions
 
-    # Caption info
+    # Caption info (from PDF text extraction)
     caption_text: Optional[str] = None
     caption_bbox: Optional[Tuple[float, float, float, float]] = None
     caption_position: Optional[str] = None  # "above" or "below"
+
+    # VLM-generated description
+    vlm_title: Optional[str] = None  # Short title (5-10 words)
+    vlm_description: Optional[str] = None  # Detailed description
 
 
 @dataclass
@@ -109,6 +113,96 @@ def get_model():
     if _model is None:
         _model = _load_doclayout_model()
     return _model
+
+
+def generate_vlm_description(
+    image_bytes: bytes,
+    visual_type: str,
+    caption_text: Optional[str] = None,
+    model: str = "claude-sonnet-4-20250514",
+) -> Dict[str, str]:
+    """
+    Generate title and description for an image using VLM.
+
+    Args:
+        image_bytes: PNG image bytes
+        visual_type: "figure" or "table"
+        caption_text: Extracted caption text (if available)
+        model: Claude model to use
+
+    Returns:
+        Dict with 'title' and 'description' keys
+    """
+    import base64
+    import json
+
+    try:
+        import anthropic
+        client = anthropic.Anthropic()
+    except Exception as e:
+        logger.warning(f"VLM not available: {e}")
+        return {"title": None, "description": None}
+
+    image_b64 = base64.standard_b64encode(image_bytes).decode("utf-8")
+
+    caption_context = ""
+    if caption_text:
+        caption_context = f"\n\nThe caption from the document is: \"{caption_text}\""
+
+    prompt = f"""Analyze this {visual_type} from a scientific/medical document.{caption_context}
+
+Provide a JSON response with:
+1. "title": A concise title (5-10 words) describing what this {visual_type} shows
+2. "description": A detailed description (2-4 sentences) explaining:
+   - What type of {visual_type} this is (e.g., flowchart, bar chart, data table)
+   - The key information or data it presents
+   - Any notable findings or patterns visible
+
+Respond ONLY with valid JSON, no other text."""
+
+    try:
+        response = client.messages.create(
+            model=model,
+            max_tokens=500,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": "image/png",
+                                "data": image_b64,
+                            },
+                        },
+                        {
+                            "type": "text",
+                            "text": prompt,
+                        },
+                    ],
+                }
+            ],
+        )
+
+        # Parse JSON response
+        response_text = response.content[0].text.strip()
+        # Handle markdown code blocks
+        if response_text.startswith("```"):
+            response_text = response_text.split("```")[1]
+            if response_text.startswith("json"):
+                response_text = response_text[4:]
+            response_text = response_text.strip()
+
+        result = json.loads(response_text)
+        return {
+            "title": result.get("title"),
+            "description": result.get("description"),
+        }
+
+    except Exception as e:
+        logger.error(f"VLM description generation failed: {e}")
+        return {"title": None, "description": None}
 
 
 def _extract_text_from_bbox(
@@ -399,6 +493,7 @@ def crop_visual_highres(
     bbox_pts: Tuple[float, float, float, float],
     crop_dpi: int = 300,
     padding_pts: float = 5.0,
+    caption_bbox: Optional[Tuple[float, float, float, float]] = None,
 ) -> Tuple[bytes, int, int]:
     """
     Crop a visual at high resolution using PyMuPDF's clip parameter.
@@ -409,6 +504,7 @@ def crop_visual_highres(
         bbox_pts: Bounding box in PDF points (x0, y0, x1, y1)
         crop_dpi: DPI for high-resolution crop
         padding_pts: Padding in PDF points
+        caption_bbox: Optional caption bbox to include in the crop
 
     Returns:
         Tuple of (PNG bytes, width_px, height_px)
@@ -417,8 +513,18 @@ def crop_visual_highres(
     try:
         page = doc[page_num - 1]
 
-        # Add padding
+        # Start with visual bbox
         x0, y0, x1, y1 = bbox_pts
+
+        # Expand to include caption if provided
+        if caption_bbox:
+            cx0, cy0, cx1, cy1 = caption_bbox
+            x0 = min(x0, cx0)
+            y0 = min(y0, cy0)
+            x1 = max(x1, cx1)
+            y1 = max(y1, cy1)
+
+        # Add padding
         x0 = max(0, x0 - padding_pts)
         y0 = max(0, y0 - padding_pts)
         x1 = min(page.rect.width, x1 + padding_pts)
@@ -442,6 +548,8 @@ def detect_and_crop_all(
     detect_dpi: int = 144,
     crop_dpi: int = 300,
     confidence_threshold: float = 0.3,
+    enable_vlm: bool = True,
+    vlm_model: str = "claude-sonnet-4-20250514",
 ) -> Dict:
     """
     Detect all visuals and save high-resolution crops.
@@ -452,6 +560,8 @@ def detect_and_crop_all(
         detect_dpi: DPI for detection
         crop_dpi: DPI for high-resolution crops
         confidence_threshold: Minimum confidence
+        enable_vlm: Whether to generate VLM titles/descriptions
+        vlm_model: Claude model for VLM descriptions
 
     Returns:
         Dict with detection results and file paths
@@ -511,16 +621,31 @@ def detect_and_crop_all(
             crop_filename = f"p{page_num}_{v.visual_type}_{idx}.png"
             crop_path = output_path / crop_filename
 
-            # Crop at high resolution
+            # Crop at high resolution (include caption bbox if available)
             png_bytes, width_px, height_px = crop_visual_highres(
                 pdf_path,
                 page_num,
                 v.bbox_pts,
                 crop_dpi=crop_dpi,
+                caption_bbox=v.caption_bbox,
             )
 
             # Save crop
             crop_path.write_bytes(png_bytes)
+
+            # Generate VLM title and description
+            vlm_title = None
+            vlm_description = None
+            if enable_vlm:
+                logger.info(f"Generating VLM description for {crop_filename}...")
+                vlm_result = generate_vlm_description(
+                    image_bytes=png_bytes,
+                    visual_type=v.visual_type,
+                    caption_text=v.caption_text,
+                    model=vlm_model,
+                )
+                vlm_title = vlm_result.get("title")
+                vlm_description = vlm_result.get("description")
 
             # Build visual entry with caption
             visual_entry = {
@@ -543,6 +668,14 @@ def detect_and_crop_all(
                     visual_entry["caption"]["bbox_pts"] = [
                         round(x, 1) for x in v.caption_bbox
                     ]
+
+            # Add VLM-generated title and description
+            if vlm_title or vlm_description:
+                visual_entry["vlm"] = {}
+                if vlm_title:
+                    visual_entry["vlm"]["title"] = vlm_title
+                if vlm_description:
+                    visual_entry["vlm"]["description"] = vlm_description
 
             page_entry["visuals"].append(visual_entry)
 
