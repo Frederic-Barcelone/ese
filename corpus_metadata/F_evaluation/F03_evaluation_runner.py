@@ -11,11 +11,12 @@ DATASETS:
     1. NLP4RARE - Rare disease medical documents (dev/test/train splits)
     2. PAPERS - Research papers with human-annotated abbreviations
 
+CONFIGURATION:
+    All parameters are in the CONFIGURATION section below.
+    By default, runs all tests on all datasets.
+
 USAGE:
-    python F03_evaluation_runner.py                    # Run all tests
-    python F03_evaluation_runner.py --nlp4rare        # NLP4RARE only
-    python F03_evaluation_runner.py --papers          # Papers only
-    python F03_evaluation_runner.py --max-docs 5      # Limit docs per dataset
+    python F03_evaluation_runner.py
 
 OUTPUT:
     - Per-document: TP, FP, FN, Precision, Recall, F1
@@ -25,7 +26,6 @@ OUTPUT:
 
 from __future__ import annotations
 
-import argparse
 import json
 import sys
 import time
@@ -54,7 +54,7 @@ def _c(color: str, text: str) -> str:
 
 
 # =============================================================================
-# CONFIGURATION
+# CONFIGURATION - Modify these parameters as needed
 # =============================================================================
 
 BASE_PATH = Path(__file__).resolve().parent.parent.parent
@@ -68,8 +68,22 @@ NLP4RARE_GOLD = BASE_PATH / "gold_data" / "nlp4rare_gold.json"
 PAPERS_PATH = BASE_PATH / "gold_data" / "PAPERS"
 PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 
-# Evaluation settings
-FUZZY_THRESHOLD = 0.8  # Long form matching threshold
+# -----------------------------------------------------------------------------
+# EVALUATION SETTINGS - Change these to control what gets evaluated
+# -----------------------------------------------------------------------------
+
+# Which datasets to run (set to False to skip)
+RUN_NLP4RARE = True
+RUN_PAPERS = True
+
+# NLP4RARE splits to evaluate: ["dev"], ["test"], ["train"], or ["dev", "test", "train"]
+NLP4RARE_SPLITS = ["dev", "test", "train"]
+
+# Max documents per dataset (None = all documents)
+MAX_DOCS = None
+
+# Matching settings
+FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
 TARGET_ACCURACY = 1.0  # Target: 100%
 
 
@@ -554,21 +568,19 @@ def print_final_summary(results: List[DatasetResult]):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run evaluation on gold standard corpora")
-    parser.add_argument("--nlp4rare", action="store_true", help="Evaluate NLP4RARE dataset only")
-    parser.add_argument("--papers", action="store_true", help="Evaluate papers dataset only")
-    parser.add_argument("--max-docs", type=int, default=None, help="Max documents to process per dataset")
-    parser.add_argument("--splits", nargs="+", default=["dev"], help="NLP4RARE splits to evaluate (dev, test, train)")
-    args = parser.parse_args()
-
-    # Default: run both if neither specified
-    run_nlp4rare = args.nlp4rare or (not args.nlp4rare and not args.papers)
-    run_papers = args.papers or (not args.nlp4rare and not args.papers)
-
+    """Run evaluation on all configured datasets."""
     print(f"\n{_c(C.BOLD + C.BRIGHT_CYAN, '=' * 70)}")
     print(f" {_c(C.BOLD + C.BRIGHT_WHITE, 'ABBREVIATION EXTRACTION EVALUATION')}")
     print(f" {_c(C.DIM, 'Target: 100% Precision & Recall')}")
     print(f"{_c(C.BOLD + C.BRIGHT_CYAN, '=' * 70)}")
+
+    # Show configuration
+    print("\n  Configuration:")
+    print(f"    NLP4RARE: {'enabled' if RUN_NLP4RARE else 'disabled'}")
+    print(f"    Papers:   {'enabled' if RUN_PAPERS else 'disabled'}")
+    print(f"    Max docs: {MAX_DOCS if MAX_DOCS else 'all'}")
+    if RUN_NLP4RARE:
+        print(f"    Splits:   {', '.join(NLP4RARE_SPLITS)}")
 
     # Initialize orchestrator once
     print("\n  Initializing orchestrator...")
@@ -577,7 +589,7 @@ def main():
     results = []
 
     # Evaluate NLP4RARE
-    if run_nlp4rare and NLP4RARE_PATH.exists():
+    if RUN_NLP4RARE and NLP4RARE_PATH.exists():
         gold_by_doc = load_nlp4rare_gold(NLP4RARE_GOLD)
         if gold_by_doc:
             result = evaluate_dataset(
@@ -585,15 +597,15 @@ def main():
                 pdf_folder=NLP4RARE_PATH,
                 gold_by_doc=gold_by_doc,
                 orch=orch,
-                max_docs=args.max_docs,
-                splits=args.splits,
+                max_docs=MAX_DOCS,
+                splits=NLP4RARE_SPLITS,
             )
             print_dataset_summary(result)
             print_error_analysis(result)
             results.append(result)
 
     # Evaluate Papers
-    if run_papers and PAPERS_PATH.exists():
+    if RUN_PAPERS and PAPERS_PATH.exists():
         gold_by_doc = load_papers_gold(PAPERS_GOLD)
         if gold_by_doc:
             result = evaluate_dataset(
@@ -601,7 +613,7 @@ def main():
                 pdf_folder=PAPERS_PATH,
                 gold_by_doc=gold_by_doc,
                 orch=orch,
-                max_docs=args.max_docs,
+                max_docs=MAX_DOCS,
             )
             print_dataset_summary(result)
             print_error_analysis(result)
