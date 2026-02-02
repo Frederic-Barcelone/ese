@@ -390,3 +390,12 @@ def extract_biomedical_entities(
     """
     enricher = ZeroShotBioNEREnricher(config)
     return enricher.extract(text)
+
+
+__all__ = [
+    "ENTITY_TYPES_TO_EXTRACT",
+    "BioNEREntity",
+    "ZeroShotExtractionResult",
+    "ZeroShotBioNEREnricher",
+    "extract_biomedical_entities",
+]

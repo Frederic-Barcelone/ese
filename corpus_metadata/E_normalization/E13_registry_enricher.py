@@ -523,3 +523,13 @@ def extract_registries(
     """
     enricher = RegistryEnricher(config)
     return enricher.extract(text)
+
+
+__all__ = [
+    "REGISTRY_LABELS",
+    "KNOWN_REGISTRIES",
+    "RegistryEntity",
+    "RegistryResult",
+    "RegistryEnricher",
+    "extract_registries",
+]

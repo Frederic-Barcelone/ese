@@ -38,7 +38,7 @@ if TYPE_CHECKING:
 
 from A_core.A01_domain_models import ValidationStatus
 from A_core.A03_provenance import hash_string
-from E_normalization.E12_entity_deduplicator import EntityDeduplicator
+from E_normalization.E17_entity_deduplicator import EntityDeduplicator
 from Z_utils.Z02_text_helpers import extract_context_snippet
 
 

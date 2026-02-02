@@ -333,3 +333,6 @@ class DiseaseNormalizer:
             return entity.model_copy(update=updates)
 
         return entity
+
+
+__all__ = ["CATEGORY_KEYWORDS", "DiseaseNormalizer"]

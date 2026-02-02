@@ -426,3 +426,14 @@ def extract_biomedical_entities(
     """
     enricher = BiomedicalNEREnricher(config)
     return enricher.extract(text)
+
+
+__all__ = [
+    "ENTITY_CATEGORIES",
+    "ALL_ENTITY_TYPES",
+    "ENTITY_TO_CATEGORY",
+    "BiomedicalEntity",
+    "BiomedicalNERResult",
+    "BiomedicalNEREnricher",
+    "extract_biomedical_entities",
+]

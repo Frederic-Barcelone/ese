@@ -522,3 +522,12 @@ def extract_genetic_entities(
     """
     enricher = GeneticEnricher(config)
     return enricher.extract(text)
+
+
+__all__ = [
+    "KNOWN_GENE_SYMBOLS",
+    "GeneticEntity",
+    "GeneticResult",
+    "GeneticEnricher",
+    "extract_genetic_entities",
+]

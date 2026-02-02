@@ -333,3 +333,6 @@ class DiseaseEnricher(BaseEnricher[ExtractedDisease, ExtractedDisease]):
             logger.info(f"PubTator enriched: {enriched_count}/{len(diseases)} diseases")
 
         return enriched
+
+
+__all__ = ["PubTator3Client", "DiseaseEnricher"]

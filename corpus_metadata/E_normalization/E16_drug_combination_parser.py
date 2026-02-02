@@ -399,3 +399,12 @@ def decompose_drug_regimen(text: str) -> List[Dict[str, Any]]:
         }
         for c in result.components
     ]
+
+
+__all__ = [
+    "DrugComponent",
+    "ParsedDrugCombination",
+    "DrugCombinationParser",
+    "parse_drug_combination",
+    "decompose_drug_regimen",
+]

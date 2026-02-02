@@ -272,3 +272,6 @@ class TermMapper(BaseNormalizer):
             entry["sources"] = obj["sources"]
 
         return entry or None
+
+
+__all__ = ["TermMapper"]

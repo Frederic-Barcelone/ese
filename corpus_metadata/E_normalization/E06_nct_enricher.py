@@ -548,3 +548,16 @@ def enrich_trial_acronym(acronym: str, config: Optional[Dict[str, Any]] = None) 
     """
     enricher = get_trial_acronym_enricher(config)
     return enricher.get_trial_description(acronym)
+
+
+__all__ = [
+    "NCTTrialInfo",
+    "ClinicalTrialsGovClient",
+    "NCTEnricher",
+    "get_nct_enricher",
+    "enrich_nct_id",
+    "get_nct_expansion",
+    "TrialAcronymEnricher",
+    "get_trial_acronym_enricher",
+    "enrich_trial_acronym",
+]

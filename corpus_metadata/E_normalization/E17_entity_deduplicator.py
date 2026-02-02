@@ -1,4 +1,4 @@
-# corpus_metadata/E_normalization/E12_entity_deduplicator.py
+# corpus_metadata/E_normalization/E17_entity_deduplicator.py
 """
 Entity deduplicator for diseases, drugs, and genes.
 

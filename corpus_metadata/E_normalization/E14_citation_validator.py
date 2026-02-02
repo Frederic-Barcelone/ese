@@ -415,3 +415,11 @@ def validate_citation_file(
     citations = data.get("citations", [])
     validator = CitationValidator(config)
     return validator.validate_citations(citations)
+
+
+__all__ = [
+    "ValidationResult",
+    "CitationValidationReport",
+    "CitationValidator",
+    "validate_citation_file",
+]

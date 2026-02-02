@@ -749,3 +749,6 @@ class Disambiguator:
         confidence = min(1.0, margin / 5.0)
 
         return best_meaning, confidence
+
+
+__all__ = ["Disambiguator"]

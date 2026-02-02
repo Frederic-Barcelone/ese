@@ -286,3 +286,11 @@ def deduplicate_feasibility_candidates(
                 break
 
     return non_ner_candidates + unique_candidates, result
+
+
+__all__ = [
+    "NERSpan",
+    "DeduplicationResult",
+    "SpanDeduplicator",
+    "deduplicate_feasibility_candidates",
+]

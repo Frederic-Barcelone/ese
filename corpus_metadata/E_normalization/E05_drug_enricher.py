@@ -179,3 +179,6 @@ class DrugEnricher(BaseEnricher[ExtractedDrug, ExtractedDrug]):
             logger.info(f"PubTator enriched: {enriched_count}/{len(drugs)} drugs")
 
         return enriched
+
+
+__all__ = ["DrugEnricher"]

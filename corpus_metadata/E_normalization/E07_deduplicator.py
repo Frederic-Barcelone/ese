@@ -304,3 +304,6 @@ class DeduplicationStats:
             f"(merged {self.groups_merged} groups, {removed} duplicates removed, "
             f"{self.alternatives_found} alternatives preserved)"
         )
+
+
+__all__ = ["Deduplicator", "DeduplicationStats"]

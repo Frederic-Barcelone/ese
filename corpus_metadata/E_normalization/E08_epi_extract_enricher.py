@@ -539,3 +539,6 @@ def extract_epidemiology(
     enricher = EpiExtractEnricher(config)
     result = enricher.extract(text)
     return result.to_epidemiology_data()
+
+
+__all__ = ["EpiEntity", "EpiExtractionResult", "EpiExtractEnricher", "extract_epidemiology"]

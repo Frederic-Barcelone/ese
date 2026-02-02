@@ -622,3 +622,12 @@ def extract_patient_journey(
     """
     enricher = PatientJourneyEnricher(config)
     return enricher.extract(text)
+
+
+__all__ = [
+    "PATIENT_JOURNEY_LABELS",
+    "PatientJourneyEntity",
+    "PatientJourneyResult",
+    "PatientJourneyEnricher",
+    "extract_patient_journey",
+]
