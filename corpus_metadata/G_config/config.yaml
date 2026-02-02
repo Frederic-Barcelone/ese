@@ -917,7 +917,7 @@ extraction_pipeline:
     #   - "vlm-only": Claude Vision detection only (higher recall, API cost)
     #   - "hybrid": VLM with heuristic fallback (best quality, highest cost)
     visual_detection:
-      mode: "vlm-only"              # Detection method
+      mode: "layout-aware"          # Detection method (layout-aware, vlm-only, hybrid, heuristic)
       model: "claude-sonnet-4-20250514"  # VLM model for detection
 
     # Detection settings (used when mode is "heuristic" or "hybrid")

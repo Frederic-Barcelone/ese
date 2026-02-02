@@ -132,6 +132,7 @@ class VisualPipelineIntegration:
 
     def _build_pipeline_config(self, visual_cfg: Dict[str, Any]) -> PipelineConfig:
         """Build PipelineConfig from YAML config section."""
+        visual_detection_cfg = visual_cfg.get("visual_detection", {})
         detection_cfg = visual_cfg.get("detection", {})
         rendering_cfg = visual_cfg.get("rendering", {})
         triage_cfg = visual_cfg.get("triage", {})
@@ -166,7 +167,15 @@ class VisualPipelineIntegration:
         # Caption zones use defaults
         caption_zones = CaptionSearchZones()
 
+        # Get detection mode from visual_detection section
+        detection_mode = visual_detection_cfg.get("mode", "vlm-only")
+        detection_model = visual_detection_cfg.get("model", "claude-sonnet-4-20250514")
+
+        logger.info(f"Visual detection mode: {detection_mode}")
+
         return PipelineConfig(
+            detection_mode=detection_mode,
+            detection_model=detection_model,
             detector=detector,
             render=render,
             caption_zones=caption_zones,
