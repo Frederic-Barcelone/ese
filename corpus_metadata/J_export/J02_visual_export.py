@@ -27,13 +27,18 @@ logger = logging.getLogger(__name__)
 # -------------------------
 
 
-def visual_to_dict(visual: ExtractedVisual, include_image: bool = True) -> Dict[str, Any]:
+def visual_to_dict(
+    visual: ExtractedVisual,
+    include_image: bool = True,
+    image_file: str | None = None,
+) -> Dict[str, Any]:
     """
     Convert ExtractedVisual to serializable dict.
 
     Args:
         visual: ExtractedVisual to convert
         include_image: Whether to include base64 image data
+        image_file: If provided, use this filename instead of base64
 
     Returns:
         Dict suitable for JSON serialization
@@ -75,8 +80,14 @@ def visual_to_dict(visual: ExtractedVisual, include_image: bool = True) -> Dict[
             "source": visual.reference.source.value,
         }
 
-    # Image
-    if include_image:
+    # Image - either file reference or base64
+    if image_file:
+        result["image"] = {
+            "file": image_file,
+            "format": visual.image_format,
+            "dpi": visual.render_dpi,
+        }
+    elif include_image:
         result["image"] = {
             "base64": visual.image_base64,
             "format": visual.image_format,
@@ -87,6 +98,14 @@ def visual_to_dict(visual: ExtractedVisual, include_image: bool = True) -> Dict[
             "format": visual.image_format,
             "dpi": visual.render_dpi,
         }
+
+    # VLM-generated title and description
+    if visual.vlm_title or visual.vlm_description:
+        result["vlm"] = {}
+        if visual.vlm_title:
+            result["vlm"]["title"] = visual.vlm_title
+        if visual.vlm_description:
+            result["vlm"]["description"] = visual.vlm_description
 
     # Table-specific
     if visual.is_table:
@@ -231,10 +250,67 @@ def export_visuals_to_json(
 def export_tables_only(
     result: PipelineResult,
     output_path: Path,
-    include_images: bool = True,
+    output_dir: Path | None = None,
+    doc_name: str = "",
+    save_images: bool = True,
 ) -> Path:
-    """Export only tables from pipeline result."""
+    """
+    Export only tables from pipeline result.
+
+    Args:
+        result: Pipeline result
+        output_path: Path for JSON output
+        output_dir: Directory for image files (defaults to output_path parent)
+        doc_name: Document name prefix for image filenames
+        save_images: Whether to save images as files (vs embed base64)
+
+    Returns:
+        Path to exported JSON file
+    """
+    import base64
+
     tables = [v for v in result.visuals if v.is_table]
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if output_dir is None:
+        output_dir = output_path.parent
+
+    # Track page counts for numbering
+    page_counts: Dict[int, int] = {}
+    table_dicts = []
+
+    for table in tables:
+        page_num = table.primary_page
+        if page_num not in page_counts:
+            page_counts[page_num] = 0
+        page_counts[page_num] += 1
+        idx = page_counts[page_num]
+
+        image_file = None
+        image_save_failed = False
+        if save_images and table.image_base64:
+            # Generate filename and save image
+            prefix = f"{doc_name}_" if doc_name else ""
+            filename = f"{prefix}table_page{page_num}_{idx}.png"
+            image_path = output_dir / filename
+
+            try:
+                img_bytes = base64.b64decode(table.image_base64)
+                with open(image_path, "wb") as f:
+                    f.write(img_bytes)
+                image_file = filename
+            except Exception as e:
+                logger.warning(f"Failed to save table image: {e}, falling back to base64")
+                image_save_failed = True
+
+        # If save failed, fall back to embedding base64
+        include_base64 = (not save_images) or image_save_failed
+        table_dicts.append(visual_to_dict(
+            table,
+            include_image=include_base64,
+            image_file=image_file,
+        ))
 
     data = {
         "metadata": {
@@ -242,25 +318,80 @@ def export_tables_only(
             "extracted_at": result.extracted_at.isoformat(),
         },
         "count": len(tables),
-        "tables": [visual_to_dict(v, include_image=include_images) for v in tables],
+        "tables": table_dicts,
     }
-
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+    logger.info(f"Exported {len(tables)} tables to {output_path}")
     return output_path
 
 
 def export_figures_only(
     result: PipelineResult,
     output_path: Path,
-    include_images: bool = True,
+    output_dir: Path | None = None,
+    doc_name: str = "",
+    save_images: bool = True,
 ) -> Path:
-    """Export only figures from pipeline result."""
+    """
+    Export only figures from pipeline result.
+
+    Args:
+        result: Pipeline result
+        output_path: Path for JSON output
+        output_dir: Directory for image files (defaults to output_path parent)
+        doc_name: Document name prefix for image filenames
+        save_images: Whether to save images as files (vs embed base64)
+
+    Returns:
+        Path to exported JSON file
+    """
+    import base64
+
     figures = [v for v in result.visuals if v.is_figure]
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if output_dir is None:
+        output_dir = output_path.parent
+
+    # Track page counts for numbering
+    page_counts: Dict[int, int] = {}
+    figure_dicts = []
+
+    for figure in figures:
+        page_num = figure.primary_page
+        if page_num not in page_counts:
+            page_counts[page_num] = 0
+        page_counts[page_num] += 1
+        idx = page_counts[page_num]
+
+        image_file = None
+        image_save_failed = False
+        if save_images and figure.image_base64:
+            # Generate filename and save image
+            prefix = f"{doc_name}_" if doc_name else ""
+            filename = f"{prefix}figure_page{page_num}_{idx}.png"
+            image_path = output_dir / filename
+
+            try:
+                img_bytes = base64.b64decode(figure.image_base64)
+                with open(image_path, "wb") as f:
+                    f.write(img_bytes)
+                image_file = filename
+            except Exception as e:
+                logger.warning(f"Failed to save figure image: {e}, falling back to base64")
+                image_save_failed = True
+
+        # If save failed, fall back to embedding base64
+        include_base64 = (not save_images) or image_save_failed
+        figure_dicts.append(visual_to_dict(
+            figure,
+            include_image=include_base64,
+            image_file=image_file,
+        ))
 
     data = {
         "metadata": {
@@ -268,15 +399,13 @@ def export_figures_only(
             "extracted_at": result.extracted_at.isoformat(),
         },
         "count": len(figures),
-        "figures": [visual_to_dict(v, include_image=include_images) for v in figures],
+        "figures": figure_dicts,
     }
-
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+    logger.info(f"Exported {len(figures)} figures to {output_path}")
     return output_path
 
 

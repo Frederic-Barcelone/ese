@@ -34,9 +34,7 @@ from B_parsing.B15_caption_extractor import CaptionSearchZones
 from B_parsing.B16_triage import TriageConfig
 from J_export.J02_visual_export import (
     export_figures_only,
-    export_images_separately,
     export_tables_only,
-    export_visuals_to_json,
 )
 
 logger = logging.getLogger(__name__)
@@ -183,6 +181,7 @@ class VisualPipelineIntegration:
             enable_vlm=vlm_cfg.get("enabled", True),
             vlm_model=vlm_cfg.get("model", "claude-sonnet-4-20250514"),
             validate_tables=vlm_cfg.get("validate_tables", True),
+            generate_vlm_descriptions=vlm_cfg.get("generate_descriptions", True),
             merge_multipage=resolution_cfg.get("merge_multipage", True),
             deduplicate=resolution_cfg.get("deduplicate", True),
             dedupe_threshold=resolution_cfg.get("dedupe_threshold", 0.7),
@@ -218,16 +217,19 @@ class VisualPipelineIntegration:
         result: PipelineResult,
         output_dir: Path,
         doc_name: str,
-        export_images: bool = False,
+        save_images_as_files: bool = True,
     ) -> Dict[str, Path]:
         """
         Export visual extraction results.
+
+        Exports two JSON files (tables and figures) with image file references.
 
         Args:
             result: Pipeline result to export
             output_dir: Output directory
             doc_name: Document name (for filename generation)
-            export_images: Whether to export images as separate files
+            save_images_as_files: If True, save images as separate files and
+                reference them in JSON. If False, embed base64 in JSON.
 
         Returns:
             Dict of exported file paths
@@ -241,26 +243,29 @@ class VisualPipelineIntegration:
         from datetime import datetime
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # Export all visuals
-        visuals_path = output_dir / f"visuals_{doc_name}_{timestamp}.json"
-        export_visuals_to_json(result, visuals_path)
-        exported["visuals"] = visuals_path
-
-        # Also export tables and figures separately for convenience
+        # Export tables with images
         if result.tables_detected > 0:
             tables_path = output_dir / f"tables_{doc_name}_{timestamp}.json"
-            export_tables_only(result, tables_path)
+            export_tables_only(
+                result,
+                tables_path,
+                output_dir=output_dir,
+                doc_name=doc_name,
+                save_images=save_images_as_files,
+            )
             exported["tables"] = tables_path
 
+        # Export figures with images
         if result.figures_detected > 0:
             figures_path = output_dir / f"figures_{doc_name}_{timestamp}.json"
-            export_figures_only(result, figures_path)
+            export_figures_only(
+                result,
+                figures_path,
+                output_dir=output_dir,
+                doc_name=doc_name,
+                save_images=save_images_as_files,
+            )
             exported["figures"] = figures_path
-
-        # Export images directly to output folder (no subfolder)
-        if export_images:
-            image_paths = export_images_separately(result, output_dir, doc_name=doc_name)
-            exported["images"] = image_paths
 
         logger.info(f"Exported visual results to {output_dir}")
         return exported

@@ -323,7 +323,9 @@ def _find_caption_by_text_search(
                     for span in line.get("spans", []):
                         block_text += span.get("text", "")
 
-                if re.search(pattern[:20], block_text, re.IGNORECASE):
+                # Check for figure/table prefix in block text
+                prefix_pattern = r"Figure\s+\d+" if visual_type == "figure" else r"Table\s+\d+"
+                if re.search(prefix_pattern, block_text, re.IGNORECASE):
                     # Found the caption block
                     caption_bbox = block.get("bbox")
                     # Get all text from this block and following blocks
@@ -367,7 +369,9 @@ def _find_caption_by_text_search(
                     for span in line.get("spans", []):
                         block_text += span.get("text", "")
 
-                if re.search(pattern[:20], block_text, re.IGNORECASE):
+                # Check for figure/table prefix in block text
+                prefix_pattern = r"Figure\s+\d+" if visual_type == "figure" else r"Table\s+\d+"
+                if re.search(prefix_pattern, block_text, re.IGNORECASE):
                     caption_bbox = block.get("bbox")
                     return {
                         "text": block_text.strip(),
@@ -890,4 +894,5 @@ __all__ = [
     "detect_visuals_doclayout",
     "crop_visual_highres",
     "detect_and_crop_all",
+    "generate_vlm_description",
 ]

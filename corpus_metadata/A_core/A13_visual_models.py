@@ -411,6 +411,14 @@ class ExtractedVisual(BaseModel):
     triage_decision: Optional[TriageDecision] = None
     triage_reason: Optional[str] = None
 
+    # VLM-generated title and description
+    vlm_title: Optional[str] = Field(
+        default=None, description="Short title (5-10 words) from VLM"
+    )
+    vlm_description: Optional[str] = Field(
+        default=None, description="Detailed description (2-4 sentences) from VLM"
+    )
+
     # Layout metadata (when using layout-aware detection)
     layout_code: Optional[str] = Field(
         default=None, description="Page layout pattern (e.g., 'full', '2col', '2col-fullbot')"

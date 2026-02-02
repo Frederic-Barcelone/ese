@@ -406,6 +406,8 @@ def merge_multipage_visuals(
             source_file=first.source_file,
             triage_decision=first.triage_decision,
             triage_reason=first.triage_reason,
+            vlm_title=first.vlm_title,
+            vlm_description=first.vlm_description,
         )
 
         merged_visuals.append(merged)
@@ -620,6 +622,8 @@ def resolve_document(
                 source_file=visual.source_file,
                 triage_decision=visual.triage_decision,
                 triage_reason=visual.triage_reason,
+                vlm_title=visual.vlm_title,
+                vlm_description=visual.vlm_description,
             )
             updated_visuals.append(updated)
 

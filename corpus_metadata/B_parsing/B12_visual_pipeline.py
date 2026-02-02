@@ -14,6 +14,7 @@ Usage:
 """
 from __future__ import annotations
 
+import base64
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -55,8 +56,7 @@ from B_parsing.B17_document_resolver import (
 )
 from B_parsing.B22_doclayout_detector import (
     detect_visuals_doclayout,
-    DocLayoutVisual,
-    DocLayoutResult,
+    generate_vlm_description,
 )
 
 logger = logging.getLogger(__name__)
@@ -96,6 +96,7 @@ class PipelineConfig:
     enable_vlm: bool = True
     vlm_model: str = "claude-sonnet-4-20250514"
     validate_tables: bool = True
+    generate_vlm_descriptions: bool = True  # Generate VLM title/description for visuals
 
     # Resolution
     merge_multipage: bool = True
@@ -526,6 +527,24 @@ class VisualExtractionPipeline:
             else:
                 extraction_method = "docling+vlm" if vlm_result else "docling_only"
 
+            # Generate VLM title and description
+            vlm_title = None
+            vlm_description = None
+            if self.config.generate_vlm_descriptions and self.config.enable_vlm:
+                try:
+                    image_bytes = base64.b64decode(rendered.image_base64)
+                    type_str = "table" if visual_type == VisualType.TABLE else "figure"
+                    vlm_desc_result = generate_vlm_description(
+                        image_bytes=image_bytes,
+                        visual_type=type_str,
+                        caption_text=caption_text,
+                        model=self.config.vlm_model,
+                    )
+                    vlm_title = vlm_desc_result.get("title")
+                    vlm_description = vlm_desc_result.get("description")
+                except Exception as e:
+                    logger.warning(f"VLM description generation failed: {e}")
+
             # Create ExtractedVisual
             visual = ExtractedVisual(
                 visual_type=visual_type,
@@ -550,6 +569,8 @@ class VisualExtractionPipeline:
                 layout_code=candidate.layout_code,
                 position_code=candidate.position_code,
                 layout_filename=candidate.layout_filename,
+                vlm_title=vlm_title,
+                vlm_description=vlm_description,
             )
             visuals.append(visual)
 
