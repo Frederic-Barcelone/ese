@@ -154,10 +154,10 @@ class EvidenceSpan(BaseModel):
 
 
 # -------------------------
-# Clinical Criteria (imported from A07a_clinical_criteria)
+# Clinical Criteria (imported from A21_clinical_criteria)
 # -------------------------
 
-from A_core.A07a_clinical_criteria import (
+from A_core.A21_clinical_criteria import (
     DiagnosisConfirmation,
     EntityNormalization,
     LabCriterion,
@@ -168,10 +168,10 @@ from A_core.A07a_clinical_criteria import (
 )
 
 # -------------------------
-# Logical Expression Models (imported from A07b_logical_expressions)
+# Logical Expression Models (imported from A22_logical_expressions)
 # -------------------------
 
-from A_core.A07b_logical_expressions import (
+from A_core.A22_logical_expressions import (
     CriterionNode,
     LogicalExpression,
     LogicalOperator,

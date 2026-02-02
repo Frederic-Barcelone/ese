@@ -24,7 +24,7 @@ import re
 import yaml
 
 # Unicode normalization utilities (extracted to separate module)
-from A_core.A04a_unicode_utils import (
+from A_core.A20_unicode_utils import (
     HYPHENS_PATTERN,
     MOJIBAKE_MAP,
     normalize_sf,

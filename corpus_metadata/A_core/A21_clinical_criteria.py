@@ -1,4 +1,4 @@
-# corpus_metadata/A_core/A07a_clinical_criteria.py
+# corpus_metadata/A_core/A21_clinical_criteria.py
 """
 Clinical criteria models for eligibility computability.
 

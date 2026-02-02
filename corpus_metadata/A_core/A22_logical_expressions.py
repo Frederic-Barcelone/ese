@@ -1,4 +1,4 @@
-# corpus_metadata/A_core/A07b_logical_expressions.py
+# corpus_metadata/A_core/A22_logical_expressions.py
 """
 Logical expression models for eligibility criteria computability.
 
