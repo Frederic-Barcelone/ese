@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C12a_recommendation_patterns.py
+# corpus_metadata/C_generators/C31_recommendation_patterns.py
 """
 Pattern constants and prompts for guideline recommendation extraction.
 

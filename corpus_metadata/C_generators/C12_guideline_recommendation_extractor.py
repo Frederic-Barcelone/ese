@@ -29,7 +29,7 @@ from A_core.A18_recommendation_models import (
     DrugDosingInfo,
 )
 
-from .C12a_recommendation_patterns import (
+from .C31_recommendation_patterns import (
     ORGANIZATION_PATTERNS,
     GUIDELINE_TITLE_PATTERNS,
     CONDITION_PATTERNS,
@@ -42,8 +42,8 @@ from .C12a_recommendation_patterns import (
     SPECIFIC_CONDITION_PATTERNS,
     RECOMMENDATION_EXTRACTION_PROMPT,
 )
-from .C12b_recommendation_llm import LLMExtractionMixin
-from .C12c_recommendation_vlm import VLMExtractionMixin
+from .C32_recommendation_llm import LLMExtractionMixin
+from .C33_recommendation_vlm import VLMExtractionMixin
 
 
 class GuidelineRecommendationExtractor(LLMExtractionMixin, VLMExtractionMixin):

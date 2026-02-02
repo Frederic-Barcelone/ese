@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C12c_recommendation_vlm.py
+# corpus_metadata/C_generators/C33_recommendation_vlm.py
 """
 VLM-based extraction mixin for guideline recommendations.
 
@@ -23,7 +23,7 @@ from A_core.A18_recommendation_models import (
     RecommendationStrength,
 )
 
-from .C12a_recommendation_patterns import VLM_LOE_SOR_EXTRACTION_PROMPT
+from .C31_recommendation_patterns import VLM_LOE_SOR_EXTRACTION_PROMPT
 from .C15_vlm_table_extractor import resize_image_for_vlm
 
 

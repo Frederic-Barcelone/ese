@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C12b_recommendation_llm.py
+# corpus_metadata/C_generators/C32_recommendation_llm.py
 """
 LLM-based extraction mixin for guideline recommendations.
 
@@ -26,7 +26,7 @@ from A_core.A18_recommendation_models import (
 
 logger = logging.getLogger(__name__)
 
-from .C12a_recommendation_patterns import RECOMMENDATION_EXTRACTION_PROMPT
+from .C31_recommendation_patterns import RECOMMENDATION_EXTRACTION_PROMPT
 
 
 class LLMExtractionMixin:

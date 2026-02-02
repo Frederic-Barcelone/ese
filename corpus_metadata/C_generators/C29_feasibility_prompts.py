@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C11a_feasibility_prompts.py
+# corpus_metadata/C_generators/C29_feasibility_prompts.py
 """
 LLM prompt templates for clinical trial feasibility extraction.
 

@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C16a_gene_fp_filter.py
+# corpus_metadata/C_generators/C34_gene_fp_filter.py
 """
 Gene false positive filtering.
 

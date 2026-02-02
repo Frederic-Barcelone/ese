@@ -1,4 +1,4 @@
-# corpus_metadata/C_generators/C11b_feasibility_response_parser.py
+# corpus_metadata/C_generators/C30_feasibility_response_parser.py
 """
 Response parsing mixin for LLM feasibility extraction.
 
@@ -40,7 +40,7 @@ from A_core.A07_feasibility_models import (
     VisitSchedule,
 )
 
-from .C11a_feasibility_prompts import (
+from .C29_feasibility_prompts import (
     ELIGIBILITY_PROMPT,
     ENDPOINTS_PROMPT,
     OPERATIONAL_BURDEN_PROMPT,

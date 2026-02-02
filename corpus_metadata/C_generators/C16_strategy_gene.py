@@ -37,7 +37,7 @@ from A_core.A19_gene_models import (
 from B_parsing.B01_pdf_to_docgraph import DocumentGraph
 from B_parsing.B06_confidence import ConfidenceCalculator
 
-from .C16a_gene_fp_filter import GeneFalsePositiveFilter
+from .C34_gene_fp_filter import GeneFalsePositiveFilter
 
 # Optional scispacy import
 try:
