@@ -1080,8 +1080,7 @@ class Orchestrator:
         if self.doc_metadata_strategy is None:
             return None
 
-        print("\n[11/12] Extracting document metadata...")
-
+        printer = get_printer(total_steps=16)
         try:
             metadata = self.doc_metadata_strategy.extract(
                 file_path=str(pdf_path),
@@ -1091,7 +1090,7 @@ class Orchestrator:
             )
             return metadata
         except Exception as e:
-            print(f"  [WARN] Document metadata extraction failed: {e}")
+            printer.warning(f"Document metadata extraction failed: {e}")
             return None
 
     def _extract_care_pathways(
@@ -1479,9 +1478,10 @@ class Orchestrator:
         print(f"{'#' * 60}")
 
         all_results = {}
+        batch_printer = get_printer(total_steps=16)
 
         for i, pdf_path in enumerate(pdf_files, 1):
-            print(f"\n[{i}/{len(pdf_files)}] {pdf_path.name}")
+            batch_printer.subheader(f"[{i}/{len(pdf_files)}] {pdf_path.name}")
             doc_start = time.time()
             try:
                 all_results[pdf_path.name] = self.process_pdf(
@@ -1489,7 +1489,7 @@ class Orchestrator:
                 )
                 doc_times[pdf_path.name] = time.time() - doc_start
             except Exception as e:
-                print(f"  [WARN] ERROR: {e}")
+                batch_printer.error(f"Processing failed: {e}")
                 all_results[pdf_path.name] = []
                 doc_times[pdf_path.name] = time.time() - doc_start
 
