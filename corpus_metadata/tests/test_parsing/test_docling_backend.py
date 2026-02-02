@@ -11,7 +11,7 @@ class TestDoclingBackendImport:
 
     def test_import_when_docling_not_installed(self):
         """Test graceful handling when Docling is not installed."""
-        from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
+        from B_parsing.B28_docling_backend import DOCLING_AVAILABLE
 
         # DOCLING_AVAILABLE should be False if docling not installed
         # (or True if it is - either is valid)
@@ -19,7 +19,7 @@ class TestDoclingBackendImport:
 
     def test_docling_extractor_raises_when_not_available(self):
         """Test that DoclingTableExtractor raises ImportError when Docling not installed."""
-        from B_parsing.B03c_docling_backend import (
+        from B_parsing.B28_docling_backend import (
             DoclingTableExtractor,
             DOCLING_AVAILABLE,
         )
@@ -34,7 +34,7 @@ class TestDoclingTableExtractorMocked:
 
     def test_table_classification_glossary(self):
         """Test table classification for glossary tables."""
-        from B_parsing.B03c_docling_backend import DoclingTableExtractor
+        from B_parsing.B28_docling_backend import DoclingTableExtractor
 
         # Create a minimal mock extractor to test classification
         with mock.patch.object(
@@ -54,7 +54,7 @@ class TestDoclingTableExtractorMocked:
 
     def test_build_grid_from_cells(self):
         """Test building 2D grid from cell objects."""
-        from B_parsing.B03c_docling_backend import DoclingTableExtractor
+        from B_parsing.B28_docling_backend import DoclingTableExtractor
 
         with mock.patch.object(
             DoclingTableExtractor, "__init__", lambda self, config=None: None
@@ -85,7 +85,7 @@ class TestDoclingTableExtractorMocked:
 
     def test_build_grid_with_spans(self):
         """Test grid building with colspan/rowspan."""
-        from B_parsing.B03c_docling_backend import DoclingTableExtractor
+        from B_parsing.B28_docling_backend import DoclingTableExtractor
 
         with mock.patch.object(
             DoclingTableExtractor, "__init__", lambda self, config=None: None
@@ -115,7 +115,7 @@ class TestDoclingTableExtractorMocked:
 
     def test_empty_cells(self):
         """Test grid building with empty cells."""
-        from B_parsing.B03c_docling_backend import DoclingTableExtractor
+        from B_parsing.B28_docling_backend import DoclingTableExtractor
 
         with mock.patch.object(
             DoclingTableExtractor, "__init__", lambda self, config=None: None
@@ -132,7 +132,7 @@ class TestTableExtractor:
 
     def test_table_extractor_requires_docling(self):
         """Test that TableExtractor requires Docling."""
-        from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
+        from B_parsing.B28_docling_backend import DOCLING_AVAILABLE
 
         if not DOCLING_AVAILABLE:
             from B_parsing.B03_table_extractor import TableExtractor
@@ -142,7 +142,7 @@ class TestTableExtractor:
 
     def test_default_config_values(self):
         """Test default configuration values."""
-        from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
+        from B_parsing.B28_docling_backend import DOCLING_AVAILABLE
 
         if DOCLING_AVAILABLE:
             from B_parsing.B03_table_extractor import TableExtractor
@@ -159,7 +159,7 @@ class TestConvenienceFunction:
 
     def test_extract_tables_docling_function(self):
         """Test the convenience function exists and handles missing Docling."""
-        from B_parsing.B03c_docling_backend import (
+        from B_parsing.B28_docling_backend import (
             extract_tables_docling,
             DOCLING_AVAILABLE,
         )

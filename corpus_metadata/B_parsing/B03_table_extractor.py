@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 from A_core.A01_domain_models import BoundingBox
 from B_parsing.B02_doc_graph import DocumentGraph, Table, TableCell, TableType
-from B_parsing.B03c_docling_backend import DoclingTableExtractor
+from B_parsing.B28_docling_backend import DoclingTableExtractor
 
 # Rendering module (B14) - visual rendering functions
 from B_parsing.B14_visual_renderer import (
@@ -29,7 +29,7 @@ from B_parsing.B14_visual_renderer import (
 )
 
 # Validation constants
-from B_parsing.B03a_table_validation import MIN_TABLE_COLS
+from B_parsing.B27_table_validation import MIN_TABLE_COLS
 
 # Minimum rows required for VLM extraction to be considered valid
 MIN_VLM_DATA_ROWS = 2

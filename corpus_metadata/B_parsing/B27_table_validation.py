@@ -1,4 +1,4 @@
-# corpus_metadata/B_parsing/B03a_table_validation.py
+# corpus_metadata/B_parsing/B27_table_validation.py
 """
 Table validation and false positive filtering.
 

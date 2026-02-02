@@ -111,7 +111,7 @@ class ComponentFactory:
         """
         # Check if Docling is available before attempting to create extractor
         try:
-            from B_parsing.B03c_docling_backend import DOCLING_AVAILABLE
+            from B_parsing.B28_docling_backend import DOCLING_AVAILABLE
             if not DOCLING_AVAILABLE:
                 print(
                     "  [WARN] Docling not installed - table extraction DISABLED\n"
