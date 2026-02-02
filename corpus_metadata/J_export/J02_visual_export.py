@@ -69,24 +69,13 @@ def visual_to_dict(
     if visual.reference:
         result["reference"] = visual.reference.raw_string
 
-    # Image - either file reference or base64
-    if image_file:
-        result["image"] = {
-            "file": image_file,
-            "format": visual.image_format,
-            "dpi": visual.render_dpi,
-        }
-    elif include_image:
-        result["image"] = {
-            "base64": visual.image_base64,
-            "format": visual.image_format,
-            "dpi": visual.render_dpi,
-        }
-    else:
-        result["image"] = {
-            "format": visual.image_format,
-            "dpi": visual.render_dpi,
-        }
+    # Image file (top-level for easy access)
+    result["image_file"] = image_file
+
+    # Image metadata
+    if include_image and not image_file:
+        # Fall back to base64 if no file saved
+        result["image_base64"] = visual.image_base64
 
     # Table-specific
     if visual.is_table:
