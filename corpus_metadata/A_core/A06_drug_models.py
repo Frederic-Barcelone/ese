@@ -1,12 +1,38 @@
 # corpus_metadata/A_core/A06_drug_models.py
 """
-Domain models for drug/chemical entity extraction.
+Pydantic domain models for drug and chemical entity extraction.
 
-Supports:
-- Investigational drugs (compound IDs like LNP023, ALXN1720)
-- FDA-approved drugs (brand + generic names)
-- General drug terms (RxNorm)
-- PubTator enrichment (MeSH IDs)
+This module defines the complete data model hierarchy for drug extraction: from raw
+candidates through validation to final export. Supports investigational drugs (compound
+IDs like LNP023, ALXN1720), FDA-approved drugs, and general drug terms with multi-source
+identifier mapping (RxNorm, MeSH, DrugBank, ChEMBL, UNII, NDC).
+
+Key Components:
+    - DrugCandidate: Pre-validation drug mention with detection metadata
+    - ExtractedDrug: Validated drug entity with evidence and codes
+    - DrugExportEntry: Simplified export format for JSON output
+    - DrugExportDocument: Complete extraction results for a document
+    - DrugIdentifier: Standard database code (RxCUI, MeSH, DrugBank, etc.)
+    - DrugProvenanceMetadata: Audit trail for drug detection
+    - DevelopmentPhase: Drug development phase enumeration
+    - DrugFieldType: Detection method (lexicon, pattern, NER)
+    - DrugGeneratorType: Source generator tracking
+
+Example:
+    >>> from A_core.A06_drug_models import DrugCandidate, DrugFieldType, DrugGeneratorType
+    >>> candidate = DrugCandidate(
+    ...     doc_id="doc_001",
+    ...     matched_text="iptacopan",
+    ...     preferred_name="iptacopan",
+    ...     field_type=DrugFieldType.EXACT_MATCH,
+    ...     generator_type=DrugGeneratorType.LEXICON_RXNORM,
+    ...     context_text="Treatment with iptacopan 200mg twice daily",
+    ...     context_location=Coordinate(page=1, bbox=[100, 200, 300, 220]),
+    ...     provenance=provenance,
+    ... )
+
+Dependencies:
+    - A_core.A01_domain_models: For BaseProvenanceMetadata, Coordinate, EvidenceSpan, ValidationStatus
 """
 
 from __future__ import annotations

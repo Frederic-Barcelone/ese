@@ -1,12 +1,29 @@
 # corpus_metadata/A_core/A03_provenance.py
 """
-Provenance and hashing utilities for reproducibility.
+Provenance utilities for reproducibility and audit trails.
 
-Provides:
-- Git revision tracking
-- Content hashing (SHA256)
-- Run ID generation
-- Timestamp utilities
+Provides deterministic hashing and fingerprinting functions to ensure pipeline
+runs are fully traceable. Every extraction can be linked back to its source
+document, git version, prompt configuration, and execution timestamp.
+
+Key Components:
+    - get_git_revision_hash: Get current git commit hash for version tracking
+    - hash_bytes: SHA256 hash of raw bytes (e.g., PDF content)
+    - hash_string: SHA256 hash of UTF-8 string content
+    - compute_doc_fingerprint: Unique fingerprint for source PDF files
+    - compute_prompt_hash: Deterministic hash of LLM prompt configuration
+    - compute_prompt_bundle_hash: Extended hash including output schema
+    - compute_context_hash: Hash of context text sent to verifier
+    - generate_run_id: Unique ID for pipeline execution (timestamp + UUID)
+
+Example:
+    >>> from A_core.A03_provenance import generate_run_id, compute_doc_fingerprint
+    >>> run_id = generate_run_id()  # "RUN_20260202_143052_ab12cd34ef56"
+    >>> with open("study.pdf", "rb") as f:
+    ...     doc_fp = compute_doc_fingerprint(f.read())
+
+Dependencies:
+    - Standard library only (hashlib, subprocess, uuid, datetime, json)
 """
 import hashlib
 import json

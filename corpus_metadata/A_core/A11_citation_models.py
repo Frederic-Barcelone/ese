@@ -1,8 +1,40 @@
 # corpus_metadata/A_core/A11_citation_models.py
 """
-Domain models for citation/reference extraction.
+Pydantic domain models for citation and reference extraction.
 
-Detects citations with identifiers (PMID, PMCID, DOI, NCT, URL) from clinical documents.
+This module defines data structures for extracting bibliographic citations and references
+from clinical documents. It detects multiple identifier types (PMID, PMCID, DOI, NCT, URL),
+tracks citation numbers from reference sections, and supports API-based validation to
+verify identifier resolution and retrieve metadata.
+
+Key Components:
+    - CitationCandidate: Pre-validation citation mention with identifiers
+    - ExtractedCitation: Validated citation entity with evidence
+    - CitationExportEntry: Simplified export format with validation results
+    - CitationExportDocument: Complete extraction results for a document
+    - CitationValidation: API validation result (resolved URL, title, status)
+    - CitationValidationSummary: Aggregate validation statistics
+    - CitationProvenanceMetadata: Audit trail for citation detection
+    - CitationIdentifierType: Identifier type enumeration (PMID, DOI, NCT, etc.)
+    - CitationGeneratorType: Source generator tracking (regex, reference section, inline)
+
+Example:
+    >>> from A_core.A11_citation_models import CitationCandidate, CitationGeneratorType
+    >>> candidate = CitationCandidate(
+    ...     doc_id="doc_001",
+    ...     pmid="12345678",
+    ...     doi="10.1056/NEJMoa2024816",
+    ...     citation_text="Smith J et al. N Engl J Med. 2024;390:1-10.",
+    ...     citation_number=1,
+    ...     generator_type=CitationGeneratorType.REFERENCE_SECTION,
+    ...     identifier_types=[CitationIdentifierType.PMID, CitationIdentifierType.DOI],
+    ...     context_text="[1] Smith J et al...",
+    ...     context_location=Coordinate(page=25, bbox=[100, 600, 500, 620]),
+    ...     provenance=provenance,
+    ... )
+
+Dependencies:
+    - A_core.A01_domain_models: For BaseProvenanceMetadata, Coordinate, EvidenceSpan, ValidationStatus
 """
 
 from __future__ import annotations

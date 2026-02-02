@@ -1,12 +1,39 @@
 # corpus_metadata/A_core/A01_domain_models.py
 """
-Domain models for the ESE extraction pipeline.
+Core domain models for the ESE abbreviation extraction pipeline.
 
-Provides Pydantic models for:
-- Pipeline stages and field types (enums)
-- Abbreviation categories and validation status
-- Candidates, extracted entities, and bounding boxes
-- Drug, disease, and other entity-specific models
+Defines the foundational Pydantic models and enums used throughout the extraction
+pipeline. These models represent the data structures for candidates (pre-verification)
+and extracted entities (post-verification), along with their provenance and evidence.
+
+Key Components:
+    - PipelineStage: Enum for GENERATION, VERIFICATION, NORMALIZATION stages
+    - FieldType: How abbreviation was found (DEFINITION_PAIR, GLOSSARY_ENTRY, SHORT_FORM_ONLY)
+    - GeneratorType: Which strategy produced the candidate (syntax, lexicon, table, etc.)
+    - ValidationStatus: VALIDATED, REJECTED, or AMBIGUOUS verdict
+    - BoundingBox: Strict coordinate representation for PDF locations
+    - Coordinate: Page number and optional bbox for entity location
+    - EvidenceSpan: Text snippet with location proving an extraction
+    - ProvenanceMetadata: Audit trail with git hash, run ID, doc fingerprint
+    - Candidate: Pre-verification abbreviation with context (high recall)
+    - ExtractedEntity: Post-verification abbreviation ready for export (high precision)
+    - AbbreviationCategory: Semantic domain (STATISTICAL, DISEASE, DRUG, GENE, etc.)
+
+Example:
+    >>> from A_core.A01_domain_models import Candidate, FieldType, GeneratorType
+    >>> candidate = Candidate(
+    ...     doc_id="study.pdf",
+    ...     field_type=FieldType.DEFINITION_PAIR,
+    ...     generator_type=GeneratorType.SYNTAX_PATTERN,
+    ...     short_form="TNF",
+    ...     long_form="tumor necrosis factor",
+    ...     context_text="...",
+    ...     context_location=coord,
+    ...     provenance=prov
+    ... )
+
+Dependencies:
+    - pydantic: BaseModel, Field, model_validator for data validation
 """
 from __future__ import annotations
 

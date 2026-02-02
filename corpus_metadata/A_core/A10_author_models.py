@@ -1,8 +1,37 @@
 # corpus_metadata/A_core/A10_author_models.py
 """
-Domain models for author/investigator extraction.
+Pydantic domain models for author and investigator extraction.
 
-Detects authors, principal investigators, and contributors from clinical documents.
+This module defines data structures for extracting author and investigator information
+from clinical documents. It supports multiple author roles (principal investigator,
+corresponding author, steering committee), tracks affiliations and contact information,
+and handles ORCID identifiers for researcher disambiguation.
+
+Key Components:
+    - AuthorCandidate: Pre-validation author mention with role and affiliation
+    - ExtractedAuthor: Validated author entity with evidence
+    - AuthorExportEntry: Simplified export format for JSON output
+    - AuthorExportDocument: Complete extraction results for a document
+    - AuthorProvenanceMetadata: Audit trail for author detection
+    - AuthorRoleType: Author role enumeration (PI, corresponding, steering committee)
+    - AuthorGeneratorType: Source generator tracking (header, affiliation block, regex)
+
+Example:
+    >>> from A_core.A10_author_models import AuthorCandidate, AuthorRoleType, AuthorGeneratorType
+    >>> candidate = AuthorCandidate(
+    ...     doc_id="doc_001",
+    ...     full_name="Jane Smith, MD, PhD",
+    ...     role=AuthorRoleType.PRINCIPAL_INVESTIGATOR,
+    ...     affiliation="Harvard Medical School",
+    ...     orcid="0000-0001-2345-6789",
+    ...     generator_type=AuthorGeneratorType.HEADER_PATTERN,
+    ...     context_text="Principal Investigator: Jane Smith, MD, PhD",
+    ...     context_location=Coordinate(page=1, bbox=[100, 200, 300, 220]),
+    ...     provenance=provenance,
+    ... )
+
+Dependencies:
+    - A_core.A01_domain_models: For BaseProvenanceMetadata, Coordinate, EvidenceSpan, ValidationStatus
 """
 
 from __future__ import annotations

@@ -1,13 +1,37 @@
 # corpus_metadata/A_core/A02_interfaces.py
 """
-Abstract interfaces for pipeline components.
+Abstract base classes and interfaces for pipeline components.
 
-Defines base classes and protocols for:
-- ExecutionContext: Shared context for extraction steps
-- BaseParser: PDF/document parsing interface
-- CandidateGenerator: Entity candidate extraction
-- Validator: LLM-based validation interface
-- Normalizer: Entity normalization/enrichment
+Defines the contracts that all pipeline components must implement. These interfaces
+enable loose coupling between layers (parsing, generation, validation, normalization)
+and allow strategies to be swapped without changing orchestration logic.
+
+Key Components:
+    - ExecutionContext: Shared context passed through extraction steps with prior outputs
+    - RawExtraction: Strategy output with features (confidence computed separately)
+    - BaseExtractor: Universal interface for entity extraction strategies
+    - BaseParser: Interface for PDF-to-DocumentGraph parsing
+    - BaseCandidateGenerator: Interface for high-recall candidate generation
+    - BaseVerifier: Interface for LLM or deterministic validation
+    - BaseNormalizer: Interface for post-verification standardization
+    - BaseEnricher: Generic interface for entity enrichment (PubTator, NCT, etc.)
+    - BaseEvaluationMetric: Interface for precision/recall metric computation
+
+Example:
+    >>> from A_core.A02_interfaces import BaseExtractor, RawExtraction
+    >>> class DiseaseExtractor(BaseExtractor):
+    ...     @property
+    ...     def strategy_id(self) -> str:
+    ...         return "disease_lexicon_orphanet"
+    ...     @property
+    ...     def entity_type(self) -> EntityType:
+    ...         return EntityType.DISEASE
+    ...     def extract(self, doc_graph, ctx, config) -> List[RawExtraction]:
+    ...         return []
+
+Dependencies:
+    - A_core.A01_domain_models: GeneratorType, Candidate, ExtractedEntity
+    - A_core.A14_extraction_result: EntityType enum
 """
 from __future__ import annotations
 

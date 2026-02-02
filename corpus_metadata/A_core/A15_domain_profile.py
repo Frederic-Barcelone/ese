@@ -1,23 +1,30 @@
-# corpus_metadata/corpus_metadata/A_core/A15_domain_profile.py
+# corpus_metadata/A_core/A15_domain_profile.py
 """
-Domain Profile System for Configurable Extraction Priors.
+Configurable domain profiles for extraction priors and confidence adjustment.
 
-Addresses overfitting by externalizing domain-specific assumptions:
-- Disease/condition vocabularies
-- Journal name patterns
-- Confidence adjustments
-- Noise term filters
+This module externalizes domain-specific assumptions (priority diseases, noise terms,
+journal patterns) into swappable profiles, preventing corpus overfitting. Switch
+between nephrology, oncology, pulmonology, or custom domains without code changes.
+Profiles influence confidence scoring rather than hard filtering, preserving recall.
 
-Instead of hardcoding nephrology-specific terms, profiles allow:
-1. Switching domains without code changes
-2. A/B testing different configurations
-3. Clear separation of generic vs domain-specific logic
+Key Components:
+    - DomainProfile: Configuration container with priority diseases, noise terms, etc.
+    - ConfidenceAdjustments: Tunable penalty/boost values for scoring
+    - load_domain_profile: Load built-in or YAML-based custom profiles
+    - get_available_profiles: List available built-in profiles
+    - Built-in profiles: "generic", "nephrology", "oncology", "pulmonology"
 
-Usage:
-    from A_core.A15_domain_profile import DomainProfile, load_domain_profile
+Example:
+    >>> from A_core.A15_domain_profile import load_domain_profile
+    >>> profile = load_domain_profile("nephrology")
+    >>> adjustment = profile.get_confidence_adjustment("IgA nephropathy")
+    >>> print(adjustment)  # Positive boost for priority disease
+    0.15
+    >>> profile.is_priority_disease("iga nephropathy")
+    True
 
-    profile = load_domain_profile("nephrology", config)
-    adjustment = profile.get_confidence_adjustment("IgA nephropathy")
+Dependencies:
+    - yaml: For loading custom YAML profile files
 """
 
 from __future__ import annotations

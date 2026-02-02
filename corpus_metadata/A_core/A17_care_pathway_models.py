@@ -1,15 +1,35 @@
 # corpus_metadata/A_core/A17_care_pathway_models.py
 """
-Care Pathway and Treatment Algorithm Domain Models.
+Domain models for clinical care pathways and treatment algorithms.
 
-These models represent structured clinical decision trees and treatment algorithms
-extracted from clinical guidelines and protocol documents.
+This module provides Pydantic models for representing structured clinical decision
+trees extracted from guideline flowcharts and protocol documents. Use these models
+when processing treatment algorithms, drug tapering schedules, or disease management
+workflows from sources like EULAR/ACR guidelines.
 
-Key use cases:
-- EULAR/ACR treatment algorithms
-- Clinical decision support pathways
-- Drug escalation/de-escalation protocols
-- Disease management workflows
+Key Components:
+    - NodeType: Enum for pathway node types (START, END, ACTION, DECISION, etc.)
+    - CarePathwayNode: Single step in a treatment algorithm with drugs, dosing, duration
+    - CarePathwayEdge: Transition between nodes with optional conditions
+    - CarePathway: Complete decision tree with nodes, edges, and clinical metadata
+    - TaperSchedulePoint: Single timepoint in a medication taper schedule
+    - TaperSchedule: Structured dosing schedule for gradual dose reduction
+
+Example:
+    >>> from A_core.A17_care_pathway_models import CarePathway, CarePathwayNode, NodeType
+    >>> node = CarePathwayNode(
+    ...     id="n1", type=NodeType.ACTION, text="Start RTX 375mg/m2",
+    ...     drugs=["rituximab"], phase="induction"
+    ... )
+    >>> pathway = CarePathway(
+    ...     pathway_id="aav_001", title="AAV Induction", condition="Active GPA/MPA",
+    ...     nodes=[node]
+    ... )
+    >>> pathway.get_action_nodes()
+    [CarePathwayNode(id='n1', ...)]
+
+Dependencies:
+    - pydantic: For model validation and serialization
 """
 
 from __future__ import annotations

@@ -1,12 +1,36 @@
 # corpus_metadata/A_core/A07_feasibility_models.py
 """
-Domain models for clinical trial feasibility information extraction.
+Pydantic domain models for clinical trial feasibility information extraction.
 
-Covers:
-- Patient journey phases (screening → randomization → treatment → follow-up)
-- Epidemiology data (prevalence, incidence, demographics)
-- Eligibility criteria (inclusion/exclusion)
-- Study design parameters (endpoints, sites, duration)
+This module provides comprehensive data structures for extracting feasibility-critical
+information from clinical trial protocols and publications. It models the full spectrum
+of feasibility data: eligibility criteria with logical expressions, CONSORT screening
+flows, operational burden (visits, procedures, vaccinations), epidemiology statistics,
+study design parameters, and geographic footprint.
+
+Key Components:
+    - FeasibilityCandidate: Pre-validation feasibility data with structured sub-types
+    - EligibilityCriterion: Inclusion/exclusion criterion with lab values and severity grades
+    - ScreeningFlow: CONSORT flow metrics with screen failure reasons
+    - OperationalBurden: Visit schedules, invasive procedures, vaccination requirements
+    - StudyDesign: Phase, blinding, randomization, treatment arms
+    - EpidemiologyData: Prevalence, incidence, demographics statistics
+    - PatientJourneyPhase: Screening, run-in, treatment, follow-up phases
+    - StudyFootprint: Geographic distribution of study sites
+    - TrialIdentifier: NCT, EudraCT, CTIS registry identifiers
+
+Example:
+    >>> from A_core.A07_feasibility_models import EligibilityCriterion, CriterionType
+    >>> criterion = EligibilityCriterion(
+    ...     criterion_type=CriterionType.INCLUSION,
+    ...     text="Age >= 18 years",
+    ...     category="age",
+    ...     parsed_value={"min_age": 18, "unit": "years"},
+    ... )
+
+Dependencies:
+    - A_core.A21_clinical_criteria: For LabCriterion, SeverityGrade, DiagnosisConfirmation
+    - A_core.A22_logical_expressions: For LogicalExpression, CriterionNode, LogicalOperator
 """
 
 from __future__ import annotations

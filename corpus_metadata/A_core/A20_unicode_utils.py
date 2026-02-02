@@ -1,11 +1,33 @@
 # corpus_metadata/A_core/A20_unicode_utils.py
 """
-Unicode Normalization Utilities
+Unicode normalization utilities for PDF text extraction cleanup.
 
-Handle PDF mojibake, ligatures, variant hyphens, and other Unicode issues
-common in PDF text extraction.
+This module provides functions for handling common Unicode issues encountered
+during PDF text extraction, including mojibake (encoding errors), ligatures,
+variant hyphens, and line-break hyphenation artifacts. Use these utilities
+when normalizing extracted text for matching and comparison.
 
-Extracted from A04_heuristics_config.py for better modularity and testability.
+Key Components:
+    - HYPHENS_PATTERN: Regex for various Unicode hyphen/dash characters
+    - MOJIBAKE_MAP: Dict mapping common PDF mojibake to correct characters
+    - normalize_sf: Normalize short forms for display/storage (NFKC, mojibake fix)
+    - normalize_sf_key: Normalize short forms for dictionary keys (uppercase)
+    - normalize_context: Normalize context text for matching (lowercase)
+    - clean_long_form: Clean long form text with hyphenation/truncation fixes
+    - is_truncated_term: Detect if a term appears truncated from PDF extraction
+
+Example:
+    >>> from A_core.A20_unicode_utils import normalize_sf, clean_long_form
+    >>> normalize_sf("TNF\\u2010\\u03b1")  # Various hyphens and Greek alpha
+    'TNF-alpha'
+    >>> clean_long_form("gastro-\\nintestinal")  # Line-break hyphenation
+    'gastrointestinal'
+    >>> normalize_sf_key("Anti-TNF")  # For dictionary key lookups
+    'ANTI-TNF'
+
+Dependencies:
+    - re: For regular expression pattern matching
+    - unicodedata: For Unicode normalization (NFKC)
 """
 
 import re

@@ -1,8 +1,36 @@
 # corpus_metadata/A_core/A09_pharma_models.py
 """
-Domain models for pharmaceutical company entity extraction.
+Pydantic domain models for pharmaceutical company entity extraction.
 
-Simple lexicon-based detection of pharma company mentions.
+This module defines data structures for detecting and extracting pharmaceutical company
+mentions from clinical documents using lexicon-based matching. It tracks canonical company
+names, headquarters locations, and parent-subsidiary relationships to enable sponsor
+identification and corporate entity resolution.
+
+Key Components:
+    - PharmaCandidate: Pre-validation pharma company mention with metadata
+    - ExtractedPharma: Validated pharma company entity with evidence
+    - PharmaExportEntry: Simplified export format for JSON output
+    - PharmaExportDocument: Complete extraction results for a document
+    - PharmaProvenanceMetadata: Audit trail for pharma detection
+    - PharmaGeneratorType: Source generator tracking (lexicon match)
+
+Example:
+    >>> from A_core.A09_pharma_models import PharmaCandidate, PharmaGeneratorType
+    >>> candidate = PharmaCandidate(
+    ...     doc_id="doc_001",
+    ...     matched_text="Novartis",
+    ...     canonical_name="Novartis",
+    ...     full_name="Novartis AG",
+    ...     headquarters="Basel, Switzerland",
+    ...     generator_type=PharmaGeneratorType.LEXICON_MATCH,
+    ...     context_text="Study sponsored by Novartis Pharmaceuticals",
+    ...     context_location=Coordinate(page=1, bbox=[100, 200, 300, 220]),
+    ...     provenance=provenance,
+    ... )
+
+Dependencies:
+    - A_core.A01_domain_models: For BaseProvenanceMetadata, Coordinate, EvidenceSpan, ValidationStatus
 """
 
 from __future__ import annotations

@@ -1,26 +1,30 @@
 # corpus_metadata/A_core/A00_logging.py
 """
-Centralized logging configuration for the ESE pipeline.
+Centralized logging configuration for the ESE extraction pipeline.
 
-Provides structured, consistent logging across all modules with:
-- Colored console output for different log levels
-- File logging with rotation for persistence
-- Context managers for operation tracking
-- Performance timing decorators
-- Structured log formatting
+Provides structured, consistent logging across all modules with colored console
+output, rotating file logs, and utilities for operation timing and progress tracking.
+Configure once at startup and use get_logger() in each module.
 
-Usage:
-    from A_core.A00_logging import get_logger, timed, LogContext
+Key Components:
+    - get_logger: Factory function to obtain a configured logger for any module
+    - configure_logging: One-time setup for log directory, level, and run ID
+    - LogContext: Context manager for timing operations with start/end logging
+    - timed: Decorator for automatic function execution timing
+    - StepLogger: Progress tracker for multi-step pipeline operations
+    - ColoredFormatter: ANSI-colored console output by log level
+    - PipelineLogger: Singleton manager for centralized logger configuration
 
-    logger = get_logger(__name__)
-    logger.info("Processing started")
+Example:
+    >>> from A_core.A00_logging import get_logger, configure_logging, LogContext
+    >>> configure_logging(log_dir="logs", log_level=logging.INFO)
+    >>> logger = get_logger(__name__)
+    >>> logger.info("Processing started")
+    >>> with LogContext(logger, "PDF parsing"):
+    ...     parse_pdf(file_path)
 
-    with LogContext(logger, "extraction"):
-        # ... extraction code ...
-
-    @timed(logger)
-    def expensive_operation():
-        # ... code ...
+Dependencies:
+    - Standard library only (logging, pathlib, functools, contextlib)
 """
 
 from __future__ import annotations

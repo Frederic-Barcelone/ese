@@ -1,32 +1,32 @@
 # corpus_metadata/A_core/A16_pipeline_metrics.py
 """
-Pipeline Metrics: Single source of truth for all extraction metrics.
+Unified metrics tracking system for extraction pipeline observability.
 
-This module provides a unified metrics tracking system that eliminates
-inconsistencies between different parts of the pipeline. All metrics
-flow through these dataclasses, ensuring a coherent story:
+This module provides a single source of truth for all pipeline metrics, ensuring
+consistency across generation, heuristics, validation, normalization, export, and
+scoring stages. Use PipelineMetrics to track progress, validate invariants, and
+generate summary reports. All logs and displays should read from this object.
 
-    candidates -> validated -> exported -> scored
+Key Components:
+    - PipelineMetrics: Top-level container with all stage metrics and validation
+    - GenerationMetrics: Candidate counts from C_generators
+    - HeuristicsMetrics: PASO rule filtering breakdown (auto-approved/rejected/LLM)
+    - ValidationMetrics: LLM validation results and SF-only extraction counts
+    - NormalizationMetrics: Disambiguation and deduplication counts
+    - ExportMetrics: Final export counts by entity type and status
+    - ScoringMetrics: Precision/recall/F1 and TP/FP/FN counts
 
-Usage:
-    from A_core.A16_pipeline_metrics import PipelineMetrics
+Example:
+    >>> from A_core.A16_pipeline_metrics import PipelineMetrics
+    >>> metrics = PipelineMetrics(run_id="RUN_001", doc_id="study.pdf")
+    >>> metrics.generation.generated_candidates = 500
+    >>> metrics.validation.llm_approved = 73
+    >>> errors = metrics.validate_invariants()
+    >>> if not errors:
+    ...     print(metrics.summary())
 
-    # Create at pipeline start
-    metrics = PipelineMetrics(run_id="RUN_123", doc_id="doc1")
-
-    # Update at each stage
-    metrics.generation.generated_candidates = 500
-    metrics.validation.llm_approved = 73
-
-    # Validate invariants before export
-    errors = metrics.validate_invariants()
-    if errors:
-        logger.warning(f"Metrics invariant violations: {errors}")
-
-Invariants:
-    - TP + FP == export.validated
-    - TP + FN == gold_count (when scored)
-    - generation.total >= heuristics.total_processed
+Dependencies:
+    - pydantic: For model validation and configuration
 """
 
 from __future__ import annotations

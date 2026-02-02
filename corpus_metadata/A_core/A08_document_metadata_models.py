@@ -1,13 +1,33 @@
 # corpus_metadata/A_core/A08_document_metadata_models.py
 """
-Domain models for document metadata extraction.
+Pydantic domain models for document metadata extraction.
 
-Covers:
-- File metadata (size, dates, permissions)
-- PDF metadata (author, creator, creation date)
-- Document classification (protocol, article, etc.)
-- Document descriptions (title, short/long descriptions)
-- Date extraction with fallback chain
+This module defines data structures for extracting and organizing document-level metadata
+from PDFs. It handles file system metadata, PDF properties (author, creator, DOI), document
+classification (protocol, CSR, publication), LLM-generated descriptions, and intelligent
+date extraction with a priority-based fallback chain (filename -> content -> PDF -> filesystem).
+
+Key Components:
+    - DocumentMetadata: Complete metadata container for a document
+    - FileMetadata: File system information (size, dates, permissions)
+    - PDFMetadata: PDF properties (title, author, DOI, page count, encryption status)
+    - DocumentClassification: Document type with confidence (protocol, article, CSR)
+    - DocumentDescription: LLM-generated title and descriptions
+    - DateExtractionResult: Extracted dates with source tracking and fallback chain
+    - ExtractedDate: Individual date with source type and confidence
+    - DocumentMetadataExport: Simplified export format
+
+Example:
+    >>> from A_core.A08_document_metadata_models import DocumentMetadata, PDFMetadata
+    >>> pdf_meta = PDFMetadata(
+    ...     title="Phase 3 Study Protocol",
+    ...     author="Sponsor Inc.",
+    ...     page_count=120,
+    ...     doi="10.1016/j.example.2024.001",
+    ... )
+
+Dependencies:
+    - None (self-contained module with no A_core dependencies)
 """
 
 from __future__ import annotations

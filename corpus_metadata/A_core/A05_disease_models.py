@@ -1,10 +1,40 @@
 # corpus_metadata/A_core/A05_disease_models.py
 """
-Domain models for disease mention detection.
-Separate from abbreviation models (A01) as diseases have fundamentally different semantics:
-- No short_form/long_form relationship
-- Multiple code systems (ICD-10, ICD-11, SNOMED-CT, MONDO, ORPHA)
-- Disease-specific fields (is_rare_disease, category, parent_disease)
+Domain models for disease entity extraction.
+
+Defines Pydantic models specific to disease mention detection, separate from
+abbreviation models (A01) due to fundamentally different semantics. Diseases
+use matched_text/preferred_label instead of short_form/long_form, support
+multiple medical coding systems, and have rare disease specific fields.
+
+Key Components:
+    - DiseaseFieldType: How disease was detected (EXACT_MATCH, PATTERN_MATCH, NER_DETECTION)
+    - DiseaseGeneratorType: Which strategy produced the candidate (lexicon, scispacy)
+    - DiseaseIdentifier: Medical code from standard ontology (ICD-10, SNOMED, MONDO, ORPHA)
+    - DiseaseProvenanceMetadata: Audit trail with medical code provenance
+    - DiseaseCandidate: Pre-validation disease mention with context and codes
+    - ExtractedDisease: Validated disease entity with all medical codes populated
+    - DiseaseExportEntry: Simplified structure for JSON export
+    - DiseaseExportDocument: Complete extraction output for a document
+
+Example:
+    >>> from A_core.A05_disease_models import DiseaseCandidate, DiseaseIdentifier
+    >>> identifier = DiseaseIdentifier(
+    ...     system="ORPHA",
+    ...     code="182090",
+    ...     display="Pulmonary arterial hypertension"
+    ... )
+    >>> candidate = DiseaseCandidate(
+    ...     doc_id="study.pdf",
+    ...     matched_text="PAH",
+    ...     preferred_label="Pulmonary arterial hypertension",
+    ...     identifiers=[identifier],
+    ...     is_rare_disease=True,
+    ...     ...
+    ... )
+
+Dependencies:
+    - A_core.A01_domain_models: BaseProvenanceMetadata, Coordinate, EvidenceSpan, ValidationStatus
 """
 
 from __future__ import annotations

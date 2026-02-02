@@ -1,44 +1,30 @@
 # corpus_metadata/A_core/A13_ner_models.py
 """
-Unified NER (Named Entity Recognition) data models.
+Unified data models for Named Entity Recognition (NER) results.
 
-Provides standardized data structures for NER results across different
-extraction backends (ZeroShotBioNER, BiomedicalNER, spaCy, etc.).
+This module provides standardized data structures that unify NER outputs from
+multiple extraction backends (ZeroShotBioNER, BiomedicalNER, scispaCy, etc.).
+Use these models when building or consuming NER pipelines to ensure consistent
+entity representation, filtering, grouping, and serialization.
 
-This module consolidates common patterns from:
-- E09_zeroshot_bioner.py (ZeroShotExtractionResult, BioNEREntity)
-- E10_biomedical_ner_all.py (BiomedicalNERResult, BiomedicalEntity)
-- E15_genetic_enricher.py (GeneticResult, GeneticEntity)
+Key Components:
+    - EntityCategory: Constants for entity categorization (clinical, genetic, etc.)
+    - NEREntity: Single extracted entity with type, score, position, and metadata
+    - NERResult: Container for multiple entities with filtering and grouping methods
+    - create_entity: Factory function for convenient entity creation
+    - merge_results: Combine multiple NERResult instances
+    - DEFAULT_TYPE_TO_CATEGORY: Mapping from entity types to categories
 
-Design goals:
-- Single entity representation for all NER backends
-- Flexible categorization system
-- Common result container with filtering/grouping methods
-- Serialization support for export
+Example:
+    >>> from A_core.A13_ner_models import NEREntity, NERResult
+    >>> entity = NEREntity(text="diabetes", entity_type="Disease", score=0.95)
+    >>> result = NERResult(source="biomedical_ner")
+    >>> result.add_entity(entity)
+    >>> diseases = result.get_by_type("Disease")
+    >>> summary = result.to_summary()
 
-Usage:
-    from A_core.A13_ner_models import NEREntity, NERResult
-
-    # Create entities
-    entity = NEREntity(
-        text="diabetes",
-        entity_type="Disease",
-        category="clinical",
-        score=0.95,
-        start=10,
-        end=18,
-    )
-
-    # Create result container
-    result = NERResult(source="biomedical_ner")
-    result.add_entity(entity)
-
-    # Query results
-    diseases = result.get_by_type("Disease")
-    clinical = result.get_by_category("clinical")
-
-    # Export
-    summary = result.to_summary()
+Dependencies:
+    - None (standalone module using only dataclasses and typing)
 """
 
 from __future__ import annotations

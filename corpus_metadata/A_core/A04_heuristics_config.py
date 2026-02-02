@@ -1,18 +1,35 @@
 # corpus_metadata/A_core/A04_heuristics_config.py
 """
-Centralized Heuristics Configuration
+Centralized heuristics configuration for abbreviation extraction.
 
-All whitelists, blacklists, and configurable rules in one place.
-Enables easy tuning without modifying pipeline logic.
+Contains all whitelists, blacklists, context rules, and configurable parameters
+for the PASO (Precision And Sensitivity Optimization) heuristics. Values are
+loaded from config.yaml with hardcoded defaults as fallback. This enables
+tuning extraction behavior without modifying pipeline logic.
 
-IMPORTANT: All values are now loaded from config.yaml.
-The hardcoded defaults are only used as fallback.
+Key Components:
+    - HeuristicsConfig: Dataclass with all configurable rules:
+        - stats_abbrevs: PASO A whitelist (CI, HR, SD auto-approved with numeric context)
+        - sf_blacklist: Auto-reject list (country codes, credentials, common words)
+        - hyphenated_abbrevs: PASO C special handling (IL-6, TNF-alpha, etc.)
+        - context_required_sfs: Ambiguous SFs needing context validation (PD, MS, GI)
+        - lexicon_priorities: Conflict resolution priorities by source
+    - HeuristicsCounters: Tracking counters for debugging heuristic effectiveness
+    - check_context_match: Validate ambiguous SF has required context
+    - calibrate_confidence: Adjust confidence based on source and context factors
+    - is_likely_author_initials: Detect and reject author initial false positives
+    - normalize_sf_key: Unicode normalization for consistent matching
 
-Categories tracked for logging:
-- recovered_by_stats_whitelist
-- recovered_by_hyphen
-- recovered_by_llm_sf_only
-- blacklisted_fp_count
+Example:
+    >>> from A_core.A04_heuristics_config import load_default_heuristics_config
+    >>> config = load_default_heuristics_config()
+    >>> if normalize_sf_key("CI") in config.stats_abbrevs:
+    ...     # Auto-approve statistical abbreviation
+    ...     pass
+
+Dependencies:
+    - A_core.A20_unicode_utils: Unicode normalization functions
+    - G_config/config.yaml: Runtime configuration values
 """
 
 from dataclasses import dataclass, field

@@ -1,11 +1,36 @@
 # corpus_metadata/A_core/A22_logical_expressions.py
 """
-Logical expression models for eligibility criteria computability.
+Domain models for logical expressions in eligibility criteria.
 
-Provides a tree-based representation for complex eligibility expressions:
-- AND/OR/NOT operators
-- Recursive evaluation against patient data
-- SQL WHERE clause generation for EHR queries
+This module provides a tree-based representation for complex eligibility
+expressions that combine multiple criteria with AND/OR/NOT operators. Use
+these models when parsing compound eligibility statements and evaluating
+them against patient data or generating SQL WHERE clauses for EHR queries.
+
+Key Components:
+    - LogicalOperator: Enum for combining criteria (AND, OR, NOT)
+    - CriterionNode: Node in expression tree (leaf with criterion or internal with operator)
+    - LogicalExpression: Complete expression with root node and criteria references
+
+Example:
+    >>> from A_core.A22_logical_expressions import (
+    ...     LogicalExpression, CriterionNode, LogicalOperator
+    ... )
+    >>> # Build: (age_ok AND eGFR_ok) expression
+    >>> age_node = CriterionNode(criterion_id="age_ok")
+    >>> egfr_node = CriterionNode(criterion_id="egfr_ok")
+    >>> root = CriterionNode(
+    ...     operator=LogicalOperator.AND, children=[age_node, egfr_node]
+    ... )
+    >>> expr = LogicalExpression(root=root, raw_text="Age >= 18 AND eGFR >= 30")
+    >>> expr.root.evaluate({"age_ok": True, "egfr_ok": True})
+    True
+    >>> expr.to_sql_where()  # Generate SQL for EHR queries
+    '((age >= 18) AND (egfr >= 30))'
+
+Dependencies:
+    - pydantic: For model validation and serialization
+    - A_core.A21_clinical_criteria: For LabCriterion evaluation (via criteria_refs)
 """
 
 from __future__ import annotations

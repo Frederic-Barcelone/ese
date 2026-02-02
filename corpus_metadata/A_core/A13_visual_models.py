@@ -1,12 +1,36 @@
 # corpus_metadata/A_core/A13_visual_models.py
 """
-Data models for the visual extraction pipeline.
+Pydantic data models for the visual (table/figure) extraction pipeline.
 
-Provides Pydantic models for:
-- ExtractedVisual: Unified model for tables and figures
-- VisualReference: Parsed reference (e.g., "Table 1", "Figure 2-4")
-- VisualRelationships: Cross-references and document context
-- Triage and caption extraction models
+This module defines the complete type system for visual element extraction,
+from initial detection through VLM enrichment to final export. Use these models
+when working with PDF figures, tables, captions, and their cross-references.
+All models use Pydantic for validation, serialization, and immutability.
+
+Key Components:
+    - VisualType: Enum for TABLE, FIGURE, OTHER classification
+    - VisualCandidate: Pre-triage detection result with raw signals
+    - ExtractedVisual: Final output model after all pipeline stages
+    - VisualReference: Parsed reference like "Table 1" or "Figure 2-4"
+    - TableStructure: Structured table data with headers, rows, and cells
+    - CaptionCandidate: Potential caption with position and confidence
+    - TriageResult: Routing decision (SKIP, CHEAP_PATH, VLM_REQUIRED)
+    - VLMEnrichmentResult: VLM classification, validation, and enrichment output
+
+Example:
+    >>> from A_core.A13_visual_models import ExtractedVisual, VisualType, PageLocation
+    >>> visual = ExtractedVisual(
+    ...     visual_type=VisualType.TABLE,
+    ...     confidence=0.95,
+    ...     page_range=[1],
+    ...     bbox_pts_per_page=[PageLocation(page_num=1, bbox_pts=(72, 100, 540, 400))],
+    ...     image_base64="...",
+    ...     extraction_method="docling+vlm",
+    ...     source_file="document.pdf"
+    ... )
+
+Dependencies:
+    - pydantic: For model validation and serialization
 """
 from __future__ import annotations
 

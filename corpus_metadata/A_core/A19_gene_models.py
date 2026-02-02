@@ -1,11 +1,38 @@
 # corpus_metadata/A_core/A19_gene_models.py
 """
-Domain models for gene/protein entity extraction.
+Domain models for gene and protein entity extraction.
 
-Supports:
-- Genes associated with rare diseases (Orphadata)
-- HGNC official gene symbols and aliases
-- Gene-disease associations for rare diseases
+This module provides Pydantic models for the complete gene extraction pipeline,
+from candidate generation through validation to export. Use these models when
+extracting gene mentions from documents, linking to standard identifiers (HGNC,
+Entrez, Ensembl), and tracking gene-disease associations from Orphadata.
+
+Key Components:
+    - GeneFieldType: Enum for detection method (EXACT_MATCH, PATTERN_MATCH, NER)
+    - GeneGeneratorType: Enum tracking which strategy produced the candidate
+    - GeneAssociationType: Enum for Orphadata gene-disease association types
+    - GeneIdentifier: Gene code from standard databases (HGNC, Entrez, Ensembl, etc.)
+    - GeneDiseaseLinkage: Link between a gene and an associated rare disease
+    - GeneCandidate: Pre-validation gene mention with context and identifiers
+    - ExtractedGene: Validated gene entity with evidence and confidence scores
+    - GeneExportEntry: Simplified gene entry for JSON export
+    - GeneExportDocument: Complete gene extraction output for a document
+
+Example:
+    >>> from A_core.A19_gene_models import GeneCandidate, GeneIdentifier, GeneFieldType
+    >>> identifier = GeneIdentifier(system="HGNC", code="HGNC:1100", display="BRCA1")
+    >>> candidate = GeneCandidate(
+    ...     doc_id="doc_001", matched_text="BRCA1", hgnc_symbol="BRCA1",
+    ...     field_type=GeneFieldType.EXACT_MATCH,
+    ...     generator_type=GeneGeneratorType.LEXICON_HGNC_ALIAS,
+    ...     context_text="mutations in BRCA1 are associated with...",
+    ...     context_location=Coordinate(page=1, start=100, end=105),
+    ...     identifiers=[identifier], provenance=...
+    ... )
+
+Dependencies:
+    - A_core.A01_domain_models: For BaseProvenanceMetadata, Coordinate, EvidenceSpan
+    - pydantic: For model validation and serialization
 """
 
 from __future__ import annotations

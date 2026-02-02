@@ -1,15 +1,37 @@
 # corpus_metadata/A_core/A18_recommendation_models.py
 """
-Guideline Recommendation Domain Models.
+Domain models for clinical guideline recommendations.
 
-These models represent structured clinical recommendations extracted from
-guidelines, including treatment recommendations, dosing guidance, and
-evidence levels.
+This module provides Pydantic models for representing structured treatment
+recommendations extracted from clinical guidelines. Use these models when
+processing EULAR/ACR recommendations, FDA labeling guidance, or protocol-specific
+treatment advice with evidence levels and dosing constraints.
 
-Key use cases:
-- EULAR/ACR treatment recommendations
-- FDA labeling guidance
-- Protocol-specific recommendations
+Key Components:
+    - EvidenceLevel: Enum for evidence quality (HIGH, MODERATE, LOW, VERY_LOW)
+    - RecommendationStrength: Enum for recommendation strength (STRONG, CONDITIONAL)
+    - RecommendationType: Enum for recommendation categories (TREATMENT, DOSING, etc.)
+    - DrugDosingInfo: Structured dosing information for a drug
+    - GuidelineRecommendation: Single actionable recommendation with population/action
+    - RecommendationSet: Collection of recommendations from a guideline document
+
+Example:
+    >>> from A_core.A18_recommendation_models import (
+    ...     GuidelineRecommendation, RecommendationType, EvidenceLevel
+    ... )
+    >>> rec = GuidelineRecommendation(
+    ...     recommendation_id="rec_001",
+    ...     recommendation_type=RecommendationType.TREATMENT,
+    ...     population="GPA/MPA organ-threatening",
+    ...     action="GC + RTX or CYC",
+    ...     evidence_level=EvidenceLevel.MODERATE,
+    ...     source="Table 2"
+    ... )
+    >>> rec.to_summary()
+    {'recommendation_id': 'rec_001', 'type': 'treatment', ...}
+
+Dependencies:
+    - pydantic: For model validation and serialization
 """
 
 from __future__ import annotations

@@ -1,39 +1,35 @@
 # corpus_metadata/A_core/A12_exceptions.py
 """
-Exception hierarchy for the ESE pipeline.
+Structured exception hierarchy for the ESE extraction pipeline.
 
-Provides a structured exception hierarchy that replaces generic exceptions
-with specific, meaningful error types. This enables:
-- Better error handling and recovery
-- More informative error messages
-- Easier debugging and logging
-- Type-safe exception catching
+This module provides domain-specific exception types that replace generic Python
+exceptions with meaningful, context-rich error classes. Each exception captures
+relevant metadata (entity IDs, file paths, API responses) enabling precise error
+handling, recovery strategies, and diagnostic logging.
 
-Hierarchy:
-    ESEPipelineError (base)
-    ├── ConfigurationError     # Invalid config, missing keys
-    ├── ParsingError           # PDF/document parsing failures
-    ├── ExtractionError        # Entity extraction failures
-    ├── EnrichmentError        # Enrichment process failures
-    │   └── APIError           # External API failures (from Z01_api_client)
-    │       └── RateLimitError # HTTP 429 rate limiting
-    ├── ValidationError        # Entity validation failures
-    ├── CacheError             # Caching operation failures
-    └── EvaluationError        # Evaluation/scoring failures
+Key Components:
+    - ESEPipelineError: Base exception for all pipeline errors (catch-all)
+    - ConfigurationError: Invalid config keys, types, or values
+    - ParsingError: PDF/document parsing failures with file/page context
+    - ExtractionError: NER/regex/lexicon extraction failures
+    - EnrichmentError: Database lookup and enrichment process failures
+    - APIError: External API failures (HTTP errors, timeouts, invalid responses)
+    - RateLimitError: HTTP 429 rate limiting with retry_after support
+    - ValidationError: Entity validation and LLM verification failures
+    - CacheError: Cache read/write/corruption failures
+    - EvaluationError: Scoring and gold standard evaluation failures
 
-Usage:
-    from A_core.A12_exceptions import (
-        ExtractionError,
-        EnrichmentError,
-        ConfigurationError,
-    )
+Example:
+    >>> from A_core.A12_exceptions import ExtractionError, EnrichmentError
+    >>> try:
+    ...     result = enricher.enrich(entity)
+    ... except EnrichmentError as e:
+    ...     logger.error(f"Enrichment failed: {e.message}")
+    ...     if e.entity_id:
+    ...         logger.error(f"Entity: {e.entity_id}")
 
-    try:
-        result = enricher.enrich(entity)
-    except EnrichmentError as e:
-        logger.error(f"Enrichment failed: {e.message}")
-        if e.entity_id:
-            logger.error(f"Entity: {e.entity_id}")
+Dependencies:
+    - None (standalone module with no internal dependencies)
 """
 
 from __future__ import annotations

@@ -1,15 +1,37 @@
 # corpus_metadata/A_core/A21_clinical_criteria.py
 """
-Clinical criteria models for eligibility computability.
+Domain models for computable clinical eligibility criteria.
 
-Contains structured models for:
-- Lab criteria (LabCriterion, LabTimepoint)
-- Diagnosis confirmation requirements
-- Severity grades (NYHA, ECOG, CKD, etc.)
-- Entity normalization (LOINC, RxNorm, etc.)
+This module provides Pydantic models for representing structured eligibility
+criteria that can be programmatically evaluated against patient data. Use these
+models when extracting lab thresholds, diagnosis confirmation requirements, or
+severity grades from clinical trial protocols for feasibility simulation.
 
-These models enable programmatic evaluation of eligibility criteria
-against patient data for feasibility simulation.
+Key Components:
+    - EntityNormalization: Standard coding for drugs/conditions/labs (LOINC, RxNorm)
+    - LabTimepoint: Structured timepoint for lab requirements (day, visit, window)
+    - LabCriterion: Computable lab criterion with evaluate() method
+    - DiagnosisConfirmation: Structured diagnosis confirmation requirement
+    - SeverityGradeType: Enum for clinical severity systems (NYHA, ECOG, CKD, etc.)
+    - SeverityGrade: Normalized severity grade with evaluate() method
+    - SEVERITY_GRADE_MAPPINGS: Dict mapping raw text to numeric grades
+
+Example:
+    >>> from A_core.A21_clinical_criteria import LabCriterion, SeverityGrade
+    >>> lab = LabCriterion(
+    ...     analyte="eGFR", operator=">=", value=30.0, unit="mL/min/1.73m2"
+    ... )
+    >>> lab.evaluate(45.0)  # Patient's eGFR is 45
+    True
+    >>> grade = SeverityGrade(
+    ...     grade_type=SeverityGradeType.NYHA, raw_value="Class II",
+    ...     numeric_value=2, operator="<="
+    ... )
+    >>> grade.evaluate(2)  # Patient is NYHA Class II
+    True
+
+Dependencies:
+    - pydantic: For model validation and serialization
 """
 
 from __future__ import annotations

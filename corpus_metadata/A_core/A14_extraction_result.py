@@ -1,13 +1,35 @@
 # corpus_metadata/A_core/A14_extraction_result.py
 """
-Universal Extraction Output Contract.
+Universal extraction output contract for deterministic pipeline results.
 
-All extraction strategies emit ExtractionResult through this contract.
-Key design decisions for determinism:
-- `id` is computed as JSON hash of canonical dict (not UUID)
-- `timestamp` is optional and excluded from regression hashing
-- All collections use immutable Tuple (not List)
-- `provenance` is required (no default, since page_num is required)
+This module defines the canonical output format that all extraction strategies
+must emit. The design ensures determinism for regression testing: IDs are computed
+from content hashes (not UUIDs), timestamps are excluded from hashing, and all
+collections use immutable tuples. Use these types when building generators or
+consuming extraction results.
+
+Key Components:
+    - EntityType: Enum of all extractable entity types (ABBREVIATION, DISEASE, etc.)
+    - Provenance: Immutable location and audit trail (page, bbox, strategy, version)
+    - ExtractionResult: Universal output with value, confidence, evidence, and status
+    - compute_result_id: Deterministic SHA256-based ID generation
+    - compute_regression_hash: Stable hash for regression test comparison
+    - to_canonical_dict: Convert result to hashable dictionary format
+
+Example:
+    >>> from A_core.A14_extraction_result import ExtractionResult, EntityType, Provenance
+    >>> provenance = Provenance(page_num=1, strategy_id="lexicon_disease")
+    >>> result = ExtractionResult(
+    ...     doc_id="doc123",
+    ...     entity_type=EntityType.DISEASE,
+    ...     field_name="disease",
+    ...     value="IgA nephropathy",
+    ...     provenance=provenance
+    ... )
+    >>> result.id  # Deterministic hash-based ID
+
+Dependencies:
+    - None (standalone module using only stdlib dataclasses, hashlib, json)
 """
 
 from __future__ import annotations
