@@ -148,10 +148,9 @@ corpus_metadata/
 |
 +-- D_validation/                            # LAYER 3: LLM VERIFICATION
 |   +-- D01_prompt_registry.py               # Versioned prompts with hash tracking
-|   +-- D02_llm_engine.py                    # LLM validation engine
-|   +-- D02a_claude_client.py                # Claude API client wrapper
+|   +-- D02_llm_engine.py                    # LLM validation engine + Claude API client
 |   +-- D03_validation_logger.py             # JSONL audit trail
-|   +-- D05_quote_verifier.py                # Quote verification against source
+|   +-- D04_quote_verifier.py                # Quote verification against source
 |
 +-- E_normalization/                         # LAYER 4: STANDARDIZATION
 |   +-- E01_term_mapper.py                   # Synonym resolution
