@@ -73,10 +73,10 @@ PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = False  # External NLP4RARE rare disease corpus (2000+ PDFs)
-RUN_PAPERS = True     # Your papers in gold_data/PAPERS/
+RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
+RUN_PAPERS = True     # Papers in gold_data/PAPERS/
 
-# NLP4RARE splits (only used if RUN_NLP4RARE=True)
+# NLP4RARE subfolders to include (all by default)
 NLP4RARE_SPLITS = ["dev", "test", "train"]
 
 # Max documents per dataset (None = all documents)
