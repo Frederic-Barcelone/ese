@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z09_filename_generator.py
+# corpus_metadata/K_tests/K09_filename_generator.py
 """Tests for layout-aware filename generation."""
 from B_parsing.B18_layout_models import VisualPosition, VisualZone
 from B_parsing.B20_zone_expander import ExpandedVisual

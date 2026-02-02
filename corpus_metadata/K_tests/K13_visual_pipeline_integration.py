@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z13_visual_pipeline_integration.py
+# corpus_metadata/K_tests/K13_visual_pipeline_integration.py
 """Integration tests for layout-aware visual pipeline."""
 from unittest.mock import Mock, patch
 

@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z08_docling_backend.py
+# corpus_metadata/K_tests/K08_docling_backend.py
 """Tests for Docling table extraction backend."""
 
 from unittest import mock

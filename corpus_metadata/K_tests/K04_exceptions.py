@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z04_exceptions.py
+# corpus_metadata/K_tests/K04_exceptions.py
 """Tests for A_core/A12_exceptions.py - Exception hierarchy."""
 
 import pytest

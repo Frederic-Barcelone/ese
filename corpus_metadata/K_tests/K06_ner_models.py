@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z06_ner_models.py
+# corpus_metadata/K_tests/K06_ner_models.py
 """Tests for A_core/A13_ner_models.py - Unified NER data models."""
 
 

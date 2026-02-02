@@ -24,7 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 python corpus_metadata/orchestrator.py
 
 # Run tests
-cd corpus_metadata && python -m pytest tests/ -v
+cd corpus_metadata && python -m pytest K_tests/ -v
 
 # Type checking
 mypy corpus_metadata
@@ -259,7 +259,7 @@ Before marking any task complete, Claude MUST verify:
 
 ```bash
 # All tests pass
-cd corpus_metadata && python -m pytest tests/ -v
+cd corpus_metadata && python -m pytest K_tests/ -v
 
 # Type checking passes
 mypy corpus_metadata

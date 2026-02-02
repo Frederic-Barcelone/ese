@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z12_layout_models.py
+# corpus_metadata/K_tests/K12_layout_models.py
 """Tests for layout models used in layout-aware visual extraction."""
 
 

@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z17_caption_extractor.py
+# corpus_metadata/K_tests/K17_caption_extractor.py
 """
 Tests for multisource caption extraction.
 """

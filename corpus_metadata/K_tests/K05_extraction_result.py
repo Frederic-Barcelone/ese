@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z05_extraction_result.py
+# corpus_metadata/K_tests/K05_extraction_result.py
 """
 Tests for the universal extraction output contract.
 

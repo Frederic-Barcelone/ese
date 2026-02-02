@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z11_layout_e2e.py
+# corpus_metadata/K_tests/K11_layout_e2e.py
 """End-to-end tests for layout-aware visual extraction."""
 import pytest
 from unittest.mock import Mock, patch

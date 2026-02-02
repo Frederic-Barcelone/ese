@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z07_visual_models_layout.py
+# corpus_metadata/K_tests/K07_visual_models_layout.py
 """Tests for layout-aware fields in visual models."""
 
 from A_core.A13_visual_models import (

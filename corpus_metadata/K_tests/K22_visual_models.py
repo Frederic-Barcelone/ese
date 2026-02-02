@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z22_visual_models.py
+# corpus_metadata/K_tests/K22_visual_models.py
 """
 Tests for visual extraction data models.
 """

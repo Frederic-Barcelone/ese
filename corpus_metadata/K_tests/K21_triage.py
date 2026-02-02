@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z21_triage.py
+# corpus_metadata/K_tests/K21_triage.py
 """
 Tests for visual triage logic.
 """

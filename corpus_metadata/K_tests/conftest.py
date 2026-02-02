@@ -1,4 +1,4 @@
-# corpus_metadata/tests/conftest.py
+# corpus_metadata/K_tests/conftest.py
 """
 Pytest configuration and fixtures for corpus_metadata tests.
 

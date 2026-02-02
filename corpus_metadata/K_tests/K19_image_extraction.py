@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z19_image_extraction.py
+# corpus_metadata/K_tests/K19_image_extraction.py
 """
 Tests for image extraction coordinate handling and padding.
 

@@ -1,4 +1,4 @@
-# corpus_metadata/tests/Z14_zone_expander.py
+# corpus_metadata/K_tests/K14_zone_expander.py
 """Tests for zone expander (whitespace-based bbox computation)."""
 import pytest
 from B_parsing.B18_layout_models import (
