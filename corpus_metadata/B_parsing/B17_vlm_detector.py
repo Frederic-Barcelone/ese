@@ -93,45 +93,68 @@ def render_page_for_vlm(
 
 VLM_DETECTION_PROMPT = """Analyze this PDF page and identify ALL tables and figures.
 
+FIRST: Determine the page layout:
+- "two_column": Most academic papers have 2 columns of text (left ~0.05-0.48, right ~0.52-0.95)
+- "single_column": Full-width text layout
+
 For EACH visual element found, provide:
 1. type: "table" or "figure"
 2. bbox: bounding box as [x0, y0, x1, y1] where coordinates are fractions (0.0 to 1.0) of page dimensions
-   - x0, y0 = top-left corner
-   - x1, y1 = bottom-right corner
-   - IMPORTANT: Be GENEROUS with the bbox - include some margin around the visual
-3. label: the reference label if visible (e.g., "Table 1", "Figure 2A", "Fig. 3")
+3. label: the reference label if visible (e.g., "Table 1", "Figure 2A")
 4. caption_start: first ~50 characters of the caption if visible
-5. is_continuation: true if this is a continuation from a previous page (look for "continued" or similar)
-6. continues_next: true if this visual continues to the next page (incomplete, cut off at bottom)
+5. is_continuation: true if this continues from previous page
+6. continues_next: true if this continues to next page
+7. column_position: "left", "right", or "full_width"
 
-CRITICAL RULES for bounding boxes:
-- Multi-panel figures (with panels A, B, C, etc.) must have ONE bbox covering ALL panels
-- Include the figure title/label at the top AND the caption at the bottom
-- Include the axis labels and legends
-- Add ~2-3% padding on all sides to avoid cutting off content
-- For 2-column layouts: if a figure spans BOTH columns, use full page width (x0≈0.05, x1≈0.95)
-- For tables: include the table title above AND footnotes below
-- When in doubt, make the bbox LARGER rather than smaller
+CRITICAL BBOX RULES - READ CAREFULLY:
+
+1. NEVER include article text paragraphs in the bbox. The bbox should contain ONLY:
+   - The visual element itself (chart, graph, flowchart, table)
+   - The figure/table label (e.g., "Figure 1:")
+   - The caption text directly below/above the visual
+   - Axis labels and legends that are part of the visual
+
+2. For TWO-COLUMN layouts, figures are typically in ONE of these positions:
+   - LEFT COLUMN ONLY: x0≈0.05, x1≈0.48 (never extend past 0.50)
+   - RIGHT COLUMN ONLY: x0≈0.50, x1≈0.95 (never start before 0.48)
+   - FULL WIDTH (spanning both): x0≈0.05, x1≈0.95
+
+3. STRICT column boundaries:
+   - If the visual is in the LEFT column, x1 must be ≤0.50
+   - If the visual is in the RIGHT column, x0 must be ≥0.48
+   - Only use full width if the visual clearly spans BOTH columns
+
+4. Multi-panel figures (A, B, C panels):
+   - If panels are STACKED VERTICALLY in ONE column, the figure is in that column only
+   - If all panels are in the LEFT column, use x1≤0.50
+   - If all panels are in the RIGHT column, use x0≥0.48
+   - Only use full width (x0≈0.05, x1≈0.95) if panels are SIDE BY SIDE spanning both columns
+
+5. Be PRECISE, not generous. Tight bboxes are better than loose ones.
+
+6. COMMON MISTAKE TO AVOID: If you see article text next to the figure, DO NOT include it.
+   Check: is there a column of text running alongside the figure? If yes, the figure is in ONE column only.
 
 Visual types to detect:
-- Tables: data tables, demographic tables, results tables (may span 1 or 2 columns)
-- Figures: charts, graphs, bar plots, line plots, Kaplan-Meier curves, flowcharts, diagrams, forest plots
+- Tables: data tables with rows/columns of data
+- Figures: charts, graphs, plots, flowcharts, diagrams, images
 
-Return ONLY valid JSON in this exact format:
+Return ONLY valid JSON:
 {
   "visuals": [
     {
-      "type": "table",
-      "bbox": [0.05, 0.12, 0.95, 0.48],
-      "label": "Table 1",
-      "caption_start": "Baseline characteristics of participants",
+      "type": "figure",
+      "bbox": [0.50, 0.15, 0.95, 0.75],
+      "label": "Figure 1",
+      "caption_start": "Trial profile showing patient flow",
       "is_continuation": false,
       "continues_next": false,
-      "confidence": 0.95
+      "confidence": 0.95,
+      "column_position": "right"
     }
   ],
-  "page_layout": "two_column" or "single_column",
-  "notes": "any relevant observations"
+  "page_layout": "two_column",
+  "notes": "Figure 1 is a flowchart in the right column"
 }
 
 If no tables or figures are found, return: {"visuals": [], "page_layout": "...", "notes": "..."}"""

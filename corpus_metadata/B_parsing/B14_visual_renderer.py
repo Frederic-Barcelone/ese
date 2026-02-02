@@ -44,9 +44,9 @@ class RenderConfig:
     small_visual_threshold: float = 10000.0  # ~1.4 inch square
     large_visual_threshold: float = 100000.0  # ~4.4 inch square
 
-    # Padding in PDF points (increased for VLM detection which may have tight bboxes)
-    padding_sides_pts: float = 24.0  # ~0.33 inch - doubled for safety margin
-    padding_caption_pts: float = 90.0  # ~1.25 inch for caption zone
+    # Padding in PDF points (minimal - VLM should provide precise bboxes)
+    padding_sides_pts: float = 6.0  # ~0.08 inch - minimal margin
+    padding_caption_pts: float = 12.0  # ~0.17 inch - small buffer for caption
 
     # Image format
     image_format: str = "png"
