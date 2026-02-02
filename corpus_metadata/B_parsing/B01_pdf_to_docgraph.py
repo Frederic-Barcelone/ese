@@ -22,10 +22,14 @@ from __future__ import annotations
 import logging
 import os
 import re
+import warnings
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+# Suppress unstructured's pymupdf_layout suggestion
+warnings.filterwarnings("ignore", message=".*pymupdf_layout.*")
 
 import fitz  # PyMuPDF
 from unstructured.partition.pdf import partition_pdf
