@@ -280,7 +280,7 @@ class VisualCandidate(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
 
     # Source detection
-    source: Literal["docling", "native_raster", "native_vector", "layout_model", "vlm_detection", "layout_aware"]
+    source: Literal["docling", "native_raster", "native_vector", "layout_model", "vlm_detection", "layout_aware", "doclayout_yolo"]
     docling_type: Optional[str] = Field(
         default=None, description="Docling's classification if available"
     )

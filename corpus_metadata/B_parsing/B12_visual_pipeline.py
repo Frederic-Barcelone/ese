@@ -53,27 +53,10 @@ from B_parsing.B17_document_resolver import (
     ResolutionResult,
     resolve_document,
 )
-from B_parsing.B17_vlm_detector import (
-    detect_visuals_vlm_document,
-    VLMDetectedVisual,
-)
-from B_parsing.B18_layout_models import (
-    LayoutPattern,
-    PageLayout,
-    VisualPosition,
-    VisualZone,
-)
-from B_parsing.B19_layout_analyzer import (
-    analyze_page_layout,
-    render_page_for_analysis,
-)
-from B_parsing.B20_zone_expander import (
-    expand_all_zones,
-    ExpandedVisual,
-)
-from B_parsing.B21_filename_generator import (
-    generate_visual_filename,
-    sanitize_name,
+from B_parsing.B22_doclayout_detector import (
+    detect_visuals_doclayout,
+    DocLayoutVisual,
+    DocLayoutResult,
 )
 
 logger = logging.getLogger(__name__)
@@ -88,9 +71,14 @@ logger = logging.getLogger(__name__)
 class PipelineConfig:
     """Configuration for the visual extraction pipeline."""
 
-    # Detection mode: "heuristic", "vlm-only", "hybrid", or "layout-aware"
-    detection_mode: str = "vlm-only"
-    detection_model: str = "claude-sonnet-4-20250514"
+    # Detection mode: "doclayout" (recommended), "heuristic", or "hybrid"
+    # "doclayout" uses DocLayout-YOLO for accurate detection without VLM
+    detection_mode: str = "doclayout"
+    detection_model: str = "claude-sonnet-4-20250514"  # Only used for VLM enrichment
+
+    # DocLayout-YOLO settings
+    doclayout_detect_dpi: int = 144
+    doclayout_confidence: float = 0.3
 
     # Detection (used when mode is "heuristic" or "hybrid")
     detector: DetectorConfig = field(default_factory=DetectorConfig)
@@ -234,35 +222,29 @@ class VisualExtractionPipeline:
         """Stage 1: Detection."""
         mode = self.config.detection_mode
 
-        if mode == "layout-aware":
-            # Use layout-aware detection (recommended)
-            return self._detect_with_layout_awareness(pdf_path)
-        elif mode == "vlm-only":
-            # Use VLM-only detection
-            return self._detect_with_vlm(pdf_path)
+        if mode == "doclayout":
+            # Use DocLayout-YOLO detection (recommended - no VLM needed)
+            return self._detect_with_doclayout(pdf_path)
         elif mode == "hybrid":
-            # Use VLM with heuristic fallback
-            vlm_result = self._detect_with_vlm(pdf_path)
+            # Use DocLayout-YOLO with heuristic fallback
+            doclayout_result = self._detect_with_doclayout(pdf_path)
             heuristic_result = detect_all_visuals(pdf_path, self.config.detector)
-            # Merge results (VLM primary, heuristic fills gaps)
-            return self._merge_detection_results(vlm_result, heuristic_result)
+            # Merge results (DocLayout primary, heuristic fills gaps)
+            return self._merge_detection_results(doclayout_result, heuristic_result)
         else:
             # Default: heuristic detection
             return detect_all_visuals(pdf_path, self.config.detector)
 
-    def _detect_with_vlm(self, pdf_path: str) -> DetectionResult:
-        """Detect visuals using VLM."""
-        import anthropic
-
+    def _detect_with_doclayout(self, pdf_path: str) -> DetectionResult:
+        """Detect visuals using DocLayout-YOLO (no VLM required)."""
         try:
-            client = anthropic.Anthropic()
-            vlm_result = detect_visuals_vlm_document(
+            result = detect_visuals_doclayout(
                 pdf_path,
-                client=client,
-                model=self.config.detection_model,
+                detect_dpi=self.config.doclayout_detect_dpi,
+                confidence_threshold=self.config.doclayout_confidence,
             )
 
-            # Get page dimensions for each page
+            # Get page dimensions
             doc = fitz.open(pdf_path)
             page_dims = {}
             for i in range(doc.page_count):
@@ -270,9 +252,9 @@ class VisualExtractionPipeline:
                 page_dims[i + 1] = (page.rect.width, page.rect.height)
             doc.close()
 
-            # Convert VLM detections to VisualCandidate format
+            # Convert DocLayout detections to VisualCandidate format
             candidates = []
-            for v in vlm_result["visuals"]:
+            for v in result.visuals:
                 page_width, page_height = page_dims.get(v.page_num, (595, 842))
                 page_area = page_width * page_height
                 bbox = v.bbox_pts
@@ -280,157 +262,36 @@ class VisualExtractionPipeline:
 
                 candidate = VisualCandidate(
                     page_num=v.page_num,
-                    bbox_pts=v.bbox_pts,
+                    bbox_pts=bbox,
                     page_width_pts=page_width,
                     page_height_pts=page_height,
                     area_ratio=visual_area / page_area if page_area > 0 else 0,
-                    docling_type="table" if v.visual_type == "table" else "figure",
+                    docling_type=v.visual_type,
                     confidence=v.confidence,
-                    source="vlm_detection",
-                    vlm_label=v.label,
-                    vlm_caption_snippet=v.caption_snippet,
+                    source="doclayout_yolo",
                 )
+                # Store caption info if available
+                if v.caption_text:
+                    candidate.caption_candidate = type('Caption', (), {
+                        'text': v.caption_text,
+                        'position': v.caption_position,
+                        'parsed_reference': None,
+                        'provenance': None,
+                    })()
+
                 candidates.append(candidate)
 
             return DetectionResult(
                 candidates=candidates,
-                tables_detected=vlm_result["tables_detected"],
-                figures_detected=vlm_result["figures_detected"],
+                tables_detected=result.tables_detected,
+                figures_detected=result.figures_detected,
                 escalated_tables=0,
-                detection_mode="vlm-only",
+                detection_mode="doclayout",
             )
 
         except Exception as e:
-            logger.error(f"VLM detection failed: {e}, falling back to heuristic")
+            logger.error(f"DocLayout-YOLO detection failed: {e}, falling back to heuristic")
             return detect_all_visuals(pdf_path, self.config.detector)
-
-    def _detect_with_layout_awareness(self, pdf_path: str) -> DetectionResult:
-        """
-        Detect visuals using layout-aware approach.
-
-        This method:
-        1. Analyzes page layout pattern (full, 2col, hybrid)
-        2. Identifies visual zones (rough location)
-        3. Expands zones to whitespace boundaries
-        4. Generates layout-aware filenames
-        """
-        import anthropic
-
-        try:
-            client = anthropic.Anthropic()
-            doc = fitz.open(pdf_path)
-
-            candidates = []
-            tables_detected = 0
-            figures_detected = 0
-
-            try:
-                for page_idx in range(doc.page_count):
-                    page_num = page_idx + 1
-                    page = doc[page_idx]
-                    page_width = page.rect.width
-                    page_height = page.rect.height
-
-                    # Step 1: Analyze layout with VLM
-                    logger.debug(f"Analyzing layout for page {page_num}")
-                    layout = analyze_page_layout(
-                        doc,
-                        page_num,
-                        client,
-                        model=self.config.detection_model,
-                    )
-
-                    if not layout.visuals:
-                        logger.debug(f"No visuals found on page {page_num}")
-                        continue
-
-                    logger.info(
-                        f"Page {page_num}: {layout.pattern.value} layout, "
-                        f"{len(layout.visuals)} visuals"
-                    )
-
-                    # Step 2: Expand zones to whitespace boundaries
-                    text_blocks = self._extract_text_blocks(doc, page_num)
-                    expanded_visuals = expand_all_zones(
-                        layout=layout,
-                        page_width=page_width,
-                        page_height=page_height,
-                        text_blocks=text_blocks,
-                    )
-
-                    # Step 3: Create candidates with layout info
-                    for idx, expanded in enumerate(expanded_visuals, 1):
-                        zone = expanded.zone
-                        bbox = expanded.bbox_pts
-                        page_area = page_width * page_height
-                        visual_area = (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
-
-                        # Generate layout-aware filename
-                        doc_name = pdf_path.rsplit("/", 1)[-1] if "/" in pdf_path else pdf_path
-                        filename = generate_visual_filename(
-                            doc_name=doc_name,
-                            page_num=page_num,
-                            visual=expanded,
-                            index=idx,
-                        )
-
-                        candidate = VisualCandidate(
-                            page_num=page_num,
-                            bbox_pts=bbox,
-                            page_width_pts=page_width,
-                            page_height_pts=page_height,
-                            area_ratio=visual_area / page_area if page_area > 0 else 0,
-                            docling_type=zone.visual_type.lower(),
-                            confidence=zone.confidence,
-                            source="layout_aware",
-                            vlm_label=zone.label,
-                            vlm_caption_snippet=zone.caption_snippet,
-                        )
-                        # Store layout metadata for filename generation
-                        candidate.layout_code = expanded.layout_code
-                        candidate.position_code = expanded.position_code
-                        candidate.layout_filename = filename
-
-                        candidates.append(candidate)
-
-                        if zone.visual_type.lower() == "table":
-                            tables_detected += 1
-                        else:
-                            figures_detected += 1
-
-            finally:
-                doc.close()
-
-            return DetectionResult(
-                candidates=candidates,
-                tables_detected=tables_detected,
-                figures_detected=figures_detected,
-                escalated_tables=0,
-                detection_mode="layout-aware",
-            )
-
-        except Exception as e:
-            logger.error(f"Layout-aware detection failed: {e}, falling back to VLM-only")
-            return self._detect_with_vlm(pdf_path)
-
-    def _extract_text_blocks(self, doc: fitz.Document, page_num: int) -> List[Dict]:
-        """Extract text blocks from a page for whitespace detection."""
-        page = doc[page_num - 1]
-        blocks = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)["blocks"]
-
-        text_blocks = []
-        for block in blocks:
-            if block.get("type") == 0:  # Text block
-                text_blocks.append({
-                    "bbox": block.get("bbox"),
-                    "text": "".join(
-                        span.get("text", "")
-                        for line in block.get("lines", [])
-                        for span in line.get("spans", [])
-                    ),
-                })
-
-        return text_blocks
 
     def _merge_detection_results(
         self,
@@ -765,15 +626,12 @@ def extract_figures_only(pdf_path: str) -> List[ExtractedVisual]:
     return [v for v in result.visuals if v.is_figure]
 
 
-def extract_visuals_layout_aware(pdf_path: str) -> PipelineResult:
+def extract_visuals_doclayout(pdf_path: str) -> PipelineResult:
     """
-    Extract visuals using layout-aware detection (recommended).
+    Extract visuals using DocLayout-YOLO detection (recommended).
 
-    This method:
-    1. Analyzes page layout pattern (full, 2col, hybrid)
-    2. Identifies visual zones (rough location)
-    3. Expands zones to whitespace boundaries
-    4. Generates layout-aware filenames
+    This method uses DocLayout-YOLO for accurate figure/table detection
+    without requiring VLM. Fast and accurate.
 
     Args:
         pdf_path: Path to PDF file
@@ -781,7 +639,7 @@ def extract_visuals_layout_aware(pdf_path: str) -> PipelineResult:
     Returns:
         PipelineResult with extracted visuals
     """
-    config = PipelineConfig(detection_mode="layout-aware")
+    config = PipelineConfig(detection_mode="doclayout")
     pipeline = VisualExtractionPipeline(config)
     return pipeline.extract(pdf_path)
 
@@ -793,7 +651,7 @@ __all__ = [
     "VisualExtractionPipeline",
     # Convenience functions
     "extract_visuals",
-    "extract_visuals_layout_aware",
+    "extract_visuals_doclayout",
     "extract_tables_only",
     "extract_figures_only",
 ]
