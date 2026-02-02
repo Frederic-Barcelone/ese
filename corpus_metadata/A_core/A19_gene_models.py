@@ -11,16 +11,15 @@ Supports:
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from A_core.A01_domain_models import (
+    BaseProvenanceMetadata,
     Coordinate,
     EvidenceSpan,
-    LLMParameters,
     ValidationStatus,
 )
 
@@ -92,32 +91,21 @@ class GeneDiseaseLinkage(BaseModel):
 
 
 # -------------------------
-# Gene provenance
+# Gene provenance (extends base provenance)
 # -------------------------
 
 
-class GeneProvenanceMetadata(BaseModel):
-    """Provenance metadata for gene detection."""
+class GeneProvenanceMetadata(BaseProvenanceMetadata):
+    """
+    Provenance metadata for gene detection.
 
-    pipeline_version: str
-    run_id: str
-    doc_fingerprint: str
+    Inherits common provenance fields from BaseProvenanceMetadata and adds:
+    - generator_name: GeneGeneratorType (overrides base Enum type)
+    - lexicon_ids: Gene-specific identifiers (GeneIdentifier)
+    """
 
     generator_name: GeneGeneratorType
-    rule_version: Optional[str] = None
-
-    # Lexicon provenance
-    lexicon_source: Optional[str] = None
-    lexicon_ids: Optional[List[GeneIdentifier]] = None
-
-    # LLM verification (if applicable)
-    prompt_bundle_hash: Optional[str] = None
-    context_hash: Optional[str] = None
-    llm_config: Optional[LLMParameters] = None
-
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
+    lexicon_ids: Optional[List[GeneIdentifier]] = None  # Gene codes
 
 
 # -------------------------
