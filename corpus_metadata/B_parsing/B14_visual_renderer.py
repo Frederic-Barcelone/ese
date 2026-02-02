@@ -1,15 +1,33 @@
 # corpus_metadata/B_parsing/B14_visual_renderer.py
 """
-Visual Renderer with Point-Based Padding.
+Visual renderer with point-based padding and adaptive DPI.
 
-Renders visual elements (tables and figures) at high resolution
-with proper coordinate space discipline.
+This module renders visual elements (tables and figures) at high resolution
+using PyMuPDF with strict coordinate space discipline. All coordinates are
+in PDF points (canonical), padding is point-based, and DPI adapts based on
+visual size for optimal quality/size tradeoffs.
 
-Key features:
-- All coordinates in PDF points (canonical)
-- Point-based padding (not pixels)
-- Adaptive DPI based on visual size
-- Tight cropping to visual + caption bounds
+Key Components:
+    - RenderConfig: Configuration for DPI, padding, and image format
+    - render_visual: Main rendering function with caption-aware padding
+    - render_table_as_image: Render table region as base64 image
+    - render_full_page_from_path: Render entire page as image
+    - render_multipage_table: Render multi-page table as single image
+    - pts_to_pixels: Convert PDF points to pixels at given DPI
+    - pixels_to_pts: Convert pixels to PDF points at given DPI
+    - bbox_pts_to_pixels: Convert bbox from PDF points to pixels
+
+Example:
+    >>> import fitz
+    >>> from B_parsing.B14_visual_renderer import render_visual, RenderConfig
+    >>> doc = fitz.open("paper.pdf")
+    >>> config = RenderConfig(default_dpi=300)
+    >>> result = render_visual(doc, page_num=1, bbox_pts=(100, 200, 400, 500))
+    >>> print(f"Rendered at {result.dpi} DPI, {len(result.image_base64)} bytes")
+
+Dependencies:
+    - A_core.A13_visual_models: PageLocation
+    - fitz (PyMuPDF): PDF rendering
 """
 from __future__ import annotations
 

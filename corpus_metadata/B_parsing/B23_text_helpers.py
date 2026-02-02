@@ -2,13 +2,32 @@
 """
 Text normalization, cleaning, and pattern utilities for PDF parsing.
 
-Provides:
-- Text normalization for header/footer detection
-- Abbreviation hyphen handling
-- OCR garbage filtering
-- Garbled flowchart detection
-- Section detection patterns
-- Document markdown conversion utilities
+This module provides text processing utilities used throughout the PDF parsing
+pipeline: text normalization for header/footer detection, abbreviation hyphen
+handling (MG-ADL), OCR garbage filtering, garbled flowchart detection, section
+detection patterns, and document markdown conversion utilities.
+
+Key Components:
+    - normalize_repeated_text: Normalize text for repetition detection (lowercase, digits -> #)
+    - normalize_abbrev_hyphens: Fix spaced abbreviation hyphens (MG- ADL -> MG-ADL)
+    - clean_text: Remove leading pipes, fix hyphens, strip whitespace
+    - is_garbled_flowchart: Detect garbled flowchart OCR output
+    - extract_figure_reference: Extract figure reference from garbled text
+    - table_to_markdown: Convert table to markdown format
+    - bbox_overlaps: Check if two bounding boxes overlap significantly
+    - SECTION_NUM_RE: Regex for numbered section headers (e.g., "2 | Methods")
+    - SECTION_PLAIN_RE: Regex for plain section headers (e.g., "Methods")
+    - NUMBERED_REFERENCE_RE: Regex for numbered references
+    - PERCENTAGE_PATTERN: Regex for percentage values
+
+Example:
+    >>> from B_parsing.B23_text_helpers import normalize_repeated_text, clean_text
+    >>> text = "| Andreas et al. Page 123"
+    >>> normalized = normalize_repeated_text(text)  # "andreas et al. page #"
+    >>> cleaned = clean_text(text)  # "Andreas et al. Page 123"
+
+Dependencies:
+    - A_core.A01_domain_models: BoundingBox (TYPE_CHECKING only)
 """
 
 from __future__ import annotations

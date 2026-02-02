@@ -1,14 +1,33 @@
 # corpus_metadata/B_parsing/B11_extraction_resolver.py
 """
-Deterministic Extraction Resolver
+Deterministic figure/table extraction resolver with caption anchoring.
 
-Merges all figure/table extraction signals (raster, vector, layout model)
-using fixed rules with caption anchoring as highest priority.
+This module merges all extraction signals (raster, vector, layout model) using
+fixed priority rules: caption-anchored figures first, then orphan native figures,
+then layout model figures only when no native coverage exists. It handles
+overlap detection and deduplication across extraction sources.
 
-Resolution rules:
-1. Caption-anchored figures (highest priority)
-2. Orphan native figures (no caption match, not overlapping tables)
-3. Layout model figures (only if no native coverage)
+Key Components:
+    - ResolvedFigure: Resolved figure with provenance (caption_linked/orphan_native/layout_model)
+    - ResolvedTable: Resolved table region with caption linkage
+    - resolve_all: Main resolution function merging all extraction sources
+    - resolve_tables: Resolve table regions based on captions
+    - filter_duplicate_figures: Remove overlapping duplicates with priority ordering
+    - bbox_overlaps: Check significant overlap between bounding boxes
+    - get_resolution_stats: Statistics about resolution results
+
+Example:
+    >>> from B_parsing.B11_extraction_resolver import resolve_all
+    >>> figures, tables = resolve_all(
+    ...     raster_figures, vector_figures, layout_figures,
+    ...     captions, columns_by_page, doc
+    ... )
+    >>> for fig in figures:
+    ...     print(f"{fig.source}: {fig.caption_text or 'No caption'}")
+
+Dependencies:
+    - B_parsing.B09_pdf_native_figures: EmbeddedFigure, VectorFigure
+    - B_parsing.B10_caption_detector: Caption, TableRegion, linking functions
 """
 
 from __future__ import annotations

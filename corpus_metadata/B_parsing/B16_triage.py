@@ -1,20 +1,31 @@
 # corpus_metadata/B_parsing/B16_triage.py
 """
-Visual Triage Logic for Visual Pipeline.
+Visual triage logic for determining VLM processing requirements.
 
-Determines which visuals need VLM processing vs can be skipped.
+This module determines which visual candidates need VLM processing versus can be
+skipped or handled cheaply. It uses cheap signals (area ratio, repeated image hash,
+caption presence, grid structure, body text references) to minimize expensive VLM
+calls while ensuring important visuals receive full enrichment.
 
-Key decisions:
-- SKIP: Noise like logos, separators, repeated graphics
-- CHEAP_PATH: Simple visuals with minimal processing
-- VLM_REQUIRED: Needs full VLM enrichment
+Key Components:
+    - TriageConfig: Configuration for area thresholds, repeat detection, margins
+    - TriageResult: Triage decision with reason and confidence
+    - TriageDecision: Enum (SKIP, CHEAP_PATH, VLM_REQUIRED)
+    - DocumentContext: Document-level context for triage (repeated hashes, references)
+    - triage_batch: Batch triage of visual candidates
+    - get_vlm_candidates: Filter candidates requiring VLM processing
+    - is_in_margin_zone: Check if visual is in header/footer margin
+    - should_escalate_to_accurate: Check if table needs ACCURATE mode
+    - compute_triage_statistics: Summary statistics for triage results
 
-Cheap signals used before expensive VLM calls:
-- Area ratio (tiny = skip)
-- Repeated image hash (header/footer = skip)
-- Caption presence (has caption = VLM)
-- Grid structure (likely table = VLM)
-- Body text references (important = VLM)
+Example:
+    >>> from B_parsing.B16_triage import triage_batch, TriageConfig
+    >>> config = TriageConfig(skip_area_ratio=0.02, vlm_area_threshold=0.10)
+    >>> triaged = triage_batch(candidates, config)
+    >>> vlm_needed = [c for c, r in triaged if r.decision == TriageDecision.VLM_REQUIRED]
+
+Dependencies:
+    - A_core.A13_visual_models: TableComplexitySignals, TriageDecision, TriageResult, VisualCandidate
 """
 from __future__ import annotations
 

@@ -1,15 +1,32 @@
 # corpus_metadata/B_parsing/B10_caption_detector.py
 """
-Caption Detection and Column Layout Analysis
+Caption detection and column layout analysis for PDF visual extraction.
 
-Detects Figure X and Table X captions with their positions,
-infers page column layout, and links captions to figure regions.
+This module detects Figure X and Table X captions, infers page column layout
+from text block distribution, and links captions to figure regions. It supports
+two-column academic layouts and provides column-aware table region definitions
+for accurate visual element extraction.
 
-Key capabilities:
-- Caption detection via regex patterns
-- Column layout inference from text distribution
-- Caption-to-figure linking (nearest region above caption)
-- Column-aware table region definition
+Key Components:
+    - Caption: Detected caption with type, number, bbox, and column index
+    - TableRegion: Table region based on caption and column bounds
+    - detect_all_captions: Find all figure/table captions on a page
+    - infer_page_columns: Detect column boundaries from text distribution
+    - link_caption_to_figure: Link caption to nearest figure above
+    - get_table_region_column_aware: Define table region respecting columns
+    - detect_captions_all_pages: Detect captions across entire document
+
+Example:
+    >>> import fitz
+    >>> from B_parsing.B10_caption_detector import detect_captions_all_pages
+    >>> doc = fitz.open("paper.pdf")
+    >>> captions, columns = detect_captions_all_pages(doc)
+    >>> for cap in captions:
+    ...     print(f"{cap.caption_type} {cap.number}: {cap.text[:50]}")
+
+Dependencies:
+    - fitz (PyMuPDF): PDF text extraction
+    - B_parsing.B09_pdf_native_figures: EmbeddedFigure, VectorFigure
 """
 
 from __future__ import annotations

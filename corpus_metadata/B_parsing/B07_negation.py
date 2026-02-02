@@ -1,10 +1,29 @@
-# corpus_metadata/corpus_metadata/B_parsing/B07_negation.py
+# corpus_metadata/B_parsing/B07_negation.py
 """
-Negation detection utilities for extraction pipelines.
+Negation and assertion detection utilities for clinical text extraction.
 
-Provides reusable negation detection for all extractors (C06-C08+).
-Critical for eligibility criteria ("no prior treatment") and disease mentions
-("no evidence of cancer").
+This module provides reusable negation detection for all extractors, critical
+for correctly interpreting eligibility criteria ("no prior treatment") and
+clinical findings ("no evidence of cancer"). It handles direct negation cues,
+prefix negation, exception clauses, and double negation patterns.
+
+Key Components:
+    - NegationDetector: Main class for context-aware negation detection
+    - NegationResult: Detection result with cue, position, and flags
+    - AssertionClassifier: Extended classifier for PRESENT/ABSENT/POSSIBLE/etc.
+    - AssertionType: Enum for assertion types (PRESENT, ABSENT, POSSIBLE, CONDITIONAL, HISTORICAL, FAMILY)
+    - NEGATION_CUES: Set of direct negation words ("no", "not", "without", etc.)
+    - NEGATION_PREFIXES: List of negation prefixes ("non-", "un-", "in-", etc.)
+
+Example:
+    >>> from B_parsing.B07_negation import NegationDetector, is_negated
+    >>> detector = NegationDetector()
+    >>> result = detector.detect("No prior treatment with immunotherapy", match_start=15)
+    >>> print(f"Negated: {result.is_negated}, Cue: {result.negation_cue}")
+    Negated: True, Cue: no
+
+Dependencies:
+    - None (standalone module)
 """
 
 from __future__ import annotations

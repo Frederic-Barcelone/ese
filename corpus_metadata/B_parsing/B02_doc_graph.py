@@ -1,13 +1,37 @@
 # corpus_metadata/B_parsing/B02_doc_graph.py
 """
-Document graph data structures for parsed PDFs.
+Pydantic data structures representing parsed PDF document structure.
 
-Provides Pydantic models for:
-- TextBlock: Atomic text unit with role and position
-- TableBlock: Extracted table with rows/columns
-- ImageBlock: Figure/image with optional OCR text
-- Page: Collection of blocks for a single page
-- DocumentGraph: Full document structure with metadata
+This module defines the core domain models for representing parsed PDF documents
+as structured graphs. It provides a hierarchical representation with pages containing
+text blocks, tables, and images, each with bounding boxes and content roles for
+downstream extraction pipelines.
+
+Key Components:
+    - DocumentGraph: Top-level container for parsed document with page collection
+    - Page: Single page with text blocks, tables, and images
+    - TextBlock: Atomic text unit with role (body, header, footer) and position
+    - Table: Dual-view table with physical cells and logical rows
+    - TableCell: Physical cell with row/col indices and spans
+    - ImageBlock: Figure/image with base64 data, caption, and classification
+    - ContentRole: Enum for text block roles (BODY_TEXT, SECTION_HEADER, etc.)
+    - TableType: Enum for table types (DATA_GRID, GLOSSARY, LAYOUT_GRID)
+    - ImageType: Enum for image types (FIGURE, FLOWCHART, CHART, DIAGRAM, etc.)
+
+Example:
+    >>> from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole
+    >>> page = Page(number=1, width=612.0, height=792.0)
+    >>> block = TextBlock(
+    ...     text="Introduction",
+    ...     page_num=1,
+    ...     reading_order_index=0,
+    ...     role=ContentRole.SECTION_HEADER,
+    ...     bbox=BoundingBox(coords=(72, 72, 540, 90)),
+    ... )
+    >>> page.blocks.append(block)
+
+Dependencies:
+    - A_core.A01_domain_models: BoundingBox for coordinate representation
 """
 from __future__ import annotations
 

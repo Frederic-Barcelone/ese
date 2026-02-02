@@ -1,15 +1,31 @@
 # corpus_metadata/B_parsing/B22_doclayout_detector.py
 """
-DocLayout-YOLO Visual Detector.
+DocLayout-YOLO visual detector for accurate figure/table detection.
 
-Uses DocLayout-YOLO model for accurate figure/table detection.
-No VLM required - pure YOLO-based detection.
+This module uses the DocLayout-YOLO model for fast, accurate detection of figures
+and tables without requiring VLM. It provides accurate bounding boxes, caption
+extraction and association, and high-resolution cropping with PyMuPDF. Inference
+is fast (~0.5s per page) making it suitable for production workloads.
 
-Key features:
-1. Accurate bounding boxes from YOLO detection
-2. Caption extraction and association
-3. High-resolution cropping with PyMuPDF clip
-4. Fast inference (~0.5s per page)
+Key Components:
+    - DocLayoutVisual: Detected visual with bbox, confidence, caption, and VLM description
+    - DetectedCaption: Caption detected by DocLayout-YOLO
+    - DocLayoutResult: Detection results for entire document
+    - detect_visuals_doclayout: Main detection function using DocLayout-YOLO
+    - generate_vlm_description: Generate VLM title/description for visual
+    - DOCLAYOUT_CATEGORIES: Category mapping from DocLayout-YOLO model
+    - VISUAL_CATEGORIES: Categories to extract (figure, table)
+    - CAPTION_CATEGORIES: Caption categories to associate
+
+Example:
+    >>> from B_parsing.B22_doclayout_detector import detect_visuals_doclayout
+    >>> result = detect_visuals_doclayout("paper.pdf", detect_dpi=144)
+    >>> for visual in result.visuals:
+    ...     print(f"{visual.visual_type} on page {visual.page_num}: {visual.caption_text}")
+
+Dependencies:
+    - fitz (PyMuPDF): PDF rendering and text extraction
+    - doclayout_yolo: DocLayout-YOLO model (optional)
 """
 from __future__ import annotations
 

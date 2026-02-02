@@ -1,9 +1,29 @@
-# corpus_metadata/corpus_metadata/B_parsing/B05_section_detector.py
+# corpus_metadata/B_parsing/B05_section_detector.py
 """
-Layout-aware section detection for document parsing.
+Layout-aware section detection for clinical document parsing.
 
-Provides reusable section detection for all extractors (C06-C08+).
-Uses multiple signals: block metadata, layout heuristics, and pattern matching.
+This module provides reusable section detection for all entity extractors using
+multiple signals: block metadata from PDF parsing, layout heuristics (ALL CAPS,
+numbered sections, bold text), and pattern matching against known section headers
+(Methods, Results, Eligibility Criteria, etc.).
+
+Key Components:
+    - SectionDetector: Main class for detecting section boundaries with multi-signal fusion
+    - SectionInfo: Detected section with name, confidence, and triggering signals
+    - SECTION_PATTERNS: Dict of compiled regex patterns by section type
+    - detect_section: Simple function to detect section from text
+    - get_section_detector: Get singleton detector instance
+
+Example:
+    >>> from B_parsing.B05_section_detector import SectionDetector
+    >>> detector = SectionDetector()
+    >>> for block in doc.iter_linear_blocks():
+    ...     section = detector.detect(block.text, block)
+    ...     if section:
+    ...         print(f"Section: {section.name} (confidence: {section.confidence})")
+
+Dependencies:
+    - B_parsing.B02_doc_graph: ContentRole for block role checking
 """
 
 from __future__ import annotations

@@ -1,18 +1,35 @@
 # corpus_metadata/B_parsing/B15_caption_extractor.py
 """
-Multisource Caption Extraction for Visual Pipeline.
+Multisource caption extraction with provenance tracking for visual pipeline.
 
-Extracts captions using multiple sources in priority order:
-1. PDF text blocks (preferred for born-digital documents)
-2. OCR fallback (for scanned documents)
-3. VLM extraction (handled downstream)
+This module extracts captions using multiple sources in priority order: PDF text
+blocks (preferred for born-digital documents), OCR fallback (for scanned documents),
+and VLM extraction (handled downstream). It uses point-based search zones, handles
+above/below/left/right caption positions, and supports 2-column academic layouts.
 
-Key improvements over B10_caption_detector:
-- Point-based search zones (not pixels)
-- Multisource extraction with provenance tracking
-- Handles above/below/left/right positions
-- 2-column layout support
-- Comprehensive caption patterns for clinical documents
+Key Components:
+    - CaptionSearchZones: Configuration for search zone sizes (points)
+    - CaptionCandidate: Extracted caption with text, position, and provenance
+    - ColumnLayout: Detected column boundaries for a page
+    - extract_caption_multisource: Main caption extraction function
+    - extract_all_captions_on_page: Extract all captions on a single page
+    - infer_column_layout: Detect column boundaries from text distribution
+    - parse_reference_from_match: Parse VisualReference from regex match
+    - FIGURE_PATTERNS: Compiled regex patterns for figure captions
+    - TABLE_PATTERNS: Compiled regex patterns for table captions
+
+Example:
+    >>> import fitz
+    >>> from B_parsing.B15_caption_extractor import extract_caption_multisource
+    >>> doc = fitz.open("paper.pdf")
+    >>> result = extract_caption_multisource(doc, page_num=1, bbox_pts=(100, 200, 400, 500))
+    >>> if result.best_caption:
+    ...     print(f"Caption: {result.best_caption.text}")
+
+Dependencies:
+    - A_core.A13_visual_models: CaptionCandidate, CaptionProvenance, CaptionSearchZones,
+      ReferenceSource, VisualReference
+    - fitz (PyMuPDF): PDF text extraction
 """
 from __future__ import annotations
 

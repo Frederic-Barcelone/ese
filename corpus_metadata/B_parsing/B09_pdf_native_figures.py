@@ -1,15 +1,29 @@
 # corpus_metadata/B_parsing/B09_pdf_native_figures.py
 """
-PDF Native Figure Extraction
+Native PDF figure extraction using PyMuPDF for raster and vector graphics.
 
-Extracts raster figures (embedded images) and vector figures (drawings/plots)
-directly from PDF using PyMuPDF primitives.
+This module extracts figures directly from PDF using PyMuPDF primitives rather
+than layout model detection. It handles raster figures (embedded images via
+XObjects) and vector figures (drawings/plots via path detection), with noise
+filtering for logos/headers/footers and deduplication via content hash.
 
-Key capabilities:
-- Raster figures via get_images() + get_image_rects()
-- Vector figures via get_drawings() + text density heuristics
-- Noise filtering (logos, headers, footers)
-- Image deduplication via content hash
+Key Components:
+    - EmbeddedFigure: Raster figure with page number, bbox, xref, and hash
+    - VectorFigure: Vector plot with drawing count and axis text detection
+    - extract_embedded_figures: Extract raster figures from PDF
+    - detect_vector_figures: Detect vector plots using drawing primitives
+    - filter_noise_images: Remove logos, headers, footers by repetition/size
+    - detect_all_figures: Main entry point for both raster and vector extraction
+    - render_figure_by_xref: Lazy render image with colorspace normalization
+    - render_vector_figure: Export vector figure by rendering clipped region
+
+Example:
+    >>> from B_parsing.B09_pdf_native_figures import detect_all_figures
+    >>> raster, vector = detect_all_figures("paper.pdf", min_area_ratio=0.03)
+    >>> print(f"Found {len(raster)} raster and {len(vector)} vector figures")
+
+Dependencies:
+    - fitz (PyMuPDF): PDF rendering and extraction
 """
 
 from __future__ import annotations

@@ -1,21 +1,36 @@
 # corpus_metadata/B_parsing/B28_docling_backend.py
 """
-Docling-based table extraction backend.
+Docling-based table extraction backend using TableFormer model.
 
-Uses IBM's Docling library with TableFormer model for high-accuracy
-table structure recognition (95-98% TEDS score on complex tables).
+This module provides high-accuracy table structure recognition (95-98% TEDS score)
+using IBM's Docling library with the TableFormer model. It handles complex nested
+tables, merged cells (colspan/rowspan), tables with partial or no borders, and
+multi-row headers.
 
-This module provides an alternative to Unstructured's table extraction,
-offering superior accuracy especially for:
-- Complex nested tables
-- Merged cells (colspan/rowspan)
-- Tables with partial or no borders
-- Multi-row headers
+Key Components:
+    - DoclingTableExtractor: Main extraction class with configurable TableFormer mode
+    - DOCLING_AVAILABLE: Flag indicating if Docling is installed
+    - extract_tables: Extract tables from PDF with structure recognition
+
+Example:
+    >>> from B_parsing.B28_docling_backend import DoclingTableExtractor
+    >>> extractor = DoclingTableExtractor(config={
+    ...     "mode": "accurate",  # or "fast"
+    ...     "do_cell_matching": True,
+    ...     "ocr_enabled": True,
+    ... })
+    >>> tables = extractor.extract_tables("document.pdf")
+    >>> for table in tables:
+    ...     print(f"Page {table['page_num']}: {len(table['rows'])} rows")
+
+Dependencies:
+    - docling: IBM Docling library with TableFormer
+    - docling_surya: SuryaOCR integration for Docling
 
 References:
-- Docling: https://github.com/docling-project/docling
-- TableFormer paper: https://arxiv.org/abs/2203.01017
-- Docling technical report: https://arxiv.org/abs/2408.09869
+    - Docling: https://github.com/docling-project/docling
+    - TableFormer paper: https://arxiv.org/abs/2203.01017
+    - Docling technical report: https://arxiv.org/abs/2408.09869
 """
 
 from __future__ import annotations

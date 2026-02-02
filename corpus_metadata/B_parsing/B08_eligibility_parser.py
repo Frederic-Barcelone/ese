@@ -1,17 +1,30 @@
 # corpus_metadata/B_parsing/B08_eligibility_parser.py
 """
-Eligibility criteria logical expression parser.
+Eligibility criteria logical expression parser for clinical trials.
 
-Parses eligibility criteria text into structured LogicalExpression trees
-that can be evaluated programmatically for feasibility simulation.
+This module parses natural language eligibility criteria text into structured
+LogicalExpression trees that can be evaluated programmatically for feasibility
+simulation. It handles AND/OR operators, nested parentheses, negation, lab value
+ranges (eGFR >= 30), severity grades (NYHA, ECOG, CKD), and age criteria.
 
-Handles:
-- AND/OR operators (explicit and implicit)
-- Nested parentheses
-- Negation
-- Lab value ranges
-- Severity grades (NYHA, ECOG, CKD)
-- Age criteria
+Key Components:
+    - EligibilityParser: Main parser class for criteria text
+    - LogicalExpression: Parsed expression tree with criteria references
+    - ParsedCriterion: Intermediate representation with lab/severity data
+    - TokenizedCriteria: Tokenized criteria with operator and criterion IDs
+    - parse_eligibility: Convenience function for parsing criteria text
+
+Example:
+    >>> from B_parsing.B08_eligibility_parser import EligibilityParser
+    >>> parser = EligibilityParser()
+    >>> expr = parser.parse("Age >= 18 years and eGFR >= 30 mL/min")
+    >>> for crit_id, criterion in expr.criteria_refs.items():
+    ...     print(f"{crit_id}: {criterion.text}")
+
+Dependencies:
+    - A_core.A07_feasibility_models: CriterionNode, CriterionType, EligibilityCriterion,
+      ExtractionMethod, LabCriterion, LogicalExpression, LogicalOperator,
+      SeverityGrade, SeverityGradeType, SEVERITY_GRADE_MAPPINGS
 """
 
 from __future__ import annotations

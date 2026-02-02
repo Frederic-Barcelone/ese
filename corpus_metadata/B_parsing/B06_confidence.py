@@ -1,9 +1,37 @@
-# corpus_metadata/corpus_metadata/B_parsing/B06_confidence.py
+# corpus_metadata/B_parsing/B06_confidence.py
 """
-Feature-based confidence scoring framework for extraction candidates.
+Feature-based confidence scoring framework for entity extraction candidates.
 
-Provides a unified confidence calculation system for all extractors (C06-C08+).
-Confidence is computed from multiple features rather than a single heuristic.
+This module provides a unified confidence calculation system for all extractors,
+computing scores from multiple features: section context, pattern strength, anchor
+proximity, negation penalties, and external validation. It includes anti-hallucination
+penalties for unverified quotes and numerical values.
+
+Key Components:
+    - ConfidenceFeatures: Dataclass for feature-based score calculation
+    - ConfidenceCalculator: Unified calculator for all extractors
+    - CriterionConfidenceCalculator: Criterion-specific scoring for eligibility criteria
+    - ContradictionDetector: Detects logical conflicts between eligibility criteria
+    - UnifiedConfidenceCalculator: Single source of truth for confidence computation
+    - SPECULATION_CUES: Words indicating uncertainty (reduce confidence)
+    - CERTAINTY_CUES: Words indicating high certainty (boost confidence)
+    - CRITERION_TYPE_WEIGHTS: Learned weights per eligibility criterion category
+
+Example:
+    >>> from B_parsing.B06_confidence import ConfidenceFeatures, get_confidence_calculator
+    >>> calc = get_confidence_calculator()
+    >>> features = calc.calculate(
+    ...     field_type="DISEASE",
+    ...     section="abstract",
+    ...     text="Patients with pulmonary arterial hypertension...",
+    ...     match_text="pulmonary arterial hypertension",
+    ...     lexicon_matched=True,
+    ... )
+    >>> score = features.total()  # Computed confidence score
+
+Dependencies:
+    - A_core.A02_interfaces: RawExtraction (TYPE_CHECKING only)
+    - A_core.A14_extraction_result: ExtractionResult, EntityType, Provenance
 """
 
 from __future__ import annotations

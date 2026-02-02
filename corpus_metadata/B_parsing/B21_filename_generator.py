@@ -1,16 +1,29 @@
 # corpus_metadata/B_parsing/B21_filename_generator.py
 """
-Layout-Aware Filename Generator.
+Layout-aware filename generator for visual element exports.
 
-Generates filenames that encode:
-- Document name
-- Visual type (figure/table)
-- Page number
-- Layout pattern (full, 2col, 2col-fullbot, fulltop-2col)
-- Position (L, R, F)
-- Index (for multiple visuals in same position)
-
+This module generates filenames that encode document name, visual type, page number,
+layout pattern, position, and index for consistent naming of extracted visuals.
 Format: {doc}_{type}_p{page}_{layout}_{position}_{index}.png
+
+Key Components:
+    - generate_visual_filename: Generate layout-aware filename for a visual
+    - sanitize_name: Sanitize document name for filesystem safety
+    - parse_visual_filename: Parse filename back to components (inverse operation)
+
+Example:
+    >>> from B_parsing.B21_filename_generator import generate_visual_filename
+    >>> from B_parsing.B20_zone_expander import ExpandedVisual
+    >>> filename = generate_visual_filename(
+    ...     doc_name="clinical_trial.pdf",
+    ...     page_num=3,
+    ...     visual=expanded_visual,
+    ...     index=1,
+    ... )
+    >>> print(filename)  # clinical_trial_figure_p3_2col_L_1.png
+
+Dependencies:
+    - B_parsing.B20_zone_expander: ExpandedVisual
 """
 from __future__ import annotations
 

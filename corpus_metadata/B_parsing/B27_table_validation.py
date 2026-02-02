@@ -1,13 +1,28 @@
 # corpus_metadata/B_parsing/B27_table_validation.py
 """
-Table validation and false positive filtering.
+Table validation and false positive filtering for extraction quality.
 
-Provides:
-- Prose text detection (multi-column article text misclassified as tables)
-- Definition/glossary table salvaging
-- Table structure validation
+This module validates extracted tables and filters false positives like
+multi-column article text misclassified as tables. It also salvages
+definition/glossary tables that might otherwise be rejected and validates
+proper table structure (minimum rows, columns, HTML tags).
 
-Extracted from B03_table_extractor.py to reduce file size.
+Key Components:
+    - is_valid_table: Main validation function checking structure and content
+    - is_prose_text_table: Detect prose text misclassified as table
+    - is_definition_table: Check if table is a valid definition/glossary table
+    - MIN_TABLE_CONFIDENCE: Minimum confidence threshold for tables
+    - MIN_TABLE_ROWS: Minimum rows required for valid table
+    - MIN_TABLE_COLS: Minimum columns required for valid table
+
+Example:
+    >>> from B_parsing.B27_table_validation import is_valid_table
+    >>> is_valid, reason = is_valid_table(rows, html)
+    >>> if not is_valid:
+    ...     print(f"Rejected: {reason}")
+
+Dependencies:
+    - beautifulsoup4: HTML parsing for structure validation
 """
 
 from __future__ import annotations

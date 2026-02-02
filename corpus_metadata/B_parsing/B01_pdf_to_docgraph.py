@@ -1,20 +1,37 @@
 # corpus_metadata/B_parsing/B01_pdf_to_docgraph.py
 """
-PDF to DocumentGraph Parser with SOTA Column Ordering.
+PDF to DocumentGraph parser with SOTA multi-column layout detection.
 
-CHANGELOG v2.1:
-    - Extracted text helpers to B23_text_helpers.py
-    - Extracted native figure extraction to B24_native_figure_extraction.py
-    - Extracted legacy ordering to B25_legacy_ordering.py
-    - Extracted repetition inference to B26_repetition_inference.py
+This module converts PDF documents into structured DocumentGraph representations
+using Unstructured.io or PyMuPDF for text extraction. It implements state-of-the-art
+column ordering (XY-Cut++), header/footer detection via repetition inference, and
+integrates native figure extraction for accurate visual element handling.
 
-CHANGELOG v2.0:
-    - Integrated B04_column_ordering for SOTA multi-column layout detection
-    - Added document_type config for layout presets
-    - Added use_sota_layout toggle (default: True)
-    - Preserves legacy ordering as fallback
+Key Components:
+    - PDFToDocGraphParser: Main parser class with configurable extraction strategies
+    - document_to_markdown: Convert DocumentGraph to Markdown with table rendering
+    - LayoutConfig: Configuration for SOTA column ordering (B04 integration)
 
-Compatible with Unstructured.io hi_res, fast, auto strategies.
+Example:
+    >>> from B_parsing.B01_pdf_to_docgraph import PDFToDocGraphParser
+    >>> parser = PDFToDocGraphParser(config={
+    ...     "unstructured_strategy": "hi_res",
+    ...     "use_sota_layout": True,
+    ...     "document_type": "academic",
+    ... })
+    >>> doc_graph = parser.parse("paper.pdf")
+    >>> for block in doc_graph.iter_linear_blocks():
+    ...     print(block.text)
+
+Dependencies:
+    - A_core.A01_domain_models: BoundingBox
+    - A_core.A02_interfaces: BaseParser
+    - B_parsing.B02_doc_graph: DocumentGraph, Page, TextBlock, ContentRole, ImageBlock, ImageType
+    - B_parsing.B04_column_ordering: SOTA column ordering and layout detection
+    - B_parsing.B23_text_helpers: Text normalization and cleaning utilities
+    - B_parsing.B24_native_figure_extraction: Native PDF figure extraction
+    - B_parsing.B25_legacy_ordering: Fallback block ordering
+    - B_parsing.B26_repetition_inference: Header/footer detection
 """
 
 from __future__ import annotations

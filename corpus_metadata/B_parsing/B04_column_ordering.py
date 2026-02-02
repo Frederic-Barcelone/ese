@@ -1,57 +1,31 @@
-# B_parsing/B04_column_ordering.py
+# corpus_metadata/B_parsing/B04_column_ordering.py
 """
-SOTA Column Layout Detection and Reading Order Module
-=====================================================
+SOTA column layout detection and reading order using XY-Cut++ algorithm.
 
-Compatible with Unstructured.io (hi_res, fast, auto strategies)
+This module implements state-of-the-art multi-column layout detection and reading
+order determination based on the XY-Cut++ algorithm (arxiv:2504.10258). It serves
+as a drop-in replacement for legacy block ordering, supporting single-column,
+two-column, three-column, and mixed layouts with adaptive thresholds.
 
-INTEGRATION:
-    Drop-in replacement for PDFToDocGraphParser._order_blocks_deterministically()
+Key Components:
+    - order_page_blocks: Main entry point for layout detection and block ordering
+    - detect_layout: Detect page layout type (single/two/three column, mixed)
+    - LayoutConfig: Configuration for layout detection thresholds
+    - LayoutType: Enum for page layout classifications
+    - BlockClass: Enum for block column classification (SPANNING, LEFT, RIGHT)
+    - SemanticPriority: Enum for reading order priority (TITLE > TABLE > NARRATIVE)
+    - PageLayout: Detected layout with gutters, spanning blocks, and column bounds
+    - ColumnOrderingMixin: Mixin class for PDFToDocGraphParser integration
 
-    In B01_pdf_to_docgraph.py, change:
-        ordered = self._order_blocks_deterministically(raw_pages[page_num], page_w=page_w)
-    To:
-        from B_parsing.B04_column_ordering import order_page_blocks
-        ordered = order_page_blocks(raw_pages[page_num], page_w, page_h)
+Example:
+    >>> from B_parsing.B04_column_ordering import order_page_blocks, create_config
+    >>> config = create_config("academic")
+    >>> ordered_blocks = order_page_blocks(raw_blocks, page_width=612, page_height=792, config=config)
 
-IMPLEMENTS:
-    - XY-Cut++ style hierarchical segmentation (arxiv:2504.10258)
-    - Whitespace-based gutter detection (Breuel method)
-    - Cross-layout element detection with adaptive β×median threshold
-    - Density-driven axis selection (τ_d ratio)
-    - L-shaped region pre-masking
-    - Semantic priority ordering (SPANNING > TITLE > TABLE > NARRATIVE)
-    - Y-band interleaving for multi-column
-    - Per-page adaptive layout detection
-    - PPTX-to-PDF mode with inverted z-order handling
-
-SUPPORTED LAYOUTS:
-    - SINGLE_COLUMN: Standard single-column document
-    - TWO_COLUMN: Academic paper style
-    - THREE_COLUMN: Newsletter/magazine style
-    - MIXED_HEADER: Single-col header + multi-col body
-    - COMPLEX: Irregular with floating elements
-
-INPUT FORMAT (from B01):
-    raw_blocks = [
-        {
-            "text": str,
-            "bbox": BoundingBox,      # from A01_domain_models
-            "x0": float,              # bbox.coords[0]
-            "y0": float,              # bbox.coords[1]
-            "zone": str,              # "HEADER" | "BODY" | "FOOTER"
-            "is_section_header": bool,
-            # Optional Unstructured metadata:
-            "category": str,          # "Title", "NarrativeText", "Table", etc.
-            "element_id": str,
-        },
-        ...
-    ]
-
-OUTPUT FORMAT:
-    Same list of dicts, reordered for correct reading sequence.
-
-VERSION: 3.0.0 (XY-Cut++ / SOTA)
+Dependencies:
+    - A_core.A01_domain_models: BoundingBox for coordinate representation
+    - B_parsing.B29_column_detection: PageStats, Gutter, find_gutters, detect_spanning
+    - B_parsing.B30_xy_cut_ordering: xy_cut_order, order_body_bands
 """
 
 from __future__ import annotations

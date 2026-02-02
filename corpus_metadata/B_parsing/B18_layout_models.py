@@ -1,16 +1,36 @@
 # corpus_metadata/B_parsing/B18_layout_models.py
 """
-Layout models for layout-aware visual extraction.
+Pydantic data structures for layout-aware visual extraction.
 
-Provides data structures for:
-- LayoutPattern: Page layout patterns (single column, two-column, etc.)
-- VisualPosition: Horizontal position codes for visuals
-- VisualZone: Description of a visual element's location on a page
-- PageLayout: Complete layout information for a single page
+This module provides data structures for representing page layouts and visual
+element locations. These models are used by the VLM layout analyzer to describe
+where visuals are located on a page, enabling the zone expander to compute
+precise bounding boxes using whitespace detection.
 
-These models are used by the VLM layout analyzer to describe where
-visuals (tables, figures) are located on a page, enabling the zone
-expander to compute precise bounding boxes using whitespace detection.
+Key Components:
+    - LayoutPattern: Enum for page layout patterns (FULL, TWO_COL, etc.)
+    - VisualPosition: Enum for horizontal position codes (LEFT, RIGHT, FULL)
+    - VisualZone: Description of visual location with type, position, and confidence
+    - PageLayout: Complete layout info with pattern, column boundary, and visual zones
+
+Example:
+    >>> from B_parsing.B18_layout_models import PageLayout, LayoutPattern, VisualZone, VisualPosition
+    >>> zone = VisualZone(
+    ...     visual_type="table",
+    ...     position=VisualPosition.LEFT,
+    ...     vertical_zone="top",
+    ...     label="Table 1",
+    ...     confidence=0.95,
+    ... )
+    >>> layout = PageLayout(
+    ...     page_num=1,
+    ...     pattern=LayoutPattern.TWO_COL,
+    ...     column_boundary=0.48,
+    ...     visuals=[zone],
+    ... )
+
+Dependencies:
+    - None (standalone data models)
 """
 from __future__ import annotations
 

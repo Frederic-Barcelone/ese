@@ -1,16 +1,35 @@
 # corpus_metadata/B_parsing/B12_visual_pipeline.py
 """
-Visual Extraction Pipeline Orchestrator.
+Visual extraction pipeline orchestrator for tables and figures.
 
-Main entry point for the visual extraction pipeline that orchestrates:
-- Stage 1: Detection (Docling + native extraction)
-- Stage 2: Rendering (PyMuPDF with point-based padding)
-- Stage 3: Triage + VLM Enrichment
-- Stage 4: Document-Level Resolution
+This module provides the main entry point for extracting visual elements from PDFs,
+orchestrating a 4-stage pipeline: (1) Detection using DocLayout-YOLO or heuristics,
+(2) Rendering with PyMuPDF point-based padding, (3) Triage and VLM enrichment,
+(4) Document-level resolution with deduplication and multi-page merging.
 
-Usage:
-    pipeline = VisualExtractionPipeline()
-    result = pipeline.extract(pdf_path)
+Key Components:
+    - VisualExtractionPipeline: Main pipeline class orchestrating all stages
+    - PipelineConfig: Configuration for detection, rendering, triage, and resolution
+    - PipelineResult: Extraction results with visuals and statistics
+    - extract_visuals: Convenience function for full pipeline extraction
+    - extract_visuals_doclayout: Extract using DocLayout-YOLO (recommended)
+    - extract_tables_only: Extract only tables from PDF
+    - extract_figures_only: Extract only figures from PDF
+
+Example:
+    >>> from B_parsing.B12_visual_pipeline import extract_visuals, PipelineConfig
+    >>> config = PipelineConfig(detection_mode="doclayout", enable_vlm=True)
+    >>> result = extract_visuals("paper.pdf", config)
+    >>> print(f"Extracted {result.tables_detected} tables, {result.figures_detected} figures")
+
+Dependencies:
+    - A_core.A13_visual_models: ExtractedVisual, VisualCandidate, TriageDecision, etc.
+    - B_parsing.B13_visual_detector: Visual detection with Docling
+    - B_parsing.B14_visual_renderer: Visual rendering with PyMuPDF
+    - B_parsing.B15_caption_extractor: Caption extraction and column layout
+    - B_parsing.B16_triage: Triage decisions for VLM processing
+    - B_parsing.B17_document_resolver: Document-level resolution
+    - B_parsing.B22_doclayout_detector: DocLayout-YOLO detection
 """
 from __future__ import annotations
 

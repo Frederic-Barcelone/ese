@@ -1,13 +1,28 @@
 # corpus_metadata/B_parsing/B26_repetition_inference.py
 """
-Header/footer repetition inference for PDF parsing.
+Header/footer detection using repetition inference across pages.
 
-Provides:
-- Repeated text detection across pages
-- Zone-based header/footer classification
-- Running header pattern matching
+This module detects headers and footers by finding text that repeats across
+multiple pages. Text is normalized (lowercase, digits -> #) to group variations
+like "Page 1" and "Page 23". Zone-based voting determines header vs footer
+classification, with pattern-based filtering for known footer types.
 
-Extracted from B01_pdf_to_docgraph.py to reduce file size.
+Key Components:
+    - infer_repeated_headers_footers: Main inference function returning header/footer sets
+    - looks_like_known_footer: Check if text matches known footer patterns
+    - is_short_repeated_noise: Check if text is short repeated noise (page numbers, etc.)
+    - is_running_header: Check if text matches running header pattern (Author et al.)
+
+Example:
+    >>> from B_parsing.B26_repetition_inference import infer_repeated_headers_footers
+    >>> headers, footers = infer_repeated_headers_footers(
+    ...     norm_count, norm_pages, norm_zone_votes, norm_sample_text,
+    ...     min_repeat_count=3, min_repeat_pages=3
+    ... )
+    >>> print(f"Found {len(headers)} headers, {len(footers)} footers")
+
+Dependencies:
+    - B_parsing.B23_text_helpers: KNOWN_FOOTER_RE, RUNNING_HEADER_RE
 """
 
 from __future__ import annotations

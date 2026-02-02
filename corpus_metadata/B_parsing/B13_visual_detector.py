@@ -1,17 +1,31 @@
 # corpus_metadata/B_parsing/B13_visual_detector.py
 """
-Visual Detector with FAST/ACCURATE Tiering.
+Visual detector with FAST/ACCURATE tiering using Docling TableFormer.
 
-Detects tables and figures using Docling with tiered TableFormer modes:
-- FAST mode for initial extraction (default)
-- ACCURATE mode for complex tables (escalated)
+This module detects tables and figures using Docling with tiered TableFormer
+modes: FAST for initial extraction and ACCURATE for complex tables (escalated
+based on complexity signals). It integrates native PDF figure detection and
+provides multi-page table detection capabilities.
 
-Key features:
-- Docling v2.71.0 integration
-- Tiered table extraction (FAST -> ACCURATE)
-- Native PDF figure detection
-- Complexity signal computation
-- Multi-page table detection
+Key Components:
+    - DetectorConfig: Configuration for TableFormer mode, escalation, and OCR
+    - detect_tables_with_docling: Detect tables using Docling backend
+    - detect_all_visuals: Main detection function returning DetectionResult
+    - DetectionResult: Detection results with candidates and statistics
+    - TableComplexitySignals: Signals for escalation decision (header depth, merged cells)
+
+Example:
+    >>> from B_parsing.B13_visual_detector import detect_all_visuals, DetectorConfig
+    >>> config = DetectorConfig(default_table_mode="fast", enable_escalation=True)
+    >>> result = detect_all_visuals("paper.pdf", config)
+    >>> print(f"Detected {result.tables_detected} tables, {result.escalated_tables} escalated")
+
+Dependencies:
+    - A_core.A13_visual_models: TableComplexitySignals, TableStructure, VisualCandidate
+    - B_parsing.B15_caption_extractor: ColumnLayout, caption extraction
+    - B_parsing.B16_triage: is_in_margin_zone, should_escalate_to_accurate
+    - fitz (PyMuPDF): PDF rendering
+    - docling: TableFormer-based table extraction
 """
 from __future__ import annotations
 

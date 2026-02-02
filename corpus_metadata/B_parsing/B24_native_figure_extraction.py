@@ -1,13 +1,33 @@
 # corpus_metadata/B_parsing/B24_native_figure_extraction.py
 """
-Native PDF figure extraction using PyMuPDF.
+Native PDF figure extraction integration for DocumentGraph population.
 
-Provides:
-- Raster and vector figure extraction from PDF XObjects
-- Image type classification from caption/OCR text
-- Integration with B09-B11 extraction resolver pipeline
+This module integrates the B09-B11 extraction pipeline into the DocumentGraph
+builder. It extracts raster and vector figures from PDF XObjects, classifies
+image types from caption/OCR text, and resolves extraction conflicts using
+the deterministic resolver.
 
-Extracted from B01_pdf_to_docgraph.py to reduce file size.
+Key Components:
+    - apply_native_figure_extraction: Main integration function for DocumentGraph
+    - classify_image_type: Classify ImageType from caption and OCR text
+    - merge_native_with_unstructured: Merge native figures with Unstructured extractions
+
+Example:
+    >>> from B_parsing.B24_native_figure_extraction import apply_native_figure_extraction
+    >>> doc_graph, stats = apply_native_figure_extraction(
+    ...     doc_graph, pdf_path, raw_images,
+    ...     min_figure_area_ratio=0.03, filter_noise=True
+    ... )
+    >>> print(f"Extraction stats: {stats}")
+
+Dependencies:
+    - A_core.A01_domain_models: BoundingBox
+    - B_parsing.B02_doc_graph: ImageBlock, ImageType, DocumentGraph
+    - B_parsing.B09_pdf_native_figures: Figure extraction functions
+    - B_parsing.B10_caption_detector: Caption detection
+    - B_parsing.B11_extraction_resolver: Deterministic resolution
+    - B_parsing.B23_text_helpers: PERCENTAGE_PATTERN
+    - fitz (PyMuPDF): PDF rendering
 """
 
 from __future__ import annotations

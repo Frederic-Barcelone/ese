@@ -1,14 +1,28 @@
 # corpus_metadata/B_parsing/B20_zone_expander.py
 """
-Zone Expander - Whitespace-Based BBox Computation.
+Whitespace-based bounding box computation from VLM visual zones.
 
-Takes visual zones from VLM layout analysis and expands them
-to precise bounding boxes using whitespace detection.
+This module takes visual zones from VLM layout analysis (B19) and expands them
+to precise bounding boxes using whitespace detection. The VLM identifies WHAT
+and roughly WHERE; this module computes precise coordinates by finding whitespace
+boundaries, stopping at margins, column boundaries, other visuals, and text blocks.
 
-Key principles:
-1. VLM identifies WHAT and roughly WHERE
-2. This module computes precise coordinates by finding whitespace
-3. Expansion stops at: margins, column boundaries, other visuals, text blocks
+Key Components:
+    - ExpandedVisual: Visual with computed precise bbox (pts and normalized)
+    - expand_zones_to_bboxes: Main expansion function for a page's visual zones
+    - compute_column_boundaries: Detect column boundaries from text block positions
+    - find_whitespace_boundaries: Find whitespace edges around a region
+    - expand_to_whitespace: Expand zone to nearest whitespace boundaries
+
+Example:
+    >>> from B_parsing.B20_zone_expander import expand_zones_to_bboxes
+    >>> from B_parsing.B18_layout_models import PageLayout
+    >>> expanded = expand_zones_to_bboxes(layout, text_blocks, page_width, page_height)
+    >>> for ev in expanded:
+    ...     print(f"{ev.zone.visual_type}: {ev.bbox_pts}")
+
+Dependencies:
+    - B_parsing.B18_layout_models: PageLayout, VisualPosition, VisualZone
 """
 from __future__ import annotations
 

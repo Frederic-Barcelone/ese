@@ -1,13 +1,30 @@
 # corpus_metadata/B_parsing/B03_table_extractor.py
 """
-Table extraction from PDF using Docling's TableFormer.
+Table extraction from PDFs using Docling's TableFormer model.
 
-Docling provides 95-98% accuracy on complex tables via the TableFormer model.
-See: https://github.com/docling-project/docling
+This module provides high-accuracy table extraction (95-98% TEDS score) using
+IBM's Docling library with the TableFormer model. It handles complex tables
+with merged cells, multi-row headers, and borderless layouts. Tables are
+rendered as images for VLM analysis and converted to structured logical rows.
 
-CHANGELOG v3.0:
-- Replaced Unstructured with Docling for table extraction
-- Simplified architecture: single backend, no fallbacks
+Key Components:
+    - TableExtractor: Main table extraction class with Docling backend
+    - extract_tables_to_json: Convenience function for PDF to JSON table extraction
+    - populate_document_graph: Integrate extracted tables into DocumentGraph
+
+Example:
+    >>> from B_parsing.B03_table_extractor import TableExtractor
+    >>> extractor = TableExtractor(config={"mode": "accurate"})
+    >>> tables = extractor.extract_tables("document.pdf")
+    >>> for table in tables:
+    ...     print(f"Page {table['page_num']}: {len(table['rows'])} rows")
+
+Dependencies:
+    - A_core.A01_domain_models: BoundingBox for table coordinates
+    - B_parsing.B02_doc_graph: DocumentGraph, Table, TableCell, TableType
+    - B_parsing.B14_visual_renderer: Table image rendering functions
+    - B_parsing.B27_table_validation: MIN_TABLE_COLS validation constant
+    - B_parsing.B28_docling_backend: DoclingTableExtractor backend
 """
 
 from __future__ import annotations

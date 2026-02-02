@@ -1,13 +1,31 @@
 # corpus_metadata/B_parsing/B19_layout_analyzer.py
 """
-VLM Layout Analyzer.
+VLM-based layout analyzer using Claude Vision for page structure detection.
 
-Analyzes PDF pages using Claude Vision to detect:
-1. Page layout pattern (full, 2col, hybrid)
-2. Visual zones (rough location, not precise bbox)
+This module analyzes PDF pages using Claude Vision to detect page layout patterns
+(full, 2col, hybrid) and visual zones (rough location, not precise bbox). The VLM
+returns semantic zones which are then refined to precise coordinates by the zone
+expander (B20) using whitespace detection.
 
-The VLM returns zones, not coordinates. Precise extraction
-is handled by whitespace expansion in B20_zone_expander.py.
+Key Components:
+    - analyze_page_layout: Analyze single page using Claude Vision
+    - analyze_document_layouts: Analyze all pages in document
+    - VLM_LAYOUT_PROMPT: System prompt for Claude Vision analysis
+    - parse_vlm_response: Parse JSON response from VLM
+    - render_page_for_analysis: Render page at appropriate resolution for VLM
+
+Example:
+    >>> from B_parsing.B19_layout_analyzer import analyze_page_layout
+    >>> import fitz
+    >>> doc = fitz.open("paper.pdf")
+    >>> layout = analyze_page_layout(doc, page_num=1)
+    >>> print(f"Layout: {layout.pattern.value}, {len(layout.visuals)} visuals")
+
+Dependencies:
+    - B_parsing.B18_layout_models: LayoutPattern, PageLayout, VisualPosition, VisualZone
+    - anthropic: Claude API client
+    - fitz (PyMuPDF): PDF rendering
+    - PIL: Image annotation for debugging
 """
 from __future__ import annotations
 

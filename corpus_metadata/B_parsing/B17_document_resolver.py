@@ -1,13 +1,35 @@
 # corpus_metadata/B_parsing/B17_document_resolver.py
 """
-Document-Level Resolution for Visual Pipeline.
+Document-level resolution for visual extraction pipeline.
 
-Performs document-level operations after VLM enrichment:
-- Body text reference scanning
-- Caption-to-visual linking
-- Section context inference
-- Multi-page visual merging
-- Deduplication
+This module performs document-level operations after VLM enrichment: body text
+reference scanning (finding "Figure 1" mentions), caption-to-visual linking,
+section context inference, multi-page visual merging for continued tables/figures,
+and deduplication of overlapping extractions.
+
+Key Components:
+    - ResolutionResult: Resolution results with merged visuals and statistics
+    - BodyTextReference: A reference found in body text (page, char offset, type)
+    - resolve_document: Main resolution function with merging and deduplication
+    - scan_body_text_references: Find visual references in document body text
+    - infer_section_context: Determine section context for each visual
+    - merge_multipage_visuals: Merge continued tables/figures across pages
+    - deduplicate_visuals: Remove overlapping duplicate extractions
+    - BODY_REFERENCE_PATTERNS: Regex patterns for body text references
+    - SECTION_PATTERNS: Regex patterns for section header detection
+
+Example:
+    >>> from B_parsing.B17_document_resolver import resolve_document
+    >>> result = resolve_document(
+    ...     visuals, pdf_path,
+    ...     merge_multipage=True, deduplicate=True
+    ... )
+    >>> print(f"Resolved to {len(result.visuals)} visuals, {result.merges_performed} merges")
+
+Dependencies:
+    - A_core.A13_visual_models: ExtractedVisual, ReferenceSource, TextMention,
+      VisualReference, VisualRelationships
+    - fitz (PyMuPDF): PDF text extraction for body text scanning
 """
 from __future__ import annotations
 

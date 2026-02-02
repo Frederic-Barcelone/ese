@@ -2,15 +2,26 @@
 """
 Legacy block ordering for single and two-column PDF layouts.
 
-Provides:
-- Two-column layout detection
-- Single-column ordering by Y position
-- Legacy deterministic block ordering
+This module provides the fallback ordering algorithm when use_sota_layout=False
+in the PDF parser. It includes two-column layout detection, single-column ordering
+by Y position, and deterministic block ordering. For correct multi-column reading
+order, use B04_column_ordering (SOTA) instead.
 
-NOTE: This is the fallback ordering when use_sota_layout=False.
-For correct multi-column reading order, use B04_column_ordering (SOTA).
+Key Components:
+    - order_blocks_deterministically: Main legacy ordering function
+    - is_two_column_page: Detect two-column layout from block positions
+    - order_single_column: Order blocks in single-column layout
+    - order_two_column: Order blocks in two-column layout
 
-Extracted from B01_pdf_to_docgraph.py to reduce file size.
+Example:
+    >>> from B_parsing.B25_legacy_ordering import order_blocks_deterministically
+    >>> ordered = order_blocks_deterministically(
+    ...     raw_blocks, page_w=612,
+    ...     two_col_min_side_blocks=6, y_tolerance=3.0
+    ... )
+
+Dependencies:
+    - None (standalone module)
 """
 
 from __future__ import annotations
