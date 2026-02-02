@@ -93,10 +93,6 @@ def render_page_for_vlm(
 
 VLM_DETECTION_PROMPT = """Analyze this PDF page and identify ALL tables and figures.
 
-FIRST: Determine the page layout:
-- "two_column": Most academic papers have 2 columns of text (left ~0.05-0.48, right ~0.52-0.95)
-- "single_column": Full-width text layout
-
 For EACH visual element found, provide:
 1. type: "table" or "figure"
 2. bbox: bounding box as [x0, y0, x1, y1] where coordinates are fractions (0.0 to 1.0) of page dimensions
@@ -104,60 +100,57 @@ For EACH visual element found, provide:
 4. caption_start: first ~50 characters of the caption if visible
 5. is_continuation: true if this continues from previous page
 6. continues_next: true if this continues to next page
-7. column_position: "left", "right", or "full_width"
+7. confidence: 0.0 to 1.0
 
-CRITICAL BBOX RULES - READ CAREFULLY:
+BBOX RULES:
 
-1. NEVER include article text paragraphs in the bbox. The bbox should contain ONLY:
-   - The visual element itself (chart, graph, flowchart, table)
-   - The figure/table label (e.g., "Figure 1:")
-   - The caption text directly below/above the visual
-   - Axis labels and legends that are part of the visual
+1. The bbox should contain ONLY the visual element and its caption:
+   - The visual itself (chart, graph, flowchart, table, diagram, image)
+   - The figure/table label and caption (e.g., "Figure 1: Description...")
+   - Axis labels, legends, and annotations that are part of the visual
 
-2. For TWO-COLUMN layouts, figures are typically in ONE of these positions:
-   - LEFT COLUMN ONLY: x0≈0.05, x1≈0.48 (never extend past 0.50)
-   - RIGHT COLUMN ONLY: x0≈0.50, x1≈0.95 (never start before 0.48)
-   - FULL WIDTH (spanning both): x0≈0.05, x1≈0.95
+2. The bbox should NOT include:
+   - Article body text paragraphs (running text discussing results, methods, etc.)
+   - Section headings (e.g., "Methods", "Results", "Discussion")
+   - Text from adjacent columns in multi-column layouts
 
-3. STRICT column boundaries:
-   - If the visual is in the LEFT column, x1 must be ≤0.50
-   - If the visual is in the RIGHT column, x0 must be ≥0.48
-   - Only use full width if the visual clearly spans BOTH columns
+3. For multi-column layouts:
+   - Determine if the visual is in one column or spans multiple columns
+   - If there is article text running alongside the visual, the visual is in ONE column only
+   - Only use full page width if the visual clearly spans across all columns
 
-4. Multi-panel figures (A, B, C panels):
-   - If panels are STACKED VERTICALLY in ONE column, the figure is in that column only
-   - If all panels are in the LEFT column, use x1≤0.50
-   - If all panels are in the RIGHT column, use x0≥0.48
-   - Only use full width (x0≈0.05, x1≈0.95) if panels are SIDE BY SIDE spanning both columns
+4. Multi-panel figures (A, B, C, etc.):
+   - Include ALL panels in a single bbox
+   - Panels stacked vertically in one column = single column figure
+   - Panels spread across columns = full width figure
 
-5. Be PRECISE, not generous. Tight bboxes are better than loose ones.
+5. PRECISION: Draw tight bboxes around the actual visual content.
+   - Start y0 at the top edge of the visual (first chart border, flowchart box, table line)
+   - End y1 at the bottom of the caption
+   - Do not include surrounding whitespace or article text
 
-6. COMMON MISTAKE TO AVOID: If you see article text next to the figure, DO NOT include it.
-   Check: is there a column of text running alongside the figure? If yes, the figure is in ONE column only.
-
-Visual types to detect:
-- Tables: data tables with rows/columns of data
-- Figures: charts, graphs, plots, flowcharts, diagrams, images
+Visual types:
+- Tables: data tables, comparison tables, results tables
+- Figures: charts, graphs, plots, flowcharts, diagrams, photos, illustrations
 
 Return ONLY valid JSON:
 {
   "visuals": [
     {
       "type": "figure",
-      "bbox": [0.50, 0.15, 0.95, 0.75],
+      "bbox": [0.05, 0.20, 0.48, 0.75],
       "label": "Figure 1",
-      "caption_start": "Trial profile showing patient flow",
+      "caption_start": "Study flowchart showing...",
       "is_continuation": false,
       "continues_next": false,
-      "confidence": 0.95,
-      "column_position": "right"
+      "confidence": 0.95
     }
   ],
   "page_layout": "two_column",
-  "notes": "Figure 1 is a flowchart in the right column"
+  "notes": "optional observations"
 }
 
-If no tables or figures are found, return: {"visuals": [], "page_layout": "...", "notes": "..."}"""
+If no tables or figures found: {"visuals": [], "page_layout": "...", "notes": "..."}"""
 
 
 def detect_visuals_vlm_single_page(
