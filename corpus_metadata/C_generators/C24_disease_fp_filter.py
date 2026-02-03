@@ -105,6 +105,10 @@ class DiseaseFalsePositiveFilter:
         # Load domain profile (defaults to generic if not provided)
         self.domain_profile = domain_profile or load_domain_profile("generic")
 
+    # Minimum adjustment floor to prevent over-penalization of valid diseases
+    # Set to -0.45 so candidates aren't filtered by the -0.5 threshold in C06
+    MIN_ADJUSTMENT_FLOOR = -0.45
+
     def score_adjustment(
         self,
         matched_text: str,
@@ -117,8 +121,13 @@ class DiseaseFalsePositiveFilter:
         CHANGED: Primary method - returns adjustment instead of filter decision.
 
         Returns:
-            (adjustment, reason) where adjustment is -1.0 to +0.3
+            (adjustment, reason) where adjustment is MIN_ADJUSTMENT_FLOOR to +0.3
             Negative = likely FP, Positive = domain-relevant boost
+
+        Note:
+            Adjustment is capped at MIN_ADJUSTMENT_FLOOR to prevent penalty stacking
+            from filtering out valid disease matches. Hard filtering via should_filter()
+            handles truly catastrophic false positives instead.
         """
         matched_clean = matched_text.strip()
         ctx_lower = context.lower()
@@ -150,6 +159,15 @@ class DiseaseFalsePositiveFilter:
             adjustment += 0.1
             if not reason:
                 reason = "disease_context_boost"
+
+        # Cap minimum adjustment to prevent over-filtering valid diseases
+        # Hard filtering via should_filter() handles truly catastrophic FPs
+        if adjustment < self.MIN_ADJUSTMENT_FLOOR:
+            adjustment = self.MIN_ADJUSTMENT_FLOOR
+            if reason:
+                reason = f"{reason}_capped"
+            else:
+                reason = "penalty_capped"
 
         return adjustment, reason
 

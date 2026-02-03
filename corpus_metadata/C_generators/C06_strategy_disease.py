@@ -498,12 +498,14 @@ class DiseaseDetector:
         """Extract from specialized lexicons (PAH, ANCA, IgAN)."""
         candidates = []
 
+        # FlashText returns (key, start, end), not (matched_text, start, end)
         hits = self.specialized_kp.extract_keywords(text, span_info=True)
-        for matched_text, start, end in hits:
-            key = self.specialized_kp.get_keyword(matched_text)
+        for key, start, end in hits:
             if not key or key not in self.specialized_entries:
                 continue
 
+            # Get actual matched text from original text using span positions
+            matched_text = text[start:end]
             entry = self.specialized_entries[key]
 
             # Check exclude contexts
@@ -547,12 +549,14 @@ class DiseaseDetector:
         """
         candidates = []
 
+        # FlashText returns (key, start, end), not (matched_text, start, end)
         hits = self.general_kp.extract_keywords(text, span_info=True)
-        for matched_text, start, end in hits:
-            key = self.general_kp.get_keyword(matched_text)
+        for key, start, end in hits:
             if not key or key not in self.general_entries:
                 continue
 
+            # Get actual matched text from original text using span positions
+            matched_text = text[start:end]
             entry = self.general_entries[key]
             context = self._make_context(text, start, end)
 
