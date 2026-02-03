@@ -672,17 +672,18 @@ class VisionImageAnalyzer:
         recommendation = classification.get("analysis_recommendation", "skip")
 
         # Run appropriate analysis based on classification
+        analysis_result: Optional[Any] = None
         if recommendation == "flowchart_analysis" or image_type == "flowchart":
-            result = self.analyze_flowchart(image_base64, ocr_text)
-            return ("flowchart", result)
+            analysis_result = self.analyze_flowchart(image_base64, ocr_text)
+            return ("flowchart", analysis_result)
 
         elif recommendation == "chart_analysis" or image_type == "chart":
-            result = self.analyze_chart(image_base64, caption)
-            return ("chart", result)
+            analysis_result = self.analyze_chart(image_base64, caption)
+            return ("chart", analysis_result)
 
         elif recommendation == "table_extraction" or image_type == "table":
-            result = self.analyze_table(image_base64, caption)
-            return ("table", result)
+            analysis_result = self.analyze_table(image_base64, caption)
+            return ("table", analysis_result)
 
         elif image_type in ("text_page", "logo"):
             # Skip these - they're false positive figure extractions
@@ -692,8 +693,8 @@ class VisionImageAnalyzer:
             # For other types, try chart analysis as a general fallback
             # (it can extract basic data from various visual formats)
             if classification.get("contains_data", False):
-                result = self.analyze_chart(image_base64, caption)
-                return ("chart", result)
+                analysis_result = self.analyze_chart(image_base64, caption)
+                return ("chart", analysis_result)
             return (image_type, None)
 
     def _call_vision_llm(

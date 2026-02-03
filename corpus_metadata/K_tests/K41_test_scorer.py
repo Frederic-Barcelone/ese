@@ -8,6 +8,7 @@ Tests precision/recall/F1 scoring for abbreviation extraction.
 from __future__ import annotations
 
 import uuid
+from typing import Any, Optional
 
 import pytest
 
@@ -31,7 +32,7 @@ from A_core.A01_domain_models import (
 
 def make_entity(
     sf: str,
-    lf: str = None,
+    lf: Optional[str] = None,
     doc_id: str = "test.pdf",
     status: ValidationStatus = ValidationStatus.VALIDATED,
     field_type: FieldType = FieldType.DEFINITION_PAIR,
@@ -62,7 +63,7 @@ def make_entity(
     )
 
 
-def make_gold(sf: str, lf: str = None, doc_id: str = "test.pdf") -> GoldAnnotation:
+def make_gold(sf: str, lf: Optional[str] = None, doc_id: str = "test.pdf") -> GoldAnnotation:
     """Helper to create gold annotations."""
     return GoldAnnotation(doc_id=doc_id, short_form=sf, long_form=lf)
 
@@ -189,7 +190,7 @@ class TestScorerBasicEvaluation:
 
     def test_no_gold_unscored(self, scorer):
         system = [make_entity("TNF", "Tumor Necrosis Factor")]
-        gold = []
+        gold: list[Any] = []
 
         report = scorer.evaluate_doc(system, gold)
 
@@ -251,7 +252,7 @@ class TestScorerSFOnlyMatching:
         assert report.true_positives == 1
 
     def test_sf_only_gold_missing_system(self, scorer):
-        system = []
+        system: list[Any] = []
         gold = [make_gold("TNF", None)]
 
         report = scorer.evaluate_doc(system, gold)

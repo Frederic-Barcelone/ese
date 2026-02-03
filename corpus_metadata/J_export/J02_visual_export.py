@@ -70,10 +70,10 @@ def extract_table_content_structeq(image_bytes: bytes) -> Dict[str, str]:
         model = struct_eqtable.build_model()
         model.max_new_tokens = 4096
         model.max_generate_time = 300
-        extract_table_content_structeq._model = model
+        extract_table_content_structeq._model = model  # type: ignore[attr-defined]
         logger.info("StructEqTable model loaded successfully")
 
-    model = extract_table_content_structeq._model
+    model = extract_table_content_structeq._model  # type: ignore[attr-defined]
 
     # Convert bytes to PIL Image
     image = Image.open(io.BytesIO(image_bytes))
@@ -118,7 +118,7 @@ def visual_to_dict(
     Returns:
         Dict suitable for JSON serialization
     """
-    result = {
+    result: Dict[str, Any] = {
         "visual_id": visual.visual_id,
         "visual_type": visual.visual_type.value,
         "confidence": visual.confidence,

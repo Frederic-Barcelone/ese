@@ -152,7 +152,7 @@ class TestIsValidAbbreviationMatch:
 
     def test_empty_input(self):
         assert not is_valid_abbreviation_match("")
-        assert not is_valid_abbreviation_match(None)
+        assert not is_valid_abbreviation_match(None)  # type: ignore[arg-type]
 
 
 class TestIsWrongExpansion:

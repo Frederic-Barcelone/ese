@@ -33,7 +33,7 @@ import logging
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import fitz  # PyMuPDF
 
@@ -136,7 +136,7 @@ def generate_vlm_description(
     visual_type: str,
     caption_text: Optional[str] = None,
     model: str = "claude-sonnet-4-20250514",
-) -> Dict[str, str]:
+) -> Dict[str, Optional[str]]:
     """
     Generate title and description for an image using VLM.
 
@@ -211,7 +211,7 @@ Respond ONLY with valid JSON, no other text."""
         )
 
         # Parse JSON response
-        response_text = response.content[0].text.strip()
+        response_text = next((block.text for block in response.content if hasattr(block, "text")), "").strip()
         # Handle markdown code blocks
         if response_text.startswith("```"):
             response_text = response_text.split("```")[1]
@@ -444,7 +444,7 @@ def _deduplicate_visuals(visuals: List[Dict], iou_threshold: float = 0.5) -> Lis
     # Sort by confidence (highest first)
     sorted_visuals = sorted(visuals, key=lambda v: v["confidence"], reverse=True)
 
-    keep = []
+    keep: list[dict[str, Any]] = []
     for visual in sorted_visuals:
         # Check if this visual overlaps significantly with any kept visual
         dominated = False
@@ -516,8 +516,8 @@ def detect_visuals_doclayout(
                 )
 
                 # Collect visuals and captions separately
-                page_visuals = []
-                page_captions = []
+                page_visuals: List[Dict[str, Any]] = []
+                page_captions: List[Dict[str, Any]] = []
 
                 # Process detections
                 for result in results:
@@ -730,7 +730,7 @@ def detect_and_crop_all(
     doc.close()
 
     # Build layout.json structure
-    layout = {
+    layout: Dict[str, Any] = {
         "pdf_path": pdf_path,
         "pages": [],
     }
@@ -747,7 +747,7 @@ def detect_and_crop_all(
         visuals_on_page = page_visuals[page_num]
         page_width, page_height = page_sizes[page_num]
 
-        page_entry = {
+        page_entry: Dict[str, Any] = {
             "page_num": page_num,
             "page_size_pts": [page_width, page_height],
             "visuals": [],
@@ -798,7 +798,7 @@ def detect_and_crop_all(
                 vlm_description = vlm_result.get("description")
 
             # Build visual entry with caption
-            visual_entry = {
+            visual_entry: Dict[str, Any] = {
                 "type": v.visual_type,
                 "confidence": round(v.confidence, 3),
                 "bbox_pts": [round(x, 1) for x in v.bbox_pts],

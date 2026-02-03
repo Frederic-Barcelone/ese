@@ -2,6 +2,8 @@
 """
 Tests for visual triage logic.
 """
+from typing import Optional
+
 import pytest
 
 from A_core.A13_visual_models import (
@@ -32,8 +34,8 @@ from B_parsing.B16_triage import (
 def make_candidate(
     area_ratio: float = 0.10,
     has_caption: bool = False,
-    docling_type: str = None,
-    image_hash: str = None,
+    docling_type: Optional[str] = None,
+    image_hash: Optional[str] = None,
     in_margin: bool = False,
     has_grid: bool = False,
     is_referenced: bool = False,

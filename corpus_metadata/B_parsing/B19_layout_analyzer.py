@@ -35,7 +35,7 @@ import json
 import logging
 import re
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 
 import anthropic
 import fitz  # PyMuPDF
@@ -615,7 +615,7 @@ def analyze_page_with_refinement(
         logger.info(f"Page {page_num} - Refinement iteration {iteration + 1}")
 
         # Draw current boxes
-        img = draw_debug_rectangles(doc, page_num, visuals)
+        img = draw_debug_rectangles(doc, page_num, visuals)  # type: ignore[assignment]
 
         # Save intermediate if requested
         if output_dir:
@@ -696,7 +696,7 @@ def draw_grid_overlay(
         try:
             font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 24)
         except Exception:
-            font = ImageFont.load_default()
+            font = ImageFont.load_default()  # type: ignore[assignment]
 
         # Draw column labels and tick marks at TOP margin
         for c in range(cols):
@@ -755,7 +755,7 @@ def draw_grid_overlay(
         try:
             font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 16)
         except Exception:
-            font = ImageFont.load_default()
+            font = ImageFont.load_default()  # type: ignore[assignment]
 
         cross_size = 8
 
@@ -800,7 +800,7 @@ def draw_grid_overlay(
         try:
             font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 20)
         except Exception:
-            font = ImageFont.load_default()
+            font = ImageFont.load_default()  # type: ignore[assignment]
 
         # Draw dashed cyan grid lines
         dash_length = 15
@@ -1322,7 +1322,7 @@ def analyze_page_two_phase(
         font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 24)
         small_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 16)
     except Exception:
-        font = ImageFont.load_default()
+        font = ImageFont.load_default()  # type: ignore[assignment]
         small_font = font
 
     # ===== PHASE 1: Column Detection =====
@@ -1397,7 +1397,7 @@ def analyze_page_two_phase(
     col_labels = [str(i + 1) for i in range(grid_cols)]
 
     # Group visuals by column side
-    by_side = {"left": [], "right": [], "spans_both": []}
+    by_side: dict[str, list[dict[str, Any]]] = {"left": [], "right": [], "spans_both": []}
     for v in phase1_visuals:
         side = v.get("side", "spans_both").lower()
         if side in by_side:
@@ -1570,7 +1570,7 @@ def analyze_page_two_phase(
                 draw.rectangle([px0, py0, px1, py1], outline=color, width=4)
 
                 # Label
-                label = v.get("label") or v.get("type")
+                label = str(v.get("label") or v.get("type") or "")
                 draw.text((px0 + 5, py0 + 5), label, fill=color, font=font)
 
         result_path = Path(output_dir) / f"{doc_name}_p{page_num}_two_phase_result.png"
@@ -1615,7 +1615,7 @@ def draw_debug_rectangles(
     try:
         font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 16)
     except Exception:
-        font = ImageFont.load_default()
+        font = ImageFont.load_default()  # type: ignore[assignment]
 
     # Draw rectangles for each visual
     for visual in visuals:

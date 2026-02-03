@@ -205,7 +205,7 @@ def infer_page_columns(
     coverage = 0
     gap_starts = []
     gap_ends = []
-    last_end = 0
+    last_end: float = 0
 
     for x, edge_type in edges:
         if edge_type == "start":
@@ -225,7 +225,7 @@ def infer_page_columns(
         return [(0, page_width)]
 
     columns: List[Tuple[float, float]] = []
-    prev_end = 0
+    prev_end: float = 0
     margin = 20  # Add small margin
 
     for gap_start, gap_end in zip(gap_starts, gap_ends):
@@ -300,7 +300,7 @@ def link_caption_to_figure(
     """
     cap_y = caption.bbox[1]  # Top of caption
 
-    candidates: List[Tuple[float, str, Union[EmbeddedFigure, VectorFigure]]] = []
+    candidates: List[Tuple[float, str, EmbeddedFigure | VectorFigure]] = []
 
     # Check raster figures above caption
     for fig in raster_figures:
@@ -327,11 +327,11 @@ def link_caption_to_figure(
         candidates.append((distance, "raster", fig))
 
     # Check vector figures above caption
-    for fig in vector_figures:
-        if fig.page_num != caption.page_num:
+    for vfig in vector_figures:
+        if vfig.page_num != caption.page_num:
             continue
 
-        fig_bottom = fig.bbox[3]
+        fig_bottom = vfig.bbox[3]
 
         if fig_bottom > cap_y:
             continue
@@ -341,12 +341,12 @@ def link_caption_to_figure(
             continue
 
         if same_column_only and columns:
-            fig_x = (fig.bbox[0] + fig.bbox[2]) / 2
+            fig_x = (vfig.bbox[0] + vfig.bbox[2]) / 2
             fig_col = get_column_index(fig_x, columns)
             if fig_col != caption.column_idx:
                 continue
 
-        candidates.append((distance, "vector", fig))
+        candidates.append((distance, "vector", vfig))
 
     if not candidates:
         return None

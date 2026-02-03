@@ -141,6 +141,7 @@ class TestTextMention:
         )
         assert mention.text == "see Figure 2"
         assert mention.page_num == 5
+        assert mention.reference is not None
         assert mention.reference.numbers == [2]
 
     def test_mention_without_reference(self):
@@ -464,6 +465,7 @@ class TestExtractedVisual:
             triage_reason="has_caption",
         )
         assert visual.caption_text is not None
+        assert visual.reference is not None
         assert visual.reference.numbers == [1]
         assert len(visual.relationships.text_mentions) == 1
 
@@ -568,6 +570,7 @@ class TestVLMEnrichmentResult:
             table_validation=validation,
         )
         assert result.classification.visual_type == VisualType.TABLE
+        assert result.parsed_reference is not None
         assert result.parsed_reference.numbers == [2]
         assert result.is_continuation is False
 

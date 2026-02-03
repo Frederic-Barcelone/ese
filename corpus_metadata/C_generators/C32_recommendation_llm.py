@@ -32,7 +32,7 @@ from __future__ import annotations
 
 import logging
 import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 
 from A_core.A18_recommendation_models import (
     DrugDosingInfo,
@@ -62,6 +62,14 @@ class LLMExtractionMixin:
     - self.pdf_path: Optional PDF path
     - self.extract_loe_sor_with_vlm(): VLM extraction method
     """
+
+    # Declare expected attributes from host class for type checking
+    if TYPE_CHECKING:
+        llm_client: Any
+        llm_model: str
+        pdf_path: Optional[str]
+        _apply_vlm_codes_to_recommendations: Any
+        extract_loe_sor_with_vlm: Any
 
     def _extract_with_llm(
         self,

@@ -169,7 +169,7 @@ class VisualExtractionPipeline:
 
     def __init__(self, config: PipelineConfig = PipelineConfig()):
         self.config = config
-        self._vlm_client = None
+        self._vlm_client: Optional[Any] = None
 
     def _get_vlm_client(self):
         """Lazy initialization of VLM client."""
@@ -488,7 +488,7 @@ class VisualExtractionPipeline:
         self,
         pdf_path: str,
         rendered_candidates: List[Dict[str, Any]],
-        table_structures: Dict[tuple, TableStructure] = None,
+        table_structures: Optional[Dict[tuple, TableStructure]] = None,
     ) -> tuple[List[ExtractedVisual], int]:
         """
         Stage 3: Triage and VLM enrichment.

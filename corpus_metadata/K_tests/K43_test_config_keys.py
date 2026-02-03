@@ -7,6 +7,7 @@ Tests configuration key enums and helper functions.
 
 from __future__ import annotations
 
+from typing import Any
 
 from G_config.G01_config_keys import (
     ConfigKey,
@@ -182,12 +183,12 @@ class TestGetConfig:
         assert result == 60
 
     def test_get_missing_key_uses_default(self):
-        config = {}
+        config: dict[str, Any] = {}
         result = get_config(config, ConfigKey.TIMEOUT_SECONDS)
         assert result == 30  # ConfigKey.TIMEOUT_SECONDS.default
 
     def test_get_with_override_default(self):
-        config = {}
+        config: dict[str, Any] = {}
         result = get_config(config, ConfigKey.TIMEOUT_SECONDS, default=45)
         assert result == 45
 
@@ -210,17 +211,17 @@ class TestGetNestedConfig:
         assert result == 48
 
     def test_get_missing_nested_uses_default(self):
-        config = {"cache": {}}
+        config: dict[str, Any] = {"cache": {}}
         result = get_nested_config(config, ConfigKey.CACHE, CacheConfig.TTL_HOURS)
         assert result == 24  # CacheConfig.TTL_HOURS.default
 
     def test_get_missing_section_uses_default(self):
-        config = {}
+        config: dict[str, Any] = {}
         result = get_nested_config(config, ConfigKey.CACHE, CacheConfig.TTL_HOURS)
         assert result == 24
 
     def test_get_with_override_default(self):
-        config = {}
+        config: dict[str, Any] = {}
         result = get_nested_config(
             config, ConfigKey.CACHE, CacheConfig.TTL_HOURS, default=12
         )
@@ -231,7 +232,7 @@ class TestConfigKeyAsDict:
     """Tests for using config keys as dictionary keys."""
 
     def test_config_key_as_dict_key(self):
-        config = {ConfigKey.RUN_ID: "test-run"}
+        config: dict[str, str] = {ConfigKey.RUN_ID: "test-run"}
         assert config[ConfigKey.RUN_ID] == "test-run"
         # Also works with string
         assert config.get("run_id") == "test-run"

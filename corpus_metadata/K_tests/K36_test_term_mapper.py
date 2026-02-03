@@ -170,11 +170,13 @@ class TestTermMapperLexiconLoading:
 
         # Test "name" key
         entry = mapper._coerce_entry({"name": "Test Name", "code": "T001"})
+        assert entry is not None
         assert entry["canonical_long_form"] == "Test Name"
         assert entry["standard_id"] == "T001"
 
         # Test "canonical" key
         entry = mapper._coerce_entry({"canonical": "Another Name", "id": "A001"})
+        assert entry is not None
         assert entry["canonical_long_form"] == "Another Name"
         assert entry["standard_id"] == "A001"
 

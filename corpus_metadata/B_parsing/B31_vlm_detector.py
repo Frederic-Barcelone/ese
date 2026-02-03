@@ -217,7 +217,7 @@ def detect_visuals_vlm_single_page(
             ],
         )
 
-        raw_text = response.content[0].text
+        raw_text = next((block.text for block in response.content if hasattr(block, "text")), "")
         tokens_used = response.usage.input_tokens + response.usage.output_tokens
 
         # Parse JSON response
@@ -414,10 +414,10 @@ def compare_detections(
     # Match VLM detections to heuristic detections
     matched_vlm = set()
     matched_heuristic = set()
-    matches = []
+    matches: List[Dict[str, Any]] = []
 
     for i, vlm_v in enumerate(vlm_visuals):
-        best_iou = 0
+        best_iou: float = 0
         best_j = -1
 
         for j, heur_v in enumerate(heuristic_visuals):

@@ -262,7 +262,7 @@ class BiomedicalNEREnricher:
             tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME)
             model = AutoModelForTokenClassification.from_pretrained(self.MODEL_NAME)
 
-            self._pipeline = pipeline(
+            self._pipeline = pipeline(  # type: ignore[call-overload]
                 "ner",
                 model=model,
                 tokenizer=tokenizer,

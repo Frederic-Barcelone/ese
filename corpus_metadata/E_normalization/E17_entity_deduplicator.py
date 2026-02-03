@@ -31,11 +31,25 @@ Dependencies:
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Callable, Dict, List, Set, TypeVar
+from typing import Any, Callable, Dict, List, Protocol, Set, TypeVar, runtime_checkable
 
 from A_core.A01_domain_models import ValidationStatus
 
-T = TypeVar("T")
+
+@runtime_checkable
+class DeduplicableEntity(Protocol):
+    """Protocol describing the attributes needed for entity deduplication."""
+
+    status: str
+    id: str
+    primary_evidence: Any
+    supporting_evidence: Any
+    validation_flags: Any
+
+    def model_copy(self, **kwargs: Any) -> DeduplicableEntity: ...
+
+
+T = TypeVar("T", bound=DeduplicableEntity)
 
 
 def _deduplicate_entities(
@@ -99,7 +113,7 @@ def _merge_group(group: List[T], get_score: Callable[[T], tuple]) -> T:
     if "deduplicated" not in flags:
         flags.append("deduplicated")
 
-    return best.model_copy(update={
+    return best.model_copy(update={  # type: ignore[return-value]
         "mention_count": len(group),
         "pages_mentioned": sorted(pages),
         "supporting_evidence": all_supporting,

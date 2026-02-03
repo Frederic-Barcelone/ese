@@ -116,7 +116,7 @@ class TestBaseProvenanceMetadata:
     def test_base_provenance_extra_forbid(self):
         """Test that extra fields are not allowed."""
         with pytest.raises(ValidationError):
-            BaseProvenanceMetadata(
+            BaseProvenanceMetadata(  # type: ignore[call-arg]
                 pipeline_version="1.0.0",
                 run_id="RUN_20250101_120000_abc123",
                 doc_fingerprint="sha256_abc123",

@@ -25,7 +25,7 @@ try:
     import pytesseract
     PYTESSERACT_AVAILABLE = True
 except ImportError:
-    pytesseract = None  # type: ignore
+    pytesseract = None
     PYTESSERACT_AVAILABLE = False
 
 # Optional PIL import
@@ -36,11 +36,11 @@ try:
     try:
         LANCZOS = Image.Resampling.LANCZOS
     except AttributeError:
-        LANCZOS = getattr(Image, 'LANCZOS', None)
+        LANCZOS = getattr(Image, 'LANCZOS', None)  # type: ignore[assignment]
 except ImportError:
-    Image = None
+    Image = None  # type: ignore[assignment]
     PIL_AVAILABLE = False
-    LANCZOS = None
+    LANCZOS = None  # type: ignore[assignment]
 
 
 def get_image_size_bytes(base64_str: str) -> int:
@@ -166,15 +166,15 @@ def compress_image_for_vision(
             # Create white background for transparency
             background = Image.new("RGB", img.size, (255, 255, 255))
             if img.mode == "P":
-                img = img.convert("RGBA")
+                img = img.convert("RGBA")  # type: ignore[assignment]
             if img.mode in ("RGBA", "LA"):
                 background.paste(img, mask=img.split()[-1])  # Use alpha as mask
-                img = background
+                img = background  # type: ignore[assignment]
             else:
-                img = img.convert("RGB")
+                img = img.convert("RGB")  # type: ignore[assignment]
             info["actions"].append("converted_to_rgb")
         elif img.mode != "RGB":
-            img = img.convert("RGB")
+            img = img.convert("RGB")  # type: ignore[assignment]
             info["actions"].append("converted_to_rgb")
 
         # Resize if larger than max_dimension
@@ -183,7 +183,7 @@ def compress_image_for_vision(
             ratio = min(max_dimension / width, max_dimension / height)
             new_width = int(width * ratio)
             new_height = int(height * ratio)
-            img = img.resize((new_width, new_height), LANCZOS)
+            img = img.resize((new_width, new_height), LANCZOS)  # type: ignore[assignment]
             info["actions"].append(f"resized_{width}x{height}_to_{new_width}x{new_height}")
 
         # Compress as JPEG with progressive quality reduction
@@ -293,14 +293,14 @@ def extract_ocr_text_from_base64(
             if img.mode in ("RGBA", "P", "LA"):
                 background = Image.new("RGB", img.size, (255, 255, 255))
                 if img.mode == "P":
-                    img = img.convert("RGBA")
+                    img = img.convert("RGBA")  # type: ignore[assignment]
                 if img.mode in ("RGBA", "LA"):
                     background.paste(img, mask=img.split()[-1])
-                    img = background
+                    img = background  # type: ignore[assignment]
                 else:
-                    img = img.convert("RGB")
+                    img = img.convert("RGB")  # type: ignore[assignment]
             elif img.mode != "RGB":
-                img = img.convert("RGB")
+                img = img.convert("RGB")  # type: ignore[assignment]
 
             # Run OCR
             text = pytesseract.image_to_string(img, lang=lang, config=config)

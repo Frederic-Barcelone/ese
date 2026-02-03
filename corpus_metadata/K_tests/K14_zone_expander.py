@@ -1,5 +1,7 @@
 # corpus_metadata/K_tests/K14_zone_expander.py
 """Tests for zone expander (whitespace-based bbox computation)."""
+from typing import Any
+
 import pytest
 from B_parsing.B18_layout_models import (
     LayoutPattern,
@@ -125,7 +127,7 @@ class TestExpandZoneToWhitespace:
         )
         page_width = 612.0
         page_height = 792.0
-        text_blocks = []
+        text_blocks: list[Any] = []
 
         result = expand_zone_to_whitespace(
             zone=zone,

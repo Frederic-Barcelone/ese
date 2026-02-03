@@ -563,7 +563,7 @@ def render_multipage_visual(
         stitched = Image.new("RGB", (max_width, total_height), (255, 255, 255))
 
         y_offset = 0
-        for img in images:
+        for img in images:  # type: ignore[assignment]
             # Center horizontally if narrower
             x_offset = (max_width - img.width) // 2
             stitched.paste(img, (x_offset, y_offset))
@@ -644,7 +644,7 @@ def resize_image_for_vlm(
             scale = max_dimension / max(width, height)
             new_width = int(width * scale)
             new_height = int(height * scale)
-            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)  # type: ignore[assignment]
 
         # Encode with quality reduction if needed
         quality = 95

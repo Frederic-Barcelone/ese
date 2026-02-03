@@ -74,7 +74,7 @@ class TestCleanWhitespace:
 
     def test_empty_input(self):
         assert _clean_ws("") == ""
-        assert _clean_ws(None) == ""
+        assert _clean_ws(None) == ""  # type: ignore[arg-type]
 
 
 class TestDehyphenateLongForm:
@@ -94,7 +94,7 @@ class TestDehyphenateLongForm:
 
     def test_empty_input(self):
         assert _dehyphenate_long_form("") == ""
-        assert _dehyphenate_long_form(None) is None
+        assert _dehyphenate_long_form(None) is None  # type: ignore[arg-type]
 
 
 class TestTruncateAtBreaks:

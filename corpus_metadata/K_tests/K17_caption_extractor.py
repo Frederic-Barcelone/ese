@@ -111,6 +111,7 @@ class TestParseReferenceFromMatch:
         import re
         pattern = re.compile(r"^(?:Figure|Fig\.?)\s*(\d+)(?:[.-](\d+))?([A-Za-z])?\.?\s*(.*)", re.IGNORECASE)
         match = pattern.match("Figure 1. Patient flow")
+        assert match is not None
 
         ref = parse_reference_from_match(match, "Figure", ReferenceSource.CAPTION)
 
@@ -124,6 +125,7 @@ class TestParseReferenceFromMatch:
         import re
         pattern = re.compile(r"^(?:Figure|Fig\.?)\s*(\d+)(?:[.-](\d+))?([A-Za-z])?\.?\s*(.*)", re.IGNORECASE)
         match = pattern.match("Figure 2-4. Multiple panels")
+        assert match is not None
 
         ref = parse_reference_from_match(match, "Figure", ReferenceSource.CAPTION)
 
@@ -134,6 +136,7 @@ class TestParseReferenceFromMatch:
         import re
         pattern = re.compile(r"^(?:Figure|Fig\.?)\s*(\d+)(?:[.-](\d+))?([A-Za-z])?\.?\s*(.*)", re.IGNORECASE)
         match = pattern.match("Figure 1A. Subgroup A")
+        assert match is not None
 
         ref = parse_reference_from_match(match, "Figure", ReferenceSource.CAPTION)
 
@@ -328,6 +331,7 @@ class TestSelectBestCaption:
         ]
 
         best = select_best_caption(candidates)
+        assert best is not None
         assert best.text == "Table 1. Demographics"
 
     def test_prefer_pdf_text_over_ocr(self):
@@ -363,6 +367,7 @@ class TestSelectBestCaption:
         ]
 
         best = select_best_caption(candidates)
+        assert best is not None
         assert best.provenance == CaptionProvenance.PDF_TEXT
 
     def test_prefer_matching_visual_type(self):
@@ -398,6 +403,8 @@ class TestSelectBestCaption:
         ]
 
         best = select_best_caption(candidates, visual_type_hint="figure")
+        assert best is not None
+        assert best.parsed_reference is not None
         assert best.parsed_reference.type_label == "Figure"
 
     def test_prefer_closer_distance(self):
@@ -429,6 +436,7 @@ class TestSelectBestCaption:
         ]
 
         best = select_best_caption(candidates)
+        assert best is not None
         assert "close" in best.text
 
     def test_empty_candidates(self):
@@ -465,4 +473,5 @@ class TestSelectBestCaption:
 
         # Tables prefer captions above
         best = select_best_caption(candidates, visual_type_hint="table")
+        assert best is not None
         assert "above" in best.text

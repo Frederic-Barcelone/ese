@@ -35,7 +35,7 @@ import time
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, Union
 
 # Add corpus_metadata to path
 ROOT = Path(__file__).resolve().parent.parent
@@ -301,7 +301,7 @@ def load_nlp4rare_gold(gold_path: Path) -> dict:
     - diseases: Dict[doc_id, List[GoldDisease]]
     - genes: Dict[doc_id, List[GoldGene]]
     """
-    result = {"abbreviations": {}, "diseases": {}, "genes": {}}
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}}
 
     if not gold_path.exists():
         print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} NLP4RARE gold not found: {gold_path}")
@@ -314,7 +314,7 @@ def load_nlp4rare_gold(gold_path: Path) -> dict:
     abbrev_data = data.get("abbreviations", {})
     annotations = abbrev_data.get("annotations", [])
     for ann in annotations:
-        entry = GoldAbbreviation(
+        entry: Union[GoldAbbreviation, GoldDisease, GoldGene] = GoldAbbreviation(
             doc_id=ann["doc_id"],
             short_form=ann["short_form"],
             long_form=ann["long_form"],
@@ -349,7 +349,7 @@ def load_nlp4rare_gold(gold_path: Path) -> dict:
 
 def load_papers_gold(gold_path: Path) -> dict:
     """Load papers gold standard (abbreviations only)."""
-    result = {"abbreviations": {}, "diseases": {}, "genes": {}}
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}}
 
     if not gold_path.exists():
         print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} Papers gold not found: {gold_path}")
@@ -589,7 +589,7 @@ def run_extraction(orch, pdf_path: Path) -> dict:
     """
     result = orch.process_pdf(str(pdf_path))
 
-    extracted = {"abbreviations": [], "diseases": [], "genes": []}
+    extracted: dict[str, list[Any]] = {"abbreviations": [], "diseases": [], "genes": []}
 
     # Extract abbreviations
     for entity in result.abbreviations:

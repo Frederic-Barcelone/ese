@@ -35,7 +35,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Literal, Optional, Tuple, cast
 
 import fitz  # PyMuPDF
 
@@ -114,8 +114,8 @@ def parse_reference_from_match(
         VisualReference object
     """
     number_str = match.group(1)
-    range_end_str = match.group(2) if match.lastindex >= 2 else None
-    suffix = match.group(3) if match.lastindex >= 3 else None
+    range_end_str = match.group(2) if match.lastindex is not None and match.lastindex >= 2 else None
+    suffix = match.group(3) if match.lastindex is not None and match.lastindex >= 3 else None
 
     # Parse number(s)
     try:
@@ -388,7 +388,7 @@ def infer_column_layout(
     # Track coverage and find gaps
     coverage = 0
     gaps: List[Tuple[float, float]] = []
-    last_end = 0
+    last_end: float = 0
 
     for x, edge_type in edges:
         if edge_type == "start":
@@ -411,7 +411,7 @@ def infer_column_layout(
     columns: List[Tuple[float, float]] = []
     margin = 20  # Small margin
 
-    prev_end = 0
+    prev_end: float = 0
     for gap_start, gap_end in gaps:
         if gap_start > prev_end + margin:
             columns.append((max(0, prev_end), gap_start))
@@ -507,10 +507,11 @@ def extract_caption_from_pdf_text(
             continue
 
         # Check if in search zone relative to visual
-        position, distance = get_relative_position(visual_bbox_pts, block_bbox, zones)
+        _pos, distance = get_relative_position(visual_bbox_pts, block_bbox, zones)
 
-        if position is None:
+        if _pos is None:
             continue
+        position = cast(Literal["above", "below", "left", "right"], _pos)
 
         # Check for caption pattern
         pattern_result = detect_caption_pattern(block_text)
@@ -819,12 +820,13 @@ def link_caption_to_visual(
     Returns:
         Updated caption with correct position/distance, or None if not linkable
     """
-    position, distance = get_relative_position(
+    _pos, distance = get_relative_position(
         visual_bbox_pts, caption.bbox_pts, zones
     )
 
-    if position is None:
+    if _pos is None:
         return None
+    position = cast(Literal["above", "below", "left", "right"], _pos)
 
     # Create updated caption with correct position
     return CaptionCandidate(

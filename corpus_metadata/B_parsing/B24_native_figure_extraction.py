@@ -238,7 +238,7 @@ def apply_native_figure_extraction(
                     "figure_type": rf.figure_type,
                 }
                 if rf.caption:
-                    metadata["caption_number"] = rf.caption.number
+                    metadata["caption_number"] = str(rf.caption.number)
 
                 new_images.append(
                     ImageBlock(

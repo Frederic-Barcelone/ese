@@ -76,7 +76,7 @@ def resize_image_for_vlm(image_base64: str) -> Tuple[str, bool]:
             scale = min(MAX_IMAGE_DIMENSION / width, MAX_IMAGE_DIMENSION / height)
             new_width = int(width * scale)
             new_height = int(height * scale)
-            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)  # type: ignore[assignment]
             was_resized = True
             logger.info(
                 "Resized image from %dx%d to %dx%d (dimension limit)",
@@ -93,7 +93,7 @@ def resize_image_for_vlm(image_base64: str) -> Tuple[str, bool]:
         while len(new_bytes) > MAX_IMAGE_BYTES and quality_scale > 0.3:
             new_width = int(img.size[0] * quality_scale)
             new_height = int(img.size[1] * quality_scale)
-            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)  # type: ignore[assignment]
             buffer = io.BytesIO()
             img.save(buffer, format="PNG", optimize=True)
             new_bytes = buffer.getvalue()

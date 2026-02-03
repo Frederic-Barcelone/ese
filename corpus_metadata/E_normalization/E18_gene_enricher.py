@@ -175,7 +175,7 @@ class GeneEnricher(BaseEnricher[ExtractedGene, ExtractedGene]):
                 current_flags.append("pubtator_enriched")
                 updates["validation_flags"] = current_flags
 
-            return gene.model_copy(update=updates, validate=True)
+            return gene.model_copy(update=updates)
 
         return gene
 

@@ -33,7 +33,7 @@ from __future__ import annotations
 import base64
 import logging
 import re
-from typing import Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, cast
 
 logger = logging.getLogger(__name__)
 
@@ -73,6 +73,18 @@ class VLMExtractionMixin:
     - self._loe_code_to_level(): LoE conversion method
     - self._sor_code_to_strength(): SoR conversion method
     """
+
+    # Runtime attribute with type annotation (used as cache)
+    _vlm_loe_sor_cache: Dict[str, Tuple[str, str, str, List[str]]]
+
+    # Declare expected attributes from host class for type checking
+    if TYPE_CHECKING:
+        pdf_path: Optional[str]
+        llm_client: Any
+        llm_model: str
+        _clean_json_response: Any
+        _sor_code_to_strength: Any
+        _loe_code_to_level: Any
 
     def extract_loe_sor_with_vlm(self, text: str) -> Dict[str, Tuple[str, str, str, List[str]]]:
         """
@@ -362,8 +374,8 @@ class VLMExtractionMixin:
                 if entry['matched']:
                     continue
 
-                snippet = entry['text_snippet']
-                keywords = entry['keywords']
+                snippet = str(entry['text_snippet'])
+                keywords = cast(List[str], entry['keywords'])
 
                 # Calculate text similarity (using more of the text)
                 text_score = text_similarity(snippet, rec_text[:150]) if snippet else 0.0
@@ -387,8 +399,8 @@ class VLMExtractionMixin:
             # Lower threshold (0.25) since we now use keyword matching
             if best_match and best_score >= 0.25:
                 best_match['matched'] = True
-                loe_code = best_match['loe_code']
-                sor_code = best_match['sor_code']
+                loe_code = str(best_match['loe_code'])
+                sor_code = str(best_match['sor_code'])
 
                 # Debug output
                 match_detail = f"txt={best_text_score:.2f}"

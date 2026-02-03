@@ -136,15 +136,15 @@ def detect_tables_with_docling(
                 )
                 # Set TableFormer mode
                 if mode == "accurate":
-                    pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+                    pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE  # type: ignore[attr-defined]
                 else:
-                    pipeline_options.table_structure_options.mode = TableFormerMode.FAST
-                pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching
+                    pipeline_options.table_structure_options.mode = TableFormerMode.FAST  # type: ignore[attr-defined]
+                pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching  # type: ignore[attr-defined]
 
                 format_options = {
                     InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
                 }
-                converter = DocumentConverter(format_options=format_options)
+                converter = DocumentConverter(format_options=format_options)  # type: ignore[arg-type]
                 # Test conversion to catch SuryaOCR initialization errors early
                 result = converter.convert(pdf_path)
             except (NameError, ImportError, Exception) as surya_error:
@@ -160,15 +160,15 @@ def detect_tables_with_docling(
             )
             # Set TableFormer mode
             if mode == "accurate":
-                pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+                pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE  # type: ignore[attr-defined]
             else:
-                pipeline_options.table_structure_options.mode = TableFormerMode.FAST
-            pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching
+                pipeline_options.table_structure_options.mode = TableFormerMode.FAST  # type: ignore[attr-defined]
+            pipeline_options.table_structure_options.do_cell_matching = config.do_cell_matching  # type: ignore[attr-defined]
 
             format_options = {
                 InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
             }
-            converter = DocumentConverter(format_options=format_options)
+            converter = DocumentConverter(format_options=format_options)  # type: ignore[arg-type]
             result = converter.convert(pdf_path)
 
         # Extract tables from result

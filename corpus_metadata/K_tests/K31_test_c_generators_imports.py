@@ -149,34 +149,34 @@ class TestStrategyClasses:
     def test_abbrev_strategy_import(self):
         """Test abbreviation strategy can be imported."""
         try:
-            from C_generators.C01_strategy_abbrev import AbbreviationCandidateGenerator
-            assert hasattr(AbbreviationCandidateGenerator, "generate")
+            from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
+            assert hasattr(AbbrevSyntaxCandidateGenerator, "extract")
         except ImportError:
-            pytest.skip("AbbreviationCandidateGenerator not available")
+            pytest.skip("AbbrevSyntaxCandidateGenerator not available")
 
     def test_disease_strategy_import(self):
         """Test disease strategy can be imported."""
         try:
-            from C_generators.C06_strategy_disease import DiseaseCandidateGenerator
-            assert hasattr(DiseaseCandidateGenerator, "generate")
+            from C_generators.C06_strategy_disease import DiseaseDetector
+            assert hasattr(DiseaseDetector, "extract")
         except ImportError:
-            pytest.skip("DiseaseCandidateGenerator not available")
+            pytest.skip("DiseaseDetector not available")
 
     def test_drug_strategy_import(self):
         """Test drug strategy can be imported."""
         try:
-            from C_generators.C07_strategy_drug import DrugCandidateGenerator
-            assert hasattr(DrugCandidateGenerator, "generate")
+            from C_generators.C07_strategy_drug import DrugDetector
+            assert hasattr(DrugDetector, "detect")
         except ImportError:
-            pytest.skip("DrugCandidateGenerator not available")
+            pytest.skip("DrugDetector not available")
 
     def test_gene_strategy_import(self):
         """Test gene strategy can be imported."""
         try:
-            from C_generators.C16_strategy_gene import GeneCandidateGenerator
-            assert hasattr(GeneCandidateGenerator, "generate")
+            from C_generators.C16_strategy_gene import GeneDetector
+            assert hasattr(GeneDetector, "detect")
         except ImportError:
-            pytest.skip("GeneCandidateGenerator not available")
+            pytest.skip("GeneDetector not available")
 
     def test_feasibility_strategy_import(self):
         """Test feasibility strategy can be imported."""
@@ -214,8 +214,8 @@ class TestHelperModules:
         """Test C31_recommendation_patterns can be imported."""
         try:
             from C_generators.C31_recommendation_patterns import (
-                RECOMMENDATION_ANCHORS,
+                ORGANIZATION_PATTERNS,
             )
-            assert RECOMMENDATION_ANCHORS is not None
+            assert ORGANIZATION_PATTERNS is not None
         except ImportError:
             pytest.skip("Recommendation patterns not available")

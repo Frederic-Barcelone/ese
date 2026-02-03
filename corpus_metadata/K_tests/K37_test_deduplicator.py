@@ -8,6 +8,7 @@ Tests abbreviation deduplication with quality-based selection.
 from __future__ import annotations
 
 import uuid
+from typing import Optional
 
 import pytest
 
@@ -30,7 +31,7 @@ def make_entity(
     generator: GeneratorType = GeneratorType.SYNTAX_PATTERN,
     field_type: FieldType = FieldType.DEFINITION_PAIR,
     page: int = 1,
-    entity_id: str = None,
+    entity_id: Optional[str] = None,
 ) -> ExtractedEntity:
     """Helper to create test entities."""
     return ExtractedEntity(
@@ -76,7 +77,7 @@ class TestNormalizeLongForm:
 
     def test_none_handling(self):
         # Should handle None gracefully
-        assert _normalize_lf(None) == ""
+        assert _normalize_lf(None) == ""  # type: ignore[arg-type]
 
 
 class TestDeduplicator:
@@ -247,7 +248,9 @@ class TestDeduplicatorConfig:
         result = deduplicator.deduplicate(entities)
 
         # Should only store max_alternatives
+        assert isinstance(result[0].normalized_value, dict)
         dedup_info = result[0].normalized_value.get("deduplication", {})
+        assert isinstance(dedup_info, dict)
         assert len(dedup_info.get("alternatives", [])) <= 2
 
 

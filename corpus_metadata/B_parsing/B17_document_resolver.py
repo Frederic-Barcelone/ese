@@ -144,7 +144,7 @@ def scan_body_text_references(
 
                 # Parse range end
                 range_end = None
-                if match.lastindex >= 2 and match.group(2):
+                if match.lastindex is not None and match.lastindex >= 2 and match.group(2):
                     try:
                         range_end = int(match.group(2))
                     except ValueError:
@@ -152,7 +152,7 @@ def scan_body_text_references(
 
                 # Parse suffix
                 suffix = None
-                if match.lastindex >= 3 and match.group(3):
+                if match.lastindex is not None and match.lastindex >= 3 and match.group(3):
                     suffix = match.group(3)
 
                 references.append(

@@ -62,7 +62,7 @@ except ImportError:
     PdfPipelineOptions = None  # type: ignore
     TableFormerMode = None  # type: ignore
     TableItem = None  # type: ignore
-    SuryaOcrOptions = None  # type: ignore
+    SuryaOcrOptions = None
 
 
 class DoclingTableExtractor:
@@ -142,10 +142,10 @@ class DoclingTableExtractor:
     def _set_tableformer_options(self, pipeline_options: "PdfPipelineOptions") -> None:
         """Set TableFormer mode and cell matching options."""
         if self.mode == "accurate":
-            pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+            pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE  # type: ignore[attr-defined]
         else:
-            pipeline_options.table_structure_options.mode = TableFormerMode.FAST
-        pipeline_options.table_structure_options.do_cell_matching = self.do_cell_matching
+            pipeline_options.table_structure_options.mode = TableFormerMode.FAST  # type: ignore[attr-defined]
+        pipeline_options.table_structure_options.do_cell_matching = self.do_cell_matching  # type: ignore[attr-defined]
 
     def extract_tables(self, file_path: str) -> List[Dict[str, Any]]:
         """

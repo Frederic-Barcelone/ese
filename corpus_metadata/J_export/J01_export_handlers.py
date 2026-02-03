@@ -1058,7 +1058,7 @@ class ExportManager:
             json.dump(export_data, f, indent=2)
 
         # Count by source
-        source_counts = {}
+        source_counts: dict[str, int] = {}
         for img in export_data["images"]:
             src = img.get("extraction_source", "unknown")
             source_counts[src] = source_counts.get(src, 0) + 1

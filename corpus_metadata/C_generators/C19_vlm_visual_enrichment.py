@@ -155,7 +155,7 @@ class VLMClient:
 
     def __init__(self, config: VLMConfig = VLMConfig()):
         self.config = config
-        self._client = None
+        self._client: Optional[Any] = None
 
     def _get_client(self):
         """Lazy initialization of Claude client."""
@@ -511,7 +511,7 @@ def enrich_visual_batch(
     client: Optional[VLMClient] = None,
     config: VLMConfig = VLMConfig(),
     validate_tables: bool = True,
-) -> List[VLMEnrichmentResult]:
+) -> List[Optional[VLMEnrichmentResult]]:
     """
     Enrich a batch of visuals using VLM.
 
@@ -522,12 +522,12 @@ def enrich_visual_batch(
         validate_tables: Whether to validate table structures
 
     Returns:
-        List of VLMEnrichmentResult (one per visual)
+        List of VLMEnrichmentResult or None (one per visual)
     """
     if client is None:
         client = VLMClient(config)
 
-    results = []
+    results: list[Optional[VLMEnrichmentResult]] = []
 
     for visual in visuals:
         image_base64 = visual.get("image_base64")

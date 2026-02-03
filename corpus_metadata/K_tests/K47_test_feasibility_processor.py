@@ -7,6 +7,8 @@ Tests FeasibilityProcessor and NER enrichment.
 
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 
 from I_extraction.I02_feasibility_processor import FeasibilityProcessor
@@ -51,37 +53,37 @@ class TestFeasibilityProcessorEnrichment:
 
     def test_enrich_with_epiextract_noop_without_enricher(self, processor):
         """Should return candidates unchanged if enricher not available."""
-        candidates = []
+        candidates: list[Any] = []
         result = processor._enrich_with_epiextract(candidates, "sample text")
         assert result == candidates
 
     def test_enrich_with_zeroshot_noop_without_enricher(self, processor):
         """Should return candidates unchanged if enricher not available."""
-        candidates = []
+        candidates: list[Any] = []
         result = processor._enrich_with_zeroshot(candidates, "sample text")
         assert result == candidates
 
     def test_enrich_with_biomedical_ner_noop_without_enricher(self, processor):
         """Should return candidates unchanged if enricher not available."""
-        candidates = []
+        candidates: list[Any] = []
         result = processor._enrich_with_biomedical_ner(candidates, "sample text")
         assert result == candidates
 
     def test_enrich_with_patient_journey_noop_without_enricher(self, processor):
         """Should return candidates unchanged if enricher not available."""
-        candidates = []
+        candidates: list[Any] = []
         result = processor._enrich_with_patient_journey(candidates, "sample text")
         assert result == candidates
 
     def test_enrich_with_registry_noop_without_enricher(self, processor):
         """Should return candidates unchanged if enricher not available."""
-        candidates = []
+        candidates: list[Any] = []
         result = processor._enrich_with_registry(candidates, "sample text")
         assert result == candidates
 
     def test_enrich_with_genetic_noop_without_enricher(self, processor):
         """Should return candidates unchanged if enricher not available."""
-        candidates = []
+        candidates: list[Any] = []
         result = processor._enrich_with_genetic(candidates, "sample text")
         assert result == candidates
 

@@ -30,7 +30,7 @@ Dependencies:
 
 from __future__ import annotations
 
-from typing import List
+from typing import TYPE_CHECKING, Any, List
 
 from A_core.A07_feasibility_models import (
     BackgroundTherapy,
@@ -83,6 +83,16 @@ class FeasibilityResponseParserMixin:
     - self._get_bool(data, key, default): Bool getter helper
     - self._get_list(data, key): List getter helper
     """
+
+    # Declare expected attributes from host class for type checking
+    if TYPE_CHECKING:
+        _call_llm: Any
+        _extraction_stats: dict[str, int]
+        _verification_stats: dict[str, int]
+        _make_provenance: Any
+        _apply_verification_penalty: Any
+        _get_list: Any
+        _get_bool: Any
 
     # =========================================================================
     # STUDY DESIGN EXTRACTION

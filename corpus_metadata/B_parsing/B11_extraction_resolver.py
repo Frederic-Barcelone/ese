@@ -62,8 +62,11 @@ class ResolvedFigure:
         if hasattr(self.figure, "page_num"):
             return self.figure.page_num
         # Layout model figures may have different attribute
-        if hasattr(self.figure, "bbox") and hasattr(self.figure.bbox, "page_num"):
-            return self.figure.bbox.page_num
+        if hasattr(self.figure, "bbox"):
+            bbox_attr = self.figure.bbox
+            page = getattr(bbox_attr, "page_num", None)
+            if page is not None:
+                return int(page)
         return 1
 
     @property
@@ -442,12 +445,12 @@ def get_resolution_stats(
     Returns:
         Dictionary with statistics
     """
-    figure_sources = {}
+    figure_sources: dict[str, int] = {}
     for fig in resolved_figures:
         source = fig.source
         figure_sources[source] = figure_sources.get(source, 0) + 1
 
-    figure_types = {}
+    figure_types: dict[str, int] = {}
     for fig in resolved_figures:
         ftype = fig.figure_type
         figure_types[ftype] = figure_types.get(ftype, 0) + 1

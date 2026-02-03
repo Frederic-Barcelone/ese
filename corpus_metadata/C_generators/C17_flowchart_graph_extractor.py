@@ -189,7 +189,7 @@ class FlowchartGraphExtractor:
     ) -> CarePathway:
         """Parse the LLM response into a CarePathway object."""
         # Parse nodes
-        nodes = []
+        nodes: list[CarePathwayNode] = []
         for node_data in response.get("nodes", []):
             if not isinstance(node_data, dict):
                 continue

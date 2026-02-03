@@ -293,7 +293,7 @@ class ClaudeClient:
                 {
                     "role": "user",
                     "content": [
-                        {
+                        {  # type: ignore[list-item]
                             "type": "image",
                             "source": {
                                 "type": "base64",
@@ -572,7 +572,9 @@ class LLMEngine:
                 uncached_results[idx] = entity
 
         for i in range(len(candidates)):
-            results.append(cached_results.get(i) or uncached_results.get(i))
+            result_entity = cached_results.get(i) or uncached_results.get(i)
+            if result_entity is not None:
+                results.append(result_entity)
 
         return results
 
