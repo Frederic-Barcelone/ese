@@ -176,6 +176,10 @@ class DiseaseDetector:
 
         self.general_disease_path = lexicon_base / "2025_08_lexicon_disease.json"
         self.orphanet_path = lexicon_base / "2025_08_orphanet_diseases.json"
+        self.mondo_path = lexicon_base / "2025_mondo_diseases.json"
+        self.rare_disease_acronyms_path = (
+            lexicon_base / "2025_08_rare_disease_acronyms.json"
+        )
 
         # Context window for snippets
         self.context_window = int(self.config.get("context_window", 300))
@@ -218,18 +222,32 @@ class DiseaseDetector:
             self.config.get("doc_fingerprint") or "unknown-doc-fingerprint"
         )
 
+        # Lexicon toggles (from disease_detection config section)
+        self._enable_general = bool(self.config.get("enable_general_lexicon", True))
+        self._enable_orphanet = bool(self.config.get("enable_orphanet", True))
+        self._enable_mondo = bool(self.config.get("enable_mondo", True))
+        self._enable_acronyms = bool(self.config.get("enable_rare_disease_acronyms", True))
+        self._enable_scispacy = bool(self.config.get("enable_scispacy", True))
+
         # Stats: (name, count, filename)
         self._lexicon_stats: List[Tuple[str, int, str]] = []
 
-        # Load lexicons
+        # Load lexicons (specialized always loaded; others gated by config)
         self._load_specialized_lexicons()
-        self._load_general_lexicon()
-        self._load_orphanet_lexicon()
+        if self._enable_general:
+            self._load_general_lexicon()
+        if self._enable_orphanet:
+            self._load_orphanet_lexicon()
+        if self._enable_mondo:
+            self._load_mondo_lexicon()
+        if self._enable_acronyms:
+            self._load_rare_disease_acronyms()
 
         # Initialize scispacy
         self.scispacy_nlp = None
         self.umls_linker = None
-        self._init_scispacy()
+        if self._enable_scispacy:
+            self._init_scispacy()
 
     def _load_specialized_lexicons(self) -> None:
         """Load specialized disease lexicons (PAH, ANCA, IgAN)."""
@@ -251,8 +269,10 @@ class DiseaseDetector:
 
                 self.specialized_entries[key] = entry
 
-                # Register preferred label and synonyms for FlashText
+                # Register preferred label, abbreviation, and synonyms for FlashText
                 self.specialized_kp.add_keyword(entry.preferred_label, key)
+                if entry.abbreviation and len(entry.abbreviation) >= 2:
+                    self.specialized_kp.add_keyword(entry.abbreviation, key)
                 for syn in entry.synonyms:
                     if len(syn) >= 3:  # Skip very short synonyms
                         self.specialized_kp.add_keyword(syn, key)
@@ -367,6 +387,127 @@ class DiseaseDetector:
 
         self._lexicon_stats.append(
             ("Orphanet diseases", loaded, self.orphanet_path.name)
+        )
+
+    def _load_mondo_lexicon(self) -> None:
+        """Load MONDO unified disease ontology lexicon.
+
+        MONDO contains ~97K disease entries with synonyms and cross-references
+        to MESH, UMLS, ICD, SNOMED, NCIT, etc.  Same format as the general
+        disease lexicon (label / sources / synonyms) but much broader coverage
+        including common diseases like "stroke" and "autoimmune disorder" that
+        are absent from the rare-disease-focused lexicons.
+        """
+        if not self.mondo_path.exists():
+            return
+
+        data = json.loads(self.mondo_path.read_text(encoding="utf-8"))
+        loaded = 0
+
+        for entry_data in data:
+            if not isinstance(entry_data, dict):
+                continue
+
+            label = (entry_data.get("label") or "").strip()
+            if not label or len(label) < 3:
+                continue
+
+            if self._looks_like_chromosome(label):
+                continue
+
+            key = f"mondo_{loaded}"
+            identifiers: Dict[str, str] = {}
+
+            sources = entry_data.get("sources", [])
+            for src in sources:
+                if isinstance(src, dict):
+                    src_name = src.get("source", "")
+                    src_id = src.get("id", "")
+                    if src_name and src_id:
+                        identifiers[src_name] = src_id
+
+            synonyms_raw = entry_data.get("synonyms", [])
+            synonyms = [
+                s for s in synonyms_raw
+                if isinstance(s, str) and len(s) >= 3
+                and not self._looks_like_chromosome(s)
+            ]
+
+            entry = DiseaseEntry(
+                key=key,
+                preferred_label=label,
+                synonyms=synonyms,
+                identifiers=identifiers,
+                is_rare_disease=False,
+                source=self.mondo_path.name,
+            )
+
+            self.general_entries[key] = entry
+            self.general_kp.add_keyword(label, key)
+            for syn in synonyms:
+                self.general_kp.add_keyword(syn, key)
+
+            loaded += 1
+
+        self._lexicon_stats.append(
+            ("MONDO diseases", loaded, self.mondo_path.name)
+        )
+
+    def _load_rare_disease_acronyms(self) -> None:
+        """Load rare disease acronyms into general keyword processor.
+
+        Loads acronym-to-disease mappings from the rare disease acronyms file.
+        Each acronym (e.g., "APS") maps to a full disease name with Orphanet
+        and ICD codes, enabling detection of disease abbreviations in text.
+        """
+        if not self.rare_disease_acronyms_path.exists():
+            return
+
+        data = json.loads(
+            self.rare_disease_acronyms_path.read_text(encoding="utf-8")
+        )
+        loaded = 0
+
+        for acronym, entry_data in data.items():
+            if not isinstance(entry_data, dict):
+                continue
+
+            name = (entry_data.get("name") or "").strip()
+            if not name:
+                continue
+
+            # Skip very short acronyms (single char) to avoid noise
+            if len(acronym) < 2:
+                continue
+
+            key = f"acronym_{acronym}"
+
+            identifiers: Dict[str, str] = {}
+            orphacode = entry_data.get("orphacode")
+            if orphacode:
+                identifiers["ORPHA"] = str(orphacode)
+            icd10 = entry_data.get("icd10_code")
+            if icd10:
+                identifiers["ICD10"] = icd10
+            icd11 = entry_data.get("icd11_code")
+            if icd11:
+                identifiers["ICD11"] = icd11
+
+            entry = DiseaseEntry(
+                key=key,
+                preferred_label=name,
+                abbreviation=acronym,
+                identifiers=identifiers,
+                is_rare_disease=True,
+                source=self.rare_disease_acronyms_path.name,
+            )
+
+            self.general_entries[key] = entry
+            self.general_kp.add_keyword(acronym, key)
+            loaded += 1
+
+        self._lexicon_stats.append(
+            ("Rare disease acronyms", loaded, self.rare_disease_acronyms_path.name)
         )
 
     def _looks_like_chromosome(self, text: str) -> bool:

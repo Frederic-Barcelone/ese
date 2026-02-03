@@ -352,10 +352,17 @@ class ComponentFactory:
     def create_disease_detector(self) -> "DiseaseDetector":
         """Create disease detection component."""
         from C_generators.C06_strategy_disease import DiseaseDetector
+        disease_cfg = self.config.get("disease_detection", {})
         return DiseaseDetector(
             config={
                 "run_id": self.run_id,
                 "lexicon_base_path": str(self.dict_path),
+                "enable_general_lexicon": disease_cfg.get("enable_general_lexicon", True),
+                "enable_orphanet": disease_cfg.get("enable_orphanet", True),
+                "enable_mondo": disease_cfg.get("enable_mondo", True),
+                "enable_rare_disease_acronyms": disease_cfg.get("enable_rare_disease_acronyms", True),
+                "enable_scispacy": disease_cfg.get("enable_scispacy", True),
+                "context_window": disease_cfg.get("context_window", 300),
             }
         )
 

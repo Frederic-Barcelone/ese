@@ -55,6 +55,7 @@ lexicons:
   disease_lexicon_pah: "disease_lexicon_pah.json"
   disease_lexicon_anca: "disease_lexicon_anca.json"
   disease_lexicon_igan: "disease_lexicon_igan.json"
+  disease_lexicon_c3g: "disease_lexicon_c3g.json"
 
   # Clinical trial acronyms lexicon
   trial_acronyms: "trial_acronyms_lexicon.json"
@@ -749,6 +750,8 @@ disease_detection:
   # Lexicons to use
   enable_general_lexicon: true    # 2025_08_lexicon_disease.json (29K+ diseases)
   enable_orphanet: true           # 2025_08_orphanet_diseases.json (9.6K diseases)
+  enable_mondo: true              # 2025_mondo_diseases.json (97K diseases, MONDO ontology)
+  enable_rare_disease_acronyms: true  # 2025_08_rare_disease_acronyms.json (1.6K acronyms)
   enable_scispacy: true           # scispacy NER with UMLS linking
 
   # Context window for snippets

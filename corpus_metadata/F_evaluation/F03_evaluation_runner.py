@@ -408,6 +408,48 @@ def lf_matches(sys_lf: Optional[str], gold_lf: str, threshold: float = FUZZY_THR
     return ratio >= threshold
 
 
+def _normalize_disease_synonyms(text: str) -> str:
+    """Normalize known disease synonym variants for matching.
+
+    Handles adjectival/noun form pairs (e.g., autism/autistic) and
+    suffix synonyms (disease/syndrome/disorder/deficiency) so that
+    semantically equivalent names can be matched.
+    """
+    # Adjectival ↔ noun form mappings (reduce to a canonical form)
+    adjective_map = [
+        ("autistic", "autism"),
+        ("epileptic", "epilepsy"),
+        ("asthmatic", "asthma"),
+        ("anemic", "anemia"),
+        ("anaemic", "anaemia"),
+        ("diabetic", "diabetes"),
+        ("arthritic", "arthritis"),
+        ("nephrotic", "nephrosis"),
+        ("neurotic", "neurosis"),
+        ("psychotic", "psychosis"),
+        ("sclerotic", "sclerosis"),
+        ("thrombotic", "thrombosis"),
+        ("stenotic", "stenosis"),
+        ("fibrotic", "fibrosis"),
+        ("necrotic", "necrosis"),
+        ("cirrhotic", "cirrhosis"),
+    ]
+    result = text
+    for adj, noun in adjective_map:
+        result = result.replace(adj, noun)
+
+    # Suffix synonyms (normalize to a single canonical suffix)
+    suffix_synonyms = [
+        ("syndrome", "disorder"),
+        ("deficiency", "disorder"),
+        ("deficit", "disorder"),
+    ]
+    for alt, canonical in suffix_synonyms:
+        result = result.replace(alt, canonical)
+
+    return result
+
+
 def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRESHOLD) -> bool:
     """Check if disease entities match."""
     sys_norm = " ".join(sys_text.strip().lower().split())
@@ -421,8 +463,18 @@ def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRE
     if sys_norm in gold_norm or gold_norm in sys_norm:
         return True
 
-    # Fuzzy match
-    ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
+    # Synonym normalization (adjectival forms + suffix synonyms)
+    sys_syn = _normalize_disease_synonyms(sys_norm)
+    gold_syn = _normalize_disease_synonyms(gold_norm)
+
+    if sys_syn == gold_syn:
+        return True
+
+    if sys_syn in gold_syn or gold_syn in sys_syn:
+        return True
+
+    # Fuzzy match (on synonym-normalized forms for better scores)
+    ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
     return ratio >= threshold
 
 
