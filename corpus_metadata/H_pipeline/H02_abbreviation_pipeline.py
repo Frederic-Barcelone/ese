@@ -3,7 +3,42 @@
 Abbreviation extraction pipeline.
 
 Handles the complete abbreviation extraction workflow including PDF parsing,
-candidate generation, filtering, LLM validation, and normalization.
+candidate generation, filtering, LLM validation, and normalization. Implements
+PASO heuristics for auto-approve/reject decisions before LLM validation.
+
+Key Components:
+    - AbbreviationPipeline: Main pipeline orchestrating abbreviation extraction
+    - Stage 1: PDF parsing into DocumentGraph
+    - Stage 2: Candidate generation using multiple strategies
+    - Stage 3: Heuristic-based filtering (PASO A/B/C/D)
+    - Stage 4: LLM validation for ambiguous candidates
+    - Stage 5: Normalization, disambiguation, and deduplication
+    - PASO heuristics:
+        - PASO A: Auto-approve statistical abbreviations (CI, HR, SD)
+        - PASO B: Country code handling (via blacklist)
+        - PASO C: Hyphenated abbreviations (auto-enriched from ClinicalTrials.gov)
+        - PASO D: LLM SF-only extraction for missing abbreviations
+
+Example:
+    >>> from H_pipeline.H02_abbreviation_pipeline import AbbreviationPipeline
+    >>> pipeline = AbbreviationPipeline(
+    ...     run_id=run_id, pipeline_version="1.0.0",
+    ...     parser=parser, table_extractor=table_extractor,
+    ...     generators=generators, heuristics=heuristics,
+    ...     term_mapper=term_mapper, disambiguator=disambiguator,
+    ...     deduplicator=deduplicator, logger=logger,
+    ... )
+    >>> doc = pipeline.parse_pdf(pdf_path, output_dir)
+    >>> candidates, full_text = pipeline.generate_candidates(doc)
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, ExtractedEntity, ValidationStatus
+    - A_core.A03_provenance: hash_string
+    - A_core.A04_heuristics_config: HeuristicsConfig, HeuristicsCounters
+    - B_parsing: PDF parsing components
+    - D_validation: LLM validation engine
+    - E_normalization: Term mapping, disambiguation, deduplication
+    - Z_utils: Text helpers, console output
 """
 
 from __future__ import annotations
@@ -43,6 +78,10 @@ from Z_utils.Z02_text_helpers import (
     score_lf_quality,
 )
 from Z_utils.Z07_console_output import get_printer
+from Z_utils.Z11_entity_helpers import (
+    create_entity_from_candidate as _shared_create_entity_from_candidate,
+    create_entity_from_search as _shared_create_entity_from_search,
+)
 
 
 class AbbreviationPipeline:
@@ -950,32 +989,8 @@ Return ONLY the JSON array, nothing else."""
         long_form_override: Optional[str] = None,
     ) -> "ExtractedEntity":
         """Create ExtractedEntity from a Candidate."""
-        from A_core.A01_domain_models import EvidenceSpan, ExtractedEntity, ValidationStatus
-
-        context = (candidate.context_text or "").strip()
-        ctx_hash = hash_string(context) if context else "no_context"
-        primary = EvidenceSpan(
-            text=context,
-            location=candidate.context_location,
-            scope_ref=ctx_hash,
-            start_char_offset=0,
-            end_char_offset=len(context),
-        )
-        return ExtractedEntity(
-            candidate_id=candidate.id,
-            doc_id=candidate.doc_id,
-            field_type=candidate.field_type,
-            short_form=candidate.short_form.strip(),
-            long_form=long_form_override
-            or (candidate.long_form.strip() if candidate.long_form else None),
-            primary_evidence=primary,
-            supporting_evidence=[],
-            status=status,
-            confidence_score=confidence,
-            rejection_reason=reason if status == ValidationStatus.REJECTED else None,
-            validation_flags=flags,
-            provenance=candidate.provenance,
-            raw_llm_response=raw_response,
+        return _shared_create_entity_from_candidate(
+            candidate, status, confidence, reason, flags, raw_response, long_form_override,
         )
 
     def _create_entity_from_search(
@@ -990,50 +1005,20 @@ Return ONLY the JSON array, nothing else."""
         lexicon_source: str,
     ) -> "ExtractedEntity":
         """Create ExtractedEntity from a text search match."""
-        from A_core.A01_domain_models import (
-            Coordinate,
-            EvidenceSpan,
-            ExtractedEntity,
-            FieldType,
-            GeneratorType,
-            ProvenanceMetadata,
-            ValidationStatus,
-        )
+        from A_core.A01_domain_models import FieldType
 
-        context_snippet = extract_context_snippet(full_text, match.start(), match.end())
-        ctx_hash = hash_string(context_snippet)
-
-        primary = EvidenceSpan(
-            text=context_snippet,
-            location=Coordinate(page_num=1),
-            scope_ref=ctx_hash,
-            start_char_offset=match.start() - max(0, match.start() - 100),
-            end_char_offset=match.end() - max(0, match.start() - 100),
-        )
-
-        prov = ProvenanceMetadata(
+        return _shared_create_entity_from_search(
+            doc_id=doc_id,
+            full_text=full_text,
+            match=match,
+            long_form=long_form,
+            field_type=FieldType.DEFINITION_PAIR,
+            confidence=confidence,
+            flags=flags,
+            rule_version=rule_version,
+            lexicon_source=lexicon_source,
             pipeline_version=self.pipeline_version,
             run_id=self.run_id,
-            doc_fingerprint=lexicon_source,
-            generator_name=GeneratorType.LEXICON_MATCH,
-            rule_version=rule_version,
-            lexicon_source=f"orchestrator:{lexicon_source}",
-        )
-
-        return ExtractedEntity(
-            candidate_id=uuid.uuid4(),
-            doc_id=doc_id,
-            field_type=FieldType.DEFINITION_PAIR,
-            short_form=match.group(),
-            long_form=long_form,
-            primary_evidence=primary,
-            supporting_evidence=[],
-            status=ValidationStatus.VALIDATED,
-            confidence_score=confidence,
-            rejection_reason=None,
-            validation_flags=flags,
-            provenance=prov,
-            raw_llm_response={"auto": lexicon_source},
         )
 
 

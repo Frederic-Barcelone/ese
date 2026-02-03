@@ -2,20 +2,32 @@
 """
 Visual Pipeline Integration for Orchestrator.
 
-Provides easy integration of the new visual extraction pipeline
-with the existing orchestrator. Handles configuration loading
-and result export.
+Provides integration of the visual extraction pipeline (tables and figures)
+with the orchestrator. Handles configuration loading, dependency checking,
+and result export to JSON format.
 
-Usage in orchestrator:
-    from H_pipeline.H03_visual_integration import VisualPipelineIntegration
+Key Components:
+    - VisualPipelineIntegration: Main integration wrapper
+    - Dependency checking: Docling, PyMuPDF, Anthropic SDK
+    - Configuration building: PipelineConfig from YAML settings
+    - Extraction: Tables and figures from PDF documents
+    - Export: JSON with image file references or embedded base64
+    - Factory function: create_visual_integration()
 
-    # In Orchestrator.__init__
-    self.visual_integration = VisualPipelineIntegration(config)
+Example:
+    >>> from H_pipeline.H03_visual_integration import VisualPipelineIntegration
+    >>> integration = VisualPipelineIntegration(config)
+    >>> if integration.enabled:
+    ...     result = integration.extract(pdf_path)
+    ...     integration.export(result, output_dir, doc_name)
 
-    # In process_single_pdf
-    if self.visual_integration.enabled:
-        visual_result = self.visual_integration.extract(pdf_path)
-        self.visual_integration.export(visual_result, output_dir)
+Dependencies:
+    - B_parsing.B12_visual_pipeline: VisualExtractionPipeline, PipelineConfig
+    - B_parsing.B13_visual_detector: DetectorConfig
+    - B_parsing.B14_visual_renderer: RenderConfig
+    - B_parsing.B15_caption_extractor: CaptionSearchZones
+    - B_parsing.B16_triage: TriageConfig
+    - J_export.J02_visual_export: export_figures_only, export_tables_only
 """
 from __future__ import annotations
 

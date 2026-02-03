@@ -3,9 +3,28 @@
 Deterministic Merge & Resolve Layer.
 
 Handles deduplication, conflict resolution, and evidence selection
-for multiple strategies extracting the same field.
+for multiple strategies extracting the same field. Guarantees deterministic
+output: same inputs always produce same outputs.
 
-INVARIANT: Same inputs always produce same outputs (deterministic).
+Key Components:
+    - MergeConfig: Configuration for merge behavior (dedupe keys, priorities)
+    - MergeResolver: Main resolver implementing deterministic merge algorithm
+    - Strategy priority: Higher priority strategies win conflicts
+    - Evidence merging: Combines supporting evidence from all duplicates
+    - Constraint enforcement: Mutual exclusivity for conflicting fields
+    - Singleton accessor: get_merge_resolver()
+
+Example:
+    >>> from H_pipeline.H04_merge_resolver import MergeResolver, MergeConfig
+    >>> config = MergeConfig.default()
+    >>> resolver = MergeResolver(config)
+    >>> merged = resolver.merge(raw_extractions)
+    >>> # Or use singleton:
+    >>> from H_pipeline.H04_merge_resolver import get_merge_resolver
+    >>> merged = get_merge_resolver().merge(raw_extractions)
+
+Dependencies:
+    - A_core.A02_interfaces: RawExtraction dataclass
 """
 
 from __future__ import annotations

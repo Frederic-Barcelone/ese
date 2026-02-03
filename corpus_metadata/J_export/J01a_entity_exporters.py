@@ -2,17 +2,42 @@
 """
 Entity export functions for diseases, genes, drugs, pharma, authors, and citations.
 
-Extracted from J01_export_handlers.py to reduce file size.
-These functions are called by ExportManager.
+Provides specialized export functions for each entity type, converting
+ExtractedEntity objects to JSON format with full metadata, codes, and
+provenance information. Extracted from J01_export_handlers.py.
+
+Key Components:
+    - export_disease_results: ICD-10, SNOMED, MONDO, ORPHA codes
+    - export_gene_results: HGNC, Entrez, Ensembl, associated diseases
+    - export_drug_results: RxCUI, MeSH, DrugBank, development phase
+    - export_pharma_results: Company names, headquarters, subsidiaries
+    - export_author_results: Names, roles, affiliations, ORCID
+    - export_citation_results: PMID, DOI, NCT with API validation
+
+Example:
+    >>> from J_export.J01a_entity_exporters import export_disease_results
+    >>> export_disease_results(
+    ...     out_dir, pdf_path, results, run_id, pipeline_version
+    ... )
+    # Creates: diseases_{doc_name}_{timestamp}.json
+
+Dependencies:
+    - A_core.A01_domain_models: ValidationStatus
+    - A_core.A05_disease_models: DiseaseExportDocument, DiseaseExportEntry
+    - A_core.A06_drug_models: DrugExportDocument, DrugExportEntry
+    - A_core.A19_gene_models: GeneExportDocument, GeneExportEntry
+    - A_core.A09_pharma_models: PharmaExportDocument, PharmaExportEntry
+    - A_core.A10_author_models: AuthorExportDocument, AuthorExportEntry
+    - A_core.A11_citation_models: CitationExportDocument, CitationValidator
 """
 from __future__ import annotations
 
 import logging
 from datetime import datetime
-
-logger = logging.getLogger(__name__)
 from pathlib import Path
 from typing import List, TYPE_CHECKING
+
+logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from A_core.A05_disease_models import ExtractedDisease

@@ -1,12 +1,34 @@
 # corpus_metadata/J_export/J02_visual_export.py
 """
-Export handlers for the new visual extraction pipeline.
+Export handlers for the visual extraction pipeline.
 
-Exports ExtractedVisual objects to JSON format with:
-- Full metadata (type, reference, caption, relationships)
-- Base64 images (or external file references)
-- Structured table data for table visuals
-- StructEqTable extraction (LaTeX/HTML) for tables
+Exports ExtractedVisual objects to JSON format with full metadata,
+images, and structured content. Supports both tables and figures
+with optional StructEqTable extraction for LaTeX/HTML output.
+
+Key Components:
+    - extract_table_content_structeq: StructEqTable LaTeX/HTML extraction
+    - visual_to_dict: Convert ExtractedVisual to serializable dict
+    - pipeline_result_to_dict: Convert full PipelineResult to dict
+    - export_visuals_to_json: Full visual export with all metadata
+    - export_tables_only: Table-specific export with StructEqTable
+    - export_figures_only: Figure-specific export
+    - export_images_separately: Save images as individual files
+
+Example:
+    >>> from J_export.J02_visual_export import export_tables_only
+    >>> export_tables_only(
+    ...     result, output_path,
+    ...     output_dir=images_dir, doc_name="document",
+    ...     save_images=True,
+    ... )
+    # Creates: output_path with table JSON and image files
+
+Dependencies:
+    - A_core.A13_visual_models: ExtractedVisual
+    - B_parsing.B12_visual_pipeline: PipelineResult
+    - struct_eqtable (optional): Table structure extraction
+    - PIL (optional): Image processing for StructEqTable
 """
 from __future__ import annotations
 

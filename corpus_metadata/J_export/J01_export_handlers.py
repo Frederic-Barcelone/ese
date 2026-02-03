@@ -2,13 +2,35 @@
 """
 Export handlers for pipeline results.
 
-Handles exporting extraction results to various JSON formats including
-abbreviations, diseases, genes, drugs, pharma companies, authors, citations,
-feasibility data, images, tables, and document metadata.
+Manages exporting extraction results to JSON format. Handles all entity types
+including abbreviations, diseases, genes, drugs, pharma companies, authors,
+citations, feasibility data, images, tables, and document metadata.
 
-REFACTORED: Entity and metadata exporters extracted to:
-- J01a_entity_exporters.py: Disease, gene, drug, pharma, author, citation exports
-- J01b_metadata_exporters.py: Document metadata, care pathways, recommendations
+Key Components:
+    - ExportManager: Central class managing all export operations
+    - Image export: Vision LLM analysis, OCR text extraction, file saving
+    - Table export: Re-rendering with padding, image file output
+    - Feasibility export: Trial IDs, eligibility criteria, epidemiology
+    - Figure rendering: render_figure_with_padding() for caption capture
+    - Delegated exports (see J01a, J01b):
+        - Entity: diseases, genes, drugs, pharma, authors, citations
+        - Metadata: document metadata, care pathways, recommendations
+
+Example:
+    >>> from J_export.J01_export_handlers import ExportManager
+    >>> manager = ExportManager(run_id, pipeline_version, output_dir)
+    >>> manager.export_disease_results(pdf_path, disease_results)
+    >>> manager.export_images(pdf_path, doc)
+    >>> manager.export_feasibility_results(pdf_path, feasibility_results)
+
+Dependencies:
+    - A_core: Domain models for all entity types
+    - B_parsing.B02_doc_graph: DocumentGraph
+    - C_generators.C10_vision_image_analysis: VisionImageAnalyzer
+    - D_validation.D02_llm_engine: ClaudeClient
+    - J_export.J01a_entity_exporters: Entity export functions
+    - J_export.J01b_metadata_exporters: Metadata export functions
+    - Z_utils.Z04_image_utils: Image size checking, OCR extraction
 """
 
 from __future__ import annotations

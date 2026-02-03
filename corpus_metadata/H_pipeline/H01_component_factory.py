@@ -4,6 +4,32 @@ Component Factory for pipeline initialization.
 
 Centralizes the creation and configuration of all pipeline components
 including parsers, generators, validators, normalizers, and detectors.
+This factory pattern allows the orchestrator to focus on coordination
+rather than component construction details.
+
+Key Components:
+    - ComponentFactory: Main factory class for creating pipeline components
+    - Parser creation: PDFToDocGraphParser, TableExtractor
+    - Generator creation: Syntax, regex, layout, flashtext, glossary generators
+    - Validation: ClaudeClient, LLMEngine, ValidationLogger
+    - Normalization: TermMapper, Disambiguator, Deduplicator
+    - Entity detection: Disease, Drug, Gene, Pharma, Author, Citation detectors
+    - Feasibility: FeasibilityDetector, LLMFeasibilityExtractor
+    - Enrichment: EpiExtract, ZeroShotBioNER, BiomedicalNER, PubTator enrichers
+
+Example:
+    >>> from H_pipeline.H01_component_factory import ComponentFactory
+    >>> factory = ComponentFactory(config, run_id, pipeline_version, log_dir)
+    >>> parser = factory.create_parser()
+    >>> disease_detector = factory.create_disease_detector()
+    >>> claude_client = factory.create_claude_client()
+
+Dependencies:
+    - B_parsing: PDF parsing and table extraction
+    - C_generators: Candidate generation strategies
+    - D_validation: LLM validation engine
+    - E_normalization: Term mapping and enrichment
+    - Z_utils: Path utilities
 """
 
 from __future__ import annotations

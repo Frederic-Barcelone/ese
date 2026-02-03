@@ -3,14 +3,44 @@
 Entity processors for extracting and validating domain-specific entities.
 
 Handles processing of diseases, genes, drugs, pharma companies, authors,
-and citations from parsed documents.
+and citations from parsed documents. Coordinates detection, validation,
+enrichment, and deduplication for each entity type.
+
+Key Components:
+    - EntityProcessor: Main processor class coordinating all entity extraction
+    - Disease processing: Detection, normalization, PubTator enrichment
+    - Gene processing: Detection, PubTator enrichment, deduplication
+    - Drug processing: Detection, enrichment, deduplication
+    - Pharma processing: Company detection and validation
+    - Author processing: Author/investigator detection and validation
+    - Citation processing: PMID, DOI, NCT reference detection and validation
+    - Entity creation helpers: create_entity_from_candidate, create_entity_from_search
+
+Example:
+    >>> from I_extraction.I01_entity_processors import EntityProcessor
+    >>> processor = EntityProcessor(
+    ...     run_id=run_id, pipeline_version="1.0.0",
+    ...     disease_detector=disease_detector,
+    ...     drug_detector=drug_detector,
+    ... )
+    >>> diseases = processor.process_diseases(doc, pdf_path)
+    >>> drugs = processor.process_drugs(doc, pdf_path)
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, ExtractedEntity, ValidationStatus
+    - A_core.A03_provenance: hash_string
+    - A_core.A05_disease_models: DiseaseCandidate, ExtractedDisease
+    - A_core.A06_drug_models: DrugCandidate, ExtractedDrug
+    - A_core.A19_gene_models: GeneCandidate, ExtractedGene
+    - C_generators: Detection strategies for each entity type
+    - E_normalization: Normalizers and enrichers
+    - Z_utils.Z02_text_helpers: extract_context_snippet
 """
 
 from __future__ import annotations
 
 import re
 import time
-import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, TYPE_CHECKING
 
@@ -39,7 +69,10 @@ if TYPE_CHECKING:
 from A_core.A01_domain_models import ValidationStatus
 from A_core.A03_provenance import hash_string
 from E_normalization.E17_entity_deduplicator import EntityDeduplicator
-from Z_utils.Z02_text_helpers import extract_context_snippet
+from Z_utils.Z11_entity_helpers import (
+    create_entity_from_candidate as _shared_create_entity_from_candidate,
+    create_entity_from_search as _shared_create_entity_from_search,
+)
 
 
 class EntityProcessor:
@@ -106,32 +139,8 @@ class EntityProcessor:
         long_form_override: Optional[str] = None,
     ) -> "ExtractedEntity":
         """Create ExtractedEntity from a Candidate (for auto-approve/reject)."""
-        from A_core.A01_domain_models import EvidenceSpan, ExtractedEntity, ValidationStatus
-
-        context = (candidate.context_text or "").strip()
-        ctx_hash = hash_string(context) if context else "no_context"
-        primary = EvidenceSpan(
-            text=context,
-            location=candidate.context_location,
-            scope_ref=ctx_hash,
-            start_char_offset=0,
-            end_char_offset=len(context),
-        )
-        return ExtractedEntity(
-            candidate_id=candidate.id,
-            doc_id=candidate.doc_id,
-            field_type=candidate.field_type,
-            short_form=candidate.short_form.strip(),
-            long_form=long_form_override
-            or (candidate.long_form.strip() if candidate.long_form else None),
-            primary_evidence=primary,
-            supporting_evidence=[],
-            status=status,
-            confidence_score=confidence,
-            rejection_reason=reason if status == ValidationStatus.REJECTED else None,
-            validation_flags=flags,
-            provenance=candidate.provenance,
-            raw_llm_response=raw_response,
+        return _shared_create_entity_from_candidate(
+            candidate, status, confidence, reason, flags, raw_response, long_form_override,
         )
 
     def create_entity_from_search(
@@ -147,49 +156,18 @@ class EntityProcessor:
         lexicon_source: str,
     ) -> "ExtractedEntity":
         """Create ExtractedEntity from a text search match."""
-        from A_core.A01_domain_models import (
-            Coordinate,
-            EvidenceSpan,
-            ExtractedEntity,
-            GeneratorType,
-            ProvenanceMetadata,
-            ValidationStatus,
-        )
-
-        context_snippet = extract_context_snippet(full_text, match.start(), match.end())
-        ctx_hash = hash_string(context_snippet)
-
-        primary = EvidenceSpan(
-            text=context_snippet,
-            location=Coordinate(page_num=1),
-            scope_ref=ctx_hash,
-            start_char_offset=match.start() - max(0, match.start() - 100),
-            end_char_offset=match.end() - max(0, match.start() - 100),
-        )
-
-        prov = ProvenanceMetadata(
+        return _shared_create_entity_from_search(
+            doc_id=doc_id,
+            full_text=full_text,
+            match=match,
+            long_form=long_form,
+            field_type=field_type,
+            confidence=confidence,
+            flags=flags,
+            rule_version=rule_version,
+            lexicon_source=lexicon_source,
             pipeline_version=self.pipeline_version,
             run_id=self.run_id,
-            doc_fingerprint=lexicon_source,
-            generator_name=GeneratorType.LEXICON_MATCH,
-            rule_version=rule_version,
-            lexicon_source=f"orchestrator:{lexicon_source}",
-        )
-
-        return ExtractedEntity(
-            candidate_id=uuid.uuid4(),
-            doc_id=doc_id,
-            field_type=field_type,
-            short_form=match.group(),
-            long_form=long_form,
-            primary_evidence=primary,
-            supporting_evidence=[],
-            status=ValidationStatus.VALIDATED,
-            confidence_score=confidence,
-            rejection_reason=None,
-            validation_flags=flags,
-            provenance=prov,
-            raw_llm_response={"auto": lexicon_source},
         )
 
     # =========================================================================

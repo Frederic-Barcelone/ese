@@ -2,8 +2,26 @@
 """
 Metadata export functions for document metadata, care pathways, and recommendations.
 
-Extracted from J01_export_handlers.py to reduce file size.
-These functions are called by ExportManager.
+Provides export functions for document-level metadata including classification,
+dates, care pathway graphs, and guideline recommendations. Extracted from
+J01_export_handlers.py.
+
+Key Components:
+    - export_document_metadata: File info, PDF metadata, classification, dates
+    - export_care_pathways: Treatment algorithm graphs (nodes, edges, phases)
+    - export_recommendations: Guideline recommendations with dosing info
+
+Example:
+    >>> from J_export.J01b_metadata_exporters import export_document_metadata
+    >>> export_document_metadata(
+    ...     out_dir, pdf_path, metadata, run_id, pipeline_version
+    ... )
+    # Creates: metadata_{doc_name}_{timestamp}.json
+
+Dependencies:
+    - A_core.A08_document_metadata_models: DocumentMetadata, DocumentMetadataExport
+    - A_core.A17_care_pathway_models: CarePathway
+    - A_core.A18_recommendation_models: RecommendationSet
 """
 from __future__ import annotations
 

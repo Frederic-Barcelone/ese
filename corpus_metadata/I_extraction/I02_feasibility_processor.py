@@ -5,13 +5,41 @@ Feasibility extraction processor.
 Handles extraction of clinical trial feasibility information including
 eligibility criteria, epidemiology data, patient journey, endpoints,
 and site information using LLM and NER-based approaches.
+
+Key Components:
+    - FeasibilityProcessor: Main processor coordinating feasibility extraction
+    - Base extraction: LLM-based or pattern-based feasibility detection
+    - NER enrichers:
+        - EpiExtract4GARD-v2: Rare disease epidemiology
+        - ZeroShotBioNER: ADE, dosage, frequency, route, duration
+        - BiomedicalNER: 84 clinical entity types
+        - PatientJourneyNER: Diagnostic delay, treatment lines, care pathway
+        - RegistryNER: Registry names, sizes, access policies
+        - GeneticNER: Gene symbols, HGVS variants, HPO terms
+    - Span deduplication: Removes overlapping NER spans
+
+Example:
+    >>> from I_extraction.I02_feasibility_processor import FeasibilityProcessor
+    >>> processor = FeasibilityProcessor(
+    ...     run_id=run_id,
+    ...     feasibility_detector=detector,
+    ...     epi_enricher=epi_enricher,
+    ... )
+    >>> candidates = processor.process(doc, pdf_path, full_text)
+
+Dependencies:
+    - A_core.A07_feasibility_models: FeasibilityCandidate, NERCandidate
+    - C_generators.C08_strategy_feasibility: FeasibilityDetector
+    - C_generators.C11_llm_feasibility: LLMFeasibilityExtractor
+    - E_normalization.E08-E15: Various NER enrichers
+    - E_normalization.E11_span_deduplicator: deduplicate_feasibility_candidates
 """
 
 from __future__ import annotations
 
 import time
 from pathlib import Path
-from typing import List, Optional, TYPE_CHECKING, Union
+from typing import Any, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from B_parsing.B02_doc_graph import DocumentGraph
@@ -24,6 +52,72 @@ if TYPE_CHECKING:
     from E_normalization.E13_registry_enricher import RegistryEnricher
     from E_normalization.E15_genetic_enricher import GeneticEnricher
     from A_core.A07_feasibility_models import FeasibilityCandidate, NERCandidate
+
+
+def _make_ner_candidate(
+    category: str,
+    text: str,
+    confidence: float,
+    source: str,
+    evidence_text: Optional[str] = None,
+    **kwargs: Any,
+) -> "NERCandidate":
+    """Create NERCandidate with common defaults.
+
+    Args:
+        category: Entity category (e.g., "adverse_event", "gene_symbol")
+        text: Primary text for the candidate
+        confidence: Confidence score
+        source: NER source name (e.g., "ZeroShotBioNER")
+        evidence_text: Evidence text (defaults to text)
+        **kwargs: Additional NERCandidate fields (e.g., epidemiology_data)
+    """
+    from A_core.A07_feasibility_models import NERCandidate
+
+    return NERCandidate(
+        category=category,
+        text=text,
+        evidence_text=evidence_text or text,
+        confidence=confidence,
+        source=source,
+        **kwargs,
+    )
+
+
+def _add_ner_entities(
+    candidates: list,
+    entities: list,
+    category: str,
+    source: str,
+    text_attr: str = "text",
+    evidence_attr: Optional[str] = None,
+) -> int:
+    """Add NER entities as NERCandidates to candidates list.
+
+    Args:
+        candidates: Target list to append to
+        entities: Source entities with text and score attributes
+        category: NER category label
+        source: NER source name
+        text_attr: Attribute name for primary text (default "text")
+        evidence_attr: Attribute name for evidence text (defaults to text_attr)
+
+    Returns:
+        Number of entities added
+    """
+    count = 0
+    for entity in entities:
+        text = getattr(entity, text_attr, "") or ""
+        evidence = getattr(entity, evidence_attr or text_attr, text) or text
+        candidates.append(_make_ner_candidate(
+            category=category,
+            text=text,
+            confidence=entity.score,
+            source=source,
+            evidence_text=evidence,
+        ))
+        count += 1
+    return count
 
 
 class FeasibilityProcessor:
@@ -149,26 +243,20 @@ class FeasibilityProcessor:
         if self.epi_enricher is None:
             return candidates
 
-        from A_core.A07_feasibility_models import NERCandidate
-
         print("  Running EpiExtract4GARD-v2 enrichment...")
         epi_start = time.time()
         epi_result = self.epi_enricher.extract(full_text)
 
-        # Convert to EpidemiologyData and add as feasibility candidates
         epi_data_list = epi_result.to_epidemiology_data()
         if epi_data_list:
             for epi_data in epi_data_list:
-                # Create a NERCandidate for each epidemiology finding
-                epi_candidate = NERCandidate(
+                candidates.append(_make_ner_candidate(
                     category="epidemiology",
                     text=epi_data.value,
-                    evidence_text=epi_data.value,
                     confidence=0.8,
                     source="EpiExtract4GARD-v2",
                     epidemiology_data=epi_data,
-                )
-                candidates.append(epi_candidate)
+                ))
             print(f"    EpiExtract4GARD: {len(epi_data_list)} epidemiology items")
             print(f"      Locations: {len(epi_result.locations)}")
             print(f"      Epi types: {len(epi_result.epi_types)}")
@@ -186,68 +274,25 @@ class FeasibilityProcessor:
         if self.zeroshot_bioner is None:
             return candidates
 
-        from A_core.A07_feasibility_models import NERCandidate
-
         print("  Running ZeroShotBioNER enrichment...")
         bioner_start = time.time()
         bioner_result = self.zeroshot_bioner.extract(full_text)
 
-        # Add extracted entities as feasibility candidates
         summary = bioner_result.to_summary()
         entity_counts = summary.get("entity_counts", {})
         total_entities = sum(entity_counts.values())
 
         if total_entities > 0:
-            # Add adverse events as candidates
-            for ade in bioner_result.adverse_events:
-                candidates.append(NERCandidate(
-                    category="adverse_event",
-                    text=ade.text,
-                    evidence_text=ade.text,
-                    confidence=ade.score,
-                    source="ZeroShotBioNER",
-                ))
-
-            # Add drug administration details as candidates
-            for dosage in bioner_result.dosages:
-                candidates.append(NERCandidate(
-                    category="drug_dosage",
-                    text=dosage.text,
-                    evidence_text=dosage.text,
-                    confidence=dosage.score,
-                    source="ZeroShotBioNER",
-                ))
-            for freq in bioner_result.frequencies:
-                candidates.append(NERCandidate(
-                    category="drug_frequency",
-                    text=freq.text,
-                    evidence_text=freq.text,
-                    confidence=freq.score,
-                    source="ZeroShotBioNER",
-                ))
-            for route in bioner_result.routes:
-                candidates.append(NERCandidate(
-                    category="drug_route",
-                    text=route.text,
-                    evidence_text=route.text,
-                    confidence=route.score,
-                    source="ZeroShotBioNER",
-                ))
-            for duration in bioner_result.durations:
-                candidates.append(NERCandidate(
-                    category="treatment_duration",
-                    text=duration.text,
-                    evidence_text=duration.text,
-                    confidence=duration.score,
-                    source="ZeroShotBioNER",
-                ))
+            source = "ZeroShotBioNER"
+            _add_ner_entities(candidates, bioner_result.adverse_events, "adverse_event", source)
+            _add_ner_entities(candidates, bioner_result.dosages, "drug_dosage", source)
+            _add_ner_entities(candidates, bioner_result.frequencies, "drug_frequency", source)
+            _add_ner_entities(candidates, bioner_result.routes, "drug_route", source)
+            _add_ner_entities(candidates, bioner_result.durations, "treatment_duration", source)
 
             print(f"    ZeroShotBioNER: {total_entities} entities extracted")
-            print(f"      ADE: {entity_counts.get('ADE', 0)}")
-            print(f"      Dosage: {entity_counts.get('dosage', 0)}")
-            print(f"      Frequency: {entity_counts.get('frequency', 0)}")
-            print(f"      Route: {entity_counts.get('route', 0)}")
-            print(f"      Duration: {entity_counts.get('duration', 0)}")
+            for key in ("ADE", "dosage", "frequency", "route", "duration"):
+                print(f"      {key}: {entity_counts.get(key, 0)}")
         print(f"    ZeroShotBioNER time: {time.time() - bioner_start:.2f}s")
 
         return candidates
@@ -261,76 +306,42 @@ class FeasibilityProcessor:
         if self.biomedical_ner is None:
             return candidates
 
-        from A_core.A07_feasibility_models import NERCandidate
-
         print("  Running BiomedicalNER enrichment...")
         biomed_start = time.time()
         biomed_result = self.biomedical_ner.extract(full_text)
 
-        # Add extracted entities as feasibility candidates
         summary = biomed_result.to_summary()
         category_counts = summary.get("category_counts", {})
         total_entities = sum(category_counts.values())
 
         if total_entities > 0:
-            # Add clinical entities
+            source = "BiomedicalNER"
+            # Map clinical entity types to categories
+            clinical_type_map = {
+                "Sign_symptom": "symptom",
+                "Diagnostic_procedure": "diagnostic_procedure",
+                "Therapeutic_procedure": "therapeutic_procedure",
+                "Lab_value": "lab_value",
+                "Outcome": "outcome",
+            }
             for entity in biomed_result.clinical:
-                if entity.entity_type == "Sign_symptom":
-                    candidates.append(NERCandidate(
-                        category="symptom",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
-                        source="BiomedicalNER",
-                    ))
-                elif entity.entity_type == "Diagnostic_procedure":
-                    candidates.append(NERCandidate(
-                        category="diagnostic_procedure",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
-                        source="BiomedicalNER",
-                    ))
-                elif entity.entity_type == "Therapeutic_procedure":
-                    candidates.append(NERCandidate(
-                        category="therapeutic_procedure",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
-                        source="BiomedicalNER",
-                    ))
-                elif entity.entity_type == "Lab_value":
-                    candidates.append(NERCandidate(
-                        category="lab_value",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
-                        source="BiomedicalNER",
-                    ))
-                elif entity.entity_type == "Outcome":
-                    candidates.append(NERCandidate(
-                        category="outcome",
-                        text=entity.text,
-                        evidence_text=entity.text,
-                        confidence=entity.score,
-                        source="BiomedicalNER",
+                category = clinical_type_map.get(entity.entity_type)
+                if category:
+                    candidates.append(_make_ner_candidate(
+                        category=category, text=entity.text,
+                        confidence=entity.score, source=source,
                     ))
 
-            # Add demographics
+            # Demographics use dynamic category
             for entity in biomed_result.demographics:
-                candidates.append(NERCandidate(
+                candidates.append(_make_ner_candidate(
                     category=f"demographics_{entity.entity_type.lower()}",
-                    text=entity.text,
-                    evidence_text=entity.text,
-                    confidence=entity.score,
-                    source="BiomedicalNER",
+                    text=entity.text, confidence=entity.score, source=source,
                 ))
 
             print(f"    BiomedicalNER: {total_entities} entities extracted")
-            print(f"      Clinical: {category_counts.get('clinical', 0)}")
-            print(f"      Demographics: {category_counts.get('demographics', 0)}")
-            print(f"      Temporal: {category_counts.get('temporal', 0)}")
-            print(f"      Anatomical: {category_counts.get('anatomical', 0)}")
+            for key in ("clinical", "demographics", "temporal", "anatomical"):
+                print(f"      {key.capitalize()}: {category_counts.get(key, 0)}")
         print(f"    BiomedicalNER time: {time.time() - biomed_start:.2f}s")
 
         return candidates
@@ -344,83 +355,27 @@ class FeasibilityProcessor:
         if self.patient_journey_enricher is None:
             return candidates
 
-        from A_core.A07_feasibility_models import NERCandidate
-
         print("  Running PatientJourneyNER enrichment...")
         pj_start = time.time()
         pj_result = self.patient_journey_enricher.extract(full_text)
 
-        # Add extracted entities as feasibility candidates
         summary = pj_result.to_summary()
         total_entities = summary.get("total", 0)
 
         if total_entities > 0:
-            # Add diagnostic delays
-            for pj_entity in pj_result.diagnostic_delays:
-                candidates.append(NERCandidate(
-                    category="diagnostic_delay",
-                    text=pj_entity.text,
-                    evidence_text=pj_entity.text,
-                    confidence=pj_entity.score,
-                    source="PatientJourneyNER",
-                ))
-
-            # Add treatment lines
-            for pj_entity in pj_result.treatment_lines:
-                candidates.append(NERCandidate(
-                    category="treatment_line",
-                    text=pj_entity.text,
-                    evidence_text=pj_entity.text,
-                    confidence=pj_entity.score,
-                    source="PatientJourneyNER",
-                ))
-
-            # Add care pathway steps
-            for pj_entity in pj_result.care_pathway_steps:
-                candidates.append(NERCandidate(
-                    category="care_pathway_step",
-                    text=pj_entity.text,
-                    evidence_text=pj_entity.text,
-                    confidence=pj_entity.score,
-                    source="PatientJourneyNER",
-                ))
-
-            # Add surveillance frequencies
-            for pj_entity in pj_result.surveillance_frequencies:
-                candidates.append(NERCandidate(
-                    category="surveillance_frequency",
-                    text=pj_entity.text,
-                    evidence_text=pj_entity.text,
-                    confidence=pj_entity.score,
-                    source="PatientJourneyNER",
-                ))
-
-            # Add pain points
-            for pj_entity in pj_result.pain_points:
-                candidates.append(NERCandidate(
-                    category="pain_point",
-                    text=pj_entity.text,
-                    evidence_text=pj_entity.text,
-                    confidence=pj_entity.score,
-                    source="PatientJourneyNER",
-                ))
-
-            # Add recruitment touchpoints
-            for pj_entity in pj_result.recruitment_touchpoints:
-                candidates.append(NERCandidate(
-                    category="recruitment_touchpoint",
-                    text=pj_entity.text,
-                    evidence_text=pj_entity.text,
-                    confidence=pj_entity.score,
-                    source="PatientJourneyNER",
-                ))
-
-            print(f"      diagnostic_delay: {summary.get('diagnostic_delay', 0)}")
-            print(f"      treatment_line: {summary.get('treatment_line', 0)}")
-            print(f"      care_pathway_step: {summary.get('care_pathway_step', 0)}")
-            print(f"      surveillance_frequency: {summary.get('surveillance_frequency', 0)}")
-            print(f"      pain_point: {summary.get('pain_point', 0)}")
-            print(f"      recruitment_touchpoint: {summary.get('recruitment_touchpoint', 0)}")
+            source = "PatientJourneyNER"
+            entity_fields = [
+                ("diagnostic_delays", "diagnostic_delay"),
+                ("treatment_lines", "treatment_line"),
+                ("care_pathway_steps", "care_pathway_step"),
+                ("surveillance_frequencies", "surveillance_frequency"),
+                ("pain_points", "pain_point"),
+                ("recruitment_touchpoints", "recruitment_touchpoint"),
+            ]
+            for attr, category in entity_fields:
+                entities = getattr(pj_result, attr, [])
+                _add_ner_entities(candidates, entities, category, source)
+                print(f"      {category}: {summary.get(category, 0)}")
         print(f"    PatientJourney: {total_entities} entities extracted")
         print(f"    PatientJourney time: {time.time() - pj_start:.2f}s")
 
@@ -435,89 +390,33 @@ class FeasibilityProcessor:
         if self.registry_enricher is None:
             return candidates
 
-        from A_core.A07_feasibility_models import NERCandidate
-
         print("  Running RegistryNER enrichment...")
         reg_start = time.time()
         reg_result = self.registry_enricher.extract(full_text)
 
-        # Add extracted entities as feasibility candidates
         summary = reg_result.to_summary()
         total_entities = summary.get("total", 0)
 
         if total_entities > 0:
-            # Add registry names
-            for reg_entity in reg_result.registry_names:
-                candidates.append(NERCandidate(
-                    category="registry_name",
-                    text=reg_entity.text,
-                    evidence_text=reg_entity.text,
-                    confidence=reg_entity.score,
-                    source="RegistryNER",
-                ))
-
-            # Add registry sizes
-            for reg_entity in reg_result.registry_sizes:
-                candidates.append(NERCandidate(
-                    category="registry_size",
-                    text=reg_entity.text,
-                    evidence_text=reg_entity.text,
-                    confidence=reg_entity.score,
-                    source="RegistryNER",
-                ))
-
-            # Add geographic coverage
-            for reg_entity in reg_result.geographic_coverages:
-                candidates.append(NERCandidate(
-                    category="geographic_coverage",
-                    text=reg_entity.text,
-                    evidence_text=reg_entity.text,
-                    confidence=reg_entity.score,
-                    source="RegistryNER",
-                ))
-
-            # Add data types
-            for reg_entity in reg_result.data_types:
-                candidates.append(NERCandidate(
-                    category="data_types",
-                    text=reg_entity.text,
-                    evidence_text=reg_entity.text,
-                    confidence=reg_entity.score,
-                    source="RegistryNER",
-                ))
-
-            # Add access policies
-            for reg_entity in reg_result.access_policies:
-                candidates.append(NERCandidate(
-                    category="access_policy",
-                    text=reg_entity.text,
-                    evidence_text=reg_entity.text,
-                    confidence=reg_entity.score,
-                    source="RegistryNER",
-                ))
-
-            # Add eligibility criteria
-            for reg_entity in reg_result.eligibility_criteria:
-                candidates.append(NERCandidate(
-                    category="eligibility_criteria",
-                    text=reg_entity.text,
-                    evidence_text=reg_entity.text,
-                    confidence=reg_entity.score,
-                    source="RegistryNER",
-                ))
-
-            print(f"      registry_name: {summary.get('registry_name', 0)}")
-            print(f"      registry_size: {summary.get('registry_size', 0)}")
-            print(f"      geographic_coverage: {summary.get('geographic_coverage', 0)}")
-            print(f"      data_types: {summary.get('data_types', 0)}")
-            print(f"      access_policy: {summary.get('access_policy', 0)}")
-            print(f"      eligibility_criteria: {summary.get('eligibility_criteria', 0)}")
+            source = "RegistryNER"
+            entity_fields = [
+                ("registry_names", "registry_name"),
+                ("registry_sizes", "registry_size"),
+                ("geographic_coverages", "geographic_coverage"),
+                ("data_types", "data_types"),
+                ("access_policies", "access_policy"),
+                ("eligibility_criteria", "eligibility_criteria"),
+            ]
+            for attr, category in entity_fields:
+                entities = getattr(reg_result, attr, [])
+                _add_ner_entities(candidates, entities, category, source)
+                print(f"      {category}: {summary.get(category, 0)}")
 
             # Report linked registries
             linked = reg_result.get_linked_registries()
             if linked:
                 print(f"    Linked to known registries: {len(linked)}")
-                for lr in linked[:3]:  # Show first 3
+                for lr in linked[:3]:
                     print(f"      {lr.get('extracted_text')} -> {lr.get('full_name', 'N/A')}")
         print(f"    RegistryNER: {total_entities} entities extracted")
         print(f"    RegistryNER time: {time.time() - reg_start:.2f}s")
@@ -533,78 +432,36 @@ class FeasibilityProcessor:
         if self.genetic_enricher is None:
             return candidates
 
-        from A_core.A07_feasibility_models import NERCandidate
-
         print("  Running GeneticNER enrichment...")
         gen_start = time.time()
         gen_result = self.genetic_enricher.extract(full_text)
 
-        # Add extracted entities as feasibility candidates
         summary = gen_result.to_summary()
         total_entities = summary.get("total", 0)
 
         if total_entities > 0:
-            # Add gene symbols
-            for gen_entity in gen_result.gene_symbols:
-                candidates.append(NERCandidate(
-                    category="gene_symbol",
-                    text=gen_entity.normalized,
-                    evidence_text=gen_entity.text,
-                    confidence=gen_entity.score,
-                    source="GeneticNER",
-                ))
-
-            # Add HGVS variants
-            for gen_entity in gen_result.variants_hgvs:
-                candidates.append(NERCandidate(
-                    category="variant_hgvs",
-                    text=gen_entity.normalized,
-                    evidence_text=gen_entity.text,
-                    confidence=gen_entity.score,
-                    source="GeneticNER",
-                ))
-
-            # Add rsID variants
-            for gen_entity in gen_result.variants_rsid:
-                candidates.append(NERCandidate(
-                    category="variant_rsid",
-                    text=gen_entity.normalized,
-                    evidence_text=gen_entity.text,
-                    confidence=gen_entity.score,
-                    source="GeneticNER",
-                ))
-
-            # Add HPO terms
-            for gen_entity in gen_result.hpo_terms:
-                candidates.append(NERCandidate(
-                    category="hpo_term",
-                    text=gen_entity.normalized,
-                    evidence_text=gen_entity.text,
-                    confidence=gen_entity.score,
-                    source="GeneticNER",
-                ))
-
-            # Add ORDO disease codes
-            for gen_entity in gen_result.disease_ordo:
-                candidates.append(NERCandidate(
-                    category="disease_ordo",
-                    text=gen_entity.normalized,
-                    evidence_text=gen_entity.text,
-                    confidence=gen_entity.score,
-                    source="GeneticNER",
-                ))
-
-            print(f"      gene_symbols: {summary.get('gene_symbols', 0)}")
-            print(f"      variants_hgvs: {summary.get('variants_hgvs', 0)}")
-            print(f"      variants_rsid: {summary.get('variants_rsid', 0)}")
-            print(f"      hpo_terms: {summary.get('hpo_terms', 0)}")
-            print(f"      disease_ordo: {summary.get('disease_ordo', 0)}")
+            source = "GeneticNER"
+            # Genetic entities use 'normalized' as primary text and 'text' as evidence
+            entity_fields = [
+                ("gene_symbols", "gene_symbol"),
+                ("variants_hgvs", "variant_hgvs"),
+                ("variants_rsid", "variant_rsid"),
+                ("hpo_terms", "hpo_term"),
+                ("disease_ordo", "disease_ordo"),
+            ]
+            for attr, category in entity_fields:
+                entities = getattr(gen_result, attr, [])
+                _add_ner_entities(
+                    candidates, entities, category, source,
+                    text_attr="normalized", evidence_attr="text",
+                )
+                print(f"      {attr}: {summary.get(attr, 0)}")
 
             # Report gene-variant associations
             genes_with_variants = gen_result.get_genes_with_variants()
             if genes_with_variants:
                 print(f"    Gene-variant associations: {len(genes_with_variants)} genes")
-                for gene, variants in list(genes_with_variants.items())[:3]:  # Show first 3
+                for gene, variants in list(genes_with_variants.items())[:3]:
                     print(f"      {gene}: {len(variants)} variant(s)")
         print(f"    GeneticNER: {total_entities} entities extracted")
         print(f"    GeneticNER time: {time.time() - gen_start:.2f}s")
