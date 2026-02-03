@@ -1,9 +1,31 @@
-# corpus_metadata/E_normalization/E17_entity_deduplicator.py
 """
 Entity deduplicator for diseases, drugs, and genes.
 
-Merges duplicate entities by canonical identifier and tracks mention frequency.
-Runs AFTER normalization to ensure proper ID-based grouping.
+This module merges duplicate entities by canonical identifier after normalization,
+tracking mention frequency and page distribution. Uses a generic implementation
+supporting any entity type with configurable key and scoring functions.
+
+Key Components:
+    - _deduplicate_entities: Generic deduplication function
+    - deduplicate_diseases: Disease-specific deduplication
+    - deduplicate_drugs: Drug-specific deduplication
+    - deduplicate_genes: Gene-specific deduplication
+    - Features:
+        - Canonical ID-based grouping
+        - Mention count tracking
+        - Pages mentioned aggregation
+        - Score-based best entity selection
+
+Example:
+    >>> from E_normalization.E17_entity_deduplicator import deduplicate_diseases
+    >>> deduplicated = deduplicate_diseases(disease_entities)
+    >>> for entity in deduplicated:
+    ...     print(f"{entity.canonical_name}: {entity.mention_count} mentions")
+    pulmonary arterial hypertension: 15 mentions
+
+Dependencies:
+    - A_core.A01_domain_models: ValidationStatus
+    - collections: defaultdict for grouping
 """
 
 from __future__ import annotations

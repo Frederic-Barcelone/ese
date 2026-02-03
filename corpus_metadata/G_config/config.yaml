@@ -746,11 +746,6 @@ disease_detection:
   # Master switch for disease detection
   enabled: true
 
-  # Domain profile for confidence adjustments
-  # Uses the active profile from domain_profile section above
-  # Can override here: domain_profile: "generic"
-  domain_profile: null  # null = use domain_profile.active
-
   # Lexicons to use
   enable_general_lexicon: true    # 2025_08_lexicon_disease.json (29K+ diseases)
   enable_orphanet: true           # 2025_08_orphanet_diseases.json (9.6K diseases)
@@ -781,41 +776,6 @@ disease_detection:
     separate_file: true           # diseases_{doc}_{timestamp}.json
     include_codes: true           # Include ICD-10, SNOMED, ORPHA codes
     include_all_identifiers: true
-
-# ==============================================================================
-# DOMAIN PROFILE
-# ==============================================================================
-# Domain profiles externalize domain-specific assumptions to avoid overfitting.
-# Instead of hardcoding nephrology-specific terms, profiles allow switching
-# domains without code changes.
-#
-# Built-in profiles:
-#   - generic: Minimal assumptions, maximum generalization
-#   - nephrology: Kidney disease and rare nephrology focus (default for this corpus)
-#   - oncology: Cancer and oncology focus
-#   - pulmonology: PAH and respiratory diseases
-#
-# Custom profiles: Point to a YAML file path for custom domain configuration
-# ==============================================================================
-domain_profile:
-  # Active profile name or path to custom YAML
-  # Options: "generic", "nephrology", "oncology", "pulmonology", or "/path/to/profile.yaml"
-  active: "nephrology"
-
-  # Override specific settings (merged with active profile)
-  # Uncomment and modify to customize without creating a full custom profile
-  # overrides:
-  #   priority_diseases:
-  #     - "my custom disease"
-  #   noise_terms:
-  #     - "term to penalize"
-
-  # Confidence adjustment settings (optional overrides)
-  # adjustments:
-  #   generic_disease_term: -0.30      # Penalty for "disease", "syndrome" etc.
-  #   physiological_system: -0.40      # Penalty for "CNS", "immune system" etc.
-  #   priority_disease_boost: 0.15     # Boost for domain-priority diseases
-  #   domain_noise_penalty: -0.20      # Penalty for domain-specific noise
 
 # ==============================================================================
 # DRUG DETECTION
@@ -859,14 +819,15 @@ deduplication:
 # Available presets:
 #   - drugs_only: Drug detection only
 #   - diseases_only: Disease detection only
+#   - genes_only: Gene detection only
 #   - abbreviations_only: Abbreviation extraction only
 #   - feasibility_only: Feasibility extraction only
-#   - entities_only: Drugs + Diseases + Abbreviations
+#   - entities_only: Drugs + Diseases + Genes + Abbreviations
 #   - clinical_entities: Drugs + Diseases
 #   - metadata_only: Authors + Citations + Document metadata
 #   - images_only: Tables + Figures/Visuals extraction only
 #   - tables_only: Table extraction only (no figures)
-#   - standard: Drugs + Diseases + Abbreviations + Feasibility (DEFAULT)
+#   - standard: Drugs + Diseases + Genes + Abbreviations + Feasibility (DEFAULT)
 #   - all: Everything
 #   - minimal: Just abbreviations (no LLM)
 #
@@ -876,9 +837,9 @@ deduplication:
 extraction_pipeline:
   # Use a preset (overrides individual flags below if set)
   # Set to null or remove to use individual flags
-  preset: images_only  # Options: drugs_only, diseases_only, abbreviations_only, feasibility_only,
-                # entities_only, clinical_entities, metadata_only, images_only, tables_only,
-                # standard, all, minimal
+  preset: entities_only  # Options: drugs_only, diseases_only, genes_only, abbreviations_only,
+                # feasibility_only, entities_only, clinical_entities, metadata_only,
+                # images_only, tables_only, standard, all, minimal
 
   # Individual extractor flags (used when preset is null)
   extractors:

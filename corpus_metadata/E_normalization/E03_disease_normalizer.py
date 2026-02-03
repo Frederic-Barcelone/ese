@@ -1,11 +1,26 @@
-# corpus_metadata/corpus_metadata/E_normalization/E03_disease_normalizer.py
 """
-Disease-specific normalization.
+Disease-specific normalization and categorization.
 
-Post-validation normalization for disease entities:
-1. Extract primary codes from identifiers list (ICD-10, SNOMED, MONDO, ORPHA)
-2. Categorize diseases by therapeutic area
-3. Standardize disease names
+This module provides post-validation normalization for disease entities,
+extracting primary codes from identifiers, categorizing by therapeutic area,
+and standardizing disease names for consistent downstream processing.
+
+Key Components:
+    - DiseaseNormalizer: Main normalizer for disease entities
+    - CATEGORY_KEYWORDS: Therapeutic area classification mappings
+    - Code extraction for ICD-10, SNOMED, MONDO, ORPHA identifiers
+    - Disease name standardization
+
+Example:
+    >>> from E_normalization.E03_disease_normalizer import DiseaseNormalizer
+    >>> normalizer = DiseaseNormalizer()
+    >>> normalized = normalizer.normalize(disease_entity)
+    >>> print(f"Category: {normalized.category}, MONDO: {normalized.mondo_id}")
+    Category: nephrology, MONDO: MONDO:0005136
+
+Dependencies:
+    - A_core.A01_domain_models: ValidationStatus
+    - A_core.A05_disease_models: DiseaseIdentifier, ExtractedDisease
 """
 
 from __future__ import annotations

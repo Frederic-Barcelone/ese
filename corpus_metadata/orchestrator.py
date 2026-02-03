@@ -19,9 +19,12 @@ from __future__ import annotations
 # =============================================================================
 # SILENCE WARNINGS FIRST (must be before library imports)
 # =============================================================================
+from pathlib import Path
+
 from dotenv import load_dotenv
 
-load_dotenv()  # Load .env file from current directory or parent
+# Load .env from project root (parent of corpus_metadata)
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 from orchestrator_utils import setup_warning_suppression, StageTimer
 setup_warning_suppression()
@@ -29,17 +32,13 @@ setup_warning_suppression()
 
 import sys
 import time
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import yaml
-from dotenv import load_dotenv
 
 from Z_utils.Z05_path_utils import get_base_path
-from Z_utils.Z10_usage_tracker import UsageTracker
-from Z_utils.Z11_console_output import get_printer, reset_printer
-
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+from Z_utils.Z06_usage_tracker import UsageTracker
+from Z_utils.Z07_console_output import get_printer, reset_printer
 # =============================================================================
 
 # Ensure imports work
@@ -92,8 +91,21 @@ from J_export.J01_export_handlers import ExportManager
 # Clinical intelligence extractors
 from C_generators.C17_flowchart_graph_extractor import FlowchartGraphExtractor
 from C_generators.C12_guideline_recommendation_extractor import GuidelineRecommendationExtractor
+from dataclasses import dataclass, field
 
 PIPELINE_VERSION = "0.8"
+
+
+@dataclass
+class ExtractionResult:
+    """Results from processing a single PDF through the pipeline."""
+    abbreviations: List[ExtractedEntity] = field(default_factory=list)
+    diseases: List[ExtractedDisease] = field(default_factory=list)
+    genes: List[ExtractedGene] = field(default_factory=list)
+    drugs: List[ExtractedDrug] = field(default_factory=list)
+    pharma: List[ExtractedPharma] = field(default_factory=list)
+    authors: List[ExtractedAuthor] = field(default_factory=list)
+    citations: List[ExtractedCitation] = field(default_factory=list)
 
 
 class Orchestrator:
@@ -239,6 +251,11 @@ class Orchestrator:
                 "feasibility": False, "pharma_companies": False, "authors": False,
                 "citations": False, "document_metadata": False, "tables": False,
             },
+            "genes_only": {
+                "drugs": False, "diseases": False, "genes": True, "abbreviations": False,
+                "feasibility": False, "pharma_companies": False, "authors": False,
+                "citations": False, "document_metadata": False, "tables": False,
+            },
             "abbreviations_only": {
                 "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
                 "feasibility": False, "pharma_companies": False, "authors": False,
@@ -340,6 +357,7 @@ class Orchestrator:
         self.use_patient_journey = options.get("use_patient_journey", True)
         self.use_registry_extraction = options.get("use_registry_extraction", True)
         self.use_genetic_extraction = options.get("use_genetic_extraction", True)
+        self.use_pubtator_enrichment = options.get("use_pubtator_enrichment", True)
 
     def _print_extraction_config(self) -> None:
         """Print extraction configuration summary."""
@@ -395,6 +413,7 @@ class Orchestrator:
             ("use_patient_journey", self.use_patient_journey),
             ("use_registry_extraction", self.use_registry_extraction),
             ("use_genetic_extraction", self.use_genetic_extraction),
+            ("use_pubtator_enrichment", self.use_pubtator_enrichment),
         ]
         for name, enabled in options:
             if enabled:
@@ -632,8 +651,12 @@ class Orchestrator:
 
     def process_pdf(
         self, pdf_path: str | Path, batch_delay_ms: Optional[float] = None
-    ) -> List[ExtractedEntity]:
-        """Process a single PDF through the full pipeline."""
+    ) -> ExtractionResult:
+        """Process a single PDF through the full pipeline.
+
+        Returns:
+            ExtractionResult with all extracted entities (abbreviations, diseases, genes, etc.)
+        """
         delay: float = (
             batch_delay_ms
             if batch_delay_ms is not None
@@ -1081,7 +1104,15 @@ class Orchestrator:
         # Print timing summary
         timer.print_summary()
 
-        return results
+        return ExtractionResult(
+            abbreviations=results,
+            diseases=disease_results or [],
+            genes=gene_results or [],
+            drugs=drug_results or [],
+            pharma=pharma_results or [],
+            authors=author_results or [],
+            citations=citation_results or [],
+        )
 
     def _process_document_metadata(
         self, doc, pdf_path: Path, content_sample: str

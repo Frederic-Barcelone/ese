@@ -86,6 +86,15 @@ class GeneAssociationType(str, Enum):
     UNKNOWN = "Unknown"
 
 
+class EnrichmentSource(str, Enum):
+    """Source of entity enrichment data."""
+
+    PUBTATOR3 = "pubtator3"
+    CLINICALTRIALS_GOV = "clinicaltrials.gov"
+    ORPHANET = "orphanet"
+    MANUAL = "manual"
+
+
 # -------------------------
 # Gene identifiers (codes)
 # -------------------------
@@ -188,6 +197,10 @@ class GeneCandidate(BaseModel):
         if not symbol:
             raise ValueError("GeneCandidate.hgnc_symbol must be non-empty.")
 
+        # Enforce invariant: is_alias implies alias_of is set
+        if self.is_alias and not self.alias_of:
+            raise ValueError("GeneCandidate.alias_of must be set when is_alias is True.")
+
         return self
 
 
@@ -243,6 +256,11 @@ class ExtractedGene(BaseModel):
     # Associated rare diseases
     associated_diseases: List[GeneDiseaseLinkage] = Field(default_factory=list)
 
+    # PubTator enrichment fields
+    pubtator_normalized_name: Optional[str] = None
+    pubtator_aliases: List[str] = Field(default_factory=list)
+    enrichment_source: Optional[EnrichmentSource] = None
+
     # Audit trail
     provenance: GeneProvenanceMetadata
     raw_llm_response: Optional[Union[Dict[str, Any], str]] = None
@@ -258,6 +276,10 @@ class ExtractedGene(BaseModel):
             raise ValueError("ExtractedGene.matched_text must be non-empty.")
         if not symbol:
             raise ValueError("ExtractedGene.hgnc_symbol must be non-empty.")
+
+        # Enforce invariant: is_alias implies alias_of is set
+        if self.is_alias and not self.alias_of:
+            raise ValueError("ExtractedGene.alias_of must be set when is_alias is True.")
 
         return self
 

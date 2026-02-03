@@ -295,7 +295,6 @@ class ExportManager:
     ) -> None:
         """Export main results to JSON."""
         from A_core.A01_domain_models import ValidationStatus
-        from F_evaluation.F05_extraction_analysis import run_analysis
 
         out_dir = self.get_output_dir(pdf_path)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -399,8 +398,6 @@ class ExportManager:
             json.dump(export_data, f, indent=2, ensure_ascii=False)
 
         print(f"\n  Exported: {out_file}")
-        if self.gold_json:
-            run_analysis(export_data, self.gold_json)
 
     def export_disease_results(
         self, pdf_path: Path, results: List["ExtractedDisease"]

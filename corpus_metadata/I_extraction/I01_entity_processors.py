@@ -89,6 +89,7 @@ class EntityProcessor:
         # Optional enrichers (can be set after init)
         self.disease_enricher = None
         self.drug_enricher = None
+        self.gene_enricher = None
 
     # =========================================================================
     # ENTITY CREATION HELPERS
@@ -355,6 +356,11 @@ class EntityProcessor:
                 flags=["auto_validated_lexicon"],
             )
             results.append(entity)
+
+        # PubTator enrichment (adds Entrez IDs, normalized names)
+        if self.gene_enricher is not None:
+            print("  Enriching with PubTator3...")
+            results = self.gene_enricher.enrich_batch(results, verbose=True)
 
         # Deduplicate and count mentions
         deduplicator = EntityDeduplicator()

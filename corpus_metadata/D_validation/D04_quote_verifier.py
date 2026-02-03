@@ -1,13 +1,31 @@
-# corpus_metadata/D_validation/D04_quote_verifier.py
 """
 Anti-hallucination verification for LLM-based extraction.
 
-Provides quote and numerical value verification to detect hallucinated content.
+This module provides verification tools to detect hallucinated content in LLM
+extractions. Verifies that quoted text and numerical values actually exist in
+the source document, supporting both exact and fuzzy matching strategies.
 
-Contains:
-  - QuoteVerifier: Verifies exact/fuzzy quote matches against source text
-  - NumericalVerifier: Verifies numerical values exist in source text
-  - VerificationResult: Result container with verification status and details
+Key Components:
+    - QuoteVerifier: Verifies exact/fuzzy quote matches against source text
+    - NumericalVerifier: Verifies numerical values exist in source text
+    - ExtractionVerifier: Combined verifier for full extraction validation
+    - QuoteVerificationResult: Result container with match ratio and position
+    - NumericalVerificationResult: Result container for number verification
+
+Example:
+    >>> from D_validation.D04_quote_verifier import QuoteVerifier, NumericalVerifier
+    >>> quote_verifier = QuoteVerifier(min_match_ratio=0.85)
+    >>> result = quote_verifier.verify("patients were randomized", source_text)
+    >>> print(f"Verified: {result.verified}, Match: {result.match_ratio:.2f}")
+    Verified: True, Match: 0.92
+    >>> num_verifier = NumericalVerifier()
+    >>> result = num_verifier.verify(350, source_text)
+    >>> print(f"Found at: {result.positions}")
+    Found at: [(1234, 1237)]
+
+Dependencies:
+    - difflib: SequenceMatcher for fuzzy string matching
+    - re: Regular expression matching for number formats
 """
 
 from __future__ import annotations

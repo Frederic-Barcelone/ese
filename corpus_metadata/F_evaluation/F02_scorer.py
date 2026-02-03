@@ -1,31 +1,37 @@
-# corpus_metadata/corpus_metadata/F_evaluation/F02_scorer.py
-
 """
-Abbreviation Extraction Scorer
+Precision/recall/F1 scorer for abbreviation extraction evaluation.
 
-Computes precision, recall, and F1 by comparing system output against gold annotations.
-Uses set-based matching on (short_form, long_form) pairs.
+This module computes evaluation metrics by comparing system output against
+gold annotations using set-based matching on (short_form, long_form) pairs.
+Supports document-level and corpus-level evaluation with configurable matching.
 
-Classification:
-    - True Positive: system pair matches gold pair
-    - False Positive: system extracted pair not in gold
-    - False Negative: gold pair not found by system
+Key Components:
+    - Scorer: Main scorer class for metric computation
+    - ScorerConfig: Configuration for matching behavior
+    - ScoreReport: Result container with TP/FP/FN and metrics
+    - Classification:
+        - True Positive: system pair matches gold pair
+        - False Positive: system extracted pair not in gold
+        - False Negative: gold pair not found by system
+    - Metrics:
+        - Precision: TP / (TP + FP) - correctness of output
+        - Recall: TP / (TP + FN) - completeness of extraction
+        - F1: harmonic mean of precision and recall
+    - Evaluation modes:
+        - evaluate_doc(): single document
+        - evaluate_corpus(): micro and macro scores
 
-Metrics:
-    - Precision: TP / (TP + FP) -  how much system output is correct
-    - Recall: TP / (TP + FN) -  how much gold was found
-    - F1: harmonic mean of precision and recall
+Example:
+    >>> from F_evaluation.F02_scorer import Scorer, ScorerConfig
+    >>> scorer = Scorer(ScorerConfig(require_long_form_match=True))
+    >>> report = scorer.evaluate_doc(extracted_entities, gold_annotations)
+    >>> print(f"P={report.precision:.2f} R={report.recall:.2f} F1={report.f1:.2f}")
+    P=0.85 R=0.90 F1=0.87
 
-Evaluation modes:
-    - evaluate_doc(): single document
-    - evaluate_corpus(): micro (global) and macro (per-doc average) scores
-
-Configuration (ScorerConfig):
-    - require_long_form_match: match SF+LF pairs vs SF-only
-    - only_validated: skip non-VALIDATED entities
-    - allow_sf_only_gold: accept gold entries without long_form
-
-Depends on F01_gold_loader.py for GoldAnnotation format.
+Dependencies:
+    - A_core.A01_domain_models: ExtractedEntity, FieldType, ValidationStatus
+    - F_evaluation.F01_gold_loader: GoldAnnotation
+    - pydantic: BaseModel for configuration schema
 """
 
 from __future__ import annotations

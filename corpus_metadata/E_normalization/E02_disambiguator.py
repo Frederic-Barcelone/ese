@@ -1,12 +1,26 @@
-# corpus_metadata/E_normalization/E02_disambiguator.py
 """
-Abbreviation disambiguator using document context.
+Abbreviation disambiguator using document context voting.
 
-Provides Disambiguator class that:
-- Resolves ambiguous SHORT_FORM_ONLY entities
-- Uses bag-of-words voting from document context
-- Requires minimum score and margin over runner-up
-- Adds disambiguation payload to normalized_value
+This module resolves ambiguous SHORT_FORM_ONLY abbreviations by analyzing
+document context using bag-of-words voting. Selects the most contextually
+appropriate long form while requiring minimum confidence thresholds.
+
+Key Components:
+    - Disambiguator: Main class for context-based disambiguation
+    - Bag-of-words voting from document context
+    - Configurable minimum score and margin requirements
+    - Disambiguation payload storage for audit trail
+
+Example:
+    >>> from E_normalization.E02_disambiguator import Disambiguator
+    >>> disambiguator = Disambiguator(config={"min_context_score": 2})
+    >>> resolved = disambiguator.disambiguate(entity, doc_context)
+    >>> print(f"Resolved: {resolved.long_form} (score: {resolved.normalized_value['score']})")
+    Resolved: Adverse Event (score: 5)
+
+Dependencies:
+    - A_core.A01_domain_models: ExtractedEntity, ValidationStatus, FieldType
+    - collections: Counter for bag-of-words scoring
 """
 from __future__ import annotations
 

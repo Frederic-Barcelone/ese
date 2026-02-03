@@ -1,12 +1,32 @@
-# corpus_metadata/E_normalization/E14_citation_validator.py
 """
 Citation identifier validation via external APIs.
 
-Validates extracted identifiers by checking against authoritative sources:
-- DOI: doi.org / CrossRef API
-- NCT: ClinicalTrials.gov API
-- PMID: PubMed/NCBI E-utilities API
-- URL: HTTP HEAD request for accessibility
+This module validates extracted identifiers by checking against authoritative
+external sources. Confirms DOI, NCT, PMID, and URL validity with rate limiting
+and detailed validation reporting.
+
+Key Components:
+    - CitationValidator: Main validator for all identifier types
+    - ValidationResult: Result container for single identifier validation
+    - CitationValidationReport: Summary of all validation results
+    - Validation sources:
+        - DOI: doi.org / CrossRef API resolution
+        - NCT: ClinicalTrials.gov API lookup
+        - PMID: PubMed/NCBI E-utilities API
+        - URL: HTTP HEAD request for accessibility
+
+Example:
+    >>> from E_normalization.E14_citation_validator import CitationValidator
+    >>> validator = CitationValidator()
+    >>> result = validator.validate("10.1038/s41586-020-2649-2", "doi")
+    >>> print(f"Valid: {result.is_valid}, URL: {result.resolved_url}")
+    Valid: True, URL: https://doi.org/10.1038/s41586-020-2649-2
+    >>> report = validator.validate_batch(citations)
+    >>> print(f"Valid: {report.valid_count}/{report.total_checked}")
+
+Dependencies:
+    - requests: HTTP client for API calls
+    - urllib.parse: URL encoding utilities
 """
 
 from __future__ import annotations

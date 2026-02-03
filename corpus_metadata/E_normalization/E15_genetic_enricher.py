@@ -1,46 +1,34 @@
-# corpus_metadata/E_normalization/E15_genetic_enricher.py
 """
-Genetic and Phenotype Enricher for clinical trial feasibility extraction.
+Genetic and phenotype enricher for rare disease trial feasibility.
 
-This module extracts genetic variants, gene names, and HPO phenotypes that are
-critical for rare disease trial eligibility assessment. Genetic criteria are
-increasingly common in precision medicine trials where patient stratification
-depends on specific mutations.
+This module extracts genetic variants, gene names, and HPO phenotypes critical
+for rare disease trial eligibility assessment. Uses clinically-validated regex
+patterns for HGVS notation, dbSNP IDs, and ontology codes.
 
-Entity Types Extracted:
-    - gene_symbol: Gene names (GBA, CFTR, DMD, SMN1)
-      Examples: "GBA gene", "mutations in CFTR"
-
-    - variant_hgvs: HGVS-formatted variants (c. and p. notation)
-      Examples: "c.1226A>G", "p.N370S", "c.1521_1523delCTT"
-
-    - variant_rsid: dbSNP reference IDs
-      Examples: "rs76763715", "rs121908755"
-
-    - hpo_term: Human Phenotype Ontology terms
-      Examples: "HP:0001744", "splenomegaly (HP:0001744)"
-
-    - disease_ordo: Orphanet rare disease codes
-      Examples: "ORPHA:355", "Gaucher disease (ORPHA:355)"
-
-Regex Patterns:
-    The module uses clinically-validated regex patterns for:
-    - HGVS coding variants: c.123A>G, c.456_789del, c.100+1G>A
-    - HGVS protein variants: p.N370S, p.Arg123Ter, p.Gly456fs
-    - Gene symbols: 2-6 uppercase letters (validated against gene list)
-    - HPO codes: HP:0000001 format
-    - ORPHA codes: ORPHA:12345 or ORDO:12345 format
+Key Components:
+    - GeneticEnricher: Main enricher using regex pattern extraction
+    - Entity types extracted:
+        - gene_symbol: Gene names (GBA, CFTR, DMD, SMN1)
+        - variant_hgvs: HGVS variants (c.1226A>G, p.N370S)
+        - variant_rsid: dbSNP IDs (rs76763715)
+        - hpo_term: HPO phenotype codes (HP:0001744)
+        - disease_ordo: Orphanet codes (ORPHA:355)
+    - Clinically-validated regex patterns:
+        - HGVS coding: c.123A>G, c.456_789del, c.100+1G>A
+        - HGVS protein: p.N370S, p.Arg123Ter, p.Gly456fs
+        - Gene symbols: 2-6 uppercase letters
 
 Example:
-    >>> from E_normalization.E14_genetic_enricher import GeneticEnricher
+    >>> from E_normalization.E15_genetic_enricher import GeneticEnricher
     >>> enricher = GeneticEnricher()
     >>> result = enricher.extract("Patients with GBA c.1226A>G mutation...")
     >>> for variant in result.variants_hgvs:
     ...     print(f"Variant: {variant.text} (gene: {variant.gene})")
+    Variant: c.1226A>G (gene: GBA)
 
 Dependencies:
-    - Uses regex patterns (no external model required)
-    - Optional: Gene symbol validation against HGNC list
+    - re: Regular expressions for pattern matching
+    - Optional: HGNC gene list for symbol validation
 """
 
 from __future__ import annotations

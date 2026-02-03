@@ -41,12 +41,12 @@ def extract_table_content_structeq(image_bytes: bytes) -> Optional[Dict[str, str
 
         # Load model (lazy initialization)
         if not hasattr(extract_table_content_structeq, '_model'):
-            logger.info("Loading StructEqTable model...")
+            logger.info("Loading StructEqTable model (first time)...")
             model = struct_eqtable.build_model()
             model.max_new_tokens = 4096
             model.max_generate_time = 300
             extract_table_content_structeq._model = model
-            logger.info("StructEqTable model loaded")
+            logger.info("StructEqTable model loaded successfully")
 
         model = extract_table_content_structeq._model
 
@@ -54,20 +54,38 @@ def extract_table_content_structeq(image_bytes: bytes) -> Optional[Dict[str, str
         image = Image.open(io.BytesIO(image_bytes))
 
         # Extract table structure in both formats
+        logger.debug("StructEqTable extracting LaTeX...")
         latex_result = model(image, 'latex')
+        logger.debug("StructEqTable extracting HTML...")
         html_result = model(image, 'html')
 
+        latex_str = latex_result[0] if latex_result else ""
+        html_str = html_result[0] if html_result else ""
+
+        logger.info(f"StructEqTable extracted: LaTeX={len(latex_str)} chars, HTML={len(html_str)} chars")
+
         return {
-            "latex": latex_result[0] if latex_result else "",
-            "html": html_result[0] if html_result else "",
+            "latex": latex_str,
+            "html": html_str,
         }
 
-    except ImportError:
-        # StructEqTable not installed - skip silently
+    except ImportError as e:
+        logger.error(f"StructEqTable not installed: {e}")
+        return None
+    except (MemoryError, KeyboardInterrupt, SystemExit):
+        raise  # Re-raise critical exceptions
+    except RuntimeError as e:
+        logger.error(f"StructEqTable runtime error (possibly CUDA/torch issue): {e}")
+        return None
+    except (ValueError, TypeError, AttributeError) as e:
+        logger.error(f"StructEqTable extraction failed: {e}")
         return None
     except Exception as e:
-        logger.warning(f"StructEqTable extraction failed: {e}")
-        return None
+        # Catch PIL and other image processing errors
+        if "UnidentifiedImageError" in type(e).__name__ or "PIL" in str(type(e)):
+            logger.error(f"StructEqTable invalid image: {e}")
+            return None
+        raise  # Re-raise unexpected exceptions
 
 
 # -------------------------
@@ -323,8 +341,11 @@ def export_tables_only(
                 with open(image_path, "wb") as f:
                     f.write(img_bytes)
                 image_file = filename
-            except Exception as e:
-                logger.warning(f"Failed to save table image: {e}, falling back to base64")
+            except (PermissionError, OSError) as e:
+                logger.error(f"Failed to save table image due to file system error: {e}")
+                image_save_failed = True
+            except ValueError as e:
+                logger.error(f"Invalid base64 data for table image: {e}")
                 image_save_failed = True
 
         # Extract table content using StructEqTable (LaTeX/HTML)
@@ -334,6 +355,10 @@ def export_tables_only(
                 img_bytes = base64.b64decode(table.image_base64)
             logger.info(f"Extracting table content with StructEqTable for page {page_num}...")
             table_content = extract_table_content_structeq(img_bytes)
+            if table_content:
+                logger.info(f"Table {idx}: StructEqTable extraction complete")
+            else:
+                logger.warning(f"Table {idx} on page {page_num}: StructEqTable returned no content")
 
         # If save failed, fall back to embedding base64
         include_base64 = (not save_images) or image_save_failed

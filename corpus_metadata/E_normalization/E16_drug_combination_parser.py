@@ -1,22 +1,31 @@
-# corpus_metadata/E_normalization/E16_drug_combination_parser.py
 """
-Drug combination decomposition parser.
+Drug combination decomposition parser for clinical trial documents.
 
-Parses drug combination strings into individual components:
-- "ACE-I + SGLT2i" → [ACE-I, SGLT2i]
-- "metformin/sitagliptin" → [metformin, sitagliptin]
-- "triple therapy (ACE-I, ARB, diuretic)" → [ACE-I, ARB, diuretic]
+This module parses drug combination strings into individual components,
+extracting dose/frequency information, recognizing drug classes, and
+distinguishing background therapy from investigational drugs.
 
-Also handles:
-- Dose/frequency extraction
-- Drug class recognition
-- Background therapy vs investigational drug distinction
+Key Components:
+    - parse_drug_combination: Main parsing function
+    - DrugComponent: Individual drug with dose/frequency/class info
+    - ParsedDrugCombination: Result container with all components
+    - Parsing capabilities:
+        - Separator handling: +, /, comma, "and"
+        - Dose extraction: 10mg, 500 mg, 2.5 mL
+        - Frequency extraction: twice daily, QD, BID
+        - Drug class recognition: ACE-I, SGLT2i, ARB
 
 Example:
     >>> from E_normalization.E16_drug_combination_parser import parse_drug_combination
-    >>> result = parse_drug_combination("ACE-I + SGLT2i")
-    >>> print([c.name for c in result.components])
-    ['ACE-I', 'SGLT2i']
+    >>> result = parse_drug_combination("ACE-I + SGLT2i 10mg")
+    >>> for c in result.components:
+    ...     print(f"{c.name}: {c.dose or 'no dose'}")
+    ACE-I: no dose
+    SGLT2i: 10mg
+
+Dependencies:
+    - A_core.A00_logging: Logging utilities
+    - re: Regular expressions for pattern matching
 """
 
 from __future__ import annotations

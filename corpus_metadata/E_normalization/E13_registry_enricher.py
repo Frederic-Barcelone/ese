@@ -1,44 +1,20 @@
-# corpus_metadata/E_normalization/E13_registry_enricher.py
 """
-Registry Enricher for clinical trial feasibility extraction.
+Registry enricher for clinical trial feasibility extraction.
 
-This module extracts patient registry information that provides real-world
-cohort access, natural history data, and external control arms for rare-disease
-trials. Registry data is critical for feasibility because it helps identify:
+This module extracts patient registry information for rare-disease trial
+feasibility, including cohort access, natural history data, and external
+control arm availability. Links to a curated database of known registries.
 
-- Existing patient cohorts that could be recruited
-- Natural history data for trial design
-- Geographic distribution of patients
-- Data availability for external control arms
-
-Entity Types Extracted:
-    - registry_name: Registry identifiers and names
-      Examples: "RaDaR", "APPEAR-C3G", "NORD", "Orphanet"
-
-    - registry_size: Cohort sizes and enrollment numbers
-      Examples: "N=1,247 patients", "annual accrual 50 pts"
-
-    - geographic_coverage: Geographic scope of registry
-      Examples: "EU-wide", "US centers", "national registry"
-
-    - data_types: Available data elements
-      Examples: "genomics", "HPO phenotypes", "longitudinal labs"
-
-    - access_policy: Data access terms and requirements
-      Examples: "research-only", "IRB approval required", "federated query"
-
-    - eligibility_criteria: Registry inclusion criteria
-      Examples: "confirmed DMD genotype", "biopsy-proven C3G"
-
-Technical Implementation:
-    Uses ZeroShotBioNER's zero-shot capability (ProdicusII/ZeroShotBioNER)
-    with registry-specific entity labels. Includes post-processing linkage
-    to a database of known rare disease registries.
-
-Known Registries Database:
-    The module includes a curated database of known rare disease registries
-    (KNOWN_REGISTRIES) for automatic linkage of extracted registry names
-    to standardized registry information.
+Key Components:
+    - RegistryEnricher: Main enricher using ZeroShotBioNER + pattern matching
+    - KNOWN_REGISTRIES: Curated database for registry linkage
+    - Entity types extracted:
+        - registry_name: Registry identifiers (RaDaR, APPEAR-C3G, NORD)
+        - registry_size: Cohort sizes (N=1,247 patients)
+        - geographic_coverage: Geographic scope (EU-wide, US centers)
+        - data_types: Available data (genomics, HPO phenotypes)
+        - access_policy: Access terms (research-only, IRB required)
+        - eligibility_criteria: Registry inclusion criteria
 
 Example:
     >>> from E_normalization.E13_registry_enricher import RegistryEnricher
@@ -47,6 +23,7 @@ Example:
     >>> for reg in result.registry_names:
     ...     if reg.linked_registry:
     ...         print(f"{reg.text} -> {reg.linked_registry['full_name']}")
+    RaDaR -> Rare Disease Registry
 
 Dependencies:
     - E_normalization.E09_zeroshot_bioner: Zero-shot NER model

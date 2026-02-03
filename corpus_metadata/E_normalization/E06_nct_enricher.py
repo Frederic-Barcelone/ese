@@ -1,25 +1,42 @@
-# corpus_metadata/E_normalization/E06_nct_enricher.py
 """
 ClinicalTrials.gov API integration for NCT identifier enrichment.
 
-Enriches extracted NCT identifiers with:
-- Official trial title (long form expansion)
-- Brief title
-- Trial acronym (if available)
-- Conditions being studied
-- Interventions/drugs
+This module enriches extracted NCT identifiers using the ClinicalTrials.gov
+API, retrieving official titles, acronyms, conditions, and interventions.
+Implements caching and rate limiting for API compliance.
 
-API Reference: https://clinicaltrials.gov/data-api/api
+Key Components:
+    - NCTEnricher: Enricher implementing BaseEnricher interface
+    - NCTTrialInfo: Data class for retrieved trial information
+    - NCTClient: API client extending BaseAPIClient
+    - Enrichment features:
+        - Official trial title (long form expansion)
+        - Brief title and trial acronym
+        - Conditions being studied
+        - Interventions/drugs
+        - Study status and phase
 
 Example:
     >>> from E_normalization.E06_nct_enricher import NCTEnricher
     >>> enricher = NCTEnricher()
     >>> info = enricher.enrich("NCT04817618")
-    >>> print(info.official_title)
+    >>> print(f"Title: {info.official_title}")
+    >>> print(f"Conditions: {info.conditions}")
+    Title: Study of Ravulizumab in Participants With aHUS
+    Conditions: ['Atypical Hemolytic Uremic Syndrome']
+
+API Reference: https://clinicaltrials.gov/data-api/api
+
+Dependencies:
+    - A_core.A00_logging: Logging utilities
+    - A_core.A02_interfaces: BaseEnricher
+    - Z_utils.Z01_api_client: BaseAPIClient
+    - requests: HTTP client for API calls
 """
 
 from __future__ import annotations
 
+import json
 import time
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
@@ -136,7 +153,10 @@ class ClinicalTrialsGovClient(BaseAPIClient):
 
         except requests.RequestException as e:
             logger.warning(f"ClinicalTrials.gov API error for {nct_id}: {e}")
-            self.cache.set(cache_key, None)
+            # Don't cache failures - allow retry on next request
+            return None
+        except json.JSONDecodeError:
+            logger.warning(f"ClinicalTrials.gov invalid JSON for {nct_id}")
             return None
 
         # Parse response
@@ -401,7 +421,10 @@ class TrialAcronymEnricher(BaseAPIClient):
 
         except requests.RequestException as e:
             logger.warning(f"TrialAcronym API error for '{acronym}': {e}")
-            self.cache.set(cache_key, None)
+            # Don't cache failures - allow retry on next request
+            return None
+        except json.JSONDecodeError:
+            logger.warning(f"TrialAcronym invalid JSON for '{acronym}'")
             return None
 
         # Find best match from results
@@ -417,6 +440,8 @@ class TrialAcronymEnricher(BaseAPIClient):
             except requests.RequestException as e:
                 # Fallback search failed - log at debug level and continue
                 logger.debug(f"TrialAcronym fallback search failed for '{acronym}': {e}")
+            except json.JSONDecodeError:
+                logger.debug(f"TrialAcronym fallback invalid JSON for '{acronym}'")
 
         if not studies:
             self.cache.set(cache_key, None)

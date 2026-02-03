@@ -1,12 +1,26 @@
-# corpus_metadata/D_validation/D01_prompt_registry.py
 """
 Prompt registry for LLM validation tasks.
 
-Provides:
-- PromptTask: Enum of validation task types
-- PromptBundle: Versioned prompt templates with system/user components
-- PromptRegistry: Central registry for all validation prompts
-- Prompt versioning and hash computation for reproducibility
+This module provides a centralized, versioned prompt store for all LLM validation
+tasks. Supports prompt versioning, hash computation for reproducibility, and
+structured prompt bundles with system/user components for different validation types.
+
+Key Components:
+    - PromptTask: Enum of validation task types (abbreviations, diseases, authors, citations)
+    - PromptBundle: Versioned prompt templates with system/user components and schema
+    - PromptRegistry: Central registry storing all validation prompts with version tracking
+    - Hash computation via compute_prompt_bundle_hash for reproducibility
+
+Example:
+    >>> from D_validation.D01_prompt_registry import PromptRegistry, PromptTask
+    >>> registry = PromptRegistry()
+    >>> bundle = registry.get(PromptTask.VERIFY_DISEASE_BATCH)
+    >>> print(f"Version: {bundle.version}, Hash: {bundle.prompt_bundle_hash[:8]}")
+    Version: 1.0.0, Hash: a1b2c3d4
+
+Dependencies:
+    - A_core.A03_provenance: compute_prompt_bundle_hash for deterministic hashing
+    - pydantic: BaseModel for PromptBundle schema validation
 """
 from __future__ import annotations
 

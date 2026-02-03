@@ -1,22 +1,34 @@
-# corpus_metadata/corpus_metadata/F_evaluation/F01_gold_loader.py
-
 """
-Gold Standard Loader
+Gold standard loader for evaluation against human annotations.
 
-Loads human-annotated abbreviation ground truth from JSON or CSV files.
-Returns validated GoldStandard object and doc_id-indexed lookup dictionary.
+This module loads human-annotated abbreviation ground truth from JSON or CSV
+files, normalizing and indexing annotations for efficient lookup during
+precision/recall calculation.
 
-Normalization applied:
-    - doc_id: filename only (strips paths)
-    - short_form: uppercased
-    - long_form: whitespace-normalized
-    - Duplicates removed by (doc_id, SF, LF) key
+Key Components:
+    - GoldLoader: Main loader class for gold standard files
+    - GoldAnnotation: Single annotation (doc_id, short_form, long_form)
+    - GoldStandard: Collection of annotations with validation
+    - Normalization applied:
+        - doc_id: filename only (strips paths)
+        - short_form: uppercased
+        - long_form: whitespace-normalized
+        - Duplicates removed by (doc_id, SF, LF) key
+    - Modes:
+        - strict=True: requires doc_id, short_form, long_form
+        - strict=False: allows missing long_form
 
-Modes:
-    - strict=True: requires doc_id, short_form, long_form
-    - strict=False: allows missing long_form
+Example:
+    >>> from F_evaluation.F01_gold_loader import GoldLoader
+    >>> loader = GoldLoader(strict=False)
+    >>> gold, by_doc = loader.load("gold_standard.json")
+    >>> print(f"Loaded {len(gold.annotations)} annotations")
+    >>> print(f"Documents: {list(by_doc.keys())}")
+    Loaded 500 annotations
+    Documents: ['protocol_101.pdf', 'protocol_102.pdf']
 
-Used by F02_scorer.py for precision/recall/F1 calculation.
+Dependencies:
+    - pydantic: BaseModel for annotation schema validation
 """
 
 from __future__ import annotations

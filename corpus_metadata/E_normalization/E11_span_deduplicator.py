@@ -1,13 +1,31 @@
-# corpus_metadata/E_normalization/E11_span_deduplicator.py
 """
 Span deduplication for multi-source NER outputs.
 
-Merges overlapping spans from multiple NER enrichers:
-- EpiExtract4GARD-v2
-- ZeroShotBioNER
-- BiomedicalNER
+This module merges overlapping spans from multiple NER enrichers, keeping
+the highest confidence match when spans overlap. Provides unified span
+representation across different NER sources.
 
-Keeps highest confidence score when spans overlap.
+Key Components:
+    - SpanDeduplicator: Main deduplicator for NER span merging
+    - NERSpan: Unified span representation from any NER source
+    - Overlap detection with configurable threshold
+    - Confidence-based selection for overlapping spans
+    - Sources handled:
+        - EpiExtract4GARD-v2
+        - ZeroShotBioNER
+        - BiomedicalNER
+
+Example:
+    >>> from E_normalization.E11_span_deduplicator import SpanDeduplicator, NERSpan
+    >>> deduplicator = SpanDeduplicator()
+    >>> spans = [NERSpan("diabetes", "disease", 0.9, "BiomedicalNER"),
+    ...          NERSpan("diabetes mellitus", "disease", 0.85, "EpiExtract")]
+    >>> deduplicated = deduplicator.deduplicate(spans)
+    >>> print(deduplicated[0].text, deduplicated[0].confidence)
+    diabetes 0.9
+
+Dependencies:
+    None (standalone dataclass-based implementation)
 """
 
 from __future__ import annotations

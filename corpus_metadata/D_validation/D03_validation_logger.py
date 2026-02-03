@@ -1,7 +1,26 @@
-# corpus_metadata/corpus_metadata/D_validation/D03_validation_logger.py
 """
-Logger for validation results.
-Writes structured logs to corpus_log directory.
+Structured logging for validation results.
+
+This module provides logging infrastructure for validation results, writing
+structured JSONL logs to the corpus_log directory. Tracks validation statistics
+and supports buffered batch writing for performance.
+
+Key Components:
+    - ValidationLogger: Main logger class for validation results
+    - JSONL output format for easy parsing and analysis
+    - In-memory buffering for batch writes
+    - Statistics tracking (total, validated, rejected, ambiguous, errors)
+
+Example:
+    >>> from D_validation.D03_validation_logger import ValidationLogger
+    >>> logger = ValidationLogger(log_dir="corpus_log", run_id="VAL_20240115")
+    >>> logger.log_validation(candidate, entity, status="VALIDATED")
+    >>> logger.flush()
+    >>> print(logger.stats)
+    {'total': 100, 'validated': 85, 'rejected': 10, 'ambiguous': 3, 'errors': 2}
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, ExtractedEntity, ValidationStatus
 """
 
 from __future__ import annotations

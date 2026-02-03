@@ -1,18 +1,33 @@
-# corpus_metadata/E_normalization/E04_pubtator_enricher.py
 """
 PubTator3 API integration for disease enrichment.
 
-Enriches extracted diseases with:
-- MeSH identifiers (if missing)
-- Normalized disease names
-- Aliases/synonyms from PubTator
+This module enriches extracted diseases using the NCBI PubTator3 API, adding
+MeSH identifiers, normalized names, and aliases. Implements rate limiting
+and disk caching per NCBI guidelines.
 
-API Reference: https://www.ncbi.nlm.nih.gov/research/pubtator3/api
+Key Components:
+    - PubTator3Client: API client with rate limiting and disk caching
+    - DiseaseEnricher: Enricher implementing BaseEnricher interface
+    - Enrichment features:
+        - MeSH identifiers (if missing)
+        - Normalized disease names from PubTator
+        - Aliases/synonyms
 
 Example:
     >>> from E_normalization.E04_pubtator_enricher import DiseaseEnricher
     >>> enricher = DiseaseEnricher()
     >>> enriched = enricher.enrich(disease_entity)
+    >>> print(f"MeSH: {enriched.mesh_id}, Aliases: {enriched.aliases}")
+    MeSH: D006973, Aliases: ['HTN', 'high blood pressure']
+
+API Reference: https://www.ncbi.nlm.nih.gov/research/pubtator3/api
+
+Dependencies:
+    - A_core.A00_logging: Logging utilities
+    - A_core.A02_interfaces: BaseEnricher
+    - A_core.A05_disease_models: DiseaseIdentifier, ExtractedDisease
+    - Z_utils.Z01_api_client: BaseAPIClient for caching and rate limiting
+    - requests: HTTP client for API calls
 """
 
 from __future__ import annotations
@@ -180,6 +195,9 @@ class PubTator3Client(BaseAPIClient):
 
         except requests.exceptions.RequestException as e:
             logger.warning(f"PubTator search failed for '{term}': {e}")
+            return None
+        except json.JSONDecodeError:
+            logger.warning(f"PubTator invalid JSON for search '{term}'")
             return None
 
 

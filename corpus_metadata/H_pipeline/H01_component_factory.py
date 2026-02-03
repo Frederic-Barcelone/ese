@@ -40,6 +40,9 @@ if TYPE_CHECKING:
     from E_normalization.E12_patient_journey_enricher import PatientJourneyEnricher
     from E_normalization.E13_registry_enricher import RegistryEnricher
     from E_normalization.E15_genetic_enricher import GeneticEnricher
+    from E_normalization.E04_pubtator_enricher import DiseaseEnricher
+    from E_normalization.E05_drug_enricher import DrugEnricher
+    from E_normalization.E18_gene_enricher import GeneEnricher
 
 
 class ComponentFactory:
@@ -98,6 +101,7 @@ class ComponentFactory:
         self.use_patient_journey = pipeline_cfg.get("use_patient_journey", True)
         self.use_registry_extraction = pipeline_cfg.get("use_registry_extraction", True)
         self.use_genetic_extraction = pipeline_cfg.get("use_genetic_extraction", True)
+        self.use_pubtator_enrichment = pipeline_cfg.get("use_pubtator_enrichment", True)
 
     def create_parser(self) -> "PDFToDocGraphParser":
         """Create PDF parser component."""
@@ -450,6 +454,30 @@ class ComponentFactory:
 
         from E_normalization.E15_genetic_enricher import GeneticEnricher
         return GeneticEnricher(config={"run_id": self.run_id})
+
+    def create_disease_enricher(self) -> Optional["DiseaseEnricher"]:
+        """Create PubTator disease enricher if enabled."""
+        if not self.use_pubtator_enrichment:
+            return None
+
+        from E_normalization.E04_pubtator_enricher import DiseaseEnricher
+        return DiseaseEnricher(config={"run_id": self.run_id})
+
+    def create_drug_enricher(self) -> Optional["DrugEnricher"]:
+        """Create PubTator drug enricher if enabled."""
+        if not self.use_pubtator_enrichment:
+            return None
+
+        from E_normalization.E05_drug_enricher import DrugEnricher
+        return DrugEnricher(config={"run_id": self.run_id})
+
+    def create_gene_enricher(self) -> Optional["GeneEnricher"]:
+        """Create PubTator gene enricher if enabled."""
+        if not self.use_pubtator_enrichment:
+            return None
+
+        from E_normalization.E18_gene_enricher import GeneEnricher
+        return GeneEnricher(config={"run_id": self.run_id})
 
     def create_doc_metadata_strategy(
         self, claude_client: Optional["ClaudeClient"], model: Optional[str] = None

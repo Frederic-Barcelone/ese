@@ -1,10 +1,27 @@
-# corpus_metadata/E_normalization/E07_deduplicator.py
-
 """
-Deduplicator for abbreviation entities.
+Deduplicator for abbreviation entities with quality-based selection.
 
-Merges multiple entities with the same short_form into a single canonical entry,
-selecting the best long_form based on quality ranking and preserving alternatives.
+This module merges multiple abbreviation entities with the same short form
+into a single canonical entry, selecting the best long form based on source
+quality ranking and preserving alternatives for reference.
+
+Key Components:
+    - Deduplicator: Main class for abbreviation deduplication
+    - Quality-based long form ranking (source, confidence, specificity)
+    - Alternative long form preservation in normalized_value
+    - Hyphen/dash normalization for consistent grouping
+
+Example:
+    >>> from E_normalization.E07_deduplicator import Deduplicator
+    >>> deduplicator = Deduplicator(config={})
+    >>> deduplicated = deduplicator.deduplicate(entities)
+    >>> for entity in deduplicated:
+    ...     print(f"{entity.short_form}: {entity.long_form} (alts: {entity.alternatives})")
+    TNF: Tumor Necrosis Factor (alts: ['tumour necrosis factor'])
+
+Dependencies:
+    - A_core.A01_domain_models: ExtractedEntity, ValidationStatus, FieldType, GeneratorType
+    - collections: defaultdict for grouping
 """
 
 from __future__ import annotations

@@ -1,25 +1,21 @@
-# corpus_metadata/E_normalization/E08_epi_extract_enricher.py
 """
 EpiExtract4GARD-v2 integration for rare disease epidemiology NER.
 
 This module provides Named Entity Recognition (NER) for epidemiology data
 using the NCATS BioBERT-based model fine-tuned on rare disease literature.
+Handles lazy model loading, sentence-level processing, and statistical normalization.
 
-Entity Types Extracted:
-    - LOC: Geographic locations (countries, regions, populations)
-    - EPI: Epidemiology type indicators (prevalence, incidence, mortality)
-    - STAT: Statistical rates and values (e.g., "1 per 100,000")
-
-The module handles:
-    - Lazy model loading to minimize startup overhead
-    - Sentence-level processing for long documents
-    - Statistical value normalization to per-million rates
-    - Entity proximity analysis to associate statistics with their context
-
-Model Information:
-    - Source: https://huggingface.co/ncats/EpiExtract4GARD-v2
-    - Paper: https://doi.org/10.1186/s12967-023-04011-y
-    - Architecture: BioBERT fine-tuned for token classification
+Key Components:
+    - EpiExtractEnricher: Main enricher using EpiExtract4GARD-v2 model
+    - Entity types extracted:
+        - LOC: Geographic locations (countries, regions, populations)
+        - EPI: Epidemiology type indicators (prevalence, incidence, mortality)
+        - STAT: Statistical rates and values (e.g., "1 per 100,000")
+    - Features:
+        - Lazy model loading to minimize startup overhead
+        - Sentence-level processing for long documents
+        - Statistical value normalization to per-million rates
+        - Entity proximity analysis for context association
 
 Example:
     >>> from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher
@@ -28,9 +24,16 @@ Example:
     >>> print(result.statistics[0].text)
     '1 per 100,000'
 
+Model Information:
+    - Source: https://huggingface.co/ncats/EpiExtract4GARD-v2
+    - Paper: https://doi.org/10.1186/s12967-023-04011-y
+    - Architecture: BioBERT fine-tuned for token classification
+
 Dependencies:
-    - transformers (HuggingFace)
-    - torch
+    - A_core.A00_logging: Logging utilities
+    - A_core.A07_feasibility_models: EpidemiologyData
+    - transformers: HuggingFace Pipeline for NER
+    - torch: PyTorch backend
 """
 
 from __future__ import annotations

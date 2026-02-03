@@ -1,18 +1,29 @@
-# corpus_metadata/E_normalization/E05_drug_enricher.py
 """
-PubTator3 API integration for drug/chemical enrichment.
+PubTator3 API integration for drug and chemical enrichment.
 
-Enriches extracted drugs with:
-- MeSH identifiers (if missing)
-- Normalized drug names
-- Aliases/synonyms from PubTator
+This module enriches extracted drugs using the NCBI PubTator3 API, adding
+MeSH identifiers, normalized names, and aliases. Reuses PubTator3Client
+from E04 for consistent caching and rate limiting.
 
-Reuses PubTator3Client from E04_pubtator_enricher.
+Key Components:
+    - DrugEnricher: Enricher implementing BaseEnricher interface
+    - Enrichment features:
+        - MeSH ID (if missing)
+        - Normalized name from PubTator
+        - Aliases/synonyms
 
 Example:
     >>> from E_normalization.E05_drug_enricher import DrugEnricher
     >>> enricher = DrugEnricher()
     >>> enriched = enricher.enrich(drug_entity)
+    >>> print(f"MeSH: {enriched.mesh_id}, Normalized: {enriched.normalized_name}")
+    MeSH: D000069059, Normalized: atorvastatin
+
+Dependencies:
+    - A_core.A00_logging: Logging utilities
+    - A_core.A02_interfaces: BaseEnricher
+    - A_core.A06_drug_models: DrugIdentifier, ExtractedDrug
+    - E_normalization.E04_pubtator_enricher: PubTator3Client
 """
 
 from __future__ import annotations

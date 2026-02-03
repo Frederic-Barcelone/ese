@@ -1,12 +1,32 @@
-# corpus_metadata/D_validation/D02_llm_engine.py
 """
-LLM Engine for validation tasks.
+LLM engine for candidate validation using Claude API.
 
-Contains:
-  - ClaudeClient: Anthropic Claude API client
-  - LLMClient: Protocol (interface) for LLM clients
-  - LLMEngine: Verifier that uses any LLMClient
-  - VerificationResult: Response schema
+This module provides the core validation engine that uses Claude to verify
+extracted candidates. Implements a protocol-based design allowing different
+LLM backends, with built-in retry logic, rate limiting, and structured output parsing.
+
+Key Components:
+    - LLMClient: Protocol (interface) for LLM clients
+    - ClaudeClient: Anthropic Claude API client implementation
+    - LLMEngine: Main verifier that uses any LLMClient for validation
+    - VerificationResult: Pydantic schema for structured validation responses
+    - Batch validation support with configurable concurrency
+
+Example:
+    >>> from D_validation.D02_llm_engine import LLMEngine, ClaudeClient
+    >>> client = ClaudeClient(model="claude-sonnet-4-20250514")
+    >>> engine = LLMEngine(client=client)
+    >>> results = engine.verify_batch(candidates, doc_context)
+    >>> for result in results:
+    ...     print(f"{result.candidate_id}: {result.status}")
+    abbr_001: VALIDATED
+
+Dependencies:
+    - A_core.A01_domain_models: Candidate, ExtractedEntity, ValidationStatus
+    - A_core.A03_provenance: Provenance tracking utilities
+    - D_validation.D01_prompt_registry: PromptRegistry, PromptTask
+    - Z_utils.Z04_image_utils: Image compression for vision tasks
+    - anthropic: Claude API client (optional)
 """
 
 from __future__ import annotations

@@ -1,14 +1,34 @@
-# corpus_metadata/E_normalization/E09_zeroshot_bioner.py
 """
 ZeroShotBioNER integration for flexible biomedical entity extraction.
 
-Uses Bayer/Serbian AI Institute BioBERT-based model for zero-shot NER.
-Extracts entities not covered by other extractors:
-- ADE: Adverse Drug Events
-- Dosage, Frequency, Strength, Form, Route, Duration: Drug administration
-- Reason: Treatment rationale
+This module provides zero-shot NER using the Bayer/Serbian AI Institute
+BioBERT-based model, extracting entities not covered by lexicon-based
+extractors such as adverse events and drug administration details.
+
+Key Components:
+    - ZeroShotBioNEREnricher: Main enricher using ProdicusII/ZeroShotBioNER
+    - BioNEREntity: Data class for extracted entities
+    - ENTITY_TYPES_TO_EXTRACT: Configured entity types
+    - Entity types extracted:
+        - ADE: Adverse Drug Events
+        - Dosage, Frequency, Strength, Form, Route, Duration: Drug administration
+        - Reason: Treatment rationale
+
+Example:
+    >>> from E_normalization.E09_zeroshot_bioner import ZeroShotBioNEREnricher
+    >>> enricher = ZeroShotBioNEREnricher()
+    >>> result = enricher.extract("Take 10mg twice daily for pain")
+    >>> for entity in result.entities:
+    ...     print(f"{entity.entity_type}: {entity.text}")
+    Dosage: 10mg
+    Frequency: twice daily
+    Reason: pain
 
 Model: https://huggingface.co/ProdicusII/ZeroShotBioNER
+
+Dependencies:
+    - transformers: HuggingFace model loading (lazy)
+    - torch: PyTorch backend (lazy)
 """
 
 from __future__ import annotations

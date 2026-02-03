@@ -1,12 +1,27 @@
-# corpus_metadata/E_normalization/E01_term_mapper.py
 """
-Term mapper for abbreviation normalization.
+Term mapper for abbreviation normalization and standardization.
 
-Provides TermMapper class that:
-- Canonicalizes long forms (case normalization, whitespace)
-- Attaches standard IDs from lexicons
-- Stores normalization payloads for audit trail
-- Optionally fills long forms for orphan short forms
+This module provides abbreviation normalization that canonicalizes long forms,
+attaches standard IDs from lexicons, and maintains audit trails. Optionally
+fills missing long forms for orphan short forms using lexicon lookup.
+
+Key Components:
+    - TermMapper: Main normalizer implementing BaseNormalizer interface
+    - Long form canonicalization (case, whitespace, punctuation)
+    - Standard ID attachment from processed lexicons
+    - Normalization payload storage for audit trail
+
+Example:
+    >>> from E_normalization.E01_term_mapper import TermMapper
+    >>> mapper = TermMapper(config={"lexicon_path": "abbreviation_lexicon.json"})
+    >>> normalized = mapper.normalize(entity)
+    >>> print(f"Canonical LF: {normalized.long_form}, ID: {normalized.standard_id}")
+    Canonical LF: Tumor Necrosis Factor, ID: MESH:D014409
+
+Dependencies:
+    - A_core.A01_domain_models: ExtractedEntity, ValidationStatus, FieldType
+    - A_core.A02_interfaces: BaseNormalizer
+    - difflib: get_close_matches for fuzzy lexicon lookup
 """
 from __future__ import annotations
 

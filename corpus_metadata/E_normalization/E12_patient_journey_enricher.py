@@ -1,42 +1,20 @@
-# corpus_metadata/E_normalization/E12_patient_journey_enricher.py
 """
-Patient Journey Enricher for clinical trial feasibility extraction.
+Patient journey enricher for clinical trial feasibility extraction.
 
 This module extracts longitudinal progression and real-world barriers that
-determine how patients reach (or fail to reach) trial eligibility. Understanding
-the patient journey is critical for feasibility assessment as it reveals:
+determine how patients reach trial eligibility. Critical for feasibility
+assessment, revealing recruitment windows, treatment requirements, and barriers.
 
-- Time-to-diagnosis patterns affecting recruitment windows
-- Prior treatment requirements impacting eligibility
-- Healthcare system touchpoints for patient identification
-- Barriers that cause patient dropout or non-enrollment
-
-Entity Types Extracted:
-    - diagnostic_delay: Time from symptom onset to diagnosis
-      Examples: "average 3-year diagnostic delay", "median 18 months to diagnosis"
-
-    - treatment_line: Prior therapy requirements (1L/2L/3L)
-      Examples: "after failure of first-line therapy", "treatment-naive patients"
-
-    - care_pathway_step: Healthcare journey milestones
-      Examples: "referred to specialist center", "genetic testing completed"
-
-    - surveillance_frequency: Monitoring intervals affecting trial burden
-      Examples: "quarterly MRI monitoring", "monthly lab assessments"
-
-    - pain_point: Patient barriers to trial participation
-      Examples: "travel burden to study sites", "frequent monitoring requirements"
-
-    - recruitment_touchpoint: Potential trial entry points
-      Examples: "at time of diagnosis", "during routine follow-up"
-
-Technical Implementation:
-    Primary: Pattern-based extraction using curated regex patterns for each
-    entity type. This approach is reliable and interpretable.
-
-    Fallback: ZeroShotBioNER model (when available) for additional coverage.
-    Note: The ZeroShotBioNER model was trained on specific entity types
-    (ADE, Dosage, etc.) and may not recognize custom patient journey labels.
+Key Components:
+    - PatientJourneyEnricher: Main enricher using pattern-based extraction
+    - Entity types extracted:
+        - diagnostic_delay: Time from symptom onset to diagnosis
+        - treatment_line: Prior therapy requirements (1L/2L/3L)
+        - care_pathway_step: Healthcare journey milestones
+        - surveillance_frequency: Monitoring intervals
+        - pain_point: Patient barriers to participation
+        - recruitment_touchpoint: Potential trial entry points
+    - Pattern-based primary extraction with ZeroShotBioNER fallback
 
 Example:
     >>> from E_normalization.E12_patient_journey_enricher import PatientJourneyEnricher
@@ -45,6 +23,8 @@ Example:
     >>> print(f"Found {result.total_entities} patient journey entities")
     >>> for delay in result.diagnostic_delays:
     ...     print(f"  Diagnostic delay: {delay.text}")
+    Found 5 patient journey entities
+      Diagnostic delay: average 3-year diagnostic delay
 
 Dependencies:
     - re: Regular expressions for pattern matching
