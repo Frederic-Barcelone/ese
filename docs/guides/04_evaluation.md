@@ -6,6 +6,15 @@ This guide covers how to evaluate the ESE pipeline's extraction accuracy against
 
 The evaluation framework in `F_evaluation/` compares pipeline output against human-annotated ground truth. It computes precision, recall, and F1 scores per entity type, per document, and across the full corpus.
 
+**Important**: There are two separate evaluation paths:
+
+- **F03_evaluation_runner.py** (recommended) -- Self-contained runner supporting abbreviations, diseases, and genes. Has its own loading, comparison, and reporting logic. This is the primary evaluation tool.
+- **F01_gold_loader.py + F02_scorer.py** -- Reusable API for **abbreviation-only** evaluation. Provides `GoldLoader` and `Scorer` classes for programmatic use. Does not support disease or gene evaluation.
+
+The F03 runner does **not** use F01/F02 internally — it has its own comparison functions optimized for multi-entity evaluation.
+
+> **Note**: Evaluation is currently supported for abbreviations, diseases, and genes only. Other entity types (drugs, pharma, authors, citations, care pathways, recommendations) do not yet have gold standard evaluation support.
+
 ## Gold Standard Data
 
 ### Location
@@ -112,9 +121,9 @@ MAX_DOCS = None
 FUZZY_THRESHOLD = 0.8  # 80% similarity for fuzzy long form matching
 ```
 
-### Programmatic Evaluation (Scorer API)
+### Programmatic Evaluation (Scorer API — Abbreviations Only)
 
-For evaluating individual documents or custom datasets, use the `Scorer` class directly:
+For evaluating abbreviation extraction on individual documents or custom datasets, use the `Scorer` class directly. This API compares `(short_form, long_form)` pairs and does **not** support disease or gene evaluation.
 
 ```python
 from F_evaluation.F02_scorer import Scorer, ScorerConfig

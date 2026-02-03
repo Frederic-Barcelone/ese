@@ -16,7 +16,15 @@ git clone <repo-url>
 cd ese
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r corpus_metadata/requirements.txt
+```
+
+### scispacy Models
+
+The pipeline uses scispacy for biomedical NER. After installing requirements, download the required model:
+
+```bash
+pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.5/en_core_sci_sm-0.5.5.tar.gz
 ```
 
 ## API Key Setup
@@ -73,10 +81,19 @@ document/
   diseases_document_YYYYMMDD_HHMMSS.json
   drugs_document_YYYYMMDD_HHMMSS.json
   genes_document_YYYYMMDD_HHMMSS.json
-  figures_document_YYYYMMDD_HHMMSS.json
+  pharma_document_YYYYMMDD_HHMMSS.json
+  authors_document_YYYYMMDD_HHMMSS.json
+  citations_document_YYYYMMDD_HHMMSS.json
+  feasibility_document_YYYYMMDD_HHMMSS.json
+  care_pathways_document_YYYYMMDD_HHMMSS.json
+  recommendations_document_YYYYMMDD_HHMMSS.json
+  metadata_document_YYYYMMDD_HHMMSS.json
   tables_document_YYYYMMDD_HHMMSS.json
+  figures_document_YYYYMMDD_HHMMSS.json
   document_extracted_text_YYYYMMDD_HHMMSS.txt
 ```
+
+Which files are generated depends on the active extraction preset and the content of the document.
 
 ## Extraction Presets
 
@@ -84,7 +101,7 @@ The pipeline supports presets that control which extractors run. Set the preset 
 
 | Preset | What It Extracts |
 |--------|-----------------|
-| `standard` (default) | Drugs, diseases, genes, abbreviations, feasibility, tables, care pathways, recommendations |
+| `standard` (default) | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | Everything enabled (all entity types, figures, tables, metadata) |
 | `minimal` | Abbreviations only (no LLM calls) |
 | `drugs_only` | Drug detection only |
@@ -93,7 +110,7 @@ The pipeline supports presets that control which extractors run. Set the preset 
 | `abbreviations_only` | Abbreviation extraction only |
 | `feasibility_only` | Feasibility extraction only |
 | `entities_only` | Drugs + diseases + genes + abbreviations |
-| `clinical_entities` | Drugs, diseases, genes, abbreviations, feasibility, care pathways, recommendations |
+| `clinical_entities` | Drugs + diseases only |
 | `metadata_only` | Authors + citations + document metadata |
 | `images_only` | Tables + figures/visuals |
 | `tables_only` | Table extraction only (no figures) |

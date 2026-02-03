@@ -16,7 +16,7 @@ extraction_pipeline:
 
 | Preset | Extractors Enabled |
 |--------|-------------------|
-| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, care pathways, recommendations |
+| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | All entity types including authors, citations, tables, figures, metadata |
 | `minimal` | Abbreviations only (no LLM) |
 | `drugs_only` | Drug detection only |
@@ -25,7 +25,7 @@ extraction_pipeline:
 | `abbreviations_only` | Abbreviation extraction only |
 | `feasibility_only` | Feasibility extraction only |
 | `entities_only` | Drugs, diseases, genes, abbreviations |
-| `clinical_entities` | Drugs, diseases, genes, abbreviations, feasibility, care pathways, recommendations |
+| `clinical_entities` | Drugs, diseases only |
 | `metadata_only` | Authors, citations, document metadata |
 | `images_only` | Tables + figures/visuals |
 | `tables_only` | Table extraction only (no figures) |
@@ -51,6 +51,8 @@ extraction_pipeline:
     document_metadata: true
     tables: true
     figures: true
+    care_pathways: true
+    recommendations: true
 ```
 
 ## Processing Options
@@ -70,6 +72,43 @@ extraction_pipeline:
     use_patient_journey: true      # Patient journey extraction
     use_registry_extraction: true  # Registry extraction
     parallel_extraction: true      # Run independent extractors in parallel
+    use_genetic_extraction: true   # Gene extraction via HGNC/Orphadata
+    use_pubtator_enrichment: true  # PubTator3 enrichment for diseases/drugs/genes
+```
+
+## Page Limits
+
+```yaml
+extraction_pipeline:
+  page_limits:
+    max_pages: null              # null = no limit, or integer to cap pages processed
+    page_range: null             # null = all pages, or [start, end] for specific range
+```
+
+## Deduplication
+
+```yaml
+deduplication:
+  enabled: true
+  priority_order:               # Source priority for resolving duplicates
+    - "syntax_pattern"
+    - "glossary_table"
+    - "regex_pattern"
+    - "layout"
+    - "lexicon_match"
+  remove_expansion_matches: true  # Remove candidates where SF matches an LF of another
+```
+
+## Output Format
+
+```yaml
+output:
+  format: "json"
+  json_indent: 2
+  include:
+    provenance: true
+    evidence: true
+    confidence: true
 ```
 
 ## API Configuration

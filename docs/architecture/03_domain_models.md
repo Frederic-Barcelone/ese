@@ -347,6 +347,9 @@ class ExtractedGene(BaseModel):
     omim_id: Optional[str]
     uniprot_id: Optional[str]
     associated_diseases: list[GeneDiseaseLinkage]
+    pubtator_normalized_name: Optional[str]  # PubTator3 canonical name
+    pubtator_aliases: list[str]              # PubTator3 aliases
+    enrichment_source: Optional[EnrichmentSource]
     status: ValidationStatus
     confidence_score: float
     provenance: GeneProvenanceMetadata
@@ -477,12 +480,21 @@ class ExtractedVisual(BaseModel):
     caption_provenance: Optional[CaptionProvenance]  # PDF_TEXT, OCR, VLM
     reference: Optional[VisualReference]
     image_base64: str               # Base64-encoded PNG
+    image_format: str               # Default "png"
+    render_dpi: int                 # Default 300
+    source_file: str
     docling_table: Optional[TableStructure]
     validated_table: Optional[TableStructure]
+    table_extraction_mode: Optional[TableExtractionMode]
     relationships: VisualRelationships
     extraction_method: str          # "docling+vlm", "docling_only", "vlm_only"
     vlm_title: Optional[str]
     vlm_description: Optional[str]
+    triage_decision: Optional[TriageDecision]
+    triage_reason: Optional[str]
+    layout_code: Optional[str]      # Layout pattern code from B18
+    position_code: Optional[str]    # Position within layout
+    layout_filename: Optional[str]  # Generated filename from B21
 ```
 
 ### VisualType Enum
@@ -623,6 +635,164 @@ class GuidelineRecommendation(BaseModel):
 ### RecommendationType Enum
 
 `TREATMENT`, `DOSING`, `DURATION`, `MONITORING`, `CONTRAINDICATION`, `ALTERNATIVE`, `PREFERENCE`, `OTHER`
+
+---
+
+## Document Metadata Models (A08)
+
+### DocumentMetadata
+
+Complete metadata container for a processed document.
+
+```python
+class DocumentMetadata(BaseModel):
+    file_metadata: FileMetadata             # File system properties (size, dates)
+    pdf_metadata: PDFMetadata               # PDF properties (title, author, DOI, page count)
+    classification: DocumentClassification  # Document type with confidence
+    description: DocumentDescription        # LLM-generated title and descriptions
+    date_extraction: DateExtractionResult   # Dates with fallback chain
+    provenance: DocumentMetadataProvenance
+```
+
+### Key Sub-Models
+
+- **DocumentType**: Classification result with `code`, `name`, `confidence` (e.g., DLA, CRM, CSR)
+- **DocumentClassification**: Primary type + alternative types ranked by confidence
+- **DocumentDescription**: LLM-generated `title`, `summary`, `description`
+- **DateExtractionResult**: All extracted dates with `DateSourceType` fallback chain (PDF_TEXT, PDF_METADATA, FILE_SYSTEM)
+
+---
+
+## Pharma Models (A09)
+
+### PharmaCandidate / ExtractedPharma
+
+```python
+class PharmaCandidate(BaseModel):
+    id: uuid.UUID
+    doc_id: str
+    matched_text: str
+    canonical_name: str
+    full_name: Optional[str]
+    headquarters: Optional[str]
+    parent_company: Optional[str]
+    subsidiaries: list[str]
+    generator_type: PharmaGeneratorType    # LEXICON_MATCH
+    provenance: PharmaProvenanceMetadata
+```
+
+---
+
+## Exceptions (A12)
+
+All pipeline exceptions inherit from `ESEPipelineError`:
+
+| Exception | Parent | Purpose |
+|-----------|--------|---------|
+| `ESEPipelineError` | `Exception` | Base for all pipeline errors |
+| `ConfigurationError` | `ESEPipelineError` | Invalid config (config_key, expected_type, actual_value) |
+| `ParsingError` | `ESEPipelineError` | PDF parsing failures (file_path, page_number) |
+| `ExtractionError` | `ESEPipelineError` | NER/regex/lexicon failures (extractor_name, entity_type) |
+| `EnrichmentError` | `ESEPipelineError` | Database lookup failures (enricher_name, entity_id) |
+| `APIError` | `EnrichmentError` | HTTP failures (status_code, response_body, endpoint) |
+| `RateLimitError` | `APIError` | HTTP 429 rate limit (retry_after) |
+| `ValidationError` | `ESEPipelineError` | Entity validation failures (entity_id, field_name) |
+| `CacheError` | `ESEPipelineError` | Cache read/write/corruption failures (cache_key, operation) |
+| `EvaluationError` | `ESEPipelineError` | Scoring and gold standard failures (metric_name) |
+
+---
+
+## Domain Profile (A15)
+
+Configurable tuning profiles for domain-specific confidence adjustments.
+
+```python
+@dataclass
+class DomainProfile:
+    name: str
+    priority_diseases: list[str]
+    priority_journals: list[str]
+    noise_terms: list[str]
+    physiological_systems: list[str]
+    generic_terms: list[str]
+    adjustments: ConfidenceAdjustments
+```
+
+Built-in profiles: `"generic"`, `"nephrology"`, `"oncology"`, `"pulmonology"`.
+
+`ConfidenceAdjustments` provides tunable penalty/boost values (e.g., `generic_disease_term`, `short_match_no_context`, `priority_disease_boost`).
+
+---
+
+## Unicode Utilities (A20)
+
+PDF-aware text normalization functions for handling encoding artifacts.
+
+- `normalize_sf()` -- NFKC normalization, mojibake fix, hyphen normalization
+- `normalize_sf_key()` -- Uppercase key normalization for dictionary lookups
+- `normalize_context()` -- Lowercase normalization for context matching
+- `clean_long_form()` -- Repair PDF extraction artifacts (line-break hyphenation, truncation)
+- `is_truncated_term()` -- Detect PDF truncation patterns
+- `MOJIBAKE_MAP` -- Common PDF encoding issues (Greek letters, ligatures)
+
+---
+
+## Clinical Criteria (A21)
+
+Computable clinical criteria models for eligibility analysis.
+
+### LabCriterion
+
+```python
+class LabCriterion(BaseModel):
+    analyte: str                    # "eGFR", "hemoglobin"
+    operator: str                   # ">=", "<", "between"
+    value: Optional[float]
+    unit: Optional[str]
+    min_value: Optional[float]      # For "between" ranges
+    max_value: Optional[float]
+    specimen: Optional[str]
+    timepoints: list[LabTimepoint]
+    normalization: Optional[EntityNormalization]  # LOINC, SNOMED codes
+```
+
+### SeverityGrade
+
+Normalized clinical severity grades.
+
+```python
+class SeverityGrade(BaseModel):
+    grade_type: SeverityGradeType   # NYHA, ECOG, CKD, CHILD_PUGH, MELD, etc.
+    raw_value: str
+    numeric_value: Optional[float]
+    min_value: Optional[float]
+    max_value: Optional[float]
+    operator: Optional[str]
+```
+
+---
+
+## Logical Expressions (A22)
+
+AND/OR/NOT tree structures for eligibility criteria composition.
+
+```python
+class CriterionNode(BaseModel):
+    criterion_id: Optional[str]
+    operator: Optional[LogicalOperator]  # AND, OR, NOT
+    children: list[CriterionNode]
+    raw_text: Optional[str]
+    confidence: float
+```
+
+```python
+class LogicalExpression(BaseModel):
+    root: CriterionNode
+    raw_text: str
+    criteria_refs: dict[str, str]   # criterion_id -> raw_text
+```
+
+Supports `evaluate()` for programmatic evaluation and `to_sql_where()` for SQL generation.
 
 ---
 

@@ -73,7 +73,7 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 
 | Preset | Extractors |
 |--------|-----------|
-| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, care pathways, recommendations |
+| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | Everything including authors, citations, tables, figures, metadata |
 | `minimal` | Abbreviations only (no LLM) |
 | `drugs_only` | Drug detection only |
@@ -82,7 +82,7 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 | `abbreviations_only` | Abbreviation extraction only |
 | `feasibility_only` | Feasibility extraction only |
 | `entities_only` | Drugs, diseases, genes, abbreviations |
-| `clinical_entities` | Drugs, diseases, genes, abbreviations, feasibility, care pathways, recommendations |
+| `clinical_entities` | Drugs, diseases only |
 | `metadata_only` | Authors, citations, document metadata |
 | `images_only` | Tables + figures/visuals |
 | `tables_only` | Table extraction only (no figures) |

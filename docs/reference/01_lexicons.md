@@ -7,6 +7,8 @@ ESE loads approximately 617,000 terms from multiple biomedical lexicons at start
 | Source | Approx Terms | Purpose | Lexicon File(s) |
 |--------|-------------|---------|-----------------|
 | Meta-Inventory | 65K+ (104K entries, 170K senses) | Clinical abbreviations | `2025_meta_inventory_abbreviations.json` |
+| Clinical Research Abbreviations | varies | Clinical research-specific abbreviations | `clinical_research_abbreviations.json` |
+| General Abbreviations | varies | General abbreviation vocabulary | `2025_08_abbreviation_general.json` |
 | MONDO | 97K | Unified disease ontology | `2025_mondo_diseases.json` |
 | RxNorm | 132K | Drug vocabulary | `2025_08_lexicon_drug.json` |
 | ChEMBL | 23K | Approved drugs | `2025_chembl_drugs.json` |
@@ -19,6 +21,7 @@ ESE loads approximately 617,000 terms from multiple biomedical lexicons at start
 | FDA Approved | 50K | FDA-approved drugs | `2025_08_fda_approved_drugs.json` |
 | Investigational | 32K | ClinicalTrials.gov drugs | `2025_08_investigational_drugs.json` |
 | Alexion Pipeline | varies | Alexion-specific drugs | `2025_08_alexion_drugs.json` |
+| Medical Terms | varies | General medical terminology | `2025_08_lexicon_medical_terms.json` |
 | UMLS Biological | varies | UMLS biological abbreviations | `2025_08_umls_biological_abbreviations_v5.tsv` |
 | UMLS Clinical | varies | UMLS clinical abbreviations | `2025_08_umls_clinical_abbreviations_v5.tsv` |
 | PRO Scales | varies | Patient-Reported Outcome instruments | `pro_scales_lexicon.json` |

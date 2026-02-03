@@ -50,6 +50,76 @@ from B_parsing.B12_visual_pipeline import PipelineResult
 logger = logging.getLogger(__name__)
 
 
+def _patch_internvl_config() -> None:
+    """Patch StructEqTable's InternVLChatConfig for transformers>=4.49 compat.
+
+    The upstream config (configuration_internvl_chat.py) does
+    ``llm_config.get('architectures')[0]`` which crashes with TypeError
+    when transformers creates a default config instance (empty llm_config).
+    We fix this by patching the cached source file on disk so that even
+    re-imports by transformers pick up the fix.
+    """
+    import glob
+    import os
+    import sys
+
+    from transformers import AutoConfig
+
+    buggy_expr = "llm_config.get('architectures')[0]"
+    safe_expr = "(llm_config.get('architectures') or ['LlamaForCausalLM'])[0]"
+
+    hf_home = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))
+    hf_modules = os.path.join(
+        os.environ.get("HF_MODULES_CACHE", os.path.join(hf_home, "modules")),
+        "transformers_modules",
+    )
+
+    def _find_and_patch() -> bool:
+        config_files = glob.glob(
+            os.path.join(hf_modules, "U4R", "StructTable*", "*", "configuration_internvl_chat.py")
+        )
+        patched_any = False
+        for path in config_files:
+            with open(path, "r") as f:
+                content = f.read()
+            if buggy_expr not in content:
+                continue
+            patched = content.replace(buggy_expr, safe_expr)
+            with open(path, "w") as f:
+                f.write(patched)
+            logger.info(f"Patched InternVLChatConfig at {path}")
+            patched_any = True
+        return patched_any
+
+    def _evict_cached_modules() -> None:
+        """Remove cached InternVL config modules so re-import picks up the patch."""
+        to_remove = [
+            key for key in sys.modules
+            if "configuration_internvl_chat" in key
+        ]
+        for key in to_remove:
+            del sys.modules[key]
+            logger.info(f"Evicted cached module: {key}")
+
+    # Try patching existing cached files first
+    if _find_and_patch():
+        _evict_cached_modules()
+        return
+
+    # Files not cached yet — trigger download (which will fail), then patch
+    try:
+        AutoConfig.from_pretrained("U4R/StructTable-InternVL2-1B", trust_remote_code=True)
+        return  # Loaded fine — no patch needed
+    except TypeError:
+        pass  # Expected: file downloaded but config instantiation failed
+
+    if _find_and_patch():
+        _evict_cached_modules()
+        return
+
+    logger.warning("Could not find InternVLChatConfig to patch — StructEqTable may fail")
+
+
 def extract_table_content_structeq(image_bytes: bytes) -> Dict[str, str]:
     """
     Extract table content using StructEqTable.
@@ -67,6 +137,7 @@ def extract_table_content_structeq(image_bytes: bytes) -> Dict[str, str]:
     # Load model (lazy initialization)
     if not hasattr(extract_table_content_structeq, '_model'):
         logger.info("Loading StructEqTable model (first time)...")
+        _patch_internvl_config()
         model = struct_eqtable.build_model()
         model.max_new_tokens = 4096
         model.max_generate_time = 300
@@ -359,9 +430,13 @@ def export_tables_only(
         if table.image_base64:
             if img_bytes is None:
                 img_bytes = base64.b64decode(table.image_base64)
-            logger.info(f"Extracting table content with StructEqTable for page {page_num}...")
-            table_content = extract_table_content_structeq(img_bytes)
-            logger.info(f"Table {idx}: StructEqTable extraction complete")
+            try:
+                logger.info(f"Extracting table content with StructEqTable for page {page_num}...")
+                table_content = extract_table_content_structeq(img_bytes)
+                logger.info(f"Table {idx}: StructEqTable extraction complete")
+            except Exception as e:
+                logger.error(f"StructEqTable extraction failed for table on page {page_num}: {e}")
+                table_content = {"latex": "", "html": "", "error": str(e)}
 
         # If save failed, fall back to embedding base64
         include_base64 = (not save_images) or image_save_failed

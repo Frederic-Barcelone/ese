@@ -4,7 +4,9 @@
 
 `A_core/` defines the shared vocabulary for the entire ESE pipeline. Every Pydantic model, enum, interface, exception, and utility used across layers lives here. No layer imports domain types from another layer; all cross-layer contracts are mediated through `A_core/`.
 
-This layer contains 22 modules and is strictly dependency-free with respect to other pipeline layers (B through J). It depends only on Pydantic v2, the standard library, and `typing_extensions`.
+This layer contains 24 modules and is strictly dependency-free with respect to other pipeline layers (B through J). It depends only on Pydantic v2, the standard library, and `typing_extensions`.
+
+> **Note**: The `A13` prefix is shared by two modules: `A13_ner_models.py` (NER output format) and `A13_visual_models.py` (figure/table models). This is a historical artifact — both modules are independent and do not conflict.
 
 See also: [Domain Models reference](../architecture/03_domain_models.md) | [Pipeline Overview](../architecture/01_overview.md)
 

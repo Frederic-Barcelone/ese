@@ -73,13 +73,13 @@ All pipeline code resides under `corpus_metadata/`.
 
 | Directory | Files | Purpose |
 |-----------|-------|---------|
-| `A_core/` | 22 | Domain models (Pydantic), interfaces, provenance, exceptions, enums |
+| `A_core/` | 24 | Domain models (Pydantic), interfaces, provenance, exceptions, enums |
 | `B_parsing/` | 31 | PDF to DocumentGraph, table extraction, figure detection, layout analysis |
-| `C_generators/` | 34 | Candidate generation strategies (syntax, regex, FlashText lexicons, LLM, VLM) |
+| `C_generators/` | 35 | Candidate generation strategies (syntax, regex, FlashText lexicons, LLM, VLM) |
 | `D_validation/` | 4 | LLM verification engine, prompt registry, quote verifier, validation logger |
 | `E_normalization/` | 18 | Term mapping, disambiguation, PubTator/NCT enrichment, deduplication |
 | `F_evaluation/` | 3 | Gold standard loading, precision/recall scorer, evaluation runner |
-| `G_config/` | 2 | `config.yaml` (all pipeline parameters) + `G01_config_keys.py` |
+| `G_config/` | 1 | `G01_config_keys.py` (+ `config.yaml` configuration file) |
 | `H_pipeline/` | 4 | Component factory, abbreviation pipeline, visual integration, merge resolver |
 | `I_extraction/` | 2 | Entity processors (`I01`) and feasibility processor (`I02`) |
 | `J_export/` | 4 | Export handlers: entity exporters, metadata exporters, visual export |
@@ -103,24 +103,24 @@ All pipeline code resides under `corpus_metadata/`.
 
 ## Orchestrator
 
-The `orchestrator.py` entry point processes each PDF through 16+ stages:
+The `orchestrator.py` entry point processes each PDF through 16 stages:
 
-1. Configuration loading and preset resolution
-2. Run ID and provenance generation
-3. PDF parsing to DocumentGraph (via Unstructured.io or Docling)
-4. Native figure extraction (PyMuPDF)
-5. Abbreviation candidate generation (syntax, regex, lexicon, layout)
-6. PASO heuristic filtering (auto-approve/reject rules)
-7. LLM abbreviation validation (Claude API)
-8. Abbreviation normalization and deduplication
-9. Disease candidate generation (FlashText + scispacy NER)
-10. Disease false-positive filtering and PubTator3 enrichment
-11. Drug candidate generation and enrichment
-12. Gene candidate generation and enrichment
-13. Author and citation extraction
-14. Feasibility extraction (pattern-based + LLM-based)
-15. Visual extraction (VLM triage + Claude Vision analysis)
-16. JSON export for all entity types
+1. **PDF Parsing** -- PDF to DocumentGraph (via Unstructured.io or Docling)
+2. **Candidate Generation** -- Abbreviation extraction (syntax, regex, lexicon, layout)
+3. **LLM Validation** -- PASO heuristic filtering + Claude API abbreviation validation
+4. **Normalization** -- Abbreviation normalization and deduplication
+5. **Disease Detection** -- FlashText + scispacy NER, FP filtering, PubTator3 enrichment
+6. **Gene Detection** -- HGNC lexicon + pattern matching, PubTator3 enrichment
+7. **Drug Detection** -- RxNorm/ChEMBL lexicon, FP filtering, enrichment
+8. **Pharma Detection** -- Pharmaceutical company identification
+9. **Author Detection** -- Author name and affiliation extraction
+10. **Citation Detection** -- PMID, DOI, NCT identifier extraction and API validation
+11. **Feasibility Extraction** -- Pattern-based + LLM-based + NER enrichment pipeline
+12. **Care Pathway Extraction** -- Clinical treatment algorithm extraction
+13. **Recommendation Extraction** -- Guideline recommendation extraction (LLM + VLM)
+14. **Visual Extraction** -- Table and figure detection with VLM triage + Claude Vision
+15. **Document Metadata** -- Document type classification, title, date extraction
+16. **Export & Summary** -- JSON export for all entity types with metrics
 
 Each stage is independently configurable through `G_config/config.yaml` and can be enabled or disabled via extraction presets.
 

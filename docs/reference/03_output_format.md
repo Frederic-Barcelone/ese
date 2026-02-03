@@ -19,10 +19,11 @@ document/
   care_pathways_document_YYYYMMDD_HHMMSS.json
   recommendations_document_YYYYMMDD_HHMMSS.json
   metadata_document_YYYYMMDD_HHMMSS.json
-  visuals_document_YYYYMMDD_HHMMSS.json
+  tables_document_YYYYMMDD_HHMMSS.json
+  figures_document_YYYYMMDD_HHMMSS.json
   document_extracted_text_YYYYMMDD_HHMMSS.txt
-  flowchart_page3_1.png          (extracted figures)
-  table_page5_2.png              (rendered tables)
+  document_figure_page3_1.png    (extracted figures)
+  document_table_page5_2.png     (rendered tables)
 ```
 
 ### File Naming Convention
@@ -572,20 +573,23 @@ Contains guideline recommendations with dosing information, evidence levels, str
 
 ## Entity Type: Visuals (Tables and Figures)
 
-**File:** `visuals_{doc_stem}_{timestamp}.json`
-**Export function:** `J_export/J02_visual_export.py`
+**Files:** `tables_{doc_stem}_{timestamp}.json` and `figures_{doc_stem}_{timestamp}.json`
+**Export function:** `J_export/J02_visual_export.py` (also `J01_export_handlers.py` for JSON exports)
 **Model:** `ExtractedVisual` from `A_core/A13_visual_models.py`
 
-Contains extracted tables (with structured data) and figures (with VLM analysis), including:
+Tables and figures are exported as **separate JSON files** (not a single combined visuals file):
+
+- `tables_*.json` -- Extracted tables with structured data (headers, rows, cells)
+- `figures_*.json` -- Extracted figures with VLM classification and description
+
+Both contain:
 
 - Visual type (TABLE, FIGURE, OTHER)
 - Page range and bounding box coordinates
 - Caption text and provenance
-- Table structure (headers, rows, cells) for tables
-- VLM classification and description for figures
 - Base64-encoded image data (optional)
 
-Extracted figure images are also saved as separate PNG files (e.g., `flowchart_page3_1.png`).
+Extracted images are saved as separate PNG files following the naming pattern `{doc_name}_{type}_page{N}_{idx}.png` (e.g., `document_figure_page3_1.png`, `document_table_page5_2.png`). When exported without a document name prefix, the pattern is `{type}_page{N}_{idx}.png`.
 
 ---
 

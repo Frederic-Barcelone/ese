@@ -285,6 +285,31 @@ J_export
 
 ---
 
+## Pharma Company Flow
+
+```
+DocumentGraph
+  |
+  v
+C18_strategy_pharma
+  +---> FlashText lexicon matching (pharma company names)
+  +---> Pattern matching for company name suffixes
+  |
+  v
+PharmaCandidate pool
+  |
+  v
+E17_entity_deduplicator (merge duplicates)
+  |
+  v
+ExtractedPharma (company name, headquarters, therapeutic areas)
+  |
+  v
+J_export --> pharma_<doc>_<timestamp>.json
+```
+
+---
+
 ## Author and Citation Flow
 
 ```
@@ -315,13 +340,75 @@ DocumentGraph
 
 ---
 
+## Care Pathway Flow
+
+```
+DocumentGraph
+  |
+  v
+C17_flowchart_graph_extractor
+  VLM-based clinical flowchart analysis
+  Extracts treatment algorithms, decision trees
+  |
+  v
+CarePathway (nodes, edges, taper schedules)
+  |
+  v
+J_export --> care_pathways_<doc>_<timestamp>.json
+```
+
+---
+
+## Recommendation Flow
+
+```
+DocumentGraph
+  |
+  v
+C12_guideline_recommendation_extractor
+  +---> C31_recommendation_patterns (regex for guidelines, evidence levels)
+  +---> C32_recommendation_llm (Claude-based extraction)
+  +---> C33_recommendation_vlm (Vision-based extraction from tables/figures)
+  |
+  v
+RecommendationSet
+  (guideline name, organization, evidence levels,
+   recommendation strength, target condition)
+  |
+  v
+J_export --> recommendations_<doc>_<timestamp>.json
+```
+
+---
+
+## Document Metadata Flow
+
+```
+DocumentGraph
+  |
+  v
+C09_strategy_document_metadata
+  +---> Document type classification (article, protocol, guidelines, etc.)
+  +---> Title extraction (header analysis, PDF metadata)
+  +---> Date extraction (publication date, PDF creation date)
+  +---> DOI extraction (regex patterns)
+  |
+  v
+DocumentMetadata (type, title, date, DOI, confidence)
+  |
+  v
+J_export --> metadata_<doc>_<timestamp>.json
+```
+
+---
+
 ## Extraction Presets
 
 The `config.yaml` `extraction_pipeline.preset` field controls which entity types are extracted:
 
 | Preset | Entities Extracted |
 |--------|--------------------|
-| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, care pathways, recommendations |
+| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | All entity types including visuals, authors, citations, document metadata |
 | `minimal` | Abbreviations only (no LLM) |
 | `drugs_only` | Drugs |
@@ -330,7 +417,7 @@ The `config.yaml` `extraction_pipeline.preset` field controls which entity types
 | `abbreviations_only` | Abbreviations |
 | `feasibility_only` | Feasibility data |
 | `entities_only` | Drugs, diseases, genes, abbreviations |
-| `clinical_entities` | Drugs, diseases, genes, abbreviations, feasibility, care pathways, recommendations |
+| `clinical_entities` | Drugs, diseases only |
 | `metadata_only` | Authors, citations, document metadata |
 | `images_only` | Tables, figures/visuals |
 | `tables_only` | Table extraction only (no figures) |

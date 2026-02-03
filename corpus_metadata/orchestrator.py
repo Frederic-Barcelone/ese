@@ -1530,7 +1530,9 @@ class Orchestrator:
                 )
                 doc_times[pdf_path.name] = time.time() - doc_start
             except Exception as e:
+                import traceback
                 batch_printer.error(f"Processing failed: {e}")
+                traceback.print_exc()
                 all_results[pdf_path.name] = ExtractionResult()
                 doc_times[pdf_path.name] = time.time() - doc_start
 

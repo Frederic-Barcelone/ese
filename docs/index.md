@@ -52,3 +52,15 @@ Detailed reference material for external integrations and output formats.
 | [Lexicons](reference/01_lexicons.md) | Loaded lexicon sources, term counts, file formats |
 | [External APIs](reference/02_external_apis.md) | Claude API, PubTator3, ClinicalTrials.gov, Unstructured.io |
 | [Output Format](reference/03_output_format.md) | JSON output schema per entity type, directory structure |
+
+## Plans
+
+Design documents and architectural plans for pipeline improvements.
+
+| Document | Description |
+|----------|-------------|
+| [Visual Extraction Redesign](plans/2026-01-31-visual-extraction-redesign.md) | Redesign of the visual extraction pipeline |
+| [Layout-Aware Visual Extraction](plans/2026-02-02-layout-aware-visual-extraction.md) | Layout-aware approach for visual detection |
+| [A_core Refactoring](plans/2026-02-02-a-core-refactoring.md) | Refactoring plan for core domain models |
+| [B_parsing Refactoring](plans/2026-02-02-b-parsing-refactoring.md) | Refactoring plan for PDF parsing layer |
+| [Z_utils Refactor Design](plans/2026-02-02-z-utils-refactor-design.md) | Refactoring plan for utilities layer |
