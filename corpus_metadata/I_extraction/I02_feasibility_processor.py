@@ -187,7 +187,6 @@ class FeasibilityProcessor:
         if self.feasibility_detector is None:
             return []
 
-        print("\n[10/12] Extracting feasibility information...")
         start = time.time()
 
         # Extract using LLM or pattern-based approach

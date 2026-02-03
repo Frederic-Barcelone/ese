@@ -183,7 +183,6 @@ class EntityProcessor:
         if self.disease_detector is None:
             return []
 
-        print("\n[5/12] Detecting disease mentions...")
         start = time.time()
 
         # Generate disease candidates
@@ -313,7 +312,6 @@ class EntityProcessor:
         if self.gene_detector is None:
             return []
 
-        print("\n[5b/12] Detecting gene mentions...")
         start = time.time()
 
         # Generate gene candidates
@@ -429,7 +427,6 @@ class EntityProcessor:
         if self.drug_detector is None:
             return []
 
-        print("\n[6/12] Detecting drug mentions...")
         start = time.time()
 
         # Run drug detection
@@ -528,7 +525,6 @@ class EntityProcessor:
         if self.pharma_detector is None:
             return []
 
-        print("\n[7/12] Detecting pharma company mentions...")
         start = time.time()
 
         # Build full text for detection
@@ -573,7 +569,6 @@ class EntityProcessor:
         if self.author_detector is None:
             return []
 
-        print("\n[8/12] Detecting author/investigator mentions...")
         start = time.time()
 
         # Build document fingerprint
@@ -612,7 +607,6 @@ class EntityProcessor:
         if self.citation_detector is None:
             return []
 
-        print("\n[9/12] Detecting citation/reference mentions...")
         start = time.time()
 
         # Build document fingerprint
