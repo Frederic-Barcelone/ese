@@ -24,6 +24,7 @@ blis>=0.7.0,<0.8.0
 struct-eqtable
 docling>=2.70.0
 docling-surya>=0.1.0
+transformers>=4.49.0,<5.0.0  # rt_detr_v2 table model requires >=4.49.0
 
 # scispacy models (install separately)
 # pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_lg-0.5.4.tar.gz
