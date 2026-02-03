@@ -1018,24 +1018,27 @@ class DiseaseDetector:
         self, candidates: List[DiseaseCandidate]
     ) -> List[DiseaseCandidate]:
         """
-        Final deduplication by preferred_label to avoid duplicates.
+        Final deduplication by matched_text to avoid duplicates.
 
-        Keeps the highest confidence candidate for each unique preferred_label.
+        Keeps the highest confidence candidate for each unique matched_text.
+        Candidates with different matched_text are preserved even if they
+        share the same preferred_label (e.g., "APS" and "Antiphospholipid
+        syndrome" are both kept as distinct textual mentions).
         """
         if not candidates:
             return candidates
 
-        # Group by preferred_label (case-insensitive)
-        by_name: Dict[str, List[DiseaseCandidate]] = {}
+        # Group by matched_text (case-insensitive)
+        by_text: Dict[str, List[DiseaseCandidate]] = {}
         for c in candidates:
-            key = c.preferred_label.lower()
-            if key not in by_name:
-                by_name[key] = []
-            by_name[key].append(c)
+            key = c.matched_text.lower()
+            if key not in by_text:
+                by_text[key] = []
+            by_text[key].append(c)
 
-        # Keep highest confidence for each name
+        # Keep highest confidence for each matched_text
         deduped = []
-        for name_key, group in by_name.items():
+        for text_key, group in by_text.items():
             # Sort by confidence descending, then by generator type priority
             group.sort(
                 key=lambda x: (

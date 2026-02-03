@@ -408,6 +408,37 @@ def lf_matches(sys_lf: Optional[str], gold_lf: str, threshold: float = FUZZY_THR
     return ratio >= threshold
 
 
+# Well-known disease synonym groups.  Each group maps multiple names to a
+# single canonical form so that evaluation matching recognises them as the
+# same entity (e.g., gold "stroke" vs extracted "cerebrovascular accident").
+_DISEASE_SYNONYM_GROUPS: List[List[str]] = [
+    ["stroke", "cerebrovascular accident", "cerebrovascular disorder", "cva"],
+    ["heart attack", "myocardial infarction", "mi"],
+    ["high blood pressure", "hypertension"],
+    ["kidney failure", "renal failure"],
+    ["liver cirrhosis", "hepatic cirrhosis", "cirrhosis of the liver"],
+    ["copd", "chronic obstructive pulmonary disease"],
+    ["als", "amyotrophic lateral sclerosis"],
+    ["ms", "multiple sclerosis"],
+    ["cf", "cystic fibrosis"],
+    ["sle", "systemic lupus erythematosus"],
+    ["ra", "rheumatoid arthritis"],
+    ["dvt", "deep vein thrombosis"],
+    ["pe", "pulmonary embolism"],
+    ["ckd", "chronic kidney disease"],
+    ["hf", "heart failure", "congestive heart failure", "chf"],
+    ["dm", "diabetes mellitus"],
+    ["intellectual disability", "mental retardation"],
+]
+
+# Pre-build a lookup: normalised term → canonical (first entry in the group)
+_SYNONYM_CANONICAL: dict[str, str] = {}
+for _group in _DISEASE_SYNONYM_GROUPS:
+    _canonical = _group[0]
+    for _term in _group:
+        _SYNONYM_CANONICAL[_term] = _canonical
+
+
 def _normalize_disease_synonyms(text: str) -> str:
     """Normalize known disease synonym variants for matching.
 
@@ -415,7 +446,7 @@ def _normalize_disease_synonyms(text: str) -> str:
     suffix synonyms (disease/syndrome/disorder/deficiency) so that
     semantically equivalent names can be matched.
     """
-    # Adjectival ↔ noun form mappings (reduce to a canonical form)
+    # Adjectival -> noun form mappings (reduce to a canonical form)
     adjective_map = [
         ("autistic", "autism"),
         ("epileptic", "epilepsy"),
@@ -450,6 +481,11 @@ def _normalize_disease_synonyms(text: str) -> str:
     return result
 
 
+def _to_canonical(text: str) -> str:
+    """Map a disease name to its canonical synonym form, if known."""
+    return _SYNONYM_CANONICAL.get(text, text)
+
+
 def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRESHOLD) -> bool:
     """Check if disease entities match."""
     sys_norm = " ".join(sys_text.strip().lower().split())
@@ -463,6 +499,10 @@ def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRE
     if sys_norm in gold_norm or gold_norm in sys_norm:
         return True
 
+    # Synonym group lookup (stroke == cerebrovascular accident, etc.)
+    if _to_canonical(sys_norm) == _to_canonical(gold_norm):
+        return True
+
     # Synonym normalization (adjectival forms + suffix synonyms)
     sys_syn = _normalize_disease_synonyms(sys_norm)
     gold_syn = _normalize_disease_synonyms(gold_norm)
@@ -471,6 +511,10 @@ def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRE
         return True
 
     if sys_syn in gold_syn or gold_syn in sys_syn:
+        return True
+
+    # Synonym group lookup on normalized forms too
+    if _to_canonical(sys_syn) == _to_canonical(gold_syn):
         return True
 
     # Fuzzy match (on synonym-normalized forms for better scores)
