@@ -8,6 +8,7 @@ from unittest import mock
 
 from orchestrator_utils import (
     StageTimer,
+    TeeFile,
     TeeWriter,
     activate_tee,
     deactivate_tee,
@@ -153,60 +154,63 @@ class TestTeeWriter:
 
     def test_tee_writes_to_both(self, tmp_path: Path) -> None:
         """Content appears in both the original stream and the log file."""
-        log_file = tmp_path / "test.log"
-
-        tee = TeeWriter(log_file)
+        log_path = tmp_path / "test.log"
+        tee_file = TeeFile(log_path)
         try:
+            tee = TeeWriter(tee_file, sys.stdout)
             tee.write("hello world")
             tee.flush()
         finally:
-            tee.close()
+            tee_file.close()
 
-        assert log_file.read_text() == "hello world"
+        assert log_path.read_text() == "hello world"
 
     def test_tee_strips_ansi(self, tmp_path: Path) -> None:
         """ANSI escape codes are stripped from the log file."""
-        log_file = tmp_path / "test.log"
-
-        tee = TeeWriter(log_file)
+        log_path = tmp_path / "test.log"
+        tee_file = TeeFile(log_path)
         try:
+            tee = TeeWriter(tee_file, sys.stdout)
             tee.write("\033[32mgreen\033[0m \033[1;31mbold-red\033[0m plain")
             tee.flush()
         finally:
-            tee.close()
+            tee_file.close()
 
-        assert log_file.read_text() == "green bold-red plain"
+        assert log_path.read_text() == "green bold-red plain"
 
     def test_tee_isatty_delegates(self) -> None:
         """isatty() returns whatever the original stdout reports."""
         original = sys.stdout
         expected = original.isatty()
 
-        log_path = Path("/dev/null")
-        tee = TeeWriter(log_path)
+        tee_file = TeeFile(Path("/dev/null"))
+        tee = TeeWriter(tee_file, original)
         try:
             assert tee.isatty() == expected
         finally:
-            tee.close()
+            tee_file.close()
 
     def test_activate_deactivate_restores_stdout(self, tmp_path: Path) -> None:
-        """activate_tee replaces stdout; deactivate_tee restores it."""
-        original = sys.stdout
+        """activate_tee replaces stdout and stderr; deactivate_tee restores them."""
+        original_out = sys.stdout
+        original_err = sys.stderr
 
-        tee = activate_tee(tmp_path)
-        assert sys.stdout is tee
+        handle = activate_tee(tmp_path)
+        assert isinstance(sys.stdout, TeeWriter)
+        assert isinstance(sys.stderr, TeeWriter)
 
-        deactivate_tee(tee)
-        assert sys.stdout is original
+        deactivate_tee(handle)
+        assert sys.stdout is original_out
+        assert sys.stderr is original_err
 
     def test_log_file_naming(self, tmp_path: Path) -> None:
         """Log file matches pipeline_run_*.log pattern."""
-        tee = activate_tee(tmp_path)
+        handle = activate_tee(tmp_path)
         try:
-            tee.write("test")
-            tee.flush()
+            sys.stdout.write("test")
+            sys.stdout.flush()
         finally:
-            deactivate_tee(tee)
+            deactivate_tee(handle)
 
         log_files = list(tmp_path.glob("pipeline_run_*.log"))
         assert len(log_files) == 1

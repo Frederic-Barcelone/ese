@@ -17,7 +17,7 @@ import warnings
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Optional
+from typing import IO, Dict, Optional
 
 
 # =============================================================================
@@ -105,13 +105,13 @@ class StageTimer:
 
 
 class TeeWriter:
-    """Wraps sys.stdout to duplicate output to a log file (ANSI-stripped)."""
+    """Wraps a stream to duplicate output to a log file (ANSI-stripped)."""
 
     _ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
 
-    def __init__(self, log_path: Path) -> None:
-        self._original = sys.stdout
-        self._file = open(log_path, "w", encoding="utf-8")  # noqa: SIM115
+    def __init__(self, log_file: TeeFile, original: IO[str]) -> None:
+        self._original = original
+        self._file = log_file
 
     def write(self, text: str) -> int:
         self._original.write(text)
@@ -125,31 +125,63 @@ class TeeWriter:
     def isatty(self) -> bool:
         return self._original.isatty()
 
-    def close(self) -> None:
-        self._file.close()
-
     def __getattr__(self, name: str) -> object:
         return getattr(self._original, name)
 
 
-def activate_tee(log_dir: Path) -> TeeWriter:
-    """Activate stdout tee to duplicate console output to a timestamped log file."""
+class TeeFile:
+    """Shared log file backing both stdout and stderr TeeWriters."""
+
+    def __init__(self, log_path: Path) -> None:
+        self._file = open(log_path, "w", encoding="utf-8")  # noqa: SIM115
+
+    def write(self, text: str) -> int:
+        return self._file.write(text)
+
+    def flush(self) -> None:
+        self._file.flush()
+
+    def close(self) -> None:
+        self._file.close()
+
+
+@dataclass
+class TeeHandle:
+    """Holds references needed to restore original streams."""
+
+    tee_file: TeeFile
+    original_stdout: IO[str]
+    original_stderr: IO[str]
+
+
+def activate_tee(log_dir: Path) -> TeeHandle:
+    """Activate stdout+stderr tee to duplicate all console output to a log file."""
     log_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    tee = TeeWriter(log_dir / f"pipeline_run_{ts}.log")
-    sys.stdout = tee
-    return tee
+    log_path = log_dir / f"pipeline_run_{ts}.log"
+    tee_file = TeeFile(log_path)
+    handle = TeeHandle(
+        tee_file=tee_file,
+        original_stdout=sys.stdout,
+        original_stderr=sys.stderr,
+    )
+    sys.stdout = TeeWriter(tee_file, sys.stdout)  # noqa: E501
+    sys.stderr = TeeWriter(tee_file, sys.stderr)  # noqa: E501
+    return handle
 
 
-def deactivate_tee(tee: Optional[TeeWriter]) -> None:
-    """Restore original stdout and close the tee log file."""
-    if tee is not None:
-        sys.stdout = tee._original
-        tee.close()
+def deactivate_tee(handle: Optional[TeeHandle]) -> None:
+    """Restore original stdout/stderr and close the tee log file."""
+    if handle is not None:
+        sys.stdout = handle.original_stdout
+        sys.stderr = handle.original_stderr
+        handle.tee_file.close()
 
 
 __all__ = [
     "StageTimer",
+    "TeeFile",
+    "TeeHandle",
     "TeeWriter",
     "activate_tee",
     "deactivate_tee",
