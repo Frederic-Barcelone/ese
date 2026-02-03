@@ -65,6 +65,9 @@ if TYPE_CHECKING:
     from C_generators.C13_strategy_author import AuthorDetector
     from C_generators.C14_strategy_citation import CitationDetector
     from E_normalization.E03_disease_normalizer import DiseaseNormalizer
+    from E_normalization.E04_pubtator_enricher import DiseaseEnricher
+    from E_normalization.E05_drug_enricher import DrugEnricher
+    from E_normalization.E18_gene_enricher import GeneEnricher
 
 from A_core.A01_domain_models import ValidationStatus
 from A_core.A03_provenance import hash_string
@@ -120,9 +123,9 @@ class EntityProcessor:
         self.citation_detector = citation_detector
 
         # Optional enrichers (can be set after init)
-        self.disease_enricher = None
-        self.drug_enricher = None
-        self.gene_enricher = None
+        self.disease_enricher: Optional[DiseaseEnricher] = None
+        self.drug_enricher: Optional[DrugEnricher] = None
+        self.gene_enricher: Optional[GeneEnricher] = None
 
     # =========================================================================
     # ENTITY CREATION HELPERS

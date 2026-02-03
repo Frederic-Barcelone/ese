@@ -1499,7 +1499,7 @@ class Orchestrator:
 
     def process_folder(
         self, folder_path: Optional[str] = None, batch_delay_ms: float = 100
-    ) -> Dict[str, List[ExtractedEntity]]:
+    ) -> Dict[str, ExtractionResult]:
         """Process all PDFs in a folder."""
         folder = Path(folder_path or self.pdf_dir)
         if not folder.exists():
@@ -1531,7 +1531,7 @@ class Orchestrator:
                 doc_times[pdf_path.name] = time.time() - doc_start
             except Exception as e:
                 batch_printer.error(f"Processing failed: {e}")
-                all_results[pdf_path.name] = []
+                all_results[pdf_path.name] = ExtractionResult()
                 doc_times[pdf_path.name] = time.time() - doc_start
 
         batch_elapsed = time.time() - batch_start
@@ -1542,7 +1542,7 @@ class Orchestrator:
         print(f"PDFs processed: {len(all_results)}")
 
         total_validated = sum(
-            sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
+            sum(1 for r in results.abbreviations if r.status == ValidationStatus.VALIDATED)
             for results in all_results.values()
         )
         print(f"Total validated abbreviations: {total_validated}")
