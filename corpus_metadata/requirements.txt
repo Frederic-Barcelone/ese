@@ -20,7 +20,8 @@ numpy>=1.19.0,<2.0.0
 thinc>=8.2.0,<8.3.0
 blis>=0.7.0,<0.8.0
 
-# Table/Visual Extraction (optional but recommended)
+# Table/Visual Extraction
+struct-eqtable
 docling>=2.70.0
 docling-surya>=0.1.0
 

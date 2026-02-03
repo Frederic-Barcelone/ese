@@ -12,6 +12,7 @@ import json
 import tempfile
 from datetime import datetime
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -209,7 +210,9 @@ class TestExportVisualsToJson:
 class TestExportTablesOnly:
     """Tests for export_tables_only function."""
 
-    def test_exports_only_tables(self, sample_pipeline_result):
+    @patch("J_export.J02_visual_export.extract_table_content_structeq")
+    def test_exports_only_tables(self, mock_structeq, sample_pipeline_result):
+        mock_structeq.return_value = {"latex": "\\begin{table}...\\end{table}", "html": "<table>...</table>"}
         with tempfile.TemporaryDirectory() as tmpdir:
             output_path = Path(tmpdir) / "tables.json"
 
@@ -226,6 +229,9 @@ class TestExportTablesOnly:
             # Should only have the table
             assert data["count"] == 1
             assert data["tables"][0]["visual_type"] == "table"
+            # table_content should always be present
+            assert "table_content" in data["tables"][0]
+            assert data["tables"][0]["table_content"]["latex"] == "\\begin{table}...\\end{table}"
 
 
 class TestExportFiguresOnly:

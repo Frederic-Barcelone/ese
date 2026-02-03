@@ -4,7 +4,7 @@ Export handlers for the visual extraction pipeline.
 
 Exports ExtractedVisual objects to JSON format with full metadata,
 images, and structured content. Supports both tables and figures
-with optional StructEqTable extraction for LaTeX/HTML output.
+with StructEqTable extraction for LaTeX/HTML output.
 
 Key Components:
     - extract_table_content_structeq: StructEqTable LaTeX/HTML extraction
@@ -27,16 +27,20 @@ Example:
 Dependencies:
     - A_core.A13_visual_models: ExtractedVisual
     - B_parsing.B12_visual_pipeline: PipelineResult
-    - struct_eqtable (optional): Table structure extraction
-    - PIL (optional): Image processing for StructEqTable
+    - struct_eqtable: Table structure extraction
+    - PIL: Image processing for StructEqTable
 """
 from __future__ import annotations
 
 import base64
+import io
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict
+
+import struct_eqtable
+from PIL import Image
 
 from A_core.A13_visual_models import (
     ExtractedVisual,
@@ -46,7 +50,7 @@ from B_parsing.B12_visual_pipeline import PipelineResult
 logger = logging.getLogger(__name__)
 
 
-def extract_table_content_structeq(image_bytes: bytes) -> Optional[Dict[str, str]]:
+def extract_table_content_structeq(image_bytes: bytes) -> Dict[str, str]:
     """
     Extract table content using StructEqTable.
 
@@ -54,60 +58,41 @@ def extract_table_content_structeq(image_bytes: bytes) -> Optional[Dict[str, str
         image_bytes: PNG image bytes of the table
 
     Returns:
-        Dict with 'latex' and 'html' keys, or None if extraction fails
+        Dict with 'latex' and 'html' keys
+
+    Raises:
+        RuntimeError: If model loading or extraction fails
+        PIL.UnidentifiedImageError: If image bytes are invalid
     """
-    import io
-    try:
-        import struct_eqtable
-        from PIL import Image
+    # Load model (lazy initialization)
+    if not hasattr(extract_table_content_structeq, '_model'):
+        logger.info("Loading StructEqTable model (first time)...")
+        model = struct_eqtable.build_model()
+        model.max_new_tokens = 4096
+        model.max_generate_time = 300
+        extract_table_content_structeq._model = model
+        logger.info("StructEqTable model loaded successfully")
 
-        # Load model (lazy initialization)
-        if not hasattr(extract_table_content_structeq, '_model'):
-            logger.info("Loading StructEqTable model (first time)...")
-            model = struct_eqtable.build_model()
-            model.max_new_tokens = 4096
-            model.max_generate_time = 300
-            extract_table_content_structeq._model = model
-            logger.info("StructEqTable model loaded successfully")
+    model = extract_table_content_structeq._model
 
-        model = extract_table_content_structeq._model
+    # Convert bytes to PIL Image
+    image = Image.open(io.BytesIO(image_bytes))
 
-        # Convert bytes to PIL Image
-        image = Image.open(io.BytesIO(image_bytes))
+    # Extract table structure in both formats
+    logger.debug("StructEqTable extracting LaTeX...")
+    latex_result = model(image, 'latex')
+    logger.debug("StructEqTable extracting HTML...")
+    html_result = model(image, 'html')
 
-        # Extract table structure in both formats
-        logger.debug("StructEqTable extracting LaTeX...")
-        latex_result = model(image, 'latex')
-        logger.debug("StructEqTable extracting HTML...")
-        html_result = model(image, 'html')
+    latex_str = latex_result[0] if latex_result else ""
+    html_str = html_result[0] if html_result else ""
 
-        latex_str = latex_result[0] if latex_result else ""
-        html_str = html_result[0] if html_result else ""
+    logger.info(f"StructEqTable extracted: LaTeX={len(latex_str)} chars, HTML={len(html_str)} chars")
 
-        logger.info(f"StructEqTable extracted: LaTeX={len(latex_str)} chars, HTML={len(html_str)} chars")
-
-        return {
-            "latex": latex_str,
-            "html": html_str,
-        }
-
-    except ImportError as e:
-        logger.error(f"StructEqTable not installed: {e}")
-        return None
-    except (MemoryError, KeyboardInterrupt, SystemExit):
-        raise  # Re-raise critical exceptions
-    except RuntimeError as e:
-        logger.error(f"StructEqTable runtime error (possibly CUDA/torch issue): {e}")
-        return None
-    except (ValueError, TypeError, AttributeError) as e:
-        logger.error(f"StructEqTable extraction failed: {e}")
-        return None
-    except Exception as e:
-        # Catch PIL and other image processing errors
-        if "UnidentifiedImageError" in type(e).__name__ or "PIL" in str(type(e)):
-            logger.error(f"StructEqTable invalid image: {e}")
-            return None
-        raise  # Re-raise unexpected exceptions
+    return {
+        "latex": latex_str,
+        "html": html_str,
+    }
 
 
 # -------------------------
@@ -187,9 +172,8 @@ def visual_to_dict(
         if visual.table_extraction_mode:
             result["table_data"]["extraction_mode"] = visual.table_extraction_mode.value
 
-        # Add StructEqTable content (LaTeX/HTML)
-        if table_content:
-            result["table_content"] = table_content
+        # Add StructEqTable content (LaTeX/HTML) — always present for tables
+        result["table_content"] = table_content if table_content else {}
 
     # Relationships
     if visual.relationships:
@@ -377,10 +361,7 @@ def export_tables_only(
                 img_bytes = base64.b64decode(table.image_base64)
             logger.info(f"Extracting table content with StructEqTable for page {page_num}...")
             table_content = extract_table_content_structeq(img_bytes)
-            if table_content:
-                logger.info(f"Table {idx}: StructEqTable extraction complete")
-            else:
-                logger.warning(f"Table {idx} on page {page_num}: StructEqTable returned no content")
+            logger.info(f"Table {idx}: StructEqTable extraction complete")
 
         # If save failed, fall back to embedding base64
         include_base64 = (not save_images) or image_save_failed
@@ -552,6 +533,8 @@ def export_images_separately(
 
 
 __all__ = [
+    # Extraction
+    "extract_table_content_structeq",
     # Serialization
     "visual_to_dict",
     "pipeline_result_to_dict",

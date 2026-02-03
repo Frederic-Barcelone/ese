@@ -131,53 +131,6 @@ def get_model():
     return _model
 
 
-def extract_table_content(image_bytes: bytes) -> Optional[Dict[str, str]]:
-    """
-    Extract table content using StructEqTable.
-
-    Args:
-        image_bytes: PNG image bytes of the table
-
-    Returns:
-        Dict with 'latex' and 'html' keys, or None if extraction fails
-    """
-    import io
-    try:
-        import struct_eqtable
-        from PIL import Image
-
-        # Load model (lazy initialization)
-        if not hasattr(extract_table_content, '_model'):
-            logger.info("Loading StructEqTable model...")
-            model = struct_eqtable.build_model()
-            # Increase limits for complex tables
-            model.max_new_tokens = 4096
-            model.max_generate_time = 300
-            extract_table_content._model = model
-            logger.info("StructEqTable model loaded")
-
-        model = extract_table_content._model
-
-        # Convert bytes to PIL Image
-        image = Image.open(io.BytesIO(image_bytes))
-
-        # Extract table structure in both formats
-        latex_result = model(image, 'latex')
-        html_result = model(image, 'html')
-
-        return {
-            "latex": latex_result[0] if latex_result else "",
-            "html": html_result[0] if html_result else "",
-        }
-
-    except ImportError as e:
-        logger.warning(f"StructEqTable not available: {e}")
-        return None
-    except Exception as e:
-        logger.error(f"Table content extraction failed: {e}")
-        return None
-
-
 def generate_vlm_description(
     image_bytes: bytes,
     visual_type: str,
@@ -826,8 +779,9 @@ def detect_and_crop_all(
             # Extract table content for tables
             table_content = None
             if v.visual_type == "table":
+                from J_export.J02_visual_export import extract_table_content_structeq
                 logger.info(f"Extracting table content for {crop_filename}...")
-                table_content = extract_table_content(png_bytes)
+                table_content = extract_table_content_structeq(png_bytes)
 
             # Generate VLM title and description
             vlm_title = None
