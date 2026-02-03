@@ -1576,15 +1576,16 @@ def main() -> None:
     Initializes the logging system and runs the pipeline orchestrator
     on all PDF files found in the configured input directory.
     """
-    # Configure logging for the pipeline run
+    orchestrator = Orchestrator()
+
+    # Configure logging to write into the same directory as validation logs
     configure_logging(
-        log_dir="logs",
+        log_dir=str(orchestrator.log_dir),
         log_level=INFO,
         enable_file_logging=True,
         enable_console_logging=False,  # Use print() for console output
     )
 
-    orchestrator = Orchestrator()
     tee = activate_tee(orchestrator.log_dir)
     try:
         orchestrator.process_folder()

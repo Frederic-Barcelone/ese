@@ -17,7 +17,7 @@ Key Components:
 
 Example:
     >>> from A_core.A00_logging import get_logger, configure_logging, LogContext
-    >>> configure_logging(log_dir="logs", log_level=logging.INFO)
+    >>> configure_logging(log_dir="corpus_log", log_level=logging.INFO)
     >>> logger = get_logger(__name__)
     >>> logger.info("Processing started")
     >>> with LogContext(logger, "PDF parsing"):
@@ -43,7 +43,7 @@ from typing import Any, Callable, Generator, Optional, TypeVar, Union
 F = TypeVar("F", bound=Callable[..., Any])
 
 # Default configuration
-DEFAULT_LOG_DIR = Path("logs")
+DEFAULT_LOG_DIR = Path("corpus_log")
 DEFAULT_LOG_LEVEL = logging.INFO
 DEFAULT_FORMAT = "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
@@ -250,7 +250,7 @@ def configure_logging(
 
     Example:
         >>> configure_logging(
-        ...     log_dir="logs",
+        ...     log_dir="corpus_log",
         ...     log_level=logging.DEBUG,
         ...     run_id="RUN_20260120_123456"
         ... )

@@ -31,6 +31,8 @@ ASV/
 corpus_db/
 corpus_dictionaries/
 corpus_logs/
+logs/
+corpus_metadata/logs/
 corpus_orphanet/
 corpus_sas/
 documents*/
