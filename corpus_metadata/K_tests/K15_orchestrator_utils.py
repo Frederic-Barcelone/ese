@@ -1,11 +1,18 @@
 # corpus_metadata/K_tests/K15_orchestrator_utils.py
 """Tests for orchestrator_utils.py."""
 
+import sys
 import time
+from pathlib import Path
 from unittest import mock
 
-
-from orchestrator_utils import StageTimer, setup_warning_suppression
+from orchestrator_utils import (
+    StageTimer,
+    TeeWriter,
+    activate_tee,
+    deactivate_tee,
+    setup_warning_suppression,
+)
 
 
 class TestStageTimer:
@@ -139,3 +146,74 @@ class TestSetupWarningSuppressions:
         # Should not raise
         setup_warning_suppression()
         setup_warning_suppression()
+
+
+class TestTeeWriter:
+    """Tests for TeeWriter class."""
+
+    def test_tee_writes_to_both(self, tmp_path: Path) -> None:
+        """Content appears in both the original stream and the log file."""
+        log_file = tmp_path / "test.log"
+
+        tee = TeeWriter(log_file)
+        try:
+            tee.write("hello world")
+            tee.flush()
+        finally:
+            tee.close()
+
+        assert log_file.read_text() == "hello world"
+
+    def test_tee_strips_ansi(self, tmp_path: Path) -> None:
+        """ANSI escape codes are stripped from the log file."""
+        log_file = tmp_path / "test.log"
+
+        tee = TeeWriter(log_file)
+        try:
+            tee.write("\033[32mgreen\033[0m \033[1;31mbold-red\033[0m plain")
+            tee.flush()
+        finally:
+            tee.close()
+
+        assert log_file.read_text() == "green bold-red plain"
+
+    def test_tee_isatty_delegates(self) -> None:
+        """isatty() returns whatever the original stdout reports."""
+        original = sys.stdout
+        expected = original.isatty()
+
+        log_path = Path("/dev/null")
+        tee = TeeWriter(log_path)
+        try:
+            assert tee.isatty() == expected
+        finally:
+            tee.close()
+
+    def test_activate_deactivate_restores_stdout(self, tmp_path: Path) -> None:
+        """activate_tee replaces stdout; deactivate_tee restores it."""
+        original = sys.stdout
+
+        tee = activate_tee(tmp_path)
+        assert sys.stdout is tee
+
+        deactivate_tee(tee)
+        assert sys.stdout is original
+
+    def test_log_file_naming(self, tmp_path: Path) -> None:
+        """Log file matches pipeline_run_*.log pattern."""
+        tee = activate_tee(tmp_path)
+        try:
+            tee.write("test")
+            tee.flush()
+        finally:
+            deactivate_tee(tee)
+
+        log_files = list(tmp_path.glob("pipeline_run_*.log"))
+        assert len(log_files) == 1
+        assert log_files[0].read_text() == "test"
+
+    def test_deactivate_none_is_noop(self) -> None:
+        """deactivate_tee(None) does nothing."""
+        original = sys.stdout
+        deactivate_tee(None)
+        assert sys.stdout is original

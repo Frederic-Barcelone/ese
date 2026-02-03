@@ -26,7 +26,7 @@ from dotenv import load_dotenv
 # Load .env from project root (parent of corpus_metadata)
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
-from orchestrator_utils import setup_warning_suppression, StageTimer
+from orchestrator_utils import StageTimer, activate_tee, deactivate_tee, setup_warning_suppression
 setup_warning_suppression()
 # =============================================================================
 
@@ -1583,8 +1583,12 @@ def main() -> None:
     )
 
     orchestrator = Orchestrator()
-    orchestrator.process_folder()
-    print("\nPipeline finished.")
+    tee = activate_tee(orchestrator.log_dir)
+    try:
+        orchestrator.process_folder()
+        print("\nPipeline finished.")
+    finally:
+        deactivate_tee(tee)
 
 
 if __name__ == "__main__":

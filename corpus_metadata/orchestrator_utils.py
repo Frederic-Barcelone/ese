@@ -10,10 +10,14 @@ Provides:
 from __future__ import annotations
 
 import os
+import re
+import sys
 import time
 import warnings
 from dataclasses import dataclass, field
-from typing import Dict
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Optional
 
 
 # =============================================================================
@@ -100,4 +104,54 @@ class StageTimer:
         print(f"{'─' * 50}")
 
 
-__all__ = ["StageTimer", "setup_warning_suppression"]
+class TeeWriter:
+    """Wraps sys.stdout to duplicate output to a log file (ANSI-stripped)."""
+
+    _ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
+
+    def __init__(self, log_path: Path) -> None:
+        self._original = sys.stdout
+        self._file = open(log_path, "w", encoding="utf-8")  # noqa: SIM115
+
+    def write(self, text: str) -> int:
+        self._original.write(text)
+        self._file.write(self._ANSI_RE.sub("", text))
+        return len(text)
+
+    def flush(self) -> None:
+        self._original.flush()
+        self._file.flush()
+
+    def isatty(self) -> bool:
+        return self._original.isatty()
+
+    def close(self) -> None:
+        self._file.close()
+
+    def __getattr__(self, name: str) -> object:
+        return getattr(self._original, name)
+
+
+def activate_tee(log_dir: Path) -> TeeWriter:
+    """Activate stdout tee to duplicate console output to a timestamped log file."""
+    log_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    tee = TeeWriter(log_dir / f"pipeline_run_{ts}.log")
+    sys.stdout = tee
+    return tee
+
+
+def deactivate_tee(tee: Optional[TeeWriter]) -> None:
+    """Restore original stdout and close the tee log file."""
+    if tee is not None:
+        sys.stdout = tee._original
+        tee.close()
+
+
+__all__ = [
+    "StageTimer",
+    "TeeWriter",
+    "activate_tee",
+    "deactivate_tee",
+    "setup_warning_suppression",
+]
