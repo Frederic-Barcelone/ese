@@ -156,6 +156,16 @@ class DiseaseDetector:
     4. scispacy NER - for unknown diseases
     """
 
+    @staticmethod
+    def _normalize_apostrophes(text: str) -> str:
+        """Normalize curly quotes/apostrophes to ASCII for consistent matching."""
+        return text.replace("\u2018", "'").replace("\u2019", "'").replace("\u201c", '"').replace("\u201d", '"')
+
+    @staticmethod
+    def _to_curly_apostrophes(text: str) -> str:
+        """Convert ASCII apostrophes to curly for matching PDF text."""
+        return text.replace("'", "\u2019")
+
     def __init__(self, config: Optional[dict] = None):
         self.config = config or {}
 
@@ -332,7 +342,12 @@ class DiseaseDetector:
             )
 
             self.general_entries[key] = entry
+            # Add original, curly, and straight apostrophe versions for matching
             self.general_kp.add_keyword(label, key)
+            if "'" in label:
+                self.general_kp.add_keyword(self._to_curly_apostrophes(label), key)
+            elif "\u2019" in label:
+                self.general_kp.add_keyword(self._normalize_apostrophes(label), key)
             plural = self._generate_plural(label)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -381,13 +396,22 @@ class DiseaseDetector:
             )
 
             self.general_entries[key] = entry
+            # Add original, curly, and straight apostrophe versions for matching
             self.general_kp.add_keyword(name, key)
+            if "'" in name:
+                self.general_kp.add_keyword(self._to_curly_apostrophes(name), key)
+            elif "\u2019" in name:
+                self.general_kp.add_keyword(self._normalize_apostrophes(name), key)
             plural = self._generate_plural(name)
             if plural:
                 self.general_kp.add_keyword(plural, key)
             for syn in entry.synonyms:
                 if not self._looks_like_chromosome(syn):
                     self.general_kp.add_keyword(syn, key)
+                    if "'" in syn:
+                        self.general_kp.add_keyword(self._to_curly_apostrophes(syn), key)
+                    elif "\u2019" in syn:
+                        self.general_kp.add_keyword(self._normalize_apostrophes(syn), key)
                     syn_plural = self._generate_plural(syn)
                     if syn_plural:
                         self.general_kp.add_keyword(syn_plural, key)
@@ -452,12 +476,21 @@ class DiseaseDetector:
             )
 
             self.general_entries[key] = entry
+            # Add original, curly, and straight apostrophe versions for matching
             self.general_kp.add_keyword(label, key)
+            if "'" in label:
+                self.general_kp.add_keyword(self._to_curly_apostrophes(label), key)
+            elif "\u2019" in label:
+                self.general_kp.add_keyword(self._normalize_apostrophes(label), key)
             plural = self._generate_plural(label)
             if plural:
                 self.general_kp.add_keyword(plural, key)
             for syn in synonyms:
                 self.general_kp.add_keyword(syn, key)
+                if "'" in syn:
+                    self.general_kp.add_keyword(self._to_curly_apostrophes(syn), key)
+                elif "\u2019" in syn:
+                    self.general_kp.add_keyword(self._normalize_apostrophes(syn), key)
                 syn_plural = self._generate_plural(syn)
                 if syn_plural:
                     self.general_kp.add_keyword(syn_plural, key)
