@@ -83,6 +83,7 @@ RUN_PAPERS = True     # Papers in gold_data/PAPERS/
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
 EVAL_DISEASES = True        # Disease entities
 EVAL_GENES = True           # Gene entities (when gold available)
+EVAL_DRUGS = True           # Drug entities (when gold available)
 
 # NLP4RARE subfolders to include (all by default)
 NLP4RARE_SPLITS = ["dev", "test", "train"]
@@ -130,6 +131,17 @@ class GoldDisease:
 
 
 @dataclass
+class GoldDrug:
+    """A single gold standard drug entity."""
+    doc_id: str
+    name: str
+
+    @property
+    def name_normalized(self) -> str:
+        return " ".join(self.name.strip().lower().split())
+
+
+@dataclass
 class GoldGene:
     """A single gold standard gene entity."""
     doc_id: str
@@ -165,6 +177,7 @@ class ExtractedDisease:
     matched_text: str  # Raw text found in document
     preferred_label: str = ""  # Normalized ontology label
     confidence: float = 0.0
+    abbreviation: Optional[str] = None  # Disease abbreviation if available
 
     @property
     def matched_text_normalized(self) -> str:
@@ -180,6 +193,10 @@ class ExtractedDisease:
         names = [self.matched_text_normalized]
         if self.preferred_label and self.preferred_label_normalized != self.matched_text_normalized:
             names.append(self.preferred_label_normalized)
+        if self.abbreviation:
+            abbr_norm = self.abbreviation.strip().lower()
+            if abbr_norm not in names:
+                names.append(abbr_norm)
         return names
 
 
@@ -193,6 +210,17 @@ class ExtractedGene:
     @property
     def symbol_normalized(self) -> str:
         return self.symbol.strip().upper()
+
+
+@dataclass
+class ExtractedDrugEval:
+    """A single extracted drug entity for evaluation."""
+    name: str
+    confidence: float = 0.0
+
+    @property
+    def name_normalized(self) -> str:
+        return " ".join(self.name.strip().lower().split())
 
 
 @dataclass
@@ -230,12 +258,13 @@ class DocumentResult:
     abbreviations: Optional[EntityResult] = None
     diseases: Optional[EntityResult] = None
     genes: Optional[EntityResult] = None
+    drugs: Optional[EntityResult] = None
     processing_time: float = 0.0
     error: Optional[str] = None
 
     @property
     def is_perfect(self) -> bool:
-        results = [self.abbreviations, self.diseases, self.genes]
+        results = [self.abbreviations, self.diseases, self.genes, self.drugs]
         for r in results:
             if r and (r.fp > 0 or r.fn > 0):
                 return False
@@ -263,12 +292,17 @@ class DatasetResult:
     gene_tp: int = 0
     gene_fp: int = 0
     gene_fn: int = 0
+    drug_tp: int = 0
+    drug_fp: int = 0
+    drug_fn: int = 0
 
     def precision(self, entity_type: str) -> float:
         if entity_type == "abbreviations":
             tp, fp = self.abbrev_tp, self.abbrev_fp
         elif entity_type == "diseases":
             tp, fp = self.disease_tp, self.disease_fp
+        elif entity_type == "drugs":
+            tp, fp = self.drug_tp, self.drug_fp
         else:
             tp, fp = self.gene_tp, self.gene_fp
         return tp / (tp + fp) if (tp + fp) > 0 else 1.0
@@ -278,6 +312,8 @@ class DatasetResult:
             tp, fn = self.abbrev_tp, self.abbrev_fn
         elif entity_type == "diseases":
             tp, fn = self.disease_tp, self.disease_fn
+        elif entity_type == "drugs":
+            tp, fn = self.drug_tp, self.drug_fn
         else:
             tp, fn = self.gene_tp, self.gene_fn
         return tp / (tp + fn) if (tp + fn) > 0 else 1.0
@@ -290,6 +326,23 @@ class DatasetResult:
 # =============================================================================
 # GOLD STANDARD LOADING
 # =============================================================================
+
+
+def _deduplicate_gold_plurals(diseases: List[GoldDisease]) -> List[GoldDisease]:
+    """Remove plural variants when singular form also exists in gold for same doc."""
+    texts = {d.text_normalized for d in diseases}
+    keep = []
+    for d in diseases:
+        t = d.text_normalized
+        # Skip if this is a plural and the singular form exists
+        if t.endswith("ies") and t[:-3] + "y" in texts:
+            continue
+        if t.endswith("ses") and t[:-2] in texts:
+            continue
+        if t.endswith("s") and not t.endswith(("ss", "us", "is")) and t[:-1] in texts:
+            continue
+        keep.append(d)
+    return keep
 
 
 def load_nlp4rare_gold(gold_path: Path) -> dict:
@@ -333,6 +386,10 @@ def load_nlp4rare_gold(gold_path: Path) -> dict:
         )
         result["diseases"].setdefault(entry.doc_id, []).append(entry)
 
+    # Deduplicate plural variants per document
+    for doc_id in result["diseases"]:
+        result["diseases"][doc_id] = _deduplicate_gold_plurals(result["diseases"][doc_id])
+
     # Load genes (when available)
     gene_data = data.get("genes", {})
     annotations = gene_data.get("annotations", [])
@@ -348,8 +405,8 @@ def load_nlp4rare_gold(gold_path: Path) -> dict:
 
 
 def load_papers_gold(gold_path: Path) -> dict:
-    """Load papers gold standard (abbreviations only)."""
-    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}}
+    """Load papers gold standard (abbreviations, diseases, drugs)."""
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {}}
 
     if not gold_path.exists():
         print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} Papers gold not found: {gold_path}")
@@ -367,6 +424,23 @@ def load_papers_gold(gold_path: Path) -> dict:
             category=ann.get("category"),
         )
         result["abbreviations"].setdefault(entry.doc_id, []).append(entry)
+
+    # Load diseases
+    for ann in data.get("defined_diseases", []):
+        entry_d = GoldDisease(
+            doc_id=ann["doc_id"],
+            text=ann["name"],
+            entity_type="RAREDISEASE" if ann.get("is_rare") else "DISEASE",
+        )
+        result["diseases"].setdefault(entry_d.doc_id, []).append(entry_d)
+
+    # Load drugs
+    for ann in data.get("defined_drugs", []):
+        entry_dr = GoldDrug(
+            doc_id=ann["doc_id"],
+            name=ann["name"],
+        )
+        result["drugs"].setdefault(entry_dr.doc_id, []).append(entry_dr)
 
     return result
 
@@ -486,10 +560,15 @@ def _to_canonical(text: str) -> str:
     return _SYNONYM_CANONICAL.get(text, text)
 
 
+def _normalize_quotes(text: str) -> str:
+    """Normalize curly quotes and apostrophes to ASCII equivalents."""
+    return text.replace("\u2018", "'").replace("\u2019", "'").replace("\u201c", '"').replace("\u201d", '"')
+
+
 def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRESHOLD) -> bool:
     """Check if disease entities match."""
-    sys_norm = " ".join(sys_text.strip().lower().split())
-    gold_norm = " ".join(gold_text.strip().lower().split())
+    sys_norm = _normalize_quotes(" ".join(sys_text.strip().lower().split()))
+    gold_norm = _normalize_quotes(" ".join(gold_text.strip().lower().split()))
 
     # Exact match
     if sys_norm == gold_norm:
@@ -663,6 +742,66 @@ def compare_genes(
     return result
 
 
+def drug_matches(sys_name: str, gold_name: str, threshold: float = FUZZY_THRESHOLD) -> bool:
+    """Check if drug names match (exact, substring, or fuzzy)."""
+    sys_norm = " ".join(sys_name.strip().lower().split())
+    gold_norm = " ".join(gold_name.strip().lower().split())
+
+    # Exact match
+    if sys_norm == gold_norm:
+        return True
+
+    # Substring match (either direction)
+    if sys_norm in gold_norm or gold_norm in sys_norm:
+        return True
+
+    # Fuzzy match
+    ratio = SequenceMatcher(None, sys_norm, gold_norm).ratio()
+    return ratio >= threshold
+
+
+def compare_drugs(
+    extracted: List[ExtractedDrugEval],
+    gold: List[GoldDrug],
+    doc_id: str,
+) -> EntityResult:
+    """Compare extracted drugs against gold standard."""
+    result = EntityResult(
+        entity_type="drugs",
+        doc_id=doc_id,
+        gold_count=len(gold),
+        extracted_count=len(extracted),
+    )
+
+    matched_gold: set[str] = set()
+
+    for ext in extracted:
+        matched = False
+        ext_name = ext.name_normalized
+
+        for g in gold:
+            gold_key = g.name_normalized
+            if gold_key not in matched_gold:
+                if drug_matches(ext_name, gold_key):
+                    result.tp += 1
+                    result.tp_items.append(ext.name)
+                    matched_gold.add(gold_key)
+                    matched = True
+                    break
+
+        if not matched:
+            result.fp += 1
+            result.fp_items.append(ext.name)
+
+    for g in gold:
+        gold_key = g.name_normalized
+        if gold_key not in matched_gold:
+            result.fn += 1
+            result.fn_items.append(g.name)
+
+    return result
+
+
 # =============================================================================
 # ORCHESTRATOR RUNNER
 # =============================================================================
@@ -685,7 +824,7 @@ def run_extraction(orch, pdf_path: Path) -> dict:
     """
     result = orch.process_pdf(str(pdf_path))
 
-    extracted: dict[str, list[Any]] = {"abbreviations": [], "diseases": [], "genes": []}
+    extracted: dict[str, list[Any]] = {"abbreviations": [], "diseases": [], "genes": [], "drugs": []}
 
     # Extract abbreviations
     for entity in result.abbreviations:
@@ -699,13 +838,14 @@ def run_extraction(orch, pdf_path: Path) -> dict:
     # Extract diseases
     for disease in result.diseases:
         if disease.status == ValidationStatus.VALIDATED:
-            # Get both matched_text (raw) and preferred_label (normalized)
             matched_text = getattr(disease, 'matched_text', '')
             preferred_label = getattr(disease, 'preferred_label', '')
+            abbreviation = getattr(disease, 'abbreviation', None)
             extracted["diseases"].append(ExtractedDisease(
                 matched_text=matched_text,
                 preferred_label=preferred_label,
                 confidence=getattr(disease, 'confidence_score', 0.0),
+                abbreviation=abbreviation,
             ))
 
     # Extract genes
@@ -716,6 +856,14 @@ def run_extraction(orch, pdf_path: Path) -> dict:
                 symbol=symbol,
                 name=getattr(gene, 'name', None),
                 confidence=getattr(gene, 'confidence_score', 0.0),
+            ))
+
+    # Extract drugs
+    for drug in result.drugs:
+        if drug.status == ValidationStatus.VALIDATED:
+            extracted["drugs"].append(ExtractedDrugEval(
+                name=getattr(drug, 'preferred_name', '') or getattr(drug, 'matched_text', ''),
+                confidence=getattr(drug, 'confidence_score', 0.0),
             ))
 
     return extracted
@@ -753,7 +901,7 @@ def evaluate_dataset(
 
     # Collect all doc_ids with gold data
     all_gold_docs = set()
-    for entity_type in ["abbreviations", "diseases", "genes"]:
+    for entity_type in ["abbreviations", "diseases", "genes", "drugs"]:
         all_gold_docs.update(gold_data.get(entity_type, {}).keys())
 
     # Filter to PDFs with gold annotations
@@ -768,12 +916,14 @@ def evaluate_dataset(
     abbrev_docs = len(gold_data.get("abbreviations", {}))
     disease_docs = len(gold_data.get("diseases", {}))
     gene_docs = len(gold_data.get("genes", {}))
+    drug_docs = len(gold_data.get("drugs", {}))
 
     print(f"  PDFs in folder:     {len(pdf_files)}")
     print(f"  PDFs with gold:     {len(pdf_with_gold)}")
     print(f"    - Abbreviations:  {abbrev_docs} docs")
     print(f"    - Diseases:       {disease_docs} docs")
     print(f"    - Genes:          {gene_docs} docs")
+    print(f"    - Drugs:          {drug_docs} docs")
     print(f"  PDFs to process:    {len(pdf_with_gold)}")
 
     for i, pdf_path in enumerate(pdf_with_gold, 1):
@@ -783,8 +933,9 @@ def evaluate_dataset(
         abbrev_gold = gold_data.get("abbreviations", {}).get(pdf_path.name, [])
         disease_gold = gold_data.get("diseases", {}).get(pdf_path.name, [])
         gene_gold = gold_data.get("genes", {}).get(pdf_path.name, [])
+        drug_gold = gold_data.get("drugs", {}).get(pdf_path.name, [])
 
-        print(f"      Gold: abbrev={len(abbrev_gold)}, disease={len(disease_gold)}, gene={len(gene_gold)}")
+        print(f"      Gold: abbrev={len(abbrev_gold)}, disease={len(disease_gold)}, gene={len(gene_gold)}, drug={len(drug_gold)}")
 
         start_time = time.time()
 
@@ -792,7 +943,7 @@ def evaluate_dataset(
             extracted = run_extraction(orch, pdf_path)
             elapsed = time.time() - start_time
 
-            print(f"      Extracted: abbrev={len(extracted['abbreviations'])}, disease={len(extracted['diseases'])}, gene={len(extracted['genes'])}")
+            print(f"      Extracted: abbrev={len(extracted['abbreviations'])}, disease={len(extracted['diseases'])}, gene={len(extracted['genes'])}, drug={len(extracted['drugs'])}")
             print(f"      Time: {elapsed:.1f}s")
 
             doc_result = DocumentResult(doc_id=pdf_path.name, processing_time=elapsed)
@@ -821,6 +972,14 @@ def evaluate_dataset(
                 result.gene_fp += gene_result.fp
                 result.gene_fn += gene_result.fn
 
+            # Compare drugs
+            if EVAL_DRUGS and drug_gold:
+                drug_result = compare_drugs(extracted["drugs"], drug_gold, pdf_path.name)
+                doc_result.drugs = drug_result
+                result.drug_tp += drug_result.tp
+                result.drug_fp += drug_result.fp
+                result.drug_fn += drug_result.fn
+
             result.doc_results.append(doc_result)
             result.docs_processed += 1
             result.total_time += elapsed
@@ -836,6 +995,8 @@ def evaluate_dataset(
                     issues.append(f"disease-{doc_result.diseases.fn}")
                 if doc_result.genes and doc_result.genes.fn > 0:
                     issues.append(f"gene-{doc_result.genes.fn}")
+                if doc_result.drugs and doc_result.drugs.fn > 0:
+                    issues.append(f"drug-{doc_result.drugs.fn}")
                 status = _c(C.BRIGHT_YELLOW, f"MISSED: {', '.join(issues)}")
 
             print(f"      Status: {status}")
@@ -898,6 +1059,10 @@ def print_dataset_summary(result: DatasetResult):
         print_entity_metrics("Genes", result.gene_tp, result.gene_fp, result.gene_fn)
         print()
 
+    if EVAL_DRUGS and (result.drug_tp + result.drug_fp + result.drug_fn > 0):
+        print_entity_metrics("Drugs", result.drug_tp, result.drug_fp, result.drug_fn)
+        print()
+
 
 def print_error_analysis(result: DatasetResult, max_examples: int = 10):
     """Print detailed error analysis."""
@@ -908,6 +1073,8 @@ def print_error_analysis(result: DatasetResult, max_examples: int = 10):
     disease_fp = []
     gene_fn = []
     gene_fp = []
+    drug_fn = []
+    drug_fp = []
 
     for doc in result.doc_results:
         if doc.abbreviations:
@@ -925,8 +1092,13 @@ def print_error_analysis(result: DatasetResult, max_examples: int = 10):
                 gene_fn.append((doc.doc_id, item))
             for item in doc.genes.fp_items:
                 gene_fp.append((doc.doc_id, item))
+        if doc.drugs:
+            for item in doc.drugs.fn_items:
+                drug_fn.append((doc.doc_id, item))
+            for item in doc.drugs.fp_items:
+                drug_fp.append((doc.doc_id, item))
 
-    has_errors = abbrev_fn or abbrev_fp or disease_fn or disease_fp or gene_fn or gene_fp
+    has_errors = abbrev_fn or abbrev_fp or disease_fn or disease_fp or gene_fn or gene_fp or drug_fn or drug_fp
     if not has_errors:
         print(f"\n  {_c(C.BRIGHT_GREEN, '✓ No errors - all extractions correct!')}")
         return
@@ -956,6 +1128,8 @@ def print_error_analysis(result: DatasetResult, max_examples: int = 10):
         print_errors("DISEASES", disease_fn, disease_fp)
     if EVAL_GENES:
         print_errors("GENES", gene_fn, gene_fp)
+    if EVAL_DRUGS:
+        print_errors("DRUGS", drug_fn, drug_fp)
 
 
 def print_final_summary(results: List[DatasetResult]):
@@ -976,6 +1150,10 @@ def print_final_summary(results: List[DatasetResult]):
     total_gene_tp = sum(r.gene_tp for r in results)
     total_gene_fp = sum(r.gene_fp for r in results)
     total_gene_fn = sum(r.gene_fn for r in results)
+
+    total_drug_tp = sum(r.drug_tp for r in results)
+    total_drug_fp = sum(r.drug_fp for r in results)
+    total_drug_fn = sum(r.drug_fn for r in results)
 
     total_docs = sum(r.docs_processed for r in results)
     total_perfect = sum(r.docs_perfect for r in results)
@@ -1003,6 +1181,12 @@ def print_final_summary(results: List[DatasetResult]):
             all_perfect = False
         print()
 
+    if EVAL_DRUGS and (total_drug_tp + total_drug_fp + total_drug_fn > 0):
+        print_entity_metrics("DRUGS (Overall)", total_drug_tp, total_drug_fp, total_drug_fn)
+        if total_drug_fp > 0 or total_drug_fn > 0:
+            all_perfect = False
+        print()
+
     if all_perfect:
         print(f"  {_c(C.BOLD + C.BRIGHT_GREEN, '████████████████████████████████████████')}")
         print(f"  {_c(C.BOLD + C.BRIGHT_GREEN, '█                                      █')}")
@@ -1025,6 +1209,10 @@ def print_final_summary(results: List[DatasetResult]):
             print(f"  {_c(C.BRIGHT_YELLOW, f'Genes: Fix {total_gene_fn} missed')}")
         if total_gene_fp > 0:
             print(f"  {_c(C.BRIGHT_RED, f'Genes: Remove {total_gene_fp} false positives')}")
+        if total_drug_fn > 0:
+            print(f"  {_c(C.BRIGHT_YELLOW, f'Drugs: Fix {total_drug_fn} missed')}")
+        if total_drug_fp > 0:
+            print(f"  {_c(C.BRIGHT_RED, f'Drugs: Remove {total_drug_fp} false positives')}")
 
     print()
 
@@ -1052,6 +1240,7 @@ def main():
     print(f"    Abbreviations: {'enabled' if EVAL_ABBREVIATIONS else 'disabled'}")
     print(f"    Diseases:      {'enabled' if EVAL_DISEASES else 'disabled'}")
     print(f"    Genes:         {'enabled' if EVAL_GENES else 'disabled'}")
+    print(f"    Drugs:         {'enabled' if EVAL_DRUGS else 'disabled'}")
 
     # Initialize orchestrator once
     print("\n  Initializing orchestrator...")
@@ -1105,6 +1294,8 @@ def main():
             all_perfect = False
         if r.gene_fp > 0 or r.gene_fn > 0:
             all_perfect = False
+        if r.drug_fp > 0 or r.drug_fn > 0:
+            all_perfect = False
 
     sys.exit(0 if all_perfect else 1)
 
@@ -1116,9 +1307,11 @@ if __name__ == "__main__":
 __all__ = [
     "GoldAbbreviation",
     "GoldDisease",
+    "GoldDrug",
     "GoldGene",
     "ExtractedAbbreviation",
     "ExtractedDisease",
+    "ExtractedDrugEval",
     "ExtractedGene",
     "EntityResult",
     "DocumentResult",

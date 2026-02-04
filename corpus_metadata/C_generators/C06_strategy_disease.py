@@ -333,6 +333,9 @@ class DiseaseDetector:
 
             self.general_entries[key] = entry
             self.general_kp.add_keyword(label, key)
+            plural = self._generate_plural(label)
+            if plural:
+                self.general_kp.add_keyword(plural, key)
             loaded += 1
 
         self._lexicon_stats.append(
@@ -379,9 +382,15 @@ class DiseaseDetector:
 
             self.general_entries[key] = entry
             self.general_kp.add_keyword(name, key)
+            plural = self._generate_plural(name)
+            if plural:
+                self.general_kp.add_keyword(plural, key)
             for syn in entry.synonyms:
                 if not self._looks_like_chromosome(syn):
                     self.general_kp.add_keyword(syn, key)
+                    syn_plural = self._generate_plural(syn)
+                    if syn_plural:
+                        self.general_kp.add_keyword(syn_plural, key)
 
             loaded += 1
 
@@ -444,8 +453,14 @@ class DiseaseDetector:
 
             self.general_entries[key] = entry
             self.general_kp.add_keyword(label, key)
+            plural = self._generate_plural(label)
+            if plural:
+                self.general_kp.add_keyword(plural, key)
             for syn in synonyms:
                 self.general_kp.add_keyword(syn, key)
+                syn_plural = self._generate_plural(syn)
+                if syn_plural:
+                    self.general_kp.add_keyword(syn_plural, key)
 
             loaded += 1
 
@@ -509,6 +524,28 @@ class DiseaseDetector:
         self._lexicon_stats.append(
             ("Rare disease acronyms", loaded, self.rare_disease_acronyms_path.name)
         )
+
+    @staticmethod
+    def _generate_plural(label: str) -> Optional[str]:
+        """Generate plural form of a disease label for FlashText matching.
+
+        Only generates plurals for labels with >= 5 characters to avoid noise
+        from very short disease names. Pluralizes the last word only.
+        """
+        if len(label) < 5:
+            return None
+        words = label.split()
+        last = words[-1]
+        # Don't pluralize if already ends in 's' or is an acronym
+        if last.endswith("s") or last.isupper():
+            return None
+        if last.endswith(("sh", "ch", "x", "z")):
+            plural_last = last + "es"
+        elif last.endswith("y") and last[-2:] not in ("ay", "ey", "oy", "uy"):
+            plural_last = last[:-1] + "ies"
+        else:
+            plural_last = last + "s"
+        return " ".join(words[:-1] + [plural_last])
 
     def _looks_like_chromosome(self, text: str) -> bool:
         """Quick check if text looks like a chromosome/karyotype pattern."""

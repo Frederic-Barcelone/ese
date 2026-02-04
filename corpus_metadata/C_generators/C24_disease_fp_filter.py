@@ -95,6 +95,19 @@ class DiseaseFalsePositiveFilter:
         "progressive", "stable", "mobile", "rigid", "dense", "men", "can",
         "was", "has", "all", "mg", "iva", "ibm", "ae", "rmd",
         "transition", "disease", "median",
+        # Generic descriptors that collide with disease ontology entries
+        "hereditary", "inherited", "idiopathic", "genetic", "congenital",
+        "infectious", "acquired", "condition", "infection", "injury",
+        "malignancy", "pituitary", "autoimmunity",
+        # Overly broad oncology/pathology terms
+        "tumor", "tumors", "neoplasm",
+    }
+
+    # Multi-word generic terms that are not specific diseases
+    GENERIC_MULTIWORD_FP_TERMS: set[str] = {
+        "rare disorder", "autosomal dominant", "autosomal recessive",
+        "x-linked", "rare disease",
+        "birth defect", "birth defects",
     }
 
     # Short match threshold
@@ -221,6 +234,10 @@ class DiseaseFalsePositiveFilter:
         if len(matched_clean.split()) <= 1:
             if matched_clean.lower() in self._common_english_lower:
                 return True, "common_english_word"
+
+        # Hard filter 3b: Multi-word generic terms (not specific diseases)
+        if matched_clean.lower() in self.GENERIC_MULTIWORD_FP_TERMS:
+            return True, "generic_multiword_term"
 
         # Hard filter 4: Author name context (e.g., "Greenfield S,")
         if len(matched_clean.split()) <= 2 and not is_abbreviation:
