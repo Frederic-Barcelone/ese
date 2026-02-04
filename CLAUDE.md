@@ -108,6 +108,59 @@ api:
       model: "claude-sonnet-4-20250514"
 ```
 
+### LLM Cost Optimization
+
+The pipeline routes LLM calls to different models based on task complexity via `model_tiers` in `config.yaml`. Simple tasks use cheaper Haiku, complex reasoning stays on Sonnet.
+
+```yaml
+api:
+  claude:
+    model_tiers:
+      # Simple → Haiku 4.5 ($1/$5 per MTok)
+      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
+      document_classification: "claude-haiku-4-5-20250901"
+      layout_analysis: "claude-haiku-4-5-20250901"
+      # Complex → Sonnet 4 ($3/$15 per MTok)
+      feasibility_extraction: "claude-sonnet-4-20250514"
+      flowchart_analysis: "claude-sonnet-4-20250514"
+```
+
+**Key files:**
+- `D02_llm_engine.py` — `resolve_model_tier()`, `record_api_usage()`, `calc_record_cost()`, `LLMUsageTracker`
+- `G_config/config.yaml` — `model_tiers` section maps `call_type` → model
+- `Z06_usage_tracker.py` — `llm_usage` SQLite table for persistent tracking
+- `orchestrator.py` — Per-document and batch cost summaries
+
+**call_type conventions:**
+Every LLM call site must pass a `call_type` string that identifies the task. For `ClaudeClient` calls, pass `call_type=` to `complete_json`/`complete_json_any`/`complete_vision_json`. For raw `anthropic.Anthropic()` calls, call `record_api_usage(response, model, call_type)` after each API call.
+
+| call_type | Tier | Used By |
+|-----------|------|---------|
+| `abbreviation_batch_validation` | Haiku | D02 LLMEngine |
+| `abbreviation_single_validation` | Haiku | D02 LLMEngine |
+| `fast_reject` | Haiku | D02 LLMEngine |
+| `document_classification` | Haiku | C09 document metadata |
+| `description_extraction` | Haiku | C09 document metadata |
+| `image_classification` | Haiku | C10 vision analysis |
+| `sf_only_extraction` | Haiku | H02 abbreviation pipeline |
+| `layout_analysis` | Haiku | B19 layout analyzer |
+| `vlm_visual_enrichment` | Haiku | C19, B22 visual enrichment |
+| `ocr_text_fallback` | Haiku | C10 vision analysis |
+| `feasibility_extraction` | Sonnet | C11 feasibility |
+| `recommendation_extraction` | Sonnet | C32 recommendation LLM |
+| `recommendation_vlm` | Sonnet | C33 recommendation VLM |
+| `flowchart_analysis` | Sonnet | C10, C17 flowchart |
+| `chart_analysis` | Sonnet | C10 chart analysis |
+| `vlm_table_extraction` | Sonnet | C10 table extraction |
+| `vlm_detection` | Sonnet | B31 VLM detector |
+
+**Adding a new LLM call site:**
+1. Choose a descriptive `call_type` string
+2. Add it to `config.yaml` under `model_tiers` with the appropriate model
+3. For `ClaudeClient` calls: pass `call_type=` parameter
+4. For raw API calls: import and call `record_api_usage(response, model, call_type)`
+5. Add the model to `MODEL_PRICING` in `D02_llm_engine.py` if it's new
+
 ## Key Patterns
 
 ### Adding a New Entity Type

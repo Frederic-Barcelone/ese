@@ -360,7 +360,10 @@ class VisionImageAnalyzer:
         if ocr_text:
             prompt += f"\n\nOCR text from image (for reference):\n{ocr_text[:1000]}"
 
-        response = self._call_vision_llm(image_base64, prompt, ocr_fallback_text=ocr_text)
+        response = self._call_vision_llm(
+            image_base64, prompt, ocr_fallback_text=ocr_text,
+            call_type="flowchart_analysis",
+        )
         if not response:
             return None
 
@@ -425,7 +428,7 @@ class VisionImageAnalyzer:
         if caption:
             prompt += f"\n\nFigure caption: {caption}"
 
-        response = self._call_vision_llm(image_base64, prompt)
+        response = self._call_vision_llm(image_base64, prompt, call_type="chart_analysis")
         if not response:
             return None
 
@@ -517,7 +520,7 @@ class VisionImageAnalyzer:
         if caption:
             prompt += f"\n\nTable caption: {caption}"
 
-        response = self._call_vision_llm(image_base64, prompt)
+        response = self._call_vision_llm(image_base64, prompt, call_type="vlm_table_extraction")
         if not response:
             return None
 
@@ -568,7 +571,7 @@ class VisionImageAnalyzer:
         if caption:
             prompt += f"\n\nTable caption: {caption}"
 
-        response = self._call_vision_llm(image_base64, prompt)
+        response = self._call_vision_llm(image_base64, prompt, call_type="vlm_table_extraction")
         if not response:
             return None
 
@@ -702,6 +705,7 @@ class VisionImageAnalyzer:
         image_base64: str,
         prompt: str,
         ocr_fallback_text: Optional[str] = None,
+        call_type: str = "image_classification",
     ) -> Optional[Dict[str, Any]]:
         """
         Call Vision LLM with image and prompt.
@@ -710,6 +714,7 @@ class VisionImageAnalyzer:
             image_base64: Base64-encoded image
             prompt: Analysis prompt
             ocr_fallback_text: Optional OCR text to use if Vision fails
+            call_type: LLM call type for usage tracking and model tier routing
 
         Returns:
             Parsed response dict or None if failed
@@ -725,7 +730,7 @@ class VisionImageAnalyzer:
                 prompt=prompt,
                 model=self.llm_model,
                 max_tokens=2000,
-                call_type="image_classification",
+                call_type=call_type,
             )
 
             return response if isinstance(response, dict) else None

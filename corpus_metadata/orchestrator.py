@@ -39,7 +39,7 @@ import yaml
 from Z_utils.Z05_path_utils import get_base_path
 from Z_utils.Z06_usage_tracker import UsageTracker
 from Z_utils.Z07_console_output import get_printer, reset_printer
-from D_validation.D02_llm_engine import get_usage_tracker
+from D_validation.D02_llm_engine import get_usage_tracker, calc_record_cost
 # =============================================================================
 
 # Ensure imports work
@@ -1516,8 +1516,11 @@ class Orchestrator:
         if not tracker.records:
             return
 
-        # Save to SQLite
-        self.usage_tracker.log_llm_usage_batch(doc_id, tracker.records)
+        # Save to SQLite (non-fatal if it fails)
+        try:
+            self.usage_tracker.log_llm_usage_batch(doc_id, tracker.records)
+        except Exception as e:
+            logger.warning("Failed to persist LLM usage to SQLite: %s", e)
 
         # Print per-document cost summary
         total_input = tracker.total_input_tokens
@@ -1617,7 +1620,6 @@ class Orchestrator:
             total_input = 0
             total_output = 0
             total_calls_all = 0
-            from D_validation.D02_llm_engine import MODEL_PRICING
             for stat in llm_stats:
                 inp = stat['total_input_tokens'] or 0
                 out = stat['total_output_tokens'] or 0
@@ -1626,10 +1628,7 @@ class Orchestrator:
                 total_input += inp
                 total_output += out
                 total_calls_all += calls
-                ip, op = MODEL_PRICING.get(stat['model'], (3.0, 15.0))
-                base_inp = inp - cache
-                cost = base_inp * ip / 1_000_000 + cache * (ip * 0.1) / 1_000_000 + out * op / 1_000_000
-                total_cost += cost
+                total_cost += calc_record_cost(stat['model'], inp, out, cache)
 
             print(f"\n{'─' * 50}")
             print("LLM COST SUMMARY (BATCH)")

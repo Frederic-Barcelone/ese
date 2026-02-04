@@ -78,6 +78,23 @@ MODEL_PRICING: Dict[str, Tuple[float, float]] = {
 }
 
 
+def calc_record_cost(
+    model: str,
+    input_tokens: int,
+    output_tokens: int,
+    cache_read_tokens: int = 0,
+    cache_creation_tokens: int = 0,
+) -> float:
+    """Calculate estimated cost in USD for a single API call."""
+    input_price, output_price = MODEL_PRICING.get(model, (3.0, 15.0))
+    base_input = input_tokens - cache_read_tokens - cache_creation_tokens
+    cache_read_cost = cache_read_tokens * (input_price * 0.1) / 1_000_000
+    cache_create_cost = cache_creation_tokens * (input_price * 1.25) / 1_000_000
+    input_cost = max(0, base_input) * input_price / 1_000_000
+    output_cost = output_tokens * output_price / 1_000_000
+    return input_cost + cache_read_cost + cache_create_cost + output_cost
+
+
 @dataclass
 class LLMUsageRecord:
     """Single API call usage record."""
@@ -130,16 +147,11 @@ class LLMUsageTracker:
 
     def estimated_cost(self) -> float:
         """Calculate estimated cost in USD based on model pricing."""
-        total = 0.0
-        for r in self.records:
-            input_price, output_price = MODEL_PRICING.get(r.model, (3.0, 15.0))
-            # Cache reads cost 10% of input price
-            base_input = r.input_tokens - r.cache_read_tokens
-            cache_cost = r.cache_read_tokens * (input_price * 0.1) / 1_000_000
-            input_cost = base_input * input_price / 1_000_000
-            output_cost = r.output_tokens * output_price / 1_000_000
-            total += input_cost + cache_cost + output_cost
-        return total
+        return sum(
+            calc_record_cost(r.model, r.input_tokens, r.output_tokens,
+                             r.cache_read_tokens, r.cache_creation_tokens)
+            for r in self.records
+        )
 
     def summary_by_model(self) -> Dict[str, Dict[str, Any]]:
         """Summarize usage grouped by model."""
@@ -155,12 +167,9 @@ class LLMUsageTracker:
             entry["input_tokens"] += r.input_tokens
             entry["output_tokens"] += r.output_tokens
             entry["cache_read_tokens"] += r.cache_read_tokens
-            input_price, output_price = MODEL_PRICING.get(r.model, (3.0, 15.0))
-            base_input = r.input_tokens - r.cache_read_tokens
-            entry["cost"] += (
-                base_input * input_price / 1_000_000
-                + r.cache_read_tokens * (input_price * 0.1) / 1_000_000
-                + r.output_tokens * output_price / 1_000_000
+            entry["cost"] += calc_record_cost(
+                r.model, r.input_tokens, r.output_tokens,
+                r.cache_read_tokens, r.cache_creation_tokens,
             )
         return by_model
 
@@ -176,12 +185,9 @@ class LLMUsageTracker:
             entry["calls"] += 1
             entry["input_tokens"] += r.input_tokens
             entry["output_tokens"] += r.output_tokens
-            input_price, output_price = MODEL_PRICING.get(r.model, (3.0, 15.0))
-            base_input = r.input_tokens - r.cache_read_tokens
-            entry["cost"] += (
-                base_input * input_price / 1_000_000
-                + r.cache_read_tokens * (input_price * 0.1) / 1_000_000
-                + r.output_tokens * output_price / 1_000_000
+            entry["cost"] += calc_record_cost(
+                r.model, r.input_tokens, r.output_tokens,
+                r.cache_read_tokens, r.cache_creation_tokens,
             )
         return by_type
 
@@ -214,10 +220,12 @@ def resolve_model_tier(call_type: str, default_model: str = "claude-sonnet-4-202
             if config_path.exists():
                 with open(config_path, "r", encoding="utf-8") as f:
                     data = yaml.safe_load(f) or {}
-                _model_tier_cache = data.get("api", {}).get("claude", {}).get("model_tiers", {})
+                tiers = data.get("api", {}).get("claude", {}).get("model_tiers", {})
+                _model_tier_cache = tiers if isinstance(tiers, dict) else {}
             else:
                 _model_tier_cache = {}
-        except Exception:
+        except (OSError, yaml.YAMLError, TypeError, KeyError) as e:
+            logger.warning("Failed to load model_tiers from config: %s", e)
             _model_tier_cache = {}
     return _model_tier_cache.get(call_type, default_model)
 
@@ -228,17 +236,19 @@ def record_api_usage(message, model: str, call_type: str) -> None:
     Use this for direct anthropic.Anthropic().messages.create() calls
     outside of ClaudeClient (e.g., in B_parsing, C_generators).
     """
+    if message is None or not hasattr(message, "usage") or not message.usage:
+        logger.debug("No usage data on API response for call_type=%s", call_type)
+        return
     tracker = _global_usage_tracker
-    if hasattr(message, "usage") and message.usage:
-        usage = message.usage
-        tracker.record(
-            model=model,
-            input_tokens=getattr(usage, "input_tokens", 0) or 0,
-            output_tokens=getattr(usage, "output_tokens", 0) or 0,
-            call_type=call_type,
-            cache_read_tokens=getattr(usage, "cache_read_input_tokens", 0) or 0,
-            cache_creation_tokens=getattr(usage, "cache_creation_input_tokens", 0) or 0,
-        )
+    usage = message.usage
+    tracker.record(
+        model=model,
+        input_tokens=getattr(usage, "input_tokens", 0) or 0,
+        output_tokens=getattr(usage, "output_tokens", 0) or 0,
+        call_type=call_type,
+        cache_read_tokens=getattr(usage, "cache_read_input_tokens", 0) or 0,
+        cache_creation_tokens=getattr(usage, "cache_creation_input_tokens", 0) or 0,
+    )
 
 
 # Optional anthropic import
@@ -1390,6 +1400,7 @@ __all__ = [
     "LLMUsageTracker",
     "MODEL_PRICING",
     "VerificationResult",
+    "calc_record_cost",
     "get_usage_tracker",
     "record_api_usage",
     "resolve_model_tier",

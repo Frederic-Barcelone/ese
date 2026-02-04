@@ -590,7 +590,7 @@ def analyze_page_with_refinement(
     doc: fitz.Document,
     page_num: int,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
     max_iterations: int = 2,
     output_dir: Optional[str] = None,
 ) -> Tuple[List[dict], Image.Image]:
@@ -611,6 +611,7 @@ def analyze_page_with_refinement(
     doc_name = Path(doc.name).stem if doc.name else "doc"
 
     # Initial detection
+    model = model or resolve_model_tier("layout_analysis")
     visuals = analyze_page_with_bbox(doc, page_num, client, model)
 
     if not visuals:
@@ -1298,7 +1299,7 @@ def analyze_page_two_phase(
     doc: fitz.Document,
     page_num: int,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
     grid_rows: int = 10,
     grid_cols: int = 5,
     output_dir: Optional[str] = None,
@@ -1323,6 +1324,7 @@ def analyze_page_two_phase(
     Returns:
         List of visuals with normalized bboxes
     """
+    model = model or resolve_model_tier("layout_analysis")
     page = doc[page_num - 1]
     zoom = dpi / 72.0
     matrix = fitz.Matrix(zoom, zoom)

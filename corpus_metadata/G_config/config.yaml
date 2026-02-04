@@ -680,7 +680,6 @@ api:
       document_classification: "claude-haiku-4-5-20250901"
       image_classification: "claude-haiku-4-5-20250901"
       sf_only_extraction: "claude-haiku-4-5-20250901"
-      author_extraction: "claude-haiku-4-5-20250901"
       layout_analysis: "claude-haiku-4-5-20250901"
       vlm_visual_enrichment: "claude-haiku-4-5-20250901"
       description_extraction: "claude-haiku-4-5-20250901"
