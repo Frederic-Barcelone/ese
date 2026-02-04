@@ -35,7 +35,7 @@ See also: [Pipeline Overview](../architecture/01_overview.md) | [Data Flow](../a
 | `B04_column_ordering.py` | XY-Cut++ layout detection for determining correct reading order across multi-column pages. |
 | `B30_xy_cut_ordering.py` | Recursive page partitioning into horizontal/vertical strips for multi-column reading order. |
 | `B18_layout_models.py` | `PageLayout`, `LayoutType`, `BlockClass` data models. |
-| `B19_layout_analyzer.py` | Spatial analysis for layout classification. |
+| `B19_layout_analyzer.py` | Spatial analysis for layout classification. Uses `resolve_model_tier("layout_analysis")` for model selection and `record_api_usage()` for usage tracking. |
 | `B25_legacy_ordering.py` | Fallback top-to-bottom, left-to-right reading order for simple layouts. |
 
 ### Section Detection
@@ -63,7 +63,7 @@ See also: [Pipeline Overview](../architecture/01_overview.md) | [Data Flow](../a
 | `B12_visual_pipeline.py` | Unified visual extraction pipeline orchestrating detection, rendering, and caption assignment. |
 | `B13_visual_detector.py` | VLM-based visual type detection (figure vs. table vs. decorative). |
 | `B14_visual_renderer.py` | Figure rendering and image generation from PDF pages. |
-| `B31_vlm_detector.py` | VLM (Vision Language Model) detector integration. |
+| `B31_vlm_detector.py` | VLM (Vision Language Model) detector integration. Uses `resolve_model_tier("vlm_detection")` with usage tracking. |
 
 ### Triage and Resolution
 
@@ -72,7 +72,7 @@ See also: [Pipeline Overview](../architecture/01_overview.md) | [Data Flow](../a
 | `B16_triage.py` | Routing decision for visual elements: `SKIP` (noise), `CHEAP_PATH` (minimal processing), `VLM_REQUIRED` (full VLM enrichment). Based on area ratio, grid structure, and caption presence. |
 | `B11_extraction_resolver.py` | Multi-page continuation detection and resolution. |
 | `B17_document_resolver.py` | Document-level conflict resolution. |
-| `B22_doclayout_detector.py` | YOLO-based layout detection. |
+| `B22_doclayout_detector.py` | YOLO-based layout detection. VLM description generation uses `resolve_model_tier("vlm_visual_enrichment")` with usage tracking. |
 
 ### Utilities
 

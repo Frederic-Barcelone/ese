@@ -92,13 +92,37 @@ Base path resolution for the project.
 
 ### Z06_usage_tracker.py
 
-SQLite-based tracking of lexicon and API usage during extraction.
+SQLite-based tracking of lexicon, data source, and LLM token usage during extraction.
 
 **Class: `UsageTracker`**
 
-- `log_lexicon_usage(lexicon_name, match_count, ...)` -- Record lexicon contribution
-- `log_datasource_usage(source, query_count, ...)` -- Record API call statistics
-- `report_summary()` -- Generate summary of all tracked usage
+**Tables managed:**
+
+| Table | Purpose |
+|-------|---------|
+| `documents` | Document processing status (started_at, finished_at, status) |
+| `lexicon_usage` | Per-document lexicon matches, candidates, validated counts |
+| `datasource_usage` | Per-document API query counts, results, errors |
+| `llm_usage` | Per-call LLM token usage: model, call_type, input/output/cache tokens, estimated cost |
+
+**Lexicon & Data Source Methods:**
+
+- `start_document(document_id, filename)` -- Register document as processing
+- `finish_document(document_id, status)` -- Mark document complete/failed
+- `log_lexicon_usage(document_id, lexicon_name, matches, candidates, validated)` -- Record lexicon contribution
+- `log_datasource_usage(document_id, datasource_name, queries, results, errors)` -- Record API call statistics
+- `get_lexicon_stats()` -- Aggregated stats by lexicon (total matches, candidates, validated, avg per doc)
+- `get_datasource_stats()` -- Aggregated stats by data source
+- `get_unused_lexicons(min_documents)` -- Find lexicons with zero matches across N+ documents
+- `get_document_usage(document_id)` -- Full usage details for a specific document
+
+**LLM Usage Methods:**
+
+- `log_llm_usage(document_id, model, call_type, input_tokens, output_tokens, cache_read_tokens, cache_creation_tokens, estimated_cost_usd)` -- Record a single LLM API call
+- `log_llm_usage_batch(document_id, records)` -- Batch insert from `LLMUsageTracker.records` (from `D02_llm_engine`)
+- `get_llm_stats()` -- Aggregated LLM stats by model (total calls, tokens, cost, documents)
+- `get_llm_stats_by_call_type()` -- Aggregated LLM stats by call_type and model
+- `print_summary()` -- Print full summary to console (documents, LLM tokens, lexicons, data sources)
 
 ### Z07_console_output.py
 

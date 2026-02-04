@@ -82,9 +82,9 @@ pipeline = AbbreviationPipeline(
 | `generate_candidates(doc)` | 2 | Run all generators, deduplicate by normalized (SF, LF) |
 | `filter_candidates(candidates, full_text)` | 3 | Corroboration check, lexicon reduction, SF form validation |
 | `apply_heuristics(candidates, counters)` | 4 | Auto-approve/reject via PASO rules, returns `(auto_results, llm_candidates)` |
-| `validate_with_llm(llm_candidates, batch_delay_ms)` | 5 | Batch LLM validation (explicit pairs batch=10, lexicon batch=15) |
+| `validate_with_llm(llm_candidates, batch_delay_ms)` | 5 | Fast-reject pre-screening (Haiku) + batch LLM validation (explicit pairs batch=10, lexicon batch=15) |
 | `search_missing_abbreviations(doc_id, full_text, found_sfs, counters)` | 6 | PASO C (hyphenated) + direct search abbreviations |
-| `extract_sf_only_with_llm(doc_id, full_text, found_sfs, counters)` | 7 | PASO D: LLM SF-only extraction with lexicon fallback |
+| `extract_sf_only_with_llm(doc_id, full_text, found_sfs, counters)` | 7 | PASO D: LLM SF-only extraction with lexicon fallback. Uses `call_type="sf_only_extraction"` (Haiku tier). |
 | `normalize_results(results, full_text)` | 8 | Normalize, NCT enrich, disambiguate, re-disambiguate, deduplicate |
 
 **PASO heuristics applied in `apply_heuristics()`:**

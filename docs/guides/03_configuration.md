@@ -133,6 +133,27 @@ api:
 - `fast`: Used for basic tasks (cheaper, faster).
 - `validation`: Used for final validation and enrichment (best quality).
 
+### Model Tier Routing (LLM Cost Optimization)
+
+Routes LLM calls to different models based on task complexity. Simple tasks use cheaper Haiku; complex reasoning stays on Sonnet.
+
+```yaml
+api:
+  claude:
+    model_tiers:
+      # Haiku tier ($1/$5 per MTok) — simple tasks
+      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
+      document_classification: "claude-haiku-4-5-20250901"
+      layout_analysis: "claude-haiku-4-5-20250901"
+      image_classification: "claude-haiku-4-5-20250901"
+      # Sonnet tier ($3/$15 per MTok) — complex reasoning
+      feasibility_extraction: "claude-sonnet-4-20250514"
+      flowchart_analysis: "claude-sonnet-4-20250514"
+      vlm_table_extraction: "claude-sonnet-4-20250514"
+```
+
+To change a task's model, update its value in this mapping. To add a new LLM call site, add a new entry here. See [Cost Optimization Guide](05_cost_optimization.md) for the full call_type table and implementation details.
+
 ### PubTator3 API
 
 ```yaml

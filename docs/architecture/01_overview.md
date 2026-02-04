@@ -101,6 +101,20 @@ All pipeline code resides under `corpus_metadata/`.
 | Rich | latest | Console output, progress bars, tables |
 | YAML | stdlib | Pipeline configuration |
 
+## LLM Cost Optimization
+
+The pipeline implements a model tier routing system to minimize API costs while maintaining extraction quality. Every LLM call site is tagged with a `call_type` string that maps to a specific model in `config.yaml`:
+
+- **Haiku tier** ($1/$5 per MTok): Simple tasks like classification, layout analysis, abbreviation validation
+- **Sonnet tier** ($3/$15 per MTok): Complex reasoning like feasibility extraction, flowchart analysis, table structure extraction
+
+Additional cost optimizations:
+- **Prompt caching**: System prompts use `cache_control: {"type": "ephemeral"}` for 90% savings on repeated prompts
+- **Fast-reject pre-screening**: Cheap Haiku pre-screens abbreviation candidates before full validation
+- **Usage tracking**: All API calls are tracked in-memory (`LLMUsageTracker` in D02) and persisted to SQLite (`llm_usage` table in Z06) with per-document and batch cost summaries
+
+See [Cost Optimization Guide](../guides/05_cost_optimization.md) for details.
+
 ## Orchestrator
 
 The `orchestrator.py` entry point processes each PDF through 16 stages:

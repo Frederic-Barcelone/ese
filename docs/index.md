@@ -42,6 +42,7 @@ Step-by-step guides for common tasks.
 | [Adding an Entity Type](guides/02_adding_entity_type.md) | End-to-end walkthrough: model, generator, validator, exporter |
 | [Configuration](guides/03_configuration.md) | config.yaml reference, extraction presets, API settings |
 | [Evaluation](guides/04_evaluation.md) | Gold standard format, scoring methodology, interpreting results |
+| [Cost Optimization](guides/05_cost_optimization.md) | Model tier routing, prompt caching, usage tracking, adding new LLM call sites |
 
 ## Reference
 

@@ -22,16 +22,30 @@ Centralized registry for all LLM validation prompts. Every prompt is versioned w
 | `PromptBundle` | Frozen Pydantic model containing `system_prompt`, `user_template`, `output_schema`, `version`, and `prompt_bundle_hash`. |
 | `PromptRegistry` | Central store mapping `(PromptTask, version)` to `PromptBundle`. Tracks latest version per task. |
 
-### D02_llm_engine.py -- Claude Validation Engine
+### D02_llm_engine.py -- Claude Validation Engine & Cost Optimization
 
-Core validation engine using the Anthropic Claude API.
+Core validation engine using the Anthropic Claude API. Also houses the LLM cost optimization infrastructure: model tier routing, usage tracking, prompt caching, and cost calculation.
+
+**Validation Components:**
 
 | Component | Description |
 |-----------|-------------|
 | `LLMClient` | Protocol (interface) for LLM backends, allowing different implementations. |
-| `ClaudeClient` | Anthropic SDK client implementation with model selection. |
-| `LLMEngine` | Main verifier: retry logic with exponential backoff, rate limiting, batch processing, structured JSON output parsing. |
+| `ClaudeClient` | Anthropic SDK client implementation with model tier routing and prompt caching. |
+| `LLMEngine` | Main verifier: retry logic with exponential backoff, rate limiting, batch processing, structured JSON output parsing, fast-reject pre-screening. |
 | `VerificationResult` | Pydantic model for structured validation responses (status, confidence, reasoning, evidence). |
+
+**Cost Optimization Components:**
+
+| Component | Description |
+|-----------|-------------|
+| `MODEL_PRICING` | Dict mapping model IDs to `(input_cost, output_cost)` per million tokens. Covers Sonnet 4, Sonnet 4.5, Haiku 3.5, and Haiku 4.5. |
+| `calc_record_cost()` | Shared cost calculation accounting for base input, cache reads (10% of input price), and cache creation (125% of input price). |
+| `LLMUsageRecord` | Dataclass for a single API call: model, input/output tokens, call_type, cache tokens. |
+| `LLMUsageTracker` | Accumulates records across all API calls in a run. Provides `summary_by_model()`, `summary_by_call_type()`, and `estimated_cost()`. |
+| `get_usage_tracker()` | Returns the global `LLMUsageTracker` singleton shared across all `ClaudeClient` instances. |
+| `resolve_model_tier()` | Resolves the model to use for a given `call_type` from `config.yaml` `model_tiers`. Lazy-loads config with caching. Falls back to Sonnet 4 if no mapping exists. |
+| `record_api_usage()` | Standalone function for raw `anthropic.Anthropic()` calls (B_parsing, C_generators) to record token usage into the global tracker. |
 
 ### D03_validation_logger.py -- Structured JSONL Logging
 
@@ -74,6 +88,30 @@ results = engine.verify_batch(candidates, doc_context)
 # Each result: VerificationResult with status, confidence, reasoning
 ```
 
+### Cost Optimization Functions
+
+```python
+from D_validation.D02_llm_engine import (
+    resolve_model_tier, record_api_usage, get_usage_tracker, calc_record_cost,
+)
+
+# Resolve model for a call type from config.yaml
+model = resolve_model_tier("layout_analysis")  # Returns Haiku or Sonnet
+
+# Record usage from raw anthropic.Anthropic() calls
+response = client.messages.create(model=model, ...)
+record_api_usage(response, model, "layout_analysis")
+
+# Calculate cost for a single call
+cost = calc_record_cost("claude-haiku-4-5-20250901", input_tokens=1000, output_tokens=200,
+                        cache_read_tokens=500)
+
+# Get accumulated usage across the run
+tracker = get_usage_tracker()
+print(tracker.estimated_cost())
+print(tracker.summary_by_call_type())
+```
+
 ### QuoteVerifier
 
 ```python
@@ -111,6 +149,21 @@ Before any LLM call, abbreviation candidates pass through deterministic PASO heu
 | **PASO D** | LLM SF-only extraction for candidates without definitions | Short forms with no long form in document |
 
 Only candidates that survive PASO rules are sent to the LLM, reducing API costs.
+
+### Model Tier Routing
+
+Every LLM call site passes a `call_type` string identifying the task. `ClaudeClient` and raw API callers use `resolve_model_tier(call_type)` to route simple tasks to Haiku (cheaper) and complex reasoning to Sonnet (higher quality):
+
+| Tier | Models | Example call_types |
+|------|--------|-------------------|
+| **Haiku** ($1/$5 per MTok) | `claude-haiku-4-5-20250901` | `abbreviation_batch_validation`, `document_classification`, `layout_analysis`, `image_classification` |
+| **Sonnet** ($3/$15 per MTok) | `claude-sonnet-4-20250514` | `feasibility_extraction`, `flowchart_analysis`, `vlm_table_extraction`, `recommendation_extraction` |
+
+Tier mappings are configured in `config.yaml` under `api.claude.model_tiers`. See [Cost Optimization Guide](../guides/05_cost_optimization.md) for the full call_type table.
+
+### Prompt Caching
+
+`ClaudeClient._call_claude()` applies `cache_control: {"type": "ephemeral"}` on system prompts, enabling Anthropic's prompt caching. Cache reads cost 10% of the input token price; cache creation costs 125%. This saves significantly on repeated system prompts across batch validation calls.
 
 ### Validation Flow
 

@@ -45,7 +45,7 @@ See also: [Data Flow](../architecture/02_data_flow.md) | [Pipeline Overview](../
 | `C06_strategy_disease.py` | Multi-layer disease detection: specialized rare disease lexicons, general disease lexicons, scispacy NER. Outputs `DiseaseCandidate` with identifiers. |
 | `C07_strategy_drug.py` | Multi-layer drug detection: Alexion pipeline drugs, investigational compounds (compound ID patterns like LNP023), FDA approved, RxNorm lexicon, scispacy CHEMICAL entities. Outputs `DrugCandidate`. |
 | `C16_strategy_gene.py` | Gene detection: HGNC symbol lexicon, scispacy GENE entities, gene symbol pattern matching. Outputs `GeneCandidate`. |
-| `C09_strategy_document_metadata.py` | Document classification, date extraction, metadata assembly. |
+| `C09_strategy_document_metadata.py` | Document classification, date extraction, metadata assembly. Uses `call_type="document_classification"` and `call_type="description_extraction"` (both Haiku tier). |
 | `C18_strategy_pharma.py` | Pharmaceutical company name detection. |
 | `C13_strategy_author.py` | Author extraction from paper headers, author blocks, and investigator lists. |
 | `C14_strategy_citation.py` | Citation extraction: PMID, DOI, NCT, URL regex patterns plus reference section parsing. |
@@ -55,7 +55,7 @@ See also: [Data Flow](../architecture/02_data_flow.md) | [Pipeline Overview](../
 | Module | Description |
 |--------|-------------|
 | `C08_strategy_feasibility.py` | Multi-category pattern-based feasibility extraction (eligibility, screening flow, study design, operational burden, epidemiology, study footprint). |
-| `C11_llm_feasibility.py` | LLM-based feasibility extraction via Claude API for complex or ambiguous feasibility data. |
+| `C11_llm_feasibility.py` | LLM-based feasibility extraction via Claude API for complex or ambiguous feasibility data. Uses `call_type="feasibility_extraction"` (Sonnet tier). |
 | `C27_feasibility_patterns.py` | Regex pattern library for feasibility categories. |
 | `C29_feasibility_prompts.py` | Structured prompts for LLM-based feasibility extraction. |
 | `C30_feasibility_response_parser.py` | JSON response parser for LLM feasibility output. |
@@ -64,10 +64,10 @@ See also: [Data Flow](../architecture/02_data_flow.md) | [Pipeline Overview](../
 
 | Module | Description |
 |--------|-------------|
-| `C10_vision_image_analysis.py` | Claude Vision analysis of flowcharts, CONSORT diagrams, and study design figures. |
+| `C10_vision_image_analysis.py` | Claude Vision analysis of flowcharts, CONSORT diagrams, and study design figures. Per-caller `call_type` routing: `flowchart_analysis` (Sonnet), `chart_analysis` (Sonnet), `vlm_table_extraction` (Sonnet), `image_classification` (Haiku), `ocr_text_fallback` (Haiku). |
 | `C15_vlm_table_extractor.py` | VLM-based table structure extraction and correction. |
-| `C17_flowchart_graph_extractor.py` | Flowchart/algorithm structure extraction from figures (node-edge graph analysis). |
-| `C19_vlm_visual_enrichment.py` | VLM enrichment: title generation, description, and semantic classification for visual elements. |
+| `C17_flowchart_graph_extractor.py` | Flowchart/algorithm structure extraction from figures (node-edge graph analysis). Uses `record_api_usage()` with `call_type="flowchart_analysis"` (Sonnet tier). |
+| `C19_vlm_visual_enrichment.py` | VLM enrichment: title generation, description, and semantic classification for visual elements. Uses `resolve_model_tier("vlm_visual_enrichment")` (Haiku tier) with `record_api_usage()`. |
 
 ### Recommendation Strategies
 
@@ -75,8 +75,8 @@ See also: [Data Flow](../architecture/02_data_flow.md) | [Pipeline Overview](../
 |--------|-------------|
 | `C12_guideline_recommendation_extractor.py` | Clinical guideline recommendation extraction. |
 | `C31_recommendation_patterns.py` | Regex patterns for recommendation detection. |
-| `C32_recommendation_llm.py` | LLM-based recommendation extraction via Claude. |
-| `C33_recommendation_vlm.py` | VLM-based recommendation extraction from figures. |
+| `C32_recommendation_llm.py` | LLM-based recommendation extraction via Claude. Uses `record_api_usage()` with `call_type="recommendation_extraction"` (Sonnet tier). |
+| `C33_recommendation_vlm.py` | VLM-based recommendation extraction from figures. Uses `record_api_usage()` with `call_type="recommendation_vlm"` (Sonnet tier). |
 
 ### False Positive Filters
 

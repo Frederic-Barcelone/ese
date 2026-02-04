@@ -51,7 +51,7 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 | `features` | Feature flags: drug_detection, disease_detection, classification, pubtator_enrichment, ai_validation |
 | `generators` | Per-generator config: syntax_pattern, glossary_table, regex_pattern, layout, lexicon (with obvious_noise list) |
 | `heuristics` | PASO rules: stats_abbrevs (PASO A), sf_blacklist (PASO B, 70+ entries), common_words, hyphenated_abbrevs (PASO C), LLM SF extractor (PASO D), context_required_sfs |
-| `api` | PubTator3 (base_url, rate_limit, cache TTL), Claude (fast/validation models, batch_delay_ms) |
+| `api` | PubTator3 (base_url, rate_limit, cache TTL), Claude (fast/validation models, batch_delay_ms, model_tiers) |
 | `nct_enricher` | ClinicalTrials.gov cache settings |
 | `validation` | Per-entity validation: abbreviation, drug (stages), disease (stages, enrichment_mode) |
 | `normalization` | term_mapper (fuzzy matching), disambiguator (min_context_score, whitelist_unexpanded) |
@@ -86,6 +86,37 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 | `metadata_only` | Authors, citations, document metadata |
 | `images_only` | Tables + figures/visuals |
 | `tables_only` | Table extraction only (no figures) |
+
+## Model Tier Routing
+
+The `model_tiers` section under `api.claude` maps each `call_type` to a specific Claude model. Simple tasks route to cheaper Haiku; complex reasoning stays on Sonnet:
+
+```yaml
+api:
+  claude:
+    model_tiers:
+      # Haiku tier ($1/$5 per MTok)
+      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
+      abbreviation_single_validation: "claude-haiku-4-5-20250901"
+      fast_reject: "claude-haiku-4-5-20250901"
+      document_classification: "claude-haiku-4-5-20250901"
+      description_extraction: "claude-haiku-4-5-20250901"
+      image_classification: "claude-haiku-4-5-20250901"
+      sf_only_extraction: "claude-haiku-4-5-20250901"
+      layout_analysis: "claude-haiku-4-5-20250901"
+      vlm_visual_enrichment: "claude-haiku-4-5-20250901"
+      ocr_text_fallback: "claude-haiku-4-5-20250901"
+      # Sonnet tier ($3/$15 per MTok)
+      feasibility_extraction: "claude-sonnet-4-20250514"
+      recommendation_extraction: "claude-sonnet-4-20250514"
+      recommendation_vlm: "claude-sonnet-4-20250514"
+      vlm_table_extraction: "claude-sonnet-4-20250514"
+      flowchart_analysis: "claude-sonnet-4-20250514"
+      chart_analysis: "claude-sonnet-4-20250514"
+      vlm_detection: "claude-sonnet-4-20250514"
+```
+
+Resolved at runtime via `D02_llm_engine.resolve_model_tier(call_type)`. See [Cost Optimization Guide](../guides/05_cost_optimization.md) for details.
 
 ## Usage Patterns
 

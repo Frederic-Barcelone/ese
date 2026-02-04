@@ -15,22 +15,40 @@ ESE integrates with several external APIs and local NER models for entity valida
 
 **Models used:**
 
-| Tier | Model | Usage |
-|------|-------|-------|
-| Validation | `claude-sonnet-4-20250514` | Abbreviation, drug, disease validation (D_validation) |
-| Fast | `claude-sonnet-4-5-20250929` | Basic tasks, cheaper/faster |
-| Vision | `claude-sonnet-4-20250514` | Figure/flowchart/table analysis |
+The pipeline uses model tier routing to balance cost and quality. Each LLM call site passes a `call_type` that maps to a model in `config.yaml` under `api.claude.model_tiers`:
 
-Models are configurable in `G_config/config.yaml` under `api.claude.validation.model` and `api.claude.fast.model`.
+| Tier | Model | Cost (Input/Output per MTok) | Usage |
+|------|-------|------------------------------|-------|
+| Haiku | `claude-haiku-4-5-20250901` | $1 / $5 | Simple tasks: classification, layout analysis, abbreviation validation |
+| Sonnet | `claude-sonnet-4-20250514` | $3 / $15 | Complex reasoning: feasibility, flowcharts, table extraction, recommendations |
 
-**Usage across the pipeline:**
+**Prompt caching** is enabled on system prompts via `cache_control: {"type": "ephemeral"}`. Cache reads cost 10% of input price; cache creation costs 125%.
 
-| Module | Purpose |
-|--------|---------|
-| `D_validation/D02_llm_engine.py` | `ClaudeClient` -- abbreviation candidate validation (single + batch), fast-reject via the fast-tier model (`claude-sonnet-4-5-20250929`) |
-| `C_generators/C10_vision_image_analysis.py` | Vision LLM analysis of figures, charts, flowcharts |
-| `C_generators/C11_llm_feasibility.py` | LLM-based feasibility data extraction from protocols |
-| `C_generators/C32_recommendation_llm.py` | Guideline recommendation extraction |
+**Usage across the pipeline (19 call sites in 12 files):**
+
+| Module | call_type | Tier | Purpose |
+|--------|-----------|------|---------|
+| `D02_llm_engine.py` | `abbreviation_batch_validation` | Haiku | Batch abbreviation validation |
+| `D02_llm_engine.py` | `abbreviation_single_validation` | Haiku | Single abbreviation validation |
+| `D02_llm_engine.py` | `fast_reject` | Haiku | Fast-reject pre-screening |
+| `C09_strategy_document_metadata.py` | `document_classification` | Haiku | Document type classification |
+| `C09_strategy_document_metadata.py` | `description_extraction` | Haiku | Title/description generation |
+| `C10_vision_image_analysis.py` | `image_classification` | Haiku | Image type classification |
+| `C10_vision_image_analysis.py` | `flowchart_analysis` | Sonnet | Flowchart/CONSORT analysis |
+| `C10_vision_image_analysis.py` | `chart_analysis` | Sonnet | Chart data extraction |
+| `C10_vision_image_analysis.py` | `vlm_table_extraction` | Sonnet | Table structure extraction |
+| `C10_vision_image_analysis.py` | `ocr_text_fallback` | Haiku | OCR text extraction fallback |
+| `C11_llm_feasibility.py` | `feasibility_extraction` | Sonnet | Feasibility data extraction |
+| `C17_flowchart_graph_extractor.py` | `flowchart_analysis` | Sonnet | Flowchart graph extraction |
+| `C19_vlm_visual_enrichment.py` | `vlm_visual_enrichment` | Haiku | Visual title/description |
+| `C32_recommendation_llm.py` | `recommendation_extraction` | Sonnet | Guideline recommendation extraction |
+| `C33_recommendation_vlm.py` | `recommendation_vlm` | Sonnet | Visual recommendation extraction |
+| `B19_layout_analyzer.py` | `layout_analysis` | Haiku | Page layout analysis (7 functions) |
+| `B22_doclayout_detector.py` | `vlm_visual_enrichment` | Haiku | VLM description generation |
+| `B31_vlm_detector.py` | `vlm_detection` | Sonnet | VLM visual detection |
+| `H02_abbreviation_pipeline.py` | `sf_only_extraction` | Haiku | PASO D SF-only extraction |
+
+**Usage tracking:** All calls are tracked by `LLMUsageTracker` (in-memory) and persisted to the `llm_usage` SQLite table via `Z06_usage_tracker.py`. The orchestrator prints per-document and batch cost summaries.
 
 **Rate limiting:**
 
