@@ -93,6 +93,8 @@ class DiseaseFalsePositiveFilter:
         "common", "complete", "sensitive", "normal", "simple", "complex",
         "general", "specific", "active", "passive", "positive", "negative",
         "progressive", "stable", "mobile", "rigid", "dense", "men", "can",
+        "was", "has", "all", "mg", "iva", "ibm", "ae", "rmd",
+        "transition", "disease", "median",
     }
 
     # Short match threshold
@@ -220,7 +222,18 @@ class DiseaseFalsePositiveFilter:
             if matched_clean.lower() in self._common_english_lower:
                 return True, "common_english_word"
 
-        # Hard filter 4: Domain profile catastrophic FPs
+        # Hard filter 4: Author name context (e.g., "Greenfield S,")
+        if len(matched_clean.split()) <= 2 and not is_abbreviation:
+            if self._is_author_name_context(matched_clean, ctx_lower):
+                return True, "author_name_context"
+
+        # Hard filter 5: Short lowercase matches from rare disease acronym lexicon
+        # True disease acronyms are uppercase (e.g., ERED, WAS); lowercase fragments
+        # like "ered" (from "consid-ered") are PDF line-break artifacts.
+        if len(matched_clean) <= 4 and matched_clean.islower() and not is_abbreviation:
+            return True, "short_lowercase_not_abbreviation"
+
+        # Hard filter 6: Domain profile catastrophic FPs
         should_filter, reason = self.domain_profile.should_hard_filter(
             matched_text, context
         )
@@ -251,6 +264,35 @@ class DiseaseFalsePositiveFilter:
 
         # If strong gene context and weak disease context, it's a gene
         return gene_score >= 2 and gene_score > dis_score
+
+    def _is_author_name_context(self, matched_text: str, ctx_lower: str) -> bool:
+        """Check if matched text appears in an author-name context.
+
+        Patterns detected:
+        - Matched text followed by single-letter initial ("Greenfield S,")
+        - Matched text in "et al" context
+        """
+        matched_lower = matched_text.lower().strip()
+        if not matched_lower:
+            return False
+
+        # Pattern: "matched_text <single letter>," or "matched_text <single letter>."
+        pattern = re.compile(
+            re.escape(matched_lower) + r"\s+[a-z]\s*[,.]",
+            re.IGNORECASE,
+        )
+        if pattern.search(ctx_lower):
+            return True
+
+        # Pattern: "matched_text et al" or "matched_text, et al"
+        et_al_pattern = re.compile(
+            re.escape(matched_lower) + r"\s*,?\s*et\s+al",
+            re.IGNORECASE,
+        )
+        if et_al_pattern.search(ctx_lower):
+            return True
+
+        return False
 
     def _is_journal_citation_context(self, ctx_lower: str) -> bool:
         """Check if context is a journal citation."""

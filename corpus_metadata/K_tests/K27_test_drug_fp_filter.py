@@ -226,6 +226,40 @@ class TestMAFFiltering:
         )
 
 
+class TestQuestionnaireAbbreviationFiltering:
+    """Tests for clinical questionnaire abbreviation FP filtering."""
+
+    def test_hads_filtered(self, filter):
+        """Test that HADS (Hospital Anxiety and Depression Scale) is filtered."""
+        assert filter.is_false_positive(
+            "HADS", "HADS score at baseline", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+    def test_sf36_filtered(self, filter):
+        """Test that SF-36 is filtered."""
+        assert filter.is_false_positive(
+            "SF-36", "SF-36 questionnaire results", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+    def test_eq5d_filtered(self, filter):
+        """Test that EQ-5D is filtered."""
+        assert filter.is_false_positive(
+            "EQ-5D", "EQ-5D utility scores", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+    def test_vas_filtered(self, filter):
+        """Test that VAS (Visual Analog Scale) is filtered."""
+        assert filter.is_false_positive(
+            "VAS", "VAS pain score", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+    def test_promis_filtered(self, filter):
+        """Test that PROMIS is filtered."""
+        assert filter.is_false_positive(
+            "PROMIS", "PROMIS fatigue domain", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+
 class TestAntibodyPhraseFiltering:
     """Tests for antibody phrase filtering as biological entities."""
 

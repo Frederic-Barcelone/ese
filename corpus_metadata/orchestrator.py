@@ -917,6 +917,13 @@ class Orchestrator:
         else:
             printer.skip("Citation detection", "disabled in config")
 
+        # Cross-entity filtering: use abbreviation + author context to remove FPs
+        disease_results, drug_results, gene_results = self._cross_entity_filter(
+            disease_results, drug_results, gene_results,
+            results,  # abbreviation results
+            author_results,
+        )
+
         # Stage 11: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
@@ -1481,6 +1488,83 @@ class Orchestrator:
             if result.vlm_enriched > 0:
                 print(f"  VLM enriched: {result.vlm_enriched}")
 
+    def _cross_entity_filter(
+        self,
+        disease_results: List[ExtractedDisease],
+        drug_results: List[ExtractedDrug],
+        gene_results: List[ExtractedGene],
+        abbrev_results: List[ExtractedEntity],
+        author_results: List[ExtractedAuthor],
+    ) -> tuple[List[ExtractedDisease], List[ExtractedDrug], List[ExtractedGene]]:
+        """
+        Post-processing filter using cross-entity context.
+
+        Uses abbreviation definitions and author names to remove false positives
+        from disease, drug, and gene results.
+        """
+        # Build abbreviation map: short_form (upper) -> long_form
+        abbrev_map: dict[str, str] = {}
+        for r in abbrev_results:
+            if r.status == ValidationStatus.VALIDATED and r.long_form:
+                abbrev_map[r.short_form.upper()] = r.long_form
+
+        # Build author name set (lowercase tokens from full names)
+        author_name_tokens: set[str] = set()
+        for a in author_results:
+            if a.status == ValidationStatus.VALIDATED:
+                for token in a.full_name.lower().split():
+                    # Only include tokens >= 4 chars to avoid filtering common short words
+                    if len(token) >= 4:
+                        author_name_tokens.add(token)
+
+        # Non-drug keywords in abbreviation long forms
+        non_drug_keywords = {
+            "scale", "score", "questionnaire", "index", "inventory",
+            "polyangiitis", "vasculitis", "disease", "syndrome",
+            "assessment", "survey", "rating",
+        }
+
+        # Filter drugs where abbreviation reveals non-drug meaning
+        filtered_drugs: List[ExtractedDrug] = []
+        for drug in drug_results:
+            drug_upper = drug.matched_text.upper().strip()
+            if drug_upper in abbrev_map:
+                long_form_lower = abbrev_map[drug_upper].lower()
+                if any(kw in long_form_lower for kw in non_drug_keywords):
+                    logger.debug(
+                        "Cross-entity filter: drug '%s' removed — abbreviation "
+                        "expands to '%s'",
+                        drug.matched_text, abbrev_map[drug_upper],
+                    )
+                    continue
+            filtered_drugs.append(drug)
+
+        # Filter diseases/genes where matched_text matches author name tokens
+        filtered_diseases: List[ExtractedDisease] = []
+        for d in disease_results:
+            matched_lower = d.matched_text.lower().strip()
+            # Only filter short matches (≤2 words) that look like author names
+            if len(matched_lower.split()) <= 2 and matched_lower in author_name_tokens:
+                logger.debug(
+                    "Cross-entity filter: disease '%s' removed — matches author name",
+                    d.matched_text,
+                )
+                continue
+            filtered_diseases.append(d)
+
+        filtered_genes: List[ExtractedGene] = []
+        for g in gene_results:
+            matched_lower = g.matched_text.lower().strip()
+            if len(matched_lower.split()) <= 2 and matched_lower in author_name_tokens:
+                logger.debug(
+                    "Cross-entity filter: gene '%s' removed — matches author name",
+                    g.matched_text,
+                )
+                continue
+            filtered_genes.append(g)
+
+        return filtered_diseases, filtered_drugs, filtered_genes
+
     def _log_usage_stats(
         self,
         doc_id: str,
@@ -1570,15 +1654,15 @@ class Orchestrator:
         # Log author detection (if enabled)
         if self.extract_authors:
             validated = count_validated(author_results)
-            self.usage_tracker.log_lexicon_usage(
-                doc_id, "Authors", matches=len(author_results), validated=validated
+            self.usage_tracker.log_datasource_usage(
+                doc_id, "Authors", queries=len(author_results), results=validated
             )
 
         # Log citation detection (if enabled)
         if self.extract_citations:
             validated = count_validated(citation_results)
-            self.usage_tracker.log_lexicon_usage(
-                doc_id, "Citations", matches=len(citation_results), validated=validated
+            self.usage_tracker.log_datasource_usage(
+                doc_id, "Citations", queries=len(citation_results), results=validated
             )
 
         # Log feasibility extraction (if enabled)

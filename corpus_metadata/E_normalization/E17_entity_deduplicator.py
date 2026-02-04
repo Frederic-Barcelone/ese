@@ -125,7 +125,7 @@ class EntityDeduplicator:
     """Deduplicates entities by canonical identifier and tracks mention frequency."""
 
     def deduplicate_diseases(self, diseases: List) -> List:
-        """Deduplicate diseases by MONDO > ORPHA > UMLS > MeSH > text."""
+        """Deduplicate diseases by MONDO > ORPHA > UMLS > MeSH > text, then merge hierarchical."""
         def get_key(d):
             if d.mondo_id:
                 return f"mondo:{d.mondo_id}"
@@ -140,7 +140,85 @@ class EntityDeduplicator:
         def get_score(d):
             return (d.confidence_score, len(d.identifiers), bool(d.mondo_id), bool(d.orpha_code))
 
-        return _deduplicate_entities(diseases, get_key, get_score)
+        deduped = _deduplicate_entities(diseases, get_key, get_score)
+        return self._merge_hierarchical_diseases(deduped, get_score)
+
+    @staticmethod
+    def _merge_hierarchical_diseases(diseases: List, get_score) -> List:
+        """Merge diseases where one preferred_label is a substring of another.
+
+        Only merges when the shorter (more generic) term shares the same ontology
+        ID as the longer term, or has no ontology ID at all. Keeps the more
+        specific entity and aggregates mention counts.
+        """
+        if len(diseases) <= 1:
+            return diseases
+
+        validated = [d for d in diseases if d.status == ValidationStatus.VALIDATED]
+        non_validated = [d for d in diseases if d.status != ValidationStatus.VALIDATED]
+
+        if len(validated) <= 1:
+            return diseases
+
+        # Sort by label length descending so we process specific → generic
+        sorted_diseases = sorted(
+            validated,
+            key=lambda d: len(d.preferred_label),
+            reverse=True,
+        )
+
+        merged_into: set[str] = set()  # ids of entities absorbed
+        result = []
+
+        for i, disease in enumerate(sorted_diseases):
+            if str(disease.id) in merged_into:
+                continue
+
+            label_lower = disease.preferred_label.lower().strip()
+            absorbed_mentions = 0
+
+            for j in range(i + 1, len(sorted_diseases)):
+                other = sorted_diseases[j]
+                if str(other.id) in merged_into:
+                    continue
+
+                other_label = other.preferred_label.lower().strip()
+
+                # Check if other is a substring of disease
+                if other_label not in label_lower:
+                    continue
+
+                # Only merge if same ontology ID or other has no ID
+                same_id = False
+                other_has_no_id = not (other.mondo_id or other.orpha_code or other.umls_cui or other.mesh_id)
+
+                if other_has_no_id:
+                    same_id = True
+                elif disease.mondo_id and other.mondo_id and disease.mondo_id == other.mondo_id:
+                    same_id = True
+                elif disease.orpha_code and other.orpha_code and disease.orpha_code == other.orpha_code:
+                    same_id = True
+                elif disease.umls_cui and other.umls_cui and disease.umls_cui == other.umls_cui:
+                    same_id = True
+
+                if same_id:
+                    merged_into.add(str(other.id))
+                    absorbed_mentions += getattr(other, "mention_count", 1) or 1
+
+            # Update mention count if we absorbed anything
+            if absorbed_mentions > 0:
+                current_mentions = getattr(disease, "mention_count", 1) or 1
+                flags = list(getattr(disease, "validation_flags", []) or [])
+                if "hierarchical_merge" not in flags:
+                    flags.append("hierarchical_merge")
+                disease = disease.model_copy(update={
+                    "mention_count": current_mentions + absorbed_mentions,
+                    "validation_flags": flags,
+                })
+
+            result.append(disease)
+
+        return result + non_validated
 
     def deduplicate_drugs(self, drugs: List) -> List:
         """Deduplicate drugs by RxCUI > DrugBank > compound_id > name."""

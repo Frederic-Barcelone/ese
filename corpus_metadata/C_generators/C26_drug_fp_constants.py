@@ -421,6 +421,16 @@ COMMON_WORDS: Set[str] = {
     "arthritis foundation",
     # Clinical questionnaire abbreviations (not drugs)
     "maf",  # Multidimensional Assessment of Fatigue questionnaire
+    "hads",  # Hospital Anxiety and Depression Scale
+    "sf-36",  # Short Form 36 questionnaire
+    "eq-5d",  # EuroQol 5-Dimension questionnaire
+    "sf-12",  # Short Form 12 questionnaire
+    "phq-9",  # Patient Health Questionnaire-9
+    "gad-7",  # Generalized Anxiety Disorder-7
+    "vas",  # Visual Analog Scale
+    "nrs",  # Numeric Rating Scale
+    "facit",  # Functional Assessment of Chronic Illness Therapy
+    "promis",  # Patient-Reported Outcomes Measurement Information System
     # Antibody types (markers, not drugs unless specific)
     "anca",
     # Generic process/action words
@@ -1059,6 +1069,9 @@ NON_DRUG_ALLCAPS: Set[str] = {
     "primary",
     "secondary",
     "additional",
+    "hads",
+    "maf",
+    "pro",
 }
 
 # Pattern suffixes that indicate biological entities, not specific drugs

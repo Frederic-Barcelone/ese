@@ -245,6 +245,105 @@ class TestCommonEnglishWordFiltering:
             assert term in filter._common_english_lower, f"{term} not in set"
 
 
+class TestNewCommonEnglishFPTerms:
+    """Tests for newly added COMMON_ENGLISH_FP_TERMS."""
+
+    @pytest.mark.parametrize("term", [
+        "was", "has", "all", "mg", "iva", "ibm", "ae", "rmd",
+        "transition", "disease", "median",
+    ])
+    def test_new_common_terms_filtered(self, filter, term):
+        """Test that new common English terms are hard-filtered."""
+        should_filter, reason = filter.should_filter(
+            term, "some clinical context"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_was_uppercase_filtered(self, filter):
+        """Test that WAS (Wiskott-Aldrich Syndrome abbrev) is filtered as word."""
+        should_filter, reason = filter.should_filter(
+            "WAS", "treatment was administered"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_multi_word_disease_unaffected(self, filter):
+        """Test that multi-word disease names containing new FP terms are NOT filtered."""
+        should_filter, reason = filter.should_filter(
+            "Wiskott-Aldrich Syndrome",
+            "diagnosed with Wiskott-Aldrich Syndrome"
+        )
+        assert not should_filter or reason != "common_english_word"
+
+
+class TestShortLowercaseFilter:
+    """Tests for short lowercase abbreviation fragment filtering."""
+
+    def test_ered_lowercase_filtered(self, filter):
+        """Test that 'ered' (from 'consid-ered') is filtered."""
+        should_filter, reason = filter.should_filter(
+            "ered", "patients who were considered eligible"
+        )
+        assert should_filter
+        assert reason == "short_lowercase_not_abbreviation"
+
+    def test_uppercase_short_not_filtered_by_this_rule(self, filter):
+        """Test that uppercase short abbreviations are not caught by this rule."""
+        # ERED as uppercase should NOT be caught by this specific filter
+        # (it may or may not be caught by other rules)
+        should_filter, reason = filter.should_filter(
+            "ERED", "patients with ERED condition"
+        )
+        assert reason != "short_lowercase_not_abbreviation"
+
+    def test_abbreviation_flag_bypasses(self, filter):
+        """Test that is_abbreviation=True bypasses short lowercase filter."""
+        should_filter, reason = filter.should_filter(
+            "ered", "context", is_abbreviation=True
+        )
+        assert reason != "short_lowercase_not_abbreviation"
+
+
+class TestAuthorNameContext:
+    """Tests for author name context detection."""
+
+    def test_author_initial_pattern(self, filter):
+        """Test detection of 'Name X,' pattern."""
+        assert filter._is_author_name_context(
+            "Greenfield", "greenfield s, jones a, et al"
+        )
+
+    def test_author_et_al_pattern(self, filter):
+        """Test detection of 'Name et al' pattern."""
+        assert filter._is_author_name_context(
+            "Greenfield", "greenfield et al reported"
+        )
+
+    def test_non_author_context(self, filter):
+        """Test that disease context is not flagged as author."""
+        assert not filter._is_author_name_context(
+            "diabetes", "patients with diabetes mellitus type 2"
+        )
+
+    def test_author_name_hard_filter(self, filter):
+        """Test that author name in context triggers hard filter."""
+        should_filter, reason = filter.should_filter(
+            "Greenfield", "Greenfield S, et al. reported findings"
+        )
+        assert should_filter
+        assert reason == "author_name_context"
+
+    def test_multi_word_not_author_filtered(self, filter):
+        """Test that multi-word diseases skip author check."""
+        should_filter, reason = filter.should_filter(
+            "Greenfield disease variant type",
+            "Greenfield S, described the condition"
+        )
+        # 4 words, so the author filter (≤2 words) should not apply
+        assert reason != "author_name_context"
+
+
 class TestCitationContextOverride:
     """Tests for citation context override in score_adjustment."""
 

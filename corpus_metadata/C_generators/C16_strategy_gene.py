@@ -116,6 +116,8 @@ class GeneDetector:
         "type", "face", "fritz", "act", "alpha", "beta", "gamma", "delta",
         # Journal names and other common terms
         "acta",  # Journal name (Acta Otorhinolaryngol, etc.)
+        # PDF line-break fragments that match gene symbols
+        "gan",  # Fragment from "Erdo-gan" etc., matches GAN gene
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
