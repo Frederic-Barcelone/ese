@@ -37,6 +37,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import fitz  # PyMuPDF
 
+from D_validation.D02_llm_engine import record_api_usage, resolve_model_tier
+
 logger = logging.getLogger(__name__)
 
 # Category mapping from DocLayout-YOLO
@@ -135,7 +137,7 @@ def generate_vlm_description(
     image_bytes: bytes,
     visual_type: str,
     caption_text: Optional[str] = None,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
 ) -> Dict[str, Optional[str]]:
     """
     Generate title and description for an image using VLM.
@@ -168,6 +170,7 @@ def generate_vlm_description(
         logger.warning(f"VLM not available: {e}")
         return {"title": None, "description": None}
 
+    model = model or resolve_model_tier("vlm_visual_enrichment")
     image_b64 = base64.standard_b64encode(image_bytes).decode("utf-8")
 
     caption_context = ""
@@ -209,6 +212,8 @@ Respond ONLY with valid JSON, no other text."""
                 }
             ],
         )
+
+        record_api_usage(response, model, "vlm_visual_enrichment")
 
         # Parse JSON response
         response_text = next((block.text for block in response.content if hasattr(block, "text")), "").strip()

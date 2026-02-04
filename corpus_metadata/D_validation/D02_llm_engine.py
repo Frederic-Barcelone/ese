@@ -37,6 +37,7 @@ import os
 import re
 import time
 from pathlib import Path
+from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Protocol, Tuple
 
 import yaml
@@ -67,6 +68,178 @@ from Z_utils.Z04_image_utils import (
 )
 
 logger = logging.getLogger(__name__)
+
+# Model pricing per million tokens (input_cost, output_cost)
+MODEL_PRICING: Dict[str, Tuple[float, float]] = {
+    "claude-sonnet-4-20250514": (3.0, 15.0),
+    "claude-sonnet-4-5-20250929": (3.0, 15.0),
+    "claude-3-5-haiku-20241022": (0.80, 4.0),
+    "claude-haiku-4-5-20250901": (1.0, 5.0),
+}
+
+
+@dataclass
+class LLMUsageRecord:
+    """Single API call usage record."""
+    model: str
+    input_tokens: int
+    output_tokens: int
+    call_type: str
+    cache_read_tokens: int = 0
+    cache_creation_tokens: int = 0
+
+
+@dataclass
+class LLMUsageTracker:
+    """Accumulates token usage across all API calls in a pipeline run."""
+    records: List[LLMUsageRecord] = field(default_factory=list)
+
+    def record(
+        self,
+        model: str,
+        input_tokens: int,
+        output_tokens: int,
+        call_type: str = "unknown",
+        cache_read_tokens: int = 0,
+        cache_creation_tokens: int = 0,
+    ) -> None:
+        self.records.append(LLMUsageRecord(
+            model=model,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            call_type=call_type,
+            cache_read_tokens=cache_read_tokens,
+            cache_creation_tokens=cache_creation_tokens,
+        ))
+
+    @property
+    def total_input_tokens(self) -> int:
+        return sum(r.input_tokens for r in self.records)
+
+    @property
+    def total_output_tokens(self) -> int:
+        return sum(r.output_tokens for r in self.records)
+
+    @property
+    def total_cache_read_tokens(self) -> int:
+        return sum(r.cache_read_tokens for r in self.records)
+
+    @property
+    def total_calls(self) -> int:
+        return len(self.records)
+
+    def estimated_cost(self) -> float:
+        """Calculate estimated cost in USD based on model pricing."""
+        total = 0.0
+        for r in self.records:
+            input_price, output_price = MODEL_PRICING.get(r.model, (3.0, 15.0))
+            # Cache reads cost 10% of input price
+            base_input = r.input_tokens - r.cache_read_tokens
+            cache_cost = r.cache_read_tokens * (input_price * 0.1) / 1_000_000
+            input_cost = base_input * input_price / 1_000_000
+            output_cost = r.output_tokens * output_price / 1_000_000
+            total += input_cost + cache_cost + output_cost
+        return total
+
+    def summary_by_model(self) -> Dict[str, Dict[str, Any]]:
+        """Summarize usage grouped by model."""
+        by_model: Dict[str, Dict[str, Any]] = {}
+        for r in self.records:
+            if r.model not in by_model:
+                by_model[r.model] = {
+                    "calls": 0, "input_tokens": 0, "output_tokens": 0,
+                    "cache_read_tokens": 0, "cost": 0.0,
+                }
+            entry = by_model[r.model]
+            entry["calls"] += 1
+            entry["input_tokens"] += r.input_tokens
+            entry["output_tokens"] += r.output_tokens
+            entry["cache_read_tokens"] += r.cache_read_tokens
+            input_price, output_price = MODEL_PRICING.get(r.model, (3.0, 15.0))
+            base_input = r.input_tokens - r.cache_read_tokens
+            entry["cost"] += (
+                base_input * input_price / 1_000_000
+                + r.cache_read_tokens * (input_price * 0.1) / 1_000_000
+                + r.output_tokens * output_price / 1_000_000
+            )
+        return by_model
+
+    def summary_by_call_type(self) -> Dict[str, Dict[str, Any]]:
+        """Summarize usage grouped by call type."""
+        by_type: Dict[str, Dict[str, Any]] = {}
+        for r in self.records:
+            if r.call_type not in by_type:
+                by_type[r.call_type] = {
+                    "calls": 0, "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                }
+            entry = by_type[r.call_type]
+            entry["calls"] += 1
+            entry["input_tokens"] += r.input_tokens
+            entry["output_tokens"] += r.output_tokens
+            input_price, output_price = MODEL_PRICING.get(r.model, (3.0, 15.0))
+            base_input = r.input_tokens - r.cache_read_tokens
+            entry["cost"] += (
+                base_input * input_price / 1_000_000
+                + r.cache_read_tokens * (input_price * 0.1) / 1_000_000
+                + r.output_tokens * output_price / 1_000_000
+            )
+        return by_type
+
+    def reset(self) -> None:
+        self.records.clear()
+
+
+# Global usage tracker (shared across all ClaudeClient instances)
+_global_usage_tracker = LLMUsageTracker()
+
+
+def get_usage_tracker() -> LLMUsageTracker:
+    """Get the global LLM usage tracker."""
+    return _global_usage_tracker
+
+
+_model_tier_cache: Optional[Dict[str, str]] = None
+
+
+def resolve_model_tier(call_type: str, default_model: str = "claude-sonnet-4-20250514") -> str:
+    """Resolve the model to use for a given call type from config.yaml tiers.
+
+    Loads model_tiers from config once and caches. Falls back to default_model
+    if no tier mapping exists for the call_type.
+    """
+    global _model_tier_cache
+    if _model_tier_cache is None:
+        try:
+            config_path = Path(__file__).parent.parent / "G_config" / "config.yaml"
+            if config_path.exists():
+                with open(config_path, "r", encoding="utf-8") as f:
+                    data = yaml.safe_load(f) or {}
+                _model_tier_cache = data.get("api", {}).get("claude", {}).get("model_tiers", {})
+            else:
+                _model_tier_cache = {}
+        except Exception:
+            _model_tier_cache = {}
+    return _model_tier_cache.get(call_type, default_model)
+
+
+def record_api_usage(message, model: str, call_type: str) -> None:
+    """Record token usage from a raw anthropic API response into the global tracker.
+
+    Use this for direct anthropic.Anthropic().messages.create() calls
+    outside of ClaudeClient (e.g., in B_parsing, C_generators).
+    """
+    tracker = _global_usage_tracker
+    if hasattr(message, "usage") and message.usage:
+        usage = message.usage
+        tracker.record(
+            model=model,
+            input_tokens=getattr(usage, "input_tokens", 0) or 0,
+            output_tokens=getattr(usage, "output_tokens", 0) or 0,
+            call_type=call_type,
+            cache_read_tokens=getattr(usage, "cache_read_input_tokens", 0) or 0,
+            cache_creation_tokens=getattr(usage, "cache_creation_input_tokens", 0) or 0,
+        )
+
 
 # Optional anthropic import
 try:
@@ -107,6 +280,7 @@ class LLMClient(Protocol):
         top_p: float,
         seed: Optional[int] = None,
         response_format: Optional[Dict[str, Any]] = None,
+        call_type: str = "json",
     ) -> Dict[str, Any]: ...
 
     def complete_json_any(
@@ -120,6 +294,7 @@ class LLMClient(Protocol):
         top_p: float = 1.0,
         seed: Optional[int] = None,
         response_format: Optional[Dict[str, Any]] = None,
+        call_type: str = "json_any",
     ) -> Any: ...
 
 
@@ -145,6 +320,7 @@ class ClaudeClient:
         max_tokens: Optional[int] = None,
         temperature: Optional[float] = None,
         config_path: Optional[str] = None,
+        usage_tracker: Optional[LLMUsageTracker] = None,
     ):
         if anthropic is None:
             raise ImportError(
@@ -174,10 +350,23 @@ class ClaudeClient:
         # Initialize client
         self.client = anthropic.Anthropic(api_key=self.api_key)
 
+        # Token usage tracker
+        self.usage_tracker = usage_tracker or get_usage_tracker()
+
+        # Model tier routing (call_type -> model)
+        self._model_tiers: Dict[str, str] = cfg.get("model_tiers", {})
+
     @property
     def messages(self):
         """Provide access to the messages API for direct usage."""
         return self.client.messages
+
+    def resolve_model(self, call_type: str) -> str:
+        """Resolve the model to use for a given call type based on config tiers.
+
+        Falls back to self.default_model if no tier mapping exists.
+        """
+        return self._model_tiers.get(call_type, self.default_model)
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load Claude config from YAML file."""
@@ -197,6 +386,7 @@ class ClaudeClient:
                 "model": val_cfg.get("model"),
                 "max_tokens": val_cfg.get("max_tokens"),
                 "temperature": val_cfg.get("temperature"),
+                "model_tiers": claude_cfg.get("model_tiers", {}),
             }
         except (OSError, IOError, yaml.YAMLError, KeyError, TypeError) as e:
             logger.warning("Failed to load config from %s: %s", config_path, e)
@@ -213,10 +403,12 @@ class ClaudeClient:
         top_p: float = 1.0,
         seed: Optional[int] = None,
         response_format: Optional[Dict[str, Any]] = None,
+        call_type: str = "json",
     ) -> Dict[str, Any]:
         """Call Claude and return parsed JSON object response."""
         raw_text = self._call_claude(
-            system_prompt, user_prompt, model, temperature, max_tokens, top_p
+            system_prompt, user_prompt, model, temperature, max_tokens, top_p,
+            call_type=call_type,
         )
         return self._extract_json_object(raw_text)
 
@@ -231,10 +423,12 @@ class ClaudeClient:
         top_p: float = 1.0,
         seed: Optional[int] = None,
         response_format: Optional[Dict[str, Any]] = None,
+        call_type: str = "json_any",
     ) -> Any:
         """Call Claude and return parsed JSON (object or array)."""
         raw_text = self._call_claude(
-            system_prompt, user_prompt, model, temperature, max_tokens, top_p
+            system_prompt, user_prompt, model, temperature, max_tokens, top_p,
+            call_type=call_type,
         )
         return self._extract_json_any(raw_text)
 
@@ -248,12 +442,14 @@ class ClaudeClient:
         temperature: float = 0.0,
         auto_compress: bool = True,
         max_image_size: int = MAX_VISION_IMAGE_SIZE_BYTES,
+        call_type: str = "vision",
     ) -> Optional[Dict[str, Any]]:
         """
         Call Claude Vision API with an image and return parsed JSON response.
         Automatically handles images exceeding the 5MB limit by compressing them.
         """
-        use_model = model or self.default_model
+        # Model tier routing: if call_type has a tier mapping, use that model
+        use_model = self._model_tiers.get(call_type, model or self.default_model)
 
         # Check image size and compress if needed
         image_size = get_image_size_bytes(image_base64)
@@ -307,6 +503,9 @@ class ClaudeClient:
             ],
         )
 
+        # Track token usage
+        self._record_usage(message, use_model, call_type)
+
         raw_text = self._extract_text_from_message(message)
         return self._extract_json_any(raw_text)
 
@@ -318,22 +517,51 @@ class ClaudeClient:
         temperature: Optional[float],
         max_tokens: Optional[int],
         top_p: float,
+        call_type: str = "unknown",
     ) -> str:
         """Make Claude API call and return raw text response."""
-        use_model = model or self.default_model
+        # Model tier routing: if call_type has a tier mapping, use that model
+        use_model = self._model_tiers.get(call_type, model or self.default_model)
         use_max_tokens = max_tokens or self.default_max_tokens
         use_temperature = temperature if temperature is not None else self.default_temperature
+
+        # Build system message with prompt caching
+        system_messages: Any = [
+            {
+                "type": "text",
+                "text": system_prompt,
+                "cache_control": {"type": "ephemeral"},
+            }
+        ]
 
         message = self.client.messages.create(
             model=use_model,
             max_tokens=use_max_tokens,
             temperature=use_temperature,
             top_p=top_p,
-            system=system_prompt,
+            system=system_messages,
             messages=[{"role": "user", "content": user_prompt}],
         )
 
+        # Track token usage
+        self._record_usage(message, use_model, call_type)
+
         return self._extract_text_from_message(message)
+
+    def _record_usage(self, message, model: str, call_type: str) -> None:
+        """Record token usage from a Claude API response."""
+        if hasattr(message, "usage") and message.usage:
+            usage = message.usage
+            cache_read = getattr(usage, "cache_read_input_tokens", 0) or 0
+            cache_creation = getattr(usage, "cache_creation_input_tokens", 0) or 0
+            self.usage_tracker.record(
+                model=model,
+                input_tokens=getattr(usage, "input_tokens", 0) or 0,
+                output_tokens=getattr(usage, "output_tokens", 0) or 0,
+                call_type=call_type,
+                cache_read_tokens=cache_read,
+                cache_creation_tokens=cache_creation,
+            )
 
     def _extract_text_from_message(self, message) -> str:
         """Extract text content from Claude message response."""
@@ -511,6 +739,7 @@ class LLMEngine:
                 top_p=self.top_p,
                 seed=self.seed,
                 response_format=self.response_format,
+                call_type="abbreviation_single_validation",
             )
         except (AnthropicRateLimitError, AnthropicConnectionError, AnthropicStatusError, AnthropicAPIError, Exception) as e:
             return self._handle_llm_error(candidate, e, context_hash, bundle)
@@ -742,7 +971,10 @@ class LLMEngine:
         user_prompt = bundle.user_template.format(candidates=candidates_text, count=len(batch))
 
         try:
-            raw = self._call_client_json_any(bundle.system_prompt, user_prompt, batch_max_tokens)
+            raw = self._call_client_json_any(
+                bundle.system_prompt, user_prompt, batch_max_tokens,
+                call_type="abbreviation_batch_validation",
+            )
         except (AnthropicRateLimitError, AnthropicConnectionError, AnthropicTimeoutError, AnthropicStatusError, AnthropicAPIError) as e:
             logger.warning("Batch LLM error, falling back: %s", e)
             return [self.verify_candidate(c) for c in batch]
@@ -794,7 +1026,10 @@ class LLMEngine:
 
         return candidate_lines, id_to_candidate
 
-    def _call_client_json_any(self, system_prompt: str, user_prompt: str, max_tokens: int) -> Any:
+    def _call_client_json_any(
+        self, system_prompt: str, user_prompt: str, max_tokens: int,
+        call_type: str = "batch_validation",
+    ) -> Any:
         """Call LLM client with complete_json_any if available."""
         if hasattr(self.client, "complete_json_any"):
             return self.client.complete_json_any(
@@ -806,6 +1041,7 @@ class LLMEngine:
                 top_p=self.top_p,
                 seed=self.seed,
                 response_format=self.response_format,
+                call_type=call_type,
             )
         return self.client.complete_json(
             system_prompt=system_prompt,
@@ -816,6 +1052,7 @@ class LLMEngine:
             top_p=self.top_p,
             seed=self.seed,
             response_format=self.response_format,
+            call_type=call_type,
         )
 
     def _parse_batch_response(self, batch: List[Candidate], raw: Any) -> List[ExtractedEntity]:
@@ -939,7 +1176,10 @@ class LLMEngine:
         user_prompt = bundle.user_template.format(candidates=candidates_text)
 
         try:
-            raw = self._call_client_json_any(bundle.system_prompt, user_prompt, self.max_tokens)
+            raw = self._call_client_json_any(
+                bundle.system_prompt, user_prompt, self.max_tokens,
+                call_type="fast_reject",
+            )
         except (AnthropicRateLimitError, AnthropicConnectionError, AnthropicTimeoutError, AnthropicStatusError, AnthropicAPIError, Exception) as e:
             logger.warning("Haiku error, sending all to Sonnet: %s", e)
             return batch, []
@@ -1142,4 +1382,15 @@ class LLMEngine:
         return (start, end)
 
 
-__all__ = ["ClaudeClient", "LLMClient", "LLMEngine", "VerificationResult"]
+__all__ = [
+    "ClaudeClient",
+    "LLMClient",
+    "LLMEngine",
+    "LLMUsageRecord",
+    "LLMUsageTracker",
+    "MODEL_PRICING",
+    "VerificationResult",
+    "get_usage_tracker",
+    "record_api_usage",
+    "resolve_model_tier",
+]

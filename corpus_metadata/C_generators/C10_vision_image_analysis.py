@@ -725,6 +725,7 @@ class VisionImageAnalyzer:
                 prompt=prompt,
                 model=self.llm_model,
                 max_tokens=2000,
+                call_type="image_classification",
             )
 
             return response if isinstance(response, dict) else None
@@ -797,6 +798,7 @@ Note: This is OCR-extracted text, so there may be some extraction errors."""
                     model=self.llm_model,
                     max_tokens=2000,
                     temperature=0.0,
+                    call_type="ocr_text_fallback",
                 )
             else:
                 return None

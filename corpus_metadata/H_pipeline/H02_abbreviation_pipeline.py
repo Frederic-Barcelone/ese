@@ -507,8 +507,13 @@ class AbbreviationPipeline:
         self,
         llm_candidates: List["Candidate"],
         batch_delay_ms: float,
+        use_fast_reject: bool = True,
     ) -> List["ExtractedEntity"]:
-        """Validate candidates using LLM."""
+        """Validate candidates using LLM.
+
+        If use_fast_reject is True, pre-screens candidates with Haiku
+        to reject obvious non-abbreviations before sending to full validation.
+        """
         assert self.llm_engine is not None, (
             "LLM engine must be initialized for validation"
         )
@@ -524,6 +529,26 @@ class AbbreviationPipeline:
                 explicit_candidates.append(c)
             else:
                 lexicon_candidates.append(c)
+
+        # Fast-reject pre-screening for lexicon candidates (skip explicit pairs — they're high trust)
+        fast_rejected_count = 0
+        if use_fast_reject and lexicon_candidates:
+            haiku_model = "claude-haiku-4-5-20250901"
+            # Use model tier if configured
+            if self.claude_client and hasattr(self.claude_client, "resolve_model"):
+                haiku_model = self.claude_client.resolve_model("fast_reject")
+
+            print(f"  Fast-reject pre-screening {len(lexicon_candidates)} lexicon candidates...")
+            try:
+                needs_review, rejected = self.llm_engine.fast_reject_batch(
+                    lexicon_candidates, haiku_model=haiku_model, batch_size=20
+                )
+                fast_rejected_count = len(rejected)
+                results.extend(rejected)
+                lexicon_candidates = needs_review
+                print(f"  Fast-reject: {fast_rejected_count} rejected, {len(needs_review)} sent to validation")
+            except Exception as e:
+                print(f"  [WARN] Fast-reject failed, sending all to validation: {e}")
 
         print(f"  Batch (explicit pairs): {len(explicit_candidates)}")
         print(f"  Individual (lexicon): {len(lexicon_candidates)}")
@@ -739,6 +764,7 @@ Return ONLY the JSON array, nothing else."""
                     temperature=0.0,
                     max_tokens=1000,
                     top_p=1.0,
+                    call_type="sf_only_extraction",
                 )
                 if isinstance(response, list):
                     for item in response:

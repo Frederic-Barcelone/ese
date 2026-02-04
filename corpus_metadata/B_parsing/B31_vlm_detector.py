@@ -40,6 +40,8 @@ from typing import Any, Dict, List, Optional, Tuple
 import anthropic
 import fitz  # PyMuPDF
 
+from D_validation.D02_llm_engine import record_api_usage, resolve_model_tier
+
 logger = logging.getLogger(__name__)
 
 
@@ -174,7 +176,7 @@ def detect_visuals_vlm_single_page(
     doc: fitz.Document,
     page_num: int,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
 ) -> VLMPageDetection:
     """
     Use VLM to detect visuals on a single page.
@@ -188,6 +190,8 @@ def detect_visuals_vlm_single_page(
     Returns:
         VLMPageDetection with detected visuals
     """
+    model = model or resolve_model_tier("vlm_detection")
+
     # Render page
     base64_image, page_width, page_height = render_page_for_vlm(doc, page_num)
 
@@ -216,6 +220,8 @@ def detect_visuals_vlm_single_page(
                 }
             ],
         )
+
+        record_api_usage(response, model, "vlm_detection")
 
         raw_text = next((block.text for block in response.content if hasattr(block, "text")), "")
         tokens_used = response.usage.input_tokens + response.usage.output_tokens
@@ -319,7 +325,7 @@ def parse_vlm_detection_response(
 def detect_visuals_vlm_document(
     pdf_path: str,
     client: Optional[anthropic.Anthropic] = None,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
     skip_pages: Optional[List[int]] = None,
 ) -> Dict[str, Any]:
     """
@@ -334,6 +340,8 @@ def detect_visuals_vlm_document(
     Returns:
         Dict with detection results and statistics
     """
+    model = model or resolve_model_tier("vlm_detection")
+
     if client is None:
         client = anthropic.Anthropic()
 

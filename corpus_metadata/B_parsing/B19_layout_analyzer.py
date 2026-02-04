@@ -41,6 +41,8 @@ import anthropic
 import fitz  # PyMuPDF
 from PIL import Image, ImageDraw, ImageFont
 
+from D_validation.D02_llm_engine import record_api_usage, resolve_model_tier
+
 from B_parsing.B18_layout_models import (
     LayoutPattern,
     PageLayout,
@@ -144,7 +146,7 @@ def analyze_page_layout(
     doc: fitz.Document,
     page_num: int,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
 ) -> PageLayout:
     """
     Analyze a page's layout and identify visual zones using VLM.
@@ -158,6 +160,8 @@ def analyze_page_layout(
     Returns:
         PageLayout with pattern and visual zones
     """
+    model = model or resolve_model_tier("layout_analysis")
+
     # Render page
     base64_image, page_width, page_height = render_page_for_analysis(doc, page_num)
 
@@ -185,6 +189,8 @@ def analyze_page_layout(
                 }
             ],
         )
+
+        record_api_usage(response, model, "layout_analysis")
 
         content_block = response.content[0]
         raw_text = content_block.text if hasattr(content_block, "text") else str(content_block)
@@ -381,7 +387,7 @@ def analyze_page_with_bbox(
     doc: fitz.Document,
     page_num: int,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
 ) -> List[dict]:
     """
     Analyze a page and get precise bounding boxes for visuals.
@@ -395,6 +401,7 @@ def analyze_page_with_bbox(
     Returns:
         List of dicts with type, label, bbox (normalized), confidence
     """
+    model = model or resolve_model_tier("layout_analysis")
     base64_image, page_width, page_height = render_page_for_analysis(doc, page_num)
 
     try:
@@ -421,6 +428,8 @@ def analyze_page_with_bbox(
                 }
             ],
         )
+
+        record_api_usage(response, model, "layout_analysis")
 
         content_block = response.content[0]
         raw_text = content_block.text if hasattr(content_block, "text") else str(content_block)
@@ -486,7 +495,7 @@ def refine_bboxes(
     annotated_image: Image.Image,
     visuals: List[dict],
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
 ) -> List[dict]:
     """
     Ask VLM to refine bounding boxes by showing it the annotated image.
@@ -500,6 +509,7 @@ def refine_bboxes(
     Returns:
         List of refined visual dicts with corrected bboxes
     """
+    model = model or resolve_model_tier("layout_analysis")
     # Convert image to base64
     buffer = io.BytesIO()
     annotated_image.save(buffer, format="PNG")
@@ -529,6 +539,8 @@ def refine_bboxes(
                 }
             ],
         )
+
+        record_api_usage(response, model, "layout_analysis")
 
         content_block = response.content[0]
         raw_text = content_block.text if hasattr(content_block, "text") else str(content_block)
@@ -1068,7 +1080,7 @@ def analyze_page_with_grid(
     doc: fitz.Document,
     page_num: int,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "",
     rows: int = 10,
     cols: int = 10,
     output_dir: Optional[str] = None,
@@ -1090,6 +1102,7 @@ def analyze_page_with_grid(
     Returns:
         List of visuals with bboxes derived from grid cells
     """
+    model = model or resolve_model_tier("layout_analysis")
     # Create grid overlay
     grid_img, grid_info = draw_grid_overlay(doc, page_num, rows, cols, style=style)
 
@@ -1132,6 +1145,8 @@ def analyze_page_with_grid(
                 }
             ],
         )
+
+        record_api_usage(response, model, "layout_analysis")
 
         content_block = response.content[0]
         raw_text = content_block.text if hasattr(content_block, "text") else str(content_block)
@@ -1488,6 +1503,8 @@ def analyze_page_two_phase(
                     }
                 ],
             )
+
+            record_api_usage(response, model, "layout_analysis")
 
             content_block = response.content[0]
             raw_text = content_block.text if hasattr(content_block, "text") else str(content_block)

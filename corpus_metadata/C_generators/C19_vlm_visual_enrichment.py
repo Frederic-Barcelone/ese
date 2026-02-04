@@ -45,6 +45,8 @@ from A_core.A13_visual_models import (
     VLMTableValidation,
 )
 
+from D_validation.D02_llm_engine import record_api_usage, resolve_model_tier
+
 logger = logging.getLogger(__name__)
 
 
@@ -57,9 +59,13 @@ logger = logging.getLogger(__name__)
 class VLMConfig:
     """Configuration for VLM enrichment."""
 
-    model: str = "claude-sonnet-4-20250514"
+    model: str = ""
     max_tokens: int = 2000
     temperature: float = 0.0
+
+    def __post_init__(self):
+        if not self.model:
+            self.model = resolve_model_tier("vlm_visual_enrichment")
 
     # Classification thresholds
     min_classification_confidence: float = 0.7
@@ -217,6 +223,7 @@ class VLMClient:
                 ],
             )
 
+            record_api_usage(message, self.config.model, "vlm_visual_enrichment")
             return message.content[0].text
 
         except Exception as e:
@@ -248,6 +255,7 @@ class VLMClient:
                 ],
             )
 
+            record_api_usage(message, self.config.model, "vlm_visual_enrichment")
             return message.content[0].text
 
         except Exception as e:

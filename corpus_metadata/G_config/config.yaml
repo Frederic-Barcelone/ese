@@ -670,6 +670,31 @@ api:
     max_tokens: 1500
     temperature: 0
 
+    # Model tier routing: maps call types to models
+    # "simple" tasks use cheaper Haiku, "complex" tasks use Sonnet
+    model_tiers:
+      # Simple tasks -> Haiku 4.5 ($1/$5 per MTok) — 3x cheaper than Sonnet
+      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
+      abbreviation_single_validation: "claude-haiku-4-5-20250901"
+      fast_reject: "claude-haiku-4-5-20250901"
+      document_classification: "claude-haiku-4-5-20250901"
+      image_classification: "claude-haiku-4-5-20250901"
+      sf_only_extraction: "claude-haiku-4-5-20250901"
+      author_extraction: "claude-haiku-4-5-20250901"
+      layout_analysis: "claude-haiku-4-5-20250901"
+      vlm_visual_enrichment: "claude-haiku-4-5-20250901"
+      description_extraction: "claude-haiku-4-5-20250901"
+      ocr_text_fallback: "claude-haiku-4-5-20250901"
+
+      # Complex tasks -> Sonnet 4 ($3/$15 per MTok) — best reasoning
+      feasibility_extraction: "claude-sonnet-4-20250514"
+      recommendation_extraction: "claude-sonnet-4-20250514"
+      recommendation_vlm: "claude-sonnet-4-20250514"
+      vlm_table_extraction: "claude-sonnet-4-20250514"
+      flowchart_analysis: "claude-sonnet-4-20250514"
+      chart_analysis: "claude-sonnet-4-20250514"
+      vlm_detection: "claude-sonnet-4-20250514"
+
 # ==============================================================================
 # NCT ENRICHER CONFIGURATION
 # ==============================================================================

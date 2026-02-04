@@ -102,6 +102,23 @@ class UsageTracker:
                 )
             """)
 
+            # LLM usage table (token tracking)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS llm_usage (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    document_id TEXT,
+                    model TEXT NOT NULL,
+                    call_type TEXT NOT NULL,
+                    input_tokens INTEGER DEFAULT 0,
+                    output_tokens INTEGER DEFAULT 0,
+                    cache_read_tokens INTEGER DEFAULT 0,
+                    cache_creation_tokens INTEGER DEFAULT 0,
+                    estimated_cost_usd REAL DEFAULT 0.0,
+                    logged_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (document_id) REFERENCES documents(document_id)
+                )
+            """)
+
             # Create indexes for faster queries
             cursor.execute("""
                 CREATE INDEX IF NOT EXISTS idx_lexicon_document
@@ -118,6 +135,14 @@ class UsageTracker:
             cursor.execute("""
                 CREATE INDEX IF NOT EXISTS idx_datasource_name
                 ON datasource_usage(datasource_name)
+            """)
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_llm_document
+                ON llm_usage(document_id)
+            """)
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_llm_model
+                ON llm_usage(model)
             """)
 
             conn.commit()
@@ -232,6 +257,101 @@ class UsageTracker:
                     logged_at = CURRENT_TIMESTAMP
             """, (document_id, datasource_name, queries, results, errors))
             conn.commit()
+        finally:
+            conn.close()
+
+    def log_llm_usage(
+        self,
+        document_id: Optional[str],
+        model: str,
+        call_type: str,
+        input_tokens: int = 0,
+        output_tokens: int = 0,
+        cache_read_tokens: int = 0,
+        cache_creation_tokens: int = 0,
+        estimated_cost_usd: float = 0.0,
+    ) -> None:
+        """Log a single LLM API call's token usage."""
+        conn = self._get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO llm_usage
+                    (document_id, model, call_type, input_tokens, output_tokens,
+                     cache_read_tokens, cache_creation_tokens, estimated_cost_usd)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (document_id, model, call_type, input_tokens, output_tokens,
+                  cache_read_tokens, cache_creation_tokens, estimated_cost_usd))
+            conn.commit()
+        finally:
+            conn.close()
+
+    def log_llm_usage_batch(
+        self,
+        document_id: Optional[str],
+        records: list,
+    ) -> None:
+        """Log multiple LLM usage records at once (from LLMUsageTracker.records)."""
+        if not records:
+            return
+        conn = self._get_connection()
+        try:
+            cursor = conn.cursor()
+            rows = [
+                (document_id, r.model, r.call_type, r.input_tokens, r.output_tokens,
+                 r.cache_read_tokens, r.cache_creation_tokens, 0.0)
+                for r in records
+            ]
+            cursor.executemany("""
+                INSERT INTO llm_usage
+                    (document_id, model, call_type, input_tokens, output_tokens,
+                     cache_read_tokens, cache_creation_tokens, estimated_cost_usd)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, rows)
+            conn.commit()
+        finally:
+            conn.close()
+
+    def get_llm_stats(self) -> List[Dict[str, Any]]:
+        """Get aggregated LLM usage statistics by model."""
+        conn = self._get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT
+                    model,
+                    COUNT(*) as total_calls,
+                    SUM(input_tokens) as total_input_tokens,
+                    SUM(output_tokens) as total_output_tokens,
+                    SUM(cache_read_tokens) as total_cache_read_tokens,
+                    SUM(estimated_cost_usd) as total_estimated_cost,
+                    COUNT(DISTINCT document_id) as documents_used
+                FROM llm_usage
+                GROUP BY model
+                ORDER BY total_input_tokens DESC
+            """)
+            return [dict(row) for row in cursor.fetchall()]
+        finally:
+            conn.close()
+
+    def get_llm_stats_by_call_type(self) -> List[Dict[str, Any]]:
+        """Get aggregated LLM usage statistics by call type."""
+        conn = self._get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT
+                    call_type,
+                    model,
+                    COUNT(*) as total_calls,
+                    SUM(input_tokens) as total_input_tokens,
+                    SUM(output_tokens) as total_output_tokens,
+                    SUM(cache_read_tokens) as total_cache_read_tokens
+                FROM llm_usage
+                GROUP BY call_type, model
+                ORDER BY total_input_tokens DESC
+            """)
+            return [dict(row) for row in cursor.fetchall()]
         finally:
             conn.close()
 
@@ -380,6 +500,7 @@ class UsageTracker:
         docs = self.get_all_documents()
         lexicon_stats = self.get_lexicon_stats()
         datasource_stats = self.get_datasource_stats()
+        llm_stats = self.get_llm_stats()
 
         print("\n" + "=" * 60)
         print("USAGE TRACKER SUMMARY")
@@ -389,6 +510,30 @@ class UsageTracker:
         completed = sum(1 for d in docs if d.get("status") == "completed")
         print(f"  Completed: {completed}")
         print(f"  Failed/Partial: {len(docs) - completed}")
+
+        # LLM token usage summary
+        if llm_stats:
+            print("\n" + "-" * 60)
+            print("LLM TOKEN USAGE")
+            print("-" * 60)
+            print(f"{'Model':<35} {'Calls':<7} {'Input':<10} {'Output':<10} {'Cache':<10}")
+            print("-" * 60)
+            total_input = 0
+            total_output = 0
+            total_cache = 0
+            total_calls = 0
+            for stat in llm_stats:
+                inp = stat['total_input_tokens'] or 0
+                out = stat['total_output_tokens'] or 0
+                cache = stat['total_cache_read_tokens'] or 0
+                calls = stat['total_calls'] or 0
+                total_input += inp
+                total_output += out
+                total_cache += cache
+                total_calls += calls
+                print(f"  {stat['model']:<33} {calls:<7} {inp:<10,} {out:<10,} {cache:<10,}")
+            print("-" * 60)
+            print(f"  {'TOTAL':<33} {total_calls:<7} {total_input:<10,} {total_output:<10,} {total_cache:<10,}")
 
         print("\n" + "-" * 60)
         print("LEXICON USAGE")

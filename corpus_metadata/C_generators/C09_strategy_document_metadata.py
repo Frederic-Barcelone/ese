@@ -817,6 +817,7 @@ Classify this document. Return JSON only."""
                     model=self.llm_model,
                     temperature=0.0,
                     max_tokens=500,
+                    call_type="document_classification",
                 )
             else:
                 response = self.llm_client.complete_json(
@@ -825,6 +826,7 @@ Classify this document. Return JSON only."""
                     model=self.llm_model,
                     temperature=0.0,
                     max_tokens=500,
+                    call_type="document_classification",
                 )
 
             if not response:
@@ -928,6 +930,7 @@ Generate title and descriptions. Return JSON only."""
                     model=self.llm_model,
                     temperature=0.0,
                     max_tokens=800,
+                    call_type="description_extraction",
                 )
             else:
                 response = self.llm_client.complete_json(
@@ -936,6 +939,7 @@ Generate title and descriptions. Return JSON only."""
                     model=self.llm_model,
                     temperature=0.0,
                     max_tokens=800,
+                    call_type="description_extraction",
                 )
 
             if not response:

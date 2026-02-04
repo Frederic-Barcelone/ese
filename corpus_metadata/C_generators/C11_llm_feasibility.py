@@ -253,6 +253,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
                     model=self.llm_model,
                     temperature=0.0,
                     max_tokens=2000,
+                    call_type="feasibility_extraction",
                 )
             else:
                 response = self.llm_client.complete_json(
@@ -261,6 +262,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
                     model=self.llm_model,
                     temperature=0.0,
                     max_tokens=2000,
+                    call_type="feasibility_extraction",
                 )
 
             if isinstance(response, list) and len(response) > 0:

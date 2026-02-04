@@ -39,6 +39,7 @@ import yaml
 from Z_utils.Z05_path_utils import get_base_path
 from Z_utils.Z06_usage_tracker import UsageTracker
 from Z_utils.Z07_console_output import get_printer, reset_printer
+from D_validation.D02_llm_engine import get_usage_tracker
 # =============================================================================
 
 # Ensure imports work
@@ -1107,6 +1108,10 @@ class Orchestrator:
             doc_id, results, disease_results, gene_results, drug_results,
             pharma_results, author_results, citation_results, feasibility_results
         )
+
+        # Log LLM token usage for this document
+        self._log_llm_usage(doc_id)
+
         self.usage_tracker.finish_document(doc_id, status="completed")
 
         # Print timing summary
@@ -1505,6 +1510,40 @@ class Orchestrator:
             doc_id, "Claude_API", queries=1, results=1
         )
 
+    def _log_llm_usage(self, doc_id: str) -> None:
+        """Log LLM token usage from the global tracker and print cost summary."""
+        tracker = get_usage_tracker()
+        if not tracker.records:
+            return
+
+        # Save to SQLite
+        self.usage_tracker.log_llm_usage_batch(doc_id, tracker.records)
+
+        # Print per-document cost summary
+        total_input = tracker.total_input_tokens
+        total_output = tracker.total_output_tokens
+        total_cache = tracker.total_cache_read_tokens
+        total_cost = tracker.estimated_cost()
+        total_calls = tracker.total_calls
+
+        print(f"\nLLM USAGE ({doc_id}):")
+        print(f"  API calls:     {total_calls}")
+        print(f"  Input tokens:  {total_input:,}")
+        print(f"  Output tokens: {total_output:,}")
+        if total_cache > 0:
+            print(f"  Cache reads:   {total_cache:,}")
+        print(f"  Est. cost:     ${total_cost:.4f}")
+
+        # Print breakdown by model
+        by_model = tracker.summary_by_model()
+        if len(by_model) > 1:
+            for model_name, stats in by_model.items():
+                short_name = model_name.split("-")[1] if "-" in model_name else model_name
+                print(f"    {short_name}: {stats['calls']} calls, ${stats['cost']:.4f}")
+
+        # Reset tracker for next document
+        tracker.reset()
+
     def process_folder(
         self, folder_path: Optional[str] = None, batch_delay_ms: float = 100
     ) -> Dict[str, ExtractionResult]:
@@ -1570,6 +1609,36 @@ class Orchestrator:
             avg_time = batch_elapsed / len(doc_times)
             print(f"  {'AVERAGE PER DOCUMENT':<40} {avg_time:>6.1f}s")
         print(f"{'─' * 50}")
+
+        # Print LLM cost summary from database
+        llm_stats = self.usage_tracker.get_llm_stats()
+        if llm_stats:
+            total_cost = 0.0
+            total_input = 0
+            total_output = 0
+            total_calls_all = 0
+            from D_validation.D02_llm_engine import MODEL_PRICING
+            for stat in llm_stats:
+                inp = stat['total_input_tokens'] or 0
+                out = stat['total_output_tokens'] or 0
+                cache = stat['total_cache_read_tokens'] or 0
+                calls = stat['total_calls'] or 0
+                total_input += inp
+                total_output += out
+                total_calls_all += calls
+                ip, op = MODEL_PRICING.get(stat['model'], (3.0, 15.0))
+                base_inp = inp - cache
+                cost = base_inp * ip / 1_000_000 + cache * (ip * 0.1) / 1_000_000 + out * op / 1_000_000
+                total_cost += cost
+
+            print(f"\n{'─' * 50}")
+            print("LLM COST SUMMARY (BATCH)")
+            print(f"{'─' * 50}")
+            print(f"  Total API calls:     {total_calls_all}")
+            print(f"  Total input tokens:  {total_input:,}")
+            print(f"  Total output tokens: {total_output:,}")
+            print(f"  Estimated cost:      ${total_cost:.4f}")
+            print(f"{'─' * 50}")
 
         # Print lexicon/data source usage summary
         self.usage_tracker.print_summary()

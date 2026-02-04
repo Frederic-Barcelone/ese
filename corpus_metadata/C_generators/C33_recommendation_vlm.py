@@ -35,6 +35,8 @@ import logging
 import re
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, cast
 
+from D_validation.D02_llm_engine import record_api_usage
+
 logger = logging.getLogger(__name__)
 
 from A_core.A18_recommendation_models import (
@@ -246,6 +248,8 @@ class VLMExtractionMixin:
                     }
                 ],
             )
+
+            record_api_usage(response, self.llm_model, "recommendation_vlm")
 
             if not response.content:
                 return {}

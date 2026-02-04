@@ -33,6 +33,8 @@ import re
 from typing import Any, Dict, List, Optional
 
 
+from D_validation.D02_llm_engine import record_api_usage
+
 logger = logging.getLogger(__name__)
 
 from A_core.A17_care_pathway_models import (
@@ -301,6 +303,8 @@ class FlowchartGraphExtractor:
                 max_tokens=4096,
                 messages=[message],
             )
+
+            record_api_usage(response, self.llm_model, "flowchart_analysis")
 
             # Extract text from response
             if response.content and len(response.content) > 0:

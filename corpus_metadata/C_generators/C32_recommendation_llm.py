@@ -43,6 +43,8 @@ from A_core.A18_recommendation_models import (
     RecommendationType,
 )
 
+from D_validation.D02_llm_engine import record_api_usage
+
 logger = logging.getLogger(__name__)
 
 from .C31_recommendation_patterns import RECOMMENDATION_EXTRACTION_PROMPT
@@ -95,6 +97,8 @@ class LLMExtractionMixin:
                     }
                 ],
             )
+
+            record_api_usage(response, self.llm_model, "recommendation_extraction")
 
             if response.content and len(response.content) > 0:
                 import json
