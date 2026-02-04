@@ -11,19 +11,20 @@ python-dotenv>=1.0
 unstructured[pdf,pymupdf]>=0.10.0
 flashtext>=2.7
 pymupdf>=1.23.0
-pymupdf4llm>=0.0.17
 
 # spaCy (pinned for scispacy compatibility)
 spacy>=3.7.4,<3.8.0
 scispacy>=0.5.0
-numpy>=1.19.0,<2.0.0
-thinc>=8.2.0,<8.3.0
-blis>=0.7.0,<0.8.0
+numpy>=1.19.0,<2.0.0    # pinned <2 for scispacy compat
+thinc>=8.2.0,<8.3.0     # pinned for spacy compat
+blis>=0.7.0,<0.8.0      # pinned for thinc compat
 
 # Table/Visual Extraction
 docling>=2.70.0
 docling-surya>=0.1.0
+doclayout_yolo>=0.0.4
 transformers>=4.49.0,<5.0.0  # rt_detr_v2 table model requires >=4.49.0
+torch>=2.0.0
 
 # scispacy models (install separately)
 # pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_lg-0.5.4.tar.gz
@@ -31,6 +32,4 @@ transformers>=4.49.0,<5.0.0  # rt_detr_v2 table model requires >=4.49.0
 
 # Additional dependencies
 requests>=2.25.0
-pandas>=1.3.0
 Pillow>=9.0.0
-tqdm>=4.60.0
