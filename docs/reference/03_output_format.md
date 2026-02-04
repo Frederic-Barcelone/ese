@@ -43,7 +43,7 @@ Every entity export file wraps results in a document-level envelope. The exact f
   "timestamp": "2025-02-03T14:30:45.123456",
   "document": "document.pdf",
   "document_path": "/absolute/path/to/document.pdf",
-  "pipeline_version": "0.7"
+  "pipeline_version": "0.8"
 }
 ```
 
@@ -68,7 +68,7 @@ Every entity export file wraps results in a document-level envelope. The exact f
   "run_id": "RUN_20250203_143045_abc123",
   "timestamp": "2025-02-03T14:30:45.123456",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "statistics": {
     "total_candidates": 45,
     "validated": 32,
@@ -132,7 +132,7 @@ Every entity export file wraps results in a document-level envelope. The exact f
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_candidates": 120,
   "total_validated": 85,
   "total_rejected": 30,
@@ -204,7 +204,7 @@ Every entity export file wraps results in a document-level envelope. The exact f
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_candidates": 50,
   "total_validated": 30,
   "total_rejected": 18,
@@ -283,7 +283,7 @@ Every entity export file wraps results in a document-level envelope. The exact f
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_candidates": 25,
   "total_validated": 18,
   "total_rejected": 7,
@@ -319,7 +319,7 @@ Every entity export file wraps results in a document-level envelope. The exact f
       "page": 4,
       "mention_count": 8,
       "pages_mentioned": [2, 4, 6, 10, 12],
-      "lexicon_source": "gene_synonyms.json",
+      "lexicon_source": "2025_08_orphadata_genes.json",
       "validation_flags": []
     }
   ]
@@ -359,7 +359,7 @@ Each disease linkage contains:
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_detected": 12,
   "unique_authors": 10,
   "authors": [
@@ -392,7 +392,7 @@ Each disease linkage contains:
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_detected": 45,
   "unique_identifiers": 38,
   "validation_summary": {
@@ -439,7 +439,7 @@ Citations include API validation results (DOI resolution, PMID lookup, NCT verif
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_detected": 5,
   "unique_companies": 3,
   "companies": [
@@ -491,7 +491,7 @@ Contains structured clinical trial feasibility data including:
   "run_id": "...",
   "timestamp": "...",
   "document": "document.pdf",
-  "pipeline_version": "0.7",
+  "pipeline_version": "0.8",
   "total_pathways": 1,
   "pathways": [
     {

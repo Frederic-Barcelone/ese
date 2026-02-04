@@ -13,7 +13,7 @@ ESE loads approximately 617,000 terms from multiple biomedical lexicons at start
 | RxNorm | 132K | Drug vocabulary | `2025_08_lexicon_drug.json` |
 | ChEMBL | 23K | Approved drugs | `2025_chembl_drugs.json` |
 | Orphanet | 9.5K | Rare diseases with ORPHA codes | `2025_08_orphanet_diseases.json` |
-| HGNC | ~40K | Gene symbols and synonyms | `gene_synonyms.json` |
+| HGNC/Orphadata | ~40K | Gene symbols and synonyms | `2025_08_orphadata_genes.json` |
 | Trial Acronyms | 125K | ClinicalTrials.gov trial acronyms | `trial_acronyms_lexicon.json` |
 | General Disease | 29K | General disease terms | `2025_08_lexicon_disease.json` |
 | Specialized Disease | ~3K | PAH, ANCA, IgAN specific | `disease_lexicon_pah.json`, `disease_lexicon_anca.json`, `disease_lexicon_igan.json` |

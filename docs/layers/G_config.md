@@ -43,7 +43,7 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 
 | Section | Content |
 |---------|---------|
-| `system` | Name, version (`15.0`), pipeline version (`0.7`) |
+| `system` | Name, version (`15.0`), pipeline version (`0.8`) |
 | `paths` | Base paths, dictionaries, databases, logs, cache, PDF input, gold data |
 | `lexicons` | 20+ lexicon file mappings (abbreviation, disease, drug, UMLS, MONDO, ChEMBL, trial acronyms, PRO scales) |
 | `databases` | SQLite databases (disease_ontology.db, orphanet_nlp.db) |
@@ -67,7 +67,7 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 **Environment variables:**
 
 - `CORPUS_BASE_PATH` -- Base path for all resources (auto-detected if unset)
-- `ANTHROPIC_API_KEY` or `CLAUDE_API_KEY` -- API key for Claude validation
+- `ANTHROPIC_API_KEY` -- API key for Claude validation
 
 **Extraction presets:**
 
@@ -75,7 +75,7 @@ Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from t
 |--------|-----------|
 | `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | Everything including authors, citations, tables, figures, metadata |
-| `minimal` | Abbreviations only (no LLM) |
+| `minimal` | Abbreviations only |
 | `drugs_only` | Drug detection only |
 | `diseases_only` | Disease detection only |
 | `genes_only` | Gene detection only |

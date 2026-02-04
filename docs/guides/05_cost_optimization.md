@@ -4,7 +4,7 @@ This guide covers the ESE pipeline's LLM cost optimization system: model tier ro
 
 ## Overview
 
-The pipeline makes 19 LLM API calls across 12 files per document. Without optimization, all calls use Sonnet 4 ($3/$15 per MTok). The cost optimization system routes simple tasks to Haiku ($1/$5 per MTok), applies prompt caching (90% savings on repeated system prompts), and pre-screens candidates with cheap fast-reject calls.
+The pipeline makes 17 unique LLM call_types across 12 files per document. Without optimization, all calls use Sonnet 4 ($3/$15 per MTok). The cost optimization system routes simple tasks to Haiku ($1/$5 per MTok), applies prompt caching (90% savings on repeated system prompts), and pre-screens candidates with cheap fast-reject calls.
 
 ## Model Tier Routing
 

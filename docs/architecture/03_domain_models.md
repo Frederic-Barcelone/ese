@@ -658,8 +658,8 @@ class DocumentMetadata(BaseModel):
 
 - **DocumentType**: Classification result with `code`, `name`, `confidence` (e.g., DLA, CRM, CSR)
 - **DocumentClassification**: Primary type + alternative types ranked by confidence
-- **DocumentDescription**: LLM-generated `title`, `summary`, `description`
-- **DateExtractionResult**: All extracted dates with `DateSourceType` fallback chain (PDF_TEXT, PDF_METADATA, FILE_SYSTEM)
+- **DocumentDescription**: LLM-generated `title`, `short_description`, `long_description`
+- **DateExtractionResult**: All extracted dates with `DateSourceType` fallback chain (FILENAME, CONTENT, PDF_METADATA, FILE_SYSTEM)
 
 ---
 

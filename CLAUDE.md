@@ -142,11 +142,12 @@ extractors:
   genes: true
   abbreviations: true
   feasibility: true
-  care_pathways: true
-  recommendations: true
-  figures: true
+  pharma_companies: true
+  authors: true
+  citations: true
+  document_metadata: true
   tables: true
-  # etc.
+  figures: true
 ```
 
 ### API Configuration
@@ -216,11 +217,13 @@ Every LLM call site must pass a `call_type` string. For `ClaudeClient` calls, pa
 
 ### Generator Interface
 ```python
-class CandidateGenerator(ABC):
-    @abstractmethod
-    def generate(self, doc: DocumentGraph) -> List[Candidate]:
+class BaseCandidateGenerator(ABC):
+    @property
+    def generator_type(self) -> GeneratorType: ...
+
+    def extract(self, doc_structure: DocumentModel) -> List[Candidate]:
         """Extract candidates from document."""
-        pass
+        ...
 ```
 
 ### Validation Flow (PASO heuristics)
@@ -282,7 +285,7 @@ Scale plugin usage to task size:
 **Generators (C_generators/)**
 - High recall, accept false positives
 - Use FlashText for lexicon matching (not regex for large vocabularies)
-- Every generator must implement `CandidateGenerator` or `BaseExtractor` interface
+- Every generator must implement `BaseCandidateGenerator` or `BaseExtractor` interface
 
 **Validators (D_validation/)**
 - High precision, filter aggressively

@@ -10,7 +10,7 @@ ESE integrates with several external APIs and local NER models for entity valida
 |----------|-------|
 | Purpose | LLM validation, document classification, vision analysis, feasibility extraction, recommendation extraction |
 | SDK | `anthropic` Python package |
-| Auth | `ANTHROPIC_API_KEY` or `CLAUDE_API_KEY` environment variable |
+| Auth | `ANTHROPIC_API_KEY` environment variable |
 | Caching | None (live API calls) |
 
 **Models used:**
@@ -24,7 +24,7 @@ The pipeline uses model tier routing to balance cost and quality. Each LLM call 
 
 **Prompt caching** is enabled on system prompts via `cache_control: {"type": "ephemeral"}`. Cache reads cost 10% of input price; cache creation costs 125%.
 
-**Usage across the pipeline (19 call sites in 12 files):**
+**Usage across the pipeline (17 unique call_types in 12 files):**
 
 | Module | call_type | Tier | Purpose |
 |--------|-----------|------|---------|
@@ -182,7 +182,7 @@ These models run locally without API calls. They are lazy-loaded to minimize sta
 | Property | Value |
 |----------|-------|
 | Purpose | Biomedical named entity recognition with UMLS concept linking |
-| Models | `en_core_sci_sm`, `en_ner_bc5cdr_md` |
+| Models | `en_core_sci_sm` |
 | Type | Local (no API calls) |
 | Loading | Lazy (loaded on first use) |
 
@@ -195,7 +195,7 @@ These models run locally without API calls. They are lazy-loaded to minimize sta
 | `C_generators/C07_strategy_drug.py` | Chemical/drug NER (CHEMICAL type) |
 | `C_generators/C16_strategy_gene.py` | Gene NER (GENE type) |
 
-The `en_ner_bc5cdr_md` model specializes in disease and chemical entity recognition. UMLS concept linking is available but limited by the `umls_max_blocks` config setting (default: 500) to avoid O(n^2) scaling on large documents.
+UMLS concept linking is available but limited by the `umls_max_blocks` config setting (default: 500) to avoid O(n^2) scaling on large documents.
 
 ---
 

@@ -84,7 +84,7 @@ from D_validation.D02_llm_engine import LLMEngine, ClaudeClient
 
 client = ClaudeClient(model="claude-sonnet-4-20250514")
 engine = LLMEngine(client=client)
-results = engine.verify_batch(candidates, doc_context)
+results = engine.verify_candidates_batch(candidates, batch_size=15, delay_ms=100)
 # Each result: VerificationResult with status, confidence, reasoning
 ```
 

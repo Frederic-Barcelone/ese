@@ -15,7 +15,7 @@ Main export orchestrator managing all export operations through the `ExportManag
 ```python
 manager = ExportManager(
     run_id=run_id,
-    pipeline_version="0.7",
+    pipeline_version="0.8",
     output_dir=None,          # Optional override (default: {pdf_dir}/{pdf_stem}/)
     gold_json=None,           # Path to gold standard for evaluation
     claude_client=claude_client,  # Optional, for Vision LLM analysis

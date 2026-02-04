@@ -18,7 +18,7 @@ See also: [Domain Models reference](../architecture/03_domain_models.md) | [Pipe
 
 | Module | Description |
 |--------|-------------|
-| `A00_logging.py` | Centralized colored logging. Provides `get_logger()`, `configure_logging()`, `LogContext` context manager, and `timed` decorator for performance measurement. |
+| `A00_logging.py` | Centralized colored logging. Provides `get_logger()`, `configure_logging()`, and `timed` decorator for performance measurement. |
 
 ### Core Abbreviation Models
 

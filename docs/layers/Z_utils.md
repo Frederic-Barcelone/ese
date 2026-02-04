@@ -77,7 +77,7 @@ Image utilities for Vision API integration.
 |----------|---------|
 | `get_image_size_bytes(base64_str)` | Calculate decoded image size from base64 string |
 | `is_image_oversized(base64_str)` | Check if image exceeds Vision API 5MB limit |
-| `compress_image(base64_str, quality, max_dimension)` | Compress image for Vision API (JPEG quality, dimension limits) |
+| `compress_image_for_vision(base64_str, max_size_bytes, quality, max_dimension)` | Compress image for Vision API (JPEG quality, dimension limits) |
 | `extract_ocr_text_from_base64(base64_str, lang, config)` | Extract text from image via Tesseract OCR |
 
 **Constants:** `PYTESSERACT_AVAILABLE` -- Boolean flag indicating Tesseract availability.

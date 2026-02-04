@@ -18,7 +18,7 @@ extraction_pipeline:
 |--------|-------------------|
 | `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | All entity types including authors, citations, tables, figures, metadata |
-| `minimal` | Abbreviations only (no LLM) |
+| `minimal` | Abbreviations only |
 | `drugs_only` | Drug detection only |
 | `diseases_only` | Disease detection only |
 | `genes_only` | Gene detection only |
@@ -51,8 +51,6 @@ extraction_pipeline:
     document_metadata: true
     tables: true
     figures: true
-    care_pathways: true
-    recommendations: true
 ```
 
 ## Processing Options
@@ -72,8 +70,6 @@ extraction_pipeline:
     use_patient_journey: true      # Patient journey extraction
     use_registry_extraction: true  # Registry extraction
     parallel_extraction: true      # Run independent extractors in parallel
-    use_genetic_extraction: true   # Gene extraction via HGNC/Orphadata
-    use_pubtator_enrichment: true  # PubTator3 enrichment for diseases/drugs/genes
 ```
 
 ## Page Limits
@@ -90,12 +86,7 @@ extraction_pipeline:
 ```yaml
 deduplication:
   enabled: true
-  priority_order:               # Source priority for resolving duplicates
-    - "syntax_pattern"
-    - "glossary_table"
-    - "regex_pattern"
-    - "layout"
-    - "lexicon_match"
+  priority_order: ["drug", "disease"]  # Entity type priority for resolving duplicates
   remove_expansion_matches: true  # Remove candidates where SF matches an LF of another
 ```
 
@@ -106,9 +97,10 @@ output:
   format: "json"
   json_indent: 2
   include:
-    provenance: true
-    evidence: true
+    statistics: true
     confidence: true
+    context: true
+    identifiers: true
 ```
 
 ## API Configuration
@@ -441,4 +433,4 @@ defaults:
 |----------|---------|---------|
 | `CORPUS_BASE_PATH` | Base directory for all resources | Auto-detected from `corpus_metadata/` location |
 | `ANTHROPIC_API_KEY` | Claude API key | Required for LLM features |
-| `CLAUDE_API_KEY` | Alternative name for Claude API key | Falls back to `ANTHROPIC_API_KEY` |
+| `CLAUDE_API_KEY` | Mentioned in config comments as alternative | Not used in pipeline code; use `ANTHROPIC_API_KEY` |

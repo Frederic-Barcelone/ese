@@ -15,7 +15,7 @@ Unified entity extraction orchestrator that handles six entity types through a c
 ```python
 processor = EntityProcessor(
     run_id=run_id,
-    pipeline_version="1.0.0",
+    pipeline_version="0.8",
     disease_detector=disease_detector,
     disease_normalizer=disease_normalizer,
     drug_detector=drug_detector,
@@ -99,7 +99,7 @@ candidates = processor.process(doc, pdf_path, full_text)
 
 ```python
 # Entity processing
-processor = EntityProcessor(run_id=run_id, pipeline_version="0.7",
+processor = EntityProcessor(run_id=run_id, pipeline_version="0.8",
                            disease_detector=factory.create_disease_detector())
 processor.disease_enricher = factory.create_disease_enricher()
 diseases = processor.process_diseases(doc, pdf_path)

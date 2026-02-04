@@ -4,7 +4,7 @@
 
 `C_generators/` is the high-recall extraction layer. Its goal is to extract every plausible candidate entity from the `DocumentGraph`, accepting false positives as an expected cost. Precision is handled downstream by `D_validation/` and false-positive filters within this layer.
 
-This layer contains 34 modules implementing multiple extraction strategies per entity type: syntax-based, regex-based, lexicon-based (FlashText with 600K+ terms), NER-based (scispacy), LLM-based (Claude), and VLM-based (Claude Vision).
+This layer contains 35 modules implementing multiple extraction strategies per entity type: syntax-based, regex-based, lexicon-based (FlashText with 600K+ terms), NER-based (scispacy), LLM-based (Claude), and VLM-based (Claude Vision).
 
 All generators implement the `BaseCandidateGenerator` interface from `A_core/A02_interfaces.py` and output typed candidate lists with `GeneratorType` provenance tracking.
 

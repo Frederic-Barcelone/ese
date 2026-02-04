@@ -41,7 +41,7 @@ Or add it to a `.env` file in the project root:
 ANTHROPIC_API_KEY=your-key
 ```
 
-The pipeline also accepts `CLAUDE_API_KEY` as an alternative environment variable name.
+The config file comments mention `CLAUDE_API_KEY` as an alternative, but the pipeline code uses `ANTHROPIC_API_KEY` exclusively.
 
 ## Lexicon Download
 
@@ -101,9 +101,9 @@ The pipeline supports presets that control which extractors run. Set the preset 
 
 | Preset | What It Extracts |
 |--------|-----------------|
-| `standard` (default) | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
+| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | Everything enabled (all entity types, figures, tables, metadata) |
-| `minimal` | Abbreviations only (no LLM calls) |
+| `minimal` | Abbreviations only |
 | `drugs_only` | Drug detection only |
 | `diseases_only` | Disease detection only |
 | `genes_only` | Gene detection only |

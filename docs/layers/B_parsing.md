@@ -17,7 +17,7 @@ See also: [Pipeline Overview](../architecture/01_overview.md) | [Data Flow](../a
 | Module | Description |
 |--------|-------------|
 | `B01_pdf_to_docgraph.py` | Main entry point. Converts PDF to `DocumentGraph` using Unstructured.io or PyMuPDF as backend. Orchestrates layout detection, table extraction, and section identification. |
-| `B02_doc_graph.py` | Data models: `DocumentGraph`, `Page`, `TextBlock`, `Table`, `ImageBlock`. Defines `ContentRole` (BODY_TEXT, SECTION_HEADER, PAGE_HEADER, PAGE_FOOTER, TABLE_CAPTION, TABLE_CELL), `ImageType` (FIGURE, FLOWCHART, CHART, DIAGRAM), and `TableType` (DATA_GRID, GLOSSARY, LAYOUT_GRID). `BoundingBox` is imported from `A_core/A01_domain_models.py`. |
+| `B02_doc_graph.py` | Data models: `DocumentGraph`, `Page`, `TextBlock`, `Table`, `ImageBlock`. Defines `ContentRole` (BODY_TEXT, SECTION_HEADER, PAGE_HEADER, PAGE_FOOTER, TABLE_CAPTION, TABLE_CELL), `ImageType` (UNKNOWN, FIGURE, FLOWCHART, CHART, DIAGRAM, PHOTO, LOGO), and `TableType` (DATA_GRID, GLOSSARY, LAYOUT_GRID). `BoundingBox` is imported from `A_core/A01_domain_models.py`. |
 
 ### Table Extraction
 

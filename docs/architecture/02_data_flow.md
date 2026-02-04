@@ -394,7 +394,7 @@ C09_strategy_document_metadata
   +---> DOI extraction (regex patterns)
   |
   v
-DocumentMetadata (type, title, date, DOI, confidence)
+DocumentMetadata (classification, short_description, long_description, date, DOI)
   |
   v
 J_export --> metadata_<doc>_<timestamp>.json
@@ -410,7 +410,7 @@ The `config.yaml` `extraction_pipeline.preset` field controls which entity types
 |--------|--------------------|
 | `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
 | `all` | All entity types including visuals, authors, citations, document metadata |
-| `minimal` | Abbreviations only (no LLM) |
+| `minimal` | Abbreviations only |
 | `drugs_only` | Drugs |
 | `diseases_only` | Diseases |
 | `genes_only` | Genes |
