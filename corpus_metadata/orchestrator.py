@@ -727,6 +727,8 @@ class Orchestrator:
             if not self.use_llm_validation:
                 printer.skip("Abbreviation validation", "disabled")
             else:
+                timer.start("2b. Filtering & Heuristics")
+
                 # Filter candidates
                 needs_validation, corroborated_sfs, word_counts, filtered_count, sf_form_rejected = (
                     self.abbreviation_pipeline.filter_candidates(unique_candidates, full_text)
@@ -764,6 +766,8 @@ class Orchestrator:
                 metrics.heuristics.rejected_by_context = counters.context_rejected
                 metrics.heuristics.rejected_by_trial_id = counters.trial_id_excluded
                 metrics.heuristics.rejected_by_common_word = counters.common_word_rejected
+
+                heur_time = timer.stop("2b. Filtering & Heuristics")
 
                 # Print stats
                 from A_core.A01_domain_models import GeneratorType
@@ -811,6 +815,8 @@ class Orchestrator:
                 val_time = timer.stop("3. LLM Validation")
                 printer.time(val_time)
 
+                timer.start("3b. SF-Only Extraction")
+
                 # Search for missing abbreviations
                 found_sfs = {
                     r.short_form.upper()
@@ -832,6 +838,8 @@ class Orchestrator:
                 # Update SF-only metrics
                 metrics.validation.sf_only_extracted = len(search_results)
                 metrics.validation.sf_only_from_llm = len(sf_only_results)
+
+                timer.stop("3b. SF-Only Extraction")
 
             # Normalize
             timer.start("4. Normalization")

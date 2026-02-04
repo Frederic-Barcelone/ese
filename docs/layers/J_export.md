@@ -78,23 +78,20 @@ Document-level metadata export functions.
 
 ### J02_visual_export.py
 
-Export handlers for the visual extraction pipeline, supporting both tables and figures with StructEqTable integration.
+Export handlers for the visual extraction pipeline, supporting both tables and figures.
 
 **Functions:**
 
 | Function | Purpose |
 |----------|---------|
-| `extract_table_content_structeq(image_bytes)` | Extract table structure as LaTeX and HTML using StructEqTable model (lazy-loaded) |
-| `visual_to_dict(visual, include_image, image_file, table_content)` | Convert `ExtractedVisual` to serializable dict with locations, title, description, caption, table data, relationships, provenance, triage info |
+| `visual_to_dict(visual, include_image, image_file)` | Convert `ExtractedVisual` to serializable dict with locations, title, description, caption, table data, relationships, provenance, triage info |
 | `pipeline_result_to_dict(result)` | Convert full `PipelineResult` to dict with metadata, statistics, visuals |
 | `export_visuals_to_json(result, output_path, include_images, pretty_print)` | Export all visuals to single JSON file |
-| `export_tables_only(result, output_path, output_dir, doc_name, save_images)` | Export tables with StructEqTable content extraction and optional image files |
+| `export_tables_only(result, output_path, output_dir, doc_name, save_images)` | Export tables with optional image files |
 | `export_figures_only(result, output_path, output_dir, doc_name, save_images)` | Export figures with optional image files |
 | `export_images_separately(result, output_dir, doc_name, format)` | Save all visual images as individual files, returns `Dict[visual_id, Path]` |
 
 **Image file naming:** `{doc_name}_{type}_page{N}_{idx}.png` where type is `table` or `figure`.
-
-**Table export enrichment:** Each table gets StructEqTable extraction producing both LaTeX and HTML representations of the table structure.
 
 ## Output Structure
 
