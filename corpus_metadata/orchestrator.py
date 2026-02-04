@@ -1519,7 +1519,10 @@ class Orchestrator:
                 doc_id, "Orphanet", matches=len(disease_results), validated=validated
             )
             # Track PubTator usage for disease enrichment
-            pubtator_enriched = sum(1 for r in disease_results if hasattr(r, 'mesh_codes') and r.mesh_codes)
+            pubtator_enriched = sum(
+                1 for r in disease_results
+                if "pubtator_enriched" in (r.validation_flags or [])
+            )
             self.usage_tracker.log_datasource_usage(
                 doc_id, "PubTator3", queries=len(disease_results), results=pubtator_enriched
             )
@@ -1530,6 +1533,14 @@ class Orchestrator:
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "HGNC", matches=len(gene_results), validated=validated
             )
+            # Track PubTator usage for gene enrichment
+            pubtator_enriched = sum(
+                1 for r in gene_results
+                if "pubtator_enriched" in (r.validation_flags or [])
+            )
+            self.usage_tracker.log_datasource_usage(
+                doc_id, "PubTator3_genes", queries=len(gene_results), results=pubtator_enriched
+            )
 
         # Log drug detection - uses RxNorm, ChEMBL (if enabled)
         if self.extract_drugs:
@@ -1539,6 +1550,14 @@ class Orchestrator:
             )
             self.usage_tracker.log_lexicon_usage(
                 doc_id, "ChEMBL", matches=len(drug_results), validated=validated
+            )
+            # Track PubTator usage for drug enrichment
+            pubtator_enriched = sum(
+                1 for r in drug_results
+                if "pubtator_enriched" in (r.validation_flags or [])
+            )
+            self.usage_tracker.log_datasource_usage(
+                doc_id, "PubTator3_drugs", queries=len(drug_results), results=pubtator_enriched
             )
 
         # Log pharma detection (if enabled)
