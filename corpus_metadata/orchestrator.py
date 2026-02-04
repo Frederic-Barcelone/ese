@@ -1091,7 +1091,7 @@ class Orchestrator:
         )
 
         # Stop export timer and total timer
-        timer.stop("12. Export")
+        timer.stop("16. Export")
         timer.stop("total")
 
         # Log usage statistics for this document

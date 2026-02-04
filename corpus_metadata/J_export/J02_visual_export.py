@@ -3,15 +3,13 @@
 Export handlers for the visual extraction pipeline.
 
 Exports ExtractedVisual objects to JSON format with full metadata,
-images, and structured content. Supports both tables and figures
-with StructEqTable extraction for LaTeX/HTML output.
+images, and structured content.
 
 Key Components:
-    - extract_table_content_structeq: StructEqTable LaTeX/HTML extraction
     - visual_to_dict: Convert ExtractedVisual to serializable dict
     - pipeline_result_to_dict: Convert full PipelineResult to dict
     - export_visuals_to_json: Full visual export with all metadata
-    - export_tables_only: Table-specific export with StructEqTable
+    - export_tables_only: Table-specific export
     - export_figures_only: Figure-specific export
     - export_images_separately: Save images as individual files
 
@@ -27,20 +25,14 @@ Example:
 Dependencies:
     - A_core.A13_visual_models: ExtractedVisual
     - B_parsing.B12_visual_pipeline: PipelineResult
-    - struct_eqtable: Table structure extraction
-    - PIL: Image processing for StructEqTable
 """
 from __future__ import annotations
 
 import base64
-import io
 import json
 import logging
 from pathlib import Path
 from typing import Any, Dict
-
-import struct_eqtable
-from PIL import Image
 
 from A_core.A13_visual_models import (
     ExtractedVisual,
@@ -48,122 +40,6 @@ from A_core.A13_visual_models import (
 from B_parsing.B12_visual_pipeline import PipelineResult
 
 logger = logging.getLogger(__name__)
-
-
-def _patch_internvl_config() -> None:
-    """Patch StructEqTable's InternVLChatConfig for transformers>=4.49 compat.
-
-    The upstream config (configuration_internvl_chat.py) does
-    ``llm_config.get('architectures')[0]`` which crashes with TypeError
-    when transformers creates a default config instance (empty llm_config).
-    We fix this by patching the cached source file on disk so that even
-    re-imports by transformers pick up the fix.
-    """
-    import glob
-    import os
-    import sys
-
-    from transformers import AutoConfig
-
-    buggy_expr = "llm_config.get('architectures')[0]"
-    safe_expr = "(llm_config.get('architectures') or ['LlamaForCausalLM'])[0]"
-
-    hf_home = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))
-    hf_modules = os.path.join(
-        os.environ.get("HF_MODULES_CACHE", os.path.join(hf_home, "modules")),
-        "transformers_modules",
-    )
-
-    def _find_and_patch() -> bool:
-        config_files = glob.glob(
-            os.path.join(hf_modules, "U4R", "StructTable*", "*", "configuration_internvl_chat.py")
-        )
-        patched_any = False
-        for path in config_files:
-            with open(path, "r") as f:
-                content = f.read()
-            if buggy_expr not in content:
-                continue
-            patched = content.replace(buggy_expr, safe_expr)
-            with open(path, "w") as f:
-                f.write(patched)
-            logger.info(f"Patched InternVLChatConfig at {path}")
-            patched_any = True
-        return patched_any
-
-    def _evict_cached_modules() -> None:
-        """Remove cached InternVL config modules so re-import picks up the patch."""
-        to_remove = [
-            key for key in sys.modules
-            if "configuration_internvl_chat" in key
-        ]
-        for key in to_remove:
-            del sys.modules[key]
-            logger.info(f"Evicted cached module: {key}")
-
-    # Try patching existing cached files first
-    if _find_and_patch():
-        _evict_cached_modules()
-        return
-
-    # Files not cached yet — trigger download (which will fail), then patch
-    try:
-        AutoConfig.from_pretrained("U4R/StructTable-InternVL2-1B", trust_remote_code=True)
-        return  # Loaded fine — no patch needed
-    except TypeError:
-        pass  # Expected: file downloaded but config instantiation failed
-
-    if _find_and_patch():
-        _evict_cached_modules()
-        return
-
-    logger.warning("Could not find InternVLChatConfig to patch — StructEqTable may fail")
-
-
-def extract_table_content_structeq(image_bytes: bytes) -> Dict[str, str]:
-    """
-    Extract table content using StructEqTable.
-
-    Args:
-        image_bytes: PNG image bytes of the table
-
-    Returns:
-        Dict with 'latex' and 'html' keys
-
-    Raises:
-        RuntimeError: If model loading or extraction fails
-        PIL.UnidentifiedImageError: If image bytes are invalid
-    """
-    # Load model (lazy initialization)
-    if not hasattr(extract_table_content_structeq, '_model'):
-        logger.info("Loading StructEqTable model (first time)...")
-        _patch_internvl_config()
-        model = struct_eqtable.build_model()
-        model.max_new_tokens = 4096
-        model.max_generate_time = 300
-        extract_table_content_structeq._model = model  # type: ignore[attr-defined]
-        logger.info("StructEqTable model loaded successfully")
-
-    model = extract_table_content_structeq._model  # type: ignore[attr-defined]
-
-    # Convert bytes to PIL Image
-    image = Image.open(io.BytesIO(image_bytes))
-
-    # Extract table structure in both formats
-    logger.debug("StructEqTable extracting LaTeX...")
-    latex_result = model(image, 'latex')
-    logger.debug("StructEqTable extracting HTML...")
-    html_result = model(image, 'html')
-
-    latex_str = latex_result[0] if latex_result else ""
-    html_str = html_result[0] if html_result else ""
-
-    logger.info(f"StructEqTable extracted: LaTeX={len(latex_str)} chars, HTML={len(html_str)} chars")
-
-    return {
-        "latex": latex_str,
-        "html": html_str,
-    }
 
 
 # -------------------------
@@ -175,7 +51,6 @@ def visual_to_dict(
     visual: ExtractedVisual,
     include_image: bool = True,
     image_file: str | None = None,
-    table_content: Dict[str, str] | None = None,
 ) -> Dict[str, Any]:
     """
     Convert ExtractedVisual to serializable dict.
@@ -184,7 +59,6 @@ def visual_to_dict(
         visual: ExtractedVisual to convert
         include_image: Whether to include base64 image data
         image_file: If provided, use this filename instead of base64
-        table_content: StructEqTable extraction (latex/html) for tables
 
     Returns:
         Dict suitable for JSON serialization
@@ -242,9 +116,6 @@ def visual_to_dict(
 
         if visual.table_extraction_mode:
             result["table_data"]["extraction_mode"] = visual.table_extraction_mode.value
-
-        # Add StructEqTable content (LaTeX/HTML) — always present for tables
-        result["table_content"] = table_content if table_content else {}
 
     # Relationships
     if visual.relationships:
@@ -406,7 +277,6 @@ def export_tables_only(
 
         image_file = None
         image_save_failed = False
-        img_bytes = None
         if save_images and table.image_base64:
             # Generate filename and save image
             prefix = f"{doc_name}_" if doc_name else ""
@@ -425,26 +295,12 @@ def export_tables_only(
                 logger.error(f"Invalid base64 data for table image: {e}")
                 image_save_failed = True
 
-        # Extract table content using StructEqTable (LaTeX/HTML)
-        table_content = None
-        if table.image_base64:
-            if img_bytes is None:
-                img_bytes = base64.b64decode(table.image_base64)
-            try:
-                logger.info(f"Extracting table content with StructEqTable for page {page_num}...")
-                table_content = extract_table_content_structeq(img_bytes)
-                logger.info(f"Table {idx}: StructEqTable extraction complete")
-            except Exception as e:
-                logger.error(f"StructEqTable extraction failed for table on page {page_num}: {e}")
-                table_content = {"latex": "", "html": "", "error": str(e)}
-
         # If save failed, fall back to embedding base64
         include_base64 = (not save_images) or image_save_failed
         table_dicts.append(visual_to_dict(
             table,
             include_image=include_base64,
             image_file=image_file,
-            table_content=table_content,
         ))
 
     data = {
@@ -608,8 +464,6 @@ def export_images_separately(
 
 
 __all__ = [
-    # Extraction
-    "extract_table_content_structeq",
     # Serialization
     "visual_to_dict",
     "pipeline_result_to_dict",

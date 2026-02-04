@@ -776,13 +776,6 @@ def detect_and_crop_all(
             # Save crop
             crop_path.write_bytes(png_bytes)
 
-            # Extract table content for tables
-            table_content = None
-            if v.visual_type == "table":
-                from J_export.J02_visual_export import extract_table_content_structeq
-                logger.info(f"Extracting table content for {crop_filename}...")
-                table_content = extract_table_content_structeq(png_bytes)
-
             # Generate VLM title and description
             vlm_title = None
             vlm_description = None
@@ -826,10 +819,6 @@ def detect_and_crop_all(
                     visual_entry["vlm"]["title"] = vlm_title
                 if vlm_description:
                     visual_entry["vlm"]["description"] = vlm_description
-
-            # Add table content (LaTeX/HTML) for tables
-            if table_content:
-                visual_entry["table_content"] = table_content
 
             page_entry["visuals"].append(visual_entry)
 
