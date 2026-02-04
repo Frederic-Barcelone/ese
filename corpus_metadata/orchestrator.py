@@ -768,7 +768,7 @@ class Orchestrator:
                 metrics.heuristics.rejected_by_trial_id = counters.trial_id_excluded
                 metrics.heuristics.rejected_by_common_word = counters.common_word_rejected
 
-                heur_time = timer.stop("2b. Filtering & Heuristics")
+                timer.stop("2b. Filtering & Heuristics")
 
                 # Print stats
                 from A_core.A01_domain_models import GeneratorType
