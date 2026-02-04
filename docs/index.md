@@ -54,6 +54,16 @@ Detailed reference material for external integrations and output formats.
 | [External APIs](reference/02_external_apis.md) | Claude API, PubTator3, ClinicalTrials.gov, Unstructured.io |
 | [Output Format](reference/03_output_format.md) | JSON output schema per entity type, directory structure |
 
+## Reports
+
+Analysis reports and quality assessments.
+
+| Document | Description |
+|----------|-------------|
+| [Quality Metrics Dossier](quality_metrics_dossier.md) | Full dossier: test suite (1,474 tests), gold standards (NLP4RARE + PAPERS), evaluation results, coverage by layer |
+| [Performance Analysis](performance_analysis.md) | Processing bottlenecks, throughput measurements, cost breakdown |
+| [Error Handling Analysis](error_handling_analysis.md) | Exception hierarchy, resilience patterns, identified gaps |
+
 ## Plans
 
 Design documents and architectural plans for pipeline improvements.
