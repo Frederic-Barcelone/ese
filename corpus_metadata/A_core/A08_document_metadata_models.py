@@ -269,11 +269,24 @@ class DocumentMetadata(BaseModel):
 # -------------------------
 
 
+class TopEntity(BaseModel):
+    """Top mentioned entity for document metadata export."""
+
+    name: str
+    mention_count: int
+    entity_type: str  # "disease", "drug", "gene"
+
+    model_config = ConfigDict(extra="forbid")
+
+
 class DocumentMetadataExport(BaseModel):
     """Simplified export format for document metadata."""
 
     doc_id: str
     doc_filename: str
+
+    # Top mentioned entities
+    top_entities: Optional[List[TopEntity]] = None
 
     # File info
     file_size_bytes: Optional[int] = None

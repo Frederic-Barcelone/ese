@@ -28,7 +28,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, TYPE_CHECKING
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from A_core.A08_document_metadata_models import DocumentMetadata
@@ -42,6 +42,7 @@ def export_document_metadata(
     metadata: "DocumentMetadata",
     run_id: str,
     pipeline_version: str,
+    top_entities: Optional[list] = None,
 ) -> None:
     """Export document metadata to JSON file."""
     from A_core.A08_document_metadata_models import DocumentMetadataExport
@@ -52,6 +53,7 @@ def export_document_metadata(
     export = DocumentMetadataExport(
         doc_id=metadata.doc_id,
         doc_filename=metadata.doc_filename,
+        top_entities=top_entities,
         file_size_bytes=metadata.file_metadata.size_bytes if metadata.file_metadata else None,
         file_size_human=metadata.file_metadata.size_human if metadata.file_metadata else None,
         file_extension=metadata.file_metadata.extension if metadata.file_metadata else None,

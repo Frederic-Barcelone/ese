@@ -77,7 +77,7 @@ from A_core.A09_pharma_models import ExtractedPharma
 from A_core.A10_author_models import ExtractedAuthor
 from A_core.A11_citation_models import ExtractedCitation
 from A_core.A07_feasibility_models import FeasibilityCandidate, NERCandidate
-from A_core.A08_document_metadata_models import DocumentMetadata
+from A_core.A08_document_metadata_models import DocumentMetadata, TopEntity
 from A_core.A17_care_pathway_models import CarePathway
 from A_core.A18_recommendation_models import RecommendationSet
 
@@ -1029,7 +1029,12 @@ class Orchestrator:
         # OLD image/table exports removed - using new visual pipeline instead
 
         if doc_metadata:
-            self.export_manager.export_document_metadata(pdf_path_obj, doc_metadata)
+            top_entities = self._compute_top_entities(
+                disease_results, drug_results, gene_results
+            )
+            self.export_manager.export_document_metadata(
+                pdf_path_obj, doc_metadata, top_entities=top_entities
+            )
 
         if care_pathway_results:
             self.export_manager.export_care_pathways(pdf_path_obj, care_pathway_results)
@@ -1146,6 +1151,64 @@ class Orchestrator:
         except Exception as e:
             printer.warning(f"Document metadata extraction failed: {e}")
             return None
+
+    def _compute_top_entities(
+        self,
+        disease_results: List[ExtractedDisease],
+        drug_results: List[ExtractedDrug],
+        gene_results: List[ExtractedGene],
+        top_n: int = 2,
+    ) -> Optional[List[TopEntity]]:
+        """Compute the top N most-mentioned entities per type.
+
+        Args:
+            disease_results: Disease extraction results.
+            drug_results: Drug extraction results.
+            gene_results: Gene extraction results.
+            top_n: Number of top entities per type.
+
+        Returns:
+            List of TopEntity or None if no validated entities exist.
+        """
+        top_entities: List[TopEntity] = []
+
+        # Top diseases by mention_count
+        validated_diseases = [
+            d for d in disease_results
+            if d.status == ValidationStatus.VALIDATED
+        ]
+        for d in sorted(validated_diseases, key=lambda x: x.mention_count, reverse=True)[:top_n]:
+            top_entities.append(TopEntity(
+                name=d.preferred_label,
+                mention_count=d.mention_count,
+                entity_type="disease",
+            ))
+
+        # Top drugs by mention_count
+        validated_drugs = [
+            dr for dr in drug_results
+            if dr.status == ValidationStatus.VALIDATED
+        ]
+        for dr in sorted(validated_drugs, key=lambda x: x.mention_count, reverse=True)[:top_n]:
+            top_entities.append(TopEntity(
+                name=dr.preferred_name,
+                mention_count=dr.mention_count,
+                entity_type="drug",
+            ))
+
+        # Top genes by mention_count
+        validated_genes = [
+            g for g in gene_results
+            if g.status == ValidationStatus.VALIDATED
+        ]
+        for g in sorted(validated_genes, key=lambda x: x.mention_count, reverse=True)[:top_n]:
+            top_entities.append(TopEntity(
+                name=g.hgnc_symbol,
+                mention_count=g.mention_count,
+                entity_type="gene",
+            ))
+
+        return top_entities if top_entities else None
 
     def _extract_care_pathways(
         self, doc, pdf_path: Path

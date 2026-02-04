@@ -1174,12 +1174,14 @@ class ExportManager:
         print(f"  Tables export: {out_file.name} ({len(tables)} tables, {saved_count} saved)")
 
     def export_document_metadata(
-        self, pdf_path: Path, metadata: "DocumentMetadata"
+        self, pdf_path: Path, metadata: "DocumentMetadata",
+        top_entities: Optional[list] = None,
     ) -> None:
         """Export document metadata to JSON file."""
         out_dir = self.get_output_dir(pdf_path)
         _export_document_metadata(
-            out_dir, pdf_path, metadata, self.run_id, self.pipeline_version
+            out_dir, pdf_path, metadata, self.run_id, self.pipeline_version,
+            top_entities=top_entities,
         )
 
     def export_care_pathways(
