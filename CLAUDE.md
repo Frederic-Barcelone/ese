@@ -4,33 +4,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**ESE (Entity & Structure Extraction)** - A production-grade 6-layer pipeline for extracting structured metadata from clinical trial and medical PDF documents. Focused on rare disease research.
+**ESE (Entity & Structure Extraction)** — Pipeline v0.8. Production-grade extraction of structured metadata from clinical trial and medical PDF documents. Focused on rare disease research.
 
 ### Core Capabilities
-- Abbreviations/acronyms with definitions
+- Abbreviations/acronyms with definitions (PASO heuristics)
 - Diseases (rare diseases, ICD-10, SNOMED, ORPHA, MONDO codes)
 - Drugs (RxNorm, MeSH, DrugBank, development phase)
 - Genes (HGNC symbols, Entrez, Ensembl, disease associations)
 - Authors/investigators with affiliations and ORCID
 - Citations/references (PMID, DOI, NCT identifiers)
-- Clinical trial feasibility data
+- Clinical trial feasibility data (eligibility, epidemiology, study design)
+- Clinical guideline recommendations (text + VLM extraction)
+- Care pathways (patient journey mapping)
 - Figures with Vision LLM analysis
 - Tables with VLM extraction
+- Document metadata (classification, dates, descriptions)
 
 ## Commands
 
 ```bash
 # Run pipeline on all PDFs in configured folder
-python corpus_metadata/orchestrator.py
+cd corpus_metadata && python orchestrator.py
 
-# Run tests
+# Run tests (59 test files)
 cd corpus_metadata && python -m pytest K_tests/ -v
 
 # Type checking
-mypy corpus_metadata
+cd corpus_metadata && python -m mypy .
 
 # Linting
-ruff check corpus_metadata
+cd corpus_metadata && python -m ruff check .
 ```
 
 ### Environment Setup
@@ -42,15 +45,21 @@ pip install -r requirements.txt
 
 # API key required
 export ANTHROPIC_API_KEY="your-key"
-# Or add to .env file
+# Or add to .env file in project root
 ```
 
 ## Architecture
 
 ```
-PDF → B_parsing → C_generators → D_validation → E_normalization → F_evaluation
-         ↓             ↓              ↓               ↓
+                          orchestrator.py
+                               |
+PDF → B_parsing → C_generators → D_validation → E_normalization → J_export
+         |             |              |               |
      DocumentGraph  Candidates    Validated      Enriched+Deduplicated
+                       |
+              H_pipeline (abbreviation pipeline, component factory)
+              I_extraction (entity/feasibility processors)
+              F_evaluation (gold standard scoring)
 ```
 
 ### Layer Philosophy
@@ -66,16 +75,48 @@ PDF → B_parsing → C_generators → D_validation → E_normalization → F_ev
 ```
 A_core/          # Domain models (Pydantic), interfaces, provenance
 B_parsing/       # PDF→DocumentGraph, table/figure extraction, layout detection
-C_generators/    # Candidate generation (syntax, regex, FlashText lexicons, LLM)
-D_validation/    # LLM verification, prompt registry
+C_generators/    # Candidate generation (syntax, regex, FlashText lexicons, LLM, VLM)
+D_validation/    # LLM verification, prompt registry, cost optimization
 E_normalization/ # Term mapping, disambiguation, PubTator/NCT enrichment
 F_evaluation/    # Gold standard loading, precision/recall scoring
 G_config/        # config.yaml (all pipeline parameters)
-H_pipeline/      # Pipeline components, abbreviation pipeline
+H_pipeline/      # Component factory, abbreviation pipeline, merge resolver
 I_extraction/    # Entity and feasibility processors
 J_export/        # JSON export handlers
-Z_utils/         # Utilities
-orchestrator.py  # Main entry point
+Z_utils/         # API client, text helpers, image utils, usage tracking
+orchestrator.py  # Main entry point (v0.8)
+```
+
+## Operations
+
+### Running the Pipeline
+```bash
+# Process all PDFs in configured input folder
+cd corpus_metadata && python orchestrator.py
+
+# To process specific PDFs, update config.yaml:
+#   paths.pdfs: "path/to/pdf/folder"
+# There is NO CLI argument support — all config is in config.yaml.
+```
+
+### Logs and Tracking
+- All logs go to `corpus_log/` (configurable via `paths.logs` in config.yaml)
+- LLM usage tracked in `corpus_log/usage_stats.db` (SQLite)
+- Console output is tee'd to `corpus_log/console_YYYYMMDD_HHMMSS.log`
+
+### Output Structure
+Processing `document.pdf` creates a folder alongside the PDF:
+```
+document/
+├── abbreviations_document_YYYYMMDD_HHMMSS.json
+├── diseases_document_*.json
+├── drugs_document_*.json
+├── genes_document_*.json
+├── recommendations_document_*.json
+├── figures_document_*.json
+├── tables_document_*.json
+├── document_extracted_text_*.txt
+└── document_flowchart_page3_1.png
 ```
 
 ## Configuration
@@ -85,8 +126,12 @@ All parameters in `corpus_metadata/G_config/config.yaml`. Key sections:
 ### Extraction Presets
 ```yaml
 extraction_pipeline:
-  preset: "standard"  # Options: drugs_only, diseases_only, abbreviations_only,
-                      # feasibility_only, entities_only, all, minimal
+  preset: "all"
+  # Options: standard, all, minimal,
+  #          drugs_only, diseases_only, genes_only,
+  #          abbreviations_only, feasibility_only,
+  #          entities_only, clinical_entities,
+  #          metadata_only, images_only, tables_only
 ```
 
 ### Entity Toggle
@@ -97,6 +142,10 @@ extractors:
   genes: true
   abbreviations: true
   feasibility: true
+  care_pathways: true
+  recommendations: true
+  figures: true
+  tables: true
   # etc.
 ```
 
@@ -105,34 +154,25 @@ extractors:
 api:
   claude:
     validation:
-      model: "claude-sonnet-4-20250514"
+      model: "claude-sonnet-4-20250514"  # Default model
+    model_tiers:  # Per-task model routing (overrides default)
+      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
+      feasibility_extraction: "claude-sonnet-4-20250514"
+      # ... 17 call_types total
 ```
 
 ### LLM Cost Optimization
 
-The pipeline routes LLM calls to different models based on task complexity via `model_tiers` in `config.yaml`. Simple tasks use cheaper Haiku, complex reasoning stays on Sonnet.
-
-```yaml
-api:
-  claude:
-    model_tiers:
-      # Simple → Haiku 4.5 ($1/$5 per MTok)
-      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
-      document_classification: "claude-haiku-4-5-20250901"
-      layout_analysis: "claude-haiku-4-5-20250901"
-      # Complex → Sonnet 4 ($3/$15 per MTok)
-      feasibility_extraction: "claude-sonnet-4-20250514"
-      flowchart_analysis: "claude-sonnet-4-20250514"
-```
+The pipeline routes 17 LLM call sites to different models based on task complexity via `model_tiers` in config.yaml. Simple tasks (classification, layout analysis) use Haiku ($1/$5 per MTok). Complex reasoning (feasibility, recommendations, visual extraction) uses Sonnet ($3/$15 per MTok).
 
 **Key files:**
-- `D02_llm_engine.py` — `resolve_model_tier()`, `record_api_usage()`, `calc_record_cost()`, `LLMUsageTracker`
-- `G_config/config.yaml` — `model_tiers` section maps `call_type` → model
+- `D02_llm_engine.py` — `resolve_model_tier()`, `record_api_usage()`, `calc_record_cost()`, `LLMUsageTracker`, `MODEL_PRICING`
+- `G_config/config.yaml` — `model_tiers` maps `call_type` → model ID
 - `Z06_usage_tracker.py` — `llm_usage` SQLite table for persistent tracking
 - `orchestrator.py` — Per-document and batch cost summaries
 
 **call_type conventions:**
-Every LLM call site must pass a `call_type` string that identifies the task. For `ClaudeClient` calls, pass `call_type=` to `complete_json`/`complete_json_any`/`complete_vision_json`. For raw `anthropic.Anthropic()` calls, call `record_api_usage(response, model, call_type)` after each API call.
+Every LLM call site must pass a `call_type` string. For `ClaudeClient` calls, pass `call_type=` to `complete_json`/`complete_json_any`/`complete_vision_json`. For raw `anthropic.Anthropic()` calls, call `record_api_usage(response, model, call_type)` after each API call.
 
 | call_type | Tier | Used By |
 |-----------|------|---------|
@@ -165,13 +205,14 @@ Every LLM call site must pass a `call_type` string that identifies the task. For
 
 ### Adding a New Entity Type
 
-1. Create domain model in `A_core/` (e.g., `A12_gene_models.py`)
+1. Create domain model in `A_core/` (e.g., `A19_gene_models.py`)
 2. Create generator in `C_generators/` (e.g., `C16_strategy_gene.py`)
-3. Add detector/enricher in `E_normalization/` if needed
-4. Register in `H_pipeline/H01_component_factory.py`
-5. Add processing method to `I_extraction/I01_entity_processors.py`
-6. Add export handler in `J_export/J01_export_handlers.py`
-7. Wire up in `orchestrator.py`
+3. Optionally create false-positive filter (e.g., `C34_gene_fp_filter.py`)
+4. Add detector/enricher in `E_normalization/` if needed
+5. Register in `H_pipeline/H01_component_factory.py`
+6. Add processing method to `I_extraction/I01_entity_processors.py`
+7. Add export handler in `J_export/J01_export_handlers.py`
+8. Wire up in `orchestrator.py`
 
 ### Generator Interface
 ```python
@@ -188,30 +229,16 @@ class CandidateGenerator(ABC):
 - PASO C: Hyphenated abbreviations (auto-enriched from ClinicalTrials.gov)
 - PASO D: LLM SF-only extraction for missing abbreviations
 
-## Output Structure
-
-Processing `document.pdf` creates:
-```
-document/
-├── abbreviations_document_YYYYMMDD_HHMMSS.json
-├── diseases_document_*.json
-├── drugs_document_*.json
-├── genes_document_*.json
-├── figures_document_*.json
-├── tables_document_*.json
-├── document_extracted_text_*.txt
-└── document_flowchart_page3_1.png
-```
-
 ## External Dependencies
 
-- **Claude API** - Validation and Vision LLM
-- **PubTator3** - MeSH codes, disease aliases
-- **ClinicalTrials.gov** - NCT metadata enrichment
-- **Unstructured.io** - PDF parsing
-- **scispacy** - Biomedical NER with UMLS linking
-- **FlashText** - Fast lexicon matching (600K+ terms)
-- **PyMuPDF (fitz)** - PDF native figure extraction
+- **Claude API** — Validation and Vision LLM (17 call sites, 2 model tiers)
+- **PubTator3** — MeSH codes, disease aliases
+- **ClinicalTrials.gov** — NCT metadata enrichment
+- **Unstructured.io** — PDF parsing backend
+- **scispacy** — Biomedical NER with UMLS linking
+- **FlashText** — Fast lexicon matching (600K+ terms)
+- **PyMuPDF (fitz)** — PDF native figure extraction
+- **Docling** — TableFormer table extraction (95-98% TEDS accuracy)
 
 ## Lexicons Loaded (~617K terms)
 
@@ -224,72 +251,38 @@ document/
 | Orphanet | 9.5K | Rare diseases |
 | Trial acronyms | 125K | ClinicalTrials.gov |
 
-## Claude Code Plugins & Workflows
+## Claude Code Workflows
 
-Claude Code MUST use these plugins proactively to ensure code quality, maintainability, and correct extraction logic.
+### When to Use Plugins
 
-### Development Workflow (Required Order)
+Scale plugin usage to task size:
 
-```
-New Feature/Entity Type:
-  /brainstorming → /writing-plans → /test-driven-development → implement → /code-simplifier → /review-pr
+**Small changes** (config fix, doc update, 1-3 line fix):
+- Just do the work. Run verification commands before claiming done.
 
-Bug Fix:
-  /systematic-debugging → /test-driven-development → fix → /code-simplifier → /verification-before-completion
+**Medium changes** (bug fix, add method, modify behavior):
+- `/systematic-debugging` for bugs, `/verification-before-completion` before done.
 
-Refactoring:
-  /writing-plans → implement → /code-simplifier → /review-pr
-```
+**Large changes** (new entity type, multi-file refactor, new pipeline stage):
+- `/brainstorming` → `/writing-plans` → `/test-driven-development` → implement → `/code-simplifier` → `/verification-before-completion`
 
 ### Plugin Reference
 
 | Plugin | When to Use | ESE-Specific Notes |
 |--------|-------------|-------------------|
-| `/brainstorming` | **Before ANY new feature** - entity types, extraction strategies, validation rules | Explore recall vs precision tradeoffs for generators |
-| `/writing-plans` | Multi-step tasks, new entity pipelines | Plan across all layers (A→C→D→E→J) |
-| `/test-driven-development` | **Before writing implementation** | Write tests for generators, validators, normalizers first |
-| `/systematic-debugging` | Test failures, extraction errors, false positives/negatives | Check each pipeline layer systematically |
-| `/code-simplifier` | **After completing any code change** | Preserve layer separation, don't merge across A_core/C_generators/D_validation |
-| `/review-pr` | Before merging, after major features | Verify extraction accuracy, API error handling |
-| `/verification-before-completion` | **Before claiming work is done** | Run `pytest`, `mypy`, `ruff` - confirm extraction outputs |
-
-### Code Quality Agents (Auto-Invoked)
-
-| Agent | Purpose | ESE Focus |
-|-------|---------|-----------|
-| `code-reviewer` | Style, patterns, best practices | Pydantic model design, generator interfaces |
-| `silent-failure-hunter` | Find swallowed errors, bad fallbacks | Critical for API calls (Claude, PubTator, NCT) |
-| `type-design-analyzer` | Type invariants, encapsulation | A_core/ models must have strong types |
-| `comment-analyzer` | Comment accuracy, maintainability | Extraction logic comments must match code |
-| `pr-test-analyzer` | Test coverage gaps | Ensure edge cases for rare disease names |
-
-### Parallel Work
-
-| Plugin | When to Use |
-|--------|-------------|
-| `/dispatching-parallel-agents` | Independent tasks (e.g., add drug extractor + add gene extractor) |
-| `/subagent-driven-development` | Execute plan steps in parallel within session |
-| `/using-git-worktrees` | Isolate experimental extraction strategies |
-
-### Mandatory Plugin Usage
-
-**Claude MUST invoke these plugins automatically:**
-
-1. **Starting new work**: `/brainstorming` before designing extraction logic
-2. **Multi-file changes**: `/writing-plans` before touching code
-3. **Any implementation**: `/test-driven-development` before writing production code
-4. **After code changes**: `/code-simplifier` to clean up
-5. **Before commits**: `/verification-before-completion` to run all checks
-6. **Bugs/failures**: `/systematic-debugging` before proposing fixes
+| `/brainstorming` | New entity types, extraction strategies | Explore recall vs precision tradeoffs |
+| `/writing-plans` | Multi-file changes, new entity pipelines | Plan across all layers (A→C→D→E→J) |
+| `/test-driven-development` | Before implementing new features | Write tests for generators, validators, normalizers first |
+| `/systematic-debugging` | Test failures, extraction errors | Check each pipeline layer systematically |
+| `/code-simplifier` | After completing large code changes | Preserve layer separation |
+| `/verification-before-completion` | Before claiming any work is done | Run pytest, mypy, ruff |
 
 ### ESE-Specific Quality Rules
-
-When using plugins, enforce these patterns:
 
 **Generators (C_generators/)**
 - High recall, accept false positives
 - Use FlashText for lexicon matching (not regex for large vocabularies)
-- Every generator must implement `CandidateGenerator` interface
+- Every generator must implement `CandidateGenerator` or `BaseExtractor` interface
 
 **Validators (D_validation/)**
 - High precision, filter aggressively
@@ -315,11 +308,17 @@ Before marking any task complete, Claude MUST verify:
 cd corpus_metadata && python -m pytest K_tests/ -v
 
 # Type checking passes
-mypy corpus_metadata
+cd corpus_metadata && python -m mypy .
 
 # Linting passes
-ruff check corpus_metadata
-
-# Pipeline runs without errors (if extraction logic changed)
-python corpus_metadata/orchestrator.py --dry-run
+cd corpus_metadata && python -m ruff check .
 ```
+
+## Documentation
+
+Comprehensive docs in `docs/` folder:
+- `docs/architecture/` — Pipeline overview, data flow, domain models
+- `docs/layers/` — Per-layer documentation (A through Z)
+- `docs/guides/` — Getting started, adding entities, configuration, evaluation, cost optimization
+- `docs/reference/` — Lexicons, external APIs, output format
+- `docs/plans/` — Design documents for pipeline improvements
