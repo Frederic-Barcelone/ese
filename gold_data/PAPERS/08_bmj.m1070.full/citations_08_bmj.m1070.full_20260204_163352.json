@@ -1,0 +1,131 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:34:00.004190",
+  "document": "08_bmj.m1070.full.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/08_bmj.m1070.full.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 7,
+  "unique_identifiers": 5,
+  "validation_summary": {
+    "total_validated": 5,
+    "valid_count": 2,
+    "invalid_count": 0,
+    "error_count": 3
+  },
+  "citations": [
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.7326/0003-4819-98-1-76",
+      "nct": null,
+      "url": null,
+      "citation_text": "ANCA-associated vasculitis. BMC Nephrol 2017;18:378. 10.1186/s12882-017-0797-x 29287588 Jennette JC, Falk RJ. Pathogenesis of antineutrophil cytoplasmic autoantibody-mediated disease.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1093/theumatology/kew232",
+      "nct": null,
+      "url": null,
+      "citation_text": "ANCA-associated vasculitis. N Engl J Med 2010;363:221-32. 10.1056/NEJMoa0909905 20647199 9 D’Cruz DP, Bares NC, Lockwood CM. Difficult asthma or Churg-Strauss syndrome? BMJ 1999;318:475-6.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "DOI not found"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1038/ki.1998.36",
+      "nct": null,
+      "url": null,
+      "citation_text": "value of ANCA serology. Kidney Int 1998;53:796-8. 10.1038/ki.1998.36 9507231 6 — Ungprasert P, Crowson CS, Cartin-Ceba R, etal . Clinical characteristics",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": true,
+        "resolved_url": "https://linkinghub.elsevier.com/retrieve/pii/S0085253815604616",
+        "title": "Diagnostic predictive value of ANCA serology",
+        "status": null,
+        "error": null
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.2215/CJN.10871016",
+      "nct": null,
+      "url": null,
+      "citation_text": "States, 1986-2015. Clin J Am Soc Nephrol 2017;12:614-23. 10.2215/CJN.10871016 28325866 © Author(s) (or their employer(s)) 2019. Re-use permitted under CC BY-NC.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": true,
+        "resolved_url": "https://journals.lww.com/cjasn/abstract/2017/04000/temporal_and_demographic_trends_in_glomerular.11.aspx",
+        "title": "Temporal and Demographic Trends in Glomerular Disease Epidemiology in the Southeastern United States, 1986–2015",
+        "status": null,
+        "error": null
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1136/bmj.318.7182.475",
+      "nct": null,
+      "url": null,
+      "citation_text": "asthma or Churg-Strauss syndrome? BMJ 1999;318:475-6. 10.1136/bmj.318.7182.475 10024248 10 Pearce FA, Hubbard RB, Grainge MJ, Watts RA, Abhishek A, Lanyon PC.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": null,
+      "nct": null,
+      "url": "https://www.thelaurencurrietwilightfoundation.org/gpcampaign/",
+      "citation_text": "recognition and diagnosis of ANCA vasculitis in primary care https://www.thelaurencurrietwilightfoundation.org/gpcampaign/ The differential diagnosis of AAV includes cancer, chronic infection (particu",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.8,
+      "validation": null
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": null,
+      "nct": null,
+      "url": "https://www.bmj",
+      "citation_text": "of The BMJ policy on financial interests are here: https://www.bmj. com/about-bmj/resources-authors/forms-policies-and-checklists/declaration-competing-interests",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.8,
+      "validation": null
+    }
+  ]
+}

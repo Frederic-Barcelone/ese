@@ -1,0 +1,55 @@
+{
+  "doc_id": "03_Protocol_ALXN1720-oMG-303",
+  "doc_filename": "03_Protocol_ALXN1720-oMG-303.pdf",
+  "top_entities": [
+    {
+      "name": "hypersensitivity",
+      "mention_count": 3,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Ocular myasthenia gravis",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "gefurulimab",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "eculizumab",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "C5",
+      "mention_count": 1,
+      "entity_type": "gene"
+    },
+    {
+      "name": "ADA",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 849383,
+  "file_size_human": "829.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": null,
+  "pdf_author": "Steve Carr",
+  "pdf_page_count": 51,
+  "pdf_creation_date": "2025-12-15T14:45:58",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "PRO",
+  "document_type_name": "Protocol & Synopsis",
+  "document_type_group": "Essential Trial Documents",
+  "classification_confidence": 0.15,
+  "title": "Phase 3 Clinical Trial Protocol for Gefurulimab in Ocular Myasthenia Gravis (ALXN1720-oMG-303)",
+  "short_description": "A randomized, double-masked, placebo-controlled Phase 3 study evaluating gefurulimab's efficacy and safety in adults with ocular myasthenia gravis.",
+  "long_description": "This protocol concept sheet outlines a multicenter Phase 3 clinical trial (ALXN1720-oMG-303) sponsored by Alexion Pharmaceuticals to evaluate gefurulimab, a complement inhibitor, in participants over 18 years of age with ocular myasthenia gravis (oMG). The study is designed as a randomized, double-masked, placebo-controlled trial across approximately 15 countries, with first patient enrollment targeted for April 2026. The document provides detailed rationale for targeting the complement system in oMG pathophysiology, explaining how anti-acetylcholine receptor autoantibodies activate complement pathways leading to neuromuscular junction destruction. It references successful results from the PREVAIL Phase 3 study of gefurulimab in generalized myasthenia gravis and discusses the unique susceptibility of ocular muscles to acetylcholine receptor loss, supporting the therapeutic approach for this specific patient population.",
+  "document_date": "2026-04-01T00:00:00",
+  "document_date_source": "content",
+  "extraction_timestamp": "2026-02-04T14:31:34.040976"
+}

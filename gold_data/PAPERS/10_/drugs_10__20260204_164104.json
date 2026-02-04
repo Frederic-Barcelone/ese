@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:41:04.565458",
+  "document": "10_.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "prednisolone",
+      "preferred_name": "Prednisolone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B-Cell Lymphoma",
+        "High Grade B-Cell Lymphoma w/MYC & BCL2 or BCL6 Rearrangements",
+        "High Grade B-Cell Lymphoma w/MYC, BCL2 & BCL6 Rearrangements",
+        "Double Expressor Lymphoma",
+        "High-grade B-cell Lymphoma"
+      ],
+      "nct_id": "NCT04479267",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011239",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04479267",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011239",
+          "display": "Prednisolone"
+        }
+      ],
+      "context": "pEGEzZ9/EE79/Z1L/79/E101He/ABo|oyeuNsys/Wod'\n\nDisease and patient characteristics\n\nDiagnosis of AAV, disease activity, disease duration, age, gender, prednisolone dose, body mass index (BMI) and level of education were collected by a physician during the study visit.\n\nDisease activity was evaluated with the Bir",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "prednisolone acetate",
+        "prednisolone phosphate",
+        "prednisolone hemisuccinate"
+      ],
+      "pubtator_normalized_name": "Prednisolone",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

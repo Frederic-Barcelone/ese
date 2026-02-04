@@ -1,0 +1,1927 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:00:21.784430",
+  "document": "02_Article_AAV Management Guidelines.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 36,
+  "total_validated": 36,
+  "total_rejected": 0,
+  "total_investigational": 22,
+  "drugs": [
+    {
+      "matched_text": "POSO830",
+      "preferred_name": "POSO830",
+      "brand_name": null,
+      "compound_id": "POSO830",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "ing Guideline development, reporting and evaluation in health care. J Clin Epidemiol 2010;63:1308-11.\n\n9 Schirmer J, Sanchez-Alamo B, Monti S, et a/. POSO830 SYSTEMATIC literature review informing the 2022 update of the eular recommendations for the management of ANCA-associated vasculitis: focus on treatm",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CD003232",
+      "preferred_name": "CD003232",
+      "brand_name": null,
+      "compound_id": "CD003232",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "rd) 2021;60:4538-47\n\n15. Nn Walters GD, Willis NS, Cooper TE, et a/. Interventions for renal vasculitis in adults. Cochrane Database Syst Rev 2020; 1:CD003232.\n\nwo Jayne D, Blockmans D, Lugmani R, et al. Efficacy and safety of belimumab and azathioprine for maintenance of remission in antineutrophil cytopla",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "rituximab",
+      "preferred_name": "Rituximab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B Cell Lymphoma"
+      ],
+      "nct_id": "NCT05018520",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069283",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05018520",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069283",
+          "display": "Rituximab"
+        }
+      ],
+      "context": "hers and have been widely cited. Recent landmark studies on the role of plasma exchange (PLEX), standardisation of glucocorticoid (GC) dosing, use of rituximab (RTX) for maintenance therapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "89Zr-rituximab",
+        "technetium 99m rituximab",
+        "131I-rituximab"
+      ],
+      "pubtator_normalized_name": "Rituximab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cyclophosphamide",
+      "preferred_name": "Cyclophosphamide",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ovarian Cancer"
+      ],
+      "nct_id": "NCT04931342",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003520",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04931342",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003520",
+          "display": "Cyclophosphamide"
+        }
+      ],
+      "context": "on in lifethreatening or organ-threatening AAV, we recommend a combination of high-dose glucocorticoids (GCs) in combination with either rituximab or cyclophosphamide. We recommend tapering of the GC dose to a target of 5mg prednisolone equivalent/day within 4-5 months. Avacopan may be considered as part of a strat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "aldophosphamide",
+        "4-hydroxyperoxycyclophosphamide",
+        "4-S-ethanolsulfido-cyclophosphamide"
+      ],
+      "pubtator_normalized_name": "Cyclophosphamide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "prednisolone",
+      "preferred_name": "Prednisolone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B-Cell Lymphoma",
+        "High Grade B-Cell Lymphoma w/MYC & BCL2 or BCL6 Rearrangements",
+        "High Grade B-Cell Lymphoma w/MYC, BCL2 & BCL6 Rearrangements",
+        "Double Expressor Lymphoma",
+        "High-grade B-cell Lymphoma"
+      ],
+      "nct_id": "NCT04479267",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011239",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04479267",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011239",
+          "display": "Prednisolone"
+        }
+      ],
+      "context": " of high-dose glucocorticoids (GCs) in combination with either rituximab or cyclophosphamide. We recommend tapering of the GC dose to a target of 5mg prednisolone equivalent/day within 4-5 months. Avacopan may be considered as part of a strategy to reduce exposure to GC in granulomatosis with polyangiitis (GPA)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "prednisolone acetate",
+        "prednisolone phosphate",
+        "prednisolone hemisuccinate"
+      ],
+      "pubtator_normalized_name": "Prednisolone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Azathioprine",
+      "preferred_name": "Azathioprine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Crohn Disease",
+        "Azathioprine",
+        "Methotrexate"
+      ],
+      "nct_id": "NCT05040464",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001379",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05040464",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001379",
+          "display": "Azathioprine"
+        }
+      ],
+      "context": "sion maintenance of GPA/ MPA, we recommend rituximab. In patients with relapsing or refractory eosinophilic GPA, we recommend the use of mepolizumab. Azathioprine and methotrexate are alternatives to biologics for remission maintenance in AAV. Conclusions In the light of recent advancements, these recommendatio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Azathioprine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "methotrexate",
+      "preferred_name": "Methotrexate",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Acute Lymphoblastic Leukemia"
+      ],
+      "nct_id": "NCT02553460",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D008727",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT02553460",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008727",
+          "display": "Methotrexate"
+        }
+      ],
+      "context": "of GPA/ MPA, we recommend rituximab. In patients with relapsing or refractory eosinophilic GPA, we recommend the use of mepolizumab. Azathioprine and methotrexate are alternatives to biologics for remission maintenance in AAV. Conclusions In the light of recent advancements, these recommendations provide update",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "methotrexate polyglutamate",
+        "7-hydroxymethotrexate",
+        "methotrexate-gamma-aspartate"
+      ],
+      "pubtator_normalized_name": "Methotrexate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mycophenolate mofetil",
+      "preferred_name": "Mycophenolate mofetil",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Hematologic Malignancies"
+      ],
+      "nct_id": "NCT06807606",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D009173",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06807606",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009173",
+          "display": "Mycophenolic Acid"
+        }
+      ],
+      "context": "n-organ-threatening or non-life-threatening GPA or MPA, treatment with a combination of glucocorticoids and rituximab is recommended. Methotrexate or mycophenolate mofetil can be considered as alternatives to rituximab. As part of regimens for induction of remission in GPA or MPA, we recommend treatment with oral glucoc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mycophenolic Acid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "prednisone",
+      "preferred_name": "prednisone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Lymphoma"
+      ],
+      "nct_id": "NCT00002462",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011241",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT00002462",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011241",
+          "display": "Prednisone"
+        }
+      ],
+      "context": "AS trial compared two GC taper regimens in 704 patients with GPA and MPA and active organ-threatening or life-threatening disease.”” The reduced-dose prednisone regimen (table 4) resulted in a 40% reduction in oral GC exposure in\n\nIn contrast to the 2016 update, this recommendation now includes RTX. Although,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "prednisone sodium succinate"
+      ],
+      "pubtator_normalized_name": "Prednisone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "methylprednisolone",
+      "preferred_name": "Methylprednisolone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B-Cell Lymphoma",
+        "High Grade B-Cell Lymphoma w/MYC & BCL2 or BCL6 Rearrangements",
+        "High Grade B-Cell Lymphoma w/MYC, BCL2 & BCL6 Rearrangements",
+        "Double Expressor Lymphoma",
+        "High-grade B-cell Lymphoma"
+      ],
+      "nct_id": "NCT04479267",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D008775",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04479267",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008775",
+          "display": "Methylprednisolone"
+        }
+      ],
+      "context": "ejas sasn 10} Buipnjout ‘}YyBluAdoo Aq pa}oe}01q “EZOS YOJEIN OL UO HOLETZ-ZZON-PIE/OEL LOL SB peysiignd si :siq Wneyy\n\nAdministration of intravenous methylprednisolone (MP) pulses in doses of 1000-3000 mg has been used in induction protocols including the RAVE, MEPEX and PEXIVAS trials*! °”'\" and is common practice ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Methylprednisolone Hemisuccinate",
+        "Methylprednisolone Acetate",
+        "methylprednisolone aceponate"
+      ],
+      "pubtator_normalized_name": "Methylprednisolone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "switch",
+      "preferred_name": "Switch",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Breast Cancer",
+        "Adjuvant Treatment",
+        "Early Stage Breast Cancer"
+      ],
+      "nct_id": "NCT07071038",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT07071038",
+          "display": null
+        }
+      ],
+      "context": "arly since RTX biosimilars have become available.'*! In an RCT, ‘tailored’ RTX maintenance treatment based on biomarkers (rise of ANCA concentration, switch from negative to positive ANCA or repopulation of CD19+ lymphocytes) was associated with a higher but not statistically different relapse rate (17.3%",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "trimethoprim-sulfamethoxazole",
+      "preferred_name": "trimethoprim-sulfamethoxazole",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Haematological Malignancy",
+        "Hypogammaglobulinemia"
+      ],
+      "nct_id": "NCT05678621",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D015662",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05678621",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015662",
+          "display": "Trimethoprim Sulfamethoxazole Drug Combination"
+        }
+      ],
+      "context": "A, leflun-omide can be considered in patients with intolerance to all the above-mentioned drugs.'®° Results of two recent meta-analyses revealed that trimethoprim-sulfamethoxazole (T/S) does not reduce relapse risk in patients with GPA.'*! '? The addition of belimumab to an AZA-based maintenance regimen did not improve relapse-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Trimethoprim Sulfamethoxazole Drug Combination",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "belimumab",
+      "preferred_name": "Belimumab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Sjogren's Syndrome",
+        "Pediatric ALL"
+      ],
+      "nct_id": "NCT06410833",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C511911",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06410833",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C511911",
+          "display": "belimumab"
+        }
+      ],
+      "context": "ee survival in an RCT, which was stopped early due to slow recruitment and had a low relapse rate in the placebo group, making a positive result with belimumab unlikely to be detected.’\n\npue\n\nThere is low-level to moderate-level evidence that patients with renal-limited vasculitis and patients positive for M",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "belimumab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "control arm",
+      "preferred_name": "Control arm",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Rectal Cancer"
+      ],
+      "nct_id": "NCT03997435",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT03997435",
+          "display": null
+        }
+      ],
+      "context": "er treatment with prednisolone at a stable dose =>7.5 mg per day prior to baseline, 54% of patients in the mepolizumab arm and 71% of patients in the control arm had active disease at randomisation with a Birmingham Vasculitis Activity Score (BVAS) >0. Patients were randomised 1:1 to continuation of standard t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "standard therapy",
+      "preferred_name": "Standard therapy",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "AML, Adult",
+        "MDS"
+      ],
+      "nct_id": "NCT05025098",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05025098",
+          "display": null
+        }
+      ],
+      "context": "ontrol arm had active disease at randomisation with a Birmingham Vasculitis Activity Score (BVAS) >0. Patients were randomised 1:1 to continuation of standard therapy (including other conventional immunosuppressive agents in more than 50% of patients in each arm) or standard therapy plus mepolizamab at a dose of 30",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "atovaquone",
+      "preferred_name": "Atovaquone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Acute Myeloid Leukemia"
+      ],
+      "nct_id": "NCT03568994",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D053626",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT03568994",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D053626",
+          "display": "Atovaquone"
+        }
+      ],
+      "context": "ion of T/S if the dose is gradually increased according to published regimens.” *'° Alternatives for patients who cannot tolerate T/S are dapsone,”'! atovaquone*'* *!* or aerosolised pentamidine.”\n\n“EZOZT YON 9} UO H9LETZ-ZZOT-PIE/IEL TOL SB paysiignd js4yj :siq WwNeyy uuy 3x9} 0} payejas sasn 10} Burpnjout ‘",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "atovaquone proguanil drug combination"
+      ],
+      "pubtator_normalized_name": "Atovaquone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trimethoprim",
+      "preferred_name": "Trimethoprim",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Prostate Cancer"
+      ],
+      "nct_id": "NCT06536374",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D015662",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06536374",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015662",
+          "display": "Trimethoprim Sulfamethoxazole Drug Combination"
+        }
+      ],
+      "context": "osphamide; EGPA, eosinophilic granulomatosis with polyangiitis; GC, glucocorticoid; IL-5, interleukin 5; MP, methylprednisolone; RTX, rituximab; T/S, trimethoprim—sulfamethoxazole.\n\ntreatments, conditions affecting the management of patients with AAV in the pandemic change rapidly. Therefore, specific recommend",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trimethoprim",
+        "trimethoprim sulfadoxine drug combination",
+        "sulfadiazine trimethoprim drug combination"
+      ],
+      "pubtator_normalized_name": "Trimethoprim Sulfamethoxazole Drug Combination",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "corticosteroids",
+      "preferred_name": "corticosteroids",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ocular Myasthenia Gravis"
+      ],
+      "nct_id": "NCT06342544",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C011244",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06342544",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C011244",
+          "display": "corticosteroid methanetriol mixture"
+        }
+      ],
+      "context": "itis biomarkers in the era of the personalized medicine. Autoimmun Rev 2020;19:102514.\n\n109 Waki D, Nishimura K, Tokumasu H, et a/. Initial high-dose corticosteroids and renal impairment are risk factors for early severe infections in elderly patients with antineutrophil cytoplasmic autoantibody-associated vasculi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "corticosteroid methanetriol mixture",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MabThera",
+      "preferred_name": "Mabthera",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Relapsed Diffuse Large B-cell Lymphoma",
+        "Refractory Diffuse Large B-Cell Lymphoma"
+      ],
+      "nct_id": "NCT04833114",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069283",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04833114",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069283",
+          "display": "Rituximab"
+        }
+      ],
+      "context": "s Technol 1985;6:587-91.\n\npapeojuMoOg ‘Bululw eyep pue\n\n93 Antonelou M, Abro A, Heath R, et a/. Comparison of outcomes using the rituximab originator MabThera with the biosimilar truxima in patients with ANCA-associated vasculitis. Scand J Rheumatol 2022;51:135-41\n\n119 Pusey CD, Rees AJ, Evans DJ, et a/. Pl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rituximab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cyclosporine A",
+      "preferred_name": "Cyclosporine A",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Acute Myeloid Leukemia (AML)",
+        "Acute Lymphocytic Leukemia (ALL)",
+        "Chronic Myelogenous Leukemia",
+        "Plasma Cell Leukemia",
+        "Myelofibrosis",
+        "Myelodysplasia",
+        "Chronic Lymphocytic Leukemia",
+        "Small Lymphocytic Lymphoma",
+        "Marginal Zone B-Cell Lymphoma",
+        "Follicular Lymphoma",
+        "Lymphoplasmacytic Lymphoma",
+        "Mantle-Cell Lymphoma",
+        "Prolymphocytic Leukemia",
+        "Diffuse Large B Cell Lymphoma",
+        "Lymphoblastic Lymphoma",
+        "Burkitt's Lymphoma",
+        "Non-Hodgkin Lymphoma",
+        "Multiple Myeloma"
+      ],
+      "nct_id": "NCT01962636",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D016572",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT01962636",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016572",
+          "display": "Cyclosporine"
+        }
+      ],
+      "context": "cytoplasm antibody-associated vasculitis. Nephro/ Dial Transplant 2018;33:899.\n\n124 Szpirt WM, Heaf JG, Petersen J. Plasma exchange for induction and cyclosporine A for maintenance of remission in Wegener's granulomatosis -- a clinical randomized controlled trial. Nephrol Dial Transplant 2011;26:206-13\n\n99 Pepper",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "cyclosporin H",
+        "cyclosporin G",
+        "SDZ 33-243"
+      ],
+      "pubtator_normalized_name": "Cyclosporine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "steroids",
+      "preferred_name": "Steroids",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Vestibular Schwannoma",
+        "Facial Nerve Paralysis"
+      ],
+      "nct_id": "NCT07116811",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013256",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT07116811",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013256",
+          "display": "Steroids"
+        }
+      ],
+      "context": "\n\n134 Guillevin L, Jarrousse B, Lok C, et a/. Longterm followup after treatment of polyarteritis nodosa and Churg-Strauss angiitis with comparison of steroids, plasma exchange and cyclophosphamide to steroids and plasma exchange. A prospective randomized trial of 71 patients. the cooperative Study Group for",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Phytosterols",
+        "Cardiac Glycosides",
+        "Steroids Fluorinated"
+      ],
+      "pubtator_normalized_name": "Steroids",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "leflunomide",
+      "preferred_name": "Leflunomide",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Recurrent Plasma Cell Myeloma",
+        "Refractory Plasma Cell Myeloma"
+      ],
+      "nct_id": "NCT04508790",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000077339",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04508790",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000077339",
+          "display": "Leflunomide"
+        }
+      ],
+      "context": "associated vasculitis. N Eng/ J Med 2008;359:2790-803\n\n148 Metzler C, Miehle N, Manger K, et a/. Elevated relapse rate under oral methotrexate versus leflunomide for maintenance of remission in wegener's granulomatosis. Rheumatology (Oxford) 2007;46:1087-91.\n\n174 Samson M, Puechal X, Devilliers H, et a/. Long-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Leflunomide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Avacopan",
+      "preferred_name": "avacopan",
+      "brand_name": "TAVNEOS",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Complement 5a Receptor Antagonist",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "CAPSULE",
+      "route": "ORAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "C000620232",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA214487",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C000620232",
+          "display": "avacopan"
+        }
+      ],
+      "context": "ion with either rituximab or cyclophosphamide. We recommend tapering of the GC dose to a target of 5mg prednisolone equivalent/day within 4-5 months. Avacopan may be considered as part of a strategy to reduce exposure to GC in granulomatosis with polyangiitis (GPA) or microscopic polyangiitis (MPA). Plasma ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "avacopan",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mepolizumab",
+      "preferred_name": "mepolizumab",
+      "brand_name": "NUCALA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Interleukin-5 Antagonist",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "SUBCUTANEOUS LYOPHILIZED POWER",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "C434107",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "BLA125526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C434107",
+          "display": "mepolizumab"
+        }
+      ],
+      "context": "is. For remission maintenance of GPA/ MPA, we recommend rituximab. In patients with relapsing or refractory eosinophilic GPA, we recommend the use of mepolizumab. Azathioprine and methotrexate are alternatives to biologics for remission maintenance in AAV. Conclusions In the light of recent advancements, these",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "mepolizumab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sulfamethoxazole",
+      "preferred_name": "sulfamethoxazole",
+      "brand_name": "GANTANOL-DS",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Azole Antifungal",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "TABLET",
+      "route": "ORAL",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013420",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA012715",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013420",
+          "display": "Sulfamethoxazole"
+        }
+      ],
+      "context": "de can be considered in patients with intolerance to all the above-mentioned drugs.'®° Results of two recent meta-analyses revealed that trimethoprim-sulfamethoxazole (T/S) does not reduce relapse risk in patients with GPA.'*! '? The addition of belimumab to an AZA-based maintenance regimen did not improve relapse-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trimethoprim Sulfamethoxazole Drug Combination",
+        "sulfamethoxazole hydroxylamine",
+        "N-acetoxysulfamethoxazole"
+      ],
+      "pubtator_normalized_name": "Sulfamethoxazole",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "reslizumab",
+      "preferred_name": "reslizumab",
+      "brand_name": "CINQAIR",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Interleukin-5 Antagonist",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "INJECTION",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "C515492",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "BLA761033",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C515492",
+          "display": "reslizumab"
+        }
+      ],
+      "context": "//:dyjy WOsy POpEO|UMOG s pue ‘Burures} jy ‘Buruiw eyep “sa1Hojouyoe} se ysanB6 Aq gzoz ‘8 Jaquiesdeq uo /WO\n\nOther IL-5 or IL-5 receptor inhibitors (reslizumab, benrali-zumab) showed efficacy in small open-label pilot studies in EGPA,'** '8° but data from RCTs using these agents are not yet available. In a r",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "reslizumab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "omalizumab",
+      "preferred_name": "omalizumab",
+      "brand_name": "XOLAIR",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Monoclonal Antibody",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "VIAL",
+      "route": "",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069444",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "BLA103976",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069444",
+          "display": "Omalizumab"
+        }
+      ],
+      "context": "ies in EGPA,'** '8° but data from RCTs using these agents are not yet available. In a retrospective multicentre series, anti-IgE-targete therapy with omalizumab appeared to be less effective than mepolizumab.'”’ As discussed above, data showing improve outcomes with other biological or conventional drugs for ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Omalizumab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dapsone",
+      "preferred_name": "dapsone",
+      "brand_name": "ACZONE",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "GEL",
+      "route": "TOPICAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003622",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA207154",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003622",
+          "display": "Dapsone"
+        }
+      ],
+      "context": "re-introduction of T/S if the dose is gradually increased according to published regimens.” *'° Alternatives for patients who cannot tolerate T/S are dapsone,”'! atovaquone*'* *!* or aerosolised pentamidine.”\n\n“EZOZT YON 9} UO H9LETZ-ZZOT-PIE/IEL TOL SB paysiignd js4yj :siq WwNeyy uuy 3x9} 0} payejas sasn ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "4-amino-4'-hydroxylaminodiphenylsulfone",
+        "diformyl dapsone",
+        "chloroguanil dapsone drug combination"
+      ],
+      "pubtator_normalized_name": "Dapsone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "propylthiouracil",
+      "preferred_name": "propylthiouracil",
+      "brand_name": "PROPYLTHIOURACIL",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Thyroid Hormone Synthesis Inhibitor",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "TABLET",
+      "route": "ORAL",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011441",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA080016",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011441",
+          "display": "Propylthiouracil"
+        }
+      ],
+      "context": "sculitides undergoing long-term dialysis. Clin J Am Soc Nephrol 2021;16:1665-75.\n\n172 Gao Y, Chen M, Ye H, et a/. Long-term outcomes of patients with propylthiouracil-induced anti-neutrophil cytoplasmic auto-antibody-associated vasculitis. Rheumatology (Oxford) 2008;47:1515-20\n\n146 Wijetilleka S, Mukhtyar C, Jayne ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Propylthiouracil",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "IL-5",
+      "preferred_name": "IL-5",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D015572",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1367184",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015572",
+          "display": "Spiramycin"
+        }
+      ],
+      "context": ", standardisation of glucocorticoid (GC) dosing, use of rituximab (RTX) for maintenance therapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2016 guidelines.\n\nBackground Since the publication of the EULAR recommendations for the ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Spiramycin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pentamidine",
+      "preferred_name": "Pentamidine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010419",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "7994",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010419",
+          "display": "Pentamidine"
+        }
+      ],
+      "context": "ly increased according to published regimens.” *'° Alternatives for patients who cannot tolerate T/S are dapsone,”'! atovaquone*'* *!* or aerosolised pentamidine.”\n\n“EZOZT YON 9} UO H9LETZ-ZZOT-PIE/IEL TOL SB paysiignd js4yj :siq WwNeyy uuy 3x9} 0} payejas sasn 10} Burpnjout ‘yyBlAdoo Aq pa}99}01q\n\nAs AAV invo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "platinum(II) pentamidine",
+        "iridium (cyclooctadiene) pentamidine tetraphenylborate",
+        "Ir-(1 3-1 5-cyclooctatetrane)-pentamidine alizarin red"
+      ],
+      "pubtator_normalized_name": "Pentamidine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "EDTA",
+      "preferred_name": "EDTA",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004492",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3755",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004492",
+          "display": "Edetic Acid"
+        }
+      ],
+      "context": "ions for the management of primary small and medium vessel vasculitis. Ann Rheum Dis 2009;68:310-7.\n\n6 Yates M, Watts RA, Bajema IM, et a/. EULAR/ERA-EDTA recommendations for the management of ANCA-associated vasculitis. Ann Rheum Dis 2016;75:1583-94.\n\n7 van der Heijde D, Aletaha D, Carmona L, et al. 20",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tris-borate-EDTA buffer",
+        "tris-acetate-EDTA buffer",
+        "Fe(III)-EDTA"
+      ],
+      "pubtator_normalized_name": "Edetic Acid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "D-glucose",
+      "preferred_name": "D-glucose",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D005947",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "4850",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005947",
+          "display": "Glucose"
+        }
+      ],
+      "context": " for clinical trials and daily practice. Ann Rheum Dis 2010;69:1913-9.\n\n62 Ozmen , Tatci E, Gokcek A, et a/. Integration of 2-deoxy-2- [ 18F ] fluoro-D-glucose PET/CT into clinical management of patients with Wege’er's granulomatosis. Ann Nucl Med 2013;27:907-15.\n\n35 Lems WF, Dreinhéfer KE, Bischoff-Ferrari ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "1 5-anhydroglucitol",
+        "glucose-cysteine"
+      ],
+      "pubtator_normalized_name": "Glucose",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anti-glomerular basement membrane antibody",
+      "preferred_name": "Anti-glomerular basement membrane antibody",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "18040",
+          "display": null
+        }
+      ],
+      "context": "of a randomized clinical trial comparing methotrexate to cyclophosphamide for remission\n\n131 Levy JB, Turner AN, Rees AJ, et a/. Long-Term outcome of anti-glomerular basement membrane antibody disease treated with plasma exchange and immunosuppression. Ann Intern Med 2001;134:1033-42.\n\n156 de Joode AAE, Sanders JSF, Puéchal X, ef a/. Long t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "TMP",
+      "preferred_name": "TMP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D015662",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2710634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015662",
+          "display": "Trimethoprim Sulfamethoxazole Drug Combination"
+        }
+      ],
+      "context": "direct rechallenge for Pneumocystis carinii pneumonia prophylaxis in human immunodeficiency virus-infected patients with previous adverse reaction to TMP-SMZ. J Infect Dis 2001;184:992-7.\n\n187 Steinfeld J, Bradford ES, Brown J. Evaluation of clinical benefit from treatment with mepolizumab for patients",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "3 3' 5 5'-tetramethylbenzidine"
+      ],
+      "pubtator_normalized_name": "Trimethoprim Sulfamethoxazole Drug Combination",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "SMZ",
+      "preferred_name": "SMZ",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10178",
+          "display": null
+        }
+      ],
+      "context": "ct rechallenge for Pneumocystis carinii pneumonia prophylaxis in human immunodeficiency virus-infected patients with previous adverse reaction to TMP-SMZ. J Infect Dis 2001;184:992-7.\n\n187 Steinfeld J, Bradford ES, Brown J. Evaluation of clinical benefit from treatment with mepolizumab for patients wit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

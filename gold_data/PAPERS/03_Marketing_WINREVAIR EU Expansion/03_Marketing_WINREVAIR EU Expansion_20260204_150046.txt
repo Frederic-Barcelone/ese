@@ -1,0 +1,69 @@
+--- Page 1 ---
+
+NEWS RELEASE
+Merck Receives Positive EU CHMP Opinion for Expanded Use of WINREVAIR™ (sotatercept) in Adults with Pulmonary Arterial Hypertension (PAH, WHO* Group 1 Pulmonary Hypertension)
+2025-12-12
+RAHWAY, N.J.--(BUSINESS WIRE)-- Merck (NYSE: MRK), known as MSD outside of the United States and Canada, today announced that the European Medicines Agency's Committee for Medicinal Products for Human Use (CHMP) recommended the approval of an expanded indication for WINREVAIR™ (sotatercept), in combination with other pulmonary arterial hypertension (PAH) therapies, for the treatment of PAH in adult patients with WHO Functional Class (FC) Il, Ill, and lV based on the Phase 3 ZENITH study. The currently approved indication in the European Union (EU) is for adults with PAH with WHO FC II to III, to improve exercise capacity. The CHMP recommendation will now be reviewed by the European Commission (EC) for amending the marketing authorization in the EU, Iceland, Liechtenstein and Norway, and a final decision is expected in the first quarter of 2026.
+"If approved, this broader indication would recognize the impact of WINREVAIR on morbidity and mortality in adult patients with PAH, extending the overall use of WINREVAIR to be inclusive of WHO FC Il, Ill and now IV patients, with a treatment objective beyond the improvement of exercise capacity,” said Dr. Joerg Koglin, senior vice president and head of general medicine, global clinical development, Merck Research Laboratories. “We look forward to the EC's decision as we work to ensure broad patient access to the first and only activin signaling inhibitor therapy approved in Europe and continue to deliver meaningful evidence to support treatment decisions.”
+The CHMP recommendation is based on data from the Phase 3 ZENITH trial which demonstrated that adding WINREVAIR to background therapy resulted in a statistically significant and clinically meaningful 76% reduction in
+°
+
+--- Page 2 ---
+
+the risk of major morbidity and mortality outcomes, the study's primary endpoint, in adults with PAH WHO functional class Ill or IV compared to placebo (HR: 0.24; 95% Cl: 0.13, 0.43; p<0.0001). The trial’s composite primary efficacy endpoint — time to first occurrence of all-cause death, lung transplantation or PAH-worsening hospitalization of >24 hours — occurred in 15 WINREVAIR-treated participants (17%) versus 47 placebo-treated participants (55%). Due to overwhelming efficacy based on the primary endpoint result, the ZENITH trial was stopped early at the interim analysis and patients were offered the opportunity to receive WINREVAIR through an open-label long-term follow-up study. These results were published in the New England Journal of Medicine. The CHMP also reviewed morbidity and mortality outcomes data from the secondary endpoint of the pivotal Phase 3 STELLAR trial as part of this recommendation.
+WINREVAIR is the first and only activin signaling inhibitor therapy for PAH approved in all 27 member states of the EU, as well as Iceland, Liechtenstein and Norway, and is currently approved in more than 50 countries. In October 2025, the U.S. Food and Drug Administration (FDA) approved an updated indication based on the Phase 3 ZENITH trial. WINREVAIR is now approved in the U.S. for the treatment of adults with PAH (WHO Group 1 pulmonary hypertension [PH]) to improve exercise capacity and WHO FC, and reduce the risk of clinical worsening events, including hospitalization for PAH, lung transplantation and death.
+* World Health Organization
+About ZENITH
+The ZENITH study (NCT04896008) was a global, double-blind, placebo-controlled, multicenter, parallel-group clinical trial in which 172 adult participants with PAH (WHO FC III or IV) at high risk of mortality were randomized in a 1:1 ratio to either WINREVAIR (target dose 0.7 mg/kg) (n=86) plus background PAH therapy or placebo (n=86) plus background PAH therapy administered subcutaneously once every 3 weeks.
+The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy. There were more participants in WHO FC III (74%) compared to WHO FC IV (26%). The REVEAL Lite 2 risk score was <9 for 2% of participants, 9 to 10 for 67% of participants and >11% for 30% of participants. The primary efficacy endpoint was time to first confirmed major morbidity or mortality event. Events were defined as all-cause death, lung transplantation or PAH worsening-related hospitalization of 224 hours. Secondary endpoints included overall survival and several additional measures.
+o
+
+--- Page 3 ---
+
+About WINREVAIR™ (sotatercept-csrk) for injection, for subcutaneous use, 45 mg, 60 mg
+In the U.S., WINREVAIR is FDA-approved for the treatment of adults with pulmonary arterial hypertension (PAH, WHO Group 1 pulmonary hypertension) to improve exercise capacity and World Health Organization (WHO) functional class (FC), and reduce the risk of clinical worsening events, including hospitalization for PAH, lung transplantation and death. WINREVAIR is the first activin signaling inhibitor therapy approved to treat PAH. WINREVAIR improves the balance between pro-proliferative and anti-proliferative signaling to modulate vascular proliferation. In preclinical models, WINREVAIR induced cellular changes that were associated with thinner vessel walls, partial reversal of right ventricular remodeling and improved hemodynamics.
+WINREVAIR is the subject of a licensing agreement with Bristol Myers Squibb.
+Selected Safety Information for WINREVAIR in the U.S.
+WINREVAIR may increase hemoglobin (Hgb). Severe erythrocytosis may increase the risk of thromboembolic events or hyperviscosity syndrome. Monitor Hgb before each dose for the first 5 doses, or longer if values are unstable, and periodically thereafter, to determine if dose adjustments are required.
+WINREVAIR may decrease platelet count. Severe thrombocytopenia may increase the risk of bleeding. Thrombocytopenia occurred more frequently in patients also receiving prostacyclin infusion. Do not initiate treatment if platelet count is <50,000/mm3. Monitor platelets before each dose for the first 5 doses, or longer if values are unstable, and periodically thereafter to determine whether dose adjustments are required.
+In clinical studies, serious bleeding (e.g., gastrointestinal, intracranial hemorrhage) was reported in 4% vs 1% (STELLAR) and 7% vs 5% (ZENITH) of patients taking WINREVAIR vs placebo, respectively. Patients with serious bleeding were more likely to be on prostacyclin background therapy and/or antithrombotic agents, or have low platelet counts. Advise patients about signs and symptoms of blood loss. Evaluate and treat bleeding accordingly. Do not administer WINREVAIR if the patient is experiencing serious bleeding.
+WINREVAIR may cause fetal harm when administered to a pregnant woman. Advise pregnant women of the potential risk to a fetus. Advise females of reproductive potential to use an effective method of contraception during treatment with WINREVAIR and for at least 4 months after the final dose. Pregnancy testing is recommended for females of reproductive potential before starting WINREVAIR treatment.
+Based on findings in animals, WINREVAIR may impair female and male fertility. Advise patients on the potential effects on fertility.
+o
+
+--- Page 4 ---
+
+The most common adverse reactions (=10% for WINREVAIR and at least 5% more than placebo) occurring in the STELLAR Phase 3 clinical trial were headache (24.5% vs 17.5%), epistaxis (22.1% vs 1.9%), rash (20.2% vs 8.1%), telangiectasia (16.6% vs 4.4%), diarrhea (15.3% vs 10.0%), dizziness (14.7% vs 6.3%) and erythema (13.5% vs 3.1%). The most common adverse reactions in the ZENITH trial were infections (67.4% vs 44.2%), epistaxis (45.3% vs 9.3%), diarrhea (25.6 % vs 17.4%), telangiectasia (25.6 % vs 3.5%), increased hemoglobin (15.1% vs 1.2%), rash (10.5% vs 4.7%), erythema (10.5% vs 3.5%) and gingival bleeding (10.5% vs 2.3%).
+Because of the potential for serious adverse reactions in the breastfed child, advise patients that breastfeeding is not recommended during treatment with WINREVAIR, and for 4 months after the final dose.
+About PAH
+Pulmonary arterial hypertension (PAH) is a rare, progressive and life-threatening blood vessel disorder characterized by the constriction of small pulmonary arteries and elevated blood pressure in the pulmonary circulation. Approximately 90,000 people worldwide are living with PAH. The disease progresses rapidly for many patients. PAH results in significant strain on the heart, leading to limited physical activity, heart failure and reduced life expectancy. The five-year mortality rate for patients with PAH is approximately 43%.
+About Merck
+At Merck, known as MSD outside of the United States and Canada, we are unified around our purpose: We use the power of leading-edge science to save and improve lives around the world. For more than 130 years, we have brought hope to humanity through the development of important medicines and vaccines. We aspire to be the premier research-intensive biopharmaceutical company in the world - and today, we are at the forefront of research to deliver innovative health solutions that advance the prevention and treatment of diseases in people and animals. We foster a diverse and inclusive global workforce and operate responsibly every day to enable a safe, sustainable and healthy future for all people and communities. For more information, visit www.merck.com and connect with us on X (formerly Twitter), Facebook, Instagram, YouTube and Linkedin.
+Forward-Looking Statement of Merck & Co., Inc., Rahway, N.J., USA
+This news release of Merck & Co., Inc., Rahway, N.J., USA (the “company”) includes “forward-looking statements” within the meaning of the safe harbor provisions of the U.S. Private Securities Litigation Reform Act of 1995. These statements are based upon the current beliefs and expectations of the company’s management and are subject to significant risks and uncertainties. There can be no guarantees with respect to pipeline candidates that the candidates will receive the necessary regulatory approvals or that they will prove to be commercially successful. If
+o
+
+--- Page 5 ---
+
+underlying assumptions prove inaccurate or risks or uncertainties materialize, actual results may differ materially from those set forth in the forward-looking statements.
+Risks and uncertainties include but are not limited to, general industry conditions and competition; general economic factors, including interest rate and currency exchange rate fluctuations; the impact of pharmaceutical industry regulation and health care legislation in the United States and internationally; global trends toward health care cost containment; technological advances, new products and patents attained by competitors; challenges inherent in new product development, including obtaining regulatory approval; the company’s ability to accurately predict future market conditions; manufacturing difficulties or delays; financial instability of international economies and sovereign risk; dependence on the effectiveness of the company's patents and other protections for innovative products; and the exposure to litigation, including patent litigation, and/or regulatory actions.
+The company undertakes no obligation to publicly update any forward-looking statement, whether as a result of new information, future events or otherwise. Additional factors that could cause results to differ materially from those described in the forward-looking statements can be found in the company’s Annual Report on Form 10-K for the year ended December 31, 2024 and the company’s other filings with the Securities and Exchange Commission (SEC) available at the SEC's Internet site (www.sec.gov).
+Please see Prescribing Information for WINREVAIR (sotatercept-csrk) at
+http://www.merck.com/product/usa/pi_circulars/w/winrevair/winrevair_pi.pdf, Patient Information for WINREVAIR at
+http://www.merck.com/product/usa/pi_circulars/w/winrevair/winrevair_ppi.pdf, and Instructions for Use for WINREVAIR (1-vial kit, 2-vial kit) at
+https://www.merck.com/product/usa/pi_circulars/w/winrevair/winrevair_ifu_1-vial_2- vial_kits.pdf.
+Media Contacts:
+Julie Cunningham
+(617) 519-6264
+Nikki Lupinacci
+(718) 644-0730
+Investor Contacts:
+Peter Dannenbaum
+°
+
+--- Page 6 ---
+
+(732) 594-1579
+Ayn Wisler (917) 691-6218
+Source: Merck & Co., Inc.
+o

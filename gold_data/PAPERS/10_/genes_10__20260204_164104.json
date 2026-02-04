@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:41:04.565261",
+  "document": "10_.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ACPA",
+      "hgnc_symbol": "PRTN3",
+      "full_name": "proteinase 3",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "9495",
+        "entrez": "5657",
+        "ensembl": "ENSG00000196415",
+        "uniprot": "P24158",
+        "omim": "177020"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "9495",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "5657",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000196415",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "177020",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P24158",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "eveci AA, Elhan AH, Erdogan BD et al. Use and detailed metric properties of patient-reported outcome measures for rheumatoid arthritis: a systematic review covering two decades. RMD Open 2021;7:e001707.\n\n38. Hoeper JR, Zeidler J, Meyer SE et al. Effect of nurse-led care on outcomes in patients with ACPA/RF-positive rheumatoid arthritis with active disease undergoing treat-to-target: a multicentre randomised controlled trial. RMD Open 2021; 7:e001627.\n\n17. Rabin R, de Charro F. EQ-5D: a measure of health status from the EuroQol Group. Ann Med 2001;33:337-43.\n\n39. Sjo AS, Bergsten U. Patients’ exper",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,881 @@
+{
+  "doc_id": "03_Protocol_ALXN1720-oMG-303",
+  "doc_filename": "03_Protocol_ALXN1720-oMG-303.pdf",
+  "trial_ids": [],
+  "study_design": {
+    "phase": "3",
+    "design_type": "parallel",
+    "blinding": "double-blind",
+    "randomization_ratio": "1:1",
+    "allocation": "gefurulimab n=84, placebo n=84 (approximately)",
+    "sample_size": 168,
+    "actual_enrollment": null,
+    "duration_months": 14,
+    "treatment_arms": [
+      {
+        "name": "gefurulimab",
+        "n": 84,
+        "dose": "600mg loading dose, then 300mg",
+        "frequency": "once weekly",
+        "route": "subcutaneous"
+      },
+      {
+        "name": "placebo",
+        "n": 84,
+        "dose": null,
+        "frequency": "once weekly",
+        "route": "subcutaneous"
+      }
+    ],
+    "control_type": "placebo",
+    "setting": "multicenter study",
+    "sites_total": null,
+    "countries_total": null,
+    "periods": [
+      {
+        "name": "screening",
+        "duration_months": 1.0,
+        "duration_weeks": null,
+        "description": null
+      },
+      {
+        "name": "RCT",
+        "duration_months": 3.0,
+        "duration_weeks": null,
+        "description": null
+      },
+      {
+        "name": "OLE",
+        "duration_months": 12.0,
+        "duration_weeks": null,
+        "description": null
+      }
+    ],
+    "evidence": [
+      {
+        "page": 6,
+        "section_header": null,
+        "quote": "ALXN1720-oMG-303 is a Phase 3, randomized, double-masked, placebo-controlled, multicenter study",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+      },
+      {
+        "page": 6,
+        "section_header": null,
+        "quote": "Approximately 168 eligible participants will be stratified by geographical region (eg, North America, Europe), steroid use at baseline (Yes or No) and baseline MGII ocular (PRO) score category (6 to 10, or 11 to 18) and randomized 1:1 to treatment with gefurulimab or placebo",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+      },
+      {
+        "page": 6,
+        "section_header": null,
+        "quote": "The study will consist of 3 periods: Screening (< 4 weeks), RCT (12 weeks), and OLE (52 weeks)",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+      },
+      {
+        "page": 6,
+        "section_header": null,
+        "quote": "receive a 600 mg loading dose of gefurulimab (or placebo) on Day 1, followed by 300 mg once weekly maintenance treatment with gefurulimab (or placebo)",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+      },
+      {
+        "page": 7,
+        "section_header": null,
+        "quote": "The maximum overall study duration for active participants will be approximately 56 weeks (from Screening through OLE)",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+      }
+    ]
+  },
+  "eligibility_inclusion": [
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Adult participants > 18 years of age at time of signing the informed consent",
+      "section": "eligibility",
+      "page": 10,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "age",
+        "derived": {
+          "operator": ">",
+          "value": 18,
+          "unit": "years"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "Adult participants > 18 years of age at time of signing the informed consent",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "AChR Ab+ oMG (MGFA Class I)",
+      "section": "eligibility",
+      "page": 10,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "AChR Ab+ oMG (MGFA Class I)",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Positive serological test for AChR autoantibodies at Screening",
+      "section": "eligibility",
+      "page": 10,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "biomarker",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "Positive serological test for AChR autoantibodies at Screening (previous test results, if applicable, must be confirmed by central laboratory during Screening)",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Participants must weigh > 40 kg",
+      "section": "eligibility",
+      "page": 10,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "other",
+        "derived": {
+          "operator": ">",
+          "value": 40,
+          "unit": "kg"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "Participants must weigh > 40 kg",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Participants of childbearing potential must follow the contraception measures specified in protocol",
+      "section": "eligibility",
+      "page": 10,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "pregnancy",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "Participants of childbearing potential must follow the contraception measures specified in protocol.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Written informed consent from each study participant or the study participant's legal guardian",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "consent",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.425,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "The Investigator, or a person designated by the Investigator, will obtain written informed consent from each study participant or the study participant's legal guardian and the participant's assent, when applicable, before any study-specific activity is performed.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Vaccination against N meningitidis serogroups within 3 years prior to Day 1",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "other",
+        "derived": {
+          "operator": "<=",
+          "value": 3,
+          "unit": "years"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "To reduce the risk of meningococcal infection, all participants must be vaccinated against NV meningitidis serogroups A, C, W135, Y, (and where available, serogroup B) within 3 years prior to Day 1.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    }
+  ],
+  "eligibility_exclusion": [
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Known other autoimmune disease that may affect study participation and results",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "comorbidity",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Known other autoimmune disease that may affect study participation and results in the opinion of PI and medical monitor",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Any medical condition or risk factor that might interfere with participation",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Any medical condition or risk factor that, in the opinion of the PI or the Medical Monitor, might interfere with participation in the study, pose any added risk to the participant, or confound the assessment of safety or efficacy of the study intervention",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "History of N meningitidis infection",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "comorbidity",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "History of N meningitidis infection",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Positive pregnancy test at Screening or Day 1",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "pregnancy",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Participants who have a positive pregnancy test at Screening or Day 1.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Evidence of hepatitis B or hepatitis C viral infection",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "comorbidity",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Evidence of hepatitis B or hepatitis C viral infection or presence of HBsAg or HBcAb with negative surface antibody (anti-HBs), or HCV infection (HCV antibody positive, expect for participants with document successful treatment).",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Pregnant, breastfeeding, or intending to conceive during the course of the study",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "pregnancy",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Pregnant, breastfeeding, or intending to conceive during the course of the study.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Employee or directly related to an employee of Alexion or the institution/investigational site",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Participant is an employee or directly related to an employee of Alexion or the institution/investigational site.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Unable or not willing to administer the study intervention",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Participant or caregiver unable or not willing to administer the study intervention.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Inability or unwillingness to adhere to the protocol requirements",
+      "section": "eligibility",
+      "page": 11,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 11,
+          "quote": "Inability or unwillingness to adhere to the protocol requirements and restrictions, including participation in scheduled study visits.",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    }
+  ],
+  "epidemiology": [],
+  "patient_journey": [],
+  "endpoints": [
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "MGII (PRO) ocular score change",
+      "section": "endpoints",
+      "page": 4,
+      "structured_data": {
+        "type": "primary",
+        "name": "MGII (PRO) ocular score change",
+        "measure": "Change from Baseline in the MGII (PRO) ocular score",
+        "timepoint": "Week 12",
+        "analysis_method": "MMRM methodology with treatment policy strategy"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "Primary: To assess the efficacy of gefurulimab Change from Baseline in the MGII (PRO) ocular score compared with placebo in the treatment of t Week 12 oMG based on changes in MGII (PRO) ar vee' ocular score",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "MGII (PRO + E) ocular score change",
+      "section": "endpoints",
+      "page": 4,
+      "structured_data": {
+        "type": "secondary",
+        "name": "MGII (PRO + E) ocular score change",
+        "measure": "Change from Baseline in the MGII (PRO + E) ocular score",
+        "timepoint": "Week 12",
+        "analysis_method": "analyzed similarly as the primary endpoint"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "To assess the efficacy of gefurulimab compared with placebo in the treatment o oMG based on change in MGII (PRO + E) ocular score Change from Baseline in the MGII (PRO + E) ocular score at Week 12",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "MG-ADL ocular subcomponent score change",
+      "section": "endpoints",
+      "page": 4,
+      "structured_data": {
+        "type": "secondary",
+        "name": "MG-ADL ocular subcomponent score change",
+        "measure": "Change from Baseline in the MG-ADL ocular subcomponent score",
+        "timepoint": "Week 12",
+        "analysis_method": "analyzed similarly as the primary endpoint"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "To assess the efficacy of gefurulimab compared with placebo in the treatment o oMG based on change in MG-ADL ocular subcomponent score Change from Baseline in the MG-ADL ocular subcomponent score at Week 12",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "MGII total score change",
+      "section": "endpoints",
+      "page": 4,
+      "structured_data": {
+        "type": "secondary",
+        "name": "MGII total score change",
+        "measure": "Change from Baseline in the MGII total score (ocular + generalized)",
+        "timepoint": "Week 12",
+        "analysis_method": "analyzed similarly as the primary endpoint"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "To assess the efficacy of gefurulimab Change from Baseline in the MGII total score (ocular + compared with placebo in the treatment o generalized) at Week 12 oMG based on change in MGII total score",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Early onset efficacy - MGII (PRO) ocular score",
+      "section": "endpoints",
+      "page": 4,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Early onset efficacy - MGII (PRO) ocular score",
+        "measure": "Change from Baseline in the MGII (PRO) ocular score",
+        "timepoint": "Week 2",
+        "analysis_method": "analyzed similarly as the primary endpoint"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "To assess the early onset of efficacy of Change from Baseline in the MGII (PRO) ocular score gefurulimab compared with placebo in the at Week 2 treatment of oMG based on change MGII (PRO) ocular score",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Pharmacokinetics",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Pharmacokinetics",
+        "measure": "Serum gefurulimab concentrations",
+        "timepoint": null,
+        "analysis_method": "Descriptive statistics"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "PK/PD: To characterize the PK/PD of gefurulimab in participants with OMG e Serum gefurulimab concentrations",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Pharmacodynamics - C5 concentrations",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Pharmacodynamics - C5 concentrations",
+        "measure": "Absolute values, change from Baseline, and percent change from Baseline in serum free and total C5 concentrations",
+        "timepoint": null,
+        "analysis_method": "Descriptive statistics"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "e Absolute values, change from Baseline, and percent change from Baseline in serum free and total C5 concentrations",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Immunogenicity",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Immunogenicity",
+        "measure": "ADA incidence, response categories, and titer over time",
+        "timepoint": "for the duration of the study",
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "Immunogenicity: To assess the immunogenicity to gefurulimab in participants with oMG ADA incidence, response categories, and titer over time for the duration of the study",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Adverse events",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "safety",
+        "name": "Adverse events",
+        "measure": "Incidence and severity of AEs and SAEs",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "Safety: To assess the safety and tolerability of gefurulimab compared to placebo and the long-term safety and tolerability of gefurulimab in participants with OMG e Incidence and severity of AEs and SAEs",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Clinical parameters",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "safety",
+        "name": "Clinical parameters",
+        "measure": "Clinically relevant changes from Baseline in vital signs, ECGs, and laboratory parameters",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "e Clinically relevant changes from Baseline in vital signs, ECGs, and laboratory parameters",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Digital endpoints",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "exploratory",
+        "name": "Digital endpoints",
+        "measure": "Digital interpretation of facial recognition recording, Saccadic/eye tracking function",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "Tertiary/Exploratory: TBC e Digital endpoint e To evaluate the safety and performance of the administration device (PFS-SD) TBC e Potential digital endpoints to explore: — Digital interpretation of facial recognition recording — Saccadic/eye tracking function",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Device user experience",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "exploratory",
+        "name": "Device user experience",
+        "measure": "Device User Experience Questionnaire",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "e Device User Experience Questionnaire",
+          "source_node_id": null,
+          "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+        }
+      ]
+    }
+  ],
+  "sites": [],
+  "operational_burden": {
+    "invasive_procedures": [],
+    "visit_schedule": {
+      "total_visits": 14,
+      "visit_days": [
+        1,
+        8,
+        15,
+        22,
+        29,
+        36,
+        43,
+        50,
+        57,
+        64,
+        71,
+        78,
+        85
+      ],
+      "frequency": "weekly",
+      "duration_weeks": 12,
+      "scheduled_visits": [],
+      "pre_randomization_days": [],
+      "on_treatment_days": [
+        1,
+        8,
+        15,
+        22,
+        29,
+        36,
+        43,
+        50,
+        57,
+        64,
+        71,
+        78,
+        85
+      ],
+      "follow_up_days": [],
+      "evidence": []
+    },
+    "central_lab_required": false,
+    "central_lab": null,
+    "special_sample_handling": [],
+    "vaccination_requirements": [
+      {
+        "vaccine_type": "meningococcal",
+        "requirement_type": "required",
+        "timing": null,
+        "agents": [],
+        "evidence": [
+          {
+            "page": 21,
+            "section_header": null,
+            "quote": "N meningitidis vaccination",
+            "char_start": null,
+            "char_end": null,
+            "bbox": null,
+            "source_node_id": null,
+            "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+          }
+        ]
+      }
+    ],
+    "background_therapy": [
+      {
+        "therapy_class": "AChE inhibitors",
+        "requirement_type": "allowed",
+        "requirement": "stable dose ≥14 days",
+        "agents": [],
+        "stable_duration_days": 14,
+        "max_dose": null,
+        "evidence": [
+          {
+            "page": 10,
+            "section_header": null,
+            "quote": "AChE inhibitors with no change in dosage during the 2 weeks (14 days) before Day 1",
+            "char_start": null,
+            "char_end": null,
+            "bbox": null,
+            "source_node_id": null,
+            "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+          }
+        ]
+      },
+      {
+        "therapy_class": "nonsteroidal immunosuppressive drugs",
+        "requirement_type": "allowed",
+        "requirement": "initiated ≥6 months before Day 1, stable dose ≥3 months",
+        "agents": [
+          "azathioprine",
+          "methotrexate",
+          "cyclosporine",
+          "tacrolimus",
+          "mycophenolate mofetil",
+          "cyclophosphamide"
+        ],
+        "stable_duration_days": 90,
+        "max_dose": null,
+        "evidence": [
+          {
+            "page": 10,
+            "section_header": null,
+            "quote": "Nonsteroidal immunosuppressive drugs (eg, azathioprine, methotrexate, cyclosporine, tacrolimus, mycophenolate mofetil, and cyclophosphamide) Initiated at least 6 months before Day 1 — No change in dosage during the 3 months before Day 1",
+            "char_start": null,
+            "char_end": null,
+            "bbox": null,
+            "source_node_id": null,
+            "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+          }
+        ]
+      },
+      {
+        "therapy_class": "steroids",
+        "requirement_type": "allowed",
+        "requirement": "initiated ≥3 months before screening, stable dose ≥28 days",
+        "agents": [],
+        "stable_duration_days": 28,
+        "max_dose": null,
+        "evidence": [
+          {
+            "page": 10,
+            "section_header": null,
+            "quote": "Steroids initiated at least 3 months (90 days) before Screening, with no change in dosage during 1 month (28 days) before Day 1",
+            "char_start": null,
+            "char_end": null,
+            "bbox": null,
+            "source_node_id": null,
+            "source_doc_id": "03_Protocol_ALXN1720-oMG-303"
+          }
+        ]
+      }
+    ],
+    "concomitant_meds_allowed": [],
+    "run_in_duration_days": null,
+    "run_in_requirements": [],
+    "burden_score": null,
+    "site_complexity_score": null,
+    "hard_gates": [
+      "meningococcal vaccination",
+      "stable background therapy requirements"
+    ]
+  },
+  "screening_flow": null,
+  "extraction_timestamp": "2026-02-04T14:31:34.040227"
+}

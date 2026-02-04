@@ -1,0 +1,2005 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:16:34.898608",
+  "document": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 41,
+  "total_validated": 41,
+  "total_rejected": 0,
+  "total_investigational": 11,
+  "drugs": [
+    {
+      "matched_text": "ACC-010",
+      "preferred_name": "ACC-010",
+      "brand_name": null,
+      "compound_id": "ACC-010",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "es were recorded and analyzed with ZEN software (Carl Zeiss).\n\nAntibody Species Dilution Supplier Reference Immunostaining TRPC1 Rabbit 1/200 Alomone ACC-010 TRPC3 Rabbit 1/200 Alomone ACC-016 TRPC4 Rabbit 1/200 Alomone ACC-018 TRPC6 Rabbit 1/200 Alomnone ACC-017 a-SMA-FITC Mouse 1/200 Sigma-F3777 Aldrich ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ACC-016",
+      "preferred_name": "ACC-016",
+      "brand_name": null,
+      "compound_id": "ACC-016",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "ZEN software (Carl Zeiss).\n\nAntibody Species Dilution Supplier Reference Immunostaining TRPC1 Rabbit 1/200 Alomone ACC-010 TRPC3 Rabbit 1/200 Alomone ACC-016 TRPC4 Rabbit 1/200 Alomone ACC-018 TRPC6 Rabbit 1/200 Alomnone ACC-017 a-SMA-FITC Mouse 1/200 Sigma-F3777 Aldrich CD31 Mouse 1/200 DAKO M0823 VE-Cadh",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ACC-018",
+      "preferred_name": "ACC-018",
+      "brand_name": null,
+      "compound_id": "ACC-018",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "y Species Dilution Supplier Reference Immunostaining TRPC1 Rabbit 1/200 Alomone ACC-010 TRPC3 Rabbit 1/200 Alomone ACC-016 TRPC4 Rabbit 1/200 Alomone ACC-018 TRPC6 Rabbit 1/200 Alomnone ACC-017 a-SMA-FITC Mouse 1/200 Sigma-F3777 Aldrich CD31 Mouse 1/200 DAKO M0823 VE-Cadherin, Alexa Mouse 1/200 Invitrogen ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ACC-017",
+      "preferred_name": "ACC-017",
+      "brand_name": null,
+      "compound_id": "ACC-017",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "e Immunostaining TRPC1 Rabbit 1/200 Alomone ACC-010 TRPC3 Rabbit 1/200 Alomone ACC-016 TRPC4 Rabbit 1/200 Alomone ACC-018 TRPC6 Rabbit 1/200 Alomnone ACC-017 a-SMA-FITC Mouse 1/200 Sigma-F3777 Aldrich CD31 Mouse 1/200 DAKO M0823 VE-Cadherin, Alexa Mouse 1/200 Invitrogen MA5-44146 Fluor 647 VWF Mouse 1/200 ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "AMAB9091",
+      "preferred_name": "AMAB9091",
+      "brand_name": null,
+      "compound_id": "AMAB9091",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "-FITC Mouse 1/200 Sigma-F3777 Aldrich CD31 Mouse 1/200 DAKO M0823 VE-Cadherin, Alexa Mouse 1/200 Invitrogen MA5-44146 Fluor 647 VWF Mouse 1/200 Sigma-AMAB9091 Aldrich Donkey anti-rabbit | Donkey 1/400 Invitrogen A-21207 Alexa Fluor 594 Donkey anti-mouse Donkey 1/400 Invitrogen 715-606- Alexa Fluor 647 151 W",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "AD0200",
+      "preferred_name": "AD0200",
+      "brand_name": null,
+      "compound_id": "AD0200",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "tion, we visualized 5-bromo- 2’-deoxyuridine (BrdU) incorporation to identify cells undergoing DNA replication using a DELFIA cell proliferation kit (AD0200, PerkinElmer). Experiments were performed according to the kit recommendations.\n\nFor cross-talk communication between PAH-hPECs and control-hPASMCs, ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CBA-200",
+      "preferred_name": "CBA-200",
+      "brand_name": null,
+      "compound_id": "CBA-200",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "e formation assay\n\n96-well plates were precoated with extracellular matrix gel prepared from Engelbreth-Holm-Swarm (EHS) tumor cells (Clinisciences; #CBA-200). 72 h after control-hPECs transfection, 5 x 10° cells/well were seeded onto the gel. Cells were incubated for 3 h at 37 °C in the standard culture m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "JCI24838",
+      "preferred_name": "JCI24838",
+      "brand_name": null,
+      "compound_id": "JCI24838",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "Savai R, Roth M, et al. Reversal of experimental pulmonary hypertension by PDGF Inhibition. J Clin Invest. 2005;115:281 1-21. https://doi.org/10.1172/JCI24838,\n\nNot applicable.\n\nCompeting interests\n\nRicard N, Tu L, Le Hiress M, Huertas A, Phan C, Thuillet R, et al. Increased pericyte coverage mediated by en",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "JC1120847",
+      "preferred_name": "JC1120847",
+      "brand_name": null,
+      "compound_id": "JC1120847",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "y MK, Chan SY. Mitochondrial metabolism in pulmonary hypertension beyond mountains there are mountains. J Clin Invest. 2018. https://doi.org/1 0.1172/JC1120847.\n\n38, Zhou C, Townsley Ml, Alexeyev M, Voelkel NF, Stevens T. Endothelial hyperper-meability in severe pulmonary arterial hypertension: role of store",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Insulin",
+      "preferred_name": "Insulin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Pancretic Cancer",
+        "Diabete Mellitus"
+      ],
+      "nct_id": "NCT05306028",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D007328",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05306028",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007328",
+          "display": "Insulin"
+        }
+      ],
+      "context": "GT\n\nTable 2 List of SIRNA used in the experiments\n\nwere cultured in DMEM (Gibco, ref 11960044) supple-mented with 12,5% FCS, 2 mmol/L L-Glutamine, 1X Insulin-Transferin-Selenium, 100 U/mL penicillin-streptomycin, 20 mmol/L HEPES, 10 ng/mL EGF.\n\nClinical data of control and PAH patients used for the study a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Insulin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Dasatinib",
+      "preferred_name": "dasatinib",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Neuroblastoma"
+      ],
+      "nct_id": "NCT02559778",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069439",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT02559778",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069439",
+          "display": "Dasatinib"
+        }
+      ],
+      "context": "s://doi.org/10.1016/j.redox.201 3.04 005.\n\n46. Ribeuz HL, Willer AS-M, Chevalier B, Sancho M, Masson B, Eyries M, et al. Role of KCNK3 dysfunction in Dasatinib-associated pulmonary arterial hypertension and endothelial cell dysfunction. Am J Respir Cell Mol Biol. 2024;71:95-109. https://doi.org/10.1165/rcmb.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dasatinib",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "oxygen",
+      "preferred_name": "oxygen",
+      "brand_name": "OXYGEN, USP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Radiographic Contrast Agent",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "GAS",
+      "route": "INHALATION",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010100",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA205817",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010100",
+          "display": "Oxygen"
+        }
+      ],
+      "context": "late that the different mitochondrial status of PAH-hPECs vs. control-hPECs, including mitochondrial membrane potential alteration, aberrant reactive oxygen production (ROS), and glycolytic shift [22, 23], could explain why SOCE is not increased in PAH-hPECs while TRPC1, TRPC3, and TRPC6 are increased. In",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Reactive Oxygen Species",
+        "Singlet Oxygen",
+        "Oxygen-15"
+      ],
+      "pubtator_normalized_name": "Oxygen",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "L-Glutamine",
+      "preferred_name": "l-glutamine",
+      "brand_name": "ENDARI",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "FOR SOLUTION",
+      "route": "ORAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D005973",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA208587",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005973",
+          "display": "Glutamine"
+        }
+      ],
+      "context": "als in rodents using selective inhibitors of TRPC3 or TRPC6 [13, 14]. In mice\n\nhPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs\n\nTarget siRNA siRNA ID Sequences",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "glutamine monofluorophosphate",
+        "marzulene",
+        "N(2)-methyl-gamma-L-glutaminyl-3 4-dihydroxybenzene"
+      ],
+      "pubtator_normalized_name": "Glutamine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "alcohol",
+      "preferred_name": "alcohol",
+      "brand_name": "DEHYDRATED ALCOHOL",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "SOLUTION",
+      "route": "INTRA-ARTERIAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000438",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA219400",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000438",
+          "display": "Alcohols"
+        }
+      ],
+      "context": " 4% paraformaldehyde, paraffin-embedded, and serially sectioned (5 tm). The tissue sections were deparaffinized in xylene baths before rehydration in alcohol. Epitope unmasking was performed in a pH 9 buffer using a 2100 Antigen Retriever (Aptum). The slides were saturated with 0.5 M NH,Cl for 15 min, then",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ethanol",
+        "Methanol"
+      ],
+      "pubtator_normalized_name": "Alcohols",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Gly",
+      "preferred_name": "Gly",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D005990",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "4919",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005990",
+          "display": "Glycerol"
+        }
+      ],
+      "context": " Inserm, UMR_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN-LUNG, Le Plessis Robinson, France ?Gly-CRRET Research Unit 4397, Paris-Est Créteil University, Créteil, France 3Inserm, UMR_S 1180, Signalisation et Physiopathologie Cardiovasculaire, Univ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Glycine",
+        "Glycogen",
+        "Glycosaminoglycans"
+      ],
+      "pubtator_normalized_name": "Glycerol",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "small interfering RNA",
+      "preferred_name": "Small interfering RNA",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "321898",
+          "display": null
+        }
+      ],
+      "context": "g) (SERCA pump inhibitor) in a Ca”*-free medium and then by adding 2 mmol/L extracellular Ca”*. To elicit the contribution of each channel, we used a small interfering RNA (siRNA) strategy. The efficacy of each siRNA was previously validated [13]. 72 h after cell transfection, we found that the knockdown of TRPC1, TRPC3",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "paraffin",
+      "preferred_name": "Paraffin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "7906",
+          "display": null
+        }
+      ],
+      "context": "\n\nFig. 1 TRPC channels expression in control-hPECs. A Expression and localization of TRPC1, TRPC3, TRPC4, and TRPC6 by immunofluorescence staining of paraffin-embedded lung sections from control patients. TRPC proteins are in red, vWF in yellow to localize PA, and endothelial cell nuclei are in blue (DAPI).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Angiotensin II",
+      "preferred_name": "Angiotensin II",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D012504",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1999003",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012504",
+          "display": "Saralasin"
+        }
+      ],
+      "context": "o control-hPECs (Fig. 3D-E).\n\nPeroxisome Proliferator-Activated Receptor Gamma Coactivator 1-Alpha (PPARGC1A), Endothelin receptor type A (EDNRA) and Angiotensin II Receptor Type 1 (AGTR1) (Fig. 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). Thes",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Angiotensin Amide",
+        "1-Sarcosine-8-Isoleucine Angiotensin II",
+        "glutamyl-glycyl-valyl-tyrosyl-valyl-histidyl-prolyl-valine"
+      ],
+      "pubtator_normalized_name": "Saralasin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tube",
+      "preferred_name": "TUBE",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "733745",
+          "display": null
+        }
+      ],
+      "context": "* signaling in hPECs from control and PAH patients. We also assessed the involvement of TRPC channels in cell proliferation, cell migration, in vitro tube formation, and the regulation of endothelial markers in hPECs from PAH patients. Finally, our study highlighted their participation in the developmen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CD40 Ligand",
+      "preferred_name": "CD40 ligand",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "60662",
+          "display": null
+        }
+      ],
+      "context": "els in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interfero",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Leptin",
+      "preferred_name": "leptin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C410862",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1441651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C410862",
+          "display": "leptine I"
+        }
+      ],
+      "context": "ression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),\n\nMagnitude XS\n\nPAH lungs\n\nB Control and PAH-hPECs\n\n100 kDa-43 kDa-\n\n*\n\n.\n\n100 kDa-\n\n43 kDa~\n\n100 kDa 110",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "leptine I",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ATP",
+      "preferred_name": "ATP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000255",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "318",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000255",
+          "display": "Adenosine Triphosphate"
+        }
+      ],
+      "context": "24, 25]. Mitochondrial depolarization enhances the activity of store-operated channels, including TRPC [26]. In addition, mitochondrial\n\nns\n\na\n\nSp &\n\nATP can buffer Ca”*, relieving the inhibitory effect of incoming Ca”* on SOCE activity [27]. We can therefore conclude that the metabolic status of mitoc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Adenosine Triphosphate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "TRP",
+      "preferred_name": "Trp",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10898",
+          "display": null
+        }
+      ],
+      "context": "e level of expression of these different SOCE modulating proteins is unknown in PAH-hPECs. Finally, the lipid membrane composition can also influence TRP channel function [34]. To better understand all these aspects of TRPC regulation in PAH and control-hPECs, several key experiments are necessary in f",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "murine",
+      "preferred_name": "Murine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C005810",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "152083",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C005810",
+          "display": "tetrahydrozoline"
+        }
+      ],
+      "context": "egulates endoMT in hPECs [35]. In mouse PECs, TRPC1 and\n\n¢\n\n°\n\n:\n\nTRPC4 strongly contribute to SOCE and endothelial barrier integrity [36, 37]. As in murine PECs, in PAHhPECs, TRPC1 and TRPC4 are involved in SOCE, and TRPC1 and TRPC3 play a role in cell proliferation. We also showed that TRPCs are not inv",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "tetrahydrozoline",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HEPES",
+      "preferred_name": "hepes",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D006531",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1312611",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006531",
+          "display": "HEPES"
+        }
+      ],
+      "context": "g selective inhibitors of TRPC3 or TRPC6 [13, 14]. In mice\n\nhPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs\n\nTarget siRNA siRNA ID Sequences Supplier Neg",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "HEPES",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "penicillin",
+      "preferred_name": "Penicillin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010406",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "7986",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010406",
+          "display": "Penicillins"
+        }
+      ],
+      "context": "bitors of TRPC3 or TRPC6 [13, 14]. In mice\n\nhPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs\n\nTarget siRNA siRNA ID Sequences Supplier Negative control Silence",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Penicillin G",
+        "Ampicillin",
+        "Methicillin"
+      ],
+      "pubtator_normalized_name": "Penicillins",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "streptomycin",
+      "preferred_name": "Streptomycin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013307",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10109",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013307",
+          "display": "Streptomycin"
+        }
+      ],
+      "context": "RPC3 or TRPC6 [13, 14]. In mice\n\nhPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs\n\nTarget siRNA siRNA ID Sequences Supplier Negative control Silencer™ Select neg",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "streptocycline",
+        "streptonicozid"
+      ],
+      "pubtator_normalized_name": "Streptomycin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Selenium",
+      "preferred_name": "Selenium",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D012643",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "9641",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012643",
+          "display": "Selenium"
+        }
+      ],
+      "context": " SIRNA used in the experiments\n\nwere cultured in DMEM (Gibco, ref 11960044) supple-mented with 12,5% FCS, 2 mmol/L L-Glutamine, 1X Insulin-Transferin-Selenium, 100 U/mL penicillin-streptomycin, 20 mmol/L HEPES, 10 ng/mL EGF.\n\nClinical data of control and PAH patients used for the study are summarized in Tab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Selenium Oxides",
+        "Selenium-75",
+        "selenium disulfide"
+      ],
+      "pubtator_normalized_name": "Selenium",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "DMSO",
+      "preferred_name": "DMSO",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004121",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3455",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004121",
+          "display": "Dimethyl Sulfoxide"
+        }
+      ],
+      "context": "s are listed in Table 4.\n\nIntracellular Ca2* measurements\n\nhPECs were plated on 18-mm glass coverslips and loaded with 2 mol/L Fura-2-AM dissolved in DMSO plus 20% pluronic acid (Life Technologies) and then incubated at 37 °C for 30 min in darkness in Krebs solution (in mmol/L: 135 NaCl, 5.9 KCI, 2 CaCl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "imidazolium-bis(imidazole)dimethylsulfoxideimidazotetrachlororuthenate(III)",
+        "dichlorotetrakis(dimethyl sulfoxide)ruthenium II"
+      ],
+      "pubtator_normalized_name": "Dimethyl Sulfoxide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "NaCl",
+      "preferred_name": "NACl",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D012965",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "9863",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012965",
+          "display": "Sodium Chloride"
+        }
+      ],
+      "context": "-AM dissolved in DMSO plus 20% pluronic acid (Life Technologies) and then incubated at 37 °C for 30 min in darkness in Krebs solution (in mmol/L: 135 NaCl, 5.9 KCI, 2 CaCl,, 1 MgCl, 10 HEPES, 10 D-glucose) at pH 7.4. Loaded cells were washed twice with the physiological solution before imaging. Ca’* ima",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bendroflumethiazide"
+      ],
+      "pubtator_normalized_name": "Sodium Chloride",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "D-glucose",
+      "preferred_name": "D-glucose",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D005947",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "4850",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005947",
+          "display": "Glucose"
+        }
+      ],
+      "context": "(Life Technologies) and then incubated at 37 °C for 30 min in darkness in Krebs solution (in mmol/L: 135 NaCl, 5.9 KCI, 2 CaCl,, 1 MgCl, 10 HEPES, 10 D-glucose) at pH 7.4. Loaded cells were washed twice with the physiological solution before imaging. Ca’* images were obtained using a microscope\n\nTable 3 Prim",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "1 5-anhydroglucitol",
+        "glucose-cysteine"
+      ],
+      "pubtator_normalized_name": "Glucose",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "DNA",
+      "preferred_name": "DNA",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3576",
+          "display": null
+        }
+      ],
+      "context": "ls proliferation measurement To evaluate cell proliferation, we visualized 5-bromo- 2’-deoxyuridine (BrdU) incorporation to identify cells undergoing DNA replication using a DELFIA cell proliferation kit (AD0200, PerkinElmer). Experiments were performed according to the kit recommendations.\n\nFor cross-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "dye",
+      "preferred_name": "dye",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C085321",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3707",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C085321",
+          "display": "cyanine dye 5"
+        }
+      ],
+      "context": " were incubated for 3 h at 37 °C in the standard culture medium, and tubular network visualization was performed after staining cells with Calcein/AM dye (10 umol/L) using EVOS (Invitrogen). As previously described [46, 48], tube formation was quantified as the number of junctions, segments, and the to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "CY5.5 cyanine dye",
+        "thioflavin T",
+        "Azo Compounds"
+      ],
+      "pubtator_normalized_name": "cyanine dye 5",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "paraformaldehyde",
+      "preferred_name": "PARAFORMALDEHYDE",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C003043",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "32889",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C003043",
+          "display": "paraform"
+        }
+      ],
+      "context": "isition in selected cells and analysis with MetaFluor® 7.8 imaging software (Molecular Devices).\n\nImmunofluorescence staining\n\nLungs were fixed in 4% paraformaldehyde, paraffin-embedded, and serially sectioned (5 tm). The tissue sections were deparaffinized in xylene baths before rehydration in alcohol. Epitope unm",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "periodate-lysine-paraformaldehyde"
+      ],
+      "pubtator_normalized_name": "paraform",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "xylene",
+      "preferred_name": "xylene",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D014992",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1311378",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014992",
+          "display": "Xylenes"
+        }
+      ],
+      "context": "cence staining\n\nLungs were fixed in 4% paraformaldehyde, paraffin-embedded, and serially sectioned (5 tm). The tissue sections were deparaffinized in xylene baths before rehydration in alcohol. Epitope unmasking was performed in a pH 9 buffer using a 2100 Antigen Retriever (Aptum). The slides were saturat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "coomassie Brilliant Blue",
+        "xylene cyanol",
+        "4-xylene"
+      ],
+      "pubtator_normalized_name": "Xylenes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Serum Albumin",
+      "preferred_name": "Serum albumin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C557199",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "9690",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C557199",
+          "display": "technetium j99m neomannosyl human serum albumin"
+        }
+      ],
+      "context": "were saturated with 0.5 M NH,Cl for 15 min, then blocked and permeabilized for one hour at room temperature with a solution containing 1% BSA (Bovine Serum Albumin), 0.5% Triton X-100, 10% human serum, and 10% donkey serum. The anti-TRPC antibodies (1/200) and anti-vWF (1/200) antibodies were incubated overnight",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "TI-23 human monoclonal antibody"
+      ],
+      "pubtator_normalized_name": "technetium j99m neomannosyl human serum albumin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Triton",
+      "preferred_name": "triton",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D017830",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "590725",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017830",
+          "display": "Octoxynol"
+        }
+      ],
+      "context": ".5 M NH,Cl for 15 min, then blocked and permeabilized for one hour at room temperature with a solution containing 1% BSA (Bovine Serum Albumin), 0.5% Triton X-100, 10% human serum, and 10% donkey serum. The anti-TRPC antibodies (1/200) and anti-vWF (1/200) antibodies were incubated overnight at 4 °C in a ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Nonidet P-40",
+        "tyloxapol",
+        "Triton N 101"
+      ],
+      "pubtator_normalized_name": "Octoxynol",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cytosine arabinoside",
+      "preferred_name": "Cytosine arabinoside",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003561",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3041",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003561",
+          "display": "Cytarabine"
+        }
+      ],
+      "context": "actor (EGF), and insulin), hPECs were plated in a culture insert (Cat. No. 90209; Ibidi) at a density of 2 x 10‘cells per well in a fresh medium with cytosine arabinoside (10 mol/L) to prevent cell proliferation. After allowing cells to attach for 24 h, we removed the culture insert and washed the cells with phosphate-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arabinofuranosylcytosine Triphosphate",
+        "5'-oleoyl cytarabine",
+        "1-beta-D-arabinofuranosylcytosine 5'-monophosphate"
+      ],
+      "pubtator_normalized_name": "Cytarabine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stress",
+      "preferred_name": "Stress",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "220040",
+          "display": null
+        }
+      ],
+      "context": "ttps://doi.org/10.1152/ajplung.00057.2016.\n\n23 Pokharel MD, Marciano DP Fu P, Franco MC, Unwalla H, Tieu K, et al. Metabolic reprogramming, oxidative stress, and pulmonary hypertension. Redox Biol. 2023;64:102797. https://doi.org/10.1016/j.redox.2023.102797.\n\n39, Yang L, Peng Z, Gong F, Yan W, Shi Y, Li H",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "fibrin",
+      "preferred_name": "Fibrin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "4382",
+          "display": null
+        }
+      ],
+      "context": ", Rasband W, Cuendet M, Uzan G, et al. Angiogenesis analyzer for ImageJ - a comparative morphometric analysis of endothelial tube formation assay and fibrin bead assay. Sci Rep. 2020;10:1 1568. https://doi.org/10.1038/s41598-020-67289-8.\n\n34, Espinoza-Arcos LG, Gonzalez-Avendafio M, Zufiga-Bustos M, Zamor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Ca 2+",
+      "preferred_name": "Ca 2+",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1316581",
+          "display": null
+        }
+      ],
+      "context": " Methods. 2012;9:671-5. https://doi.org/10.1038/nmeth.2089.\n\n35 Babicheva A, Elmadbouh |, Song S, Thompson M, Powers R, Jain PP et al. Store-operated Ca 2+ entry is involved in endothelium-to-mesenchymal transition in lung vascular endothelial cells. BioRxiv Prepr Serv Biol 2024:2024.12.06.627034. https:",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

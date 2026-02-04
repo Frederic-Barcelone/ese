@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+    "extracted_at": "2026-02-04T15:02:50.556147"
+  },
+  "count": 3,
+  "figures": [
+    {
+      "visual_id": "c3da6abe-6abf-4831-8cc3-60044a23f251",
+      "visual_type": "figure",
+      "confidence": 0.9,
+      "page_range": [
+        3
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 3,
+          "bbox_pts": [
+            43.5,
+            92.068359375,
+            565.7089233398438,
+            527.668359375
+          ]
+        }
+      ],
+      "title": "WINREVAIR Safety Information and Clinical Guidelines",
+      "description": "This is a text-based informational document providing comprehensive safety information and prescribing guidelines for WINREVAIR (sotatercept-csrk), an FDA-approved treatment for pulmonary arterial hypertension. The document outlines key safety warnings including increased hemoglobin levels requiring monitoring, decreased platelet counts with bleeding risks, and specific contraindications for patients experiencing serious bleeding. It presents clinical trial data showing higher rates of serious bleeding in WINREVAIR patients compared to placebo across two studies (STELLAR and ZENITH), with particular risks for patients on prostacyclin or antithrombotic therapy.",
+      "caption": "Do not administer WINREVAIR if the patient is experiencing serious bleeding.",
+      "image_file": "03_Marketing_WINREVAIR EU Expansion_figure_page3_1.png",
+      "relationships": {
+        "text_mentions": [],
+        "section_context": "Background",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+        "extracted_at": "2026-02-04T14:03:21.108524"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "large_uncaptioned"
+      }
+    },
+    {
+      "visual_id": "d565774a-9379-4087-bb1f-5463d45914f6",
+      "visual_type": "figure",
+      "confidence": 0.9,
+      "page_range": [
+        4
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 4,
+          "bbox_pts": [
+            43.5,
+            84.0399169921875,
+            565.3548583984375,
+            519.6399169921875
+          ]
+        }
+      ],
+      "title": "WINREVAIR Clinical Trial Safety Data Summary",
+      "description": "This is a text-based medical document excerpt presenting safety data from two clinical trials (STELLAR Phase 3 and ZENITH) for the drug WINREVAIR used to treat pulmonary arterial hypertension (PAH). The document lists the most common adverse reactions and their frequencies compared to placebo, including headache, epistaxis, rash, and gastrointestinal effects. It also includes important safety information about breastfeeding restrictions and provides background information about PAH as a rare, life-threatening condition affecting approximately 90,000 people worldwide with a 43% five-year mortality rate.",
+      "caption": "Forward-Looking Statement of Merck & Co., Inc., Rahway, N.J., USA",
+      "image_file": "03_Marketing_WINREVAIR EU Expansion_figure_page4_1.png",
+      "relationships": {
+        "text_mentions": [],
+        "section_context": "Background",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+        "extracted_at": "2026-02-04T14:03:21.108554"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "large_uncaptioned"
+      }
+    },
+    {
+      "visual_id": "25c4325f-a584-4ba1-817d-70ca3e73bdcb",
+      "visual_type": "figure",
+      "confidence": 0.8,
+      "page_range": [
+        6
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 6,
+          "bbox_pts": [
+            43.5,
+            75.4398193359375,
+            154.82994079589844,
+            167.7568359375
+          ]
+        }
+      ],
+      "title": "Contact Information and Data Source",
+      "description": "This appears to be a contact information section or footer from a scientific/medical document. It contains two phone numbers with area codes (732) 594-1579 and (917) 691-6218, along with a contact name 'Ayn Wisler'. The source attribution indicates the information comes from Merck & Co., Inc., a major pharmaceutical company, suggesting this is likely from a medical or pharmaceutical research publication.",
+      "caption": null,
+      "image_file": "03_Marketing_WINREVAIR EU Expansion_figure_page6_1.png",
+      "relationships": {
+        "text_mentions": [],
+        "section_context": "Background",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling_only",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+        "extracted_at": "2026-02-04T14:03:21.108576"
+      },
+      "triage": {
+        "decision": "cheap_path",
+        "reason": "default"
+      }
+    }
+  ]
+}

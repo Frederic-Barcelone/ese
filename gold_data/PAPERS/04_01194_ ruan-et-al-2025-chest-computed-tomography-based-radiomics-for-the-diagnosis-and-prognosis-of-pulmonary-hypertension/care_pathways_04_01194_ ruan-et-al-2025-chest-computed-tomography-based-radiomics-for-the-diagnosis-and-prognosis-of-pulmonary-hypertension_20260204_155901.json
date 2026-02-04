@@ -1,0 +1,476 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:59:01.272109",
+  "document": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "pipeline_version": "0.8",
+  "total_pathways": 1,
+  "pathways": [
+    {
+      "pathway_id": "Figure_p3",
+      "title": "Pulmonary Hypertension (PH) Diagnostic and Prognostic Study Flow",
+      "condition": "Pulmonary Hypertension (PH)",
+      "phases": [
+        "Diagnostic Study",
+        "Outcome Study"
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multi-center Recruitment (n=430) January 2019-December 2021",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": "January 2019-December 2021"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Excluded (n=44): unavailable qualified images (n=15), pulmonary parenchymal diseases (n=14), unmatched age-sex (n=15)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n3",
+          "type": "assessment",
+          "text": "Derivation cohort (n=386)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n4",
+          "type": "assessment",
+          "text": "PH (n=193): PAH(n=142), NPAH(n=51)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n5",
+          "type": "assessment",
+          "text": "NPH (n=193): Symptomatic patients (n=102), healthy volunteer(n=91)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Information Collection - Clinical informations: demographic, lab test, hemodynamics, cardiac ultrasound, chest CT",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radiomic features: pulmonary vessels segment, radiomics extraction",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Machine Learning (RFC/SVC/LRC) - PH Detection Models: radiomics models, joint models",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Exploratory PAH Subtyping Analysis- Differentiation of Pulmonary Arterial Hypertension",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n10",
+          "type": "start",
+          "text": "Multi-center Recruitment (n=80) January-June 2022",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": "January-June 2022"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Excluded (n=4): unavailable qualified images (n=2), pulmonary parenchymal diseases (n=2)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n12",
+          "type": "assessment",
+          "text": "Validation cohort (n=76)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n13",
+          "type": "assessment",
+          "text": "Suspect PH patients(n=64)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n14",
+          "type": "assessment",
+          "text": "Healthy volunteer(n=12)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n15",
+          "type": "action",
+          "text": "Probabilities predicted - PH Diagnostic Models: radiomics models, joint models",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n16",
+          "type": "assessment",
+          "text": "Confirmed by RHC and Cardiac Ultrasound - PH (n=38): PAH(n=30), NPAH(n=8)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n17",
+          "type": "assessment",
+          "text": "NPH (n=38): symptomatic patients (n=26), healthy volunteer(n=12)",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n18",
+          "type": "assessment",
+          "text": "Model Performance - ROC, Calibration curve",
+          "phase": "Diagnostic Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n19",
+          "type": "start",
+          "text": "Multi-center PH Recruitment (n=193) Follow-up continued until December 2023",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": "Follow-up continued until December 2023"
+        },
+        {
+          "id": "n20",
+          "type": "action",
+          "text": "Excluded (n=27): Lost for follow up (n=27)",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n21",
+          "type": "assessment",
+          "text": "Derivation cohort - PH (n=166)",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n22",
+          "type": "start",
+          "text": "Multi-center PH Recruitment (n=38) January-June 2022 Follow-up continued until December 2023",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": "January-June 2022, Follow-up continued until December 2023"
+        },
+        {
+          "id": "n23",
+          "type": "action",
+          "text": "Excluded (n=6): Lost for follow up (n=6)",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n24",
+          "type": "assessment",
+          "text": "Validation cohort - PH (n=32)",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n25",
+          "type": "action",
+          "text": "Follow-up data - Clinical deterioration event (n=96): all-cause mortality (n=5), lung transplantation (n=1), readmission due to worsening of PH (n=55), escalation of PH treatment (n=35)",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n26",
+          "type": "action",
+          "text": "Follow-up data - Clinical deterioration event (n=11): all-cause mortality (n=1), lung transplantation (n=0), readmission due to worsening of PH (n=3), escalation of PH treatment (n=7)",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n27",
+          "type": "action",
+          "text": "a. Univariate COX, b. LASSO",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n28",
+          "type": "action",
+          "text": "Multivariate Cox - PH Prognostic Models: radiomics model, joint model",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n29",
+          "type": "action",
+          "text": "Probabilities predicted by PH Radiomics Prognostic Model - PH Prognostic Models: radiomics model, joint model",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        },
+        {
+          "id": "n30",
+          "type": "end",
+          "text": "Model Performance - Kaplan-Meier survival curve, ROC: Time_AUC",
+          "phase": "Outcome Study",
+          "drugs": [],
+          "dose": "",
+          "duration": ""
+        }
+      ],
+      "edges": [
+        {
+          "source_id": "n1",
+          "target_id": "n2",
+          "condition": "exclusion criteria",
+          "condition_type": "negative"
+        },
+        {
+          "source_id": "n1",
+          "target_id": "n3",
+          "condition": "included patients",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n3",
+          "target_id": "n4",
+          "condition": "PH patients",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n3",
+          "target_id": "n5",
+          "condition": "NPH patients",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n3",
+          "target_id": "n6",
+          "condition": "data collection",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n6",
+          "target_id": "n7",
+          "condition": "radiomics analysis",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n6",
+          "target_id": "n8",
+          "condition": "machine learning",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n8",
+          "target_id": "n9",
+          "condition": "subtyping analysis",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n10",
+          "target_id": "n11",
+          "condition": "exclusion criteria",
+          "condition_type": "negative"
+        },
+        {
+          "source_id": "n10",
+          "target_id": "n12",
+          "condition": "included patients",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n12",
+          "target_id": "n13",
+          "condition": "suspect PH",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n12",
+          "target_id": "n14",
+          "condition": "healthy volunteers",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n12",
+          "target_id": "n15",
+          "condition": "prediction",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n15",
+          "target_id": "n16",
+          "condition": "RHC confirmation",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n15",
+          "target_id": "n17",
+          "condition": "NPH confirmation",
+          "condition_type": "negative"
+        },
+        {
+          "source_id": "n16",
+          "target_id": "n18",
+          "condition": "model evaluation",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n17",
+          "target_id": "n18",
+          "condition": "model evaluation",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n19",
+          "target_id": "n20",
+          "condition": "lost to follow-up",
+          "condition_type": "negative"
+        },
+        {
+          "source_id": "n19",
+          "target_id": "n21",
+          "condition": "continued follow-up",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n22",
+          "target_id": "n23",
+          "condition": "lost to follow-up",
+          "condition_type": "negative"
+        },
+        {
+          "source_id": "n22",
+          "target_id": "n24",
+          "condition": "continued follow-up",
+          "condition_type": "positive"
+        },
+        {
+          "source_id": "n21",
+          "target_id": "n25",
+          "condition": "outcome data collection",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n24",
+          "target_id": "n26",
+          "condition": "outcome data collection",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n25",
+          "target_id": "n27",
+          "condition": "statistical analysis",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n27",
+          "target_id": "n28",
+          "condition": "multivariate modeling",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n26",
+          "target_id": "n29",
+          "condition": "validation prediction",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n28",
+          "target_id": "n30",
+          "condition": "performance evaluation",
+          "condition_type": "other"
+        },
+        {
+          "source_id": "n29",
+          "target_id": "n30",
+          "condition": "performance evaluation",
+          "condition_type": "other"
+        }
+      ],
+      "entry_criteria": "Multi-center recruitment for suspected or confirmed pulmonary hypertension patients",
+      "primary_drugs": [],
+      "alternative_drugs": [],
+      "decision_points": [
+        "PH vs NPH classification",
+        "RHC confirmation",
+        "Clinical deterioration events"
+      ],
+      "target_dose": "",
+      "target_timepoint": "December 2023",
+      "maintenance_duration": "",
+      "relapse_handling": "Clinical deterioration events tracked including mortality, transplantation, readmission, treatment escalation",
+      "source_figure": "Figure_p3",
+      "source_page": 3,
+      "extraction_confidence": 0.8
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+--- Page 1 ---
+
+Respiratory Resea rch
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345 https://doi.org/10.1186/s12931-025-03376-6
+TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension
+Anais Saint-Martin Willer'®, Bastien Masson'®, Loann Laubry'®, Mary Dutheil!, Kristelle El Jekmek'®, Gilles Carpentier?®, Mathieu Gourmelon'®, Jessica Sabourin*®, Marc Humbert'®, Olaf Mercier'®, Grégoire Ruffenach'®, David Montani'®, Véronique Capuano'® and Fabrice Antigny'""®
+Abstract
+Background-Pulmonary arterial hypertension (PAH) is a rare, fatal, and progressive pulmonary vascular disease. Pulmonary endothelial cell dysfunction is a hallmark of PAH, defined by excessive proliferation and dysregulated angiogenesis, along with imbalanced production and release of vasoactive substances, growth factors, and mediators of coagulation and inflammation. Intracellular calcium (Ca?*) variations are essential in these processes. Among the various channels involved in Ca** homeostasis, transient receptor potential canonical channels (TRPC1 to 7) are known to be essential for endothelial cells of various origins, but their role in PAH remains unknown.
+Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRPC3 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium. Moreover, we showed that none of the TRPC channels is involved in the migration or in vitro tubulogenesis of PAH-hPECs. Finally, we found that TRPC1 knockdown induces changes in the mRNA expression of several genes described to be crucial for endothelial cell homeostasis.
+Conclusions-These data demonstrate that TRPC channels, especially TRPC1, are essential for maintaining the hPECs function in PAH, indicating that TRPC channels are central and represent interesting candidates for reducing endothelial dysfunction in PAH.
+Keywords PAH, Calcium, TRPC channels, SOCE, Endothelial cells
+*Correspondence: Fabrice Antigny fabrice.antigny@inserm.fr ‘Hypertension Pulmonaire : Physiopathologie and Innovation Thérapeutique (HPPIT), Université Paris-Saclay, Inserm, UMR_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN-LUNG, Le Plessis Robinson, France ?Gly-CRRET Research Unit 4397, Paris-Est Créteil University, Créteil, France 3Inserm, UMR_S 1180, Signalisation et Physiopathologie Cardiovasculaire, Université Paris-Saclay, Orsay, France
+© The Author(s) 2025. Open Access This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Cornmons licence, and indicate if you modified the licensed material. You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party material in this article are included in the article's Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http//creati vecommonsorg/licenses/by-nc-nd/4.0/.
+
+--- Page 2 ---
+
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345
+Page
+Introduction
+are expressed in the PA, and more particularly in hPECs in control and PAH patients as indicated by the co-staining with von Willebrand factor (vWF) (Fig. 1A). To decipher the role of each expressed TRPC channel, we performed in vitro experiments using control-hPECs.
+Endothelial cell dysfunction is a key contributor to the pathogenesis of pulmonary arterial (PA) hypertension (PAH), a rare and life-threatening pulmonary vascular disease defined by an increase in mean PA pressure >20 mmHg and pulmonary vascular resistance >2 Wood units. PAH affects approximately 50 individuals per million, and despite the availability of targeted therapies, 3-year mortality remains high, ranging from 30 to 55% [1].
+First of all, we checked whether our cultured hPECs expressed three different endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPECs do not express alphasmooth muscle actin (a-SMA), a marker of smooth muscle cell, contrary to our human PA smooth muscle cells (hPASMCs) (Fig. 1B).
+PAH can occur in the presence of germline mutations (heritable PAH), be associated with diseases, drugs, or toxin exposure, or even in the absence of an identifiable underlying cause (idiopathic PAH). A hallmark of PAH is the progressive and largely irreversible narrowing of small PA [2]. The underlying pathobiology of PAH is multifactorial, and pulmonary endothelial cells (PECs) dysfunction plays a central role in PA remodeling [2]. PECs from patients with PAH (PAH-hPECs) exhibit multiple phenotypic changes, including increased susceptibility to apoptosis [3, 4], reduced angiogenic capacity [3, 5], endothelial-to-mesenchymal transition (endoMT) [6], and enhanced proliferative and migratory capacity [3, 4]. In addition, PAH-hPECs contribute to the pathogenesis of PAH by favoring the recruitment of pro-inflammatory cytokines [7]. Elevation of the intracellular calcium (Ca”*) concentration, resulting from the endoplasmic reticulum (ER) Ca?* release or Ca”* influx, is central for regulating endothelial functions [8]. In endothelial cells, as in all non-excitable cells, Ca?* entry from the extracellular compartment could be mediated by store-operated Ca** entry (SOCE), store-independent Ca** entry (SICE), or stretch-activated Ca’* entry. In the pathogenesis of PAH, SOCE has been described to play a critical role in the development of PAH by contributing to the pathologi-cal phenotypes of PA smooth muscle cells (hPASMCs) [9, 10]. Depending on the cell types, the transient receptor potential canonical (TRPC) channels could be involved in all these different types of Ca”* entry [9, 11]. In recent years, pharmacological modulation of TRPC channels has been proposed as a potential therapeutic strategy to
+As TRPC channels have been demonstrated to contrib-ute to Ca”* homeostasis in different types of endothelial cells, we measured the contribution of TRPC to intracel-lular Ca”* signals (Fig. 1C). SOCE was induced by depleting intracellular Ca** by applying 1 umol/L thapsigargin (Tg) (SERCA pump inhibitor) in a Ca”*-free medium and then by adding 2 mmol/L extracellular Ca”*. To elicit the contribution of each channel, we used a small interfering RNA (siRNA) strategy. The efficacy of each siRNA was previously validated [13]. 72 h after cell transfection, we found that the knockdown of TRPC1, TRPC3, TRPC4, and TRPC6 had no impact on ER Ca** release (Fig. 1D). The knockdown of TRPC4 decreased SOCE, whereas the knockdown of TRPC1, TRPC3, and TRPC6 had no impact on SOCE (Fig. 1E) in control-hPECs.
+We performed experiments to measure the contribution of each SOC channel to Ca’* signaling induced by the activation of the G protein-coupled receptor with 1 umol/L of histamine (Fig. 1F). We found that the knockdown of TRPC1 and TRPC4 reduced histamine-mediated Ca?* response, where neither siTRPC3 nor siTRPC6 altered histamine-induced Ca’* signaling in control-hPECs (Fig. 1G).
+Moreover, we found that TRPC3 and TRPC4 are involved in control-hPECs proliferation (Fig. 1H) and that TRPC1 and TRPC6 are involved in migration (Fig. 11).
+The expression of TRPC1, TRPC4, and TRPC6 increased in PAH-hPECs compared to control patients
+counteract PAH development [10, 12-14].
+We investigated the expression, localization, and functional role of TRPC channels in hPECs isolated from control and PAH patients, focusing on their involvement in intracellular Ca”* signaling and their contribution to proliferation, migration, and in vitro tubulogenesis in PAH-hPECs.
+Similarly, to control lungs, we found by immunostaining in lungs from PAH patients that TRPC1, TRPC3, TRPC4, and TRPC6 are expressed in the PA (co-staining with vWF) (Fig. 2A). To assess the protein expression of TRPC channels, we performed immunoblots on control-and PAH-hPECs. We found an increased protein expression of TRPC1, TRPC4, and TRPC6 in PAH compared with control-hPECs, while TRPC3 protein expression was unchanged (Fig. 2B).
+Results
+TRPC channels are expressed in control-hPECs and participate in cell function
+Immunofluorescent staining in human lung sections demonstrated that TRPC1, TRPC3, TRPC4, and TRPC6
+Fura2/AM Ca** imaging experiments with Tg (Fig. 3A) revealed that ER Ca** content (Fig. 3B) and SOCE
+
+--- Page 3 ---
+
+(2025) 26:345
+Saint-Martin Willer et al. Respiratory Research
+Page
+Control-hPECs
+Control-hPASMCs
++ ee iS ‘La
+Fig. 1 (See legend on next page.)
+Normalized
+
+--- Page 4 ---
+
+Page
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345
+(See figure on previous page.)
+Fig. 1 TRPC channels expression in control-hPECs. A Expression and localization of TRPC1, TRPC3, TRPC4, and TRPC6 by immunofluorescence staining of paraffin-embedded lung sections from control patients. TRPC proteins are in red, vWF in yellow to localize PA, and endothelial cell nuclei are in blue (DAPI). Right column: magnitude X5 with white arrows to highlight co-staining TRPC with vWF. B Characterization of primary control-hPEC and control-hPASMCs by immunofluorescence and confocal imaging: vWF (in red), VE-cadherin (in yellow), CD31 (in green) and alpha-SMA (in green). C Illustrations of 340/380 ratio in SOCE protocol mediated by Thapsigargin (Tg) under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions (n=6 patients for siControl, siTRPC1, siTRPC3, and siTRPC6 and 5 for siTRPC4) (D) Quantifications of ER Ca?* release by calculating delta peak Tg under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. E Quantifications of SOCE influx by calculating delta peak SOCE under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. (n=6 patients for siControl, siTRPC1, siTRPC3, and 5 for siTRPC4 and siTRPC6). F Illustrations of the 340/380 ratio in histamine-induced Ca** influx under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. G Quantifications of histamine-induced Ca?* influx by calculating the area under the curve under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. (n=4 patients for each condition). H Proliferation rate normalized by siControl for siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions measured by BrdU incorporation (n=4 patients for sTRPC1 and n=3 for siTRPC3, siTRPC4, and siTRPC6). | Wound closure normalized by siControl in siTRPC1, siTRPC3, siTRPC4, and TRPC6 conditions after 8 h (n=4 for each condition). ns=non significant; * P< 0.05, **P<0.01
+(Fig. 3C) were unchanged in PAH-hPECs compared to control-hPECs, while histamine-induced Ca’* signaling was reduced in PAH-hPECs compared to control-hPECs (Fig. 3D-E).
+Peroxisome Proliferator-Activated Receptor Gamma Coactivator 1-Alpha (PPARGC1A), Endothelin receptor type A (EDNRA) and Angiotensin II Receptor Type 1 (AGTR1) (Fig. 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40) (Fig. 6B) and that TRPC4 knockdown reduced the mRNA level of Histone Deacetylase 5 (HDAC5) (Fig. 6C) without significantly affecting the expression of other endothelial markers. TRPC6 knockdown did not induce a change in mRNA of these 90 endothelial markers (data not shown).
+TRPC knockdown reduces PAH-hPECs dysfunction
+In PAH-hPECs, the knockdown of TRPC1 and TRPC3 decreased ER Ca?* release (Fig. 4A-B). Moreover, we found that siTRPC1 and siTRPC4 reduced SOCE amplitude, while siTRPC3 and siTRPC6 did not affect SOCE (Fig. 4A, C). In addition, we found that siTRPC6 increased histamine-mediated Ca** response (Fig. 4D-E), suggesting a restraining role of TRPC6 in this response.
+Because PAH-hPECs are characterized by a reduction in their migratory and angiogenic capacities, we investigated whether TRPC isoforms were involved in these processes. 72 h after PAH-hPECs transfection, we found that none of the TRPC channels were involved in PAH-hPECs migration (Fig. 5A) or angiogenic capacity (Fig. 5B). BrdU assay showed that among all TRPCs, only the knockdown of TRPC1 and TRPC3 reduced PAH-hPECs proliferation by about 30% (Fig. 5C). We also evaluated the crosstalk between PAH—-hPECs and control-hPASMCs. We measured the proliferation capacity of control-hPASMCs in the presence of culture medium from PAH-hPECs transfected with siTRPC1, siTRPC3, siTRPC4, or siTRPC6. We found that TRPC3, TRPC4, or TRPC6 knockdown decreased this mitogenic crosstalk in the PAH-hPECs medium (Fig. 5D).
+Discussion
+Endothelial dysfunction and the involvement of SOC channels are crucial for the development of PAH. However, the role of TRPC channels in control-and PAH-hPECs was unknown. This work investigated the expression, the location, and the role of SOC channels in Ca** signaling in hPECs from control and PAH patients. We also assessed the involvement of TRPC channels in cell proliferation, cell migration, in vitro tube formation, and the regulation of endothelial markers in hPECs from PAH patients. Finally, our study highlighted their participation in the development of the pathology by participating in the control of pulmonary endothelial cell homeostasis.
+Endothelial dysfunction in PAH
+TRPC channel knockdown in PAH-hPECs induces numerous modifications in the expression of genes involved in endothelial cell homeostasis
+The modulation of arterial tone by endothelial cells during pathological processes is currently well understood and represents the target of known therapies in the treatment of PAH. Under physiological conditions, hPECs are generally in a quiescent state. By contrast, in a pathologi-cal state, such as PAH, several studies demonstrated that PAH-hPECs developed increased migratory capacity and hyperproliferation, resulting in PA obstruction [3, 4]. The overproduction of several growth factors is a key feature of pulmonary endothelial dysfunction in PAH,
+To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),
+
+--- Page 5 ---
+
+Page
+(2025) 26:345
+Saint-Martin Willer et al. Respiratory Research
+Magnitude XS
+PAH lungs
+B Control and PAH-hPECs
+100 kDa-43 kDa-
+*
+.
+100 kDa-
+43 kDa~
+100 kDa 110 kDa-43kDa-
+.
+PS
+ee
+Fig. 2 Comparison of TRPC localization and expression in control-hPECs and PAH-hPECs. A Expression and localization of TRPC1, TRPC3, TRPC4, and TRPC6 by immunofluorescence staining of paraffin-embedded lung sections from PAH patients. TRPC proteins are in red, vWF in yellow, and endothelial cell nuclei are in blue (DAPI). Right column: magnitude X5 with white arrows to highlight co-staining TRPC with vWF. B Immunoblot images and quantifi-cation of TRPC1, TRPC3, TRPC4, and TRPC6 protein expression in hPECs from control and PAH patients (TRPC1: n= 10 control and PAH patients; TRPC3 and TRPC6: n=5 control and PAH patients; TRPC4: n=8 control and PAH patients). ns=non significant; * P< 0.05, **P<0.01
+increased ability to proliferate and migrate, PAH-hPECs developed a reduced capacity for angiogenesis, as evidenced by decreased in vitro tube formation and disorga-nization compared to control patients [3, 5, 19]. In PAH, endothelial dysfunction contributes to the recruitment of pro-inflammatory cells through the overproduction of pro-inflammatory cytokines such as IL-la and IL-6, as well as other pro-inflammatory mediators such as leptin
+leading to the proliferation and excessive migration of hPASMCs, pulmonary vascular progenitors, and pericytes [15-17]. In association with this change in endothelial phenotype, PAH-hPECs exhibited an endoMT process characterized by a progressive loss of expression of molecules involved in cell-cell interactions. This leads to endothelial barrier instability, which contributes to pulmonary vascular remodeling [3, 6, 18]. Despite the
+
+--- Page 6 ---
+
+Saint-Martin Willer et al. Respiratory Research
+A
+D
+(2025) 26:345
+Fig. 3 Comparison of SOCE and histamine-calcium influx in control and PAH-hPECs. A Illustrations of the 340/380 ratio in SOCE protocol mediated by Thapsigargin (Tg) in control and PAH-hPECs. B Quantifications of Tg influx by calculating delta peak Tg in control and PAH-(n=3 for control and 4 for PAH patients). C Quantifications of SOCE influx by calculating delta peak SOCE in control and PAH-hPECs (n=6 for control and 8 for PAH patients). D Illustrations of the 340/380 ratio in histamine-induced Ca** influx in control and PAH-hPECs. E Quantifications of histamine-induced Ca?* influx by calculating the area under the curve for control and PAH-hPECs (n=5 for control and 4 for PAH patients). ns=non significant; * P< 0.05
+(7, 20]. The secreted factors promote endothelial barrier instability, which facilitates immune cell infiltration [21].
+In the present study, we found that control-and PAHhPECs expressed TRPC1, TRPC3, TRPC4, and TRPC6. The TRPC1, TRPC4, and TRPC6 were overexpressed in PAH-hPECs compared to control-hPECs, but SOCE was similar in both groups. The histamine-induced Ca?* response, however, was reduced in PAH. Regarding the absence of a difference in SOCE between control and PAH-hPECs, we can speculate that the different mitochondrial status of PAH-hPECs vs. control-hPECs, including mitochondrial membrane potential alteration, aberrant reactive oxygen production (ROS), and glycolytic shift [22, 23], could explain why SOCE is not increased in PAH-hPECs while TRPC1, TRPC3, and TRPC6 are increased. Indeed, mitochondrial function is closely related to SOCE [24, 25]. Mitochondrial depolarization enhances the activity of store-operated channels, including TRPC [26]. In addition, mitochondrial
+Page
+ns
+a
+Sp &
+ATP can buffer Ca”*, relieving the inhibitory effect of incoming Ca”* on SOCE activity [27]. We can therefore conclude that the metabolic status of mitochondria is key to regulating intracellular ATP content, which in turn affects SOCE activity. Mitochondrial status can also influence ROS production, which can modulate TRPC channel function [28-30]. ROS are mainly handled by the mitochondria and are linked to SOCE activity [31, 32]. In addition, SOCE is a complex mechanism involving several modulating proteins, and each of them could modulate SOCE negatively and positively [33]. To our knowledge, the level of expression of these different SOCE modulating proteins is unknown in PAH-hPECs. Finally, the lipid membrane composition can also influence TRP channel function [34]. To better understand all these aspects of TRPC regulation in PAH and control-hPECs, several key experiments are necessary in further studies.
+
+--- Page 7 ---
+
+(2025) 26:345
+Saint-Martin Willer et al. Respiratory Research
+Fig. 4 Consequences of TRPC channels knockdown in PAH-hPECs. A Illustrations of the 340/380 ratio in SOCE protocol mediated by Thapsigargin (Tg) in siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. B Quantifications of ER Ca?* release by calculating delta peak Tg under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions (n= 13 for siControl, 8 for siTRPC1, siTRPC4 and siTRPC6, 9 for siTRPC3). C Quantifications of the mean SOCE influx by calculating delta peak SOCE in siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions (n= 12 patients for siControl, 8 for siTRPC1, 9 for siTRPC3, 8 for siTRPC4, and 8 for siTRPC6). D Illustrations of the 340/380 ratio in histamine-induced Ca?* influx in siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. E Quantifications of the mean histamine-induced Ca ** influx by calculating the area under the curve for siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions (n=6 patients). ns=non-significant; * P< 0.05
+Our results showed that TRPC1, TRPC3, and TRPC4 are involved in SOCE, while only TRPC6 is involved in histamine Ca?*-mediated responses. We have shown that TRPC1, TRPC3, and TRPC4 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk. We also showed that TRPC channels do not play a role in in vitro tubulogen-esis of PAH-hPECs. However, we found that TRPC4 and TRPC6 are involved in the proliferation of control-hPECs and that TRPC1 and TRPC6 are involved in the migration of these cells. This study suggests that TRPC channels are involved in hPECs homeostasis in control-hPECs and involved in the development of the PAH phenotype of these cells.
+SOC channels in endothelial dysfunction
+Prior to the present study, only a few studies investigated the role of SOC channels in the functions of hPECs. Recently, Babicheva et al. showed that SOCE regulates endoMT in hPECs [35]. In mouse PECs, TRPC1 and
+Page
+¢
+°
+:
+TRPC4 strongly contribute to SOCE and endothelial barrier integrity [36, 37]. As in murine PECs, in PAHhPECs, TRPC1 and TRPC4 are involved in SOCE, and TRPC1 and TRPC3 play a role in cell proliferation. We also showed that TRPCs are not involved in migration or in vitro tubulogenesis of PAH-hPECs. TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium.
+In addition, we found that TRPC1 knockdown in PAH-hPECs induced increased expression of more than 10 genes involved in inflammatory signaling, regulation of vasomotor activity, and endothelial cell migration. Altogether, these findings indicate that TRPC channels contribute to endothelial dysfunction occurring in PAH.
+Furthermore, we found that TRPC4 is overexpressed in PAH-hPECs and plays a role in SOCE in both control- and PAH-hPECs. Previous studies have shown that TRPC4 is involved in the increased permeability of lung endothelial cells in both control and experimental
+
+--- Page 8 ---
+
+Saint-Martin Willer et al. Respiratory Research
+PAH-hPECs
+A
+B
+PAH-hPECs c
+(2025) 26:345
+Fig. 5 Consequences of TRPC1, TRPC3, TRPC4, and TRPC6 knockdown on migration and angiogenesis in PAH-hPECs. A (Illustration of siControl and siTRPC6) Wound closure normalized by siControl in siTRPC1, siTRPC3, siTRPC4, and TRPC6 conditions after 8 h, left: illustrations, bar graph = 750 um; right: quantifications (n=5 patients for siTRPC1 and siTRPC4 and n=4 patients for siTRPC3 and siTRPC6). B Angiogenesis by tube formation assay; left: illustrations; right: quantifications of segment length and number of junctions normalized by siControl in siTRPC1, siTRPC3, siTRPC4, and TRPC6 conditions (n=4 patients for siTRPC1, siTRPC4, and siTRPC6, n=5 patients for siTRPC3). C Proliferation rate normalized by siControl for siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions measured by BrdU incorporation (n=6 patients for siTRPC1 and siTRPC3 and n=4 for siTRPC4 and siTRPC6). D The proliferation of control-hPASMCs in contact with the culture medium of PAH-hPECs transfected with siControl, siTRPC1, siTRPC3, siTRPC4, or siTRPC6 was measured by BrdU incorporation (n=8 control-hPASMCs and 8 PAH-hPECs). Bar graph = 750 ym. ns=non significant, **P<0.01
+=> = ge N 2 35 SS 65 Ze E o Oo
+PAH-hPECs to control-hPASMCs crosstalk
+D
+Page
+
+--- Page 9 ---
+
+Saint-Martin Willer et al. Respiratory Research
+PAH-hPECs
+A
+models of PAH [38]. Yang et al. also demonstrated that TRPC4 expression is increased in PECs isolated from rats exposed to Sugen/hypoxia, monocrotaline, or hypoxia. They showed that TRPC4 is involved in apoptosis in PECs exposed to hypoxia, indicating that it plays a role in PAH development by promoting apoptosis in PECs [39]. Similarly, our results support
+B
+(2025) 26:345
+Page
+Fig. 6 Consequences of TRPC1, TRPC3, and TRPC4 knockdown by siRNA on mRNA expression of genes involved in endothelial cell dysfunction in PAHhPECs. A mRNA expression of CD4O0LG, IL1B, TNF, PTGFR, ANGPT1, LEP, IRF3, PPARGC1A, EDNRA and AGTR1 after TRPC1 knockdown (n=4 patients). mRNA expression of CD40 after TRPC3 knockdown (n=4 patients). C mRNA expression of HDACS5 after TRPC4 knockdown (n=5 patients). ns=non significant; * P< 0.05, *P<0.01
+an important role of TRPC4 in endothelial dysfunction occurring in PAH.
+_
+Contrary to hPECs, in endothelial cells from the systemic circulation, we know that SOC channels, TRPC1, TRPC3, and TRPC4, regulate the angiogenic process [40]. Regarding the involvement of TRPC in SOCE, some reports in systemic endothelial cells indicate that TRPC1, TRPC4, and TRPC3 are involved in SOCE [41, 42]. Since
+—_
+
+--- Page 10 ---
+
+Page
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345
+Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance
+exposed to Sugen/hypoxia, knocking down TRPC4 using an adeno-associated virus reduced both right ventricu-lar systolic pressure and right ventricular hypertrophy [39]. This study demonstrated the potential of targeting TRPC4 in endothelial cells to reduce PAH. As in PASMCs or other cell types, including PECs, Ca* signaling is necessary for almost all cellular functions, including prolif-eration, migration, contraction, and gene transcription [8]. Given that PAH is characterized by pulmonary endothelial dysfunction, it is important to analyze the consequences of SOC channel inhibition on the phenotype of hPECs. In addition to the beneficial effects of SOC channel inhibitors on PAH-hPASMCs phenotypes, the present study demonstrated that SOC channel inhibition may also partly reduce endothelial dysfunction.
+PAH (n=13) Control (n=12) Age, years 13 (46) 72 51 (66) 77 Sex, M/F 3 M/ M/8F Diseases Diagnosis 31% hPAH 100% lung 38% iPAH cancer 8% PVOD 159% PAH with congenital heart disease 8% PH group 5 Mutation in BMPR2 gene Carrier 3 NA no-carrier 10 NA Mutation in SOX17 gene Carrier 1 NA no-carrier 12 NA Hemodynamic parameters mPAP, mmHg 38 (52,5) 65 NA i, L/min/m? 2,1 (2,66) 3,13 NA PVR, Wood units 3,9 (11,22) 18 NA Medication Monotherapies NA NA Bitherapies NA NA
+Conclusions
+Using primary hPECs from control and patients suffering from PAH, we found that hPECs express TRPC1, TRPC3, TRPC4, and TRPC6. TRPC1, TRPC4, and TRPC6 are involved in Ca’* signaling of PAH-hPECs. We showed that TRPC1 and TRPC3 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium. Finally, we found that TRPC1 is crucial for endothelial cell homeostasis. Together, these results demonstrate that TRPC channels are central and represent very interesting candidates for reducing endothelial dysfunction in PAH.
+Tritherapies
+46%
+NA
+Methods
+reports demonstrated that STIM1 could interact and activate TRPC1 and TRPC4 channels [43] directly, we supposed that in PAH-hPECs, TRPC1 and TRPC4 are involved in SOCE via STIM1 interaction during ER Ca”* depletion.
+Culture of hPECs and hPASMCs isolated from PAH and
+control patients
+Cells were isolated as previously described [44-46] and were used for the study between passages 3 and 5. Patients studied were part of a program approved by our institutional Ethics Committee and had given written informed consent (ID RCB: 2018-A01252-53).
+Therapeutic perspective
+In recent years, TRPC channels have emerged as novel therapeutic targets to reduce PAH development. These studies are based on in vitro experiments in hPASMCs and in vivo therapeutic trials in rodents using selective inhibitors of TRPC3 or TRPC6 [13, 14]. In mice
+hPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs
+Target siRNA siRNA ID Sequences Supplier Negative control Silencer™ Select negative control #1 (4390844) Thermo Fisher Scientific siTRPC1 814411 Sense: GGACUACGGUUGUCAGAAATT Thermo Fisher Scientific Antisense: UUUCUGACAACCGUAGUCCAA, siTRPC3 814413 Sense: CGUUAUCAGCAGAUAAUGATT Thermo Fisher Scientific Antisense : UCAUUAUCUGCUGAUAACGTG siTRPC4 229618 Sense: CGAGAAUCAUGGGACAUGUTT Thermo Fisher Scientific Antisense: ACAUGUCCCAUGAUUCUCGTG siTRPCO 314421 Sense: CAGCAUACAUGUUUAGUGATT, Thermo Fisher Scientific Antisense : UCACUAAACAUGUAUGCUGGT
+Table 2 List of SIRNA used in the experiments
+
+--- Page 11 ---
+
+(2025) 26:345
+Saint-Martin Willer et al. Respiratory Research
+were cultured in DMEM (Gibco, ref 11960044) supple-mented with 12,5% FCS, 2 mmol/L L-Glutamine, 1X Insulin-Transferin-Selenium, 100 U/mL penicillin-streptomycin, 20 mmol/L HEPES, 10 ng/mL EGF.
+Clinical data of control and PAH patients used for the study are summarized in Table 1.
+SIRNA transfection
+hPECs were transfected in suspension by incubating 4x10° cells in a solution containing 1000 pL of OptiMEM (Gibco, ref 31985-062), 6 pL of Lipofectamine RNAiMax (Invitrogen, ref 13778-150), and 50 nM of a specific Silencer™ Select siRNA. All the siRNA used in the experiments are summarized in Table 2. Opti-MEM, lipofectamine, and siRNA were mixed for 20 min at room temperature. After harvesting, cells were added to the mix for 20 min. The mix was then put in cell culture dishes containing complete MCDB medium. Media were changed 24 h after transfection. All experiments were performed 72 h after hPECs transfection.
+Reverse transcription-quantitative PCR (RT-qPCR)
+Total RNA from hPECs was isolated by using a TRIzol reagent. RNA concentration and purity were evaluated on a NanoDrop (Thermo Scientific, USA) spectropho-tometer measuring absorbance at 230, 260, and 280 nm. RT was performed with a StaRT kit from Anygenes (Paris, France) according to the manufacturer’s protocol, and qPCR was performed with perfect Master Mix SYBR Green (with ROX) for SignAray 96 system from Anygenes according to the manufacturer’s protocol on a Plus Real-Time PCR System (Life Technologies) and analyzed with StepOne Software. For PAH-hPECs, Endothelial Dysfunction plaques (PZ75A1H1-F) were used. All the primers used are summarized in Table 3.
+Western blot analyses
+Total proteins (20 yg) from hPECs or human lung-tissue samples were prepared as described previously [47]. Antibodies used for Western blot experiments are listed in Table 4.
+Intracellular Ca2* measurements
+hPECs were plated on 18-mm glass coverslips and loaded with 2 mol/L Fura-2-AM dissolved in DMSO plus 20% pluronic acid (Life Technologies) and then incubated at 37 °C for 30 min in darkness in Krebs solution (in mmol/L: 135 NaCl, 5.9 KCI, 2 CaCl,, 1 MgCl, 10 HEPES, 10 D-glucose) at pH 7.4. Loaded cells were washed twice with the physiological solution before imaging. Ca’* images were obtained using a microscope
+Table 3 Primers used in RT-gPC in PAHPECs
+Page
+
+--- Page 12 ---
+
+Page
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345
+Table 4 Antibodies used for Western blot and immunostaining experiments
+DAPI. Antibodies used for immunostaining experiments are listed in Table 4. Immunostaining was observed and acquired under an LSM 900 microscope (Carl Zeiss, Le Pecq, France) equipped with 405-, 488-, 555-, and 639- nm lasers (Carl Zeiss). Images were recorded and analyzed with ZEN software (Carl Zeiss).
+Antibody Species Dilution Supplier Reference Immunostaining TRPC1 Rabbit 1/200 Alomone ACC-010 TRPC3 Rabbit 1/200 Alomone ACC-016 TRPC4 Rabbit 1/200 Alomone ACC-018 TRPC6 Rabbit 1/200 Alomnone ACC-017 a-SMA-FITC Mouse 1/200 Sigma-F3777 Aldrich CD31 Mouse 1/200 DAKO M0823 VE-Cadherin, Alexa Mouse 1/200 Invitrogen MA5-44146 Fluor 647 VWF Mouse 1/200 Sigma-AMAB9091 Aldrich Donkey anti-rabbit | Donkey 1/400 Invitrogen A-21207 Alexa Fluor 594 Donkey anti-mouse Donkey 1/400 Invitrogen 715-606- Alexa Fluor 647 151 Western blot TRPC1 Rabbit 1/1000 Alomone ACC-010 TRPC3 Rabbit 1/1000 Alomone ACC-016 TRPC4 Rabbit 1/1000 Alomone ACC-018 TRPC6 Rabbit 1/1000 Alomnone ACC-017 b-actin-HRP Mouse 1/3000 Santa Sc-47778 Cruz Biotech-
+Pulmonary vascular cells proliferation measurement
+Pulmonary vascular cells proliferation measurement To evaluate cell proliferation, we visualized 5-bromo- 2’-deoxyuridine (BrdU) incorporation to identify cells undergoing DNA replication using a DELFIA cell proliferation kit (AD0200, PerkinElmer). Experiments were performed according to the kit recommendations.
+For cross-talk communication between PAH-hPECs and control-hPASMCs, culture medium of PAH-hPECs transfected with siControl, siTRPC1, siTRPC3, siTRPC4, or siTRPC6 was collected 72 h after transfection. The proliferation capacity of control-hPASMCs was then measured in the presence of 50% DMEM medium + 50% transfected PAH-hPECs culture medium.
+In vitro tube formation assay
+96-well plates were precoated with extracellular matrix gel prepared from Engelbreth-Holm-Swarm (EHS) tumor cells (Clinisciences; #CBA-200). 72 h after control-hPECs transfection, 5 x 10° cells/well were seeded onto the gel. Cells were incubated for 3 h at 37 °C in the standard culture medium, and tubular network visualization was performed after staining cells with Calcein/AM dye (10 umol/L) using EVOS (Invitrogen). As previously described [46, 48], tube formation was quantified as the number of junctions, segments, and the total master segment length. The total master segment length quantifies the main extension of the network, excluding branches, while the number of junctions and segments reflects the global complexity of the network branching.
+nologies
+(Olympus IX71) equipped with a Sutter Fluo Lambda 421 LED system (Sutter Instrument Company, Novato, CA, USA), which rapidly changed the excitation wavelengths between 340 nm and 380 nm. Emission was measured at 510 nm.
+Image acquisition in selected cells and analysis with MetaFluor® 7.8 imaging software (Molecular Devices).
+Immunofluorescence staining
+Lungs were fixed in 4% paraformaldehyde, paraffin-embedded, and serially sectioned (5 tm). The tissue sections were deparaffinized in xylene baths before rehydration in alcohol. Epitope unmasking was performed in a pH 9 buffer using a 2100 Antigen Retriever (Aptum). The slides were saturated with 0.5 M NH,Cl for 15 min, then blocked and permeabilized for one hour at room temperature with a solution containing 1% BSA (Bovine Serum Albumin), 0.5% Triton X-100, 10% human serum, and 10% donkey serum. The anti-TRPC antibodies (1/200) and anti-vWF (1/200) antibodies were incubated overnight at 4 °C in a solution of PBS, 0.2% BSA, 0.2% Triton X-100, and 3% donkey serum. The slides were then incubated for 1 h in the dark at room temperature with a secondary antibody (1/400) donkey anti-rabbit Alexa Fluor 594 (to detect TRPC) or donkey anti-mouse Alexa 647 (to detect vWF) with 3% human serum and
+Wound healing assay
+We used the wound healing assay to evaluate cell migration. After 48 h of starvation (medium without growth factors: fetal calf serum (FCS), epidermal growth factor (EGF), and insulin), hPECs were plated in a culture insert (Cat. No. 90209; Ibidi) at a density of 2 x 10‘cells per well in a fresh medium with cytosine arabinoside (10 mol/L) to prevent cell proliferation. After allowing cells to attach for 24 h, we removed the culture insert and washed the cells with phosphate-buffered saline to remove non-adherent cells. Cells were transfected with corresponding siRNA 24 h before starvation (72 h before removal of culture inserts). Cell migration into the wound space was quanti-fied using ImageJ software [49]. Cell motility was assessed by the percentage of wound closure 8 h after initiation of wound healing ([(area TO - area T8) + area T8] x 100).
+
+--- Page 13 ---
+
+Page
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345
+Humbert M, Guignabert C, Bonnet S, Dorfmiiller P, Klinger JR, Nicolls MR, et al. Pathology and pathobiology of pulmonary hypertension: state of the art and research perspectives. Eur Respir J. 2019;53:1801887. https://doi.org/10.1183/ 13993003.01887-2018.
+Statistical analyses
+All statistical tests were performed using GraphPad Prism software (GraphPad, version 9.0 for Windows). After checking with the Shapiro—Wilk normality test to see whether the sample data followed a normal distribution, differences between the two were assessed using an unpaired t-test or Mann-Whitney test when conditions of parametric tests were not met. Kruskal-Wallis tests with post hoc Dunn were used to compare three or more groups (all data with sample size 1 <6/group and skewed data with sample sizen 2 6/group). All values are reported as mean+standard error of the mean. Representative images/figures were chosen to represent the mean of each quantification. For all experiments, a p-value of <0.05 was considered statistically significant.
+Masri FA, Xu W, Comhair SAA, Asosingh K, Koo M, Vasanji A, et al. Hyperprolif-erative apoptosis-resistant endothelial cells in idiopathic pulmonary arterial hypertension. Am J Physiol Lung Cell Mol Physiol. 2007;293:L548-554. https:/ /doi.org/10.1152/ajplung.00428,2006.
+Tu L, Dewachter L, Gore B, Fadel E, Dartevelle P Simonneau G, et al. Autocrine fibroblast growth factor-2 signaling contributes to altered endothelial phenotype in pulmonary hypertension. Am J Respir Cell Mol Biol. 2011;45:311-22. https://doi.org/10.1165/rcmb.2010-03170C.
+Le Vely B, Phan C, Berrebeh N, Thuillet R, Ottaviani M, Chelgham MK, et al Loss of cAbI tyrosine kinase in pulmonary arterial hypertension causes dysfunction of vascular endothelial cells. Am J Respir Cell Mol Biol. 2022;67:215-26. https://doi.org/10.1165/rcmb.2021-03320C.
+Ranchoux B, Antigny F, Rucker-Martin C, Hautefort A, Pechoux C, Bogaard HJ, et al. Endothelial-tomesenchymal transition in pulmonary hypertension. Circulation. 2015;131:1006-18. https://doi.org/10.1161/CIRCULATIONAHA.11 4.008750.
+Huertas A, Guignabert C, Barbera JA, Bartsch P, Bhattacharya J, Bhattacharya S, et al. Pulmonary vascular endothelium: the orchestra conductor in respira-tory diseases: highlights from basic research to therapy. Eur Respir J. 2018. https://doi.org/10.1183/13993003.00745-2017.
+Supplementary Information
+The online version contains supplementary material available at https://doi.or 9/10.1186/s12931-025-03376-6.
+Santos-Gomes J, Le Ribeuz H, Bras-Silva C, Antigny F, Addo R. Role of ion channel remodeling in endothelial dysfunction induced by pulmonary arterial hypertension. Biomolecules. 2022;12:484. https://doi.org/10.3390/biom12 040484.
+Supplementary Material 1
+Masson B, Montani D, Humbert M, Capuano V, Antigny F. Role of storeoperated Ca2 + entry in the pulmonary vascular remodeling occurring in pulmonary arterial hypertension. Biomolecules. 2021;11:1781. https://doi.org /10.3390/biom1 1121781
+Authors’ contributions
+Conception and design: A.SMW, B.M, V.C, and F.A. Acquisition of data: ASSMW, B.M, L.L, M.D, K.E-J, Y. R, M.G, V.C, and FA. Analysis and interpretation: ASMW, B.M, V.C, and F.A. A.SMW, O.M, D.M, M.H, V.C, and F.A. wrote the initial drafts of the manuscript. All authors reviewed the final draft of the manuscript.
+Masson B, Le Ribeuz H, Sabourin J, Laubry L, Woodhouse E, Foster R, et al Orail inhibitors as potential treatments for pulmonary arterial hypertension. Circ Res. 2022;101161CIRCRESAHA1 22321041. https://doi.org/10.1161/CIRCR ESAHA.122.321041
+Funding
+Lambert M, Capuano V, Olschewski A, Sabourin J, Nagaraj C, Girerd B, et al. lon channels in pulmonary hypertension: a therapeutic interest? Int J Mol Sci. 2018;19:E3162. https://doi.org/10.3390/ijms 19103162.
+This study was supported by grants from the French National Institute for Health and Medical Research (INSERM), the Université Paris-Saclay, the Marie Lannelongue Hospital, and the French National Agency for Research (ANR). This work was supported by a grant from Fondation Maladies Rares and AFM-Téléthon #POCs(2023)-121503. A.SMW and B.M. are supported by the Therapeutic Innovation Doctoral School (ED569). K-EJ is supported by the French patient association HTAP France.
+Zhang J, Dong F, Ju G, Pan X, Mao X, Zhang X. Sodium houttuyfonate allevi-ates Monocrotaline-induced pulmonary hypertension by regulating Orail and Orai2. Am J Respir Cell Mol Biol. 2024;71:332-42. https://doi.org/10.1165/ rcmb.2023-00150C.
+Masson B, Saint-Martin Willer A, Dutheil M, Penalva L, Le Ribeuz H, El Jekmek K, et al. Contribution of TRPC channels in human and experimental pulmonary arterial hypertension. Am J Physiol Lung Cell Mol Physiol. 2023. https://d oi.org/10.1152/ajplung.0001 1.2023.
+Data availability
+The authors declare that all supporting data are available in the article.
+Jain PP, Lai N, Xiong M, Chen J, Babicheva A, Zhao T, et al. TRPC6, a therapeu-tic target for pulmonary hypertension. Am J Physiol Lung Cell Mol Physiol. 2021;321:L1161-82. https://doi.org/10.1152/ajplung.00159.2021.
+Declarations
+Ethics approval and consent to participate
+Guignabert C. Dysfunction and restoration of endothelial cell communications in pulmonary arterial hypertension: therapeutic implications. In: Nakani-shi T, Baldwin HS, Fineman JR, Yamagishi H, editors. Mol. Mech. Congenit. Heart Dis. Pulm. Hypertens. Singapore: Springer; 2020. pp. 147-55. https://doi .0rg/10.1007/978-981-15-1185-1_19.
+Patients studied were part of a program approved by our institutional Ethics Committee and had given written informed consent (ID RCB: 2018-A01252-53).
+Consent for publication
+Schermuly RT, Dony E, Ghofrani HA, Pullamsetti S, Savai R, Roth M, et al. Reversal of experimental pulmonary hypertension by PDGF Inhibition. J Clin Invest. 2005;115:281 1-21. https://doi.org/10.1172/JCI24838,
+Not applicable.
+Competing interests
+Ricard N, Tu L, Le Hiress M, Huertas A, Phan C, Thuillet R, et al. Increased pericyte coverage mediated by endothelial-derived fibroblast growth factor-2 and interleukin-6 is a source of smooth muscle-like cells in pulmonary hypertension. Circulation. 2014;129:1586-97. https://doi.org/10.1161/CIRCUL ATIONAHA.113.007469.
+The authors declare no competing interests.
+Received: 7 July 2025 / Accepted: 29 September 2025 Published online: 12 December 2025
+Hopper RK, Moonen J-RAJ, Diebold I, Cao A, Rhodes CJ, Tojais NF. In pulmonary arterial hypertension, reduced BMPR2 promotes endothelial-to-mesenchymal transition via HMGA1 and its target Slug. Circulation. 2016;133:1783-94, https://doi.org/10.1161/CIRCULATIONAHA.1 15.020617.
+References
+Sturtzel C. Endothelial cells. Adv Exp Med Biol. 2017;1003:71-91. https://doi.or 9/10.1007/978-3-319-57613-8_4.
+1. Humbert M, Kovacs G, Hoeper MM, Badagliacca R, Berger RMF, Brida M, et al. 2022 ESC/ERS guidelines for the diagnosis and treatment of pulmonary hypertension. Eur Respir J. 2022;2200879. https://doi.org/10.1183/13993003.0 0879-2022.
+20. Huertas A, Perros F, Tu L, Cohen-Kaminsky S, Montani D, Dorfmiiller P et al Immune dysregulation and endothelial dysfunction in pulmonary arterial
+
+--- Page 14 ---
+
+Page
+Saint-Martin Willer et al. Respiratory Research (2025) 26:345
+sufficient for the store-operated Ca2 + entry function of transient receptor potential canonical (TRPC) 1 and 4 channels in endothelial cells. Mol Pharma-col. 2012;81:510-26. https://doi.org/10.1124/mol.111.074658.
+hypertension: a complex interplay. Circulation. 2014;129:1332-40. https://doi. org/10.1161/CIRCULATIONAHA.113.004555.
+21. Stacher E, Graham BB, Hunt JM, Gandjeva A, Groshong SD, McLaughlin WV, et al. Modern age pathology of pulmonary arterial hypertension. Am J Respir Crit Care Med. 2012;186:261-72. https://doi.org/10.1164/rccm.201201-01640C.
+37, Tiruppathi C, Ahmmed GU, Vogel SM, Malik AB. Ca2+ signaling, TRP channels, and endothelial permeability. Microcirculation. 2006;13:693-708. https://doi. org/10.1080/10739680600930347.
+22. Culley MK, Chan SY. Mitochondrial metabolism in pulmonary hypertension beyond mountains there are mountains. J Clin Invest. 2018. https://doi.org/1 0.1172/JC1120847.
+38, Zhou C, Townsley Ml, Alexeyev M, Voelkel NF, Stevens T. Endothelial hyperper-meability in severe pulmonary arterial hypertension: role of store-operated calcium entry. Am J Physiol-Lung Cell Mol Physiol. 2016;311:L560-9. https://doi.org/10.1152/ajplung.00057.2016.
+23 Pokharel MD, Marciano DP Fu P, Franco MC, Unwalla H, Tieu K, et al. Metabolic reprogramming, oxidative stress, and pulmonary hypertension. Redox Biol. 2023;64:102797. https://doi.org/10.1016/j.redox.2023.102797.
+39, Yang L, Peng Z, Gong F, Yan W, Shi Y, Li H, et al. TRPC4 aggravates hypoxic pulmonary hypertension by promoting pulmonary endothelial cell apoptosis. Free Radic Biol Med. 2024;219:141-52. https://doi.org/10.1016/j.freeradbiome .2024.04.224,
+24, Malli R, Graier WE. The role of mitochondria in the Activation/Maintenance of SOCE: the contribution of mitochondrial Ca2 + Uptake, mitochondrial Motility, and location to Store-Operated Ca2 + Entry. Adv Exp Med Biol. 2017;993:297-319. https://doi.org/10.1007/978-3-319-57732-6_16.
+40. Antigny F. Transient receptor potential canonical channels are required for in vitro endothelial. Tube Formation®. 2012;287:11
+25 Ben-Kasus Nissim T, Zhang X, Elazar A, Roy S, Stolwijk JA, Zhou Y, et al. Mitochondria control store-operated Ca2 + entry through Na+and redox signals. EMBO J. 2017;36:797-815. https://doi.org/10.15252/embj.201592481
+41 Antigny F, Jousset H, Konig S, Frieden M. Thapsigargin activates Ca +entry both by store-dependent, STIM1/Orail-mediated, and store-independent, TRPC3/PLC/PKC-mediated pathways in human endothelial cells. Cell Calcium, 2011;49:115-27. https://doi.org/10.1016/j.ceca.2010.12.001.
+26. Nan J, Li J, Lin Y, Saif Ur Rahman M, Li Z, Zhu L. The interplay between mitochondria and store-operated Ca2 + entry: emerging insights into cardiac diseases. J Cell Mol Med. 2021;25(20):9496-512. https://doi.org/10./jcm m.16941.
+42. Freichel M, Suh SH, Pfeifer A, Schweig U, Trost C, Weissgerber P. Lack of an endothelial store-operated Ca2+ current impairs agonist-dependent vasore-laxation in TRP4—/— mice. Nat Cell Biol. 2001;3(2):121-7. https://doi.org/10.10 38/35055019.
+27, Montalvo GB, Artalejo AR, Gilabert JA. ATP from subplasmalemmal mitochon-dria controls Ca2+-dependent inactivation of CRAC channels. J Biol Chem 2006;281:35616-23. https://doi.org/10.1074/jbc.M6035 18200.
+43 Huang GN, Zeng W, Kim JY, Yuan JP, Han L, Muallem S, et al. STIM1 carboxyl-terminus activates native SOC, I(crac) and TRPC1 channels. Nat Cell Biol 2006;8:1003-10. https://doi.org/10.1038/ncb1454.
+28, Malczyk M, Veith C, Schermuly RT, Gudermann T, Dietrich A, Sommer N, et al. NADPH oxidases-do they play a role in TRPC regulation under hypoxia? Pflugers Arch. 2016;468:23-41. https://doi.org/10.1007/s00424-015-1731-3.
+Sankhe S, Manousakidi S, Antigny F, Arthur Ataam J, Bentebbal S, Ruchon Y, et al. T-type Ca2 + channels elicit pro-proliferative and anti-apoptotic responses through impaired PP2A/Akt1 signaling in PASMCs from patients with pulmonary arterial hypertension. Biochim Biophys Acta. 2017;1864:1631-41. https//doi.org/10.1016/j.bbamcr.2017.06.018.
+29, Veit F, Pak O, Brandes RP, Weissmann N. Hypoxia-dependent reactive oxygen species signaling in the pulmonary circulation: focus on ion channels. Anti-oxid Redox Signal. 2015;22:537-52. https://doi.org/10.1089/ars.2014.6234.
+30, Kozai D, Ogawa N, Mori Y. Redox regulation of transient receptor potential channels. Antioxid Redox Signal. 2014;21:971-86. https://doi.org/10.1089/ars. 2013.5616.
+45, Lambert M, Capuano V, Boet A, Tesson L, Bertero T, Nakhleh MK, et al. Charac-terization of Kcnk3 -mutated rat, a novel model of pulmonary hypertension. Circ Res. 2019;125:678-95. https://doi.org/10.1161/CIRCRESAHA.119.314793
+31 Quinlan CL, Perevoshchikova IV, Hey-Mogensen M, Orr AL, Brand MD. Sites of reactive oxygen species generation by mitochondria oxidizing different substrates. Redox Biol. 2013;1:304-12. https://doi.org/10.1016/j.redox.201 3.04 005.
+46. Ribeuz HL, Willer AS-M, Chevalier B, Sancho M, Masson B, Eyries M, et al. Role of KCNK3 dysfunction in Dasatinib-associated pulmonary arterial hypertension and endothelial cell dysfunction. Am J Respir Cell Mol Biol. 2024;71:95-109. https://doi.org/10.1165/rcmb.2023-01850C.
+32, Rizzuto R, De Stefani D, Raffaello A, Mammucari C. Mitochondria as sensors and regulators of calcium signalling. Nat Rev Mol Cell Biol. 2012;13:566-78. https://doi.org/10.1038/nrm3412.
+47. Le Ribeuz H, Masson B, Capuano V, Dutheil M, Gooroochurn H, Boét A, et al SUR1 as a new therapeutic target for pulmonary arterial hypertension. Am J Respir Cell Mol Biol. 2022. https://doi.org/10.1165/rcmb.2021-01800C.
+33 Willer AS-M, Montani D, Capuano V, Antigny F. Orai1/STIMs modulators in pulmonary vascular diseases. Cell Calcium. 2024;102892. https://doi.org/10.1 016/j.ceca.2024.102892.
+48. Carpentier G, Berndt S, Ferratge S, Rasband W, Cuendet M, Uzan G, et al. Angiogenesis analyzer for ImageJ - a comparative morphometric analysis of endothelial tube formation assay and fibrin bead assay. Sci Rep. 2020;10:1 1568. https://doi.org/10.1038/s41598-020-67289-8.
+34, Espinoza-Arcos LG, Gonzalez-Avendafio M, Zufiga-Bustos M, Zamora RA, Vergara-Jaque A, Poblete H. Exploring a peripheral PIP2-binding site and its role in the alternative regulation of the TRP channel superfamily. J Gen Physiol. 2025;157:e202413574. https://doi.org/10.1085/jgp.202413574.
+49, Schneider CA, Rasband WS, Eliceiri KW. NIH image to imageJ: 25 years of image analysis. Nat Methods. 2012;9:671-5. https://doi.org/10.1038/nmeth.2089.
+35 Babicheva A, Elmadbouh |, Song S, Thompson M, Powers R, Jain PP et al. Store-operated Ca 2+ entry is involved in endothelium-to-mesenchymal transition in lung vascular endothelial cells. BioRxiv Prepr Serv Biol 2024:2024.12.06.627034. https://doi.org/10.1101/2024.12.06.627034
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+36, Sundivakkam PC, Freichel M, Singh V, Yuan JP, Vogel SM, Flockerzi V, et al. The Ca2+sensor stromal interaction molecule 1 (STIM1) is necessary and

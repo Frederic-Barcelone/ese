@@ -1,0 +1,569 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:33:52.836767",
+  "document": "08_bmj.m1070.full.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/08_bmj.m1070.full.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 11,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_investigational": 3,
+  "drugs": [
+    {
+      "matched_text": "rituximab",
+      "preferred_name": "Rituximab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B Cell Lymphoma"
+      ],
+      "nct_id": "NCT05018520",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069283",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05018520",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069283",
+          "display": "Rituximab"
+        }
+      ],
+      "context": "O papeojumog ‘OzOz [dW PL UO OZOLW[wa/gEL LOL Se paysiignd ysuy :rWg\n\nNicola was treated with glucocorticoids, cyclophosphamide, plasma exchange, and rituximab. Her renal function initially deteriorated before her disease entered remission, but she avoided the need for dialysis. She now enjoys a good quality",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "89Zr-rituximab",
+        "technetium 99m rituximab",
+        "131I-rituximab"
+      ],
+      "pubtator_normalized_name": "Rituximab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mycophenolate mofetil",
+      "preferred_name": "Mycophenolate mofetil",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Hematologic Malignancies"
+      ],
+      "nct_id": "NCT06807606",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D009173",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06807606",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009173",
+          "display": "Mycophenolic Acid"
+        }
+      ],
+      "context": "culitis service. It is treated with immunosuppressive therapies such as glucocorticoids, cyclophosphamide, rituximab, azathioprine, methotrexate, and mycophenolate mofetil. Adjunctive treatments\n\nAuthorship and contributorship: RWH conceived the idea for this article, wrote the first complete draft, and acts as guaranto",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mycophenolic Acid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cyclophosphamide",
+      "preferred_name": "Cyclophosphamide",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ovarian Cancer"
+      ],
+      "nct_id": "NCT04931342",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003520",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04931342",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003520",
+          "display": "Cyclophosphamide"
+        }
+      ],
+      "context": "from the Wellcome Trust (209562/Z/17/Z).\n\n12. de Groot K, Harper L, Jayne DRW, etal. EUVAS (European Vasculitis Study Group). Pulse versus daily oral cyclophosphamide for induction of remission in antineutrophil cytoplasmic antibody-associated vasculitis: a randomized trial. Ann Intern Med 2009;150:670-80. 10.7326/",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "aldophosphamide",
+        "4-hydroxyperoxycyclophosphamide",
+        "4-S-ethanolsulfido-cyclophosphamide"
+      ],
+      "pubtator_normalized_name": "Cyclophosphamide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "propylthiouracil",
+      "preferred_name": "propylthiouracil",
+      "brand_name": "PROPYLTHIOURACIL",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Thyroid Hormone Synthesis Inhibitor",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "TABLET",
+      "route": "ORAL",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011441",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA080016",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011441",
+          "display": "Propylthiouracil"
+        }
+      ],
+      "context": " approximately the same in women and men. Environmental risk factors are absent in most cases but exposure to drugs such as cocaine, hydralazine, and propylthiouracil has been implicated.*\n\nTwo clinical scenarios pose particular diagnostic difficulty. The first is alveolar haemorrhage: it can be hard to recognise a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Propylthiouracil",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "creatine",
+      "preferred_name": "Creatine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003401",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2907",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003401",
+          "display": "Creatine"
+        }
+      ],
+      "context": "mpts her GP to consider systemic inflammatory disease. Urinalysis is positive for blood and protein, and blood tests show new renal impairment (serum creatine 327 umol/L, estimated glomerular filtration rate (eGFR) 13 mL/min/1.73m’) and evidence of an inflammatory response (C-reactive protein 50 mg/L, haemo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Phosphocreatine",
+        "5 7-Dihydroxytryptamine"
+      ],
+      "pubtator_normalized_name": "Creatine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "haemoglobin",
+      "preferred_name": "Haemoglobin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "5202",
+          "display": null
+        }
+      ],
+      "context": "atine 327 umol/L, estimated glomerular filtration rate (eGFR) 13 mL/min/1.73m’) and evidence of an inflammatory response (C-reactive protein 50 mg/L, haemoglobin 103 g/L, platelets 461x10°/L, albumin 33 g/L). Nicola is referred urgently to her local renal unit and undergoes kidney biopsy and testing for anti-n",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "sinus pain",
+      "preferred_name": "Sinus Pain",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "219936",
+          "display": null
+        }
+      ],
+      "context": "ed, but the most commonly affected systems are the upper airways, lungs, kidneys, eyes, and peripheral nerves. Therefore, presenting symptoms include sinus pain, nasal discharge, or crusting, ear pain, or deafness (from upper airways involvement), cough, shortness of breath, wheeze or haemoptysis (from lung i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "cough",
+      "preferred_name": "Cough",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1490475",
+          "display": null
+        }
+      ],
+      "context": "tysis (or other features suggestive of alveolar haemorrhage—eg, shortness of breath and acute drop in haemoglobin)\n\n+ Progressive shortness of breath/cough (particularly if accompanied by systemic symptoms or fine crackles suggestive of pulmonary fibrosis)\n\nWhy does this matter?\n\n+ Refractory/steroid dep",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "electrolytes",
+      "preferred_name": "electrolytes",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004573",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3793",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004573",
+          "display": "Electrolytes"
+        }
+      ],
+      "context": " chronic covert blood loss in low grade alveolar haemorrhage or gut involvement; rapidly falling haemoglobin in acute alveolar haemorrhage)\n\nUrea and electrolytes (rising serum creatine/falling eGFR)\n\nSerum albumin (may be low due to inflammation or nephrotic range proteinuria)\n\nEducation into practice\n\nC react",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Electrolytes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Serum albumin",
+      "preferred_name": "Serum albumin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C557199",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "9690",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C557199",
+          "display": "technetium j99m neomannosyl human serum albumin"
+        }
+      ],
+      "context": "emorrhage or gut involvement; rapidly falling haemoglobin in acute alveolar haemorrhage)\n\nUrea and electrolytes (rising serum creatine/falling eGFR)\n\nSerum albumin (may be low due to inflammation or nephrotic range proteinuria)\n\nEducation into practice\n\nC reactive protein or erythrocyte sedimentation rate (both ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "TI-23 human monoclonal antibody"
+      ],
+      "pubtator_normalized_name": "technetium j99m neomannosyl human serum albumin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stress",
+      "preferred_name": "Stress",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "220040",
+          "display": null
+        }
+      ],
+      "context": "opausal symptom. | was also caring for my mum who had terminal cancer, and my two kids alongside running a charity so put most of my symptoms down to stress and anxiety. | explained this to my GP who said he would like to check some blood tests, which surprised me. | thought he was just being thorough and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

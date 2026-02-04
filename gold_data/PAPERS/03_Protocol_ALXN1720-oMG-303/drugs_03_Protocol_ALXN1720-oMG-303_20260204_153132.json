@@ -1,0 +1,517 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:31:32.859710",
+  "document": "03_Protocol_ALXN1720-oMG-303.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Protocol_ALXN1720-oMG-303.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 11,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_investigational": 10,
+  "drugs": [
+    {
+      "matched_text": "Gefurulimab",
+      "preferred_name": "gefurulimab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "cals, Inc\n\n121 Seaport Boulevard Boston MA 02210 USA\n\nUSA\n\nAstraZeneca Study Identifier:\n\nD6783C00001\n\nName of Study Intervention (Active Substance)\n\nGefurulimab, ALXN1720\n\nTarget Study Start Date and Number of Countries\n\nFPI: April 2026\n\nApproximately 15 countries\n\nTarget Indication(s)\n\nFor the treatment of p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_alexion_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "eculizumab",
+      "preferred_name": "eculizumab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "imen for gefurulimab in this Phase 3 study leverages prior experience in treating complement-mediated diseases (including gMG) with the C5 inhibitors eculizumab, ravulizumab, and gefurulimab. Using gefurulimab PK/PD data from healthy participants (Studies ALXN1720-HV-101, HV-103, and HV-104) and from patients",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_alexion_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ravulizumab",
+      "preferred_name": "ravulizumab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "tained terminal complement inhibition in patients with gMG has shown favorable benefit/risk profiles following therapeutic dosing with eculizumab and ravulizumab. Based on the totality of PK, PD, ADA, safety, and efficacy data obtained during the development of eculizumab and ravulizumab, and recent experience",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_alexion_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ALXN1720",
+      "preferred_name": "ALXN1720",
+      "brand_name": null,
+      "compound_id": "ALXN1720",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "DRAFT 18 Sep 2025\n\nProtocol Concept Sheet ALXN1720-oMG-303/D6783C00001\n\nPROTOCOL CONCEPT SHEET ALXN1720-oMG-303\n\n1. ADMINISTRATIVE\n\nProtocol Title\n\nA Phase 3, Randomized, Double-masked, Placebo-contro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "HV-101",
+      "preferred_name": "HV-101",
+      "brand_name": null,
+      "compound_id": "HV-101",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": "oposed based on modeling and dosing simulations using clinical PK, PD and ADA data from a first-in-human Phase | study of gefurulimab (Study ALXN1720-HV-101), TBD and subject to change based on PREVAIL study data.\n\n4.3. Justification for Dose\n\nThe dosage regimen for gefurulimab in this Phase 3 study lever",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "HV-104",
+      "preferred_name": "HV-104",
+      "brand_name": null,
+      "compound_id": "HV-104",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [],
+      "context": " C5 inhibitors eculizumab, ravulizumab, and gefurulimab. Using gefurulimab PK/PD data from healthy participants (Studies ALXN1720-HV-101, HV-103, and HV-104) and from patients with gMG (ALXN1720-MG- 301), a population PK/PD model was developed and used to identify a gefurulimab dosing regimen predicted to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "pattern:compound_id",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "steroids",
+      "preferred_name": "Steroids",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Vestibular Schwannoma",
+        "Facial Nerve Paralysis"
+      ],
+      "nct_id": "NCT07116811",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013256",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT07116811",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013256",
+          "display": "Steroids"
+        }
+      ],
+      "context": "or oMG, the standard of care has been unchanged for decades and includes symptomatic treatment with AChE inhibitors, disease-modifying treatment with steroids, steroid-sparing immunosuppressants. None of the standard chronic or maintenance treatment options specifically address the autoimmune defect in MG o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Phytosterols",
+        "Cardiac Glycosides",
+        "Steroids Fluorinated"
+      ],
+      "pubtator_normalized_name": "Steroids",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cyclophosphamide",
+      "preferred_name": "Cyclophosphamide",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ovarian Cancer"
+      ],
+      "nct_id": "NCT04931342",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003520",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04931342",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003520",
+          "display": "Cyclophosphamide"
+        }
+      ],
+      "context": " (14 days) before Day 1\n\ne Nonsteroidal immunosuppressive drugs (eg, azathioprine, methotrexate, cyclosporine, tacrolimus, mycophenolate mofetil, and cyclophosphamide) Initiated at least 6 months before Day 1\n\nInitiated at least 6 months before Day 1\n\n— No change in dosage during the 3 months before Day 1\n\ne Steroi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "aldophosphamide",
+        "4-hydroxyperoxycyclophosphamide",
+        "4-S-ethanolsulfido-cyclophosphamide"
+      ],
+      "pubtator_normalized_name": "Cyclophosphamide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "corticosteroids",
+      "preferred_name": "corticosteroids",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ocular Myasthenia Gravis"
+      ],
+      "nct_id": "NCT06342544",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C011244",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06342544",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C011244",
+          "display": "corticosteroid methanetriol mixture"
+        }
+      ],
+      "context": "e above medications, a period equal to the stable dose requirement listed above for that medication (eg, > 3 months for azathioprine or > 4 weeks for corticosteroids) must have passed prior to Day 1.\n\nWeight\n\nParticipants must weigh > 40 kg\n\nSex and Contraceptive/Barrier Requirements\n\nParticipants of childbearing ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "corticosteroid methanetriol mixture",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rituximab",
+      "preferred_name": "Rituximab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B Cell Lymphoma"
+      ],
+      "nct_id": "NCT05018520",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069283",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05018520",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069283",
+          "display": "Rituximab"
+        }
+      ],
+      "context": " inhibitors within < 5 half-lives before Randomization (Day 1)\n\ne\n\ne Use of FcRn inhibitor within < 5 half-lives before Randomization (Day 1)\n\nUse of rituximab, ocrelizumab or other B cell-depleting therapy received or scheduled within < 3 months (90 days) before Randomization on Day 1.\n\ne\n\nHistory of thymec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "89Zr-rituximab",
+        "technetium 99m rituximab",
+        "131I-rituximab"
+      ],
+      "pubtator_normalized_name": "Rituximab",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ADAPT",
+      "preferred_name": "ADAPT",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "614919",
+          "display": null
+        }
+      ],
+      "context": "et al. Effect of efgartigimod on muscle group subdomains in participants with generalized myasthenia gravis: post hoc analyses of the phase 3 pivotal ADAPT study. European Journal of Neurology. 2024;31(1):e16098.\n\nDalakas MC, Alexopoulos H, Spaeth PJ. Complement in neurological disorders and emerging com",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

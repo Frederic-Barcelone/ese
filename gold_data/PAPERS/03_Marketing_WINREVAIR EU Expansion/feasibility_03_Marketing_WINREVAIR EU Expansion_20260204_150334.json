@@ -1,0 +1,576 @@
+{
+  "doc_id": "03_Marketing_WINREVAIR EU Expansion",
+  "doc_filename": "03_Marketing_WINREVAIR EU Expansion.pdf",
+  "trial_ids": [
+    {
+      "id_type": "NCT",
+      "value": "NCT04896008",
+      "registry": "ClinicalTrials.gov",
+      "url": "https://clinicaltrials.gov/study/NCT04896008",
+      "title": null
+    }
+  ],
+  "study_design": {
+    "phase": "3",
+    "design_type": "parallel",
+    "blinding": "double-blind",
+    "randomization_ratio": "1:1",
+    "allocation": "WINREVAIR n=86, placebo n=86",
+    "sample_size": 172,
+    "actual_enrollment": 172,
+    "duration_months": null,
+    "treatment_arms": [
+      {
+        "name": "WINREVAIR (sotatercept)",
+        "n": 86,
+        "dose": "0.7 mg/kg",
+        "frequency": "once every 3 weeks",
+        "route": "subcutaneous"
+      },
+      {
+        "name": "Placebo",
+        "n": 86,
+        "dose": null,
+        "frequency": "once every 3 weeks",
+        "route": "subcutaneous"
+      }
+    ],
+    "control_type": "placebo",
+    "setting": "global, multicenter",
+    "sites_total": null,
+    "countries_total": null,
+    "periods": [
+      {
+        "name": "double_blind",
+        "duration_months": null,
+        "duration_weeks": null,
+        "description": null
+      },
+      {
+        "name": "open_label",
+        "duration_months": null,
+        "duration_weeks": null,
+        "description": null
+      }
+    ],
+    "evidence": [
+      {
+        "page": null,
+        "section_header": null,
+        "quote": "The ZENITH study (NCT04896008) was a global, double-blind, placebo-controlled, multicenter, parallel-group clinical trial",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+      },
+      {
+        "page": null,
+        "section_header": null,
+        "quote": "172 adult participants with PAH (WHO FC III or IV) at high risk of mortality were randomized in a 1:1 ratio to either WINREVAIR (target dose 0.7 mg/kg) (n=86) plus background PAH therapy or placebo (n=86) plus background PAH therapy administered subcutaneously once every 3 weeks",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+      },
+      {
+        "page": null,
+        "section_header": null,
+        "quote": "based on data from the Phase 3 ZENITH trial",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+      },
+      {
+        "page": null,
+        "section_header": null,
+        "quote": "Due to overwhelming efficacy based on the primary endpoint result, the ZENITH trial was stopped early at the interim analysis and patients were offered the opportunity to receive WINREVAIR through an open-label long-term follow-up study",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+      }
+    ]
+  },
+  "eligibility_inclusion": [
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "adult participants with PAH (WHO FC III or IV) at high risk of mortality",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "adult participants with PAH (WHO FC III or IV) at high risk of mortality",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "adult participants",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "age",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "adult participants with PAH (WHO FC III or IV) at high risk of mortality",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "on background PAH treatment",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "prior_treatment",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    }
+  ],
+  "eligibility_exclusion": [
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "patients diagnosed with human immunodeficiency virus (HIV)-associated PAH",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "PAH associated with portal hypertension",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "pulmonary veno-occlusive disease",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "pulmonary capillary hemangiomatosis",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "overt signs of capillary and/or venous involvement",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "platelet count is <50,000/mm3",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "lab_value",
+        "derived": {
+          "operator": "<",
+          "value": 50000,
+          "unit": "/mm3"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "Do not initiate treatment if platelet count is <50,000/mm3",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "patient is experiencing serious bleeding",
+      "section": "eligibility",
+      "page": null,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "Do not administer WINREVAIR if the patient is experiencing serious bleeding",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    }
+  ],
+  "epidemiology": [],
+  "patient_journey": [],
+  "endpoints": [
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Major morbidity and mortality events",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "primary",
+        "name": "Major morbidity and mortality events",
+        "measure": "Time to first confirmed major morbidity or mortality event",
+        "timepoint": null,
+        "analysis_method": "Hazard ratio analysis"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The primary efficacy endpoint was time to first confirmed major morbidity or mortality event. Events were defined as all-cause death, lung transplantation or PAH worsening-related hospitalization of 224 hours.",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Composite morbidity and mortality endpoint",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "primary",
+        "name": "Composite morbidity and mortality endpoint",
+        "measure": "Time to first occurrence of all-cause death, lung transplantation or PAH-worsening hospitalization of >24 hours",
+        "timepoint": null,
+        "analysis_method": "HR: 0.24; 95% CI: 0.13, 0.43; p<0.0001"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The trial's composite primary efficacy endpoint — time to first occurrence of all-cause death, lung transplantation or PAH-worsening hospitalization of >24 hours — occurred in 15 WINREVAIR-treated participants (17%) versus 47 placebo-treated participants (55%).",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Overall survival",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Overall survival",
+        "measure": "Overall survival",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "Secondary endpoints included overall survival and several additional measures.",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Hemoglobin monitoring",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "safety",
+        "name": "Hemoglobin monitoring",
+        "measure": "Hemoglobin levels",
+        "timepoint": "Before each dose for first 5 doses, then periodically",
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "WINREVAIR may increase hemoglobin (Hgb). Severe erythrocytosis may increase the risk of thromboembolic events or hyperviscosity syndrome. Monitor Hgb before each dose for the first 5 doses, or longer if values are unstable, and periodically thereafter, to determine if dose adjustments are required.",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Platelet count monitoring",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "safety",
+        "name": "Platelet count monitoring",
+        "measure": "Platelet count",
+        "timepoint": "Before each dose for first 5 doses, then periodically",
+        "analysis_method": null
+      },
+      "confidence": 0.44,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "WINREVAIR may decrease platelet count. Severe thrombocytopenia may increase the risk of bleeding. Monitor platelets before each dose for the first 5 doses, or longer if values are unstable, and periodically thereafter to determine whether dose adjustments are required.",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Serious bleeding events",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "safety",
+        "name": "Serious bleeding events",
+        "measure": "Serious bleeding (gastrointestinal, intracranial hemorrhage)",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "In clinical studies, serious bleeding (e.g., gastrointestinal, intracranial hemorrhage) was reported in 4% vs 1% (STELLAR) and 7% vs 5% (ZENITH) of patients taking WINREVAIR vs placebo, respectively.",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Common adverse reactions - STELLAR",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "safety",
+        "name": "Common adverse reactions - STELLAR",
+        "measure": "Adverse reactions ≥10% and at least 5% more than placebo",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The most common adverse reactions (=10% for WINREVAIR and at least 5% more than placebo) occurring in the STELLAR Phase 3 clinical trial were headache (24.5% vs 17.5%), epistaxis (22.1% vs 1.9%), rash (20.2% vs 8.1%), telangiectasia (16.6% vs 4.4%), diarrhea (15.3% vs 10.0%), dizziness (14.7% vs 6.3%) and erythema (13.5% vs 3.1%).",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Common adverse reactions - ZENITH",
+      "section": "endpoints",
+      "page": null,
+      "structured_data": {
+        "type": "safety",
+        "name": "Common adverse reactions - ZENITH",
+        "measure": "Most common adverse reactions",
+        "timepoint": null,
+        "analysis_method": null
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": null,
+          "quote": "The most common adverse reactions in the ZENITH trial were infections (67.4% vs 44.2%), epistaxis (45.3% vs 9.3%), diarrhea (25.6 % vs 17.4%), telangiectasia (25.6 % vs 3.5%), increased hemoglobin (15.1% vs 1.2%), rash (10.5% vs 4.7%), erythema (10.5% vs 3.5%) and gingival bleeding (10.5% vs 2.3%).",
+          "source_node_id": null,
+          "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+        }
+      ]
+    }
+  ],
+  "sites": [],
+  "operational_burden": {
+    "invasive_procedures": [],
+    "visit_schedule": {
+      "total_visits": null,
+      "visit_days": [],
+      "frequency": "every 3 weeks",
+      "duration_weeks": null,
+      "scheduled_visits": [],
+      "pre_randomization_days": [],
+      "on_treatment_days": [],
+      "follow_up_days": [],
+      "evidence": []
+    },
+    "central_lab_required": false,
+    "central_lab": null,
+    "special_sample_handling": [],
+    "vaccination_requirements": [],
+    "background_therapy": [
+      {
+        "therapy_class": "PAH therapy",
+        "requirement_type": "required",
+        "requirement": "background PAH treatment required",
+        "agents": [],
+        "stable_duration_days": null,
+        "max_dose": null,
+        "evidence": [
+          {
+            "page": null,
+            "section_header": null,
+            "quote": "Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy",
+            "char_start": null,
+            "char_end": null,
+            "bbox": null,
+            "source_node_id": null,
+            "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+          }
+        ]
+      }
+    ],
+    "concomitant_meds_allowed": [],
+    "run_in_duration_days": null,
+    "run_in_requirements": [],
+    "burden_score": null,
+    "site_complexity_score": null,
+    "hard_gates": []
+  },
+  "screening_flow": {
+    "planned_sample_size": null,
+    "actual_enrollment": 172,
+    "screened": null,
+    "screen_failures": null,
+    "randomized": 172,
+    "treated": null,
+    "completed": null,
+    "discontinued": null,
+    "screening_yield": null,
+    "screen_failure_rate": null,
+    "dropout_rate": null,
+    "screen_failure_rate_reported": null,
+    "screen_failure_rate_computed": null,
+    "screen_fail_reasons": [],
+    "reasons_can_overlap": false,
+    "run_in_failures": null,
+    "run_in_failure_reasons": [],
+    "evidence": [
+      {
+        "page": null,
+        "section_header": null,
+        "quote": "The ZENITH study (NCT04896008) was a global, double-blind, placebo-controlled, multicenter, parallel-group clinical trial in which 172 adult participants with PAH (WHO FC III or IV) at high risk of mortality were randomized in a 1:1 ratio to either WINREVAIR (target dose 0.7 mg/kg) (n=86) plus background PAH therapy or placebo (n=86) plus background PAH therapy",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+      },
+      {
+        "page": null,
+        "section_header": null,
+        "quote": "The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "03_Marketing_WINREVAIR EU Expansion"
+      }
+    ]
+  },
+  "extraction_timestamp": "2026-02-04T14:03:34.839581"
+}

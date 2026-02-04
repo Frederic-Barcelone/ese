@@ -1,0 +1,1966 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:00:21.780314",
+  "document": "02_Article_AAV Management Guidelines.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+  "total_candidates": 1413,
+  "total_validated": 77,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 2,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 1,
+    "recovered_by_direct_search": 1,
+    "recovered_by_llm_sf_only": 7,
+    "blacklisted_fp_count": 16,
+    "common_word_rejected": 28,
+    "context_rejected": 0,
+    "form_filter_rejected": 89,
+    "trial_id_excluded": 1
+  },
+  "abbreviations": [
+    {
+      "short_form": "CI",
+      "long_form": "confidence interval",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "Long-term follow-up of 535 patients with MPA or GPA and a broad spectrum of severity stages revealed an increased mortality ratio of 2.6 (95% CI 2.2 to 3.1) compared with an age-matched and sex-matched general population. The main causes of death within the first year were infection (48%) and active vasculitis (19%).'°” High-dose GC contributes to the risk of infections,'°*!!° and patients are concerned about adverse effects of GC,'!! thus",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PLEX",
+      "long_form": "plasma exchange",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Handling editor Josef S Smolen In 2009, the EULAR developed its first recommendations for managing small and medium vessel vasculitis. An update focusing on AAV was published in 2016.° These recommendations provided guidance to clinicians and researchers and have been widely cited. Recent landmark studies on the role of plasma exchange (PLEX), standardisation of glucocorticoid (GC) dosing, use of rituximab (RTX) for maintenance therapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2016 guidelines.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ANCA",
+      "long_form": "antineutrophil cytoplasmic antibodies",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "yle habits and disease impairment in ANCA-associated vasculitis. Results of a randomized, controlled study. Scand J Rheumatol 2023;52:69-76. 53 Mohammad AJ, Mortensen KH, Babar J, et a/. Pulmonary involvement in antineutrophil cytoplasmic antibodies (ANCA) -associated vasculitis: the influence of ANCA subtype. J Rheumatol 2017;44:1458-67",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "AAV",
+      "long_form": "ANCA associated vasculitis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "erapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2016 guidelines. Background Since the publication of the EULAR recommendations for the management of antineutrophil cytoplasmic antibody (ANCA)-associated vasculitis (AAV) in 2016, several randomised clinical trials have been published that have the potential to change clinical care and support the need for an update.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "GCs",
+      "long_form": "glucocorticoids",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "opinion from 20 experts from 16 countries. We modified existing recommendations and created new recommendations. Results Four overarching principles and 17 recommendations were formulated. We recommend biopsies and ANCA testing to assist in establishing a diagnosis of AAV. For remission induction in lifethreatening or organ-threatening AAV, we recommend a combination of high-dose glucocorticoids (GCs) in combination with either rituximab or cyclophosphamide. We recommend tapering of the GC dose to a target of 5mg prednisolone equivalent/day within 4-5 months. Avacopan may be considered as part of a strategy to reduce exposure to GC in granulomatosis with polyangiitis (GPA) or microscopic polyangiitis (MPA). Plasma exchange may be considered in patients with rapidly progressive glomerulonephrit",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SLR",
+      "long_form": "systematic literature review",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Check for updates Based on results of a Delphi survey among the task force, we defined 14 key research questions addressing the management of AAV. For the update domains, the systematic literature review (SLR) was restricted to literature published from first of February 2015 (the date of the last set of recommendations) onwards. For new domains and drugs not included in the last update, the search was unrestricted. The following databases were used:",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EGPA",
+      "long_form": "eosinophilic granulomatosis with polyangiitis",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "in patients in which exposure to CYC needs to be avoided, and are consistent with earlier observational reports (see recommendation no. 3). Figure 3. The 2022 EULAR algorithm for treatment of eosinophilic granulomatosis with polyangiitis (EGPA). 'See table 2 for examples of organ/life-threatening and not organ/life-threatening manifestations. *See table 4 for an example of GC dosing (note: validated in MPA and GPA only). 3Consider use of RTX over CYC in patients (m/f) with childbearing potential or previous exposure to CYC at an individual cumulative dosage considered to be associated with an increased risk of complications. “Individual",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "LoE",
+      "long_form": "level of evidence",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "rent parts of each recommendation (referred to with different signs such as * or t). The level of agreement was computed on a 0-10 scale. AAV, ANCA-associated vasculitis; ANCA, antineutrophil cytoplasmic antibody; EGPA, eosinophilic GPA; FY, final vote (% of expert panel members who agreed with the recommendation); GPA, granulomatosis with polyangiitis; LoA, level of agreement on a scale of 0-10; LoE, level of evidence; MPA, microscopic polyangiitis; MPO, myeloperoxidase; n.a., not applicable; PR3, proteinase 3; SoR, strength of recommendation.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SoR",
+      "long_form": "strength of recommendation",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "ed on a 0-10 scale. AAV, ANCA-associated vasculitis; ANCA, antineutrophil cytoplasmic antibody; EGPA, eosinophilic GPA; FY, final vote (% of expert panel members who agreed with the recommendation); GPA, granulomatosis with polyangiitis; LoA, level of agreement on a scale of 0-10; LoE, level of evidence; MPA, microscopic polyangiitis; MPO, myeloperoxidase; n.a., not applicable; PR3, proteinase 3; SoR, strength of recommendation.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ESKD",
+      "long_form": "end stage kidney disease",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "s outlined in the 2016 update,° have not been revised, as the key evidence supporting this recommendation is unchanged. In addition to supporting a clinical diagnosis, biopsies (particularly from the kidney) can be helpful for distinguishing active disease from damage as the cause of clinical decline. A clinicopathological renal risk score gives prognostic information for end-stage kidney disease (ESKD) but histopathological subtypes are insufficient to guide treatment decisions.*” 4 Repeat kidney biopsy may differentiate recurrent or refractory disease activity from damage or alternative diagnoses.**",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PR3",
+      "long_form": "proteinase 3",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "d transbronchial biopsies are only 30% and 12%, respectively).*” ** In patients with pulmonary lesions that cannot be clearly attributed to active AAV, thoracoscopic or open lung biopsies can be considered.*”*! When obtaining or interpreting a biopsy is challenging, surrogate markers can support a clinical diagnosis of AAV that is based on a typical clinical presentation and positive proteinase 3 (PR3)-ANCA or myelop-eroxidase (MPO)-ANCA serology.°* Such surrogate parameters can be either clinical (such as mononeuritis multiplex confirmed by electrophysiological studies), laboratory data (such as red blood cell casts in the urine suggestive of glomerulonephritis) or findings on imaging.**",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "anti-GBM",
+      "long_form": "antibodies against glomerular basement membrane",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "n of patients with disease limited to the respiratory tract, or with renal-limited vasculitis, are ANCA negative.”” The 2017 international consensus statement contains detailed advice regarding other aspects of ANCA testing in GPA and MPA, such as indications for testing, the role of antibody levels and laboratory methodology. Additional testing for antibodies against glomerular basement membrane (anti-GBM) is advisable in the context of pulmonary-renal syndrome, as patients with anti-GBM/AAV overlap have a lower renal survival”! and benefit from routine use of PLEX.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RPGN",
+      "long_form": "rapid progressive glomerulonephritis",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "rulonephritis, plasma exchange may be considered taken into account individual risk for end-stage kidney disease and patient preferences. °Stop avacopan after duration of treatment of 6-12 months; there are no data on use of avacopan beyond 1 year, so longer-term use cannot be recommended. AZA, azathioprine; CYC, cyclophosphamide; GC, glucocorticoid; MMF, mycophenolate mofetil; MTX, methotrexate; RPGN, rapid progressive glomerulonephritis; RTX, rituximab.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "eGFR",
+      "long_form": "estimated glomerular filtration rate",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 7,
+      "context_text": "he routine use of MP pulse therapy in addition to oral GC induction therapy, and there is a need for further research on this topic. In view of this limitation, and based on the evidence from PEXIVAS trial, MP pulse therapy should be limited to treatment of severe organ-threatening manifestations, particularly either active renal involvement with a documented estimated glomer-ular filtration rate (eGFR) of <50mL/min/1.73/m*, or DAH.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "GPA",
+      "long_form": "granulomatosis with polyangiitis",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 7,
+      "context_text": "GPA, granulomatosis with polyangiitis; MPA, microscopic polyangiitis.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MPA",
+      "long_form": "microscopic polyangiitis",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 7,
+      "context_text": "GPA, granulomatosis with polyangiitis; MPA, microscopic polyangiitis.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "T/S",
+      "long_form": "trimethoprim sulfamethoxazole",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 9,
+      "context_text": "duce remission. MMF was associated with a higher relapse rate compared with AZA in the only phase III RCT’? and can be considered in patients with intolerance or contrain-dications to RTX, AZA or MTX. In patients with GPA, leflun-omide can be considered in patients with intolerance to all the above-mentioned drugs.'®° Results of two recent meta-analyses revealed that trimethoprim-sulfamethoxazole (T/S) does not reduce relapse risk in patients with GPA.'*! '? The addition of belimumab to an AZA-based maintenance regimen did not improve relapse-free survival in an RCT, which was stopped early due to slow recruitment and had a low relapse rate in the placebo group, making a positive result with belimumab unlikely to be detected.’",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MEPO",
+      "long_form": "mepolizumab",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "“Individualised duration of maintenance treatment. °In patients with relapsing or refractory EGPA without organthreatening manifestations at the time of relapse, MEPO is preferred for maintenance of remission, and AZA, MTX or RTX can be used as alternatives if MEPO is not tolerated or ineffective. AZA, azathioprine; CYC, cyclophosphamide; GC, glucocorticoid; GPA, granulomatosis with polyangiitis; MEPO, mepolizumab; MPA, microscopic polyangiitis; MTX,",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RTX",
+      "long_form": "rituximab",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "methotrexate; RTX, rituximab.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "BVAS",
+      "long_form": "Birmingham Vasculitis Activity Score",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 11,
+      "context_text": "he inclusion of patients without vasculitic manifes-tations, while patients with active life-threatening or organthreatening manifestations were excluded. After treatment with prednisolone at a stable dose =>7.5 mg per day prior to baseline, 54% of patients in the mepolizumab arm and 71% of patients in the control arm had active disease at randomisation with a Birmingham Vasculitis Activity Score (BVAS) >0. Patients were randomised 1:1 to continuation of standard therapy (including other conventional immunosuppressive agents in more than 50% of patients in each arm) or standard therapy plus mepolizamab at a dose of 300mg subcutaneously every 4 weeks. Both co-primary endpoints (the number of weeks in remission on a prednisolone dose reduced to 4mg and the proportion of patients in remission at we",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Medizin",
+      "long_form": "Rheumatologie und Immunologie",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "‘Klinik fir Innere Medizin, Rheumatologie und Immunologie, Medius Kliniken,",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IDIBAPS",
+      "long_form": "Institut d'Investigacions Biomédiques August Pi | Sunyer",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "n, University Medical Center Schleswig-Holstein, Campus Kiel, Kiel, Germany 4CIBIO, Universita degli Studi di Trento, Trento, Italy >Rheumatology, Santa Chiara Hospital, Trento, Italy “Department of Internal Medicine, University Hospital of Leuven, Leuven, Belgium ‘Department of Autoimmune Diseases, Hospital Clinic, University of Barcelona, Institut d'Investigacions Biomédiques August Pi | Sunyer (IDIBAPS), Barcelona, Spain ®Rheumazentrum Schleswig-Holstein Mitte, Neumuenster, Germany °Division of Rheumatology, Department of Internal Medicine, Vasculitis Research Center, Hacettepe University School of Medicine, Anakra, Turkey ‘Department of Internal Medicine IV, Medical University, Innsbruck, Austria \"Department of Medicine, University of Cambridge, Cambridge, UK \"Trinity Health Kidney Centre, Trin",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "LuVaCs",
+      "long_form": "Lupus-, Vasculitis-, and Complement-Mediated Systemic Autoimmune Diseases",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "e, Rheumatology Department, Norfolk and Norwich University Hospital NHS Trust, Norwich, UK *°2nd Department of Internal Medicine, Jagiellonian University Medical College, Krakow, Poland *'Division of Nephrology, Department of Clinical Sciences, Lund University, Skane University Hospital, Lund, Sweden Centre of Expertise for Lupus-, Vasculitis-, and Complement-Mediated Systemic Autoimmune Diseases (LuVaCs), Department of Internal Medicine, Section Nephrology, Leiden University Medical Centre, Leiden, The Netherlands National Referral Center for Rare Systemic Autoimmune Diseases, Université Paris Descartes, Hopital Cochin, Assistance Publique-Hépitaux de Paris (APHP), Paris, France *4Department of Epidemiology and Biostatistics, Faculty of Medicine, University of Iceland, Reykjavik, Iceland *>Depart",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "APHP",
+      "long_form": "Assistance Publique H pitaux",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "University Hospital, Lund, Sweden Centre of Expertise for Lupus-, Vasculitis-, and Complement-Mediated Systemic Autoimmune Diseases (LuVaCs), Department of Internal Medicine, Section Nephrology, Leiden University Medical Centre, Leiden, The Netherlands National Referral Center for Rare Systemic Autoimmune Diseases, Université Paris Descartes, Hopital Cochin, Assistance Publique-Hépitaux de Paris (APHP), Paris, France *4Department of Epidemiology and Biostatistics, Faculty of Medicine, University of Iceland, Reykjavik, Iceland *>Department of Rheumatology and Centre for Rheumatology Research, University Hospital Reykjavik, Reykjavik, Iceland *6Nephrology Unit, Meyer Children’s Hospital, and Department of Biomedical, Experimental and Clinical Science, University of Florence, Florence, Italy 272nd",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EUVAS",
+      "long_form": "European vasculitis Study Group",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "ing on eosinophilic granulomatosis with polyangiitis outcomes: a long-term retrospective study on 42 patients. Autoimmun Rev 2015;14:774-80. 30 Robson J, Doll H, Suppiah R, et a/. Damage in the ANCA-associated vasculitides: long-term data from the European vasculitis Study Group (EUVAS) therapeutic trials. Ann Rheum Dis 2015;74:177-84.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ANCAs",
+      "long_form": "antineutrophil cytoplasmic antibodies",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "t al. Kidney biopsy chronicity grading in antineutrophil cytoplasmic antibody-associated vasculitis. Nephro/ Dial Transplant 2022;37:1710-21 69 Damoiseaux J, Csernok E, Rasmussen N, et a/. Detection of antineutrophil cytoplasmic antibodies (ANCAs): a multicentre European vasculitis Study Group (EUVAS) evaluation of the value of indirect immunofluorescence (IIF) versus antigen-specific immunoassays. Ann Rheum Dis 2017;76:647-53",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PEXIVAS",
+      "long_form": "Plasma exchange and glucocorticoid dosing in the treatment of anti-neutrophil cytoplasm antibody associated vasculitis",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 16,
+      "context_text": "reported diagnosis of granulomatosis with polyangiitis and microscopic polyangiitis: observational study. J Med Internet Res 2020;22:e17231. 112 Walsh M, Merkel PA, Peh CA, ef a/. Plasma exchange and glucocorticoid dosing in the treatment of anti-neutrophil cytoplasm antibody associated vasculitis (PEXIVAS): protocol for a randomized controlled trial. Trials 2013; 14:73",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FVSG",
+      "long_form": "french vasculitis study group",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 17,
+      "context_text": "for remission maintenance in antineutrophil cytoplasmic antibody-associated vasculitis: a randomized controlled trial. JAMA 2010;304:2381-8. 175 Guillevin L, Pagnoux C, Seror R, et a/. The five-factor score revisited: assessment of prognoses of systemic necrotizing vasculitides based on the french vasculitis study group (FVSG) cohort. Medicine (Baltimore) 2011;90:19-27.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TMPSMZ",
+      "long_form": "Trimethoprim-Sulfamethoxazole",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 18,
+      "context_text": "n with methotrexate and unexpected high cardiac and pulmonary relapse ratio during maintenance treatment. Clin Exp Rheumatol 2004;22:552-61. 210 Leoung GS, Stanford JF, Giordano MF et al. Trimethoprim-Sulfamethoxazole (TMPSMZ) dose escalation versus direct rechallenge for Pneumocystis carinii pneumonia prophylaxis in human immunodeficiency virus-infected patients with previous adverse reaction to TMP-SMZ. J Infect Dis 2001;184:992-7.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SARG",
+      "long_form": "C1orf116 gene",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "ceived speaker fees and/ or consultancies and/or grants from AbbVie, Genesis-Pharma, Janssen, Lilly, MSD, Novartis, Pfizer, Roche and UCB. The work is supported by the Greek Rheumatology Society and Professional Association of Rheumatologists (ERE-EPERE) and the Special Account for Research Grants (SARG), National and Kapodistrian University of Athens, Greece. JHS received research grants from the John Grube Foundation and the Deutsche Gesellschaft fiir Rheumatologie (German Society for Rheumatology). MAL received unrestricted research funding and consultancy fees from Vifor with Chemocentryx. MCC",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "SARG"
+        }
+      ]
+    },
+    {
+      "short_form": "ARCH",
+      "long_form": "ARCH (clinical trial)",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "ceuticals. The LUMC received consulting fees from Aurinia Pharmaceuticals, Novartis, GSK, KezarBio, Vifor Pharma and Otsuka Pharmaceuticals on consultancies delivered by YKOT. The work of YKOT is supported by the Dutch Kidney Foundation (170KG04) and by the Arthritis Research and Collaboration Hub (ARCH) foundation. ARCH is funded by Dutch Arthritis Foundation (ReumaNederland). AV, BS-A, CBM, FP-K, GT, JH, JM, NH, PV and SM reported no conflicts of interest. @",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT01631214"
+        }
+      ]
+    },
+    {
+      "short_form": "GC",
+      "long_form": "standardisation of glucocorticoid",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "LAR developed its first recommendations for managing small and medium vessel vasculitis. An update focusing on AAV was published in 2016.° These recommendations provided guidance to clinicians and researchers and have been widely cited. Recent landmark studies on the role of plasma exchange (PLEX), standardisation of glucocorticoid (GC) dosing, use of rituximab (RTX) for maintenance therapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2016 guidelines.",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MPO",
+      "long_form": "myelop-eroxidase",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "not be clearly attributed to active AAV, thoracoscopic or open lung biopsies can be considered.*”*! When obtaining or interpreting a biopsy is challenging, surrogate markers can support a clinical diagnosis of AAV that is based on a typical clinical presentation and positive proteinase 3 (PR3)-ANCA or myelop-eroxidase (MPO)-ANCA serology.°* Such surrogate parameters can be either clinical (such as mononeuritis multiplex confirmed by electrophysiological studies), laboratory data (such as red blood cell casts in the urine suggestive of glomerulonephritis) or findings on imaging.**",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "AZA",
+      "long_form": "arm were switched to receive azathioprine",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "largest trial comparing RTX and CYC for remission induction, remission rates at 6 and 12 months in relapsing patients were higher for RTX. This superiority of RTX over CYC did not extend to month 18,*'*? probably because there was no maintenance treatment in the RTX arm, whereas patients in the CYC arm were switched to receive azathioprine (AZA) for 12-15 months. Therefore, we favour treatment with RTX in relapsing patients (figure 1). The recently published data from the induction part of the RITAZAREM Study have shown that RTX can effectively restore remission in patients with relapsing AAV.”° There are limited data on use of CYC in pati",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DAH",
+      "long_form": "and/or diffuse alveolar haemorrhage",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "ecent retrospective studies found similar efficacy of RTX and RTX biosimilars in patients with AAV.>*° Until recently, experience with RTX without concomitant CYC in patients with severe kidney failure has been limited to data from retrospective studies.”° The recent PEXIVAS Study included patients with severe renal disease and/or diffuse alveolar haemorrhage (DAH) treated with RTX and outcomes appear not to differ compared with CYC, but the study was not sufficiently powered to demonstrate non-inferiority of RTX over CYC in this subgroup.” Although pharmacokinetics and mode of action of RTX do not suggest inferior efficacy in patients with renal failure or D",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MMF",
+      "long_form": "trial showed that mycophenolate mofetil",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "The MYCYC trial showed that mycophenolate mofetil (MMF) was non-inferior to CYC for remission induction in new-onset MPA or GPA.”! There was no safety benefit of MMF demonstrated and the study subjects in the MMF group who were PR3-ANCA positive had a much higher relapse rate.”! Thus, use of MMF for remission induction should be limited to situations wh",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MP",
+      "long_form": "of intravenous methylprednisolone",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 7,
+      "context_text": "Administration of intravenous methylprednisolone (MP) pulses in doses of 1000-3000 mg has been used in induction protocols including the RAVE, MEPEX and PEXIVAS trials*! °”'\" and is common practice in many institutions, without an evidence base. No head-to-head trials have studied the role of MP pulses in AAV, the best available evidence being derived",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PJP",
+      "long_form": "jirovecii pneumonia",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 12,
+      "context_text": "17. For patients with AAV receiving RIX, CYC andlor high doses of GCs, we recommend the use of T/S as prophylaxis against Pneumocystis jirovecii pneumonia (PJP) and other infections.",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IIF",
+      "long_form": "value of indirect immunofluorescence",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "69 Damoiseaux J, Csernok E, Rasmussen N, et a/. Detection of antineutrophil cytoplasmic antibodies (ANCAs): a multicentre European vasculitis Study Group (EUVAS) evaluation of the value of indirect immunofluorescence (IIF) versus antigen-specific immunoassays. Ann Rheum Dis 2017;76:647-53",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EULAR",
+      "long_form": "European League Against Rheumatism",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "EULAR recommendations for the management of ANCA-associated vasculitis: 2022 update",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "C5a",
+      "long_form": "Complement Component 5A",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ate focusing on AAV was published in 2016.° These recommendations provided guidance to clinicians and researchers and have been widely cited. Recent landmark studies on the role of plasma exchange (PLEX), standardisation of glucocorticoid (GC) dosing, use of rituximab (RTX) for maintenance therapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2016 guidelines.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Dr",
+      "long_form": "doctor",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Prof Dr Bernhard Hellmich, Klinik fiir Innere Medizin, Rheumatologie und Immunologie, Medius Kliniken, Akademisches Lehrkrankenhaus der Universitat Tubingen, Kirchheim unter Teck 73230, Germany; b.hellmich@medius-kliniken.de",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RCTS",
+      "long_form": "randomised clinical trials",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "y-systemic’ are variably defined and misleading in clinical practice. Patients who appear to have less severe disease and may receive less intense treatment yet are at risk of developing organ-threatening or life-threatening manifestations.'” '* In most recent randomised controlled clinical trials (RCTS), this concept has been discarded and patients with different stages of disease severity were assigned the same intensity of induction treatment.'””! As patients with ‘non-severe’ AAV are at risk of being undertreated, this task force decided not to change the categorisation of the 2016 recommendat",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CD19",
+      "long_form": "cluster of differentiation 19",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 3,
+      "context_text": "of remission of relapsing EGPA after induction of remission for non-organthreatening or life-threatening manifestations at the time of relapse, we recommend treatment with mepolizumab.* In the management of patients with AAV, we recommend that structured clinical assessment, rather than ANCA and/or CD19+ B cell testing alone, should inform decisions on changes in 1b*",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:SNOMEDCT_US",
+          "id": "CD19"
+        }
+      ]
+    },
+    {
+      "short_form": "CT",
+      "long_form": "computerized tomography",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "ical diagnosis or a positive biopsy in AAV,\"° Therefore, no evidence-based recommendations on the use of imaging for the diagnosis of AAV can be made. However, imaging is recommended as an integral part of the diagnostic evaluation to detect organ involvement and to identify potential biopsy sites. CT of the chest is more sensitive than conventional radiographs and helps to distinguish disease manifestations of AAV from infection and other comorbidities,>~** and to detect interstitial lung disease in patients with MPA.°*** MRI can detect",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MEDCIN",
+          "id": "CT"
+        }
+      ]
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "on to detect organ involvement and to identify potential biopsy sites. CT of the chest is more sensitive than conventional radiographs and helps to distinguish disease manifestations of AAV from infection and other comorbidities,>~** and to detect interstitial lung disease in patients with MPA.°*** MRI can detect",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RITAZAREM",
+      "long_form": "RITAZAREM (clinical trial)",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "*'*? probably because there was no maintenance treatment in the RTX arm, whereas patients in the CYC arm were switched to receive azathioprine (AZA) for 12-15 months. Therefore, we favour treatment with RTX in relapsing patients (figure 1). The recently published data from the induction part of the RITAZAREM Study have shown that RTX can effectively restore remission in patients with relapsing AAV.”° There are limited data on use of CYC in patients relapsing after induction with RTX and the risk of malignancy increases when repeated courses of CYC are given.’”",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT01697267"
+        }
+      ]
+    },
+    {
+      "short_form": "RAVE",
+      "long_form": "Rituximab in ANCA-Associated Vasculitis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "A recent meta-analysis that included retrospective studies found that efficacy and safety outcomes do not differ between the RTX protocol used in the RAVE trial (375 mg/m? per week for 4weeks), which is approved for induction of remission in GPA and MPA in the European Union and the two-dose protocol (1g in weeks 0 and 2) approved for rheumatoid arthritis.”* Recent retrospective studies found similar efficacy of RTX and RTX biosimilars in patients wi",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MTX",
+      "long_form": "methotrexate",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "With respect to MTX and MMF, this statement refers to newonset disease only. The MYCYC Study also included patients without organ-threatening manifestations.2! Another RCT comparing CYC and MMF in AAV found numerically lower disease-free survival rates in the MMF group at 2 and 4years, respectively.'°? Two smaller RCT",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RCT",
+      "long_form": "randomised controlled trial",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "With respect to MTX and MMF, this statement refers to newonset disease only. The MYCYC Study also included patients without organ-threatening manifestations.2! Another RCT comparing CYC and MMF in AAV found numerically lower disease-free survival rates in the MMF group at 2 and 4years, respectively.'°? Two smaller RCTs, primarily focusing on MPA, concluded equivalence of CYC and MMF for remission induction and safety.'°° '* Given the probable lower long-term efficacy",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MEPEX",
+      "long_form": "Randomised Trial of Plasma Exchange or High Dose Methyl Prednisolone as Adjunctive Therapy for Severe Renal Vasculitis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 7,
+      "context_text": "Administration of intravenous methylprednisolone (MP) pulses in doses of 1000-3000 mg has been used in induction protocols including the RAVE, MEPEX and PEXIVAS trials*! °”'\" and is common practice in many institutions, without an evidence base. No head-to-head trials have studied the role of MP pulses in AAV, the best available evidence being derived from indirect compar-ison across different trials. Observational studies have reported no effi",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT01408836"
+        }
+      ]
+    },
+    {
+      "short_form": "ADVOCATE",
+      "long_form": "ADVOCATE (clinical trial)",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 7,
+      "context_text": "This is a new recommendation based on results of the ADVOCATE RCT in 331 patients with newly diagnosed or relapsing MPA or GPA that compared the use of the oral C5aR inhibitor avacopan (30mg two times per day) with a GC regimen tapering from 1 mg/kg/day to 0 by 21 weeks (a GC withdrawal time similar to the RAVE trial*!) as part of a standard induction protoco",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT02994927"
+        }
+      ]
+    },
+    {
+      "short_form": "MAINRITSAN",
+      "long_form": "MAINtenance of Remission Using RITuximab in Systemic ANCA-associated Vasculitis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 8,
+      "context_text": "In the MAINRITSAN trial, patients who attained remission after induction therapy with GC and CYC, repeat-dose RTX (500 mg two times at 6months then 500mg every 6 months three times) over 2 years was associated with a lower relapse rate than treatment with AZA, with comparable safety.'** Long-term data of this trial",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT00748644"
+        }
+      ]
+    },
+    {
+      "short_form": "III",
+      "long_form": "roman numeral for the number 3",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 9,
+      "context_text": "ia). Doses lower than those recommended for AZA and MTX (online supplemental table 1) have been associated with higher relapse rates.'°6'47 '48 MTX can be continued in patients in whom it was used to induce remission. MMF was associated with a higher relapse rate compared with AZA in the only phase III RCT’? and can be considered in patients with intolerance or contrain-dications to RTX, AZA or MTX. In patients with GPA, leflun-omide can be considered in patients with intolerance to all the above-mentioned drugs.'®° Results of two recent meta-analyses revealed that trimethoprim-sulfamethoxazole (",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FFS",
+      "long_form": "FFS (clinical trial)",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "An RCT examining the use of RTX in EGPA (REOVAS) included 105 patients with new-onset or relapsing EGPA of whom 42 had life-threatening or organ-threatening disease (FFS >1) (abstract).”” Patients with FFS >1 received high-dose GCs plus either 2x1g RTX (days 1 and 15) or nine pulses of CYC over 13 weeks. The primary endpoint of on-treatment remission was reached at similar frequencies at days 180 and 360 in both groups, but the limited number of patients, the super",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT02693782"
+        }
+      ]
+    },
+    {
+      "short_form": "REOVAS",
+      "long_form": "REOVAS (clinical trial)",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "An RCT examining the use of RTX in EGPA (REOVAS) included 105 patients with new-onset or relapsing EGPA of whom 42 had life-threatening or organ-threatening disease (FFS >1) (abstract).”” Patients with FFS >1 received high-dose GCs plus either 2x1g RTX (days 1 and 15) or nine pulses of CYC over 13 weeks. The primary endpoint of on-treatment remi",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT02807103"
+        }
+      ]
+    },
+    {
+      "short_form": "ENT",
+      "long_form": "Ear, nose and throat",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "studies have compared different GC tapering strategies in the treatment of EGPA. In the absence of data to support an evidence-based recommendation on GC tapering in EGPA, recommendations made for GPA and MPA (statement no. 4) can be used as an orientation. However, asthma and ear, nose and throat (ENT) exacerbation increase the GC requirement in patients with EGPA, leading to prolonged tapering.'** Therefore, interdisciplinary management involving pulmonologists and/or otorhinolaryngolgists aimed at optimising treatment (including topical agents) of asthma, polyposis and sinusitis is recommended",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IgG",
+      "long_form": "Immunoglobulin G",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 12,
+      "context_text": "of this recommendation,'? but wording has been rephrased to highlight the purpose of immunoglob-ulin measurement. Results of the MAINRITSAN-3 Study have shown that long-term treatment of patients with GPA or MPA with RTX over 36 months was associated with the development of hypogammaglobulinaemia (IgG <5 g/L) in 21% of patients, confirming earlier reports on decreased IgG levels following treatment with RTX or CYC in AAV.'*? *°° For further details on risk factors for secondary immunodeficiency after RTX, monitoring, indications, dosage and discontinuation of immunoglob-ulin replacement therapy,",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IL",
+      "long_form": "Interleukins",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "8 Brouwers MC, Kho ME, Browman GP, et a/. Agree Il: advancing Guideline development, reporting and evaluation in health care. J Clin Epidemiol 2010;63:1308-11.",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "IL"
+        }
+      ]
+    },
+    {
+      "short_form": "POSO830",
+      "long_form": "POSO (clinical trial)",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "9 Schirmer J, Sanchez-Alamo B, Monti S, et a/. POSO830 SYSTEMATIC literature review informing the 2022 update of the eular recommendations for the management of ANCA-associated vasculitis: focus on treatment strategies. Ann Rheum Dis 2022;81:706.",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT04375696"
+        }
+      ]
+    },
+    {
+      "short_form": "BMJ",
+      "long_form": "British Medical Journal",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "Supplemental material This content has been supplied by the author(s). It has not been vetted by BMJ Publishing Group Limited (BIWJ) and may not have been peer-reviewed. Any opinions or recommendations discussed are solely those of the author(s) and are not endorsed by BMJ. BMJ disclaims all liability and responsibility arising from any reliance placed on the content. Where the content includes an",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RM",
+      "long_form": "remission",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "20 Smith RM, Jones RB, Specks U, ef a/. Rituximab as therapy to induce remission after relapse in ANCA-associated vasculitis. Ann Rheum Dis 2020;79:1243-9.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Vasc",
+      "long_form": "Vascular Diseases",
+      "confidence": 0.6,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "55 Baqir M, Yi EE, Colby TV, et a/. Radiologic and pathologic characteristics of myeloperoxidase-antineutrophil cytoplasmic antibody-associated interstitial lung disease: a retrospective analysis. Sarcoidosis Vasc Diffuse Lung Dis 2019;36:195-201.",
+      "lexicon_source": "2025_08_umls_clinical_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MSH",
+          "id": "Vasc"
+        }
+      ]
+    },
+    {
+      "short_form": "PET",
+      "long_form": "positron emission tomography",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "61 Nelson DR, Johnson GB, Cartin-Ceba R, et a/. Characterization of F-18 fluorodeoxyglucose PET/CT in granulomatosis with polyangiitis. Sarcoidosis Vasc Diffuse Lung Dis 2016;32:342-52.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Nat",
+      "long_form": "national",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 15,
+      "context_text": "67 Bossuyt X, Cohen Tervaert J-W, Arimura Y, et al. Position paper: revised 2017 international consensus on testing of ANCAs in granulomatosis with polyangiitis and microscopic polyangiitis. Nat Rev Rheumatol 2017;13:683-92.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SARS",
+      "long_form": "severe acute respiratory syndrome",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 17,
+      "context_text": "143 Mrak D, Tobudic S, Koblischke M. SARS-cov-2 vaccination in rituximab-treated patients: B cells promote humoral immune responses in the presence of T-cellmediated immunity. Ann Rheum Dis 2021;80:1345-50.",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0005091"
+        },
+        {
+          "source": "DOID",
+          "id": "DOID:2945"
+        },
+        {
+          "source": "EFO",
+          "id": "EFO:0000694"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:9237"
+        },
+        {
+          "source": "ICD9",
+          "id": "ICD9:079.82"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:262817"
+        },
+        {
+          "source": "MESH",
+          "id": "MESH:D045169"
+        },
+        {
+          "source": "MedDRA",
+          "id": "MedDRA:10061982"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C85064"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:140896"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:398447004"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C1175175"
+        },
+        {
+          "source": "icd11.foundation",
+          "id": "icd11.foundation:652944603"
+        }
+      ]
+    },
+    {
+      "short_form": "AIDS",
+      "long_form": "acquired immunodeficiency syndrome",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 18,
+      "context_text": "209 Para MF Finkelstein D, Becker S, et a/. Reduced toxicity with gradual initiation of trimethoprim-sulfamethoxazole as primary prophylaxis for Pneumocystis carinii pneumonia: AIDS clinical Trials Group 268. J Acquir Immune Defic Syndr 2000;24:337-43.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "NM",
+      "long_form": "Myopathies, Nemaline",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 18,
+      "context_text": "200 Venhoff N, Effelsberg NM, Salzer U, et a/. Impact of rituximab on immunoglobulin concentrations and B cell numbers after cyclophosphamide treatment in patients with ANCA-associated vasculitides. PLoS One 2012;7:e37626.",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "NM"
+        }
+      ]
+    },
+    {
+      "short_form": "IL-5",
+      "long_form": "interleukin-5",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "se of rituximab (RTX) for maintenance therapy, C5a receptor (CSaR)-targeted and anti-interleukin 5 (IL-5) therapy in EGPA make this an opportune time to update the 2016 guidelines. Background Since the pu",
+      "lexicon_source": "orchestrator:hyphenated",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HR",
+      "long_form": "hazard ratio",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "howing that the prophylactic use of T/S was associated with a lower frequency of severe infections (HR 0.30, 95% CI 0.13 to 0.69).”° In an earlier RCT investigating the role of T/S in therapeutic dosage",
+      "lexicon_source": "orchestrator:direct_search",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "C5aR",
+      "long_form": "C5a receptor",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " RCT in 331 patients with newly diagnosed or relapsing MPA or GPA that compared the use of the oral C5aR inhibitor avacopan (30mg two times per day) with a GC regimen tapering from 1 mg/kg/day to 0 by 21 ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EMEUNET",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "L; GT), convenor (BH) and co-convenor (DJ), 2 delegates of the EULAR young rheumatologists’ network EMEUNET (AB, SM), 2 fellows (BS-A, JHS), 1 health professional (NH) and 2 patient representatives (PV, FP-K",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ACR",
+      "long_form": "American College of Rheumatology",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "s in AAV\"! that have been validated for use in clinical trials.'* American College of Rheumatology (ACR)/EULAR criteria for treatment response in AAV are now in development, which are expected to replace",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FV",
+      "long_form": "Final Vote",
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "sculitis. Recommendati Table 3. EULAR recommendations for the management of AAV—2022 update LoE SoR FV (%) LoA (0-10) 10 Overarching principles Patients with AAV should be offered best care which must b",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "LoA",
+      "long_form": "Level of Agreement",
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "s. Recommendati Table 3. EULAR recommendations for the management of AAV—2022 update LoE SoR FV (%) LoA (0-10) 10 Overarching principles Patients with AAV should be offered best care which must be based ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PR3-ANCA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "s with signs and/or symptoms raising suspicion of a diagnosis of AAV, we recommend testing for both PR3-ANCA and MPO-ANCA using a high-quality antigen-specific assay as the primary method of testing. For indu",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MPO-ANCA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "and/or symptoms raising suspicion of a diagnosis of AAV, we recommend testing for both PR3-ANCA and MPO-ANCA using a high-quality antigen-specific assay as the primary method of testing. For induction of remi",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "matched_text": "skeletal muscle",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:364531"
+    },
+    {
+      "name": "Anti-neutrophil cytoplasmic antibody-associated vasculitis",
+      "matched_text": "ANCA-associated vasculitis",
+      "abbreviation": "AAV",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:156152"
+    },
+    {
+      "name": "Combined immunodeficiency due to partial RAG1 deficiency",
+      "matched_text": "Cid",
+      "abbreviation": "CID",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "D81.8",
+      "orpha": "ORPHA:231154"
+    },
+    {
+      "name": "anti-glomerular basement membrane antibody disease",
+      "matched_text": "anti-glomerular basement membrane antibody disease",
+      "abbreviation": null,
+      "confidence": 0.5499999999999999,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:375"
+    },
+    {
+      "name": "Eosinophilic granulomatosis with polyangiitis",
+      "matched_text": "EGPA",
+      "abbreviation": "EGPA",
+      "confidence": 0.97,
+      "is_rare": true,
+      "icd10": "M30.1",
+      "orpha": "ORPHA:183"
+    },
+    {
+      "name": "Pauci-immune glomerulonephritis with ANCA",
+      "matched_text": "ANCA-associated glomerulonephritis",
+      "abbreviation": "ANCA-GN",
+      "confidence": 0.9500000000000001,
+      "is_rare": true,
+      "icd10": "N05.7",
+      "orpha": "ORPHA:97563"
+    },
+    {
+      "name": "rapidly progressive glomerulonephritis",
+      "matched_text": "rapidly progressive glomerulonephritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:280569"
+    },
+    {
+      "name": "Cutaneous neuroendocrine carcinoma",
+      "matched_text": "MCC",
+      "abbreviation": "MCC",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C44.6",
+      "orpha": "ORPHA:79140"
+    },
+    {
+      "name": "Granulomatosis with polyangiitis",
+      "matched_text": "granulomatosis with polyangiitis",
+      "abbreviation": "GPA",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": "M31.3",
+      "orpha": "ORPHA:900"
+    },
+    {
+      "name": "central nervous system disease",
+      "matched_text": "central nervous system disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Multiple epiphyseal dysplasia",
+      "matched_text": "Med",
+      "abbreviation": "MED",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:251"
+    },
+    {
+      "name": "interstitial lung disease",
+      "matched_text": "interstitial lung disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J80-J84",
+      "orpha": "Orphanet:182095"
+    },
+    {
+      "name": "microscopic polyangiitis",
+      "matched_text": "microscopic polyangiitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M31.7",
+      "orpha": "Orphanet:727"
+    },
+    {
+      "name": "Microscopic polyangiitis",
+      "matched_text": "MPA",
+      "abbreviation": "MPA",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "M31.7",
+      "orpha": "ORPHA:727"
+    },
+    {
+      "name": "Femoral-facial syndrome",
+      "matched_text": "FFS",
+      "abbreviation": "FFS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q87.8",
+      "orpha": "ORPHA:1988"
+    },
+    {
+      "name": "mononeuritis multiplex",
+      "matched_text": "Mononeuritis multiplex",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G58.7",
+      "orpha": null
+    },
+    {
+      "name": "chronic kidney disease",
+      "matched_text": "chronic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:N18.9",
+      "orpha": null
+    },
+    {
+      "name": "hearing loss disorder",
+      "matched_text": "deafness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H90",
+      "orpha": null
+    },
+    {
+      "name": "hypertensive disorder",
+      "matched_text": "hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I15",
+      "orpha": null
+    },
+    {
+      "name": "rheumatoid arthritis",
+      "matched_text": "rheumatoid arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:284130"
+    },
+    {
+      "name": "polyarteritis nodosa",
+      "matched_text": "polyarteritis nodosa",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M30.0",
+      "orpha": "Orphanet:767"
+    },
+    {
+      "name": "systemic vasculitis",
+      "matched_text": "systemic vasculitis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "glomerulonephritis",
+      "matched_text": "glomerulonephritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Netherton syndrome",
+      "matched_text": "NS",
+      "abbreviation": "NS",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "Q80.8",
+      "orpha": "ORPHA:634"
+    },
+    {
+      "name": "Polycythemia vera",
+      "matched_text": "PV",
+      "abbreviation": "PV",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D45",
+      "orpha": "ORPHA:729"
+    },
+    {
+      "name": "allergic reaction",
+      "matched_text": "allergic reaction",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Nemaline myopathy",
+      "matched_text": "NM",
+      "abbreviation": "NM",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:607"
+    },
+    {
+      "name": "immunodeficiency",
+      "matched_text": "immunodeficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "orbital disease",
+      "matched_text": "orbital disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cardiac disease",
+      "matched_text": "cardiac disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pneumocystosis",
+      "matched_text": "Pneumocystis jirovecii pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B59",
+      "orpha": "Orphanet:723"
+    },
+    {
+      "name": "bladder cancer",
+      "matched_text": "bladder cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "kidney disease",
+      "matched_text": "kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cardiomyopathy",
+      "matched_text": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I42",
+      "orpha": "Orphanet:167848"
+    },
+    {
+      "name": "kidney failure",
+      "matched_text": "kidney failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "lung disorder",
+      "matched_text": "pulmonary disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "osteoporosis",
+      "matched_text": "osteoporosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M81",
+      "orpha": null
+    },
+    {
+      "name": "Glioblastoma",
+      "matched_text": "GBM",
+      "abbreviation": "GBM",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C71.9",
+      "orpha": "ORPHA:360"
+    },
+    {
+      "name": "Pyomyositis",
+      "matched_text": "PM",
+      "abbreviation": "PM",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "M60.0",
+      "orpha": "ORPHA:764"
+    },
+    {
+      "name": "lymphopenia",
+      "matched_text": "lymphopenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D72.810",
+      "orpha": null
+    },
+    {
+      "name": "vasculitis",
+      "matched_text": "vasculitis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:52759"
+    },
+    {
+      "name": "malignancy",
+      "matched_text": "malignancy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "alveolitis",
+      "matched_text": "alveolitis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:J67.2",
+      "orpha": "Orphanet:31740"
+    },
+    {
+      "name": "neuropathy",
+      "matched_text": "neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "scleritis",
+      "matched_text": "scleritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H15.0",
+      "orpha": null
+    },
+    {
+      "name": "infection",
+      "matched_text": "infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A00-B99",
+      "orpha": null
+    },
+    {
+      "name": "polyposis",
+      "matched_text": "polyposis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "sinusitis",
+      "matched_text": "sinusitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "arthritis",
+      "matched_text": "Arthritis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Myositis",
+      "matched_text": "Myositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "ORPHA:93672"
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "diabetes",
+      "matched_text": "diabetes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E08-E13",
+      "orpha": null
+    },
+    {
+      "name": "syndrome",
+      "matched_text": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "COVID-19",
+      "matched_text": "COVID-19",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:U07.1",
+      "orpha": null
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "asthma",
+      "matched_text": "asthma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J45",
+      "orpha": null
+    },
+    {
+      "name": "Lupus",
+      "matched_text": "Lupus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M32",
+      "orpha": "Orphanet:536"
+    },
+    {
+      "name": "ARCH",
+      "matched_text": "ARCH",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "GPA",
+      "matched_text": "GPA",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M31.3",
+      "orpha": "Orphanet:900"
+    },
+    {
+      "name": "JHS",
+      "matched_text": "JHS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2319"
+    },
+    {
+      "name": "IEL",
+      "matched_text": "IEL",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1885"
+    },
+    {
+      "name": "MMF",
+      "matched_text": "MMF",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:592"
+    },
+    {
+      "name": "CLS",
+      "matched_text": "Cls",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:192"
+    },
+    {
+      "name": "IGE",
+      "matched_text": "IgE",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "NHS",
+      "matched_text": "NHS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:627"
+    },
+    {
+      "name": "BMS",
+      "matched_text": "BMS",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:353253"
+    },
+    {
+      "name": "MSD",
+      "matched_text": "MSD",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:585"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "POSO830",
+      "matched_text": "POSO830",
+      "compound_id": "POSO830",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "CD003232",
+      "matched_text": "CD003232",
+      "compound_id": "CD003232",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "Rituximab",
+      "matched_text": "rituximab",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Cyclophosphamide",
+      "matched_text": "cyclophosphamide",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Prednisolone",
+      "matched_text": "prednisolone",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Azathioprine",
+      "matched_text": "Azathioprine",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Methotrexate",
+      "matched_text": "methotrexate",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Mycophenolate mofetil",
+      "matched_text": "mycophenolate mofetil",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "prednisone",
+      "matched_text": "prednisone",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Methylprednisolone",
+      "matched_text": "methylprednisolone",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Switch",
+      "matched_text": "switch",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    },
+    {
+      "name": "trimethoprim-sulfamethoxazole",
+      "matched_text": "trimethoprim-sulfamethoxazole",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Belimumab",
+      "matched_text": "belimumab",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Control arm",
+      "matched_text": "control arm",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Standard therapy",
+      "matched_text": "standard therapy",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Atovaquone",
+      "matched_text": "atovaquone",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Trimethoprim",
+      "matched_text": "trimethoprim",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    },
+    {
+      "name": "corticosteroids",
+      "matched_text": "corticosteroids",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    },
+    {
+      "name": "Mabthera",
+      "matched_text": "MabThera",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Cyclosporine A",
+      "matched_text": "cyclosporine A",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Steroids",
+      "matched_text": "steroids",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    },
+    {
+      "name": "Leflunomide",
+      "matched_text": "leflunomide",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "avacopan",
+      "matched_text": "Avacopan",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "mepolizumab",
+      "matched_text": "mepolizumab",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "sulfamethoxazole",
+      "matched_text": "sulfamethoxazole",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "reslizumab",
+      "matched_text": "reslizumab",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "omalizumab",
+      "matched_text": "omalizumab",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "dapsone",
+      "matched_text": "dapsone",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "propylthiouracil",
+      "matched_text": "propylthiouracil",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "IL-5",
+      "matched_text": "IL-5",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Pentamidine",
+      "matched_text": "pentamidine",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "EDTA",
+      "matched_text": "EDTA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "D-glucose",
+      "matched_text": "D-glucose",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Anti-glomerular basement membrane antibody",
+      "matched_text": "anti-glomerular basement membrane antibody",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "TMP",
+      "matched_text": "TMP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "SMZ",
+      "matched_text": "SMZ",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": [
+    {
+      "name": "GlaxoSmithKline",
+      "matched_text": "GSK",
+      "full_name": "GlaxoSmithKline plc",
+      "headquarters": "London, UK",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Amgen",
+      "matched_text": "Amgen",
+      "full_name": "Amgen Inc.",
+      "headquarters": "Thousand Oaks, California, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Eli Lilly",
+      "matched_text": "Lilly",
+      "full_name": "Eli Lilly and Company",
+      "headquarters": "Indianapolis, Indiana, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Roche",
+      "matched_text": "Roche",
+      "full_name": "F. Hoffmann-La Roche AG",
+      "headquarters": "Basel, Switzerland",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Novartis",
+      "matched_text": "Novartis",
+      "full_name": "Novartis AG",
+      "headquarters": "Basel, Switzerland",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Catalyst Biosciences",
+      "matched_text": "Catalyst Biosciences",
+      "full_name": "Catalyst Biosciences, Inc.",
+      "headquarters": "South San Francisco, California, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "AbbVie",
+      "matched_text": "AbbVie",
+      "full_name": "AbbVie Inc.",
+      "headquarters": "North Chicago, Illinois, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "AstraZeneca",
+      "matched_text": "AstraZeneca",
+      "full_name": "AstraZeneca PLC",
+      "headquarters": "Cambridge, UK",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Bristol-Myers Squibb",
+      "matched_text": "BMS",
+      "full_name": "Bristol-Myers Squibb Company",
+      "headquarters": "New York City, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Boehringer Ingelheim",
+      "matched_text": "Boehringer",
+      "full_name": "Boehringer Ingelheim GmbH",
+      "headquarters": "Ingelheim, Germany",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Janssen",
+      "matched_text": "Janssen",
+      "full_name": "Janssen Pharmaceuticals",
+      "headquarters": "Beerse, Belgium",
+      "parent_company": "Johnson & Johnson",
+      "confidence": 0.95
+    },
+    {
+      "name": "Merck",
+      "matched_text": "MSD",
+      "full_name": "Merck & Co., Inc.",
+      "headquarters": "Rahway, New Jersey, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Pfizer",
+      "matched_text": "Pfizer",
+      "full_name": "Pfizer Inc.",
+      "headquarters": "New York, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "ChemoCentryx",
+      "matched_text": "Chemocentryx",
+      "full_name": "ChemoCentryx, Inc.",
+      "headquarters": "San Carlos, California, USA",
+      "parent_company": "Amgen",
+      "confidence": 0.95
+    },
+    {
+      "name": "Takeda",
+      "matched_text": "Takeda",
+      "full_name": "Takeda Pharmaceutical Company Limited",
+      "headquarters": "Tokyo, Japan",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "UCB",
+      "matched_text": "UCB",
+      "full_name": "UCB S.A.",
+      "headquarters": "Brussels, Belgium",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Genentech",
+      "matched_text": "Genentech",
+      "full_name": "Genentech, Inc.",
+      "headquarters": "South San Francisco, California, USA",
+      "parent_company": "Roche",
+      "confidence": 0.95
+    },
+    {
+      "name": "Sanofi",
+      "matched_text": "Sanofi",
+      "full_name": "Sanofi S.A.",
+      "headquarters": "Paris, France",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Regeneron",
+      "matched_text": "Regeneron",
+      "full_name": "Regeneron Pharmaceuticals, Inc.",
+      "headquarters": "Tarrytown, New York, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    }
+  ]
+}

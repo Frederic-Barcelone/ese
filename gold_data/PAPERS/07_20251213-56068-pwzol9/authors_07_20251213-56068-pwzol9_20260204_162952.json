@@ -1,0 +1,61 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:29:52.295751",
+  "document": "07_20251213-56068-pwzol9.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/07_20251213-56068-pwzol9.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 5,
+  "unique_authors": 5,
+  "authors": [
+    {
+      "full_name": "Fatimazahra Merzouk : ! . Cardiology",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Fatimazahra Merzouk : ! . Cardiology",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Cheikh Khalifa International University Hospital",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Cheikh Khalifa International University Hospital",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "R . Cardiology",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "R . Cardiology",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Mohammed VI International University Hospital",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Mohammed VI International University Hospital",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "R Corresponding author: Ghita Bennis",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "R Corresponding author: Ghita Bennis",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

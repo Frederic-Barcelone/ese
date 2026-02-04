@@ -1,0 +1,657 @@
+--- Page 1 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+PROTOCOL CONCEPT SHEET ALXN1720-oMG-303
+1. ADMINISTRATIVE
+Protocol Title
+A Phase 3, Randomized, Double-masked, Placebo-controlled, Multicenter Study to Evaluate the Efficacy, Safety, Pharmacokinetics, Pharmacodynamics, and Immunogenicity of Gefurulimab in Participants > 18 years of age with Ocular Myasthenia Gravis
+Brief Title
+A study to investigate safety and efficacy of gefurulimab compared with placebo in participants aged > 18 years of age with OMG
+Sponsor
+Alexion Pharmaceuticals, Inc
+121 Seaport Boulevard Boston MA 02210 USA
+USA
+AstraZeneca Study Identifier:
+D6783C00001
+Name of Study Intervention (Active Substance)
+Gefurulimab, ALXN1720
+Target Study Start Date and Number of Countries
+FPI: April 2026
+Approximately 15 countries
+Target Indication(s)
+For the treatment of patients > 18 years of age with OMG
+Page | of 51 Alexion Confidential
+
+--- Page 2 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+2. INTRODUCTION
+2.1. Study Rationale
+Motor nerves ending at the NMJ release acetylcholine to activate postsynaptic AChRs present on the surface of muscle fibers and induce voluntary muscle contractions. Autoantibodies against the AChR play an essential role in the pathophysiology of MG and may interfere with receptor function or prompt receptor internalization and degradation. Most importantly, though, anti-AChR autoantibodies cause NMJ degeneration through activation of the complement system.
+Anti-AChR autoantibodies are immunoglobulins of the G1 and G3 subtypes which attract complement component Clq. Deposition of Clq triggers the classical complement pathway leading to the cleavage of C5 into C5a and C5b. C5b initiates the assembly of the MACs and destruction of the motor end plate (Dalakas, 2020; Gavriilaki, 2020), reducing the efficiency and reliability of neuromuscular signalling.
+Evidence of complement activity in anti-AChR antibody-positive gMG is provided by histopathological findings of complement deposition and MAC formation at motor end plates, studies demonstrating interference of AChR autoantibodies with functional domains of the AChR (Li, 2025) and NMJ destruction in the presence of MACs (Engel, 1977), experimental models of autoimmune myasthenia gravis (EAMG) (Tiiziin, 2013), and the established clinical benefits achieved by terminal complement inhibition.
+Blocking terminal complement activity is now an established effective therapeutic approach to gMG that has been endorsed by neuromuscular disease experts in treatment guidelines (Narayanaswami, 2021; Sanders, 2016).
+The PREVAIL Phase 3 gefurulimab study in gMG showed that gefurulimab met the primary and all secondary endpoints, with participants achieving complete terminal complement inhibition, defined as serum free C5 < 0.5 t1g/mL over the treatment period in patients with gMG. Approximately half of incident MG cases present with muscle weakness restricted to ocular muscles known as oMG or Myasthenia Gravis Foundation of America (MGFA) Class | (Garcia Estévez, 2020; Hendricks, 2019; Mercelis, 2023; Santos, 2016). MGFA Classes II — IV extend the disease continuum and represent gMG of increasing severity. However, the disease mechanism for oMG is similar to gMG.
+Ocular muscle fibers are more susceptible to AChR receptor loss for a variety of reasons including higher frequency of synaptic firing in twitch fibers of EOMs compared to limb muscles, making them more susceptible to fatigue; fewer AChRs on tonic muscles necessary for sustained gaze, making them more susceptible to receptor loss or damage and reduced expression of complement regulatory proteins on ocular muscle fibers (Bril, 2024; Soltys, 2008). A proportion of oMG patients do not achieve adequate control with current SoC treatment (Behbehani, 2023; Kerty, 2014), resulting in chronic and fluctuating diplopia and ptosis. Effective management of oMG requires continuous control of the mechanisms responsible for the disease’s pathophysiology. Achievement and maintenance of a status at which clinical signs and symptoms of the underlying condition are absent or minimally present is widely accepted as the treatment goal for various chronic disabling immuno-mediated diseases (eg, bronchial asthma, inflammatory bowel disease, multiple sclerosis, and rheumatoid arthritis).
+Page Alexion Confidential
+
+--- Page 3 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Compared with conventional antibodies, gefurulimab has a low molecular weight, allowing it to be concentrated in small volumes suitable for home SC injection convenient for the oMG patients. Another benefit of gefurulimab is its long elimination half-life, allowing convenient QIW dosing intervals. The purpose of this study is to evaluate the safety and efficacy of gefurulimab for the treatment of oMG in adults > 18 years of age with autoantibodies against AChR (AChR+). The study will also evaluate the safety and performance of the administration device (PFS-SD).
+Current therapies for MG aim to improve neuromuscular transmission at the NMJ (symptomatic treatment) or target immunological mechanisms underlying the disease pathophysiology. For patients with MGFA Class 1, or oMG, the standard of care has been unchanged for decades and includes symptomatic treatment with AChE inhibitors, disease-modifying treatment with steroids, steroid-sparing immunosuppressants. None of the standard chronic or maintenance treatment options specifically address the autoimmune defect in MG or the underlying pathophysiology or mechanism of NMJ injury due to anti-AChR antibody-AChR interactions, complement activation, and the resultant NMJ destruction. Gefurulimab was developed for the treatment of gMG with these needs in mind and is now being evaluated for oMG.
+Page Alexion Confidential
+
+--- Page 4 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+3. OBJECTIVES, ENDPOINTS, AND ESTIMANDS
+The study will compare gefurulimab with placebo in participants > 18 years of age (at Screening) with AChR Ab + oMG.
+The estimand corresponding to the primary objective is defined as follows:
+e Population: Adults with AChR Ab+ oMG
+e Treatments: gefurulimab vs placebo
+e Intercurrent events:
+The following IEs will be handled using a treatment-policy strategy, ie, all data collected will be included in the analysis regardless of IEs which include
+— use of rescue therapy, change in concomitant oMG therapy, missing 2 or more consecutive scheduled doses of study intervention, use of prohibited medication and therapy, having thymectomy or other thymic surgery, discontinuation of study intervention.
+The difference between treatment groups in the mean change from Baseline in the MGII (PRO) ocular score at Week 12 will be assessed.
+Table 1: Objectives and Endpoints*
+Objectives Endpoints Primary: To assess the efficacy of gefurulimab Change from Baseline in the MGII (PRO) ocular score compared with placebo in the treatment of t Week 12 oMG based on changes in MGII (PRO) ar vee’ ocular score Key Secondary Efficacy: To assess the efficacy of gefurulimab compared with placebo in the treatment o oMG based on change in MGII (PRO + E) ocular score Change from Baseline in the MGII (PRO + E) ocular score at Week 12 To assess the efficacy of gefurulimab compared with placebo in the treatment o oMG based on change in MG-ADL ocular subcomponent score Change from Baseline in the MG-ADL ocular subcomponent score at Week 12 To assess the efficacy of gefurulimab Change from Baseline in the MGII total score (ocular + compared with placebo in the treatment o generalized) at Week 12 oMG based on change in MGII total score To assess the early onset of efficacy of Change from Baseline in the MGII (PRO) ocular score gefurulimab compared with placebo in the at Week 2 treatment of oMG based on change MGII (PRO) ocular score
+Page Alexion Confidential
+
+--- Page 5 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 1: Objectives and Endpoints?
+Objectives Endpoints PK/PD: To characterize the PK/PD of gefurulimab in participants with OMG e Serum gefurulimab concentrations e Absolute values, change from Baseline, and percent change from Baseline in serum free and total C5 concentrations Immunogenicity: To assess the immunogenicity to gefurulimab in participants with oMG ADA incidence, response categories, and titer over time for the duration of the study Safety: To assess the safety and tolerability of gefurulimab compared to placebo and the long-term safety and tolerability of gefurulimab in participants with OMG e Incidence and severity of AEs and SAEs e Clinically relevant changes from Baseline in vital signs, ECGs, and laboratory parameters Tertiary/Exploratory: TBC e Digital endpoint e To evaluate the safety and performance of the administration device (PFS-SD) TBC e Potential digital endpoints to explore: — Digital interpretation of facial recognition recording — Saccadic/eye tracking function e Device User Experience Questionnaire * Does not represent a complete list of endpoints. Final list of endpoints will be confirmed with protocol
+* Does not represent a complete list of endpoints. Final list of endpoints will be confirmed with protocol development.
+Page Alexion Confidential
+
+--- Page 6 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+4. STUDY DESIGN
+4.1. Overall Design
+ALXN1720-oMG-303 is a Phase 3, randomized, double-masked, placebo-controlled, multicenter study to evaluate the efficacy, safety, PK, PD, and immunogenicity of gefurulimab in participants > 18 years of age (at screening) with oMG.
+Approximately 168 eligible participants will be stratified by geographical region (eg, North America, Europe), steroid use at baseline (Yes or No) and baseline MGII ocular (PRO) score category (6 to 10, or 11 to 18) and randomized 1:1 to treatment with gefurulimab or placebo. Both active treatment and placebo will be administered through SC injections by using a PFS-SD.
+A non-binding interim analysis for efficacy and futility will be performed when approximately 96 participants have completed Week 12 of the RCT Period. The futility will be assessed using the predictive probability of final study success.
+The study will consist of 3 periods: Screening (< 4 weeks), RCT (12 weeks), and OLE (52 weeks) (Figure 1). Consenting participants will be screened for study eligibility up to 4 weeks prior to Day 1. Participants with confirmed oMG (MGFA Class I) (Jaretzki, 2000) and a positive serological test for AChR autoantibodies at Screening will be included if their MGII (PRO) ocular score is > 6 and at least 2 ocular items with a score of > 2. Participants with any gMG symptoms anytime during the disease course comprising MGFA Classes II and above will be excluded from the study.
+Participants who satisfy all eligibility criteria will be randomized into the RCT Period and receive a 600 mg loading dose of gefurulimab (or placebo) on Day 1, followed by 300 mg once weekly maintenance treatment with gefurulimab (or placebo), starting one week (Day 8) and after the initial dose for a total of 12 weeks. During their first 5 visits, participants and, if applicable, their caregivers will be trained in administering the study intervention by designated study site personnel. Once training is complete and certified, participants may self-administer the treatment at home unless the scheduled dose falls on the same day as an upcoming Clinic Visit. In this case, participants will be asked to administer the study intervention at the clinic under supervision of the study site personnel to monitor their injection skills.
+Participants who complete the 12-week RCT Period will continue the study through the 52-week OLE Period. Participants will transition to open-label treatment with gefurulimab following completion of the Day 85 (Week 12) assessments. To maintain the masking of participants for their treatment allocation in the previous RCT Period, the first dose upon entry to the OLE Period on Day 85 (Week 12) will be administered by study site personnel. Participants who were in the placebo group during the RCT Period will receive a masked loading dose of gefurulimab. Participants who were in the gefurulimab group during the RCT Period will receive a masked maintenance dose and one additional injection of placebo to match the number of injections required for a loading dose. Participants will resume the weekly open-label self-administered maintenance doses the following week (Day 64; Week 9).
+The maximum overall study duration for active participants will be approximately 56 weeks (from Screening through OLE). A SFU Visit will be conducted 12 weeks (~ 5 mean elimination half-lives) after the last dose of the study intervention. SFU will not be required if the
+Page Alexion Confidential
+
+--- Page 7 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Investigator determines that a participant is benefitting from treatment with gefurulimab in the OLE, and the participant continues treatment because they can be provided with gefurulimab through appropriate mechanism, for example a post-trial access program as allowed by local laws and regulations.
+If a participant discontinues treatment or withdraws from the study early or completes the study prior to the end of the OLE Period, the participant will be encouraged to return for an ET/EOS Visit as soon as possible.
+Figure 1: Study Design Schematic
+* An interim analysis for early efficacy and futility will be performed after approximately 96 participants have completed Week 12 of the RCT Period.
+4.2. Scientific Rationale for Study Design
+The goal of this study is to assess the efficacy and safety of gefurulimab compared with placebo in the treatment of adults with oMG based on the ability of participants to perform activities of daily living, and improvement in participants’ symptoms of ptosis and/or diplopia due to improved EOM strength. Primary and key secondary objectives reflect this goal:
+e The MGII is a patient centered composite score measuring MG impairment and severity and is responsive to change in status. The ocular subscore (8 items, ranging from 0-23) consists of 6 PRO items with a maximum score of 18 and 2 physical exam items with a maximum score of 5. MGII PRO ocular score as primary endpoint and and PRO + E ocular score as secondary endpoint will be used to assess the impact of oMG and measure treatment-associated changes in disease severity.
+e MG-ADL profile is a valid and sensitive instrument to assess impact of MG and measure treatment-associated change in disease severity. A decrease in the MG-ADL total score by 2 points compared to Baseline is considered an indicator of clinical improvement (Muppidi, 2012). Although there isn’t a separate score defined just for ocular symptoms, an improvement in diplopia and ptosis will contribute to an overall improvement in the total scores. MG-ADL will be assessed and ocular subcomponent will be used for oMG.
+The study will examine other measures of treatment efficacy and assess the safety and tolerability of the study intervention, the PK, PD, and immunogenicity of gefurulimab, as well as biomarkers that are relevant to the mechanism of action of gefurulimab.
+Page Alexion Confidential
+
+--- Page 8 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+The length of the RCT Period and selection of primary and secondary endpoints at Week 12 are designed to demonstrate sustained changes in ocular symptoms and signs, which is critical in a chronic disease such as oMG. The length of OLE Period will further support the sustained improvement in ocular signs and symptoms.
+Eligibility criteria and outcome measures have been chosen based on a review of comparable clinical studies, recommendations provided by the Task Force on MG Study Design of the Medical Scientific Advisory Board of the MGFA (Benatar, 2012), and advice from experts in the field of oMG research.
+The study will include adults with oMG corresponding to MGFA Classification Class I to evaluate the therapeutic potential of gefurulimab in participants with moderate or severe ocular muscle weakness. If successful, gefurulimab will provide these participants with a treatment option that they can administer themselves, at home, at convenient weekly dosing intervals.
+A fixed dose regimen is being proposed based on modeling and dosing simulations using clinical PK, PD and ADA data from a first-in-human Phase | study of gefurulimab (Study ALXN1720-HV-101), TBD and subject to change based on PREVAIL study data.
+4.3. Justification for Dose
+The dosage regimen for gefurulimab in this Phase 3 study leverages prior experience in treating complement-mediated diseases (including gMG) with the C5 inhibitors eculizumab, ravulizumab, and gefurulimab. Using gefurulimab PK/PD data from healthy participants (Studies ALXN1720-HV-101, HV-103, and HV-104) and from patients with gMG (ALXN1720-MG- 301), a population PK/PD model was developed and used to identify a gefurulimab dosing regimen predicted to achieve rapid and complete terminal complement inhibition. The proposed gefurulimab dosing regimen in patients with oMG is a fixed dose regimen consisting of a SC loading dose (600 mg) followed by once weekly SC maintenance doses of 300 mg, starting one week after the loading dose. This is consistent with the proposed gefurulimab dose regimen in patients with gMG.
+Targeting sustained terminal complement inhibition in patients with gMG has shown favorable benefit/risk profiles following therapeutic dosing with eculizumab and ravulizumab. Based on the totality of PK, PD, ADA, safety, and efficacy data obtained during the development of eculizumab and ravulizumab, and recent experience with gefurulimab treatment in patients with gMG, where achieving complete terminal complement inhibition resulted in a positive benefit/risk profile in patients with gMG, the proposed gefurulimab dosage regimen is expected to be beneficial in treating participants with oMG.
+Delayed doses, defined as doses administered > 1 day later than scheduled, should be administered as soon as possible and not later than the next scheduled dose. Replacement of missed doses will be determined on an individual basis.
+A supplemental dose of 300 mg of TRADENAME should be administered after every other PE or PP session (within 4 hours, if possible). If PE or PP occurs on a regularly scheduled dosing day, the maintenance dose (and the supplemental dose, if applicable) must be administered after completion of the PE or PP session (within 4 hours, if possible).
+Page Alexion Confidential
+
+--- Page 9 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+If the supplemental dose cannot be administered as directed, a supplemental dose of 300 mg of TRADENAME should be administered with the next weekly maintenance dose of TRADENAME.
+PP/PE rescue therapy is not anticipated to be needed in the oMG indication. However, should PP/PE be required, supplemental dosing is recommended A supplemental dose of 300 mg of gefurulimab should be administered after every other PP or PE session within 4 hours, if possible. If PP or PE occurs on a regularly scheduled dosing day, the maintenance dose (and the supplemental dose, if applicable) must be administer after completion of the PP or PE session. If the 300 mg supplemental dose cannot be administered as directed, it should be administered with the next weekly maintenance dose.
+To maintain the masking of treatment allocation in the RCT Period, participants who were in the placebo group during the RCT Period will receive a masked loading dose of gefurulimab at the start of the OLE Period on Day 85 (Week 12). Participants who were in the gefurulimab group during the RCT Period will receive a masked maintenance dose and one additional injection of placebo to match the number of injections required for a loading dose. Weekly open-label maintenance doses will resume the following week (Day 92; Week 13).
+Safety and tolerability of gefurulimab have been established over a wide range of PK exposures, including those expected under the proposed oMG dosage regimens, in healthy volunteers and in patients with gMG.
+4.4. Duration of Treatment and End-of-Study Definition
+Duration of treatment with gefurulimab will be 12 weeks of RCT Period for participants randomized to gefurulimab, followed by a 52-week OLE Period when all participants will be receiving gefurulimab.
+participant is considered to have completed the study if:
+A
+e The participant has completed all periods of the study as required by the study protocol, or
+e The participant completes an EoS Visit during the OLE because they can be
+th gefurulimab by prescription following registration or approval, or through a post-trial access program as allowed by local laws and regulations, or
+e The study is stopped early, and the participant has completed all applicable periods of the study including an EoS Visit.
+The end of the study is defined as the date of the last visit of the last participant in the study.
+5. STUDY POPULATION
+Inclusion and exclusion criteria are provided below. Note these are not inclusive of entire list from CSP template, which will be included at time of protocol development
+5.1. Inclusion Criteria
+Inclusion criteria are provided below
+Page Alexion Confidential
+
+--- Page 10 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Inclusion Criteria
+Age
+Adult participants > 18 years of age at time of signing the informed consent
+Type of Participant and Disease Characteristics
+AChR Ab+ oMG (MGFA Class I)
+e Positive serological test for AChR autoantibodies at Screening (previous test results, if applicable, must be confirmed by central laboratory during Screening)
+Screening and Day 1 MGII (PRO) ocular
+e Score >6, AND
+e Atleast 2 ocular items with a score of > 2
+Documented diagnosis of oMG within < 3 years prior to Screening. Patients > 3years can be included if they have;
+e Historical MRI within past 12 months without fatty replacement in EOM or
+e Demonstrated response (ie, improvement in at least 1 oMG sign, based on investigator judgment) to treatment (IVIg, PP/PE [ie, including plasmapheresis in addition to plasma exchange [PLEX]]), pyridostigmine, and/or steroids) in the past year
+Participants must be receiving a stable dosage of MG therapy before Day | that includes AChE inhibitors, steroids, or NSISTs, either in combination or alone, with the following dosage conditions,
+e AChE inhibitors with no change in dosage during the 2 weeks (14 days) before Day 1
+e Nonsteroidal immunosuppressive drugs (eg, azathioprine, methotrexate, cyclosporine, tacrolimus, mycophenolate mofetil, and cyclophosphamide) Initiated at least 6 months before Day 1
+Initiated at least 6 months before Day 1
+— No change in dosage during the 3 months before Day 1
+e Steroids initiated at least 3 months (90 days) before Screening, with no change in dosage during | month (28 days) before Day 1
+If a participant has recently discontinued any of the above medications, a period equal to the stable dose requirement listed above for that medication (eg, > 3 months for azathioprine or > 4 weeks for corticosteroids) must have passed prior to Day 1.
+Weight
+Participants must weigh > 40 kg
+Sex and Contraceptive/Barrier Requirements
+Participants of childbearing potential must follow the contraception measures specified in protocol.
+Page Alexion Confidential
+
+--- Page 11 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Inclusion Criteria
+Informed Consent and Assent
+The Investigator, or a person designated by the Investigator, will obtain written informed consent from each study participant or the study participant’s legal guardian and the participant’s assent, when applicable, before any study-specific activity is performed. All legal guardians should be fully informed, and participants should be informed to the fullest extent possible, about the study in language and terms they are able to understand.
+Vaccinations
+To reduce the risk of meningococcal infection, all participants must be vaccinated against NV meningitidis serogroups A, C, W135, Y, (and where available, serogroup B) within 3 years prior to Day 1. Participants who do not meet this requirement will be vaccinated against these N meningitidis serogroups before receiving the first dose of the study intervention. If Day | occurs < 2 weeks after the vaccination, participants will receive prophylactic antibiotics until 2 weeks after the vaccination. Vaccinations must follow national/local vaccination guidelines.
+5.2. Exclusion Criteria
+Exclusion criteria are provided below.
+Exclusion Criteria
+Medical Conditions
+General
+e Known other autoimmune disease that may affect study participation and results in the opinion of PI and medical monitor
+e Any medical condition or risk factor that, in the opinion of the PI or the Medical Monitor, might interfere with participation in the study, pose any added risk to the participant, or confound the assessment of safety or efficacy of the study intervention
+e History of N meningitidis infection
+e History of malignancy within 5 years of screening except
+— treated Basal cell or nonmetastasizing squamous cell skin cancers
+— treated Cervical CIS without recurrence
+Active systemic bacterial, viral, or fungal infection < 14 days prior to Day 1.
+e
+e History of hypersensitivity to any ingredient contained in the study intervention, including its device components
+Ocular
+Page Alexion Confidential
+
+--- Page 12 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Exclusion Criteria
+e Involutional blepharoptosis (age related ptosis) crossing the pupil in primary gaze
+e History of EOM surgery
+e History of amblyopia, cross eyes etc. or any other ocular condition which might interfere with accurate study assessments
+Prior/Concomitant Therapy
+Use of complement inhibitors within < 5 half-lives before Randomization (Day 1)
+e
+e Use of FcRn inhibitor within < 5 half-lives before Randomization (Day 1)
+Use of rituximab, ocrelizumab or other B cell-depleting therapy received or scheduled within < 3 months (90 days) before Randomization on Day 1.
+e
+History of thymectomy or other thymic surgery within 6 months prior to Screening
+e
+e Periodic or chronic administration of PP/PE as maintenance therapy received within 6 months of Randomization (Day 1) or IVIg within 1 month
+Prior/Concurrent Clinical Study Experience
+Participation in another investigational medication, biologics, combination product or device study within 30 days or 5 half-lives of the treatment, whichever is longer, before the first dose of study intervention. Participation in observational studies, for example, MG registry studies, is permitted.
+Concurrent participation in another study involving an investigational drug, biological product, device, combination product, procedure, or any other intervention, at any time during this study. Alexion must be consulted if concurrent participation in a non-interventional study is considered. At the discretion of Alexion, concurrent participation in non-interventional studies may be allowed.
+Diagnostic Assessments
+e Historical anti MuSK or anti LRP-4 Ab + status
+e Laboratory abnormalities at the Screening Visit, including:
+— ALT>2 x the ULN
+— Direct bilirubin > 2 x ULN
+— Estimated glomerular filtration rate < 30 mL/min/1.73 m’ or participant on dialysis
+— Any other clinically significant laboratory abnormality that, in the opinion of the Investigator, would make participation in the study inappropriate or put the participant at undue risk.
+e Positive HIV antibody test or a positive serological test for HIV-1 or HIV-2.
+Page Alexion Confidential
+
+--- Page 13 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Exclusion Criteria
+e Participants who have a positive pregnancy test at Screening or Day 1.
+e Evidence of hepatitis B or hepatitis C viral infection or presence of HBsAg or HBcAb with negative surface antibody (anti-HBs), or HCV infection (HCV antibody positive, expect for participants with document successful treatment). If locally available, SVR should be documented or established at Screening.
+Other Exclusion Criteria
+e Pregnant, breastfeeding, or intending to conceive during the course of the study.
+e Participant is an employee or directly related to an employee of Alexion or the institution/investigational site.
+e Participant or caregiver unable or not willing to administer the study intervention.
+e Inability or unwillingness to adhere to the protocol requirements and restrictions, including participation in scheduled study visits.
+6. STUDY INTERVENTION(S) AND CONCOMITANT THERAPY
+Study intervention is defined as any investigational intervention(s), marketed product(s), placebo, or medical device(s) intended to be administered to a study participant according to the study protocol. For the purposes of this study, study intervention refers to the integral medicinal product consisting of a PFS-SD containing gefurulimab or placebo.
+6.1. Study Intervention(s) Administered
+The PFS-SD is a single-use, disposable device to deliver gefurulimab or placebo SC. The glass prefilled syringe has a built-in passive needle safety mechanism to prevent needlestick injuries and improve its ergonomic use. After the injection is complete, a safety device is extended to cover the needle. Details regarding the study intervention are presented in Table 2.
+All investigational products are manufactured in accordance with current Good Manufacturing Practice.
+Page Alexion Confidential
+
+--- Page 14 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 2: Study Intervention
+Group Name Treatment 1 Treatment 2 Intervention Name ALXN1720-PFS-SD Placebo-PFS-SD Type Integral medicinal product: biological product and device Integral medicinal product: placebo formulation and device Dose Formulation Sterile liquid gefurulimab is formulated at pH 6.7 and each syringe contains 300 mg of gefurulimab in 20 mM L-histidine/histidine hydrochloride, 100 mM glycine, 200 mM sucrose, 0.08% (w/v) polysorbate 80 Device configuration/style/model: BD 2.25mL Neopak™ Prefilled Syringe with Ultrasafe Plus™ Passive Needle Safety Device Sterile liquid gefurulimab bulk placebo is formulated at pH 6.7 and each syringe contains 20 mM L-histidine/histidine hydrochloride, 100 mM glycine, 200 mM sucrose, 0.08% (w/v) polysorbate 80 Device configuration/style/model: BD 2.25mL Neopak™ Prefilled Syringe with Ultrasafe Plus™ Passive Needle Safety Device Unit Dose Strength | 300 mg (2 mL = 150 mg/mL) placebo (2 mL) Dosage Level 600 mg LD (on Day 1) + 300 mg Same number of injections as (TBD and Subject Q1W MD (starting Day 8) gefurulimab to change) during the RCT Period. during the RCT Period. For dosing during the OLE Period, | For dosing during the OLE Period, see see Section 4.3 Section 4.3 Route of SC injection SC injection Administration Use Experimental Placebo IMP or AxMP IMP IMP Sourcing Provided centrally by Alexion Provided centrally by Alexion Packaging and Gefurulimab will be provided ina _ | Placebo will be provided in a PFS-SD. Labeling PFS-SD. One kit contains 1 PFS- | One kit contains 1 PFS-SD. Kits will be SD. Kits will be labeled as labeled as required per country required per country regulations. regulations.
+6.2. Assignment to Study Intervention
+Participants will be randomized on Day | after the Investigator has verified the eligibility criteria. Participants will be stratified by geographical region (eg, North America, Europe), steroid use at baseline (Yes or No) and baseline MGII (PRO) ocular score category (6 to 10, or 11 to 18) and randomized 1:1 to gefurulimab or placebo using a centralized RTSM.
+Page Alexion Confidential
+
+--- Page 15 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+6.3. Masking
+PFS-SDs containing gefurulimab or placebo will be provided in identical study intervention kits and with identical labels for all participants in the RCT Period. Yellow transparent tape will cover the PFS-SDs to conceal the color difference between gefurulimab and placebo. Because the viscosity of gefurulimab also differs from the placebo formulation, a moderately different injection force will be required for its administration. To maintain the mask despite this difference in viscosity, study sites will be required to designate an independent staff member who can:
+e Administer the study intervention during the initial Clinic Visits and Day 85
+e Train and supervise participants and, if applicable, their caregivers, for doses that are self-administered
+These designated staff members can be a nurse, study coordinator, or Sub-Investigator trained to administer the study intervention. They will remain masked to the participant’s assigned study intervention and are not permitted to communicate observations related to the injection force required to administer the intervention to the study participant, a caregiver, other site personnel, Alexion staff or designees, or any other personnel associated with the conduct of the study. They must not have any other role in the study and, specifically, are not permitted to participate in any other study activities including safety or efficacy assessments.
+Once screening for the entire study is complete and all participants at a study site have received their last masked dose at the beginning of the OLE period in Week 12 (Day 85), that study site no longer has to retain a designated staff member for injection training or oversight. Staff members who held that role until Week 12 (Day 85) may now participate in other study activities including safety and efficacy assessments.
+Investigators will receive only masked information unless unmasked information is judged necessary for safety reasons. In case of an emergency, the Investigator has the sole responsibility for determining if unmasking of a participants’ intervention assignment is warranted. Participant safety must always be the first consideration in making such a determination. If the Investigator decides that unmasking is warranted, the Investigator may, at the Investigator’s discretion, contact Alexion to discuss the situation prior to unmasking a participant’s intervention assignment unless this could delay emergency treatment for the participant. If unmasking is deemed necessary, the Investigator will be able to unmask the participant’s intervention assignment using the IRT. Ifa participant’s intervention assignment is unmasked, Alexion must be notified within 24 hours after breaking the masking.
+In the event of a SUSAR reporting guidance in protocol must be followed. The mask will be maintained for persons responsible for the ongoing conduct of the study (eg, Monitors, Investigators) and those responsible for data analysis and interpretation of results.
+To manage the uncertainty associated with the assumed treatment effect for the primary endpoint, an interim analysis for sample size re-estimation will be performed after approximately 56 participants have completed Week 12 of the RCT Period. The analysis will be reviewed by an independent DMC. The sample size may be increased to a maximum of 186 participants if the conditional power based on the estimated treatment effect in the primary endpoint falls within
+Page Alexion Confidential
+
+--- Page 16 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+the promising zone of 41% to 90%. Additional details of the interim analysis will be provided in the SAP.
+Except for these emergency situations, unmasked information will only be accessible to those who are involved in safety reporting to Health Authorities, IECs, and/or IRBs.
+7. STATISTICAL CONSIDERATIONS
+Statistical methods for this study will be further detailed in a separate SAP. Statistical analyses will include tabulations of summary data, inferential analyses, by patient listings and figures. Inference from efficacy analyses will be based on a 2-sided type I error rate (a) of 5% (one-sided type I error rate of 2.5%) unless stated otherwise. The summary statistics for continuous variables will include, but not be limited to, the number of patients, mean, standard deviation, minimum, median, and maximum. For categorical variables, frequencies and percentages will be presented.
+The Full Analysis Set (FAS) will be the primary population used for the analysis of all efficacy endpoints for the RCT Period. Supplemental per protocol analyses for primary and secondary efficacy endpoints will be performed based on the Per Protocol Set (PPS) in the same manner as done for the FAS. Safety analyses will be performed on the Safety Set (SS).
+The baseline value for analysis and reporting will be based on the last non missing measurement prior to the first dose of study intervention unless stated otherwise.
+Analyses will be performed using the SAS software Version 9.4 or higher.
+7.1. Sample Size Determination
+The sample size determination of N = 168 was based on the following assumptions:
+e The MMRM method is used to compare gefurulimab and placebo in the change from Baseline of MGII (PRO) ocular score at Week 12;
+e 1:1 gefurulimab and placebo randomization;
+e At least 160 participant complete RCT period; (approximately 5% dropout rate);
+e The treatment difference (gefurulimab - placebo) is assumed to be -2.7 based on available data on MGII (PRO) ocular score from (Barnett, 2017);
+e Common SD is conservatively assumed to be 5.2 based on available data from (Barnett, Bril, Kapral, Kulkarni and Davis, 2017);
+e 2-sided significance level of 0.05 (one-sided 0.025)
+With these assumptions, simulation demonstrates that a sample size of 160 participants (168 participants if including dropout) provides an overall power of 90.2% to detect a treatment difference in change from baseline of MGII ocular (PRO) with significance level of 0.00381 at interim and 0.02380 at the final analysis.
+Page Alexion Confidential
+
+--- Page 17 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+7.2. Analysis Sets
+The population sets used for analysis are defined in Table 3.
+Table 3 Analysis Sets
+Analysis Set Description Randomized Set All randomized participants grouped by randomized treatment group. Full Analysis Set (FAS) All randomized participants who receive at least 1 dose of study ntervention. Participants will be analyzed as randomized. Per-Protocol Set (PPS) All FAS participants without important protocol deviations that are likely to impact efficacy during the RCT Period. The PPS will be fully defined in the SAP prior to database lock. Participants will be analyzed as randomized. PK Analysis Set (PKAS) All randomized participants who receive at least 1 dose of study intervention and have at least 1 evaluable postbaseline PK concentration. PD Analysis Set (PDAS) All randomized participants who receive at least 1 dose of study ntervention and have at least 1 evaluable postbaseline PD data point. Safety Set (SS) All randomized participants who receive at least 1 dose of study ntervention. Participants will be analyzed according to the study ntervention they received. Immunogenicity Analysis All randomized participants who receive at least 1 dose (full or partial) Set (IAS) of study intervention and have at least 1 reportable postdose result in the ADA assay. Participants will be analyzed according to the study ntervention they received. OLE Set All randomized participants who received at least 1 dose of gefurulimab in the OLE period. Gefurulimab Treated Set All participants who receive at least 1 dose of gefurulimab either in the RCT or the OLE Period.
+7.3. Statistical Analyses
+7.3.1. Primary Endpoint Analysis
+The primary endpoint, change from baseline in the MGII (PRO) ocular score at Week 12, will be analyzed using MMRM methodology with all available data during RCT period. All intercurrent events other than death will be handled using treatment policy strategy. For death, a while on treatment strategy will be applied. Missing data will not be imputed for the primary analysis. The model will include change in MGII (PRO) ocular score from Baseline at each prespecified time point as the response variable, fixed categorical effects of treatment, study visit and treatment-by-study visit interaction, geographical region, steroid use at baseline and baseline MGII (PRO) ocular score. The treatment effect will be evaluated via contrast for the treatment-by-visit term at Week 12. An unstructured covariance matrix will be used to model the correlations among
+Page Alexion Confidential
+
+--- Page 18 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+repeated measurements within each participant. Other covariance structures will be implemented if a convergence issue occurs (details to be provided in the SAP). The Kenward-Roger method will be used to estimate the denominator degrees of freedom.
+7.3.2. Key Secondary Endpoint Analyses
+All key secondary endpoints will be analyzed similarly as the primary endpoint.
+7.3.3. Pharmacokinetic/Pharmacodynamic Analysis
+Blood samples will be collected for the determination of serum gefurulimab, free C5 and total C5 concentrations at the timepoints specified in the SoA. Individual serum concentrations for all participants who receive at least 1 dose of gefurulimab and who have evaluable PK/PD data will be used to summarize PK/PD parameters for gefurulimab. Descriptive statistics will be presented for all PK/PD endpoints at each sampling time. The PD effects of gefurulimab will be summarized using absolute values, change from Baseline, and percentage change from Baseline in free and total C5 serum concentrations.
+7.3.4. Immunogenicity Analysis
+All immunogenicity analyses will be performed on the IAS.
+Immunogenicity variables include ADA status, ADA response category, and ADA incidence, ADA titer and NAb incidence over the duration of the study.
+Definitions of the ADA status, response, and response titer categories will be provided in the SAP.
+7.3.5. Other Safety Analysis
+The safety and tolerability of gefurulimab will be assessed based on AEs and findings in clinical laboratory tests, ECG, and vital signs. Safety analyses will be performed on the SS and OLE Set based on the study period under consideration.
+7.3.6. Tertiary/Exploratory Analysis
+TBC
+7.3.7. Interim Analysis
+A non-binding interim analysis for early efficacy and futility will be performed when approximately 96 participants have completed Week 12 of the RCT Period. Enrollment of participants will proceed without interruption while the analysis is ongoing. The futility will be assessed using predictive probability of success at the end of the study. If the predictive probability of success is less than 0.0025, the DMC may recommend stopping the study early due to futility.
+Hierarchical testing procedure will be followed for the testing of primary and key secondary endpoints. The overall type I error of the study for this interim and the final analysis is controlled at 1-sided 0.025 using the Lan & DeMets a-spending approximation to the O’Brien & Fleming boundaries for primary endpoint and Lan & DeMets a-spending approximation to the Pocock boundaries for key secondary endpoints.
+Page Alexion Confidential
+
+--- Page 19 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+If the p-value for the primary endpoint analysis at this interim analysis is less than 0.00381, the DMC may recommend stopping the study early due to efficacy. If the study is continued to the end after this interim analysis, the significance level for the primary analysis at the final analysis is 0.02380. If the statistical significance for the primary endpoint analysis is reached at the interim analysis, the key secondary endpoints will be tested at the one-sided significance level of 0.01771. If the statistical significance for the primary endpoint is not reached at interim but reached at the final analysis, the key secondary endpoints will be tested at the one-sided significance level of 0. 0.01286. The key secondary endpoints are tested in the order described in Section 3 until a non-significance is observed, at which point only nominal p-values will be reported.
+The interim analysis will be conducted such that the ongoing study integrity is maintained. An ISC will conduct the interim analysis and investigators, participants, and the study team who are involved in the conduct of the study will remain masked to treatment assignment until the final clinical data lock. A SIP will be developed in which the masking method and unmasking process will be pre-specified.
+The DMC will evaluate the interim results and make recommendations for the study as outlined in the DMC charter. Further details regarding the decision rules, roles, responsibilities, and processes of DMC during the interim analysis will be described in the DMC charter.
+7.3.8. Independent Data Monitoring Committee
+A DMC will be established to oversee the safety of the study participants and make appropriate recommendations regarding further study conduct based on the available data, including regular review of safety data and at planned interim analysis where early efficacy and futility will be assessed.
+Page Alexion Confidential
+
+--- Page 20 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+8. SCHEDULE OF ACTIVITIES
+8.1. RCT Period: Screening to End of Randomized Control Period
+Period/Phase Screen-Randomized Controlled Treatment Period ing Study Visit 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ET Clinical Deterioratio n Study Day D1 D8 | D15 | D22 | D29 | D36 | D43 | D50 | D57 D64 | D71 D78 D85 Window (day[s]) +1 +1 +1 +1] +1 +1 +1 +1 +1 +1 +1 +1 Weeks-4W to wi | W2 | W3 | W4 | W5 | W6 | W7 ws wo | wi0 |} Wil wi2 D-1 Visit Type Cc Cc Cc Cc R Cc R Cc R Cc R R R Cc Cc Cc C = Clinic Visit R = Remote Visit Eligibility Informed XxX consent/assent Inclusion/ exclusion XxX XxX criteria * Medical/surgical history MG history MGFA classification AChR Ab mK | |X Weight
+Table 4: RCT Period: Screening to End of Randomized Controlled Period (Week 12), Early Termination, or Clinical Deterioration
+Page Alexion Confidential
+
+--- Page 21 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 4: RCT Period: Screening to End of Randomized Controlled Period (Week 12), Early Termination, or Clinical Deterioration
+Period/Phase Screen-Randomized Controlled Treatment Period ing Study Visit 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ET Clinical Deterioratio n Study Day D1 D8 | D15 | D22 | D29 | D36 | D43 | D50 | D57 D64 | D71 D78 D85 Window (day[s]) +1 +1 +1 +1] +1 +1 +1 +1 +1 +1 +1 +1 Weeks-4W to wi | W2 | W3 | W4 | W5 | W6 | W7 ws wo | wi0 |} Wil wi2 D-1 Visit Type Cc Cc Cc Cc R Cc R Cc R Cc R R R Cc Cc Cc C = Clinic Visit R = Remote Visit Height XxX Demographics x N meningitidis x vaccination Dispense patient safety XxX card Serum pregnancy test x x x Urine pregnancy test x x x x FSH XxX HIV testing XxX Hepatitis B testing XxX Hepatitis C testing! XxX IVIGg testing XxX Clinical laboratory XxX XxX XxX XxX XxX XxX tests Randomization XxX
+Page Alexion Confidential
+
+--- Page 22 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 4: RCT Period: Screening to End of Randomized Controlled Period (Week 12), Early Termination, or Clinical Deterioration
+Period/Phase Screen-Randomized Controlled Treatment Period ing Study Visit 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ET Clinical Deterioratio n Study Day D1 D8 D15 | D22 | D29 | D36 | D43 | D50 D57 D64 D71 D78 D85 Window (day[s]) +1 +1 +1 +1] +1 +1 +1 +1 +1 +1 +1 +1 Weeks we wi W2 W3 W4 | W5 W6 W7 ws w9 wi0 Wil Wwi2 Visit Type Cc Cc Cc Cc R Cc R Cc R Cc R R R Cc Cc Cc C = Clinic Visit R = Remote Visit Efficacy MGII (PRO) xX xX xX xX xX xX xX xX xX xX xX MGII (Exam) xX xX xX xX xX xX xX xX MG-ADL xX xX xX xX xX xX xX xX xX xX x xX x xX xX xX NEI-VFQ-25 xX xX xX xX xX xX xX xX MG-QoL15r xX xX xX xX xX xX xX Neuro-QoL fatigue XxX Xx XxX XxX XxX XxX (short form) SF-36° xX xX xX xX xX xX PGI-S (ocular) xX xX xX xX xX xX xX xX xX xX xX PGI-C (ocular) xX xX xX xX xX xX MGFA-PIS xX xX Digital biomarkers-TBD Safety
+Page Alexion Confidential
+
+--- Page 23 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 4: RCT Period: Screening to End of Randomized Controlled Period (Week 12), Early Termination, or Clinical Deterioration
+Period/Phase Screen-Randomized Controlled Treatment Period ing Study Visit 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ET Clinical Deterioratio n Study Day D1 D8 D15 | D22 | D29 | D36 | D43 | D50 D57 D64 D71 D78 D85 Window (day[s]) +1 +1 +1 +1] +1 +1 +1 +1 +1 +1 +1 +1 Weeks-4W to wi W2 W3 W4 | W5 W6 W7 ws w9 wi0 Wil Wwi2 D-1 Visit Type Cc Cc Cc Cc R Cc R Cc R Cc R R R Cc Cc Cc C = Clinic Visit R = Remote Visit Physical examination XxX xX XxX (tar gete qd) Abbreviated physical XxX Xx Xx Xx XxX XxX XxX examination Vital signs x x x x x x x x x x 12-lead ECG xX xX xX C-SSRS Baseline XxX C-SSRS since last visit Xx XxX XxX Blood Sample Collection PK/PD B T T xX T x x (Optio nal; taken ~D45) ADA xX xX xX xX xX (pre-dose)
+Page Alexion Confidential
+
+--- Page 24 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 4: RCT Period: Screening to End of Randomized Controlled Period (Week 12), Early Termination, or Clinical Deterioration
+Period/Phase Screen-Randomized Controlled Treatment Period ing Study Visit 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ET Clinical Deterioratio n Study Day D1 D8 D15 | D22 | D29 | D36 | D43 | D50 D57 D64 D71 D78 D85 Window (day[s]) +1 +1 +1 +1] +1 +1 +1 +1 +1 +1 +1 +1 Weeks-4W to wil Ww2 W3 WwW4 | W5 Wo W7 ws wo wi0 wil wi2 D-1 Visit Type Cc Cc Cc Cc R Cc R Cc R Cc R R R Cc Cc Cc C = Clinic Visit R = Remote Visit Serum and plasma x x x xX xX samples for biomarkers Other Review patient safety Xx Xx XxX XxX XxX Xx X XxX XxX XxX card Participant training XxX Xx Xx xX xX and certification in dose administration Administration of XxX Weekly administration of study intervention (maintenance dose) study interventionY Completion of Weekly following administration of study intervention participant diary Device user xX xX experience questionnaire Injection site XxX Xx Xx XxX XxX XxX XxX XxX XxX evaluation Injection site questions X XxX XxX XxX X Xx
+Page Alexion Confidential
+
+--- Page 25 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 4: RCT Period: Screening to End of Randomized Controlled Period (Week 12), Early Termination, or Clinical Deterioration
+Period/Phase Screen-Randomized Controlled Treatment Period ing Study Visit 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ET Clinical Deterioratio n Study Day D1 D8 | D15 | D22 | D29 | D36 | D43 | D50 | D57 D64 | D71 D78 D85 Window (day[s]) +1 +1 +1 +1] +1 +1 +1 +1 +1 +1 +1 +1 Weeks-4W to wi | W2 | W3 | W4 | W5 | W6 | W7 ws wo | wi0 |} Wil wi2 D-1 Visit Type Cc Cc Cc Cc R Cc R Cc R Cc R R R Cc Cc Cc C = Clinic Visit R = Remote Visit AEs/SAEs Continuous monitoring XxX XxX Concomitant xX xX xX xX xX xX xX xX xX xX xX xX xX xX xX xX medication Physical and other XxX XxX Xx Xx XxX XxX XxX Xx X XxX XxX X Xx XxX XxX XxX non-pharmaceutical therapy Hospitalization status XxX XxX Xx Xx XxX XxX XxX Xx X XxX XxX X Xx XxX XxX XxX Monitoring of study Continuous monitoring XxX XxX medication error, abuse, and misuse Health economics-TBD
+Page Alexion Confidential
+
+--- Page 26 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+8.2. OLE Period: Week 12 to Week 64, Early Termination, or Clinical Deterioration
+Table 5: OLE Period: Week 12 to Week 64, Early Termination, or Clinical Deterioration
+Period/Phase Open-Label Extension Period Study Visit 15 16, 19(SFU) 20, 23 24 25 26 27 28 29 30 31 32 33 34 ET/EOS Clinical 17, 21, (SFU) Deterioration 18 22 Study Day D85 | D92, D113 D120, | D141 | D169 | D197 | D225 | D253 | D281 | D309 | D337 | D365 | D393 | D421 | D449 D99, D127, D106 D134 Window (day|s}) 41 | 41 +1 +1 41 | +2 +2 42 | 42 | 42 | +2 | 42 | 42 | 42 | 42 42 Weeks Wi12 | W13, WI16 WI17, | W20 | W24 | W28 | W32 | W36 | W40 | W44 | W48 | W52 | W56 | W60 Wo4 Wwi4, WI18, TBD Wi5, wi9 Visit Type Cc R Cc R Cc R Cc TBD R Cc R Cc R Cc R TBD Cc Cc C = Clinic Visit R = Remote Visit AChR Ab x MGFA. x classification Weight x x - x x Height Serum pregnancy x test Urine pregnancy XxX x x xX XxX xX test Clinical laboratory XxX x x xX XxX xX x xX tests Efficacy MGII (PRO) x x x x x x MGII (Exam) MG-ADL x x x x x x
+Page A exion Confidential
+
+--- Page 27 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 5: OLE Period: Week 12 to Week 64, Early Termination, or Clinical Deterioration
+Period/Phase Open-Label Extension Period Study Visit 15 16, 17, 19(SFU) 20, 21, 23 24 25 (SFU) 26 27 28 29 30 31 32 33 34 ET/EOS Clinical Deterioration Study Day D85 D92, D99, D106 D113 D120, D127, D134 D141 D169 D197 D225 D253 D281 D309 D337 D365 D393 D421 D449 Window (day[s]) +1 +1 +1 +1 +1 +2 +2 +2 +2 +2 +2 +2 +2 +2 +2 +2 Weeks wi2 W13, Wwi4, Wi5, WI16 Wi17, WI18, wi9 ‘w20 W24 W28 W32 TBD W36 w40 w44 Ww48 W52 W56 W60 Wo4 Visit Type C = Clinic Visit R = Remote Visit TBD TBD NEI-VFQ-25 MG-QoL15r Neuro-QoL fatigue (short form) cd cd ~ SF-36 PGI-S (ocular) PGI-C (ocular) MGFA-PIS KL KL mK |X KL KL mK |X x |x| x] xX Digital biomarkers-TBD Safety Physical examination Abbreviated physical examination Vital signs 12-lead ECG
+A Page exion Confidential
+
+--- Page 28 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 5: OLE Period: Week 12 to Week 64, Early Termination, or Clinical Deterioration
+Period/Phase Open-Label Extension Period Study Visit 15 16, 17, 19(SFU) 20, 21, 23 24 25 (SFU) 26 27 28 29 30 31 32 33 34 ET/EOS Clinical Deterioration Study Day D85 D92, D99, D106 D113 D120, D127, D134 D141 D169 | D197 D225 D253 D281 D309 D337 D365 D393 D421 D449 Window (day[s]) +1 +1 +1 +1 +1 +2 +2 +2 +2 +2 +2 +2 +2 +2 +2 +2 Weeks wi2 W13, Wwi4, Wi5, WI16 Wi17, WI18, wi9 ‘w20 W24 | W28 W32 TBD W36 w40 w44 Ww48 W52 W56 W60 Wo4 Visit Type C = Clinic Visit R = Remote Visit TBD TBD C-SSRS since last visit Blood Sample Collection PK/PD ADA Serum and plasma samples for biomarkers Other Review patient safety card Administration of study intervention Weekly administration of study intervention (maintenance dose) Completion of participant diary Weekly following administration of study intervention Device user experience questionnaire xX Injection site evaluation
+A Page exion Confidential
+
+--- Page 29 ---
+
+DRAFT Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 5: OLE Period: Week 12 to Week 64, Early Termination, or Clinical Deterioration
+Period/Phase Open-Label Extension Period Study Visit 15 16, 19(SFU) 20, 23 24 25 26 27 28 29 30 31 32 33 34 ET/EOS Clinical 17, 21, (SFU) Deterioration 18 22 Study Day D85 | D92, D113 D120, | D141 | D169 | D197 | D225 | D253 | D281 | D309 | D337 | D365 | D393 | D421 | D449 D99, D127, D106 D134 Window (day|s]) +1 +1 +1 +1 +1 +2 +2 +2 +2 +2 +2 +2 +2 +2 +2 +2 Weeks Wi12 | W13, Wil6 WI17, | W20 | W24 | W28 | W32 | W36 | W40 | W44 | W48 | W52 | W56 | W60 | W64 wi4, wis, TBD wis, wi9 Visit Type Cc R Cc R Cc R Cc TBD R Cc R Cc R Cc R TBD Cc Cc C = Clinic Visit R = Remote Visit Injection site xX x xX XxX x xX questions AEs/SAEs Continuous monitoring Concomitant x x x x x x x x x x x x x medication Physical and other XxX xX XxX x x xX x XxX xX x XxX xX xX x xX non-pharmaceutical therapy Hospitalization XxX xX XxX x x xX x XxX xX x XxX xX xX x xX status Monitoring of Continuous monitoring x xX study medication error, abuse, and misuse Health economics-TBD
+Page Alexion Confidential
+
+--- Page 30 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-0MG-303/D6783C00001
+9. SAFETY CONSIDERATIONS AND STOPPING RULES
+9.1. Discontinuation of Study Intervention
+In rare instances, it may be necessary for a participant to permanently discontinue the study intervention. The Investigator will notify the Medical Monitor as soon as possible of any discontinuation or consideration to discontinue the study intervention.
+If a participant permanently discontinues treatment, an ET Visit should be conducted as soon as possible (see SoA in Section 8). A SFU Visit will be conducted 12 weeks (84 + 3 days) after the last dose of the study intervention for all participants.
+Participants must be considered for discontinuation of the study intervention if any of the following occur:
+e Serious hypersensitivity reaction with, eg, bronchospasm or other respiratory reaction requiring ventilator support, symptomatic hypotension, or serum sickness-like reaction manifesting within 14 days after administration of the study intervention
+e AE that would, in the opinion of the Investigator, make continued participation in the study an unacceptable risk
+e Severe uncontrolled infection
+e Concomitant use of disallowed medication
+e Pregnancy or planning of a pregnancy
+e Investigator or Alexion deems discontinuation to be in the best interest of the participant
+The reason for treatment discontinuation will be recorded in the eCRF. If study intervention is discontinued because of a participant’s pregnancy, the Investigator will make a reasonable attempt to follow up, in accordance with local laws and regulations, until the outcome of the pregnancy is known.
+Participants who discontinue the study intervention will not be replaced.
+Page Alexion Confidential
+
+--- Page 31 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+9.2. Participant Withdrawal from the Study
+All efforts should be made to ensure prospective participants are willing to comply with the requirements of study participation prior to conducting the screening procedures.
+If feasible, the Investigator should contact Alexion and their site before withdrawing a participant or discontinuing the study intervention. The reason for participant discontinuation must be recorded in the source documents and eCRF.
+A participant may withdraw from the study at any time at his/her own request or participant’s legal guardian’s request, or may be withdrawn at any time at the discretion of the Investigator for safety, behavioral, compliance, or administrative reasons. Participant withdrawals are expected to be uncommon.
+At the time of early withdrawal from the study, an ET Visit should be conducted as soon as possible as shown in the SoA (Section 8). Additionally, a Safety Follow-up Visit should be performed 12 weeks (+ 3 days) following the last administration of the study intervention. Refer to the SoA for data to be collected at the time of study discontinuation and follow-up, and for any further evaluations that need to be completed.
+If the participant withdraws from the study, Alexion may retain and continue to use any samples collected before such a withdrawal of consent for the purposes the participant originally consented unless the participant withdraws consent for use of samples already collected. If the participant specifically withdraws consent for any use of samples, it must be documented in the site study records by the Investigator and the Investigator must inform the Local and Global Study Team. Destruction of any samples taken and not yet tested should be carried out in line with documented sample withdrawal wishes in conjunction with what was stated in the informed consent and local regulation.
+The legal guardian and the pediatric participant have the right to withdraw permission (consent or assent, respectively) at any time during the study. If the study staff identify any reluctance in the legal guardian or pediatric participant (eg, signs of verbal or physical dissent) about continued participation in the study, the pediatric participant’s continuation in the study should be re-evaluated. The same principles that govern permission/assent/consent also govern its withdrawal.
+Participants who withdraw or are withdrawn from the study will not be replaced.
+participant will be withdrawn from the study for any of the following reasons:
+A
+Withdrawal of consent or assent if applicable (A pediatric participant’s dissent should be respected.)
+Lost to Follow-up
+A participant will be considered lost to follow-up if the participant repeatedly fails to return for scheduled visits and cannot be contacted by the study site.
+Page Alexion Confidential
+
+--- Page 32 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+The following actions must be taken if a participant fails to return to the clinic for a required study visit:
+e The site must attempt to contact the participant to reschedule the missed visit as soon as possible, counsel the participant on the importance of maintaining the assigned visit schedule, and ascertain whether or not the participant wishes to and should continue in the study.
+e Before a participant is deemed lost to follow-up, the Investigator or designee must make every effort to regain contact with the participant (where possible, 3 telephone calls and, if necessary, a certified letter to the participant’s last known mailing address or local equivalent methods). These contact attempts should be documented in the participant’s medical record.
+e Should the participant continue to be unreachable, they will be considered lost to follow-up.
+Page Alexion Confidential
+
+--- Page 33 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+10. CLINICAL LABORATORY TESTS
+e The Investigator must review the laboratory report, document this review, and record any clinically relevant changes occurring during the study in the AE section of the eCRF. The laboratory reports must be filed with the source documents. Clinically significant abnormal laboratory findings are those which are not associated with the underlying disease, unless judged by the Investigator to be more severe than expected for the participant’s condition.
+e All laboratory tests with abnormal values and considered clinically significant by the Investigator during the study should be repeated until the values return to normal or Baseline or are no longer considered clinically significant by the Investigator or Medical Monitor.
+— Ifsuch values do not return to normal/Baseline within a period of time judged reasonable by the Investigator, the etiology should be identified, and the Medical Monitor notified.
+— All protocol-required laboratory assessments, must be collected in accordance with the Laboratory Manual and the SoA.
+— Laboratory assessments performed at the institution’s local laboratory or central laboratory that require a change in participant management or are considered clinically significant by the Investigator must be recorded in the AE or SAE form. When possible, values outside of the reference range should be entered, eg, in a free text field.
+10.1. Virus Serology
+Testing for HIV-1 and HIV-2 is required for all participants prior to Randomization. Participants who are positive for HIV antibodies will not be randomized.
+Similarly, participants who are positive for HBsAg, positive anti-HBc with negative anti-HBs, or HCV antibodies will not be randomized unless successful treatment and, if locally available, SVR are documented.
+10.2. Urinalysis
+Urine samples will be analyzed for the parameters listed in protocol. A microscopic examination of urine samples will be performed if the results of the macroscopic analysis are abnormal.
+10.3. Follicle-stimulating Hormone
+FSH may be obtained to confirm postmenopausal status in female participants who are considered postmenopausal. A high FSH level in the postmenopausal range may be used to confirm a postmenopausal state in women not using hormonal contraception or HRT.
+This test is not needed in participants of childbearing potential.
+Enter Clinical Laboratory Tests Footnote
+Page Alexion Confidential
+
+--- Page 34 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+11. LIST OF ABBREVIATIONS
+Table 6: Abbreviations and Specialist Terms
+Term Ab antibody AChE acetylcholine esterase AChR acetylcholine receptor AChR+ anti-acetylcholine receptor antibody-positive ADA antidrug antibody AE adverse event ALT alanine aminotransferase AxMP auxiliary medical product anti-HBc hepatitis B core antibody anti-HBs hepatitis B surface antibody CX complement component X C-SSRS Columbia Suicide Severity Rating Scale D day DMC Data Monitoring Committee DQRMP design quality risk management planning rDRC Regulatory Drug Development Committee ECG electrocardiogram eCRF electronic case report form EOM extrinsic ocular muscles EoS end of study EQ-5D-5L European Quality of Life Health 5-item questionnaire dimensions 5 level ET early termination EU European Union FAS full analysis set FceRn human neonatal Fe receptor FPI First participant in FSH follicle-stimulating hormone gMG generalized myasthenia gravis
+Abbreviation or | Explanation
+HBcAb
+hepatitis B core antibody
+Page Alexion Confidential
+
+--- Page 35 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 6: Abbreviations and Specialist Terms
+Abbreviation or | Explanation Term HBsAg hepatitis B surface antigen HCV hepatitis C virus Hib Haemophilus influenzae type b HIV human immunodeficiency virus HRT hormone replacement therapy IAS immunogenicity analysis set IE intercurrent event IEC Independent Ethics Committee IgG immunoglobulin G IMP investigational medicinal product IRB Institutional Review Board IRT interactive response technology ISC independent statistical center IVIg intravenous immunoglobulin LD loading dose LRP-4 low-density lipoprotein receptor related protein 4 MAC membrane attack complex MD maintenance dose MG myasthenia gravis MGII myasthenia gravis impairment index MG-ADL Myasthenia Gravis Activities of Daily Living profile MGFA Myasthenia Gravis Foundation of America MGFA-PIS Myasthenia Gravis Foundation of America Post-Intervention Status MG-QoL15r Myasthenia Gravis Quality of Life scale revised 15-item MMRM mixed-effect model for repeated measures MRI magnetic resonance imaging MuSK muscle-specific tyrosine kinase NAb neutralizing antibody
+NEI-VFQ-25 National Eye Institute Visual Functioning Questionnaire-25
+Page Alexion Confidential
+
+--- Page 36 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 6: Abbreviations and Specialist Terms
+Abbreviation or | Explanation
+Term
+NMJ neuromuscular junction NSIST nonsteroidal immunosuppressive treatment OLE open-label extension oMG ocular myasthenia gravis P postdose sample PD pharmacodynamic(s) PDAS pharmacodynamic analysis set PE plasma exchange PFS-SD prefilled syringe with safety device PGI-C Patient Global Impression of Change PGI-S Patient Global Impression of Severity PI principal investigator PK pharmacokinetic(s) PKAS pharmacokinetic analysis set PP plasmapheresis PPS per protocol set PRO patient reported outcome PRO+E patient reported outcome and exam QIW once every week RCT randomized control treatment RTSM Randomization and Trial Supply Management SAE serious adverse event SAP statistical analysis plan SAS Statistical Analysis System Sc subcutaneous(ly) SD standard deviation SF-36 Short Form Health Survey (36 question version) SFU safety follow-up
+Neuro-QoL Fatigue (short form)
+Quality of Life in Neurological Disorders Fatigue scale (short form)
+Page Alexion Confidential
+
+--- Page 37 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Table 6: Abbreviations and Specialist Terms
+Abbreviation or | Explanation Term SIP study integrity plan SoA Schedule of Activities SoC standard of care SS safety set SUSAR suspected unexpected serious adverse reactions SVR sustained virologic response T trough sample (predose) ULN upper limit of normal W week
+Page Alexion Confidential
+
+--- Page 38 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+12. REFERENCES
+Barnett C, Bril V, Kapral M, Kulkarni AV, Davis AM. Myasthenia Gravis Impairment Index: Responsiveness, meaningful change, and relative efficiency. Neurology. 2017;89(23):2357-2364.
+Behbehani R. Ocular Myasthenia Gravis: A Current Overview. Eye Brain. 2023;15:1-13.
+Benatar M, Sanders DB, Burns TM, et al. Recommendations for myasthenia gravis clinical trials. Muscle Nerve. 2012;45(6):909-917.
+Bril V, Howard Jr JF, Karam C, et al. Effect of efgartigimod on muscle group subdomains in participants with generalized myasthenia gravis: post hoc analyses of the phase 3 pivotal ADAPT study. European Journal of Neurology. 2024;31(1):e16098.
+Dalakas MC, Alexopoulos H, Spaeth PJ. Complement in neurological disorders and emerging complement-targeted therapeutics. Nat Rev Neurol. 2020;16(11):601-617.
+Engel AG, Lambert EH, Howard FM. Immune complexes (IgG and C3) at the motor end-plate in myasthenia gravis: ultrastructural and light microscopic localization and electrophysiologic correlations. Mayo Clin Proc. 1977;52(5):267-280.
+Garcia Estévez DA, Lopez Diaz LM, Pardo Parrado M, et al. Epidemiology of myasthenia gravis in the province of Ourense (Galicia, Spain). Neurologia (Engl Ed). 2020;S0213-4853(20):30215-30212.
+Gavriilaki E, Brodsky RA. Complementopathies and precision medicine. J Clin Invest. 2020; 130:2152-2163.
+Hendricks TM, Bhatti MT, Hodge DO, Chen JJ. Incidence, epidemiology, and transformation of ocular myasthenia gravis: a population-based study. American journal of ophthalmology. 2019;205:99-105.
+Jaretzki A, III, Barohn RJ, Ernstoff RM, et al. Myasthenia gravis: recommendations for clinical research standards. Task Force of the Medical Scientific Advisory Board of the Myasthenia Gravis Foundation of America. Neurology. 2000;55(1):16-23.
+Kerty E, Elsais A, Argov Z, Evoli A, Gilhus NE. EFNS/ENS Guidelines for the treatment of ocular myasthenia. Eur J Neurol. 2014;21(5):687-693.
+Li H, Pham MC, Teng J, O'Connor KC, Noviello CM, Hibbs RE. Autoimmune mechanisms elucidated through muscle acetylcholine receptor structures. Cell. 2025;188(9):2390-2406.e2320.
+Mercelis R, Alonso-Jimenez A, Van Schil P. Current management of myasthenia gravis in Belgium: a single-center experience. Acta neurologica Belgica. 2023;123(2):375-384.
+Muppidi S. The myasthenia gravis-specific activities of daily living profile. Ann N Y Acad Sci. 201231274:114-119.
+Narayanaswami P, Sanders DB, Wolfe G, et al. International consensus guidance for management of myasthenia gravis: 2020 update. Neurology. 2021;96(3):114-122.
+Sanders DB, Wolfe GI, Benatar M, et al. International consensus guidance for management of myasthenia gravis: executive summary. Neurology. 2016;87(4):419-425.
+Page Alexion Confidential
+
+--- Page 39 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Santos E, Coutinho E, Moreira I, et al. Epidemiology of myasthenia gravis in Northern Portugal: Frequency estimates and clinical epidemiological distribution of cases. Muscle Nerve. 2016;54(3):413-421.
+Soltys J, Gong B, Kaminski HJ, Zhou Y, Kusner LL. Extraocular muscle susceptibility to myasthenia gravis: unique immunological environment? Annals of the New York Academy of Sciences. 2008;1132:220-224.
+Tiiziin E, Christadoss P. Complement associated pathogenic mechanisms in myasthenia gravis. Autoimmun Rev. 2013;12(9):904-911.
+Page Alexion Confidential
+
+--- Page 40 ---
+
+DRAFT 18 Sep 2025
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+APPENDIX 1. DESIGN QUALITY RISK MANAGEMENT PLANNING (DQRMP) OUTPUT
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) Participant population Risk 1: Adolescent Challenges: Risk 1: Mitigate — Following the CDRC discussion the study will | No Differential PK/PD, adherence issues, | now be recruiting only adults -PCS is revised to reflect this and consent complexities in patients change (note added on Sept 17, 2025) aged 12-17. (Mitigations prior to the CRDC meeting: Implement frequent monitoring for adherence via patient diaries and reminders; Develop age-specific consent/assent training and materials to ensure comprehension; Involve caregivers in consent discussions) Risk 2: Diplopia/ptosis - reading of Risk 2: Mitigate consent. Informed consent is read out. Discussion on 02092025: Diplopia or Ptosis will not compromise consent comprehension or PRO completion because we are able to consent people who are severely visually compromised. Consents are just read out to them by someone else and then we ask for comprehension. Consent would be read out to people who need help. PROs could be completed by asking them over the phone for remote visits. If they have ptosis, it's painful when you are lifting one eyelid. In case anybody has severe ptosis, we can always ask the questions and then the administrator can note down the responses. Risk 3: Diagnostic Misclassification: Risk 3: Mitigate Risk of enrolling patients with generalized MG Low risk. Train sites on oMG-specific symptoms to reduce misclassification at screening. Clarify symptoms criteria in protocol. No adjudication committee.
+Page Alexion Confidential
+
+--- Page 41 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) RISK 4: Low Adolescent Prevalence RISK 5: Recruitment feasibility challenges due to rarity, especially in adolescents RISK 6: Pediatric participants may miss study visits due to logistical reasons — i.e. school / summer holidays Discussion: Recall from the meeting last week (August 27, 2025), JT was suggesting having a separate committee to confirm the diagnosis of OMG, which was also done by our competitor Argenx. However, we include only ACHR positive patients, therefore there is no need for any adjudication committee. This would add an additional burden on the sponsor's side. Risk 4: Mitigate-Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this change (note added on Sept 17, 2025) (Mitigations prior to CDRC meeting: Target recruitment in regions with higher adolescent oMG prevalence; Collaborate with pediatric neurology networks and advocacy groups). Risk 5: Mitigate-Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this change (note added on Sept 17, 2025) Leverage rare disease registries and referral centers. Provide travel support to reduce logistical barriers. Risk 6: Mitigate-Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this change (note added on Sept 17, 2025) [Mitigations prior to CDRC meeting: Offer flexible scheduling with remote or virtual visit options where feasible; Provide travel reimbursement and school coordination support (notes to school); Schedule critical visits outside holiday periods with reminders tailored to adolescent participants).
+DRAFT 18 Sep 2025
+Page Alexion Confidential
+
+--- Page 42 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+18 Sep 2025
+DRAFT
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) Discussion: School coordination - providing a letter to school administration, if their school knows, it would be less burdensome for the pediatric participants to explain things to the school, why were they absent or why were they missing part or full of the school day. It might be beneficial to suggest pediatric patients discuss it with their school attendance to avoid dropping out or facing difficulties at school because of trial participation.] Stratification RISK 1: Age Stratification: Failure to stratify by age (adolescent vs. adult) RISK 2: Baseline disease characteristics Imbalance: Uncontrolled disease severity differences confound efficacy. Risk 1: Mitigate-Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this change (note added on Sept 17, 2025) [Prior to CDRC discussion this risk was accepted with the rationale noted below: No age stratification adopted for this study. Rationale: Given the size of this study, only up to 2 stratification factors are recommended (region and steroid use). The number of adolescents enrolled is expected to be low given the rarity of this population. Adding age stratification on top of the other 2 factors will create sparse strata and undermine study power and therefore not adopted. Typically, adolescents were treated in an open label setting in other MG pediatric studies. Even if imbalance is present during RCT period, OLE data of placebo adolescent patients will be collected which adds to the totality of adolescent efficacy data of Gefurulimab.)] Risk 2: Mitigate Subgroup analyses will be planned in SAP; Sensitivity analysis can be performed further to adjust for these covariates. Discussion: For the study with sample size like only 100 or so, it’s recommended that we should only have up to two stratification factors to avoid sparse strata. Investigational product/study medication RISK 1: PFS-SD Device Usability: Incorrect self-administration of study intervention by caregivers / participants >12 years old. Risk 1: Mitigate-Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this change (note added on Sept 17, 2025)
+Page Alexion Confidential
+
+--- Page 43 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) Mitigations prior to CDRC meeting: Site planning and patient communication must be closely managed, especially for remote visits. Train participants on study intervention administration before self-administering at home. Certification will be acquired. Discussion 02092025: This is part of the PCS-Participants have to be trained and certified before self-administering at home. Discussion 04092025: Highlighted the risk of incorrect self-administration, even with training and certification of participants. Potential issues included incorrect needle insertion angle, incomplete plunger depression, and premature needle activation. Referenced positive feedback from the Prevail study (GMG study), where device performance metrics showed high rates of successful administration. The team agreed this risk is low based on Prevail study outcomes, with no significant differences anticipated for the ocular population using the same device. Mitigation remains focused on training and certification (“Concerns were raised about adolescents (ages 12-14) self-administering and whether caregivers would assist. It was noted that certification is required but it is not specified by age who would administer, suggesting caregivers are likely to assist younger adolescents” - n/a after removing the pediatric population from the protocol.)
+Page Alexion Confidential
+DRAFT
+18 Sep 2025
+
+--- Page 44 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+DRAFT
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) Safety RISK 1: Vaccination against Risk 1: Mitigate No Meningococcal infection - Ensuring vaccinations are administered as per local guidelines RISK 2: Delayed reporting of SAEs and pregnancies. RISK 3: Missing ADA/PK samples during immune-mediated events (anaphylaxis, hypersensitivity). Medical monitoring activities; Sites will be trained on the importance of vaccinations, the serotypes required to be covered before inclusion, and direct to local guidelines; Discussion from meetings: The meningococcal infection risk is inherent across all complement inhibition studies, regardless of protocol design or population. We should leverage learnings from prior studies (e.g., pediatric and Phase 3 MG studies) to save time and ensure consistency and need dive deeper into mitigations during the IQRMP. Highlighted the importance of confirming local guideline familiarity among medical monitors and referencing existing data from similar studies in the same countries. Risk 2: Mitigate Real-time AE reporting procedures and site training; Physicians must follow protocol procedures for reporting within 24 hours, supported by medical monitoring to ensure timely reporting and root cause analysis for delays, with retraining of sites if necessary. Risk 3: Accept It is not always possible to collect samples at such an event.
+18 Sep 2025
+Page Alexion Confidential
+
+--- Page 45 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+DRAFT
+18 Sep 2025
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) Efficacy RISK 1: Variable symptoms in ocular | Risk 1. Mitigate No MG RISK 2: Incorrect administration order (PRO before exam) at Baseline and Week 12. RISK 3: Missing data on MGII (Myasthenia Gravis Impairment Index) item scores and total scores (ocular or generalized) at critical time points (Day 1 and Week 12). If more than 3 items are missing for the same assessment, the assessment may be invalid. Train and certify raters. Train patients and caregivers on PRO tool use to ensure accurate reporting over the recall period. Discussion: It was noted that while the symptoms are subjective to the patient, the Patient-Reported Outcome (PRO) tool (MGI) used as the primary outcome measure captures data over a 7-14 days recall period, reducing variability. It was clarified that variability is inherent to myasthenia gravis (MG), not specifically ocular symptoms, suggesting a reframing of the risk to "variable symptoms in ocular MG." PRO tool is validated for its intended purpose. Central adjudication of videos was deemed infeasible. Risk 2: Mitigate Use of PRO tools to capture timing of assessment that might be entered in eCRF (or use of ePRO). Administration order to be depicted in the CSP. Train the sites accordingly. Discussion: It was confirmed that PRO must be completed before exams, and the wording needed adjustment to clarify this as the correct order. Further discussion on capturing the timing of assessment in the eCRF is deferred to the IQRMP sessions with data management. Risk 3: Mitigate High risk Explicit methodology will be added to the CSP. Implement eCRF alerts for incomplete assessments to ensure data capture. We will require MGII rater certification. In this case, we need to make it clear during MGII training that all MGII items are to be
+Page Alexion Confidential
+
+--- Page 46 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+DRAFT
+18 Sep 2025
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) RISK 4: Missing or incomplete collection of data for key secondary endpoints MGII PRO + exam (ocular), the MG-ADL ocular subcomponent and the MGII total score (includes ocular and generalized components) at Baseline and Week 12. RISK 5: Use of disallowed medications (other complement inhibitors, FeRni’s, B-cell-depleting therapies): OMG SOC; B cell depleting therapies in past or present collected and that “If more than 3 items are missing for the same assessment, the assessment may be invalid” tSDV; Document incomplete collection as Important Protocol Deviation (IPD). Discussion: Highlighted past issues in the GA trial where incomplete data collection led to invalid results, stressing the need for accuracy, especially at baseline, due to the short, randomized control period. Additional strategies like site coordinator calls during visits are suggested for ensuring complete data collection. Risk 4: Mitigate High Risk; Explicit instructions will be added to the CSP. Implement eCRF alerts for incomplete assessments to ensure data capture. MGII rater certification. tSDV; Document incomplete collection as Important Protocol Deviation (IPD). Risk 5: Mitigate Define clear lists of disallowed medications in the protocol. Require detailed medication history at screening and during study. Implement eCRF checks to flag use of prohibited therapies. Train sites on monitoring compliance. Centralized Monitoring. tSDV. Discussion: It was confirmed the disallowed medications list is consistent with the MG protocol. Outlined standard mitigations like clear protocol definitions, capturing prior medication history at screening, and regular medical monitoring. A suggestion was made to set up alerts in EDC system for newly entered disallowed medications. Check insights from the Prevail Team.
+Page Alexion Confidential
+
+--- Page 47 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+18 Sep 2025
+DRAFT
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) RISK 6: Out of window data collection for week 12 RISK 7: Failure to Use Refrigerated Centrifuge for processing the PK/PD samples RISK 8: Incomplete or Inaccurate Dosing History Documentation for PK analysis: The amount, date, time, and injection site (abdomen/thigh/upper arm) should be documented for all doses (including any unscheduled doses or those related to clinical deterioration). Risk 6: Mitigate Provide site staff with scheduling tools and reminders, site monitor oversight, and corrective actions for deviations. Centralized Monitoring. tSDV. Discussion: Mitigations like scheduling tools, reminders, site monitor oversight, and corrective actions for deviations were supported. Prevail practices to be explored. Risk 7: Mitigate Strict adherence to lab manual and SOPs—with particular emphasis in site initiation visits and ongoing staff training. Pre-study verification of access to refrigerated centrifuge at all sample collection sites. Monitoring of sample processing conditions (time, temperature, device ID) on laboratory log. Reporting protocol deviations with prompt root-cause analysis and CAPA. Risk 8: Mitigate Require real-time documentation of dosing details (amount, date, time, injection site). Train sites on accurate recording; implement eCRF fields for dosing data. Engage patient logs and source verification to ensure completeness. Train subjects since they will self-administer and self-record the information as well. Discussion: Confirmed that in Prevail, patients provided complete data for dosing history.
+Page Alexion Confidential
+
+--- Page 48 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) Complexity RISK 1: Incomplete Data Transfer: Immunogenicity samples marked "pending analysis" at database lock due to CRO transfer delays. RISK 2: Participant Burden: Frequent visits or complex procedures increasing dropout, especially in adolescents Risk 1: Mitigate Connect with Prevail DM and oMG DM on monitoring processes and periodic checks during mock data transfers. DM input for effective monitoring strategies, to be addressed during CSP development. Discussion: Data should be thoroughly checked at the time of Mock data transfer. It is important that complete data is transferred by the CRO before DBL. We’ve noticed in other programs that many samples were with status ‘pending analysis’. Data should be transferred in the correct agreed format, this should be checked thoroughly during mock data transfer Titer values should be appropriately reported with MRD factored in. Risk 2: Mitigate-Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this change (note added on Sept 17, 2025) Simplify visit schedules and procedures in the clinical study protocol (CSP) where feasible. Offer remote visit options or travel reimbursement. Discussion: Number of clinic visits reduced, and remote visits are offered. Travel reimbursement will be provided. Confirmed ongoing efforts to further reduce visits based on expert feedback, especially considering the novelty of tools used. (Mitigation prior to CDRC meeting: Provide adolescent-friendly support (e.g., flexible scheduling around school) to reduce burden). No Masking, prevention of bias and preserving other aspects of trial integrity Risk 1: PRO Subjectivity: Patient-reported diplopia improvement susceptible to expectation bias. RISK 1: MITIGATE Train site staff to avoid suggestive language during PRO collection. Use standardized scripts for PRO administration. Educate participants on objective reporting. Discussion: Central adjudication was ruled out as previously discussed. Mitigations focus on training and standardized scripts,
+Page Alexion Confidential
+DRAFT
+18 Sep 2025
+
+--- Page 49 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+DRAFT
+18 Sep 2025
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) though challenges were noted with scripts for home-administered PROs. PROs like MGI and MG-ADL in Prevail were administered by site staff over the phone, not independently by patients at home, ensuring control. RISK 2: Viscosity differences pose a_ | Risk 2: Mitigate risk during the RCT to OLE transition | The dose at the transition from RCT to OLE is administered by HCP (Week 12) Discussion: Patients remained blinded during RCT. Viscosity differences pose a risk during the RCT to OLE transition where patients may receive mixed active and placebo syringes. It was explained that Healthcare Professionals (HCPs) administer these doses to prevent patients from feeling differences, thus maintaining blinding. Mitigations include HCP administration at transition to address viscosity differences. RISK 3: BIAS: Inconsistent Risk 3: Mitigate assessments for MGII exam ocular Raters will be trained and certified. score, for the same eye or both eyes. Standardize MGII assessment protocols across sites with detailed training. Minimize missing values through timely data entry and query resolution. Implement central monitoring. Other RISK 1: Local or systemic reactions Risk 1: Mitigate No to the treatment administration. Low risk. Protein therapies administered SC may | Monitoring of reactions will be done as part of routine safety cause local (injection site) and assessments, as it was done for the PREVAIL, and details will be systemic reactions. Injection site included in the CSP. reactions may include erythema, pruritus (itch), pain, and bruising. Discussion 05092025: This risk was not significant in the Prevail Systemic reactions may be immune-study and considered it low. The team agreed to retain the mitigation mediated or nonimmune and usually as proposed, with no changes needed at this stage. occur within hours of the treatment
+Page Alexion Confidential
+
+--- Page 50 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss rDRC (Yes/No) administration. Immune-mediated reactions may include severe allergic reactions, eg, anaphylaxis. Nonimmune reactions may involve nonspecific symptoms, eg, headache, dizziness, or nausea. RISK 2: Device failure. Risk 2: Mitigate High risk. Training for participants and sites on reporting device issues. Addressing issues like bubbles in devices, which caused perceived failures in Prevail. Updating IFUs to avoid confusion, building on updates made during Prevail; Ensure visibility of expiry dates on labels for both patients and sites, with systems to track and communicate expirations. Sending home additional kits increases the risk of using expired kits as providing extra kits introduces this secondary risk. Discussion 05092025: Additional study intervention kits are provided at home to account for potential failures. device failures occurred a few times in Prevail, necessitating kit replacements. This introduced a secondary risk of patients retaining expired kits or not returning them, leading to potential misuse. In Prevail, kits were returned to the site after use, and new backups were dispensed, minimizing the risk of expired kit usage. One notable case in Spain involved a patient using an expired kit, but data supported an extended expiry, avoiding serious consequences. The risk of expired kit usage is distinct from device failure itself, as providing extra kits introduces this secondary risk. It was confirmed that 1-3 extra kits per dose were provided in Prevail (one kit per dose if multiple doses were at home). The team agreed this remains necessary despite the risk. (n/a after CDRC discussion - Following the CDRC discussion the study will now be recruiting only adults -PCS is revised to reflect this
+18 Sep 2025
+DRAFT
+at
+Page Alexion Confidential
+
+--- Page 51 ---
+
+Protocol Concept Sheet ALXN1720-oMG-303/D6783C00001
+Risk Category Risk Description Risk Response (Accept/Mitigate) Discuss at rDRC (Yes/No) change-Clear instructions for use (IFU) tailored for different age groups, especially adolescents who are less reliant on caregivers. there were concerns about the complexity of the current study due to the mixed population (pediatric and adult). Caregivers manage younger participants, while adults and adolescents may self-administer independently, increasing risks of non-compliance or errors)
+Page Alexion Confidential
+DRAFT 18 Sep 2025

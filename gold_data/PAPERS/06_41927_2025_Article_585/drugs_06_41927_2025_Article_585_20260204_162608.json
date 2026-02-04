@@ -1,0 +1,414 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:26:08.754587",
+  "document": "06_41927_2025_Article_585.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_investigational": 7,
+  "drugs": [
+    {
+      "matched_text": "methylprednisolone",
+      "preferred_name": "Methylprednisolone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B-Cell Lymphoma",
+        "High Grade B-Cell Lymphoma w/MYC & BCL2 or BCL6 Rearrangements",
+        "High Grade B-Cell Lymphoma w/MYC, BCL2 & BCL6 Rearrangements",
+        "Double Expressor Lymphoma",
+        "High-grade B-cell Lymphoma"
+      ],
+      "nct_id": "NCT04479267",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D008775",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04479267",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008775",
+          "display": "Methylprednisolone"
+        }
+      ],
+      "context": "deceased patients, information on the cause and timing of death and medications received will be gathered through phone interviews with next of kin.\n\nmethylprednisolone) and maintenance therapies (prednisolone, azathioprine, methotrexate, mycophenolate mofetil). Treatment response: assessed using BVAS-WG scores. Comp",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Methylprednisolone Hemisuccinate",
+        "Methylprednisolone Acetate",
+        "methylprednisolone aceponate"
+      ],
+      "pubtator_normalized_name": "Methylprednisolone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "prednisolone",
+      "preferred_name": "Prednisolone",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B-Cell Lymphoma",
+        "High Grade B-Cell Lymphoma w/MYC & BCL2 or BCL6 Rearrangements",
+        "High Grade B-Cell Lymphoma w/MYC, BCL2 & BCL6 Rearrangements",
+        "Double Expressor Lymphoma",
+        "High-grade B-cell Lymphoma"
+      ],
+      "nct_id": "NCT04479267",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011239",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04479267",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011239",
+          "display": "Prednisolone"
+        }
+      ],
+      "context": " timing of death and medications received will be gathered through phone interviews with next of kin.\n\nmethylprednisolone) and maintenance therapies (prednisolone, azathioprine, methotrexate, mycophenolate mofetil). Treatment response: assessed using BVAS-WG scores. Complete remission is defined as a BVAS-WG sc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "prednisolone acetate",
+        "prednisolone phosphate",
+        "prednisolone hemisuccinate"
+      ],
+      "pubtator_normalized_name": "Prednisolone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mycophenolate mofetil",
+      "preferred_name": "Mycophenolate mofetil",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Hematologic Malignancies"
+      ],
+      "nct_id": "NCT06807606",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D009173",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06807606",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009173",
+          "display": "Mycophenolic Acid"
+        }
+      ],
+      "context": "will be gathered through phone interviews with next of kin.\n\nmethylprednisolone) and maintenance therapies (prednisolone, azathioprine, methotrexate, mycophenolate mofetil). Treatment response: assessed using BVAS-WG scores. Complete remission is defined as a BVAS-WG score of zero after treatment, partial remission as a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mycophenolic Acid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cyclophosphamide",
+      "preferred_name": "Cyclophosphamide",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ovarian Cancer"
+      ],
+      "nct_id": "NCT04931342",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003520",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04931342",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003520",
+          "display": "Cyclophosphamide"
+        }
+      ],
+      "context": "pancreatitis, hepatomegaly, hepatitis, and abdominal pain, will be documented. Treatment regimens: types, doses, and duration of induction therapies (cyclophosphamide,\n\nStatistical analysis\n\nTable 1 Patient demographics\n\npatients showed the first symptoms at the fourth decade of their life (Table 1).\n\nWith GI Witho",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "aldophosphamide",
+        "4-hydroxyperoxycyclophosphamide",
+        "4-S-ethanolsulfido-cyclophosphamide"
+      ],
+      "pubtator_normalized_name": "Cyclophosphamide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MTX",
+      "preferred_name": "Methotrexate",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Leukemia"
+      ],
+      "nct_id": "NCT04547049",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D008727",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04547049",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008727",
+          "display": "Methotrexate"
+        }
+      ],
+      "context": " 26 Cyc+Pulse = PD7.5 D 19 Cyc + Pulse PDS50,Aza L 9 Cyc PD2.5 L 32 Cyc + Pulse PD, RTX, Cyc D 28 Cyc+Pulse = PD60 D 17 Cyc+Pulse — Celcept, PD60 L 6 MTX MTX, PD30 D 18 Aza+pulse = PDS L 15 Aza+pulse = RTX L 30 Cyc+Pulse = PD30 D 35 Cyc+Pulse = PD45,Cyc D 6 MTX PD60,Cyc D 19 Cyc + Pulse PD60,Aza L 37 C",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "methotrexate polyglutamate",
+        "7-hydroxymethotrexate",
+        "methotrexate-gamma-aspartate"
+      ],
+      "pubtator_normalized_name": "Methotrexate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Aza",
+      "preferred_name": "Azathioprine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Acute Myeloid Leukemia",
+        "Myelodysplastic Syndromes",
+        "Chronic Myelomonocytic Leukemia"
+      ],
+      "nct_id": "NCT04609826",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001379",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT04609826",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001379",
+          "display": "Azathioprine"
+        }
+      ],
+      "context": "se and throat, L: lung, K: kidney, P: pancreas, C: nervous system, M: mucosa, J: joint, S: skin, Li: liver, HF: heart failure, Cyc: cyclophosphamide, Aza: azathioprine, Pulse: pulse methylprednisolone, RTX: rituximab, PD: prednisolone\n\nliver enzyme abnormalities, which developed hepato-splenomegaly, pr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Azathioprine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rituximab",
+      "preferred_name": "Rituximab",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Diffuse Large B Cell Lymphoma"
+      ],
+      "nct_id": "NCT05018520",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000069283",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05018520",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000069283",
+          "display": "Rituximab"
+        }
+      ],
+      "context": "s system, M: mucosa, J: joint, S: skin, Li: liver, HF: heart failure, Cyc: cyclophosphamide, Aza: azathioprine, Pulse: pulse methylprednisolone, RTX: rituximab, PD: prednisolone\n\nliver enzyme abnormalities, which developed hepato-splenomegaly, proteinuria, alveolar hemorrhage, and mesenteric ischemia during ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "89Zr-rituximab",
+        "technetium 99m rituximab",
+        "131I-rituximab"
+      ],
+      "pubtator_normalized_name": "Rituximab",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

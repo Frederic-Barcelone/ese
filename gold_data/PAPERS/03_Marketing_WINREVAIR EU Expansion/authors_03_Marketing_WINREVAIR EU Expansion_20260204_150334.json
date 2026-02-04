@@ -1,0 +1,31 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:03:34.092257",
+  "document": "03_Marketing_WINREVAIR EU Expansion.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 2,
+  "unique_authors": 2,
+  "authors": [
+    {
+      "full_name": "N.J.---- Merck",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "N.J.---- Merck",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Liechtenstein and Norway",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Liechtenstein and Norway",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

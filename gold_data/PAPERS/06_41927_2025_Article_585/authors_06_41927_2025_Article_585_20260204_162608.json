@@ -1,0 +1,141 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:26:08.755094",
+  "document": "06_41927_2025_Article_585.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 13,
+  "unique_authors": 13,
+  "authors": [
+    {
+      "full_name": "Seyed Farshad Allameh?",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Seyed Farshad Allameh?",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Abdolreza Raee”",
+      "role": "corresponding_author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Abdolreza Raee”",
+      "page": 1,
+      "confidence": 0.9
+    },
+    {
+      "full_name": "Birmingham Vasculitis Activity Score",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Birmingham Vasculitis Activity Score",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "School of Medicine",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "School of Medicine",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Amiralam Hospital",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Amiralam Hospital",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Tehran University of Medical Sciences",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Tehran University of Medical Sciences",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Iran Department of Internal Medicine",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Iran Department of Internal Medicine",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Imam Khomeini Hospital Complex",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Imam Khomeini Hospital Complex",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Iran Department of Radiation Oncology",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Iran Department of Radiation Oncology",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Cancer Institute",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Cancer Institute",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Iran Radiation Oncology Research Center",
+      "role": "corresponding_author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Iran Radiation Oncology Research Center",
+      "page": 1,
+      "confidence": 0.9
+    },
+    {
+      "full_name": "Cancer Research Institute",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Cancer Research Institute",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Shahid Beheshti University of Medical Sciences",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Shahid Beheshti University of Medical Sciences",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:41:05.335214",
+  "document": "10_.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 1,
+  "unique_identifiers": 1,
+  "validation_summary": {
+    "total_validated": 1,
+    "valid_count": 0,
+    "invalid_count": 0,
+    "error_count": 1
+  },
+  "citations": [
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1093/rheumatology/keaf417",
+      "nct": null,
+      "url": null,
+      "citation_text": "Rheumatology, 2025, 64, 6233-6240 https://doi.org/10.1093/rheumatology/keaf417 Advance access publication 8 August 2025 SC British Society for e Rheumatology RHEUMATOLOGY",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    }
+  ]
+}

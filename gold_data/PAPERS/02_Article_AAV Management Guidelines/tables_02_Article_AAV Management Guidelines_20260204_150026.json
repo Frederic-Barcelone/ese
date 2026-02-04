@@ -1,0 +1,629 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+    "extracted_at": "2026-02-04T14:57:58.321901"
+  },
+  "count": 4,
+  "tables": [
+    {
+      "visual_id": "4ba177fd-fc0a-4912-a78b-89d37ef45dea",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        3,
+        4
+      ],
+      "is_multipage": true,
+      "locations": [
+        {
+          "page_num": 3,
+          "bbox_pts": [
+            41.07014846801758,
+            49.139503479003906,
+            553.2890625,
+            738.2630004882812
+          ]
+        },
+        {
+          "page_num": 4,
+          "bbox_pts": [
+            41.172889709472656,
+            64.63701629638672,
+            553.3155517578125,
+            142.12991333007812
+          ]
+        }
+      ],
+      "title": "EULAR AAV Management Recommendations 2022",
+      "description": "This is a clinical guidelines table presenting EULAR (European League Against Rheumatism) recommendations for managing AAAV (ANCA-associated vasculitis) updated in 2022. The table contains 15 specific recommendations (numbered 1-15) plus overarching principles (A-D), each with associated level of evidence (LoE), strength of recommendation (SoR), percentage of favorable votes (FV), and level of agreement scores (LoA 0-10). The recommendations cover various aspects of AAV management including diagnosis, treatment induction and maintenance, with most recommendations showing high agreement scores (8.0-10.0) and strong evidence levels, indicating robust consensus among experts.",
+      "caption": "EULAR recommendations for the management of AAV—2022 update",
+      "reference": "Table 3",
+      "image_file": "02_Article_AAV Management Guidelines_table_page3_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Table 3",
+              "EULAR recommendations for the management ofAAV-2022 update",
+              "LoE",
+              "SoR",
+              "FV (%)",
+              "LoA (0-10)"
+            ]
+          ],
+          "rows": [
+            [
+              "",
+              "Overarching principles",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "A",
+              "Patients with AAV should be offered best care which must be based on shared decision- making between the patient and the physician considering efficacy, safety and costs.",
+              "n.a.",
+              "n.a.",
+              "n.a.",
+              "9.6±0.5"
+            ],
+            [
+              "B",
+              "Patients with AAV should have access to education focusing on the impact of AAV and its prognosis, key warning symptoms and treatment (including treatment-related complications).",
+              "n.a.",
+              "n.a.",
+              "n.a.",
+              "9.8±0.6"
+            ],
+            [
+              "C",
+              "Patients with AAV should be periodically screened for treatment-related adverse effects and comorbidities.We recommend prophylaxis and lifestyle advice to reduce treatment-related complications and other comorbidities.",
+              "n.a.",
+              "n.a.",
+              "n.a.",
+              "9.8±0.6"
+            ],
+            [
+              "D",
+              "AAV are rare, heterogeneous, and potentially life-threatening and organ-threatening diseases and thus require multidisciplinary management by centres with, or with ready access to, expertise in vasculitis.",
+              "n.a.",
+              "n.a.",
+              "n.a.",
+              "9.8±0.5"
+            ],
+            [
+              "1",
+              "Recommendations A positive biopsy is strongly supportive of a diagnosis of vasculitis and we recommend biopsies to assist in establishing a new diagnosis of AAV and for further evaluation of patients suspected of having relapsing vasculitis.",
+              "3b",
+              "C",
+              "90",
+              "8.7±1.9"
+            ],
+            [
+              "2",
+              "In patients with signs and/or symptoms raising suspicion of a diagnosis of AAV, we recommend testing for both PR3-ANCA and MPO-ANCA using a high-quality antigen-specific assay as the primary method of testing.",
+              "1a",
+              "A",
+              "100",
+              "10.0±0"
+            ],
+            [
+              "3",
+              "For induction of remission in patients with new-onset or relapsing GPA or MPA with organ- threatening or life-threatening disease, we recommend treatment with a combination of glucocorticoids and either rituximab or cyclophosphamide.* Rituximab is preferred in relapsing disease.†",
+              "1a* 2b†",
+              "A* B†",
+              "100",
+              "9.6±0.8"
+            ],
+            [
+              "4",
+              "For induction of remission of non-organ-threatening or non-life-threatening GPA or MPA, treatment with a combination of glucocorticoids and rituximab is recommended. Methotrexate or mycophenolate mofetil can be considered as alternatives to rituximab.",
+              "1b",
+              "B",
+              "90",
+              "9.2±0.8"
+            ],
+            [
+              "5",
+              "As part of regimens for induction of remission in GPA or MPA, we recommend treatment with oral glucocorticoids at a starting dose of 50-75mg prednisolone equivalent/day, depending on body weight.We recommend stepwise reduction in glucocorticoids according to table 4 and achieving a dose of 5mg prednisolone equivalent per day by 4-5months.",
+              "1b",
+              "A",
+              "100",
+              "9.4±0.8"
+            ],
+            [
+              "6",
+              "Avacopan in combination with rituximab or cyclophosphamide may be considered for induction of remission in GPA or MPA, as part of a strategy to substantially reduce exposure to glucocorticoids.",
+              "1b",
+              "B",
+              "100",
+              "9.0±0.9"
+            ],
+            [
+              "7",
+              "Plasma exchange may be considered as part of therapy to induce remission in GPA or MPA for those with a serum creatinine >300µmol/L due to active glomerulonephritis.* Routine use of plasma exchange to treat alveolar haemorrhage in GPA and MPA is not 1b†",
+              "1a*",
+              "B* B†",
+              "95* 90†",
+              "8.0±1.7"
+            ],
+            [
+              "8",
+              "recommended.† For patients with GPA or MPA with disease refractory to therapy to induce remission, we recommend a thorough reassessment of disease status and comorbidities and consideration",
+              "5",
+              "D",
+              "100",
+              "8.8±1.3 9.9±0.5"
+            ],
+            [
+              "9",
+              "of options for additional or different treatment. These patients should be managed in close conjunction with, or referred to, a centre with expertise in vasculitis. For maintenance of remission of GPA and MPA, after induction of remission with either rituximab or cyclophosphamide, we recommend treatment with rituximab. Azathioprine or",
+              "1b",
+              "A",
+              "100",
+              "9.3±1.0"
+            ],
+            [
+              "10",
+              "methotrexate may be considered as alternatives. We recommend that therapy to maintain remission for GPA and MPA be continued for 24- 48months following induction of remission of new-onset disease.* Longer duration of",
+              "1a*",
+              "B",
+              "100",
+              "9.1±1.4"
+            ],
+            [
+              "",
+              "therapy should be considered in relapsing patients or those with an increased risk of relapse, but should be balanced against patient preferences and risks of continuing immunosuppression.†",
+              "4†",
+              "D",
+              "",
+              ""
+            ],
+            [
+              "11",
+              "For induction of remission in new-onset or relapsing EGPA with organ-threatening or life- threatening manifestations, we recommend treatment with a combination of high-dose glucocorticoids and cyclophosphamide.A combination of high-dose glucocorticoids and rituximab may be considered as an alternative.",
+              "2b",
+              "B",
+              "100",
+              "9.6±0.8"
+            ],
+            [
+              "13",
+              "threatening manifestations, we recommend treatment with glucocorticoids. For induction of remission in patients with relapsing or refractory EGPA without active organ- threatening or life-threatening disease, we recommend the use of mepolizumab.",
+              "1b",
+              "B",
+              "70",
+              "8.9±1.3"
+            ],
+            [
+              "14",
+              "For maintenance of remission of EGPA after induction of remission for organ-threatening or life-threatening disease, treatment with either methotrexate†, azathioprine‡, mepolizumab‡",
+              "2b†",
+              "B",
+              "",
+              ""
+            ],
+            [
+              "",
+              "",
+              "",
+              "",
+              "85",
+              "8.8±1.5"
+            ],
+            [
+              "",
+              "or rituximab‡ should be considered",
+              "4‡",
+              "C",
+              "",
+              ""
+            ],
+            [
+              "15",
+              "For maintenance of remission of relapsing EGPA after induction of remission for non-organ- threatening or life-threatening manifestations at the time of relapse, we recommend treatment with mepolizumab.* In the management of patients with AAV, we recommend that structured clinical assessment, rather thanANCA and/or CD19+ Bcell testing alone, should inform decisions on changes in",
+              "1b* 1b",
+              "A B",
+              "95",
+              "9.3±1.1"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (table 3)",
+            "page_num": 2,
+            "char_offset": 2638
+          },
+          {
+            "text": "\nTable 3",
+            "page_num": 3,
+            "char_offset": 93
+          },
+          {
+            "text": "\nTable 3",
+            "page_num": 4,
+            "char_offset": 7118
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm_merged",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+        "extracted_at": "2026-02-04T14:00:10.254650"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "d9682484-ee12-4995-867c-4454c4f05dd4",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        2
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 2,
+          "bbox_pts": [
+            41.320457458496094,
+            73.91045379638672,
+            288.6950988769531,
+            254.03692626953125
+          ]
+        }
+      ],
+      "title": "EULAR Disease Activity States for AAV",
+      "description": "This is a definitions table that presents the EULAR (European League Against Rheumatism) consensus definitions for six different disease activity states in AAV (antineutrophil cytoplasmic antibody-associated vasculitis). The table systematically defines each clinical state from active disease through remission, response, relapse, and refractory disease, providing standardized criteria for clinicians to assess patient status. Notable patterns include the clear progression from active disease to remission states, and the specific quantitative criteria for response (≥50% reduction in disease activity score) that distinguishes it from the more qualitative definitions of other states.",
+      "caption": "EULAR consensus definitions for disease activity states in AAV",
+      "reference": "Table 1",
+      "image_file": "02_Article_AAV Management Guidelines_table_page2_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Activity state",
+              "EULAR consensus definition"
+            ]
+          ],
+          "rows": [
+            [
+              "Active disease",
+              "Presence of typical signs, symptoms or other features (such as glomerulonephritis or pulmonary nodules) of active AAV"
+            ],
+            [
+              "Remission",
+              "Absence of typical signs, symptoms, or other features of active AAV with or without immunosuppressive therapy"
+            ],
+            [
+              "Sustained remission",
+              "Absence of typical signs, symptoms, or other features of active AAV over a defined time period with or without immunosuppressive therapy"
+            ],
+            [
+              "Response",
+              "≥50% reduction of disease activity score and absence of new manifestations"
+            ],
+            [
+              "Relapse",
+              "Recurrence of active AAV after a period of remission"
+            ],
+            [
+              "Refractory",
+              "Unchanged or increased signs, symptoms or other features of active AAV after a period of standard induction therapy. Damage, infections, side effects of treatment or comorbidities as potential causes of the persistent or worsened disease manifestations need to be ruled out."
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " \n(table 1)",
+            "page_num": 2,
+            "char_offset": 1015
+          },
+          {
+            "text": " \nTable 1",
+            "page_num": 2,
+            "char_offset": 4256
+          },
+          {
+            "text": " table 1)",
+            "page_num": 9,
+            "char_offset": 1862
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+        "extracted_at": "2026-02-04T14:00:10.254375"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "95830d89-ba51-4d2e-a60f-f2a9e13c5034",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        2
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 2,
+          "bbox_pts": [
+            40.3973274230957,
+            599.058837890625,
+            553.001708984375,
+            720.1953735351562
+          ]
+        }
+      ],
+      "title": "AAV Disease Severity Classification Examples",
+      "description": "This is a comparative data table that categorizes clinical manifestations of ANCA-associated vasculitis (AAV) into two severity levels. The left column lists potentially organ/life-threatening manifestations including serious conditions like glomerulonephritis, pulmonary hemorrhage, and central nervous system involvement. The right column presents manifestations that are not ultimately organ/life-threatening, such as nasal disease without bone involvement, non-ulcerating skin involvement, and skeletal muscle-only myositis. This classification system helps clinicians assess disease severity and determine appropriate treatment approaches for AAV patients.",
+      "caption": "Examples of organ/life-threatening and not organ/life-threatening manifestations in patients with AAV",
+      "reference": "Table 2",
+      "image_file": "02_Article_AAV Management Guidelines_table_page2_2.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Examples of potentially organ/life-threatening manifestations*",
+              "Examples of manifestations that are not ultimately organ/life-threatening*"
+            ]
+          ],
+          "rows": [
+            [
+              "Glomerulonephritis",
+              "Nasal and paranasal disease without bony involvement (erosion) or cartilage collapse or olfactory dysfunction or deafness"
+            ],
+            [
+              "Pulmonary haemorrhage",
+              "Skin involvement without ulceration"
+            ],
+            [
+              "Meningeal involvement",
+              "Myositis (skeletal muscle only)"
+            ],
+            [
+              "Central nervous system involvement",
+              "Non-cavitating pulmonary nodules"
+            ],
+            [
+              "Retro-orbital disease",
+              "Episcleritis"
+            ],
+            [
+              "Cardiac involvement",
+              ""
+            ],
+            [
+              "Mesenteric involvement",
+              ""
+            ],
+            [
+              "Mononeuritis multiplex",
+              ""
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (table 2)",
+            "page_num": 2,
+            "char_offset": 2378
+          },
+          {
+            "text": "\nTable 2",
+            "page_num": 2,
+            "char_offset": 5288
+          },
+          {
+            "text": "See table 2",
+            "page_num": 6,
+            "char_offset": 5221
+          },
+          {
+            "text": " (table 2)",
+            "page_num": 10,
+            "char_offset": 1349
+          },
+          {
+            "text": " table 2",
+            "page_num": 10,
+            "char_offset": 1850
+          },
+          {
+            "text": "See table 2",
+            "page_num": 10,
+            "char_offset": 5658
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+        "extracted_at": "2026-02-04T14:00:10.254427"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "f1273e0e-5b4d-4b0f-bdb8-bdf160fc55d3",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        7
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 7,
+          "bbox_pts": [
+            41.83434295654297,
+            86.5918197631836,
+            288.4576110839844,
+            242.68954467773438
+          ]
+        }
+      ],
+      "title": "Glucocorticoid Dosing Schedule by Body Weight",
+      "description": "This is a data table presenting a systematic glucocorticoid tapering schedule for treating GPA or MPA patients. The table shows prednisolone-equivalent dosing in mg/day across different body weight categories (<50kg, 50-75kg, >75kg) over a treatment period extending beyond one year. Notable patterns include higher initial doses for heavier patients (75mg vs 50mg), a rapid taper in the first few weeks, followed by a gradual reduction to a maintenance dose of 5mg/day by weeks 19-52, with individual tapering schedules after 52 weeks.",
+      "caption": "Glucocorticoid dosing (mg/day, prednisolone equivalent) with rituximab or cyclophosphamide-based regimens for remission induction in GPA or MPA according to the PEXIVAS Study",
+      "reference": "Table 4",
+      "image_file": "02_Article_AAV Management Guidelines_table_page7_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Weeks",
+              "Body weight (kg).<50",
+              "Body weight (kg).50-75",
+              "Body weight (kg).>75"
+            ]
+          ],
+          "rows": [
+            [
+              "1*",
+              "50",
+              "60",
+              "75"
+            ],
+            [
+              "2",
+              "25",
+              "30",
+              "40"
+            ],
+            [
+              "3-4",
+              "20",
+              "25",
+              "30"
+            ],
+            [
+              "5-6",
+              "15",
+              "20",
+              "25"
+            ],
+            [
+              "7-8",
+              "12.5",
+              "15",
+              "20"
+            ],
+            [
+              "9-10",
+              "10",
+              "12.5",
+              "15"
+            ],
+            [
+              "11-12",
+              "7.5",
+              "10",
+              "12.5"
+            ],
+            [
+              "13-14",
+              "6",
+              "7.5",
+              "10"
+            ],
+            [
+              "15-18",
+              "5",
+              "5",
+              "7.5"
+            ],
+            [
+              "19-52",
+              "5",
+              "5",
+              "5"
+            ],
+            [
+              ">52",
+              "Individual taper",
+              "Individual taper",
+              "Individual taper"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "according to table 4",
+            "page_num": 3,
+            "char_offset": 2437
+          },
+          {
+            "text": "according to \ntable 4",
+            "page_num": 6,
+            "char_offset": 4096
+          },
+          {
+            "text": " \n(table 4)",
+            "page_num": 6,
+            "char_offset": 4921
+          },
+          {
+            "text": "See table 4",
+            "page_num": 6,
+            "char_offset": 5323
+          },
+          {
+            "text": "\nTable 4",
+            "page_num": 7,
+            "char_offset": 5156
+          },
+          {
+            "text": "See table 4",
+            "page_num": 10,
+            "char_offset": 5761
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+        "extracted_at": "2026-02-04T14:00:10.254527"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    }
+  ]
+}

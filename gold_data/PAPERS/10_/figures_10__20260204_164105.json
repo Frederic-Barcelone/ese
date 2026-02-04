@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+    "extracted_at": "2026-02-04T16:39:53.395600"
+  },
+  "count": 2,
+  "figures": [
+    {
+      "visual_id": "5a27a0aa-a202-42e1-b9e3-d1ba423f9795",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        4
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 4,
+          "bbox_pts": [
+            95.58429718017578,
+            54.42500305175781,
+            493.9653015136719,
+            231.25
+          ]
+        }
+      ],
+      "title": "Patient Factors Associated with Health Assessment Scores",
+      "description": "This is an arrow diagram showing the direction of association between patient characteristics and four different health assessment measures (HADS-anxiety, EQ-5D index, EQ-VAS, and MAF). Upward arrows indicate positive associations while downward arrows indicate negative associations for specific patient factors including gender, disease activity status, disease duration, and age. The figure reveals that females with active, short-duration disease show higher anxiety scores, while inactive disease is associated with better quality of life measures. Notably, the direction of associations varies considerably across the different assessment tools.",
+      "caption": "Associations between disease activity, respectively: disease duration and EQ-5D-Index, EQ-VAS, HADS-A, HADS-D, MAF",
+      "reference": "Figure 1",
+      "image_file": "10__figure_page4_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Fig. 1)",
+            "page_num": 3,
+            "char_offset": 2093
+          },
+          {
+            "text": " (Fig. 1)",
+            "page_num": 3,
+            "char_offset": 2545
+          },
+          {
+            "text": " (Fig. 1)",
+            "page_num": 3,
+            "char_offset": 2833
+          },
+          {
+            "text": " \nFigure 1",
+            "page_num": 4,
+            "char_offset": 2264
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+        "extracted_at": "2026-02-04T15:40:54.132016"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "2039ec65-9903-4b11-b711-a0c379b49fb9",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        5
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 5,
+          "bbox_pts": [
+            95.30079650878906,
+            54.42498779296875,
+            505.7008056640625,
+            312.7749938964844
+          ]
+        }
+      ],
+      "title": "Patient Clusters by Quality of Life Scores",
+      "description": "This is a cluster analysis diagram showing four distinct patient groups (A-D) arranged along an EQ-VAS (EuroQol Visual Analog Scale) quality of life scale from 0-100. Each cluster represents patients with different combinations of disease characteristics including EQ-5D index scores, anxiety/depression levels, fatigue, disease duration, and prednisolone dosage. The clusters show a clear pattern where higher quality of life scores (Clusters A and B) are associated with longer disease duration and lower steroid doses, while lower scores (Clusters C and D) correlate with shorter disease duration, higher anxiety/depression, and higher prednisolone doses.",
+      "caption": "Interquartile range ({}) on the EQ-VAS scale for clusters A–D",
+      "reference": "Figure 2",
+      "image_file": "10__figure_page5_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Fig. 2)",
+            "page_num": 4,
+            "char_offset": 463
+          },
+          {
+            "text": " \nFigure 2",
+            "page_num": 5,
+            "char_offset": 3837
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+        "extracted_at": "2026-02-04T15:40:54.132051"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    }
+  ]
+}

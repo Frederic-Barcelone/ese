@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/08_bmj.m1070.full.pdf",
+    "extracted_at": "2026-02-04T16:33:19.140856"
+  },
+  "count": 1,
+  "figures": [
+    {
+      "visual_id": "06fb975a-5f5b-47e5-8195-a58dae261914",
+      "visual_type": "figure",
+      "confidence": 1.0,
+      "page_range": [
+        5
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 5,
+          "bbox_pts": [
+            56.69300079345703,
+            120.89187622070312,
+            538.5745849609375,
+            262.04302978515625
+          ]
+        }
+      ],
+      "title": "Clinical Manifestations of ANCA-Associated Vasculitis (AAV)",
+      "description": "This is a composite clinical photograph figure showing three distinct manifestations of AAV across different organ systems. Panel (a) displays a CT scan revealing diffuse alveolar hemorrhage in the lungs, panel (b) shows fingers with nail fold infarctions and splinter hemorrhages, and panel (c) demonstrates nasal bridge collapse creating a 'saddle nose' deformity. The figure illustrates the serious multi-organ consequences that can occur with delayed diagnosis of AAV, ranging from pulmonary complications to vascular and structural deformities.",
+      "caption": "Clinical consequences of AAV. (a) Diffuse alveolar haemorrhage. (b) Nail fold infarction and splinter haemorrhages. (c) Nasal bridge collapse resulting from chronic, erosive inflammation in the upper airways. Delayed diagnosis can result in permanent disability/deformity and early mortality. Manifestations of advanced disease such as a 'saddle nose' deformity are relatively rare but can still occur if a diagnosis of AAV is missed (these images are not directly related to the case study in this article)",
+      "reference": "Fig 1",
+      "image_file": "08_bmj.m1070.full_figure_page5_1.png",
+      "relationships": {
+        "text_mentions": [],
+        "section_context": null,
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/08_bmj.m1070.full.pdf",
+        "extracted_at": "2026-02-04T15:33:41.687886"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    }
+  ]
+}

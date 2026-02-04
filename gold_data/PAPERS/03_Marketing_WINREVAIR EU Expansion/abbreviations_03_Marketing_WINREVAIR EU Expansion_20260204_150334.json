@@ -1,0 +1,412 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:03:34.090565",
+  "document": "03_Marketing_WINREVAIR EU Expansion.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+  "total_candidates": 259,
+  "total_validated": 18,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 1,
+    "recovered_by_llm_sf_only": 8,
+    "blacklisted_fp_count": 9,
+    "common_word_rejected": 2,
+    "context_rejected": 0,
+    "form_filter_rejected": 5,
+    "trial_id_excluded": 1
+  },
+  "abbreviations": [
+    {
+      "short_form": "Hgb",
+      "long_form": "hemoglobin",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 3,
+      "context_text": "dynamics. WINREVAIR is the subject of a licensing agreement with Bristol Myers Squibb. Selected Safety Information for WINREVAIR in the U.S. WINREVAIR may increase hemoglobin (Hgb). Severe erythrocytosis may increase the risk of thromboembolic events or hyperviscosity syndrome. Monitor Hgb before each dose for the first 5 doses, or longer if values are unstable, and periodically thereafter, to determine if dose adjustments are required.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PAH",
+      "long_form": "Pulmonary arterial hypertension",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "About PAH Pulmonary arterial hypertension (PAH) is a rare, progressive and life-threatening blood vessel disorder characterized by the constriction of small pulmonary arteries and elevated blood pressure in the pulmonary circulation. Approximately 90,000 people worldwide are living with PAH. The disease progresses rapidly for many patients. PAH results in significant strain on the heart, leading to limited physical activity, heart failure and",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SEC",
+      "long_form": "Securities and Exchange Commission",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "cly update any forward-looking statement, whether as a result of new information, future events or otherwise. Additional factors that could cause results to differ materially from those described in the forward-looking statements can be found in the company’s Annual Report on Form 10-K for the year ended December 31, 2024 and the company’s other filings with the Securities and Exchange Commission (SEC) available at the SEC's Internet site (www.sec.gov).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FC",
+      "long_form": "Functional Class",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "that the European Medicines Agency's Committee for Medicinal Products for Human Use (CHMP) recommended the approval of an expanded indication for WINREVAIR™ (sotatercept), in combination with other pulmonary arterial hypertension (PAH) therapies, for the treatment of PAH in adult patients with WHO Functional Class (FC) Il, Ill, and lV based on the Phase 3 ZENITH study. The currently approved indication in the European Union (EU) is for adults with PAH with WHO FC II to III, to improve exercise capacity. The CHMP recommendation will now be reviewed by the European Commission (EC) for amending the marketing authori",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EC",
+      "long_form": "European Commission",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ent of PAH in adult patients with WHO Functional Class (FC) Il, Ill, and lV based on the Phase 3 ZENITH study. The currently approved indication in the European Union (EU) is for adults with PAH with WHO FC II to III, to improve exercise capacity. The CHMP recommendation will now be reviewed by the European Commission (EC) for amending the marketing authorization in the EU, Iceland, Liechtenstein and Norway, and a final decision is expected in the first quarter of 2026.",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CTD",
+      "long_form": "connective tissue diseases",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IL",
+      "long_form": "Interleukins",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "icines Agency's Committee for Medicinal Products for Human Use (CHMP) recommended the approval of an expanded indication for WINREVAIR™ (sotatercept), in combination with other pulmonary arterial hypertension (PAH) therapies, for the treatment of PAH in adult patients with WHO Functional Class (FC) Il, Ill, and lV based on the Phase 3 ZENITH study. The currently approved indication in the European Union (EU) is for adults with PAH with WHO FC II to III, to improve exercise capacity. The CHMP recommendation will now be reviewed by the European Commission (EC) for amending the marketing authorizat",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "III",
+      "long_form": "roman numeral for the number 3",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "combination with other pulmonary arterial hypertension (PAH) therapies, for the treatment of PAH in adult patients with WHO Functional Class (FC) Il, Ill, and lV based on the Phase 3 ZENITH study. The currently approved indication in the European Union (EU) is for adults with PAH with WHO FC II to III, to improve exercise capacity. The CHMP recommendation will now be reviewed by the European Commission (EC) for amending the marketing authorization in the EU, Iceland, Liechtenstein and Norway, and a final decision is expected in the first quarter of 2026.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HIV",
+      "long_form": "human immunodeficiency virus",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacycl",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HR",
+      "long_form": "hazard ratio",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "he study's primary endpoint, in adults with PAH WHO functional class Ill or IV compared to placebo (HR: 0.24; 95% Cl: 0.13, 0.43; p<0.0001). The trial’s composite primary efficacy endpoint — time to fir",
+      "lexicon_source": "orchestrator:direct_search",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CHMP",
+      "long_form": "Committee for Medicinal Products for Human Use",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "NEWS RELEASE Merck Receives Positive EU CHMP Opinion for Expanded Use of WINREVAIR™ (sotatercept) in Adults with Pulmonary Arterial Hypertension",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRK",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " (PAH, WHO* Group 1 Pulmonary Hypertension) 2025-12-12 RAHWAY, N.J.--(BUSINESS WIRE)-- Merck (NYSE: MRK), known as MSD outside of the United States and Canada, today announced that the European Medicines",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MSD",
+      "long_form": "Merck Sharp & Dohme",
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "up 1 Pulmonary Hypertension) 2025-12-12 RAHWAY, N.J.--(BUSINESS WIRE)-- Merck (NYSE: MRK), known as MSD outside of the United States and Canada, today announced that the European Medicines Agency's Commi",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PH",
+      "long_form": "pulmonary hypertension",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " now approved in the U.S. for the treatment of adults with PAH (WHO Group 1 pulmonary hypertension [PH]) to improve exercise capacity and WHO FC, and reduce the risk of clinical worsening events, includ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "NCT04896008",
+      "long_form": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled Study to Evaluate Sotatercept When Added to Maximum Tolerated Background Therapy in Participants With Pulmonary Arterial Hypertension (PAH) World Health Organization (WHO) Functional Class (FC) III or FC IV at High Risk Mortality",
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "for PAH, lung transplantation and death. * World Health Organization About ZENITH The ZENITH study (NCT04896008) was a global, double-blind, placebo-controlled, multicenter, parallel-group clinical trial in whic",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "WINREVAIR",
+      "long_form": "sotatercept-csrk",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "NEWS RELEASE Merck Receives Positive EU CHMP Opinion for Expanded Use of WINREVAIR™ (sotatercept) in Adults with Pulmonary Arterial Hypertension (PAH, WHO* Group 1 Pulmonary Hyperten",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "STELLAR",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "o reviewed morbidity and mortality outcomes data from the secondary endpoint of the pivotal Phase 3 STELLAR trial as part of this recommendation. WINREVAIR is the first and only activin signaling inhibitor t",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ZENITH",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "atment of PAH in adult patients with WHO Functional Class (FC) Il, Ill, and lV based on the Phase 3 ZENITH study. The currently approved indication in the European Union (EU) is for adults with PAH with WHO",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Idiopathic pulmonary arterial hypertension",
+      "matched_text": "idiopathic PAH",
+      "abbreviation": "iPAH",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:422"
+    },
+    {
+      "name": "Heritable pulmonary arterial hypertension",
+      "matched_text": "heritable PAH",
+      "abbreviation": "hPAH",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:275777"
+    },
+    {
+      "name": "PAH associated with portal hypertension",
+      "matched_text": "PAH associated with portal hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:275813"
+    },
+    {
+      "name": "Pulmonary capillary hemangiomatosis",
+      "matched_text": "pulmonary capillary hemangiomatosis",
+      "abbreviation": "PCH",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "D18.0",
+      "orpha": "ORPHA:199241"
+    },
+    {
+      "name": "Pulmonary veno-occlusive disease",
+      "matched_text": "pulmonary veno-occlusive disease",
+      "abbreviation": "PVOD",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "J98.4",
+      "orpha": "ORPHA:31837"
+    },
+    {
+      "name": "Pulmonary arterial hypertension",
+      "matched_text": "Pulmonary Arterial Hypertension",
+      "abbreviation": "PAH",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:182090"
+    },
+    {
+      "name": "connective tissue diseases",
+      "matched_text": "connective tissue diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "immunodeficiency",
+      "matched_text": "immunodeficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "thrombocytopenia",
+      "matched_text": "thrombocytopenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "telangiectasia",
+      "matched_text": "telangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "heart failure",
+      "matched_text": "heart failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I50",
+      "orpha": null
+    },
+    {
+      "name": "idiopathic",
+      "matched_text": "idiopathic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "dependence",
+      "matched_text": "dependence",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "syndrome",
+      "matched_text": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diarrhea",
+      "matched_text": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "cHILD",
+      "matched_text": "child",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:264665"
+    },
+    {
+      "name": "MSD",
+      "matched_text": "MSD",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:585"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Sotatercept",
+      "matched_text": "sotatercept",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "sotatercept-csrk",
+      "matched_text": "WINREVAIR",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Prostacyclin",
+      "matched_text": "prostacyclin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": [
+    {
+      "name": "Merck",
+      "matched_text": "Merck",
+      "full_name": "Merck & Co., Inc.",
+      "headquarters": "Rahway, New Jersey, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    },
+    {
+      "name": "Bristol-Myers Squibb",
+      "matched_text": "Bristol Myers Squibb",
+      "full_name": "Bristol-Myers Squibb Company",
+      "headquarters": "New York City, USA",
+      "parent_company": null,
+      "confidence": 0.95
+    }
+  ]
+}

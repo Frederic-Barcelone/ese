@@ -1,0 +1,466 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+    "extracted_at": "2026-02-04T16:39:53.395600"
+  },
+  "count": 2,
+  "tables": [
+    {
+      "visual_id": "d0a4b80c-934a-44ce-a75f-d2d1d33c8c8c",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        3
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 3,
+          "bbox_pts": [
+            46.61213684082031,
+            464.5338439941406,
+            552.9238891601562,
+            723.87744140625
+          ]
+        }
+      ],
+      "title": "Patient Characteristics Across Three Vasculitis Subtypes",
+      "description": "This is a comprehensive demographic and clinical data table comparing patient characteristics across three types of ANCA-associated vasculitis (AAV): EGPA, GPA, and MPA. The table presents detailed information for 296 total patients, including age, gender, BMI, education, occupation, disease duration, disease activity scores, and treatment data. Notable patterns include GPA being the most common subtype (70.6% of patients), EGPA patients having the longest median disease duration (7 years), and the majority of patients across all subtypes having low disease activity (BVAS scores of 0-1).",
+      "caption": "Patient characteristics",
+      "reference": "Table 1",
+      "image_file": "10__table_page3_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "",
+              "Total",
+              "EGPA",
+              "GPA",
+              "MPA"
+            ]
+          ],
+          "rows": [
+            [
+              "Diagnosis, n ( % )",
+              "296",
+              "12 (4.1)",
+              "209 (70.6)",
+              "75 (25.3)"
+            ],
+            [
+              "Age, years",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "Median, range (IQR)",
+              "63, 18-90 (50-70)",
+              "59, 34-73 (41-68)",
+              "60, 18-90 (47-68)",
+              "67, 31-86 (56-73)"
+            ],
+            [
+              "Age under 65years, n (%)",
+              "166 (56.5)",
+              "9 (75)",
+              "127 (61)",
+              "40 (40.5)"
+            ],
+            [
+              "Gender",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "female, n (%)",
+              "157 (53)",
+              "5 (41.7)",
+              "100 (47.8)",
+              "52 (69.3)"
+            ],
+            [
+              "male, n (%)",
+              "139 (47)",
+              "7 (58.3)",
+              "109 (52.2)",
+              "23 (30.7)"
+            ],
+            [
+              "BMI median, range (IQR)",
+              "25.4, 16-59 (23-29.4)",
+              "24.3, 21-27 (22-26.7)",
+              "25.3, 16-59 (16-59)",
+              "25.7, 17-40 (22.6-30)"
+            ],
+            [
+              "Education, a",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "n (%)",
+              "223 (80.7)",
+              "10 (83.3)",
+              "162 (82.2)",
+              "50 (75.8)"
+            ],
+            [
+              "Occupation n (%)",
+              "133 (47.8)",
+              "8 (66.7)",
+              "102 (51.3)",
+              "23 (34.3)"
+            ],
+            [
+              "employed/student, retired, n (%)",
+              "130 (46.0)",
+              "4 (33.3)",
+              "88 (44.2)",
+              "38 (56.7)"
+            ],
+            [
+              "unemployed, n (%) Disease duration, years median, range (IQR)",
+              "15 (5.1) 2, 0-31 (0-6)",
+              "n/a 7, 0-19 (0-11)",
+              "9 (4.5) 2, 0-31 (2-8)",
+              "8 (9) 1, 0-18 (0-5)"
+            ],
+            [
+              "≤ 2years, n (%)",
+              "162 (55.3)",
+              "",
+              "",
+              ""
+            ],
+            [
+              "",
+              "",
+              "4 (33)",
+              "116 (56)",
+              "42 (56.8)"
+            ],
+            [
+              "≥ 3years, n (%)",
+              "131 (44.7)",
+              "8 (67)",
+              "91 (44.0)",
+              "32 (43.2)"
+            ],
+            [
+              "Disease activity (BVAS) median, range (IQR)",
+              "1, 0-33 (0-12)",
+              "0, 0-30 (0-14)",
+              "1, 0-33 (0-12)",
+              "0, 0-31(0-14)"
+            ],
+            [
+              "BVAS ¼ 0 n (%)",
+              "95 (46.3)",
+              "7 (70)",
+              "2 (42.8)",
+              "26 (52)"
+            ],
+            [
+              "BVAS ≥ 1 n (%)",
+              "110 (53.7)",
+              "3 (30)",
+              "83 (57.2)",
+              "24 (48)"
+            ],
+            [
+              "Prednisolone dose, mg median, range (IQR)",
+              "5, 0-80 (0-12.5)",
+              "5, 0-60 (5-7.5)",
+              "5, 0-80 (0-30)",
+              "5, 0-60 (0-10)"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Table 1)",
+            "page_num": 3,
+            "char_offset": 1438
+          },
+          {
+            "text": " \nTable 1",
+            "page_num": 3,
+            "char_offset": 3590
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+        "extracted_at": "2026-02-04T15:40:54.131925"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "0e27e5d2-fda8-498b-b6c7-d4a1579c4a48",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        4
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 4,
+          "bbox_pts": [
+            41.66185760498047,
+            286.80023193359375,
+            547.6975708007812,
+            430.4015808105469
+          ]
+        }
+      ],
+      "title": "Disease Activity and Duration Correlations with Quality-of-Life Measures",
+      "description": "This is a correlation data table showing statistical associations (Spearman's rank correlations) between disease activity and disease duration with various health-related quality of life measures in vasculitis patients. The table presents correlation coefficients (rs) and p-values for different patient subgroups (All patients, EGPA, GPA, MPA) across five outcome measures: EQ-5D-index, EQ-VAS, HADS-A, HADS-D, and MAF. Notable findings include significant positive correlations between disease activity and anxiety/depression scores, and significant negative correlations between longer disease duration and anxiety/depression measures, suggesting that active disease worsens quality of life while longer disease duration may be associated with better psychological adaptation.",
+      "caption": "Associations between disease activity, respectively: disease duration and EQ-5D-Index, EQ-VAS, HADS-A, HADS-D, MAF",
+      "reference": "Table 2",
+      "image_file": "10__table_page4_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Disease activity",
+              "All patients",
+              "r s",
+              "P -value",
+              "EGPA",
+              "r s",
+              "P -value",
+              "GPA",
+              "r s",
+              "P -value",
+              "MPA",
+              "r s",
+              "P -value"
+            ]
+          ],
+          "rows": [
+            [
+              "EQ-5D-index",
+              "n ¼ 179",
+              "0.228",
+              "0.002",
+              "n ¼ 11",
+              "- 0.736",
+              "0.024",
+              "n ¼ 127",
+              "- 0.233",
+              "0.008",
+              "n ¼ 43",
+              "- 0.155",
+              "0.322"
+            ],
+            [
+              "EQ-VAS",
+              "n ¼ 170",
+              "- 0.279",
+              "< 0.001",
+              "n ¼ 11",
+              "- 0.295",
+              "0.407",
+              "n ¼ 118",
+              "- 0.337",
+              "< 0.001",
+              "n ¼ 42",
+              "- 0.184",
+              "0.243"
+            ],
+            [
+              "HADS-A",
+              "n ¼ 177",
+              "0.221",
+              "0.003",
+              "n ¼ 10",
+              "0.045",
+              "0.901",
+              "n ¼ 124",
+              "0.209",
+              "0.020",
+              "n ¼ 43",
+              "0.374",
+              "0.013"
+            ],
+            [
+              "HADS-D",
+              "n ¼ 180",
+              "0.189",
+              "0.011",
+              "n ¼ 10",
+              "0.225",
+              "0.532",
+              "n ¼ 127",
+              "0.173",
+              "0.051",
+              "n ¼ 43",
+              "0.281",
+              "0.068"
+            ],
+            [
+              "MAF",
+              "n ¼ 164",
+              "0.256",
+              "< 0.001",
+              "n ¼ 9",
+              "0.218",
+              "0.532",
+              "n ¼ 112",
+              "0.287",
+              "0.002",
+              "n ¼ 43",
+              "0.191",
+              "0.220"
+            ],
+            [
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration",
+              "Disease duration"
+            ],
+            [
+              "EQ-5D-index",
+              "n ¼ 277",
+              "0.105",
+              "0.080",
+              "n ¼ 11",
+              "0.309",
+              "0.356",
+              "n ¼ 207",
+              "0.106",
+              "0.139",
+              "n ¼ 69",
+              "0.083",
+              "0.499"
+            ],
+            [
+              "EQ-VAS",
+              "n ¼ 267",
+              "0.286",
+              "< 0.001",
+              "n ¼ 12",
+              "0.579",
+              "0.049",
+              "n ¼ 184",
+              "0.302",
+              "< 0.001",
+              "n ¼ 67",
+              "0.229",
+              "0.794"
+            ],
+            [
+              "HADS-A",
+              "n ¼ 274",
+              "- 0.257",
+              "< 0.001",
+              "n ¼ 12",
+              "- 0.348",
+              "0.267",
+              "n ¼ 185",
+              "- 0.244",
+              "< 0.001",
+              "n ¼ 70",
+              "- 0.336",
+              "0.002"
+            ],
+            [
+              "HADS-D",
+              "n ¼ 280",
+              "- 0.164",
+              "< 0.001",
+              "n ¼ 12",
+              "- 0.404",
+              "0.193",
+              "n ¼ 190",
+              "- 0.146",
+              "0.040",
+              "n ¼ 71",
+              "- 0.244",
+              "0.004"
+            ],
+            [
+              "MAF",
+              "n ¼ 257",
+              "- 0.242",
+              "< 0.001",
+              "n ¼ 10",
+              "- 0.699",
+              "0.024",
+              "n ¼ 171",
+              "- 0.307",
+              "< 0.001",
+              "n ¼ 66",
+              "- 0.033",
+              "0.794"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Table 2)",
+            "page_num": 3,
+            "char_offset": 3021
+          },
+          {
+            "text": " (Table 2)",
+            "page_num": 3,
+            "char_offset": 3272
+          },
+          {
+            "text": " (Table 2)",
+            "page_num": 4,
+            "char_offset": 68
+          },
+          {
+            "text": " \nTable 2",
+            "page_num": 4,
+            "char_offset": 2557
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/10_.pdf",
+        "extracted_at": "2026-02-04T15:40:54.131980"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    }
+  ]
+}

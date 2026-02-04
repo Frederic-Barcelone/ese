@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:29:56.879018",
+  "document": "07_20251213-56068-pwzol9.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/07_20251213-56068-pwzol9.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 5,
+  "unique_identifiers": 4,
+  "validation_summary": {
+    "total_validated": 4,
+    "valid_count": 1,
+    "invalid_count": 0,
+    "error_count": 3
+  },
+  "citations": [
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.7759/cureus.99115",
+      "nct": null,
+      "url": null,
+      "citation_text": "High-Performance Teenage Football Player. Cureus 17(12): e99115. DOI 10.7759/cureus.99115, a A 14-year-old male football player was evaluated as part of routine pre-participation",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": true,
+        "resolved_url": "https://www.cureus.com/articles/445910-the-hidden-shunt-an-asymptomatic-atrial-septal-defect-revealed-by-echocardiography-in-a-high-performance-teenage-football-player",
+        "title": "The Hidden Shunt: An Asymptomatic Atrial Septal Defect Revealed by Echocardiography in a High-Performance Teenage Football Player",
+        "status": null,
+        "error": null
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1093/eurheartj/ehaa605",
+      "nct": null,
+      "url": null,
+      "citation_text": "athletes and exercisers. Am J Cardiol. 2019, 123:532-5. 10.1016/j.amjcard.2018.11.001 Maron BJ, Friedman RA, Kligfield P, et al.: Assessment of the 12-lead electrocardiogram",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1016/j.jace.2014.05.006",
+      "nct": null,
+      "url": null,
+      "citation_text": "cohort study. JACC Cardiovasc Interv. 2018, 11:795-804. 10.1016/j.jcin.2018.01.262 Muroke V, Jalanko M, Haukka J, et al.: Outcome of transcatheter atrial septal defect",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "DOI not found"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1080/07853890.2023.2178669",
+      "nct": null,
+      "url": "https://youtu.be/390YyOW97tc?si=VS356rM8OeHOcyxX",
+      "citation_text": "atrial septal defect device deployment View video here: https://youtu.be/390YyOW97tc?si=VS356rM8OeHOcyxX The patient was discharged on aspirin therapy for three months and advised a gradual return to ",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": null,
+      "nct": null,
+      "url": "https://youtu.be/ebOhK1waRDE?si=C_nfpOvDEc4Z97CC",
+      "citation_text": "imaging showing the interatrial shunt View video here: https://youtu.be/ebOhK1waRDE?si=C_nfpOvDEc4Z97CC Intervention Given the significant shunt (Qp/Qs >1.5) and evidence of right-heart",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.8,
+      "validation": null
+    }
+  ]
+}

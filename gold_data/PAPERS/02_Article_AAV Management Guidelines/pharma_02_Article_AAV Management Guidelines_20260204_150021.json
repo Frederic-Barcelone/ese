@@ -1,0 +1,258 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:00:21.784825",
+  "document": "02_Article_AAV Management Guidelines.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 19,
+  "unique_companies": 19,
+  "companies": [
+    {
+      "matched_text": "GSK",
+      "canonical_name": "GlaxoSmithKline",
+      "full_name": "GlaxoSmithKline plc",
+      "headquarters": "London, UK",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "GSK",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Amgen",
+      "canonical_name": "Amgen",
+      "full_name": "Amgen Inc.",
+      "headquarters": "Thousand Oaks, California, USA",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Amgen",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Lilly",
+      "canonical_name": "Eli Lilly",
+      "full_name": "Eli Lilly and Company",
+      "headquarters": "Indianapolis, Indiana, USA",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Lilly",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Roche",
+      "canonical_name": "Roche",
+      "full_name": "F. Hoffmann-La Roche AG",
+      "headquarters": "Basel, Switzerland",
+      "parent_company": null,
+      "subsidiaries": [
+        "Genentech",
+        "Chugai"
+      ],
+      "confidence": 0.95,
+      "context": "Roche",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Novartis",
+      "canonical_name": "Novartis",
+      "full_name": "Novartis AG",
+      "headquarters": "Basel, Switzerland",
+      "parent_company": null,
+      "subsidiaries": [
+        "Sandoz",
+        "Alcon"
+      ],
+      "confidence": 0.95,
+      "context": "Novartis",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Catalyst Biosciences",
+      "canonical_name": "Catalyst Biosciences",
+      "full_name": "Catalyst Biosciences, Inc.",
+      "headquarters": "South San Francisco, California, USA",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Catalyst Biosciences",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "AbbVie",
+      "canonical_name": "AbbVie",
+      "full_name": "AbbVie Inc.",
+      "headquarters": "North Chicago, Illinois, USA",
+      "parent_company": null,
+      "subsidiaries": [
+        "Allergan"
+      ],
+      "confidence": 0.95,
+      "context": "AbbVie",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "AstraZeneca",
+      "canonical_name": "AstraZeneca",
+      "full_name": "AstraZeneca PLC",
+      "headquarters": "Cambridge, UK",
+      "parent_company": null,
+      "subsidiaries": [
+        "Alexion"
+      ],
+      "confidence": 0.95,
+      "context": "AstraZeneca",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "BMS",
+      "canonical_name": "Bristol-Myers Squibb",
+      "full_name": "Bristol-Myers Squibb Company",
+      "headquarters": "New York City, USA",
+      "parent_company": null,
+      "subsidiaries": [
+        "Celgene"
+      ],
+      "confidence": 0.95,
+      "context": "BMS",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Boehringer",
+      "canonical_name": "Boehringer Ingelheim",
+      "full_name": "Boehringer Ingelheim GmbH",
+      "headquarters": "Ingelheim, Germany",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Boehringer",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Janssen",
+      "canonical_name": "Janssen",
+      "full_name": "Janssen Pharmaceuticals",
+      "headquarters": "Beerse, Belgium",
+      "parent_company": "Johnson & Johnson",
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Janssen",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "MSD",
+      "canonical_name": "Merck",
+      "full_name": "Merck & Co., Inc.",
+      "headquarters": "Rahway, New Jersey, USA",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "MSD",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Pfizer",
+      "canonical_name": "Pfizer",
+      "full_name": "Pfizer Inc.",
+      "headquarters": "New York, USA",
+      "parent_company": null,
+      "subsidiaries": [
+        "Wyeth",
+        "Hospira"
+      ],
+      "confidence": 0.95,
+      "context": "Pfizer",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Chemocentryx",
+      "canonical_name": "ChemoCentryx",
+      "full_name": "ChemoCentryx, Inc.",
+      "headquarters": "San Carlos, California, USA",
+      "parent_company": "Amgen",
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Chemocentryx",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Takeda",
+      "canonical_name": "Takeda",
+      "full_name": "Takeda Pharmaceutical Company Limited",
+      "headquarters": "Tokyo, Japan",
+      "parent_company": null,
+      "subsidiaries": [
+        "Shire"
+      ],
+      "confidence": 0.95,
+      "context": "Takeda",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "UCB",
+      "canonical_name": "UCB",
+      "full_name": "UCB S.A.",
+      "headquarters": "Brussels, Belgium",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "UCB",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Genentech",
+      "canonical_name": "Genentech",
+      "full_name": "Genentech, Inc.",
+      "headquarters": "South San Francisco, California, USA",
+      "parent_company": "Roche",
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Genentech",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Sanofi",
+      "canonical_name": "Sanofi",
+      "full_name": "Sanofi S.A.",
+      "headquarters": "Paris, France",
+      "parent_company": null,
+      "subsidiaries": [
+        "Genzyme"
+      ],
+      "confidence": 0.95,
+      "context": "Sanofi",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    },
+    {
+      "matched_text": "Regeneron",
+      "canonical_name": "Regeneron",
+      "full_name": "Regeneron Pharmaceuticals, Inc.",
+      "headquarters": "Tarrytown, New York, USA",
+      "parent_company": null,
+      "subsidiaries": [],
+      "confidence": 0.95,
+      "context": "Regeneron",
+      "page": 1,
+      "lexicon_source": "pharma_companies_lexicon.json"
+    }
+  ]
+}

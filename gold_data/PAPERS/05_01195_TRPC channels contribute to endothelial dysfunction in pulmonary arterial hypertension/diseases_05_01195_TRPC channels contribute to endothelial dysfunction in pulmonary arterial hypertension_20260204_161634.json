@@ -1,0 +1,1949 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:16:34.897244",
+  "document": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 29,
+  "total_validated": 29,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "PAH with congenital heart disease",
+      "preferred_label": "Pulmonary arterial hypertension associated with congenital heart disease",
+      "abbreviation": "PAH-CHD",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "697905000",
+        "mondo": null,
+        "orpha": "ORPHA:275803",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:275803",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "697905000",
+          "display": null
+        }
+      ],
+      "context": "PAH (n=13) Control (n=12) Age, years 13 (46) 72 51 (66) 77 Sex, M/F 3 M/ M/8F Diseases Diagnosis 31% hPAH 100% lung 38% iPAH cancer 8% PVOD 159% PAH with congenital heart disease 8% PH group 5 Mutation in BMPR2 gene Carrier 3 NA no-carrier 10 NA Mutation in SOX17 gene Carrier 1 NA no-carrier 12 NA Hemodynamic parameters mPAP, mmHg 38 (52,5) 65 NA i, L/min/m? 2,1 (2,66) 3,13 NA PVR, Wood units 3,9 (11,22) 18 NA Medication Monotherapies NA NA Bitherapies NA NA",
+      "page": 10,
+      "mention_count": 2,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "EGF",
+      "preferred_label": "Lipodystrophy due to peptidic growth factors deficiency",
+      "abbreviation": "EGF",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E88.1",
+        "icd11": "LD27.6Z",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:1979",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:1979",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E88.1",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LD27.6Z",
+          "display": null
+        }
+      ],
+      "context": "were cultured in DMEM (Gibco, ref 11960044) supple-mented with 12,5% FCS, 2 mmol/L L-Glutamine, 1X Insulin-Transferin-Selenium, 100 U/mL penicillin-streptomycin, 20 mmol/L HEPES, 10 ng/mL EGF.",
+      "page": 11,
+      "mention_count": 1,
+      "pages_mentioned": [
+        11
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "idiopathic PAH",
+      "preferred_label": "Idiopathic pulmonary arterial hypertension",
+      "abbreviation": "iPAH",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "697898008",
+        "mondo": null,
+        "orpha": "ORPHA:422",
+        "umls": "C0242927",
+        "mesh": "D065627"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:422",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "697898008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0242927",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D065627",
+          "display": "Familial Primary Pulmonary Hypertension"
+        }
+      ],
+      "context": "PAH can occur in the presence of germline mutations (heritable PAH), be associated with diseases, drugs, or toxin exposure, or even in the absence of an identifiable underlying cause (idiopathic PAH). A hallmark of PAH is the progressive and largely irreversible narrowing of small PA [2]. The underlying pathobiology of PAH is multifactorial, and pulmonary endothelial cells (PECs) dysfunction plays a central role in PA remodeling [2]. PECs from patients with PAH (PAH-hPECs) exhibit multiple phe",
+      "page": 2,
+      "mention_count": 3,
+      "pages_mentioned": [
+        2,
+        10,
+        13
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Familial Primary Pulmonary Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heritable PAH",
+      "preferred_label": "Heritable pulmonary arterial hypertension",
+      "abbreviation": "hPAH",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "697897003",
+        "mondo": null,
+        "orpha": "ORPHA:275777",
+        "umls": "C3714756",
+        "mesh": "D065627"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:275777",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "697897003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C3714756",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D065627",
+          "display": "Familial Primary Pulmonary Hypertension"
+        }
+      ],
+      "context": "PAH can occur in the presence of germline mutations (heritable PAH), be associated with diseases, drugs, or toxin exposure, or even in the absence of an identifiable underlying cause (idiopathic PAH). A hallmark of PAH is the progressive and largely irreversible narrowing of small PA [2]. The underlying pathobiology of PAH is multifactorial, and pulmonary endothel",
+      "page": 2,
+      "mention_count": 2,
+      "pages_mentioned": [
+        2,
+        10
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Familial Primary Pulmonary Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pulmonary veno-occlusive disease",
+      "preferred_label": "Pulmonary veno-occlusive disease",
+      "abbreviation": "PVOD",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "J98.4",
+        "icd11": "BB01.0",
+        "snomed": "89420002",
+        "mondo": null,
+        "orpha": "ORPHA:31837",
+        "umls": "C0034091",
+        "mesh": "D011668"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:31837",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "J98.4",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "J98.4",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "89420002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0034091",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011668",
+          "display": null
+        }
+      ],
+      "context": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pulmonary Veno-Occlusive Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pulmonary arterial hypertension",
+      "preferred_label": "Pulmonary arterial hypertension",
+      "abbreviation": "PAH",
+      "confidence": 1.0,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "11399002",
+        "mondo": null,
+        "orpha": "ORPHA:182090",
+        "umls": "C2973725",
+        "mesh": "D000081029"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:182090",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "11399002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C2973725",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000081029",
+          "display": null
+        }
+      ],
+      "context": "TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension",
+      "page": 1,
+      "mention_count": 5,
+      "pages_mentioned": [
+        1,
+        10,
+        13
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Familial Primary Pulmonary Hypertension",
+        "Pulmonary Arterial Hypertension Hereditary Hemorrhagic Telangiectasia-Related",
+        "Neutropenia Severe Congenital Autosomal Recessive 4"
+      ],
+      "pubtator_normalized_name": "Pulmonary Arterial Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "RA",
+      "preferred_label": "Reactive angioendotheliomatosis",
+      "abbreviation": "RA",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:673574",
+        "umls": null,
+        "mesh": "C535293"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:673574",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535293",
+          "display": "Reactive angioendotheliomatosis"
+        }
+      ],
+      "context": "34, Espinoza-Arcos LG, Gonzalez-Avendafio M, Zufiga-Bustos M, Zamora RA, Vergara-Jaque A, Poblete H. Exploring a peripheral PIP2-binding site and its role in the alternative regulation of the TRP channel superfamily. J Gen Physiol. 2025;157:e202413574. https://doi.org/10.1085/jgp.202413574.",
+      "page": 14,
+      "mention_count": 1,
+      "pages_mentioned": [
+        14
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Reactive angioendotheliomatosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Dis",
+      "preferred_label": "Deafness-infertility syndrome",
+      "abbreviation": "DIS",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q93.5",
+        "icd11": "LD2H.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:94064",
+        "umls": null,
+        "mesh": "C567010"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:94064",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q93.5",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LD2H.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567010",
+          "display": "Deafness Sensorineural And Male Infertility"
+        }
+      ],
+      "context": "Guignabert C. Dysfunction and restoration of endothelial cell communications in pulmonary arterial hypertension: therapeutic implications. In: Nakani-shi T, Baldwin HS, Fineman JR, Yamagishi H, editors. Mol. Mech. Congenit. Heart Dis. Pulm. Hypertens. Singapore: Springer; 2020. pp. 147-55. https://doi .0rg/10.1007/978-981-15-1185-1_19.",
+      "page": 13,
+      "mention_count": 1,
+      "pages_mentioned": [
+        13
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Deafness Sensorineural And Male Infertility",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Med",
+      "preferred_label": "Multiple epiphyseal dysplasia",
+      "abbreviation": "MED",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": "LD24.61",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:251",
+        "umls": null,
+        "mesh": "C535501"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:251",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LD24.61",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535501",
+          "display": "Epiphyseal dysplasia multiple 1"
+        }
+      ],
+      "context": "26. Nan J, Li J, Lin Y, Saif Ur Rahman M, Li Z, Zhu L. The interplay between mitochondria and store-operated Ca2 + entry: emerging insights into cardiac diseases. J Cell Mol Med. 2021;25(20):9496-512. https://doi.org/10./jcm m.16941.",
+      "page": 14,
+      "mention_count": 1,
+      "pages_mentioned": [
+        14
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epiphyseal dysplasia multiple 4",
+        "Epiphyseal dysplasia multiple 3",
+        "Osteochondrodysplasias"
+      ],
+      "pubtator_normalized_name": "Epiphyseal dysplasia multiple 1",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital heart disease",
+      "preferred_label": "congenital heart disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005453",
+        "orpha": null,
+        "umls": "UMLS:C0152021",
+        "mesh": "MESH:D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1682",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005207",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57501",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006330",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C95834",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:13213009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2004408087",
+          "display": null
+        }
+      ],
+      "context": "PAH (n=13) Control (n=12) Age, years 13 (46) 72 51 (66) 77 Sex, M/F 3 M/ M/8F Diseases Diagnosis 31% hPAH 100% lung 38% iPAH cancer 8% PVOD 159% PAH with congenital heart disease 8% PH group 5 Mutation in BMPR2 gene Carrier 3 NA no-carrier 10 NA Mutation in SOX17 gene Carrier 1 NA no-carrier 12 NA Hemodynamic parameters mPAP, mmHg 38 (52,5) 65 NA i, L/min/m? 2,1 (2,66) 3,13 NA PVR, Wood units 3,9 (11,22) 18 NA Medication Monotherapies NA NA Bitherapies NA NA",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Hypertension",
+      "preferred_label": "hypertensive disorder",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005044",
+        "orpha": null,
+        "umls": "UMLS:C0020538",
+        "mesh": "MESH:D006973"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10763",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000537",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000822",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I15",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:997.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38341003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020538",
+          "display": null
+        }
+      ],
+      "context": "*Correspondence: Fabrice Antigny fabrice.antigny@inserm.fr ‘Hypertension Pulmonaire : Physiopathologie and Innovation Thérapeutique (HPPIT), Université Paris-Saclay, Inserm, UMR_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN-LUNG, Le Plessis Robinson, France ?Gly-CRRET Research Unit 4397, Paris-Est Créteil Universit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Cat",
+      "preferred_label": "Common arterial trunk",
+      "abbreviation": "CAT",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q20.0",
+        "icd11": "LA85.4",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:3384",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:3384",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q20.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LA85.4",
+          "display": null
+        }
+      ],
+      "context": "We used the wound healing assay to evaluate cell migration. After 48 h of starvation (medium without growth factors: fetal calf serum (FCS), epidermal growth factor (EGF), and insulin), hPECs were plated in a culture insert (Cat. No. 90209; Ibidi) at a density of 2 x 10‘cells per well in a fresh medium with cytosine arabinoside (10 mol/L) to prevent cell proliferation. After allowing cells to attach for 24 h, we removed the culture insert and washed the cells with phosphate-buffered saline to remove non-adherent cells. Cel",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "PBS",
+      "preferred_label": "prune belly syndrome",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q79.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007032",
+        "orpha": "Orphanet:2970",
+        "umls": "UMLS:C0033770",
+        "mesh": "MESH:D011535"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007032",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060889",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7479",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q79.4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.71",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18718",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011535",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10051025",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200185",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85033",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1623",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:100100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2970",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:5187006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0033770",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1393408621",
+          "display": null
+        }
+      ],
+      "context": "min, then blocked and permeabilized for one hour at room temperature with a solution containing 1% BSA (Bovine Serum Albumin), 0.5% Triton X-100, 10% human serum, and 10% donkey serum. The anti-TRPC antibodies (1/200) and anti-vWF (1/200) antibodies were incubated overnight at 4 °C in a solution of PBS, 0.2% BSA, 0.2% Triton X-100, and 3% donkey serum. The slides were then incubated for 1 h in the dark at room temperature with a secondary antibody (1/400) donkey anti-rabbit Alexa Fluor 594 (to detect TRPC) or donkey anti-mouse Alexa 647 (to detect vWF) with 3% human serum and",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "nM",
+      "preferred_label": "Nemaline myopathy",
+      "abbreviation": "NM",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": "8C72.00",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:607",
+        "umls": null,
+        "mesh": "C538397"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:607",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C72.00",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538397",
+          "display": "Nemaline myopathy 5"
+        }
+      ],
+      "context": "hPECs were transfected in suspension by incubating 4x10° cells in a solution containing 1000 pL of OptiMEM (Gibco, ref 31985-062), 6 pL of Lipofectamine RNAiMax (Invitrogen, ref 13778-150), and 50 nM of a specific Silencer™ Select siRNA. All the siRNA used in the experiments are summarized in Table 2. Opti-MEM, lipofectamine, and siRNA were mixed for 20 min at room temperature. After harvesting, cells were added to the mix for 20 min. The mix was then put in cell culture dishes containing compl",
+      "page": 11,
+      "mention_count": 1,
+      "pages_mentioned": [
+        11
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myopathies Nemaline",
+        "Intranuclear Rod Myopathy",
+        "Actin-Accumulation Myopathy"
+      ],
+      "pubtator_normalized_name": "Nemaline myopathy 5",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FA",
+      "preferred_label": "Friedreich ataxia",
+      "abbreviation": "FA",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G11.1",
+        "icd11": "8A03.10",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:95",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:95",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G11.1",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8A03.10",
+          "display": null
+        }
+      ],
+      "context": "Conception and design: A.SMW, B.M, V.C, and F.A. Acquisition of data: ASSMW, B.M, L.L, M.D, K.E-J, Y. R, M.G, V.C, and FA. Analysis and interpretation: ASMW, B.M, V.C, and F.A. A.SMW, O.M, D.M, M.H, V.C, and F.A. wrote the initial drafts of the manuscript. All authors reviewed the final draft of the manuscript.",
+      "page": 13,
+      "mention_count": 1,
+      "pages_mentioned": [
+        13
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "HS",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HS",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        }
+      ],
+      "context": "Guignabert C. Dysfunction and restoration of endothelial cell communications in pulmonary arterial hypertension: therapeutic implications. In: Nakani-shi T, Baldwin HS, Fineman JR, Yamagishi H, editors. Mol. Mech. Congenit. Heart Dis. Pulm. Hypertens. Singapore: Springer; 2020. pp. 147-55. https://doi .0rg/10.1007/978-981-15-1185-1_19.",
+      "page": 13,
+      "mention_count": 1,
+      "pages_mentioned": [
+        13
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "idiopathic",
+      "preferred_label": "idiopathic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700005",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D010300"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700005",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:894194405",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010300",
+          "display": "Parkinson Disease"
+        }
+      ],
+      "context": "PAH can occur in the presence of germline mutations (heritable PAH), be associated with diseases, drugs, or toxin exposure, or even in the absence of an identifiable underlying cause (idiopathic PAH). A hallmark of PAH is the progressive and largely irreversible narrowing of small PA [2]. The underlying pathobiology of PAH is multifactorial, and pulmonary endothelial cells (PECs) dysfunction plays a central role in PA remodeling [2]. PECs from patients with PAH (PAH-hPECs) exhibit multiple",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic Noncirrhotic Portal Hypertension",
+        "Idiopathic Pulmonary Fibrosis",
+        "Calcinosis Cutis"
+      ],
+      "pubtator_normalized_name": "Parkinson Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "PAH can occur in the presence of germline mutations (heritable PAH), be associated with diseases, drugs, or toxin exposure, or even in the absence of an identifiable underlying cause (idiopathic PAH). A hallmark of PAH is the progressive and largely irreversible narrowing of small PA [2]. The underlying pathobiology of PAH is multifactorial, and pulmonary endothelial cells (PECs) dysfunction p",
+      "page": 2,
+      "mention_count": 2,
+      "pages_mentioned": [
+        2,
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "acquired",
+      "preferred_label": "acquired",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021141",
+        "orpha": "Orphanet:409941",
+        "umls": null,
+        "mesh": "D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021141",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:409941",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000163",
+          "display": "Acquired Immunodeficiency Syndrome"
+        }
+      ],
+      "context": "DAPI. Antibodies used for immunostaining experiments are listed in Table 4. Immunostaining was observed and acquired under an LSM 900 microscope (Carl Zeiss, Le Pecq, France) equipped with 405-, 488-, 555-, and 639- nm lasers (Carl Zeiss). Images were recorded and analyzed with ZEN software (Carl Zeiss).",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acquired ichthyosis",
+        "Blindness",
+        "Anemia Hemolytic"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        }
+      ],
+      "context": "PAH (n=13) Control (n=12) Age, years 13 (46) 72 51 (66) 77 Sex, M/F 3 M/ M/8F Diseases Diagnosis 31% hPAH 100% lung 38% iPAH cancer 8% PVOD 159% PAH with congenital heart disease 8% PH group 5 Mutation in BMPR2 gene Carrier 3 NA no-carrier 10 NA Mutation in SOX17 gene Carrier 1 NA no-carrier 12 NA Hemodynamic parameters mPAP, mmHg 38 (52,5) 65 NA i, L/min/m? 2,1 (2,66) 3,13 NA PVR, Wood units 3,9 (11,22) 18 NA Medication Monoth",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Wound",
+      "preferred_label": "wound",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "r siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. (n=4 patients for each condition). H Proliferation rate normalized by siControl for siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions measured by BrdU incorporation (n=4 patients for sTRPC1 and n=3 for siTRPC3, siTRPC4, and siTRPC6). | Wound closure normalized by siControl in siTRPC1, siTRPC3, siTRPC4, and TRPC6 conditions after 8 h (n=4 for each condition). ns=non significant; * P< 0.05, **P<0.01",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Wound Infection",
+        "Wounds Nonpenetrating",
+        "Wounds Gunshot"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "PVOD",
+      "preferred_label": "PVOD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009937",
+        "orpha": "Orphanet:31837",
+        "umls": "UMLS:C0034091",
+        "mesh": "MESH:D011668"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009937",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5453",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10153",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:416.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18769",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011668",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10037458",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200427",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85039",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:265450",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:31837",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:89420002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0034091",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1368993024",
+          "display": null
+        }
+      ],
+      "context": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "SMA",
+      "preferred_label": "SMA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019079",
+        "orpha": "Orphanet:70",
+        "umls": "UMLS:C4024957",
+        "mesh": "D055752"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019079",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4531",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:870510",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100231",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1729",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:70",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4024957",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D055752",
+          "display": "Small Cell Lung Carcinoma"
+        }
+      ],
+      "context": "r our cultured hPECs expressed three different endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPECs do not express alphasmooth muscle actin (a-SMA), a marker of smooth muscle cell, contrary to our human PA smooth muscle cells (hPASMCs) (Fig. 1B).",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carcinoma Non-Small-Cell Lung"
+      ],
+      "pubtator_normalized_name": "Small Cell Lung Carcinoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MEM",
+      "preferred_label": "MEM",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008001",
+        "orpha": null,
+        "umls": "UMLS:C0343079",
+        "mesh": "MESH:C562823"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008001",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:83356",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562823",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:157400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:238749001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0343079",
+          "display": null
+        }
+      ],
+      "context": "re transfected in suspension by incubating 4x10° cells in a solution containing 1000 pL of OptiMEM (Gibco, ref 31985-062), 6 pL of Lipofectamine RNAiMax (Invitrogen, ref 13778-150), and 50 nM of a specific Silencer™ Select siRNA. All the siRNA used in the experiments are summarized in Table 2. Opti-MEM, lipofectamine, and siRNA were mixed for 20 min at room temperature. After harvesting, cells were added to the mix for 20 min. The mix was then put in cell culture dishes containing complete MCDB medium. Media were changed 24 h after transfection. All experiments were performed 72 h after hPECs tra",
+      "page": 11,
+      "mention_count": 1,
+      "pages_mentioned": [
+        11
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "gPC",
+      "preferred_label": "GPC",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002308",
+        "orpha": null,
+        "umls": "UMLS:C0009769",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002308",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2457",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:372.39",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3210",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34507",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:231857004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009769",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:8559059",
+          "display": null
+        }
+      ],
+      "context": "Table 3 Primers used in RT-gPC in PAHPECs",
+      "page": 11,
+      "mention_count": 1,
+      "pages_mentioned": [
+        11
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ACC",
+      "preferred_label": "ACC",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009022",
+        "orpha": "Orphanet:200",
+        "umls": "UMLS:C0175754",
+        "mesh": "MESH:D061085"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009022",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:104498",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D061085",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98905",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:217990",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:200",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:5102002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0175754",
+          "display": null
+        }
+      ],
+      "context": "1/200 DAKO M0823 VE-Cadherin, Alexa Mouse 1/200 Invitrogen MA5-44146 Fluor 647 VWF Mouse 1/200 Sigma-AMAB9091 Aldrich Donkey anti-rabbit | Donkey 1/400 Invitrogen A-21207 Alexa Fluor 594 Donkey anti-mouse Donkey 1/400 Invitrogen 715-606- Alexa Fluor 647 151 Western blot TRPC1 Rabbit 1/1000 Alomone ACC-010 TRPC3 Rabbit 1/1000 Alomone ACC-016 TRPC4 Rabbit 1/1000 Alomone ACC-018 TRPC6 Rabbit 1/1000 Alomnone ACC-017 b-actin-HRP Mouse 1/3000 Santa Sc-47778 Cruz Biotech-",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CBA",
+      "preferred_label": "CBA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018841",
+        "orpha": "Orphanet:485631",
+        "umls": "UMLS:C5680095",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018841",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050674",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009039",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21996",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1826069",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:607765",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:485631",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5680095",
+          "display": null
+        }
+      ],
+      "context": "96-well plates were precoated with extracellular matrix gel prepared from Engelbreth-Holm-Swarm (EHS) tumor cells (Clinisciences; #CBA-200). 72 h after control-hPECs transfection, 5 x 10° cells/well were seeded onto the gel. Cells were incubated for 3 h at 37 °C in the standard culture medium, and tubular network visualization was performed after staining cells with Calcein/AM dye (10 umol/L) using EVOS (Invitrogen). As previously",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "BSA",
+      "preferred_label": "BSA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100501",
+        "orpha": null,
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100501",
+          "display": null
+        }
+      ],
+      "context": "deparaffinized in xylene baths before rehydration in alcohol. Epitope unmasking was performed in a pH 9 buffer using a 2100 Antigen Retriever (Aptum). The slides were saturated with 0.5 M NH,Cl for 15 min, then blocked and permeabilized for one hour at room temperature with a solution containing 1% BSA (Bovine Serum Albumin), 0.5% Triton X-100, 10% human serum, and 10% donkey serum. The anti-TRPC antibodies (1/200) and anti-vWF (1/200) antibodies were incubated overnight at 4 °C in a solution of PBS, 0.2% BSA, 0.2% Triton X-100, and 3% donkey serum. The slides were then incubated for 1 h in the d",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "AFM",
+      "preferred_label": "AFM",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G04.82",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100115",
+        "orpha": "Orphanet:623801",
+        "umls": "UMLS:C4290000",
+        "mesh": "MESH:C000629404"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100115",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080947",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:13142",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G04.82",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:927532",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C000629404",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128379",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:623801",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4290000",
+          "display": null
+        }
+      ],
+      "context": "This study was supported by grants from the French National Institute for Health and Medical Research (INSERM), the Université Paris-Saclay, the Marie Lannelongue Hospital, and the French National Agency for Research (ANR). This work was supported by a grant from Fondation Maladies Rares and AFM-Téléthon #POCs(2023)-121503. A.SMW and B.M. are supported by the Therapeutic Innovation Doctoral School (ED569). K-EJ is supported by the French patient association HTAP France.",
+      "page": 13,
+      "mention_count": 1,
+      "pages_mentioned": [
+        13
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

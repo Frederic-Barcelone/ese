@@ -1,0 +1,219 @@
+--- Page 1 ---
+
+BMC Rheumatology
+Siri et al. BMC Rheumatology (2025) 9:129 https://doi.org/10.1186/s41927-025-00585-w
+Gastrointestinal involvement in granulomatosis with polyangiitis: frequency, clinical impact, and prognostic implications in a retrospective cohort study
+Goli Siri', Seyed Farshad Allameh?, Mahsa Heidari-Foroozan?, Abdolreza Raee*”, Mohammad Sadidi! and ahgol Meshkati?”
+Abstract
+Background Granulomatosis with polyangiitis (GPA) is a rare form of antineutrophil cytoplasmic antibody (ANCA)- associated vasculitis that can involve multiple organ systems, including the gastrointestinal (Gl) tract. Although Gl manifestations are relatively uncommon, they may be associated with serious complications and adverse outcomes. This study aimed to assess the frequency and types of Gl involvement in patients with GPA and to examine their relationship with disease severity, prognosis, and treatment response.
+Methods In this retrospective cohort study, clinical records of 220 patients with a confirmed diagnosis of GPA who were referred to Amir Alam Hospital between 2013 and 2021 were reviewed. Data on demographic characteristics, Gl symptoms, Birmingham Vasculitis Activity Score (BVAS), therapeutic response, relapse rates, and mortality were collected and analyzed.
+Results Gl involvement was observed in 18 patients (8.2%). The most common manifestations included hepatitis, mesenteric ischemia, diarrhea, pancreatitis, and elevated liver enzymes. Patients with Gl involvement had significantly higher BVAS scores (mean 21 vs. 15.8, p=0.004), a markedly increased mortality risk (hazard ratio= 3.24, p< 0.001), and a shorter time to first relapse (mean 5.2 vs. 10.3 months, p=0.041) compared to those without Gl symptoms.
+Conclusion Gastrointestinal involvement in GPA is associated with more severe disease activity, diminished treatment response, and increased mortality. Early detection and appropriate management of GI manifestations may improve clinical outcomes. Further prospective studies are warranted to elucidate the underlying mechanisms and optimize treatment strategies for this high-risk subgroup.
+Keywords Granulomatosis with polyangiitis, Gastrointestinal manifestations, Vasculitis, BVAS, Prognosis, Treatment outcome
+*Correspondence: Mahgol Meshkati mahgol.m.1373@gmail.com Department of Internal Medicine, School of Medicine, Amiralam Hospital, Tehran University of Medical Sciences, Tehran, Iran Department of Internal Medicine, School of Medicine, Imam Khomeini Hospital Complex, Tehran University of Medical Sciences, Tehran, Iran
+Department of Radiation Oncology, Cancer Institute, Imam Khomeini Hospital Complex, Tehran University of Medical Sciences, Tehran, Iran *Radiation Oncology Research Center, Cancer Research Institute, Imam Khomeini Hospital Complex, Tehran University of Medical Sciences, Tehran, Iran
+Student Research Committee, School of Medicine, Shahid Beheshti University of Medical Sciences, Tehran, Iran
+© The Author(s) 2025. Open Access This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in any mediurn or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Cornmons licence, and indicate if you modified the licensed material. You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party material in this article are included in the article's Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article's Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http//creati vecommonsorg/licenses/by-nc-nd/4.0/.
+
+--- Page 2 ---
+
+Page
+Siri et al. BMC Rheumatology (2025) 9:129
+management of this rare yet significant aspect of the disease.
+Introduction
+Granulomatosis with polyangiitis (GPA), formerly known as Wegener’s granulomatosis, is a rare but potentially life-threatening autoimmune vasculitis classified under antineutrophil cytoplasmic antibody (ANCA)-associated vasculitides (AAVs) [1]. It mostly affects small to medium sized vessels and may result in multiorgan dysfunction and noticeable mortality if it is left untreated [2, 3]. While GPA is uncommon in the pediatric population, it is the most prevalent life-threatening vasculitis in adults, with studies reporting mortality rates of up to 20% within the first year of diagnosis [4].
+Methods
+Study design and population
+This is a retrospective cohort study involving Iranian patients diagnosed with GPA according to the 1990 American College of Rheumatology (ACR) criteria and the European Medicines Agency (EMA) algorithm. The study includes all patients aged 16 years or older who were either hospitalized or seen in the rheumatology outpatient clinic at Amir Alam Hospital between 2013 and 2021. Based on hospital records and clinical estimates, approximately 30-40 GPA new cases are seen annually with strong clinical suspicion for GPA considering that this center is the country’s rheumatology center, totaling an estimated 210-280 patients over the study period. Due to the rarity of the disease, a census method will be used, and all eligible patients within the study period will be included.
+Although GPA commonly presents with involvement of the upper and lower respiratory tract and kidneys, gastrointestinal (GI) manifestations are considered uncommon, reported in only 5—10% of cases [5]. Nevertheless, when present, GI involvement can lead to severe compli-cations, including mesenteric ischemia, intestinal perforation, and massive gastrointestinal bleeding, which can be fatal. GI symptoms in GPA can affect the entire digestive tract and may arise either as a direct manifestation of vasculitis or as collateral effects of immunosuppressive therapies used in disease management [6].
+The ACR 1990 criteria require at least two of the following for GPA diagnosis [10]:
+1. Granulomatous inflammation on biopsy;
+Maziak et al. (2016) reported that 26% of patients with GPA suffered from GI symptoms during the disease course, comprising of oral ulcers, dyspepsia, diarrhea, nausea, vomiting, gastrointestinal bleeding, and intestinal perforation. Noticeably, 22% of those with GI bleeding yielded to the disease, underscoring the need for greater clinical attention to these manifestations [6]. Similarly, Eriksson et al. demonstrated that abdominal pain and GI bleeding were among the most common GI symptoms in GPA patients, and those with such symptoms had signifi-cantly higher disease activity scores, although overall survival was not statistically different from patients without GI involvement [7].
+2. Microscopic hematuria or red blood cell casts;
+3. Chest radiographic abnormalities (e.g., nodules, infiltrates, cavitation);
+4. Nasal or oral inflammation (e.g., ulcers, purulent or bloody discharge).
+Also we used EMA 2007 algorithm with 3 presumptions, at least 3 months follow-up, age at least 16 years old and require to at least biopsy proven vasculitis, ANCA positive, confirm vasculitis or granuloma by other diagnostic modality like angiography or MRI [11].
+Based on EMA and CHCC 2012 the patient in four ways diagnosed GPA (Fig. 1): (1) Based on ACR 1990 diagnosed GPA, (2) Biopsy proven tissue sample for GPA, (3) Tissue sample confirmed MPA but clinical sign and symptoms of GPA, (4) ANCA positive and clinical features of GPA without tissue sample.
+Despite numerous recent case reports describing GPArelated GI complications such as elevated liver enzymes, hepatitis, esophageal ulcers, gastritis, and colitis, large-scale cohort studies examining the frequency of GI involvement and its impact on treatment response and prognosis remain limited [8, 9]. A better comprehension of these features could contribute to improved diagnostic accuracy, earlier therapeutic intervention, and potentially better outcomes.
+Patients with incomplete diagnostic information that cannot be retrieved through follow-up phone calls will be excluded.
+Inclusion criteria’s: age > 16 years old, at least 3 months follow up, GPA diagnosis based on the algorithm.
+In this retrospective cohort study, we evaluate the frequency, clinical presentation, and prognostic implications of gastrointestinal manifestations in Iranian patients with GPA. We also compare therapeutic responses and outcomes between patients with and without GI involvement. Given the diagnostic challenges and potentially fatal complications associated with GI manifestations in GPA, our study seeks to provide updated evidence that may guide clinicians in the timely recognition and
+Exclusion criteria’s: patients meet criteria for EGPA, patient has small vessels features, ANCA + but no GPA features, biopsy or imaging evidence consistent with PAN {12].
+Data collection and variables
+Patient data will be collected through detailed chart review of inpatient and outpatient records and, when
+
+--- Page 3 ---
+
+(2025) 9:129
+Page
+Siri et al. BMC Rheumatology
+Patients with clinical diagnosis of vasculitis Yes ™e EGPA <— — Meets ACR criteria for EGPA Ny Yes GPA Meets ACR criteria for GPA Yes GPA g¢_ Biopsy consistent with GPA (CHCC) Yes GPA ¢—— Yes GPA gq Yes MPA Yes a Biopsy consistent with MPA (CHCC) + clinical GPA features Na ANCA positive (PR3/MPO) + clinical GPA features, no biopsy a <¢— Clinical + biopsy evidence of small vessels vasculitis no GPA features Na MPA <— _ ANCA positive (PR3/MPO) + Renal vasculitis no GPA features Yes ™a PAN —— Biopsy/Angiographic evidence consistent with PAN (CHCC) ™a
+Unclassified
+Fig. 1 Diagnosis algorithm
+necessary, supplemented by telephone interviews. All data will be entered into SPSS software. To ensure data quality, two independent researchers will enter the data into Excel, and 15% of entries will be randomly rechecked. In the case of deceased patients, information on the cause and timing of death and medications received will be gathered through phone interviews with next of kin.
+methylprednisolone) and maintenance therapies (prednisolone, azathioprine, methotrexate, mycophenolate mofetil). Treatment response: assessed using BVAS-WG scores. Complete remission is defined as a BVAS-WG score of zero after treatment, partial remission as a>50% reduction in BVAS-WG, and relapse as any increase in BVAS-WG. Prognostic outcomes: relapse and mortality rates.
+The following variables will be recorded:
+Descriptive statistics will be used to summarize the data. Continuous variables will be reported as means and standard deviations (if normally distributed) or medians and interquartile ranges (if not). Categorical variables will be compared using the Chi-square test, with Yates’ correction or Fisher’s exact test where appropriate. The Student’s t-test will be used to compare continuous variables between groups (e.g., disease severity by BVAS score). A p-value <0.05 will be considered statistically significant. Hazard ratios will be calculated to compare relapse and mortality rates between patients with and without gastrointestinal involvement.
+Demographics: gender, age at diagnosis, time from symptom onset to diagnosis, and follow-up duration. Clinical features: organ involvement and symptoms at presentation, assessed using the Birmingham Vasculitis Activity Score for Wegener's Granulomatosis (BVAS-WG). Gastrointestinal symptoms, including elevated liver enzymes (AST, ALT >79 IU/L; ALP > 306 IU/L), GI bleeding, diarrhea, nausea, vomiting, mesenteric ischemia, ascites, pancreatitis, hepatomegaly, hepatitis, and abdominal pain, will be documented. Treatment regimens: types, doses, and duration of induction therapies (cyclophosphamide,
+Statistical analysis
+
+--- Page 4 ---
+
+Page
+Siri et al. BMC Rheumatology (2025) 9:129
+Table 1 Patient demographics
+patients showed the first symptoms at the fourth decade of their life (Table 1).
+With GI Without GI Whole p- involvement(18) involvement(202) sample(220) val-ue Sex(f) 7 (38.9) 101 (50) 108 (49.1) 0.367 age 52.53 (13.38) 49.7 (16.49) 49.92 (16.26) 0.384 Age 46.94 (12.90) 44.23(16.17) 44.48 (15.93) 0.435 at the time of diagnosis Delay 2 (1.87) 1.97(3.46) 1.97(3.36) 0.284 in diagnosis
+Due to the variable presentation of symptoms and asynchronous onset across organ systems, a diagnostic delay was observed, with some patients experiencing up to 25 months delay between symptom onset and confirmed diagnosis.
+Clinical presentation
+1. At diagnosis, the most common organ system involvements were otologic, nasal, sinus, ocular, pulmonary, subglottic, followed by eosinophilia, facial nerve palsy, dermatologic, central nervous system vasculitis, asthma, and renal involvement. Serologically, 29 patients were MPO-positive and 142 patients were PR3-positive (Fig. 2). Additionally, 52 patients presented with pseudotumor-like manifestations (Supplementary Fig. 1). Out of our 220 patients, 3 had eosinophilia above 10% and 2 had asthma, but all of these people are PR3 positive and ultimately did not meet the required score to confirm EGPA. In gastrointestinal patients, we generally did not have eosinophilia or asthma.
+Consent to participate
+Participants were informed of the study and gave written consent for use of their data.
+Results
+Patient characteristics
+A total of 220 patients diagnosed with GPA were included in this study, comprising 112 males and 108 females. The mean age at the time of enrollment was 50.08 + 16.26 years (range: 13-80), and the mean age at diagnosis was 44,48 +15.93 years (range: 16-80). Furthermore, most
+Out of the 220 patients, 18 (8.2%) exhibited gastroin-testinal (GI) involvement during follow-up before exact
+arthritis, 1,0%
+Se rology
+™
+=
+=
+=
+=
+=
+=
+=
+=
+=
+Fig. 2 Clinical symptoms at the time of diagnosis
+
+--- Page 5 ---
+
+Siri et al. BMC Rheumatology (2025) 9:129
+diagnosis of GPA so patients at diagnosis before any treatments given, divided to GI involvement patients or patients without GI involvement, including hepatitis, hepatomegaly, splenomegaly, mesenteric ischemia, diarrhea, effusion, and pancreatitis (Supplementary Fig. 2). GI signs and symptoms first documented with chief complain and physical exam then based on results imaging and tissue sampling perform for example hepato-splenomegaly and mesenteric ischemia documented with imaging and later confirmed with surgery. Liver enzyme evaluation showed 15 patients had elevated ALT and 12 patients had elevated AST level, then liver biopsy confirmed hepatitis.
+Gastrointestinal patients are recorded in Table 2 with their clinical symptoms and treatment measures. As can be seen in the table, all patients initially had gastrointesti-nal symptoms or liver enzyme abnormalities. During the follow-up of the non-gastrointestinal patient, no obvious gastrointestinal symptoms were found to be added to the gastrointestinal patients.
+The pancreatic symptom mentioned in Supplementary Fig. 2 is related to patient number 1, who initially pre-sented with pancreatic pseudotumor. The ascites symptom mentioned in Supplementary Fig. 2 is for patient number 4, who initially had hepatitis and developed ascites during the course of the disease, but it should be noted that the patient also had proteinuria and kidney problems. Two patients are also mentioned in Supple-mentary Fig. 2 as having splenomegaly, and in fact, these patients number 2 and 18 had hepatosplenomegaly from the beginning and the cause was not splenic infarction or hypodense nodules. Patient 18 initially presented with
+Table 2 Clinical description of 18 Gastrointestinal patients
+Patientno. Age LagofDx(months) Serology Organ involvment at GPA diagnosis First BVAS InductionTx MaintenanceTx Prognosis 65 3-ENT, LK, PM 391-Li, ENT. 38 0 PR3 Li, ENT, LK, eye, HF 63 4 PR3 ENT, K;S, Li 62 3 PR3 Li, GENT, L 68 2 PR3 ENT, Li 51 0-Li, ENT, LK, eye, S 56 2 PR3 ENT, Keye, C,Li 54. 6 PR3 ENT, LK, Li 28 4 PR3 ENT, LK, Li 68 0 PR3 ENT, L.Li, JM 69 0 PR3 ENT, Li, MJ 58 2 PR3 ENT, K,C, eye, Li 51 0 PR3 ENT, K,C, eye, MLi 50 4-ENT, Li 52 3 PR3 ENT, LG, Li 39 0 PR3 ENT, KL, Geye, HF, Li 40 2 PR3 ENT, Li 34 Cyc PD, RTX, Cyc D 13 Cyc+Pulse = PD5,Aza L 34 Cyc+Pulse = PD5,Aza D 26 Cyc+Pulse = PD7.5 D 19 Cyc + Pulse PDS50,Aza L 9 Cyc PD2.5 L 32 Cyc + Pulse PD, RTX, Cyc D 28 Cyc+Pulse = PD60 D 17 Cyc+Pulse — Celcept, PD60 L 6 MTX MTX, PD30 D 18 Aza+pulse = PDS L 15 Aza+pulse = RTX L 30 Cyc+Pulse = PD30 D 35 Cyc+Pulse = PD45,Cyc D 6 MTX PD60,Cyc D 19 Cyc + Pulse PD60,Aza L 37 Cyc+Pulse = PDS D 9 Aza RTX L
+ENT: ear, nose and throat, L: lung, K: kidney, P: pancreas, C: nervous system, M: mucosa, J: joint, S: skin, Li: liver, HF: heart failure, Cyc: cyclophosphamide, Aza: azathioprine, Pulse: pulse methylprednisolone, RTX: rituximab, PD: prednisolone
+Page
+liver enzyme abnormalities, which developed hepato-splenomegaly, proteinuria, alveolar hemorrhage, and mesenteric ischemia during treatment, which was controlled with surgery and initiation of rituximab. The patient is currently in complete response. The second case of mesenteric ischemia mentioned in Supplemen-tary Fig. 2 is Patient 15, who died during treatment due to mesenteric ischemia. Two patients had diarrhea according to the chart, which was added during the course of the disease. In Patient 11, the patient developed diarrhea following azathioprine, which was changed to cyclophos-phamide, and then was placed on maintenance therapy with prednisolone. The other case was Patient 4, who had diarrhea from the beginning of maintenance therapy (Table 2).
+BVAS-WG scoring
+Comparison of disease activity between patients with and without gastrointestinal (GI) symptoms revealed statistically significant differences. At the time of diagnosis, the mean BVAS score was significantly higher in patients with GI manifestations compared to those without (21.0 + 10.13 vs. 15.8 + 7.43; p =0.004). Similarly, after follow-up time with median of 19 months, patients with GI symptoms continued to exhibit higher disease activity (8.47+9.24 vs. 4.43 +7.72; p=0.042). However, when adjusted for covariates using ANCOVA, the difference in final BVAS scores between the two groups was not statistically significant (adjusted mean 0.66+1.11 vs. 4.66 + 0.52; p= 0.266) (Table 3).
+
+--- Page 6 ---
+
+Page
+Siri et al. BMC Rheumatology (2025) 9:129
+Table 4 Relapse time
+Table 3 BVAS score during follow-up
+Group Mean+SD Mean+SD Statistical Test P- (Without GI (With GI valSymptoms) Symptoms) ue Disease 1.0141.05 141+071 Mann-Whitney 0.394 Relapse Partial 1.0740.95 0.82+0.64 Mann-Whitney 0.447 Response Com-1.2941.16 1.114136 Mann-Whitney 0.384 plete Response Timeto 8.2+9.02 6445.87 Mann-Whitney 0.450 Relapse
+Group Mean+SD Mean+SD Statistical P- (Without GI (With GI Test valSymptoms) Symptoms) ue BVAS Score = 15.8+7.43 2141013 Indepen-0.004 at Diagnosis dent t-test BVAS 4.434772 84749.24 Indepen-0.042 Score After dent t-test Follow-Up Final Ad-4.66+0.522 0.66 (SE=1.11) ANCOVA — 0.266 justed Score (ANCOVA)
+Treatment
+Patients received induction therapy with various combinations of cyclophosphamide, pulse methylprednisolone, rituximab, methotrexate, azathioprine, and mycophe-nolate mofetil. Maintenance regimens included rituximab, methotrexate, azathioprine, and mycophenolate Prednisolone therapy was initiated at a mean dose of 51.1 mg (+7.5) (Fig. 3). It should be noted that except for 2 patients, all patients received prednisolone during the course of treatment, and Fig. 3 only shows pulsed prednisolone.
+group compared to 8.2 months (+ 9.02) in the total cohort (p= 0.4105) (Table 4).
+The mean time to reaching 5 mg prednisolone was 11.47 months (+10.22). Time to complete tapering of prednisolone averaged 30.78 months (+ 25.36), and time to complete discontinuation of all medications averaged 43.75 months (+32.44). The mean time to first relapse was 10.34 months (+ 10.59), and the mean time to death was 19.7 months (+ 27.74).
+Among GI patients, the mean time to reach 5 mg prednisolone was 9.75 months (+2.98), and none achieved discontinuation of corticosteroids or immunosuppres-sive drugs. The mean time to first relapse was 5.2 months (+ 2.97) (p=0.041), and the mean time to death was 13.6 months (+ 15.23). The difference in time to tapering prednisolone to 5 mg between groups was not statistically significant (p= 0.37).
+During a median follow-up of 19 months (range: 1-172), 84 patients (38.2%) did not experience relapse. Two patients had up to five relapses. The mean number of relapses was 1.01 (+ 1.05). Mean partial and complete responses were 1.07(+0.95) and 1.29(+ 1.16), respectively.
+Among the 18 GI patients, only one did not relapse. The mean number of relapses in this group was 1.41 (+0.71), with mean partial and complete responses of 0.82 (+0.64) and 1.11(+1.36), respectively. The mean time to first relapse was 6.4 months (+5.87) in the GI
+Mortality
+Of the 220 patients, 67 deaths (30.5%) occurred. Causes of death were: vasculitis-related (n= 24), cardiovascular
+A
+B
+Wfrequency Mpercentage
+Fig. 3 A) Patients under induction treatment. B) Patients under maintenance treatment
+
+--- Page 7 ---
+
+(2025) 9:129
+Siri et al. BMC Rheumatology
+Page
+Fig. 4 Overall survival (left) and Relapse free survival (right) analysis
+Table 5 Mortality rate comparison between two groups
+Group Number of NumMortal-Z P- patients berof ity Rate value deaths (%) Without Gl 202 57 28 2.19 0.0285 Symptoms With GlSymptoms 18 10 55.56
+(n=23), infectious (1=15), malignancy (m=5), and gastrointestinal hemorrhage (1 = 2) (The patients mentioned suffered from gastrointestinal bleeding at the start of induction therapy and had no pre-existing gastrointesti-nal symptoms). Two patients had overlapping cardiovas-cular and infectious causes.
+Among GI patients, 10 out of 18 died: 7 from vasculitis-related causes (One case due to mesenteric ischemia), 2 from cardiovascular events, and 1 from infection (Table 5).
+Survival analysis
+vasculitis. While GPA is often characterized by involvement of the upper respiratory tract, lungs, and kidneys, our findings underscore that GI involvement, although less frequent, may be a marker of more aggressive disease and worse clinical outcomes. While our results are in line with prior reports by Eriksson et al. (6.5%) and Masiak et al. (26%), it is important to compare them to other large cohort studies to provide better context. For instance, the frequency of GI involvement in GPA has been reported as 3.8% in a study conducted by Schirmer et al., 4.4% [13] in the study of Solans-Laqué et al. [14] however, unlike the aforementioned study, the digestive causes in our study were mostly liver problems, while the study by Erickson et al. was mostly peptic ulcers. This variability may reflect differences in patient populations, diagnos-tic thresholds, and study methodologies. The wide range in reported prevalence can be attributed to several key factors. Firstly, diagnostic thresholds vary significantly; some studies may have included only clinically apparent
+Comparison of mortality between GI and non-GI patients using the Z-proportion test revealed a significant difference (Z=2.19, p=0.0285). We performed two Cox regression for relapse free survival and overall survival analysis (Tables 6 and 7) that demonstrated significantly shorter relapse free survival with hazard ratio of 2.989 (95% Cl: 1697 — 5.266, p< 0.001) and lower survival in GIinvolved patients, with a hazard ratio of 3.247 (95% CI: 1.638-6.434, p = 0.001) (Fig. 4).
+Discussion
+This study investigated the frequency and clinical significance of GI manifestations in patients with GPA, a rare but potentially life-threatening ANCA-associated
+Variable and covariates B SE p-value Hazard ratio 95.0% Cl for hazard ratio Lower Upper Gl involvment 1.095 0.289 <0,001 2.989 1.697 5.266
+Table 6 Cox analysis relapse free survival data
+Variable and covariates B SE p-value Hazard ratio 95.0% Cl for hazard ratio Lower Upper Gl involvment 1.178 0.3490 0.001 3.247 1.638 6.434 Age 0.041 0.008 0.001 1.042 1.026 1.058 PR3 0.278 0.267 0.297 1.321 0.783 2.227
+Table 7 Cox analysis overall survival data
+
+--- Page 8 ---
+
+Page
+Siri et al. BMC Rheumatology (2025) 9:129
+with higher severity [17]. However, unlike Eriksson's study, which found no significant difference in survival between patients with and without GI involvement, our findings demonstrated that patients with GI manifestations not only had higher disease activity but also exhibited increased mortality and reduced survival (hazard ratio 3.25, p = 0.001). This discrepancy may be attributed to differences in the nature of GI symptoms or delays in diagnosis in our study population.
+symptoms or severe complications (e.g., ischemia, bleeding), while others used subclinical, radiological, or laboratory findings such as isolated enzyme elevations without corroborating clinical evidence. Secondly, referral bias is a major consideration; as a tertiary care center, our cohort likely captures a higher proportion of severe and complex cases, which may inflate the observed prevalence of GI involvement compared to population-based studies. Additionally, differences in disease severity at presentation, or the inclusion of drug related GI effects without rigorous exclusion of toxicity could contribute to these differences [6, 7].
+In terms of symptom profile, manifestations such as hepatitis, hepatomegaly, mesenteric ischemia, diarthea, effusion, and pancreatitis were observed among our patients with gastrointestinal (GI) involvement. This contrasts somewhat with the findings of Latus et al. [18] and Masiak et al. [6] where greater emphasis was placed on abdominal pain, GI bleeding, and diarrhea as the pre-dominant features. A significant proportion of patients with gastrointestinal symptoms were observed, which could be due to direct liver involvement, as most patients had liver problems from the beginning and none of the liver manifestations were due to drugs effects. This finding is also consistent with the report by Lotus et al., where patients developed elevated liver enzymes after receiving azathioprine and their medication was changed. In our patients, one patient had a drug change due to diarrhea caused by azathioprine [7].
+The prognostic significance of GI involvement in systemic vasculitis is not a novel finding; it has been a cornerstone of risk stratification for decades, most notably through its inclusion in the Five-Factor Score (FFS). Initially developed for polyarteritis nodosa (PAN), microscopic polyangiitis (MPA), and eosinophilic granulomatosis with polyangiitis (EGPA, then CSS), the FFS was revised and validated by the French Vasculi-tis Study Group (FVSG) in 2009 to include GPA. In this large cohort of 1,108 patients, the revised FFS identified four factors including age >65 years, cardiac involvement, renal insufficiency (creatinine > 150 mol/L), and GI involvement that were each independently associated with a higher 5-year mortality and accorded + 1 point. Our data strongly support this long-standing observation, confirming that GI involvement is a marker of severe disease. Furthermore, the 2009 FFS demonstrated a striking dose-dependent increase in mortality: 5-year survival rates were 91% for a score of 0, 79% for a score of 1, and only 60% for a score of > 2. This underscores the critical importance of the FFS in identifying high-risk patients at diagnosis who may require more aggressive therapeutic strategies [15].
+Another key finding is that patients with GI symptoms not only had a poorer response to treatment (Inability to discontinue medications and stop prednisolone), but also experienced earlier and more frequent relapses (mean time to relapse: 5.2 vs. 10.3 months; p = 0.041 and shorter RFS with hazard ratio of 2.989, p < 0.001). This is of particular clinical relevance in the management of GPA patients with GI involvement, as it suggests a need for more intensive monitoring, tailored pharmacologic strategies, and possibly more aggressive therapeutic interventions in this subgroup. These findings align with Comarmond et al. [1], study that reported a more complex treatment course and higher relapse rates among patients with extrapulmonary and extrarenal involvement including the GI tract outside of the classic ELK (ENT, lung, kidney) pattern [14].
+The most frequent GI manifestations in our patients including hepatitis, mesenteric ischemia, diarrhea, pancreatitis, hepatomegaly, and elevated liver enzymes are consistent with those reported by Bagai et al. and Pan et al., who described both frequent hepatic abnormali-ties and rare but severe intestinal presentations. These findings support the notion that while GI involvement in GPA is relatively uncommon, it encompasses a wide clinical spectrum and may be associated with significant morbidity if not promptly recognized and managed [5, 16].
+It should be noted that two of the deaths reported in our study were due to gastrointestinal bleeding, but these bleedings were due to the methylprednisolone pulse and not to the patients’ gastrointestinal symptoms, in contrast with the findings of Masiak et al. who associated 22% of GI patient mortality with bleeding [6], as well as Wojciechowska et al., who reported bowel perforation and the need for surgical intervention in patients with GI involvement, In our study, there were two cases of mesenteric ischemia, one of which died [19]. Moreover, our study demonstrated a significantly higher mortality rate among G]-involved patients compared to others
+Interestingly, in our study, patients with GI manifestations had significantly BVAS compared to those without GI involvement (mean 21 vs. 15.8, p = 0.004), a finding consistent with the results reported by Eriksson et al., who also observed increased disease severity in patients with GI involvement [7]. Similarly, Grygiel-Gérniak et al. showed that involvement of extrapulmonary organs, including the gastrointestinal system, is often associated
+
+--- Page 9 ---
+
+Page
+Siri et al. BMC Rheumatology (2025) 9:129
+(p = 0.028), highlighting the prognostic importance of GI manifestations and the need for early detection and aggressive intervention.
+CHCC Chapel Hill Consensus Conference EGPA Eosinophilic Granulomatosis with Polyangiitis PAN Polyarteritis Nodosa SPSS Statistical Package for the Social Sciences BVAS-WG Birmingham Vasculitis Activity Score for Wegener's Granulomatosis AST. Aspartate Aminotransferase ALT Alanine Aminotransferase ALP Alkaline Phosphatase MPO Myeloperoxidase PR3 Proteinase 3 ENT Ear, Nose and Throat L Lung K Kidney P Pancreas Nervous System M Mucosa Joint S Skin Li Liver HF Heart Failure ge Cyclophosphamide Aza Azathioprine Pulse Pulse Methylprednisolone RTX Rituximab PD Prednisolone D Death L Living Tx Treatment SD Standard Deviation ANCOVA Analysis of Covariance SE Standard Error MTX Methotrexate a Confidence Interval FFS Five-Factor Score MPA. Microscopic Polyangiitis css Churg-Strauss Syndrome FVSG French Vasculitis Study Group ELK ENT, Lung, Kidney Acknowledgements
+From a diagnostic perspective, several case reports such as those by Yoshikawa et al. and Rolle et al. have highlighted GI symptoms as the initial presentation of GPA. For instance, Yoshikawa described a patient who initially presented with oral ulcers and bloody diarrhea and was later diagnosed with GPA [4, 20]. Similarly, Ahmed et al., focusing on ocular involvement in GPA, emphasized that atypical manifestations including GI or ocular symptoms may contribute to diagnostic delays and more severe complications [21].
+Cc
+J
+Strengths of this study include its relatively large sample size for a single-center GPA cohort in a Middle Eastern population and its comprehensive clinical data spanning nearly a decade. It is one of the few population-based studies in Iran to systematically assess GI manifestations in GPA using standardized disease activity metrics and outcome measures.
+However, several limitations must be acknowledged. The retrospective design may have led to underreporting or misclassification of symptoms, particularly milder or transient GI manifestations. The study was also conducted at a single tertiary referral center, which may limit the generalizability of findings to other populations or care settings. Moreover, causal inference is limited due to the observational nature of the study, and confounding variables such as medication-induced GI symptoms could not always be fully disentangled from vasculitis-related effects. Lastly, the absence of histopathologi-cal confirmation in many GI cases limits mechanistic conclusions.
+Acknowledgements
+Authors would like to appreciate the support and constructive comments of the methodologist(s) research development office, Imamkhomeini Hospital complex, Tehran, Iran.
+Author contributions
+Conclusion
+GS and AR designed the study. MHF and AR wrote the manuscript. SFA and MS and AR did the analysis and designed the graphs. MM supervised the study. All authors have read and confirmed the manuscript.
+Gastrointestinal involvement in GPA, although relatively uncommon, is associated with increased disease severity, higher relapse rates, and significantly elevated mortality. These findings strengthen the importance of early recognition and management of GI symptoms in patients with GPA. Clinicians should maintain a high index of suspicion for GI complications, particularly in patients with elevated disease activity or atypical presentations. Further prospective, multicenter studies are warranted to clarify underlying mechanisms, evaluate predictive biomarkers, and develop targeted therapeutic strategies to improve outcomes in this high-risk subgroup.
+Funding
+No funding was received.
+Data availability
+Data is available from the corresponding author upon reasonable request.
+Declarations
+Ethics approval and consent to participate
+This study adhered to the ethical principles set forth in the Declaration of Helsinki. Ethical approval was granted by the Ethics Review Board of the Amir alam hospital at Tehran University of Medical Sciences (IR TUMS.AMIRALAM. REC.1402.003). All participants were informed of the study and gave written consent for use of their data.
+Abbreviations
+GPA Granulomatosis with Polyangiitis Gl Gastrointestinal ANCA Antineutrophil Cytoplasmic Antibody AAVS ANCA-Associated Vasculitides BVAS Birmingham Vasculitis Activity Score ACR American College of Rheumatology EMA European Medicines Agency
+Consent for publication
+Gl Gastrointestinal
+Not applicable.
+interests
+Competing The authors declare no competing interests.
+
+--- Page 10 ---
+
+Siri et al. BMC Rheumatology (2025) 9:129
+Page
+Hellmich B, Flossmann O, Gross WL, Bacon P, Cohen-Tervaert JW, Guillevin L, et al. EULAR recommendations for conducting clinical studies and/or clinical trials in systemic vasculitis: focus on anti-neutrophil cytoplasm antibody-associated vasculitis. Ann Rheum Dis. 2007;66(5):605-17.
+Received: 24 July 2025 / Accepted: 8 October 2025 Published online: 31 October 2025
+Schirmer JH, Wright MN, Herrmann K, Laudien M, Nélle B, Reinhold-Keller E, et al. Myeloperoxidase-Antineutrophil cytoplasmic antibody (ANCA)-Positive granulomatosis with polyangiitis (Wegener's) is a clinically distinct subset of ANCA-Associated vasculitis: A retrospective analysis of 315 patients from a German vasculitis referral center. Arthritis Rheumatol. 2016;68(12):2953-63.
+References
+1. Comarmond C, Cacoub P. Granulomatosis with polyangiitis (Wegener): clinical aspects and treatment. Autoimmun Rev. 2014;13(11):1121-5.
+2. Potentas-Policewicz M, Fijolek J. Granulomatosis with polyangiitis: clinical characteristics and updates in diagnosis. Front Med. 2024;11.
+Solans-Laqué R, Fraile G, Rodriguez-Carballeira M, Caminal L, Castillo MJ, Martinez-Valle F, et al. Clinical characteristics and outcome of Spanish patients with ANCA-associated vasculitides: impact of the vasculitis type, ANCA specificity, and treatment on mortality and morbidity. Med (Baltim). 2017;96(8):e6083.
+3. Pagnoux C, Mahr A, Cohen P, Guillevin L. Presentation and outcome of Gastrointestinal involvement in systemic necrotizing vasculitides: analysis of 62 patients with polyarteritis nodosa, microscopic polyangiitis, wegener granulomatosis, Churg-Strauss syndrome, or rheumatoid arthritis-associated vasculitis. Med (Baltim). 2005;84(2):1 15-28.
+Guillevin L, Pagnoux C, Seror R, Mahr A, Mouthon L, Toumelin PL. The FiveFactor score revisited: assessment of prognoses of systemic necrotizing vasculitides based on the French vasculitis study group (FVSG) cohort. Med (Baltim). 201 1;90(1):19-27.
+4. — Rolle N, Muruganandam M, Jan |, Harji FM, Harrington J, Konstantinov KN Look granulomatosis with polyangiitis (GPA) straight in the face: missed opportunities leading to a delayed diagnosis. Auto Immun Highlights. 2019;10(1):8.
+Pan S-W, Wang C, Zhang X, Zhang L, Yan Q-Q, Zhao C-J, et al. A rare endoscopic appearance of granulomatosis with polyangiitis involving the intestine: a case report. BMC Gastroenterol. 2018;18(1):154.
+5. Bagai S, Sharma A, Gupta R, Kumar V, Rathi M, Kohli HS, et al. Gastrointestinal involvement in granulomatosis with polyangiitis: case report and review. Indian J Nephrol. 2019;29(6):415-8.
+Grygiel-Gorniak B, Limphaibool N, Perkowska K, Puszczewicz M. Clinical manifestations of granulomatosis with polyangiitis: key considerations and major features. Postgrad Med. 2018;130(7):581-96.
+6. Masiak A, Zdrojewski £, Zdrojewski Z, Butto-Piontecka B, Rutkowski B. Gastrointestinal tract involvement in granulomatosis with polyangiitis. Prz Gastroenterol. 2016;11(4):270-5.
+Latus J, Koetter |, Fritz P Kimmel M, Biegger D, Ott G, et al. Gastrointestinal involvement in granulomatosis with polyangiitis and microscopic polyangiitis: histological features and outcome. Int J Rheum Dis. 2014;17(4):412-9.
+7. Eriksson P, Segelmark M, Hallb6k O, Frequency. Diagnosis, Treatment, and outcome of Gastrointestinal disease in granulomatosis with polyangiitis and microscopic polyangiitis. J Rheumatol. 2018;45(4):529-37.
+Wojciechowska J, KreCicki T. Clinical characteristics of patients with granulomatosis with polyangiitis and microscopic polyangiitis in ENT practice: a comparative analysis. Acta Otorhinolaryngol Ital. 2018;38(6):517-27.
+8. Rolak S, Pham MM, Lam-Himlin DM, Batheja MJ. New diagnosis of granulomatosis with polyangiitis presenting with oral Ulcerations, lleitis, and hematochezia. ACG Case Rep J. 2025;12(6):e01746.
+20. Yoshikawa A, Yoshida S, Takeuchi T, Fujiki Y, Makino S, Hanafusa T. Gastroin-testinal involvement at the onset of granulomatosis with polyangiitis: A case report. Mod Rheumatol. 2017;27(1):162-4.
+9. Alawna R, JalamnehT, Massad M, Alawna N, Rabaia A, Alrub FA. Granulomato-sis with polyangiitis presenting with intestinal obstruction: A case report. Int J Surg Case Rep. 2022;97:107446,
+21 Ahmed A, Foster CS. Cyclophosphamide or rituximab treatment of scleritis and uveitis for patients with granulomatosis with polyangiitis. Ophthalmic Res. 2019;61(1):44-50.
+10. Leavitt RY, Fauci AS, Bloch DA, Michel BA, Hunder GG, Arend WP et al. The American college of rheumatology 1990 criteria for the classification of wegener's granulomatosis. Arthritis Rheum. 1990;33(8):1101-7.
+11. Watts R, Lane S, Hanslik T, Hauser T, Hellmich B, Koldingsnes W, et al. Development and validation of a consensus methodology for the classification of the ANCA-associated vasculitides and polyarteritis nodosa for epidemiological studies. Ann Rheum Dis. 2007;66(2):222-7,
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.

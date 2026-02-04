@@ -1,0 +1,1219 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:58:53.508011",
+  "document": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 16,
+  "total_validated": 16,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "MCC",
+      "preferred_label": "Cutaneous neuroendocrine carcinoma",
+      "abbreviation": "MCC",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": "C44.6",
+        "icd11": "2C34",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:79140",
+        "umls": null,
+        "mesh": "D005359"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:79140",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C44.6",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2C34",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005359",
+          "display": "Fibrous Dysplasia Polyostotic"
+        }
+      ],
+      "context": ". D, Kaplan-Meier analysis of RM and JM models in the risk of adverse events in validation cohort. AUC indicates area under the curve; HLH, High (x) - Low (y) - High (z) pass wavelet filter; LLH, Low (x) - Low (y) - High (z) pass wavelet filter; LLL, Low (x) - Low (y) - Low (z) pass wavelet filter; MCC, Maximal Correlation Coefficient; JM, joint models; LASSO, least absolute shrinkage and selection operator; LLH, LLL, MCC, PA, diameter of pulmonary artery trunk measured by computed tomography; PH, pulmonary hypertension; RM, radiomic models; and RV, transverse diameter of right ventricle measured",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fibrous Dysplasia Polyostotic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tricuspid regurgitation",
+      "preferred_label": "tricuspid regurgitation",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002870",
+        "orpha": null,
+        "umls": "UMLS:C0040961",
+        "mesh": "MESH:D014262"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002870",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4080",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11911",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014262",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200301",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C50842",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:111287006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040961",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:770887951",
+          "display": null
+        }
+      ],
+      "context": "Nonstandard Abbreviations and Acronyms AO aorta diameter JM joint model logistic regression classifier noncontrast computed tomography main pulmonary artery diameter pulmonary arterial hypertension pulmonary hypertension right heart catheterization tricuspid regurgitation velocity",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "HLH",
+      "preferred_label": "Hemophagocytic syndrome",
+      "abbreviation": "HLH",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": "4A01.23",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:158032",
+        "umls": null,
+        "mesh": "D051359"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:158032",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A01.23",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D051359",
+          "display": "Lymphohistiocytosis Hemophagocytic"
+        }
+      ],
+      "context": "M and JM models in the risk of adverse events in derivation cohort. C, Radiomic and clinical features were selected based LASSO and multivariate Cox for PH prognosis. D, Kaplan-Meier analysis of RM and JM models in the risk of adverse events in validation cohort. AUC indicates area under the curve; HLH, High (x) - Low (y) - High (z) pass wavelet filter; LLH, Low (x) - Low (y) - High (z) pass wavelet filter; LLL, Low (x) - Low (y) - Low (z) pass wavelet filter; MCC, Maximal Correlation Coefficient; JM, joint models; LASSO, least absolute shrinkage and selection operator; LLH, LLL, MCC, PA, diamete",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Griscelli syndrome type 1",
+        "Griscelli syndrome type 2"
+      ],
+      "pubtator_normalized_name": "Lymphohistiocytosis Hemophagocytic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Pulmonary Hypertension",
+      "preferred_label": "Pulmonary hypertension",
+      "abbreviation": "PH",
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01",
+        "snomed": "70995007",
+        "mondo": null,
+        "orpha": "ORPHA:182090",
+        "umls": "C0020542",
+        "mesh": "D006976"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:182090",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.20",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "70995007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0020542",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006976",
+          "display": null
+        }
+      ],
+      "context": "Chest Computed Tomography—Based Radiomics for the Diagnosis and Prognosis of Pulmonary Hypertension",
+      "page": 1,
+      "mention_count": 6,
+      "pages_mentioned": [
+        1,
+        13
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pulmonary Arterial Hypertension",
+        "Familial Primary Pulmonary Hypertension",
+        "Pulmonary edema of mountaineers"
+      ],
+      "pubtator_normalized_name": "Hypertension Pulmonary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Cardiovascular Disease",
+      "preferred_label": "cardiovascular disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I00-I99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004995",
+        "orpha": null,
+        "umls": "UMLS:C0007222",
+        "mesh": "MESH:D002318"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004995",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1287",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000319",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I00-I99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:459.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2848",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002318",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100005",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2931",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:49601007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007222",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:426429380",
+          "display": null
+        }
+      ],
+      "context": "ology, Shanghai Pudong Hospital, Fudan University Pudong Medical Center, Shanghai, China (B.R.); Department of Cardiology, Sun Yat-sen Memorial Hospital, Sun Yat-sen University, Guangzhou, Guangdong, China (M.C.); Department of Cardiology, Zhongshan Hospital, Fudan University, Shanghai Institute of Cardiovascular Disease, Shanghai, China (L.G.); Department of Respiratory and Critical Care Medicine, The First Affiliated Hospital of Nanjing Medical University, Nanjing, Jiangsu, China (W.X.); Department of Cardio-Pulmonary Circulation, Shanghai Pulmonary Hospital, Tongji University, Shanghai, China (L.W., Q.Z.); and D",
+      "page": 13,
+      "mention_count": 1,
+      "pages_mentioned": [
+        13
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tamari Goodman syndrome"
+      ],
+      "pubtator_normalized_name": "Cardiovascular Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertension",
+      "preferred_label": "hypertensive disorder",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005044",
+        "orpha": null,
+        "umls": "UMLS:C0020538",
+        "mesh": "MESH:D006973"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10763",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000537",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000822",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I15",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:997.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38341003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020538",
+          "display": null
+        }
+      ],
+      "context": "ized by multiple causes, intricate pathophysiological changes, and rapid deterioration.'? Effective management of PH hinges on precise classification and risk stratification, particularly in World Health Organization group 1 PH (pulmonary arterial hypertension [PAH]), where targeted therapies Pisce hypertension (PH) is a cardiovascular",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Pericardial effusion",
+      "preferred_label": "pericardial effusion",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001370",
+        "orpha": null,
+        "umls": "UMLS:C0031039",
+        "mesh": "MESH:D010490"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001370",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:118",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001698",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10653",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010490",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3319",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373945007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031039",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2002014072",
+          "display": null
+        }
+      ],
+      "context": ".62 <0.001 2.68+0.22 4.04+0.54 <0.001 TRPG 30.5448.25 70.244+20.92 <0.001 29.40+4.88 66.51417.73 <0.001 Pulmonary artery systolic pressure 34.23+9.03 76.15+22.29 <0.001 33.43+6.91 72.18+18.35 <0.001 Tricuspid annular plane systolic 22.10+0.97 17.63+4.03 <0.001 21.92+1.93 16.49+3.97 <0.001 excursion Pericardial effusion 10 (5.18) 94 (48.70) <0.001 2 (6.26) 14 (36.84) <0.001",
+      "page": 5,
+      "mention_count": 1,
+      "pages_mentioned": [
+        5
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pericardial Effusion Chronic"
+      ],
+      "pubtator_normalized_name": "Pericardial Effusion",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MD",
+      "preferred_label": "Menkes disease",
+      "abbreviation": "MD",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E83.0",
+        "icd11": "5C64.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:565",
+        "umls": null,
+        "mesh": "D007706"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:565",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E83.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C64.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007706",
+          "display": "Menkes Kinky Hair Syndrome"
+        }
+      ],
+      "context": "Bingian Ruan ®, MM*; Mengqi Chen ®, PhD*; Qi Zhuang ®, MM; Lihua Guan, PhD; Weiping Xie, PhD; Lan Wang ®, PhD; Qinhua Zhao ®, PhD; Shiyong Yu®, PhD; An Wang ®, MM; Jian Wang ©, MM; Menghui Yang, MM; Jieyan Shen ®, MD, PhD",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Menkes Kinky Hair Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "calcification",
+      "preferred_label": "calcification",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002123",
+        "orpha": null,
+        "umls": "UMLS:C0006663",
+        "mesh": "MESH:D002114"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002123",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:182",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0003761",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:275.49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:709",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002114",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3672",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:6595006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006663",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1374802956",
+          "display": null
+        }
+      ],
+      "context": "hickening, calcification distribution) without contrast-induced signal interference.'>-\"” This advantage underpins NCCT’s growing role in vascular phenotyping, particularly when iodinated agents obscure mural deails in coronary or cerebrovascular studies.\"®'°",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Calcinosis",
+        "Diffuse Neurofibrillary Tangles with Calcification",
+        "Vascular Calcification"
+      ],
+      "pubtator_normalized_name": "Calcinosis Cutis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sensitivity",
+      "preferred_label": "sensitivity",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000605",
+        "orpha": null,
+        "umls": "UMLS:C3532523",
+        "mesh": "D007333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000605",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060056",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:759636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:473010000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3532523",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007333",
+          "display": "Insulin Resistance"
+        }
+      ],
+      "context": "Among the models, the joint model using logistic regression classifier (LRC_JM) demonstrated optimal performance, achieving an area under the curve (AUC) of 0.984 (95% Cl, 0.959-0.995) and 0.980 (95% Cl, 0.901-1.000) in the validation cohort (Figure 3, Table 2, Table S3). This model attained sensitivity of 0.932 (95%",
+      "page": 6,
+      "mention_count": 1,
+      "pages_mentioned": [
+        6
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatitis Contact",
+        "Photophobia",
+        "Glutamate Monosodium Sensitivity"
+      ],
+      "pubtator_normalized_name": "Insulin Resistance",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dependence",
+      "preferred_label": "dependence",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004938",
+        "orpha": null,
+        "umls": "UMLS:C0038580",
+        "mesh": "D019966"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004938",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9973",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:304.60",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20989",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35458",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:2403008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038580",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019966",
+          "display": "Substance-Related Disorders"
+        }
+      ],
+      "context": "thin the fix ranges (evidenced by higher kurtosis, Informational Measure of Correlation (IMC)). Regarding texture, PAH exhibits less regional heterogeneity (evidenced by lower difference average, small area emphasis, small area high—gray-level emphasis, short run high—gray-level emphasis, and large dependence high—gray-level emphasis). The gray-level variance may be attributed to calcification, uneven remodeling of the vessel wall, and the flow distribution between the artery and venous bed. The texture changes observed in PAH and PH also indicated the spatial heterogeneity of blood flow distribution wi",
+      "page": 12,
+      "mention_count": 1,
+      "pages_mentioned": [
+        12
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alcoholism",
+        "Opioid-Related Disorders",
+        "Tobacco Use Disorder"
+      ],
+      "pubtator_normalized_name": "Substance-Related Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "acquired",
+      "preferred_label": "acquired",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021141",
+        "orpha": "Orphanet:409941",
+        "umls": null,
+        "mesh": "D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021141",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:409941",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000163",
+          "display": "Acquired Immunodeficiency Syndrome"
+        }
+      ],
+      "context": "NCCT scans were acquired following standardized imaging protocols (120kV, 5mm slice thickness) using multidetector CT scanners from 4 manufacturers: Toshiba (Aquilion series), Siemens (GOMATOM Force), GE(RevolutionCT), andUIH(UCT 760). Pulmonaryvessel segmentation was conducted using semiautomated lung masks (Chest Imaging",
+      "page": 3,
+      "mention_count": 1,
+      "pages_mentioned": [
+        3
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acquired ichthyosis",
+        "Blindness",
+        "Anemia Hemolytic"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Radiomics has been widely applied to the morphology study of parenchymal organ diseases.'°75 A cardiac magnetic resonance imaging radiomics study demonstrated its effectiveness in diagnosing PH with",
+      "page": 10,
+      "mention_count": 1,
+      "pages_mentioned": [
+        10
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Lan",
+      "preferred_label": "LAN",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020619",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D007806"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020619",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:111600",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007806",
+          "display": "Language Disorders"
+        }
+      ],
+      "context": "Bingian Ruan ®, MM*; Mengqi Chen ®, PhD*; Qi Zhuang ®, MM; Lihua Guan, PhD; Weiping Xie, PhD; Lan Wang ®, PhD; Qinhua Zhao ®, PhD; Shiyong Yu®, PhD; An Wang ®, MM; Jian Wang ©, MM; Menghui Yang, MM; Jieyan Shen ®, MD, PhD",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Language Development Disorders",
+        "Apraxias"
+      ],
+      "pubtator_normalized_name": "Language Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "NPH",
+      "preferred_label": "NPH",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009366",
+        "orpha": "Orphanet:314928",
+        "umls": "UMLS:C0020258",
+        "mesh": "MESH:D006850"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009366",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1572",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001065",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:331.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006850",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10029773",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:236690",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:314928",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:30753002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020258",
+          "display": null
+        }
+      ],
+      "context": "AUC indicates area under the curve; CT, computed tomography; LASSO, least absolute shrinkage and selection operator; LRC, logistic regression classifier; NPAH Non-pulmonary arterial hypertension (encompassing WHO Groups 2-5); NPH, nonpulmonary hypertension; PAH, pulmonary arterial hypertension; PH, pulmonary hypertension; RFC, rando forest classifier; RHC, right heart catheterization; ROC, receiver operating characteristics; and SVC, support vector machines classifier.",
+      "page": 3,
+      "mention_count": 1,
+      "pages_mentioned": [
+        3
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hydrocephalus Normal Pressure",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Cls",
+      "preferred_label": "CLS",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010561",
+        "orpha": "Orphanet:192",
+        "umls": "UMLS:C0265252",
+        "mesh": "MESH:D038921"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010561",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3783",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6123",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75556",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D038921",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200952",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84643",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:983",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:303600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:192",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15182000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265252",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:380089065",
+          "display": null
+        }
+      ],
+      "context": "ic studies are described in the corresponding Methods subsections. A P value <0.05 indicates statisti-cal significance. To ensure the robustness of the model, internal validation was performed using a 10-repeat, 5- fold cross-validation scheme, with performance metrics reported along with their 95% Cls across all iterations. All",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

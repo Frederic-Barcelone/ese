@@ -1,0 +1,442 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+    "extracted_at": "2026-02-04T15:54:14.261997"
+  },
+  "count": 8,
+  "figures": [
+    {
+      "visual_id": "816ec0c5-b203-49b0-a600-40ab144a31f0",
+      "visual_type": "figure",
+      "confidence": 1.0,
+      "page_range": [
+        4
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 4,
+          "bbox_pts": [
+            62.36191940307617,
+            66.1348876953125,
+            532.9136962890625,
+            293.490234375
+          ]
+        }
+      ],
+      "title": "CT Segmentation of Lung Parenchyma and Vessels",
+      "description": "This figure shows 3D reconstruction and segmentation masks from chest CT scans, displaying both pulmonary parenchyma (Panel A) and pulmonary blood vessels (Panel B). Panel A presents the lung tissue parenchyma as solid 3D reconstructions in teal and brown colors, with corresponding cross-sectional, coronal, and sagittal view masks. Panel B shows the intricate branching network of pulmonary vessels as red tree-like structures, demonstrating the complex vascular architecture within the lungs along with their corresponding segmentation masks in multiple anatomical planes.",
+      "caption": "Segmentation of pulmonary parenchyma and pulmonary vessels from chest CT. A. Masks and 3D reconstruction of the cross-section, the coronal plane, and the sagittal plane of pulmonary parenchyma. B. Masks and 3D reconstruction of the cross-section, the coronal plane, and the sagittal plane of pulmonary vessels. 3D indicates 3-dimensional; and CT, computed tomography.",
+      "reference": "Figure 2",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page4_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "in Figure 2",
+            "page_num": 3,
+            "char_offset": 920
+          },
+          {
+            "text": " \nFigure 2",
+            "page_num": 4,
+            "char_offset": 2952
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548209"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "48d868ea-2289-4631-b304-b52ccd5db079",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        3
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 3,
+          "bbox_pts": [
+            63.78779602050781,
+            65.7598876953125,
+            531.48779296875,
+            369.7798767089844
+          ]
+        }
+      ],
+      "title": "Pulmonary Hypertension Diagnostic and Prognostic Study Flowchart",
+      "description": "This is a comprehensive study flowchart showing the methodology for a multi-center pulmonary hypertension research project divided into diagnostic and outcome phases. The diagnostic study recruited 430 patients from January 2019 to December 2021, with 386 patients in the derivation cohort (193 PH patients, 193 non-PH patients) and 76 in the validation cohort, utilizing machine learning models including RFC, SVC, and LRC for PH detection. The outcome study followed 193 PH patients with clinical deterioration events tracked, applying univariate COX and LASSO analyses to develop prognostic models. The flowchart demonstrates a systematic approach to developing both diagnostic and prognostic models for pulmonary hypertension using radiomics and clinical data.",
+      "caption": "Study flow chart. AUC indicates area under the curve; CT, computed tomography; LASSO, least absolute shrinkage and selection operator; LRC, logistic regression classifier; NPAH Non-pulmonary arterial hypertension (encompassing WHO Groups 2–5); NPH, nonpulmonary hypertension; PAH, pulmonary arterial hypertension; PH, pulmonary hypertension; RFC, random forest classifier; RHC, right heart catheterization; ROC, receiver operating characteristics; and SVC, support vector machines classifier.",
+      "reference": "Figure 1",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page3_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "in Figure 1",
+            "page_num": 2,
+            "char_offset": 3284
+          },
+          {
+            "text": "\nFigure 1",
+            "page_num": 3,
+            "char_offset": 2207
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548187"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "a18fd012-f0e5-40b0-84e7-bec62231699b",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        6
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 6,
+          "bbox_pts": [
+            307.3902587890625,
+            66.39166259765625,
+            533.0142822265625,
+            518.4556884765625
+          ]
+        }
+      ],
+      "title": "Model Performance Comparison for PH Diagnosis",
+      "description": "This figure contains two main visualization types comparing different diagnostic models for pulmonary hypertension (PH). Panel B shows a calibration curve plotting the proportion of positive records against average predicted values for six different models (RFC_RM, SVC_RM, LRC_RM, RFC_JM, SVC_JM, LRC_JM), demonstrating how well each model's predicted probabilities align with actual outcomes. Panel D displays a decision curve analysis showing net benefit versus threshold probability for three LRC models (LRC_JM, LRC_TRV, LRC_PA/AO), which evaluates the clinical utility of each model at different decision thresholds. The visualizations suggest varying performance characteristics among the different diagnostic approaches, with some models showing better calibration and clinical benefit than others.",
+      "caption": "models in diagnosing PH.\non curve of 6 models. C, ROC curve of 6 constructed models in\nPA/AO, and LRC_JM model. AUC indicates area under the\nclassifier; LRC_PA/AO, computed tomography-measured diameter\nel established by logistic regression classifier; LRC_RM, radiomic\ncardiographic measured tricuspid regurgitation velocity diagnostic",
+      "reference": "Figure 3",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page6_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Figure 3",
+            "page_num": 6,
+            "char_offset": 680
+          },
+          {
+            "text": " \nFigure 3",
+            "page_num": 6,
+            "char_offset": 758
+          },
+          {
+            "text": " (Figure 3B)",
+            "page_num": 7,
+            "char_offset": 463
+          },
+          {
+            "text": " (Figure 3D)",
+            "page_num": 7,
+            "char_offset": 1425
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548236"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "bd4adce9-71a1-45b5-944e-1639d61f05ab",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        6
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 6,
+          "bbox_pts": [
+            54.645999908447266,
+            51.7274169921875,
+            540.6292724609375,
+            482.0265167236328
+          ]
+        }
+      ],
+      "title": "Model Performance Comparison for PH Diagnosis",
+      "description": "This figure contains four panels (A-D) showing different aspects of model performance evaluation for diagnosing pulmonary hypertension (PH). Panel A shows ROC curves for 6 different models in the derivation cohort, with AUC values ranging from 0.884 to 0.984, indicating excellent discriminative performance. Panel B displays calibration curves showing how well the predicted probabilities match actual outcomes, Panel C shows ROC curves for model validation, and Panel D presents a decision curve analysis comparing net benefit across different threshold probabilities for three LRC models.",
+      "caption": "Model performance of radiomic models and joint models in diagnosing PH. A, ROC curve of 6 models in the derivation cohort. B, Calibration curve of 6 models. C, ROC curve of 6 constructed models in",
+      "reference": "Figure 3",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page6_2.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Figure 3",
+            "page_num": 6,
+            "char_offset": 680
+          },
+          {
+            "text": " \nFigure 3",
+            "page_num": 6,
+            "char_offset": 758
+          },
+          {
+            "text": " (Figure 3B)",
+            "page_num": 7,
+            "char_offset": 463
+          },
+          {
+            "text": " (Figure 3D)",
+            "page_num": 7,
+            "char_offset": 1425
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548263"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "e135f0b4-1a9b-47b0-87d0-629ca4c95dfa",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        8
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 8,
+          "bbox_pts": [
+            63.77944564819336,
+            65.7598876953125,
+            531.49609375,
+            360.2578125
+          ]
+        }
+      ],
+      "title": "SHAP Feature Importance Analysis for Pulmonary Hypertension Diagnosis",
+      "description": "This is a multi-panel figure showing SHAP (SHapley Additive exPlanations) analysis results for a logistic regression classifier model used to diagnose pulmonary hypertension. The figure includes feature importance ranking plots, beeswarm plots, individual case explanations, and expression heatmaps comparing different diagnostic scenarios (PH vs NPH and PAH vs NPH). Key findings show that tricuspid regurgitation velocity (TRV) and right ventricle (RV) features are among the most important predictors, with various radiomic texture features also contributing significantly to the diagnostic model performance.",
+      "caption": "Importance of predictor variables based on the SHAP algorithm for the LRC model. A, Importance ranking plot of variables for LRC_JM model in diagnosing PH. B, Beeswarm plots of the LRC_JM model in diagnosing PH. C, Importance ranking plot of variables for LRC_JM model in diagnosing PAH. D, Beeswarm plots of the LRC_JM model in diagnosing PAH. E, Individual explanation for an NPH sample. F, Expression heat map of radiomic variables for LRC_JM model of PH and NPH samples. G, Individual explanation for a PH sample. Elg indicates elongation; GNU, GrayLevel NonUniformity; HHH, Higher-Order High High; HHL, Higher-Order High Low; HLH, Higher-Order Low High; HLL, Higher-Order Low Low; LA, LongAxis; LLL, Lower-Order Low Low; LRC, logistic regression classifier; NPH, non-pulmonary hypertension; PA, pulmonary artery; PAH, pulmonary arterial hypertension; PH, pulmonary hypertension; RV, right ventricle; SHAP, SHapley Additive exPlanations; TRV, tricuspid regurgitation velocity.",
+      "reference": "Figure 4",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page8_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " \nFigure 4",
+            "page_num": 8,
+            "char_offset": 1482
+          },
+          {
+            "text": " (Figure 4F)",
+            "page_num": 12,
+            "char_offset": 1174
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548285"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "6c94f963-0cc6-422f-8c79-b21e2aee45bc",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        9
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 9,
+          "bbox_pts": [
+            66.43030548095703,
+            65.73321533203125,
+            533.014404296875,
+            523.7972412109375
+          ]
+        }
+      ],
+      "title": "Machine Learning Model Performance for PAH Classification",
+      "description": "This figure consists of four performance evaluation plots (ROC curves, calibration curves, and precision-recall curves) comparing six different machine learning models for classifying pulmonary arterial hypertension (PAH). The models include radiomic models, joint models, and PA/AO ratio models using three different classifiers: logistic regression (LRC), random forest (RFC), and support vector machine (SVC). The ROC curves in panel A show all models performing well above chance with AUCs ranging from 0.839 to 0.960, with the SVC-based models generally showing the highest performance. The calibration and precision-recall curves demonstrate varying levels of model reliability and predictive accuracy across different validation cohorts.",
+      "caption": "Model performance of radiomic models and joint models in classifying PAH. A, ROC curve of 6 models in the resampled balanced developed data. B, Calibration curve of 6 constructed models. C, PR curve of 6 models in a raw developed cohort. D, PR curve of 6 constructed models in a validated cohort. LRC_JM indicates joint model established by logistic regression classifier; LRC_PA/AO, computed tomography-measured diameter ratio of the main pulmonary artery and the aorta diagnostic model established by logistic regression classifier; LRC_RM, radiomic model established by logistic regression classifier; RFC_JM, joint model established by random forest classifier; RFC_PA/AO, computed tomography-measured diameter ratio of the main pulmonary artery and the aorta diagnostic model established by random forest classifier; RFC_RM, radiomic model established by random forest classifier; SVC_JM, joint model established by support vector machine classifier; SVC_PA/AO, computed tomography-measured diameter ratio of the main pulmonary artery and the aorta diagnostic model established by support vector machine classifier; SVC_RM, radiomic model established by support vector machine classifier.",
+      "reference": "Figure 5",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page9_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " \nFigure 5",
+            "page_num": 9,
+            "char_offset": 672
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548305"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "5c334816-d6f2-44ac-9811-d6c5b902bbb4",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        10
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 10,
+          "bbox_pts": [
+            63.7795295715332,
+            65.7598876953125,
+            531.4960327148438,
+            478.4781494140625
+          ]
+        }
+      ],
+      "title": "Pulmonary Hypertension Prognosis Prediction and Survival Analysis",
+      "description": "This figure presents a comprehensive analysis of predictive factors for pulmonary hypertension (PH) prognosis through forest plots and Kaplan-Meier survival curves. Panel A shows hazard ratios for radiomic features selected via LASSO regression, with RV (right ventricle) being the only statistically significant predictor (HR=1.04, p=0.004). Panel B displays survival curves comparing radiomic model (RM) and joint model (JM) performance in the derivation cohort, showing significant prognostic stratification (p<0.0001). Panels C and D present similar analyses for the validation cohort, where clinical features are included alongside radiomic features, though the validation results show less clear separation between risk groups and non-significant p-values (0.22 and 0.18).",
+      "caption": "Predictor variables and Kaplan–Meier analysis of PH prognosis. A, Radiomic features were selected based LASSO and multivariate Cox for PH prognosis. B, Kaplan–Meier analysis of RM and JM models in the risk of adverse events in derivation cohort. C, Radiomic and clinical features were selected based LASSO and multivariate Cox for PH prognosis. D, Kaplan–Meier analysis of RM and JM models in the risk of adverse events in validation cohort. AUC indicates area under the curve; HLH, High (x) - Low (y) - High (z) pass wavelet filter; LLH, Low (x) - Low (y) - High (z) pass wavelet filter; LLL, Low (x) - Low (y) - Low (z) pass wavelet filter; MCC, Maximal Correlation Coefficient; JM, joint models; LASSO, least absolute",
+      "reference": "Figure 6",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page10_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " \n(Figure 6)",
+            "page_num": 7,
+            "char_offset": 3489
+          },
+          {
+            "text": " Figure 6B)",
+            "page_num": 7,
+            "char_offset": 3697
+          },
+          {
+            "text": " \n(Figure  6D)",
+            "page_num": 7,
+            "char_offset": 3766
+          },
+          {
+            "text": "\nFigure 6",
+            "page_num": 10,
+            "char_offset": 1251
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548352"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "fefa54e9-7779-43d3-a133-51f9ba68f1aa",
+      "visual_type": "figure",
+      "confidence": 0.95,
+      "page_range": [
+        11
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 11,
+          "bbox_pts": [
+            63.78779602050781,
+            288.54150390625,
+            531.48779296875,
+            633.6614990234375
+          ]
+        }
+      ],
+      "title": "Model Performance Comparison for PH Prognosis",
+      "description": "This figure contains four panels (A-D) showing performance comparisons between radiomic models (RM), joint models (JM), and standard fourth-layer risk stratification for pulmonary hypertension prognosis prediction. Panels A and C display ROC curves with AUC values for derivation and validation cohorts respectively, while panels B and D show time-dependent AUC values over months for the same cohorts. The results demonstrate that different models perform variably over time, with some models showing better discrimination ability in certain time periods, and the validation cohort generally showing more variable performance compared to the derivation cohort.",
+      "caption": "Model performance of radiomic models and joint models in PH prognosis. A, ROC curve of RM, JM models and the standard fourth-layer risk stratification in derivation cohort. B, Time-AUC of RM, JM, and the standard fourth-layer risk stratification in derivation cohort. C, ROC curve of RM and JM models and the standard fourth-layer risk stratification in validation cohort. D, Time-AUC of RM, JM, and the standard fourth-layer risk stratification in validation cohort. The CIs for the time-dependent AUC in derivation cohort were estimated using the 10×5-fold cross-validation approach while in validation cohort using asymptotic normality assumption. AUC indicates area under the curve; JM, joint models; PH, pulmonary hypertension;",
+      "reference": "Figure 7",
+      "image_file": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension_figure_page11_1.png",
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "in Figure 7",
+            "page_num": 8,
+            "char_offset": 536
+          },
+          {
+            "text": "\nFigure 7",
+            "page_num": 11,
+            "char_offset": 1352
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+        "extracted_at": "2026-02-04T14:58:44.548374"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    }
+  ]
+}

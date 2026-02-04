@@ -1,0 +1,496 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+    "extracted_at": "2026-02-04T16:12:22.069913"
+  },
+  "count": 4,
+  "tables": [
+    {
+      "visual_id": "7665ebe3-32ec-469a-8f45-7516c871d455",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        10
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 10,
+          "bbox_pts": [
+            55.4997673034668,
+            622.77197265625,
+            539.2337646484375,
+            734.3460083007812
+          ]
+        }
+      ],
+      "title": "siRNA Sequences for TRPC Channel Targeting",
+      "description": "This is a data table listing small interfering RNA (siRNA) sequences used in experimental studies. The table provides detailed information for four different TRPC (Transient Receptor Potential Canonical) channel targets (TRPC1, TRPC3, TRPC4, and TRPC6) along with a negative control. Each entry includes the siRNA ID, specific sense and antisense sequences, and supplier information, with all siRNAs sourced from Thermo Fisher Scientific.",
+      "caption": "List of SiRNA used in the experiments",
+      "reference": "Table 2",
+      "image_file": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension_table_page10_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Target siRNA",
+              "siRNA ID",
+              "Sequences",
+              "Supplier"
+            ]
+          ],
+          "rows": [
+            [
+              "Negative control",
+              "Silencer ™ Select negative control #1 (4390844)",
+              "Silencer ™ Select negative control #1 (4390844)",
+              "Thermo Fisher Scientific"
+            ],
+            [
+              "siTRPC1",
+              "s14411",
+              "Sense: GGACUACGGUUGUCAGAAATT Antisense: UUUCUGACAACCGUAGUCCAA",
+              "Thermo Fisher Scientific"
+            ],
+            [
+              "siTRPC3",
+              "s14413",
+              "Sense: CGUUAUCAGCAGAUAAUGATT Antisense : UCAUUAUCUGCUGAUAACGTG",
+              "Thermo Fisher Scientific"
+            ],
+            [
+              "siTRPC4",
+              "s229618",
+              "Sense: CGAGAAUCAUGGGACAUGUTT Antisense: ACAUGUCCCAUGAUUCUCGTG",
+              "Thermo Fisher Scientific"
+            ],
+            [
+              "siTRPC6",
+              "s14421",
+              "Sense: CAGCAUACAUGUUUAGUGATT Antisense : UCACUAAACAUGUAUGCUGGT",
+              "Thermo Fisher Scientific"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "\nTable 2",
+            "page_num": 10,
+            "char_offset": 3388
+          },
+          {
+            "text": "in Table 2",
+            "page_num": 11,
+            "char_offset": 690
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+        "extracted_at": "2026-02-04T15:16:25.231627"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "2c427898-9fe7-43bf-98fc-a8231970b3fc",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        12
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 12,
+          "bbox_pts": [
+            55.436649322509766,
+            105.1566390991211,
+            291.0999450683594,
+            398.6320495605469
+          ]
+        }
+      ],
+      "title": "Antibodies Used for Western Blot and Immunostaining",
+      "description": "This is a data table listing antibodies and their specifications used in Western blot and immunostaining experiments. The table provides detailed information including antibody names, species (rabbit, mouse, donkey), dilution ratios, suppliers, and reference codes for each antibody. Notable patterns include TRPC antibodies using 1/200 dilution for immunostaining and 1/1000 for Western blot, with all TRPC antibodies sourced from Alomone Labs, while other antibodies come from various suppliers including Sigma-Aldrich, DAKO, Invitrogen, and Santa Cruz Biotechnologies.",
+      "caption": "Antibodies used for Western blot and immunostaining experiments",
+      "reference": "Table 1",
+      "image_file": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension_table_page12_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Antibody",
+              "Species",
+              "Dilution",
+              "Supplier",
+              "Reference"
+            ]
+          ],
+          "rows": [
+            [
+              "Immunostaining",
+              "Immunostaining",
+              "Immunostaining",
+              "Immunostaining",
+              "Immunostaining"
+            ],
+            [
+              "TRPC1",
+              "Rabbit",
+              "1/200",
+              "Alomone",
+              "ACC-010"
+            ],
+            [
+              "TRPC3",
+              "Rabbit",
+              "1/200",
+              "Alomone",
+              "ACC-016"
+            ],
+            [
+              "TRPC4",
+              "Rabbit",
+              "1/200",
+              "Alomone",
+              "ACC-018"
+            ],
+            [
+              "TRPC6",
+              "Rabbit",
+              "1/200",
+              "Alomone",
+              "ACC-017"
+            ],
+            [
+              "a-SMA-FITC",
+              "Mouse",
+              "1/200",
+              "Sigma- Aldrich",
+              "F3777"
+            ],
+            [
+              "CD31",
+              "Mouse",
+              "1/200",
+              "DAKO",
+              "M0823"
+            ],
+            [
+              "VE-Cadherin, Alexa Fluor 647",
+              "Mouse",
+              "1/200",
+              "Invitrogen",
+              "MA5-44146"
+            ],
+            [
+              "vWF",
+              "Mouse",
+              "1/200",
+              "Sigma- Aldrich",
+              "AMAB9091"
+            ],
+            [
+              "Donkey anti-rabbit Alexa Fluor 594",
+              "Donkey",
+              "1/400",
+              "Invitrogen",
+              "A-21207"
+            ],
+            [
+              "Donkey anti-mouse Alexa Fluor 647",
+              "Donkey",
+              "1/400",
+              "Invitrogen",
+              "715-606- 151"
+            ],
+            [
+              "Western blot",
+              "Western blot",
+              "Western blot",
+              "Western blot",
+              "Western blot"
+            ],
+            [
+              "TRPC1",
+              "Rabbit",
+              "1/1000",
+              "Alomone",
+              "ACC-010"
+            ],
+            [
+              "TRPC3",
+              "Rabbit",
+              "1/1000",
+              "Alomone",
+              "ACC-016"
+            ],
+            [
+              "TRPC4",
+              "Rabbit",
+              "1/1000",
+              "Alomone",
+              "ACC-018"
+            ],
+            [
+              "TRPC6",
+              "Rabbit",
+              "1/1000",
+              "Alomone",
+              "ACC-017"
+            ],
+            [
+              "b-actin-HRP",
+              "Mouse",
+              "1/3000",
+              "Santa Cruz Biotech- nologies",
+              "Sc-47778"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " \nTable 1",
+            "page_num": 10,
+            "char_offset": 2593
+          },
+          {
+            "text": "in Table 1",
+            "page_num": 11,
+            "char_offset": 360
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+        "extracted_at": "2026-02-04T15:16:25.231653"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "a2529f63-427b-4c09-b196-b9ad28d8ea47",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        11
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 11,
+          "bbox_pts": [
+            355.5539855957031,
+            99.94696044921875,
+            488.3800048828125,
+            695.364013671875
+          ]
+        }
+      ],
+      "title": "RT-qPCR Primers for PAH-hPECs Analysis",
+      "description": "This is a comprehensive data table listing primers used in reverse transcription quantitative PCR (RT-qPCR) experiments on pulmonary arterial hypertension human pulmonary endothelial cells (PAH-hPECs). The table appears to contain multiple columns with information about different primer sets, likely including primer names, sequences, and associated experimental parameters. The table is organized into distinct sections or categories, suggesting different groups of genes or experimental conditions being analyzed. This represents a methodological reference for molecular biology experiments targeting specific gene expression analysis in PAH research.",
+      "caption": "Primers used in RT-qPCR in PAH-hPECs",
+      "reference": "Table 3",
+      "image_file": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension_table_page11_1.png",
+      "table_data": {},
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Table  3)",
+            "page_num": 4,
+            "char_offset": 2314
+          },
+          {
+            "text": "in Table 3",
+            "page_num": 11,
+            "char_offset": 1747
+          },
+          {
+            "text": " \nTable 3",
+            "page_num": 11,
+            "char_offset": 2416
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+        "extracted_at": "2026-02-04T15:16:25.231805"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "49541853-7f52-4b6f-bf14-71ae04694d3f",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        10
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 10,
+          "bbox_pts": [
+            55.31962203979492,
+            139.6583709716797,
+            291.0777893066406,
+            429.6575622558594
+          ]
+        }
+      ],
+      "title": "PAH Patient Demographics and Clinical Characteristics",
+      "description": "This is a clinical data table comparing demographic and clinical characteristics between 13 patients with pulmonary arterial hypertension (PAH) and 12 control patients with lung cancer. The table presents patient age, sex distribution, disease diagnoses, genetic mutations in BMPR2 and SOX17 genes, hemodynamic parameters including mean pulmonary arterial pressure and cardiac index, and treatment regimens. Notable findings include a younger median age in PAH patients (13 years vs 51 years), diverse PAH subtypes with hereditary PAH being most common (31%), and 23% of PAH patients carrying BMPR2 gene mutations.",
+      "caption": "Conclusions Using primary hPECs from control and patients suffering  from PAH, we found that hPECs express TRPC1, TRPC3,  TRPC4, and TRPC6. TRPC1, TRPC4, and TRPC6 are  involved in Ca2+ signaling of PAH-hPECs. We showed  that TRPC1 and TRPC3 are essential for PAH-hPECs  proliferation and that TRPC3, TRPC4, and TRPC6 are  important for mitogenic crosstalk in the PAH-hPECs  medium. Finally, we found that TRPC1 is crucial for  endothelial cell homeostasis. Together, these results  demonstrate that TRPC channels are central and repre­ sent very interesting candidates for reducing endothelial  dysfunction in PAH.",
+      "image_file": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension_table_page10_2.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "",
+              "PAH ( n =13)",
+              "Control ( n =12)"
+            ]
+          ],
+          "rows": [
+            [
+              "Age, years",
+              "13 (46) 72",
+              "51 (66) 77"
+            ],
+            [
+              "Sex, M/F",
+              "3 M/10F",
+              "4 M/8F"
+            ],
+            [
+              "Diseases",
+              "",
+              ""
+            ],
+            [
+              "Diagnosis",
+              "31% hPAH",
+              "100% lung"
+            ],
+            [
+              "",
+              "38% iPAH",
+              "cancer"
+            ],
+            [
+              "",
+              "8% PVOD",
+              ""
+            ],
+            [
+              "",
+              "15% PAH with congenital heart disease",
+              ""
+            ],
+            [
+              "Mutation in BMPR2 gene Carrier",
+              "8% PH group 5 3",
+              "NA"
+            ],
+            [
+              "no-carrier",
+              "10",
+              "NA"
+            ],
+            [
+              "Mutation in SOX17 gene",
+              "",
+              ""
+            ],
+            [
+              "Carrier",
+              "1",
+              "NA"
+            ],
+            [
+              "no-carrier",
+              "12",
+              "NA"
+            ],
+            [
+              "Hemodynamic parameters mPAP,mmHg",
+              "38 (52,5) 65",
+              "NA"
+            ],
+            [
+              "CI, L/min/m 2",
+              "2,1 (2,66) 3,13",
+              "NA"
+            ],
+            [
+              "PVR,Wood units",
+              "3,9 (11,22) 18",
+              "NA"
+            ],
+            [
+              "Medication",
+              "",
+              ""
+            ],
+            [
+              "Monotherapies",
+              "NA",
+              "NA"
+            ],
+            [
+              "Bitherapies",
+              "NA",
+              "NA"
+            ],
+            [
+              "Tritherapies",
+              "46%",
+              "NA"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [],
+        "section_context": "Discussion",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+        "extracted_at": "2026-02-04T15:16:25.231579"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:59:00.866996",
+  "document": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 7,
+  "unique_identifiers": 6,
+  "validation_summary": {
+    "total_validated": 6,
+    "valid_count": 2,
+    "invalid_count": 0,
+    "error_count": 4
+  },
+  "citations": [
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1093/eurheartj/",
+      "nct": null,
+      "url": "https://github.com/",
+      "citation_text": "pulmonary hypertension. Am J Cardiol. 2003;91:1033-1037. doi: 10.1016/s0002-9149(03)00136-x 22. Frangi AF, Niessen WJ, Vincken KL, Viergever MA. Multiscale Vessel Enhancement Filtering.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "DOI not found"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.1038/srep03529",
+      "nct": null,
+      "url": null,
+      "citation_text": "normal subjects. Circulation. 2001;104:2797— 2802. doi: 10.1161/hc4801.100076 21 Kroon D-J, Slump CH. Coherence Filtering to Enhance the Mandibular Canal in Cone-Beam CT data.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": true,
+        "resolved_url": "https://www.nature.com/articles/srep03529",
+        "title": "Volumetric CT-based segmentation of NSCLC using 3D-Slicer",
+        "status": null,
+        "error": null
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.3390/diagnostics11040679",
+      "nct": null,
+      "url": null,
+      "citation_text": "State-of-the-art review. Diagnostics (Basel). 2021;11:679. doi: 10.3390/diagnostics11040679 6. Kusunose K, Hirata Y, Tsuji T, Kotoku J, Sata M. Deep learning to predict elevated",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.3389/fimmu.2023.1082980",
+      "nct": null,
+      "url": null,
+      "citation_text": "pneumonitis: a short review. Front Immunol. 2023;14:1082980. doi: 10.3389/fimmu.2023.1082980 7. Opotowsky AR, Ojeda J, Rogers F, Prasanna V, Clair M, Moko L, Vaidya A, Afilalo J, Forfia PR.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": true,
+        "resolved_url": "https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2023.1082980/full",
+        "title": "Advances in CT features and radiomics of checkpoint inhibitor-related pneumonitis: A short review",
+        "status": null,
+        "error": null
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": "10.14814/phy2.13159",
+      "nct": null,
+      "url": null,
+      "citation_text": "rethinking resistance. Physiol Rep. 2017;5:e13159. doi: 10.14814/phy2.13159 30. McLaughlin VV, McGoon MD. Pulmonary arterial hypertension. Circulation. 2006;114:1417-1431.",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.98,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": null,
+        "title": null,
+        "status": null,
+        "error": "HTTP 403"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": null,
+      "nct": "NCT05417378",
+      "url": null,
+      "citation_text": "protocol has been registered on Clinical Trial Registry (NCT05417378). Comprehensive methodological details are provided in the Supplementary Methods,",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.95,
+      "validation": {
+        "is_valid": false,
+        "resolved_url": "https://clinicaltrials.gov/study/NCT05417378",
+        "title": null,
+        "status": null,
+        "error": "NCT not found"
+      }
+    },
+    {
+      "pmid": null,
+      "pmcid": null,
+      "doi": null,
+      "nct": null,
+      "url": "https://www.ahajournals.org/doi/suppl/10.1161/JAHA.125.043221",
+      "citation_text": "disposition. Supplemental Material is available at https://www.ahajournals.org/doi/suppl/10.1161/JAHA.125.043221 For Sources of Funding and Disclosures, see page 13. JAHA is available at: www.ahajourn",
+      "citation_number": null,
+      "page": 1,
+      "confidence": 0.8,
+      "validation": null
+    }
+  ]
+}

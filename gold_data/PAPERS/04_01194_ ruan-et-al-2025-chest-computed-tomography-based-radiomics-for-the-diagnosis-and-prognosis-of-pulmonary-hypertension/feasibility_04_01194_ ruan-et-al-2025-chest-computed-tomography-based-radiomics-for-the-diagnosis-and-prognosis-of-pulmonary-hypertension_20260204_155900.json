@@ -1,0 +1,137 @@
+{
+  "doc_id": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension",
+  "doc_filename": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "trial_ids": [
+    {
+      "id_type": "NCT",
+      "value": "NCT05417378",
+      "registry": "ClinicalTrials.gov",
+      "url": "https://clinicaltrials.gov/study/NCT05417378",
+      "title": null
+    }
+  ],
+  "study_design": null,
+  "eligibility_inclusion": [
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "age between 18 and 75years old",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "age",
+        "derived": {
+          "operator": "range",
+          "unit": "years"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "age between 18 and 75years old",
+          "source_node_id": null,
+          "source_doc_id": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "availability of RHC, echocardiography, and noncontrast chest CT within 30 days",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "other",
+        "derived": {
+          "value": 30,
+          "unit": "days"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "availability of RHC, echocardiography, and noncontrast chest CT within 30 days",
+          "source_node_id": null,
+          "source_doc_id": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension"
+        }
+      ]
+    }
+  ],
+  "eligibility_exclusion": [
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "pulmonary parenchymal pathology",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "pulmonary parenchymal pathology",
+          "source_node_id": null,
+          "source_doc_id": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "imaging artifacts",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "imaging artifacts",
+          "source_node_id": null,
+          "source_doc_id": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "thoracic deformities",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": {
+          "operator": "boolean"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "thoracic deformities",
+          "source_node_id": null,
+          "source_doc_id": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension"
+        }
+      ]
+    }
+  ],
+  "epidemiology": [],
+  "patient_journey": [],
+  "endpoints": [],
+  "sites": [],
+  "operational_burden": null,
+  "screening_flow": null,
+  "extraction_timestamp": "2026-02-04T14:59:01.271391"
+}

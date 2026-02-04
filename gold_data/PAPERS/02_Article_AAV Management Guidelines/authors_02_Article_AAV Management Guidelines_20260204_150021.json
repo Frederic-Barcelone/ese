@@ -1,0 +1,51 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:00:21.785010",
+  "document": "02_Article_AAV Management Guidelines.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/02_Article_AAV Management Guidelines.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 4,
+  "unique_authors": 4,
+  "authors": [
+    {
+      "full_name": "Alvise Berti",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Alvise Berti",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Nicole Hollinger",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Nicole Hollinger",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Benjamin Terrier",
+      "role": "corresponding_author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Benjamin Terrier",
+      "page": 1,
+      "confidence": 0.9
+    },
+    {
+      "full_name": "Gunnar Tomasson",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Gunnar Tomasson",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+{
+  "doc_id": "06_41927_2025_Article_585",
+  "doc_filename": "06_41927_2025_Article_585.pdf",
+  "trial_ids": [],
+  "study_design": {
+    "phase": null,
+    "design_type": "single-arm",
+    "blinding": null,
+    "randomization_ratio": null,
+    "allocation": null,
+    "sample_size": 220,
+    "actual_enrollment": 220,
+    "duration_months": 96,
+    "treatment_arms": [],
+    "control_type": null,
+    "setting": "Amir Alam Hospital, Tehran, Iran",
+    "sites_total": 1,
+    "countries_total": 1,
+    "periods": [],
+    "evidence": [
+      {
+        "page": 2,
+        "section_header": null,
+        "quote": "This is a retrospective cohort study involving Iranian patients diagnosed with GPA",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "06_41927_2025_Article_585"
+      },
+      {
+        "page": 1,
+        "section_header": null,
+        "quote": "clinical records of 220 patients with a confirmed diagnosis of GPA who were referred to Amir Alam Hospital between 2013 and 2021 were reviewed",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "06_41927_2025_Article_585"
+      },
+      {
+        "page": 2,
+        "section_header": null,
+        "quote": "The study includes all patients aged 16 years or older who were either hospitalized or seen in the rheumatology outpatient clinic at Amir Alam Hospital between 2013 and 2021",
+        "char_start": null,
+        "char_end": null,
+        "bbox": null,
+        "source_node_id": null,
+        "source_doc_id": "06_41927_2025_Article_585"
+      }
+    ]
+  },
+  "eligibility_inclusion": [
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "age > 16 years old",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "age",
+        "derived": {
+          "operator": ">",
+          "value": 16,
+          "unit": "years"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "age > 16 years old",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "at least 3 months follow up",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "other",
+        "derived": {
+          "operator": ">=",
+          "value": 3,
+          "unit": "months"
+        }
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "at least 3 months follow up",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "GPA diagnosis based on the algorithm",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "GPA diagnosis based on the algorithm",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "Iranian patients diagnosed with GPA according to the 1990 American College of Rheumatology (ACR) criteria and the European Medicines Agency (EMA) algorithm",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "Iranian patients diagnosed with GPA according to the 1990 American College of Rheumatology (ACR) criteria and the European Medicines Agency (EMA) algorithm",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_INCLUSION",
+      "text": "gave written consent for use of their data",
+      "section": "eligibility",
+      "page": 4,
+      "structured_data": {
+        "type": "inclusion",
+        "category": "consent",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "gave written consent for use of their data",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    }
+  ],
+  "eligibility_exclusion": [
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "patients meet criteria for EGPA",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "patients meet criteria for EGPA",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "patient has small vessels features",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "patient has small vessels features",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "ANCA + but no GPA features",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "biomarker",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "ANCA + but no GPA features",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "biopsy or imaging evidence consistent with PAN",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "diagnosis",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "biopsy or imaging evidence consistent with PAN",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "ELIGIBILITY_EXCLUSION",
+      "text": "Patients with incomplete diagnostic information that cannot be retrieved through follow-up phone calls",
+      "section": "eligibility",
+      "page": 2,
+      "structured_data": {
+        "type": "exclusion",
+        "category": "other",
+        "derived": null
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "page": 2,
+          "quote": "Patients with incomplete diagnostic information that cannot be retrieved through follow-up phone calls will be excluded",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    }
+  ],
+  "epidemiology": [],
+  "patient_journey": [],
+  "endpoints": [
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Frequency of GI involvement",
+      "section": "endpoints",
+      "page": 1,
+      "structured_data": {
+        "type": "primary",
+        "name": "Frequency of GI involvement",
+        "measure": "Proportion of GPA patients with gastrointestinal manifestations",
+        "timepoint": "During follow-up period (2013-2021)",
+        "analysis_method": "Descriptive statistics"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "This study aimed to assess the frequency and types of Gl involvement in patients with GPA and to examine their relationship with disease severity, prognosis, and treatment response.",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Types of GI involvement",
+      "section": "endpoints",
+      "page": 1,
+      "structured_data": {
+        "type": "primary",
+        "name": "Types of GI involvement",
+        "measure": "Clinical manifestations of gastrointestinal involvement",
+        "timepoint": "At diagnosis and during follow-up",
+        "analysis_method": "Descriptive analysis"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "This study aimed to assess the frequency and types of Gl involvement in patients with GPA and to examine their relationship with disease severity, prognosis, and treatment response.",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Disease severity comparison",
+      "section": "endpoints",
+      "page": 5,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Disease severity comparison",
+        "measure": "Birmingham Vasculitis Activity Score (BVAS)",
+        "timepoint": "At diagnosis and after follow-up (median 19 months)",
+        "analysis_method": "Student's t-test and ANCOVA adjustment"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "At the time of diagnosis, the mean BVAS score was significantly higher in patients with GI manifestations compared to those without (21.0 + 10.13 vs. 15.8 + 7.43; p =0.004). Similarly, after follow-up time with median of 19 months, patients with GI symptoms continued to exhibit higher disease activity (8.47+9.24 vs. 4.43 +7.72; p=0.042).",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Treatment response",
+      "section": "endpoints",
+      "page": 3,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Treatment response",
+        "measure": "BVAS-WG scores for complete remission, partial remission, and relapse",
+        "timepoint": "During treatment and follow-up",
+        "analysis_method": "BVAS-WG scoring system"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 3,
+          "quote": "Treatment response: assessed using BVAS-WG scores. Complete remission is defined as a BVAS-WG score of zero after treatment, partial remission as a>50% reduction in BVAS-WG, and relapse as any increase in BVAS-WG.",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Time to first relapse",
+      "section": "endpoints",
+      "page": 1,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Time to first relapse",
+        "measure": "Time from diagnosis to first relapse",
+        "timepoint": "During follow-up period",
+        "analysis_method": "Comparison between groups"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "a shorter time to first relapse (mean 5.2 vs. 10.3 months, p=0.041) compared to those without Gl symptoms.",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Mortality risk",
+      "section": "endpoints",
+      "page": 1,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Mortality risk",
+        "measure": "Hazard ratio for mortality",
+        "timepoint": "During follow-up period",
+        "analysis_method": "Hazard ratio calculation"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "a markedly increased mortality risk (hazard ratio= 3.24, p< 0.001)",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    },
+    {
+      "field_type": "STUDY_ENDPOINT",
+      "text": "Relapse rates",
+      "section": "endpoints",
+      "page": 3,
+      "structured_data": {
+        "type": "secondary",
+        "name": "Relapse rates",
+        "measure": "Proportion of patients experiencing relapse",
+        "timepoint": "During follow-up period",
+        "analysis_method": "Hazard ratios comparison"
+      },
+      "confidence": 0.44,
+      "evidence": [
+        {
+          "page": 3,
+          "quote": "Prognostic outcomes: relapse and mortality rates. Hazard ratios will be calculated to compare relapse and mortality rates between patients with and without gastrointestinal involvement.",
+          "source_node_id": null,
+          "source_doc_id": "06_41927_2025_Article_585"
+        }
+      ]
+    }
+  ],
+  "sites": [
+    {
+      "field_type": "STUDY_SITE",
+      "text": "Iran",
+      "section": "sites",
+      "page": null,
+      "structured_data": {
+        "country": "Iran",
+        "site_count": 1
+      },
+      "confidence": 0.85,
+      "evidence": []
+    }
+  ],
+  "operational_burden": {
+    "invasive_procedures": [
+      {
+        "name": "biopsy",
+        "timing": [
+          "eligibility requirement"
+        ],
+        "timing_days": [
+          -1
+        ],
+        "optional": false,
+        "purpose": "diagnosis_confirmation",
+        "is_eligibility_requirement": true,
+        "evidence": [
+          {
+            "page": 2,
+            "section_header": null,
+            "quote": "require to at least biopsy proven vasculitis",
+            "char_start": null,
+            "char_end": null,
+            "bbox": null,
+            "source_node_id": null,
+            "source_doc_id": "06_41927_2025_Article_585"
+          }
+        ]
+      }
+    ],
+    "visit_schedule": {
+      "total_visits": null,
+      "visit_days": [],
+      "frequency": null,
+      "duration_weeks": null,
+      "scheduled_visits": [],
+      "pre_randomization_days": [],
+      "on_treatment_days": [],
+      "follow_up_days": [],
+      "evidence": []
+    },
+    "central_lab_required": false,
+    "central_lab": null,
+    "special_sample_handling": [],
+    "vaccination_requirements": [],
+    "background_therapy": [],
+    "concomitant_meds_allowed": [],
+    "run_in_duration_days": null,
+    "run_in_requirements": [],
+    "burden_score": null,
+    "site_complexity_score": null,
+    "hard_gates": [
+      "biopsy requirement"
+    ]
+  },
+  "screening_flow": null,
+  "extraction_timestamp": "2026-02-04T15:26:11.269488"
+}

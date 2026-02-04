@@ -1,0 +1,1383 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T16:16:34.895503",
+  "document": "05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/05_01195_TRPC channels contribute to endothelial dysfunction in pulmonary arterial hypertension.pdf",
+  "total_candidates": 989,
+  "total_validated": 75,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 1,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 13,
+    "blacklisted_fp_count": 9,
+    "common_word_rejected": 13,
+    "context_rejected": 0,
+    "form_filter_rejected": 109,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "PAH",
+      "long_form": "Pulmonary arterial hypertension",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Abstract Background-Pulmonary arterial hypertension (PAH) is a rare, fatal, and progressive pulmonary vascular disease. Pulmonary endothelial cell dysfunction is a hallmark of PAH, defined by excessive proliferation and dysregulated angiogenesis, along with imbalanced production and release of vasoactive substances, growth factors, and mediators of coagulation and inflammation. Intracellular calcium (Ca?*) variations are essential in these processes. Am",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PECs",
+      "long_form": "pulmonary endothelial cells",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "l canonical channels (TRPC1 to 7) are known to be essential for endothelial cells of various origins, but their role in PAH remains unknown. Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRPC3 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium. Moreover, we showed that none",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SOCE",
+      "long_form": "store operated Ca entry",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "dothelial cells of various origins, but their role in PAH remains unknown. Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRPC3 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium. Moreover, we showed that none of the TRPC channels is involved in the migration or in vitro tubulogenesis of PAH-hPECs. Finally, we found that TRPC1 knockdown induces changes in the mRNA expression of several genes described to b",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "vWF",
+      "long_form": "von Willebrand factor",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "Introduction are expressed in the PA, and more particularly in hPECs in control and PAH patients as indicated by the co-staining with von Willebrand factor (vWF) (Fig. 1A). To decipher the role of each expressed TRPC channel, we performed in vitro experiments using control-hPECs.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PA",
+      "long_form": "pulmonary arterial",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "llebrand factor (vWF) (Fig. 1A). To decipher the role of each expressed TRPC channel, we performed in vitro experiments using control-hPECs. Endothelial cell dysfunction is a key contributor to the pathogenesis of pulmonary arterial (PA) hypertension (PAH), a rare and life-threatening pulmonary vascular disease defined by an increase in mean PA pressure >20 mmHg and pulmonary vascular resistance >2 Wood units. PAH affects approximately 50 individuals per million, and despite the availability of targeted therapies, 3-year mortality remains high, ranging from 30 to 55% [1].",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "a-SMA",
+      "long_form": "alphasmooth muscle actin",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "d therapies, 3-year mortality remains high, ranging from 30 to 55% [1]. First of all, we checked whether our cultured hPECs expressed three different endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPECs do not express alphasmooth muscle actin (a-SMA), a marker of smooth muscle cell, contrary to our human PA smooth muscle cells (hPASMCs) (Fig. 1B).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "hPASMCs",
+      "long_form": "human PA smooth muscle cells",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "we checked whether our cultured hPECs expressed three different endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPECs do not express alphasmooth muscle actin (a-SMA), a marker of smooth muscle cell, contrary to our human PA smooth muscle cells (hPASMCs) (Fig. 1B).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "endoMT",
+      "long_form": "endothelialto-mesenchymal transition",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "gely irreversible narrowing of small PA [2]. The underlying pathobiology of PAH is multifactorial, and pulmonary endothelial cells (PECs) dysfunction plays a central role in PA remodeling [2]. PECs from patients with PAH (PAH-hPECs) exhibit multiple phenotypic changes, including increased susceptibility to apoptosis [3, 4], reduced angiogenic capacity [3, 5], endothelial-to-mesenchymal transition (endoMT) [6], and enhanced proliferative and migratory capacity [3, 4]. In addition, PAH-hPECs contribute to the pathogenesis of PAH by favoring the recruitment of pro-inflammatory cytokines [7]. Elevation of the intracellular calcium (Ca”*) concentration, resulting from the endoplasmic reticulum (ER) Ca?* release or Ca”* influx, is central for regulating endothelial functions [8]. In endothelial cells, a",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SICE",
+      "long_form": "store independent Ca entry",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "inflammatory cytokines [7]. Elevation of the intracellular calcium (Ca”*) concentration, resulting from the endoplasmic reticulum (ER) Ca?* release or Ca”* influx, is central for regulating endothelial functions [8]. In endothelial cells, as in all non-excitable cells, Ca?* entry from the extracellular compartment could be mediated by store-operated Ca** entry (SOCE), store-independent Ca** entry (SICE), or stretch-activated Ca’* entry. In the pathogenesis of PAH, SOCE has been described to play a critical role in the development of PAH by contributing to the pathologi-cal phenotypes of PA smooth muscle cells (hPASMCs) [9, 10]. Depending on the cell types, the transient receptor potential canonical (TRPC) channels could be involved in all these different types of Ca”* entry [9, 11]. In recent ye",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRPC",
+      "long_form": "transient receptor potential canonical",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "artment could be mediated by store-operated Ca** entry (SOCE), store-independent Ca** entry (SICE), or stretch-activated Ca’* entry. In the pathogenesis of PAH, SOCE has been described to play a critical role in the development of PAH by contributing to the pathologi-cal phenotypes of PA smooth muscle cells (hPASMCs) [9, 10]. Depending on the cell types, the transient receptor potential canonical (TRPC) channels could be involved in all these different types of Ca”* entry [9, 11]. In recent years, pharmacological modulation of TRPC channels has been proposed as a potential therapeutic strategy to",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Tg",
+      "long_form": "thapsigargin",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "1]. In recent years, pharmacological modulation of TRPC channels has been proposed as a potential therapeutic strategy to As TRPC channels have been demonstrated to contrib-ute to Ca”* homeostasis in different types of endothelial cells, we measured the contribution of TRPC to intracel-lular Ca”* signals (Fig. 1C). SOCE was induced by depleting intracellular Ca** by applying 1 umol/L thapsigargin (Tg) (SERCA pump inhibitor) in a Ca”*-free medium and then by adding 2 mmol/L extracellular Ca”*. To elicit the contribution of each channel, we used a small interfering RNA (siRNA) strategy. The efficacy of each siRNA was previously validated [13]. 72 h after cell transfection, we found that the knockdown of TRPC1, TRPC3, TRPC4, and TRPC6 had no impact on ER Ca** release (Fig. 1D). The knockdown of T",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "siRNA",
+      "long_form": "small interfering RNA",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "te to Ca”* homeostasis in different types of endothelial cells, we measured the contribution of TRPC to intracel-lular Ca”* signals (Fig. 1C). SOCE was induced by depleting intracellular Ca** by applying 1 umol/L thapsigargin (Tg) (SERCA pump inhibitor) in a Ca”*-free medium and then by adding 2 mmol/L extracellular Ca”*. To elicit the contribution of each channel, we used a small interfering RNA (siRNA) strategy. The efficacy of each siRNA was previously validated [13]. 72 h after cell transfection, we found that the knockdown of TRPC1, TRPC3, TRPC4, and TRPC6 had no impact on ER Ca** release (Fig. 1D). The knockdown of TRPC4 decreased SOCE, whereas the knockdown of TRPC1, TRPC3, and TRPC6 had no impact on SOCE (Fig. 1E) in control-hPECs.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PPARGC1A",
+      "long_form": "Peroxisome Proliferator-Activated Receptor Gamma Coactivator 1-Alpha",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "PAH-hPECs compared to control-hPECs, while histamine-induced Ca’* signaling was reduced in PAH-hPECs compared to control-hPECs (Fig. 3D-E). Peroxisome Proliferator-Activated Receptor Gamma Coactivator 1-Alpha (PPARGC1A), Endothelin receptor type A (EDNRA) and Angiotensin II Receptor Type 1 (AGTR1) (Fig. 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40)",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EDNRA",
+      "long_form": "Endothelin receptor type",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "PAH-hPECs compared to control-hPECs, while histamine-induced Ca’* signaling was reduced in PAH-hPECs compared to control-hPECs (Fig. 3D-E). Peroxisome Proliferator-Activated Receptor Gamma Coactivator 1-Alpha (PPARGC1A), Endothelin receptor type A (EDNRA) and Angiotensin II Receptor Type 1 (AGTR1) (Fig. 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40) (Fig. 6B) and that TRPC4 knockdown",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "AGTR1",
+      "long_form": "Angiotensin II Receptor Type 1",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "PAH-hPECs compared to control-hPECs, while histamine-induced Ca’* signaling was reduced in PAH-hPECs compared to control-hPECs (Fig. 3D-E). Peroxisome Proliferator-Activated Receptor Gamma Coactivator 1-Alpha (PPARGC1A), Endothelin receptor type A (EDNRA) and Angiotensin II Receptor Type 1 (AGTR1) (Fig. 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40) (Fig. 6B) and that TRPC4 knockdown reduced the mRNA level of Histone Deacetyla",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HDAC5",
+      "long_form": "Histone Deacetylase 5",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": ". 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40) (Fig. 6B) and that TRPC4 knockdown reduced the mRNA level of Histone Deacetylase 5 (HDAC5) (Fig. 6C) without significantly affecting the expression of other endothelial markers. TRPC6 knockdown did not induce a change in mRNA of these 90 endothelial markers (data not shown).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CD40LG",
+      "long_form": "CD40 Ligand",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "sulting in PA obstruction [3, 4]. The overproduction of several growth factors is a key feature of pulmonary endothelial dysfunction in PAH, To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IL-1B",
+      "long_form": "Interleukin 1 Beta",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "sulting in PA obstruction [3, 4]. The overproduction of several growth factors is a key feature of pulmonary endothelial dysfunction in PAH, To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PTGFR",
+      "long_form": "prostaglandin F receptor",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "uction of several growth factors is a key feature of pulmonary endothelial dysfunction in PAH, To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ANGPT1",
+      "long_form": "Angiopoietin 1",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "factors is a key feature of pulmonary endothelial dysfunction in PAH, To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IRF3",
+      "long_form": "Interferon Regulatory Factor 3",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "function in PAH, To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "NA",
+      "long_form": "not applicable",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PVOD",
+      "long_form": "pulmonary venoocclusive disease",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PVR",
+      "long_form": "pulmonary vascular resistance",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "INSERM",
+      "long_form": "Institute for Health and Medical Research",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "et al. lon channels in pulmonary hypertension: a therapeutic interest? Int J Mol Sci. 2018;19:E3162. https://doi.org/10.3390/ijms 19103162. This study was supported by grants from the French National Institute for Health and Medical Research (INSERM), the Université Paris-Saclay, the Marie Lannelongue Hospital, and the French National Agency for Research (ANR). This work was supported by a grant from Fondation Maladies Rares and AFM-Téléthon #POCs(2023)-121503. A.SMW and B.M. are supported by the Therapeutic Innovation Doctoral School (ED569). K-EJ is supported by the French patient association HTAP France.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "STIM1",
+      "long_form": "stromal interaction molecule 1",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations. 36, Sundivakkam PC, Freichel M, Singh V, Yuan JP, Vogel SM, Flockerzi V, et al. The Ca2+sensor stromal interaction molecule 1 (STIM1) is necessary and",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ROS",
+      "long_form": "aberrant reactive oxygen production",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "both groups. The histamine-induced Ca?* response, however, was reduced in PAH. Regarding the absence of a difference in SOCE between control and PAH-hPECs, we can speculate that the different mitochondrial status of PAH-hPECs vs. control-hPECs, including mitochondrial membrane potential alteration, aberrant reactive oxygen production (ROS), and glycolytic shift [22, 23], could explain why SOCE is not increased in PAH-hPECs while TRPC1, TRPC3, and TRPC6 are increased. Indeed, mitochondrial function is closely related to SOCE [24, 25]. Mitochondrial depolarization enhances the activity of store-operated channels, including TRPC [26]. I",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "BrdU",
+      "long_form": "bromodeoxyuridine",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "ntifications of histamine-induced Ca?* influx by calculating the area under the curve under siControl, siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions. (n=4 patients for each condition). H Proliferation rate normalized by siControl for siTRPC1, siTRPC3, siTRPC4, and siTRPC6 conditions measured by BrdU incorporation (n=4 patients for sTRPC1 and n=3 for siTRPC3, siTRPC4, and siTRPC6). | Wound closure normalized by siControl in siTRPC1, siTRPC3, siTRPC4, and TRPC6 conditions after 8 h (n=4 for each condition). ns=non significant; * P< 0.05, **P<0.01",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FCS",
+      "long_form": "fetal calf serum",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 12,
+      "context_text": "We used the wound healing assay to evaluate cell migration. After 48 h of starvation (medium without growth factors: fetal calf serum (FCS), epidermal growth factor (EGF), and insulin), hPECs were plated in a culture insert (Cat. No. 90209; Ibidi) at a density of 2 x 10‘cells per well in a fresh medium with cytosine arabinoside (10 mol/L) to prevent cell proliferation. After allowing cells to attach for 24 h, we removed the culture ins",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRPC1",
+      "long_form": "transient receptor potential channel-related protein 1",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "alanced production and release of vasoactive substances, growth factors, and mediators of coagulation and inflammation. Intracellular calcium (Ca?*) variations are essential in these processes. Among the various channels involved in Ca** homeostasis, transient receptor potential canonical channels (TRPC1 to 7) are known to be essential for endothelial cells of various origins, but their role in PAH remains unknown.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "mRNA",
+      "long_form": "messenger ribonucleic acid",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "H-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium. Moreover, we showed that none of the TRPC channels is involved in the migration or in vitro tubulogenesis of PAH-hPECs. Finally, we found that TRPC1 knockdown induces changes in the mRNA expression of several genes described to be crucial for endothelial cell homeostasis.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRPC3",
+      "long_form": "transient receptor potential channel 3",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRPC4",
+      "long_form": "transient receptor potential channel 4",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRP",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRPC6",
+      "long_form": "transient receptor potential channel 6",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRPC3 are esse",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PAH-hPECs",
+      "long_form": "human pulmonary endothelial cells from PAH patients",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Results-We found that four TRPC channels (TRPC1, TRPC3, TRPC4, and TRPC6) were expressed in human pulmonary endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRPC3 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, and TRPC6 are important for mitogenic crosstalk in the PAH-hPECs medium. Moreover, we showed that none of the TRPC channe",
+      "lexicon_source": "disease_lexicon_pah.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SMA",
+      "long_form": "Smooth Muscle Actin",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "r our cultured hPECs expressed three different endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPECs do not express alphasmooth muscle actin (a-SMA), a marker of smooth muscle cell, contrary to our human PA smooth muscle cells (hPASMCs) (Fig. 1B).",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CD31",
+      "long_form": "cluster of differentiation 31",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "First of all, we checked whether our cultured hPECs expressed three different endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPECs do not express alphasmooth muscle actin (a-SMA), a marker of smooth muscle cell, contrary to our human PA smooth muscle cells (hPASMCs) (Fig. 1B).",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RNA",
+      "long_form": "ribonucleic acid",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 2,
+      "context_text": "TRPC to intracel-lular Ca”* signals (Fig. 1C). SOCE was induced by depleting intracellular Ca** by applying 1 umol/L thapsigargin (Tg) (SERCA pump inhibitor) in a Ca”*-free medium and then by adding 2 mmol/L extracellular Ca”*. To elicit the contribution of each channel, we used a small interfering RNA (siRNA) strategy. The efficacy of each siRNA was previously validated [13]. 72 h after cell transfection, we found that the knockdown of TRPC1, TRPC3, TRPC4, and TRPC6 had no impact on ER Ca** release (Fig. 1D). The knockdown of TRPC4 decreased SOCE, whereas the knockdown of TRPC1, TRPC3, and TRPC6",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DAPI",
+      "long_form": "4',6-diamino-2-phenylindole dihydrochloride",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "Fig. 1 TRPC channels expression in control-hPECs. A Expression and localization of TRPC1, TRPC3, TRPC4, and TRPC6 by immunofluorescence staining of paraffin-embedded lung sections from control patients. TRPC proteins are in red, vWF in yellow to localize PA, and endothelial cell nuclei are in blue (DAPI). Right column: magnitude X5 with white arrows to highlight co-staining TRPC with vWF. B Characterization of primary control-hPEC and control-hPASMCs by immunofluorescence and confocal imaging: vWF (in red), VE-cadherin (in yellow), CD31 (in green) and alpha-SMA (in green). C Illustrations of 340/3",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CD40",
+      "long_form": "cluster of differentiation 40",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "over, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40) (Fig. 6B) and that TRPC4 knockdown reduced the mRNA level of Histone Deacetylase 5 (HDAC5) (Fig. 6C) without significantly affecting the expression of other endothelial markers. TRPC6 knockdown did not induce a change in mRNA of these 90 endothelial markers (data not shown).",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TNF",
+      "long_form": "tumor necrosis factor",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "ptor Type 1 (AGTR1) (Fig. 6A). Moreover, no significant change was observed in the expression of the other 80 endothelial markers (Table 3). These results suggest that TRPC1 partly contributes to endothelial dysfunction in PAH disease. We also found that TRPC3 knockdown increased mRNA expression of TNF Receptor Superfamily Member 5 (CD40) (Fig. 6B) and that TRPC4 knockdown reduced the mRNA level of Histone Deacetylase 5 (HDAC5) (Fig. 6C) without significantly affecting the expression of other endothelial markers. TRPC6 knockdown did not induce a change in mRNA of these 90 endothelial markers (dat",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRPCs",
+      "long_form": "transient receptor potential channels",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "r migratory and angiogenic capacities, we investigated whether TRPC isoforms were involved in these processes. 72 h after PAH-hPECs transfection, we found that none of the TRPC channels were involved in PAH-hPECs migration (Fig. 5A) or angiogenic capacity (Fig. 5B). BrdU assay showed that among all TRPCs, only the knockdown of TRPC1 and TRPC3 reduced PAH-hPECs proliferation by about 30% (Fig. 5C). We also evaluated the crosstalk between PAH—-hPECs and control-hPASMCs. We measured the proliferation capacity of control-hPASMCs in the presence of culture medium from PAH-hPECs transfected with siTRPC1,",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "qPCR",
+      "long_form": "quantitative polymerase chain reaction",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 4,
+      "context_text": "To better understand the role played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interleukin 1 Beta (IL-1B), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3),",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IL",
+      "long_form": "Interleukins",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 5,
+      "context_text": "educed capacity for angiogenesis, as evidenced by decreased in vitro tube formation and disorga-nization compared to control patients [3, 5, 19]. In PAH, endothelial dysfunction contributes to the recruitment of pro-inflammatory cells through the overproduction of pro-inflammatory cytokines such as IL-la and IL-6, as well as other pro-inflammatory mediators such as leptin",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ATP",
+      "long_form": "adenosine triphosphate",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "ATP can buffer Ca”*, relieving the inhibitory effect of incoming Ca”* on SOCE activity [27]. We can therefore conclude that the metabolic status of mitochondria is key to regulating intracellular ATP content, which in turn affects SOCE activity. Mitochondrial status can also influence ROS production, w",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TRP",
+      "long_form": "transient receptor potential",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 6,
+      "context_text": "s a complex mechanism involving several modulating proteins, and each of them could modulate SOCE negatively and positively [33]. To our knowledge, the level of expression of these different SOCE modulating proteins is unknown in PAH-hPECs. Finally, the lipid membrane composition can also influence TRP channel function [34]. To better understand all these aspects of TRPC regulation in PAH and control-hPECs, several key experiments are necessary in further studies.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "iPAH",
+      "long_form": "idiopathic pulmonary arterial hypertension",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "mPAP",
+      "long_form": "mean pulmonary arterial pressure",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "Table 1 Characteristics of control patients and PAH patients before lung transplantation. Cl : cardiac index; hPAH : heritable PAH; iPAH : idiopathic PAH; mPAP : mean pulmonary arterial pressure; NA : not applicable; PVOD : pulmonary veno-occlusive disease; PVR : pulmonary vascular resistance",
+      "lexicon_source": "disease_lexicon_pah.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PASMCs",
+      "long_form": "pulmonary arterial smooth muscle cells",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "exposed to Sugen/hypoxia, knocking down TRPC4 using an adeno-associated virus reduced both right ventricu-lar systolic pressure and right ventricular hypertrophy [39]. This study demonstrated the potential of targeting TRPC4 in endothelial cells to reduce PAH. As in PASMCs or other cell types, including PECs, Ca* signaling is necessary for almost all cellular functions, including prolif-eration, migration, contraction, and gene transcription [8]. Given that PAH is characterized by pulmonary endothelial dysfunction, it is important to analyze the consequences of SOC c",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PH",
+      "long_form": "pulmonary hypertension",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "PAH (n=13) Control (n=12) Age, years 13 (46) 72 51 (66) 77 Sex, M/F 3 M/ M/8F Diseases Diagnosis 31% hPAH 100% lung 38% iPAH cancer 8% PVOD 159% PAH with congenital heart disease 8% PH group 5 Mutation in BMPR2 gene Carrier 3 NA no-carrier 10 NA Mutation in SOX17 gene Carrier 1 NA no-carrier 12 NA Hemodynamic parameters mPAP, mmHg 38 (52,5) 65 NA i, L/min/m? 2,1 (2,66) 3,13 NA PVR, Wood units 3,9 (11,22) 18 NA Medication Monotherapies NA NA Bitherapies NA NA",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "BMPR2",
+      "long_form": "bone morphogenetic protein receptor type 2",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "PAH (n=13) Control (n=12) Age, years 13 (46) 72 51 (66) 77 Sex, M/F 3 M/ M/8F Diseases Diagnosis 31% hPAH 100% lung 38% iPAH cancer 8% PVOD 159% PAH with congenital heart disease 8% PH group 5 Mutation in BMPR2 gene Carrier 3 NA no-carrier 10 NA Mutation in SOX17 gene Carrier 1 NA no-carrier 12 NA Hemodynamic parameters mPAP, mmHg 38 (52,5) 65 NA i, L/min/m? 2,1 (2,66) 3,13 NA PVR, Wood units 3,9 (11,22) 18 NA Medication Monotherapies NA NA Bitherapies NA NA",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HEPES",
+      "long_form": "N-2-hydroxyethylpiperazine-N-2-ethanesulfonic acid",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "hPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MCDB",
+      "long_form": "molecular, cellular and developmental biology medium",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 10,
+      "context_text": "hPECs were maintained in MCDB 131 (Gibco, ref 10372019), 10% FCS, 2 mM L-Glutamine, 25 mM HEPES, 100 U/mL penicillin-streptomycin, 6 g/mL ECGS, 1 ng/ mL VEGF, 1 U/mL heparin at 37 °C, 5% CO,. hPASMCs",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DMEM",
+      "long_form": "Dulbecco's minimal essential medium",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 11,
+      "context_text": "were cultured in DMEM (Gibco, ref 11960044) supple-mented with 12,5% FCS, 2 mmol/L L-Glutamine, 1X Insulin-Transferin-Selenium, 100 U/mL penicillin-streptomycin, 20 mmol/L HEPES, 10 ng/mL EGF.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EGF",
+      "long_form": "epidermal growth factor",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 11,
+      "context_text": "were cultured in DMEM (Gibco, ref 11960044) supple-mented with 12,5% FCS, 2 mmol/L L-Glutamine, 1X Insulin-Transferin-Selenium, 100 U/mL penicillin-streptomycin, 20 mmol/L HEPES, 10 ng/mL EGF.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PCR",
+      "long_form": "polymerase chain reaction",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 11,
+      "context_text": "Reverse transcription-quantitative PCR (RT-qPCR)",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SAA",
+      "long_form": "Amyloid-Related Serum Protein",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "Masri FA, Xu W, Comhair SAA, Asosingh K, Koo M, Vasanji A, et al. Hyperprolif-erative apoptosis-resistant endothelial cells in idiopathic pulmonary arterial hypertension. Am J Physiol Lung Cell Mol Physiol. 2007;293:L548-554. https:/ /doi.org/10.1152/ajplung.00428,2006.",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MSH",
+          "id": "SAA"
+        }
+      ]
+    },
+    {
+      "short_form": "ED569",
+      "long_form": "Exercise Dose and Nonalcoholic Fatty Liver Disease",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 13,
+      "context_text": "(INSERM), the Université Paris-Saclay, the Marie Lannelongue Hospital, and the French National Agency for Research (ANR). This work was supported by a grant from Fondation Maladies Rares and AFM-Téléthon #POCs(2023)-121503. A.SMW and B.M. are supported by the Therapeutic Innovation Doctoral School (ED569). K-EJ is supported by the French patient association HTAP France.",
+      "lexicon_source": "trial_acronyms_lexicon.json",
+      "lexicon_ids": [
+        {
+          "source": "ClinicalTrials.gov",
+          "id": "NCT00771108"
+        }
+      ]
+    },
+    {
+      "short_form": "Redox",
+      "long_form": "oxidation-reduction",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "23 Pokharel MD, Marciano DP Fu P, Franco MC, Unwalla H, Tieu K, et al. Metabolic reprogramming, oxidative stress, and pulmonary hypertension. Redox Biol. 2023;64:102797. https://doi.org/10.1016/j.redox.2023.102797.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Nat",
+      "long_form": "national",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "42. Freichel M, Suh SH, Pfeifer A, Schweig U, Trost C, Weissgerber P. Lack of an endothelial store-operated Ca2+ current impairs agonist-dependent vasore-laxation in TRP4—/— mice. Nat Cell Biol. 2001;3(2):121-7. https://doi.org/10.10 38/35055019.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "KCNK3",
+      "long_form": "KCNK3 gene",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 14,
+      "context_text": "45, Lambert M, Capuano V, Boet A, Tesson L, Bertero T, Nakhleh MK, et al. Charac-terization of Kcnk3 -mutated rat, a novel model of pulmonary hypertension. Circ Res. 2019;125:678-95. https://doi.org/10.1161/CIRCRESAHA.119.314793",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "KCNK3"
+        }
+      ]
+    },
+    {
+      "short_form": "IL-6",
+      "long_form": "interleukin-6",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "f pro-inflammatory cells through the overproduction of pro-inflammatory cytokines such as IL-la and IL-6, as well as other pro-inflammatory mediators such as leptin leading to the proliferation and excess",
+      "lexicon_source": "orchestrator:hyphenated",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "hPECs",
+      "long_form": "human pulmonary endothelial cells",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " endothelial cells (PECs) from control and PAH patients. By knocking down each of these channels in hPECs isolated from PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operate",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "Ca",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "int-Martin Willer'®, Bastien Masson'®, Loann Laubry'®, Mary Dutheil!, Kristelle El Jekmek'®, Gilles Carpentier?®, Mathieu Gourmelon'®, Jessica Sabourin*®, Marc Humbert'®, Olaf Mercier'®, Grégoire Ruffen",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HPPIT",
+      "long_form": "Hypertension Pulmonaire : Physiopathologie and Innovation Thérapeutique",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "fabrice.antigny@inserm.fr ‘Hypertension Pulmonaire : Physiopathologie and Innovation Thérapeutique (HPPIT), Université Paris-Saclay, Inserm, UMR_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Gr",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "UMR_S",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ulmonaire : Physiopathologie and Innovation Thérapeutique (HPPIT), Université Paris-Saclay, Inserm, UMR_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "AP-HP",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " Physiopathologie and Innovation Thérapeutique (HPPIT), Université Paris-Saclay, Inserm, UMR_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN-LUNG, Le P",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ERN-LUNG",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "R_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN-LUNG, Le Plessis Robinson, France ?Gly-CRRET Research Unit 4397, Paris-Est Créteil University, Créteil, ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "VE-Cadherin",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ent endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed that hPE",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ER",
+      "long_form": "endoplasmic reticulum",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "R_S 999, AP-HP, Hépital Bicétre, Hdpital Marie Lannelongue (Groupe Hospitalier Paris Saint Joseph), ERN-LUNG, Le Plessis Robinson, France ?Gly-CRRET Research Unit 4397, Paris-Est Créteil University, Cré",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SERCA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "(Fig. 1C). SOCE was induced by depleting intracellular Ca** by applying 1 umol/L thapsigargin (Tg) (SERCA pump inhibitor) in a Ca”*-free medium and then by adding 2 mmol/L extracellular Ca”*. To elicit the",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SOC",
+      "long_form": "Standard of Care",
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " PAH patients (PAH-hPECs), we found that TRPC1 and TRPC4 are involved in store-operated Ca** entry (SOCE). We showed that TRPC1 and TRPC3 are essential for PAH-hPECs proliferation and that TRPC3, TRPC4, ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "VE",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ent endothelial markers by immunostaining (Fig. 1B). We confirmed that all hPECs expressed the vWF, VE-Cadherin, and CD31, demonstrating the endothelial phenotype of the control-hPECs. We also confirmed",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "RT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ole played by TRPC channels in PAH-hPECs, we quantified the expression of 90 endothelial markers by RT-qPCR assay. We found that TRPC1 knockdown increased mRNA expression of CD40 Ligand (CD40LG), Interl",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "LEP",
+      "long_form": "Leptin",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "), Tumor Necrosis Factor (TNF), prostaglan-din F receptor (PTGFR), Angiopoietin 1 (ANGPT1), Leptin (LEP) Interferon Regulatory Factor 3 (IRF3), Magnitude XS PAH lungs B Control and PAH-hPECs 100 kDa-43 k",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Pulmonary arterial hypertension associated with congenital heart disease",
+      "matched_text": "PAH with congenital heart disease",
+      "abbreviation": "PAH-CHD",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:275803"
+    },
+    {
+      "name": "Lipodystrophy due to peptidic growth factors deficiency",
+      "matched_text": "EGF",
+      "abbreviation": "EGF",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "E88.1",
+      "orpha": "ORPHA:1979"
+    },
+    {
+      "name": "Idiopathic pulmonary arterial hypertension",
+      "matched_text": "idiopathic PAH",
+      "abbreviation": "iPAH",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:422"
+    },
+    {
+      "name": "Heritable pulmonary arterial hypertension",
+      "matched_text": "heritable PAH",
+      "abbreviation": "hPAH",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:275777"
+    },
+    {
+      "name": "Pulmonary veno-occlusive disease",
+      "matched_text": "pulmonary veno-occlusive disease",
+      "abbreviation": "PVOD",
+      "confidence": 0.85,
+      "is_rare": true,
+      "icd10": "J98.4",
+      "orpha": "ORPHA:31837"
+    },
+    {
+      "name": "Pulmonary arterial hypertension",
+      "matched_text": "pulmonary arterial hypertension",
+      "abbreviation": "PAH",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:182090"
+    },
+    {
+      "name": "Reactive angioendotheliomatosis",
+      "matched_text": "RA",
+      "abbreviation": "RA",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:673574"
+    },
+    {
+      "name": "Deafness-infertility syndrome",
+      "matched_text": "Dis",
+      "abbreviation": "DIS",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "Q93.5",
+      "orpha": "ORPHA:94064"
+    },
+    {
+      "name": "Multiple epiphyseal dysplasia",
+      "matched_text": "Med",
+      "abbreviation": "MED",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:251"
+    },
+    {
+      "name": "congenital heart disease",
+      "matched_text": "congenital heart disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hypertensive disorder",
+      "matched_text": "Hypertension",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:I15",
+      "orpha": null
+    },
+    {
+      "name": "Common arterial trunk",
+      "matched_text": "Cat",
+      "abbreviation": "CAT",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "Q20.0",
+      "orpha": "ORPHA:3384"
+    },
+    {
+      "name": "prune belly syndrome",
+      "matched_text": "PBS",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q79.4",
+      "orpha": "Orphanet:2970"
+    },
+    {
+      "name": "Nemaline myopathy",
+      "matched_text": "nM",
+      "abbreviation": "NM",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:607"
+    },
+    {
+      "name": "Friedreich ataxia",
+      "matched_text": "FA",
+      "abbreviation": "FA",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "G11.1",
+      "orpha": "ORPHA:95"
+    },
+    {
+      "name": "Hinman syndrome",
+      "matched_text": "HS",
+      "abbreviation": "HS",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "N32.8",
+      "orpha": "ORPHA:84085"
+    },
+    {
+      "name": "idiopathic",
+      "matched_text": "idiopathic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "acquired",
+      "matched_text": "acquired",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:409941"
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "wound",
+      "matched_text": "Wound",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "PVOD",
+      "matched_text": "PVOD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:31837"
+    },
+    {
+      "name": "SMA",
+      "matched_text": "SMA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:70"
+    },
+    {
+      "name": "MEM",
+      "matched_text": "MEM",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "GPC",
+      "matched_text": "gPC",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "ACC",
+      "matched_text": "ACC",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:200"
+    },
+    {
+      "name": "CBA",
+      "matched_text": "CBA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:485631"
+    },
+    {
+      "name": "BSA",
+      "matched_text": "BSA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "AFM",
+      "matched_text": "AFM",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G04.82",
+      "orpha": "Orphanet:623801"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "ACC-010",
+      "matched_text": "ACC-010",
+      "compound_id": "ACC-010",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "ACC-016",
+      "matched_text": "ACC-016",
+      "compound_id": "ACC-016",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "ACC-018",
+      "matched_text": "ACC-018",
+      "compound_id": "ACC-018",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "ACC-017",
+      "matched_text": "ACC-017",
+      "compound_id": "ACC-017",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "AMAB9091",
+      "matched_text": "AMAB9091",
+      "compound_id": "AMAB9091",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "AD0200",
+      "matched_text": "AD0200",
+      "compound_id": "AD0200",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "CBA-200",
+      "matched_text": "CBA-200",
+      "compound_id": "CBA-200",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "JCI24838",
+      "matched_text": "JCI24838",
+      "compound_id": "JCI24838",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "JC1120847",
+      "matched_text": "JC1120847",
+      "compound_id": "JC1120847",
+      "confidence": 0.8,
+      "is_investigational": true,
+      "phase": null
+    },
+    {
+      "name": "Insulin",
+      "matched_text": "Insulin",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "dasatinib",
+      "matched_text": "Dasatinib",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "oxygen",
+      "matched_text": "oxygen",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "l-glutamine",
+      "matched_text": "L-Glutamine",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "alcohol",
+      "matched_text": "alcohol",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Gly",
+      "matched_text": "Gly",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Small interfering RNA",
+      "matched_text": "small interfering RNA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Paraffin",
+      "matched_text": "paraffin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Angiotensin II",
+      "matched_text": "Angiotensin II",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "TUBE",
+      "matched_text": "tube",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "CD40 ligand",
+      "matched_text": "CD40 Ligand",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "leptin",
+      "matched_text": "Leptin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "ATP",
+      "matched_text": "ATP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Trp",
+      "matched_text": "TRP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Murine",
+      "matched_text": "murine",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "hepes",
+      "matched_text": "HEPES",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Penicillin",
+      "matched_text": "penicillin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Streptomycin",
+      "matched_text": "streptomycin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Selenium",
+      "matched_text": "Selenium",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "DMSO",
+      "matched_text": "DMSO",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "NACl",
+      "matched_text": "NaCl",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "D-glucose",
+      "matched_text": "D-glucose",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "DNA",
+      "matched_text": "DNA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "dye",
+      "matched_text": "dye",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "PARAFORMALDEHYDE",
+      "matched_text": "paraformaldehyde",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "xylene",
+      "matched_text": "xylene",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Serum albumin",
+      "matched_text": "Serum Albumin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "triton",
+      "matched_text": "Triton",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Cytosine arabinoside",
+      "matched_text": "cytosine arabinoside",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Stress",
+      "matched_text": "stress",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Fibrin",
+      "matched_text": "fibrin",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Ca 2+",
+      "matched_text": "Ca 2+",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

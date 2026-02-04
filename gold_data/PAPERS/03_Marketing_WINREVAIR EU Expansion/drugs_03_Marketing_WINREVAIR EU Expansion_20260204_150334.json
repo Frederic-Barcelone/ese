@@ -1,0 +1,160 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:03:34.091951",
+  "document": "03_Marketing_WINREVAIR EU Expansion.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "sotatercept",
+      "preferred_name": "Sotatercept",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Multiple Myeloma"
+      ],
+      "nct_id": "NCT01562405",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT01562405",
+          "display": null
+        }
+      ],
+      "context": "NEWS RELEASE\n\nMerck Receives Positive EU CHMP Opinion for Expanded Use of WINREVAIR™ (sotatercept) in Adults with Pulmonary Arterial Hypertension (PAH, WHO* Group 1 Pulmonary Hypertension)\n\n2025-12-12\n\nRAHWAY, N.J.--(BUSINESS WIRE)-- Merck (NYSE: ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "WINREVAIR",
+      "preferred_name": "sotatercept-csrk",
+      "brand_name": "WINREVAIR",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "INJECTION",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "BLA761363",
+          "display": null
+        }
+      ],
+      "context": "NEWS RELEASE\n\nMerck Receives Positive EU CHMP Opinion for Expanded Use of WINREVAIR™ (sotatercept) in Adults with Pulmonary Arterial Hypertension (PAH, WHO* Group 1 Pulmonary Hypertension)\n\n2025-12-12\n\nRAHWAY, N.J.--(BUSINESS WIRE)--",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "prostacyclin",
+      "preferred_name": "Prostacyclin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011464",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "8814",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011464",
+          "display": "Epoprostenol"
+        }
+      ],
+      "context": " signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy. There were more participants in WHO FC III (74%) compared to WHO FC IV (26%). The REVEAL Lite 2 risk score was <9 for 2% of partici",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Prostaglandins I",
+        "carboprostacyclin",
+        "HOE 892"
+      ],
+      "pubtator_normalized_name": "Epoprostenol",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

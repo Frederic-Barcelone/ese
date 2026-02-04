@@ -1,0 +1,889 @@
+{
+  "metadata": {
+    "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+    "extracted_at": "2026-02-04T16:23:21.323119"
+  },
+  "count": 8,
+  "tables": [
+    {
+      "visual_id": "ac9aba0f-9f7f-478f-bbf6-1edd9659e449",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        4
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 4,
+          "bbox_pts": [
+            55.586761474609375,
+            95.00701904296875,
+            290.550537109375,
+            255.3878936767578
+          ]
+        }
+      ],
+      "title": "Patient Demographics by GI Involvement Status",
+      "description": "This is a data table comparing demographic characteristics between patients with and without gastrointestinal (GI) involvement in a study of 220 patients. The table presents sex distribution, age metrics, and diagnostic delay information across the two groups, along with statistical p-values testing for significant differences. All p-values (0.367, 0.384, 0.435, 0.284) are above 0.05, indicating no statistically significant differences in demographics between patients with GI involvement (n=18) and those without (n=202).",
+      "caption": "Patient demographics",
+      "reference": "Table 1",
+      "image_file": "06_41927_2025_Article_585_table_page4_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "",
+              "With GI involvement(18)",
+              "Without GI involvement(202)",
+              "Whole sample(220)",
+              "p - val- ue"
+            ]
+          ],
+          "rows": [
+            [
+              "Sex(f)",
+              "7 (38.9)",
+              "101 (50)",
+              "108 (49.1)",
+              "0.367"
+            ],
+            [
+              "age",
+              "52.53 (13.38)",
+              "49.7 (16.49)",
+              "49.92 (16.26)",
+              "0.384"
+            ],
+            [
+              "Age at the time",
+              "46.94 (12.90)",
+              "44.23(16.17)",
+              "44.48 (15.93)",
+              "0.435"
+            ],
+            [
+              "diag- nosis Delay in diag-",
+              "2 (1.87)",
+              "1.97(3.46)",
+              "1.97(3.36)",
+              "0.284"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Table 1)",
+            "page_num": 4,
+            "char_offset": 562
+          },
+          {
+            "text": " \nTable 1",
+            "page_num": 4,
+            "char_offset": 1638
+          }
+        ],
+        "section_context": "Methods",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259701"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "c7459410-58c8-41a5-84be-a5ffbe09f42b",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        5
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 5,
+          "bbox_pts": [
+            55.44117736816406,
+            492.16278076171875,
+            539.3275756835938,
+            715.1546630859375
+          ]
+        }
+      ],
+      "title": "Clinical Characteristics of 18 GPA Patients",
+      "description": "This is a clinical data table presenting detailed patient characteristics for 18 individuals diagnosed with granulomatosis with polyangiitis (GPA), a systemic vasculitis. The table includes demographics, diagnostic delays, serological status (PR3-ANCA), multi-organ involvement patterns, disease severity scores (BVAS), treatment regimens, and clinical outcomes. Notable patterns include predominant ENT and liver involvement, varied diagnostic delays (0-6 months), mostly PR3-positive serology, and mixed prognosis outcomes with both living (L) and deceased (D) patients represented equally.",
+      "caption": "Clinical description of 18 Gastrointestinal patients",
+      "reference": "Table 2",
+      "image_file": "06_41927_2025_Article_585_table_page5_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Patient no.",
+              "Age",
+              "Lag of Dx (months)",
+              "Serology",
+              "Organ involvment at GPA diagnosis",
+              "First BVAS",
+              "Induction Tx",
+              "MaintenanceTx",
+              "Prognosis"
+            ]
+          ],
+          "rows": [
+            [
+              "1",
+              "65",
+              "3",
+              "-",
+              "ENT, L,K, P,M",
+              "34",
+              "Cyc",
+              "PD, RTX, Cyc",
+              "D"
+            ],
+            [
+              "2",
+              "39",
+              "1",
+              "-",
+              "Li, ENT",
+              "13",
+              "Cyc+Pulse",
+              "PD5,Aza",
+              "L"
+            ],
+            [
+              "3",
+              "38",
+              "0",
+              "PR3",
+              "Li, ENT, L,K, eye, HF",
+              "34",
+              "Cyc+Pulse",
+              "PD5,Aza",
+              "D"
+            ],
+            [
+              "4",
+              "63",
+              "4",
+              "PR3",
+              "ENT, K,S, Li",
+              "26",
+              "Cyc+Pulse",
+              "PD7.5",
+              "D"
+            ],
+            [
+              "5",
+              "62",
+              "3",
+              "PR3",
+              "Li, C,ENT, L",
+              "19",
+              "Cyc+Pulse",
+              "PD50,Aza",
+              "L"
+            ],
+            [
+              "6",
+              "68",
+              "2",
+              "PR3",
+              "ENT, Li",
+              "9",
+              "Cyc",
+              "PD2.5",
+              "L"
+            ],
+            [
+              "7",
+              "51",
+              "0",
+              "-",
+              "Li, ENT, L,K, eye, S",
+              "32",
+              "Cyc+Pulse",
+              "PD, RTX, Cyc",
+              "D"
+            ],
+            [
+              "8",
+              "56",
+              "2",
+              "PR3",
+              "ENT, K,eye, C,Li",
+              "28",
+              "Cyc+Pulse",
+              "PD60",
+              "D"
+            ],
+            [
+              "9",
+              "54",
+              "6",
+              "PR3",
+              "ENT, L,K, Li",
+              "17",
+              "Cyc+Pulse",
+              "Celcept, PD60",
+              "L"
+            ],
+            [
+              "10",
+              "28",
+              "4",
+              "PR3",
+              "ENT, L,K, Li",
+              "6",
+              "MTX",
+              "MTX, PD30",
+              "D"
+            ],
+            [
+              "11",
+              "68",
+              "0",
+              "PR3",
+              "ENT, L,Li, J,M",
+              "18",
+              "Aza+pulse",
+              "PD5",
+              "L"
+            ],
+            [
+              "12",
+              "69",
+              "0",
+              "PR3",
+              "ENT, Li, M,J",
+              "15",
+              "Aza+pulse",
+              "RTX",
+              "L"
+            ],
+            [
+              "13",
+              "58",
+              "2",
+              "PR3",
+              "ENT, K,C, eye, Li",
+              "30",
+              "Cyc+Pulse",
+              "PD30",
+              "D"
+            ],
+            [
+              "14",
+              "51",
+              "0",
+              "PR3",
+              "ENT, K,C, eye, M,Li",
+              "35",
+              "Cyc+Pulse",
+              "PD45,Cyc",
+              "D"
+            ],
+            [
+              "15",
+              "50",
+              "4",
+              "-",
+              "ENT, Li",
+              "6",
+              "MTX",
+              "PD60,Cyc",
+              "D"
+            ],
+            [
+              "16",
+              "52",
+              "3",
+              "PR3",
+              "ENT, L,C, Li",
+              "19",
+              "Cyc+Pulse",
+              "PD60,Aza",
+              "L"
+            ],
+            [
+              "17",
+              "39",
+              "0",
+              "PR3",
+              "ENT, K,L, C,eye, HF, Li",
+              "37",
+              "Cyc+Pulse",
+              "PD5",
+              "D"
+            ],
+            [
+              "18",
+              "40",
+              "2",
+              "PR3",
+              "ENT, Li",
+              "9",
+              "Aza",
+              "RTX",
+              "L"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "in Table 2",
+            "page_num": 5,
+            "char_offset": 781
+          },
+          {
+            "text": " \n(Table 2)",
+            "page_num": 5,
+            "char_offset": 2555
+          },
+          {
+            "text": "\nTable 2",
+            "page_num": 5,
+            "char_offset": 3299
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259742"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "e90a9137-cefd-4bf0-845f-14fddca8defc",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        6
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 6,
+          "bbox_pts": [
+            55.625736236572266,
+            95.51895141601562,
+            291.05548095703125,
+            213.93992614746094
+          ]
+        }
+      ],
+      "title": "BVAS Scores: GI Symptoms vs No GI Symptoms",
+      "description": "This is a data table comparing BVAS (Birmingham Vasculitis Activity Score) measurements between two patient groups - those without GI symptoms and those with GI symptoms. The table shows three time points: scores at diagnosis, scores after follow-up, and final adjusted scores using ANCOVA analysis. Notable findings include significantly higher BVAS scores in the GI symptoms group at both diagnosis (21±10.13 vs 15.8±7.43, p=0.004) and after follow-up (8.47±9.24 vs 4.43±7.72, p=0.042), though the final adjusted scores showed no significant difference (p=0.266).",
+      "caption": "BVAS score during follow-up",
+      "reference": "Table 3",
+      "image_file": "06_41927_2025_Article_585_table_page6_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Group",
+              "Mean±SD (Without GI Symptoms)",
+              "Mean±SD (With GI Symptoms)",
+              "Statistical Test",
+              "P - val- ue"
+            ]
+          ],
+          "rows": [
+            [
+              "BVAS Score",
+              "15.8±7.43",
+              "21±10.13",
+              "Indepen- dent t-test",
+              "0.004"
+            ],
+            [
+              "at Diagnosis BVAS Score After Follow-Up",
+              "4.43±7.72",
+              "8.47±9.24",
+              "Indepen- dent t-test",
+              "0.042"
+            ],
+            [
+              "Final Ad- justed Score (ANCOVA)",
+              "4.66±0.522",
+              "0.66 (SE=1.11)",
+              "ANCOVA",
+              "0.266"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Table 3)",
+            "page_num": 5,
+            "char_offset": 3288
+          },
+          {
+            "text": " \nTable 3",
+            "page_num": 6,
+            "char_offset": 2121
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259770"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "5e62b096-11d7-4493-acde-6cf5eafe59ca",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        6
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 6,
+          "bbox_pts": [
+            303.29925537109375,
+            94.90791320800781,
+            538.8607177734375,
+            225.56361389160156
+          ]
+        }
+      ],
+      "title": "Relapse Time Comparison by GI Symptoms",
+      "description": "This is a data table comparing relapse times between patient groups with and without gastrointestinal (GI) symptoms across different response categories. The table presents mean values with standard deviations for disease relapse, partial response, complete response, and overall time to relapse groups. Statistical analysis using Mann-Whitney tests shows no significant differences between groups (all p-values > 0.05), suggesting that GI symptoms do not significantly affect relapse timing patterns.",
+      "caption": "Relapse time",
+      "reference": "Table 4",
+      "image_file": "06_41927_2025_Article_585_table_page6_2.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Group",
+              "Mean±SD (Without GI Symptoms)",
+              "Mean±SD (With GI Symptoms)",
+              "Statistical Test",
+              "P - val- ue"
+            ]
+          ],
+          "rows": [
+            [
+              "Disease",
+              "1.01±1.05",
+              "1.41±0.71",
+              "Mann-Whitney",
+              "0.394"
+            ],
+            [
+              "Relapse Partial",
+              "1.07±0.95",
+              "0.82±0.64",
+              "Mann-Whitney",
+              "0.447"
+            ],
+            [
+              "Com- plete Response",
+              "1.29±1.16",
+              "1.11±1.36",
+              "Mann-Whitney",
+              "0.384"
+            ],
+            [
+              "Time to Relapse",
+              "8.2±9.02",
+              "6.4±5.87",
+              "Mann-Whitney",
+              "0.450"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " (Table 4)",
+            "page_num": 6,
+            "char_offset": 1211
+          },
+          {
+            "text": "\nTable 4",
+            "page_num": 6,
+            "char_offset": 2490
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259796"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "4e63d37b-c99b-477b-8a1e-9a761944c6aa",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        7
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 7,
+          "bbox_pts": [
+            55.76809310913086,
+            604.7777099609375,
+            539.01318359375,
+            641.27978515625
+          ]
+        }
+      ],
+      "title": "Cox Analysis GI Involvement Survival Impact",
+      "description": "This is a data table presenting Cox proportional hazards regression analysis results for gastrointestinal (GI) involvement as a predictor of both relapse-free survival and overall survival. The table shows that GI involvement is a significant negative prognostic factor, with hazard ratios of 2.989 for relapse-free survival and 3.247 for overall survival, both with p-values ≤0.001. The confidence intervals confirm that patients with GI involvement have approximately 3 times higher risk of relapse and death compared to those without GI involvement.",
+      "caption": "Cox analysis relapse free survival data",
+      "reference": "Table 6",
+      "image_file": "06_41927_2025_Article_585_table_page7_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Variable and covariates.",
+              "B.",
+              "SE.",
+              "p -value.",
+              "Hazard ratio.",
+              "95.0% CI for hazard ratio.Lower",
+              "95.0% CI for hazard ratio.Upper"
+            ]
+          ],
+          "rows": [
+            [
+              "GI involvment",
+              "1.095",
+              "0.289",
+              "<0.001",
+              "2.989",
+              "1.697",
+              "5.266"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "\nTable 6",
+            "page_num": 7,
+            "char_offset": 2551
+          }
+        ],
+        "section_context": "Discussion",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259826"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "2e46ce3a-0992-4735-bc50-d6c71a17b9d4",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        7
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 7,
+          "bbox_pts": [
+            55.884117126464844,
+            664.5667724609375,
+            538.9727783203125,
+            734.3062744140625
+          ]
+        }
+      ],
+      "title": "Cox Regression Analysis for Cancer Survival",
+      "description": "This is a data table presenting Cox proportional hazards regression analysis results for both relapse-free survival (Table 6) and overall survival (Table 7). The tables show hazard ratios, confidence intervals, and p-values for various covariates including gastrointestinal (GI) involvement, age, and PR3 status. Notable findings include GI involvement being a significant predictor of both relapse (HR=2.989, p<0.001) and death (HR=3.247, p=0.001), while age also significantly affects overall survival risk.",
+      "caption": "Cox analysis relapse free survival data",
+      "reference": "Table 6",
+      "image_file": "06_41927_2025_Article_585_table_page7_2.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Variable and covariates.",
+              "B.",
+              "SE.",
+              "p -value.",
+              "Hazard ratio.",
+              "95.0% CI for hazard ratio.Lower",
+              "95.0% CI for hazard ratio.Upper"
+            ]
+          ],
+          "rows": [
+            [
+              "GI involvment",
+              "1.178",
+              "0.3490",
+              "0.001",
+              "3.247",
+              "1.638",
+              "6.434"
+            ],
+            [
+              "Age",
+              "0.041",
+              "0.008",
+              "0.001",
+              "1.042",
+              "1.026",
+              "1.058"
+            ],
+            [
+              "PR3",
+              "0.278",
+              "0.267",
+              "0.297",
+              "1.321",
+              "0.783",
+              "2.227"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": "\nTable 6",
+            "page_num": 7,
+            "char_offset": 2551
+          }
+        ],
+        "section_context": "Discussion",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259847"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "has_caption"
+      }
+    },
+    {
+      "visual_id": "68b1b42f-75ef-42aa-97ec-92e030b78885",
+      "visual_type": "table",
+      "confidence": 1.0,
+      "page_range": [
+        7
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 7,
+          "bbox_pts": [
+            303.34912109375,
+            273.00140380859375,
+            539.0059814453125,
+            339.1595458984375
+          ]
+        }
+      ],
+      "title": "Mortality Comparison: GI Symptoms vs No Symptoms",
+      "description": "This is a comparative data table analyzing mortality rates between two patient groups based on the presence or absence of gastrointestinal (GI) symptoms. The table shows that patients with GI symptoms had a significantly higher mortality rate (55.56%) compared to those without GI symptoms (28%), despite the much smaller sample size (18 vs 202 patients). The statistical analysis indicates this difference is significant with a Z-score of 2.19 and p-value of 0.0285, suggesting that GI symptoms may be associated with increased mortality risk.",
+      "caption": "Mortality rate comparison between two groups",
+      "reference": "Table 5",
+      "image_file": "06_41927_2025_Article_585_table_page7_3.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "Group",
+              "Number of patients",
+              "Num- ber of deaths",
+              "Mortal- ity Rate (%)",
+              "Z",
+              "P - value"
+            ]
+          ],
+          "rows": [
+            [
+              "Without GI",
+              "202",
+              "57",
+              "28",
+              "2.19",
+              "0.0285"
+            ],
+            [
+              "Symptoms With GI Symptoms",
+              "18",
+              "10",
+              "55.56",
+              "",
+              ""
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [
+          {
+            "text": " \n(Table 5)",
+            "page_num": 7,
+            "char_offset": 546
+          },
+          {
+            "text": " \nTable 5",
+            "page_num": 7,
+            "char_offset": 2345
+          }
+        ],
+        "section_context": "Results",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259873"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    },
+    {
+      "visual_id": "6e7e3507-39b8-4bd8-8c23-e9d368f8e3ed",
+      "visual_type": "table",
+      "confidence": 0.9,
+      "page_range": [
+        9
+      ],
+      "is_multipage": false,
+      "locations": [
+        {
+          "page_num": 9,
+          "bbox_pts": [
+            55.22142028808594,
+            667.777099609375,
+            209.23558044433594,
+            731.2222900390625
+          ]
+        }
+      ],
+      "title": "Medical Abbreviations for Vasculitis Research Study",
+      "description": "This is a reference table listing medical abbreviations and their full definitions used in a vasculitis research study. The table provides standardized terminology for conditions like Granulomatosis with Polyangiitis (GPA), ANCA-Associated Vasculitides (AAVs), and assessment tools like the Birmingham Vasculitis Activity Score (BVAS). It also includes organizational abbreviations such as the American College of Rheumatology (ACR) and European Medicines Agency (EMA), serving as a glossary for readers to understand the technical terms used throughout the medical document.",
+      "caption": "Conclusion Gastrointestinal involvement in GPA, although relatively  uncommon, is associated with increased disease severity,  higher relapse rates, and significantly elevated mortality.  These findings strengthen the importance of early recog­ nition and management of GI symptoms in patients with  GPA. Clinicians should maintain a high index of suspi­ cion for GI complications, particularly in patients with  elevated disease activity or atypical presentations. Fur­ ther prospective, multicenter studies are warranted to  clarify underlying mechanisms, evaluate predictive bio­ markers, and develop targeted therapeutic strategies to  improve outcomes in this high-risk subgroup.",
+      "image_file": "06_41927_2025_Article_585_table_page9_1.png",
+      "table_data": {
+        "structure": {
+          "headers": [
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": [
+            [
+              "GPA",
+              "Granulomatosis with Polyangiitis"
+            ],
+            [
+              "GI",
+              "Gastrointestinal"
+            ],
+            [
+              "ANCA",
+              "Antineutrophil Cytoplasmic Antibody"
+            ],
+            [
+              "AAVs",
+              "ANCA-Associated Vasculitides"
+            ],
+            [
+              "BVAS",
+              "Birmingham Vasculitis Activity Score"
+            ],
+            [
+              "ACR",
+              "American College of Rheumatology"
+            ],
+            [
+              "EMA",
+              "European Medicines Agency"
+            ]
+          ],
+          "confidence": 0.85
+        }
+      },
+      "relationships": {
+        "text_mentions": [],
+        "section_context": "Conclusions",
+        "continued_from": null,
+        "continues_to": null
+      },
+      "provenance": {
+        "extraction_method": "docling+vlm",
+        "source_file": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/06_41927_2025_Article_585.pdf",
+        "extracted_at": "2026-02-04T15:25:59.259891"
+      },
+      "triage": {
+        "decision": "vlm",
+        "reason": "docling_table"
+      }
+    }
+  ]
+}

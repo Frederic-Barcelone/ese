@@ -1,0 +1,296 @@
+--- Page 1 ---
+
+Woy popeopuMog
+Journal of the American Heart Association
+Check for updates
+®
+ORIGINAL RESEARCH
+Chest Computed Tomography—Based Radiomics for the Diagnosis and Prognosis of Pulmonary Hypertension
+Bingian Ruan ®, MM*; Mengqi Chen ®, PhD*; Qi Zhuang ®, MM; Lihua Guan, PhD; Weiping Xie, PhD; Lan Wang ®, PhD; Qinhua Zhao ®, PhD; Shiyong Yu®, PhD; An Wang ®, MM; Jian Wang ©, MM; Menghui Yang, MM; Jieyan Shen ®, MD, PhD
+BACKGROUND: Imaging technique has emerged as an innovative tool for diagnosing and monitoring patients with pulmonary hypertension (PH). Current studies in radiomics primarily focus on hemodynamics and cardiac function, whereas the assessment of pulmonary vessels is often neglected. This study aims to investigate the diagnostic and prognostic value of computed tomography pulmonary vascular radiomics in PH.
+METHODS: This multicenter study enrolled 193 patients with PH and 193 controls (102 symptomatic non-PH cases and 91 healthy volunteers) for diagnostic analysis, with external validation in 38 patients with PH and 38 controls. For prognostic analysis, 166 patients with PH were prospectively followed (median follow-up: 16months; 96 clinical deterioration events), with external validation in 32 patients with PH (median follow-up: 7 months; 11 events). Pulmonary vascular radiomics features extracted from chest computed tomography were used to develop predictive models for PH diagnosis and prognosis.
+RESULTS: The diagnostic model integrating 7 radiomic and 3 clinical features achieved an area under the curve of 0.984 (95% Cl, 0.959-0.995) in the derivation cohort and 0.980 (0.901-1.000) in external validation. For exploratory pulmonary arterial hypertension subtyping, the model incorporating 8 radiomic and 2 clinical features yielded an area under the curve of 0.898 (0.825-0.972) internally and 0.877 (0.352-1.000) externally. The prognostic radiomic-clinical model outperformed the European Society of Cardiology 4-strata risk assessment, with a 2-year area under the curve of 0.866 (0.8-0.942) versus 0.709 (0.648-0.789).
+CONCLUSIONS: The radiomics-based models have strong diagnostic and prognostic capabilities for PH and can also successfully differentiate pulmonary arterial hypertension. This suggests the potential of radiomics to discern PH with different clinical risks, which may facilitate personalized drug therapy.
+Key Words: computed tomography m™ diagnosis ™ machine learning ™ prognosis ™ pulmonary hypertension ™ radiomics
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+disease characterized by multiple causes, intricate pathophysiological changes, and rapid deterioration.'? Effective management of PH hinges on precise classification and risk stratification, particularly in World Health Organization group 1 PH (pulmonary arterial hypertension [PAH]), where targeted therapies Pisce hypertension (PH) is a cardiovascular
+yield significant survival benefits. Right heart catheter-ization (RHC), regarded as the gold standard for diagnosing and classifying PH, is constrained in its clinical application by its invasive nature.
+In the past 2 decades, noninvasive diagnostic and prognostic methods for PH have evolved,*-° primarily concentrating on measuring hemodynamic
+Correspondence to: Jieyan Shen, MD, PhD, Renji Hospital, No. 1680 Dongfang Road, Pudong New District, Shanghai, China. Email: shenjieyan@renji.com; shenjieyan66@163.com
+*B. Ruan and M. Chen contributed equally.
+This article was sent to Sula Mazimba, MD, MPH, Associate Editor, for review by expert referees, editorial decision, and final disposition.
+Supplemental Material is available at https://www.ahajournals.org/doi/suppl/10.1161/JAHA.125.043221
+For Sources of Funding and Disclosures, see page 13.
+© 2025 The Author(s). Published on behalf of the American Heart Association, Inc., by Wiley. This is an open access article under the terms of the Creative Commons Attribution-NonCommercial-NoDerivs License, which permits use and distribution in any medium, provided the original work is properly cited, the use non-commercial and no modifications or adaptations are made.
+JAHA is available at: www.ahajournals.org/journal/janha
+is
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 2 ---
+
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+hickening, calcification distribution) without contrast-induced signal interference.'>-"” This advantage underpins NCCT’s growing role in vascular phenotyping, particularly when iodinated agents obscure mural deails in coronary or cerebrovascular studies."®'°
+CLINICAL PERSPECTIVE
+What Is New?
+We developed computed tomography-based radiomics models that achieve high diagnos-tic accuracy for pulmonary hypertension and effectively differentiate pulmonary arterial hypertension from other pulmonary hypertension subtypes.
+Therefore, the integration of NCCT radiomic analysis with clinical data may provide a novel approach or the noninvasive identification of PH disease progression, ultimately informing treatment decisions and improving patient outcomes. The purpose of this study was to establish diagnostic and prognostic models for PH by extracting radiomic features from the pulmonary vascular region and to assess their clinical utility and easibility.
+Our prognostic radiomics model demonstrates superior performance in predicting clinical outcomes of patients with pulmonary hypertension compared with the European Society of Cardiology simplified 4-strata risk assessment tool.
+METHODS
+What Are the Clinical Implications?
+By quantifying vascular heterogeneity, computed tomography pulmonary vascular radiomics enables semiautomated, noninvasive detection and risk stratification of pulmonary hypertension, thereby providing a foundation for guiding personalized treatment strategies.
+Study Design and Participants
+The data set used and analyzed in this study is available from the corresponding author upon reasonable request. This multicenter study involved a retrospective derivation cohort (January 2019—December 2021; Renji Hospital affiliated to Shanghai Jiao Tong University School of Medicine and Zhongshan Hospital affiliated to Fudan University) and a prospective validation cohort (January 2022-June 2022; the First Affiliated Hospital of Nanjing Medical University, Shanghai Pulmonary Hospital and the Second Affiliated Hospital of the Third Military Medical University). PH was defined as mean pulmonary artery pressure >25mmHg on RHC. The control group without PH consisted of symptomatic patients exhibiting PH-like clinical or radiologic manifestations (main pulmonary artery diameter [PA] >29mm or ratio of the PA and the aorta diameter [PA/ AO] =1) alongside healthy volunteers, all confirmed by RHC or echocardiography, with age-sex matching to patients with PH. Inclusion criteria of participants were (1) age between 18 and 75years old; and (2) availability of RHC, echocardiography, and noncontrast chest CT within 30 days. Exclusion criteria were pulmonary parenchymal pathology, imaging artifacts, and thoracic deformities. The clinical data were recorded, including age, sex, RHC hemodynamic, echocardiography findings, CT measurements, cardiac function grading, and clinical deterioration events.
+Nonstandard Abbreviations and Acronyms AO aorta diameter JM joint model logistic regression classifier noncontrast computed tomography main pulmonary artery diameter pulmonary arterial hypertension pulmonary hypertension right heart catheterization tricuspid regurgitation velocity
+Nonstandard Abbreviations and Acronyms
+Woy popeopuMog
+AO aorta diameter
+JM joint model
+logistic regression classifier
+noncontrast computed tomography
+main pulmonary artery diameter
+pulmonary arterial hypertension
+pulmonary hypertension
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+right heart catheterization
+tricuspid regurgitation velocity
+characteristics and cardiac function.”® However, the morphological changes caused by pulmonary vascular remodeling have often been overlooked.° This gap may be bridged by radiomics, which extracts quantitative imaging features to reflect underlying pathophysio-logical mechanisms.'°-!? Previous studies have shown that radiomic features may be strongly associated with the progression of PH and its impact on cardiac function,'®"4 suggesting that thorough quantitative analysis can provide valuable insights into the evolution of the disease.
+The overall workflow of this study and the detailed participant recruitment information for each analysis are illustrated in Figure 1. The study protocol has been registered on Clinical Trial Registry (NCT05417378). Comprehensive methodological details are provided in the Supplementary Methods, with strategies for model development and evaluation covered in Data S1 and S2, and sample size calculation along with missing data processing detailed in Data S3 and S4. This research was approved by the Ethics Committee of Renji
+Given the potential of radiomics to quantify vascular morphology, computed tomography (CT) emerges as a practical modality for characterizing pulmonary vascular remodeling. Crucially, noncontrast CT (NCCT) pre-serves intrinsic vascular wall characteristics (eg, intimal
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 3 ---
+
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Figure 1. Study flow chart.
+Woy popeopuMog
+AUC indicates area under the curve; CT, computed tomography; LASSO, least absolute shrinkage and selection operator; LRC, logistic regression classifier; NPAH Non-pulmonary arterial hypertension (encompassing WHO Groups 2-5); NPH, nonpulmonary hypertension; PAH, pulmonary arterial hypertension; PH, pulmonary hypertension; RFC, rando forest classifier; RHC, right heart catheterization; ROC, receiver operating characteristics; and SVC, support vector machines classifier.
+Standardization Initiative guidelines,2° with isotropic resampling (1x1x1 mm?®) and intensity discretization (bin width=5). The semiautomated segmentation workflow is elaborated in Data S5.
+Hospital (KY2022-037-B) and conformed to the princi-ples outlined in the Declaration of Helsinki. All partici-pants signed the informed consent forms.
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+Radiomics Measurement and Preprocessing
+Diagnostic Study Pulmonary Hypertension Detection
+NCCT scans were acquired following standardized imaging protocols (120kV, 5mm slice thickness) using multidetector CT scanners from 4 manufacturers: Toshiba (Aquilion series), Siemens (GOMATOM Force), GE(RevolutionCT), andUIH(UCT 760). Pulmonaryvessel segmentation was conducted using semiautomated lung masks (Chest Imaging Platform, 3D Slicer, https:// download. slicer.org/bitstream/614aca0a342a877 cb3c65630),”° followed by vessel enhancement via the Frangni filter*'*? via Matlab R2021a. The results of pulmonary vessel segmentation from chest CT are illustrated in Figure 2. A total of 944 radiomic feature extractions (Pyradiomics, Python 3.0)'? were derived from original and transformed pulmonary vessels images through wavelet decomposition and Laplacian of Gaussian filtering followed the Image Biomarker
+Cross-group comparison and least absolute shrinkage and selection operator regression analyses selected discriminative radiomic and clinical features between patients with PH and controls. Various machine learning methods, including the support vector machines classifier, logistic regression classifier (LRC), and random forests classifier were used to establish the diagnostic models. Radiomic models were established using only radiomics features, whereas joint models (JM) combined these features with clinical data.
+The optimal model was compared with the 2 most commonly used noninvasive estimation models: echocardiographic measured tricuspid regurgitation velocity (.RC_TRV) and CT-measured diameter ratio of the main pulmonary artery and the aorta (LRC_PA/AO).
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 4 ---
+
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Figure 2. Segmentation of pulmonary parenchyma and pulmonary vessels from chest CT.
+A, Masks and 3D reconstruction of the cross-section, the coronal plane, and the sagittal plane of pulmonary parenchyma. B, Masks and 3D reconstruction of the cross-section, the coronal plane, and the sagittal plane of pulmonary vessels. 3D indicates 3-dimensional; and CT, computed tomography.
+Exploratory PAH Subtyping Analysis: Differentiation of Pulmonary Arterial Hypertension
+at specific time points relevant to each cohort: at 1 and 2years after the baseline CT in the derivation cohort and at 6months and 1 year in the validation cohort.
+Woy popeopuMog
+Univariate Cox and least absolute shrinkage and selection operator regression analyses identified predic-tors of clinical deterioration. Multivariate Cox regression was used to develop prognostic models, with calculated risk scores stratifying high-risk and low-risk groups.
+Within the cohort with PH, we conducted an embedded subgroup analysis comparing PAH against other PH subtypes. To address class imbalance, the synthetic minority oversampling technique algorithm was used in the training set. Identical feature extraction and machine learning classifiers were applied for PAH discrimination.
+The comparison of the models and the simpli-fied four-strata risk assessment tool from the 2022 European Society of Cardiology guidelines’ was assessed using DeLong’s test for correlated ROC curves and the Akaike and Bayesian information criteria.
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+Brier score, C-index, and calibration curve were used to evaluate the stability and bias of the models. Receiver operating characteristic (ROC) and precision-recall curves were calculated to validate the discrimi-native ability of the model.
+Statistical Analysis
+During descriptive analysis, quantitative variables were reported as mean+SD or median (interquartile range) according to the distribution, and categorical variables were expressed as frequency (percentage). During cross-group comparison, quantitative variables were analyzed using the t test or Mann-Whitney U test, and categorical variables were assessed using the x? test. Statistical analysis methods for the diagnostic and prognostic studies are described in the corresponding Methods subsections. A P value <0.05 indicates statisti-cal significance. To ensure the robustness of the model, internal validation was performed using a 10-repeat, 5- fold cross-validation scheme, with performance metrics reported along with their 95% Cls across all iterations. All
+Prognostic Study
+The primary end point for this prognostic study was clinical deterioration-free survival, defined as the time from the date of the baseline CT examination to the first occurrence of any of the following events, with follow-up censored at December 31, 2023: (1) all-cause mortality, (2) lung transplantation, (3) readmission due to worsening of PH, and (4) escalation of PH-targeted therapy. For patients who did not experience any event, data were right censored at the date of their last known follow-up.
+Additionally, for the time-dependent ROC analysis, binary outcomes for clinical deterioration were defined
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 5 ---
+
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Table 1. Characteristics of Participants in the Derivation and Validation Cohort
+Derivation cohort Validation cohort Characteristics NPH (N=193) PH (N=193) P value NPH (N=38) PH (N=38) P value Demographic information Age, y 48.12413.54 46.15415.43 0.182 55.4249.71 45.55415.22 0.001 Female sex 150 (77.72) 150 (77.72) 1 20 (62.63) 31 (81.58) 0.007 Chest CT Pulmonary artery width measured 2.75+0.45 3.50+0.55 <0.001 2.92+0.35 3.47+0.56 <0.001 by CT AO 3.09+0.50 3.09+0.45 0.883 3.2140.34 3.00+0.36 0.01 PA/AO, 0.90+0.14 1.15+0.21 <0.001 0.91+0.11 1.1840.25 <0.001 Cardiac ultrasound Inner diameter of aortic root 30.2742.86 29.59+3.21 0.029 31.46+2.82 30.05+3.46 0.055 measured by echocardiology Left atrium 35.8144.33 35.8747.19 0.928 37.1344.38 35.0347.73 0.148 Interventricular septum 8.84 (8.84, 9.00) 9.00 (8.00, 9.00) 0.528 9.00 (8.84, 9.96) 9.00 (8.00, 9.00) 0.313 LVd 44,99+3.94 40.85+6.43 <0.001 45.7745.54 39.6346.91 <0.001 LVs 28.7843.51 25.49+5.25 <0.001 29.7645.49 24.7645.50 <0.001 LV pressure 8.21 (8.00, 9.00) 8.00 (8.00, 9.00) 0.104 8.21 (8.00, 9.00) 8.00 (8.00, 9.00) 0.728 Fractional shortening 35.58+2.99 39.30+22.08 0.021 35.2443.59 37.95+6.21 0.022 LV ejection fraction 65.40+3.91 68.17+7.06 <0.001 65.28+6.57 67.6146.84 0.135 Transverse diameter of right ventricle | 33.42+3.50 45.54+8.59 <0.001 34.9744.18 46.15+7.86 <0.001 Right atrium diameter measured by 36.56+3.92 48.49+10.64 <0.001 37.4545.52 48.07411.97 <0.001 echocardiology Inner diameter of pulmonary artery 23.8842.82 32.1546.72 <0.001 23.50+2.38 31.3147.22 <0.001 trunk measured by echocardiology Tricuspid regurgitation velocity 2.72+0.36 415+0.62 <0.001 2.68+0.22 4.04+0.54 <0.001 TRPG 30.5448.25 70.244+20.92 <0.001 29.40+4.88 66.51417.73 <0.001 Pulmonary artery systolic pressure 34.23+9.03 76.15+22.29 <0.001 33.43+6.91 72.18+18.35 <0.001 Tricuspid annular plane systolic 22.10+0.97 17.63+4.03 <0.001 21.92+1.93 16.49+3.97 <0.001 excursion Pericardial effusion 10 (5.18) 94 (48.70) <0.001 2 (6.26) 14 (36.84) <0.001
+Woy popeopuMog
+AO indicates aortic width measured by CT; CT, computed tomography; LVd, left ventricular dimension diastolic; LVs, left ventricular dimension systolic; NPH, nonpulmonary hypertension; PA/AO, the ratio of pulmonary artery width and aortic width measured by CT; and PH, pulmonary hypertension. TRPG, Tricuspid Regurgitation Peak Gradient.
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+codes have been made publicly available at the GitHub repository and can be accessed at (https://github.com/ bingianruan/Chest-CT-radiomics-for-PH).
+effusion (all P<0.05). No significant differences existed in the World Health Organization functional class and RHC hemodynamics between cohorts (all P>0.05).
+The prognostic-derived cohort comprised 166 patients, with a median follow-up period of 485 days (95% Cl, 395-627 days), recording 96 clinical deteri-oration events. External prognostic validation involved 38 cases with PH with a median 203-day follow-up (95% Cl, 168-311 days) and 11 events. The baseline characteristics are detailed in Table 1 and Table S1.
+RESULTS
+Demographics and Hemodynamics
+The derivation cohort included 193 patients with PH and 193 controls without PH (102 symptomatic mimics, 91 healthy volunteers). External validation comprised 38 patients with PH and 38 matched controls (26 symptomatic without PH, 12 healthy).
+Diagnostic Model
+Pulmonary Hypertension Detection
+Patients with PH exhibited characteristic changes on ultrasound and CT across both cohorts, such as greater pulmonary artery width and PA/AO, smaller left ventricu-lar diameter, elevated left ventricular ejection fraction, enlarged right atrium and right ventricle, and more pericardial
+Least absolute shrinkage and selection operator regression identified key predictors for the radiomic model (6 grayscale and 5 texture features) and joint model (CT-derived PA/AO ratio, echocardiographic
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 6 ---
+
+SZ0Z ‘E] oquisdaq Uo Xq
+B10'speusnofeye//:dny Woy popeopuMog
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Figure 3. Model performance of radiomic models and joint models in diagnosing PH.
+A, ROC curve of 6 models in the derivation cohort. B, Calibration curve of 6 models. ©, ROC curve of 6 constructed models in validation cohort. D, Decision analysis graph of LRC_TRV, LRC_PA/AO, and LRC_JM model. AUC indicates area under the curve; LRC_JM indicates joint model established by logistic regression classifier; LRC_PA/AO, computed tomography-measured diameter ratio of the main pulmonary artery and the aorta diagnostic model established by logistic regression classifier; LRC_RM, radiomic model established by logistic regression classifier; LRC_TRV, echocardiographic measured tricuspid regurgitation velocity diagnostic model established by logistic regression classifier; RFC_JM, joint model established by random forests classifier; RFC_RM, radiomic model established by random forests classifier; ROC, receiver operating characteristics; SVC_JM, joint model established by support vector machines classifier; and SVC_RM, radiomic model established by support vector machines classifier.
+Among the models, the joint model using logistic regression classifier (LRC_JM) demonstrated optimal performance, achieving an area under the curve (AUC) of 0.984 (95% Cl, 0.959-0.995) and 0.980 (95% Cl, 0.901-1.000) in the validation cohort (Figure 3, Table 2, Table S3). This model attained sensitivity of 0.932 (95%
+TRV and right ventricular basal diameter RV, 1 vascular shape feature, 1 grayscale feature, and 5 texture features), as shown in Figure S1 and Table S2. Further details on the model estimators and the probability calculation are provided in the supplement, as illustrated in Figures S2 through S4.
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 7 ---
+
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Ruan et al
+Radiomic signatures were computed at maximal voxel resolution, enabling visual quantification of spatial heterogeneity in pulmonary vascular architecture between the group with PH and the control group (Figures 4E through 4G, Table S6).
+Table 2. Summary of Diagnostic Performance for Pulmonary Hypertension
+Model Derivation cohort Validation cohort RFC_RM 0.884 (0.810-0.944) 0.708 (0.500-0.900) SVC_RM 0.900 (0.829-0.948) 0.611 (0.101-0.857) LRC_RM 0.907 (0.842-0.953) 0.809 (0.583-0.978) RFC_JM 0.918 (0.853-0.966) 0.750 (0.511—-0.925) SVC_JM 0.963 (0.911—-0.996) 0.975 (0.870-1.000) 0.980 (0.901-1.000) 0.976 (0.861-1.000) ( LRC_JM 0.984 (0.959-0.995) ( Echocardiographic 0.980 (0.956-0.993) measured tricuspid regurgitation velocity diagnostic model established by LRC Computed tomography- | 0.855 (0.766-0.927) measured diameter ratio of the main pulmonary artery and the aorta diagnostic model 0.845 (0.681-1.000) established by LRC
+Differentiation of Pulmonary Arterial Hypertension
+As an exploratory analysis within the cohort wi PH, radiomic models were developed by 10 feature: (5 grayscale features, 5 texture), and joint mode with 2 echocardiographic parameters—left atri diameter and inner diameter of pulmonary artery trun’ measured by echocardiology—along with 3 grayscal and 5 texture features (Figure S5, Tables S7 and S8 SHnas
+<QOQOrox7
+In the derivation cohort, LRC_JM displayed goo calibration and discriminative performance, achievin an AUC of 0.898 (95% Cl, 0.825-0.972) with sensitivi of 0.836 (95% Cl, 0.743-0.927), and specificity of 0.874 (95% Cl, 0.730—0.992) (Figures 5A and 5B, Table S9), supplemented by precision-recall curves (Figures 5C and 5D). External validation showed consistent diagnostic accuracy of 0.855 (95% Cl, 0.645—-1.000).
+JM indicates joint model; LRC, logistic regression classifier; RFC, random forests classifier; RM, radiomic model; and SVC, support vector machines classifier.
+Cl, 0.889-0.974), specificity of 0.927 (95% Cl, 0.825— 0.994), and accuracy of 0.932 (95% Cl, 0.883-0.974) in the derivation cohort, with corresponding values of 0.932 (95% Cl, 0.776-1.000), 0.944 (95% Cl, 0.714— 1.000) and 0.933 (95% Cl, 0.800-1.000) in the valida-ion cohort. Model stability was confirmed by calibration curves (Figure 3B) and Brier scores <0.25 (Table S4).
+Prognostic Model
+Least absolute shrinkage and selection operator-Cox regression identified 6 radiomic features for the radiomic prognostic model and 8 combined radiomic-clinical features for the joint model (Figure S6, Table S10). Patients were stratified into high-risk and low-risk groups using calculated risk scores, with high gray-level zone emphasis (hazard ratio [HR], 1.3 95% Cl, 1.02-1.50) and right ventricular basal diameter (RV; HR, 1.04 95% Cl, 1.01-1.10) demonstrating independent prognostic significance (Figure 6)
+Woy popeopuMog
+The LRC_JM model exhibited significantly superior discriminative performance over conventional predic-ion models, achieving higher AUC values than both he TRV model (AUC, 0.980 [95% Cl, 0.956-0.993]; DeLong's test, P<0.05; see Table S5) and the PA/AO model (AUC, 0.855 [95% Cl, 0.766-0.927]; DeLong’s est, P<0.05). This enhancement in predictive accuracy was further corroborated by likelinood ratio ests, which showed highly significant improvements when comparing the LRC_JM model to the TRV model (x°(9)=38.584, P<0.001) and the PA/AO mode (x°(9)=258.273, P<0.001), confirming that the incorpo-ration of radiomic features adds statistically significan incremental prognostic value beyond conventional parameters. Additionally, decision curve analysis demonstrated that the LRC_JM model provided greater clinical net benefit across a range of clinically relevan threshold probabilities (Figure 3D).
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+Kaplan-Meier analysis revealed significant differ-ences in clinical deterioration-free survival between risk groups in the derivation cohort (radiomic model: P=0.0002; joint model: P<0.0001, Figure 6B). Although the validation cohort showed comparable trends (Figure 6D), statistical significance was not reached due to limited event numbers (n=11).
+The joint model showed higher time-dependent AUC values compared with the 2022 European Society of Cardiology 4-strata tool for both 1-year (AUC, 0.674 [95% Cl, 0.545—-0.746] versus 0.612 [95% Cl, 0.502— 0.712]; see Table 3) and 2-year outcomes (AUC, 0.798 [95% Cl, 0.756-0.980] versus 0.717 [95% Cl, 0.572-0.843]); however, these differences did not reach statistical significance on DeLong’s test (P=0.4825 and P=0.3647, respectively; see Table S11). Furthermore, the joint model achieved a better balance between goodness-of-fit and complexity than the European
+Notably, when applied to symptomatic controls without PH, LRC_JM maintained diagnostic accuracy 0} 0.892 (95% Cl, 0.875—0.908), significantly surpassing the TRV method (accuracy, 0.823 [95% Cl, 0.803—0.844]) and PA/AO method (accuracy, 0.627 [95% Cl, 0.599—0.655)).
+Shapley additive explanations analysis elucidated key predictors in the logistic regression joint mode (LRC_JM) for PH diagnosis (Figures 4A and 4B).
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 8 ---
+
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+Woy popeopuMog
+Ruan et al
+Figure 4. Importance of predictor variables based on the SHAP algorithm for the LRC model.
+Society of Cardiology model, as reflected by its lower Aikake information criterion (819.374 versus 823.606) and Bayesian information criterion (821.938 versus 826.170) values (Table S12). The radiomic model alone demonstrated moderate predictive accuracy (1-year AUC, 0.652 [95% Cl, 0.540-0.740]; 2-year AUC, 0.738 [95% Cl, 0.662-0.950)). The ROC and time-AUC curves for all models are presented in Figure 7 and Table S13.
+DISCUSSION
+In this study, we employed a multicenter clinical co-hort to investigate the modified radiomics characteris-tics of pulmonary vascular imaging in patients with PH
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+Chest CT Radiomics for PH Diagnosis and Prognosis
+A, Importance ranking plot of variables for LRC_JM model in diagnosing PH. B, Beeswarm plots of the LRC_JM model in diagnosing PH. C, Importance ranking plot of variables for LRC_JM model in diagnosing PAH. D, Beeswarm plots of the LRC_JUM model in diagnosing PAH. E, Individual explanation for an NPH sample. F, Expression heat map of radiomic variables for LRC_JM model of PH and NPH samples. G, Individual explanation for a PH sample. Elg indicates elongation; GNU, GrayLevel NonUniformity; HHH_ SRHGE, Short Run High GrayLevel Emphasis after High (x) - High (y) - High (z) pass wavelet filter; (F), HLL_SAE, Small Area Emphasis after High (x) - Low (y) - Low (z) pass wavelet filter; HHL_SAHGE, Small Area High GrayLevel Emphasis after High (x) - High (y) - Low (z) pass wavelet filter; LA, left atrial diameter measured by echocardiology; LHH_Kur, kurtosis after Low (x) - High (y) - High (z) pass wavelet filter; LHL_DA, difference average after Low (x) - High (y) - Low (z) pass wavelet filter; LHL_Mean, mean after Low (x) - High (y) - Low (z) pass wavelet filter; LHL_Min, minimum after Low (x) - High (y) - Low (z) pass wavelet filter; LLL_ BSY, busyness after Low (x) - Low (y) - Low (z) pass wavelet filter; LLL_Coa, coarseness after Low (x) - Low (y) - Low (z) pass wavelet filter; LLL_Cor, correlation after Low (x) - Low (y) - Low (z) pass wavelet filter; LLL_SZNUN, Size Zone NonUniformity Normalized after Low (x) - Low (y) - Low (z) pass wavelet filter; Log_Imcl, Imcl after Laplacian of Gaussian filter; LRC_JM, joint model established by logistic regression classifier; NPH, nonpulmonary hypertension; PA/AO, ratio of pulmonary artery width and aortic width measured by computed tomography; PA_E, inner diameter of pulmonary artery trunk measured by echocardiology; PH, pulmonary hypertension; RV, transverse diameter of right ventricle; SHAP, Shapley additive explanations; and TRV, tricuspid regurgitation velocity.
+We developed and validated diagnostic and prognostic models based on radiomics and clinical data via machine learning. Compared with existing clinical methods for PH detection and prognosis prediction, our approach exhibits higher discriminative power. Our study underscores the potential of the morphology and texture of pulmonary vessels, as a supplement to conventional imaging methods to improve the diagnostic and prognostic utility in managing patients with PH. compared with controls without PH, aiming to identify features with potential diagnostic and prognostic value.
+n recent years, imaging techniques such as echocardiography, nuclear medicine, CT scanning, magnetic resonance imaging, and molecular imaging have
+—
+
+--- Page 9 ---
+
+SZ0Z ‘E] oquisdaq Uo Xq
+B10'speusnofeye//:dny Woy popeopuMog
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Figure 5. Model performance of radiomic models and joint models in classifying PAH.
+A, ROC curve of 6 models in the resampled balanced developed data. B, Calibration curve of 6 constructed models. C, PR curve of 6 models in a raw developed cohort. D, PR curve of 6 constructed models in a validated cohort. LRC_JM indicates joint model established by logistic regression classifier; LRC_PA/AO, computed tomography-measured diameter ratio of the main pulmonary artery and the aorta diagnostic model established by logistic regression classifier; LRC_RM, radiomic model established by logistic regression classifier; LRC_TRV, echocardiographic measured tricuspid regurgitation velocity diagnostic model established by logistic regression classifier; PAH, pulmonary arterial hypertension; PR, precision-recall; RFC_JM, joint model established by random forests classifier; RFC_RM, radiomic model established by random forests classifier; ROC, receiver operating characteristics; SVC_JM, joint model established by support vector machines classifier; and SVC_RM, radiomic model established by support vector machines classifier
+been increasingly used in the diagnosis and prognosis of patients with PH. Nevertheless, these investigations primarily focus on cardiac functional imaging and large vessel morphology, and a substantial amount of information regarding the pulmonary vascular structure and
+texture remains unclear. In our previous study using intravascular ultrasound,** we found that the morphological structure of the pulmonary vascular walls is associated with the remodeling and severity of pulmonary vessels. Therefore, changes in the structure
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 10 ---
+
+Ruan et al
+A
+Chest CT Radiomics for PH Diagnosis and Prognosis
+SZ0Z ‘E] oquisdaq Uo Xq
+Figure 6. Predictor variables and Kaplan-Meier analysis of PH prognosis.
+A, Radiomic features were selected based LASSO and multivariate Cox for PH prognosis. B, Kaplan-Meier analysis of RM and JM models in the risk of adverse events in derivation cohort. C, Radiomic and clinical features were selected based LASSO and multivariate Cox for PH prognosis. D, Kaplan-Meier analysis of RM and JM models in the risk of adverse events in validation cohort. AUC indicates area under the curve; HLH, High (x) - Low (y) - High (z) pass wavelet filter; LLH, Low (x) - Low (y) - High (z) pass wavelet filter; LLL, Low (x) - Low (y) - Low (z) pass wavelet filter; MCC, Maximal Correlation Coefficient; JM, joint models; LASSO, least absolute shrinkage and selection operator; LLH, LLL, MCC, PA, diameter of pulmonary artery trunk measured by computed tomography; PH, pulmonary hypertension; RM, radiomic models; and RV, transverse diameter of right ventricle measured by echocardiology.
+and shape of the pulmonary vasculature more directly reflect the essence of pulmonary vascular remodeling, providing a more accurate diagnosis and severity of the disease. As highlighted in the Pulmonary Vascular Institute statement on PH, there is an urgent clinical need for innovative tools to facilitate diagnosis and prognosis.?
+an AUC of 0.86213. However, the analysis of pulmonary vascular radiomics in patients with PH has not been reported. Our study is the first to propose the use of radiomics of pulmonary vessels from NCCT in the diagnostic and prognostic models for PH, showing superior performance compared with conventional methods that rely on existing clinical factors such as TRV and PA/AO. This could be attributed to radiom-ics providing a more realistic description of pulmonary vascular remodeling by leveraging comprehensive information about pulmonary vascular morphology.
+Radiomics has been widely applied to the morphology study of parenchymal organ diseases.'°75 A cardiac magnetic resonance imaging radiomics study demonstrated its effectiveness in diagnosing PH with
+B10'speusnofeye//:dny Woy popeopuMog
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 11 ---
+
+STZOT ‘ET J9quiasaq] UO Aq
+S10'sjeumofeyey/:dny wo popropuMog
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+Table 3. Summary of Prognostic Performance for Clinical Deterioration
+Radiomics model 0.640 (0.580-0.689) 0.804 (0.703-0.903) 0.684 (0.443-0.924) 0.629 (0.229-1) Joint model 0.646 (0.591-0.707) 0.866 (0.8-0.942) 0.686 (0.436-0.935) 0.779 (0.476-1) Simplified 4-strata risk assessment | 0.607 (0.554-0.662) 0.709 (0.648-0.789) 0.554 (0.246-0.862) 0.654 (0.184-1) tool of the 2022 European society of Cardiology guidelines
+AUC indicates are under the curve.
+“Asymptotic normality was used for AUC Cl estimation in the validation cohort owing to limited sample size.
+without PH, our study demonstrated that PH exhibits distinct pulmonary vasculature characteristics, including reduced elongation, elevated and uniformly distributed gray values (evidenced by radiomic features: higher mean, interquartile range, robust mean
+Despite the unique advantage of radiomics in elucidating the pulmonary vascular characteristics of PH, understanding and interpreting radiomics data poses a considerable challenge. By comparing and analyzing radiomic features of patients with PH with controls
+—
+Figure 7. Model performance of radiomic models and joint models in PH prognosis.
+A, ROC curve of RM, JM models and the standard fourth-layer risk stratification in derivation cohort. B, Time-AUC of RM, JM, and the standard fourth-layer risk stratification in derivation cohort. C, ROC curve of RM and JM models and the standard fourth-layer risk stratification in validation cohort. D, Time-AUC of RM, JM, and the standard fourth-layer risk stratification in validation cohort. The Cls for the time-dependent AUC in derivation cohort were estimated using the 10x5-fold cross-validation approach while in validation cohort using asymptotic normality assumption. AUC indicates area under the curve; JM, joint models; PH, pulmonary hypertension; RM, radiomic models; ROC, receiver operating characteristic; and SCORE_ESC, the score calculated by simplified 4-strata risk assessment tool of the 2022.
+an
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 12 ---
+
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+which demonstrated that the various types of remodeling observed in different regions of PAH can serve as prognostic indicators for mortality in patients with PAH.
+absolute deviation and lower kurtosis of gray-level),
+increased roughness (evidenced by lower autocor-relation), intricate spatial distribution patterns (charac-terized by higher contrast and lower correlation), and more uneven and busier local texture changes (evidenced by higher gray-level nonuniformity, normalized size zone nonuniformity, contrast, and busyness). The shape changes may be attributed to enlarged cardiac shadows and narrowed lung fields.*° The gray-level variations may be attributed to the augmentation in vascular bed volume and density, as well as the vascular wall remodeling induced by vascular resistance. These texture changes indicated comprehensive vascular involvement and the existence of spatial and local heterogeneity in the remodeling process,?”78 which aligns well with previous studies on pulmonary vascular morphology, which demonstrated the heterogeneity of tissue density.29 This observation is substantiated by heterogeneous heatmap patterns revealed through spatial analysis (Figure 4F). Notably, the abrupt transition in radiomic signatures variation within peripheral vasculature suggests focal architec-tural disorganization at the microvascular level, corresponding to significant occlusion and plexiform lesions in distal pulmonary vessels.°°.*!
+The radiomics prognostic model effectively assesses the 1-year and 2-year outcomes of patients with PH, demonstrating superior predictive capability for long-term clinical deterioration events compared with the 4-strata risk assessment tool.
+Pulmonary vascular remodeling exhibits greater prognostic capacity than cardiac function and may enhance precise clinical decision-making within the current strategies of targeted drug combination therapy.
+Limitations
+This study has several limitations. First, the sample size is relatively small, particularly in the prospective validation cohort, which may affect the generalizability of our findings. Second, the retrospective nature of the derivation cohort may introduce selection bias, as the data collection was dependent on the availability and quality of historical records. The high diagnostic AUC of TRV alone in our cohort may reflect spectrum bias, given that patients were referred for RHC by specialists, creating a high-risk population. Third, the incorporation of healthy control cohorts and the exclusion of individuals with pulmonary parenchymal pathologies may limit the generalizability of diagnostic performance in clinical practice, as routine medical assessment necessitates differentiation among symptomatic patients with complex comorbidities. Furthermore, given that RHC is not routinely recommended for patients with World Health Organization groups 2 and 3 PH, a potential population bias could not be avoided in our study cohort. Finally, the observation period of the prognostic cohort may be insufficient, and a longer follow-up time is needed to optimize the prognostic model.
+Compared with other types of PH, PAH is character-ized by reduced left atrial diameter and increased PA.°2 In the analysis of gray-level, it is observed that PAH displays a more diverse pattern (evidenced by radiomics features: higher gray-level variance, maximum, mean, but lower 90th percentile, median, minimum); however, concentrated within the fix ranges (evidenced by higher kurtosis, Informational Measure of Correlation (IMC)). Regarding texture, PAH exhibits less regional heterogeneity (evidenced by lower difference average, small area emphasis, small area high—gray-level emphasis, short run high—gray-level emphasis, and large dependence high—gray-level emphasis). The gray-level variance may be attributed to calcification, uneven remodeling of the vessel wall, and the flow distribution between the artery and venous bed. The texture changes observed in PAH and PH also indicated the spatial heterogeneity of blood flow distribution within the pulmonary vessels.°°3!
+popeopuMog
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny Woy
+CONCLUSIONS
+In conclusion, this study successfully established radiomic models for the diagnosis and prognosis of PH through machine learning. Combining advanced radiomics techniques with clinical data provides a promising avenue to enhance the more precise noninvasive detection and individualized treatment of PH. These findings not only underscore the potential of radiom-ics in clinical settings but also pave the way for future research aimed at improving patient outcomes and quality of life.
+The current pathogenetic and hemodynamic classification system facilitates the application of targeted drugs; however, it lacks utility in studying and prognosticating pathophysiological abnormalities. The majority of published studies investigating risk factors for pulmonary hypertension have predominantly focused on the imaging assessment of cardiac function, with limited exploration of pulmonary vascular-related parameters. Our prognostic studies identified significant predictors unrelated to myocardial function, such as pulmonary vascular roughness and complexity. This finding aligns with the study conducted by Cai,**
+ARTICLE INFORMATION
+Received June 16, 2025; accepted October 17, 2025.
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 13 ---
+
+Ruan et al
+Chest CT Radiomics for PH Diagnosis and Prognosis
+pulmonary hypertension: a meta-analysis and systematic review. Medicine (Baltimore). 2014;93:e256. doi: 10.1097/MD.0000000000000256
+Affiliations
+Kiely DG, Levin DL, Hassoun PM, Ivy D, Jone PN, Bwika J, Kawut SM, Lordan J, Lungu A, Mazurek JA, et al. Statement on imaging and pulmonary hypertension from the pulmonary vascular research institute (PVRI). Pulm Circ. 2019;9:1-32. doi: 10.1177/2045894019841990
+Department of Cardiology, Renji Hospital, School of Medicine, Shanghai Jiao Tong University, Shanghai, China (B.R., Q.Z., A.W., J.W., MY., J.S.); Department of Cardiology, Shanghai Pudong Hospital, Fudan University Pudong Medical Center, Shanghai, China (B.R.); Department of Cardiology, Sun Yat-sen Memorial Hospital, Sun Yat-sen University, Guangzhou, Guangdong, China (M.C.); Department of Cardiology, Zhongshan Hospital, Fudan University, Shanghai Institute of Cardiovascular Disease, Shanghai, China (L.G.); Department of Respiratory and Critical Care Medicine, The First Affiliated Hospital of Nanjing Medical University, Nanjing, Jiangsu, China (W.X.); Department of Cardio-Pulmonary Circulation, Shanghai Pulmonary Hospital, Tongji University, Shanghai, China (L.W., Q.Z.); and Department of Cardiology, the Second Affiliated Hospital, Third Military Medical University (Army Medical University), Chongqing, China (S.Y,).
+Gillies RJ, Kinahan PE, Hricak H. Radiomics: images are more than pictures, they are data. Radiology. 2016;278:563-577. doi: 10.1148/ radiol.2015151169
+Avanzo M, Wei L, Stancanello J, Valliéres M, Rao A, Morin O, Mattonen SA, El Naqa |. Machine and deep learning methods for radiomics. Med Phys. 2020;47:e185-e202. doi: 10.1002/mp.13678
+van Griethuysen JJM, Fedorov A, Parmar C, Hosny A, Aucoin N, Narayan V, Beets-Tan RGH, Fillion-Robin JC, Pieper S, Aerts H. Computational Radiomics system to decode the radiographic phenotype. Cancer Res. 2017;77:e104—e107. doi: 10.1158/0008-5472.CAN-17-0339
+Acknowledgments
+Priya S, Aggarwal T, Ward C, Bathla G, Jacob M, Gerke A, Hoffman EA, Nagpal P. Radiomics detection of pulmonary hypertension via texture-based assessments of cardiac MRI: a machine-learning model comparison-cardiac MRI radiomics in pulmonary hypertension. J Clin Med. 2021;10:1921. doi: 10.3390/jem10091921
+The authors thank all participants for their willingness to provide medical information and images. Thanks to all medical staff of the relevant departments in collaborating hospitals for the completion of right heart catheterization and diagnosis and treatment of patients with pulmonary hypertension.
+dimenez-del-Toro O, Cid YD, Platon A, Hachulla AL, Lador F, Poletti PA, Muller H. A lung graph model for the radiological assessment of chronic thromboembolic pulmonary hypertension in CT. Comput Biol Med. 2020;125:103962. doi: 10.1016/j. compbiomed.2020.103962
+Sources of Funding
+This work was supported by National Natural Science Foundation of China (CN) (No. 81970047), National Natural Science Foundation of China (CN) (No. 82270050), and Fund for Clinical Scientific Research and Cultivation of Renji Hospital (PYII20-13).
+Hecht HS, Blaha MJ, Kazerooni EA, Cury RC, Budoff M, Leipsic J, Shaw L. CAC-DRS: Coronary Artery Calcium Data and Reporting System. An expert consensus document of the Society of Cardiovascular Computed Tomography (SCCT). J Cardiovasc Comput Tomogr. 2018;12:185-191. doi: 10.1016/j.jcct.2018.03.008
+Disclosures
+None.
+Nasir K, Cainzos-Achirica M. Role of coronary artery calcium score in the primary prevention of cardiovascular disease. BMJ. 2021;373:n776. doi: 10.1136/bmj.n776
+Supplemental Material
+Data S1: Supplemental Methods Tables S1-S13 Figures S1-S6
+Lindenholz A, van der Kolk AG, Zwanenburg JJM, Hendrikse J. The use and pitfalls of intracranial Vessel Wall imaging: how we do it. Radiology. 2018;286:12-28. doi: 10.1148/radiol.2017162096
+Lyu J, Fu Y, Yang M, Xiong Y, Duan Q, Duan C, Wang X, Xing X, Zhang D, Lin J, et al. Generative adversarial network-based noncontrast CT angiography for aorta and carotid arteries. Radiology. 2023;309:e230681. doi: 10.1148/radiol.230681
+REFERENCES
+1. Humbert M, Kovacs G, Hoeper MM, Badagliacca R, Berger RMF, Brida M, Carlsen J, Coats AJS, Escribano-Subias P, Ferrari P, et al. 2022 ESC/ERS guidelines for the diagnosis and treatment of pulmonary hypertension. Eur Heart J. 2022;43:3618-3731. doi: 10.1093/eurheartj/ ehac237
+Zhang N, Yang G, Zhang W, Wang W, Zhou Z, Zhang H, Xu L, Chen Y. Fully automatic framework for comprehensive coronary artery calcium scores analysis on non-contrast cardiac-gated CT scan: Total and vessel-specific quantifications. Eur J Radiol. 2021;134:109420. doi: 10.1016/j.ejrad.2020.109420
+B10'speusnofeye//:dny Woy popeopuMog
+2. KhouV, Anderson JJ, Strange G, Corrigan C, Collins N, Celermajer DS, Dwyer N, Feenstra J, Horrigan M, Keating D, et al. Diagnostic delay in pulmonary arterial hypertension: insights from the Australian and New Zealand pulmonary hypertension registry. Respirology. 2020;25:863— 871. doi: 10./resp.13768
+20. Velazquez ER, Parmar C, Jermoumi M, Mak RH, van Baardwijk A, Fennessy FM, Lewis JH, De Ruysscher D, Kikinis R, Lambin P, et al. Volumetric CT-based segmentation of NSCLC using 3D-slicer. Sci Rep. 2013;3:3529. doi: 10.1038/srep03529
+SZ0Z ‘E] oquisdaq Uo Xq
+3. McQuillan BM, Picard MH, Leavitt M, Weyman AE. Clinical correlates and reference intervals for pulmonary artery systolic pressure among echocardiographically normal subjects. Circulation. 2001;104:2797— 2802. doi: 10.1161/hc4801.100076
+21 Kroon D-J, Slump CH. Coherence Filtering to Enhance the Mandibular Canal in Cone-Beam CT data. Paper/Poster presented at: Annual International Conference of the IEEE Engineering in Medicine and Biology Society; 2009.
+4. Hinderliter AL, Willis PW, Long WA, Clarke WR, Ralph D, Caldwell EJ, Williams W, Ettinger NA, Hill NS, Summer WR, et al. Frequency and severity of tricuspid regurgitation determined by Doppler echocardiog-raphy in primary pulmonary hypertension. Am J Cardiol. 2003;91:1033-1037. doi: 10.1016/s0002-9149(03)00136-x
+22. Frangi AF, Niessen WJ, Vincken KL, Viergever MA. Multiscale Vessel Enhancement Filtering. Paper/Poster Presented. Berlin, Heidelberg: Springer; 1998.
+23. Zwanenburg A, Valligres M, Abdalah MA, Aerts H, Andrearczyk V, Apte A, Ashrafinia S, Bakas S, Beukinga RJ, Boellaard R, et al. The image biomarker standardization initiative: standardized quantitative radiomics for high-throughput image-based phenotyping. Radiology. 2020;295:328-338. doi: 10.1148/radiol.2020191145
+5. Dwivedi K, Sharkey M, Condliffe R, Uthoff UM, Alabed S, Metherall P, Lu H, Wild JM, Hoffman EA, Swift AJ, et al. Pulmonary hypertension in association with lung disease: quantitative CT and artificial intelligence to the rescue? State-of-the-art review. Diagnostics (Basel). 2021;11:679. doi: 10.3390/diagnostics11040679
+24 Shen JY, Cai ZY, Sun LY, Yang CD, He B. The application of intravascular ultrasound to evaluate pulmonary vascular properties and mortality in patients with pulmonary arterial hypertension. J Am Soc Echocardiogr. 2016;29:103-111. doi: 10.1016/j.echo.2015.08.018
+6. Kusunose K, Hirata Y, Tsuji T, Kotoku J, Sata M. Deep learning to predict elevated pulmonary artery pressure in patients with suspected pulmonary hypertension using standard chest X ray. Sci Rep. 2020;10:19311. doi: 10.1038/s41598-020-76359-w
+25. Huang J, Chen X, Xia B, Ma S. Advances in CT features and radiomics of checkpoint inhibitor-related pneumonitis: a short review. Front Immunol. 2023;14:1082980. doi: 10.3389/fimmu.2023.1082980
+7. Opotowsky AR, Ojeda J, Rogers F, Prasanna V, Clair M, Moko L, Vaidya A, Afilalo J, Forfia PR. A simple echocardiographic prediction rule for hemodynamics in pulmonary hypertension. Circ-Cardiovasc Imag. 2012;5:765-775. doi: 10.1161/CIRCIMAGING.112.976654
+26. Ascha M, Renapurkar RD, Tonelli AR. A review of imaging modalities in pulmonary hypertension. Ann Thorac Med. 2017;12:61-73. doi: 10.4103/1817-1737.203742
+8. Shen Y, Wan C, Tian P, Wu Y, Li X, Yang T, An J, Wang T, Chen L, Wen F. CT-base pulmonary artery measurement in the detection of
+27. Dorfmiller P. Pulmonary hypertension: pathology. Handb Exp Pharmacol. 2013;218:59-75. doi: 10.1007/978-3-642-38664-0_3
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+
+--- Page 14 ---
+
+SZ0Z ‘E] oquisdaq Uo Xq B10'speusnofeye//:dny
+Woy popeopuMog
+Ruan et al
+28. Helmberger M, Pienn M, Urschler M, Kullnig P, Stollberger R, Kovacs G, Olschewski A, Olschewski H, Balint Z. Quantification of tortuosity and fractal dimension of the lung vessels in pulmonary hypertension patients. PLOS One. 2014;9:687515. doi: 10.1371 /journal.pone.0087515
+29. RolN, Timmer EM, Faes TJ, Vonk Noordegraaf A, Griinberg K, Bogaard HJ, Westerhof N. Vascular narrowing in pulmonary arterial hypertension is heterogeneous: rethinking resistance. Physiol Rep. 2017;5:e13159. doi: 10.14814/phy2.13159
+30. McLaughlin VV, McGoon MD. Pulmonary arterial hypertension. Circulation. 2006;114:1417-1431. doi: 10.1161/CIRCULATIONAHA. 104.503540
+J Am Heart Assoc. 2025;14:e043221. DOI: 10.1161/JAHA.125.043221
+Chest CT Radiomics for PH Diagnosis and Prognosis
+31. Vonk Noordegraaf A, Chin KM, Haddad F, Hassoun PM, Hemnes AR, Hopkins SR, Kawut SM, Langleben D, Lumens J, Naeije R. Pathophysiology of the right ventricle and of the pulmonary circulation in pulmonary hypertension: an update. Eur Respir J. 2019;53:1801900. doi: 10.1183/13993003.01900-2018
+32. Humbert M, Guignabert C, Bonnet S, Dorfmiller P, Klinger JR, Nicolls MR, Olschewski AJ, Pullamsetti SS, Schermuly RT, Stenmark KR, et al. Pathology and pathobiology of pulmonary hypertension: state of the art and research perspectives. Eur Respir J. 2019;53:1801887. doi: 10.1183/13993003.01887-2018

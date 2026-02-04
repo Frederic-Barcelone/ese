@@ -1,0 +1,1371 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:03:34.091390",
+  "document": "03_Marketing_WINREVAIR EU Expansion.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/03_Marketing_WINREVAIR EU Expansion.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 18,
+  "total_validated": 18,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "idiopathic PAH",
+      "preferred_label": "Idiopathic pulmonary arterial hypertension",
+      "abbreviation": "iPAH",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "697898008",
+        "mondo": null,
+        "orpha": "ORPHA:422",
+        "umls": "C0242927",
+        "mesh": "D065627"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:422",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "697898008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0242927",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D065627",
+          "display": "Familial Primary Pulmonary Hypertension"
+        }
+      ],
+      "context": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary ve",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Familial Primary Pulmonary Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heritable PAH",
+      "preferred_label": "Heritable pulmonary arterial hypertension",
+      "abbreviation": "hPAH",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "697897003",
+        "mondo": null,
+        "orpha": "ORPHA:275777",
+        "umls": "C3714756",
+        "mesh": "D065627"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:275777",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "697897003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C3714756",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D065627",
+          "display": "Familial Primary Pulmonary Hypertension"
+        }
+      ],
+      "context": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capill",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Familial Primary Pulmonary Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "PAH associated with portal hypertension",
+      "preferred_label": "PAH associated with portal hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017154",
+        "orpha": "Orphanet:275813",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017154",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:275813",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:445237003",
+          "display": null
+        }
+      ],
+      "context": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy. There were more participants in WHO",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "pulmonary capillary hemangiomatosis",
+      "preferred_label": "Pulmonary capillary hemangiomatosis",
+      "abbreviation": "PCH",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "D18.0",
+        "icd11": "BB01.0",
+        "snomed": "233949008",
+        "mondo": null,
+        "orpha": "ORPHA:199241",
+        "umls": "C0340548",
+        "mesh": "C535861"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:199241",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D18.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "233949008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0340548",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535861",
+          "display": null
+        }
+      ],
+      "context": "th connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy. There were more participants in WHO FC III (74%) compared to WHO FC IV (26%). The REVEAL Lite 2 risk score was",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hemangiomatosis familial pulmonary capillary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pulmonary veno-occlusive disease",
+      "preferred_label": "Pulmonary veno-occlusive disease",
+      "abbreviation": "PVOD",
+      "confidence": 0.85,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "J98.4",
+        "icd11": "BB01.0",
+        "snomed": "89420002",
+        "mondo": null,
+        "orpha": "ORPHA:31837",
+        "umls": "C0034091",
+        "mesh": "D011668"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:31837",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "J98.4",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "J98.4",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "89420002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0034091",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011668",
+          "display": null
+        }
+      ],
+      "context": "iopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on prostacyclin infusion therapy. There were more participants in WHO FC III (74%) compared to WHO FC IV",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pulmonary Veno-Occlusive Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Pulmonary Arterial Hypertension",
+      "preferred_label": "Pulmonary arterial hypertension",
+      "abbreviation": "PAH",
+      "confidence": 1.0,
+      "is_rare_disease": true,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01.0",
+        "snomed": "11399002",
+        "mondo": null,
+        "orpha": "ORPHA:182090",
+        "umls": "C2973725",
+        "mesh": "D000081029"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:182090",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01.0",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "11399002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C2973725",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000081029",
+          "display": null
+        }
+      ],
+      "context": "Merck Receives Positive EU CHMP Opinion for Expanded Use of WINREVAIR™ (sotatercept) in Adults with Pulmonary Arterial Hypertension (PAH, WHO* Group 1 Pulmonary Hypertension)",
+      "page": 1,
+      "mention_count": 4,
+      "pages_mentioned": [
+        1,
+        2
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Familial Primary Pulmonary Hypertension",
+        "Pulmonary Arterial Hypertension Hereditary Hemorrhagic Telangiectasia-Related",
+        "Neutropenia Severe Congenital Autosomal Recessive 4"
+      ],
+      "pubtator_normalized_name": "Pulmonary Arterial Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "connective tissue diseases",
+      "preferred_label": "connective tissue diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003900",
+        "orpha": null,
+        "umls": "UMLS:C0009782",
+        "mesh": "MESH:D003240"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003900",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:65",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001986",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1098",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003240",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100172",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26729",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:105969002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009782",
+          "display": null
+        }
+      ],
+      "context": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiom",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Undifferentiated Connective Tissue Diseases",
+        "Skin and Connective Tissue Diseases"
+      ],
+      "pubtator_normalized_name": "Connective Tissue Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "immunodeficiency",
+      "preferred_label": "immunodeficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021094",
+        "orpha": null,
+        "umls": "UMLS:C0021051",
+        "mesh": "D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021094",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:279.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7034",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100204",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3131",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:300755",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234532001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021051",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000163",
+          "display": "Acquired Immunodeficiency Syndrome"
+        }
+      ],
+      "context": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonary veno-occlusive disease, or pulmonary capillary hemangiomatosis or overt signs of capillary and/or venous involvement. Participants were on background PAH treatment, 72% on triple therapy, 28% on double therapy and 59% on",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Immunodeficiency due to Defect in MAPBP-Interacting Protein",
+        "Lymphoproliferative Disorders",
+        "X-Linked Combined Immunodeficiency Diseases"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "thrombocytopenia",
+      "preferred_label": "thrombocytopenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002049",
+        "orpha": null,
+        "umls": "UMLS:C0040034",
+        "mesh": "MESH:D013921"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002049",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1588",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:287.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52737",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013921",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3408",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:302215000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040034",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:683583694",
+          "display": null
+        }
+      ],
+      "context": "WINREVAIR may decrease platelet count. Severe thrombocytopenia may increase the risk of bleeding. Thrombocytopenia occurred more frequently in patients also receiving prostacyclin infusion. Do not initiate treatment if platelet count is <50,000/mm3. Monitor platelets before each dose for the first 5 doses, or longer if values are unstable, and periodically the",
+      "page": 3,
+      "mention_count": 1,
+      "pages_mentioned": [
+        3
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Purpura Thrombocytopenic Idiopathic",
+        "Thrombocytopenia Neonatal Alloimmune",
+        "Thrombocytopenia cyclic"
+      ],
+      "pubtator_normalized_name": "Thrombocytopenia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "telangiectasia",
+      "preferred_label": "telangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001576",
+        "orpha": null,
+        "umls": "UMLS:C0039446",
+        "mesh": "MESH:D013684"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001576",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1272",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21088",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013684",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28194",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:247479008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039446",
+          "display": null
+        }
+      ],
+      "context": "The most common adverse reactions (=10% for WINREVAIR and at least 5% more than placebo) occurring in the STELLAR Phase 3 clinical trial were headache (24.5% vs 17.5%), epistaxis (22.1% vs 1.9%), rash (20.2% vs 8.1%), telangiectasia (16.6% vs 4.4%), diarrhea (15.3% vs 10.0%), dizziness (14.7% vs 6.3%) and erythema (13.5% vs 3.1%). The most common adverse reactions in the ZENITH trial were infections (67.4% vs 44.2%), epistaxis (45.3% vs 9.3%), diarrhea (25.6 % vs 17.4%), telangiectasia (25.6 % vs 3.5%), increased hemoglobin (1",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Telangiectasia Hereditary Hemorrhagic",
+        "Central Nervous System Vascular Malformations",
+        "Telangiectasis"
+      ],
+      "pubtator_normalized_name": "Ataxia Telangiectasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heart failure",
+      "preferred_label": "heart failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I50",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005252",
+        "orpha": null,
+        "umls": "UMLS:C0018801",
+        "mesh": "MESH:D006333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005252",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003144",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I50",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:I50",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:428.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6749",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006333",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C50577",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84114007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018801",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1458683894",
+          "display": null
+        }
+      ],
+      "context": "y the constriction of small pulmonary arteries and elevated blood pressure in the pulmonary circulation. Approximately 90,000 people worldwide are living with PAH. The disease progresses rapidly for many patients. PAH results in significant strain on the heart, leading to limited physical activity, heart failure and reduced life expectancy. The five-year mortality rate for patients with PAH is approximately 43%.",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Failure Diastolic",
+        "Heart Failure Systolic",
+        "Lowry Maclean syndrome"
+      ],
+      "pubtator_normalized_name": "Heart Failure",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "idiopathic",
+      "preferred_label": "idiopathic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700005",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D010300"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700005",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:894194405",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010300",
+          "display": "Parkinson Disease"
+        }
+      ],
+      "context": "The most common PAH etiologies were idiopathic PAH (50%), PAH associated with connective tissue diseases (CTD) (28%), and heritable PAH (11%). The mean time since PAH diagnosis to screening was 8 years. The study excluded patients diagnosed with human immunodeficiency virus (HIV)-associated PAH, PAH associated with portal hypertension, pulmonar",
+      "page": 2,
+      "mention_count": 1,
+      "pages_mentioned": [
+        2
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic Noncirrhotic Portal Hypertension",
+        "Idiopathic Pulmonary Fibrosis",
+        "Calcinosis Cutis"
+      ],
+      "pubtator_normalized_name": "Parkinson Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dependence",
+      "preferred_label": "dependence",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004938",
+        "orpha": null,
+        "umls": "UMLS:C0038580",
+        "mesh": "D019966"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004938",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9973",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:304.60",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20989",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35458",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:2403008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038580",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019966",
+          "display": "Substance-Related Disorders"
+        }
+      ],
+      "context": "patents attained by competitors; challenges inherent in new product development, including obtaining regulatory approval; the company’s ability to accurately predict future market conditions; manufacturing difficulties or delays; financial instability of international economies and sovereign risk; dependence on the effectiveness of the company's patents and other protections for innovative products; and the exposure to litigation, including patent litigation, and/or regulatory actions.",
+      "page": 5,
+      "mention_count": 1,
+      "pages_mentioned": [
+        5
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alcoholism",
+        "Opioid-Related Disorders",
+        "Tobacco Use Disorder"
+      ],
+      "pubtator_normalized_name": "Substance-Related Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndrome",
+      "preferred_label": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002254",
+        "orpha": null,
+        "umls": "UMLS:C0039082",
+        "mesh": "MESH:D013577"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002254",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:225",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11688",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013577",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28193",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000086",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039082",
+          "display": null
+        }
+      ],
+      "context": "WINREVAIR may increase hemoglobin (Hgb). Severe erythrocytosis may increase the risk of thromboembolic events or hyperviscosity syndrome. Monitor Hgb before each dose for the first 5 doses, or longer if values are unstable, and periodically thereafter, to determine if dose adjustments are required.",
+      "page": 3,
+      "mention_count": 1,
+      "pages_mentioned": [
+        3
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diarrhea",
+      "preferred_label": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001673",
+        "orpha": null,
+        "umls": "UMLS:C1290807",
+        "mesh": "MESH:D003967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001673",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13250",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002014",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:009.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:713159",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2987",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128333008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290807",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:116759077",
+          "display": null
+        }
+      ],
+      "context": "The most common adverse reactions (=10% for WINREVAIR and at least 5% more than placebo) occurring in the STELLAR Phase 3 clinical trial were headache (24.5% vs 17.5%), epistaxis (22.1% vs 1.9%), rash (20.2% vs 8.1%), telangiectasia (16.6% vs 4.4%), diarrhea (15.3% vs 10.0%), dizziness (14.7% vs 6.3%) and erythema (13.5% vs 3.1%). The most common adverse reactions in the ZENITH trial were infections (67.4% vs 44.2%), epistaxis (45.3% vs 9.3%), diarrhea (25.6 % vs 17.4%), telangiectasia (25.6 % vs 3.5%), increased hemoglobin (15.1% vs 1.2%), rash (10.5%",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diarrhea 5 With Tufting Enteropathy Congenital",
+        "Diarrhea 3 Secretory Sodium Congenital",
+        "Dysentery"
+      ],
+      "pubtator_normalized_name": "Diarrhea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "ht hope to humanity through the development of important medicines and vaccines. We aspire to be the premier research-intensive biopharmaceutical company in the world - and today, we are at the forefront of research to deliver innovative health solutions that advance the prevention and treatment of diseases in people and animals. We foster a diverse and inclusive global workforce and operate responsibly every day to enable a safe, sustainable and healthy future for all people and communities. For more information, visit www.merck.com and connect with us on X (formerly Twitter), Facebook, Instagram, Yo",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "child",
+      "preferred_label": "cHILD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017015",
+        "orpha": "Orphanet:264665",
+        "umls": "UMLS:C3161253",
+        "mesh": "D002658"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017015",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10559",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:853969",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:264665",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3161253",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1408868257",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002658",
+          "display": "Developmental Disabilities"
+        }
+      ],
+      "context": "Because of the potential for serious adverse reactions in the breastfed child, advise patients that breastfeeding is not recommended during treatment with WINREVAIR, and for 4 months after the final dose.",
+      "page": 4,
+      "mention_count": 1,
+      "pages_mentioned": [
+        4
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Learning Disabilities",
+        "Precursor Cell Lymphoblastic Leukemia-Lymphoma",
+        "Child Nutrition Disorders"
+      ],
+      "pubtator_normalized_name": "Developmental Disabilities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MSD",
+      "preferred_label": "MSD",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010088",
+        "orpha": "Orphanet:585",
+        "umls": "UMLS:C0268263",
+        "mesh": "MESH:D052517"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010088",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050441",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5061",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75664",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D052517",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200566",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84908",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1471",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:272200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:585",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:54898003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268263",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:848083807",
+          "display": null
+        }
+      ],
+      "context": "RAHWAY, N.J.--(BUSINESS WIRE)-- Merck (NYSE: MRK), known as MSD outside of the United States and Canada, today announced that the European Medicines Agency's Committee for Medicinal Products for Human Use (CHMP) recommended the approval of an expanded indication for WINREVAIR™ (sotatercept), in combination with other pulmonary arterial hypertension (PAH) therap",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

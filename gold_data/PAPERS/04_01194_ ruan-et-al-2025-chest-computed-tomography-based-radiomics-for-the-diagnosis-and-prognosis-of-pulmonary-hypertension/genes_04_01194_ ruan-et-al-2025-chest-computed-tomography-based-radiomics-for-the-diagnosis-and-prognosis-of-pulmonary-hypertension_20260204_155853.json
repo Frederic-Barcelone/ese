@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T15:58:53.508451",
+  "document": "04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/04_01194_ ruan-et-al-2025-chest-computed-tomography-based-radiomics-for-the-diagnosis-and-prognosis-of-pulmonary-hypertension.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "Mak",
+      "hgnc_symbol": "MAK",
+      "full_name": "male germ cell associated kinase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "6816",
+        "entrez": "4117",
+        "ensembl": "ENSG00000111837",
+        "uniprot": "P20794",
+        "omim": "154235"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "6816",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "4117",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000111837",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "154235",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P20794",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "791",
+          "disease_name": "Retinitis pigmentosa",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "Collins N, Celermajer DS, Dwyer N, Feenstra J, Horrigan M, Keating D, et al. Diagnostic delay in pulmonary arterial hypertension: insights from the Australian and New Zealand pulmonary hypertension registry. Respirology. 2020;25:863— 871. doi: 10./resp.13768\n\n20. Velazquez ER, Parmar C, Jermoumi M, Mak RH, van Baardwijk A, Fennessy FM, Lewis JH, De Ruysscher D, Kikinis R, Lambin P, et al. Volumetric CT-based segmentation of NSCLC using 3D-slicer. Sci Rep. 2013;3:3529. doi: 10.1038/srep03529\n\nSZ0Z ‘E] oquisdaq Uo Xq\n\n3. McQuillan BM, Picard MH, Leavitt M, Weyman AE. Clinical correlates and referen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}
