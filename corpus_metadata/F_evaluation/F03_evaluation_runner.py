@@ -30,6 +30,7 @@ OUTPUT:
 from __future__ import annotations
 
 import json
+import re
 import sys
 import time
 from dataclasses import dataclass, field
@@ -577,6 +578,16 @@ def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRE
     # Substring match
     if sys_norm in gold_norm or gold_norm in sys_norm:
         return True
+
+    # Token overlap match — handles partial name matches like
+    # "Del Castillo syndrome" vs "Ahumada-Del Castillo"
+    sys_tokens = set(re.split(r"[\s\-]+", sys_norm)) - {"of", "the", "and", "in", "with", "type", "syndrome", "disease", "disorder"}
+    gold_tokens = set(re.split(r"[\s\-]+", gold_norm)) - {"of", "the", "and", "in", "with", "type", "syndrome", "disease", "disorder"}
+    if sys_tokens and gold_tokens and len(sys_tokens) >= 2 and len(gold_tokens) >= 2:
+        overlap = sys_tokens & gold_tokens
+        min_significant = min(len(sys_tokens), len(gold_tokens))
+        if len(overlap) >= 2 and len(overlap) / min_significant >= 0.65:
+            return True
 
     # Synonym group lookup (stroke == cerebrovascular accident, etc.)
     if _to_canonical(sys_norm) == _to_canonical(gold_norm):
