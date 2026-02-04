@@ -204,8 +204,8 @@ class DrugFalsePositiveFilter:
             if fp_substr in text_lower:
                 return True
 
-        # Pattern-based filtering for NER results
-        if generator_type == DGT.SCISPACY_NER:
+        # Pattern-based filtering for NER and lexicon results
+        if generator_type in {DGT.SCISPACY_NER, DGT.LEXICON_RXNORM, DGT.LEXICON_FDA}:
             for suffix in BIOLOGICAL_SUFFIXES:
                 if text_lower.endswith(suffix):
                     return True

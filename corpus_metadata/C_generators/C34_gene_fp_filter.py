@@ -195,6 +195,10 @@ class GeneFalsePositiveFilter:
         "wang", "chen", "yang", "zhang", "lin", "sun", "ma",
         # Abbreviations commonly mistaken
         "ge", "et", "ds", "wr", "uk", "us",
+        # Additional common words that are gene aliases
+        "son", "best", "ren", "rest", "last", "most", "near", "well", "good",
+        "part", "step", "mark", "ring", "pair", "map", "gap", "cap", "tip",
+        "bar", "tag", "tan", "dim",
         # Section headers and document structure
         "methods", "results", "discussion", "conclusion", "abstract",
         "introduction", "background", "references", "table", "figure",
@@ -235,6 +239,30 @@ class GeneFalsePositiveFilter:
         "median", "mean", "average", "range",
     }
 
+    # Clinical questionnaire/instrument abbreviations confused with genes
+    QUESTIONNAIRE_TERMS: Set[str] = {
+        "maf",   # Multidimensional Assessment of Fatigue
+        "haq",   # Health Assessment Questionnaire
+        "das",   # Disease Activity Score
+        "bdi",   # Beck Depression Inventory
+        "gad",   # Generalized Anxiety Disorder scale
+        "phq",   # Patient Health Questionnaire
+    }
+
+    # Antibody abbreviations confused with genes
+    ANTIBODY_ABBREVIATIONS: Set[str] = {
+        "acpa",  # Anti-Citrullinated Protein Antibody
+        "ana",   # Antinuclear Antibody
+        "asca",  # Anti-Saccharomyces cerevisiae Antibodies
+    }
+
+    # Context keywords indicating antibody usage (not gene)
+    ANTIBODY_CONTEXT_KEYWORDS: Set[str] = {
+        "antibod", "titer", "seropositive", "seronegative",
+        "autoantibod", "immunoassay", "elisa", "positivity",
+        "serolog", "reactiv",
+    }
+
     # Short genes that ALWAYS need context validation (2-3 chars)
     SHORT_GENES_NEED_CONTEXT: Set[str] = {
         "ar", "vr", "hr", "mr", "or", "nr", "er", "pr", "gr",
@@ -259,6 +287,9 @@ class GeneFalsePositiveFilter:
         self.short_genes_lower = {w.lower() for w in self.SHORT_GENES_NEED_CONTEXT}
         self.gene_context_lower = {w.lower() for w in self.GENE_CONTEXT_KEYWORDS}
         self.non_gene_context_lower = {w.lower() for w in self.NON_GENE_CONTEXT_KEYWORDS}
+        self.questionnaire_lower = {w.lower() for w in self.QUESTIONNAIRE_TERMS}
+        self.antibody_abbrev_lower = {w.lower() for w in self.ANTIBODY_ABBREVIATIONS}
+        self.antibody_context_lower = {w.lower() for w in self.ANTIBODY_CONTEXT_KEYWORDS}
 
         # Combined always-filter set
         self.always_filter = (
@@ -376,6 +407,16 @@ class GeneFalsePositiveFilter:
         if text_lower in self.common_english_lower:
             return True, "common_english_word"
 
+        # Filter questionnaire abbreviations unless strong gene context
+        if text_lower in self.questionnaire_lower:
+            if not self._has_strong_gene_context(context):
+                return True, "questionnaire_term"
+
+        # Filter antibody abbreviations when antibody context is present
+        if text_lower in self.antibody_abbrev_lower:
+            if self._is_antibody_context(context):
+                return True, "antibody_abbreviation"
+
         # Check other always-filter terms (unless from specialized lexicon)
         if not is_from_lexicon or is_alias:
             other_filters = (
@@ -447,6 +488,17 @@ class GeneFalsePositiveFilter:
             "chronic kidney", "kidney disease", "renal function",
         ]
         return any(kw in ctx_lower for kw in kidney_keywords)
+
+    def _has_strong_gene_context(self, context: str) -> bool:
+        """Check if context has strong gene evidence (2+ gene keywords)."""
+        ctx_lower = context.lower()
+        gene_score = sum(1 for kw in self.gene_context_lower if kw in ctx_lower)
+        return gene_score >= 2
+
+    def _is_antibody_context(self, context: str) -> bool:
+        """Check if context indicates antibody usage (not gene)."""
+        ctx_lower = context.lower()
+        return any(kw in ctx_lower for kw in self.antibody_context_lower)
 
     def _score_context(self, context: str) -> Tuple[int, int]:
         """Score context for gene vs non-gene usage."""

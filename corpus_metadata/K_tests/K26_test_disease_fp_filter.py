@@ -177,3 +177,104 @@ class TestEdgeCases:
         """Test short match threshold handling."""
         assert filter.SHORT_MATCH_THRESHOLD == 4
         # Matches <= 4 chars should have different treatment
+
+
+class TestCommonEnglishWordFiltering:
+    """Tests for common English word hard filtering."""
+
+    def test_common_filtered(self, filter):
+        """Test that 'common' is hard-filtered as single word."""
+        should_filter, reason = filter.should_filter(
+            "common", "common variable immunodeficiency"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_complete_filtered(self, filter):
+        """Test that 'complete' is hard-filtered."""
+        should_filter, reason = filter.should_filter(
+            "complete", "complete response observed"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_sensitive_filtered(self, filter):
+        """Test that 'sensitive' is hard-filtered."""
+        should_filter, reason = filter.should_filter(
+            "sensitive", "highly sensitive patients"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_men_filtered(self, filter):
+        """Test that 'MEN' is hard-filtered as single word."""
+        should_filter, reason = filter.should_filter(
+            "MEN", "men aged 18 to 65"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_can_filtered(self, filter):
+        """Test that 'CAN' is hard-filtered as single word."""
+        should_filter, reason = filter.should_filter(
+            "CAN", "patients who can tolerate"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_multi_word_not_affected(self, filter):
+        """Test that multi-word disease names are not affected."""
+        should_filter, reason = filter.should_filter(
+            "common variable immunodeficiency",
+            "diagnosed with common variable immunodeficiency"
+        )
+        assert not should_filter or reason != "common_english_word"
+
+    def test_progressive_filtered(self, filter):
+        """Test that 'progressive' is hard-filtered."""
+        should_filter, reason = filter.should_filter(
+            "progressive", "progressive disease observed"
+        )
+        assert should_filter
+        assert reason == "common_english_word"
+
+    def test_common_english_fp_terms_set(self, filter):
+        """Test that COMMON_ENGLISH_FP_TERMS set is defined."""
+        expected = ["common", "complete", "sensitive", "normal", "men", "can"]
+        for term in expected:
+            assert term in filter._common_english_lower, f"{term} not in set"
+
+
+class TestCitationContextOverride:
+    """Tests for citation context override in score_adjustment."""
+
+    def test_citation_short_match_override(self, filter):
+        """Test that short matches in citation context get -0.55 override."""
+        adjustment, reason = filter.score_adjustment(
+            "arthritis", "Smith et al. Arthritis Rheumatol. 2022; 74: 123-130"
+        )
+        assert adjustment <= -0.55
+        assert "citation" in reason.lower()
+
+    def test_citation_single_word_override(self, filter):
+        """Test single-word match in citation context."""
+        adjustment, reason = filter.score_adjustment(
+            "lupus", "Jones et al. Lupus. 2021; 30: 45-52"
+        )
+        assert adjustment <= -0.55
+
+    def test_long_phrase_no_override(self, filter):
+        """Test that phrases >3 words don't get citation override."""
+        adjustment, reason = filter.score_adjustment(
+            "systemic lupus erythematosus with nephritis",
+            "doi: 10.1000/test SLE with nephritis"
+        )
+        # 4+ word match should NOT get citation override
+        assert reason != "citation_context_override"
+
+    def test_non_citation_no_override(self, filter):
+        """Test that non-citation context doesn't get override."""
+        adjustment, reason = filter.score_adjustment(
+            "arthritis", "patients with rheumatoid arthritis diagnosis"
+        )
+        assert reason != "citation_context_override"

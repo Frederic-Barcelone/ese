@@ -289,3 +289,121 @@ class TestEdgeCases:
             is_from_lexicon=True, is_alias=True
         )
         # Aliases may be treated more strictly
+
+
+class TestAdditionalCommonWords:
+    """Tests for additional common English words added to filter."""
+
+    def test_son_filtered(self, filter):
+        """Test that 'son' is filtered as common word."""
+        is_fp, reason = filter.is_false_positive(
+            "son", "her son was diagnosed", GeneGeneratorType.PATTERN_GENE_SYMBOL
+        )
+        assert is_fp
+        assert reason == "common_english_word"
+
+    def test_best_filtered(self, filter):
+        """Test that 'best' is filtered as common word."""
+        is_fp, reason = filter.is_false_positive(
+            "best", "best supportive care", GeneGeneratorType.PATTERN_GENE_SYMBOL
+        )
+        assert is_fp
+        assert reason == "common_english_word"
+
+    def test_ren_filtered(self, filter):
+        """Test that 'ren' is filtered as common word."""
+        is_fp, reason = filter.is_false_positive(
+            "Ren", "Ren et al. reported", GeneGeneratorType.PATTERN_GENE_SYMBOL
+        )
+        assert is_fp
+        assert reason == "common_english_word"
+
+    def test_additional_words_in_set(self, filter):
+        """Test that all additional words are in the common words set."""
+        additional = [
+            "son", "best", "ren", "rest", "last", "most", "near", "well",
+            "good", "part", "step", "mark", "ring", "pair", "map", "gap",
+            "cap", "tip", "bar", "tag", "tan", "dim",
+        ]
+        for word in additional:
+            assert word in filter.common_english_lower, f"{word} not in set"
+
+
+class TestQuestionnaireDisambiguation:
+    """Tests for questionnaire abbreviation disambiguation."""
+
+    def test_maf_filtered_without_gene_context(self, filter):
+        """Test that MAF is filtered as questionnaire without gene context."""
+        is_fp, reason = filter.is_false_positive(
+            "MAF", "MAF score was measured at baseline",
+            GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
+        )
+        assert is_fp
+        assert reason == "questionnaire_term"
+
+    def test_maf_passes_with_gene_context(self, filter):
+        """Test that MAF passes with strong gene context."""
+        is_fp, reason = filter.is_false_positive(
+            "MAF", "MAF gene mutation variant expression allele",
+            GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
+        )
+        assert not is_fp
+
+    def test_haq_filtered(self, filter):
+        """Test that HAQ is filtered as questionnaire."""
+        is_fp, reason = filter.is_false_positive(
+            "HAQ", "HAQ-DI disability index",
+            GeneGeneratorType.PATTERN_GENE_SYMBOL
+        )
+        assert is_fp
+        assert reason == "questionnaire_term"
+
+    def test_das_filtered(self, filter):
+        """Test that DAS is filtered as questionnaire."""
+        is_fp, reason = filter.is_false_positive(
+            "DAS", "DAS28 disease activity score",
+            GeneGeneratorType.PATTERN_GENE_SYMBOL
+        )
+        assert is_fp
+        assert reason == "questionnaire_term"
+
+
+class TestAntibodyDisambiguation:
+    """Tests for antibody abbreviation disambiguation."""
+
+    def test_acpa_filtered_in_antibody_context(self, filter):
+        """Test that ACPA is filtered as antibody in antibody context."""
+        is_fp, reason = filter.is_false_positive(
+            "ACPA", "ACPA antibody titer was elevated",
+            GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
+        )
+        assert is_fp
+        assert reason == "antibody_abbreviation"
+
+    def test_acpa_passes_without_antibody_context(self, filter):
+        """Test that ACPA passes without antibody context."""
+        is_fp, reason = filter.is_false_positive(
+            "ACPA", "ACPA gene mutation expression allele variant",
+            GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
+        )
+        assert not is_fp
+
+    def test_ana_filtered_in_antibody_context(self, filter):
+        """Test that ANA is filtered as antibody in antibody context."""
+        is_fp, reason = filter.is_false_positive(
+            "ANA", "ANA seropositive patients",
+            GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
+        )
+        assert is_fp
+        assert reason == "antibody_abbreviation"
+
+    def test_antibody_context_keywords(self, filter):
+        """Test antibody context keyword detection."""
+        assert filter._is_antibody_context("antibody titer levels")
+        assert filter._is_antibody_context("seropositive patients")
+        assert not filter._is_antibody_context("gene mutation expression")
+
+    def test_strong_gene_context_helper(self, filter):
+        """Test strong gene context detection."""
+        assert filter._has_strong_gene_context("gene mutation expression")
+        assert not filter._has_strong_gene_context("patient treatment")

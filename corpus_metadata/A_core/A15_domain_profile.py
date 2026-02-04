@@ -196,6 +196,7 @@ def _create_generic_profile() -> DomainProfile:
             "neoplasm", "neoplasms", "tumor", "tumors",
             "abnormality", "abnormalities", "anomaly", "anomalies",
             "malformation", "deficiency", "insufficiency",
+            "rheumatism",
         },
         physiological_systems={
             "cns", "central nervous system",
@@ -263,6 +264,7 @@ def _create_nephrology_profile() -> DomainProfile:
             "neoplasm", "neoplasms", "tumor", "tumors",
             "abnormality", "abnormalities", "anomaly", "anomalies",
             "malformation", "deficiency", "insufficiency",
+            "rheumatism",
             # Nephrology-generic
             "nephritis", "glomerulonephritis",
         },

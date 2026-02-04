@@ -208,3 +208,68 @@ class TestIntegration:
         """Test that context affects filtering decisions."""
         # Same text may be filtered differently based on context
         pass
+
+
+class TestMAFFiltering:
+    """Tests for MAF questionnaire abbreviation filtering."""
+
+    def test_maf_filtered_as_common_word(self, filter):
+        """Test that MAF is filtered as common word."""
+        assert filter.is_false_positive(
+            "MAF", "MAF score at baseline", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+    def test_maf_case_insensitive(self, filter):
+        """Test MAF filtering is case-insensitive."""
+        assert filter.is_false_positive(
+            "maf", "maf questionnaire", DrugGeneratorType.LEXICON_RXNORM
+        )
+
+
+class TestAntibodyPhraseFiltering:
+    """Tests for antibody phrase filtering as biological entities."""
+
+    def test_anca_antibody_filtered(self, filter):
+        """Test that ANCA antibody phrases are filtered."""
+        assert filter.is_false_positive(
+            "anti-neutrophil cytoplasmic antibody", "",
+            DrugGeneratorType.SCISPACY_NER
+        )
+
+    def test_antinuclear_antibody_filtered(self, filter):
+        """Test that antinuclear antibody is filtered."""
+        assert filter.is_false_positive(
+            "antinuclear antibody", "",
+            DrugGeneratorType.SCISPACY_NER
+        )
+
+    def test_acpa_antibody_filtered(self, filter):
+        """Test that ACPA antibody phrases are filtered."""
+        assert filter.is_false_positive(
+            "anti-citrullinated protein antibody", "",
+            DrugGeneratorType.SCISPACY_NER
+        )
+
+
+class TestBiologicalSuffixExtendedScope:
+    """Tests for biological suffix filtering extended to RxNorm/FDA."""
+
+    def test_rxnorm_biological_suffix_filtered(self, filter):
+        """Test that RxNorm matches ending in biological suffixes are filtered."""
+        assert filter.is_false_positive(
+            "complement receptor", "",
+            DrugGeneratorType.LEXICON_RXNORM
+        )
+
+    def test_fda_biological_suffix_filtered(self, filter):
+        """Test that FDA matches ending in biological suffixes are filtered."""
+        assert filter.is_false_positive(
+            "tyrosine kinase", "",
+            DrugGeneratorType.LEXICON_FDA
+        )
+
+    def test_valid_drug_rxnorm_not_filtered(self, filter):
+        """Test that valid RxNorm drug names are not filtered."""
+        assert not filter.is_false_positive(
+            "methotrexate", "", DrugGeneratorType.LEXICON_RXNORM
+        )

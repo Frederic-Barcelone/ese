@@ -87,6 +87,14 @@ class DiseaseFalsePositiveFilter:
         "allele", "polymorphism", "genotype",
     ]
 
+    # Common English words that collide with disease names
+    # Single-word matches of these should be hard-filtered
+    COMMON_ENGLISH_FP_TERMS: set[str] = {
+        "common", "complete", "sensitive", "normal", "simple", "complex",
+        "general", "specific", "active", "passive", "positive", "negative",
+        "progressive", "stable", "mobile", "rigid", "dense", "men", "can",
+    }
+
     # Short match threshold
     SHORT_MATCH_THRESHOLD = 4
 
@@ -101,6 +109,7 @@ class DiseaseFalsePositiveFilter:
             re.compile(p, re.IGNORECASE) for p in self.CHROMOSOME_PATTERNS
         ]
         self._gene_pattern = re.compile(self.GENE_PATTERN)
+        self._common_english_lower = {w.lower() for w in self.COMMON_ENGLISH_FP_TERMS}
 
         # Load domain profile (defaults to generic if not provided)
         self.domain_profile = domain_profile or load_domain_profile("generic")
@@ -169,6 +178,13 @@ class DiseaseFalsePositiveFilter:
             else:
                 reason = "penalty_capped"
 
+        # Citation context override: short matches in citation context should
+        # be penalized below the -0.5 threshold even after floor capping
+        if is_citation and len(matched_clean.split()) <= 3:
+            if adjustment > -0.55:
+                adjustment = -0.55
+                reason = "citation_context_override"
+
         return adjustment, reason
 
     def should_filter(
@@ -199,7 +215,12 @@ class DiseaseFalsePositiveFilter:
             if gene_score >= 3:
                 return True, "strong_gene_context"
 
-        # Hard filter 3: Domain profile catastrophic FPs
+        # Hard filter 3: Common English words as single-word disease matches
+        if len(matched_clean.split()) <= 1:
+            if matched_clean.lower() in self._common_english_lower:
+                return True, "common_english_word"
+
+        # Hard filter 4: Domain profile catastrophic FPs
         should_filter, reason = self.domain_profile.should_hard_filter(
             matched_text, context
         )

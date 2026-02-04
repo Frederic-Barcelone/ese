@@ -155,6 +155,15 @@ BIOLOGICAL_ENTITIES: Set[str] = {
     "acetylcholine receptor",
     "cholinergic receptors",
     "anti-acetylcholine receptor antibody",  # biomarker, not drug
+    # Autoantibody phrases (diagnostic markers, not drugs)
+    "anti-neutrophil cytoplasmic antibody",
+    "anti-neutrophil cytoplasmic antibodies",
+    "antineutrophil cytoplasmic antibody",
+    "antineutrophil cytoplasmic antibodies",
+    "anti-citrullinated protein antibody",
+    "anti-citrullinated protein antibodies",
+    "antinuclear antibody",
+    "antinuclear antibodies",
     # Hormones (biological, not therapeutic drugs unless specific formulation)
     "fsh",  # Follicle Stimulating Hormone
     "follicle stimulating hormone",
@@ -410,6 +419,8 @@ COMMON_WORDS: Set[str] = {
     "lymphocytes",
     "no data",
     "arthritis foundation",
+    # Clinical questionnaire abbreviations (not drugs)
+    "maf",  # Multidimensional Assessment of Fatigue questionnaire
     # Antibody types (markers, not drugs unless specific)
     "anca",
     # Generic process/action words
