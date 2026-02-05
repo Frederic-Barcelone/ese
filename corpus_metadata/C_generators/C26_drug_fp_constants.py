@@ -242,6 +242,13 @@ BIOLOGICAL_ENTITIES: Set[str] = {
     "phosphate",
     "chloride",
     "bicarbonate",
+    # Lipid panel / metabolic markers (lab values, not drugs)
+    "cholesterol",
+    "ldl",
+    "hdl",
+    "triglycerides",
+    "triglyceride",
+    "sgpt",  # Serum Glutamic-Pyruvic Transaminase (liver enzyme)
     # Kidney function markers (lab values, not drugs)
     "egfr",  # estimated Glomerular Filtration Rate
     "gfr",   # Glomerular Filtration Rate
@@ -561,6 +568,38 @@ COMMON_WORDS: Set[str] = {
     "kg",   # kilograms
     "mg",   # milligrams (unit, not drug name)
     "ml",   # milliliters
+    # Consumer/social media FPs (CADEC corpus - non-drug terms in patient forums)
+    "sleep",
+    "cold",
+    "cough",
+    "statin",  # drug class, not specific drug
+    "dry eyes",
+    "dry skin",
+    "pain relief",
+    "once a day",
+    "sore throat",
+    "milk",
+    "ice",
+    "fiber",
+    "bear",
+    "grapefruit juice",
+    "grape juice",
+    "cider vinegar",
+    "rice",
+    "salmon",
+    "wool",
+    "wheelchair",
+    "tomorrow",
+    "tube",
+    "switch",
+    "burn",
+    "rectal",
+    "gloves",
+    "acne",
+    "ten",
+    "let",
+    "dna",
+    "mos",
 }
 
 # Organizations and agencies (not drugs)
@@ -609,6 +648,8 @@ BODY_PARTS: Set[str] = {
     "gum",
     "nail",
     "hair",
+    "hip",
+    "disc",
 }
 
 # Clinical trial status terms (leaked from trial data)
@@ -652,6 +693,8 @@ EQUIPMENT_PROCEDURES: Set[str] = {
     "ekg",
     "eeg",
     "emg",
+    "blood test",
+    "blood tests",
 }
 
 # Terms that should ALWAYS be filtered, even from specialized lexicons
@@ -722,6 +765,7 @@ NER_FALSE_POSITIVES: Set[str] = {
     "beta-blockers",
     "calcium channel blockers",
     "diuretics",
+    "statin",
     "statins",
     "nsaids",
     "antibiotics",
@@ -1201,6 +1245,60 @@ DRUG_ABBREVIATIONS: Dict[str, str] = {
 }
 
 
+# Consumer drug misspellings and regional brand variants → canonical names
+# Used by DrugDetector to expand FlashText matching for social media/patient text
+CONSUMER_DRUG_VARIANTS: Dict[str, str] = {
+    # Statin misspellings
+    "sinivastatin": "simvastatin",
+    "zocar": "simvastatin",
+    "zorcor": "simvastatin",
+    "liptor": "atorvastatin",
+    "lipitors": "atorvastatin",
+    "pravochol": "pravastatin",
+    "mevacore": "lovastatin",
+    # NSAID/analgesic misspellings
+    "asprin": "aspirin",
+    "alleve": "naproxen",
+    "relefen": "nabumetone",
+    "artrotec": "diclofenac",
+    "capsacian": "capsaicin",
+    "hydrocodine": "hydrocodone",
+    "propain": "paracetamol",
+    # Other common misspellings
+    "insalin": "insulin",
+    "trazadone": "trazodone",
+    "testonrone": "testosterone",
+    "ezetimbe": "ezetimibe",
+    "naicin": "niacin",
+    "actose": "pioglitazone",
+    "capiten": "captopril",
+    "glcotrol": "glipizide",
+    # AU/NZ consumer brand names
+    "panadeine": "paracetamol",
+    "panadeine forte": "paracetamol",
+    "mypaid forte": "paracetamol",
+    "pamprin": "pamabrom",
+}
+
+# Multi-word consumer drug patterns not typically in clinical lexicons
+CONSUMER_DRUG_PATTERNS: List[str] = [
+    "birth control pill",
+    "birth control pills",
+    "flu jab",
+    "steroid shots",
+    "steroid shot",
+    "vitamin c",
+    "vit c",
+    "omega 3",
+    "coq10",
+    "co q 10",
+    "coenzyme q10",
+    "fish oil",
+    "red yeast rice",
+    "cider vinegar",
+]
+
+
 __all__ = [
     "BACTERIA_ORGANISMS",
     "VACCINE_TERMS",
@@ -1218,4 +1316,6 @@ __all__ = [
     "BIOLOGICAL_SUFFIXES",
     "FP_SUBSTRINGS",
     "DRUG_ABBREVIATIONS",
+    "CONSUMER_DRUG_VARIANTS",
+    "CONSUMER_DRUG_PATTERNS",
 ]

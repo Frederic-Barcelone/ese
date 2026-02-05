@@ -67,6 +67,10 @@ from C_generators.C25_drug_fp_filter import (
     DRUG_ABBREVIATIONS,
     DrugFalsePositiveFilter,
 )
+from C_generators.C26_drug_fp_constants import (
+    CONSUMER_DRUG_PATTERNS,
+    CONSUMER_DRUG_VARIANTS,
+)
 
 # Optional scispacy import
 try:
@@ -157,12 +161,14 @@ class DrugDetector:
         self.investigational_processor: Optional[KeywordProcessor] = None
         self.fda_processor: Optional[KeywordProcessor] = None
         self.rxnorm_processor: Optional[KeywordProcessor] = None
+        self.consumer_processor: Optional[KeywordProcessor] = None
 
         # Drug metadata dictionaries
         self.alexion_drugs: Dict[str, Dict] = {}
         self.investigational_drugs: Dict[str, Dict] = {}
         self.fda_drugs: Dict[str, Dict] = {}
         self.rxnorm_drugs: Dict[str, Dict] = {}
+        self.consumer_drugs: Dict[str, Dict] = {}
 
         # Lexicon loading stats (for summary output)
         self._lexicon_stats: List[Tuple[str, int, str]] = []
@@ -191,6 +197,7 @@ class DrugDetector:
         self._load_investigational_lexicon()
         self._load_fda_lexicon()
         self._load_rxnorm_lexicon()
+        self._load_consumer_variants()
 
     def _load_alexion_lexicon(self) -> None:
         """Load Alexion specialized drug lexicon."""
@@ -392,6 +399,38 @@ class DrugDetector:
         except Exception as e:
             logger.warning("Failed to load RxNorm lexicon: %s", e)
 
+    def _load_consumer_variants(self) -> None:
+        """Load consumer drug misspellings and multi-word patterns."""
+        consumer_proc = KeywordProcessor(case_sensitive=False)
+        count = 0
+
+        # Add misspelling → canonical mappings
+        for variant, canonical in CONSUMER_DRUG_VARIANTS.items():
+            canonical_key = canonical.lower()
+            if canonical_key not in self.consumer_drugs:
+                self.consumer_drugs[canonical_key] = {
+                    "preferred_name": canonical.title(),
+                    "source": "consumer_variant",
+                }
+            consumer_proc.add_keyword(variant, canonical_key)
+            count += 1
+
+        # Add multi-word consumer patterns
+        for pattern in CONSUMER_DRUG_PATTERNS:
+            pattern_key = pattern.lower()
+            if pattern_key not in self.consumer_drugs:
+                self.consumer_drugs[pattern_key] = {
+                    "preferred_name": pattern.title(),
+                    "source": "consumer_pattern",
+                }
+            consumer_proc.add_keyword(pattern, pattern_key)
+            count += 1
+
+        self.consumer_processor = consumer_proc
+        self._lexicon_stats.append(
+            ("Consumer variants", count, "C26_drug_fp_constants.py")
+        )
+
     def _init_scispacy(self) -> None:
         """Initialize scispacy NER model."""
         if not SCISPACY_AVAILABLE or spacy is None:
@@ -516,7 +555,21 @@ class DrugDetector:
                 )
             )
 
-        # Layer 6: scispacy NER fallback
+        # Layer 6: Consumer drug variants (misspellings + multi-word patterns)
+        if self.consumer_processor:
+            candidates.extend(
+                self._detect_with_lexicon(
+                    full_text,
+                    doc_graph,
+                    doc_fingerprint,
+                    self.consumer_processor,
+                    self.consumer_drugs,
+                    DrugGeneratorType.LEXICON_RXNORM,  # Treat as general lexicon
+                    "consumer_variants",
+                )
+            )
+
+        # Layer 7: scispacy NER fallback
         if self.nlp:
             candidates.extend(
                 self._detect_with_ner(full_text, doc_graph, doc_fingerprint)

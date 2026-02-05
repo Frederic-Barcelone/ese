@@ -252,10 +252,10 @@ class DrugFalsePositiveFilter:
                 if indicator in ctx_lower:
                     return True
 
-            # Check for author initials pattern
+            # Check for author initials pattern (uppercase only — not IGNORECASE
+            # to avoid matching drug + common 1-2 letter words like "to", "at", "i")
             author_pattern = re.compile(
-                rf"\b{re.escape(text_stripped)}\s+[A-Z]{{1,2}}[,\.\s]",
-                re.IGNORECASE
+                rf"\b{re.escape(text_stripped)}\s+[A-Z]{{1,2}}[,\.\s]"
             )
             if author_pattern.search(context):
                 return True
