@@ -13,6 +13,7 @@ PURPOSE:
 DATASETS:
     1. NLP4RARE - Rare disease medical documents (dev/test/train splits)
     2. PAPERS - Research papers with human-annotated abbreviations
+    3. BioCreative II GM - Gene/protein name recognition benchmark
 
 CONFIGURATION:
     All parameters are in the CONFIGURATION section below.
@@ -72,6 +73,10 @@ NLP4RARE_GOLD = BASE_PATH / "gold_data" / "nlp4rare_gold.json"
 PAPERS_PATH = BASE_PATH / "gold_data" / "PAPERS"
 PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 
+# BioCreative II GM paths
+BC2GM_PATH = BASE_PATH / "gold_data" / "bc2gm" / "pdfs"
+BC2GM_GOLD = BASE_PATH / "gold_data" / "golden_bc2gm.json"
+
 # -----------------------------------------------------------------------------
 # EVALUATION SETTINGS - Change these to control what gets evaluated
 # -----------------------------------------------------------------------------
@@ -79,6 +84,7 @@ PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 # Which datasets to run (set to False to skip)
 RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
+RUN_BC2GM = False      # BioCreative II GM corpus (gene/protein name recognition)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
@@ -148,6 +154,7 @@ class GoldGene:
     doc_id: str
     symbol: str
     name: Optional[str] = None
+    ncbi_gene_id: Optional[str] = None
 
     @property
     def symbol_normalized(self) -> str:
@@ -206,11 +213,18 @@ class ExtractedGene:
     """A single extracted gene entity."""
     symbol: str
     name: Optional[str] = None
+    matched_text: Optional[str] = None
     confidence: float = 0.0
 
     @property
     def symbol_normalized(self) -> str:
         return self.symbol.strip().upper()
+
+    @property
+    def matched_text_normalized(self) -> str:
+        if not self.matched_text:
+            return self.symbol_normalized
+        return self.matched_text.strip().upper()
 
 
 @dataclass
@@ -442,6 +456,33 @@ def load_papers_gold(gold_path: Path) -> dict:
             name=ann["name"],
         )
         result["drugs"].setdefault(entry_dr.doc_id, []).append(entry_dr)
+
+    return result
+
+
+def load_bc2gm_gold(gold_path: Path) -> dict:
+    """Load BioCreative II GM gold standard annotations.
+
+    Returns dict with keys:
+    - genes: Dict[doc_id, List[GoldGene]]
+    """
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {}}
+
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} bc2gm gold not found: {gold_path}")
+        return result
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    gene_data = data.get("genes", {})
+    annotations = gene_data.get("annotations", [])
+    for ann in annotations:
+        entry = GoldGene(
+            doc_id=ann["doc_id"],
+            symbol=ann["symbol"],
+        )
+        result["genes"].setdefault(entry.doc_id, []).append(entry)
 
     return result
 
@@ -711,6 +752,43 @@ def compare_diseases(
     return result
 
 
+def gene_matches(ext: ExtractedGene, gold: GoldGene) -> bool:
+    """Check if an extracted gene matches a gold gene entity.
+
+    Multi-step matching:
+    1. Exact match on symbol (uppercase)
+    2. Exact match on matched_text vs gold symbol
+    3. Substring match (handles "BRCA1 gene" vs "BRCA1")
+    4. Name-based match if available
+    """
+    ext_sym = ext.symbol_normalized
+    gold_sym = gold.symbol_normalized
+    ext_mt = ext.matched_text_normalized
+
+    # 1. Exact symbol match
+    if ext_sym == gold_sym:
+        return True
+
+    # 2. Matched text vs gold symbol
+    if ext_mt == gold_sym:
+        return True
+
+    # 3. Substring match (either direction)
+    if len(ext_sym) >= 3 and len(gold_sym) >= 3:
+        if ext_sym in gold_sym or gold_sym in ext_sym:
+            return True
+        if ext_mt in gold_sym or gold_sym in ext_mt:
+            return True
+
+    # 4. Name-based match
+    if ext.name and gold.symbol:
+        ext_name = ext.name.strip().upper()
+        if ext_name == gold_sym or gold_sym in ext_name or ext_name in gold_sym:
+            return True
+
+    return False
+
+
 def compare_genes(
     extracted: List[ExtractedGene],
     gold: List[GoldGene],
@@ -728,12 +806,11 @@ def compare_genes(
 
     for ext in extracted:
         matched = False
-        ext_sym = ext.symbol_normalized
 
         for g in gold:
             gold_key = g.symbol_normalized
             if gold_key not in matched_gold:
-                if ext_sym == gold_key:
+                if gene_matches(ext, g):
                     result.tp += 1
                     result.tp_items.append(ext.symbol)
                     matched_gold.add(gold_key)
@@ -862,10 +939,11 @@ def run_extraction(orch, pdf_path: Path) -> dict:
     # Extract genes
     for gene in result.genes:
         if gene.status == ValidationStatus.VALIDATED:
-            symbol = getattr(gene, 'symbol', '') or getattr(gene, 'gene_symbol', '')
+            symbol = getattr(gene, 'hgnc_symbol', '') or getattr(gene, 'symbol', '') or getattr(gene, 'gene_symbol', '')
             extracted["genes"].append(ExtractedGene(
                 symbol=symbol,
-                name=getattr(gene, 'name', None),
+                name=getattr(gene, 'full_name', None) or getattr(gene, 'name', None),
+                matched_text=getattr(gene, 'matched_text', None),
                 confidence=getattr(gene, 'confidence_score', 0.0),
             ))
 
@@ -1244,6 +1322,7 @@ def main():
     print("\n  Configuration:")
     print(f"    NLP4RARE:     {'enabled' if RUN_NLP4RARE else 'disabled'}")
     print(f"    Papers:       {'enabled' if RUN_PAPERS else 'disabled'}")
+    print(f"    bc2gm:        {'enabled' if RUN_BC2GM else 'disabled'}")
     print(f"    Max docs:     {MAX_DOCS if MAX_DOCS else 'all'}")
     if RUN_NLP4RARE:
         print(f"    Splits:       {', '.join(NLP4RARE_SPLITS)}")
@@ -1292,6 +1371,22 @@ def main():
             print_error_analysis(result)
             results.append(result)
 
+    # Evaluate BioCreative II GM
+    if RUN_BC2GM and BC2GM_PATH.exists():
+        gold_data = load_bc2gm_gold(BC2GM_GOLD)
+        has_gold = any(gold_data[k] for k in gold_data)
+        if has_gold:
+            result = evaluate_dataset(
+                name="BioCreative-II-GM",
+                pdf_folder=BC2GM_PATH,
+                gold_data=gold_data,
+                orch=orch,
+                max_docs=MAX_DOCS,
+            )
+            print_dataset_summary(result)
+            print_error_analysis(result)
+            results.append(result)
+
     # Final summary
     if results:
         print_final_summary(results)
@@ -1329,5 +1424,6 @@ __all__ = [
     "DatasetResult",
     "evaluate_dataset",
     "load_nlp4rare_gold",
+    "load_bc2gm_gold",
     "load_papers_gold",
 ]
